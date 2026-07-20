@@ -1,0 +1,3114 @@
+{
+  "beginner": [
+    {
+      "source": "Goblin",
+      "level": 2,
+      "rarity": "1/64"
+    },
+    {
+      "source": "Chicken",
+      "level": 1,
+      "rarity": "1/300"
+    },
+    {
+      "source": "Moss giant",
+      "level": 42,
+      "rarity": "1/45"
+    },
+    {
+      "source": "Farmer",
+      "level": 7,
+      "rarity": "1/90"
+    },
+    {
+      "source": "Dark wizard",
+      "level": 7,
+      "rarity": "1/50"
+    },
+    {
+      "source": "Minotaur",
+      "level": 12,
+      "rarity": "1/60"
+    },
+    {
+      "source": "Black Knight Titan",
+      "level": 120,
+      "rarity": "1/50"
+    },
+    {
+      "source": "Cow",
+      "level": 2,
+      "rarity": "1/128"
+    },
+    {
+      "source": "Scorpion",
+      "level": 1,
+      "rarity": "1/100"
+    },
+    {
+      "source": "Mugger",
+      "level": 6,
+      "rarity": "1/80"
+    },
+    {
+      "source": "Dungeon rat",
+      "level": 12,
+      "rarity": "1/128"
+    },
+    {
+      "source": "Man",
+      "level": 2,
+      "rarity": "1/90"
+    },
+    {
+      "source": "Barbarian",
+      "level": 8,
+      "rarity": "1/75"
+    },
+    {
+      "source": "Hobgoblin",
+      "level": 28,
+      "rarity": "1/70"
+    },
+    {
+      "source": "Skeleton",
+      "level": 21,
+      "rarity": "1/100"
+    },
+    {
+      "source": "Black bear",
+      "level": 19,
+      "rarity": "1/90"
+    },
+    {
+      "source": "Grizzly bear",
+      "level": 21,
+      "rarity": "1/90"
+    },
+    {
+      "source": "Giant spider",
+      "level": 2,
+      "rarity": "1/128"
+    },
+    {
+      "source": "Ice giant",
+      "level": 53,
+      "rarity": "1/40"
+    },
+    {
+      "source": "Giant rat",
+      "level": null,
+      "rarity": "1/128"
+    },
+    {
+      "source": "Deadly red spider",
+      "level": 34,
+      "rarity": "1/128"
+    },
+    {
+      "source": "Treus Dayth",
+      "level": 95,
+      "rarity": "1/90"
+    },
+    {
+      "source": "Al Kharid warrior",
+      "level": 9,
+      "rarity": "1/90"
+    },
+    {
+      "source": "Narf",
+      "level": 2,
+      "rarity": "1/90"
+    },
+    {
+      "source": "Woman",
+      "level": 2,
+      "rarity": "1/90"
+    },
+    {
+      "source": "Young impling",
+      "level": 22,
+      "rarity": "1/25"
+    },
+    {
+      "source": "Wolf",
+      "level": 11,
+      "rarity": null
+    },
+    {
+      "source": "Ghost",
+      "level": 19,
+      "rarity": "1/90"
+    },
+    {
+      "source": "Dwarf",
+      "level": 7,
+      "rarity": "1/100"
+    },
+    {
+      "source": "Cave goblin (monster)",
+      "level": 3,
+      "rarity": "1/64"
+    },
+    {
+      "source": "King Scorpion",
+      "level": 32,
+      "rarity": "1/100"
+    },
+    {
+      "source": "Gunthor the brave",
+      "level": 29,
+      "rarity": "1/30"
+    },
+    {
+      "source": "Hill Giant",
+      "level": 28,
+      "rarity": "1/50"
+    },
+    {
+      "source": "Thief",
+      "level": 14,
+      "rarity": "1/90"
+    },
+    {
+      "source": "Ice spider",
+      "level": 61,
+      "rarity": "1/128"
+    },
+    {
+      "source": "Frog",
+      "level": 5,
+      "rarity": "1/90"
+    },
+    {
+      "source": "Black Guard",
+      "level": 25,
+      "rarity": "1/100"
+    },
+    {
+      "source": "Spider",
+      "level": 1,
+      "rarity": "1/128"
+    },
+    {
+      "source": "Baby impling",
+      "level": 17,
+      "rarity": "1/50"
+    },
+    {
+      "source": "Big frog",
+      "level": 10,
+      "rarity": "1/70"
+    },
+    {
+      "source": "Death wing",
+      "level": 83,
+      "rarity": null
+    },
+    {
+      "source": "Afflicted",
+      "level": 30,
+      "rarity": "1/90"
+    },
+    {
+      "source": "Baby impling jar",
+      "level": null,
+      "rarity": "1/50"
+    },
+    {
+      "source": "Young impling jar",
+      "level": null,
+      "rarity": "1/25"
+    },
+    {
+      "source": "Poison spider",
+      "level": 31,
+      "rarity": null
+    },
+    {
+      "source": "Giant frog",
+      "level": 13,
+      "rarity": "1/64"
+    },
+    {
+      "source": "Skeletal miner",
+      "level": 42,
+      "rarity": "1/100"
+    },
+    {
+      "source": "Cow calf",
+      "level": 2,
+      "rarity": "1/128"
+    },
+    {
+      "source": "Shadow spider",
+      "level": 52,
+      "rarity": "1/128"
+    },
+    {
+      "source": "Giant lobster (Ghosts Ahoy)",
+      "level": 32,
+      "rarity": null
+    },
+    {
+      "source": "Poison Scorpion",
+      "level": 20,
+      "rarity": "1/100"
+    },
+    {
+      "source": "Penda",
+      "level": 5,
+      "rarity": "1/90"
+    },
+    {
+      "source": "Rooster",
+      "level": 2,
+      "rarity": "1/300"
+    },
+    {
+      "source": "Scorpia's offspring (monster)",
+      "level": 15,
+      "rarity": "1/100"
+    },
+    {
+      "source": "Drunken man",
+      "level": 3,
+      "rarity": "1/90"
+    },
+    {
+      "source": "Goblin guard",
+      "level": 42,
+      "rarity": "1/64"
+    },
+    {
+      "source": "Rogue",
+      "level": 15,
+      "rarity": "1/90"
+    },
+    {
+      "source": "Scorpia's guardian",
+      "level": 47,
+      "rarity": null
+    },
+    {
+      "source": "Ocga",
+      "level": 5,
+      "rarity": "1/90"
+    },
+    {
+      "source": "Cuffs",
+      "level": 3,
+      "rarity": "1/90"
+    },
+    {
+      "source": "Jeff",
+      "level": 2,
+      "rarity": "1/90"
+    },
+    {
+      "source": "Pit Scorpion",
+      "level": 28,
+      "rarity": "1/100"
+    },
+    {
+      "source": "Ceolburg",
+      "level": 4,
+      "rarity": "1/90"
+    },
+    {
+      "source": "Obor",
+      "level": 106,
+      "rarity": "1/50"
+    },
+    {
+      "source": "Hygd",
+      "level": 4,
+      "rarity": "1/90"
+    },
+    {
+      "source": "Grizzly bear cub",
+      "level": 33,
+      "rarity": "1/90"
+    },
+    {
+      "source": "Bear Cub",
+      "level": 15,
+      "rarity": "1/90"
+    },
+    {
+      "source": "Grave scorpion",
+      "level": 12,
+      "rarity": "1/100"
+    },
+    {
+      "source": "Breoca",
+      "level": 5,
+      "rarity": "1/90"
+    },
+    {
+      "source": "Anja",
+      "level": 2,
+      "rarity": "1/90"
+    },
+    {
+      "source": "Hengel",
+      "level": 2,
+      "rarity": "1/90"
+    },
+    {
+      "source": "Spider (Ungael)",
+      "level": 35,
+      "rarity": null
+    },
+    {
+      "source": "Bryophyta",
+      "level": 128,
+      "rarity": "1/45"
+    },
+    {
+      "source": "Spider (Ape Atoll)",
+      "level": 1,
+      "rarity": null
+    },
+    {
+      "source": "Jungle spider (Ape Atoll)",
+      "level": 37,
+      "rarity": null
+    },
+    {
+      "source": "Body Golem",
+      "level": 50,
+      "rarity": "1/62"
+    },
+    {
+      "source": "Chaos Golem",
+      "level": 70,
+      "rarity": "1/100"
+    },
+    {
+      "source": "Flawed Golem",
+      "level": 13,
+      "rarity": null
+    },
+    {
+      "source": "Mind Golem",
+      "level": 30,
+      "rarity": "1/50"
+    },
+    {
+      "source": "Goblin (Goblin Village)",
+      "level": 5,
+      "rarity": "1/80"
+    },
+    {
+      "source": "Goblin (Vault of War)",
+      "level": 5,
+      "rarity": "1/80"
+    },
+    {
+      "source": "Goblin (God Wars Dungeon)",
+      "level": 12,
+      "rarity": "1/80"
+    },
+    {
+      "source": "Ghost (Grave of Scorpius)",
+      "level": 24,
+      "rarity": null
+    },
+    {
+      "source": "Boar",
+      "level": 5,
+      "rarity": "1/128"
+    },
+    {
+      "source": "Barbarian (Barbarian Camp)",
+      "level": 9,
+      "rarity": "1/75"
+    },
+    {
+      "source": "Enraged Boar",
+      "level": 12,
+      "rarity": "1/128"
+    },
+    {
+      "source": "Skeleton (Catacombs of Kourend)",
+      "level": 22,
+      "rarity": "1/100"
+    },
+    {
+      "source": "Cyclops (Ardougne Zoo)",
+      "level": 56,
+      "rarity": "1/50"
+    },
+    {
+      "source": "Rusty",
+      "level": 2,
+      "rarity": "1/90"
+    },
+    {
+      "source": "Buffalo",
+      "level": 9,
+      "rarity": null
+    },
+    {
+      "source": "Thief (Varlamore)",
+      "level": 16,
+      "rarity": "1/90"
+    },
+    {
+      "source": "Porcupine",
+      "level": 4,
+      "rarity": null
+    },
+    {
+      "source": "Small salvage",
+      "level": 15,
+      "rarity": "1/300"
+    },
+    {
+      "source": "Chest (Obor's lair)",
+      "level": null,
+      "rarity": null
+    },
+    {
+      "source": "Chest (Bryophyta's lair)",
+      "level": null,
+      "rarity": null
+    },
+    {
+      "source": "Brutus",
+      "level": 30,
+      "rarity": "1/15"
+    }
+  ],
+  "easy": [
+    {
+      "source": "Thug",
+      "level": 10,
+      "rarity": "1/128"
+    },
+    {
+      "source": "Banshee",
+      "level": 23,
+      "rarity": "1/128"
+    },
+    {
+      "source": "Goblin",
+      "level": 2,
+      "rarity": "1/128"
+    },
+    {
+      "source": "Lev",
+      "level": 24,
+      "rarity": "1/128"
+    },
+    {
+      "source": "H.A.M. Member",
+      "level": 15,
+      "rarity": "1/50"
+    },
+    {
+      "source": "Rock Crab",
+      "level": 13,
+      "rarity": "1/128"
+    },
+    {
+      "source": "Farmer",
+      "level": null,
+      "rarity": "1/128"
+    },
+    {
+      "source": "Minotaur",
+      "level": 12,
+      "rarity": "1/101"
+    },
+    {
+      "source": "Cave bug",
+      "level": 96,
+      "rarity": "1/128"
+    },
+    {
+      "source": "Mugger",
+      "level": 6,
+      "rarity": "1/128"
+    },
+    {
+      "source": "Icefiend",
+      "level": 13,
+      "rarity": "1/128"
+    },
+    {
+      "source": "Mystery box",
+      "level": null,
+      "rarity": null
+    },
+    {
+      "source": "Man",
+      "level": 2,
+      "rarity": "1/128"
+    },
+    {
+      "source": "Lanzig",
+      "level": 48,
+      "rarity": "1/128"
+    },
+    {
+      "source": "Barbarian",
+      "level": 8,
+      "rarity": "1/128"
+    },
+    {
+      "source": "Cave slime",
+      "level": 23,
+      "rarity": "1/128"
+    },
+    {
+      "source": "Werewolf",
+      "level": 88,
+      "rarity": "1/128"
+    },
+    {
+      "source": "Al Kharid warrior",
+      "level": 9,
+      "rarity": "1/128"
+    },
+    {
+      "source": "Narf",
+      "level": 2,
+      "rarity": "1/128"
+    },
+    {
+      "source": "Woman",
+      "level": 2,
+      "rarity": "1/128"
+    },
+    {
+      "source": "Young impling",
+      "level": 22,
+      "rarity": "1/50"
+    },
+    {
+      "source": "Cave goblin (monster)",
+      "level": 3,
+      "rarity": "1/128"
+    },
+    {
+      "source": "Gourmet impling",
+      "level": 28,
+      "rarity": "1/25"
+    },
+    {
+      "source": "H.A.M. Guard",
+      "level": 12,
+      "rarity": "1/55"
+    },
+    {
+      "source": "Molanisk",
+      "level": 51,
+      "rarity": "1/128"
+    },
+    {
+      "source": "Gunthor the brave",
+      "level": 29,
+      "rarity": "1/128"
+    },
+    {
+      "source": "Thief",
+      "level": 14,
+      "rarity": "1/128"
+    },
+    {
+      "source": "Baby impling",
+      "level": 17,
+      "rarity": "1/100"
+    },
+    {
+      "source": "Gourmet impling jar",
+      "level": null,
+      "rarity": "1/25"
+    },
+    {
+      "source": "Afflicted",
+      "level": 30,
+      "rarity": "1/128"
+    },
+    {
+      "source": "Baby impling jar",
+      "level": null,
+      "rarity": "1/100"
+    },
+    {
+      "source": "Young impling jar",
+      "level": null,
+      "rarity": "1/50"
+    },
+    {
+      "source": "Dagannoth spawn",
+      "level": 42,
+      "rarity": "1/128"
+    },
+    {
+      "source": "Ork",
+      "level": 107,
+      "rarity": "1/128"
+    },
+    {
+      "source": "Freidir",
+      "level": 48,
+      "rarity": "1/128"
+    },
+    {
+      "source": "Borrokar",
+      "level": 48,
+      "rarity": "1/128"
+    },
+    {
+      "source": "Lensa",
+      "level": 48,
+      "rarity": "1/128"
+    },
+    {
+      "source": "Penda",
+      "level": 5,
+      "rarity": "1/128"
+    },
+    {
+      "source": "Chest (Dorgesh-Kaan Average)",
+      "level": 52,
+      "rarity": "1/23"
+    },
+    {
+      "source": "Yuri",
+      "level": 24,
+      "rarity": "1/128"
+    },
+    {
+      "source": "Ogre Coffin",
+      "level": 20,
+      "rarity": "1/100"
+    },
+    {
+      "source": "Drunken man",
+      "level": 3,
+      "rarity": "1/128"
+    },
+    {
+      "source": "Goblin guard",
+      "level": 42,
+      "rarity": "1/128"
+    },
+    {
+      "source": "Rogue",
+      "level": 15,
+      "rarity": "1/128"
+    },
+    {
+      "source": "Ocga",
+      "level": 5,
+      "rarity": "1/128"
+    },
+    {
+      "source": "Cuffs",
+      "level": 3,
+      "rarity": "1/128"
+    },
+    {
+      "source": "Sand Crab",
+      "level": 15,
+      "rarity": "1/128"
+    },
+    {
+      "source": "Jeff",
+      "level": 2,
+      "rarity": "1/128"
+    },
+    {
+      "source": "Joseph",
+      "level": 24,
+      "rarity": "1/128"
+    },
+    {
+      "source": "Jennella",
+      "level": 48,
+      "rarity": "1/128"
+    },
+    {
+      "source": "Ceolburg",
+      "level": 4,
+      "rarity": "1/128"
+    },
+    {
+      "source": "Screaming banshee",
+      "level": 70,
+      "rarity": null
+    },
+    {
+      "source": "Hygd",
+      "level": 4,
+      "rarity": "1/128"
+    },
+    {
+      "source": "Alexis",
+      "level": 24,
+      "rarity": "1/128"
+    },
+    {
+      "source": "Boris",
+      "level": 24,
+      "rarity": "1/128"
+    },
+    {
+      "source": "Eduard",
+      "level": 24,
+      "rarity": "1/128"
+    },
+    {
+      "source": "Galina",
+      "level": 24,
+      "rarity": "1/128"
+    },
+    {
+      "source": "Imre",
+      "level": 24,
+      "rarity": "1/128"
+    },
+    {
+      "source": "Georgy",
+      "level": 24,
+      "rarity": "1/128"
+    },
+    {
+      "source": "Irina",
+      "level": 24,
+      "rarity": "1/128"
+    },
+    {
+      "source": "Ksenia",
+      "level": 24,
+      "rarity": "1/128"
+    },
+    {
+      "source": "Liliya",
+      "level": 24,
+      "rarity": "1/128"
+    },
+    {
+      "source": "Milla",
+      "level": 24,
+      "rarity": "1/128"
+    },
+    {
+      "source": "Nikita",
+      "level": 24,
+      "rarity": "1/128"
+    },
+    {
+      "source": "Nikolai",
+      "level": 24,
+      "rarity": "1/128"
+    },
+    {
+      "source": "Sofiya",
+      "level": 24,
+      "rarity": "1/128"
+    },
+    {
+      "source": "Svetlana",
+      "level": 24,
+      "rarity": "1/128"
+    },
+    {
+      "source": "Vera",
+      "level": 24,
+      "rarity": "1/128"
+    },
+    {
+      "source": "Yadviga",
+      "level": 24,
+      "rarity": "1/128"
+    },
+    {
+      "source": "Zoja",
+      "level": 24,
+      "rarity": "1/128"
+    },
+    {
+      "source": "Breoca",
+      "level": 5,
+      "rarity": "1/128"
+    },
+    {
+      "source": "Lobstrosity",
+      "level": 68,
+      "rarity": "1/128"
+    },
+    {
+      "source": "Ammonite Crab",
+      "level": 25,
+      "rarity": "1/128"
+    },
+    {
+      "source": "Anja",
+      "level": 2,
+      "rarity": "1/128"
+    },
+    {
+      "source": "Hengel",
+      "level": 2,
+      "rarity": "1/128"
+    },
+    {
+      "source": "Swamp Crab",
+      "level": 55,
+      "rarity": "1/96"
+    },
+    {
+      "source": "Guard (H.A.M. Storerooms)",
+      "level": 20,
+      "rarity": null
+    },
+    {
+      "source": "Skeleton (Tarn's Lair)",
+      "level": 42,
+      "rarity": "1/128"
+    },
+    {
+      "source": "Coffin (Hallowed Sepulchre)",
+      "level": 66,
+      "rarity": "1/50"
+    },
+    {
+      "source": "Sourhog",
+      "level": 37,
+      "rarity": "1/128"
+    },
+    {
+      "source": "Casket (Reward pool)",
+      "level": null,
+      "rarity": null
+    },
+    {
+      "source": "Vardorvis",
+      "level": 572,
+      "rarity": "1/160"
+    },
+    {
+      "source": "Goblin (Goblin Village)",
+      "level": 5,
+      "rarity": "1/128"
+    },
+    {
+      "source": "Goblin (Vault of War)",
+      "level": 5,
+      "rarity": "1/128"
+    },
+    {
+      "source": "Goblin (God Wars Dungeon)",
+      "level": 12,
+      "rarity": "1/128"
+    },
+    {
+      "source": "Lynx",
+      "level": 21,
+      "rarity": "1/128"
+    },
+    {
+      "source": "Barbarian (Barbarian Camp)",
+      "level": 9,
+      "rarity": "1/128"
+    },
+    {
+      "source": "Bronze Chest (red)",
+      "level": null,
+      "rarity": null
+    },
+    {
+      "source": "Bronze Chest (brown)",
+      "level": null,
+      "rarity": null
+    },
+    {
+      "source": "Bronze Chest (crimson)",
+      "level": null,
+      "rarity": null
+    },
+    {
+      "source": "Bronze Chest (black)",
+      "level": null,
+      "rarity": null
+    },
+    {
+      "source": "Bronze Chest (purple)",
+      "level": null,
+      "rarity": null
+    },
+    {
+      "source": "Duke Sucellus",
+      "level": 538,
+      "rarity": "1/160"
+    },
+    {
+      "source": "The Whisperer",
+      "level": 587,
+      "rarity": "1/160"
+    },
+    {
+      "source": "The Leviathan",
+      "level": 593,
+      "rarity": "1/160"
+    },
+    {
+      "source": "Rusty",
+      "level": 2,
+      "rarity": "1/128"
+    },
+    {
+      "source": "Wealthy citizen",
+      "level": 50,
+      "rarity": "1/85"
+    },
+    {
+      "source": "Jaguar cub",
+      "level": 31,
+      "rarity": null
+    },
+    {
+      "source": "Buffalo",
+      "level": 9,
+      "rarity": null
+    },
+    {
+      "source": "Thief (Varlamore)",
+      "level": 16,
+      "rarity": "1/128"
+    },
+    {
+      "source": "Frost Crab",
+      "level": 15,
+      "rarity": "1/128"
+    },
+    {
+      "source": "Fishy salvage",
+      "level": 26,
+      "rarity": "1/300"
+    },
+    {
+      "source": "Clue turtle",
+      "level": 5,
+      "rarity": null
+    },
+    {
+      "source": "Hermit crab",
+      "level": 19,
+      "rarity": null
+    },
+    {
+      "source": "Dolphin",
+      "level": 22,
+      "rarity": "1/55"
+    },
+    {
+      "source": "Tern",
+      "level": 20,
+      "rarity": "1/125"
+    },
+    {
+      "source": "Eagle ray",
+      "level": 44,
+      "rarity": "1/75"
+    },
+    {
+      "source": "Brutus",
+      "level": 30,
+      "rarity": "1/40"
+    }
+  ],
+  "medium": [
+    {
+      "source": "Brine rat",
+      "level": 70,
+      "rarity": "1/128"
+    },
+    {
+      "source": "Catablepon",
+      "level": 49,
+      "rarity": "1/101"
+    },
+    {
+      "source": "Cockatrice",
+      "level": 37,
+      "rarity": "1/128"
+    },
+    {
+      "source": "Feral Vampyre",
+      "level": 61,
+      "rarity": "1/128"
+    },
+    {
+      "source": "Ice warrior",
+      "level": 57,
+      "rarity": "1/128"
+    },
+    {
+      "source": "Mystery box",
+      "level": null,
+      "rarity": null
+    },
+    {
+      "source": "Guard",
+      "level": 19,
+      "rarity": "1/128"
+    },
+    {
+      "source": "Pyrefiend",
+      "level": 43,
+      "rarity": "1/128"
+    },
+    {
+      "source": "Harpie Bug Swarm",
+      "level": 46,
+      "rarity": "1/128"
+    },
+    {
+      "source": "Werewolf",
+      "level": 88,
+      "rarity": "1/512"
+    },
+    {
+      "source": "Dagannoth",
+      "level": 74,
+      "rarity": "1/128"
+    },
+    {
+      "source": "Tribesman",
+      "level": 32,
+      "rarity": "1/138"
+    },
+    {
+      "source": "Jungle horror",
+      "level": 70,
+      "rarity": "1/128"
+    },
+    {
+      "source": "Jogre",
+      "level": 53,
+      "rarity": "1/129"
+    },
+    {
+      "source": "Dark warrior",
+      "level": 37,
+      "rarity": "1/96"
+    },
+    {
+      "source": "Possessed pickaxe",
+      "level": 50,
+      "rarity": "1/256"
+    },
+    {
+      "source": "Mummy (Ancient Pyramid)",
+      "level": 103,
+      "rarity": "1/513"
+    },
+    {
+      "source": "Magic axe",
+      "level": 42,
+      "rarity": "1/256"
+    },
+    {
+      "source": "Earth impling",
+      "level": 36,
+      "rarity": "1/100"
+    },
+    {
+      "source": "Essence impling",
+      "level": 42,
+      "rarity": "1/50"
+    },
+    {
+      "source": "Abyssal leech",
+      "level": 41,
+      "rarity": "1/256"
+    },
+    {
+      "source": "Guard (Burthorpe)",
+      "level": 37,
+      "rarity": "1/128"
+    },
+    {
+      "source": "Donny the lad",
+      "level": 34,
+      "rarity": "1/128"
+    },
+    {
+      "source": "Speedy Keith",
+      "level": 34,
+      "rarity": "1/128"
+    },
+    {
+      "source": "Black Heather",
+      "level": 34,
+      "rarity": "1/128"
+    },
+    {
+      "source": "Skeleton brute",
+      "level": 132,
+      "rarity": "1/128"
+    },
+    {
+      "source": "Vampyre Juvinate",
+      "level": null,
+      "rarity": null
+    },
+    {
+      "source": "Eclectic impling jar",
+      "level": null,
+      "rarity": "1/25"
+    },
+    {
+      "source": "Black Guard",
+      "level": 48,
+      "rarity": "1/128"
+    },
+    {
+      "source": "Abyssal guardian",
+      "level": 59,
+      "rarity": "1/256"
+    },
+    {
+      "source": "Sea Snake Hatchling",
+      "level": 62,
+      "rarity": "1/128"
+    },
+    {
+      "source": "Sea Snake Young",
+      "level": 90,
+      "rarity": "1/128"
+    },
+    {
+      "source": "Gnome",
+      "level": 75,
+      "rarity": "1/150"
+    },
+    {
+      "source": "Abyssal walker",
+      "level": 81,
+      "rarity": "1/256"
+    },
+    {
+      "source": "Giant Rock Crab",
+      "level": 137,
+      "rarity": "1/128"
+    },
+    {
+      "source": "Wallasalki",
+      "level": 98,
+      "rarity": "1/128"
+    },
+    {
+      "source": "Warrior (Rellekka)",
+      "level": 48,
+      "rarity": "1/128"
+    },
+    {
+      "source": "Eclectic impling",
+      "level": 50,
+      "rarity": "1/25"
+    },
+    {
+      "source": "Essence impling jar",
+      "level": null,
+      "rarity": "1/50"
+    },
+    {
+      "source": "Paladin",
+      "level": 62,
+      "rarity": "1/128"
+    },
+    {
+      "source": "Black Guard Berserker",
+      "level": 66,
+      "rarity": "1/128"
+    },
+    {
+      "source": "Market Guard",
+      "level": 48,
+      "rarity": "1/128"
+    },
+    {
+      "source": "Rock lobster",
+      "level": 127,
+      "rarity": "1/128"
+    },
+    {
+      "source": "Skeletal miner",
+      "level": 42,
+      "rarity": "1/128"
+    },
+    {
+      "source": "Giant Sea Snake",
+      "level": 149,
+      "rarity": "1/128"
+    },
+    {
+      "source": "Earth impling jar",
+      "level": null,
+      "rarity": "1/100"
+    },
+    {
+      "source": "Mammoth",
+      "level": 80,
+      "rarity": "1/128"
+    },
+    {
+      "source": "Dagannoth (Waterbirth Island)",
+      "level": 88,
+      "rarity": "1/128"
+    },
+    {
+      "source": "Sir Carl",
+      "level": 62,
+      "rarity": "1/128"
+    },
+    {
+      "source": "Sir Harry",
+      "level": 62,
+      "rarity": "1/128"
+    },
+    {
+      "source": "Sir Jerro",
+      "level": 62,
+      "rarity": "1/128"
+    },
+    {
+      "source": "Monkey (Monkey Madness I)",
+      "level": null,
+      "rarity": null
+    },
+    {
+      "source": "Gnome child",
+      "level": 75,
+      "rarity": "1/150"
+    },
+    {
+      "source": "Angry barbarian spirit",
+      "level": 166,
+      "rarity": "1/128"
+    },
+    {
+      "source": "Berserk barbarian spirit",
+      "level": 166,
+      "rarity": "1/128"
+    },
+    {
+      "source": "Enraged barbarian spirit",
+      "level": 166,
+      "rarity": "1/128"
+    },
+    {
+      "source": "Skeleton heavy",
+      "level": 130,
+      "rarity": "1/128"
+    },
+    {
+      "source": "Skeleton hero",
+      "level": 146,
+      "rarity": "1/128"
+    },
+    {
+      "source": "Skeleton thug",
+      "level": 130,
+      "rarity": "1/128"
+    },
+    {
+      "source": "Skeleton warlord",
+      "level": 132,
+      "rarity": "1/128"
+    },
+    {
+      "source": "Liam",
+      "level": null,
+      "rarity": null
+    },
+    {
+      "source": "Miala",
+      "level": null,
+      "rarity": null
+    },
+    {
+      "source": "Verak",
+      "level": null,
+      "rarity": null
+    },
+    {
+      "source": "Giant skeleton (Tarn's Lair)",
+      "level": 100,
+      "rarity": "1/128"
+    },
+    {
+      "source": "Giant skeleton (Shadow Dungeon)",
+      "level": 80,
+      "rarity": "1/128"
+    },
+    {
+      "source": "Guard (Shayzien)",
+      "level": 21,
+      "rarity": "1/128"
+    },
+    {
+      "source": "Head Guard",
+      "level": 84,
+      "rarity": "1/128"
+    },
+    {
+      "source": "King Sand Crab",
+      "level": 107,
+      "rarity": "1/128"
+    },
+    {
+      "source": "Benjamin",
+      "level": null,
+      "rarity": null
+    },
+    {
+      "source": "Flaming pyrelord",
+      "level": 97,
+      "rarity": null
+    },
+    {
+      "source": "Cockathrice",
+      "level": 89,
+      "rarity": null
+    },
+    {
+      "source": "Soldier (Shayzien)",
+      "level": 21,
+      "rarity": "1/128"
+    },
+    {
+      "source": "Ancient Zygomite",
+      "level": 109,
+      "rarity": "1/128"
+    },
+    {
+      "source": "Skeleton (mage)",
+      "level": 94,
+      "rarity": "1/128"
+    },
+    {
+      "source": "Gnome woman",
+      "level": 75,
+      "rarity": "1/150"
+    },
+    {
+      "source": "Former Vampyre",
+      "level": null,
+      "rarity": null
+    },
+    {
+      "source": "Skeleton (Tarn's Lair)",
+      "level": 40,
+      "rarity": "1/128"
+    },
+    {
+      "source": "Sulphur Lizard",
+      "level": 50,
+      "rarity": "1/128"
+    },
+    {
+      "source": "Stone chest",
+      "level": null,
+      "rarity": null
+    },
+    {
+      "source": "Sergeant (Shayzien)",
+      "level": 84,
+      "rarity": "1/128"
+    },
+    {
+      "source": "Guard (Hosidius)",
+      "level": 19,
+      "rarity": "1/128"
+    },
+    {
+      "source": "Pyrelord",
+      "level": 60,
+      "rarity": "1/104"
+    },
+    {
+      "source": "Infernal pyrelord",
+      "level": 134,
+      "rarity": null
+    },
+    {
+      "source": "Coffin (Hallowed Sepulchre)",
+      "level": 66,
+      "rarity": "1/50"
+    },
+    {
+      "source": "Chest (Isle of Souls Dungeon)",
+      "level": 28,
+      "rarity": null
+    },
+    {
+      "source": "Casket (Reward pool)",
+      "level": null,
+      "rarity": null
+    },
+    {
+      "source": "Vardorvis",
+      "level": 572,
+      "rarity": "1/160"
+    },
+    {
+      "source": "Necromancer (Great Kourend)",
+      "level": 68,
+      "rarity": "1/128"
+    },
+    {
+      "source": "Lynx Tamer",
+      "level": 21,
+      "rarity": "1/128"
+    },
+    {
+      "source": "Bandit (Shayzien)",
+      "level": 22,
+      "rarity": "1/128"
+    },
+    {
+      "source": "Steel Chest (red)",
+      "level": null,
+      "rarity": null
+    },
+    {
+      "source": "Steel Chest (brown)",
+      "level": null,
+      "rarity": null
+    },
+    {
+      "source": "Steel Chest (crimson)",
+      "level": null,
+      "rarity": null
+    },
+    {
+      "source": "Steel Chest (black)",
+      "level": null,
+      "rarity": null
+    },
+    {
+      "source": "Steel Chest (purple)",
+      "level": null,
+      "rarity": null
+    },
+    {
+      "source": "Black Chest (red)",
+      "level": null,
+      "rarity": null
+    },
+    {
+      "source": "Black Chest (brown)",
+      "level": null,
+      "rarity": null
+    },
+    {
+      "source": "Black Chest (crimson)",
+      "level": null,
+      "rarity": null
+    },
+    {
+      "source": "Black Chest (black)",
+      "level": null,
+      "rarity": null
+    },
+    {
+      "source": "Black Chest (purple)",
+      "level": null,
+      "rarity": null
+    },
+    {
+      "source": "Tribeswoman",
+      "level": 32,
+      "rarity": "1/138"
+    },
+    {
+      "source": "Guard (Port Sarim jail)",
+      "level": 21,
+      "rarity": "1/128"
+    },
+    {
+      "source": "Guard (Doric's hut)",
+      "level": 19,
+      "rarity": "1/128"
+    },
+    {
+      "source": "Duke Sucellus",
+      "level": 538,
+      "rarity": "1/160"
+    },
+    {
+      "source": "The Whisperer",
+      "level": 587,
+      "rarity": "1/160"
+    },
+    {
+      "source": "The Leviathan",
+      "level": 593,
+      "rarity": "1/160"
+    },
+    {
+      "source": "Scurrius",
+      "level": 200,
+      "rarity": "1/25"
+    },
+    {
+      "source": "Rusty chest",
+      "level": 33,
+      "rarity": "1/200"
+    },
+    {
+      "source": "Grimy Lizard",
+      "level": 50,
+      "rarity": null
+    },
+    {
+      "source": "Moonlight Cockatrice",
+      "level": 49,
+      "rarity": null
+    },
+    {
+      "source": "Jaguar",
+      "level": 67,
+      "rarity": null
+    },
+    {
+      "source": "Bandit (Varlamore)",
+      "level": 23,
+      "rarity": "1/128"
+    },
+    {
+      "source": "Black jaguar",
+      "level": 67,
+      "rarity": null
+    },
+    {
+      "source": "Knight of Varlamore",
+      "level": 46,
+      "rarity": "1/128"
+    },
+    {
+      "source": "White jaguar",
+      "level": 67,
+      "rarity": null
+    },
+    {
+      "source": "Guard (Varlamore)",
+      "level": 21,
+      "rarity": "1/128"
+    },
+    {
+      "source": "Agility dispenser",
+      "level": null,
+      "rarity": "1/40"
+    },
+    {
+      "source": "Chest (Aldarin Villas)",
+      "level": 36,
+      "rarity": "1/90"
+    },
+    {
+      "source": "Emissary Chosen",
+      "level": 76,
+      "rarity": "1/128"
+    },
+    {
+      "source": "Emissary Acolyte",
+      "level": 34,
+      "rarity": "1/128"
+    },
+    {
+      "source": "Guard (Aldarin)",
+      "level": 21,
+      "rarity": "1/128"
+    },
+    {
+      "source": "Pygmy kraken",
+      "level": 93,
+      "rarity": null
+    },
+    {
+      "source": "Barracuda salvage",
+      "level": 35,
+      "rarity": "1/300"
+    },
+    {
+      "source": "Hammerhead shark",
+      "level": 90,
+      "rarity": "1/100"
+    },
+    {
+      "source": "Clue turtle",
+      "level": 30,
+      "rarity": null
+    },
+    {
+      "source": "Guard (Auburnvale)",
+      "level": 21,
+      "rarity": "1/128"
+    },
+    {
+      "source": "Guard (Tlati Rainforest)",
+      "level": 21,
+      "rarity": "1/128"
+    },
+    {
+      "source": "Osprey",
+      "level": 63,
+      "rarity": "1/200"
+    },
+    {
+      "source": "Pirate (Thieving)",
+      "level": 60,
+      "rarity": null
+    },
+    {
+      "source": "Tarnished chest",
+      "level": 54,
+      "rarity": "1/150"
+    },
+    {
+      "source": "Bull shark",
+      "level": 65,
+      "rarity": "1/100"
+    },
+    {
+      "source": "Bottle of spinning comp-kvass",
+      "level": null,
+      "rarity": null
+    },
+    {
+      "source": "Butterfly ray",
+      "level": 68,
+      "rarity": "1/85"
+    },
+    {
+      "source": "Guard (Port Roberts)",
+      "level": 21,
+      "rarity": "1/128"
+    }
+  ],
+  "hard": [
+    {
+      "source": "Green dragon",
+      "level": 79,
+      "rarity": "1/128"
+    },
+    {
+      "source": "Jelly",
+      "level": 78,
+      "rarity": "1/128"
+    },
+    {
+      "source": "Cyclops",
+      "level": 56,
+      "rarity": "1/512"
+    },
+    {
+      "source": "Mystery box",
+      "level": null,
+      "rarity": null
+    },
+    {
+      "source": "Abyssal demon",
+      "level": 124,
+      "rarity": "1/128"
+    },
+    {
+      "source": "Aberrant spectre",
+      "level": 96,
+      "rarity": "1/128"
+    },
+    {
+      "source": "Greater demon",
+      "level": 92,
+      "rarity": "1/128"
+    },
+    {
+      "source": "Hellhound",
+      "level": 122,
+      "rarity": "1/64"
+    },
+    {
+      "source": "Ankou",
+      "level": 75,
+      "rarity": "1/512"
+    },
+    {
+      "source": "Nechryael",
+      "level": 115,
+      "rarity": "1/128"
+    },
+    {
+      "source": "Black demon",
+      "level": 172,
+      "rarity": "1/128"
+    },
+    {
+      "source": "Blue dragon",
+      "level": 111,
+      "rarity": "1/128"
+    },
+    {
+      "source": "Bloodveld",
+      "level": 76,
+      "rarity": "1/256"
+    },
+    {
+      "source": "Dark beast",
+      "level": 182,
+      "rarity": "1/128"
+    },
+    {
+      "source": "Kurask",
+      "level": 106,
+      "rarity": "1/128"
+    },
+    {
+      "source": "Turoth",
+      "level": 83,
+      "rarity": "1/128"
+    },
+    {
+      "source": "Bronze dragon",
+      "level": 131,
+      "rarity": "1/128"
+    },
+    {
+      "source": "Gargoyle",
+      "level": 111,
+      "rarity": "1/128"
+    },
+    {
+      "source": "Steel dragon",
+      "level": 246,
+      "rarity": "1/64"
+    },
+    {
+      "source": "Cave horror",
+      "level": 80,
+      "rarity": "1/128"
+    },
+    {
+      "source": "Elf Warrior",
+      "level": 108,
+      "rarity": "1/128"
+    },
+    {
+      "source": "Dagannoth Rex",
+      "level": 303,
+      "rarity": "1/42"
+    },
+    {
+      "source": "Black dragon",
+      "level": 227,
+      "rarity": "1/128"
+    },
+    {
+      "source": "Dark warrior",
+      "level": 145,
+      "rarity": "1/128"
+    },
+    {
+      "source": "Red dragon",
+      "level": 152,
+      "rarity": "1/128"
+    },
+    {
+      "source": "Waterfiend",
+      "level": 115,
+      "rarity": "1/128"
+    },
+    {
+      "source": "Iron dragon",
+      "level": 189,
+      "rarity": "1/128"
+    },
+    {
+      "source": "Terror dog",
+      "level": 100,
+      "rarity": "1/128"
+    },
+    {
+      "source": "Suqah",
+      "level": 111,
+      "rarity": "1/129"
+    },
+    {
+      "source": "Vyrewatch",
+      "level": 87,
+      "rarity": "1/128"
+    },
+    {
+      "source": "Dagannoth Supreme",
+      "level": 303,
+      "rarity": "1/42"
+    },
+    {
+      "source": "Dagannoth Prime",
+      "level": 303,
+      "rarity": "1/42"
+    },
+    {
+      "source": "Magpie impling",
+      "level": 65,
+      "rarity": "1/50"
+    },
+    {
+      "source": "Bandit",
+      "level": 130,
+      "rarity": "1/128"
+    },
+    {
+      "source": "Brutal green dragon",
+      "level": 227,
+      "rarity": "1/128"
+    },
+    {
+      "source": "Ninja impling",
+      "level": 74,
+      "rarity": "1/25"
+    },
+    {
+      "source": "Gorak",
+      "level": 145,
+      "rarity": "1/128"
+    },
+    {
+      "source": "Aviansie",
+      "level": 69,
+      "rarity": "1/128"
+    },
+    {
+      "source": "Balfrug Kreeyath",
+      "level": 151,
+      "rarity": "1/128"
+    },
+    {
+      "source": "Starlight",
+      "level": 149,
+      "rarity": "1/128"
+    },
+    {
+      "source": "Bree",
+      "level": 146,
+      "rarity": "1/128"
+    },
+    {
+      "source": "Growler",
+      "level": 139,
+      "rarity": "1/128"
+    },
+    {
+      "source": "Spiritual mage",
+      "level": 120,
+      "rarity": "1/128"
+    },
+    {
+      "source": "Spiritual ranger",
+      "level": 115,
+      "rarity": "1/128"
+    },
+    {
+      "source": "Spiritual warrior",
+      "level": 115,
+      "rarity": "1/128"
+    },
+    {
+      "source": "Sergeant Strongstack",
+      "level": 141,
+      "rarity": "1/128"
+    },
+    {
+      "source": "Nature impling",
+      "level": 58,
+      "rarity": "1/100"
+    },
+    {
+      "source": "Knight of Saradomin",
+      "level": 101,
+      "rarity": "1/128"
+    },
+    {
+      "source": "Mourner",
+      "level": 108,
+      "rarity": "1/128"
+    },
+    {
+      "source": "Paladin",
+      "level": 70,
+      "rarity": "1/500"
+    },
+    {
+      "source": "Sergeant Steelwill",
+      "level": 142,
+      "rarity": "1/128"
+    },
+    {
+      "source": "Sergeant Grimspike",
+      "level": 142,
+      "rarity": "1/128"
+    },
+    {
+      "source": "Flight Kilisa",
+      "level": 159,
+      "rarity": "1/128"
+    },
+    {
+      "source": "Wingman Skree",
+      "level": 143,
+      "rarity": "1/128"
+    },
+    {
+      "source": "Flockleader Geerin",
+      "level": 149,
+      "rarity": "1/128"
+    },
+    {
+      "source": "Zakl'n Gritch",
+      "level": 142,
+      "rarity": "1/128"
+    },
+    {
+      "source": "Tstanon Karlak",
+      "level": 145,
+      "rarity": "1/128"
+    },
+    {
+      "source": "Magpie impling jar",
+      "level": null,
+      "rarity": "1/50"
+    },
+    {
+      "source": "Cave kraken",
+      "level": 127,
+      "rarity": "1/100"
+    },
+    {
+      "source": "Nature impling jar",
+      "level": null,
+      "rarity": "1/100"
+    },
+    {
+      "source": "Elder Chaos druid",
+      "level": 129,
+      "rarity": "1/128"
+    },
+    {
+      "source": "Scorpia",
+      "level": 225,
+      "rarity": "1/100"
+    },
+    {
+      "source": "Crazy archaeologist",
+      "level": 204,
+      "rarity": "1/128"
+    },
+    {
+      "source": "Chaos Fanatic",
+      "level": 202,
+      "rarity": "1/128"
+    },
+    {
+      "source": "Smoke devil",
+      "level": 160,
+      "rarity": "1/128"
+    },
+    {
+      "source": "Thermonuclear smoke devil",
+      "level": 301,
+      "rarity": "1/96"
+    },
+    {
+      "source": "Saradomin priest",
+      "level": 113,
+      "rarity": "1/128"
+    },
+    {
+      "source": "Ork",
+      "level": 107,
+      "rarity": "1/128"
+    },
+    {
+      "source": "Ninja impling jar",
+      "level": null,
+      "rarity": "1/25"
+    },
+    {
+      "source": "Frost dragon",
+      "level": 202,
+      "rarity": "1/128"
+    },
+    {
+      "source": "Chest (Rogues' Castle)",
+      "level": 84,
+      "rarity": "1/99"
+    },
+    {
+      "source": "Experiment No.2",
+      "level": 109,
+      "rarity": "1/128"
+    },
+    {
+      "source": "Gangster",
+      "level": 45,
+      "rarity": "1/65"
+    },
+    {
+      "source": "Gang boss",
+      "level": 76,
+      "rarity": "1/65"
+    },
+    {
+      "source": "Lizardman shaman",
+      "level": 150,
+      "rarity": "1/200"
+    },
+    {
+      "source": "Tortured gorilla",
+      "level": 141,
+      "rarity": "1/300"
+    },
+    {
+      "source": "Demonic gorilla",
+      "level": 275,
+      "rarity": "1/100"
+    },
+    {
+      "source": "Brutal blue dragon",
+      "level": 271,
+      "rarity": "1/128"
+    },
+    {
+      "source": "Brutal black dragon",
+      "level": 318,
+      "rarity": "1/128"
+    },
+    {
+      "source": "Brutal red dragon",
+      "level": 289,
+      "rarity": "1/128"
+    },
+    {
+      "source": "Deviant spectre",
+      "level": 169,
+      "rarity": "1/128"
+    },
+    {
+      "source": "Warped Jelly",
+      "level": 112,
+      "rarity": "1/64"
+    },
+    {
+      "source": "Twisted Banshee",
+      "level": 89,
+      "rarity": "1/128"
+    },
+    {
+      "source": "Greater Nechryael",
+      "level": 200,
+      "rarity": "1/128"
+    },
+    {
+      "source": "Mutated Bloodveld",
+      "level": 123,
+      "rarity": "1/128"
+    },
+    {
+      "source": "Skotizo",
+      "level": 321,
+      "rarity": null
+    },
+    {
+      "source": "Greater abyssal demon",
+      "level": 342,
+      "rarity": null
+    },
+    {
+      "source": "Abhorrent spectre",
+      "level": 253,
+      "rarity": null
+    },
+    {
+      "source": "Night beast",
+      "level": 374,
+      "rarity": null
+    },
+    {
+      "source": "King kurask",
+      "level": 295,
+      "rarity": null
+    },
+    {
+      "source": "Marble gargoyle",
+      "level": 349,
+      "rarity": null
+    },
+    {
+      "source": "Nechryarch",
+      "level": 300,
+      "rarity": null
+    },
+    {
+      "source": "Vitreous Jelly",
+      "level": 206,
+      "rarity": null
+    },
+    {
+      "source": "Cave abomination",
+      "level": 206,
+      "rarity": null
+    },
+    {
+      "source": "Repugnant spectre",
+      "level": 335,
+      "rarity": null
+    },
+    {
+      "source": "Insatiable mutated Bloodveld",
+      "level": 278,
+      "rarity": null
+    },
+    {
+      "source": "Insatiable Bloodveld",
+      "level": 202,
+      "rarity": null
+    },
+    {
+      "source": "Nuclear smoke devil",
+      "level": 280,
+      "rarity": null
+    },
+    {
+      "source": "Armoured zombie (Zemouregal's Base)",
+      "level": 82,
+      "rarity": "1/128"
+    },
+    {
+      "source": "Aquanite",
+      "level": 145,
+      "rarity": "1/125"
+    },
+    {
+      "source": "Spitting Wyvern",
+      "level": 139,
+      "rarity": "1/118"
+    },
+    {
+      "source": "Taloned Wyvern",
+      "level": 147,
+      "rarity": "1/118"
+    },
+    {
+      "source": "Long-tailed Wyvern",
+      "level": 152,
+      "rarity": "1/118"
+    },
+    {
+      "source": "Vitreous Warped Jelly",
+      "level": 241,
+      "rarity": null
+    },
+    {
+      "source": "Screaming twisted banshee",
+      "level": 144,
+      "rarity": null
+    },
+    {
+      "source": "Wyrm",
+      "level": 97,
+      "rarity": "1/256"
+    },
+    {
+      "source": "Drake",
+      "level": 192,
+      "rarity": "1/128"
+    },
+    {
+      "source": "Hydra",
+      "level": 194,
+      "rarity": "1/128"
+    },
+    {
+      "source": "Alchemical Hydra",
+      "level": 426,
+      "rarity": "1/100"
+    },
+    {
+      "source": "Skeleton (Shayzien Crypts)",
+      "level": 132,
+      "rarity": "1/100"
+    },
+    {
+      "source": "Zombie (Shayzien Crypts)",
+      "level": 132,
+      "rarity": "1/100"
+    },
+    {
+      "source": "Sarachnis",
+      "level": 318,
+      "rarity": "1/40"
+    },
+    {
+      "source": "Temple Spider",
+      "level": 75,
+      "rarity": "1/200"
+    },
+    {
+      "source": "Undead Druid",
+      "level": 105,
+      "rarity": "1/100"
+    },
+    {
+      "source": "Guard (Prifddinas)",
+      "level": 108,
+      "rarity": "1/128"
+    },
+    {
+      "source": "Iorwerth Warrior",
+      "level": 108,
+      "rarity": "1/128"
+    },
+    {
+      "source": "Iorwerth Archer",
+      "level": 90,
+      "rarity": "1/128"
+    },
+    {
+      "source": "Elf Archer",
+      "level": 90,
+      "rarity": "1/128"
+    },
+    {
+      "source": "Basilisk Knight",
+      "level": 204,
+      "rarity": "1/192"
+    },
+    {
+      "source": "Basilisk Sentinel",
+      "level": 358,
+      "rarity": null
+    },
+    {
+      "source": "Vyrewatch Sentinel",
+      "level": 151,
+      "rarity": "1/100"
+    },
+    {
+      "source": "Coffin (Hallowed Sepulchre)",
+      "level": 66,
+      "rarity": "1/50"
+    },
+    {
+      "source": "Shadow Wyrm",
+      "level": 259,
+      "rarity": null
+    },
+    {
+      "source": "Spiked Turoth",
+      "level": 244,
+      "rarity": null
+    },
+    {
+      "source": "Guardian Drake",
+      "level": 376,
+      "rarity": null
+    },
+    {
+      "source": "Colossal Hydra",
+      "level": 309,
+      "rarity": null
+    },
+    {
+      "source": "Casket (Reward pool)",
+      "level": null,
+      "rarity": null
+    },
+    {
+      "source": "Vardorvis",
+      "level": 572,
+      "rarity": "1/160"
+    },
+    {
+      "source": "Albatross",
+      "level": 110,
+      "rarity": "1/120"
+    },
+    {
+      "source": "Araxyte",
+      "level": 96,
+      "rarity": "1/128"
+    },
+    {
+      "source": "Silver Chest (red)",
+      "level": null,
+      "rarity": null
+    },
+    {
+      "source": "Silver Chest (brown)",
+      "level": null,
+      "rarity": null
+    },
+    {
+      "source": "Silver Chest (crimson)",
+      "level": null,
+      "rarity": null
+    },
+    {
+      "source": "Silver Chest (black)",
+      "level": null,
+      "rarity": null
+    },
+    {
+      "source": "Silver Chest (purple)",
+      "level": null,
+      "rarity": null
+    },
+    {
+      "source": "Blood Reaver",
+      "level": 161,
+      "rarity": "1/112"
+    },
+    {
+      "source": "Intricate pouch",
+      "level": null,
+      "rarity": "1/10"
+    },
+    {
+      "source": "Duke Sucellus",
+      "level": 538,
+      "rarity": "1/160"
+    },
+    {
+      "source": "The Whisperer",
+      "level": 587,
+      "rarity": "1/160"
+    },
+    {
+      "source": "The Leviathan",
+      "level": 593,
+      "rarity": "1/160"
+    },
+    {
+      "source": "Phantom Muspah",
+      "level": 741,
+      "rarity": "1/30"
+    },
+    {
+      "source": "Cyclops (God Wars Dungeon)",
+      "level": 81,
+      "rarity": "1/512"
+    },
+    {
+      "source": "Cyclops (Catacombs of Kourend)",
+      "level": 56,
+      "rarity": "1/512"
+    },
+    {
+      "source": "Mutated Terrorbird",
+      "level": 178,
+      "rarity": null
+    },
+    {
+      "source": "Mutated Tortoise",
+      "level": 247,
+      "rarity": null
+    },
+    {
+      "source": "Warped Tortoise",
+      "level": 121,
+      "rarity": null
+    },
+    {
+      "source": "Warped Terrorbird",
+      "level": 96,
+      "rarity": null
+    },
+    {
+      "source": "Stingray",
+      "level": 92,
+      "rarity": "1/185"
+    },
+    {
+      "source": "Sulphur Nagua",
+      "level": 98,
+      "rarity": "1/256"
+    },
+    {
+      "source": "The Hueycoatl",
+      "level": 642,
+      "rarity": "1/50"
+    },
+    {
+      "source": "Elite Black Knight",
+      "level": 138,
+      "rarity": null
+    },
+    {
+      "source": "Elite Dark Mage",
+      "level": 96,
+      "rarity": null
+    },
+    {
+      "source": "Elite Dark Ranger",
+      "level": 96,
+      "rarity": null
+    },
+    {
+      "source": "Elite Dark Warrior",
+      "level": 96,
+      "rarity": null
+    },
+    {
+      "source": "Skeleton (Lucien's camp)",
+      "level": 132,
+      "rarity": "1/100"
+    },
+    {
+      "source": "Dreadborn Araxyte",
+      "level": 281,
+      "rarity": "1/192"
+    },
+    {
+      "source": "Frost Nagua",
+      "level": 104,
+      "rarity": null
+    },
+    {
+      "source": "Chilled jelly",
+      "level": 112,
+      "rarity": "1/64"
+    },
+    {
+      "source": "Armoured zombie (Zemouregal's Fort)",
+      "level": 105,
+      "rarity": "1/100"
+    },
+    {
+      "source": "Moss Giant (Iorwerth Dungeon)",
+      "level": 84,
+      "rarity": "1/200"
+    },
+    {
+      "source": "Eldric the Ice King",
+      "level": 350,
+      "rarity": "1/25"
+    },
+    {
+      "source": "Branda the Fire Queen",
+      "level": 350,
+      "rarity": "1/25"
+    },
+    {
+      "source": "Martial salvage",
+      "level": 73,
+      "rarity": "1/500"
+    },
+    {
+      "source": "Clue turtle",
+      "level": 50,
+      "rarity": null
+    },
+    {
+      "source": "Earthen Nagua",
+      "level": 128,
+      "rarity": "1/128"
+    },
+    {
+      "source": "Frigatebird",
+      "level": 78,
+      "rarity": "1/170"
+    },
+    {
+      "source": "Gryphon",
+      "level": 95,
+      "rarity": "1/100"
+    },
+    {
+      "source": "Elder aquanite",
+      "level": 305,
+      "rarity": null
+    },
+    {
+      "source": "Lava Strykewyrm",
+      "level": 116,
+      "rarity": "1/128"
+    },
+    {
+      "source": "Magma strykewyrm",
+      "level": 249,
+      "rarity": null
+    },
+    {
+      "source": "Dire gryphon",
+      "level": 209,
+      "rarity": null
+    },
+    {
+      "source": "Reinforced chest",
+      "level": 76,
+      "rarity": "1/115"
+    },
+    {
+      "source": "Narwhal",
+      "level": 111,
+      "rarity": "1/150"
+    },
+    {
+      "source": "Tiger shark",
+      "level": 125,
+      "rarity": null
+    },
+    {
+      "source": "Spined kraken",
+      "level": 128,
+      "rarity": null
+    },
+    {
+      "source": "Vitreous Chilled Jelly",
+      "level": 241,
+      "rarity": null
+    },
+    {
+      "source": "Manta ray (monster)",
+      "level": 133,
+      "rarity": "1/120"
+    }
+  ],
+  "elite": [
+    {
+      "source": "Mithril dragon",
+      "level": 304,
+      "rarity": "1/350"
+    },
+    {
+      "source": "King Black Dragon",
+      "level": 276,
+      "rarity": "1/450"
+    },
+    {
+      "source": "Giant Mole",
+      "level": 230,
+      "rarity": "1/500"
+    },
+    {
+      "source": "Kalphite Queen",
+      "level": 333,
+      "rarity": "1/100"
+    },
+    {
+      "source": "Abyssal demon",
+      "level": 124,
+      "rarity": "1/1200"
+    },
+    {
+      "source": "Chaos Elemental",
+      "level": 305,
+      "rarity": "1/200"
+    },
+    {
+      "source": "Dark beast",
+      "level": 182,
+      "rarity": "1/1200"
+    },
+    {
+      "source": "Skeletal Wyvern",
+      "level": 140,
+      "rarity": "1/350"
+    },
+    {
+      "source": "Steel dragon",
+      "level": 246,
+      "rarity": "1/500"
+    },
+    {
+      "source": "Dagannoth Rex",
+      "level": 303,
+      "rarity": "1/750"
+    },
+    {
+      "source": "Black dragon",
+      "level": 227,
+      "rarity": "1/500"
+    },
+    {
+      "source": "Hero",
+      "level": 80,
+      "rarity": "1/1400"
+    },
+    {
+      "source": "Salarin the twisted",
+      "level": 70,
+      "rarity": "1/500"
+    },
+    {
+      "source": "Dagannoth Supreme",
+      "level": 303,
+      "rarity": "1/750"
+    },
+    {
+      "source": "Dagannoth Prime",
+      "level": 303,
+      "rarity": "1/750"
+    },
+    {
+      "source": "Dragon impling jar",
+      "level": null,
+      "rarity": "1/50"
+    },
+    {
+      "source": "Dragon impling",
+      "level": 83,
+      "rarity": "1/50"
+    },
+    {
+      "source": "K'ril Tsutsaroth",
+      "level": 650,
+      "rarity": "1/250"
+    },
+    {
+      "source": "Commander Zilyana",
+      "level": 596,
+      "rarity": "1/250"
+    },
+    {
+      "source": "Kree'arra",
+      "level": 580,
+      "rarity": "1/250"
+    },
+    {
+      "source": "General Graardor",
+      "level": 624,
+      "rarity": "1/250"
+    },
+    {
+      "source": "Cave kraken",
+      "level": 127,
+      "rarity": "1/1200"
+    },
+    {
+      "source": "Kraken",
+      "level": 291,
+      "rarity": "1/500"
+    },
+    {
+      "source": "Lava dragon",
+      "level": 252,
+      "rarity": "1/250"
+    },
+    {
+      "source": "Callisto",
+      "level": 470,
+      "rarity": "1/100"
+    },
+    {
+      "source": "Vet'ion",
+      "level": 454,
+      "rarity": "1/100"
+    },
+    {
+      "source": "Venenatis",
+      "level": 464,
+      "rarity": "1/100"
+    },
+    {
+      "source": "Smoke devil",
+      "level": 160,
+      "rarity": "1/750"
+    },
+    {
+      "source": "Thermonuclear smoke devil",
+      "level": 301,
+      "rarity": "1/500"
+    },
+    {
+      "source": "Nex",
+      "level": 1001,
+      "rarity": "1/48"
+    },
+    {
+      "source": "Tormented Demon",
+      "level": 450,
+      "rarity": "1/128"
+    },
+    {
+      "source": "Corporeal Beast",
+      "level": 785,
+      "rarity": "1/200"
+    },
+    {
+      "source": "Zulrah",
+      "level": 725,
+      "rarity": "1/75"
+    },
+    {
+      "source": "Barbarian Assault/Gambles",
+      "level": null,
+      "rarity": "1/15"
+    },
+    {
+      "source": "Cerberus",
+      "level": 318,
+      "rarity": "1/100"
+    },
+    {
+      "source": "Abyssal Sire",
+      "level": 350,
+      "rarity": "1/180"
+    },
+    {
+      "source": "Lizardman shaman",
+      "level": 150,
+      "rarity": "1/1200"
+    },
+    {
+      "source": "Tortured gorilla",
+      "level": 141,
+      "rarity": "1/1500"
+    },
+    {
+      "source": "Demonic gorilla",
+      "level": 275,
+      "rarity": "1/500"
+    },
+    {
+      "source": "Brutal blue dragon",
+      "level": 271,
+      "rarity": "1/750"
+    },
+    {
+      "source": "Brutal black dragon",
+      "level": 318,
+      "rarity": "1/250"
+    },
+    {
+      "source": "Brutal red dragon",
+      "level": 289,
+      "rarity": "1/500"
+    },
+    {
+      "source": "Skotizo",
+      "level": 321,
+      "rarity": "1/5"
+    },
+    {
+      "source": "Rune dragon",
+      "level": 380,
+      "rarity": "1/300"
+    },
+    {
+      "source": "Greater abyssal demon",
+      "level": 342,
+      "rarity": "1/120"
+    },
+    {
+      "source": "Night beast",
+      "level": 374,
+      "rarity": "1/120"
+    },
+    {
+      "source": "Nuclear smoke devil",
+      "level": 280,
+      "rarity": null
+    },
+    {
+      "source": "Adamant dragon",
+      "level": 338,
+      "rarity": "1/320"
+    },
+    {
+      "source": "Ancient Wyvern",
+      "level": 210,
+      "rarity": "1/350"
+    },
+    {
+      "source": "Deranged archaeologist",
+      "level": 276,
+      "rarity": "1/200"
+    },
+    {
+      "source": "Grotesque Guardians",
+      "level": null,
+      "rarity": "1/230"
+    },
+    {
+      "source": "Vorkath",
+      "level": 732,
+      "rarity": "1/65"
+    },
+    {
+      "source": "Hydra",
+      "level": 194,
+      "rarity": "1/512"
+    },
+    {
+      "source": "Alchemical Hydra",
+      "level": 426,
+      "rarity": "1/256"
+    },
+    {
+      "source": "Yama",
+      "level": 1238,
+      "rarity": "1/30"
+    },
+    {
+      "source": "Sarachnis",
+      "level": 318,
+      "rarity": "1/60"
+    },
+    {
+      "source": "Chest (Barrows)",
+      "level": null,
+      "rarity": "1/200"
+    },
+    {
+      "source": "Crystal impling jar",
+      "level": null,
+      "rarity": "1/50"
+    },
+    {
+      "source": "Crystal impling",
+      "level": 80,
+      "rarity": "1/50"
+    },
+    {
+      "source": "Reward Chest (The Gauntlet)",
+      "level": null,
+      "rarity": "1/25"
+    },
+    {
+      "source": "The Nightmare",
+      "level": 814,
+      "rarity": "1/190"
+    },
+    {
+      "source": "Monumental chest",
+      "level": null,
+      "rarity": "1/25"
+    },
+    {
+      "source": "Phosani's Nightmare",
+      "level": 1024,
+      "rarity": "1/35"
+    },
+    {
+      "source": "Coffin (Hallowed Sepulchre)",
+      "level": 66,
+      "rarity": "1/60"
+    },
+    {
+      "source": "Grand Hallowed Coffin",
+      "level": 66,
+      "rarity": "1/30"
+    },
+    {
+      "source": "Colossal Hydra",
+      "level": 309,
+      "rarity": null
+    },
+    {
+      "source": "Gold key red",
+      "level": null,
+      "rarity": "1/139"
+    },
+    {
+      "source": "Gold key brown",
+      "level": null,
+      "rarity": "1/139"
+    },
+    {
+      "source": "Gold key crimson",
+      "level": null,
+      "rarity": "1/139"
+    },
+    {
+      "source": "Gold key black",
+      "level": null,
+      "rarity": "1/139"
+    },
+    {
+      "source": "Gold key purple",
+      "level": null,
+      "rarity": "1/139"
+    },
+    {
+      "source": "Vardorvis",
+      "level": 572,
+      "rarity": "1/160"
+    },
+    {
+      "source": "Ancient chest",
+      "level": null,
+      "rarity": "1/12"
+    },
+    {
+      "source": "Gold Chest (red)",
+      "level": null,
+      "rarity": "1/139"
+    },
+    {
+      "source": "Gold Chest (crimson)",
+      "level": null,
+      "rarity": "1/139"
+    },
+    {
+      "source": "Gold Chest (brown)",
+      "level": null,
+      "rarity": "1/139"
+    },
+    {
+      "source": "Gold Chest (black)",
+      "level": null,
+      "rarity": "1/139"
+    },
+    {
+      "source": "Gold Chest (purple)",
+      "level": null,
+      "rarity": "1/139"
+    },
+    {
+      "source": "Chest (Tombs of Amascut)",
+      "level": null,
+      "rarity": null
+    },
+    {
+      "source": "Duke Sucellus",
+      "level": 538,
+      "rarity": "1/160"
+    },
+    {
+      "source": "The Whisperer",
+      "level": 587,
+      "rarity": "1/160"
+    },
+    {
+      "source": "The Leviathan",
+      "level": 593,
+      "rarity": "1/160"
+    },
+    {
+      "source": "Phantom Muspah",
+      "level": 741,
+      "rarity": "1/45"
+    },
+    {
+      "source": "Artio",
+      "level": 320,
+      "rarity": "1/100"
+    },
+    {
+      "source": "Calvar'ion",
+      "level": 264,
+      "rarity": "1/100"
+    },
+    {
+      "source": "Spindel",
+      "level": 302,
+      "rarity": "1/100"
+    },
+    {
+      "source": "Araxxor",
+      "level": 890,
+      "rarity": "1/50"
+    },
+    {
+      "source": "Amoxliatl",
+      "level": null,
+      "rarity": "1/200"
+    },
+    {
+      "source": "Doom of Mokhaiotl",
+      "level": 558,
+      "rarity": "1/75"
+    },
+    {
+      "source": "Eldric the Ice King",
+      "level": 350,
+      "rarity": "1/100"
+    },
+    {
+      "source": "Branda the Fire Queen",
+      "level": 350,
+      "rarity": "1/100"
+    },
+    {
+      "source": "Great white shark",
+      "level": 175,
+      "rarity": "1/200"
+    },
+    {
+      "source": "Clue turtle",
+      "level": 70,
+      "rarity": null
+    },
+    {
+      "source": "Shellbane gryphon",
+      "level": 235,
+      "rarity": "1/200"
+    },
+    {
+      "source": "Orca",
+      "level": 205,
+      "rarity": "1/130"
+    },
+    {
+      "source": "Armoured kraken",
+      "level": 180,
+      "rarity": "1/160"
+    },
+    {
+      "source": "Vampyre kraken",
+      "level": 211,
+      "rarity": "1/150"
+    },
+    {
+      "source": "Maggot King",
+      "level": 741,
+      "rarity": "1/40"
+    },
+    {
+      "source": "Veiled kraken",
+      "level": 210,
+      "rarity": "1/140"
+    },
+    {
+      "source": "Venator",
+      "level": 246,
+      "rarity": null
+    },
+    {
+      "source": "Blood-starved venator",
+      "level": 246,
+      "rarity": null
+    }
+  ],
+  "master": [
+    {
+      "source": "Reward casket (hard)",
+      "level": null,
+      "rarity": "1/15"
+    },
+    {
+      "source": "Reward casket (medium)",
+      "level": null,
+      "rarity": "1/30"
+    },
+    {
+      "source": "Reward casket (easy)",
+      "level": null,
+      "rarity": "1/50"
+    },
+    {
+      "source": "Reward casket (elite)",
+      "level": null,
+      "rarity": "1/5"
+    }
+  ]
+}

@@ -1,0 +1,1698 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>OSRS TCG — Sourcing Panel Preview</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: #1a1a1a;
+    color: #c8c8c8;
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+    font-size: 13px;
+    display: flex;
+    height: 100vh;
+    overflow: hidden;
+  }
+
+  /* ── Left: card list ── */
+  #sidebar {
+    width: 260px;
+    min-width: 260px;
+    background: #141414;
+    border-right: 1px solid #333;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+
+  #sidebar h2 {
+    padding: 12px 14px 8px;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #888;
+    border-bottom: 1px solid #333;
+  }
+
+  #controls {
+    padding: 8px;
+    border-bottom: 1px solid #333;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  #search {
+    background: #222;
+    border: 1px solid #444;
+    color: #ddd;
+    padding: 6px 8px;
+    border-radius: 3px;
+    font-size: 12px;
+    width: 100%;
+  }
+  #search:focus { outline: none; border-color: #b07a30; }
+  #filter-row { display: flex; gap: 6px; }
+
+  select {
+    background: #222;
+    border: 1px solid #444;
+    color: #ccc;
+    padding: 4px 6px;
+    border-radius: 3px;
+    font-size: 11px;
+    flex: 1;
+  }
+
+  #card-list { overflow-y: auto; flex: 1; }
+
+  .card-item {
+    padding: 7px 14px;
+    cursor: pointer;
+    border-bottom: 1px solid #1f1f1f;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: background 0.1s;
+  }
+  .card-item:hover         { background: #1e1e1e; }
+  .card-item.selected      { background: #2a2000; border-left: 2px solid #b07a30; }
+  .card-item.owned-card    { border-left: 2px solid #2a6b35; }
+  .card-item.selected.owned-card { border-left: 2px solid #b07a30; }
+  .card-name { flex: 1; }
+  .card-type { font-size: 10px; color: #666; margin-left: 8px; }
+  .card-cat  { font-size: 9px; color: #4a6a8a; background:#0d1e2e; border-radius:2px; padding:1px 4px; margin-left:6px; white-space:nowrap; }
+
+  /* ── Right: detail ── */
+  #detail { flex: 1; overflow-y: auto; padding: 20px 24px; }
+  #detail .placeholder { color: #444; margin-top: 60px; text-align: center; font-size: 15px; }
+  #detail h1           { font-size: 18px; color: #e8c97a; margin-bottom: 4px; }
+  #detail .subtitle    { color: #666; font-size: 11px; margin-bottom: 12px; }
+
+  .section { margin-bottom: 22px; }
+
+  .section-header {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #888;
+    border-bottom: 1px solid #333;
+    padding-bottom: 5px;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  /* ── Progress pill: "3 / 7" ── */
+  .progress-pill {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 11px;
+    font-weight: normal;
+    text-transform: none;
+    letter-spacing: 0;
+  }
+  .progress-pill .fraction { color: #aaa; }
+  .progress-pill .fraction .num { color: #e8c97a; font-weight: 700; }
+  .progress-pill .fraction .den { color: #666; }
+  .pbar {
+    width: 60px;
+    height: 5px;
+    background: #2a2a2a;
+    border-radius: 3px;
+    overflow: hidden;
+  }
+  .pbar-fill { height: 100%; background: #e8c97a; border-radius: 3px; transition: width 0.2s; }
+  .pbar-fill.complete { background: #00c853; }
+
+  /* ── Drop rows ── */
+  .drop-row {
+    display: flex;
+    align-items: center;
+    padding: 6px 8px;
+    border-radius: 3px;
+    margin-bottom: 2px;
+    cursor: pointer;
+    transition: background 0.1s;
+    user-select: none;
+  }
+  .drop-row:hover { background: #1e1e1e; }
+
+  /* owned state */
+  .drop-row.owned  { background: #0a1a0a; }
+  .drop-row.locked { background: transparent; }
+
+  /* access pill — Unlocked / Locked label on Dropped By rows */
+  .access-pill {
+    font-size: 10px;
+    font-weight: 600;
+    padding: 2px 7px;
+    border-radius: 10px;
+    flex-shrink: 0;
+    margin-left: 6px;
+  }
+  .access-pill.unlocked { background: #003d1f; color: #00c853; }
+  .access-pill.locked   { background: #2a0a0a; color: #c84a00; }
+
+  .drop-indicator {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    font-weight: 700;
+    flex-shrink: 0;
+    margin-right: 10px;
+  }
+  .drop-indicator.owned  { background: #003d1f; color: #00c853; }
+  .drop-indicator.locked { background: #2a1a00; color: #7a5020; border: 1px solid #3a2a10; }
+  .drop-indicator.rdt    { background: #1a1a2a; color: #4a5a8a; }
+
+  .drop-name { flex: 1; }
+  .drop-name.owned  { color: #00c853; }
+  .drop-name.locked { color: #888; }
+  .drop-name.rdt    { color: #777; }
+
+  .rarity-badge {
+    font-size: 10px;
+    padding: 2px 7px;
+    border-radius: 2px;
+    margin: 0 8px;
+    font-weight: 600;
+    flex-shrink: 0;
+  }
+  .rarity-Always         { background: #003d1f; color: #00c853; }
+  .rarity-Common         { background: #1a2e00; color: #76c442; }
+  .rarity-Uncommon       { background: #2a2800; color: #c8b400; }
+  .rarity-Rare           { background: #001a3a; color: #4a9eff; }
+  .rarity-Very-Rare      { background: #1e0030; color: #b060e0; }
+  .rarity-Extremely-Rare { background: #2e1000; color: #ff7020; }
+  .rarity-Unknown        { background: #1a1a1a; color: #555; }
+
+  .fraction { font-size: 10px; color: #555; min-width: 60px; text-align: right; flex-shrink: 0; }
+
+  /* ── Stats bar ── */
+  .stats-bar {
+    display: flex;
+    gap: 0;
+    background: #111;
+    border: 1px solid #2a2a2a;
+    border-radius: 4px;
+    margin-bottom: 20px;
+    overflow: hidden;
+  }
+  .stat-block {
+    flex: 1;
+    padding: 10px 14px;
+    border-right: 1px solid #2a2a2a;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .stat-block:last-child { border-right: none; }
+  .stat-label { font-size: 10px; color: #555; text-transform: uppercase; letter-spacing: 0.5px; }
+  .stat-value { font-size: 16px; font-weight: 700; color: #e8c97a; line-height: 1; }
+  .stat-value .den { font-size: 12px; color: #666; font-weight: normal; }
+  .stat-value.complete { color: #00c853; }
+
+  .quest-row       { padding: 5px 0; border-bottom: 1px solid #1a1a1a; }
+  .quest-name      { color: #c8b400; }
+  .quest-prereqs   { font-size: 11px; color: #555; margin-top: 2px; padding-left: 12px; }
+  .empty-note      { color: #444; font-style: italic; font-size: 11px; padding: 4px 0; }
+
+  /* ── RDT section note ── */
+  .rdt-header-note {
+    font-size: 10px;
+    color: #4a5a8a;
+    font-weight: normal;
+    text-transform: none;
+    letter-spacing: 0;
+  }
+  .rdt-banner {
+    font-size: 11px;
+    color: #4a5a8a;
+    background: #0d0d1a;
+    border: 1px solid #1a1a3a;
+    border-radius: 3px;
+    padding: 6px 10px;
+    margin-bottom: 8px;
+  }
+
+  /* ── Gathering card ── */
+  .gathering-card {
+    background: #0d1f0d;
+    border: 1px solid #1a3a1a;
+    border-radius: 4px;
+    padding: 12px 14px;
+  }
+  .gathering-skill { font-size: 13px; color: #76c442; font-weight: 600; margin-bottom: 6px; }
+  .level-req {
+    background: #1a3a00; color: #76c442;
+    padding: 2px 7px; border-radius: 10px;
+    font-size: 11px; margin-left: 8px; font-weight: normal;
+  }
+  .level-req.locked { background: #3a1a00; color: #c84a00; }
+  .gathering-detail { font-size: 11px; color: #888; margin-top: 4px; }
+  .gathering-tool   { font-size: 11px; color: #aaa; margin-top: 6px; }
+  .gathering-tool strong { color: #ddd; }
+
+  /* ── Production card ── */
+  .production-card {
+    background: #0f0f1f;
+    border: 1px solid #1e1e3a;
+    border-radius: 4px;
+    padding: 12px 14px;
+  }
+  .production-skill { font-size: 13px; color: #6a8aee; font-weight: 600; margin-bottom: 8px; }
+  .production-ingredients { margin-top: 8px; }
+  .prod-ingredient {
+    display: flex; align-items: center;
+    padding: 4px 6px; border-radius: 3px;
+    cursor: pointer; margin-bottom: 2px;
+    transition: background 0.1s;
+  }
+  .prod-ingredient:hover { background: #141414; }
+  .prod-ingredient .drop-indicator { width: 14px; height: 14px; font-size: 9px; margin-right: 8px; }
+  .prod-ingredient-name { flex: 1; font-size: 12px; }
+  .prod-ingredient-name.owned  { color: #00c853; }
+  .prod-ingredient-name.locked { color: #888; }
+  .prod-ingredient-qty { font-size: 11px; color: #555; }
+  .prod-output-note { font-size: 10px; color: #555; margin-top: 6px; }
+  .production-facilities { font-size: 11px; color: #888; margin-top: 4px; }
+
+  /* ── Spawns ── */
+  .spawn-row { font-size: 11px; color: #888; padding: 3px 0; border-bottom: 1px solid #1a1a1a; }
+  .spawn-row:last-child { border-bottom: none; }
+
+  /* ── Level panel ── */
+  #level-panel {
+    background: #111;
+    border-top: 1px solid #333;
+    padding: 10px 14px 12px;
+    font-size: 11px;
+    color: #888;
+  }
+  .panel-title {
+    text-transform: uppercase; letter-spacing: 1px;
+    font-size: 10px; margin-bottom: 8px; color: #666;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .panel-hint { font-size: 10px; color: #444; font-weight: normal; text-transform: none; letter-spacing: 0; }
+  .level-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; }
+  .level-entry { display: flex; align-items: center; gap: 5px; }
+  .level-entry label { color: #888; font-size: 10px; flex: 1; }
+  .level-entry input {
+    background: #1a1a1a; border: 1px solid #333;
+    color: #ddd; width: 42px; padding: 3px 5px;
+    border-radius: 3px; font-size: 11px; text-align: center;
+  }
+  .level-entry input:focus { outline: none; border-color: #b07a30; }
+
+  /* ── Tool tiers ── */
+  .tool-tiers { margin-top: 10px; }
+  .tool-tier-row {
+    display: flex; align-items: center;
+    padding: 3px 0; gap: 8px; font-size: 11px;
+  }
+  .tier-dot { width: 7px; height: 7px; border-radius: 50%; background: #2a2a2a; flex-shrink: 0; }
+  .tier-name { flex: 1; color: #555; }
+  .tier-req  { font-size: 10px; color: #444; }
+  /* can equip + own the card */
+  .tool-tier-row.available .tier-dot  { background: #3a3a3a; }
+  .tool-tier-row.available .tier-name { color: #777; }
+  .tool-tier-row.available .tier-req  { color: #555; }
+  /* best owned+usable tier */
+  .tool-tier-row.best .tier-dot  { background: #e8c97a; }
+  .tool-tier-row.best .tier-name { color: #e8c97a; font-weight: 600; }
+  .tool-tier-row.best .tier-req  { color: #888; }
+  /* can equip but don't own the card */
+  .tool-tier-row.no-card .tier-dot  { background: #3a3a1a; }
+  .tool-tier-row.no-card .tier-name { color: #5a5a30; }
+  .tool-tier-row.no-card .tier-req  { color: #4a4a20; }
+  /* locked — attack level too low */
+  .tool-tier-row.locked .tier-dot  { background: #2a1a1a; }
+  .tool-tier-row.locked .tier-name { color: #5a2a2a; }
+  .tool-tier-row.locked .tier-req  { color: #c84a00; font-weight: 600; }
+
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: #111; }
+  ::-webkit-scrollbar-thumb { background: #333; border-radius: 3px; }
+</style>
+</head>
+<body>
+
+<div id="sidebar">
+  <h2>Card Sourcing</h2>
+  <div id="controls">
+    <input id="search" type="text" placeholder="Search cards…" oninput="filterCards()" autocomplete="off">
+    <div id="filter-row">
+      <select id="owned-filter" onchange="filterCards()">
+        <option value="all">All cards</option>
+        <option value="owned">Owned only</option>
+        <option value="not-owned">Not owned</option>
+      </select>
+    </div>
+    <div id="filter-row2" style="display:flex;gap:6px;">
+      <select id="cat-filter" onchange="filterCards()" style="flex:1">
+        <option value="all">All categories</option>
+        <option value="Weapon">Weapons</option>
+        <option value="Ammo">Ammo</option>
+        <option value="Rune">Runes</option>
+        <option value="Armour">Armour</option>
+        <option value="Consumable">Food &amp; Potions</option>
+        <option value="clueScrolls">Clue Scrolls</option>
+        <option value="Clue">Clue rewards</option>
+        <option value="other">Misc / Other</option>
+      </select>
+    </div>
+  </div>
+  <div id="sim-bar" style="padding:6px 10px;border-bottom:1px solid #222;font-size:10px;color:#555;display:flex;align-items:center;gap:6px;box-sizing:border-box;width:100%;">
+    <span id="sim-summary" style="flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap"></span>
+    <input id="rsn-input" type="text" placeholder="RSN…" style="background:#111;border:1px solid #333;color:#aaa;padding:3px 6px;border-radius:3px;font-size:10px;width:80px;flex-shrink:0;outline:none" onkeydown="if(event.key==='Enter')lookupLevels()">
+    <button id="levels-btn"  onclick="lookupLevels()"       style="background:#222;border:1px solid #444;color:#888;padding:3px 0;border-radius:3px;cursor:pointer;font-size:10px;width:58px;flex-shrink:0">Levels</button>
+    <button id="refresh-btn" onclick="refreshCollection()"  style="background:#222;border:1px solid #444;color:#888;padding:3px 0;border-radius:3px;cursor:pointer;font-size:10px;width:58px;flex-shrink:0">↻ Refresh</button>
+    <button id="sim-btn"     onclick="reroll()"             style="background:#222;border:1px solid #333;color:#888;padding:3px 0;border-radius:3px;cursor:pointer;font-size:10px;width:58px;flex-shrink:0;display:none">Re-roll</button>
+  </div>
+  <div id="card-list"></div>
+</div>
+
+<div id="main-content" style="flex:1;display:flex;flex-direction:column;overflow:hidden;">
+  <div id="detail" style="flex:1;overflow-y:auto;padding:20px 24px;">
+    <div class="placeholder">← Select a card to see sourcing info</div>
+  </div>
+</div>
+
+<script>
+// ─── Tool tiers ────────────────────────────────────────────────────────────
+// skillReq = Mining/WC level needed to USE the tool (from OSRS wiki skill pages)
+
+// Implicit tools required for production but NOT listed in the wiki ingredient table.
+// Most tools are now scraped directly from the wiki's Tools cell — only genuine
+// wiki omissions need to be hard-coded here.
+const SKILL_IMPLICIT_TOOLS = {
+  Smithing: ["Hammer"],   // always needed at an Anvil; wiki never lists it
+};
+
+function getImplicitTools(skill, ingredients, wikiTools) {
+  // Start with wiki-scraped tools (Knife, Chisel, Ring mould, etc.)
+  const tools = [...(wikiTools || [])];
+
+  // Hard-coded fallbacks for tools the wiki genuinely omits
+  // Smithing → Hammer (if not already captured by wiki)
+  if (skill === 'Smithing' && !tools.includes('Hammer'))
+    tools.push('Hammer');
+
+  // Crafting + Thread → Needle (wiki lists Thread but never Needle)
+  const ings = ingredients || [];
+  if (skill === 'Crafting' && ings.some(i => i.item === 'Thread') && !tools.includes('Needle'))
+    tools.push('Needle');
+
+  return tools;
+}
+
+const TOOL_TIERS = {
+  "Pickaxe": [
+    {name:"Bronze pickaxe",  skillReq:1},  {name:"Iron pickaxe",    skillReq:1},
+    {name:"Steel pickaxe",   skillReq:6},  {name:"Black pickaxe",   skillReq:11},
+    {name:"Mithril pickaxe", skillReq:21}, {name:"Adamant pickaxe", skillReq:31},
+    {name:"Rune pickaxe",    skillReq:41}, {name:"Dragon pickaxe",  skillReq:61},
+    {name:"Crystal pickaxe", skillReq:71},
+  ],
+  "Axe": [
+    {name:"Bronze axe",  skillReq:1},  {name:"Iron axe",    skillReq:1},
+    {name:"Steel axe",   skillReq:6},  {name:"Black axe",   skillReq:11},
+    {name:"Mithril axe", skillReq:21}, {name:"Adamant axe", skillReq:31},
+    {name:"Rune axe",    skillReq:41}, {name:"Dragon axe",  skillReq:61},
+    {name:"Crystal axe", skillReq:71},
+  ],
+};
+
+// ─── Compound tool resolution ───────────────────────────────────────────────
+// Some gathering tools are compound ("Fishing rod + bait"). Each part is
+// checked separately; "feathers" matches any of FEATHER_CARDS.
+const FEATHER_CARDS = [
+  'Feather', 'Red feather', 'Yellow feather', 'Orange feather',
+  'Blue feather', 'Stripy feather', 'Wimpy feather',
+];
+// Maps lowercased shorthand → real card name
+const TOOL_PART_ALIASES = { bait: 'Fishing bait', sandworms: 'Sandworms' };
+
+function resolveToolParts(toolStr) {
+  if (!toolStr || toolStr === 'None') return [];
+  return toolStr.split(' + ').map(raw => {
+    const part = raw.trim();
+    const key  = part.toLowerCase();
+    if (key === 'feathers') {
+      const ownedF = FEATHER_CARDS.filter(f => isOwned(f));
+      return {
+        label: 'Feathers',
+        owned: ownedF.length > 0,
+        note:  ownedF.length > 0
+          ? ownedF.slice(0, 2).join(', ') + (ownedF.length > 2 ? ` +${ownedF.length - 2} more` : '')
+          : 'none owned',
+      };
+    }
+    const name = TOOL_PART_ALIASES[key] || part;
+    return { label: name, owned: isOwned(name), note: null };
+  });
+}
+
+// ─── State ─────────────────────────────────────────────────────────────────
+let monsterDrops = {}, itemSources = {}, questChains = {}, cardCategories = {}, cardDetails = {};
+let clueScrollSources   = {};   // tier → [{source, level, rarity}]
+let clueRewardsByTier   = {};   // tier → [item names]
+let clueRewardRarities  = {};   // tier → {item name → fraction string}
+let ingredientInfo      = {};   // non-card ingredient name → {production, shops, spawns}
+let allCards     = [];
+let selected = null, selectedType = null;
+
+// Simulated skill levels — randomised on load
+let skills = { Mining:1, Woodcutting:1, Fishing:1, Farming:1, Slayer:1, Sailing:1, Fletching:1, Smithing:1, Cooking:1, Crafting:1, Runecrafting:1, Herblore:1, Thieving:1, Hunter:1, Magic:1, Agility:1, Firemaking:1, Construction:1 };
+
+// Owned cards — randomised on load (no localStorage persistence for simulation)
+let owned = new Set();
+
+function isOwned(name) { return owned.has(name.toLowerCase()); }
+
+function wikiLink(name) {
+  // Strip disambiguation suffix "Monkey (monster)" → "Monkey" for wiki URL
+  const page = name.replace(/ \([^)]+\)$/, '').replace(/ /g, '_');
+  const url = 'https://oldschool.runescape.wiki/w/' + encodeURIComponent(page);
+  return `<a href="${url}" target="_blank" rel="noopener" title="View on OSRS Wiki"
+    style="color:#555;font-size:11px;text-decoration:none;margin-left:8px;vertical-align:middle"
+    onclick="event.stopPropagation()">↗ wiki</a>`;
+}
+function toggleOwned(name) {
+  const k = name.toLowerCase();
+  if (owned.has(k)) owned.delete(k); else owned.add(k);
+  refreshDetail();
+}
+
+function reroll() {
+  simulateRandom();
+  refreshDetail();
+  updateSimBar();
+}
+
+function updateSimBar() {
+  const el = document.getElementById('sim-summary');
+  if (!el) return;
+  const lvls = Object.entries(skills).map(([s,v]) => `${s.slice(0,3)} ${v}`).join(' · ');
+  el.textContent = `~15% owned · ${lvls}`;
+}
+
+async function loadCollection() {
+  // Try real collection first; fall back to random simulation
+  try {
+    const data = await fetch('output/my_collection.json').then(r => r.json());
+    owned = new Set(data.ownedCards.map(n => n.toLowerCase()));
+    document.getElementById('sim-summary').textContent =
+      `${data.cardCount} cards owned (real collection)`;
+    document.getElementById('sim-btn').style.display = 'inline-block';
+    return;
+  } catch {}
+  simulateRandom();
+  updateSimBar();
+}
+
+function simulateRandom() {
+  // Random skill levels: uniform 1–99
+  for (const s of Object.keys(skills))
+    skills[s] = Math.floor(Math.random() * 99) + 1;
+
+  // Collect every card name that appears in the data
+  const allNames = new Set();
+  for (const name of Object.keys(monsterDrops)) allNames.add(name.toLowerCase());
+  for (const name of Object.keys(itemSources))  allNames.add(name.toLowerCase());
+  for (const data of Object.values(monsterDrops))
+    for (const d of data.drops || []) allNames.add(d.card.toLowerCase());
+
+  // Own ~15% at random
+  owned = new Set();
+  for (const name of allNames)
+    if (Math.random() < 0.15) owned.add(name);
+}
+
+// ─── Data loading ──────────────────────────────────────────────────────────
+async function loadData() {
+  try {
+    const cb = `?v=${Date.now()}`;  // cache-bust so updated JSON files are always fresh
+    const [md, is, qc, cc, cd, css, cs, crr, ii] = await Promise.all([
+      fetch(`output/monster_drops.json${cb}`).then(r => r.json()).catch(() => ({})),
+      fetch(`output/item_sources.json${cb}`).then(r => r.json()).catch(() => ({})),
+      fetch(`output/quest_chains.json${cb}`).then(r => r.json()).catch(() => ({})),
+      fetch(`output/card_categories.json${cb}`).then(r => r.json()).catch(() => ({})),
+      fetch(`output/card_details.json${cb}`).then(r => r.json()).catch(() => ({})),
+      fetch(`clue_scroll_sources.json${cb}`).then(r => r.json()).catch(() => ({})),
+      fetch(`clue_sources.json${cb}`).then(r => r.json()).catch(() => ({})),
+      fetch(`clue_reward_rarities.json${cb}`).then(r => r.json()).catch(() => ({})),
+      fetch(`ingredient_info.json${cb}`).then(r => r.json()).catch(() => ({})),
+    ]);
+    monsterDrops = md; itemSources = is; questChains = qc; cardCategories = cc; cardDetails = cd;
+    clueScrollSources  = css;
+    clueRewardRarities = crr;
+    ingredientInfo     = ii;
+    // Build inverted tier → [item names] map from clue_sources.json
+    for (const [name, tiers] of Object.entries(cs)) {
+      for (const tier of tiers) {
+        if (!clueRewardsByTier[tier]) clueRewardsByTier[tier] = [];
+        clueRewardsByTier[tier].push(name);
+      }
+    }
+    await loadCollection();
+    buildCardList();
+    document.getElementById('rsn-input').value = 'lottie_tcg';
+  } catch {
+    document.getElementById('detail').innerHTML =
+      `<div class="placeholder">⚠ Needs a local server.<br>
+       <code>python3 scripts/server.py</code><br>
+       Then open <a href="http://localhost:8765/preview.html" style="color:#b07a30">localhost:8765/preview.html</a></div>`;
+  }
+}
+
+const CLUE_TIER_CONFIG = {
+  beginner: {label:'Beginner', color:'#c8a830', bg:'#2a2010'},
+  easy:     {label:'Easy',     color:'#50c050', bg:'#102010'},
+  medium:   {label:'Medium',   color:'#c8c030', bg:'#202010'},
+  hard:     {label:'Hard',     color:'#4080c0', bg:'#101828'},
+  elite:    {label:'Elite',    color:'#9050d0', bg:'#1e1028'},
+  master:   {label:'Master',   color:'#d03030', bg:'#280a0a'},
+};
+const CLUE_TIER_ORDER = ['beginner','easy','medium','hard','elite','master'];
+
+function buildCardList() {
+  for (const name of Object.keys(monsterDrops))
+    allCards.push({name, type:'monster'});
+  for (const [name, d] of Object.entries(itemSources)) {
+    if (d.monsters?.length || d.rdtMonsters?.length || d.quests?.length || d.shops?.length || d.shopBought || d.gathering || d.clueTiers?.length)
+      allCards.push({name, type:'item', cats: cardCategories[name] || []});
+  }
+  // Virtual clue scroll cards — always at top of list
+  for (const tier of CLUE_TIER_ORDER)
+    allCards.push({name: `Clue scroll (${tier})`, type: 'clue', tier});
+  allCards.sort((a,b) => {
+    // Clue scrolls sort before everything else
+    if (a.type === 'clue' && b.type !== 'clue') return -1;
+    if (b.type === 'clue' && a.type !== 'clue') return  1;
+    if (a.type === 'clue' && b.type === 'clue')
+      return CLUE_TIER_ORDER.indexOf(a.tier) - CLUE_TIER_ORDER.indexOf(b.tier);
+    return a.name.localeCompare(b.name);
+  });
+  renderList(allCards);
+}
+
+function filterCards() {
+  const q       = document.getElementById('search').value.toLowerCase();
+  const owned_f = document.getElementById('owned-filter').value;
+  const catFil  = document.getElementById('cat-filter').value;
+
+  renderList(allCards.filter(c => {
+    if (q && !c.name.toLowerCase().includes(q)) return false;
+    // Clue scroll virtual cards: skip owned filter; always pass category filter when 'all' or 'clueScrolls'
+    if (c.type === 'clue') {
+      return catFil === 'all' || catFil === 'clueScrolls';
+    }
+    if (owned_f === 'owned'     && !isOwned(c.name)) return false;
+    if (owned_f === 'not-owned' &&  isOwned(c.name)) return false;
+    if (catFil !== 'all') {
+      if (catFil === 'clueScrolls') return false;  // clueScrolls filter = only show clue scroll cards
+      if (c.type !== 'item') return false;
+      const cats = c.cats || [];
+      if (catFil === 'other') {
+        if (cats.length > 0) return false;
+      } else {
+        if (!cats.includes(catFil)) return false;
+      }
+    }
+    return true;
+  }));
+}
+
+// Short category abbreviation for the sidebar badge
+const CAT_ABBR = {
+  Weapon:'Wpn', Ammo:'Ammo', Rune:'Rune',
+  Armour:'Arm', Consumable:'Food', Clue:'Clue',
+  Slayer:'Slay', General:'Gen',
+};
+
+function renderList(cards) {
+  const list = document.getElementById('card-list');
+  list.innerHTML = '';
+  for (const card of cards) {
+    const el = document.createElement('div');
+    if (card.type === 'clue') {
+      const cfg = CLUE_TIER_CONFIG[card.tier] || {};
+      el.className = 'card-item' + (card.name === selected ? ' selected' : '');
+      el.innerHTML = `<span class="card-name">${card.name}</span>`
+        + `<span style="font-size:9px;color:${cfg.color};background:${cfg.bg};border-radius:2px;padding:1px 5px">${cfg.label}</span>`;
+    } else {
+      const ownedCls = isOwned(card.name) ? ' owned-card' : '';
+      el.className = 'card-item' + (card.name === selected ? ' selected' : '') + ownedCls;
+      const catTag = card.type === 'item' && card.cats?.length
+        ? `<span class="card-cat">${CAT_ABBR[card.cats[0]] || card.cats[0]}</span>`
+        : `<span class="card-type">${card.type}</span>`;
+      el.innerHTML = `<span class="card-name">${card.name}</span>${catTag}`;
+    }
+    el.onclick = () => showCard(card.name, card.type);
+    list.appendChild(el);
+  }
+}
+
+// ─── Skill levels ──────────────────────────────────────────────────────────
+function getLevel(skill) { return skills[skill] || 1; }
+
+// ─── Card display ──────────────────────────────────────────────────────────
+function showCard(name, type) {
+  selected = name; selectedType = type;
+  filterCards();
+  refreshDetail();
+}
+
+function refreshDetail() {
+  if (!selected) return;
+  const detail = document.getElementById('detail');
+  const scroll = detail.scrollTop;
+  if (selectedType === 'monster') renderMonster(selected, detail);
+  else if (selectedType === 'clue') renderClueScroll(selected.match(/\((\w+)\)$/)?.[1], detail);
+  else if (selectedType === 'ingredient') renderIngredient(selected, detail);
+  else renderItem(selected, detail);
+  detail.scrollTop = scroll;
+}
+
+function rarityClass(r) { return 'rarity-' + (r||'Unknown').replace(/ /g,'-'); }
+
+// Convert a fraction string like "1/128" to a rarity label
+function fractionToRarity(frac) {
+  if (!frac) return 'Unknown';
+  if (frac === '1/1') return 'Always';
+  const m = frac.match(/^([\d.]+)\/([\d,]+)$/);
+  if (!m) return 'Unknown';
+  const rate = parseFloat(m[1]) / parseFloat(m[2].replace(/,/g,''));
+  if (rate >= 0.1)    return 'Common';
+  if (rate >= 0.02)   return 'Uncommon';
+  if (rate >= 0.005)  return 'Rare';
+  if (rate >= 0.001)  return 'Very Rare';
+  return 'Extremely Rare';
+}
+
+// ─── Rarity helpers ────────────────────────────────────────────────────────
+const RARITY_RANK = { Always:0, Common:1, Uncommon:2, Rare:3, 'Very Rare':4, 'Extremely Rare':5 };
+function fractionValue(f) {
+  // Returns numeric drop probability (lower = rarer)
+  if (!f) return 1;
+  const m = f.match(/^([\d.]+)\/([\d,.]+)$/);
+  if (!m) return 1;
+  return parseFloat(m[1]) / parseFloat(m[2].replace(/,/g,''));
+}
+
+// Deduplicate a monster list by card name, keeping the most common entry per monster
+// (highest drop probability — best rate the player can get this item).
+function dedupeMonsters(list) {
+  const best = {};
+  for (const m of list) {
+    const prev = best[m.card];
+    if (!prev) { best[m.card] = m; continue; }
+    const prevRank = RARITY_RANK[prev.rarity] ?? 99;
+    const newRank  = RARITY_RANK[m.rarity]  ?? 99;
+    // Lower rank = more common; prefer that
+    if (newRank < prevRank) { best[m.card] = m; continue; }
+    // Same rarity label — prefer higher fraction value (more frequent)
+    if (newRank === prevRank && fractionValue(m.fraction) > fractionValue(prev.fraction))
+      best[m.card] = m;
+  }
+  return Object.values(best);
+}
+
+// ─── Progress pill HTML ────────────────────────────────────────────────────
+function progressPill(count, total, isRdt) {
+  if (total === 0) return '';
+  const pct  = total ? (count/total)*100 : 0;
+  const done = count === total;
+  const color = isRdt ? '#2a3a6a' : (done ? '#00c853' : '#e8c97a');
+  return `<div class="progress-pill">
+    <span class="fraction">
+      <span class="num" style="color:${color}">${count}</span>
+      <span class="den"> / ${total}</span>
+    </span>
+    <div class="pbar">
+      <div class="pbar-fill${done && !isRdt ? ' complete' : ''}" style="width:${pct}%;${isRdt?'background:#2a3a6a':''}"></div>
+    </div>
+  </div>`;
+}
+
+// ─── Drop row HTML (clickable to toggle owned) ─────────────────────────────
+// Inline req tags shown next to a monster name in drop rows
+// Returns HTML string for e.g. "Slay 85 ✓" / "Sail 75 ✗"
+function monsterReqTags(monsterData) {
+  if (!monsterData) return '';
+  let html = '';
+  const checks = [
+    {key:'slayerLevel',  skill:'Slayer',  abbr:'Slay'},
+    {key:'sailingLevel', skill:'Sailing', abbr:'Sail'},
+  ];
+  for (const {key, skill, abbr} of checks) {
+    const lvl = monsterData[key];
+    if (!lvl) continue;
+    const met = getLevel(skill) >= lvl;
+    html += `<span style="font-size:10px;margin-left:4px;color:${met?'#c87820':'#8a4a10'}">${abbr} ${lvl}${met?' ✓':' ✗'}</span>`;
+  }
+  return html;
+}
+
+function dropRowHtml(cardName, rarity, fraction, isRdt) {
+  const ownedCard = isOwned(cardName);
+  // RDT rows still show ownership — owned = green tick, not-owned = dimmed diamond
+  const indClass  = ownedCard ? 'owned' : (isRdt ? 'rdt' : 'locked');
+  const nameClass = ownedCard ? 'owned' : (isRdt ? 'rdt' : 'locked');
+  const rowClass  = ownedCard ? 'owned' : (isRdt ? '' : 'locked');
+  const symbol    = ownedCard ? '✓' : (isRdt ? '◇' : '✗');
+  const rarityBg  = isRdt && !ownedCard ? 'background:#0d0d1a;color:#4a5a8a;' : '';
+
+  const reqTags = monsterReqTags(monsterDrops[cardName]);
+
+  return `<div class="drop-row ${rowClass}" style="cursor:pointer" data-nav="${cardName}" data-nav-type="item" onclick="showCard(this.dataset.nav,this.dataset.navType)">
+    <div class="drop-indicator ${indClass}">${symbol}</div>
+    <span class="drop-name ${nameClass}">${cardName}${reqTags}</span>
+    <span class="rarity-badge ${rarityClass(rarity)}" style="${rarityBg}">${rarity}</span>
+    <span class="fraction">${fraction || '—'}</span>
+  </div>`;
+}
+
+// ─── Monster view ──────────────────────────────────────────────────────────
+// Deduplicate drops by card name, keeping the entry with the highest drop probability.
+// Some monsters (e.g. Scurrius) have multiple drop tables on the same wiki page,
+// causing the same item to appear twice with different fractions.
+function dedupeDrops(drops) {
+  const best = new Map();
+  for (const d of drops) {
+    const key = d.card;
+    if (!best.has(key)) { best.set(key, d); continue; }
+    // Compare probabilities: parse "N/D" → rate, keep higher rate
+    const rate = frac => {
+      if (!frac) return 0;
+      const m = frac.match(/^([\d.]+)\/([\d,]+)$/);
+      return m ? parseFloat(m[1]) / parseFloat(m[2].replace(/,/g,'')) : 0;
+    };
+    if (rate(d.fraction) > rate(best.get(key).fraction)) best.set(key, d);
+  }
+  return [...best.values()];
+}
+
+function renderMonster(name, container) {
+  const data      = monsterDrops[name] || {};
+  const allDropsRaw = data.drops || [];
+  const allDrops  = dedupeDrops(allDropsRaw);
+  const mainDrops = allDrops.filter(d => !d.fromRdt);
+  const rdtDrops  = allDrops.filter(d => d.fromRdt);
+
+  const mainOwned = mainDrops.filter(d => isOwned(d.card)).length;
+  const rdtOwned  = rdtDrops.filter(d => isOwned(d.card)).length;
+
+  const reqs = [];
+  if (data.slayerLevel)  reqs.push({label: `Slayer ${data.slayerLevel}`,  locked: getLevel('Slayer')  < data.slayerLevel});
+  if (data.sailingLevel) reqs.push({label: `Sailing ${data.sailingLevel}`, locked: getLevel('Sailing') < data.sailingLevel});
+  if (data.quests?.length) reqs.push({label: `Quest locked`, locked: true});
+  if (name.startsWith('Revenant')) reqs.push({label: 'Coins (entrance fee)', locked: !isOwned('Coins')});
+
+  const mDetail  = cardDetails[name] || {};
+  const mImgHtml = mDetail.imageUrl
+    ? `<img src="${mDetail.imageUrl}" style="float:right;max-width:64px;max-height:64px;image-rendering:pixelated;margin-left:8px" onerror="this.style.display='none'">`
+    : '';
+  const mExamHtml = mDetail.examine
+    ? `<div style="font-size:11px;color:#888;font-style:italic;margin-top:3px">${mDetail.examine}</div>`
+    : '';
+
+  const monsterOwned = isOwned(name);
+  let html = `<h1>${name}${mImgHtml}${wikiLink(name)}</h1>
+    <div class="subtitle">
+      Monster card
+      ${data.combatLevel ? ` · Combat ${data.combatLevel}` : ''}
+      · <span style="color:${monsterOwned?'#00c853':'#7a5020'}">${monsterOwned?'✓ Owned':'✗ Not owned'}</span>
+      <span style="color:#555;font-size:10px;margin-left:8px;cursor:pointer" data-nav="${name}" onclick="toggleOwned(this.dataset.nav)">(toggle)</span>
+      ${reqs.map(r => `<span style="margin-left:8px;padding:2px 7px;border-radius:10px;font-size:10px;
+        background:${r.locked?'#3a1a00':'#003d1f'};color:${r.locked?'#c84a00':'#00c853'}">${r.label}</span>`).join('')}
+      ${mExamHtml}
+    </div>`;
+
+  // Stats blocks
+  html += `<div class="stats-bar">
+    <div class="stat-block">
+      <div class="stat-label">Main Drops</div>
+      <div class="stat-value${mainOwned===mainDrops.length&&mainDrops.length>0?' complete':''}">${mainOwned}<span class="den"> / ${mainDrops.length}</span></div>
+    </div>
+    <div class="stat-block">
+      <div class="stat-label">Rare Drop Table</div>
+      <div class="stat-value" style="color:${rdtOwned===rdtDrops.length&&rdtDrops.length>0?'#00c853':'#4a6aaa'}">${rdtOwned}<span class="den"> / ${rdtDrops.length}</span></div>
+    </div>
+    <div class="stat-block">
+      <div class="stat-label">All TCG Drops</div>
+      <div class="stat-value${(mainOwned+rdtOwned)===allDrops.length&&allDrops.length>0?' complete':''}">${mainOwned+rdtOwned}<span class="den"> / ${allDrops.length}</span></div>
+    </div>
+  </div>`;
+
+  // Main drops
+  html += `<div class="section">
+    <div class="section-header">
+      TCG Card Drops
+      ${progressPill(mainOwned, mainDrops.length, false)}
+    </div>`;
+  if (mainDrops.length === 0) {
+    html += `<div class="empty-note">No main-table TCG drops found.</div>`;
+  } else {
+    // Owned first, then locked
+    const sorted = [...mainDrops].sort((a,b) => {
+      const ao = isOwned(a.card), bo = isOwned(b.card);
+      if (ao !== bo) return ao ? -1 : 1;
+      return 0;
+    });
+    for (const d of sorted)
+      html += dropRowHtml(d.card, d.rarity, d.fraction, false);
+  }
+  html += `</div>`;
+
+  // RDT drops
+  if (rdtDrops.length > 0) {
+    html += `<div class="section">
+      <div class="section-header">
+        Rare Drop Table
+        <span class="rdt-header-note">shared · ${progressPill(rdtOwned, rdtDrops.length, true)}</span>
+      </div>
+      <div class="rdt-banner">These drops come from the shared Rare &amp; Gem Drop Table, which many monsters access. Owning these doesn't require farming this specific monster.</div>`;
+    const sorted = [...rdtDrops].sort((a,b) => {
+      const ao = isOwned(a.card), bo = isOwned(b.card);
+      if (ao !== bo) return ao ? -1 : 1;
+      return 0;
+    });
+    for (const d of sorted)
+      html += dropRowHtml(d.card, d.rarity, d.fraction, true);
+    html += `</div>`;
+  }
+
+  container.innerHTML = html;
+}
+
+// ─── Production card HTML ──────────────────────────────────────────────────
+// Maps wiki facility strings → human-readable access notes.
+// Altars are locations (not cards) — show what the player actually needs to carry.
+// Access options for each altar. Strings that match itemSources keys will show
+// ownership indicators; others (e.g. 'Abyss') are shown as plain grey text.
+const FACILITY_NOTES = {
+  'None': null,
+  'Air Altar':    ['Air talisman', 'Air tiara', 'Abyss'],
+  'Water Altar':  ['Water talisman', 'Water tiara', 'Abyss'],
+  'Earth Altar':  ['Earth talisman', 'Earth tiara', 'Abyss'],
+  'Fire Altar':   ['Fire talisman', 'Fire tiara', 'Abyss'],
+  'Mind Altar':   ['Mind talisman', 'Mind tiara', 'Abyss'],
+  'Body Altar':   ['Body talisman', 'Body tiara', 'Abyss'],
+  'Chaos Altar':  ['Chaos talisman', 'Chaos tiara', 'Abyss'],
+  'Nature Altar': ['Nature talisman', 'Nature tiara', 'Abyss'],
+  'Cosmic Altar': ['Cosmic talisman', 'Cosmic tiara', 'Abyss'],
+  'Law Altar':    ['Law talisman', 'Law tiara', 'Abyss'],
+  'Death Altar':  ['Death talisman', 'Death tiara', 'Abyss'],
+  'Astral Altar': ['Astral talisman', 'Abyss'],
+  'Blood Altar':  ['Blood talisman', 'Abyss'],
+  'Blood AltarBlood Altar (Kourend)': ['Blood talisman', 'Abyss'],
+  'Soul Altar':   ['Soul talisman', 'Abyss'],
+  'Wrath Altar':  ['Wrath talisman', 'Abyss'],
+};
+function facilityNote(f) {
+  if (!f || f === 'None') return null;
+  const opts = FACILITY_NOTES[f];
+  if (!opts) return `<span style="color:#888">Requires: ${f}</span>`;
+  const sep = ' <span style="color:#555">/</span> ';
+  const parts = opts.map(opt => {
+    const isCard = itemSources[opt] !== undefined;
+    if (!isCard) return `<span style="color:#666">${opt}</span>`;
+    const owned = isOwned(opt);
+    const col = owned ? '#76c442' : '#c84a00';
+    const sym = owned ? '✓' : '✗';
+    return `<span style="cursor:pointer;color:${col}" data-nav="${opt}" data-nav-type="item" onclick="showCard(this.dataset.nav,this.dataset.navType)">${opt} ${sym}</span>`;
+  });
+  return `Access: ${parts.join(sep)}`;
+}
+
+// ─── Non-card ingredient row (navigates to its own page) ───────────────────
+function renderNonCardIngredient(itemName, quantity) {
+  return `<div class="prod-ingredient" style="cursor:pointer"
+    data-nav="${itemName}" data-nav-type="ingredient"
+    onclick="showCard(this.dataset.nav,this.dataset.navType)">
+    <div class="drop-indicator" style="color:#555">○</div>
+    <span class="prod-ingredient-name" style="color:#777">${itemName}</span>
+    <span class="prod-ingredient-qty">×${quantity}</span>
+    <span style="font-size:9px;padding:1px 5px;border-radius:8px;background:#1a1a1a;
+      border:1px solid #333;color:#555;margin-left:6px;white-space:nowrap">no card</span>
+  </div>`;
+}
+
+// ─── Ingredient detail page ─────────────────────────────────────────────────
+function renderIngredient(name, container) {
+  const info = ingredientInfo[name] || {};
+  const prod = info.production || null;
+  const shops = info.shops || [];
+  const spawns = info.spawns || [];
+  const wikiUrl = 'https://oldschool.runescape.wiki/w/' + encodeURIComponent(name.replace(/ /g, '_'));
+
+  let html = `<h1>${name}${wikiLink(name)}</h1>
+    <div class="subtitle" style="color:#666">
+      Intermediary item — not a TCG card
+    </div>`;
+
+  // Production
+  if (prod) {
+    const skill = prod.skill || '';
+    const level = prod.level || 0;
+    const playerLevel = getLevel(skill);
+    const canCraft = playerLevel >= level;
+    const skillColor = {
+      Fletching: '#5a9a30', Smithing: '#8a7a40', Cooking: '#9a4a20',
+      Crafting: '#7a5a30', Herblore: '#3a8a3a', Runecrafting: '#6a4a9a',
+      Construction: '#7a6a40', Farming: '#4a8a4a', Magic: '#5a5aaa',
+      Firemaking: '#aa5a20', Mining: '#5a5a7a', Woodcutting: '#5a7a30',
+      Fishing: '#3a5a8a',
+    }[skill] || '#6a8aee';
+
+    const ingRows = (prod.ingredients || []).map(ing => {
+      const isCard = itemSources[ing.item] !== undefined;
+      if (!isCard) {
+        // Nested non-card ingredient — clickable to its own page
+        return `<div class="prod-ingredient" style="cursor:pointer"
+          data-nav="${ing.item}" data-nav-type="ingredient"
+          onclick="showCard(this.dataset.nav,this.dataset.navType)">
+          <div class="drop-indicator" style="color:#555">○</div>
+          <span class="prod-ingredient-name" style="color:#777">${ing.item}</span>
+          <span class="prod-ingredient-qty">×${ing.quantity}</span>
+          <span style="font-size:9px;padding:1px 5px;border-radius:8px;background:#1a1a1a;
+            border:1px solid #333;color:#555;margin-left:6px;white-space:nowrap">no card</span>
+        </div>`;
+      }
+      const ingOwned = isOwned(ing.item);
+      const cls = ingOwned ? 'owned' : 'locked';
+      const sym = ingOwned ? '✓' : '✗';
+      return `<div class="prod-ingredient" style="cursor:pointer"
+        data-nav="${ing.item}" data-nav-type="item"
+        onclick="showCard(this.dataset.nav,this.dataset.navType)">
+        <div class="drop-indicator ${cls}">${sym}</div>
+        <span class="prod-ingredient-name ${cls}">${ing.item}</span>
+        <span class="prod-ingredient-qty">×${ing.quantity}</span>
+      </div>`;
+    }).join('');
+
+    // Implicit tools (Knife, Chisel, moulds, etc. — from wiki + hard-coded fallbacks)
+    const implicitTools = getImplicitTools(skill, prod.ingredients || [], prod.tools);
+    const toolRows = implicitTools.map(tool => {
+      const toolOwned = isOwned(tool);
+      const cls = toolOwned ? 'owned' : 'locked';
+      const sym = toolOwned ? '✓' : '✗';
+      const isToolCard = itemSources[tool] !== undefined;
+      if (isToolCard) {
+        return `<div class="prod-ingredient" style="cursor:pointer"
+          data-nav="${tool}" data-nav-type="item"
+          onclick="showCard(this.dataset.nav,this.dataset.navType)">
+          <div class="drop-indicator ${cls}">${sym}</div>
+          <span class="prod-ingredient-name ${cls}">${tool}</span>
+          <span class="prod-ingredient-qty" style="color:#555;font-style:italic">tool</span>
+        </div>`;
+      }
+      return `<div class="prod-ingredient" style="cursor:default">
+        <div class="drop-indicator" style="color:#555">○</div>
+        <span class="prod-ingredient-name" style="color:#555">${tool}</span>
+        <span class="prod-ingredient-qty" style="color:#444;font-style:italic">tool</span>
+      </div>`;
+    }).join('');
+
+    html += `<div class="section"><div class="section-header">How to obtain</div>
+      <div class="production-card">
+        <div class="production-skill">${skill}
+          <span class="level-req${canCraft?'':' locked'}"
+            style="background:${canCraft?'':'#3a1a00'};color:${canCraft?skillColor:'#c84a00'}">
+            Level ${level}${canCraft?' ✓':' — need '+(level-playerLevel)+' more lvls'}
+          </span>
+        </div>
+        ${prod.facilities ? `<div class="production-facilities">${facilityNote(prod.facilities) || `<span style="color:#888">Requires: ${prod.facilities}</span>`}</div>` : ''}
+        <div class="production-ingredients">${ingRows}${toolRows}</div>
+      </div>
+    </div>`;
+
+  } else if (shops.length) {
+    const shopRows = shops.map(s => {
+      const isCard = itemSources[s.currency] !== undefined;
+      const curOwned = isCard ? isOwned(s.currency) : null;
+      const col = curOwned === true ? '#76c442' : curOwned === false ? '#c84a00' : '#888';
+      const sym = curOwned === true ? ' ✓' : curOwned === false ? ' ✗' : '';
+      const price = s.price != null ? `${s.price.toLocaleString()}× ` : '';
+      const curHtml = isCard
+        ? `<span style="cursor:pointer;color:${col}" data-nav="${s.currency}" data-nav-type="item"
+            onclick="showCard(this.dataset.nav,this.dataset.navType)">${price}${s.currency}${sym}</span>`
+        : `<span style="color:#888">${price}${s.currency}</span>`;
+      return `<div class="drop-row" style="cursor:default;background:#0d0d0d">
+        <div class="drop-indicator" style="color:#6a8aaa">◈</div>
+        <span class="drop-name" style="color:#aaa;flex:1">${s.seller}</span>
+        <span style="font-size:11px;margin-left:8px">${curHtml}</span>
+      </div>`;
+    }).join('');
+    html += `<div class="section"><div class="section-header">How to obtain</div>${shopRows}</div>`;
+
+  } else if (spawns.length) {
+    const spawnRows = spawns.map(loc =>
+      `<div class="drop-row" style="cursor:default">
+        <div class="drop-indicator" style="color:#5a7a30">◈</div>
+        <span class="drop-name" style="color:#aaa">${loc}</span>
+      </div>`
+    ).join('');
+    html += `<div class="section"><div class="section-header">How to obtain</div>${spawnRows}</div>`;
+
+  } else {
+    html += `<div class="section"><div class="section-header">How to obtain</div>
+      <div style="color:#555;font-size:12px;padding:8px 0">
+        No skilling data found — check the
+        <a href="${wikiUrl}" target="_blank" rel="noopener" style="color:#6a8aee">OSRS Wiki</a>
+        for details.
+      </div>
+    </div>`;
+  }
+
+  // "Also obtained from" — monster drops / activities from Item sources table
+  const itemSrcs = info.itemSources || [];
+  if (itemSrcs.length) {
+    const srcRows = itemSrcs.map(s => {
+      const isMonsterCard = monsterDrops[s.source] !== undefined;
+      const isItemCard    = itemSources[s.source] !== undefined;
+      const isCard        = isMonsterCard || isItemCard;
+      const cardType      = isMonsterCard ? 'monster' : 'item';
+      const srcOwned      = isCard ? isOwned(s.source) : null;
+      const indCls        = srcOwned === true ? 'owned' : srcOwned === false ? 'locked' : '';
+      const sym           = srcOwned === true ? '✓' : srcOwned === false ? '✗' : '◈';
+      const frac          = s.fraction;
+      const rarLabel      = frac ? fractionToRarity(frac) : (s.wiki_label || '');
+      const rarHtml       = rarLabel
+        ? `<span class="rarity-badge ${rarityClass(rarLabel)}">${rarLabel}</span>${frac ? `<span class="fraction">${frac}</span>` : ''}`
+        : '';
+      const qtyHtml       = s.quantity
+        ? `<span style="font-size:10px;color:#555;margin-left:4px">×${s.quantity}</span>`
+        : '';
+      const lvlHtml       = s.level
+        ? `<span style="font-size:10px;color:#555;margin-left:4px">(${s.level})</span>`
+        : '';
+
+      if (isCard) {
+        return `<div class="drop-row ${indCls}" style="cursor:pointer"
+          data-nav="${s.source}" data-nav-type="${cardType}"
+          onclick="showCard(this.dataset.nav,this.dataset.navType)">
+          <div class="drop-indicator ${indCls}">${sym}</div>
+          <span class="drop-name ${indCls}">${s.source}${lvlHtml}${qtyHtml}</span>
+          ${rarHtml}
+        </div>`;
+      }
+      return `<div class="drop-row" style="cursor:default">
+        <div class="drop-indicator" style="color:#555">◈</div>
+        <span class="drop-name" style="color:#777">${s.source}${lvlHtml}${qtyHtml}</span>
+        ${rarHtml}
+      </div>`;
+    }).join('');
+    html += `<div class="section"><div class="section-header">Also obtained from</div>${srcRows}</div>`;
+  }
+
+  // "Used to make" — TCG cards that use this as an ingredient
+  const usedBy = Object.entries(itemSources).filter(([, data]) => {
+    const ings = data.production?.ingredients || [];
+    return ings.some(i => i.item === name);
+  }).map(([itemName]) => itemName);
+
+  if (usedBy.length) {
+    const usedRows = usedBy.map(cardName => {
+      const cardOwned = isOwned(cardName);
+      const cls = cardOwned ? 'owned' : 'locked';
+      const sym = cardOwned ? '✓' : '✗';
+      return `<div class="drop-row ${cls}" style="cursor:pointer"
+        data-nav="${cardName}" data-nav-type="item"
+        onclick="showCard(this.dataset.nav,this.dataset.navType)">
+        <div class="drop-indicator ${cls}">${sym}</div>
+        <span class="drop-name ${cls}">${cardName}</span>
+      </div>`;
+    }).join('');
+    html += `<div class="section"><div class="section-header">Used to make</div>${usedRows}</div>`;
+  }
+
+  container.innerHTML = html;
+}
+
+function renderProduction(prod) {
+  const skill       = prod.skill || '';
+  const level       = prod.level || 0;
+  const ingredients = prod.ingredients || [];
+  const outputQty   = prod.outputQuantity;
+  const facilities  = prod.facilities;
+  const playerLevel = getLevel(skill);
+  const canCraft    = playerLevel >= level;
+
+  const skillColor = {
+    Fletching: '#5a9a30', Smithing: '#8a7a40', Cooking: '#9a4a20',
+    Crafting: '#7a5a30', Herblore: '#3a8a3a', Runecrafting: '#6a4a9a',
+    Construction: '#7a6a40', Farming: '#4a8a4a', Magic: '#5a5aaa',
+    Firemaking: '#aa5a20', Mining: '#5a5a7a', Woodcutting: '#5a7a30',
+    Fishing: '#3a5a8a',
+  }[skill] || '#6a8aee';
+
+  const implicitTools = getImplicitTools(skill, ingredients, prod.tools);
+  // Non-card ingredients are skipped from ownership check (they can't be collected)
+  const allIngredientsOwned = ingredients.every(i => !itemSources[i.item] || isOwned(i.item))
+                           && implicitTools.every(t => isOwned(t));
+
+  let rows = ingredients.map(ing => {
+    const isCard   = itemSources[ing.item] !== undefined;
+    const ingOwned = isOwned(ing.item);
+    if (!isCard) {
+      return renderNonCardIngredient(ing.item, ing.quantity);
+    }
+    const cls = ingOwned ? 'owned' : 'locked';
+    const sym = ingOwned ? '✓' : '✗';
+    return `<div class="prod-ingredient" style="cursor:pointer" data-nav="${ing.item}" data-nav-type="item" onclick="showCard(this.dataset.nav,this.dataset.navType)">
+      <div class="drop-indicator ${cls}">${sym}</div>
+      <span class="prod-ingredient-name ${cls}">${ing.item}</span>
+      <span class="prod-ingredient-qty">×${ing.quantity}</span>
+    </div>`;
+  }).join('');
+
+  // Implicit tools (Hammer for smithing, Needle for leather crafting)
+  rows += implicitTools.map(tool => {
+    const toolOwned = isOwned(tool);
+    const cls = toolOwned ? 'owned' : 'locked';
+    const sym = toolOwned ? '✓' : '✗';
+    return `<div class="prod-ingredient" style="cursor:pointer" data-nav="${tool}" data-nav-type="item" onclick="showCard(this.dataset.nav,this.dataset.navType)">
+      <div class="drop-indicator ${cls}">${sym}</div>
+      <span class="prod-ingredient-name ${cls}">${tool}</span>
+      <span class="prod-ingredient-qty" style="color:#555;font-style:italic">tool</span>
+    </div>`;
+  }).join('');
+
+  return `<div class="section">
+    <div class="section-header">Production</div>
+    <div class="production-card">
+      <div class="production-skill">
+        ${skill}
+        <span class="level-req${canCraft?'':' locked'}" style="background:${canCraft?'':'#3a1a00'};color:${canCraft?skillColor:'#c84a00'}">
+          Level ${level}${canCraft?' ✓':' — need '+(level-playerLevel)+' more lvls'}
+        </span>
+      </div>
+      ${facilityNote(facilities) ? `<div class="production-facilities">${facilityNote(facilities)}</div>` : ''}
+      <div class="production-ingredients">${rows}</div>
+      ${outputQty && outputQty > 1 ? `<div class="prod-output-note">Produces ${outputQty}× per craft</div>` : ''}
+      ${allIngredientsOwned ? '' : `<div class="prod-output-note" style="color:#c84a00;margin-top:6px">▲ Some ingredients not yet in collection</div>`}
+    </div>
+  </div>`;
+}
+
+// ─── Clue Scroll view ──────────────────────────────────────────────────────
+function renderClueScroll(tier, container) {
+  const cfg      = CLUE_TIER_CONFIG[tier] || {label:tier, color:'#888', bg:'#111'};
+  const sources  = clueScrollSources[tier] || [];
+  const rewards  = clueRewardsByTier[tier]  || [];
+
+  // Split sources: monsters in our catalog vs skilling/other
+  const monsterSources  = sources.filter(s => monsterDrops[s.source]);
+  const otherSources    = sources.filter(s => !monsterDrops[s.source]);
+
+  const ownedMonSrc  = monsterSources.filter(s => isOwned(s.source)).length;
+  const totalRewards = rewards.length;
+  const ownedRewards = rewards.filter(n => isOwned(n)).length;
+
+  const tierBadge = `<span style="background:${cfg.bg};color:${cfg.color};border:1px solid ${cfg.color}55;border-radius:3px;padding:2px 10px;font-size:11px;font-weight:600;margin-left:8px">${cfg.label}</span>`;
+
+  const clueWikiUrl = `https://oldschool.runescape.wiki/w/Clue_scroll_(${tier})`;
+  let html = `<h1>Clue scroll ${tierBadge}<a href="${clueWikiUrl}" target="_blank" rel="noopener" title="View on OSRS Wiki"
+    style="color:#555;font-size:11px;text-decoration:none;margin-left:8px;vertical-align:middle"
+    onclick="event.stopPropagation()">↗ wiki</a></h1>
+    <div class="subtitle" style="color:#666">Virtual card — tracks sources &amp; reward completion</div>
+    <div class="stats-bar">
+      <div class="stat-block">
+        <div class="stat-label">Monster Sources</div>
+        <div class="stat-value" style="color:${ownedMonSrc>0?'#e8c97a':'#555'}">${ownedMonSrc}<span class="den"> / ${monsterSources.length}</span></div>
+      </div>
+      <div class="stat-block">
+        <div class="stat-label">Rewards Owned</div>
+        <div class="stat-value" style="color:${cfg.color}">${ownedRewards}<span class="den"> / ${totalRewards}</span></div>
+      </div>
+      <div class="stat-block">
+        <div class="stat-label">Other Sources</div>
+        <div class="stat-value" style="color:#555">${otherSources.length}</div>
+      </div>
+    </div>`;
+
+  // Monster sources section
+  html += `<div class="section">
+    <div class="section-header">Monster Sources ${progressPill(ownedMonSrc, monsterSources.length, false)}</div>`;
+  if (monsterSources.length === 0) {
+    html += `<div class="empty-note">No monster sources in catalog.</div>`;
+  } else {
+    const sorted = [...monsterSources]
+      .filter(s => isOwned(s.source))
+      .sort((a, b) => (a.level||999) - (b.level||999));
+    if (sorted.length === 0) {
+      html += `<div class="empty-note">No unlocked monster sources yet.</div>`;
+    }
+    for (const s of sorted) {
+      const owned = isOwned(s.source);
+      const cls   = owned ? 'owned' : 'locked';
+      const sym   = owned ? '✓' : '✗';
+      const cmb   = monsterDrops[s.source]?.combatLevel;
+      const cmbHtml = cmb ? `<span style="font-size:10px;color:#555;margin-left:4px">Cmb ${cmb}</span>` : '';
+      const reqTags = monsterReqTags(monsterDrops[s.source]);
+      const rarLabel = fractionToRarity(s.rarity);
+      const rarHtml  = s.rarity
+        ? `<span class="rarity-badge ${rarityClass(rarLabel)}">${rarLabel}</span><span class="fraction">${s.rarity}</span>`
+        : '';
+      html += `<div class="drop-row ${cls}" style="cursor:pointer" data-nav="${s.source}" data-nav-type="monster" onclick="showCard(this.dataset.nav,this.dataset.navType)">
+        <div class="drop-indicator ${cls}">${sym}</div>
+        <span class="drop-name ${cls}">${s.source}${cmbHtml}${reqTags}</span>
+        <span class="access-pill ${owned?'unlocked':'locked'}">${owned?'Unlocked':'Locked'}</span>
+        ${rarHtml}
+      </div>`;
+    }
+  }
+  html += `</div>`;
+
+  // Other sources (skilling, implings, etc.)
+  if (otherSources.length > 0) {
+    html += `<div class="section"><div class="section-header">Other Sources</div>`;
+    for (const s of otherSources) {
+      const rarLabel = fractionToRarity(s.rarity);
+      const rarHtml  = s.rarity
+        ? `<span class="rarity-badge ${rarityClass(rarLabel)}">${rarLabel}</span><span class="fraction">${s.rarity}</span>`
+        : '';
+      html += `<div class="drop-row" style="cursor:default;background:#0d0d0d">
+        <div class="drop-indicator" style="color:#555">◈</div>
+        <span class="drop-name" style="color:#888">${s.source}${s.level ? ` (lv ${s.level})` : ''}</span>
+        ${rarHtml}
+      </div>`;
+    }
+    html += `</div>`;
+  }
+
+  // Rewards section
+  const tierRarities = clueRewardRarities[tier] || {};
+  html += `<div class="section">
+    <div class="section-header">Possible Rewards ${progressPill(ownedRewards, totalRewards, false)}</div>`;
+  if (rewards.length === 0) {
+    html += `<div class="empty-note">No reward data loaded.</div>`;
+  } else {
+    // Sort: owned first, then by rarity rate (rarest last within each group)
+    const sortedR = [...rewards].sort((a, b) => {
+      const ao = isOwned(a), bo = isOwned(b);
+      if (ao !== bo) return ao ? -1 : 1;
+      return a.localeCompare(b);
+    });
+    for (const name of sortedR) {
+      const owned   = isOwned(name);
+      const cls     = owned ? 'owned' : 'locked';
+      const sym     = owned ? '✓' : '✗';
+      const frac    = tierRarities[name] || '';
+      const rarLabel = frac ? fractionToRarity(frac) : '';
+      const rarHtml  = frac
+        ? `<span class="rarity-badge ${rarityClass(rarLabel)}">${rarLabel}</span><span class="fraction">${frac}</span>`
+        : '';
+      html += `<div class="drop-row ${cls}" style="cursor:pointer" data-nav="${name}" data-nav-type="item" onclick="showCard(this.dataset.nav,this.dataset.navType)">
+        <div class="drop-indicator ${cls}">${sym}</div>
+        <span class="drop-name ${cls}">${name}</span>
+        <span class="access-pill ${owned?'unlocked':'locked'}">${owned?'Owned':'Locked'}</span>
+        ${rarHtml}
+      </div>`;
+    }
+  }
+  html += `</div>`;
+
+  container.innerHTML = html;
+}
+
+// ─── Item view ─────────────────────────────────────────────────────────────
+function renderItem(name, container) {
+  const data        = itemSources[name] || {};
+  const monsters    = data.monsters    || [];
+  const rdtMonsters = data.rdtMonsters || [];
+  const quests      = data.quests      || [];
+  const gathering   = data.gathering;
+  const production  = data.production  || null;
+  const spawns      = data.spawns      || [];
+  const shops       = data.shops       || [];
+  const clueTiers   = data.clueTiers   || [];
+
+  // For items: "owned" means the player has THIS item card
+  const itemOwned = isOwned(name);
+
+  const itemCats = cardCategories[name] || [];
+  const catBadges = itemCats.map(c =>
+    `<span style="font-size:9px;background:#0d1e2e;color:#4a6a8a;border-radius:2px;padding:1px 5px;margin-left:4px">${c}</span>`
+  ).join('');
+  const detail  = cardDetails[name] || {};
+  const imgHtml = detail.imageUrl
+    ? `<img src="${detail.imageUrl}" style="float:right;max-width:64px;max-height:64px;image-rendering:pixelated;margin-left:8px" onerror="this.style.display='none'">`
+    : '';
+  const examHtml = detail.examine
+    ? `<div style="font-size:11px;color:#888;font-style:italic;margin-top:3px">${detail.examine}</div>`
+    : '';
+
+  let html = `<h1>${name}${imgHtml}${wikiLink(name)}</h1>
+    <div class="subtitle">Item card${catBadges} · <span style="color:${itemOwned?'#00c853':'#7a5020'}">${itemOwned?'✓ Owned':'✗ Not owned'}</span>
+      <span style="color:#555;font-size:10px;margin-left:8px;cursor:pointer" data-nav="${name}" onclick="toggleOwned(this.dataset.nav)">(toggle)</span>
+      ${examHtml}
+    </div>`;
+
+  const allMonsterSources = dedupeMonsters(monsters);
+  const monstersOwnedStat = allMonsterSources.filter(m => isOwned(m.card)).length;
+  const monsterColor = monsters.length === 0 ? '#555'
+    : monstersOwnedStat === allMonsterSources.length ? '#00c853' : '#e8c97a';
+
+  html += `<div class="stats-bar">
+    <div class="stat-block">
+      <div class="stat-label">Monster Sources</div>
+      <div class="stat-value" style="color:${monsterColor}">${monstersOwnedStat}<span class="den"> / ${allMonsterSources.length}</span></div>
+    </div>
+    <div class="stat-block">
+      <div class="stat-label">Quest Rewards</div>
+      <div class="stat-value">${quests.length}<span class="den"> quests</span></div>
+    </div>
+    ${gathering ? (() => {
+      const canG = getLevel(gathering.skill) >= gathering.level;
+      const hasTool = !TOOL_TIERS[gathering.tool] || (() => {
+        for (const t of TOOL_TIERS[gathering.tool]) if (isOwned(t.name) && getLevel(gathering.skill) >= t.skillReq) return true;
+        return false;
+      })();
+      const gColor = (canG && hasTool) ? '#76c442' : '#c84a00';
+      return `<div class="stat-block">
+        <div class="stat-label">Gathering</div>
+        <div class="stat-value" style="color:${gColor};font-size:13px">${gathering.skill} ${gathering.level}</div>
+      </div>`;
+    })() : (production ? (() => {
+      const canP = getLevel(production.skill) >= production.level;
+      const implP = getImplicitTools(production.skill, production.ingredients, production.tools);
+      const allOwned = (production.ingredients || []).every(i => !itemSources[i.item] || isOwned(i.item))
+                    && implP.every(t => isOwned(t));
+      const pColor = (canP && allOwned) ? '#6a8aee' : '#c84a00';
+      return `<div class="stat-block">
+        <div class="stat-label">Craftable</div>
+        <div class="stat-value" style="color:${pColor};font-size:13px">${production.skill} ${production.level}</div>
+      </div>`;
+    })() : '')}
+    ${spawns.length ? `<div class="stat-block">
+      <div class="stat-label">Ground Spawns</div>
+      <div class="stat-value" style="font-size:13px">${spawns.length}</div>
+    </div>` : ''}
+    ${shops.length ? `<div class="stat-block">
+      <div class="stat-label">Shops</div>
+      <div class="stat-value" style="font-size:13px;color:#8ab4d4">${shops.length}</div>
+    </div>` : ''}
+  </div>`;
+
+  // Gathering
+  if (gathering) {
+    const playerLevel = getLevel(gathering.skill);
+    const canGather   = playerLevel >= gathering.level;
+    const tiers     = TOOL_TIERS[gathering.tool];
+    const skillLvl  = getLevel(gathering.skill);  // e.g. Mining or Woodcutting level
+    // bestTier = highest tier where player OWNS the card AND meets the skill level req
+    let bestTier = null;
+    if (tiers) {
+      for (const t of tiers)
+        if (isOwned(t.name) && skillLvl >= t.skillReq) bestTier = t;
+    }
+
+    // Tool ownership — tiered tools (Pickaxe/Axe) use bestTier; others resolve per-part
+    const toolParts     = !tiers ? resolveToolParts(gathering.tool) : [];
+    const allToolsOwned = tiers ? !!bestTier : toolParts.every(p => p.owned);
+
+    const tieredToolNote = !tiers ? '' : bestTier
+      ? ` — best owned: <strong style="color:#e8c97a">${bestTier.name}</strong>`
+      : ` — <span style="color:#c84a00">no ${gathering.tool.toLowerCase()} in collection</span>`;
+
+    // Build the tool display HTML
+    let toolHtml;
+    if (tiers) {
+      toolHtml = `<strong>${gathering.tool}</strong>${tieredToolNote}`;
+    } else if (toolParts.length === 0) {
+      toolHtml = `<strong>${gathering.tool}</strong>`;   // "None"
+    } else {
+      toolHtml = toolParts.map((p, i) => {
+        const col      = p.owned ? '#76c442' : '#c84a00';
+        const sym      = p.owned ? '✓' : '✗';
+        const noteHtml = p.note ? ` <span style="color:#888;font-size:10px">(${p.note})</span>` : '';
+        const sep      = i > 0 ? ' <span style="color:#555"> + </span>' : '';
+        const isCard   = itemSources[p.label] !== undefined;
+        const inner    = `<strong style="color:${col}">${p.label} ${sym}</strong>${noteHtml}`;
+        return sep + (isCard
+          ? `<span style="cursor:pointer" data-nav="${p.label}" data-nav-type="item" onclick="showCard(this.dataset.nav,this.dataset.navType)">${inner}</span>`
+          : inner);
+      }).join('');
+    }
+
+    const canActuallyGather = canGather && allToolsOwned;
+    html += `<div class="section">
+      <div class="section-header">Gathering</div>
+      <div class="gathering-card">
+        <div class="gathering-skill" style="color:${canActuallyGather?'#76c442':'#c84a00'}">
+          ${gathering.skill}
+          <span class="level-req${canGather?'':' locked'}">
+            Level ${gathering.level}${canGather?' ✓':' — need '+(gathering.level-playerLevel)+' more lvls'}
+          </span>
+        </div>
+        <div class="gathering-detail">${gathering.method}</div>
+        <div class="gathering-tool">Tool: ${toolHtml}</div>
+        ${tiers ? renderToolTiers(tiers, gathering.skill) : ''}
+      </div>
+    </div>`;
+  }
+
+  // Production (crafting/cooking/smithing/fletching/etc.)
+  if (production) {
+    html += renderProduction(production);
+  }
+
+  // Ground spawns
+  if (spawns.length) {
+    html += `<div class="section">
+      <div class="section-header">Ground Spawns <span style="font-size:10px;color:#666;font-weight:normal;text-transform:none;letter-spacing:0">${spawns.length} location${spawns.length!==1?'s':''}</span></div>
+      ${spawns.map(s => `<div class="spawn-row">📍 ${s}</div>`).join('')}
+    </div>`;
+  }
+
+  // Clue scroll reward tiers
+  if (clueTiers.length > 0) {
+    const TIER_STYLE = {
+      beginner: {bg:'#2a2010',color:'#c8a830',label:'Beginner'},
+      easy:     {bg:'#102010',color:'#50c050',label:'Easy'},
+      medium:   {bg:'#202010',color:'#c8c030',label:'Medium'},
+      hard:     {bg:'#101828',color:'#4080c0',label:'Hard'},
+      elite:    {bg:'#1e1028',color:'#9050d0',label:'Elite'},
+      master:   {bg:'#280a0a',color:'#d03030',label:'Master'},
+    };
+    html += `<div class="section">
+      <div class="section-header">Clue Scroll Reward</div>`;
+    for (const tier of clueTiers) {
+      const s    = TIER_STYLE[tier] || {bg:'#1a1a1a',color:'#888',label:tier};
+      const frac = (clueRewardRarities[tier] || {})[name] || '';
+      const rarLabel = frac ? fractionToRarity(frac) : '';
+      html += `<div class="drop-row" style="cursor:pointer" onclick="showCard('Clue scroll (${tier})','clue')">
+        <div class="drop-indicator" style="color:${s.color}">◈</div>
+        <span class="drop-name" style="color:${s.color}">${s.label}</span>
+        ${frac ? `<span class="rarity-badge ${rarityClass(rarLabel)}">${rarLabel}</span><span class="fraction">${frac}</span>` : ''}
+      </div>`;
+    }
+    html += `</div>`;
+  }
+
+  // Shops & Rewards section
+  if (shops.length > 0) {
+    html += `<div class="section">
+      <div class="section-header">Shops &amp; Rewards</div>`;
+    for (const shop of shops) {
+      const isCard    = itemSources[shop.currency] !== undefined;
+      const curOwned  = isCard ? isOwned(shop.currency) : null;
+      const curCol    = curOwned === true ? '#76c442' : curOwned === false ? '#c84a00' : '#888';
+      const curSym    = curOwned === true ? ' ✓' : curOwned === false ? ' ✗' : '';
+      const priceStr  = shop.price != null ? `${shop.price.toLocaleString()}× ` : '';
+      const curHtml   = isCard
+        ? `<span style="cursor:pointer;color:${curCol}" data-nav="${shop.currency}" data-nav-type="item" onclick="showCard(this.dataset.nav,this.dataset.navType)">${priceStr}${shop.currency}${curSym}</span>`
+        : `<span style="color:#888">${priceStr}${shop.currency}</span>`;
+      html += `<div class="drop-row" style="cursor:default;background:#0d0d0d">
+        <div class="drop-indicator" style="color:#6a8aaa">◈</div>
+        <span class="drop-name" style="color:#aaa;flex:1">${shop.seller}</span>
+        <span style="font-size:11px;margin-left:8px;flex-shrink:0">${curHtml}</span>
+      </div>`;
+    }
+    html += `</div>`;
+  }
+
+  // Monster drops
+  const dedupedMonsters = allMonsterSources;  // already deduped above
+  const monstersUnlocked = monstersOwnedStat;
+  html += `<div class="section">
+    <div class="section-header">
+      Dropped By
+      ${progressPill(monstersUnlocked, dedupedMonsters.length, false)}
+    </div>`;
+  if (dedupedMonsters.length === 0) {
+    html += `<div class="empty-note">Not found as a monster drop${gathering?' (gathered instead)':''}.</div>`;
+  } else {
+    const sortedMonsters = [...dedupedMonsters].sort((a, b) => {
+      const ao = isOwned(a.card), bo = isOwned(b.card);
+      if (ao !== bo) return ao ? -1 : 1;
+      return a.card.localeCompare(b.card);
+    });
+    for (const m of sortedMonsters) {
+      const mOwned  = isOwned(m.card);
+      const indCls  = mOwned ? 'owned' : 'locked';
+      const symbol  = mOwned ? '✓' : '✗';
+      const cmb      = monsterDrops[m.card]?.combatLevel;
+      const cmbHtml  = cmb ? `<span style="font-size:10px;color:#555;margin-left:4px">Cmb ${cmb}</span>` : '';
+      const reqTags  = monsterReqTags(monsterDrops[m.card]);
+      html += `<div class="drop-row ${mOwned?'owned':'locked'}" style="cursor:pointer" data-nav="${m.card}" data-nav-type="monster" onclick="showCard(this.dataset.nav,this.dataset.navType)">
+        <div class="drop-indicator ${indCls}">${symbol}</div>
+        <span class="drop-name ${indCls}">${m.card}${cmbHtml}${reqTags}</span>
+        <span class="access-pill ${mOwned?'unlocked':'locked'}">${mOwned?'Unlocked':'Locked'}</span>
+        <span class="rarity-badge ${rarityClass(m.rarity)}">${m.rarity}</span>
+        <span class="fraction">${m.fraction||'—'}</span>
+      </div>`;
+    }
+  }
+  html += `</div>`;
+
+  // RDT monsters
+  if (rdtMonsters.length > 0) {
+    html += `<div class="section">
+      <div class="section-header">Also on Rare Drop Table <span class="rdt-header-note">${rdtMonsters.length} monsters</span></div>
+      <div class="rdt-banner">This item appears on the shared Rare &amp; Gem Drop Table. Many monsters can drop it via the RDT — these are not monster-specific sources.</div>`;
+    for (const m of rdtMonsters.slice(0, 6))
+      html += dropRowHtml(m.card, m.rarity, m.fraction, true);
+    if (rdtMonsters.length > 6)
+      html += `<div class="empty-note" style="padding:6px 0">…and ${rdtMonsters.length-6} more</div>`;
+    html += `</div>`;
+  }
+
+  // Quests
+  html += `<div class="section"><div class="section-header">Quest Rewards</div>`;
+  if (quests.length === 0) {
+    html += `<div class="empty-note">Not a quest reward.</div>`;
+  } else {
+    for (const q of quests) {
+      const chain = questChains[q];
+      html += `<div class="quest-row"><span class="quest-name">${q}</span>`;
+      if (chain?.prerequisites?.length)
+        html += `<div class="quest-prereqs">requires: ${chain.prerequisites.join(', ')}</div>`;
+      html += `</div>`;
+    }
+  }
+  html += `</div>`;
+
+  container.innerHTML = html;
+}
+
+// ─── Tool tier rows HTML ───────────────────────────────────────────────────
+// skillName = e.g. "Mining" or "Woodcutting" — used to check level gate
+function renderToolTiers(tiers, skillName) {
+  const skillLvl = getLevel(skillName);
+
+  // best = highest tier the player OWNS and can USE (skill level ok)
+  let bestName = null;
+  for (const t of tiers)
+    if (isOwned(t.name) && skillLvl >= t.skillReq) bestName = t.name;
+
+  let html = `<div class="tool-tiers">`;
+  for (const t of tiers) {
+    const hasCard  = isOwned(t.name);
+    const levelOk  = skillLvl >= t.skillReq;
+    const isBest   = t.name === bestName;
+
+    let cls, label;
+    if (isBest) {
+      cls = 'best';    label = '✓';
+    } else if (hasCard && !levelOk) {
+      // Own it but level gate not met — show the level required
+      cls = 'locked';  label = `need ${skillName} ${t.skillReq}`;
+    } else if (hasCard) {
+      // Own it, level ok, just not the best available
+      cls = 'available'; label = '✓';
+    } else {
+      // Don't own the card — show as unavailable, no level details
+      cls = '';         label = '—';
+    }
+
+    html += `<div class="tool-tier-row ${cls}">
+      <div class="tier-dot"></div>
+      <span class="tier-name">${t.name}</span>
+      <span class="tier-req">${label}</span>
+    </div>`;
+  }
+  return html + `</div>`;
+}
+
+// ─── Live collection refresh (requires server.py) ──────────────────────────
+async function refreshCollection() {
+  const btn = document.getElementById('refresh-btn');
+  btn.disabled = true;
+  btn.textContent = '↻ …';
+  try {
+    const data = await fetch('/api/collection/refresh').then(r => {
+      if (!r.ok) throw new Error(`HTTP ${r.status}`);
+      return r.json();
+    });
+    if (data.error) throw new Error(data.error);
+    owned = new Set(data.ownedCards.map(n => n.toLowerCase()));
+    document.getElementById('sim-summary').textContent =
+      `${data.cardCount} cards owned · refreshed ${new Date().toLocaleTimeString()}`;
+    document.getElementById('sim-btn').style.display = 'none';
+    filterCards();
+    refreshDetail();
+    btn.textContent = '↻ Refresh';
+    btn.disabled = false;
+  } catch (e) {
+    console.error('Refresh failed:', e);
+    btn.textContent = '✗ Error';
+    btn.style.color = '#c84a00';
+    setTimeout(() => {
+      btn.textContent = '↻ Refresh';
+      btn.style.color = '';
+      btn.disabled = false;
+    }, 3000);
+  }
+}
+
+// ─── Hiscores level lookup (requires server.py) ────────────────────────────
+async function lookupLevels() {
+  const input = document.getElementById('rsn-input');
+  const btn   = document.getElementById('levels-btn');
+  const rsn   = input.value.trim();
+  if (!rsn) return;
+
+  btn.disabled = true;
+  btn.textContent = '…';
+  try {
+    const data = await fetch(`/api/hiscores?player=${encodeURIComponent(rsn)}`).then(r => {
+      if (!r.ok) throw new Error(`HTTP ${r.status}`);
+      return r.json();
+    });
+    if (data.error) throw new Error(data.error);
+
+    // Merge returned levels into skills — only update skills we track
+    for (const [skill, lvl] of Object.entries(data.levels)) {
+      if (skill in skills) skills[skill] = lvl;
+    }
+    refreshDetail();
+    btn.textContent = '✓ ' + data.player;
+    btn.style.color = '#00c853';
+    setTimeout(() => { btn.textContent = 'Levels'; btn.style.color = ''; btn.disabled = false; }, 3000);
+  } catch (e) {
+    console.error('Level lookup failed:', e);
+    btn.textContent = '✗ Error';
+    btn.style.color = '#c84a00';
+    setTimeout(() => { btn.textContent = 'Levels'; btn.style.color = ''; btn.disabled = false; }, 3000);
+  }
+}
+
+loadData();
+</script>
+</body>
+</html>
