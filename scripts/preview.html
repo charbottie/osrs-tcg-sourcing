@@ -12,9 +12,142 @@
     font-family: 'Segoe UI', Tahoma, sans-serif;
     font-size: 13px;
     display: flex;
+    flex-direction: column;
     height: 100vh;
     overflow: hidden;
   }
+
+  /* ── Tab bar ── */
+  #tab-bar {
+    display: flex;
+    background: #111;
+    border-bottom: 1px solid #333;
+    padding: 0 8px;
+    flex-shrink: 0;
+  }
+  .tab-btn {
+    padding: 8px 16px;
+    font-size: 12px;
+    color: #666;
+    cursor: pointer;
+    border: none;
+    background: none;
+    border-bottom: 2px solid transparent;
+    transition: color 0.1s;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .tab-btn:hover { color: #aaa; }
+  .tab-btn.active { color: #e8c97a; border-bottom-color: #e8c97a; }
+
+  /* ── App content wrapper ── */
+  #app-content { flex: 1; display: flex; overflow: hidden; }
+
+  /* ── Skilling tab ── */
+  #skill-panel { flex: 1; display: flex; overflow: hidden; }
+  #skill-list-pane {
+    width: 280px; min-width: 280px;
+    background: #141414;
+    border-right: 1px solid #333;
+    overflow-y: auto;
+    padding: 12px;
+  }
+  #skill-detail-pane { flex: 1; overflow-y: auto; padding: 20px 24px; }
+  .skill-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; }
+  .skill-cell {
+    background: #1a1a1a;
+    border: 1px solid #2a2a2a;
+    border-radius: 4px;
+    padding: 8px 6px;
+    cursor: pointer;
+    text-align: center;
+    transition: border-color 0.1s;
+  }
+  .skill-cell:hover { border-color: #444; }
+  .skill-cell.selected { border-color: #b07a30; background: #1e1800; }
+  .skill-cell.has-methods { border-color: #2a3a2a; }
+  .skill-cell-name { font-size: 10px; color: #888; margin-bottom: 2px; }
+  .skill-cell-level { font-size: 16px; color: #e8c97a; font-weight: 600; }
+  .skill-cell-count { font-size: 9px; color: #4a8a4a; margin-top: 2px; }
+  .skill-cell-count.zero { color: #444; }
+
+  .method-row {
+    display: flex; align-items: center;
+    padding: 5px 0; gap: 8px;
+    border-bottom: 1px solid #1f1f1f;
+    font-size: 12px;
+  }
+  .method-row:last-child { border-bottom: none; }
+  .method-indicator { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+  .method-indicator.available  { background: #3a8a3a; }
+  .method-indicator.no-card    { background: #4a4a20; }
+  .method-indicator.no-source  { background: #7a4a10; }
+  .method-indicator.locked     { background: #5a2a2a; }
+  .method-name { flex: 1; }
+  .method-name.available  { color: #c8c8c8; }
+  .method-name.no-card    { color: #667; cursor: pointer; }
+  .method-name.no-source  { color: #8a5a20; }
+  .method-name.locked     { color: #5a3a3a; }
+  .method-level { font-size: 10px; color: #555; min-width: 36px; text-align: right; }
+  .method-note  { font-size: 10px; color: #666; }
+
+  /* ── Questing tab ── */
+  #quest-panel { flex: 1; display: flex; overflow: hidden; }
+  #quest-list-pane {
+    width: 320px; min-width: 320px;
+    background: #141414;
+    border-right: 1px solid #333;
+    display: flex; flex-direction: column;
+    overflow: hidden;
+  }
+  #quest-list-controls { padding: 8px; border-bottom: 1px solid #222; display: flex; flex-direction: column; gap: 6px; }
+  #quest-list-scroll { flex: 1; overflow-y: auto; }
+  #quest-detail-pane { flex: 1; overflow-y: auto; padding: 20px 24px; }
+
+  .quest-item {
+    padding: 7px 12px;
+    cursor: pointer;
+    border-bottom: 1px solid #1a1a1a;
+    display: flex; align-items: center; gap: 8px;
+    transition: background 0.1s;
+  }
+  .quest-item:hover { background: #1c1c1c; }
+  .quest-item.selected { background: #2a2000; border-left: 2px solid #b07a30; }
+  .quest-badge {
+    font-size: 10px; font-weight: 700;
+    width: 16px; text-align: center; flex-shrink: 0;
+  }
+  .quest-badge.ok      { color: #3a9a3a; }
+  .quest-badge.close   { color: #c8a020; }
+  .quest-badge.locked  { color: #7a3a3a; }
+  .quest-name { flex: 1; font-size: 12px; }
+  .quest-qp { font-size: 10px; color: #555; flex-shrink: 0; }
+  .quest-members-tag { font-size: 9px; color: #4a6a8a; background: #0d1e2e; border-radius: 2px; padding: 1px 3px; flex-shrink: 0; }
+
+  .req-row {
+    display: flex; align-items: center; gap: 8px;
+    padding: 4px 0; font-size: 12px;
+    border-bottom: 1px solid #1a1a1a;
+  }
+  .req-row:last-child { border-bottom: none; }
+  .req-icon { font-size: 12px; width: 14px; flex-shrink: 0; }
+  .req-icon.ok     { color: #3a9a3a; }
+  .req-icon.fail   { color: #9a3a3a; }
+  .req-icon.warn   { color: #8a6a20; }
+  .req-label { flex: 1; }
+  .req-note  { font-size: 10px; color: #666; }
+
+  /* ── Rules tab ── */
+  #rules-panel { flex: 1; overflow-y: auto; padding: 32px 40px; max-width: 720px; }
+  #rules-panel h2 { color: #e8c97a; font-size: 16px; margin-bottom: 16px; }
+  #rules-panel h3 { color: #c8b060; font-size: 13px; margin: 20px 0 8px; text-transform: uppercase; letter-spacing: 1px; }
+  #rules-panel p, #rules-panel li { color: #999; line-height: 1.6; margin-bottom: 8px; font-size: 13px; }
+  #rules-panel ul { padding-left: 20px; }
+  #rules-panel table { border-collapse: collapse; width: 100%; margin: 8px 0 16px; }
+  #rules-panel th { text-align: left; padding: 6px 10px; font-size: 11px; color: #888; border-bottom: 1px solid #333; text-transform: uppercase; letter-spacing: 0.5px; }
+  #rules-panel td { padding: 6px 10px; font-size: 12px; border-bottom: 1px solid #222; }
+  #rules-panel td:first-child { color: #c8c8c8; }
+  #rules-panel td:last-child { color: #5a9a5a; }
 
   /* ── Left: card list ── */
   #sidebar {
@@ -146,19 +279,7 @@
   .drop-row.owned  { background: #0a1a0a; }
   .drop-row.locked { background: transparent; }
 
-  /* access pill — Unlocked / Locked label on Dropped By rows */
-  .access-pill {
-    font-size: 10px;
-    font-weight: 600;
-    padding: 2px 7px;
-    border-radius: 10px;
-    flex-shrink: 0;
-    margin-left: 6px;
-  }
-  .access-pill.unlocked { background: #003d1f; color: #00c853; }
-  .access-pill.locked   { background: #2a0a0a; color: #c84a00; }
-
-  .drop-indicator {
+.drop-indicator {
     width: 18px;
     height: 18px;
     border-radius: 50%;
@@ -347,6 +468,20 @@
 </head>
 <body>
 
+<div id="tab-bar">
+  <button class="tab-btn active" onclick="switchTab('cards')"   id="tab-cards">Cards</button>
+  <button class="tab-btn"        onclick="switchTab('skilling')" id="tab-skilling">Skilling</button>
+  <button class="tab-btn"        onclick="switchTab('questing')" id="tab-questing">Questing</button>
+  <button class="tab-btn"        onclick="switchTab('rules')"    id="tab-rules">Rules</button>
+  <div style="flex:1"></div>
+  <div id="global-nav" style="display:flex;align-items:center;padding:0 8px;gap:4px;">
+    <button id="global-back-btn" onclick="navigateBack()" style="font-size:11px;padding:2px 10px;cursor:pointer;border:1px solid #444;border-radius:3px;background:#222;color:#aaa;" disabled>← Back</button>
+    <button id="global-fwd-btn"  onclick="navigateForward()" style="font-size:11px;padding:2px 10px;cursor:pointer;border:1px solid #444;border-radius:3px;background:#222;color:#aaa;" disabled>Forward →</button>
+  </div>
+</div>
+
+<div id="app-content">
+
 <div id="sidebar">
   <h2>Card Sourcing</h2>
   <div id="controls">
@@ -387,6 +522,8 @@
     <div class="placeholder">← Select a card to see sourcing info</div>
   </div>
 </div>
+
+</div><!-- #app-content -->
 
 <script>
 // ─── Tool tiers ────────────────────────────────────────────────────────────
@@ -463,22 +600,120 @@ function resolveToolParts(toolStr) {
   });
 }
 
+// ─── Recursive item reachability ────────────────────────────────────────────
+// canGetItem: can the player actually obtain this item given current level,
+// tools, and card ownership? Checks ALL source routes as OR conditions.
+// Never returns false from a single failed route — exhausts all options first.
+// Memoised per collection state (cache cleared on refreshCollection / lookupLevels).
+let _canGetCache = {};
+
+function canGetItem(itemName, visited = new Set()) {
+  if (visited.has(itemName)) return false;           // cycle guard
+  if (itemName in _canGetCache) return _canGetCache[itemName];
+
+  const data = itemSources[itemName];
+  const info = ingredientInfo[itemName];
+  if (!data && !info) {
+    _canGetCache[itemName] = true;                   // unknown → not in card set, no restriction
+    return true;
+  }
+
+  const src = data || info;
+
+  // Data gap fallback: entry exists in our data but ALL source fields are empty.
+  // Covers both itemSources (TCG cards) and ingredientInfo (non-card intermediates like unf potions).
+  // Don't penalise data gaps — assume the item is obtainable.
+  {
+    const hasSrc = src.shopBought || (src.spawns && src.spawns.length) ||
+                   src.gathering || (src.monsters && src.monsters.length) ||
+                   src.production || src.alwaysAvailable || (src.clueTiers && src.clueTiers.length);
+    if (!hasSrc) { _canGetCache[itemName] = true; return true; }
+  }
+
+  // Ground spawn — no Bronzeman restriction (free pickup)
+  if (src.spawns && src.spawns.length > 0) { _canGetCache[itemName] = true; return true; }
+
+  // Shop — requires spending coins (or special currency), which counts as using it.
+  // Coins IS a TCG card; need to own it before shops are accessible.
+  // item_sources.json doesn't track which currency each shop uses, so we check Coins as the common case.
+  if (src.shopBought && isOwned('Coins')) { _canGetCache[itemName] = true; return true; }
+
+  // Gathering: level + tool (no card needed for the resource itself)
+  if (src.gathering) {
+    const g = src.gathering;
+    if (getLevel(g.skill) >= (g.level || 1)) {
+      let toolOk = !g.tool || g.tool === 'None';
+      if (!toolOk && TOOL_TIERS[g.tool]) {
+        toolOk = TOOL_TIERS[g.tool].some(t => isOwned(t.name) && getLevel(g.skill) >= t.skillReq);
+      } else if (!toolOk) {
+        const parts = resolveToolParts(g.tool);
+        toolOk = parts.every(p => !itemSources[p.label] || isOwned(p.label));
+      }
+      if (toolOk) { _canGetCache[itemName] = true; return true; }
+    }
+    // gathering failed — fall through to check other sources
+  }
+
+  // Monster drop — need to own the monster card
+  if (src.monsters && src.monsters.length > 0) {
+    if (src.monsters.some(m => isOwned(m.card))) { _canGetCache[itemName] = true; return true; }
+    // no owned monster card — fall through
+  }
+
+  // Production chain — recurse into ingredients
+  if (src.production) {
+    const p = src.production;
+    if (!p.skill || getLevel(p.skill) >= (p.level || 1)) {
+      const newVisited = new Set([...visited, itemName]);
+      const ok = (p.ingredients || []).every(ing => {
+        if (itemSources[ing.item] && !isOwned(ing.item)) return false; // need card to use as ingredient
+        return canGetItem(ing.item, newVisited);
+      });
+      if (ok) { _canGetCache[itemName] = true; return true; }
+    }
+    // production failed — fall through
+  }
+
+  // All sources exhausted
+  _canGetCache[itemName] = false;
+  return false;
+}
+
 // ─── State ─────────────────────────────────────────────────────────────────
 let monsterDrops = {}, itemSources = {}, questChains = {}, cardCategories = {}, cardDetails = {};
 let clueScrollSources   = {};   // tier → [{source, level, rarity}]
 let clueRewardsByTier   = {};   // tier → [item names]
 let clueRewardRarities  = {};   // tier → {item name → fraction string}
 let ingredientInfo      = {};   // non-card ingredient name → {production, shops, spawns}
+let questsData          = {};   // quest name → {prerequisites, skillRequirements, ...}
 let allCards     = [];
 let selected = null, selectedType = null;
+let activeTab = 'cards';
+let selectedSkill = null;   // currently selected skill in Skilling tab
+let selectedQuest = null;   // currently selected quest in Questing tab
 
-// Simulated skill levels — randomised on load
-let skills = { Mining:1, Woodcutting:1, Fishing:1, Farming:1, Slayer:1, Sailing:1, Fletching:1, Smithing:1, Cooking:1, Crafting:1, Runecrafting:1, Herblore:1, Thieving:1, Hunter:1, Magic:1, Agility:1, Firemaking:1, Construction:1 };
+// Simulated skill levels — randomised on load (includes combat skills for quest checks)
+let skills = {
+  Attack:1, Hitpoints:10, Mining:1, Strength:1, Agility:1, Smithing:1,
+  Defence:1, Herblore:1, Fishing:1, Ranged:1, Thieving:1, Cooking:1,
+  Prayer:1, Crafting:1, Firemaking:1, Magic:1, Fletching:1, Woodcutting:1,
+  Runecrafting:1, Slayer:1, Farming:1, Construction:1, Hunter:1, Sailing:1,
+};
 
 // Owned cards — randomised on load (no localStorage persistence for simulation)
 let owned = new Set();
 
 function isOwned(name) { return owned.has(name.toLowerCase()); }
+
+// Normalise wiki spawn location text: "1 st floor 2 nd floor" → "1st floor"
+// The wiki shows both UK (1st floor) and US (2nd floor) names; keep the first only.
+function cleanSpawnText(s) {
+  // Collapse "N st/nd/rd/th" → "Nth" (remove the extra space)
+  s = s.replace(/(\d+)\s+(st|nd|rd|th)\b/gi, '$1$2');
+  // Remove duplicate consecutive floor references e.g. "1st floor 2nd floor" → "1st floor"
+  s = s.replace(/(\d+(?:st|nd|rd|th)\s+floor)\s+\d+(?:st|nd|rd|th)\s+floor/gi, '$1');
+  return s.trim();
+}
 
 function wikiLink(name) {
   // Strip disambiguation suffix "Monkey (monster)" → "Monkey" for wiki URL
@@ -543,7 +778,7 @@ function simulateRandom() {
 async function loadData() {
   try {
     const cb = `?v=${Date.now()}`;  // cache-bust so updated JSON files are always fresh
-    const [md, is, qc, cc, cd, css, cs, crr, ii] = await Promise.all([
+    const [md, is, qc, cc, cd, css, cs, crr, ii, qd] = await Promise.all([
       fetch(`output/monster_drops.json${cb}`).then(r => r.json()).catch(() => ({})),
       fetch(`output/item_sources.json${cb}`).then(r => r.json()).catch(() => ({})),
       fetch(`output/quest_chains.json${cb}`).then(r => r.json()).catch(() => ({})),
@@ -553,11 +788,13 @@ async function loadData() {
       fetch(`clue_sources.json${cb}`).then(r => r.json()).catch(() => ({})),
       fetch(`clue_reward_rarities.json${cb}`).then(r => r.json()).catch(() => ({})),
       fetch(`ingredient_info.json${cb}`).then(r => r.json()).catch(() => ({})),
+      fetch(`output/quests.json${cb}`).then(r => r.json()).catch(() => ({})),
     ]);
     monsterDrops = md; itemSources = is; questChains = qc; cardCategories = cc; cardDetails = cd;
     clueScrollSources  = css;
     clueRewardRarities = crr;
     ingredientInfo     = ii;
+    questsData         = qd;
     // Build inverted tier → [item names] map from clue_sources.json
     for (const [name, tiers] of Object.entries(cs)) {
       for (const tier of tiers) {
@@ -568,6 +805,9 @@ async function loadData() {
     await loadCollection();
     buildCardList();
     document.getElementById('rsn-input').value = 'lottie_tcg';
+    // Auto-load fresh data on startup (silently — errors are caught in each function)
+    refreshCollection();   // re-decode RuneLite profiles for up-to-date card ownership
+    lookupLevels();        // pull live hiscores for 'lottie_tcg'
   } catch {
     document.getElementById('detail').innerHTML =
       `<div class="placeholder">⚠ Needs a local server.<br>
@@ -590,7 +830,9 @@ function buildCardList() {
   for (const name of Object.keys(monsterDrops))
     allCards.push({name, type:'monster'});
   for (const [name, d] of Object.entries(itemSources)) {
-    if (d.monsters?.length || d.rdtMonsters?.length || d.quests?.length || d.shops?.length || d.shopBought || d.gathering || d.clueTiers?.length)
+    const hasSrc = d.monsters?.length || d.rdtMonsters?.length || d.quests?.length || d.shops?.length || d.shopBought || d.gathering || d.clueTiers?.length;
+    const isKnownCard = cardCategories[name]?.length > 0;
+    if (hasSrc || isKnownCard)
       allCards.push({name, type:'item', cats: cardCategories[name] || []});
   }
   // Virtual clue scroll cards — always at top of list
@@ -667,8 +909,69 @@ function renderList(cards) {
 // ─── Skill levels ──────────────────────────────────────────────────────────
 function getLevel(skill) { return skills[skill] || 1; }
 
+// ─── Cross-tab navigation history ─────────────────────────────────────────
+// Each entry: {tab, name, type, skill, quest} — full app state snapshot
+let navHistory = [];
+let navForward = [];
+
+function captureState() {
+  return {tab: activeTab, name: selected, type: selectedType,
+          skill: selectedSkill, quest: selectedQuest};
+}
+
+function pushHistoryEntry() {
+  const state = captureState();
+  // Only push if there's meaningful state to save
+  if (!state.tab) return;
+  navHistory.push(state);
+  if (navHistory.length > 50) navHistory.shift();
+  navForward = [];
+  updateNavButtons();
+}
+
+function updateNavButtons() {
+  const backBtn = document.getElementById('global-back-btn');
+  const fwdBtn  = document.getElementById('global-fwd-btn');
+  if (backBtn) backBtn.disabled = navHistory.length === 0;
+  if (fwdBtn)  fwdBtn.disabled  = navForward.length === 0;
+}
+
+function navigate(state) {
+  // Restore full app state without pushing history
+  _renderTab(state.tab, false);  // don't reset selection — we restore it below
+  if (state.tab === 'skilling') {
+    selectedSkill = null;
+    if (state.skill) showSkillDetail(state.skill, false);
+    else renderSkillGrid();
+  } else if (state.tab === 'questing') {
+    selectedQuest = null;
+    if (state.quest) showQuestDetail(state.quest, false);
+    else renderQuestList();
+  } else if (state.tab === 'cards') {
+    selected = state.name; selectedType = state.type;
+    filterCards();
+    if (state.name) refreshDetail();
+  }
+  updateNavButtons();
+}
+
+function navigateBack() {
+  if (!navHistory.length) return;
+  navForward.push(captureState());
+  const prev = navHistory.pop();
+  navigate(prev);
+}
+
+function navigateForward() {
+  if (!navForward.length) return;
+  navHistory.push(captureState());
+  const next = navForward.pop();
+  navigate(next);
+}
+
 // ─── Card display ──────────────────────────────────────────────────────────
-function showCard(name, type) {
+function showCard(name, type, push = true) {
+  if (push) pushHistoryEntry();
   selected = name; selectedType = type;
   filterCards();
   refreshDetail();
@@ -677,12 +980,14 @@ function showCard(name, type) {
 function refreshDetail() {
   if (!selected) return;
   const detail = document.getElementById('detail');
+  if (!detail) return;
   const scroll = detail.scrollTop;
   if (selectedType === 'monster') renderMonster(selected, detail);
   else if (selectedType === 'clue') renderClueScroll(selected.match(/\((\w+)\)$/)?.[1], detail);
   else if (selectedType === 'ingredient') renderIngredient(selected, detail);
   else renderItem(selected, detail);
   detail.scrollTop = scroll;
+  updateNavButtons();
 }
 
 function rarityClass(r) { return 'rarity-' + (r||'Unknown').replace(/ /g,'-'); }
@@ -1062,7 +1367,7 @@ function renderIngredient(name, container) {
     const spawnRows = spawns.map(loc =>
       `<div class="drop-row" style="cursor:default">
         <div class="drop-indicator" style="color:#5a7a30">◈</div>
-        <span class="drop-name" style="color:#aaa">${loc}</span>
+        <span class="drop-name" style="color:#aaa">${cleanSpawnText(loc)}</span>
       </div>`
     ).join('');
     html += `<div class="section"><div class="section-header">How to obtain</div>${spawnRows}</div>`;
@@ -1270,7 +1575,6 @@ function renderClueScroll(tier, container) {
       html += `<div class="drop-row ${cls}" style="cursor:pointer" data-nav="${s.source}" data-nav-type="monster" onclick="showCard(this.dataset.nav,this.dataset.navType)">
         <div class="drop-indicator ${cls}">${sym}</div>
         <span class="drop-name ${cls}">${s.source}${cmbHtml}${reqTags}</span>
-        <span class="access-pill ${owned?'unlocked':'locked'}">${owned?'Unlocked':'Locked'}</span>
         ${rarHtml}
       </div>`;
     }
@@ -1319,7 +1623,6 @@ function renderClueScroll(tier, container) {
       html += `<div class="drop-row ${cls}" style="cursor:pointer" data-nav="${name}" data-nav-type="item" onclick="showCard(this.dataset.nav,this.dataset.navType)">
         <div class="drop-indicator ${cls}">${sym}</div>
         <span class="drop-name ${cls}">${name}</span>
-        <span class="access-pill ${owned?'unlocked':'locked'}">${owned?'Owned':'Locked'}</span>
         ${rarHtml}
       </div>`;
     }
@@ -1475,7 +1778,7 @@ function renderItem(name, container) {
   if (spawns.length) {
     html += `<div class="section">
       <div class="section-header">Ground Spawns <span style="font-size:10px;color:#666;font-weight:normal;text-transform:none;letter-spacing:0">${spawns.length} location${spawns.length!==1?'s':''}</span></div>
-      ${spawns.map(s => `<div class="spawn-row">📍 ${s}</div>`).join('')}
+      ${spawns.map(s => `<div class="spawn-row">📍 ${cleanSpawnText(s)}</div>`).join('')}
     </div>`;
   }
 
@@ -1552,7 +1855,6 @@ function renderItem(name, container) {
       html += `<div class="drop-row ${mOwned?'owned':'locked'}" style="cursor:pointer" data-nav="${m.card}" data-nav-type="monster" onclick="showCard(this.dataset.nav,this.dataset.navType)">
         <div class="drop-indicator ${indCls}">${symbol}</div>
         <span class="drop-name ${indCls}">${m.card}${cmbHtml}${reqTags}</span>
-        <span class="access-pill ${mOwned?'unlocked':'locked'}">${mOwned?'Unlocked':'Locked'}</span>
         <span class="rarity-badge ${rarityClass(m.rarity)}">${m.rarity}</span>
         <span class="fraction">${m.fraction||'—'}</span>
       </div>`;
@@ -1641,11 +1943,14 @@ async function refreshCollection() {
     });
     if (data.error) throw new Error(data.error);
     owned = new Set(data.ownedCards.map(n => n.toLowerCase()));
+    _canGetCache = {};
     document.getElementById('sim-summary').textContent =
       `${data.cardCount} cards owned · refreshed ${new Date().toLocaleTimeString()}`;
     document.getElementById('sim-btn').style.display = 'none';
     filterCards();
     refreshDetail();
+    if (activeTab === 'skilling') renderSkillGrid();
+    if (activeTab === 'questing') renderQuestList();
     btn.textContent = '↻ Refresh';
     btn.disabled = false;
   } catch (e) {
@@ -1680,7 +1985,10 @@ async function lookupLevels() {
     for (const [skill, lvl] of Object.entries(data.levels)) {
       if (skill in skills) skills[skill] = lvl;
     }
+    _canGetCache = {};
     refreshDetail();
+    if (activeTab === 'skilling') renderSkillGrid();
+    if (activeTab === 'questing') renderQuestList();
     btn.textContent = '✓ ' + data.player;
     btn.style.color = '#00c853';
     setTimeout(() => { btn.textContent = 'Levels'; btn.style.color = ''; btn.disabled = false; }, 3000);
@@ -1690,6 +1998,1358 @@ async function lookupLevels() {
     btn.style.color = '#c84a00';
     setTimeout(() => { btn.textContent = 'Levels'; btn.style.color = ''; btn.disabled = false; }, 3000);
   }
+}
+
+// ─── Tab navigation ────────────────────────────────────────────────────────
+function switchTab(tab) {
+  if (tab !== activeTab) pushHistoryEntry();
+  _renderTab(tab);
+}
+
+function _renderTab(tab, resetSelection = true) {
+  activeTab = tab;
+  // Update tab button styles
+  for (const t of ['cards','skilling','questing','rules'])
+    document.getElementById(`tab-${t}`).classList.toggle('active', t === tab);
+
+  const sidebar     = document.getElementById('sidebar');
+  const mainContent = document.getElementById('main-content');
+
+  if (tab === 'cards') {
+    sidebar.style.display = 'flex';
+    mainContent.style.display = 'flex';
+    // Rebuild detail pane only if it doesn't exist (was replaced by another tab)
+    if (!document.getElementById('detail')) {
+      mainContent.innerHTML = `<div id="detail" style="flex:1;overflow-y:auto;padding:20px 24px;"><div class="placeholder">← Select a card to see sourcing info</div></div>`;
+    }
+    if (resetSelection) { selected = null; selectedType = null; }
+    filterCards();
+  } else {
+    sidebar.style.display = 'none';
+    mainContent.style.display = 'flex';
+    mainContent.style.flexDirection = 'column';
+    if (tab === 'skilling') {
+      if (resetSelection) selectedSkill = null;
+      mainContent.innerHTML = `<div id="skill-panel">
+        <div id="skill-list-pane">
+          <div style="font-size:10px;color:#666;text-transform:uppercase;letter-spacing:1px;margin-bottom:10px">Skills</div>
+          <div class="skill-grid" id="skill-grid"></div>
+        </div>
+        <div id="skill-detail-pane">
+          <div class="placeholder" style="margin-top:60px;color:#444">← Select a skill</div>
+        </div>
+      </div>`;
+      renderSkillGrid();
+    } else if (tab === 'questing') {
+      if (resetSelection) selectedQuest = null;
+      mainContent.innerHTML = `<div id="quest-panel">
+        <div id="quest-list-pane">
+          <div id="quest-list-controls">
+            <input id="quest-search" type="text" placeholder="Search quests…" oninput="renderQuestList()"
+              style="background:#222;border:1px solid #444;color:#ddd;padding:6px 8px;border-radius:3px;font-size:12px;width:100%">
+            <select id="quest-filter" onchange="renderQuestList()"
+              style="background:#222;border:1px solid #444;color:#ccc;padding:4px 6px;border-radius:3px;font-size:11px">
+              <option value="all">All quests</option>
+              <option value="ok">Completable</option>
+              <option value="close">Almost ready</option>
+              <option value="free">Free quests</option>
+              <option value="members">Members only</option>
+            </select>
+          </div>
+          <div id="quest-list-scroll"></div>
+        </div>
+        <div id="quest-detail-pane">
+          <div class="placeholder" style="margin-top:60px;color:#444">← Select a quest</div>
+        </div>
+      </div>`;
+      renderQuestList();
+    } else if (tab === 'rules') {
+      mainContent.innerHTML = renderRulesTab();
+    }
+  }
+}
+
+// ─── Skilling tab ──────────────────────────────────────────────────────────
+
+// OSRS skill order (3-column grid, left-to-right top-to-bottom)
+const SKILL_ORDER = [
+  'Attack','Hitpoints','Mining',
+  'Strength','Agility','Smithing',
+  'Defence','Herblore','Fishing',
+  'Ranged','Thieving','Cooking',
+  'Prayer','Crafting','Firemaking',
+  'Magic','Fletching','Woodcutting',
+  'Runecrafting','Slayer','Farming',
+  'Construction','Hunter','Sailing',
+];
+
+// Maps our skill names → OSRS wiki icon filename (some differ from skill name)
+const SKILL_ICON_NAME = {
+  Runecrafting: 'Runecraft',  // wiki uses "Runecraft_icon.png" not "Runecrafting_icon.png"
+};
+const _WIKI = 'https://oldschool.runescape.wiki/images/';
+function skillIcon(skill, size=16) {
+  const name = SKILL_ICON_NAME[skill] || skill;
+  return `<img src="${_WIKI}${name}_icon.png" width="${size}" height="${size}"
+    alt="${skill}" style="vertical-align:middle;image-rendering:pixelated;margin-right:3px">`;
+}
+
+// Static data for skills without card-based training
+const AGILITY_COURSES = [
+  {name:'Gnome Stronghold',          level:1,  xp:86.5},
+  {name:'Draynor Village rooftop',   level:10, xp:120},
+  {name:'Al Kharid rooftop',         level:20, xp:180},
+  {name:'Varrock rooftop',           level:30, xp:238},
+  {name:'Barbarian Outpost',         level:35, xp:152.5},
+  {name:'Canifis rooftop',           level:40, xp:240},
+  {name:'Ape Atoll agility course',  level:48, xp:580},
+  {name:'Hallowed Sepulchre (F1)',    level:52, xp:550},
+  {name:'Wilderness Agility Course', level:52, xp:571.4},
+  {name:'Falador rooftop',           level:50, xp:570},
+  {name:"Seers' Village rooftop",    level:60, xp:570},
+  {name:'Pollnivneach rooftop',      level:70, xp:890},
+  {name:'Prifddinas agility course', level:75, xp:1275},
+  {name:'Rellekka rooftop',          level:80, xp:780},
+  {name:'Ardougne rooftop',          level:90, xp:793},
+];
+
+// Full Slayer task data per master. weights from OSRS wiki.
+// cards: array of TCG card names that fulfil this task (any one owned = task available).
+const SLAYER_TASKS = {
+  'Turael': {
+    slayerReq:1, combatReq:3,
+    tasks:[
+      {task:'Banshees',        cards:['Banshee'],                                                        weight:8},
+      {task:'Bats',            cards:['Bat'],                                                            weight:7},
+      {task:'Bears',           cards:['Bear'],                                                           weight:7},
+      {task:'Birds',           cards:['Chicken','Seagull'],                                              weight:6},
+      {task:'Cave bugs',       cards:['Cave bug'],                                                       weight:8},
+      {task:'Cave crawlers',   cards:['Cave crawler'],                                                   weight:8},
+      {task:'Cave slime',      cards:['Cave slime'],                                                     weight:8},
+      {task:'Cows',            cards:['Cow'],                                                            weight:8},
+      {task:'Crawling Hands',  cards:['Crawling Hand'],                                                  weight:8},
+      {task:'Dogs',            cards:['Dog'],                                                            weight:7},
+      {task:'Dwarves',         cards:['Dwarf'],                                                          weight:7},
+      {task:'Ghosts',          cards:['Ghost'],                                                          weight:7},
+      {task:'Goblins',         cards:['Goblin'],                                                         weight:7},
+      {task:'Icefiends',       cards:['Icefiend'],                                                       weight:8},
+      {task:'Kalphite',        cards:['Kalphite Worker','Kalphite Soldier','Kalphite Guardian','Kalphite Queen'], weight:6},
+      {task:'Lizards',         cards:['Lizard','Desert lizard'],                                         weight:8},
+      {task:'Minotaurs',       cards:['Minotaur'],                                                       weight:7},
+      {task:'Monkeys',         cards:['Monkey'],                                                         weight:6},
+      {task:'Rats',            cards:['Rat'],                                                            weight:7},
+      {task:'Scorpions',       cards:['Scorpion'],                                                       weight:7},
+      {task:'Skeletons',       cards:['Skeleton'],                                                       weight:7},
+      {task:'Spiders',         cards:['Spider'],                                                         weight:6},
+      {task:'Wolves',          cards:['Wolf'],                                                           weight:7},
+      {task:'Zombies',         cards:['Zombie'],                                                         weight:7},
+    ]
+  },
+  'Mazchna': {
+    slayerReq:1, combatReq:20,
+    tasks:[
+      {task:'Banshees',        cards:['Banshee'],                                                        weight:8},
+      {task:'Bats',            cards:['Bat'],                                                            weight:7},
+      {task:'Bears',           cards:['Bear'],                                                           weight:6},
+      {task:'Catablepon',      cards:['Catablepon'],                                                     weight:8},
+      {task:'Cave bugs',       cards:['Cave bug'],                                                       weight:8},
+      {task:'Cave crawlers',   cards:['Cave crawler'],                                                   weight:8},
+      {task:'Cave slime',      cards:['Cave slime'],                                                     weight:8},
+      {task:'Cockatrice',      cards:['Cockatrice'],                                                     weight:8},
+      {task:'Crabs',           cards:['Rock Crab','Sand Crab','Ammonite Crab','Swamp Crab'],             weight:8},
+      {task:'Crawling Hands',  cards:['Crawling Hand'],                                                  weight:8},
+      {task:'Dogs',            cards:['Dog'],                                                            weight:7},
+      {task:'Flesh Crawlers',  cards:['Flesh Crawler'],                                                  weight:7},
+      {task:'Ghosts',          cards:['Ghost'],                                                          weight:7},
+      {task:'Ghouls',          cards:['Ghoul'],                                                          weight:7},
+      {task:'Hill Giants',     cards:['Hill Giant'],                                                     weight:7},
+      {task:'Hobgoblins',      cards:['Hobgoblin'],                                                      weight:7},
+      {task:'Ice warriors',    cards:['Ice Warrior'],                                                    weight:7},
+      {task:'Kalphite',        cards:['Kalphite Worker','Kalphite Soldier','Kalphite Guardian','Kalphite Queen'], weight:6},
+      {task:'Killerwatts',     cards:['Killerwatt'],                                                     weight:6},
+      {task:'Lizards',         cards:['Lizard','Desert lizard'],                                         weight:8},
+      {task:'Mogres',          cards:['Mogre'],                                                          weight:8},
+      {task:'Pyrefiends',      cards:['Pyrefiend'],                                                      weight:8},
+      {task:'Rockslugs',       cards:['Rockslug'],                                                       weight:8},
+      {task:'Scorpions',       cards:['Scorpion'],                                                       weight:7},
+      {task:'Shades',          cards:['Shade'],                                                          weight:8},
+      {task:'Skeletons',       cards:['Skeleton'],                                                       weight:7},
+      {task:'Vampyres',        cards:['Vampyre'],                                                        weight:6},
+      {task:'Wall beasts',     cards:['Wall beast'],                                                     weight:7},
+      {task:'Wolves',          cards:['Wolf'],                                                           weight:7},
+      {task:'Zombies',         cards:['Zombie'],                                                         weight:7},
+    ]
+  },
+  'Vannaka': {
+    slayerReq:1, combatReq:40,
+    tasks:[
+      {task:'Aberrant spectres',   cards:['Aberrant spectre'],                                           weight:8},
+      {task:'Abyssal demons',      cards:['Abyssal demon'],                                              weight:8},
+      {task:'Ankou',               cards:['Ankou'],                                                      weight:8},
+      {task:'Banshees',            cards:['Banshee'],                                                    weight:8},
+      {task:'Basilisks',           cards:['Basilisk'],                                                   weight:8},
+      {task:'Bats',                cards:['Bat'],                                                        weight:7},
+      {task:'Bears',               cards:['Bear'],                                                       weight:7},
+      {task:'Bloodveld',           cards:['Bloodveld'],                                                  weight:8},
+      {task:'Blue dragons',        cards:['Baby blue dragon','Blue dragon'],                             weight:7},
+      {task:'Cave bugs',           cards:['Cave bug'],                                                   weight:8},
+      {task:'Cave crawlers',       cards:['Cave crawler'],                                               weight:8},
+      {task:'Cave slime',          cards:['Cave slime'],                                                 weight:8},
+      {task:'Cockatrice',          cards:['Cockatrice'],                                                 weight:8},
+      {task:'Crawling Hands',      cards:['Crawling Hand'],                                              weight:8},
+      {task:'Crocodiles',          cards:['Crocodile'],                                                  weight:8},
+      {task:'Dagannoth',           cards:['Dagannoth','Dagannoth Prime','Dagannoth Rex','Dagannoth Supreme'], weight:7},
+      {task:'Dogs',                cards:['Dog'],                                                        weight:7},
+      {task:'Dust devils',         cards:['Dust devil'],                                                 weight:8},
+      {task:'Dwarves',             cards:['Dwarf'],                                                      weight:7},
+      {task:'Earth warriors',      cards:['Earth Warrior'],                                              weight:8},
+      {task:'Elves',               cards:['Elf'],                                                        weight:8},
+      {task:'Fire giants',         cards:['Fire Giant'],                                                 weight:8},
+      {task:'Flesh Crawlers',      cards:['Flesh Crawler'],                                              weight:7},
+      {task:'Gargoyles',           cards:['Gargoyle'],                                                   weight:5},
+      {task:'Ghosts',              cards:['Ghost'],                                                      weight:7},
+      {task:'Ghouls',              cards:['Ghoul'],                                                      weight:7},
+      {task:'Green dragons',       cards:['Green dragon','Baby green dragon'],                           weight:7},
+      {task:'Gryphons',            cards:['Gryphon'],                                                    weight:10},
+      {task:'Guards',              cards:['Guard'],                                                      weight:7},
+      {task:'Hellhounds',          cards:['Hellhound'],                                                  weight:8},
+      {task:'Hill giants',         cards:['Hill Giant'],                                                 weight:7},
+      {task:'Hobgoblins',          cards:['Hobgoblin'],                                                  weight:7},
+      {task:'Ice giants',          cards:['Ice Giant'],                                                  weight:7},
+      {task:'Ice warriors',        cards:['Ice Warrior'],                                                weight:7},
+      {task:'Infernal Mages',      cards:['Infernal Mage'],                                             weight:8},
+      {task:'Jellies',             cards:['Jelly'],                                                      weight:8},
+      {task:'Kalphite',            cards:['Kalphite Worker','Kalphite Soldier','Kalphite Guardian','Kalphite Queen'], weight:7},
+      {task:'Killerwatts',         cards:['Killerwatt'],                                                 weight:7},
+      {task:'Kurask',              cards:['Kurask'],                                                     weight:8},
+      {task:'Lizards',             cards:['Lizard','Desert lizard'],                                     weight:8},
+      {task:'Mogres',              cards:['Mogre'],                                                      weight:8},
+      {task:'Molanisks',           cards:['Molanisk'],                                                   weight:8},
+      {task:'Nechryael',           cards:['Nechryael'],                                                  weight:8},
+      {task:'Otherworldly beings', cards:['Otherworldly being'],                                         weight:8},
+      {task:'Pyrefiends',          cards:['Pyrefiend'],                                                  weight:8},
+      {task:'Rockslugs',           cards:['Rockslug'],                                                   weight:8},
+      {task:'Scorpions',           cards:['Scorpion'],                                                   weight:7},
+      {task:'Shades',              cards:['Shade'],                                                      weight:7},
+      {task:'Skeletal wyverns',    cards:['Skeletal Wyvern'],                                            weight:5},
+      {task:'Skeletons',           cards:['Skeleton'],                                                   weight:7},
+      {task:'Spiders',             cards:['Spider'],                                                     weight:7},
+      {task:'Trolls',              cards:['Troll'],                                                      weight:7},
+      {task:'Turoth',              cards:['Turoth'],                                                     weight:8},
+      {task:'Vampyres',            cards:['Vampyre'],                                                    weight:7},
+      {task:'Wall beasts',         cards:['Wall beast'],                                                 weight:7},
+      {task:'Wolves',              cards:['Wolf'],                                                       weight:7},
+      {task:'Zombies',             cards:['Zombie'],                                                     weight:7},
+    ]
+  },
+  'Chaeldar': {
+    slayerReq:75, combatReq:0,
+    tasks:[
+      {task:'Aberrant spectres',   cards:['Aberrant spectre'],                                           weight:8},
+      {task:'Abyssal demons',      cards:['Abyssal demon'],                                              weight:12},
+      {task:'Aviansie',            cards:['Aviansie'],                                                   weight:9},
+      {task:'Banshees',            cards:['Banshee'],                                                    weight:8},
+      {task:'Black demons',        cards:['Black Demon'],                                                weight:10},
+      {task:'Black dragons',       cards:['Black dragon','Baby black dragon'],                           weight:8},
+      {task:'Bloodveld',           cards:['Bloodveld'],                                                  weight:10},
+      {task:'Blue dragons',        cards:['Baby blue dragon','Blue dragon'],                             weight:8},
+      {task:'Cave horrors',        cards:['Cave Horror'],                                                weight:10},
+      {task:'Cave kraken',         cards:['Cave Kraken'],                                               weight:12},
+      {task:'Dagannoth',           cards:['Dagannoth','Dagannoth Prime','Dagannoth Rex','Dagannoth Supreme'], weight:11},
+      {task:'Dark beasts',         cards:['Dark Beast'],                                                 weight:10},
+      {task:'Dust devils',         cards:['Dust devil'],                                                 weight:12},
+      {task:'Elves',               cards:['Elf'],                                                        weight:10},
+      {task:'Fire giants',         cards:['Fire Giant'],                                                 weight:12},
+      {task:'Gargoyles',           cards:['Gargoyle'],                                                   weight:11},
+      {task:'Grotesque Guardians', cards:['Dusk','Dawn'],                                                weight:5},
+      {task:'Hellhounds',          cards:['Hellhound'],                                                  weight:12},
+      {task:'Hydra',               cards:['Hydra'],                                                      weight:15},
+      {task:'Jellies',             cards:['Jelly'],                                                      weight:12},
+      {task:'Kurask',              cards:['Kurask'],                                                     weight:12},
+      {task:'Lizardmen',           cards:['Lizardman','Lizardman Brute','Lizardman Shaman'],             weight:10},
+      {task:'Nechryael',           cards:['Nechryael'],                                                  weight:12},
+      {task:'Smoke devils',        cards:['Smoke devil'],                                                weight:12},
+      {task:'Spiritual creatures', cards:['Spiritual warrior','Spiritual ranger','Spiritual mage'],      weight:12},
+      {task:'Turoth',              cards:['Turoth'],                                                     weight:12},
+      {task:'Waterfiends',         cards:['Waterfiend'],                                                 weight:9},
+    ]
+  },
+  'Konar': {
+    slayerReq:1, combatReq:75,
+    tasks:[
+      {task:'Abyssal demons',      cards:['Abyssal demon'],                                              weight:9},
+      {task:'Adamant dragons',     cards:['Adamant dragon'],                                             weight:5},
+      {task:'Ankou',               cards:['Ankou'],                                                      weight:5},
+      {task:'Basilisks',           cards:['Basilisk'],                                                   weight:7},
+      {task:'Black demons',        cards:['Black Demon'],                                                weight:9},
+      {task:'Black dragons',       cards:['Black dragon','Baby black dragon'],                           weight:9},
+      {task:'Blue dragons',        cards:['Baby blue dragon','Blue dragon'],                             weight:9},
+      {task:'Cave horrors',        cards:['Cave Horror'],                                                weight:5},
+      {task:'Cave kraken',         cards:['Cave Kraken'],                                               weight:9},
+      {task:'Dagannoth',           cards:['Dagannoth','Dagannoth Prime','Dagannoth Rex','Dagannoth Supreme'], weight:9},
+      {task:'Dark beasts',         cards:['Dark Beast'],                                                 weight:9},
+      {task:'Drake',               cards:['Drake'],                                                      weight:10},
+      {task:'Dust devils',         cards:['Dust devil'],                                                 weight:9},
+      {task:'Elves',               cards:['Elf'],                                                        weight:5},
+      {task:'Fire giants',         cards:['Fire Giant'],                                                 weight:9},
+      {task:'Fossil Island wyverns',cards:['Ancient Wyvern','Long-tailed Wyvern','Spitting Wyvern','Taloned Wyvern'], weight:5},
+      {task:'Gargoyles',           cards:['Gargoyle'],                                                   weight:7},
+      {task:'Greater demons',      cards:['Greater Demon'],                                              weight:9},
+      {task:'Hellhounds',          cards:['Hellhound'],                                                  weight:9},
+      {task:'Hydras',              cards:['Hydra'],                                                      weight:10},
+      {task:'Iron dragons',        cards:['Iron dragon'],                                                weight:9},
+      {task:'Jellies',             cards:['Jelly'],                                                      weight:5},
+      {task:'Kurask',              cards:['Kurask'],                                                     weight:5},
+      {task:'Lizardmen',           cards:['Lizardman','Lizardman Brute','Lizardman Shaman'],             weight:10},
+      {task:'Metal dragons',       cards:['Iron dragon','Steel dragon','Mithril dragon','Adamant dragon','Rune dragon'], weight:15},
+      {task:'Nechryael',           cards:['Nechryael'],                                                  weight:9},
+      {task:'Rune dragons',        cards:['Rune dragon'],                                                weight:5},
+      {task:'Skeletal wyverns',    cards:['Skeletal Wyvern'],                                            weight:5},
+      {task:'Smoke devils',        cards:['Smoke devil'],                                                weight:9},
+      {task:'Steel dragons',       cards:['Steel dragon'],                                               weight:9},
+      {task:'Sulphur lizards',     cards:['Sulphur lizard'],                                             weight:5},
+      {task:'Wyrms',               cards:['Wyrm'],                                                       weight:10},
+    ]
+  },
+  'Nieve': {
+    slayerReq:85, combatReq:0,
+    tasks:[
+      {task:'Abyssal demons',      cards:['Abyssal demon'],                                              weight:9},
+      {task:'Ankou',               cards:['Ankou'],                                                      weight:5},
+      {task:'Aviansie',            cards:['Aviansie'],                                                   weight:8},
+      {task:'Black demons',        cards:['Black Demon'],                                                weight:9},
+      {task:'Bloodveld',           cards:['Bloodveld'],                                                  weight:9},
+      {task:'Blue dragons',        cards:['Baby blue dragon','Blue dragon'],                             weight:4},
+      {task:'Cave horrors',        cards:['Cave Horror'],                                                weight:5},
+      {task:'Cave kraken',         cards:['Cave Kraken'],                                               weight:9},
+      {task:'Dagannoth',           cards:['Dagannoth','Dagannoth Prime','Dagannoth Rex','Dagannoth Supreme'], weight:9},
+      {task:'Dark beasts',         cards:['Dark Beast'],                                                 weight:9},
+      {task:'Dust devils',         cards:['Dust devil'],                                                 weight:9},
+      {task:'Elves',               cards:['Elf'],                                                        weight:9},
+      {task:'Fire giants',         cards:['Fire Giant'],                                                 weight:9},
+      {task:'Fossil Island wyverns',cards:['Ancient Wyvern','Long-tailed Wyvern','Spitting Wyvern','Taloned Wyvern'], weight:5},
+      {task:'Gargoyles',           cards:['Gargoyle'],                                                   weight:8},
+      {task:'Greater demons',      cards:['Greater Demon'],                                              weight:9},
+      {task:'Hellhounds',          cards:['Hellhound'],                                                  weight:8},
+      {task:'Iron dragons',        cards:['Iron dragon'],                                                weight:5},
+      {task:'Kalphite',            cards:['Kalphite Worker','Kalphite Soldier','Kalphite Guardian','Kalphite Queen'], weight:9},
+      {task:'Kurask',              cards:['Kurask'],                                                     weight:4},
+      {task:'Lizardmen',           cards:['Lizardman','Lizardman Brute','Lizardman Shaman'],             weight:9},
+      {task:'Metal dragons',       cards:['Iron dragon','Steel dragon','Mithril dragon','Adamant dragon'], weight:12},
+      {task:'Nechryael',           cards:['Nechryael'],                                                  weight:9},
+      {task:'Skeletal wyverns',    cards:['Skeletal Wyvern'],                                            weight:5},
+      {task:'Smoke devils',        cards:['Smoke devil'],                                                weight:9},
+      {task:'Spiritual creatures', cards:['Spiritual warrior','Spiritual ranger','Spiritual mage'],      weight:9},
+      {task:'Steel dragons',       cards:['Steel dragon'],                                               weight:5},
+      {task:'TzHaar',              cards:['TzHaar-Ket','TzHaar-Xil','TzHaar-Mej'],                     weight:10},
+      {task:'Waterfiends',         cards:['Waterfiend'],                                                 weight:5},
+    ]
+  },
+  'Duradel': {
+    slayerReq:50, combatReq:100,
+    tasks:[
+      {task:'Abyssal demons',      cards:['Abyssal demon'],                                              weight:12},
+      {task:'Adamant dragons',     cards:['Adamant dragon'],                                             weight:6},
+      {task:'Ankou',               cards:['Ankou'],                                                      weight:5},
+      {task:'Araxytes',            cards:['Araxxor','Araxyte'],                                          weight:10},
+      {task:'Aviansie',            cards:['Aviansie'],                                                   weight:8},
+      {task:'Black demons',        cards:['Black Demon'],                                                weight:12},
+      {task:'Black dragons',       cards:['Black dragon','Baby black dragon'],                           weight:9},
+      {task:'Bloodveld',           cards:['Bloodveld'],                                                  weight:10},
+      {task:'Blue dragons',        cards:['Baby blue dragon','Blue dragon'],                             weight:4},
+      {task:'Cave horrors',        cards:['Cave Horror'],                                                weight:5},
+      {task:'Cave kraken',         cards:['Cave Kraken'],                                               weight:10},
+      {task:'Dagannoth',           cards:['Dagannoth','Dagannoth Prime','Dagannoth Rex','Dagannoth Supreme'], weight:12},
+      {task:'Dark beasts',         cards:['Dark Beast'],                                                 weight:11},
+      {task:'Dust devils',         cards:['Dust devil'],                                                 weight:8},
+      {task:'Elves',               cards:['Elf'],                                                        weight:8},
+      {task:'Fire giants',         cards:['Fire Giant'],                                                 weight:8},
+      {task:'Fossil Island wyverns',cards:['Ancient Wyvern','Long-tailed Wyvern','Spitting Wyvern','Taloned Wyvern'], weight:5},
+      {task:'Gargoyles',           cards:['Gargoyle'],                                                   weight:10},
+      {task:'Greater demons',      cards:['Greater Demon'],                                              weight:9},
+      {task:'Hellhounds',          cards:['Hellhound'],                                                  weight:10},
+      {task:'Hydras',              cards:['Hydra'],                                                      weight:10},
+      {task:'Iron dragons',        cards:['Iron dragon'],                                                weight:5},
+      {task:'Kalphite',            cards:['Kalphite Worker','Kalphite Soldier','Kalphite Guardian','Kalphite Queen'], weight:8},
+      {task:'Kurask',              cards:['Kurask'],                                                     weight:4},
+      {task:'Lizardmen',           cards:['Lizardman','Lizardman Brute','Lizardman Shaman'],             weight:10},
+      {task:'Metal dragons',       cards:['Iron dragon','Steel dragon','Mithril dragon','Adamant dragon','Rune dragon'], weight:14},
+      {task:'Mutated zygomites',   cards:['Mutated zygomite'],                                          weight:2},
+      {task:'Nechryael',           cards:['Nechryael'],                                                  weight:12},
+      {task:'Rune dragons',        cards:['Rune dragon'],                                                weight:6},
+      {task:'Skeletal wyverns',    cards:['Skeletal Wyvern'],                                            weight:5},
+      {task:'Smoke devils',        cards:['Smoke devil'],                                                weight:10},
+      {task:'Spiritual creatures', cards:['Spiritual warrior','Spiritual ranger','Spiritual mage'],      weight:8},
+      {task:'Steel dragons',       cards:['Steel dragon'],                                               weight:5},
+      {task:'TzHaar',              cards:['TzHaar-Ket','TzHaar-Xil','TzHaar-Mej'],                     weight:10},
+      {task:'Waterfiends',         cards:['Waterfiend'],                                                 weight:5},
+    ]
+  },
+};
+
+// Standard spellbook combat + utility spells with rune requirements
+const MAGIC_SPELLS = [
+  {name:'Wind Strike',        level:1,  runes:{'Air rune':2,'Mind rune':1}},
+  {name:'Water Strike',       level:5,  runes:{'Air rune':1,'Water rune':1,'Mind rune':1}},
+  {name:'Earth Strike',       level:9,  runes:{'Air rune':2,'Earth rune':1,'Mind rune':1}},
+  {name:'Fire Strike',        level:13, runes:{'Air rune':3,'Fire rune':1,'Mind rune':1}},
+  {name:'Wind Bolt',          level:17, runes:{'Air rune':2,'Chaos rune':1}},
+  {name:'Water Bolt',         level:23, runes:{'Air rune':2,'Water rune':2,'Chaos rune':1}},
+  {name:'Earth Bolt',         level:29, runes:{'Air rune':3,'Earth rune':3,'Chaos rune':1}},
+  {name:'Fire Bolt',          level:35, runes:{'Air rune':4,'Fire rune':4,'Chaos rune':1}},
+  {name:'Wind Blast',         level:41, runes:{'Air rune':3,'Death rune':1}},
+  {name:'Water Blast',        level:47, runes:{'Air rune':3,'Water rune':3,'Death rune':1}},
+  {name:'Earth Blast',        level:53, runes:{'Air rune':4,'Earth rune':4,'Death rune':1}},
+  {name:'Fire Blast',         level:59, runes:{'Air rune':5,'Fire rune':5,'Death rune':1}},
+  {name:'Wind Wave',          level:62, runes:{'Air rune':5,'Blood rune':1}},
+  {name:'Water Wave',         level:65, runes:{'Air rune':5,'Water rune':7,'Blood rune':1}},
+  {name:'Earth Wave',         level:70, runes:{'Air rune':7,'Earth rune':7,'Blood rune':1}},
+  {name:'Fire Wave',          level:75, runes:{'Air rune':7,'Fire rune':7,'Blood rune':1}},
+  {name:'Low Level Alchemy',  level:21, runes:{'Fire rune':3,'Nature rune':1}},
+  {name:'High Level Alchemy', level:55, runes:{'Fire rune':5,'Nature rune':1}},
+  {name:'Superheat Item',     level:43, runes:{'Fire rune':4,'Nature rune':1}},
+];
+// Bow → max arrows it can fire; crossbow → max bolts; all can use lower tiers too
+const ARROWS = ['Bronze arrow','Iron arrow','Steel arrow','Mithril arrow','Adamant arrow','Rune arrow'];
+const BOLTS  = ['Bronze bolts','Iron bolts','Steel bolts','Mithril bolts','Adamant bolts','Rune bolts'];
+const BOW_COMPAT = {
+  'Training bow':   {ammo:['Training arrows'], level:1},
+  // Standard bows: can fire any arrow tier (all arrows are compatible with all bows)
+  'Shortbow':       {ammo:ARROWS, level:1},
+  'Longbow':        {ammo:ARROWS, level:1},
+  'Oak shortbow':   {ammo:ARROWS, level:5},
+  'Oak longbow':    {ammo:ARROWS, level:5},
+  'Willow shortbow':{ammo:ARROWS, level:20},
+  'Willow longbow': {ammo:ARROWS, level:20},
+  'Maple shortbow': {ammo:ARROWS, level:30},
+  'Maple longbow':  {ammo:ARROWS, level:30},
+  'Yew shortbow':   {ammo:ARROWS, level:40},
+  'Yew longbow':    {ammo:ARROWS, level:40},
+  'Magic shortbow': {ammo:ARROWS, level:50},
+  'Magic longbow':  {ammo:ARROWS, level:50},
+  // Crossbows: can only fire bolts up to their tier
+  'Crossbow':         {ammo:BOLTS.slice(0,1), level:1},
+  'Iron crossbow':    {ammo:BOLTS.slice(0,2), level:10},
+  'Steel crossbow':   {ammo:BOLTS.slice(0,3), level:20},
+  'Mithril crossbow': {ammo:BOLTS.slice(0,4), level:30},
+  'Adamant crossbow': {ammo:BOLTS.slice(0,5), level:40},
+};
+const STANDALONE_THROWN = [
+  {name:'Bronze dart',  level:1},  {name:'Iron dart',    level:1},
+  {name:'Steel dart',   level:5},  {name:'Mithril dart', level:20},
+  {name:'Adamant dart', level:30}, {name:'Rune dart',    level:40},
+  {name:'Chinchompa',   level:30}, {name:'Red chinchompa',level:55},
+];
+// Pickpocketable NPCs with their Thieving level and XP.
+// Card column: exact name in monsterDrops (null = no TCG card → no Bronzeman restriction).
+const PICKPOCKET_NPCS = [
+  {name:'Man',                       card:'Man',                 level:1,  xp:8.0},
+  {name:'Woman',                     card:'Woman',               level:1,  xp:8.0},
+  {name:"'The Guns'",                card:null,                  level:1,  xp:8.0},   // Tower of Life, no card
+  {name:'Farmer',                    card:'Farmer',              level:10, xp:14.5},
+  {name:'H.A.M. Member',             card:null,                  level:15, xp:18.5},
+  {name:'Warrior Woman',             card:null,                  level:15, xp:18.5},
+  {name:'Warrior',                   card:null,                  level:25, xp:26.0},
+  {name:'Digsite Workman',           card:null,                  level:25, xp:25.0},
+  {name:'Villager',                  card:null,                  level:30, xp:29.3},  // Sophanem/Pollnivneach
+  {name:'Rogue',                     card:'Rogue',               level:32, xp:35.5},
+  {name:'Cave Goblin',               card:null,                  level:36, xp:40.0},
+  {name:'Master Farmer',             card:null,                  level:38, xp:43.0},
+  {name:'Guard',                     card:'Guard',               level:40, xp:46.8},
+  {name:'Fremennik Citizen',         card:null,                  level:45, xp:65.0},
+  {name:'Bearded Pollnivnian Bandit',card:null,                  level:45, xp:65.0},
+  {name:'Wealthy Citizen',           card:null,                  level:50, xp:96.0},
+  {name:'Desert Bandit',             card:null,                  level:53, xp:79.4},
+  {name:'Knight of Ardougne',        card:'Knight of Ardougne',  level:55, xp:84.3},
+  {name:'Pollnivnian Bandit',        card:null,                  level:55, xp:84.3},
+  {name:'Pirate',                    card:'Pirate',              level:60, xp:72.0},
+  {name:'Yanille Watchman',          card:null,                  level:65, xp:137.5},
+  {name:'Menaphite Thug',            card:'Menaphite Thug',      level:65, xp:137.5},
+  {name:'Paladin',                   card:'Paladin',             level:70, xp:151.7},
+  {name:'Gnome',                     card:'Gnome',               level:75, xp:198.3},
+  {name:'Hero',                      card:'Hero',                level:80, xp:273.3},
+  {name:'Vyre',                      card:null,                  level:82, xp:306.9},
+  {name:'Elf',                       card:null,                  level:85, xp:353.3},
+  {name:'TzHaar-Hur',                card:'TzHaar-Hur',          level:90, xp:103.4},
+];
+// Thieving stalls — no card required (stolen items go directly to inventory, not picked up)
+// XP values from https://oldschool.runescape.wiki/w/Thieving/Experience_table
+const THIEVING_STALLS = [
+  {name:"Vegetable stall",  level:2,  xp:10},
+  {name:"Baker's stall",    level:5,  xp:16},
+  {name:"Tea stall",        level:5,  xp:16},
+  {name:"Crafting stall",   level:5,  xp:20},
+  {name:"General stall",    level:5,  xp:25},
+  {name:"Silk stall",       level:20, xp:24},
+  {name:"Wine stall",       level:22, xp:27},
+  {name:"Fruit stall",      level:25, xp:28.5},
+  {name:"Seed stall",       level:27, xp:10},
+  {name:"Fur stall",        level:35, xp:45},
+  {name:"Fish stall",       level:42, xp:42},
+  {name:"Crossbow stall",   level:49, xp:52},
+  {name:"Silver stall",     level:50, xp:205},
+  {name:"Scimitar stall",   level:65, xp:210},
+  {name:"Magic stall",      level:65, xp:90},
+  {name:"Spice stall",      level:65, xp:92},
+  {name:"Gem stall",        level:75, xp:408},
+];
+// Hunter creatures — level + tool only (gathering rule: no card needed to hunt)
+// tool: null → tool check skipped (falconer's glove rented for coins, herbiboar needs no item)
+// Sources: https://oldschool.runescape.wiki/w/Hunter/Experience_table
+const HUNTER_CREATURES = [
+  // Bird snare (shopBought)
+  {name:'Crimson swift',          level:1,  tool:'Bird snare',               xp:34},
+  {name:'Copper longtail',        level:9,  tool:'Bird snare',               xp:61.2},
+  {name:'Cerulean twitch',        level:11, tool:'Bird snare',               xp:64.5},
+  {name:'Tropical wagtail',       level:19, tool:'Bird snare',               xp:95.2},
+  // Noose wand (shopBought)
+  {name:'Polar kebbit',           level:1,  tool:'Noose wand',               xp:30},
+  {name:'Common kebbit',          level:3,  tool:'Noose wand',               xp:36},
+  {name:'Desert devil',           level:13, tool:'Noose wand',               xp:66},
+  {name:'Razor-backed kebbit',    level:49, tool:'Noose wand',               xp:348.5},
+  // Butterfly net + jar (both shopBought)
+  {name:'Ruby harvest',           level:15, tool:'Butterfly net',            xp:24},
+  {name:'Baby impling',           level:17, tool:'Butterfly net',            xp:18},
+  {name:'Young impling',          level:22, tool:'Butterfly net',            xp:20},
+  {name:'Sapphire glacialis',     level:25, tool:'Butterfly net',            xp:34},
+  {name:'Snowy knight',           level:35, tool:'Butterfly net',            xp:44},
+  {name:'Earth impling',          level:36, tool:'Butterfly net',            xp:25},
+  {name:'Essence impling',        level:42, tool:'Butterfly net',            xp:27},
+  {name:'Black warlock',          level:45, tool:'Butterfly net',            xp:54},
+  {name:'Eclectic impling',       level:50, tool:'Butterfly net',            xp:30},
+  {name:'Nature impling',         level:58, tool:'Butterfly net',            xp:34},
+  {name:'Sunlight moth',          level:65, tool:'Butterfly net',            xp:74},
+  {name:'Magpie impling',         level:65, tool:'Butterfly net',            xp:44},
+  {name:'Ninja impling',          level:74, tool:'Butterfly net',            xp:50},
+  {name:'Moonlight moth',         level:75, tool:'Butterfly net',            xp:84},
+  {name:'Dragon impling',         level:83, tool:'Butterfly net',            xp:65},
+  {name:'Lucky impling',          level:89, tool:'Butterfly net',            xp:80},
+  // Box trap (shopBought)
+  {name:'Ferret',                 level:27, tool:'Box trap',                 xp:115.2},
+  {name:'Embertailed jerboa',     level:39, tool:'Box trap',                 xp:137},
+  {name:'Chinchompa',             level:53, tool:'Box trap',                 xp:198.4},
+  {name:'Maniacal monkey',        level:60, tool:'Box trap',                 xp:1000},
+  {name:'Carnivorous chinchompa', level:63, tool:'Box trap',                 xp:265},
+  {name:'Black chinchompa',       level:73, tool:'Box trap',                 xp:315},
+  {name:'Grenwall',               level:77, tool:'Box trap',                 xp:100},
+  // Rabbit snare (shopBought)
+  {name:'White rabbit',           level:27, tool:'Rabbit snare',             xp:144},
+  // Net trap + rope (both shopBought)
+  {name:'Swamp lizard',           level:29, tool:'Small fishing net + Rope', xp:152},
+  {name:'Orange salamander',      level:47, tool:'Small fishing net + Rope', xp:224},
+  {name:'Red salamander',         level:59, tool:'Small fishing net + Rope', xp:272},
+  {name:'Black salamander',       level:67, tool:'Small fishing net + Rope', xp:319.2},
+  // Deadfall — logs are gatherable, no card needed
+  {name:'Wild kebbit',            level:23, tool:'Logs',                     xp:128},
+  {name:'Barb-tailed kebbit',     level:33, tool:'Logs',                     xp:168},
+  {name:'Prickly kebbit',         level:37, tool:'Logs',                     xp:204},
+  {name:'Sabre-toothed kebbit',   level:51, tool:'Logs',                     xp:200},
+  // Spiked pit — teasing stick (shopBought) + logs
+  {name:'Spined larupia',         level:31, tool:'Teasing stick + Logs',     xp:180},
+  {name:'Horned graahk',          level:41, tool:'Teasing stick + Logs',     xp:240},
+  {name:'Sabre-toothed kyatt',    level:55, tool:'Teasing stick + Logs',     xp:300},
+  {name:'Sunlight antelope',      level:72, tool:'Teasing stick + Logs',     xp:380},
+  {name:'Moonlight antelope',     level:91, tool:'Teasing stick + Logs',     xp:450},
+  // Falconry — glove rented for coins, no item to own → tool:null skips card check
+  {name:'Spotted kebbit',         level:43, tool:null,                       xp:104},
+  {name:'Dark kebbit',            level:57, tool:null,                       xp:132},
+  {name:'Dashing kebbit',         level:69, tool:null,                       xp:156},
+  // Herbiboar — requires 31 Herblore + 36 Firemaking; no trap item needed
+  {name:'Herbiboar',              level:80, tool:null,                       xp:1950},
+];
+// Firemaking level per log type
+const FIREMAKING_LEVELS = {
+  'Logs':1,'Oak logs':15,'Willow logs':30,'Teak logs':35,'Arctic pine logs':42,
+  'Maple logs':45,'Mahogany logs':50,'Yew logs':60,'Blisterwood logs':62,
+  'Magic logs':75,'Redwood logs':90,
+};
+// Prayer bones/ashes and their xp (burial only)
+// If a bone isn't in itemSources the guard in getTrainingMethods skips it automatically
+const PRAYER_BONES = [
+  {name:'Bones',xp:4.5},{name:'Burnt bones',xp:4.5},{name:'Bat bones',xp:4.5},
+  {name:'Big bones',xp:15},{name:'Jogre bones',xp:15},
+  {name:'Zogre bones',xp:22.5},
+  {name:'Babydragon bones',xp:30},
+  {name:'Wyrm bones',xp:50},
+  {name:'Wyvern bones',xp:72},{name:'Dragon bones',xp:72},
+  {name:'Lava dragon bones',xp:85},
+  {name:'Drake bones',xp:80},
+  {name:'Fayrg bones',xp:84},{name:'Raurg bones',xp:96},
+  {name:'Dagannoth bones',xp:125},
+  {name:'Hydra bones',xp:110},
+  {name:'Manticore bones',xp:120},
+  {name:'Ourg bones',xp:140},{name:'Superior dragon bones',xp:150},
+  {name:'Fiendish ashes',xp:10},{name:'Ashes',xp:22.5},
+  {name:'Abyssal ashes',xp:85},{name:'Infernal ashes',xp:110},
+];
+
+function getTrainingMethods(skillName) {
+  /**
+   * Return an array of training method objects for a given skill.
+   * Each object: {name, level, status, cardOwned, note, type}
+   * status: 'available' | 'no-card' | 'locked-level' | 'locked-tool'
+   */
+  const myLevel = getLevel(skillName);
+  const results = [];
+
+  const GATHERING_SKILLS = new Set(['Mining','Woodcutting','Fishing','Farming']);
+  const PRODUCTION_SKILLS = new Set(['Fletching','Smithing','Crafting','Cooking','Herblore','Construction','Runecrafting']);
+  const MELEE_SKILLS = new Set(['Attack','Strength','Defence','Hitpoints']);
+
+  if (skillName === 'Hunter') {
+    // Hardcoded creature list — level + tool only (gathering rule, no card needed)
+    for (const c of HUNTER_CREATURES) {
+      const parts = resolveToolParts(c.tool);
+      const missingCardParts = parts.filter(p => itemSources[p.label] && !p.owned);
+      let status, note;
+      if (myLevel < c.level) {
+        status = 'locked-level';
+        note = missingCardParts.length ? 'need: ' + missingCardParts.map(p => p.label).join(', ') : '';
+      } else if (missingCardParts.length > 0) {
+        status = 'locked-tool';
+        note = 'need: ' + missingCardParts.map(p => p.label).join(', ');
+      } else {
+        status = 'available';
+        note = c.tool !== 'None' ? c.tool : '';
+      }
+      results.push({name:c.name, level:c.level, status, cardOwned:true, note, xp:c.xp, type:'hunter'});
+    }
+
+  } else if (GATHERING_SKILLS.has(skillName)) {
+    for (const [cardName, data] of Object.entries(itemSources)) {
+      if (!data) continue;
+      const g = data.gathering;
+      if (!g || g.skill !== skillName) continue;
+      const level = g.level;
+      const cardOwned = isOwned(cardName);
+
+      // Tool check — tool IS required to gather (Bronzeman: gated by level + tool)
+      let toolNote = '';
+      let toolLocked = false;
+      if (g.tool && TOOL_TIERS[g.tool]) {
+        const tiers = TOOL_TIERS[g.tool];
+        const hasTool = tiers.some(t => isOwned(t.name) && myLevel >= t.skillReq);
+        if (!hasTool) {
+          toolLocked = true;
+          const ownedAny = tiers.some(t => isOwned(t.name));
+          toolNote = ownedAny ? 'level too low for tool' : 'no tool';
+        } else {
+          const bestTool = [...tiers].reverse().find(t => isOwned(t.name) && myLevel >= t.skillReq);
+          if (bestTool) toolNote = bestTool.name;
+        }
+      } else if (g.tool && g.tool !== 'None') {
+        const parts = resolveToolParts(g.tool);
+        // Only card tools (in itemSources) create Bronzeman restrictions
+        const missingCardParts = parts.filter(p => itemSources[p.label] && !p.owned);
+        if (missingCardParts.length > 0) {
+          toolLocked = true;
+          toolNote = missingCardParts.map(p => p.label).join(', ') + ' needed';
+        } else {
+          toolNote = parts.filter(p => itemSources[p.label]).map(p => p.label).slice(0,2).join(' + ');
+        }
+      }
+
+      let status;
+      if (myLevel < level) status = 'locked-level';
+      else if (toolLocked) status = 'locked-tool';
+      else if (!cardOwned) status = 'no-card';  // can gather but resource can only be dropped/banked
+      else status = 'available';
+
+      results.push({name:cardName, level, status, cardOwned, note:toolNote, xp:g.xp, method:g.method, type:'gathering'});
+    }
+
+  } else if (skillName === 'Firemaking') {
+    // Burning logs requires: log card + tinderbox card + Firemaking level
+    const hasTinderbox = isOwned('Tinderbox');
+    for (const [logName, fireLevel] of Object.entries(FIREMAKING_LEVELS)) {
+      if (!itemSources[logName]) continue;
+      const cardOwned = isOwned(logName);
+      let status, note;
+      if (!hasTinderbox) {
+        status = 'locked-tool';
+        note = 'no Tinderbox';
+      } else if (myLevel < fireLevel) {
+        status = 'locked-level';
+        note = '';
+      } else if (!cardOwned) {
+        status = 'no-card';
+        note = '';
+      } else {
+        status = 'available';
+        note = '';
+      }
+      results.push({name:logName, level:fireLevel, status, cardOwned, note, type:'firemaking'});
+    }
+
+  } else if (skillName === 'Thieving') {
+    // ── Stalls: hardcoded list (stolen items go to inventory, no card gate) ──
+    for (const stall of THIEVING_STALLS) {
+      const status = myLevel < stall.level ? 'locked-level' : 'available';
+      results.push({name:stall.name, level:stall.level, status, cardOwned:true,
+        note: `${stall.xp} xp`, xp:stall.xp, isPickpocket:false, npcCardRequired:false, type:'thieving'});
+    }
+    // ── Pickpockets: hardcoded NPC list (wiki scraper doesn't capture all NPCs) ─
+    for (const npc of PICKPOCKET_NPCS) {
+      const cardOwned = npc.card ? isOwned(npc.card) : true; // no card → no restriction
+      const npcCardRequired = !!npc.card;
+      let status;
+      if (myLevel < npc.level) {
+        status = 'locked-level';
+      } else if (npcCardRequired && !cardOwned) {
+        status = 'no-card';
+      } else {
+        status = 'available';
+      }
+      results.push({name:`Pickpocket ${npc.name}`, level:npc.level, status, cardOwned,
+        note:`${npc.xp} xp`, xp:npc.xp, isPickpocket:true, npcCardRequired, type:'thieving'});
+    }
+
+  } else if (skillName === 'Prayer') {
+    // Burying bones/ashes: need the card to use the item (Bronzeman rule)
+    // Also check if the item is actually gettable (e.g. own Ourg bones card but no Ourg monster card)
+    for (const bone of PRAYER_BONES) {
+      if (!itemSources[bone.name]) continue;
+      const cardOwned = isOwned(bone.name);
+      const gettable = canGetItem(bone.name);
+      let status;
+      if (!cardOwned)      status = 'no-card';
+      else if (!gettable)  status = 'no-source';
+      else                 status = 'available';
+      results.push({name:bone.name, level:1, status,
+        cardOwned, note:`${bone.xp} xp`, xp:bone.xp, type:'prayer'});
+    }
+
+  } else if (skillName === 'Magic') {
+    // Show actual castable spells based on rune card ownership + level
+    for (const spell of MAGIC_SPELLS) {
+      const missingRunes = Object.keys(spell.runes).filter(r => !isOwned(r));
+      const levelOk = myLevel >= spell.level;
+      let status, note;
+      if (!levelOk) {
+        status = 'locked-level';
+        note = missingRunes.length ? 'need: ' + missingRunes.slice(0,2).join(', ') : '';
+      } else if (missingRunes.length > 0) {
+        status = 'no-card'; note = 'need: ' + missingRunes.slice(0,3).join(', ');
+      } else {
+        status = 'available'; note = Object.keys(spell.runes).join(', ');
+      }
+      results.push({name:spell.name, level:spell.level, status,
+        cardOwned:missingRunes.length===0, note, type:'magic-spell'});
+    }
+
+  } else if (skillName === 'Ranged') {
+    // Bow + arrow / crossbow + bolt combos, and standalone thrown
+    for (const [bow, cfg] of Object.entries(BOW_COMPAT)) {
+      if (!itemSources[bow]) continue;
+      const bowOwned = isOwned(bow);
+      const levelOk = myLevel >= cfg.level;
+      const ownedAmmo = cfg.ammo.filter(a => isOwned(a));
+      if (bowOwned && ownedAmmo.length) {
+        for (const ammo of ownedAmmo) {
+          results.push({name:`${bow} + ${ammo}`, level:cfg.level,
+            status: levelOk ? 'available' : 'locked-level',
+            cardOwned:true, note:'', weapon:bow, ammo, type:'ranged-setup'});
+        }
+      } else if (bowOwned) {
+        results.push({name:bow, level:cfg.level, status:'no-card', cardOwned:false,
+          note:`no ammo`, weapon:bow, ammo:null, type:'ranged-setup'});
+      } else if (ownedAmmo.length) {
+        results.push({name:bow, level:cfg.level, status:'no-card', cardOwned:false,
+          note:`no bow`, weapon:bow, ammo:null, type:'ranged-setup'});
+      }
+      // If neither bow nor any ammo owned — skip
+    }
+    for (const t of STANDALONE_THROWN) {
+      if (!itemSources[t.name]) continue;
+      const owned = isOwned(t.name);
+      const levelOk = myLevel >= t.level;
+      results.push({name:t.name, level:t.level,
+        status: !owned ? 'no-card' : !levelOk ? 'locked-level' : 'available',
+        cardOwned:owned, note:'', weapon:t.name, ammo:null, type:'ranged-setup'});
+    }
+
+  } else if (MELEE_SKILLS.has(skillName)) {
+    // Melee combat: need monster card to fight
+    for (const mName of Object.keys(monsterDrops)) {
+      if (!isOwned(mName)) continue;
+      const cbLv = monsterDrops[mName].combatLevel;
+      results.push({name:mName, level:cbLv||0, status:'available',
+        cardOwned:true, note:'', combatLevel:cbLv, type:'combat'});
+    }
+    results.sort((a,b) => (a.level||0) - (b.level||0));
+    return results;
+
+  } else if (PRODUCTION_SKILLS.has(skillName)) {
+    for (const [cardName, data] of Object.entries(itemSources)) {
+      if (!data) continue;
+      const p = data.production;
+      if (!p || p.skill !== skillName) continue;
+      // Skip methods that grant 0 XP — not training methods
+      if (!p.xp || p.xp <= 0) continue;
+      // For Cooking: skip burnt items (failed cooks, not intentional training)
+      if (skillName === 'Cooking' && cardName.toLowerCase().startsWith('burnt')) continue;
+      // Skip Chambers of Xeric fish — raw form only obtainable inside the raid, not a normal training method
+      if (skillName === 'Cooking' && /^Raw .+ fish \(\d+\)$/.test(p.ingredients?.[0]?.item || '')) continue;
+      const level = p.level || 0;
+      const ings = p.ingredients || [];
+      // Tool card check — production tools that are TCG cards must be owned.
+      // Runecrafting: tiaras are altar-access items that can be bypassed via the Abyss.
+      // Detect them by name pattern (all end in "tiara") and treat as optional.
+      const isTiara = t => t.toLowerCase().endsWith('tiara');
+      const allTools = p.tools || [];
+      const hardTools = skillName === 'Runecrafting' ? allTools.filter(t => !isTiara(t)) : allTools;
+      const missingTools = hardTools.filter(t => itemSources[t] && !isOwned(t));
+      const missingTiara = skillName === 'Runecrafting' ? allTools.find(t => isTiara(t) && !isOwned(t)) : null;
+      // Ingredient assessment: unowned cards → no-card; owned but unobtainable → no-source
+      const blockedBy = [];    // owned-card or non-card ingredients that can't be obtained
+      const missingCards = []; // card ingredients not yet owned
+      for (const ing of ings) {
+        const isCard = !!itemSources[ing.item];
+        if (isCard && !isOwned(ing.item)) {
+          missingCards.push(ing.item);       // don't own the card → no-card
+        } else if (isCard && !canGetItem(ing.item)) {
+          blockedBy.push(ing.item);          // own card but can't obtain → no-source
+        } else if (!isCard && !canGetItem(ing.item)) {
+          blockedBy.push(ing.item);          // non-card ingredient unreachable → no-source
+        }
+      }
+      let status, note;
+      if (myLevel < level) {
+        status = 'locked-level'; note = '';
+      } else if (missingTools.length > 0) {
+        status = 'locked-tool'; note = 'need: ' + missingTools.slice(0,2).join(', ');
+      } else if (blockedBy.length > 0) {
+        status = 'no-source';
+        // Show all blocking items (both unobtainable and missing cards) up to 3 total
+        const allBlocked = [...blockedBy, ...missingCards].slice(0, 3);
+        note = 'no source: ' + allBlocked.join(', ');
+      } else if (missingCards.length > 0) {
+        status = 'no-card'; note = 'need: ' + missingCards.slice(0,3).join(', ');
+      } else {
+        status = 'available';
+        if (missingTiara) note = `use ${missingTiara} or Abyss`;
+        else {
+          const parts = [...ings.slice(0, 2).map(i => i.item), ...hardTools.slice(0, 1)];
+          note = parts.join(' + ');
+        }
+      }
+      // For Cooking with a single card ingredient, show that as the method name
+      // For simple 1-ingredient cooking (e.g. Raw pike → Pike), show the raw ingredient as the name.
+      // Don't apply to multi-ingredient recipes — they'd collapse to a shared ingredient (e.g. Equa leaves).
+      const cardIngs = ings.filter(i => !!itemSources[i.item]).map(i => i.item);
+      const singleIng = skillName === 'Cooking' && ings.length === 1 && cardIngs.length === 1 ? cardIngs[0] : null;
+      results.push({name:cardName, displayName:singleIng||cardName, displayNav:singleIng||cardName, level, status, cardOwned:isOwned(cardName), note, xp:p.xp, type:'production', quests:p.quests||null});
+    }
+
+  } else if (skillName === 'Agility') {
+    for (const c of AGILITY_COURSES) {
+      results.push({name:c.name, level:c.level,
+        status: myLevel >= c.level ? 'available' : 'locked-level',
+        cardOwned:true, note:`${c.xp} xp/lap`, type:'agility'});
+    }
+  } else if (skillName === 'Slayer') {
+    for (const [masterName, master] of Object.entries(SLAYER_TASKS)) {
+      const levelOk = myLevel >= (master.slayerReq || 1);
+      const availTasks = master.tasks.filter(t => t.cards.some(c => isOwned(c))).length;
+      const status = !levelOk ? 'locked-level' : availTasks > 0 ? 'available' : 'no-card';
+      results.push({name:masterName, level:master.slayerReq||0,
+        status, cardOwned:availTasks > 0, note:`${availTasks}/${master.tasks.length} tasks`, type:'slayer'});
+    }
+  }
+
+  // Sort: available first, then by level asc
+  results.sort((a,b) => {
+    const order = {available:0,'no-source':1,'no-card':2,'locked-tool':3,'locked-level':4};
+    if (order[a.status] !== order[b.status]) return order[a.status] - order[b.status];
+    return (a.level||0) - (b.level||0);
+  });
+  return results;
+}
+
+function countAvailableMethods(skillName) {
+  if (['Attack','Strength','Defence','Hitpoints'].includes(skillName))
+    return Object.keys(monsterDrops).filter(m => isOwned(m)).length;
+  if (skillName === 'Magic')
+    return MAGIC_SPELLS.filter(s => getLevel('Magic') >= s.level && Object.keys(s.runes).every(r => isOwned(r))).length;
+  if (skillName === 'Ranged')
+    return getTrainingMethods('Ranged').filter(m => m.status === 'available').length;
+  if (skillName === 'Prayer')
+    return PRAYER_BONES.filter(b => itemSources[b.name] && isOwned(b.name) && canGetItem(b.name)).length;
+  if (skillName === 'Agility') return AGILITY_COURSES.filter(c => getLevel('Agility') >= c.level).length;
+  if (skillName === 'Slayer')  return Object.values(SLAYER_TASKS).filter(m => getLevel('Slayer') >= (m.slayerReq||1) && m.tasks.some(t => t.cards.some(c => isOwned(c)))).length;
+  return getTrainingMethods(skillName).filter(m => m.status === 'available').length;
+}
+
+function renderSkillGrid() {
+  const grid = document.getElementById('skill-grid');
+  if (!grid) return;
+  let html = '';
+  for (const skill of SKILL_ORDER) {
+    const lvl   = getLevel(skill);
+    const count = countAvailableMethods(skill);
+    const sel   = skill === selectedSkill ? ' selected' : '';
+    const hasMeth = count > 0 ? ' has-methods' : '';
+    html += `<div class="skill-cell${sel}${hasMeth}" onclick="showSkillDetail('${skill}')">
+      <div class="skill-cell-name">${skillIcon(skill, 14)} ${skill}</div>
+      <div class="skill-cell-level">${lvl}</div>
+      <div class="skill-cell-count ${count===0?'zero':''}">${count} method${count!==1?'s':''}</div>
+    </div>`;
+  }
+  grid.innerHTML = html;
+}
+
+function showSkillDetail(skillName, push = true) {
+  if (push) pushHistoryEntry();
+  selectedSkill = skillName;
+  // Update grid selection
+  renderSkillGrid();
+  const pane = document.getElementById('skill-detail-pane');
+  if (!pane) return;
+
+  const myLevel = getLevel(skillName);
+  const methods = getTrainingMethods(skillName);
+  const avail = methods.filter(m => m.status === 'available').length;
+
+  const GATHERING_SKILLS = new Set(['Mining','Woodcutting','Fishing','Farming']);
+  const PRODUCTION_SKILLS = new Set(['Fletching','Smithing','Crafting','Cooking','Herblore','Construction','Runecrafting']);
+  const MELEE_SKILLS = new Set(['Attack','Strength','Defence','Hitpoints']);
+  const COMBAT_LIKE = new Set(['Attack','Strength','Defence','Hitpoints']);
+
+  let intro = '';
+  if (GATHERING_SKILLS.has(skillName)) {
+    intro = `<p style="color:#666;font-size:11px;margin-bottom:12px">Available = level met + tool owned + card owned. Without the card you can gather but the resource can only be dropped or banked — not useful training.</p>`;
+  } else if (skillName === 'Hunter') {
+    intro = `<p style="color:#666;font-size:11px;margin-bottom:12px">Hunting is gated by level and the catching tool only — no card needed for the creature. Caught items can only be used once you own the item card.</p>`;
+  } else if (skillName === 'Firemaking') {
+    const hasTinderbox = isOwned('Tinderbox');
+    intro = `<p style="color:#666;font-size:11px;margin-bottom:12px">Burning logs requires the log card (using an item = card required) and a Tinderbox card. Tinderbox: ${hasTinderbox?'<b style="color:#3a8a3a">owned</b>':'<b style="color:#aa4040">not owned</b>'}.</p>`;
+  } else if (skillName === 'Thieving') {
+    intro = `<p style="color:#666;font-size:11px;margin-bottom:12px">Stalls are free — level only. Pickpocketing NPCs requires their monster card.</p>`;
+  } else if (skillName === 'Prayer') {
+    intro = `<p style="color:#666;font-size:11px;margin-bottom:12px">Burying bones/ashes requires the card (using an item = card required).</p>`;
+  } else if (skillName === 'Magic') {
+    intro = `<p style="color:#666;font-size:11px;margin-bottom:12px">Shows spells you can cast based on rune cards owned. Use castable combat spells on any monster you own the card for.</p>`;
+  } else if (skillName === 'Ranged') {
+    intro = `<p style="color:#666;font-size:11px;margin-bottom:12px">Shows weapon + ammo combos you can use. Use any available setup on monsters you own the card for.</p>`;
+  } else if (MELEE_SKILLS.has(skillName)) {
+    intro = `<p style="color:#666;font-size:11px;margin-bottom:12px">You need the monster card to fight. Sorted by combat level.</p>`;
+  } else if (PRODUCTION_SKILLS.has(skillName)) {
+    let prodNote = 'Ingredient cards required. Orange = have the card but no way to obtain the item right now. Output card not required to produce.';
+    if (skillName === 'Construction') prodNote += ' <b>Note: POH furniture data not yet scraped — only ship construction items shown. Your house costs 1,000 coins from an Estate Agent (no card needed for the NPC, but coins required).</b>';
+    intro = `<p style="color:#666;font-size:11px;margin-bottom:12px">${prodNote}</p>`;
+  } else if (skillName === 'Agility') {
+    intro = `<p style="color:#666;font-size:11px;margin-bottom:12px">Agility courses need no card — level only.</p>`;
+  } else if (skillName === 'Slayer') {
+    intro = `<p style="color:#666;font-size:11px;margin-bottom:12px">Click a master to see their full task list and assignment probabilities. Green = you own at least one card for that task.</p>`;
+  }
+
+  let rows = '';
+  if (skillName === 'Slayer') {
+    // Custom master list — each master is clickable to drill into its task list
+    rows = `<div class="section"><div class="section-header">Slayer masters</div><div style="margin-top:8px">`;
+    for (const [masterName, master] of Object.entries(SLAYER_TASKS)) {
+      const levelOk = getLevel('Slayer') >= (master.slayerReq || 1);
+      const availTasks = master.tasks.filter(t => t.cards.some(c => isOwned(c))).length;
+      const totalTasks = master.tasks.length;
+      const reqStr = master.slayerReq > 1 ? `Sl ${master.slayerReq}` : master.combatReq > 3 ? `Cb ${master.combatReq}` : '';
+      const indCls = !levelOk ? 'locked' : availTasks > 0 ? 'available' : 'no-card';
+      const nameCls = indCls;
+      rows += `<div class="method-row" style="cursor:pointer" onclick="showSlayerMasterDetail('${masterName.replace(/'/g,"\\'")}')">
+        <div class="method-indicator ${indCls}"></div>
+        <span class="method-name ${nameCls}">${masterName}</span>
+        <span class="method-level">${reqStr}</span>
+        <span class="method-note">${availTasks}/${totalTasks} tasks →</span>
+      </div>`;
+    }
+    rows += `</div></div>`;
+  } else if (methods.length === 0) {
+    rows = `<div style="color:#444;font-size:12px;margin-top:12px">No training data available for ${skillName}.</div>`;
+  } else {
+    const isCombatLike = COMBAT_LIKE.has(skillName);
+    rows = `<div class="section">`;
+    if (isCombatLike) {
+      rows += `<div class="section-header">${avail} monster${avail!==1?'s':''} available</div>`;
+    } else {
+      rows += `<div class="section-header">${avail} available · ${methods.length - avail} locked</div>`;
+    }
+    rows += `<div style="margin-top:8px">`;
+    for (const m of methods) {
+      const indCls  = m.status === 'available' ? 'available' : m.status === 'no-card' ? 'no-card' : m.status === 'no-source' ? 'no-source' : 'locked';
+      const nameCls = m.status === 'available' ? 'available' : m.status === 'no-card' ? 'no-card' : m.status === 'no-source' ? 'no-source' : 'locked';
+
+      // Name HTML — clickable for items, monsters
+      let nameHtml;
+      const safeNav = (n, t) => `pushHistoryEntry();_renderTab('cards');setTimeout(()=>showCard('${n.replace(/\\/g,'\\\\').replace(/'/g,"\\'")}','${t}',false),50)`;
+      if (m.type === 'gathering' || m.type === 'production' || m.type === 'prayer' || m.type === 'firemaking') {
+        const navName = m.displayNav || m.name;
+        const dispName = m.displayName || m.name;
+        const navType = itemSources[navName] ? 'item' : 'ingredient';
+        nameHtml = `<span class="method-name ${nameCls}" style="cursor:pointer" onclick="${safeNav(navName,navType)}">${dispName}</span>`;
+      } else if (m.type === 'hunter' && itemSources[m.name]) {
+        nameHtml = `<span class="method-name ${nameCls}" style="cursor:pointer" onclick="${safeNav(m.name,'item')}">${m.name}</span>`;
+      } else if (m.type === 'combat') {
+        nameHtml = `<span class="method-name ${nameCls}" style="cursor:pointer" onclick="${safeNav(m.name,'monster')}">${m.name}</span>`;
+      } else if (m.type === 'ranged-setup') {
+        // Weapon is clickable; show combo name
+        const weaponLink = m.weapon && itemSources[m.weapon]
+          ? `<span style="cursor:pointer" onclick="${safeNav(m.weapon,'item')}">${m.weapon}</span>`
+          : m.weapon || '';
+        const ammoLink = m.ammo && itemSources[m.ammo]
+          ? ` + <span style="cursor:pointer" onclick="${safeNav(m.ammo,'item')}">${m.ammo}</span>`
+          : '';
+        nameHtml = `<span class="method-name ${nameCls}">${weaponLink}${ammoLink}</span>`;
+      } else if (m.type === 'magic-spell') {
+        nameHtml = `<span class="method-name ${nameCls}">${m.name}</span>`;
+      } else if (m.type === 'thieving' && m.npcName && m.npcCardRequired) {
+        nameHtml = `<span class="method-name ${nameCls}">${m.name}</span>`;
+      } else {
+        nameHtml = `<span class="method-name ${nameCls}">${m.name}</span>`;
+      }
+
+      // Level string — combat level for monsters, skill level for others
+      const isCombatType = ['combat','magic','ranged'].includes(m.type);
+      const levelStr = (m.combatLevel != null && isCombatType) ? `Cb ${m.combatLevel}` :
+                       (m.level > 0 ? `Lv ${m.level}` : '');
+      const noteStr  = m.note ? `<span class="method-note">${m.note}</span>` : '';
+      const questStr = m.quests && m.quests.length
+        ? `<span class="method-note" style="color:#a06800" title="Quest required">🗺 ${m.quests[0]}</span>`
+        : '';
+
+      rows += `<div class="method-row">
+        <div class="method-indicator ${indCls}"></div>
+        ${nameHtml}
+        <span class="method-level">${levelStr}</span>
+        ${noteStr}${questStr}
+      </div>`;
+    }
+    rows += `</div></div>`;
+  }
+
+  pane.innerHTML = `
+    <h1>${skillIcon(skillName, 18)} ${skillName}
+      <span style="font-size:13px;color:#888;font-weight:normal;margin-left:8px">Level ${myLevel}</span>
+    </h1>
+    <div class="subtitle">${avail} training method${avail!==1?'s':''} available</div>
+    ${intro}
+    ${rows}
+  `;
+}
+
+// ─── Slayer master detail ──────────────────────────────────────────────────
+
+function showSlayerMasterDetail(masterName) {
+  const master = SLAYER_TASKS[masterName];
+  if (!master) return;
+  const pane = document.getElementById('skill-detail-pane');
+  if (!pane) return;
+
+  const tasks = master.tasks;
+  const totalWeight = tasks.reduce((s, t) => s + t.weight, 0);
+
+  // Sort: owned tasks first, then by weight desc
+  const sorted = [...tasks].sort((a, b) => {
+    const aOwned = a.cards.some(c => isOwned(c));
+    const bOwned = b.cards.some(c => isOwned(c));
+    if (aOwned !== bOwned) return aOwned ? -1 : 1;
+    return b.weight - a.weight;
+  });
+
+  const availCount = tasks.filter(t => t.cards.some(c => isOwned(c))).length;
+
+  let rows = `<div class="section">
+    <div class="section-header">${availCount} of ${tasks.length} tasks — you have a card</div>
+    <div style="margin-top:8px">`;
+
+  for (const t of sorted) {
+    const ownedCards = t.cards.filter(c => isOwned(c));
+    const owned = ownedCards.length > 0;
+    const pct = ((t.weight / totalWeight) * 100).toFixed(1);
+    const indCls = owned ? 'available' : 'locked';
+    const nameCls = owned ? 'available' : 'locked';
+    const noteText = owned ? ownedCards.join(', ') : 'no card';
+    rows += `<div class="method-row">
+      <div class="method-indicator ${indCls}"></div>
+      <span class="method-name ${nameCls}">${t.task}</span>
+      <span class="method-level" style="min-width:46px;text-align:right">${pct}%</span>
+      <span class="method-note">${noteText}</span>
+    </div>`;
+  }
+  rows += `</div></div>`;
+
+  const reqStr = master.slayerReq > 1 ? `Slayer ${master.slayerReq}` : master.combatReq > 3 ? `Combat ${master.combatReq}` : 'No req';
+  pane.innerHTML = `
+    <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px">
+      <button onclick="showSkillDetail('Slayer')" style="background:#2a2a2a;border:1px solid #444;color:#aaa;padding:4px 10px;cursor:pointer;border-radius:3px;font-size:12px">← Slayer</button>
+      <h1 style="margin:0;font-size:16px">${masterName}</h1>
+    </div>
+    <div class="subtitle">${availCount}/${tasks.length} tasks available · ${reqStr}</div>
+    <p style="color:#666;font-size:11px;margin-bottom:12px">% = chance of being assigned. Green = you own the relevant monster card.</p>
+    ${rows}
+  `;
+}
+
+// ─── Questing tab ──────────────────────────────────────────────────────────
+
+function computeCompletableQuests() {
+  /**
+   * Iteratively propagate completability. A quest is completable if:
+   *   - All prerequisites are completable (or not in our dataset)
+   *   - All skill requirements are met (player level >= req)
+   *   - All required items are owned (player has the card)
+   *   - All kill requirements are owned (player has the monster card)
+   * Returns a Set of completable quest names.
+   */
+  const completable = new Set();
+  let changed = true;
+  while (changed) {
+    changed = false;
+    for (const [name, q] of Object.entries(questsData)) {
+      if (completable.has(name)) continue;
+      const prereqsOk = (q.prerequisites || []).every(p => completable.has(p) || !questsData[p]);
+      const skillsOk  = (q.skillRequirements || []).every(r => getLevel(r.skill) >= r.level);
+      const itemsOk   = (q.itemsRequired || []).every(i => isOwned(i));
+      const killsOk   = (q.killsRequired || []).every(k => isOwned(k));
+      if (prereqsOk && skillsOk && itemsOk && killsOk) {
+        completable.add(name); changed = true;
+      }
+    }
+  }
+  return completable;
+}
+
+function questStatus(questName, completable) {
+  const q = questsData[questName];
+  if (!q) return 'locked';
+  if (completable.has(questName)) return 'ok';
+  // "Close" = prereqs completable + skills ok, but missing ≤2 cards
+  const prereqsOk = (q.prerequisites || []).every(p => completable.has(p) || !questsData[p]);
+  const skillsOk  = (q.skillRequirements || []).every(r => getLevel(r.skill) >= r.level);
+  if (!prereqsOk || !skillsOk) return 'locked';
+  const missingItems = (q.itemsRequired || []).filter(i => !isOwned(i));
+  const missingKills = (q.killsRequired || []).filter(k => !isOwned(k));
+  if (missingItems.length + missingKills.length <= 2) return 'close';
+  return 'locked';
+}
+
+function renderQuestList() {
+  const scroll = document.getElementById('quest-list-scroll');
+  if (!scroll) return;
+  const q  = (document.getElementById('quest-search')?.value || '').toLowerCase();
+  const f  = document.getElementById('quest-filter')?.value || 'all';
+  const completable = computeCompletableQuests();
+
+  let quests = Object.entries(questsData);
+
+  // Filter
+  quests = quests.filter(([name, data]) => {
+    if (q && !name.toLowerCase().includes(q)) return false;
+    const st = questStatus(name, completable);
+    if (f === 'ok'      && st !== 'ok')    return false;
+    if (f === 'close'   && st !== 'close') return false;
+    if (f === 'free'    && data.members)   return false;
+    if (f === 'members' && !data.members)  return false;
+    return true;
+  });
+
+  // Sort: ok → close → locked, then alphabetical
+  const orderMap = {ok:0, close:1, locked:2};
+  quests.sort(([an, ad], [bn, bd]) => {
+    const as = questStatus(an, completable), bs = questStatus(bn, completable);
+    if (orderMap[as] !== orderMap[bs]) return orderMap[as] - orderMap[bs];
+    return an.localeCompare(bn);
+  });
+
+  let html = '';
+  for (const [name, data] of quests) {
+    const st = questStatus(name, completable);
+    const badge = st === 'ok' ? '✓' : (st === 'close' ? '~' : '✗');
+    const badgeCls = st;
+    const sel = name === selectedQuest ? ' selected' : '';
+    const qp = data.questPoints ? `<span class="quest-qp">${data.questPoints}qp</span>` : '';
+    const mem = data.members ? `<span class="quest-members-tag">M</span>` : '';
+    html += `<div class="quest-item${sel}" onclick="showQuestDetail('${name.replace(/'/g,"\\'")}')">
+      <span class="quest-badge ${badgeCls}">${badge}</span>
+      <span class="quest-name">${name}</span>
+      ${qp}${mem}
+    </div>`;
+  }
+  scroll.innerHTML = html || `<div style="padding:12px;color:#444;font-size:12px">No quests match this filter.</div>`;
+}
+
+function showQuestDetail(questName, push = true) {
+  if (push) pushHistoryEntry();
+  selectedQuest = questName;
+  // Update list selection
+  document.querySelectorAll('.quest-item').forEach(el => {
+    el.classList.toggle('selected', el.querySelector('.quest-name')?.textContent === questName);
+  });
+
+  const pane = document.getElementById('quest-detail-pane');
+  if (!pane) return;
+  const q = questsData[questName];
+  if (!q) { pane.innerHTML = `<div class="placeholder">Quest data not found.</div>`; return; }
+
+  const completable = computeCompletableQuests();
+  const st = questStatus(questName, completable);
+
+  const statusColor = st === 'ok' ? '#3a9a3a' : (st === 'close' ? '#c8a020' : '#9a3a3a');
+  const statusLabel = st === 'ok' ? 'Completable' : (st === 'close' ? 'Almost ready' : 'Locked');
+
+  // Subtitle
+  const typeStr = q.members ? 'Members quest' : 'Free quest';
+  const qpStr   = q.questPoints ? ` · ${q.questPoints} quest point${q.questPoints!==1?'s':''}` : '';
+
+  let html = `<h1>${questName} ${wikiLink(questName)}
+    <span style="font-size:12px;color:${statusColor};font-weight:normal;margin-left:8px">${statusLabel}</span>
+  </h1>
+  <div class="subtitle">${typeStr}${qpStr}</div>`;
+
+  if (q.questNpc) {
+    html += `<div class="section">
+      <div class="section-header">Start NPC</div>
+      <div style="margin-top:8px;font-size:13px;color:#aaa">${q.questNpc} <span style="color:#555;font-size:11px">(talk to — no card required)</span></div>
+    </div>`;
+  }
+
+  // Prerequisites
+  if (q.prerequisites?.length) {
+    html += `<div class="section"><div class="section-header">Prerequisites</div><div style="margin-top:8px">`;
+    for (const prereq of q.prerequisites) {
+      const ok = completable.has(prereq) || !questsData[prereq];
+      html += `<div class="req-row">
+        <span class="req-icon ${ok?'ok':'fail'}">${ok?'✓':'✗'}</span>
+        <span class="req-label" style="cursor:pointer;color:${ok?'#c8c8c8':'#9a5a5a'}"
+          onclick="showQuestDetail('${prereq.replace(/'/g,"\\'")}')">
+          ${prereq}</span>
+        <span class="req-note">${ok ? (questsData[prereq]?'completable':'unknown quest') : 'locked'}</span>
+      </div>`;
+    }
+    html += `</div></div>`;
+  }
+
+  // Skill requirements
+  if (q.skillRequirements?.length) {
+    html += `<div class="section"><div class="section-header">Skill Requirements</div><div style="margin-top:8px">`;
+    for (const r of q.skillRequirements) {
+      const myLvl = getLevel(r.skill);
+      const ok    = myLvl >= r.level;
+      html += `<div class="req-row">
+        <span class="req-icon ${ok?'ok':'fail'}">${ok?'✓':'✗'}</span>
+        <span class="req-label">${r.skill} ${r.level}${r.boostable?'':' <span style="font-size:10px;color:#666">(not boostable)</span>'}</span>
+        <span class="req-note">you: ${myLvl}</span>
+      </div>`;
+    }
+    html += `</div></div>`;
+  }
+
+  // Items required
+  if (q.itemsRequired?.length) {
+    html += `<div class="section"><div class="section-header">Items Required</div><div style="margin-top:8px">`;
+    for (const item of q.itemsRequired) {
+      const ok = isOwned(item);
+      const isCard = !!itemSources[item];
+      html += `<div class="req-row">
+        <span class="req-icon ${ok?'ok':'fail'}">${ok?'✓':'✗'}</span>
+        <span class="req-label" ${isCard?`style="cursor:pointer" onclick="pushHistoryEntry();_renderTab('cards');setTimeout(()=>showCard('${item.replace(/'/g,"\\'")}','item',false),50)"`:''}>${item}</span>
+        <span class="req-note">${ok ? 'owned' : (isCard ? 'need card' : 'no TCG card')}</span>
+      </div>`;
+    }
+    html += `</div></div>`;
+  }
+
+  // Enemies to defeat
+  if (q.killsRequired?.length) {
+    html += `<div class="section"><div class="section-header">Enemies to Defeat</div><div style="margin-top:8px">`;
+    for (const kill of q.killsRequired) {
+      const ok = isOwned(kill);
+      const isCard = !!monsterDrops[kill];
+      html += `<div class="req-row">
+        <span class="req-icon ${ok?'ok':'fail'}">${ok?'✓':'✗'}</span>
+        <span class="req-label" ${isCard?`style="cursor:pointer" onclick="pushHistoryEntry();_renderTab('cards');setTimeout(()=>showCard('${kill.replace(/'/g,"\\'")}','monster',false),50)"`:''}>${kill}</span>
+        <span class="req-note">${ok ? 'card owned' : (isCard ? 'need monster card' : 'no TCG card')}</span>
+      </div>`;
+    }
+    html += `</div></div>`;
+  }
+
+  // Reward items note
+  if (q.rewardItems?.length) {
+    html += `<div class="section"><div class="section-header">Reward Items</div>
+      <div style="margin-top:8px;font-size:12px;color:#888">
+        ${q.rewardItems.map(r => `<span style="margin-right:8px">${r}</span>`).join('')}
+      </div>
+      <div style="font-size:10px;color:#555;margin-top:6px">Quest rewards are given directly — no card required to receive. You can drop/bank items you haven't unlocked.</div>
+    </div>`;
+  }
+
+  if (!q.prerequisites?.length && !q.skillRequirements?.length && !q.itemsRequired?.length && !q.killsRequired?.length) {
+    html += `<div style="color:#555;font-size:12px;margin-top:12px">No tracked requirements. Check the wiki for full details.</div>`;
+  }
+
+  pane.innerHTML = html;
+}
+
+// ─── Rules tab ─────────────────────────────────────────────────────────────
+function renderRulesTab() {
+  return `<div id="rules-panel">
+    <h2>Bronzeman TCG — Rules Reference</h2>
+    <p>This tool helps you figure out what you can do based on your OSRS TCG card collection.
+    The Bronzeman TCG mod enforces the following restrictions:</p>
+
+    <h3>Core Rules</h3>
+    <table>
+      <tr><th>Action</th><th>Card Required?</th></tr>
+      <tr><td>Talk to an NPC / start a quest</td><td>No — always accessible</td></tr>
+      <tr><td>Fight or kill an NPC</td><td>Yes — need the monster card</td></tr>
+      <tr><td>Pickpocket an NPC</td><td>Yes — need the monster card</td></tr>
+      <tr><td>Gather a resource (mine, chop, fish, farm, hunt)</td><td>No — gated by level + tool only</td></tr>
+      <tr><td>Thieve from a stall</td><td>No — gated by level only; individual stolen items still require their card to use</td></tr>
+      <tr><td>Buy from a shop</td><td>Yes — spending coins or any currency counts as using it; need the currency card</td></tr>
+      <tr><td>Use, eat, equip, or operate an item</td><td>Yes — need the item card</td></tr>
+      <tr><td>Use an item as a crafting ingredient</td><td>Yes — need the item card</td></tr>
+      <tr><td>Produce an output item</td><td>No — you can produce even without the output card</td></tr>
+      <tr><td>Pick up loot or items from the ground</td><td>No — you can always pick things up and bank them</td></tr>
+      <tr><td>Receive an item as a quest reward</td><td>No — given directly, no card needed</td></tr>
+      <tr><td>Hand over or use an item during a quest</td><td>Yes — need the item card, even if you were handed it during the quest</td></tr>
+      <tr><td>Sell a card</td><td>You lose access — selling a card removes that unlock until you get it back</td></tr>
+    </table>
+
+    <h3>Gathering</h3>
+    <p>You can mine, chop, fish, farm, hunt, and thieve from stalls based on your skill level and the tools you have — regardless of whether you own the card for the resource. Items you gather without owning the card can be banked but not used, equipped, or consumed.</p>
+    <p><strong>Example:</strong> You own a Bronze axe but not the Logs card. You can still chop trees — but you can't light the logs, fletch them, or use them in any recipe.</p>
+
+    <h3>Production</h3>
+    <p>You need the card for every ingredient you actively use in a recipe. The output item doesn't need a card — you can produce it freely. But without the output card, you can only bank the result, not use it further.</p>
+    <p><strong>Example:</strong> You own the Iron ore card. You can smelt Iron bars even without the Iron bar card. But you can't then smith those bars into equipment — that requires the Iron bar card.</p>
+
+    <h3>Combat</h3>
+    <p>You need the monster card to attack any NPC. You can always talk to NPCs, walk through their areas, and start quests without a card.</p>
+
+    <h3>Shops</h3>
+    <p>Spending coins or any other currency counts as <em>using</em> it, so you need the currency's card before you can buy from shops. Coins is a TCG card — until you unlock it, you can earn and bank gold but not spend it. The same applies to special currencies like Tokkul or marks of grace.</p>
+
+    <h3>Quests</h3>
+    <p>Quest start NPCs can always be talked to. To complete a quest you need:</p>
+    <ul>
+      <li>All prerequisite quests completed</li>
+      <li>Skill levels meeting all requirements</li>
+      <li>Monster cards for any required kills</li>
+      <li>Cards for any items you must use or hand over during the quest — even if the game hands you that item mid-quest</li>
+    </ul>
+
+    <h3>Foils</h3>
+    <p>Foil cards are cosmetically shiny but don't grant any extra unlocks. A foil Iron ore card unlocks exactly the same things as a regular Iron ore card.</p>
+
+    <h3>No card exists</h3>
+    <p>If no TCG card exists for an NPC or item, there is no restriction — you can interact with it freely. The card set covers 1,227 monsters and 5,149 resource items; anything outside that set is unrestricted.</p>
+
+    <h3>Tabs in this tool</h3>
+    <ul>
+      <li><strong>Cards</strong> — Browse all 6,376 TCG cards. See monster drop rates, item sources, production recipes, and ingredient chains.</li>
+      <li><strong>Skilling</strong> — See which training methods are available for each skill based on your level, tools, and owned cards.</li>
+      <li><strong>Questing</strong> — See all OSRS quests and check completability based on your collection and skill levels.</li>
+    </ul>
+  </div>`;
 }
 
 loadData();

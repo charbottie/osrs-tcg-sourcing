@@ -83,6 +83,31 @@ def parse_production(html: str) -> list[dict]:
         if headers[:2] == ["Skill", "Level"]:
             pending_skill = _parse_skill_table(el)
 
+        elif "Ticks" in headers or "Ticks" in el.get_text():
+            # No-skill creation table (assembly, mixing — no level requirement).
+            # Some tables have a caption/note in row 1 and Members/Ticks in row 2.
+            # Flatten all cell text across all rows to find Facilities/Tools.
+            all_cells: list[str] = []
+            for tr in el.find_all("tr"):
+                all_cells.extend(td.get_text(strip=True) for td in tr.find_all(["th", "td"]))
+            # Only treat as no-skill if we actually see 'Ticks' in the cells
+            if "Ticks" not in all_cells:
+                continue
+            facilities = None
+            tools = None
+            for i, cell in enumerate(all_cells):
+                low = cell.lower()
+                if low == "facilities" and i + 1 < len(all_cells):
+                    fac = all_cells[i + 1]
+                    if fac not in ("None", "N/A", ""):
+                        facilities = fac
+                elif low == "tools" and i + 1 < len(all_cells):
+                    t = all_cells[i + 1]
+                    if t not in ("None", "N/A", ""):
+                        tools = t
+            pending_skill = {"skill": None, "level": 0, "xp": None,
+                             "facilities": facilities, "tools": tools}
+
         elif headers[:2] == ["Item", "Quantity"] and pending_skill:
             ingredients, output_qty = _parse_ingredient_table(el)
             if ingredients:
@@ -92,6 +117,7 @@ def parse_production(html: str) -> list[dict]:
                     "xp":            pending_skill.get("xp"),
                     "facilities":    pending_skill.get("facilities"),
                     "tools":         pending_skill.get("tools"),
+                    "quests":        pending_skill.get("quests"),
                     "ingredients":   ingredients,
                     "outputQuantity": output_qty,
                 })
@@ -345,12 +371,13 @@ def _row_texts(tr: Tag | None) -> list[str]:
 
 
 def _parse_skill_table(table: Tag) -> dict | None:
-    """Extract {skill, level, xp, facilities} from a Skill/Level/XP table."""
+    """Extract {skill, level, xp, facilities, quests} from a Skill/Level/XP table."""
     skill = None
     level = None
     xp: float | None = None
     facilities = None
     tools_list: list[str] = []
+    quests: list[str] = []
 
     for tr in table.find_all("tr"):
         cells = tr.find_all(["td", "th"])
@@ -373,6 +400,15 @@ def _parse_skill_table(table: Tag) -> dict | None:
                 if m:
                     xp = float(m.group())
 
+        elif cells[0].find("a", title="Quest points"):
+            # Quest / unlock requirement row — second link is the quest/unlock name
+            links = cells[0].find_all("a")
+            for lnk in links:
+                title = lnk.get("title") or lnk.get_text(strip=True)
+                if title and title != "Quest points":
+                    quests.append(title)
+                    break
+
         elif c0 in ("Tools", "Facilities", "Facility") and len(cells) >= 4:
             # cells[1] = tool (icon only — text is empty, read from link title/text)
             # cells[3] = facility (text label)
@@ -393,7 +429,8 @@ def _parse_skill_table(table: Tag) -> dict | None:
     if not skill or level is None:
         return None
     return {"skill": skill, "level": level, "xp": xp, "facilities": facilities,
-            "tools": tools_list if tools_list else None}
+            "tools": tools_list if tools_list else None,
+            "quests": quests if quests else None}
 
 
 def _parse_ingredient_table(table: Tag) -> tuple[list[dict], int | None]:

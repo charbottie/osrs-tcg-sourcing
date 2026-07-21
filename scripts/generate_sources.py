@@ -283,14 +283,26 @@ def enrich_with_quests(
 # Step 5: Item production + spawns (scraped from item wiki pages)
 # ---------------------------------------------------------------------------
 
+def _has_source(entry: dict) -> bool:
+    """Return True if an item_sources entry already has any sourcing data."""
+    return bool(
+        entry.get("shopBought") or entry.get("spawns") or entry.get("gathering")
+        or entry.get("monsters") or entry.get("rdtMonsters")
+        or entry.get("production") or entry.get("questReward")
+        or entry.get("clueTiers") or entry.get("alwaysAvailable")
+    )
+
+
 def build_production_spawns(
     item_cards_list: list[dict],
     item_sources: dict[str, dict],
+    monster_names_lc: set[str] | None = None,
     limit: int | None = None,
 ) -> None:
-    """Fetch item wiki pages; add production method and spawn data in-place."""
+    """Fetch item wiki pages; add production method, spawn, shop, and drop data in-place."""
     subset = item_cards_list if limit is None else item_cards_list[:limit]
     total = len(subset)
+    backfilled = 0
 
     for i, card in enumerate(subset, 1):
         name = card["name"]
@@ -315,6 +327,31 @@ def build_production_spawns(
         if shops:
             item_sources[name]["shops"] = shops
             item_sources[name]["shopBought"] = True
+
+        # Backfill: for items that still have no sourcing, parse the wiki's
+        # "Item sources" table and match sources against known monster card names.
+        if not _has_source(item_sources[name]) and monster_names_lc is not None:
+            wiki_srcs = item_scraper.parse_item_sources(html)
+            added = 0
+            for src in wiki_srcs:
+                src_name = src["source"]
+                if src_name.lower() not in monster_names_lc:
+                    continue
+                # Find the canonical card name (preserve original case)
+                # monster_names_lc maps lowercase -> but we need the real name;
+                # reconstruct from the source string (wiki titles are correctly cased)
+                entry = {
+                    "card":     src_name,
+                    "rarity":   src.get("wiki_label") or "Unknown",
+                    "fraction": src.get("fraction") or "",
+                }
+                item_sources[name]["monsters"].append(entry)
+                added += 1
+            if added:
+                backfilled += 1
+
+    if backfilled:
+        print(f"  Backfilled item sources for {backfilled} items via wiki 'Item sources' table")
 
 
 # ---------------------------------------------------------------------------
@@ -407,7 +444,9 @@ def main() -> int:
     # --- Pass 4: Item production + spawns ---
     if not args.skip_items:
         print(f"\nPass 4: Item production & spawns ({len(items)} item cards)...")
-        build_production_spawns(items, item_sources, limit=args.limit)
+        build_production_spawns(items, item_sources,
+                               monster_names_lc=monster_names_lc,
+                               limit=args.limit)
         write_json(out_dir / "item_sources.json", item_sources,
                    "item sources (with production + spawns)")
     else:
