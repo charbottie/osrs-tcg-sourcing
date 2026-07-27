@@ -101044,8 +101044,8 @@
     "gathering": null,
     "production": {
       "skill": "Cooking",
-      "level": 1,
-      "xp": 10.0,
+      "level": 35,
+      "xp": 30.0,
       "facilities": "Shrine (Tempoross Cove)",
       "tools": null,
       "ingredients": [
@@ -152890,7 +152890,13 @@
     "monsters": [],
     "rdtMonsters": [],
     "quests": [],
-    "gathering": null,
+    "gathering": {
+      "skill": "Fishing",
+      "level": 35,
+      "method": "Harpoon (Tempoross Cove)",
+      "tool": "Harpoon",
+      "xp": 35
+    },
     "production": null,
     "spawns": [],
     "shopBought": false,

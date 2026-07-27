@@ -336,6 +336,13 @@
     "tool": "Harpoon",
     "xp": 110
   },
+  "Raw harpoonfish": {
+    "skill": "Fishing",
+    "level": 35,
+    "method": "Harpoon (Tempoross Cove)",
+    "tool": "Harpoon",
+    "xp": 35
+  },
   "Raw anglerfish": {
     "skill": "Fishing",
     "level": 82,

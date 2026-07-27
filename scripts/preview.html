@@ -217,6 +217,7 @@
   .card-name { flex: 1; }
   .card-type { font-size: 10px; color: #666; margin-left: 8px; }
   .card-cat  { font-size: 9px; color: #4a6a8a; background:#0d1e2e; border-radius:2px; padding:1px 4px; margin-left:6px; white-space:nowrap; }
+  .food-cat  { color: #5a9a30; background: #0d1c09; cursor: default; }
 
   /* ── Right: detail ── */
   #detail { flex: 1; overflow-y: auto; padding: 20px 24px; }
@@ -464,6 +465,144 @@
   ::-webkit-scrollbar { width: 6px; }
   ::-webkit-scrollbar-track { background: #111; }
   ::-webkit-scrollbar-thumb { background: #333; border-radius: 3px; }
+
+  /* ── Equipment tab ── */
+  #equip-panel { flex: 1; display: flex; flex-direction: column; overflow: hidden; }
+  #equip-style-bar {
+    display: flex; gap: 6px; padding: 10px 16px;
+    border-bottom: 1px solid #333; flex-shrink: 0; background: #141414;
+  }
+  .equip-style-btn {
+    padding: 5px 18px; font-size: 11px; border-radius: 3px; cursor: pointer;
+    border: 1px solid #444; background: #1e1e1e; color: #888;
+    text-transform: uppercase; letter-spacing: 0.5px;
+  }
+  .equip-style-btn:hover { color: #bbb; border-color: #666; }
+  .equip-style-btn.active { color: #e8c97a; border-color: #b07a30; background: #1e1800; }
+  #equip-body { flex: 1; display: flex; overflow: hidden; }
+  #equip-doll-pane {
+    width: 230px; min-width: 230px; padding: 20px 16px;
+    background: #141414; border-right: 1px solid #333;
+    display: flex; flex-direction: column; gap: 6px; overflow-y: auto;
+  }
+  .doll-row { display: flex; gap: 6px; justify-content: center; }
+  .doll-slot {
+    width: 62px; height: 54px; border-radius: 4px; cursor: pointer;
+    border: 1px solid #2a2a2a; background: #1a1a1a;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: 2px; transition: border-color 0.1s; position: relative; flex-shrink: 0;
+  }
+  .doll-slot:hover:not(.doll-empty):not(.doll-dimmed) { border-color: #555; }
+  .doll-slot.selected { border-color: #b07a30; background: #1e1800; }
+  .doll-slot.has-upgrade { border-color: #5a9a30; }
+  .doll-slot.doll-empty { visibility: hidden; cursor: default; }
+  .doll-slot.doll-dimmed { opacity: 0.3; cursor: default; }
+  .doll-slot-label { font-size: 9px; color: #666; text-transform: uppercase; letter-spacing: 0.3px; }
+  .doll-slot-label-overlay {
+    position: absolute; bottom: 2px; left: 0; right: 0;
+    text-align: center; font-size: 8px; color: #555; pointer-events: none;
+    text-transform: uppercase; letter-spacing: 0.2px;
+  }
+  .doll-item-img {
+    width: 38px; height: 38px; object-fit: contain;
+    image-rendering: pixelated; flex-shrink: 0;
+  }
+  .doll-slot-item { font-size: 9px; color: #aaa; text-align: center; line-height: 1.2;
+    max-width: 56px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .doll-slot-item.owned { color: #76c442; }
+  .doll-upgrade-dot {
+    position: absolute; top: 3px; right: 3px;
+    width: 7px; height: 7px; border-radius: 50%; background: #5a9a30;
+  }
+  #equip-detail-pane { flex: 1; overflow-y: auto; padding: 20px 24px; }
+  .equip-slot-header { font-size: 14px; color: #e8c97a; font-weight: 600; margin-bottom: 4px; }
+  .equip-slot-sub { font-size: 11px; color: #555; margin-bottom: 16px; }
+  .equip-item-row {
+    display: flex; align-items: center; gap: 10px;
+    padding: 6px 8px; border-radius: 3px; margin-bottom: 3px;
+    border: 1px solid transparent; cursor: pointer;
+  }
+  .equip-item-row:hover { background: #1e1e1e; border-color: #333; }
+  .equip-item-row.equipped { background: #1e1800; border-color: #b07a30; }
+  .equip-item-row.new-unlock { border-color: #3a6a1a; background: #0d1a08; }
+  .equip-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+  .equip-dot.owned    { background: #3a8a3a; }
+  .equip-dot.obtainable { background: #4a4a20; }
+  .equip-dot.locked   { background: #3a2a2a; }
+  .equip-item-name { flex: 1; font-size: 12px; }
+  .equip-item-name.owned    { color: #c8c8c8; }
+  .equip-item-name.obtainable { color: #555; }
+  .equip-item-name.locked   { color: #3a3a3a; }
+  .equip-item-value { font-size: 10px; color: #444; flex-shrink: 0; }
+  .equip-item-badge {
+    font-size: 9px; padding: 1px 5px; border-radius: 2px; flex-shrink: 0;
+  }
+  .equip-item-badge.equipped { background: #2a1800; color: #b07a30; }
+  .equip-item-badge.upgrade  { background: #0d1a08; color: #5a9a30; }
+  .equip-item-badge.new-card { background: #1a1a08; color: #8a8a20; }
+  .equip-section-title {
+    font-size: 10px; text-transform: uppercase; letter-spacing: 1px;
+    color: #555; margin: 14px 0 6px; padding-bottom: 4px;
+    border-bottom: 1px solid #222;
+  }
+  .equip-set-btn {
+    font-size: 10px; padding: 2px 8px; border-radius: 2px;
+    border: 1px solid #444; background: #222; color: #888; cursor: pointer;
+    flex-shrink: 0; white-space: nowrap;
+  }
+  .equip-set-btn:hover { color: #ccc; border-color: #666; }
+  .view-card-btn {
+    font-size: 10px; padding: 2px 7px; border-radius: 2px; cursor: pointer;
+    border: 1px solid #2a2a2a; background: transparent; color: #444; flex-shrink: 0;
+    white-space: nowrap;
+  }
+  .view-card-btn:hover { color: #999; border-color: #555; }
+  .equip-2h-tag { font-size: 9px; color: #6a5a30; margin-left: 4px; }
+
+  /* Equipment stats summary panel */
+  #equip-right-pane { flex: 1; display: flex; flex-direction: column; overflow: hidden; }
+  #equip-stats-panel { flex-shrink: 0; padding: 12px 16px 10px; border-bottom: 1px solid #222; background: #111; }
+  .equip-stats-lbl { font-size: 10px; color: #555; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px; }
+  .equip-stats-grid { display: grid; grid-template-columns: 1fr 1fr; column-gap: 14px; }
+  .equip-stat-grp { font-size: 9px; color: #444; text-transform: uppercase; letter-spacing: 0.3px; margin: 6px 0 2px; }
+  .equip-stat-row { display: flex; justify-content: space-between; font-size: 11px; color: #555; line-height: 1.7; }
+  .sv { font-family: monospace; font-size: 11px; }
+  .sv.pos { color: #76c442; }
+  .sv.neg { color: #c44242; }
+  .sv.zero { color: #2a2a2a; }
+
+  /* Item hover tooltip — fixed-position so it's never clipped by scroll containers */
+  #equip-tooltip-float {
+    position: fixed; z-index: 200; display: none;
+    background: #1c1c1c; border: 1px solid #444; border-radius: 4px;
+    padding: 8px 12px; font-size: 11px; color: #aaa; min-width: 200px;
+    pointer-events: none; white-space: nowrap; box-shadow: 0 4px 12px rgba(0,0,0,0.7);
+  }
+  .tt-row { display: flex; justify-content: space-between; gap: 20px; line-height: 1.75; }
+  .tt-delta.pos { color: #76c442; }
+  .tt-delta.neg { color: #c44242; }
+  .tt-req { font-size: 10px; color: #555; margin-top: 6px; border-top: 1px solid #2a2a2a; padding-top: 4px; }
+
+  /* Combat type badge per item */
+  .combat-badge { font-size: 9px; padding: 1px 5px; border-radius: 2px; flex-shrink: 0; text-transform: uppercase; letter-spacing: 0.3px; }
+  .combat-badge.melee  { background: #1a0d00; color: #7a4a18; }
+  .combat-badge.ranged { background: #0a1500; color: #3a7a18; }
+  .combat-badge.magic  { background: #080818; color: #3a4a9a; }
+  /* DPS calculator */
+  .dps-section { border-top: 1px solid #1e1e1e; margin-top: 8px; padding-top: 8px; }
+  .dps-controls { display: flex; flex-wrap: wrap; gap: 6px 12px; margin: 6px 0; align-items: center; }
+  .dps-lbl { font-size: 10px; color: #555; display: flex; align-items: center; gap: 4px; }
+  .dps-lbl select, .dps-lbl input {
+    background: #1a1a1a; border: 1px solid #333; color: #888; border-radius: 2px;
+    font-size: 10px; padding: 1px 3px; outline: none;
+  }
+  .dps-lbl input[type=number] { width: 46px; }
+  #dps-output { font-size: 11px; color: #666; margin-top: 4px; display: flex; gap: 16px; flex-wrap: wrap; }
+  .dps-val { display: flex; flex-direction: column; }
+  .dps-val-num { font-size: 14px; color: #c8c8c8; font-weight: 600; }
+  .dps-val-lbl { font-size: 9px; color: #444; text-transform: uppercase; letter-spacing: 0.3px; }
+  /* Level requirement tag on owned-but-locked items */
+  .req-tag { font-size: 9px; color: #7a4a18; background: #1a0d00; border-radius: 2px; padding: 1px 5px; flex-shrink: 0; }
 </style>
 </head>
 <body>
@@ -472,6 +611,7 @@
   <button class="tab-btn active" onclick="switchTab('cards')"   id="tab-cards">Cards</button>
   <button class="tab-btn"        onclick="switchTab('skilling')" id="tab-skilling">Skilling</button>
   <button class="tab-btn"        onclick="switchTab('questing')" id="tab-questing">Questing</button>
+  <button class="tab-btn"        onclick="switchTab('equipment')" id="tab-equipment">Equipment</button>
   <button class="tab-btn"        onclick="switchTab('rules')"    id="tab-rules">Rules</button>
   <div style="flex:1"></div>
   <div id="global-nav" style="display:flex;align-items:center;padding:0 8px;gap:4px;">
@@ -496,23 +636,28 @@
     <div id="filter-row2" style="display:flex;gap:6px;">
       <select id="cat-filter" onchange="filterCards()" style="flex:1">
         <option value="all">All categories</option>
+        <option value="monsters">Monsters</option>
         <option value="Weapon">Weapons</option>
         <option value="Ammo">Ammo</option>
         <option value="Rune">Runes</option>
         <option value="Armour">Armour</option>
-        <option value="Consumable">Food &amp; Potions</option>
+        <option value="Food">Food</option>
+        <option value="Consumable">Potions &amp; Other</option>
+        <option value="Currency">Currency</option>
         <option value="clueScrolls">Clue Scrolls</option>
         <option value="Clue">Clue rewards</option>
         <option value="other">Misc / Other</option>
       </select>
     </div>
   </div>
-  <div id="sim-bar" style="padding:6px 10px;border-bottom:1px solid #222;font-size:10px;color:#555;display:flex;align-items:center;gap:6px;box-sizing:border-box;width:100%;">
-    <span id="sim-summary" style="flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap"></span>
-    <input id="rsn-input" type="text" placeholder="RSN…" style="background:#111;border:1px solid #333;color:#aaa;padding:3px 6px;border-radius:3px;font-size:10px;width:80px;flex-shrink:0;outline:none" onkeydown="if(event.key==='Enter')lookupLevels()">
-    <button id="levels-btn"  onclick="lookupLevels()"       style="background:#222;border:1px solid #444;color:#888;padding:3px 0;border-radius:3px;cursor:pointer;font-size:10px;width:58px;flex-shrink:0">Levels</button>
-    <button id="refresh-btn" onclick="refreshCollection()"  style="background:#222;border:1px solid #444;color:#888;padding:3px 0;border-radius:3px;cursor:pointer;font-size:10px;width:58px;flex-shrink:0">↻ Refresh</button>
-    <button id="sim-btn"     onclick="reroll()"             style="background:#222;border:1px solid #333;color:#888;padding:3px 0;border-radius:3px;cursor:pointer;font-size:10px;width:58px;flex-shrink:0;display:none">Re-roll</button>
+  <div id="sim-bar" style="padding:5px 10px 6px;border-bottom:1px solid #222;font-size:10px;color:#555;display:flex;flex-direction:column;gap:5px;box-sizing:border-box;width:100%;">
+    <span id="sim-summary" style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis;width:100%"></span>
+    <div style="display:flex;align-items:center;gap:5px;">
+      <input id="rsn-input" type="text" placeholder="RSN…" style="background:#111;border:1px solid #333;color:#aaa;padding:3px 6px;border-radius:3px;font-size:10px;flex:1;min-width:0;outline:none" onkeydown="if(event.key==='Enter')lookupLevels()">
+      <button id="levels-btn"  onclick="lookupLevels()"       style="background:#222;border:1px solid #444;color:#888;padding:3px 0;border-radius:3px;cursor:pointer;font-size:10px;width:52px;flex-shrink:0">Levels</button>
+      <button id="refresh-btn" onclick="refreshCollection()"  style="background:#222;border:1px solid #444;color:#888;padding:3px 0;border-radius:3px;cursor:pointer;font-size:10px;width:52px;flex-shrink:0">↻ Refresh</button>
+      <button id="sim-btn"     onclick="reroll()"             style="background:#222;border:1px solid #333;color:#888;padding:3px 0;border-radius:3px;cursor:pointer;font-size:10px;width:52px;flex-shrink:0;display:none">Re-roll</button>
+    </div>
   </div>
   <div id="card-list"></div>
 </div>
@@ -680,7 +825,8 @@ function canGetItem(itemName, visited = new Set()) {
 }
 
 // ─── State ─────────────────────────────────────────────────────────────────
-let monsterDrops = {}, itemSources = {}, questChains = {}, cardCategories = {}, cardDetails = {};
+let monsterDrops = {}, itemSources = {}, questChains = {}, cardCategories = {}, cardDetails = {}, foodData = {};
+let equipBySlot  = {};   // slot → [{name, value, is2h, itemIds}]
 let clueScrollSources   = {};   // tier → [{source, level, rarity}]
 let clueRewardsByTier   = {};   // tier → [item names]
 let clueRewardRarities  = {};   // tier → {item name → fraction string}
@@ -778,7 +924,7 @@ function simulateRandom() {
 async function loadData() {
   try {
     const cb = `?v=${Date.now()}`;  // cache-bust so updated JSON files are always fresh
-    const [md, is, qc, cc, cd, css, cs, crr, ii, qd] = await Promise.all([
+    const [md, is, qc, cc, cd, css, cs, crr, ii, qd, ed, fd] = await Promise.all([
       fetch(`output/monster_drops.json${cb}`).then(r => r.json()).catch(() => ({})),
       fetch(`output/item_sources.json${cb}`).then(r => r.json()).catch(() => ({})),
       fetch(`output/quest_chains.json${cb}`).then(r => r.json()).catch(() => ({})),
@@ -789,8 +935,11 @@ async function loadData() {
       fetch(`clue_reward_rarities.json${cb}`).then(r => r.json()).catch(() => ({})),
       fetch(`ingredient_info.json${cb}`).then(r => r.json()).catch(() => ({})),
       fetch(`output/quests.json${cb}`).then(r => r.json()).catch(() => ({})),
+      fetch(`output/equipment_data.json${cb}`).then(r => r.json()).catch(() => ({})),
+      fetch(`output/food_data.json${cb}`).then(r => r.json()).catch(() => ({})),
     ]);
     monsterDrops = md; itemSources = is; questChains = qc; cardCategories = cc; cardDetails = cd;
+    equipBySlot = ed; foodData = fd;
     clueScrollSources  = css;
     clueRewardRarities = crr;
     ingredientInfo     = ii;
@@ -831,9 +980,15 @@ function buildCardList() {
     allCards.push({name, type:'monster'});
   for (const [name, d] of Object.entries(itemSources)) {
     const hasSrc = d.monsters?.length || d.rdtMonsters?.length || d.quests?.length || d.shops?.length || d.shopBought || d.gathering || d.clueTiers?.length;
-    const isKnownCard = cardCategories[name]?.length > 0;
-    if (hasSrc || isKnownCard)
-      allCards.push({name, type:'item', cats: cardCategories[name] || []});
+    const isKnownCard = name in cardCategories;  // present in Card.json (even Resource-only items)
+    if (hasSrc || isKnownCard || isOwned(name)) {
+      // Currency and Food items get their own categories regardless of what Card.json says
+      let cats;
+      if (CURRENCY_NAMES.has(name)) cats = ['Currency'];
+      else if (name in foodData) cats = ['Food'];
+      else cats = cardCategories[name] || [];
+      allCards.push({name, type:'item', cats});
+    }
   }
   // Virtual clue scroll cards — always at top of list
   for (const tier of CLUE_TIER_ORDER)
@@ -864,6 +1019,7 @@ function filterCards() {
     if (owned_f === 'not-owned' &&  isOwned(c.name)) return false;
     if (catFil !== 'all') {
       if (catFil === 'clueScrolls') return false;  // clueScrolls filter = only show clue scroll cards
+      if (catFil === 'monsters') return c.type === 'monster';
       if (c.type !== 'item') return false;
       const cats = c.cats || [];
       if (catFil === 'other') {
@@ -876,11 +1032,20 @@ function filterCards() {
   }));
 }
 
+// Items that should be classified as Currency regardless of Card.json categories
+const CURRENCY_NAMES = new Set([
+  'Coins', 'Platinum token', 'Tokkul', 'Trading sticks', 'Mark of grace',
+  'Ecto-token', 'Golden nugget', 'Nuggets', 'Crystal shards', 'Hallowed mark',
+  'Hallowed crystal shard', 'Warrior guild token', 'Castle wars ticket',
+  'Archery ticket', 'Agility arena ticket', 'Wilderness agility ticket',
+  'Coin pouch',
+]);
+
 // Short category abbreviation for the sidebar badge
 const CAT_ABBR = {
   Weapon:'Wpn', Ammo:'Ammo', Rune:'Rune',
-  Armour:'Arm', Consumable:'Food', Clue:'Clue',
-  Slayer:'Slay', General:'Gen',
+  Armour:'Arm', Consumable:'Pot', Food:'Food', Clue:'Clue',
+  Slayer:'Slay', General:'Gen', Currency:'Coin',
 };
 
 function renderList(cards) {
@@ -896,9 +1061,20 @@ function renderList(cards) {
     } else {
       const ownedCls = isOwned(card.name) ? ' owned-card' : '';
       el.className = 'card-item' + (card.name === selected ? ' selected' : '') + ownedCls;
-      const catTag = card.type === 'item' && card.cats?.length
-        ? `<span class="card-cat">${CAT_ABBR[card.cats[0]] || card.cats[0]}</span>`
-        : `<span class="card-type">${card.type}</span>`;
+      const firstCat = card.cats?.[0];
+      let catTag;
+      if (card.type === 'item' && firstCat) {
+        if (firstCat === 'Currency') {
+          catTag = `<span class="card-cat" style="background:#1e1600;color:#a07830">Coin</span>`;
+        } else if (firstCat === 'Food') {
+          const hp = foodData[card.name];
+          catTag = `<span class="card-cat food-cat" title="Heals ${hp} HP">+${hp}hp</span>`;
+        } else {
+          catTag = `<span class="card-cat">${CAT_ABBR[firstCat] || firstCat}</span>`;
+        }
+      } else {
+        catTag = `<span class="card-type">${card.type}</span>`;
+      }
       el.innerHTML = `<span class="card-name">${card.name}</span>${catTag}`;
     }
     el.onclick = () => showCard(card.name, card.type);
@@ -1647,10 +1823,15 @@ function renderItem(name, container) {
   // For items: "owned" means the player has THIS item card
   const itemOwned = isOwned(name);
 
-  const itemCats = cardCategories[name] || [];
-  const catBadges = itemCats.map(c =>
-    `<span style="font-size:9px;background:#0d1e2e;color:#4a6a8a;border-radius:2px;padding:1px 5px;margin-left:4px">${c}</span>`
-  ).join('');
+  const healHp = foodData[name];
+  const itemCats = CURRENCY_NAMES.has(name) ? ['Currency']
+    : healHp ? ['Food']
+    : (cardCategories[name] || []);
+  const catBadges = itemCats.map(c => {
+    if (c === 'Food') return `<span style="font-size:9px;background:#0d1c09;color:#5a9a30;border-radius:2px;padding:1px 5px;margin-left:4px">Food · heals ${healHp} HP</span>`;
+    if (c === 'Currency') return `<span style="font-size:9px;background:#1e1600;color:#a07830;border-radius:2px;padding:1px 5px;margin-left:4px">Currency</span>`;
+    return `<span style="font-size:9px;background:#0d1e2e;color:#4a6a8a;border-radius:2px;padding:1px 5px;margin-left:4px">${c}</span>`;
+  }).join('');
   const detail  = cardDetails[name] || {};
   const imgHtml = detail.imageUrl
     ? `<img src="${detail.imageUrl}" style="float:right;max-width:64px;max-height:64px;image-rendering:pixelated;margin-left:8px" onerror="this.style.display='none'">`
@@ -2009,7 +2190,7 @@ function switchTab(tab) {
 function _renderTab(tab, resetSelection = true) {
   activeTab = tab;
   // Update tab button styles
-  for (const t of ['cards','skilling','questing','rules'])
+  for (const t of ['cards','skilling','questing','equipment','rules'])
     document.getElementById(`tab-${t}`).classList.toggle('active', t === tab);
 
   const sidebar     = document.getElementById('sidebar');
@@ -2063,6 +2244,9 @@ function _renderTab(tab, resetSelection = true) {
         </div>
       </div>`;
       renderQuestList();
+    } else if (tab === 'equipment') {
+      mainContent.innerHTML = renderEquipmentTab();
+      initEquipmentTab();
     } else if (tab === 'rules') {
       mainContent.innerHTML = renderRulesTab();
     }
@@ -2639,23 +2823,39 @@ function getTrainingMethods(skillName) {
         }
       } else if (g.tool && g.tool !== 'None') {
         const parts = resolveToolParts(g.tool);
-        // Only card tools (in itemSources) create Bronzeman restrictions
-        const missingCardParts = parts.filter(p => itemSources[p.label] && !p.owned);
-        if (missingCardParts.length > 0) {
-          toolLocked = true;
-          toolNote = missingCardParts.map(p => p.label).join(', ') + ' needed';
+        const cardParts = parts.filter(p => itemSources[p.label]);
+        if (cardParts.length > 0) {
+          // At least one part is a known card — check ownership
+          const missingCardParts = cardParts.filter(p => !p.owned);
+          if (missingCardParts.length > 0) {
+            toolLocked = true;
+            toolNote = missingCardParts.map(p => p.label).join(', ') + ' needed';
+          } else {
+            toolNote = cardParts.map(p => p.label).slice(0, 2).join(' + ');
+          }
         } else {
-          toolNote = parts.filter(p => itemSources[p.label]).map(p => p.label).slice(0,2).join(' + ');
+          // Tool string is present but no parts match any known card
+          // (e.g. 'Silver sickle (b)') — can't verify ownership, treat as locked
+          toolLocked = true;
+          toolNote = g.tool + ' needed';
         }
       }
 
+      // If there's a tool requirement, gathering is level+tool gated (card not needed to gather).
+      // If there's NO tool (e.g. Flax), the card itself is the gate.
+      const hasTool = !!(g.tool && g.tool !== 'None');
       let status;
-      if (myLevel < level) status = 'locked-level';
-      else if (toolLocked) status = 'locked-tool';
-      else if (!cardOwned) status = 'no-card';  // can gather but resource can only be dropped/banked
-      else status = 'available';
+      if (myLevel < level)        status = 'locked-level';
+      else if (toolLocked)        status = 'locked-tool';
+      else if (!hasTool && !cardOwned) status = 'no-card';  // no tool to substitute — need the card
+      else                        status = 'available';
 
-      results.push({name:cardName, level, status, cardOwned, note:toolNote, xp:g.xp, method:g.method, type:'gathering'});
+      // If gatherable via tool but card not owned, note it — resource can be banked but not used
+      const gatherNote = (hasTool && !cardOwned)
+        ? (toolNote ? toolNote + ' · no card' : 'no card')
+        : toolNote;
+
+      results.push({name:cardName, level, status, cardOwned, note:gatherNote, xp:g.xp, method:g.method, type:'gathering'});
     }
 
   } else if (skillName === 'Firemaking') {
@@ -2917,7 +3117,7 @@ function showSkillDetail(skillName, push = true) {
 
   let intro = '';
   if (GATHERING_SKILLS.has(skillName)) {
-    intro = `<p style="color:#666;font-size:11px;margin-bottom:12px">Available = level met + tool owned + card owned. Without the card you can gather but the resource can only be dropped or banked — not useful training.</p>`;
+    intro = `<p style="color:#666;font-size:11px;margin-bottom:12px">Available = level met + tool card owned. Card ownership is not required to gather — you can always chop/mine/fish if you have the tool. "no card" note means the resource can be banked but not used.</p>`;
   } else if (skillName === 'Hunter') {
     intro = `<p style="color:#666;font-size:11px;margin-bottom:12px">Hunting is gated by level and the catching tool only — no card needed for the creature. Caught items can only be used once you own the item card.</p>`;
   } else if (skillName === 'Firemaking') {
@@ -3350,6 +3550,608 @@ function renderRulesTab() {
       <li><strong>Questing</strong> — See all OSRS quests and check completability based on your collection and skill levels.</li>
     </ul>
   </div>`;
+}
+
+// ─── Equipment tab ─────────────────────────────────────────────────────────
+
+// equipBySlot declared at top with other globals
+let activeEquipStyle = localStorage.getItem('equip_active_style') || 'melee';
+let selectedEquipSlot = null;
+
+const STAT_KEYS = [
+  'attack_stab','attack_slash','attack_crush','attack_magic','attack_ranged',
+  'defence_stab','defence_slash','defence_crush','defence_magic','defence_ranged',
+  'melee_strength','ranged_strength','magic_damage','prayer',
+];
+const STAT_SHORT = {
+  attack_stab:'Stab', attack_slash:'Slash', attack_crush:'Crush',
+  attack_magic:'Magic atk', attack_ranged:'Ranged atk',
+  defence_stab:'Def/Stab', defence_slash:'Def/Slash', defence_crush:'Def/Crush',
+  defence_magic:'Def/Magic', defence_ranged:'Def/Ranged',
+  melee_strength:'Strength', ranged_strength:'Ranged str',
+  magic_damage:'Magic dmg', prayer:'Prayer',
+};
+
+function computeTotalStats() {
+  const totals = {};
+  for (const k of STAT_KEYS) totals[k] = 0;
+  for (const slot of Object.keys(SLOT_FULL)) {
+    const eq = getEquipped(slot);
+    if (!eq) continue;
+    const item = (equipBySlot[slot] || []).find(i => i.name === eq);
+    if (!item || !item.stats) continue;
+    for (const [k, v] of Object.entries(item.stats)) {
+      if (totals[k] !== undefined) totals[k] += v;
+    }
+  }
+  return totals;
+}
+
+function renderGearStats() {
+  const el = document.getElementById('equip-stats-panel');
+  if (!el) return;
+  const s = computeTotalStats();
+  const anyEquipped = Object.keys(SLOT_FULL).some(slot => getEquipped(slot));
+  if (!anyEquipped) {
+    el.innerHTML = `<div style="color:#333;font-size:11px;padding:4px">No gear equipped yet — set items in each slot to see totals</div>`;
+    return;
+  }
+  const fmt = (v, suf='') => {
+    const cls = v > 0 ? 'pos' : v < 0 ? 'neg' : 'zero';
+    const sign = v > 0 ? '+' : '';
+    return `<span class="sv ${cls}">${sign}${v}${suf}</span>`;
+  };
+  el.innerHTML = `
+    <div class="equip-stats-lbl">Equipped totals</div>
+    <div class="equip-stats-grid">
+      <div>
+        <div class="equip-stat-grp">Attack</div>
+        <div class="equip-stat-row"><span>Stab</span>${fmt(s.attack_stab)}</div>
+        <div class="equip-stat-row"><span>Slash</span>${fmt(s.attack_slash)}</div>
+        <div class="equip-stat-row"><span>Crush</span>${fmt(s.attack_crush)}</div>
+        <div class="equip-stat-row"><span>Magic</span>${fmt(s.attack_magic)}</div>
+        <div class="equip-stat-row"><span>Ranged</span>${fmt(s.attack_ranged)}</div>
+      </div>
+      <div>
+        <div class="equip-stat-grp">Defence</div>
+        <div class="equip-stat-row"><span>Stab</span>${fmt(s.defence_stab)}</div>
+        <div class="equip-stat-row"><span>Slash</span>${fmt(s.defence_slash)}</div>
+        <div class="equip-stat-row"><span>Crush</span>${fmt(s.defence_crush)}</div>
+        <div class="equip-stat-row"><span>Magic</span>${fmt(s.defence_magic)}</div>
+        <div class="equip-stat-row"><span>Ranged</span>${fmt(s.defence_ranged)}</div>
+      </div>
+    </div>
+    <div class="equip-stats-grid">
+      <div>
+        <div class="equip-stat-grp">Other</div>
+        <div class="equip-stat-row"><span>Melee str</span>${fmt(s.melee_strength)}</div>
+        <div class="equip-stat-row"><span>Ranged str</span>${fmt(s.ranged_strength)}</div>
+      </div>
+      <div>
+        <div class="equip-stat-grp">&nbsp;</div>
+        <div class="equip-stat-row"><span>Magic dmg</span>${fmt(s.magic_damage,'%')}</div>
+        <div class="equip-stat-row"><span>Prayer</span>${fmt(s.prayer)}</div>
+      </div>
+    </div>
+    <div class="dps-section">
+      <div class="equip-stat-grp" style="margin-top:0;margin-bottom:4px">DPS Estimate</div>
+      <div class="dps-controls">
+        <label class="dps-lbl">Prayer:
+          <select id="dps-prayer" onchange="dpsSettingChanged()">
+            ${(PRAYER_BY_STYLE[activeEquipStyle]||['none']).map(k =>
+              `<option value="${k}" ${dpsSettings.prayer===k?'selected':''}>${DPS_PRAYERS[k].label}</option>`
+            ).join('')}
+          </select>
+        </label>
+        <label class="dps-lbl">Style:
+          <select id="dps-style" onchange="dpsSettingChanged()">
+            ${activeEquipStyle==='melee'
+              ? `<option value="aggressive" ${dpsSettings.atkStyle==='aggressive'?'selected':''}>Aggressive</option>
+                 <option value="accurate"   ${dpsSettings.atkStyle==='accurate'  ?'selected':''}>Accurate</option>
+                 <option value="controlled" ${dpsSettings.atkStyle==='controlled'?'selected':''}>Controlled</option>`
+              : activeEquipStyle==='ranged'
+              ? `<option value="rapid"    ${dpsSettings.atkStyle==='rapid'   ?'selected':''}>Rapid</option>
+                 <option value="accurate" ${dpsSettings.atkStyle==='accurate'?'selected':''}>Accurate</option>`
+              : `<option value="standard">Standard</option>`
+            }
+          </select>
+        </label>
+        <label class="dps-lbl">Enemy def:
+          <input type="number" id="dps-def-lvl"   min="0" max="500" value="${dpsSettings.enemyDefLvl}"   onchange="dpsSettingChanged()">
+        </label>
+        <label class="dps-lbl">Def bonus:
+          <input type="number" id="dps-def-bonus"  min="-100" max="500" value="${dpsSettings.enemyDefBonus}" onchange="dpsSettingChanged()">
+        </label>
+      </div>
+      <div id="dps-output"></div>
+    </div>`;
+}
+
+function buildItemTooltip(item, eqItem) {
+  const stats  = item.stats  || {};
+  const eqStats = (eqItem && eqItem.name !== item.name && eqItem.stats) || {};
+  const activeKeys = STAT_KEYS.filter(k => stats[k] || eqStats[k]);
+  if (!activeKeys.length && !Object.keys(item.reqLvl || {}).length) {
+    return '<div style="color:#444;font-style:italic;font-size:10px">No combat stats</div>';
+  }
+  const rows = activeKeys.map(k => {
+    const v   = stats[k]   || 0;
+    const ev  = eqStats[k] || 0;
+    const d   = v - ev;
+    const suf = k === 'magic_damage' ? '%' : '';
+    const sign = v >= 0 ? '+' : '';
+    let delta = '';
+    if (eqItem && eqItem.name !== item.name && d !== 0) {
+      delta = d > 0
+        ? ` <span class="tt-delta pos">(+${d})</span>`
+        : ` <span class="tt-delta neg">(${d})</span>`;
+    }
+    return `<div class="tt-row"><span>${STAT_SHORT[k]}</span><span>${sign}${v}${suf}${delta}</span></div>`;
+  }).join('');
+  const reqs = item.reqLvl || {};
+  const reqStr = Object.entries(reqs).filter(([,v])=>v>0)
+    .map(([k,v])=>`${k[0].toUpperCase()+k.slice(1)} ${v}`).join(', ');
+  const reqHtml = reqStr
+    ? `<div class="tt-req">Requires: ${reqStr}</div>`
+    : '';
+  return rows + reqHtml;
+}
+
+// Paper doll grid — [row, col, slot, label]
+const DOLL_LAYOUT = [
+  [[0,1,'head','Head']],
+  [[1,0,'cape','Cape'],  [1,1,'neck','Neck'],   [1,2,'ammo','Ammo']],
+  [[2,0,'weapon','Wpn'], [2,1,'body','Body'],    [2,2,'shield','Shld']],
+  [[3,0,'hands','Glvs'], [3,1,'legs','Legs']],
+  [[4,0,'ring','Ring'],  [4,1,'feet','Boots']],
+];
+
+// No slot dimming — all slots are always active regardless of style
+
+// ─── DPS Calculator ─────────────────────────────────────────────────────────
+// Prayer multipliers: { mAtk, mStr, rAtk, rStr, mgAtk }
+const DPS_PRAYERS = {
+  none:       { mAtk:1.00, mStr:1.00, rAtk:1.00, rStr:1.00, mgAtk:1.00, label:'None' },
+  piety:      { mAtk:1.20, mStr:1.23, rAtk:1.00, rStr:1.00, mgAtk:1.00, label:'Piety' },
+  chivalry:   { mAtk:1.18, mStr:1.18, rAtk:1.00, rStr:1.00, mgAtk:1.00, label:'Chivalry' },
+  rigour:     { mAtk:1.00, mStr:1.00, rAtk:1.20, rStr:1.23, mgAtk:1.00, label:'Rigour' },
+  eagle_eye:  { mAtk:1.00, mStr:1.00, rAtk:1.15, rStr:1.15, mgAtk:1.00, label:'Eagle Eye' },
+  augury:     { mAtk:1.00, mStr:1.00, rAtk:1.00, rStr:1.00, mgAtk:1.25, label:'Augury' },
+  mystic:     { mAtk:1.00, mStr:1.00, rAtk:1.00, rStr:1.00, mgAtk:1.15, label:'Mystic Might' },
+};
+
+// Prayer options per combat style
+const PRAYER_BY_STYLE = {
+  melee:  ['none','piety','chivalry'],
+  ranged: ['none','rigour','eagle_eye'],
+  magic:  ['none','augury','mystic'],
+};
+
+let dpsSettings = {
+  prayer: 'none',
+  atkStyle: 'aggressive', // melee: accurate/aggressive/controlled; ranged: rapid/accurate
+  enemyDefLvl: 1,
+  enemyDefBonus: 0,
+};
+
+function loadDpsSettings() {
+  try {
+    const s = JSON.parse(localStorage.getItem('dps_settings') || '{}');
+    Object.assign(dpsSettings, s);
+  } catch {}
+}
+function saveDpsSettings() {
+  localStorage.setItem('dps_settings', JSON.stringify(dpsSettings));
+}
+
+function meetsReqLvl(item) {
+  const reqs = item.reqLvl || {};
+  for (const [skill, lvl] of Object.entries(reqs)) {
+    const skillName = skill.charAt(0).toUpperCase() + skill.slice(1);
+    if (getLevel(skillName) < lvl) return false;
+  }
+  return true;
+}
+
+function calcDps() {
+  const style  = activeEquipStyle;
+  const s      = computeTotalStats();
+  const prayer = DPS_PRAYERS[dpsSettings.prayer] || DPS_PRAYERS.none;
+  const enemyDef   = Math.max(1, parseInt(dpsSettings.enemyDefLvl)  || 1);
+  const enemyBonus = Math.max(0, parseInt(dpsSettings.enemyDefBonus) || 0);
+
+  // Get equipped weapon speed
+  const eqWpnName = getEquipped('weapon');
+  const wpnItem   = eqWpnName ? (equipBySlot['weapon'] || []).find(i => i.name === eqWpnName) : null;
+  let   baseSpeed = (wpnItem && wpnItem.attackSpeed) || 4;
+
+  if (style === 'melee') {
+    const strOff = dpsSettings.atkStyle === 'aggressive' ? 3 : dpsSettings.atkStyle === 'controlled' ? 1 : 0;
+    const atkOff = dpsSettings.atkStyle === 'accurate'   ? 3 : dpsSettings.atkStyle === 'controlled' ? 1 : 0;
+    const effStr = Math.floor(getLevel('Strength') * prayer.mStr) + strOff + 8;
+    const effAtk = Math.floor(getLevel('Attack')   * prayer.mAtk) + atkOff + 8;
+    const eqStr  = s.melee_strength || 0;
+    const eqAtk  = Math.max(s.attack_stab || 0, s.attack_slash || 0, s.attack_crush || 0);
+    const maxHit = Math.floor(0.5 + effStr * (eqStr + 64) / 640);
+    const atkRoll = Math.floor(effAtk * (eqAtk + 64));
+    const defRoll = Math.floor((enemyDef + 9) * (enemyBonus + 64));
+    const hitChance = atkRoll > defRoll
+      ? 1 - (defRoll + 2) / (2 * (atkRoll + 1))
+      : atkRoll / (2 * (defRoll + 1));
+    const dps = (maxHit / 2) * Math.max(0, Math.min(1, hitChance)) / (baseSpeed * 0.6);
+    return { maxHit, hitChance: Math.max(0, Math.min(1, hitChance)), dps, speed: baseSpeed };
+  }
+
+  if (style === 'ranged') {
+    const isRapid = dpsSettings.atkStyle === 'rapid';
+    const atkOff  = isRapid ? 0 : 3;
+    const speed   = isRapid ? Math.max(1, baseSpeed - 1) : baseSpeed;
+    const effAtk  = Math.floor(getLevel('Ranged') * prayer.rAtk) + atkOff + 8;
+    const effStr  = Math.floor(getLevel('Ranged') * prayer.rStr) + atkOff + 8;
+    const eqStr   = s.ranged_strength || 0;
+    const eqAtk   = s.attack_ranged || 0;
+    const maxHit  = Math.floor(0.5 + effStr * (eqStr + 64) / 640);
+    const atkRoll = Math.floor(effAtk * (eqAtk + 64));
+    const defRoll = Math.floor((enemyDef + 9) * (enemyBonus + 64));
+    const hitChance = atkRoll > defRoll
+      ? 1 - (defRoll + 2) / (2 * (atkRoll + 1))
+      : atkRoll / (2 * (defRoll + 1));
+    const dps = (maxHit / 2) * Math.max(0, Math.min(1, hitChance)) / (speed * 0.6);
+    return { maxHit, hitChance: Math.max(0, Math.min(1, hitChance)), dps, speed };
+  }
+
+  return null; // magic — too spell-dependent
+}
+
+function dpsSettingChanged() {
+  const prayerEl = document.getElementById('dps-prayer');
+  const styleEl  = document.getElementById('dps-style');
+  const defLvlEl = document.getElementById('dps-def-lvl');
+  const defBonEl = document.getElementById('dps-def-bonus');
+  if (prayerEl) dpsSettings.prayer    = prayerEl.value;
+  if (styleEl)  dpsSettings.atkStyle  = styleEl.value;
+  if (defLvlEl) dpsSettings.enemyDefLvl   = parseInt(defLvlEl.value) || 1;
+  if (defBonEl) dpsSettings.enemyDefBonus = parseInt(defBonEl.value) || 0;
+  saveDpsSettings();
+  updateDpsOutput();
+}
+
+function updateDpsOutput() {
+  const el = document.getElementById('dps-output');
+  if (!el) return;
+  const result = calcDps();
+  if (!result) {
+    el.innerHTML = `<span style="color:#333;font-style:italic">Magic DPS requires spell selection</span>`;
+    return;
+  }
+  const { maxHit, hitChance, dps, speed } = result;
+  el.innerHTML = `
+    <div class="dps-val"><span class="dps-val-num">${maxHit}</span><span class="dps-val-lbl">Max Hit</span></div>
+    <div class="dps-val"><span class="dps-val-num">${(hitChance*100).toFixed(1)}%</span><span class="dps-val-lbl">Accuracy</span></div>
+    <div class="dps-val"><span class="dps-val-num">${dps.toFixed(2)}</span><span class="dps-val-lbl">DPS</span></div>
+    <div class="dps-val"><span class="dps-val-num">${speed}t</span><span class="dps-val-lbl">Speed</span></div>`;
+}
+
+const SLOT_FULL = {
+  head:'Head', cape:'Cape', neck:'Neck', ammo:'Ammo',
+  weapon:'Weapon', body:'Body', shield:'Shield',
+  hands:'Gloves', legs:'Legs', ring:'Ring', feet:'Boots',
+};
+
+// Style colours for headers
+const STYLE_COLOR = { melee:'#e8c97a', ranged:'#76c442', magic:'#6a8aee' };
+
+function equipKey(slot) { return `equip_${activeEquipStyle}_${slot}`; }
+function getEquipped(slot) { return localStorage.getItem(equipKey(slot)) || ''; }
+function setEquipped(slot, name) {
+  hideEquipTooltip();
+  localStorage.setItem(equipKey(slot), name);
+  refreshEquipDoll();
+  renderGearStats();
+  updateDpsOutput();
+  if (selectedEquipSlot === slot) renderEquipSlotDetail(slot);
+}
+
+// Returns items for a slot sorted: equipped → owned → gettable → locked
+// Within each tier: style-matching items first, then by value desc
+function slotItems(slot) {
+  const raw = equipBySlot[slot] || [];
+  const eq  = getEquipped(slot);
+  return raw.map(item => {
+    const owned       = isOwned(item.name);
+    const equipped    = item.name === eq;
+    const srcData     = itemSources[item.name];
+    const gettable    = owned || (srcData ? canGetItem(item.name) : false);
+    const styleMatch  = item.combatType === activeEquipStyle || item.combatType === 'all' || !item.combatType;
+    const meetsReq    = meetsReqLvl(item);
+    return { ...item, owned, equipped, gettable, styleMatch, meetsReq };
+  }).sort((a, b) => {
+    const rank = x => x.equipped ? 0 : x.owned ? 1 : x.gettable ? 2 : 3;
+    const rd = rank(a) - rank(b);
+    if (rd !== 0) return rd;
+    // Within tier: style match first
+    const sm = (b.styleMatch ? 1 : 0) - (a.styleMatch ? 1 : 0);
+    if (sm !== 0) return sm;
+    return (b.value || 0) - (a.value || 0);
+  });
+}
+
+function slotHasUpgrade(slot) {
+  const eq = getEquipped(slot);
+  const items = slotItems(slot);
+  // upgrade = owned item that meets level reqs and isn't currently equipped
+  return items.some(i => i.owned && i.meetsReq && i.name !== eq);
+}
+
+function renderEquipmentTab() {
+  return `<div id="equip-panel">
+    <div id="equip-style-bar">
+      <span style="font-size:11px;color:#555;margin-right:4px;align-self:center">Style:</span>
+      <button class="equip-style-btn ${activeEquipStyle==='melee'?'active':''}" onclick="switchEquipStyle('melee')">⚔ Melee</button>
+      <button class="equip-style-btn ${activeEquipStyle==='ranged'?'active':''}" onclick="switchEquipStyle('ranged')">🏹 Ranged</button>
+      <button class="equip-style-btn ${activeEquipStyle==='magic'?'active':''}" onclick="switchEquipStyle('magic')">🔮 Magic</button>
+      <span id="equip-owned-count" style="margin-left:auto;font-size:11px;color:#555;align-self:center"></span>
+    </div>
+    <div id="equip-body">
+      <div id="equip-doll-pane"></div>
+      <div id="equip-right-pane">
+        <div id="equip-stats-panel"><div style="color:#333;font-size:11px;padding:4px">No gear equipped yet</div></div>
+        <div id="equip-detail-pane"><div class="placeholder" style="margin-top:60px;color:#444">← Click a slot to see available items</div></div>
+      </div>
+    </div>
+  </div>`;
+}
+
+function initEquipmentTab() {
+  // Restore persisted style + slot
+  const savedStyle = localStorage.getItem('equip_active_style');
+  if (savedStyle && ['melee','ranged','magic'].includes(savedStyle)) {
+    activeEquipStyle = savedStyle;
+  }
+  loadDpsSettings();
+  refreshEquipDoll();
+  updateEquipCount();
+  renderGearStats();
+  updateDpsOutput();
+  const savedSlot = localStorage.getItem('equip_selected_slot');
+  if (savedSlot && SLOT_FULL[savedSlot]) {
+    selectedEquipSlot = savedSlot;
+    refreshEquipDoll();
+    renderEquipSlotDetail(savedSlot);
+  }
+}
+
+function switchEquipStyle(style) {
+  activeEquipStyle = style;
+  localStorage.setItem('equip_active_style', style);
+  document.querySelectorAll('.equip-style-btn').forEach(b => {
+    b.classList.toggle('active', b.textContent.toLowerCase().includes(style));
+  });
+  refreshEquipDoll();
+  updateEquipCount();
+  renderGearStats();
+  updateDpsOutput();
+  if (selectedEquipSlot) renderEquipSlotDetail(selectedEquipSlot);
+}
+
+function updateEquipCount() {
+  const el = document.getElementById('equip-owned-count');
+  if (!el) return;
+  const allSlots = Object.keys(SLOT_FULL);
+  const totalOwned  = allSlots.reduce((n, s) => n + (equipBySlot[s]||[]).filter(i => isOwned(i.name)).length, 0);
+  const totalItems  = allSlots.reduce((n, s) => n + (equipBySlot[s]||[]).length, 0);
+  el.textContent = `${totalOwned} / ${totalItems} owned`;
+}
+
+function refreshEquipDoll() {
+  const pane = document.getElementById('equip-doll-pane');
+  if (!pane) return;
+  let html = '';
+  for (const row of DOLL_LAYOUT) {
+    html += `<div class="doll-row">`;
+    const rowMap = {};
+    for (const [r, c, slot, lbl] of row) rowMap[c] = { slot, lbl };
+    for (let col = 0; col < 3; col++) {
+      const cell = rowMap[col];
+      if (!cell) { html += `<div class="doll-slot doll-empty"></div>`; continue; }
+      const { slot, lbl } = cell;
+      const eq         = getEquipped(slot);
+      const upgrade    = slotHasUpgrade(slot);
+      const isSelected = selectedEquipSlot === slot;
+      let cls = 'doll-slot';
+      if (upgrade)    cls += ' has-upgrade';
+      if (isSelected) cls += ' selected';
+      const upgradeDot = upgrade ? `<div class="doll-upgrade-dot"></div>` : '';
+
+      let inner;
+      if (eq) {
+        const imgUrl = (cardDetails[eq] || {}).imageUrl || '';
+        inner = imgUrl
+          ? `<img src="${imgUrl}" class="doll-item-img" onerror="this.style.display='none'">`
+          : `<div class="doll-slot-item owned">${eq.length > 10 ? eq.slice(0,9)+'…' : eq}</div>`;
+      } else {
+        inner = `<div class="doll-slot-label">${lbl}</div>`;
+      }
+
+      const slotTitle = eq ? eq : lbl;
+      html += `<div class="${cls}" title="${slotTitle}" onclick="selectEquipSlot('${slot}')">
+        ${upgradeDot}
+        ${inner}
+        ${eq ? `<div class="doll-slot-label doll-slot-label-overlay">${lbl}</div>` : ''}
+      </div>`;
+    }
+    html += `</div>`;
+  }
+  pane.innerHTML = html;
+}
+
+function selectEquipSlot(slot) {
+  selectedEquipSlot = slot;
+  localStorage.setItem('equip_selected_slot', slot);
+  refreshEquipDoll();
+  renderEquipSlotDetail(slot);
+}
+
+function renderEquipSlotDetail(slot) {
+  const pane = document.getElementById('equip-detail-pane');
+  if (!pane) return;
+  const items  = slotItems(slot);
+  const eq     = getEquipped(slot);
+  const label  = SLOT_FULL[slot] || slot;
+  const col    = STYLE_COLOR[activeEquipStyle] || '#e8c97a';
+  const owned  = items.filter(i => i.owned).length;
+  // Find the currently equipped item object for delta comparisons
+  const eqItem = items.find(i => i.equipped) || null;
+
+  let html = `
+    <div class="equip-slot-header" style="color:${col}">${label}</div>
+    <div class="equip-slot-sub">${owned} owned · ${items.length} total in this slot</div>`;
+
+  const sectionDefs = [
+    { key: 'equipped',    label: 'Equipped',                filter: i =>  i.equipped },
+    { key: 'owned',       label: 'Owned — can equip',       filter: i =>  i.owned && !i.equipped &&  i.meetsReq },
+    { key: 'level_req',   label: 'Owned — level required',  filter: i =>  i.owned && !i.equipped && !i.meetsReq },
+    { key: 'gettable',    label: 'Obtainable (no card yet)',filter: i => !i.owned &&  i.gettable },
+    { key: 'locked',      label: 'Not yet accessible',      filter: i => !i.owned && !i.gettable },
+  ];
+
+  for (const sec of sectionDefs) {
+    const group = items.filter(sec.filter);
+    if (group.length === 0) continue;
+    html += `<div class="equip-section-title">${sec.label} (${group.length})</div>`;
+    for (const item of group) {
+      const dotCls  = item.owned ? 'owned' : item.gettable ? 'obtainable' : 'locked';
+      const nameCls = item.owned ? 'owned' : item.gettable ? 'obtainable' : 'locked';
+      const rowCls  = item.equipped ? ' equipped' : (item.owned && !item.equipped && sec.key === 'owned') ? ' new-unlock' : '';
+      const tag2h   = item.is2h ? `<span class="equip-2h-tag">2H</span>` : '';
+      const valStr  = item.value > 0 ? formatGp(item.value) : '';
+      const combatBadge = (item.combatType && item.combatType !== 'all')
+        ? `<span class="combat-badge ${item.combatType}">${item.combatType}</span>`
+        : '';
+      const styleExtra = (!item.styleMatch && item.combatType !== 'all')
+        ? ' style="opacity:0.55"'
+        : '';
+      const escapedName = item.name.replace(/'/g, "\\'");
+      const safeItem = encodeURIComponent(item.name);
+
+      // Row click: equip for owned+meets-req, clear for equipped, view sourcing otherwise
+      let rowOnclick, rowTitle;
+      if (item.equipped) {
+        rowOnclick = `setEquipped('${slot}','')`;
+        rowTitle   = 'Click to remove';
+      } else if (item.owned && item.meetsReq) {
+        rowOnclick = `setEquipped('${slot}','${escapedName}')`;
+        rowTitle   = 'Click to equip';
+      } else if (item.owned && !item.meetsReq) {
+        rowOnclick = ``;
+        rowTitle   = 'Level too low to equip';
+      } else {
+        rowOnclick = `navigateToCard('${escapedName}')`;
+        rowTitle   = 'Click to view sourcing';
+      }
+
+      // Equip state badge
+      const badge = item.equipped
+        ? `<span class="equip-item-badge equipped">Equipped</span>`
+        : '';
+
+      // Level requirement tag shown on level-locked owned items
+      const reqTag = (() => {
+        if (!item.owned || item.meetsReq || !item.reqLvl) return '';
+        const missing = Object.entries(item.reqLvl)
+          .filter(([k, v]) => getLevel(k.charAt(0).toUpperCase() + k.slice(1)) < v)
+          .map(([k, v]) => `${k.charAt(0).toUpperCase() + k.slice(1)} ${v}`)
+          .join(', ');
+        return missing ? `<span class="req-tag">${missing}</span>` : '';
+      })();
+
+      // "View ↗" for owned items (click=equip, so they need another route to sourcing)
+      const viewBtn = item.owned
+        ? `<button class="view-card-btn" title="View card sourcing" onclick="event.stopPropagation();navigateToCard('${escapedName}')">↗ Card</button>`
+        : '';
+
+      // Clear button on equipped item
+      const clearBtn = item.equipped
+        ? `<button class="equip-set-btn" onclick="event.stopPropagation();setEquipped('${slot}','')">Clear</button>`
+        : '';
+
+      html += `<div class="equip-item-row${rowCls}"
+        data-slot="${slot}" data-item="${safeItem}"
+        title="${rowTitle}"
+        onmouseenter="showEquipTooltip(event)"
+        onmouseleave="hideEquipTooltip()"
+        onclick="${rowOnclick}">
+        <div class="equip-dot ${dotCls}"></div>
+        <div class="equip-item-name ${nameCls}"${styleExtra}>${item.name}${tag2h}</div>
+        ${combatBadge}
+        <div class="equip-item-value">${valStr}</div>
+        ${reqTag}${badge}${viewBtn}${clearBtn}
+      </div>`;
+    }
+  }
+
+  if (items.length === 0) {
+    html += `<div class="placeholder" style="color:#444;margin-top:40px">No items in this slot</div>`;
+  }
+
+  pane.innerHTML = html;
+}
+
+// Floating tooltip for item stats in equipment slot detail
+function showEquipTooltip(event) {
+  const el = event.currentTarget;
+  const slot     = el.dataset.slot;
+  const itemName = decodeURIComponent(el.dataset.item || '');
+  if (!itemName) return;
+  const items  = slotItems(slot);
+  const item   = items.find(i => i.name === itemName);
+  if (!item) return;
+  const eqItem = items.find(i => i.equipped) || null;
+  const content = buildItemTooltip(item, eqItem);
+
+  let tt = document.getElementById('equip-tooltip-float');
+  if (!tt) {
+    tt = document.createElement('div');
+    tt.id = 'equip-tooltip-float';
+    document.body.appendChild(tt);
+  }
+  tt.innerHTML = content;
+  tt.style.display = 'block';
+
+  // Position: below row by default, flip above if near bottom of viewport
+  const rect = el.getBoundingClientRect();
+  const ttH  = tt.getBoundingClientRect().height;
+  const spaceBelow = window.innerHeight - rect.bottom;
+  if (spaceBelow < ttH + 8 && rect.top > ttH + 8) {
+    tt.style.top  = (rect.top - ttH - 4) + 'px';
+  } else {
+    tt.style.top  = (rect.bottom + 4) + 'px';
+  }
+  tt.style.right = (window.innerWidth - rect.right) + 'px';
+  tt.style.left  = 'auto';
+}
+
+function hideEquipTooltip() {
+  const tt = document.getElementById('equip-tooltip-float');
+  if (tt) tt.style.display = 'none';
+}
+
+// Navigate to an item in the Cards tab (reuse existing showCard logic)
+function navigateToCard(name) {
+  hideEquipTooltip();
+  pushHistoryEntry();
+  _renderTab('cards', false);
+  selected = name;
+  selectedType = 'item';
+  // Find the card in the list and highlight it
+  const items = allCards.filter(c => c.name === name);
+  if (items.length) showCard(name, items[0].type || 'item');
+}
+
+function formatGp(n) {
+  if (n >= 1_000_000) return (n/1_000_000).toFixed(1).replace(/\.0$/,'') + 'M';
+  if (n >= 1_000)     return (n/1_000).toFixed(1).replace(/\.0$/,'') + 'K';
+  return n.toString();
 }
 
 loadData();

@@ -50,7 +50,20 @@ def decode_blob(blob: str) -> dict:
 
 
 def extract_owned_names(state: dict) -> tuple[list[str], int]:
-    """Return (unique_names_sorted, total_instance_count)."""
+    """Return (unique_names_sorted, total_instance_count).
+
+    Handles two schema shapes:
+      - schema ≤5: cardInstances / collectionState.instances — list of {cardName, ...}
+      - schema 6+: cardEntries — list of {cardName, variants: [...]}
+    """
+    # Schema 6+: cardEntries with per-card variants list
+    entries = state.get("cardEntries", [])
+    if entries:
+        names = sorted({e["cardName"] for e in entries if "cardName" in e})
+        total = sum(len(e.get("variants", [])) for e in entries)
+        return names, total
+
+    # Schema ≤5: flat instances list
     instances = state.get("cardInstances", [])
     if not instances:
         instances = state.get("collectionState", {}).get("instances", [])
@@ -84,8 +97,12 @@ def find_best_backup(backups_dir: pathlib.Path) -> tuple[pathlib.Path, dict] | N
                 idx = text.index(PREFIX)
                 blob = text[idx:].strip().replace("\\:", ":")
                 state = decode_blob(blob)
-                instances = state.get("cardInstances") or state.get("collectionState", {}).get("instances", [])
-                if not instances:
+                has_data = (
+                    state.get("cardEntries")
+                    or state.get("cardInstances")
+                    or state.get("collectionState", {}).get("instances")
+                )
+                if not has_data:
                     continue  # skip empty states (e.g. the 'default' folder)
                 best_path = f
                 best_mtime = mtime
