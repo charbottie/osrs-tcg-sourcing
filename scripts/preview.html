@@ -127,6 +127,19 @@
   .quest-name { flex: 1; font-size: 12px; }
   .quest-qp { font-size: 10px; color: #555; flex-shrink: 0; }
   .quest-members-tag { font-size: 9px; color: #4a6a8a; background: #0d1e2e; border-radius: 2px; padding: 1px 3px; flex-shrink: 0; }
+  #quest-stats {
+    display: grid; grid-template-columns: 1fr 1fr 1fr;
+    gap: 1px; background: #222; border-radius: 4px; overflow: hidden;
+    margin-bottom: 2px;
+  }
+  .qstat {
+    background: #161616; padding: 7px 8px; text-align: center;
+  }
+  .qstat-val  { font-size: 15px; font-weight: 700; color: #ddd; line-height: 1.2; }
+  .qstat-sub  { font-size: 10px; color: #555; margin-top: 1px; }
+  .qstat-qp   { font-size: 11px; color: #888; margin-top: 1px; }
+  .qstat.done-col  .qstat-val { color: #b07a30; }
+  .qstat.avail-col .qstat-val { color: #4a9a4a; }
   .quest-section-header {
     padding: 6px 12px 4px;
     font-size: 10px; font-weight: 700;
@@ -2322,6 +2335,7 @@ function _renderTab(tab, resetSelection = true) {
       mainContent.innerHTML = `<div id="quest-panel">
         <div id="quest-list-pane">
           <div id="quest-list-controls">
+            <div id="quest-stats"></div>
             <input id="quest-search" type="text" placeholder="Search quests…" oninput="renderQuestList()"
               style="background:#222;border:1px solid #444;color:#ddd;padding:6px 8px;border-radius:3px;font-size:12px;width:100%">
             <div style="display:flex;gap:6px;align-items:center">
@@ -3506,12 +3520,50 @@ function questItemHtml(name, data, completable) {
   </div>`;
 }
 
+function renderQuestStats(completable) {
+  const el = document.getElementById('quest-stats');
+  if (!el) return;
+
+  let doneCount = 0, doneQP = 0;
+  let availCount = 0, availQP = 0;
+  let totalCount = 0, totalQP = 0;
+
+  for (const [name, q] of Object.entries(questsData)) {
+    const qp = q.questPoints || 0;
+    totalCount++;
+    totalQP += qp;
+    if (completedQuests.has(name)) {
+      doneCount++; doneQP += qp;
+    } else if (completable.has(name)) {
+      availCount++; availQP += qp;
+    }
+  }
+
+  el.innerHTML = `
+    <div class="qstat done-col">
+      <div class="qstat-val">${doneCount}</div>
+      <div class="qstat-sub">Completed</div>
+      <div class="qstat-qp">${doneQP} QP</div>
+    </div>
+    <div class="qstat avail-col">
+      <div class="qstat-val">${availCount}</div>
+      <div class="qstat-sub">Available</div>
+      <div class="qstat-qp">+${availQP} QP</div>
+    </div>
+    <div class="qstat">
+      <div class="qstat-val">${totalCount}</div>
+      <div class="qstat-sub">Total</div>
+      <div class="qstat-qp">${totalQP} QP</div>
+    </div>`;
+}
+
 function renderQuestList() {
   const scroll = document.getElementById('quest-list-scroll');
   if (!scroll) return;
   const search = (document.getElementById('quest-search')?.value || '').toLowerCase();
   const f      = document.getElementById('quest-filter')?.value || 'all';
   const completable = computeCompletableQuests();
+  renderQuestStats(completable);
 
   const orderMap = {ok:0, close:1, locked:2, done:3};
   const sortFn = ([an], [bn]) => {
