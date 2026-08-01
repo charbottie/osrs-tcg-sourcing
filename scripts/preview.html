@@ -120,6 +120,10 @@
   .quest-badge.ok      { color: #3a9a3a; }
   .quest-badge.close   { color: #c8a020; }
   .quest-badge.locked  { color: #7a3a3a; }
+  .quest-badge.done    { color: #b07a30; }
+  .quest-item.done-quest { opacity: 0.5; }
+  .quest-item.done-quest:hover { opacity: 0.8; }
+  .quest-item.done-quest.selected { opacity: 1; }
   .quest-name { flex: 1; font-size: 12px; }
   .quest-qp { font-size: 10px; color: #555; flex-shrink: 0; }
   .quest-members-tag { font-size: 9px; color: #4a6a8a; background: #0d1e2e; border-radius: 2px; padding: 1px 3px; flex-shrink: 0; }
@@ -842,6 +846,15 @@ let clueRewardRarities  = {};   // tier → {item name → fraction string}
 let ingredientInfo      = {};   // non-card ingredient name → {production, shops, spawns}
 let questsData          = {};   // quest name → {prerequisites, skillRequirements, ...}
 let bmQuestCards        = {};   // quest name → {cardGroups, groupLabels, monsterCards, notes} from bronzeman plugin
+let completedQuests     = new Set(JSON.parse(localStorage.getItem('completed_quests') || '[]'));
+
+function toggleQuestDone(name) {
+  if (completedQuests.has(name)) completedQuests.delete(name);
+  else completedQuests.add(name);
+  localStorage.setItem('completed_quests', JSON.stringify([...completedQuests]));
+  renderQuestList();
+  showQuestDetail(name, false);   // re-render detail without pushing history
+}
 let allCards     = [];
 let selected = null, selectedType = null;
 let activeTab = 'cards';
@@ -2253,8 +2266,10 @@ function _renderTab(tab, resetSelection = true) {
             <select id="quest-filter" onchange="renderQuestList()"
               style="background:#222;border:1px solid #444;color:#ccc;padding:4px 6px;border-radius:3px;font-size:11px">
               <option value="all">All quests</option>
+              <option value="notdone">Not completed</option>
               <option value="ok">Completable</option>
               <option value="close">Almost ready</option>
+              <option value="done">Completed</option>
               <option value="free">Free quests</option>
               <option value="members">Members only</option>
             </select>
@@ -3363,12 +3378,13 @@ function checkQuestCards(name, q) {
 function computeCompletableQuests() {
   /**
    * Iteratively propagate completability. A quest is completable if:
-   *   - All prerequisites are completable (or not in our dataset)
+   *   - Manually marked done (always counts — player has finished it)
+   *   - All prerequisites are completable/done (or not in our dataset)
    *   - All skill requirements are met (player level >= req)
    *   - All card groups satisfied (prefer BM data; fallback to wiki infobox)
-   * Returns a Set of completable quest names.
+   * Returns a Set of completable quest names (includes done quests).
    */
-  const completable = new Set();
+  const completable = new Set(completedQuests); // done quests seed the set
   let changed = true;
   while (changed) {
     changed = false;
@@ -3386,6 +3402,7 @@ function computeCompletableQuests() {
 }
 
 function questStatus(questName, completable) {
+  if (completedQuests.has(questName)) return 'done';
   const q = questsData[questName];
   if (!q) return 'locked';
   if (completable.has(questName)) return 'ok';
@@ -3408,12 +3425,13 @@ function isMiniquest(name) {
 
 function questItemHtml(name, data, completable) {
   const st = questStatus(name, completable);
-  const badge = st === 'ok' ? '✓' : (st === 'close' ? '~' : '✗');
+  const badge = st === 'done' ? '✓' : (st === 'ok' ? '✓' : (st === 'close' ? '~' : '✗'));
+  const doneCls = st === 'done' ? ' done-quest' : '';
   const sel = name === selectedQuest ? ' selected' : '';
   const qp = data.questPoints ? `<span class="quest-qp">${data.questPoints}qp</span>` : '';
   const mem = data.members ? `<span class="quest-members-tag">M</span>` : '';
   const mini = isMiniquest(name) ? `<span class="quest-miniquest-tag">mini</span>` : '';
-  return `<div class="quest-item${sel}" onclick="showQuestDetail('${name.replace(/'/g,"\\'")}')">
+  return `<div class="quest-item${sel}${doneCls}" onclick="showQuestDetail('${name.replace(/'/g,"\\'")}')">
     <span class="quest-badge ${st}">${badge}</span>
     <span class="quest-name">${name}</span>
     ${qp}${mem}${mini}
@@ -3427,7 +3445,7 @@ function renderQuestList() {
   const f      = document.getElementById('quest-filter')?.value || 'all';
   const completable = computeCompletableQuests();
 
-  const orderMap = {ok:0, close:1, locked:2};
+  const orderMap = {ok:0, close:1, locked:2, done:3};
   const sortFn = ([an], [bn]) => {
     const as = questStatus(an, completable), bs = questStatus(bn, completable);
     if (orderMap[as] !== orderMap[bs]) return orderMap[as] - orderMap[bs];
@@ -3438,10 +3456,12 @@ function renderQuestList() {
   for (const [name, data] of Object.entries(questsData)) {
     if (search && !name.toLowerCase().includes(search)) continue;
     const st = questStatus(name, completable);
-    if (f === 'ok'      && st !== 'ok')    continue;
-    if (f === 'close'   && st !== 'close') continue;
-    if (f === 'free'    && data.members)   continue;
-    if (f === 'members' && !data.members)  continue;
+    if (f === 'ok'      && st !== 'ok')       continue;
+    if (f === 'close'   && st !== 'close')    continue;
+    if (f === 'done'    && st !== 'done')     continue;
+    if (f === 'notdone' && st === 'done')     continue;
+    if (f === 'free'    && data.members)      continue;
+    if (f === 'members' && !data.members)     continue;
     if (isMiniquest(name)) miniquests.push([name, data]);
     else                   mainQuests.push([name, data]);
   }
@@ -3449,13 +3469,18 @@ function renderQuestList() {
   mainQuests.sort(sortFn);
   miniquests.sort(sortFn);
 
+  const doneMain  = mainQuests.filter(([n]) => completedQuests.has(n)).length;
+  const doneMini  = miniquests.filter(([n]) => completedQuests.has(n)).length;
+
   let html = '';
   if (mainQuests.length) {
-    html += `<div class="quest-section-header">Quests (${mainQuests.length})</div>`;
+    const doneStr = doneMain ? ` · ${doneMain} done` : '';
+    html += `<div class="quest-section-header">Quests (${mainQuests.length}${doneStr})</div>`;
     for (const [name, data] of mainQuests) html += questItemHtml(name, data, completable);
   }
   if (miniquests.length) {
-    html += `<div class="quest-section-header" style="margin-top:4px">Miniquests (${miniquests.length}) — wiki data only</div>`;
+    const doneStr = doneMini ? ` · ${doneMini} done` : '';
+    html += `<div class="quest-section-header" style="margin-top:4px">Miniquests (${miniquests.length}${doneStr}) — wiki data only</div>`;
     for (const [name, data] of miniquests) html += questItemHtml(name, data, completable);
   }
   if (!html) html = `<div style="padding:12px;color:#444;font-size:12px">No quests match this filter.</div>`;
@@ -3490,10 +3515,19 @@ function showQuestDetail(questName, push = true) {
     : (q.members ? 'Members quest' : 'Free quest');
   const qpStr   = q.questPoints ? ` · ${q.questPoints} quest point${q.questPoints!==1?'s':''}` : '';
 
+  const isDone = completedQuests.has(questName);
+  const doneBtn = `<button onclick="toggleQuestDone('${questName.replace(/'/g,"\\'")}')"
+    style="float:right;margin-top:2px;padding:4px 10px;font-size:11px;cursor:pointer;border-radius:3px;border:1px solid;
+      ${isDone
+        ? 'background:#2a1e08;border-color:#7a5020;color:#b07a30'
+        : 'background:#0e1e0e;border-color:#2a5a2a;color:#4a9a4a'}">
+    ${isDone ? '✓ Completed — mark undone' : 'Mark as completed'}
+  </button>`;
+
   let html = `<h1>${questName} ${wikiLink(questName)}
-    <span style="font-size:12px;color:${statusColor};font-weight:normal;margin-left:8px">${statusLabel}</span>
+    <span style="font-size:12px;color:${isDone?'#b07a30':statusColor};font-weight:normal;margin-left:8px">${isDone?'Done':statusLabel}</span>
   </h1>
-  <div class="subtitle">${typeStr}${qpStr}</div>`;
+  <div class="subtitle">${typeStr}${qpStr} ${doneBtn}</div>`;
 
   if (mini) {
     html += `<div style="background:#150e1a;border:1px solid #3a2850;border-radius:4px;padding:8px 12px;margin:10px 0;font-size:11px;color:#8a6aaa;line-height:1.6">
