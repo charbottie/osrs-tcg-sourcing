@@ -121,9 +121,11 @@
   .quest-badge.close   { color: #c8a020; }
   .quest-badge.locked  { color: #7a3a3a; }
   .quest-badge.done    { color: #b07a30; }
-  .quest-item.done-quest { opacity: 0.5; }
-  .quest-item.done-quest:hover { opacity: 0.8; }
-  .quest-item.done-quest.selected { opacity: 1; }
+  .quest-item.done-quest { background: #131310; }
+  .quest-item.done-quest .quest-name { text-decoration: line-through; color: #666; }
+  .quest-item.done-quest:hover { background: #1c1c18; }
+  .quest-item.done-quest.selected { background: #2a2000; }
+  .quest-item.done-quest.selected .quest-name { color: #c8c8c8; text-decoration: none; }
   .quest-name { flex: 1; font-size: 12px; }
   .quest-qp { font-size: 10px; color: #555; flex-shrink: 0; }
   .quest-members-tag { font-size: 9px; color: #4a6a8a; background: #0d1e2e; border-radius: 2px; padding: 1px 3px; flex-shrink: 0; }
@@ -3507,7 +3509,7 @@ function isMiniquest(name) {
 
 function questItemHtml(name, data, completable) {
   const st = questStatus(name, completable);
-  const badge = st === 'done' ? '✓' : (st === 'ok' ? '✓' : (st === 'close' ? '~' : '✗'));
+  const badge = st === 'done' ? '☑' : (st === 'ok' ? '✓' : (st === 'close' ? '~' : '✗'));
   const doneCls = st === 'done' ? ' done-quest' : '';
   const sel = name === selectedQuest ? ' selected' : '';
   const qp = data.questPoints ? `<span class="quest-qp">${data.questPoints}qp</span>` : '';
