@@ -47,29 +47,23 @@ def scan_dir(quest_dir: pathlib.Path) -> dict[str, str]:
 def main() -> int:
     p = argparse.ArgumentParser(description=__doc__,
                                 formatter_class=argparse.RawDescriptionHelpFormatter)
-    p.add_argument("--player", default="",
-                   help="Only scan this player's screenshots (default: all players)")
+    p.add_argument("--player", default="lottie_tcg",
+                   help="Player name to scan (default: lottie_tcg)")
     args = p.parse_args()
 
     if not SCREENSHOTS_BASE.exists():
         print(f"ERROR: Screenshots directory not found: {SCREENSHOTS_BASE}")
         return 1
 
-    all_found: dict[str, str] = {}
+    quest_dir = SCREENSHOTS_BASE / args.player / "Quests"
+    print(f"Scanning: {quest_dir}")
 
-    if args.player:
-        dirs = [SCREENSHOTS_BASE / args.player / "Quests"]
-    else:
-        dirs = [d / "Quests" for d in SCREENSHOTS_BASE.iterdir() if d.is_dir()]
+    all_found = scan_dir(quest_dir)
 
-    for quest_dir in dirs:
-        found = scan_dir(quest_dir)
-        if found:
-            player = quest_dir.parent.name
-            print(f"  {player}: {len(found)} completed quests")
-            for name in sorted(found):
-                print(f"    {name}")
-            all_found.update(found)
+    if all_found:
+        print(f"  {len(all_found)} completed quests:")
+        for name in sorted(all_found):
+            print(f"    {name}")
 
     if not all_found:
         print("No quest completion screenshots found.")

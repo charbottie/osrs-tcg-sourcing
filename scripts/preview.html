@@ -846,14 +846,32 @@ let clueRewardRarities  = {};   // tier → {item name → fraction string}
 let ingredientInfo      = {};   // non-card ingredient name → {production, shops, spawns}
 let questsData          = {};   // quest name → {prerequisites, skillRequirements, ...}
 let bmQuestCards        = {};   // quest name → {cardGroups, groupLabels, monsterCards, notes} from bronzeman plugin
-let completedQuests     = new Set(JSON.parse(localStorage.getItem('completed_quests') || '[]'));
+// Two separate stores: screenshot-derived (file) and manually toggled (user).
+// completedQuests = union of both; re-running the script only touches the file set.
+let _cqFile   = new Set(JSON.parse(localStorage.getItem('cq_file')   || '[]'));
+let _cqManual = new Set(JSON.parse(localStorage.getItem('cq_manual') || '[]'));
+let completedQuests = new Set([..._cqFile, ..._cqManual]);
+
+function _saveCq() {
+  localStorage.setItem('cq_file',   JSON.stringify([..._cqFile]));
+  localStorage.setItem('cq_manual', JSON.stringify([..._cqManual]));
+  // Keep legacy key in sync so old code paths (if any) still work
+  localStorage.setItem('completed_quests', JSON.stringify([...completedQuests]));
+}
 
 function toggleQuestDone(name) {
-  if (completedQuests.has(name)) completedQuests.delete(name);
-  else completedQuests.add(name);
-  localStorage.setItem('completed_quests', JSON.stringify([...completedQuests]));
+  if (completedQuests.has(name)) {
+    // Remove from whichever set(s) it's in
+    _cqFile.delete(name);
+    _cqManual.delete(name);
+    completedQuests.delete(name);
+  } else {
+    _cqManual.add(name);
+    completedQuests.add(name);
+  }
+  _saveCq();
   renderQuestList();
-  showQuestDetail(name, false);   // re-render detail without pushing history
+  showQuestDetail(name, false);
 }
 let allCards     = [];
 let selected = null, selectedType = null;
@@ -980,12 +998,14 @@ async function loadData() {
         bmQuestCards[q.name] = q;
       }
     }
-    // Merge completed quests from screenshot-derived file (on top of localStorage)
-    for (const name of (cq.completedQuests || [])) {
-      completedQuests.add(name);
-    }
-    if ((cq.completedQuests || []).length) {
-      localStorage.setItem('completed_quests', JSON.stringify([...completedQuests]));
+    // Replace the file-sourced set with the current file contents.
+    // This means re-running decode_completed_quests.py correctly removes
+    // stale entries (e.g. quests from other accounts) without touching
+    // manually-marked quests stored in _cqManual.
+    if ((cq.completedQuests || []).length > 0) {
+      _cqFile = new Set(cq.completedQuests);
+      completedQuests = new Set([..._cqFile, ..._cqManual]);
+      _saveCq();
     }
     // Build inverted tier → [item names] map from clue_sources.json
     for (const [name, tiers] of Object.entries(cs)) {
@@ -2235,11 +2255,11 @@ async function syncQuestsFromScreenshots() {
       return r.json();
     });
 
-    let added = 0;
-    for (const name of (data.completedQuests || [])) {
-      if (!completedQuests.has(name)) { completedQuests.add(name); added++; }
-    }
-    localStorage.setItem('completed_quests', JSON.stringify([...completedQuests]));
+    const before = _cqFile.size;
+    _cqFile = new Set(data.completedQuests || []);
+    completedQuests = new Set([..._cqFile, ..._cqManual]);
+    _saveCq();
+    const added = _cqFile.size - before;
     renderQuestList();
 
     if (btn) {
