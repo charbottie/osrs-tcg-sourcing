@@ -105,6 +105,8 @@ class Handler(http.server.SimpleHTTPRequestHandler):
             self._api_generate_log()
         elif path == "/api/hiscores":
             self._api_hiscores()
+        elif path == "/api/quests/completed":
+            self._api_quests_completed()
         else:
             self.send_error(404)
 
@@ -225,6 +227,48 @@ class Handler(http.server.SimpleHTTPRequestHandler):
                     levels[self._HISCORE_SKILLS[i]] = lvl
 
         self._json_response({"player": player, "levels": levels})
+
+    # ── Quest completion from RuneLite screenshots ────────────────────────
+
+    # RuneLite Screenshot plugin names quest-completion screenshots:
+    #   Quest(<quest name>) YYYY-MM-DD_HH-MM-SS.png
+    # The quest name is exactly what OSRS displays on completion.
+    _SCREENSHOTS_BASE = pathlib.Path.home() / ".runelite" / "screenshots"
+
+    def _api_quests_completed(self):
+        import re
+        qs = urllib.parse.parse_qs(urllib.parse.urlparse(self.path).query)
+        player = (qs.get("player") or [""])[0].strip()
+
+        search_dirs: list[pathlib.Path] = []
+        if player:
+            search_dirs.append(self._SCREENSHOTS_BASE / player / "Quests")
+        # Also scan all player dirs if no player specified, or as fallback
+        if self._SCREENSHOTS_BASE.exists():
+            for d in self._SCREENSHOTS_BASE.iterdir():
+                candidate = d / "Quests"
+                if candidate not in search_dirs and candidate.is_dir():
+                    search_dirs.append(candidate)
+
+        pattern = re.compile(r'^Quest\((.+?)\)\s+\d{4}-\d{2}-\d{2}')
+        found: dict[str, str] = {}   # quest name → screenshot filename (latest)
+
+        for quest_dir in search_dirs:
+            if not quest_dir.is_dir():
+                continue
+            for f in quest_dir.iterdir():
+                m = pattern.match(f.name)
+                if m:
+                    name = m.group(1)
+                    # Keep most recent screenshot for each quest name
+                    if name not in found or f.name > found[name]:
+                        found[name] = f.name
+
+        self._json_response({
+            "completedQuests": sorted(found.keys()),
+            "screenshotCount": len(found),
+            "dirsScanned": [str(d) for d in search_dirs],
+        })
 
     # ── Helpers ───────────────────────────────────────────────────────────
 

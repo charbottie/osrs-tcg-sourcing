@@ -2216,6 +2216,56 @@ async function lookupLevels() {
   }
 }
 
+// ─── Quest sync from RuneLite screenshots (requires server.py) ────────────────
+async function syncQuestsFromScreenshots() {
+  const btn = document.getElementById('quest-sync-btn');
+  if (!btn) return;
+  btn.disabled = true;
+  btn.textContent = '…';
+
+  try {
+    const rsn = document.getElementById('rsn-input')?.value.trim() || '';
+    const url  = rsn ? `/api/quests/completed?player=${encodeURIComponent(rsn)}` : '/api/quests/completed';
+    const data = await fetch(url).then(r => {
+      if (!r.ok) throw new Error(`HTTP ${r.status}`);
+      return r.json();
+    });
+
+    if (!data.completedQuests?.length) {
+      btn.textContent = 'None found';
+      btn.style.color = '#888';
+      setTimeout(() => { btn.textContent = '↻ Sync'; btn.style.color = ''; btn.disabled = false; }, 2500);
+      return;
+    }
+
+    // Match screenshot names to questsData keys (case-insensitive fallback)
+    const questIndex = {};
+    for (const name of Object.keys(questsData)) questIndex[name.toLowerCase()] = name;
+
+    let added = 0;
+    for (const screenshotName of data.completedQuests) {
+      const canonical = questsData[screenshotName]   // exact match first
+        ? screenshotName
+        : questIndex[screenshotName.toLowerCase()];   // case-insensitive fallback
+      if (canonical && !completedQuests.has(canonical)) {
+        completedQuests.add(canonical);
+        added++;
+      }
+    }
+    localStorage.setItem('completed_quests', JSON.stringify([...completedQuests]));
+
+    renderQuestList();
+    btn.textContent = `+${added} synced`;
+    btn.style.color = '#4a9a4a';
+    setTimeout(() => { btn.textContent = '↻ Sync'; btn.style.color = ''; btn.disabled = false; }, 2500);
+  } catch (e) {
+    btn.textContent = 'No server';
+    btn.style.color = '#884444';
+    btn.title = 'Run python3 scripts/server.py first';
+    setTimeout(() => { btn.textContent = '↻ Sync'; btn.style.color = ''; btn.title = 'Import completed quests from RuneLite screenshots'; btn.disabled = false; }, 3000);
+  }
+}
+
 // ─── Tab navigation ────────────────────────────────────────────────────────
 function switchTab(tab) {
   if (tab !== activeTab) pushHistoryEntry();
@@ -2263,16 +2313,23 @@ function _renderTab(tab, resetSelection = true) {
           <div id="quest-list-controls">
             <input id="quest-search" type="text" placeholder="Search quests…" oninput="renderQuestList()"
               style="background:#222;border:1px solid #444;color:#ddd;padding:6px 8px;border-radius:3px;font-size:12px;width:100%">
-            <select id="quest-filter" onchange="renderQuestList()"
-              style="background:#222;border:1px solid #444;color:#ccc;padding:4px 6px;border-radius:3px;font-size:11px">
-              <option value="all">All quests</option>
-              <option value="notdone">Not completed</option>
-              <option value="ok">Completable</option>
-              <option value="close">Almost ready</option>
-              <option value="done">Completed</option>
-              <option value="free">Free quests</option>
-              <option value="members">Members only</option>
-            </select>
+            <div style="display:flex;gap:6px;align-items:center">
+              <select id="quest-filter" onchange="renderQuestList()"
+                style="flex:1;background:#222;border:1px solid #444;color:#ccc;padding:4px 6px;border-radius:3px;font-size:11px">
+                <option value="all">All quests</option>
+                <option value="notdone">Not completed</option>
+                <option value="ok">Completable</option>
+                <option value="close">Almost ready</option>
+                <option value="done">Completed</option>
+                <option value="free">Free quests</option>
+                <option value="members">Members only</option>
+              </select>
+              <button id="quest-sync-btn" onclick="syncQuestsFromScreenshots()"
+                title="Import completed quests from RuneLite screenshots"
+                style="background:#222;border:1px solid #444;color:#888;padding:4px 8px;border-radius:3px;cursor:pointer;font-size:11px;white-space:nowrap;flex-shrink:0">
+                ↻ Sync
+              </button>
+            </div>
           </div>
           <div id="quest-list-scroll"></div>
         </div>
@@ -2305,6 +2362,8 @@ function _renderTab(tab, resetSelection = true) {
         </div>
       </div>`;
       renderQuestList();
+      // Auto-sync from screenshots on first tab open (silently — no feedback if server absent)
+      syncQuestsFromScreenshots().catch(() => {});
     } else if (tab === 'equipment') {
       mainContent.innerHTML = renderEquipmentTab();
       initEquipmentTab();
