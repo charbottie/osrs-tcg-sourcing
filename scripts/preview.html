@@ -123,6 +123,15 @@
   .quest-name { flex: 1; font-size: 12px; }
   .quest-qp { font-size: 10px; color: #555; flex-shrink: 0; }
   .quest-members-tag { font-size: 9px; color: #4a6a8a; background: #0d1e2e; border-radius: 2px; padding: 1px 3px; flex-shrink: 0; }
+  .quest-section-header {
+    padding: 6px 12px 4px;
+    font-size: 10px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 1px;
+    color: #555; background: #111;
+    border-bottom: 1px solid #222;
+    position: sticky; top: 0; z-index: 1;
+  }
+  .quest-miniquest-tag { font-size: 9px; color: #5a4a7a; background: #1a1028; border-radius: 2px; padding: 1px 3px; flex-shrink: 0; }
 
   .req-row {
     display: flex; align-items: center; gap: 8px;
@@ -946,10 +955,16 @@ async function loadData() {
     clueRewardRarities = crr;
     ingredientInfo     = ii;
     questsData         = qd;
-    // Build quest name → BM card requirement map (non-miniquests only)
+    // Build quest name → BM card requirement map; track miniquests separately
     bmQuestCards = {};
     for (const q of (bmqc.quests || [])) {
-      if (q && q.name && !q.miniquest) bmQuestCards[q.name] = q;
+      if (!q || !q.name) continue;
+      if (q.miniquest) {
+        // Miniquests: store card data but flag them so the UI can split them
+        bmQuestCards[q.name] = { ...q, _miniquest: true };
+      } else {
+        bmQuestCards[q.name] = q;
+      }
     }
     // Build inverted tier → [item names] map from clue_sources.json
     for (const [name, tiers] of Object.entries(cs)) {
@@ -2247,7 +2262,31 @@ function _renderTab(tab, resetSelection = true) {
           <div id="quest-list-scroll"></div>
         </div>
         <div id="quest-detail-pane">
-          <div class="placeholder" style="margin-top:60px;color:#444">← Select a quest</div>
+          <div id="quest-welcome" style="max-width:500px;padding:8px 4px">
+            <h2 style="color:#e8c97a;font-size:15px;margin-bottom:12px">Quest completability</h2>
+            <p style="color:#888;font-size:12px;line-height:1.7;margin-bottom:14px">
+              Select a quest from the list to see which cards you need and whether you can complete it.
+              The list is sorted by status: ✓ completable first, ~ almost ready, ✗ locked.
+            </p>
+            <div style="background:#1a1608;border:1px solid #3a3010;border-radius:4px;padding:12px;font-size:11px;line-height:1.7;color:#999;margin-bottom:12px">
+              <div style="color:#c8a830;font-weight:700;margin-bottom:6px">About the data sources</div>
+              <div style="margin-bottom:6px">
+                <span style="color:#7ab07a">Quests (180)</span> — requirements come from the
+                <strong style="color:#bbb">Bronzeman TCG plugin</strong>, which was manually curated
+                to use exact card names and includes mid-quest items (things handed to you during the
+                quest that you must use or hand over). This is the most accurate source.
+              </div>
+              <div>
+                <span style="color:#9070b0">Miniquests (30)</span> — requirements come from the
+                <strong style="color:#bbb">OSRS wiki infobox</strong> only. Card names may not match
+                exactly, and mid-quest item requirements are not captured. Treat these as a rough guide.
+              </div>
+            </div>
+            <p style="color:#555;font-size:11px;line-height:1.6">
+              If a main quest shows requirements that seem wrong, the bronzeman plugin data is the authoritative source —
+              raise it with Felmeme to get the quest entry updated.
+            </p>
+          </div>
         </div>
       </div>`;
       renderQuestList();
@@ -3359,55 +3398,76 @@ function questStatus(questName, completable) {
   return 'locked';
 }
 
+function isMiniquest(name) {
+  // A quest is a miniquest if BM data flags it, or if it has 0 quest points and
+  // isn't in the main BM quest list (best-effort for wiki-only entries).
+  if (bmQuestCards[name]?._miniquest) return true;
+  if (!bmQuestCards[name] && questsData[name]?.questPoints === 0) return true;
+  return false;
+}
+
+function questItemHtml(name, data, completable) {
+  const st = questStatus(name, completable);
+  const badge = st === 'ok' ? '✓' : (st === 'close' ? '~' : '✗');
+  const sel = name === selectedQuest ? ' selected' : '';
+  const qp = data.questPoints ? `<span class="quest-qp">${data.questPoints}qp</span>` : '';
+  const mem = data.members ? `<span class="quest-members-tag">M</span>` : '';
+  const mini = isMiniquest(name) ? `<span class="quest-miniquest-tag">mini</span>` : '';
+  return `<div class="quest-item${sel}" onclick="showQuestDetail('${name.replace(/'/g,"\\'")}')">
+    <span class="quest-badge ${st}">${badge}</span>
+    <span class="quest-name">${name}</span>
+    ${qp}${mem}${mini}
+  </div>`;
+}
+
 function renderQuestList() {
   const scroll = document.getElementById('quest-list-scroll');
   if (!scroll) return;
-  const q  = (document.getElementById('quest-search')?.value || '').toLowerCase();
-  const f  = document.getElementById('quest-filter')?.value || 'all';
+  const search = (document.getElementById('quest-search')?.value || '').toLowerCase();
+  const f      = document.getElementById('quest-filter')?.value || 'all';
   const completable = computeCompletableQuests();
 
-  let quests = Object.entries(questsData);
-
-  // Filter
-  quests = quests.filter(([name, data]) => {
-    if (q && !name.toLowerCase().includes(q)) return false;
-    const st = questStatus(name, completable);
-    if (f === 'ok'      && st !== 'ok')    return false;
-    if (f === 'close'   && st !== 'close') return false;
-    if (f === 'free'    && data.members)   return false;
-    if (f === 'members' && !data.members)  return false;
-    return true;
-  });
-
-  // Sort: ok → close → locked, then alphabetical
   const orderMap = {ok:0, close:1, locked:2};
-  quests.sort(([an, ad], [bn, bd]) => {
+  const sortFn = ([an], [bn]) => {
     const as = questStatus(an, completable), bs = questStatus(bn, completable);
     if (orderMap[as] !== orderMap[bs]) return orderMap[as] - orderMap[bs];
     return an.localeCompare(bn);
-  });
+  };
+
+  let mainQuests = [], miniquests = [];
+  for (const [name, data] of Object.entries(questsData)) {
+    if (search && !name.toLowerCase().includes(search)) continue;
+    const st = questStatus(name, completable);
+    if (f === 'ok'      && st !== 'ok')    continue;
+    if (f === 'close'   && st !== 'close') continue;
+    if (f === 'free'    && data.members)   continue;
+    if (f === 'members' && !data.members)  continue;
+    if (isMiniquest(name)) miniquests.push([name, data]);
+    else                   mainQuests.push([name, data]);
+  }
+
+  mainQuests.sort(sortFn);
+  miniquests.sort(sortFn);
 
   let html = '';
-  for (const [name, data] of quests) {
-    const st = questStatus(name, completable);
-    const badge = st === 'ok' ? '✓' : (st === 'close' ? '~' : '✗');
-    const badgeCls = st;
-    const sel = name === selectedQuest ? ' selected' : '';
-    const qp = data.questPoints ? `<span class="quest-qp">${data.questPoints}qp</span>` : '';
-    const mem = data.members ? `<span class="quest-members-tag">M</span>` : '';
-    html += `<div class="quest-item${sel}" onclick="showQuestDetail('${name.replace(/'/g,"\\'")}')">
-      <span class="quest-badge ${badgeCls}">${badge}</span>
-      <span class="quest-name">${name}</span>
-      ${qp}${mem}
-    </div>`;
+  if (mainQuests.length) {
+    html += `<div class="quest-section-header">Quests (${mainQuests.length})</div>`;
+    for (const [name, data] of mainQuests) html += questItemHtml(name, data, completable);
   }
-  scroll.innerHTML = html || `<div style="padding:12px;color:#444;font-size:12px">No quests match this filter.</div>`;
+  if (miniquests.length) {
+    html += `<div class="quest-section-header" style="margin-top:4px">Miniquests (${miniquests.length}) — wiki data only</div>`;
+    for (const [name, data] of miniquests) html += questItemHtml(name, data, completable);
+  }
+  if (!html) html = `<div style="padding:12px;color:#444;font-size:12px">No quests match this filter.</div>`;
+  scroll.innerHTML = html;
 }
 
 function showQuestDetail(questName, push = true) {
   if (push) pushHistoryEntry();
   selectedQuest = questName;
-  // Update list selection
+  // Hide welcome panel, update list selection
+  const welcome = document.getElementById('quest-welcome');
+  if (welcome) welcome.style.display = 'none';
   document.querySelectorAll('.quest-item').forEach(el => {
     el.classList.toggle('selected', el.querySelector('.quest-name')?.textContent === questName);
   });
@@ -3419,18 +3479,28 @@ function showQuestDetail(questName, push = true) {
 
   const completable = computeCompletableQuests();
   const st = questStatus(questName, completable);
+  const mini = isMiniquest(questName);
 
   const statusColor = st === 'ok' ? '#3a9a3a' : (st === 'close' ? '#c8a020' : '#9a3a3a');
   const statusLabel = st === 'ok' ? 'Completable' : (st === 'close' ? 'Almost ready' : 'Locked');
 
   // Subtitle
-  const typeStr = q.members ? 'Members quest' : 'Free quest';
+  const typeStr = mini
+    ? (q.members ? 'Members miniquest' : 'Free miniquest')
+    : (q.members ? 'Members quest' : 'Free quest');
   const qpStr   = q.questPoints ? ` · ${q.questPoints} quest point${q.questPoints!==1?'s':''}` : '';
 
   let html = `<h1>${questName} ${wikiLink(questName)}
     <span style="font-size:12px;color:${statusColor};font-weight:normal;margin-left:8px">${statusLabel}</span>
   </h1>
   <div class="subtitle">${typeStr}${qpStr}</div>`;
+
+  if (mini) {
+    html += `<div style="background:#150e1a;border:1px solid #3a2850;border-radius:4px;padding:8px 12px;margin:10px 0;font-size:11px;color:#8a6aaa;line-height:1.6">
+      ⚠ <strong style="color:#a080cc">Miniquest</strong> — requirements shown here come from the OSRS wiki infobox only.
+      Mid-quest items and exact card names may be missing. Check the wiki for the full walkthrough.
+    </div>`;
+  }
 
   if (q.questNpc) {
     html += `<div class="section">
