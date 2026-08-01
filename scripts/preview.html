@@ -515,7 +515,7 @@
     width: 7px; height: 7px; border-radius: 50%; background: #5a9a30;
   }
   #equip-detail-pane { flex: 1; overflow-y: auto; padding: 20px 24px; }
-  .equip-slot-header { font-size: 14px; color: #e8c97a; font-weight: 600; margin-bottom: 4px; }
+  .equip-slot-header { font-size: 14px; color: #e8c97a; font-weight: 600; margin-bottom: 4px; display: flex; align-items: center; }
   .equip-slot-sub { font-size: 11px; color: #555; margin-bottom: 16px; }
   .equip-item-row {
     display: flex; align-items: center; gap: 10px;
@@ -832,6 +832,7 @@ let clueRewardsByTier   = {};   // tier → [item names]
 let clueRewardRarities  = {};   // tier → {item name → fraction string}
 let ingredientInfo      = {};   // non-card ingredient name → {production, shops, spawns}
 let questsData          = {};   // quest name → {prerequisites, skillRequirements, ...}
+let bmQuestCards        = {};   // quest name → {cardGroups, groupLabels, monsterCards, notes} from bronzeman plugin
 let allCards     = [];
 let selected = null, selectedType = null;
 let activeTab = 'cards';
@@ -924,7 +925,7 @@ function simulateRandom() {
 async function loadData() {
   try {
     const cb = `?v=${Date.now()}`;  // cache-bust so updated JSON files are always fresh
-    const [md, is, qc, cc, cd, css, cs, crr, ii, qd, ed, fd] = await Promise.all([
+    const [md, is, qc, cc, cd, css, cs, crr, ii, qd, ed, fd, bmqc] = await Promise.all([
       fetch(`output/monster_drops.json${cb}`).then(r => r.json()).catch(() => ({})),
       fetch(`output/item_sources.json${cb}`).then(r => r.json()).catch(() => ({})),
       fetch(`output/quest_chains.json${cb}`).then(r => r.json()).catch(() => ({})),
@@ -937,6 +938,7 @@ async function loadData() {
       fetch(`output/quests.json${cb}`).then(r => r.json()).catch(() => ({})),
       fetch(`output/equipment_data.json${cb}`).then(r => r.json()).catch(() => ({})),
       fetch(`output/food_data.json${cb}`).then(r => r.json()).catch(() => ({})),
+      fetch(`output/bm_quest_cards.json${cb}`).then(r => r.json()).catch(() => ({quests:[]})),
     ]);
     monsterDrops = md; itemSources = is; questChains = qc; cardCategories = cc; cardDetails = cd;
     equipBySlot = ed; foodData = fd;
@@ -944,6 +946,11 @@ async function loadData() {
     clueRewardRarities = crr;
     ingredientInfo     = ii;
     questsData         = qd;
+    // Build quest name → BM card requirement map (non-miniquests only)
+    bmQuestCards = {};
+    for (const q of (bmqc.quests || [])) {
+      if (q && q.name && !q.miniquest) bmQuestCards[q.name] = q;
+    }
     // Build inverted tier → [item names] map from clue_sources.json
     for (const [name, tiers] of Object.entries(cs)) {
       for (const tier of tiers) {
@@ -3290,13 +3297,36 @@ function showSlayerMasterDetail(masterName) {
 
 // ─── Questing tab ──────────────────────────────────────────────────────────
 
+/**
+ * Check whether all card groups for a quest are satisfied using BM data.
+ * Returns {cardsOk, missingCount} where cardsOk=true means all groups have ≥1 owned card.
+ * Falls back to quests.json itemsRequired + killsRequired if no BM data.
+ */
+function checkQuestCards(name, q) {
+  const bm = bmQuestCards[name];
+  if (bm) {
+    let missing = 0;
+    for (const group of (bm.cardGroups || [])) {
+      if (!group.some(card => isOwned(card))) missing++;
+    }
+    for (const monster of (bm.monsterCards || [])) {
+      if (!isOwned(monster)) missing++;
+    }
+    return { cardsOk: missing === 0, missingCount: missing };
+  }
+  // Fallback to wiki infobox data
+  const missingItems = (q.itemsRequired || []).filter(i => !isOwned(i));
+  const missingKills = (q.killsRequired || []).filter(k => !isOwned(k));
+  const missing = missingItems.length + missingKills.length;
+  return { cardsOk: missing === 0, missingCount: missing };
+}
+
 function computeCompletableQuests() {
   /**
    * Iteratively propagate completability. A quest is completable if:
    *   - All prerequisites are completable (or not in our dataset)
    *   - All skill requirements are met (player level >= req)
-   *   - All required items are owned (player has the card)
-   *   - All kill requirements are owned (player has the monster card)
+   *   - All card groups satisfied (prefer BM data; fallback to wiki infobox)
    * Returns a Set of completable quest names.
    */
   const completable = new Set();
@@ -3307,9 +3337,8 @@ function computeCompletableQuests() {
       if (completable.has(name)) continue;
       const prereqsOk = (q.prerequisites || []).every(p => completable.has(p) || !questsData[p]);
       const skillsOk  = (q.skillRequirements || []).every(r => getLevel(r.skill) >= r.level);
-      const itemsOk   = (q.itemsRequired || []).every(i => isOwned(i));
-      const killsOk   = (q.killsRequired || []).every(k => isOwned(k));
-      if (prereqsOk && skillsOk && itemsOk && killsOk) {
+      const { cardsOk } = checkQuestCards(name, q);
+      if (prereqsOk && skillsOk && cardsOk) {
         completable.add(name); changed = true;
       }
     }
@@ -3325,9 +3354,8 @@ function questStatus(questName, completable) {
   const prereqsOk = (q.prerequisites || []).every(p => completable.has(p) || !questsData[p]);
   const skillsOk  = (q.skillRequirements || []).every(r => getLevel(r.skill) >= r.level);
   if (!prereqsOk || !skillsOk) return 'locked';
-  const missingItems = (q.itemsRequired || []).filter(i => !isOwned(i));
-  const missingKills = (q.killsRequired || []).filter(k => !isOwned(k));
-  if (missingItems.length + missingKills.length <= 2) return 'close';
+  const { missingCount } = checkQuestCards(questName, q);
+  if (missingCount <= 2) return 'close';
   return 'locked';
 }
 
@@ -3442,34 +3470,114 @@ function showQuestDetail(questName, push = true) {
     html += `</div></div>`;
   }
 
-  // Items required
-  if (q.itemsRequired?.length) {
-    html += `<div class="section"><div class="section-header">Items Required</div><div style="margin-top:8px">`;
-    for (const item of q.itemsRequired) {
-      const ok = isOwned(item);
-      const isCard = !!itemSources[item];
-      html += `<div class="req-row">
-        <span class="req-icon ${ok?'ok':'fail'}">${ok?'✓':'✗'}</span>
-        <span class="req-label" ${isCard?`style="cursor:pointer" onclick="pushHistoryEntry();_renderTab('cards');setTimeout(()=>showCard('${item.replace(/'/g,"\\'")}','item',false),50)"`:''}>${item}</span>
-        <span class="req-note">${ok ? 'owned' : (isCard ? 'need card' : 'no TCG card')}</span>
-      </div>`;
-    }
-    html += `</div></div>`;
-  }
+  // Card requirements — prefer BM data (exact card names, any-of groups, mid-quest items)
+  const bm = bmQuestCards[questName];
+  if (bm) {
+    const cardGroups = bm.cardGroups || [];
+    const groupLabels = bm.groupLabels || [];
+    const monsterCards = bm.monsterCards || [];
+    const totalGroups = cardGroups.length + monsterCards.length;
 
-  // Enemies to defeat
-  if (q.killsRequired?.length) {
-    html += `<div class="section"><div class="section-header">Enemies to Defeat</div><div style="margin-top:8px">`;
-    for (const kill of q.killsRequired) {
-      const ok = isOwned(kill);
-      const isCard = !!monsterDrops[kill];
-      html += `<div class="req-row">
-        <span class="req-icon ${ok?'ok':'fail'}">${ok?'✓':'✗'}</span>
-        <span class="req-label" ${isCard?`style="cursor:pointer" onclick="pushHistoryEntry();_renderTab('cards');setTimeout(()=>showCard('${kill.replace(/'/g,"\\'")}','monster',false),50)"`:''}>${kill}</span>
-        <span class="req-note">${ok ? 'card owned' : (isCard ? 'need monster card' : 'no TCG card')}</span>
-      </div>`;
+    if (totalGroups > 0) {
+      // Split into satisfied vs missing for display ordering
+      const itemRows = [], monsterRows = [];
+
+      // Item card groups (any-of within each group)
+      for (let i = 0; i < cardGroups.length; i++) {
+        const group = cardGroups[i];
+        const label = (groupLabels[i] || group[0]) || '';
+        const groupOk = group.some(card => isOwned(card));
+
+        if (group.length === 1) {
+          // Single card — show normally
+          const card = group[0];
+          const ok = isOwned(card);
+          const isItemCard = !!itemSources[card];
+          const nav = isItemCard
+            ? `style="cursor:pointer" onclick="pushHistoryEntry();_renderTab('cards');setTimeout(()=>showCard('${card.replace(/'/g,"\\'")}','item',false),50)"`
+            : '';
+          const note = bm.notes && bm.notes.includes(card) ? `<span style="font-size:10px;color:#7a6a30;margin-left:6px">mid-quest</span>` : '';
+          itemRows.push({ ok, html: `<div class="req-row">
+            <span class="req-icon ${ok?'ok':'fail'}">${ok?'✓':'✗'}</span>
+            <span class="req-label" ${nav}>${card}</span>
+            <span class="req-note">${ok ? 'owned' : 'need card'}</span>${note}
+          </div>` });
+        } else {
+          // Any-of group
+          const nav = group.map(c => itemSources[c]
+            ? `<span style="cursor:pointer;color:${isOwned(c)?'#7ab07a':'#9a5a5a'}" onclick="pushHistoryEntry();_renderTab('cards');setTimeout(()=>showCard('${c.replace(/'/g,"\\'")}','item',false),50)">${c}</span>`
+            : `<span style="color:${isOwned(c)?'#7ab07a':'#666'}">${c}</span>`).join('<span style="color:#444"> · </span>');
+          itemRows.push({ ok: groupOk, html: `<div class="req-row" style="align-items:flex-start">
+            <span class="req-icon ${groupOk?'ok':'fail'}" style="margin-top:2px">${groupOk?'✓':'✗'}</span>
+            <div style="flex:1">
+              <div class="req-label" style="color:#888;font-size:11px;margin-bottom:3px">Any: ${label}</div>
+              <div style="font-size:11px;line-height:1.6">${nav}</div>
+            </div>
+          </div>` });
+        }
+      }
+
+      // Monster cards (each must be owned individually)
+      for (const monster of monsterCards) {
+        const ok = isOwned(monster);
+        const isCard = !!monsterDrops[monster];
+        const nav = isCard
+          ? `style="cursor:pointer" onclick="pushHistoryEntry();_renderTab('cards');setTimeout(()=>showCard('${monster.replace(/'/g,"\\'")}','monster',false),50)"`
+          : '';
+        monsterRows.push({ ok, html: `<div class="req-row">
+          <span class="req-icon ${ok?'ok':'fail'}">${ok?'✓':'✗'}</span>
+          <span class="req-label" ${nav}>${monster}</span>
+          <span class="req-note">${ok ? 'card owned' : (isCard ? 'need card' : 'no TCG card')}</span>
+        </div>` });
+      }
+
+      if (itemRows.length > 0) {
+        html += `<div class="section"><div class="section-header">Items &amp; Cards Required</div><div style="margin-top:8px">`;
+        // Show missing first, then owned
+        for (const r of [...itemRows.filter(r=>!r.ok), ...itemRows.filter(r=>r.ok)]) html += r.html;
+        html += `</div></div>`;
+      }
+      if (monsterRows.length > 0) {
+        html += `<div class="section"><div class="section-header">Enemies to Defeat</div><div style="margin-top:8px">`;
+        for (const r of [...monsterRows.filter(r=>!r.ok), ...monsterRows.filter(r=>r.ok)]) html += r.html;
+        html += `</div></div>`;
+      }
+
+      if (bm.notes) {
+        html += `<div style="font-size:11px;color:#7a6a30;margin-top:4px;padding:6px 8px;background:#1e1a08;border-radius:3px">
+          ⚠ ${bm.notes}</div>`;
+      }
+    } else {
+      html += `<div style="color:#555;font-size:12px;margin-top:4px">No card requirements tracked. Check the wiki for full details.</div>`;
     }
-    html += `</div></div>`;
+  } else {
+    // Fallback: wiki infobox data (may include non-card items)
+    if (q.itemsRequired?.length) {
+      html += `<div class="section"><div class="section-header">Items Required <span style="font-size:10px;color:#555;font-weight:normal">(wiki infobox)</span></div><div style="margin-top:8px">`;
+      for (const item of q.itemsRequired) {
+        const ok = isOwned(item);
+        const isCard = !!itemSources[item];
+        html += `<div class="req-row">
+          <span class="req-icon ${ok?'ok':'fail'}">${ok?'✓':'✗'}</span>
+          <span class="req-label" ${isCard?`style="cursor:pointer" onclick="pushHistoryEntry();_renderTab('cards');setTimeout(()=>showCard('${item.replace(/'/g,"\\'")}','item',false),50)"`:''}>${item}</span>
+          <span class="req-note">${ok ? 'owned' : (isCard ? 'need card' : 'no TCG card')}</span>
+        </div>`;
+      }
+      html += `</div></div>`;
+    }
+    if (q.killsRequired?.length) {
+      html += `<div class="section"><div class="section-header">Enemies to Defeat</div><div style="margin-top:8px">`;
+      for (const kill of q.killsRequired) {
+        const ok = isOwned(kill);
+        const isCard = !!monsterDrops[kill];
+        html += `<div class="req-row">
+          <span class="req-icon ${ok?'ok':'fail'}">${ok?'✓':'✗'}</span>
+          <span class="req-label" ${isCard?`style="cursor:pointer" onclick="pushHistoryEntry();_renderTab('cards');setTimeout(()=>showCard('${kill.replace(/'/g,"\\'")}','monster',false),50)"`:''}>${kill}</span>
+          <span class="req-note">${ok ? 'card owned' : (isCard ? 'need monster card' : 'no TCG card')}</span>
+        </div>`;
+      }
+      html += `</div></div>`;
+    }
   }
 
   // Reward items note
@@ -3482,7 +3590,7 @@ function showQuestDetail(questName, push = true) {
     </div>`;
   }
 
-  if (!q.prerequisites?.length && !q.skillRequirements?.length && !q.itemsRequired?.length && !q.killsRequired?.length) {
+  if (!q.prerequisites?.length && !q.skillRequirements?.length && !bm && !q.itemsRequired?.length && !q.killsRequired?.length) {
     html += `<div style="color:#555;font-size:12px;margin-top:12px">No tracked requirements. Check the wiki for full details.</div>`;
   }
 
@@ -3557,6 +3665,7 @@ function renderRulesTab() {
 // equipBySlot declared at top with other globals
 let activeEquipStyle = localStorage.getItem('equip_active_style') || 'melee';
 let selectedEquipSlot = null;
+let equipSortBy = localStorage.getItem('equip_sort_by') || 'value';
 
 const STAT_KEYS = [
   'attack_stab','attack_slash','attack_crush','attack_magic','attack_ranged',
@@ -3985,11 +4094,150 @@ function refreshEquipDoll() {
   pane.innerHTML = html;
 }
 
+const SLOT_DEFAULT_SORT = {
+  weapon: 'dps',
+  ammo:   'atk_style',
+  neck:   'atk_style',
+  ring:   'atk_style',
+  cape:   'atk_style',
+  head:   'def_style',
+  body:   'def_style',
+  legs:   'def_style',
+  hands:  'def_style',
+  feet:   'def_style',
+  shield: 'def_style',
+};
+
 function selectEquipSlot(slot) {
   selectedEquipSlot = slot;
   localStorage.setItem('equip_selected_slot', slot);
+  // Apply a sensible default sort for this slot type
+  const def = SLOT_DEFAULT_SORT[slot] || 'value';
+  equipSortBy = def;
+  localStorage.setItem('equip_sort_by', def);
   refreshEquipDoll();
   renderEquipSlotDetail(slot);
+}
+
+const EQUIP_SORT_OPTS = [
+  { key: 'value',           label: 'Value'     },
+  { key: 'dps',             label: 'DPS'       },
+  { key: 'atk_style',       label: 'Attack'    },
+  { key: 'def_style',       label: 'Defence'   },
+  { key: 'attack_slash',    label: 'Slash'     },
+  { key: 'attack_stab',     label: 'Stab'      },
+  { key: 'attack_crush',    label: 'Crush'     },
+  { key: 'attack_magic',    label: 'Magic atk' },
+  { key: 'attack_ranged',   label: 'Ranged atk'},
+  { key: 'melee_strength',  label: 'Str bonus' },
+  { key: 'ranged_strength', label: 'Rng str'   },
+  { key: 'magic_damage',    label: 'Mag dmg'   },
+  { key: 'defence_slash',   label: 'Def slash' },
+  { key: 'defence_stab',    label: 'Def stab'  },
+  { key: 'defence_crush',   label: 'Def crush' },
+  { key: 'defence_magic',   label: 'Def magic' },
+  { key: 'defence_ranged',  label: 'Def ranged'},
+  { key: 'prayer',          label: 'Prayer'    },
+];
+
+function setEquipSort(key) {
+  equipSortBy = key;
+  localStorage.setItem('equip_sort_by', key);
+  if (selectedEquipSlot) renderEquipSlotDetail(selectedEquipSlot);
+}
+
+function calcDpsForItem(slot, item) {
+  // Full-gear DPS with `item` swapped into `slot` — keeps all other equipped gear.
+  const s = computeTotalStats();
+
+  // Remove current occupant's stats from this slot
+  const cur = getEquipped(slot);
+  if (cur) {
+    const curItem = (equipBySlot[slot] || []).find(i => i.name === cur);
+    if (curItem && curItem.stats)
+      for (const [k, v] of Object.entries(curItem.stats))
+        if (s[k] !== undefined) s[k] -= v;
+  }
+  // Add candidate item's stats
+  if (item.stats)
+    for (const [k, v] of Object.entries(item.stats))
+      if (s[k] !== undefined) s[k] += v;
+
+  // Weapon speed: use candidate's own speed for weapon slot, else current weapon
+  let baseSpeed;
+  if (slot === 'weapon') {
+    baseSpeed = item.attackSpeed || 4;
+  } else {
+    const wpnName = getEquipped('weapon');
+    const wpn = wpnName ? (equipBySlot['weapon'] || []).find(i => i.name === wpnName) : null;
+    baseSpeed = (wpn && wpn.attackSpeed) || 4;
+  }
+
+  const style   = activeEquipStyle;
+  const prayer  = DPS_PRAYERS[dpsSettings.prayer] || DPS_PRAYERS.none;
+  const eDef    = Math.max(1, parseInt(dpsSettings.enemyDefLvl)  || 1);
+  const eBonus  = Math.max(0, parseInt(dpsSettings.enemyDefBonus) || 0);
+  const defRoll = Math.floor((eDef + 9) * (eBonus + 64));
+
+  if (style === 'melee') {
+    const strOff = dpsSettings.atkStyle === 'aggressive' ? 3 : dpsSettings.atkStyle === 'controlled' ? 1 : 0;
+    const atkOff = dpsSettings.atkStyle === 'accurate'   ? 3 : dpsSettings.atkStyle === 'controlled' ? 1 : 0;
+    const effStr = Math.floor(getLevel('Strength') * prayer.mStr) + strOff + 8;
+    const effAtk = Math.floor(getLevel('Attack')   * prayer.mAtk) + atkOff + 8;
+    const eqStr  = s.melee_strength || 0;
+    const eqAtk  = Math.max(s.attack_stab || 0, s.attack_slash || 0, s.attack_crush || 0);
+    const maxHit  = Math.floor(0.5 + effStr * (eqStr + 64) / 640);
+    const atkRoll = Math.floor(effAtk * (eqAtk + 64));
+    const hit = atkRoll > defRoll ? 1 - (defRoll + 2) / (2*(atkRoll+1)) : atkRoll / (2*(defRoll+1));
+    return (maxHit / 2) * Math.max(0, Math.min(1, hit)) / (baseSpeed * 0.6);
+  }
+  if (style === 'ranged') {
+    const isRapid = dpsSettings.atkStyle === 'rapid';
+    const atkOff  = isRapid ? 0 : 3;
+    const speed   = isRapid ? Math.max(1, baseSpeed - 1) : baseSpeed;
+    const effAtk  = Math.floor(getLevel('Ranged') * prayer.rAtk) + atkOff + 8;
+    const effStr  = Math.floor(getLevel('Ranged') * prayer.rStr) + atkOff + 8;
+    const eqStr   = s.ranged_strength || 0;
+    const eqAtk   = s.attack_ranged   || 0;
+    const maxHit  = Math.floor(0.5 + effStr * (eqStr + 64) / 640);
+    const atkRoll = Math.floor(effAtk * (eqAtk + 64));
+    const hit = atkRoll > defRoll ? 1 - (defRoll + 2) / (2*(atkRoll+1)) : atkRoll / (2*(defRoll+1));
+    return (maxHit / 2) * Math.max(0, Math.min(1, hit)) / (speed * 0.6);
+  }
+  return 0; // magic — too spell-dependent
+}
+
+function styleAtkStat(stats) {
+  // Best offensive bonus for the current combat style
+  if (activeEquipStyle === 'melee')
+    return Math.max(stats.attack_stab||0, stats.attack_slash||0, stats.attack_crush||0);
+  if (activeEquipStyle === 'ranged')
+    return (stats.attack_ranged||0) + (stats.ranged_strength||0);
+  if (activeEquipStyle === 'magic')
+    return (stats.attack_magic||0) + (stats.magic_damage||0);
+  return Math.max(stats.attack_stab||0, stats.attack_slash||0, stats.attack_crush||0,
+                  stats.attack_ranged||0, stats.attack_magic||0);
+}
+
+function styleDefStat(stats) {
+  // Defence against the current combat style's attack type
+  if (activeEquipStyle === 'melee')
+    return (stats.defence_stab||0) + (stats.defence_slash||0) + (stats.defence_crush||0);
+  if (activeEquipStyle === 'ranged')
+    return stats.defence_ranged||0;
+  if (activeEquipStyle === 'magic')
+    return stats.defence_magic||0;
+  // 'all': total defence
+  return (stats.defence_stab||0) + (stats.defence_slash||0) + (stats.defence_crush||0)
+       + (stats.defence_ranged||0) + (stats.defence_magic||0);
+}
+
+function getStatVal(item, key) {
+  if (key === 'value')    return item.value || 0;
+  if (key === 'dps')      return selectedEquipSlot ? calcDpsForItem(selectedEquipSlot, item) : 0;
+  if (key === 'atk_style') return styleAtkStat(item.stats || {});
+  if (key === 'def_style') return styleDefStat(item.stats || {});
+  return (item.stats && item.stats[key]) || 0;
 }
 
 function renderEquipSlotDetail(slot) {
@@ -4003,8 +4251,17 @@ function renderEquipSlotDetail(slot) {
   // Find the currently equipped item object for delta comparisons
   const eqItem = items.find(i => i.equipped) || null;
 
+  const sortOpts = EQUIP_SORT_OPTS.map(o =>
+    `<option value="${o.key}"${o.key === equipSortBy ? ' selected' : ''}>${o.label}</option>`
+  ).join('');
+
   let html = `
-    <div class="equip-slot-header" style="color:${col}">${label}</div>
+    <div class="equip-slot-header" style="color:${col}">${label}
+      <select onchange="setEquipSort(this.value)" onclick="event.stopPropagation()"
+        style="margin-left:auto;font-size:10px;background:#1a1a1a;border:1px solid #333;color:#888;padding:2px 4px;border-radius:3px;cursor:pointer">
+        ${sortOpts}
+      </select>
+    </div>
     <div class="equip-slot-sub">${owned} owned · ${items.length} total in this slot</div>`;
 
   const sectionDefs = [
@@ -4016,7 +4273,8 @@ function renderEquipSlotDetail(slot) {
   ];
 
   for (const sec of sectionDefs) {
-    const group = items.filter(sec.filter);
+    const group = items.filter(sec.filter)
+      .sort((a, b) => getStatVal(b, equipSortBy) - getStatVal(a, equipSortBy));
     if (group.length === 0) continue;
     html += `<div class="equip-section-title">${sec.label} (${group.length})</div>`;
     for (const item of group) {
@@ -4024,7 +4282,11 @@ function renderEquipSlotDetail(slot) {
       const nameCls = item.owned ? 'owned' : item.gettable ? 'obtainable' : 'locked';
       const rowCls  = item.equipped ? ' equipped' : (item.owned && !item.equipped && sec.key === 'owned') ? ' new-unlock' : '';
       const tag2h   = item.is2h ? `<span class="equip-2h-tag">2H</span>` : '';
-      const valStr  = item.value > 0 ? formatGp(item.value) : '';
+      const valStr  = equipSortBy === 'value'
+        ? (item.value > 0 ? formatGp(item.value) : '')
+        : equipSortBy === 'dps'
+        ? (() => { const v = calcDpsForItem(slot, item); return v > 0 ? v.toFixed(2) : ''; })()
+        : (() => { const v = getStatVal(item, equipSortBy); return v !== 0 ? (v > 0 ? '+' : '') + v : ''; })();
       const combatBadge = (item.combatType && item.combatType !== 'all')
         ? `<span class="combat-badge ${item.combatType}">${item.combatType}</span>`
         : '';
