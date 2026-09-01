@@ -47,3 +47,49 @@
 
 ### Context used this session
 ~45% (estimated)
+
+---
+
+## 2026-08-31 — Session 3: v1.0 State Format + Preview Tool Optimisations
+
+**Goal**: Support RLTCG_v3 (v1.0 state format), add account discovery dropdown, and fix canGetItem() categorisation gaps.
+
+### What was done
+
+**decode_collection.py — RLTCG_v3 support**:
+- v1.0 of osrs-tcg removed the XOR obfuscation step from state encoding
+- Added `RLTCG_v3` decode path: `Base64 → gzip.decompress → JSON` (no XOR)
+- Both `RLTCG_v2` (pre-v1.0) and `RLTCG_v3` (v1.0+) now supported via `KNOWN_PREFIXES`
+- `find_best_backup()` and `find_state_blobs_from_profiles()` scan for either prefix
+
+**server.py — `/api/accounts/list` endpoint**:
+- Added `_api_accounts_list()` handler: runs decode_collection.py as subprocess, reads resulting `all_collections.json`, returns sorted account list with name/cardCount/credits/updatedAt
+
+**preview.html — Account discovery dropdown**:
+- Replaced RSN text `<input>` with `<select>` dropdown
+- `populateAccountDropdown(accounts)` populates from accounts list with `name (N,NNN)` labels
+- `onAccountChange(rsn)` switches collection + hiscores levels + quest completions together when dropdown changes
+- Startup: populates dropdown from static `all_collections.json` (already loaded), auto-selects top account
+- `refreshAll()` re-fetches `/api/accounts/list` after collection refresh to update card counts in dropdown
+
+**preview.html — canGetItem() fixes**:
+- **Shop currency fix**: 285 items had `shopBought=true` but only special-currency shops (NMZ points, Marks of Grace, Tokkul etc.). Old code assumed Coins. Fixed: check actual `shop.currency` field; free with Coins only if a coins-shop exists; special currencies treated as owned if the player has the currency card.
+- **Tanning map**: Added `TANNING_MAP` for 7 leather items. Hides → leathers via tanner NPC requires only Coins + hide card (no skill). Previously these were always locked unless the player had the leather card.
+- **Karambwanji alias**: `resolveToolParts()` now replaces `bait` with `Karambwanji` for Karambwan vessel tools (Karambwanji is a specific fish bait).
+- **Silver sickle (b) alias**: `TOOL_PART_ALIASES` maps `silver sickle (b)` → `Silver sickle` (the card name).
+- **Clue scroll rewards**: 405 items only obtainable from clue scrolls were permanently locked. Added: if `src.clueTiers.length > 0`, item is obtainable (any player can do clue scrolls).
+- **Production tool cards**: `canGetItem()`'s production branch now checks tool cards (Hammer → 209 smithing items, Knife → 54 fletching, Chisel → 48 crafting, Needle → 52 crafting). Uses `getImplicitTools()` which merges wiki-scraped tools with hard-coded skill defaults.
+- **Skilling tab non-card tool lock fix**: Tool strings that contain no TCG-card parts no longer show a lock; they show the tool name as a plain note.
+
+**quest_cards.json — Client of Kourend feather fix**:
+- bronzeman-tcg v0.3.0 changed quest_cards.json schema: `cardGroups`/`groupLabels` → `sections`/`requirements`/`cards`; file also moved from `src/main/resources/` to `src/main/resources/quest/`
+- The stash from the previous session was invalid due to these breaking changes; dropped it and re-applied the fix directly in the new schema format
+- Client of Kourend now correctly lists all 7 feather types as an ANY requirement
+
+### Impact summary
+- v3 decode: unlocks all accounts that installed osrs-tcg v1.0+
+- Account dropdown: no more manual RSN typing; switching account also refreshes levels and quests
+- canGetItem fixes: ~1,000+ items more accurately categorised (unlocked vs locked)
+
+### Context used this session
+~85% (two sessions, ran out of context partway through)

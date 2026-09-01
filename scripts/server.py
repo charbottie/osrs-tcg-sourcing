@@ -107,16 +107,30 @@ class Handler(http.server.SimpleHTTPRequestHandler):
             self._api_hiscores()
         elif path == "/api/quests/completed":
             self._api_quests_completed()
+        elif path == "/api/accounts/list":
+            self._api_accounts_list()
         else:
             self.send_error(404)
 
     # ── Collection endpoints ──────────────────────────────────────────────
 
     def _api_collection_refresh(self):
-        """Run decode_collection.py and return the new collection."""
+        """Run decode_collection.py and return the new collection.
+
+        Optional query param: ?player=<display_name>
+        If provided, decodes only that RS profile and returns its collection.
+        Always regenerates all_collections.json regardless.
+        """
+        qs = urllib.parse.parse_qs(urllib.parse.urlparse(self.path).query)
+        player = (qs.get("player") or [""])[0].strip()
+
+        cmd = [sys.executable, str(_SCRIPTS_DIR / "decode_collection.py"),
+               "--out", str(_COLLECTION)]
+        if player:
+            cmd += ["--player", player]
+
         result = subprocess.run(
-            [sys.executable, str(_SCRIPTS_DIR / "decode_collection.py"),
-             "--out", str(_COLLECTION)],
+            cmd,
             capture_output=True, text=True,
             cwd=str(_SCRIPTS_DIR.parent),
         )
@@ -127,6 +141,8 @@ class Handler(http.server.SimpleHTTPRequestHandler):
             data = json.loads(_COLLECTION.read_text(encoding="utf-8"))
             data["refreshedAt"] = datetime.now().isoformat(timespec="seconds")
             data["log"] = result.stdout.strip()
+            if player:
+                data["player"] = player
             self._json_response(data)
         except Exception as e:
             self._json_response({"error": str(e)}, status=500)
@@ -142,6 +158,48 @@ class Handler(http.server.SimpleHTTPRequestHandler):
             "cardCount": data.get("cardCount", 0),
             "updatedAt": mtime.isoformat(timespec="seconds"),
         })
+
+    def _api_accounts_list(self):
+        """Return all discovered TCG accounts.
+
+        Runs decode_collection.py (no player arg) to refresh all_collections.json,
+        then returns the account list with card counts + credits.
+        """
+        try:
+            _ALL_COLLECTIONS = _OUT_DIR / "all_collections.json"
+
+            result = subprocess.run(
+                [sys.executable, str(_SCRIPTS_DIR / "decode_collection.py"),
+                 "--out", str(_COLLECTION)],
+                capture_output=True, text=True,
+                cwd=str(_SCRIPTS_DIR.parent),
+            )
+
+            if not _ALL_COLLECTIONS.exists():
+                self._json_response({"accounts": [], "log": result.stdout.strip()})
+                return
+
+            data = json.loads(_ALL_COLLECTIONS.read_text(encoding="utf-8"))
+            profiles = data.get("profiles", {})
+            accounts = sorted(
+                [
+                    {
+                        "name":      name,
+                        "cardCount": info.get("cardCount", 0),
+                        "credits":   info.get("credits", 0),
+                        "updatedAt": info.get("updatedAt", ""),
+                    }
+                    for name, info in profiles.items()
+                ],
+                key=lambda a: a["updatedAt"],
+                reverse=True,
+            )
+            self._json_response({
+                "accounts":  accounts,
+                "updatedAt": data.get("updatedAt", ""),
+            })
+        except Exception as e:
+            self._json_response({"error": str(e)}, status=500)
 
     # ── Generate endpoints ────────────────────────────────────────────────
 

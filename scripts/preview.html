@@ -643,6 +643,9 @@
   <button class="tab-btn"        onclick="switchTab('rules')"    id="tab-rules">Rules</button>
   <div style="flex:1"></div>
   <div id="global-nav" style="display:flex;align-items:center;padding:0 8px;gap:4px;">
+    <select id="rsn-input" onchange="onAccountChange(this.value)" style="background:#111;border:1px solid #333;color:#aaa;padding:3px 6px;border-radius:3px;font-size:10px;max-width:180px;min-width:60px;outline:none;cursor:pointer"><option value="">— loading —</option></select>
+    <button id="refresh-btn" onclick="refreshAll()" style="background:#222;border:1px solid #444;color:#888;padding:3px 0;border-radius:3px;cursor:pointer;font-size:10px;width:52px;flex-shrink:0">↻ Refresh</button>
+    <button id="sim-btn" onclick="reroll()" style="background:#222;border:1px solid #333;color:#888;padding:3px 0;border-radius:3px;cursor:pointer;font-size:10px;width:52px;flex-shrink:0;display:none">Re-roll</button>
     <button id="global-back-btn" onclick="navigateBack()" style="font-size:11px;padding:2px 10px;cursor:pointer;border:1px solid #444;border-radius:3px;background:#222;color:#aaa;" disabled>← Back</button>
     <button id="global-fwd-btn"  onclick="navigateForward()" style="font-size:11px;padding:2px 10px;cursor:pointer;border:1px solid #444;border-radius:3px;background:#222;color:#aaa;" disabled>Forward →</button>
   </div>
@@ -678,14 +681,8 @@
       </select>
     </div>
   </div>
-  <div id="sim-bar" style="padding:5px 10px 6px;border-bottom:1px solid #222;font-size:10px;color:#555;display:flex;flex-direction:column;gap:5px;box-sizing:border-box;width:100%;">
-    <span id="sim-summary" style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis;width:100%"></span>
-    <div style="display:flex;align-items:center;gap:5px;">
-      <input id="rsn-input" type="text" placeholder="RSN…" style="background:#111;border:1px solid #333;color:#aaa;padding:3px 6px;border-radius:3px;font-size:10px;flex:1;min-width:0;outline:none" onkeydown="if(event.key==='Enter')lookupLevels()">
-      <button id="levels-btn"  onclick="lookupLevels()"       style="background:#222;border:1px solid #444;color:#888;padding:3px 0;border-radius:3px;cursor:pointer;font-size:10px;width:52px;flex-shrink:0">Levels</button>
-      <button id="refresh-btn" onclick="refreshCollection()"  style="background:#222;border:1px solid #444;color:#888;padding:3px 0;border-radius:3px;cursor:pointer;font-size:10px;width:52px;flex-shrink:0">↻ Refresh</button>
-      <button id="sim-btn"     onclick="reroll()"             style="background:#222;border:1px solid #333;color:#888;padding:3px 0;border-radius:3px;cursor:pointer;font-size:10px;width:52px;flex-shrink:0;display:none">Re-roll</button>
-    </div>
+  <div id="sim-bar" style="padding:4px 10px 5px;border-bottom:1px solid #222;font-size:10px;color:#555;box-sizing:border-box;width:100%;">
+    <span id="sim-summary" style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis;display:block"></span>
   </div>
   <div id="card-list"></div>
 </div>
@@ -743,6 +740,38 @@ const TOOL_TIERS = {
   ],
 };
 
+// ─── Card level-order sort ─────────────────────────────────────────────────
+// Used to sort any-of groups by level requirement then alphabetically,
+// so e.g. "Bronze axe · Iron axe · Steel axe…" instead of alphabetical.
+const CARD_SORT_LEVEL = (() => {
+  const m = {};
+  for (const tiers of Object.values(TOOL_TIERS))
+    for (const t of tiers) m[t.name.toLowerCase()] = t.skillReq;
+  // Extra variants not in TOOL_TIERS (Gilded = Rune tier; 3rd age/Infernal = Dragon tier)
+  const extras = {
+    'Gilded pickaxe': 41, '3rd age pickaxe': 61, 'Infernal pickaxe': 61,
+    'Gilded axe':     41, '3rd age axe':     61, 'Infernal axe':     61,
+    // Spears (Attack level requirement)
+    'Iron spear': 1, 'Steel spear': 5, 'Mithril spear': 20,
+    'Adamant spear': 30, 'Rune spear': 40, 'Dragon spear': 60,
+    // Feathers — regular first (level 0), coloured variants after (alphabetically at level 1)
+    'Feather': 0,
+    'Blue feather': 1, 'Orange feather': 1, 'Red feather': 1,
+    'Stripy feather': 1, 'Wimpy feather': 1, 'Yellow feather': 1,
+  };
+  for (const [n, lvl] of Object.entries(extras)) m[n.toLowerCase()] = lvl;
+  return m;
+})();
+
+// Sort a card-name array by level asc, then alphabetically within same level.
+function sortCardsByLevel(cards) {
+  return [...cards].sort((a, b) => {
+    const la = CARD_SORT_LEVEL[a.toLowerCase()] ?? 999;
+    const lb = CARD_SORT_LEVEL[b.toLowerCase()] ?? 999;
+    return la !== lb ? la - lb : a.localeCompare(b);
+  });
+}
+
 // ─── Compound tool resolution ───────────────────────────────────────────────
 // Some gathering tools are compound ("Fishing rod + bait"). Each part is
 // checked separately; "feathers" matches any of FEATHER_CARDS.
@@ -751,11 +780,35 @@ const FEATHER_CARDS = [
   'Blue feather', 'Stripy feather', 'Wimpy feather',
 ];
 // Maps lowercased shorthand → real card name
-const TOOL_PART_ALIASES = { bait: 'Fishing bait', sandworms: 'Sandworms' };
+// 'bait' is context-sensitive: Karambwan vessel uses Karambwanji, others use Fishing bait.
+// resolveToolParts checks the full tool string before splitting to handle that case.
+// 'Silver sickle (b)' → base card 'Silver sickle' (blessed via quest, no separate TCG card).
+const TOOL_PART_ALIASES = {
+  bait:                 'Fishing bait',
+  sandworms:            'Sandworms',
+  'silver sickle (b)':  'Silver sickle',
+};
+
+// Hides that can be tanned into leather at a tanner NPC (no skill req, just Coins).
+// The game never makes you pick up the leather from the ground — it converts in your
+// inventory — so you only need the hide card + Coins to unlock leather crafting.
+const TANNING_MAP = {
+  'Leather':              'Cowhide',
+  'Hard leather':         'Cowhide',
+  'Snakeskin':            'Snake hide',
+  'Green dragon leather': 'Green dragonhide',
+  'Blue dragon leather':  'Blue dragonhide',
+  'Red dragon leather':   'Red dragonhide',
+  'Black dragon leather': 'Black dragonhide',
+};
 
 function resolveToolParts(toolStr) {
   if (!toolStr || toolStr === 'None') return [];
-  return toolStr.split(' + ').map(raw => {
+  // Context-specific alias: Karambwan vessel + bait uses Karambwanji, not Fishing bait
+  const effectiveStr = toolStr.startsWith('Karambwan vessel')
+    ? toolStr.replace(/\bbait\b/i, 'Karambwanji')
+    : toolStr;
+  return effectiveStr.split(' + ').map(raw => {
     const part = raw.trim();
     const key  = part.toLowerCase();
     if (key === 'feathers') {
@@ -765,7 +818,7 @@ function resolveToolParts(toolStr) {
         owned: ownedF.length > 0,
         note:  ownedF.length > 0
           ? ownedF.slice(0, 2).join(', ') + (ownedF.length > 2 ? ` +${ownedF.length - 2} more` : '')
-          : 'none owned',
+          : 'any feather card — Feather, Red, Yellow, Orange, Blue, Stripy or Wimpy',
       };
     }
     const name = TOOL_PART_ALIASES[key] || part;
@@ -806,10 +859,20 @@ function canGetItem(itemName, visited = new Set()) {
   // Ground spawn — no Bronzeman restriction (free pickup)
   if (src.spawns && src.spawns.length > 0) { _canGetCache[itemName] = true; return true; }
 
-  // Shop — requires spending coins (or special currency), which counts as using it.
-  // Coins IS a TCG card; need to own it before shops are accessible.
-  // item_sources.json doesn't track which currency each shop uses, so we check Coins as the common case.
-  if (src.shopBought && isOwned('Coins')) { _canGetCache[itemName] = true; return true; }
+  // Shop — check whether the item is available via a shop the player can access.
+  // item_sources.json records per-shop currency; many items have ONLY special-currency
+  // shops (NMZ points, Marks of grace, Tokkul, etc.). We check:
+  //  1. Coins-accepting shops — need the Coins card.
+  //  2. Special-currency shops — if that currency is itself a TCG card, check ownership.
+  if (src.shopBought && src.shops && src.shops.length > 0) {
+    const hasCoinsShop = src.shops.some(s => !s.currency || s.currency === 'Coins');
+    if (hasCoinsShop && isOwned('Coins')) { _canGetCache[itemName] = true; return true; }
+    // Special currencies that are TCG cards (Tokkul, Mark of grace, Abyssal pearls, etc.)
+    const specialOwned = src.shops.some(s =>
+      s.currency && s.currency !== 'Coins' && isOwned(s.currency)
+    );
+    if (specialOwned) { _canGetCache[itemName] = true; return true; }
+  }
 
   // Gathering: level + tool (no card needed for the resource itself)
   if (src.gathering) {
@@ -833,18 +896,38 @@ function canGetItem(itemName, visited = new Set()) {
     // no owned monster card — fall through
   }
 
-  // Production chain — recurse into ingredients
+  // Clue scroll reward — reachable if the item has any clue tier.
+  // Any player can accumulate clue scrolls over time; treat all tiers as obtainable.
+  // The detail panel already shows which tier(s) the item comes from.
+  if (src.clueTiers && src.clueTiers.length > 0) { _canGetCache[itemName] = true; return true; }
+
+  // Production chain — recurse into ingredients and check production tools.
+  // Tools (Hammer, Chisel, Knife, Needle, etc.) are TCG cards; you must own them to use them.
   if (src.production) {
     const p = src.production;
     if (!p.skill || getLevel(p.skill) >= (p.level || 1)) {
-      const newVisited = new Set([...visited, itemName]);
-      const ok = (p.ingredients || []).every(ing => {
-        if (itemSources[ing.item] && !isOwned(ing.item)) return false; // need card to use as ingredient
-        return canGetItem(ing.item, newVisited);
-      });
-      if (ok) { _canGetCache[itemName] = true; return true; }
+      const prodTools = getImplicitTools(p.skill, p.ingredients || [], p.tools || []);
+      const toolsOk   = prodTools.every(t => !itemSources[t] || isOwned(t));
+      if (toolsOk) {
+        const newVisited = new Set([...visited, itemName]);
+        const ok = (p.ingredients || []).every(ing => {
+          if (itemSources[ing.item] && !isOwned(ing.item)) return false; // need card to use as ingredient
+          return canGetItem(ing.item, newVisited);
+        });
+        if (ok) { _canGetCache[itemName] = true; return true; }
+      }
     }
     // production failed — fall through
+  }
+
+  // Tanning: hides → leathers at a tanner NPC (no skill, just Coins + the hide card)
+  // The leather appears directly in inventory — no ground pickup — so only Coins + hide needed.
+  const tanHide = TANNING_MAP[itemName];
+  if (tanHide) {
+    const newV = new Set([...visited, itemName]);
+    if (isOwned('Coins') && canGetItem(tanHide, newV)) {
+      _canGetCache[itemName] = true; return true;
+    }
   }
 
   // All sources exhausted
@@ -861,6 +944,7 @@ let clueRewardRarities  = {};   // tier → {item name → fraction string}
 let ingredientInfo      = {};   // non-card ingredient name → {production, shops, spawns}
 let questsData          = {};   // quest name → {prerequisites, skillRequirements, ...}
 let bmQuestCards        = {};   // quest name → {cardGroups, groupLabels, monsterCards, notes} from bronzeman plugin
+let allCollections      = {};   // displayName → {cardCount, ownedCards, credits, updatedAt}
 // Two separate stores: screenshot-derived (file) and manually toggled (user).
 // completedQuests = union of both; re-running the script only touches the file set.
 let _cqFile   = new Set(JSON.parse(localStorage.getItem('cq_file')   || '[]'));
@@ -958,6 +1042,63 @@ async function loadCollection() {
   updateSimBar();
 }
 
+// ─── Collection switcher ───────────────────────────────────────────────────
+// Called when the RSN input changes. Looks up the player in allCollections
+// (pre-decoded from all_collections.json) and switches owned cards client-side.
+// If not found, shows a hint without changing the current collection.
+function switchCollection(rsn) {
+  if (!rsn) return;
+  const key = Object.keys(allCollections).find(k => k.toLowerCase() === rsn.toLowerCase());
+  if (!key) {
+    // Not in local cache — show a subtle hint, don't change anything
+    const el = document.getElementById('sim-summary');
+    if (el) el.textContent = `'${rsn}' not in local cache — hit ↻ Refresh to decode`;
+    return;
+  }
+  const profile = allCollections[key];
+  owned = new Set(profile.ownedCards.map(n => n.toLowerCase()));
+  _canGetCache = {};
+  document.getElementById('sim-summary').textContent =
+    `${profile.cardCount} cards owned · ${key}`;
+  document.getElementById('sim-btn').style.display = 'none';
+  filterCards();
+  refreshDetail();
+  if (activeTab === 'skilling') renderSkillGrid();
+  if (activeTab === 'questing') renderQuestList();
+}
+
+// Populate the account dropdown from an array of {name, cardCount, credits?} objects.
+function populateAccountDropdown(accounts) {
+  const sel = document.getElementById('rsn-input');
+  if (!sel || sel.tagName !== 'SELECT') return;
+  const current = sel.value;
+  sel.innerHTML = '';
+  if (!accounts || !accounts.length) {
+    sel.innerHTML = '<option value="">— no accounts found —</option>';
+    return;
+  }
+  for (const a of accounts) {
+    const opt = document.createElement('option');
+    opt.value = a.name;
+    opt.textContent = `${a.name}  (${(a.cardCount || 0).toLocaleString()})`;
+    sel.appendChild(opt);
+  }
+  // Restore previous selection if still present; otherwise first entry
+  if (current && [...sel.options].some(o => o.value === current)) {
+    sel.value = current;
+  } else {
+    sel.selectedIndex = 0;
+  }
+}
+
+// Called when the account dropdown changes — switches collection + levels + quests.
+function onAccountChange(rsn) {
+  if (!rsn) return;
+  switchCollection(rsn);
+  lookupLevels(rsn);
+  syncQuestsFromScreenshots(rsn);
+}
+
 function simulateRandom() {
   // Random skill levels: uniform 1–99
   for (const s of Object.keys(skills))
@@ -980,7 +1121,7 @@ function simulateRandom() {
 async function loadData() {
   try {
     const cb = `?v=${Date.now()}`;  // cache-bust so updated JSON files are always fresh
-    const [md, is, qc, cc, cd, css, cs, crr, ii, qd, ed, fd, bmqc, cq] = await Promise.all([
+    const [md, is, qc, cc, cd, css, cs, crr, ii, qd, ed, fd, bmqc, cq, ac] = await Promise.all([
       fetch(`output/monster_drops.json${cb}`).then(r => r.json()).catch(() => ({})),
       fetch(`output/item_sources.json${cb}`).then(r => r.json()).catch(() => ({})),
       fetch(`output/quest_chains.json${cb}`).then(r => r.json()).catch(() => ({})),
@@ -995,6 +1136,7 @@ async function loadData() {
       fetch(`output/food_data.json${cb}`).then(r => r.json()).catch(() => ({})),
       fetch(`output/bm_quest_cards.json${cb}`).then(r => r.json()).catch(() => ({quests:[]})),
       fetch(`output/completed_quests.json${cb}`).then(r => r.json()).catch(() => ({completedQuests:[]})),
+      fetch(`output/all_collections.json${cb}`).then(r => r.json()).catch(() => ({profiles:{}})),
     ]);
     monsterDrops = md; itemSources = is; questChains = qc; cardCategories = cc; cardDetails = cd;
     equipBySlot = ed; foodData = fd;
@@ -1002,6 +1144,7 @@ async function loadData() {
     clueRewardRarities = crr;
     ingredientInfo     = ii;
     questsData         = qd;
+    allCollections     = ac.profiles || {};
     // Build quest name → BM card requirement map; track miniquests separately
     bmQuestCards = {};
     for (const q of (bmqc.quests || [])) {
@@ -1031,10 +1174,15 @@ async function loadData() {
     }
     await loadCollection();
     buildCardList();
-    document.getElementById('rsn-input').value = 'lottie_tcg';
-    // Auto-load fresh data on startup (silently — errors are caught in each function)
-    refreshCollection();   // re-decode RuneLite profiles for up-to-date card ownership
-    lookupLevels();        // pull live hiscores for 'lottie_tcg'
+    // Populate account dropdown from pre-loaded all_collections.json (sorted by most recently updated)
+    const _startupAccounts = Object.entries(allCollections)
+      .map(([name, d]) => ({ name, cardCount: d.cardCount || 0, credits: d.credits || 0, updatedAt: d.updatedAt || '' }))
+      .sort((a, b) => b.updatedAt.localeCompare(a.updatedAt));
+    populateAccountDropdown(_startupAccounts);
+    const _selectedRsn = document.getElementById('rsn-input')?.value || '';
+    if (_selectedRsn) switchCollection(_selectedRsn);
+    // Auto-load fresh data on startup (also refreshes dropdown via /api/accounts/list)
+    refreshAll();
   } catch {
     document.getElementById('detail').innerHTML =
       `<div class="placeholder">⚠ Needs a local server.<br>
@@ -2190,21 +2338,52 @@ function renderToolTiers(tiers, skillName) {
   return html + `</div>`;
 }
 
+// ─── Refresh all — collection + levels + quest sync ───────────────────────
+async function refreshAll() {
+  const btn = document.getElementById('refresh-btn');
+  if (btn) { btn.disabled = true; btn.textContent = '↻ …'; }
+  const rsn = document.getElementById('rsn-input')?.value.trim() || '';
+  await Promise.allSettled([
+    refreshCollection(),
+    lookupLevels(rsn),
+    syncQuestsFromScreenshots(rsn),
+  ]);
+  // Refresh the account dropdown with latest data from server
+  try {
+    const acData = await fetch('/api/accounts/list', { signal: AbortSignal.timeout(8000) }).then(r => r.json());
+    if (acData.accounts?.length) {
+      // Merge fresh ownedCards from allCollections into the account list
+      populateAccountDropdown(acData.accounts);
+      // Re-select current account so dropdown stays put
+      const sel = document.getElementById('rsn-input');
+      if (sel && rsn && [...sel.options].some(o => o.value === rsn)) sel.value = rsn;
+    }
+  } catch {}
+  if (btn) { btn.textContent = '↻ Refresh'; btn.disabled = false; }
+}
+
 // ─── Live collection refresh (requires server.py) ──────────────────────────
 async function refreshCollection() {
   const btn = document.getElementById('refresh-btn');
   btn.disabled = true;
   btn.textContent = '↻ …';
+  const rsn = document.getElementById('rsn-input')?.value.trim() || '';
+  const url = rsn ? `/api/collection/refresh?player=${encodeURIComponent(rsn)}` : '/api/collection/refresh';
   try {
-    const data = await fetch('/api/collection/refresh').then(r => {
+    const data = await fetch(url).then(r => {
       if (!r.ok) throw new Error(`HTTP ${r.status}`);
       return r.json();
     });
     if (data.error) throw new Error(data.error);
     owned = new Set(data.ownedCards.map(n => n.toLowerCase()));
     _canGetCache = {};
-    document.getElementById('sim-summary').textContent =
-      `${data.cardCount} cards owned · refreshed ${new Date().toLocaleTimeString()}`;
+    // Also update allCollections so subsequent client-side switches are fresh
+    if (rsn && data.ownedCards) {
+      const acKey = Object.keys(allCollections).find(k => k.toLowerCase() === rsn.toLowerCase()) || rsn;
+      allCollections[acKey] = { cardCount: data.cardCount, ownedCards: data.ownedCards, credits: data.credits || 0 };
+    }
+    const label = rsn ? `${data.cardCount} cards owned · ${rsn}` : `${data.cardCount} cards owned · refreshed ${new Date().toLocaleTimeString()}`;
+    document.getElementById('sim-summary').textContent = label;
     document.getElementById('sim-btn').style.display = 'none';
     filterCards();
     refreshDetail();
@@ -2225,16 +2404,12 @@ async function refreshCollection() {
 }
 
 // ─── Hiscores level lookup (requires server.py) ────────────────────────────
-async function lookupLevels() {
-  const input = document.getElementById('rsn-input');
-  const btn   = document.getElementById('levels-btn');
-  const rsn   = input.value.trim();
-  if (!rsn) return;
+async function lookupLevels(rsn) {
+  const _rsn = rsn || document.getElementById('rsn-input')?.value.trim();
+  if (!_rsn) return;
 
-  btn.disabled = true;
-  btn.textContent = '…';
   try {
-    const data = await fetch(`/api/hiscores?player=${encodeURIComponent(rsn)}`).then(r => {
+    const data = await fetch(`/api/hiscores?player=${encodeURIComponent(_rsn)}`).then(r => {
       if (!r.ok) throw new Error(`HTTP ${r.status}`);
       return r.json();
     });
@@ -2248,47 +2423,69 @@ async function lookupLevels() {
     refreshDetail();
     if (activeTab === 'skilling') renderSkillGrid();
     if (activeTab === 'questing') renderQuestList();
-    btn.textContent = '✓ ' + data.player;
-    btn.style.color = '#00c853';
-    setTimeout(() => { btn.textContent = 'Levels'; btn.style.color = ''; btn.disabled = false; }, 3000);
   } catch (e) {
     console.error('Level lookup failed:', e);
-    btn.textContent = '✗ Error';
-    btn.style.color = '#c84a00';
-    setTimeout(() => { btn.textContent = 'Levels'; btn.style.color = ''; btn.disabled = false; }, 3000);
   }
 }
 
-// ─── Quest sync from completed_quests.json (generated by decode_completed_quests.py) ──
-async function syncQuestsFromScreenshots() {
+// ─── Quest sync from RuneLite screenshots ──────────────────────────────────
+// Tries server API first (/api/quests/completed?player=RSN), falls back to
+// the static output/completed_quests.json generated by decode_completed_quests.py.
+async function syncQuestsFromScreenshots(rsn) {
   const btn = document.getElementById('quest-sync-btn');
   if (btn) { btn.disabled = true; btn.textContent = '…'; }
 
-  try {
-    const data = await fetch(`output/completed_quests.json?v=${Date.now()}`).then(r => {
-      if (!r.ok) throw new Error(`HTTP ${r.status}`);
-      return r.json();
-    });
+  const _rsn = rsn || (document.getElementById('quest-rsn-input')?.value ||
+               document.getElementById('rsn-input')?.value || '').trim();
 
-    const before = _cqFile.size;
-    _cqFile = new Set(data.completedQuests || []);
-    completedQuests = new Set([..._cqFile, ..._cqManual]);
-    _saveCq();
-    const added = _cqFile.size - before;
-    renderQuestList();
+  let data = null;
+  let source = 'file';
 
-    if (btn) {
-      btn.textContent = added ? `+${added} synced` : '✓ Up to date';
-      btn.style.color = added ? '#4a9a4a' : '#666';
-      setTimeout(() => { btn.textContent = '↻ Sync'; btn.style.color = ''; btn.disabled = false; }, 2000);
+  // Try server API if we have an RSN
+  if (_rsn) {
+    try {
+      const resp = await fetch(`/api/quests/completed?player=${encodeURIComponent(_rsn)}`, { signal: AbortSignal.timeout(3000) });
+      if (resp.ok) {
+        data = await resp.json();
+        source = 'server';
+      }
+    } catch (_) { /* server not running — fall through */ }
+  }
+
+  // Fall back to static file
+  if (!data) {
+    try {
+      const resp = await fetch(`output/completed_quests.json?v=${Date.now()}`);
+      if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
+      data = await resp.json();
+      source = 'file';
+    } catch (_) {
+      if (btn) {
+        btn.textContent = 'No file';
+        btn.style.color = '#884444';
+        btn.title = _rsn
+          ? `Server not running and no static file found.\nRun: python3 scripts/decode_completed_quests.py --player ${_rsn}`
+          : 'Run: python3 scripts/decode_completed_quests.py';
+        setTimeout(() => { btn.textContent = '↻ Sync'; btn.style.color = ''; btn.title = ''; btn.disabled = false; }, 3000);
+      }
+      return;
     }
-  } catch (e) {
-    if (btn) {
-      btn.textContent = 'No file';
-      btn.style.color = '#884444';
-      btn.title = 'Run: python3 scripts/decode_completed_quests.py';
-      setTimeout(() => { btn.textContent = '↻ Sync'; btn.style.color = ''; btn.title = 'Reload from completed_quests.json'; btn.disabled = false; }, 3000);
-    }
+  }
+
+  const before = _cqFile.size;
+  _cqFile = new Set(data.completedQuests || []);
+  completedQuests = new Set([..._cqFile, ..._cqManual]);
+  _saveCq();
+  const delta = _cqFile.size - before;
+  renderQuestList();
+
+  if (btn) {
+    const label = source === 'server'
+      ? (delta ? `+${delta} synced` : '✓ Up to date')
+      : (delta ? `+${delta} (file)` : '✓ (file)');
+    btn.textContent = label;
+    btn.style.color = delta ? '#4a9a4a' : '#666';
+    setTimeout(() => { btn.textContent = '↻ Sync'; btn.style.color = ''; btn.disabled = false; }, 2000);
   }
 }
 
@@ -2351,11 +2548,6 @@ function _renderTab(tab, resetSelection = true) {
                 <option value="free">Free quests</option>
                 <option value="members">Members only</option>
               </select>
-              <button id="quest-sync-btn" onclick="syncQuestsFromScreenshots()"
-                title="Import completed quests from RuneLite screenshots"
-                style="background:#222;border:1px solid #444;color:#888;padding:4px 8px;border-radius:3px;cursor:pointer;font-size:11px;white-space:nowrap;flex-shrink:0">
-                ↻ Sync
-              </button>
             </div>
           </div>
           <div id="quest-list-scroll"></div>
@@ -2979,10 +3171,9 @@ function getTrainingMethods(skillName) {
             toolNote = cardParts.map(p => p.label).slice(0, 2).join(' + ');
           }
         } else {
-          // Tool string is present but no parts match any known card
-          // (e.g. 'Silver sickle (b)') — can't verify ownership, treat as locked
-          toolLocked = true;
-          toolNote = g.tool + ' needed';
+          // No parts match any TCG card — tool is freely available (not a Bronzeman restriction).
+          // Show the tool name as context but don't lock the activity.
+          toolNote = g.tool;
         }
       }
 
@@ -3729,10 +3920,28 @@ function showQuestDetail(questName, push = true) {
             <span class="req-note">${ok ? 'owned' : 'need card'}</span>${note}
           </div>` });
         } else {
-          // Any-of group
-          const nav = group.map(c => itemSources[c]
-            ? `<span style="cursor:pointer;color:${isOwned(c)?'#7ab07a':'#9a5a5a'}" onclick="pushHistoryEntry();_renderTab('cards');setTimeout(()=>showCard('${c.replace(/'/g,"\\'")}','item',false),50)">${c}</span>`
-            : `<span style="color:${isOwned(c)?'#7ab07a':'#666'}">${c}</span>`).join('<span style="color:#444"> · </span>');
+          // Any-of group — tier by status then level order within each tier
+          // owned → obtainable (canGetItem) → locked, level order within each
+          const levelSorted = sortCardsByLevel(group);
+          const owned_    = levelSorted.filter(c => isOwned(c));
+          const getable   = levelSorted.filter(c => !isOwned(c) && canGetItem(c));
+          const locked_   = levelSorted.filter(c => !isOwned(c) && !canGetItem(c));
+          const tiered    = [...owned_, ...getable, ...locked_];
+
+          const nav = tiered.map((c, i) => {
+            const cardOwned    = isOwned(c);
+            const cardGetable  = !cardOwned && canGetItem(c);
+            const color        = cardOwned ? '#7ab07a' : cardGetable ? '#c8a830' : '#555';
+            // Dim the separator before locked cards
+            const prevLocked   = i > 0 && locked_.includes(tiered[i-1]);
+            const sepColor     = (locked_.includes(c) || prevLocked) ? '#333' : '#444';
+            const sep = i > 0 ? `<span style="color:${sepColor}"> · </span>` : '';
+            const inner = `<span style="color:${color}">${c}</span>`;
+            return sep + (itemSources[c]
+              ? `<span style="cursor:pointer" onclick="pushHistoryEntry();_renderTab('cards');setTimeout(()=>showCard('${c.replace(/'/g,"\\'")}','item',false),50)">${inner}</span>`
+              : inner);
+          }).join('');
+
           itemRows.push({ ok: groupOk, html: `<div class="req-row" style="align-items:flex-start">
             <span class="req-icon ${groupOk?'ok':'fail'}" style="margin-top:2px">${groupOk?'✓':'✗'}</span>
             <div style="flex:1">
