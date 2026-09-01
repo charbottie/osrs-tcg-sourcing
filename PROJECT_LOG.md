@@ -93,3 +93,41 @@
 
 ### Context used this session
 ~85% (two sessions, ran out of context partway through)
+
+---
+
+## 2026-09-01 — Session 4: Quest Cards v1.0 Rework + Pipeline Migration
+
+**Goal**: Rework all quest card requirements to use v1.0 card names; update the generate pipeline to use the v1.0 catalog.
+
+### What was done
+
+**bronzeman-tcg quest_cards.json — v1.0 rework**:
+- Saved v1.0 live catalog from `~/.runelite/OSRS-TCG/catalog/cards.live.json` → `research/card-catalog-v1.json` (5200 cards: 3809 items + 1391 NPCs)
+- Kept beta catalog as `research/card-catalog.json` for reference
+- Validated all 221 quests in quest_cards.json against v1.0 catalog
+- Applied 55 distinct renames (142 refs) and 27 distinct removals (33 refs):
+  - Cat variants → `Pet cat`; Infernal tools → Dragon base; Machete variants → `Machete`
+  - Armoured zombie variants → `Armoured zombie`; Wardens → `The Wardens`
+  - Potion names → herb names (e.g., Attack potion → Guam leaf)
+  - Removed: Tattered pages, Uncharged cell, Cadava berries, colored feathers/logs, Burnt meat, etc.
+- Added Ghostspeak amulet to The Restless Ghost
+- Added 10 Recipe for Disaster sub-quests, Vale Totems, Learning the Ropes
+- Fixed Romeo & Juliet (empty section after Cadava berries removal)
+- Fixed Into the Tombs (duplicate Wardens entries merged)
+- Synced `scripts/output/bm_quest_cards.json` ← plugin quest_cards.json (203 → 221 quests)
+
+**Generate pipeline — v1.0 migration**:
+- `generate_sources.py`: `load_cards()` now normalises v1.0 `{items, npcs}` format to flat list
+  - Carries `equipmentSlot`, `itemIds`, `wikiPage` fields from v1.0 structure
+  - Added `card_wiki_page()` helper: prefers explicit `wiki.page` field over inferred slug
+  - Updated all 3 wiki fetch call sites to use `card_wiki_page(card)`
+- `generate_equipment.py`: updated CARD_JSON path + added `_load_equip_cards()` normaliser
+- `generate_food.py`: updated CARD_JSON path + added inline v1.0 normalisation
+- `server.py`: updated `--card-json` arg to pass `card-catalog-v1.json`
+- Ran full pipeline regeneration using 6815 cached wiki HTML pages:
+  - `monster_drops.json`: 1391 entries, 15,250 drop rows, 779 monsters with TCG drops
+  - `item_sources.json`: 3809 entries (1191 production, 1109 shops, 243 spawns, 709 clue rewards)
+
+### Context used this session
+~35%
