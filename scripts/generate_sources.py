@@ -12,9 +12,9 @@ These files are generated at dev-time and bundled into the plugin JAR.
 The shipped plugin makes ZERO wiki requests at runtime.
 
 Usage:
-  python scripts/generate_sources.py --card-json research/card-catalog.json
-  python scripts/generate_sources.py --card-json research/card-catalog.json --limit 20
-  python scripts/generate_sources.py --card-json research/card-catalog.json --monster "Abyssal demon"
+  python scripts/generate_sources.py --card-json research/card-catalog-v1.json
+  python scripts/generate_sources.py --card-json research/card-catalog-v1.json --limit 20
+  python scripts/generate_sources.py --card-json research/card-catalog-v1.json --monster "Abyssal demon"
 
 Wiki access rules (non-negotiable, per wiki staff github issue #1 2026-07-18):
   - Plain page URLs only — never api.php?action=parse
@@ -54,7 +54,36 @@ _SUFFIX_RE = re.compile(r"^(.*?) \([^)]*\)$")
 
 def load_cards(card_json_path: str) -> list[dict]:
     with open(card_json_path, encoding="utf-8") as f:
-        return json.load(f)
+        data = json.load(f)
+    # Normalise v1.0 format {items: [...], npcs: [...]} to flat list
+    if isinstance(data, dict) and "items" in data and "npcs" in data:
+        flat: list[dict] = []
+        for entry in data["items"]:
+            tcg_tags = entry.get("tcg", {}).get("tags", {})
+            card: dict = {
+                "name":      entry["name"],
+                "category":  ["Resource"],
+                "wikiPage":  entry.get("wiki", {}).get("page", ""),
+                "questItem": False,
+            }
+            # Carry equipment fields so generate_equipment.py's filter still works
+            slot = tcg_tags.get("slot")
+            if slot:
+                card["equipmentSlot"] = slot
+                item_ids = ([entry["id"]] if "id" in entry else [])
+                item_ids += [v["id"] for v in entry.get("tcg", {}).get("variants", []) if "id" in v]
+                card["itemIds"] = item_ids
+                card["value"] = 0
+            flat.append(card)
+        for entry in data["npcs"]:
+            flat.append({
+                "name":      entry["name"],
+                "category":  ["Monster"],
+                "wikiPage":  entry.get("wiki", {}).get("page", ""),
+                "questItem": False,
+            })
+        return flat
+    return data
 
 
 def monster_cards(cards: list[dict]) -> list[dict]:
@@ -84,6 +113,18 @@ def wiki_page_name(card_name: str) -> str:
     return (m.group(1) if m else card_name).replace(" ", "_")
 
 
+def card_wiki_page(card: dict) -> str:
+    """Return the wiki page slug for a card.
+
+    Prefers the explicit wikiPage field (from v1.0 catalog) over the inferred
+    name-based slug, so cached pages are hit by their exact wiki title.
+    """
+    explicit = card.get("wikiPage", "")
+    if explicit:
+        return explicit.replace(" ", "_")
+    return wiki_page_name(card["name"])
+
+
 # ---------------------------------------------------------------------------
 # Step 1: Monster drops
 # ---------------------------------------------------------------------------
@@ -103,7 +144,7 @@ def build_monster_drops(
     total = len(subset)
     for i, card in enumerate(subset, 1):
         name = card["name"]
-        page = wiki_page_name(name)
+        page = card_wiki_page(card)
         print(f"  [{i}/{total}] {name} -> /w/{page}")
 
         html, fetched_from = wiki_fetcher.fetch_with_loot_fallback(page)
@@ -234,7 +275,7 @@ def build_quest_chains(
         card_name = card["name"]
         # The card name IS typically the quest name for quest-item cards
         # e.g. card "Dragon Slayer I" corresponds to wiki page Dragon_Slayer_I
-        page = wiki_page_name(card_name)
+        page = card_wiki_page(card)
 
         if page in seen_quests:
             continue
@@ -308,7 +349,7 @@ def build_production_spawns(
         name = card["name"]
         if name not in item_sources:
             continue
-        page = wiki_page_name(name)
+        page = card_wiki_page(card)
         if i % 50 == 1:
             print(f"  [{i}/{total}] {name} -> /w/{page}")
 
@@ -373,7 +414,7 @@ def parse_args() -> argparse.Namespace:
     p = argparse.ArgumentParser(description=__doc__,
                                 formatter_class=argparse.RawDescriptionHelpFormatter)
     p.add_argument("--card-json", required=True,
-                   help="Path to Card.json (e.g. research/card-catalog.json)")
+                   help="Path to Card.json (e.g. research/card-catalog-v1.json)")
     p.add_argument("--limit", type=int, default=None,
                    help="Process only the first N monsters (for testing)")
     p.add_argument("--monster", type=str, default=None,

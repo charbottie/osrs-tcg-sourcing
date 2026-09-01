@@ -27,7 +27,7 @@ import time
 import urllib.request
 from collections import defaultdict
 
-CARD_JSON = os.path.join(os.path.dirname(__file__), '..', 'plugins/osrs-tcg/src/main/resources/Card.json')
+CARD_JSON = os.path.join(os.path.dirname(__file__), '..', 'research', 'card-catalog-v1.json')
 OUT_JSON  = os.path.join(os.path.dirname(__file__), 'output', 'equipment_data.json')
 
 UA = 'OSRS-TCG-enrichment/1.0 (github.com/Azderi/osrs-tcg)'
@@ -206,12 +206,35 @@ def merge_best(id_lookup: dict[int, dict], item_ids: list[int]) -> tuple[dict, d
     return best_reqs, best_stats, best_speed, best_wtype
 
 
+def _load_equip_cards(path: str) -> list[dict]:
+    """Load equipment cards, normalising v1.0 {items, npcs} format if needed."""
+    with open(path, encoding='utf-8') as f:
+        data = json.load(f)
+    # v1.0 format: {items: [...], npcs: [...]}
+    if isinstance(data, dict) and 'items' in data:
+        result = []
+        for entry in data['items']:
+            tcg_tags = entry.get('tcg', {}).get('tags', {})
+            slot = tcg_tags.get('slot')
+            if not slot:
+                continue
+            item_ids = ([entry['id']] if 'id' in entry else [])
+            item_ids += [v['id'] for v in entry.get('tcg', {}).get('variants', []) if 'id' in v]
+            result.append({
+                'name':         entry['name'],
+                'equipmentSlot': slot,
+                'itemIds':       item_ids,
+                'value':         0,
+            })
+        return result
+    # Beta flat format
+    return [c for c in data if 'equipmentSlot' in c]
+
+
 def main() -> int:
     # Load Card.json
     print('Loading Card.json ...')
-    with open(CARD_JSON, encoding='utf-8') as f:
-        cards: list[dict] = json.load(f)
-    equip_cards = [c for c in cards if 'equipmentSlot' in c]
+    equip_cards = _load_equip_cards(CARD_JSON)
     print(f'  {len(equip_cards)} equipment cards')
 
     # Fetch OSRSBox items-complete

@@ -16,7 +16,7 @@ import re
 import sys
 import urllib.request
 
-CARD_JSON = os.path.join(os.path.dirname(__file__), '..', 'plugins/osrs-tcg/src/main/resources/Card.json')
+CARD_JSON = os.path.join(os.path.dirname(__file__), '..', 'research', 'card-catalog-v1.json')
 OUT_JSON  = os.path.join(os.path.dirname(__file__), 'output', 'food_data.json')
 
 UA = 'OSRS-TCG-enrichment/1.0 (github.com/Azderi/osrs-tcg)'
@@ -76,8 +76,12 @@ def main() -> int:
 
     print('Loading Card.json ...')
     with open(CARD_JSON, encoding='utf-8') as f:
-        cards: list[dict] = json.load(f)
-    card_names = {c['name'] for c in cards}
+        raw = json.load(f)
+    # Normalise v1.0 format {items: [...], npcs: [...]}
+    if isinstance(raw, dict) and 'items' in raw:
+        card_names = {e['name'] for e in raw['items']} | {e['name'] for e in raw.get('npcs', [])}
+    else:
+        card_names = {c['name'] for c in raw}
     print(f'  {len(card_names)} cards')
 
     # Only keep entries that match a card name
