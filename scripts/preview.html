@@ -977,6 +977,8 @@ let selected = null, selectedType = null;
 let activeTab = 'cards';
 let selectedSkill = null;   // currently selected skill in Skilling tab
 let selectedQuest = null;   // currently selected quest in Questing tab
+let _lastSourceMtime = 0;   // newest RuneLite save file mtime at last refresh
+let _refreshInProgress = false;
 
 // Simulated skill levels — randomised on load (includes combat skills for quest checks)
 let skills = {
@@ -1183,6 +1185,19 @@ async function loadData() {
     if (_selectedRsn) switchCollection(_selectedRsn);
     // Auto-load fresh data on startup (also refreshes dropdown via /api/accounts/list)
     refreshAll();
+    // Auto-detect new collection after packs opened / logout — poll every 8s
+    setInterval(async () => {
+      if (_refreshInProgress) return;
+      try {
+        const sm = await fetch('/api/collection/source-mtime', { signal: AbortSignal.timeout(3000) }).then(r => r.json());
+        if (sm.sourceMtime && sm.sourceMtime > _lastSourceMtime + 0.5) {
+          const btn = document.getElementById('refresh-btn');
+          if (btn) { btn.style.color = '#b07a30'; btn.title = 'New collection detected — refreshing…'; }
+          await refreshAll();
+          if (btn) { btn.style.color = ''; btn.title = ''; }
+        }
+      } catch {}
+    }, 8000);
   } catch {
     document.getElementById('detail').innerHTML =
       `<div class="placeholder">⚠ Needs a local server.<br>
@@ -1205,16 +1220,13 @@ function buildCardList() {
   for (const name of Object.keys(monsterDrops))
     allCards.push({name, type:'monster'});
   for (const [name, d] of Object.entries(itemSources)) {
-    const hasSrc = d.monsters?.length || d.rdtMonsters?.length || d.quests?.length || d.shops?.length || d.shopBought || d.gathering || d.clueTiers?.length;
-    const isKnownCard = name in cardCategories;  // present in Card.json (even Resource-only items)
-    if (hasSrc || isKnownCard || isOwned(name)) {
-      // Currency and Food items get their own categories regardless of what Card.json says
-      let cats;
-      if (CURRENCY_NAMES.has(name)) cats = ['Currency'];
-      else if (name in foodData) cats = ['Food'];
-      else cats = cardCategories[name] || [];
-      allCards.push({name, type:'item', cats});
-    }
+    // Every entry in itemSources is a v1.0 catalog card — show them all.
+    // Currency and Food get their own categories; others use cardCategories tags.
+    let cats;
+    if (CURRENCY_NAMES.has(name)) cats = ['Currency'];
+    else if (name in foodData) cats = ['Food'];
+    else cats = cardCategories[name] || [];
+    allCards.push({name, type:'item', cats});
   }
   // Virtual clue scroll cards — always at top of list
   for (const tier of CLUE_TIER_ORDER)
@@ -2340,6 +2352,8 @@ function renderToolTiers(tiers, skillName) {
 
 // ─── Refresh all — collection + levels + quest sync ───────────────────────
 async function refreshAll() {
+  if (_refreshInProgress) return;
+  _refreshInProgress = true;
   const btn = document.getElementById('refresh-btn');
   if (btn) { btn.disabled = true; btn.textContent = '↻ …'; }
   const rsn = document.getElementById('rsn-input')?.value.trim() || '';
@@ -2359,7 +2373,13 @@ async function refreshAll() {
       if (sel && rsn && [...sel.options].some(o => o.value === rsn)) sel.value = rsn;
     }
   } catch {}
+  // Record source mtime so auto-poll knows when next change occurs
+  try {
+    const sm = await fetch('/api/collection/source-mtime', { signal: AbortSignal.timeout(3000) }).then(r => r.json());
+    if (sm.sourceMtime) _lastSourceMtime = sm.sourceMtime;
+  } catch {}
   if (btn) { btn.textContent = '↻ Refresh'; btn.disabled = false; }
+  _refreshInProgress = false;
 }
 
 // ─── Live collection refresh (requires server.py) ──────────────────────────

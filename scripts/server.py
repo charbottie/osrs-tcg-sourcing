@@ -109,6 +109,8 @@ class Handler(http.server.SimpleHTTPRequestHandler):
             self._api_quests_completed()
         elif path == "/api/accounts/list":
             self._api_accounts_list()
+        elif path == "/api/collection/source-mtime":
+            self._api_collection_source_mtime()
         else:
             self.send_error(404)
 
@@ -326,6 +328,43 @@ class Handler(http.server.SimpleHTTPRequestHandler):
             "completedQuests": sorted(found.keys()),
             "screenshotCount": len(found),
             "dirsScanned": [str(d) for d in search_dirs],
+        })
+
+    # ── Collection source-mtime (for auto-refresh detection) ─────────────
+
+    _TCG_PROFILES = pathlib.Path.home() / ".runelite" / "OSRS-TCG" / "profiles"
+    _TCG_BACKUPS  = pathlib.Path.home() / ".runelite" / "OSRS-TCG" / "backups"
+
+    def _api_collection_source_mtime(self):
+        """Return the newest mtime of any RuneLite TCG save file.
+
+        Fast filesystem stat scan — no decode. Used by the browser to
+        detect when new packs have been opened / the player has logged out.
+        """
+        best = 0.0
+
+        # v1.0+ profiles: ~/.runelite/OSRS-TCG/profiles/<hash>/tcg.save
+        if self._TCG_PROFILES.exists():
+            for account_dir in self._TCG_PROFILES.iterdir():
+                save = account_dir / "tcg.save"
+                if save.is_file():
+                    best = max(best, save.stat().st_mtime)
+
+        # Legacy backups: ~/.runelite/OSRS-TCG/backups/<hash>/*
+        if self._TCG_BACKUPS.exists():
+            for account_dir in self._TCG_BACKUPS.iterdir():
+                if account_dir.is_dir():
+                    for f in account_dir.iterdir():
+                        if f.is_file():
+                            best = max(best, f.stat().st_mtime)
+
+        # profiles2/*.properties (pre-v1.0 fallback)
+        for f in (pathlib.Path.home() / ".runelite" / "profiles2").glob("*.properties"):
+            best = max(best, f.stat().st_mtime)
+
+        self._json_response({
+            "sourceMtime": best,
+            "sourceTime":  datetime.fromtimestamp(best).isoformat(timespec="seconds") if best else None,
         })
 
     # ── Helpers ───────────────────────────────────────────────────────────

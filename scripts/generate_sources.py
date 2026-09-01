@@ -59,28 +59,36 @@ def load_cards(card_json_path: str) -> list[dict]:
     if isinstance(data, dict) and "items" in data and "npcs" in data:
         flat: list[dict] = []
         for entry in data["items"]:
-            tcg_tags = entry.get("tcg", {}).get("tags", {})
+            tcg      = entry.get("tcg", {})
+            tcg_tags = tcg.get("tags", {})
             card: dict = {
                 "name":      entry["name"],
                 "category":  ["Resource"],
                 "wikiPage":  entry.get("wiki", {}).get("page", ""),
                 "questItem": False,
+                "examine":   entry.get("examine", ""),
+                "imagePath": entry.get("imagePath", ""),
+                "tags":      {"labels": tcg_tags.get("labels", [])},
             }
             # Carry equipment fields so generate_equipment.py's filter still works
             slot = tcg_tags.get("slot")
             if slot:
                 card["equipmentSlot"] = slot
                 item_ids = ([entry["id"]] if "id" in entry else [])
-                item_ids += [v["id"] for v in entry.get("tcg", {}).get("variants", []) if "id" in v]
+                item_ids += [v["id"] for v in tcg.get("variants", []) if "id" in v]
                 card["itemIds"] = item_ids
                 card["value"] = 0
             flat.append(card)
         for entry in data["npcs"]:
+            tcg_tags = entry.get("tcg", {}).get("tags", {})
             flat.append({
                 "name":      entry["name"],
                 "category":  ["Monster"],
                 "wikiPage":  entry.get("wiki", {}).get("page", ""),
                 "questItem": False,
+                "examine":   entry.get("examine", ""),
+                "imagePath": entry.get("imagePath", ""),
+                "tags":      {"labels": tcg_tags.get("labels", [])},
             })
         return flat
     return data
@@ -407,6 +415,52 @@ def write_json(path: Path, data: dict, label: str) -> None:
 
 
 # ---------------------------------------------------------------------------
+# Card metadata (card_categories.json + card_details.json)
+# ---------------------------------------------------------------------------
+
+def _wiki_image_url(image_path: str) -> str:
+    """Convert a v1.0 imagePath to an OSRS wiki thumbnail URL.
+
+    imagePath is like /images/items/detail/Rune_scimitar_detail.png
+    Wiki thumbnail: https://oldschool.runescape.wiki/images/thumb/<filename>/130px-<filename>
+    """
+    filename = image_path.rsplit("/", 1)[-1] if "/" in image_path else image_path
+    if not filename:
+        return ""
+    return f"https://oldschool.runescape.wiki/images/thumb/{filename}/130px-{filename}"
+
+
+def _write_card_metadata(cards: list[dict], out_dir: Path) -> None:
+    """Write card_categories.json and card_details.json from the loaded card list.
+
+    card_categories: {name: [label, ...]}  — category tags for UI filtering
+    card_details:    {name: {examine, imageUrl}}  — shown in card detail pane
+    """
+    categories: dict[str, list] = {}
+    details: dict[str, dict] = {}
+
+    for card in cards:
+        name = card["name"]
+        # Tags from v1.0 catalog live on the card dict directly (carried through load_cards)
+        # For normalised flat cards they're not there; for raw v1.0 cards they may be absent.
+        # Prefer tcg.tags.labels if present; fall back to empty list.
+        labels: list[str] = card.get("tags", {}).get("labels", [])
+        categories[name] = labels
+
+        examine = card.get("examine", "")
+        image_path = card.get("imagePath", "")
+        details[name] = {
+            "examine":  examine,
+            "imageUrl": _wiki_image_url(image_path) if image_path else "",
+        }
+
+    write_json(out_dir / "card_categories.json", categories,
+               f"card categories ({len(categories)} cards)")
+    write_json(out_dir / "card_details.json", details,
+               f"card details ({len(details)} cards)")
+
+
+# ---------------------------------------------------------------------------
 # CLI
 # ---------------------------------------------------------------------------
 
@@ -508,6 +562,10 @@ def main() -> int:
                    "item sources (with clue tiers)")
     else:
         print("\nPass 5: Skipped (clue_sources.json not found)")
+
+    # --- Pass 6: Card metadata (categories + details) ---
+    print("\nPass 6: Writing card metadata...")
+    _write_card_metadata(cards, out_dir)
 
     # --- Summary ---
     total_drops = sum(len(v["drops"]) for v in monster_drops.values())
