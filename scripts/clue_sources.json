@@ -35,15 +35,6 @@
   "Sandwich lady bottom": [
     "beginner"
   ],
-  "Rune scimitar ornament kit (guthix)": [
-    "beginner"
-  ],
-  "Rune scimitar ornament kit (saradomin)": [
-    "beginner"
-  ],
-  "Rune scimitar ornament kit (zamorak)": [
-    "beginner"
-  ],
   "Black 2h sword": [
     "beginner"
   ],
@@ -250,15 +241,6 @@
     "beginner"
   ],
   "Herring": [
-    "beginner"
-  ],
-  "Minor beginner scroll case": [
-    "beginner"
-  ],
-  "Major beginner scroll case": [
-    "beginner"
-  ],
-  "Explore": [
     "beginner"
   ],
   "Willow comp bow": [
@@ -564,9 +546,6 @@
   "Bob's purple shirt": [
     "easy"
   ],
-  "Highwayman mask": [
-    "easy"
-  ],
   "Blue beret": [
     "easy"
   ],
@@ -769,91 +748,7 @@
     "elite",
     "master"
   ],
-  "Charge dragonstone jewellery scroll": [
-    "easy",
-    "medium",
-    "hard",
-    "elite",
-    "master"
-  ],
-  "Nardah teleport": [
-    "easy",
-    "medium",
-    "hard",
-    "elite",
-    "master"
-  ],
-  "Mos le'harmless teleport": [
-    "easy",
-    "medium",
-    "hard",
-    "elite",
-    "master"
-  ],
-  "Mort'ton teleport": [
-    "easy",
-    "medium",
-    "hard",
-    "elite",
-    "master"
-  ],
-  "Feldip hills teleport": [
-    "easy",
-    "medium",
-    "hard",
-    "elite",
-    "master"
-  ],
-  "Lunar isle teleport": [
-    "easy",
-    "medium",
-    "hard",
-    "elite",
-    "master"
-  ],
-  "Digsite teleport": [
-    "easy",
-    "medium",
-    "hard",
-    "elite",
-    "master"
-  ],
-  "Piscatoris teleport": [
-    "easy",
-    "medium",
-    "hard",
-    "elite",
-    "master"
-  ],
-  "Pest control teleport": [
-    "easy",
-    "medium",
-    "hard",
-    "elite",
-    "master"
-  ],
-  "Tai bwo wannai teleport": [
-    "easy",
-    "medium",
-    "hard",
-    "elite",
-    "master"
-  ],
-  "Lumberyard teleport": [
-    "easy",
-    "medium",
-    "hard",
-    "elite",
-    "master"
-  ],
-  "Iorwerth camp teleport": [
-    "easy",
-    "medium",
-    "hard",
-    "elite",
-    "master"
-  ],
-  "Master scroll book (empty)": [
+  "Master scroll book": [
     "easy",
     "medium",
     "hard",
@@ -1028,18 +923,6 @@
     "elite",
     "master"
   ],
-  "Minor easy scroll case": [
-    "easy"
-  ],
-  "Major easy scroll case": [
-    "easy"
-  ],
-  "Clue scroll (master)": [
-    "easy",
-    "medium",
-    "hard",
-    "elite"
-  ],
   "Large spade": [
     "easy"
   ],
@@ -1187,9 +1070,6 @@
   "Saradomin mitre": [
     "medium"
   ],
-  "Saradomin cloak": [
-    "medium"
-  ],
   "Guthix mitre": [
     "medium"
   ],
@@ -1197,9 +1077,6 @@
     "medium"
   ],
   "Zamorak mitre": [
-    "medium"
-  ],
-  "Zamorak cloak": [
     "medium"
   ],
   "Ancient mitre": [
@@ -1442,19 +1319,10 @@
   "Swordfish": [
     "medium"
   ],
-  "Minor medium scroll case": [
-    "medium"
-  ],
-  "Major medium scroll case": [
-    "medium"
-  ],
-  "Clueless scroll": [
-    "medium"
-  ],
   "Magic comp bow": [
     "hard"
   ],
-  "Amulet of glory (t4)": [
+  "Amulet of glory (t)": [
     "hard"
   ],
   "Robin hood hat": [
@@ -1787,9 +1655,6 @@
   "Zamorak crozier": [
     "hard"
   ],
-  "Zombie head (Treasure Trails)": [
-    "hard"
-  ],
   "Cyclops head": [
     "hard"
   ],
@@ -1853,23 +1718,23 @@
   "Tzhaar-ket-om ornament kit": [
     "hard"
   ],
-  "Super energy(4)": [
+  "Super energy": [
     "hard"
   ],
-  "Super restore(4)": [
+  "Super restore": [
     "hard",
     "elite"
   ],
-  "Antifire potion(4)": [
+  "Antifire potion": [
     "hard"
   ],
-  "Super attack(4)": [
+  "Super attack": [
     "hard"
   ],
-  "Super strength(4)": [
+  "Super strength": [
     "hard"
   ],
-  "Super defence(4)": [
+  "Super defence": [
     "hard"
   ],
   "Gilded full helm": [
@@ -2044,15 +1909,6 @@
     "master"
   ],
   "Shark": [
-    "hard"
-  ],
-  "Minor hard scroll case": [
-    "hard"
-  ],
-  "Major hard scroll case": [
-    "hard"
-  ],
-  "Uri transform": [
     "hard"
   ],
   "Dragon full helm ornament kit": [
@@ -2241,13 +2097,13 @@
   "Battlestaff": [
     "elite"
   ],
-  "Extended antifire(4)": [
+  "Extended antifire": [
     "elite"
   ],
-  "Saradomin brew(4)": [
+  "Saradomin brew": [
     "elite"
   ],
-  "Ranging potion(4)": [
+  "Ranging potion": [
     "elite"
   ],
   "Gilded scimitar": [
@@ -2306,7 +2162,7 @@
     "elite",
     "master"
   ],
-  "Grimy ranarr weed": [
+  "Ranarr weed": [
     "elite",
     "master"
   ],
@@ -2339,15 +2195,6 @@
   "Soul rune": [
     "elite",
     "master"
-  ],
-  "Dragonstone bracelet": [
-    "elite"
-  ],
-  "Dragon necklace": [
-    "elite"
-  ],
-  "Dragonstone ring": [
-    "elite"
   ],
   "Tuna potato": [
     "elite"
@@ -2387,12 +2234,6 @@
   "Magic seed": [
     "elite",
     "master"
-  ],
-  "Minor elite scroll case": [
-    "elite"
-  ],
-  "Major elite scroll case": [
-    "elite"
   ],
   "Heavy casket": [
     "elite"
@@ -2487,9 +2328,6 @@
   "Ale of the gods": [
     "master"
   ],
-  "Obsidian cape (r)": [
-    "master"
-  ],
   "Fancy tiara": [
     "master"
   ],
@@ -2544,7 +2382,7 @@
   "Ring of coins": [
     "master"
   ],
-  "Anti-venom+(4)": [
+  "Anti-venom+": [
     "master"
   ],
   "Torstol": [
@@ -2577,7 +2415,7 @@
   "Dragon halberd": [
     "master"
   ],
-  "Onyx bolts (e)": [
+  "Onyx bolts": [
     "master"
   ],
   "Manta ray": [
@@ -2586,10 +2424,10 @@
   "Limpwurt root": [
     "master"
   ],
-  "Grimy toadflax": [
+  "Toadflax": [
     "master"
   ],
-  "Grimy snapdragon": [
+  "Snapdragon": [
     "master"
   ],
   "Runite ore": [
@@ -2602,12 +2440,6 @@
     "master"
   ],
   "Scroll sack": [
-    "master"
-  ],
-  "Minor master scroll case": [
-    "master"
-  ],
-  "Major master scroll case": [
     "master"
   ]
 }

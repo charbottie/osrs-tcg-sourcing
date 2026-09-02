@@ -3269,7 +3269,13 @@
     "monsters": [],
     "rdtMonsters": [],
     "quests": [],
-    "gathering": null,
+    "gathering": {
+      "skill": "Farming",
+      "level": 9,
+      "method": "Harvest Guam herb patch",
+      "tool": "Guam seed + Rake + Seed dibber",
+      "xp": 11.5
+    },
     "production": {
       "skill": "Herblore",
       "level": 3,
@@ -3295,7 +3301,13 @@
     "monsters": [],
     "rdtMonsters": [],
     "quests": [],
-    "gathering": null,
+    "gathering": {
+      "skill": "Farming",
+      "level": 14,
+      "method": "Harvest Marrentill herb patch",
+      "tool": "Marrentill seed + Rake + Seed dibber",
+      "xp": 13.5
+    },
     "production": {
       "skill": "Herblore",
       "level": 5,
@@ -3327,7 +3339,13 @@
     ],
     "rdtMonsters": [],
     "quests": [],
-    "gathering": null,
+    "gathering": {
+      "skill": "Farming",
+      "level": 19,
+      "method": "Harvest Tarromin herb patch",
+      "tool": "Tarromin seed + Rake + Seed dibber",
+      "xp": 18
+    },
     "production": {
       "skill": "Herblore",
       "level": 11,
@@ -3353,7 +3371,13 @@
     "monsters": [],
     "rdtMonsters": [],
     "quests": [],
-    "gathering": null,
+    "gathering": {
+      "skill": "Farming",
+      "level": 26,
+      "method": "Harvest Harralander herb patch",
+      "tool": "Harralander seed + Rake + Seed dibber",
+      "xp": 21.5
+    },
     "production": {
       "skill": "Herblore",
       "level": 20,
@@ -3455,7 +3479,13 @@
     ],
     "rdtMonsters": [],
     "quests": [],
-    "gathering": null,
+    "gathering": {
+      "skill": "Farming",
+      "level": 32,
+      "method": "Harvest Ranarr herb patch",
+      "tool": "Ranarr seed + Rake + Seed dibber",
+      "xp": 30.5
+    },
     "production": {
       "skill": "Herblore",
       "level": 25,
@@ -3474,7 +3504,10 @@
     "spawns": [],
     "shopBought": false,
     "shops": [],
-    "clueTiers": [],
+    "clueTiers": [
+      "elite",
+      "master"
+    ],
     "alwaysAvailable": false
   },
   "Irit leaf": {
@@ -3557,7 +3590,13 @@
     ],
     "rdtMonsters": [],
     "quests": [],
-    "gathering": null,
+    "gathering": {
+      "skill": "Farming",
+      "level": 44,
+      "method": "Harvest Irit herb patch",
+      "tool": "Irit seed + Rake + Seed dibber",
+      "xp": 43
+    },
     "production": {
       "skill": "Herblore",
       "level": 40,
@@ -3659,7 +3698,13 @@
     ],
     "rdtMonsters": [],
     "quests": [],
-    "gathering": null,
+    "gathering": {
+      "skill": "Farming",
+      "level": 50,
+      "method": "Harvest Avantoe herb patch",
+      "tool": "Avantoe seed + Rake + Seed dibber",
+      "xp": 54.5
+    },
     "production": {
       "skill": "Herblore",
       "level": 48,
@@ -3761,7 +3806,13 @@
     ],
     "rdtMonsters": [],
     "quests": [],
-    "gathering": null,
+    "gathering": {
+      "skill": "Farming",
+      "level": 56,
+      "method": "Harvest Kwuarm herb patch",
+      "tool": "Kwuarm seed + Rake + Seed dibber",
+      "xp": 69
+    },
     "production": {
       "skill": "Herblore",
       "level": 54,
@@ -3863,7 +3914,13 @@
     ],
     "rdtMonsters": [],
     "quests": [],
-    "gathering": null,
+    "gathering": {
+      "skill": "Farming",
+      "level": 67,
+      "method": "Harvest Cadantine herb patch",
+      "tool": "Cadantine seed + Rake + Seed dibber",
+      "xp": 106.5
+    },
     "production": {
       "skill": "Herblore",
       "level": 65,
@@ -3970,7 +4027,13 @@
     ],
     "rdtMonsters": [],
     "quests": [],
-    "gathering": null,
+    "gathering": {
+      "skill": "Farming",
+      "level": 79,
+      "method": "Harvest Dwarf weed herb patch",
+      "tool": "Dwarf weed seed + Rake + Seed dibber",
+      "xp": 170.5
+    },
     "production": {
       "skill": "Herblore",
       "level": 70,
@@ -4082,7 +4145,13 @@
     ],
     "rdtMonsters": [],
     "quests": [],
-    "gathering": null,
+    "gathering": {
+      "skill": "Farming",
+      "level": 85,
+      "method": "Harvest Torstol herb patch",
+      "tool": "Torstol seed + Rake + Seed dibber",
+      "xp": 224.5
+    },
     "production": {
       "skill": "Herblore",
       "level": 75,
@@ -64719,7 +64788,13 @@
     ],
     "rdtMonsters": [],
     "quests": [],
-    "gathering": null,
+    "gathering": {
+      "skill": "Mining",
+      "level": 40,
+      "method": "Mine Gem rock",
+      "tool": "Pickaxe",
+      "xp": 7.5
+    },
     "production": {
       "skill": "Crafting",
       "level": 43,
@@ -64849,7 +64924,13 @@
     ],
     "rdtMonsters": [],
     "quests": [],
-    "gathering": null,
+    "gathering": {
+      "skill": "Mining",
+      "level": 40,
+      "method": "Mine Gem rock",
+      "tool": "Pickaxe",
+      "xp": 7.5
+    },
     "production": {
       "skill": "Crafting",
       "level": 34,
@@ -64979,7 +65060,13 @@
     ],
     "rdtMonsters": [],
     "quests": [],
-    "gathering": null,
+    "gathering": {
+      "skill": "Mining",
+      "level": 30,
+      "method": "Mine Gem rock",
+      "tool": "Pickaxe",
+      "xp": 7.5
+    },
     "production": {
       "skill": "Crafting",
       "level": 27,
@@ -65104,7 +65191,13 @@
     ],
     "rdtMonsters": [],
     "quests": [],
-    "gathering": null,
+    "gathering": {
+      "skill": "Mining",
+      "level": 20,
+      "method": "Mine Gem rock",
+      "tool": "Pickaxe",
+      "xp": 7.5
+    },
     "production": {
       "skill": "Crafting",
       "level": 20,
@@ -65192,7 +65285,13 @@
     "monsters": [],
     "rdtMonsters": [],
     "quests": [],
-    "gathering": null,
+    "gathering": {
+      "skill": "Mining",
+      "level": 10,
+      "method": "Mine Gem rock",
+      "tool": "Pickaxe",
+      "xp": 7.5
+    },
     "production": {
       "skill": "Crafting",
       "level": 1,
@@ -65231,7 +65330,13 @@
     "monsters": [],
     "rdtMonsters": [],
     "quests": [],
-    "gathering": null,
+    "gathering": {
+      "skill": "Mining",
+      "level": 13,
+      "method": "Mine Gem rock",
+      "tool": "Pickaxe",
+      "xp": 7.5
+    },
     "production": {
       "skill": "Crafting",
       "level": 13,
@@ -65270,7 +65375,13 @@
     "monsters": [],
     "rdtMonsters": [],
     "quests": [],
-    "gathering": null,
+    "gathering": {
+      "skill": "Mining",
+      "level": 16,
+      "method": "Mine Gem rock",
+      "tool": "Pickaxe",
+      "xp": 7.5
+    },
     "production": {
       "skill": "Crafting",
       "level": 16,
@@ -80583,7 +80694,9 @@
     "spawns": [],
     "shopBought": false,
     "shops": [],
-    "clueTiers": [],
+    "clueTiers": [
+      "hard"
+    ],
     "alwaysAvailable": false
   },
   "Fishing potion": {
@@ -80643,7 +80756,9 @@
     "spawns": [],
     "shopBought": false,
     "shops": [],
-    "clueTiers": [],
+    "clueTiers": [
+      "hard"
+    ],
     "alwaysAvailable": false
   },
   "Super defence": {
@@ -80673,7 +80788,9 @@
     "spawns": [],
     "shopBought": false,
     "shops": [],
-    "clueTiers": [],
+    "clueTiers": [
+      "hard"
+    ],
     "alwaysAvailable": false
   },
   "Ranging potion": {
@@ -80703,7 +80820,9 @@
     "spawns": [],
     "shopBought": false,
     "shops": [],
-    "clueTiers": [],
+    "clueTiers": [
+      "elite"
+    ],
     "alwaysAvailable": false
   },
   "Antipoison": {
@@ -80841,7 +80960,9 @@
     "spawns": [],
     "shopBought": false,
     "shops": [],
-    "clueTiers": [],
+    "clueTiers": [
+      "hard"
+    ],
     "alwaysAvailable": false
   },
   "Flowers": {
@@ -80942,7 +81063,13 @@
     ],
     "rdtMonsters": [],
     "quests": [],
-    "gathering": null,
+    "gathering": {
+      "skill": "Farming",
+      "level": 73,
+      "method": "Harvest Lantadyme herb patch",
+      "tool": "Lantadyme seed + Rake + Seed dibber",
+      "xp": 151.5
+    },
     "production": {
       "skill": "Herblore",
       "level": 67,
@@ -83598,7 +83725,13 @@
     ],
     "rdtMonsters": [],
     "quests": [],
-    "gathering": null,
+    "gathering": {
+      "skill": "Farming",
+      "level": 38,
+      "method": "Harvest Toadflax herb patch",
+      "tool": "Toadflax seed + Rake + Seed dibber",
+      "xp": 34.5
+    },
     "production": {
       "skill": "Herblore",
       "level": 30,
@@ -83623,7 +83756,9 @@
         "currency": "Brimhaven voucher"
       }
     ],
-    "clueTiers": [],
+    "clueTiers": [
+      "master"
+    ],
     "alwaysAvailable": false
   },
   "Snapdragon": {
@@ -83731,7 +83866,13 @@
     ],
     "rdtMonsters": [],
     "quests": [],
-    "gathering": null,
+    "gathering": {
+      "skill": "Farming",
+      "level": 62,
+      "method": "Harvest Snapdragon herb patch",
+      "tool": "Snapdragon seed + Rake + Seed dibber",
+      "xp": 98.5
+    },
     "production": {
       "skill": "Herblore",
       "level": 59,
@@ -83756,7 +83897,9 @@
         "currency": "Brimhaven voucher"
       }
     ],
-    "clueTiers": [],
+    "clueTiers": [
+      "master"
+    ],
     "alwaysAvailable": false
   },
   "Energy potion": {
@@ -83816,7 +83959,9 @@
     "spawns": [],
     "shopBought": false,
     "shops": [],
-    "clueTiers": [],
+    "clueTiers": [
+      "hard"
+    ],
     "alwaysAvailable": false
   },
   "Super restore": {
@@ -83852,7 +83997,10 @@
         "currency": "Theatre of Blood points"
       }
     ],
-    "clueTiers": [],
+    "clueTiers": [
+      "hard",
+      "elite"
+    ],
     "alwaysAvailable": false
   },
   "Agility potion": {
@@ -111333,7 +111481,9 @@
         "currency": "Theatre of Blood points"
       }
     ],
-    "clueTiers": [],
+    "clueTiers": [
+      "elite"
+    ],
     "alwaysAvailable": false
   },
   "Ice cooler": {
@@ -120171,7 +120321,9 @@
     "spawns": [],
     "shopBought": false,
     "shops": [],
-    "clueTiers": [],
+    "clueTiers": [
+      "master"
+    ],
     "alwaysAvailable": false
   },
   "Mith grapple": {
@@ -123801,7 +123953,9 @@
     "spawns": [],
     "shopBought": false,
     "shops": [],
-    "clueTiers": [],
+    "clueTiers": [
+      "hard"
+    ],
     "alwaysAvailable": false
   },
   "Strength amulet (t)": {
@@ -130706,7 +130860,9 @@
     "spawns": [],
     "shopBought": false,
     "shops": [],
-    "clueTiers": [],
+    "clueTiers": [
+      "elite"
+    ],
     "alwaysAvailable": false
   },
   "Black chinchompa": {
@@ -134941,7 +135097,9 @@
     "spawns": [],
     "shopBought": false,
     "shops": [],
-    "clueTiers": [],
+    "clueTiers": [
+      "master"
+    ],
     "alwaysAvailable": false
   },
   "Pet snakeling": {
@@ -143925,7 +144083,13 @@
     "spawns": [],
     "shopBought": false,
     "shops": [],
-    "clueTiers": [],
+    "clueTiers": [
+      "easy",
+      "medium",
+      "hard",
+      "elite",
+      "master"
+    ],
     "alwaysAvailable": false
   },
   "Expert mining gloves": {
@@ -156038,7 +156202,13 @@
     "monsters": [],
     "rdtMonsters": [],
     "quests": [],
-    "gathering": null,
+    "gathering": {
+      "skill": "Fishing",
+      "level": 35,
+      "method": "Harpoon (Tempoross Cove)",
+      "tool": "Harpoon",
+      "xp": 35
+    },
     "production": {
       "skill": "Cooking",
       "level": 1,

@@ -91,61 +91,54 @@
     "tool": "Pickaxe",
     "xp": 50
   },
-  "Uncut opal": {
+  "Opal": {
     "skill": "Mining",
     "level": 10,
     "method": "Mine Gem rock",
     "tool": "Pickaxe",
     "xp": 7.5
   },
-  "Uncut jade": {
+  "Jade": {
     "skill": "Mining",
     "level": 13,
     "method": "Mine Gem rock",
     "tool": "Pickaxe",
     "xp": 7.5
   },
-  "Uncut red topaz": {
+  "Red topaz": {
     "skill": "Mining",
     "level": 16,
     "method": "Mine Gem rock",
     "tool": "Pickaxe",
     "xp": 7.5
   },
-  "Uncut sapphire": {
+  "Sapphire": {
     "skill": "Mining",
     "level": 20,
     "method": "Mine Gem rock",
     "tool": "Pickaxe",
     "xp": 7.5
   },
-  "Uncut emerald": {
+  "Emerald": {
     "skill": "Mining",
     "level": 30,
     "method": "Mine Gem rock",
     "tool": "Pickaxe",
     "xp": 7.5
   },
-  "Uncut ruby": {
+  "Ruby": {
     "skill": "Mining",
     "level": 40,
     "method": "Mine Gem rock",
     "tool": "Pickaxe",
     "xp": 7.5
   },
-  "Uncut diamond": {
+  "Diamond": {
     "skill": "Mining",
     "level": 40,
     "method": "Mine Gem rock",
     "tool": "Pickaxe",
     "xp": 7.5
-  },
-  "Essence": {
-    "skill": "Mining",
-    "level": 1,
-    "method": "Mine Rune essence mine",
-    "tool": "Pickaxe",
-    "xp": 5
   },
   "Pure essence": {
     "skill": "Mining",
@@ -336,7 +329,7 @@
     "tool": "Harpoon",
     "xp": 110
   },
-  "Raw harpoonfish": {
+  "Harpoonfish": {
     "skill": "Fishing",
     "level": 35,
     "method": "Harpoon (Tempoross Cove)",
@@ -371,98 +364,98 @@
     "tool": "Big fishing net",
     "xp": 38
   },
-  "Grimy guam leaf": {
+  "Guam leaf": {
     "skill": "Farming",
     "level": 9,
     "method": "Harvest Guam herb patch",
     "tool": "Guam seed + Rake + Seed dibber",
     "xp": 11.5
   },
-  "Grimy marrentill": {
+  "Marrentill": {
     "skill": "Farming",
     "level": 14,
     "method": "Harvest Marrentill herb patch",
     "tool": "Marrentill seed + Rake + Seed dibber",
     "xp": 13.5
   },
-  "Grimy tarromin": {
+  "Tarromin": {
     "skill": "Farming",
     "level": 19,
     "method": "Harvest Tarromin herb patch",
     "tool": "Tarromin seed + Rake + Seed dibber",
     "xp": 18
   },
-  "Grimy harralander": {
+  "Harralander": {
     "skill": "Farming",
     "level": 26,
     "method": "Harvest Harralander herb patch",
     "tool": "Harralander seed + Rake + Seed dibber",
     "xp": 21.5
   },
-  "Grimy ranarr weed": {
+  "Ranarr weed": {
     "skill": "Farming",
     "level": 32,
     "method": "Harvest Ranarr herb patch",
     "tool": "Ranarr seed + Rake + Seed dibber",
     "xp": 30.5
   },
-  "Grimy toadflax": {
+  "Toadflax": {
     "skill": "Farming",
     "level": 38,
     "method": "Harvest Toadflax herb patch",
     "tool": "Toadflax seed + Rake + Seed dibber",
     "xp": 34.5
   },
-  "Grimy irit leaf": {
+  "Irit leaf": {
     "skill": "Farming",
     "level": 44,
     "method": "Harvest Irit herb patch",
     "tool": "Irit seed + Rake + Seed dibber",
     "xp": 43
   },
-  "Grimy avantoe": {
+  "Avantoe": {
     "skill": "Farming",
     "level": 50,
     "method": "Harvest Avantoe herb patch",
     "tool": "Avantoe seed + Rake + Seed dibber",
     "xp": 54.5
   },
-  "Grimy kwuarm": {
+  "Kwuarm": {
     "skill": "Farming",
     "level": 56,
     "method": "Harvest Kwuarm herb patch",
     "tool": "Kwuarm seed + Rake + Seed dibber",
     "xp": 69
   },
-  "Grimy snapdragon": {
+  "Snapdragon": {
     "skill": "Farming",
     "level": 62,
     "method": "Harvest Snapdragon herb patch",
     "tool": "Snapdragon seed + Rake + Seed dibber",
     "xp": 98.5
   },
-  "Grimy cadantine": {
+  "Cadantine": {
     "skill": "Farming",
     "level": 67,
     "method": "Harvest Cadantine herb patch",
     "tool": "Cadantine seed + Rake + Seed dibber",
     "xp": 106.5
   },
-  "Grimy lantadyme": {
+  "Lantadyme": {
     "skill": "Farming",
     "level": 73,
     "method": "Harvest Lantadyme herb patch",
     "tool": "Lantadyme seed + Rake + Seed dibber",
     "xp": 151.5
   },
-  "Grimy dwarf weed": {
+  "Dwarf weed": {
     "skill": "Farming",
     "level": 79,
     "method": "Harvest Dwarf weed herb patch",
     "tool": "Dwarf weed seed + Rake + Seed dibber",
     "xp": 170.5
   },
-  "Grimy torstol": {
+  "Torstol": {
     "skill": "Farming",
     "level": 85,
     "method": "Harvest Torstol herb patch",
@@ -567,47 +560,12 @@
     "tool": "Butterfly net",
     "xp": 35
   },
-  "Red feather": {
-    "skill": "Hunter",
-    "level": 1,
-    "method": "Bird snare (Crimson swift, Piscatoris)",
-    "tool": "Bird snare",
-    "xp": 34
-  },
-  "Yellow feather": {
-    "skill": "Hunter",
-    "level": 5,
-    "method": "Bird snare (Golden warbler, Kharidian Desert)",
-    "tool": "Bird snare",
-    "xp": 48.5
-  },
-  "Orange feather": {
-    "skill": "Hunter",
-    "level": 9,
-    "method": "Bird snare (Copper longtail, Piscatoris)",
-    "tool": "Bird snare",
-    "xp": 61
-  },
-  "Blue feather": {
-    "skill": "Hunter",
-    "level": 11,
-    "method": "Bird snare (Cerulean twitch, Rellekka)",
-    "tool": "Bird snare",
-    "xp": 64.5
-  },
   "Stripy feather": {
     "skill": "Hunter",
     "level": 19,
     "method": "Bird snare (Tropical wagtail, Feldip Hills)",
     "tool": "Bird snare",
     "xp": 95
-  },
-  "Wimpy feather": {
-    "skill": "Hunter",
-    "level": 39,
-    "method": "Bird snare (Wimpy bird, Feldip Hills)",
-    "tool": "Bird snare",
-    "xp": 238.5
   },
   "Polar kebbit fur": {
     "skill": "Hunter",
@@ -693,13 +651,6 @@
     "tool": "Snare",
     "xp": 162
   },
-  "Grenwall spikes": {
-    "skill": "Hunter",
-    "level": 77,
-    "method": "Box trap (Grenwall, Piscatoris)",
-    "tool": "Box trap",
-    "xp": null
-  },
   "Mark of grace": {
     "skill": "Agility",
     "level": 1,
@@ -755,20 +706,6 @@
     "method": "Pitfall trap (Kyatt, Piscatoris)",
     "tool": "Teasing stick + Logs",
     "xp": 300
-  },
-  "Coin pouch": {
-    "skill": "Thieving",
-    "level": 1,
-    "method": "Pickpocket any NPC",
-    "tool": "None",
-    "xp": 1
-  },
-  "Blood shard": {
-    "skill": "Thieving",
-    "level": 82,
-    "method": "Pickpocket Vyre (Meiyerditch)",
-    "tool": "None",
-    "xp": 306.7
   },
   "Rogue mask": {
     "skill": "Thieving",

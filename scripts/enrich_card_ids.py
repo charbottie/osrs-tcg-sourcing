@@ -1,6 +1,10 @@
 #!/usr/bin/env python3
 """
-Enriches Card.json with itemIds (for Resource cards) and npcIds (for Monster cards).
+[BETA ONLY] Enriches the beta Card.json with itemIds / npcIds from OSRSBox.
+
+NOTE: The v1.0 catalog (research/card-catalog-v1.json) already includes OSRS
+item/NPC IDs in the 'id' and 'tcg.variants[].id' fields — this script is no
+longer needed for v1.0 and should not be run against the v1.0 catalog.
 
 Data sources:
   Items: osrsbox-db + 0xNeffarion/osrsreboxed-db (combined, ~87% coverage)
