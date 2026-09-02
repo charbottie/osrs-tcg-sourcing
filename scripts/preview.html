@@ -3655,11 +3655,19 @@ function checkQuestCards(name, q) {
   const bm = bmQuestCards[name];
   if (bm) {
     let missing = 0;
-    for (const group of (bm.cardGroups || [])) {
-      if (!group.some(card => isOwned(card))) missing++;
-    }
-    for (const monster of (bm.monsterCards || [])) {
-      if (!isOwned(monster)) missing++;
+    // Schema 2: sections → requirements → {cards, type}
+    for (const section of (bm.sections || [])) {
+      for (const req of (section.requirements || [])) {
+        const cards = req.cards || [];
+        if (!cards.length) continue;
+        if (req.type === 'enemy') {
+          // Each enemy card must be owned individually
+          for (const card of cards) { if (!isOwned(card)) missing++; }
+        } else {
+          // Item: any-of group — at least one owned satisfies the requirement
+          if (!cards.some(card => isOwned(card))) missing++;
+        }
+      }
     }
     return { cardsOk: missing === 0, missingCount: missing };
   }
@@ -3907,55 +3915,62 @@ function showQuestDetail(questName, push = true) {
     html += `</div></div>`;
   }
 
-  // Card requirements — prefer BM data (exact card names, any-of groups, mid-quest items)
+  // Card requirements — BM data (schema 2: sections → requirements → {label, cards, type})
   const bm = bmQuestCards[questName];
   if (bm) {
-    const cardGroups = bm.cardGroups || [];
-    const groupLabels = bm.groupLabels || [];
-    const monsterCards = bm.monsterCards || [];
-    const totalGroups = cardGroups.length + monsterCards.length;
+    const itemRows = [], monsterRows = [];
 
-    if (totalGroups > 0) {
-      // Split into satisfied vs missing for display ordering
-      const itemRows = [], monsterRows = [];
+    for (const section of (bm.sections || [])) {
+      for (const req of (section.requirements || [])) {
+        const cards = req.cards || [];
+        if (!cards.length) continue;
+        const label = req.label || cards[0] || '';
 
-      // Item card groups (any-of within each group)
-      for (let i = 0; i < cardGroups.length; i++) {
-        const group = cardGroups[i];
-        const label = (groupLabels[i] || group[0]) || '';
-        const groupOk = group.some(card => isOwned(card));
-
-        if (group.length === 1) {
-          // Single card — show normally
-          const card = group[0];
+        if (req.type === 'enemy') {
+          // Each enemy card is a separate requirement
+          for (const card of cards) {
+            const ok = isOwned(card);
+            const isCard = !!monsterDrops[card];
+            const nav = isCard
+              ? `style="cursor:pointer" onclick="pushHistoryEntry();_renderTab('cards');setTimeout(()=>showCard('${card.replace(/'/g,"\\'")}','monster',false),50)"`
+              : '';
+            monsterRows.push({ ok, html: `<div class="req-row">
+              <span class="req-icon ${ok?'ok':'fail'}">${ok?'✓':'✗'}</span>
+              <span class="req-label" ${nav}>${card}</span>
+              <span class="req-note">${ok ? 'card owned' : (isCard ? 'need card' : 'no TCG card')}</span>
+            </div>` });
+          }
+        } else if (cards.length === 1) {
+          // Single item card
+          const card = cards[0];
           const ok = isOwned(card);
           const isItemCard = !!itemSources[card];
           const nav = isItemCard
             ? `style="cursor:pointer" onclick="pushHistoryEntry();_renderTab('cards');setTimeout(()=>showCard('${card.replace(/'/g,"\\'")}','item',false),50)"`
             : '';
-          const note = bm.notes && bm.notes.includes(card) ? `<span style="font-size:10px;color:#7a6a30;margin-left:6px">mid-quest</span>` : '';
+          // Show label when it differs from the card name (e.g. "Defence potion (3) or (4)")
+          const displayLabel = (label !== card) ? `${label} <span style="font-size:10px;color:#666">(${card})</span>` : card;
           itemRows.push({ ok, html: `<div class="req-row">
             <span class="req-icon ${ok?'ok':'fail'}">${ok?'✓':'✗'}</span>
-            <span class="req-label" ${nav}>${card}</span>
-            <span class="req-note">${ok ? 'owned' : 'need card'}</span>${note}
+            <span class="req-label" ${nav}>${displayLabel}</span>
+            <span class="req-note">${ok ? 'owned' : 'need card'}</span>
           </div>` });
         } else {
-          // Any-of group — tier by status then level order within each tier
-          // owned → obtainable (canGetItem) → locked, level order within each
-          const levelSorted = sortCardsByLevel(group);
-          const owned_    = levelSorted.filter(c => isOwned(c));
-          const getable   = levelSorted.filter(c => !isOwned(c) && canGetItem(c));
-          const locked_   = levelSorted.filter(c => !isOwned(c) && !canGetItem(c));
-          const tiered    = [...owned_, ...getable, ...locked_];
+          // Any-of group — tier owned → obtainable → locked
+          const groupOk = cards.some(c => isOwned(c));
+          const levelSorted = sortCardsByLevel(cards);
+          const owned_  = levelSorted.filter(c => isOwned(c));
+          const getable = levelSorted.filter(c => !isOwned(c) && canGetItem(c));
+          const locked_ = levelSorted.filter(c => !isOwned(c) && !canGetItem(c));
+          const tiered  = [...owned_, ...getable, ...locked_];
 
-          const nav = tiered.map((c, i) => {
-            const cardOwned    = isOwned(c);
-            const cardGetable  = !cardOwned && canGetItem(c);
-            const color        = cardOwned ? '#7ab07a' : cardGetable ? '#c8a830' : '#555';
-            // Dim the separator before locked cards
-            const prevLocked   = i > 0 && locked_.includes(tiered[i-1]);
-            const sepColor     = (locked_.includes(c) || prevLocked) ? '#333' : '#444';
-            const sep = i > 0 ? `<span style="color:${sepColor}"> · </span>` : '';
+          const optHtml = tiered.map((c, i) => {
+            const cardOwned   = isOwned(c);
+            const cardGetable = !cardOwned && canGetItem(c);
+            const color       = cardOwned ? '#7ab07a' : cardGetable ? '#c8a830' : '#555';
+            const prevLocked  = i > 0 && locked_.includes(tiered[i-1]);
+            const sepColor    = (locked_.includes(c) || prevLocked) ? '#333' : '#444';
+            const sep   = i > 0 ? `<span style="color:${sepColor}"> · </span>` : '';
             const inner = `<span style="color:${color}">${c}</span>`;
             return sep + (itemSources[c]
               ? `<span style="cursor:pointer" onclick="pushHistoryEntry();_renderTab('cards');setTimeout(()=>showCard('${c.replace(/'/g,"\\'")}','item',false),50)">${inner}</span>`
@@ -3966,29 +3981,17 @@ function showQuestDetail(questName, push = true) {
             <span class="req-icon ${groupOk?'ok':'fail'}" style="margin-top:2px">${groupOk?'✓':'✗'}</span>
             <div style="flex:1">
               <div class="req-label" style="color:#888;font-size:11px;margin-bottom:3px">Any: ${label}</div>
-              <div style="font-size:11px;line-height:1.6">${nav}</div>
+              <div style="font-size:11px;line-height:1.6">${optHtml}</div>
             </div>
           </div>` });
         }
       }
+    }
 
-      // Monster cards (each must be owned individually)
-      for (const monster of monsterCards) {
-        const ok = isOwned(monster);
-        const isCard = !!monsterDrops[monster];
-        const nav = isCard
-          ? `style="cursor:pointer" onclick="pushHistoryEntry();_renderTab('cards');setTimeout(()=>showCard('${monster.replace(/'/g,"\\'")}','monster',false),50)"`
-          : '';
-        monsterRows.push({ ok, html: `<div class="req-row">
-          <span class="req-icon ${ok?'ok':'fail'}">${ok?'✓':'✗'}</span>
-          <span class="req-label" ${nav}>${monster}</span>
-          <span class="req-note">${ok ? 'card owned' : (isCard ? 'need card' : 'no TCG card')}</span>
-        </div>` });
-      }
-
+    const totalRows = itemRows.length + monsterRows.length;
+    if (totalRows > 0) {
       if (itemRows.length > 0) {
         html += `<div class="section"><div class="section-header">Items &amp; Cards Required</div><div style="margin-top:8px">`;
-        // Show missing first, then owned
         for (const r of [...itemRows.filter(r=>!r.ok), ...itemRows.filter(r=>r.ok)]) html += r.html;
         html += `</div></div>`;
       }
@@ -3996,11 +3999,6 @@ function showQuestDetail(questName, push = true) {
         html += `<div class="section"><div class="section-header">Enemies to Defeat</div><div style="margin-top:8px">`;
         for (const r of [...monsterRows.filter(r=>!r.ok), ...monsterRows.filter(r=>r.ok)]) html += r.html;
         html += `</div></div>`;
-      }
-
-      if (bm.notes) {
-        html += `<div style="font-size:11px;color:#7a6a30;margin-top:4px;padding:6px 8px;background:#1e1a08;border-radius:3px">
-          ⚠ ${bm.notes}</div>`;
       }
     } else {
       html += `<div style="color:#555;font-size:12px;margin-top:4px">No card requirements tracked. Check the wiki for full details.</div>`;
