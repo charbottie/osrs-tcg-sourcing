@@ -47,9 +47,12 @@ def scan_dir(quest_dir: pathlib.Path) -> dict[str, str]:
 def main() -> int:
     p = argparse.ArgumentParser(description=__doc__,
                                 formatter_class=argparse.RawDescriptionHelpFormatter)
-    p.add_argument("--player", default="lottie_tcg",
-                   help="Player name to scan (default: lottie_tcg)")
+    p.add_argument("--player", default=None,
+                   help="Player name to scan (required)")
     args = p.parse_args()
+
+    if not args.player:
+        p.error("--player is required (e.g. --player your_rsn)")
 
     if not SCREENSHOTS_BASE.exists():
         print(f"ERROR: Screenshots directory not found: {SCREENSHOTS_BASE}")

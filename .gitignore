@@ -42,7 +42,9 @@ plugins/
 # ── Session / working files ────────────────────────────────────────────────────
 CLAUDE.md
 PROJECT_LOG.md
+docs/bronzeman-architecture.md
+docs/osrs-tcg-architecture.md
+docs/opportunities.md
 docs/opportunities/
-research/beta_vs_v1_diff.txt
-research/quest_cards_review.json
-research/quest_cards_review.txt
+research/
+
