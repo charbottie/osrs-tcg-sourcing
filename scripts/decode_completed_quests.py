@@ -74,8 +74,8 @@ def main() -> int:
 
     completed = sorted(all_found.keys())
     OUT_JSON.parent.mkdir(parents=True, exist_ok=True)
-    OUT_JSON.write_text(json.dumps({"completedQuests": completed}, indent=2,
-                                    ensure_ascii=False) + "\n",
+    OUT_JSON.write_text(json.dumps({"player": args.player, "completedQuests": completed},
+                                    indent=2, ensure_ascii=False) + "\n",
                         encoding="utf-8")
     print(f"\nWrote {len(completed)} completed quest names → {OUT_JSON}")
     return 0

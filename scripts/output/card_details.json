@@ -11751,7 +11751,7 @@
   },
   "Desert goat horn": {
     "examine": "Not much good for blowing.",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Desert_goat_horn_detail.png/130px-Desert_goat_horn_detail.png",
+    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Goat_horn_detail.png/130px-Goat_horn_detail.png",
     "tier": "Common",
     "regions": [
       "Wilderness",
@@ -13478,7 +13478,7 @@
   },
   "Grubs à la mode": {
     "examine": "Juicy, tasty grubs.",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Grubs_à_la_mode_detail.png/130px-Grubs_à_la_mode_detail.png",
+    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Grubs_%C3%A0_la_mode_detail.png/130px-Grubs_%C3%A0_la_mode_detail.png",
     "tier": "Common",
     "regions": [
       "Misthalin"
@@ -25171,7 +25171,7 @@
   },
   "Valuables": {
     "examine": "Some valuable bits and bobs from wealthy houses.",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Valuables 4 detail.png/130px-Valuables 4 detail.png",
+    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Valuables_4_detail.png/130px-Valuables_4_detail.png",
     "tier": "Common",
     "regions": [
       "Varlamore"
@@ -25505,7 +25505,7 @@
   },
   "Chichilihui rosé": {
     "examine": "A light and dry Tlati Rosé that's known for its floral elegance.",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Chichilihui_rosé_detail.png/130px-Chichilihui_rosé_detail.png",
+    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Chichilihui_ros%C3%A9_detail.png/130px-Chichilihui_ros%C3%A9_detail.png",
     "tier": "Common",
     "regions": [
       "Varlamore"
@@ -25513,7 +25513,7 @@
   },
   "Imperial rosé": {
     "examine": "A complex and herby Tempestus Rosé that's famously served at the College of Bards.",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Imperial_rosé_detail.png/130px-Imperial_rosé_detail.png",
+    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Imperial_ros%C3%A9_detail.png/130px-Imperial_ros%C3%A9_detail.png",
     "tier": "Uncommon",
     "regions": [
       "Varlamore"
@@ -25521,7 +25521,7 @@
   },
   "Xochipaltic rosé": {
     "examine": "A sweet and pale Avium Rosé that's no longer produced due to vine rot.",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Xochipaltic_rosé_detail.png/130px-Xochipaltic_rosé_detail.png",
+    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Xochipaltic_ros%C3%A9_detail.png/130px-Xochipaltic_ros%C3%A9_detail.png",
     "tier": "Uncommon",
     "regions": [
       "Varlamore"
@@ -28269,7 +28269,7 @@
   },
   "Hallowfell": {
     "examine": "This really fells my hallow.",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Hallowfell detail.png/130px-Hallowfell detail.png",
+    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Hallowfell_detail.png/130px-Hallowfell_detail.png",
     "tier": "Legendary",
     "regions": []
   },
@@ -28287,7 +28287,7 @@
   },
   "Aggy": {
     "examine": "A cute angel.",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Aggy chathead.png/130px-Aggy chathead.png",
+    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Aggy_chathead.png/130px-Aggy_chathead.png",
     "tier": "Godly",
     "regions": []
   },
@@ -38563,7 +38563,7 @@
   },
   "Furia Tullus": {
     "examine": "She looks important.",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Ennius Tullus.png/130px-Ennius Tullus.png",
+    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Ennius_Tullus.png/130px-Ennius_Tullus.png",
     "tier": "Epic",
     "regions": [
       "Varlamore"
@@ -39324,7 +39324,7 @@
   },
   "Ennius Tullus": {
     "examine": "Convinced of his own transcendence.",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Ennius Tullus.png/130px-Ennius Tullus.png",
+    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Ennius_Tullus.png/130px-Ennius_Tullus.png",
     "tier": "Legendary",
     "regions": [
       "Varlamore"
@@ -40095,7 +40095,7 @@
   },
   "Mad Angel": {
     "examine": "O Lord, she approaches!",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Mad Angel (dormant).png/130px-Mad Angel (dormant).png",
+    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Mad_Angel_%28dormant%29.png/130px-Mad_Angel_%28dormant%29.png",
     "tier": "Legendary",
     "regions": []
   },

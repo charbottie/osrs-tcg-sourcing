@@ -1207,14 +1207,19 @@ async function loadData() {
         bmQuestCards[q.name] = q;
       }
     }
-    // Replace the file-sourced set with the current file contents.
-    // This means re-running decode_completed_quests.py correctly removes
-    // stale entries (e.g. quests from other accounts) without touching
-    // manually-marked quests stored in _cqManual.
-    if ((cq.completedQuests || []).length > 0) {
-      _cqFile = new Set(cq.completedQuests);
-      completedQuests = new Set([..._cqFile, ..._cqManual]);
-      _saveCq();
+    // Only load completed_quests.json at startup if the file has a player tag
+    // that matches the currently selected account. A file with no player tag
+    // is ambiguous — don't apply it to any specific account (syncQuestsFromScreenshots
+    // applies the same rule). This prevents lottie_tcg quests leaking onto tcg_lottie.
+    {
+      const cqPlayer = (cq.player || cq.rsn || '').toLowerCase();
+      const startupRsn = (document.getElementById('rsn-input')?.value || '').trim().toLowerCase();
+      const cqMatches = cqPlayer && (!startupRsn || cqPlayer === startupRsn);
+      if (cqMatches && (cq.completedQuests || []).length > 0) {
+        _cqFile = new Set(cq.completedQuests);
+        completedQuests = new Set([..._cqFile, ..._cqManual]);
+        _saveCq();
+      }
     }
     // Build inverted tier → [item names] map from clue_sources.json
     for (const [name, tiers] of Object.entries(cs)) {
@@ -1247,7 +1252,10 @@ async function loadData() {
       .sort((a, b) => b.updatedAt.localeCompare(a.updatedAt));
     populateAccountDropdown(_startupAccounts);
     const _selectedRsn = document.getElementById('rsn-input')?.value || '';
-    if (_selectedRsn) switchCollection(_selectedRsn);
+    if (_selectedRsn) {
+      _loadManualForRsn(_selectedRsn);  // set _currentRsn before any saves happen
+      switchCollection(_selectedRsn);
+    }
     // Auto-load fresh data on startup (also refreshes dropdown via /api/accounts/list)
     refreshAll();
     // Auto-detect new collection after packs opened / logout — poll every 8s
@@ -2202,7 +2210,9 @@ function renderClueScroll(tier, container) {
   const tierBadge = `<span style="background:${cfg.bg};color:${cfg.color};border:1px solid ${cfg.color}55;border-radius:3px;padding:2px 10px;font-size:11px;font-weight:600;margin-left:8px">${cfg.label}</span>`;
 
   const clueWikiUrl = `https://oldschool.runescape.wiki/w/Clue_scroll_(${tier})`;
-  let html = `<h1>Clue scroll ${tierBadge}<a href="${clueWikiUrl}" target="_blank" rel="noopener" title="View on OSRS Wiki"
+  const clueImgUrl = `https://oldschool.runescape.wiki/images/Clue_scroll_(${tier}).png`;
+  const clueImgHtml = `<img src="${clueImgUrl}" style="float:right;max-width:64px;max-height:64px;image-rendering:pixelated;margin-left:8px" onerror="this.style.display='none'">`;
+  let html = `<h1>${clueImgHtml}Clue scroll ${tierBadge}<a href="${clueWikiUrl}" target="_blank" rel="noopener" title="View on OSRS Wiki"
     style="color:#555;font-size:11px;text-decoration:none;margin-left:8px;vertical-align:middle"
     onclick="event.stopPropagation()">↗ wiki</a></h1>
     <div class="subtitle" style="color:#666">Virtual card — tracks sources &amp; reward completion</div>
