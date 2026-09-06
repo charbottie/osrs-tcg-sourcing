@@ -13432,6 +13432,13 @@
               "type": "item"
             },
             {
+              "label": "Karamjan rum (or 30 Coins to buy on Karamja)",
+              "cards": [
+                "Karamjan rum"
+              ],
+              "type": "item"
+            },
+            {
               "label": "Raw karambwan",
               "cards": [
                 "Raw karambwan"
