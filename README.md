@@ -136,6 +136,36 @@ These files are generated locally and never committed:
 
 ---
 
+## Known limitations / areas for improvement
+
+Contributions welcome — these are the roughest edges:
+
+**Quest completion detection**
+- Relies on RuneLite quest-list screenshots stored locally. If you haven't taken a screenshot of your quest list in RuneLite, completions won't sync. A direct RuneLite API integration or hiscores-based detection would be more reliable.
+
+**`bm_quest_cards.json` is hand-curated**
+- Quest card requirements for Bronzeman mode (which cards you need to complete each quest) are manually maintained. New quests and quest reworks need manual updates. The format is documented in `docs/data-structures.md` — PRs welcome.
+
+**Area gate mappings are hardcoded**
+- The list of monsters tied to gated zones (Morytania, Kourend, Varlamore, etc.) and the extra requirements for each (e.g. Spade for Barrows) are hardcoded in `preview.html` as `CARD_AREAS` / `AREA_GATES`. New content areas or corrections require editing those constants directly.
+
+**Quest-gated gathering/production coverage is incomplete**
+- Only a handful of gathering methods (e.g. Mort Myre Fungus) and production methods (e.g. crystal equipment) have quest requirements encoded. Other quest-locked skilling spots may show as available when they shouldn't.
+
+**Game data can go stale**
+- `monster_drops.json`, `item_sources.json`, and `quests.json` are scraped from the OSRS Wiki. When the game updates (new content, reworks, renamed cards) the data needs re-scraping via the generate scripts. There's no automatic refresh.
+
+**No web-hosted version**
+- The tool requires running a local Python server. There's no hosted/shareable link. The main blocker is that collection data lives on your local disk — a RuneLite plugin API or cloud sync would be needed to host this publicly.
+
+**Card name matching is fragile**
+- Cards have no numeric IDs — names are the sole key throughout all data files and the plugin. If the TCG renames a card, every reference across `bm_quest_cards.json`, `item_sources.json`, `monster_drops.json`, etc. needs updating.
+
+**No mobile support**
+- The UI is desktop-only and hasn't been tested on small screens.
+
+---
+
 ## Related projects
 
 | Project | Link |
