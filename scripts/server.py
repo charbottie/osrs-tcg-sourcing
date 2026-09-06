@@ -324,12 +324,13 @@ class Handler(http.server.SimpleHTTPRequestHandler):
 
         search_dirs: list[pathlib.Path] = []
         if player:
+            # Player specified — only scan that player's directory, never others.
             search_dirs.append(self._SCREENSHOTS_BASE / player / "Quests")
-        # Also scan all player dirs if no player specified, or as fallback
-        if self._SCREENSHOTS_BASE.exists():
+        elif self._SCREENSHOTS_BASE.exists():
+            # No player specified — scan all player directories.
             for d in self._SCREENSHOTS_BASE.iterdir():
                 candidate = d / "Quests"
-                if candidate not in search_dirs and candidate.is_dir():
+                if candidate.is_dir():
                     search_dirs.append(candidate)
 
         pattern = re.compile(r'^Quest\((.+?)\)\s+\d{4}-\d{2}-\d{2}')
@@ -347,6 +348,7 @@ class Handler(http.server.SimpleHTTPRequestHandler):
                         found[name] = f.name
 
         self._json_response({
+            "player": player,
             "completedQuests": sorted(found.keys()),
             "screenshotCount": len(found),
             "dirsScanned": [str(d) for d in search_dirs],
