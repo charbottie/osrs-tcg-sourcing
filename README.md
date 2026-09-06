@@ -164,6 +164,9 @@ Contributions welcome — these are the roughest edges:
 **No mobile support**
 - The UI is desktop-only and hasn't been tested on small screens.
 
+**Data pipeline scripts need a post-beta tidy**
+- Several scripts in `scripts/` were written iteratively during beta and haven't been consolidated. `generate_equipment.py` and `generate_food.py` could be merged; clue scroll data lives across three separate JSON files; some generate scripts still reference the old beta card catalog path. The pipeline works but is rougher than the rest of the codebase.
+
 ---
 
 ## Related projects
