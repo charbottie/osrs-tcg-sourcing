@@ -967,7 +967,7 @@ function canGetItem(itemName, visited = new Set()) {
 }
 
 // ─── State ─────────────────────────────────────────────────────────────────
-let monsterDrops = {}, itemSources = {}, questChains = {}, cardCategories = {}, cardDetails = {}, foodData = {};
+let monsterDrops = {}, itemSources = {}, cardCategories = {}, cardDetails = {}, foodData = {};
 let packCatalog  = null;   // {catalogVersion, packSize, packs:[...]} from /api/packs
 let packPools    = null;   // {packId: {tierLabel: count}} precomputed at load time
 let equipBySlot  = {};   // slot → [{name, value, is2h, itemIds}]
@@ -1173,10 +1173,9 @@ function simulateRandom() {
 async function loadData() {
   try {
     const cb = `?v=${Date.now()}`;  // cache-bust so updated JSON files are always fresh
-    const [md, is, qc, cc, cd, css, cs, crr, ii, qd, ed, fd, bmqc, cq, ac] = await Promise.all([
+    const [md, is, cc, cd, css, cs, crr, ii, qd, ed, fd, bmqc, cq, ac] = await Promise.all([
       fetch(`output/monster_drops.json${cb}`).then(r => r.json()).catch(() => ({})),
       fetch(`output/item_sources.json${cb}`).then(r => r.json()).catch(() => ({})),
-      fetch(`output/quest_chains.json${cb}`).then(r => r.json()).catch(() => ({})),
       fetch(`output/card_categories.json${cb}`).then(r => r.json()).catch(() => ({})),
       fetch(`output/card_details.json${cb}`).then(r => r.json()).catch(() => ({})),
       fetch(`clue_scroll_sources.json${cb}`).then(r => r.json()).catch(() => ({})),
@@ -1190,7 +1189,7 @@ async function loadData() {
       fetch(`output/completed_quests.json${cb}`).then(r => r.json()).catch(() => ({completedQuests:[]})),
       fetch(`output/all_collections.json${cb}`).then(r => r.json()).catch(() => ({profiles:{}})),
     ]);
-    monsterDrops = md; itemSources = is; questChains = qc; cardCategories = cc; cardDetails = cd;
+    monsterDrops = md; itemSources = is; cardCategories = cc; cardDetails = cd;
     equipBySlot = ed; foodData = fd;
     clueScrollSources  = css;
     clueRewardRarities = crr;
@@ -2560,11 +2559,7 @@ function renderItem(name, container) {
     html += `<div class="empty-note">No quest association.</div>`;
   } else {
     for (const q of quests) {
-      const chain = questChains[q];
-      html += `<div class="quest-row"><span class="quest-name">${q}</span>`;
-      if (chain?.prerequisites?.length)
-        html += `<div class="quest-prereqs">requires: ${chain.prerequisites.join(', ')}</div>`;
-      html += `</div>`;
+      html += `<div class="quest-row"><span class="quest-name">${q}</span></div>`;
     }
   }
   html += `</div>`;
