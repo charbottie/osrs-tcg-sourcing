@@ -27,8 +27,8 @@ A local web app for **OSRS TCG** players running the **Bronzeman TCG** RuneLite 
 ## Quick start
 
 ```bash
-git clone https://github.com/your-username/osrs_tcg.git
-cd osrs_tcg
+git clone https://github.com/charbottie/osrs-tcg-sourcing.git
+cd osrs-tcg-sourcing
 pip install -r scripts/requirements.txt
 python scripts/server.py
 ```
