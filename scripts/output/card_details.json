@@ -152,7 +152,7 @@
   },
   "Wine of zamorak": {
     "examine": "An evil wine for an evil god.",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Wine_of_zamorak_detail.png/130px-Wine_of_zamorak_detail.png",
+    "imageUrl": "https://oldschool.runescape.wiki/images/Wine_of_Zamorak.png",
     "tier": "Common",
     "regions": []
   },
@@ -6701,7 +6701,7 @@
   },
   "Ring of charos": {
     "examine": "The Ring of Charos.",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Ring_of_charos_detail.png/130px-Ring_of_charos_detail.png",
+    "imageUrl": "https://oldschool.runescape.wiki/images/Ring_of_Charos.png",
     "tier": "Uncommon",
     "regions": []
   },
@@ -8276,7 +8276,7 @@
   },
   "Amulet of nature": {
     "examine": "An Amulet of Nature.",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Amulet_of_nature_detail.png/130px-Amulet_of_nature_detail.png",
+    "imageUrl": "https://oldschool.runescape.wiki/images/Amulet_of_Nature.png",
     "tier": "Uncommon",
     "regions": []
   },
@@ -10484,7 +10484,7 @@
   },
   "Dwarven rock cake": {
     "examine": "Red hot and glowing, ouch! Only for dwarf consumption.",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Dwarven_rock_cake_detail.png/130px-Dwarven_rock_cake_detail.png",
+    "imageUrl": "https://oldschool.runescape.wiki/images/Dwarven_rock_cake_%28hot%29.png",
     "tier": "Uncommon",
     "regions": [
       "Asgarnia"
@@ -13205,7 +13205,7 @@
   },
   "Helm of Neitiznot": {
     "examine": "A gift from Neitiznot's Burgher.",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Helm_of_neitiznot_detail.png/130px-Helm_of_neitiznot_detail.png",
+    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Helm_of_Neitiznot_detail.png/100px-Helm_of_Neitiznot_detail.png",
     "tier": "Epic",
     "regions": [
       "Fremennik"
@@ -13989,7 +13989,7 @@
   },
   "Book of knowledge": {
     "examine": "Educate yourself.",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Book_of_knowledge_detail.png/130px-Book_of_knowledge_detail.png",
+    "imageUrl": "https://oldschool.runescape.wiki/images/Book_of_Knowledge.png",
     "tier": "Common",
     "regions": []
   },
@@ -14081,7 +14081,7 @@
   },
   "Scroll of redirection": {
     "examine": "Use this on a 'Teleport to House' tablet to redirect the tablet.",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Scroll_of_redirection_detail.png/130px-Scroll_of_redirection_detail.png",
+    "imageUrl": "https://oldschool.runescape.wiki/images/Scroll_of_Redirection.png",
     "tier": "Common",
     "regions": [
       "Kandarin"
@@ -14111,7 +14111,7 @@
   },
   "Staff of the dead": {
     "examine": "A ghastly weapon with evil origins.",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Staff_of_the_dead_detail.png/130px-Staff_of_the_dead_detail.png",
+    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Staff_of_the_Dead_detail.png/98px-Staff_of_the_Dead_detail.png",
     "tier": "Legendary",
     "regions": [
       "Asgarnia"
@@ -14248,7 +14248,7 @@
   },
   "Mark of grace": {
     "examine": "You can exchange these for rewards at the Rogues' Den.",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Mark_of_grace_detail.png/130px-Mark_of_grace_detail.png",
+    "imageUrl": "https://oldschool.runescape.wiki/images/Mark_of_Grace.png",
     "tier": "Common",
     "regions": [
       "Misthalin",
@@ -14361,7 +14361,7 @@
   },
   "Trident of the seas": {
     "examine": "A weapon from the deep.",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Trident_of_the_seas_detail.png/130px-Trident_of_the_seas_detail.png",
+    "imageUrl": "https://oldschool.runescape.wiki/images/Uncharged_trident.png",
     "tier": "Epic",
     "regions": [
       "Kandarin",
@@ -14527,7 +14527,7 @@
   },
   "Mystic smoke staff": {
     "examine": "It gives a 10% accuracy and damage bonus for spells on the standard spellbook.",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/250px-Smoke_battlestaff_detail_animated.gif/130px-250px-Smoke_battlestaff_detail_animated.gif",
+    "imageUrl": "https://oldschool.runescape.wiki/images/Mystic_smoke_staff.png",
     "tier": "Epic",
     "regions": []
   },
@@ -15913,7 +15913,7 @@
   },
   "Dragon legs/skirt ornament kit": {
     "examine": "Use on dragon platelegs or plateskirt to make them look fancier!",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/250px-Dragon_legs+skirt_ornament_kit_detail.png/130px-250px-Dragon_legs+skirt_ornament_kit_detail.png",
+    "imageUrl": "https://oldschool.runescape.wiki/images/Dragon_legs%2Bskirt_ornament_kit.png",
     "tier": "Rare",
     "regions": [
       "General"
@@ -16118,7 +16118,7 @@
   },
   "Pet dagannoth supreme": {
     "examine": "Wouldn't want that sleeping at the end of my bed.",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Pet_dagannoth_supreme_detail.png/130px-Pet_dagannoth_supreme_detail.png",
+    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Dagannoth_Supreme_Jr..png/280px-Dagannoth_Supreme_Jr..png",
     "tier": "Godly",
     "regions": [
       "Fremennik"
@@ -16126,7 +16126,7 @@
   },
   "Pet dagannoth prime": {
     "examine": "Has the same temper as its father.",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Pet_dagannoth_prime_detail.png/130px-Pet_dagannoth_prime_detail.png",
+    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Dagannoth_Prime_Jr..png/200px-Dagannoth_Prime_Jr..png",
     "tier": "Godly",
     "regions": [
       "Fremennik"
@@ -16134,7 +16134,7 @@
   },
   "Pet dagannoth rex": {
     "examine": "They do say if you like it you should put a ring on it.",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Pet_dagannoth_rex_detail.png/130px-Pet_dagannoth_rex_detail.png",
+    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Dagannoth_Rex_Jr..png/230px-Dagannoth_Rex_Jr..png",
     "tier": "Godly",
     "regions": [
       "Fremennik"
@@ -16142,7 +16142,7 @@
   },
   "Baby mole": {
     "examine": "Keep Molin', molin' molin' molin'!",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Baby_mole_detail.png/130px-Baby_mole_detail.png",
+    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Baby_Mole_%28follower%29.png/280px-Baby_Mole_%28follower%29.png",
     "tier": "Godly",
     "regions": [
       "Asgarnia"
@@ -16150,7 +16150,7 @@
   },
   "Kalphite princess": {
     "examine": "Suggests there's a king nearby.",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Kalphite_princess_detail.png/130px-Kalphite_princess_detail.png",
+    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Kalphite_Princess_%28follower%2C_walking%29.png/290px-Kalphite_Princess_%28follower%2C_walking%29.png",
     "tier": "Godly",
     "regions": [
       "Desert"
@@ -16158,7 +16158,7 @@
   },
   "Pet smoke devil": {
     "examine": "*cough*",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Pet_smoke_devil_detail.png/130px-Pet_smoke_devil_detail.png",
+    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Smoke_Devil_%28follower%29.png/250px-Smoke_Devil_%28follower%29.png",
     "tier": "Godly",
     "regions": [
       "Kandarin"
@@ -16166,7 +16166,7 @@
   },
   "Pet kree'arra": {
     "examine": "Is it a bird, is it... no it's a bird.",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Pet_kree'arra_detail.png/130px-Pet_kree'arra_detail.png",
+    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Kree%27arra_Jr..png/270px-Kree%27arra_Jr..png",
     "tier": "Godly",
     "regions": [
       "Asgarnia"
@@ -16174,7 +16174,7 @@
   },
   "Pet general graardor": {
     "examine": "Totally inaudible.",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Pet_general_graardor_detail.png/130px-Pet_general_graardor_detail.png",
+    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/General_Graardor_Jr..png/280px-General_Graardor_Jr..png",
     "tier": "Godly",
     "regions": [
       "Asgarnia"
@@ -16182,7 +16182,7 @@
   },
   "Pet zilyana": {
     "examine": "Somehow a junior even though she's named after her spawn mother!",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Pet_zilyana_detail.png/130px-Pet_zilyana_detail.png",
+    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Zilyana_Jr..png/250px-Zilyana_Jr..png",
     "tier": "Godly",
     "regions": [
       "Asgarnia"
@@ -16190,7 +16190,7 @@
   },
   "Pet k'ril tsutsaroth": {
     "examine": "Where did he even come from?",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Pet_k'ril_tsutsaroth_detail.png/130px-Pet_k'ril_tsutsaroth_detail.png",
+    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/K%27ril_Tsutsaroth_Jr..png/290px-K%27ril_Tsutsaroth_Jr..png",
     "tier": "Godly",
     "regions": [
       "Asgarnia"
@@ -16198,7 +16198,7 @@
   },
   "Prince Black Dragon": {
     "examine": "Not quite the full royalty yet.",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Prince_black_dragon_detail.png/130px-Prince_black_dragon_detail.png",
+    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Prince_Black_Dragon_%28follower%29.png/280px-Prince_Black_Dragon_%28follower%29.png",
     "tier": "Godly",
     "regions": [
       "Wilderness"
@@ -16206,7 +16206,7 @@
   },
   "Pet kraken": {
     "examine": "How.... is it walking?",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Pet_kraken_detail.png/130px-Pet_kraken_detail.png",
+    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Pet_Kraken_%28follower%29.png/200px-Pet_Kraken_%28follower%29.png",
     "tier": "Godly",
     "regions": [
       "Kandarin"
@@ -16220,7 +16220,7 @@
   },
   "Pet penance queen": {
     "examine": "Got eggs?",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Pet_penance_queen_detail.png/130px-Pet_penance_queen_detail.png",
+    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Penance_Pet.png/290px-Penance_Pet.png",
     "tier": "Godly",
     "regions": [
       "Kandarin"
@@ -16316,7 +16316,7 @@
   },
   "Amulet of the damned": {
     "examine": "Heirloom of an ancient and extinct family of Morytania.",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Amulet_of_the_damned_detail.png/130px-Amulet_of_the_damned_detail.png",
+    "imageUrl": "https://oldschool.runescape.wiki/images/Amulet_of_the_Damned_%28full%29.png",
     "tier": "Epic",
     "regions": [
       "Morytania"
@@ -16348,7 +16348,7 @@
   },
   "Jar of sand": {
     "examine": "It's just a jar of sand.",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Jar_of_sand_detail.png/130px-Jar_of_sand_detail.png",
+    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Jar_of_Sand_detail.png/90px-Jar_of_Sand_detail.png",
     "tier": "Epic",
     "regions": [
       "Desert"
@@ -16356,7 +16356,7 @@
   },
   "Trident of the swamp": {
     "examine": "A toxic weapon from the deep.",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Trident_of_the_swamp_detail.png/130px-Trident_of_the_swamp_detail.png",
+    "imageUrl": "https://oldschool.runescape.wiki/images/Uncharged_toxic_trident.png",
     "tier": "Legendary",
     "regions": [
       "Kandarin",
@@ -16379,7 +16379,7 @@
   },
   "Pet snakeling": {
     "examine": "A slithering serpent spawn of Zulrah.",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Pet_snakeling_detail.png/130px-Pet_snakeling_detail.png",
+    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Snakeling.png/250px-Snakeling.png",
     "tier": "Godly",
     "regions": [
       "Tirannwn"
@@ -16411,7 +16411,7 @@
   },
   "Jar of swamp": {
     "examine": "This is my Swamp!",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Jar_of_swamp_detail.png/130px-Jar_of_swamp_detail.png",
+    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Jar_of_Swamp_detail.png/90px-Jar_of_Swamp_detail.png",
     "tier": "Epic",
     "regions": [
       "Tirannwn"
@@ -16577,7 +16577,7 @@
   },
   "Vet'ion jr.": {
     "examine": "Only the true lord & king of the lands can lift his burden.",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Vet'ion_jr._detail.png/130px-Vet'ion_jr._detail.png",
+    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Vet%27ion_Jr._%28follower%29.png/180px-Vet%27ion_Jr._%28follower%29.png",
     "tier": "Godly",
     "regions": [
       "Wilderness"
@@ -16599,7 +16599,7 @@
   },
   "Tzrek-jad": {
     "examine": "This is not going to hurt... but it might tickle.",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Tzrek-jad_detail.png/130px-Tzrek-jad_detail.png",
+    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/TzRek-Jad_%28follower%29.png/200px-TzRek-Jad_%28follower%29.png",
     "tier": "Godly",
     "regions": [
       "Karamja"
@@ -16642,7 +16642,7 @@
   },
   "Jar of souls": {
     "examine": "This may be of use for a certain person.",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Jar_of_souls_detail.png/130px-Jar_of_souls_detail.png",
+    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Jar_of_Souls_detail.png/90px-Jar_of_Souls_detail.png",
     "tier": "Epic",
     "regions": [
       "Asgarnia"
@@ -16738,7 +16738,7 @@
   },
   "Jar of miasma": {
     "examine": "It smells abysmal.",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Jar_of_miasma_detail.png/130px-Jar_of_miasma_detail.png",
+    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Jar_of_Miasma_detail.png/90px-Jar_of_Miasma_detail.png",
     "tier": "Epic",
     "regions": [
       "Misthalin"
@@ -17468,7 +17468,7 @@
   },
   "Helm of raedwald": {
     "examine": "An ancient helmet of King Raedwald Indanorf. First discovered by Pikachu Yip.",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Helm_of_raedwald_detail.png/130px-Helm_of_raedwald_detail.png",
+    "imageUrl": "https://oldschool.runescape.wiki/images/Helm_of_Raedwald.png",
     "tier": "Common",
     "regions": []
   },
@@ -17510,7 +17510,7 @@
   },
   "Jar of darkness": {
     "examine": "It smells like it's been where the sun doesn't shine.",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Jar_of_darkness_detail.png/130px-Jar_of_darkness_detail.png",
+    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Jar_of_Darkness_detail.png/90px-Jar_of_Darkness_detail.png",
     "tier": "Epic",
     "regions": [
       "Kourend"
@@ -18594,7 +18594,7 @@
   },
   "Giant squirrel": {
     "examine": "A giant squirrel with beautiful markings.",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Giant_squirrel_detail.png/130px-Giant_squirrel_detail.png",
+    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Giant_Squirrel_%28follower%29.png/240px-Giant_Squirrel_%28follower%29.png",
     "tier": "Godly",
     "regions": [
       "General",
@@ -18650,7 +18650,7 @@
   },
   "Rift guardian": {
     "examine": "An abyssal rift guardian.",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/rift_guardian_detail.png/130px-rift_guardian_detail.png",
+    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Rift_guardian_%28follower%2C_fire%29.png/200px-Rift_guardian_%28follower%2C_fire%29.png",
     "tier": "Godly",
     "regions": [
       "Desert"
@@ -18736,7 +18736,7 @@
   },
   "Tome of fire": {
     "examine": "An ancient tome containing the secrets of fire magic.",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Tome_of_fire_detail.png/130px-Tome_of_fire_detail.png",
+    "imageUrl": "https://oldschool.runescape.wiki/images/Tome_of_Fire_%28empty%29.png",
     "tier": "Legendary",
     "regions": [
       "Kourend"
@@ -19255,7 +19255,7 @@
   },
   "Jal-nib-rek": {
     "examine": "It loves to nibble.",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Jal-nib-rek_detail.png/130px-Jal-nib-rek_detail.png",
+    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Jal-Nib-Rek_%28follower%29.png/290px-Jal-Nib-Rek_%28follower%29.png",
     "tier": "Godly",
     "regions": [
       "Karamja"
@@ -19696,7 +19696,7 @@
   },
   "Jar of stone": {
     "examine": "Stones aren't very useful in this capacity.",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Jar_of_stone_detail.png/130px-Jar_of_stone_detail.png",
+    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Jar_of_Stone_detail.png/90px-Jar_of_Stone_detail.png",
     "tier": "Epic",
     "regions": [
       "Morytania"
@@ -19718,7 +19718,7 @@
   },
   "Imbued saradomin cape": {
     "examine": "A cape from the almighty god Saradomin, imbued with great power.",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Imbued_saradomin_cape_detail.png/130px-Imbued_saradomin_cape_detail.png",
+    "imageUrl": "https://oldschool.runescape.wiki/images/Imbued_Saradomin_cape.png",
     "tier": "Epic",
     "regions": [
       "Wilderness"
@@ -19726,7 +19726,7 @@
   },
   "Imbued guthix cape": {
     "examine": "A cape from the almighty god Guthix, imbued with great power.",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Imbued_guthix_cape_detail.png/130px-Imbued_guthix_cape_detail.png",
+    "imageUrl": "https://oldschool.runescape.wiki/images/Imbued_Guthix_cape.png",
     "tier": "Epic",
     "regions": [
       "Wilderness"
@@ -19734,7 +19734,7 @@
   },
   "Imbued zamorak cape": {
     "examine": "A cape from the almighty god Zamorak, imbued with great power.",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Imbued_zamorak_cape_detail.png/130px-Imbued_zamorak_cape_detail.png",
+    "imageUrl": "https://oldschool.runescape.wiki/images/Imbued_Zamorak_cape.png",
     "tier": "Epic",
     "regions": [
       "Wilderness"
@@ -19935,7 +19935,7 @@
   },
   "Jar of decay": {
     "examine": "Very healthy.",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Jar_of_decay_detail.png/130px-Jar_of_decay_detail.png",
+    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Jar_of_Decay_detail.png/90px-Jar_of_Decay_detail.png",
     "tier": "Epic",
     "regions": [
       "Fremennik"
@@ -20151,7 +20151,7 @@
   },
   "Staff of light": {
     "examine": "A ghastly weapon with evil origins combined with a holy light.",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Staff_of_light_detail.png/130px-Staff_of_light_detail.png",
+    "imageUrl": "https://oldschool.runescape.wiki/images/Staff_of_Light.png",
     "tier": "Legendary",
     "regions": [
       "Asgarnia"
@@ -20207,7 +20207,7 @@
   },
   "Scythe of Vitur": {
     "examine": "A powerful scythe.",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Scythe_of_vitur_detail.png/130px-Scythe_of_vitur_detail.png",
+    "imageUrl": "https://oldschool.runescape.wiki/images/Scythe_of_Vitur_%28uncharged%29.png",
     "tier": "Godly",
     "regions": [
       "Morytania"
@@ -20319,7 +20319,7 @@
   },
   "Lil' zik": {
     "examine": "What has eight legs and runs a Vampyric Theatre?",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Lil'_zik_detail.png/130px-Lil'_zik_detail.png",
+    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Lil%27_Zik_%28follower%29.png/290px-Lil%27_Zik_%28follower%29.png",
     "tier": "Godly",
     "regions": [
       "Morytania"
@@ -20668,7 +20668,7 @@
   },
   "Boots of brimstone": {
     "examine": "A pair of heat resistant boots charged with the claw of the ferocious Drake.",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Boots_of_brimstone_detail.png/130px-Boots_of_brimstone_detail.png",
+    "imageUrl": "https://oldschool.runescape.wiki/images/Boots_of_Brimstone.png",
     "tier": "Rare",
     "regions": [
       "Kourend"
@@ -20784,7 +20784,7 @@
   },
   "Jar of chemicals": {
     "examine": "Looks unstable.",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Jar_of_chemicals_detail.png/130px-Jar_of_chemicals_detail.png",
+    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Jar_of_Chemicals_detail.png/90px-Jar_of_Chemicals_detail.png",
     "tier": "Epic",
     "regions": [
       "Kourend"
@@ -21212,7 +21212,7 @@
   },
   "Guthix ornament kit": {
     "examine": "Use on a rune scimitar to make it look fancier!",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Rune_scimitar_ornament_kit_(guthix)_detail.png/130px-Rune_scimitar_ornament_kit_(guthix)_detail.png",
+    "imageUrl": "https://oldschool.runescape.wiki/images/Rune_scimitar_ornament_kit_%28Guthix%29.png",
     "tier": "Rare",
     "regions": [
       "Misthalin",
@@ -21222,7 +21222,7 @@
   },
   "Saradomin ornament kit": {
     "examine": "Use on a rune scimitar to make it look fancier!",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Rune_scimitar_ornament_kit_(saradomin)_detail.png/130px-Rune_scimitar_ornament_kit_(saradomin)_detail.png",
+    "imageUrl": "https://oldschool.runescape.wiki/images/Holy_ornament_kit.png",
     "tier": "Rare",
     "regions": [
       "Misthalin",
@@ -21232,7 +21232,7 @@
   },
   "Zamorak ornament kit": {
     "examine": "Use on a rune scimitar to make it look fancier!",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Rune_scimitar_ornament_kit_(zamorak)_detail.png/130px-Rune_scimitar_ornament_kit_(zamorak)_detail.png",
+    "imageUrl": "https://oldschool.runescape.wiki/images/Zamorak_godsword_ornament_kit.png",
     "tier": "Rare",
     "regions": [
       "Misthalin",
@@ -21314,7 +21314,7 @@
   },
   "Staff of bob the cat": {
     "examine": "A staff styled after the elusive cat.",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Staff_of_bob_the_cat_detail.png/130px-Staff_of_bob_the_cat_detail.png",
+    "imageUrl": "https://oldschool.runescape.wiki/images/Staff_of_Bob_the_Cat.png",
     "tier": "Uncommon",
     "regions": [
       "General"
@@ -21490,7 +21490,7 @@
   },
   "Mask of ranul": {
     "examine": "A creepy mask worn during a blood moon.",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Mask_of_ranul_detail.png/130px-Mask_of_ranul_detail.png",
+    "imageUrl": "https://oldschool.runescape.wiki/images/Mask_of_Ranul.png",
     "tier": "Rare",
     "regions": [
       "Kourend"
@@ -21498,7 +21498,7 @@
   },
   "Jar of eyes": {
     "examine": "Stop staring!",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Jar_of_eyes_detail.png/130px-Jar_of_eyes_detail.png",
+    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Jar_of_Eyes_detail.png/90px-Jar_of_Eyes_detail.png",
     "tier": "Epic",
     "regions": [
       "Kourend"
@@ -21618,7 +21618,7 @@
   },
   "Crystal of amlodd": {
     "examine": "A crystal of the Amlodd clan.",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Crystal_of_amlodd_detail.png/130px-Crystal_of_amlodd_detail.png",
+    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Crystal_of_Amlodd_detail.png/100px-Crystal_of_Amlodd_detail.png",
     "tier": "Epic",
     "regions": [
       "Tirannwn"
@@ -21690,7 +21690,7 @@
   },
   "Blade of saeldor": {
     "examine": "A magical elven sword.",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Blade_of_saeldor_detail.png/130px-Blade_of_saeldor_detail.png",
+    "imageUrl": "https://oldschool.runescape.wiki/images/Blade_of_Saeldor_%28inactive%29.png",
     "tier": "Mythic",
     "regions": [
       "Tirannwn"
@@ -21786,7 +21786,7 @@
   },
   "Staff of balance": {
     "examine": "A ghastly weapon with evil origins combined with an icon of balance.",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Staff_of_balance_detail.png/130px-Staff_of_balance_detail.png",
+    "imageUrl": "https://oldschool.runescape.wiki/images/Staff_of_Balance.png",
     "tier": "Legendary",
     "regions": []
   },
@@ -21952,7 +21952,7 @@
   },
   "Little nightmare": {
     "examine": "Quite the little nightmare.",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Little_nightmare_detail.png/130px-Little_nightmare_detail.png",
+    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Little_Nightmare_%28follower%29.png/250px-Little_Nightmare_%28follower%29.png",
     "tier": "Godly",
     "regions": [
       "Morytania"
@@ -21960,7 +21960,7 @@
   },
   "Jar of dreams": {
     "examine": "With this jar, your dreams can come true!",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Jar_of_dreams_detail.png/130px-Jar_of_dreams_detail.png",
+    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Jar_of_Dreams_detail.png/90px-Jar_of_Dreams_detail.png",
     "tier": "Epic",
     "regions": [
       "Morytania"
@@ -22384,7 +22384,7 @@
   },
   "Lil' creator": {
     "examine": "A pint-sized bringer of existence.",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Lil'_creator_detail.png/130px-Lil'_creator_detail.png",
+    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Lil%27_Creator_%28follower%29.png/230px-Lil%27_Creator_%28follower%29.png",
     "tier": "Godly",
     "regions": [
       "Misthalin"
@@ -22615,7 +22615,7 @@
   },
   "Jar of spirits": {
     "examine": "How does someone jar this?",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Jar_of_spirits_detail.png/130px-Jar_of_spirits_detail.png",
+    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Jar_of_Spirits_detail.png/90px-Jar_of_Spirits_detail.png",
     "tier": "Epic",
     "regions": [
       "Wilderness"
@@ -22623,7 +22623,7 @@
   },
   "Jar of smoke": {
     "examine": "Don't breathe in.",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Jar_of_smoke_detail.png/130px-Jar_of_smoke_detail.png",
+    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Jar_of_Smoke_detail.png/90px-Jar_of_Smoke_detail.png",
     "tier": "Epic",
     "regions": [
       "Kandarin"
@@ -22680,7 +22680,7 @@
   },
   "Tome of water": {
     "examine": "An ancient tome containing the secrets of water magic.",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Tome_of_water_detail.png/130px-Tome_of_water_detail.png",
+    "imageUrl": "https://oldschool.runescape.wiki/images/Tome_of_Water_%28empty%29.png",
     "tier": "Legendary",
     "regions": [
       "Desert"
@@ -22995,7 +22995,7 @@
   },
   "Book of the dead": {
     "examine": "A book that grants its holder the powers of resurrection.",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Book_of_the_dead_detail.png/130px-Book_of_the_dead_detail.png",
+    "imageUrl": "https://oldschool.runescape.wiki/images/Book_of_the_Dead.png",
     "tier": "Rare",
     "regions": [
       "Kourend"
@@ -23039,7 +23039,7 @@
   },
   "Bow of faerdhinen": {
     "examine": "A magical elven bow.",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Bow_of_faerdhinen_detail.png/130px-Bow_of_faerdhinen_detail.png",
+    "imageUrl": "https://oldschool.runescape.wiki/images/Bow_of_Faerdhinen_%28inactive%29.png",
     "tier": "Legendary",
     "regions": [
       "Tirannwn"
@@ -23355,7 +23355,7 @@
   },
   "Hat of the eye": {
     "examine": "The perfect hood for runecrafting.",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Hat_of_the_eye_detail.png/130px-Hat_of_the_eye_detail.png",
+    "imageUrl": "https://oldschool.runescape.wiki/images/Hat_of_the_Eye.png",
     "tier": "Rare",
     "regions": [
       "Desert"
@@ -23363,7 +23363,7 @@
   },
   "Robe top of the eye": {
     "examine": "The perfect robe top for runecrafting.",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Robe_top_of_the_eye_detail.png/130px-Robe_top_of_the_eye_detail.png",
+    "imageUrl": "https://oldschool.runescape.wiki/images/Robe_top_of_the_Eye.png",
     "tier": "Rare",
     "regions": [
       "Desert"
@@ -23371,7 +23371,7 @@
   },
   "Robe bottoms of the eye": {
     "examine": "The perfect robe bottoms for runecrafting.",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Robe_bottoms_of_the_eye_detail.png/130px-Robe_bottoms_of_the_eye_detail.png",
+    "imageUrl": "https://oldschool.runescape.wiki/images/Robe_bottoms_of_the_Eye.png",
     "tier": "Rare",
     "regions": [
       "Desert"
@@ -23379,7 +23379,7 @@
   },
   "Boots of the eye": {
     "examine": "The perfect boots for runecrafting.",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Boots_of_the_eye_detail.png/130px-Boots_of_the_eye_detail.png",
+    "imageUrl": "https://oldschool.runescape.wiki/images/Boots_of_the_Eye.png",
     "tier": "Rare",
     "regions": [
       "Desert"
@@ -23420,7 +23420,7 @@
   },
   "Amulet of the eye": {
     "examine": "An amulet in the shape of an eye.",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Amulet_of_the_eye_detail.png/130px-Amulet_of_the_eye_detail.png",
+    "imageUrl": "https://oldschool.runescape.wiki/images/Amulet_of_the_Eye.png",
     "tier": "Rare",
     "regions": [
       "Desert"
@@ -23572,7 +23572,7 @@
   },
   "Lily of the sands": {
     "examine": "A beautiful lily.",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Lily_of_the_sands_detail.png/130px-Lily_of_the_sands_detail.png",
+    "imageUrl": "https://oldschool.runescape.wiki/images/Lily_of_the_Sands.png",
     "tier": "Common",
     "regions": [
       "Desert"
@@ -23588,7 +23588,7 @@
   },
   "Thread of elidinis": {
     "examine": "A spool of thread that gives off a divine energy.",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Thread_of_elidinis_detail.png/130px-Thread_of_elidinis_detail.png",
+    "imageUrl": "https://oldschool.runescape.wiki/images/Thread_of_Elidinis.png",
     "tier": "Rare",
     "regions": [
       "Desert"
@@ -23604,7 +23604,7 @@
   },
   "Breach of the scarab": {
     "examine": "A jewel with a scarab etched upon it that radiates with power.",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Breach_of_the_scarab_detail.png/130px-Breach_of_the_scarab_detail.png",
+    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Breach_of_the_Scarab_detail.png/100px-Breach_of_the_Scarab_detail.png",
     "tier": "Legendary",
     "regions": [
       "Desert"
@@ -23612,7 +23612,7 @@
   },
   "Eye of the corruptor": {
     "examine": "A jewel with a symbol of destruction etched upon it that radiates with power.",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Eye_of_the_corruptor_detail.png/130px-Eye_of_the_corruptor_detail.png",
+    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Eye_of_the_Corruptor_detail.png/100px-Eye_of_the_Corruptor_detail.png",
     "tier": "Legendary",
     "regions": [
       "Desert"
@@ -23620,7 +23620,7 @@
   },
   "Jewel of the sun": {
     "examine": "A jewel with a symbol of the sun etched upon it that radiates with power.",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Jewel_of_the_sun_detail.png/130px-Jewel_of_the_sun_detail.png",
+    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Jewel_of_the_Sun_detail.png/100px-Jewel_of_the_Sun_detail.png",
     "tier": "Legendary",
     "regions": [
       "Desert"
@@ -23660,7 +23660,7 @@
   },
   "Tears of elidinis": {
     "examine": "Restores combat abilities and prayer for you and for nearby allies.",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Tears_of_elidinis_(4)_detail.png/130px-Tears_of_elidinis_(4)_detail.png",
+    "imageUrl": "https://oldschool.runescape.wiki/images/Tears_of_Elidinis_%281%29.png",
     "tier": "Uncommon",
     "regions": [
       "Desert"
@@ -23724,7 +23724,7 @@
   },
   "Mask of rebirth": {
     "examine": "A mask representing rebirth.",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Mask_of_rebirth_detail.png/130px-Mask_of_rebirth_detail.png",
+    "imageUrl": "https://oldschool.runescape.wiki/images/Mask_of_Rebirth.png",
     "tier": "Rare",
     "regions": []
   },
@@ -23780,7 +23780,7 @@
   },
   "Muphin": {
     "examine": "An oversized grub with arms.",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/muphin.png/130px-muphin.png",
+    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Muphin_%28follower%2C_ranged%29.png/250px-Muphin_%28follower%2C_ranged%29.png",
     "tier": "Godly",
     "regions": [
       "Fremennik"
@@ -24477,7 +24477,7 @@
   },
   "Tonalztics of ralos": {
     "examine": "A rebounding throwing weapon of devastating proportions.",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Tonalztics_of_ralos_detail.png/130px-Tonalztics_of_ralos_detail.png",
+    "imageUrl": "https://oldschool.runescape.wiki/images/Tonalztics_of_Ralos_%28uncharged%29.png",
     "tier": "Legendary",
     "regions": [
       "Varlamore"
@@ -24549,7 +24549,7 @@
   },
   "Smol heredit": {
     "examine": "Still somewhat imposing, I suppose.",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Smol_heredit_detail.png/130px-Smol_heredit_detail.png",
+    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Smol_Heredit_%28follower%29.png/200px-Smol_Heredit_%28follower%29.png",
     "tier": "Godly",
     "regions": [
       "Varlamore"
@@ -25355,7 +25355,7 @@
   },
   "Jar of venom": {
     "examine": "Handy that this comes in an easily transportable jar.",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Jar_of_venom_detail.png/130px-Jar_of_venom_detail.png",
+    "imageUrl": "https://oldschool.runescape.wiki/images/Jar_of_Venom.png",
     "tier": "Epic",
     "regions": [
       "Morytania"
@@ -25425,7 +25425,7 @@
   },
   "Pendant of ates": {
     "examine": "An ancient pendant infused with frozen tears.",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Pendant_of_ates_detail.png/130px-Pendant_of_ates_detail.png",
+    "imageUrl": "https://oldschool.runescape.wiki/images/Pendant_of_Ates_%28inert%29.png",
     "tier": "Uncommon",
     "regions": [
       "Varlamore"
@@ -25729,7 +25729,7 @@
   },
   "Tome of earth": {
     "examine": "An ancient tome containing the secrets of earth magic.",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Tome_of_earth_detail.png/130px-Tome_of_earth_detail.png",
+    "imageUrl": "https://oldschool.runescape.wiki/images/Tome_of_Earth_%28empty%29.png",
     "tier": "Legendary",
     "regions": [
       "Varlamore"
@@ -26056,7 +26056,7 @@
   },
   "Jewel of amascut": {
     "examine": "A jewel that amascut once used and has now discarded.",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Jewel_of_amascut_detail.png/130px-Jewel_of_amascut_detail.png",
+    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Jewel_of_Amascut_detail.png/100px-Jewel_of_Amascut_detail.png",
     "tier": "Legendary",
     "regions": [
       "Desert"
@@ -26251,7 +26251,7 @@
   },
   "Eye of ayak": {
     "examine": "This staff is imbued with demonic power.",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Eye_of_ayak_detail.png/130px-Eye_of_ayak_detail.png",
+    "imageUrl": "https://oldschool.runescape.wiki/images/Eye_of_Ayak_%28uncharged%29.png",
     "tier": "Mythic",
     "regions": [
       "Varlamore"
@@ -26267,7 +26267,7 @@
   },
   "Dom": {
     "examine": "Doom on a small scale.",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/250px-Dom_(follower).png/130px-250px-Dom_(follower).png",
+    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Dom_%28follower%29.png/250px-Dom_%28follower%29.png",
     "tier": "Godly",
     "regions": [
       "Varlamore"
@@ -26283,7 +26283,7 @@
   },
   "Horn of plenty": {
     "examine": "Sound the horn for a better hunt.",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Horn_of_plenty_detail.png/130px-Horn_of_plenty_detail.png",
+    "imageUrl": "https://oldschool.runescape.wiki/images/Horn_of_Plenty_%28empty%29.png",
     "tier": "Rare",
     "regions": [
       "No"
@@ -27403,7 +27403,7 @@
   },
   "Medallion of the deep": {
     "examine": "Allows the wielder to breathe underwater.",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Medallion_of_the_deep_detail.png/130px-Medallion_of_the_deep_detail.png",
+    "imageUrl": "https://oldschool.runescape.wiki/images/Medallion_of_the_Deep.png",
     "tier": "Common",
     "regions": [
       "No"
@@ -27825,7 +27825,7 @@
   },
   "Jar of feathers": {
     "examine": "It's unclear why someone would want to stuff feathers into a jar and make them harder to carry.",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Jar_of_feathers_detail.png/130px-Jar_of_feathers_detail.png",
+    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Jar_of_Feathers_detail.png/90px-Jar_of_Feathers_detail.png",
     "tier": "Epic",
     "regions": [
       "No"
@@ -27881,7 +27881,7 @@
   },
   "Cowbell amulet": {
     "examine": "A very fashionable a-moo-let.",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/250px-Cowbell_amulet_(empty)_detail.png/130px-250px-Cowbell_amulet_(empty)_detail.png",
+    "imageUrl": "https://oldschool.runescape.wiki/images/Cowbell_amulet_%28empty%29.png",
     "tier": "Common",
     "regions": []
   },
@@ -28221,7 +28221,7 @@
   },
   "Wyrmscraig goat hoof": {
     "examine": "An otherwise unremarkable goat hoof.",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Wyrmscraig_goat_hoof_detail_v802cadef.png/130px-Wyrmscraig_goat_hoof_detail_v802cadef.png",
+    "imageUrl": "https://oldschool.runescape.wiki/images/Wyrmscraig_goat_hoof.png",
     "tier": "Common",
     "regions": []
   },
@@ -28233,7 +28233,7 @@
   },
   "Wyrmscraig shoes": {
     "examine": "Soft leather shoes.",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Wyrmscraig_shoes_detail_va7378116.png/130px-Wyrmscraig_shoes_detail_va7378116.png",
+    "imageUrl": "https://oldschool.runescape.wiki/images/Wyrmscraig_shoes.png",
     "tier": "Rare",
     "regions": []
   },
@@ -28251,19 +28251,19 @@
   },
   "Wyrmscraig goat fur": {
     "examine": "You have a strange urge to clothe a golem in this.",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Wyrmscraig_goat_fur_detail_v88b91d09.png/130px-Wyrmscraig_goat_fur_detail_v88b91d09.png",
+    "imageUrl": "https://oldschool.runescape.wiki/images/Wyrmscraig_goat_fur.png",
     "tier": "Common",
     "regions": []
   },
   "Sunstone": {
     "examine": "A chunk of sunstone.",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Sunstone_detail_vafcffbf6.png/130px-Sunstone_detail_vafcffbf6.png",
+    "imageUrl": "https://oldschool.runescape.wiki/images/Sunstone.png",
     "tier": "Common",
     "regions": []
   },
   "Jeweller's chisel": {
     "examine": "A specialised chisel made to cut gems.",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Jeweller's_chisel_detail_v41621a9e.png/130px-Jeweller's_chisel_detail_v41621a9e.png",
+    "imageUrl": "https://oldschool.runescape.wiki/images/Jeweller%27s_chisel.png",
     "tier": "Epic",
     "regions": []
   },
@@ -28275,13 +28275,13 @@
   },
   "Jar of light": {
     "examine": "It smells like it's been where the sun does shine.",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/260px-Jar_of_light_detail.png/130px-260px-Jar_of_light_detail.png",
+    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Jar_of_Light_detail.png/90px-Jar_of_Light_detail.png",
     "tier": "Epic",
     "regions": []
   },
   "Mr mcgroot": {
     "examine": "He is McGroot.",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/500px-Mr_McGroot_(follower).png/130px-500px-Mr_McGroot_(follower).png",
+    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Mr_McGroot_%28follower%29.png/250px-Mr_McGroot_%28follower%29.png",
     "tier": "Godly",
     "regions": []
   },
@@ -28978,7 +28978,7 @@
   },
   "Crawling Hand": {
     "examine": "Now THAT's handy.",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Crawling_Hand_(level_12_1).png/130px-Crawling_Hand_(level_12_1).png",
+    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Crawling_Hand_%28level_7%29.png/200px-Crawling_Hand_%28level_7%29.png",
     "tier": "Uncommon",
     "regions": [
       "Asgarnia"
@@ -30591,7 +30591,7 @@
   },
   "White Knight": {
     "examine": "A White Knight partisan.",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/White_Knight_(partisan_male).png/130px-White_Knight_(partisan_male).png",
+    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/White_Knight_%28initiate%2C_male%29.png/120px-White_Knight_%28initiate%2C_male%29.png",
     "tier": "Rare",
     "regions": [
       "Asgarnia"
@@ -30744,7 +30744,7 @@
   },
   "Cyclops": {
     "examine": "A one-eyed man eater.",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Cyclops_(level_56_2).png/130px-Cyclops_(level_56_2).png",
+    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Cyclops.png/50px-Cyclops.png",
     "tier": "Epic",
     "regions": [
       "Asgarnia"
@@ -31345,7 +31345,7 @@
   },
   "Aluft Gianne snr.": {
     "examine": "The famous tree gnome chef.",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Aluft_Gianne_snr.png/130px-Aluft_Gianne_snr.png",
+    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Aluft_Gianne_snr..png/120px-Aluft_Gianne_snr..png",
     "tier": "Uncommon",
     "regions": [
       "Kandarin"
@@ -31735,7 +31735,7 @@
   },
   "Farmer": {
     "examine": "He grows the crops in this area.",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Farmer_(straw_hat_brown_hair).png/130px-Farmer_(straw_hat_brown_hair).png",
+    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Farmer_%28straw_hat%2C_brown_hair%29.png/150px-Farmer_%28straw_hat%2C_brown_hair%29.png",
     "tier": "Common",
     "regions": [
       "Fremennik",
@@ -32208,7 +32208,7 @@
   },
   "Rabbit": {
     "examine": "A cute bunny rabbit.",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Rabbit_(Tirannwn_1).png/130px-Rabbit_(Tirannwn_1).png",
+    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Rabbit_%28Tirannwn%2C_1%29.png/90px-Rabbit_%28Tirannwn%2C_1%29.png",
     "tier": "Common",
     "regions": [
       "Fremennik",
@@ -32563,7 +32563,7 @@
   },
   "Vampyre Juvenile": {
     "examine": "A juvenile vampyre.",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Vampyre_Juvenile_(Meiyerditch_male).png/130px-Vampyre_Juvenile_(Meiyerditch_male).png",
+    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Vampyre_Juvenile.png/100px-Vampyre_Juvenile.png",
     "tier": "Rare",
     "regions": [
       "Morytania"
@@ -33398,7 +33398,7 @@
   },
   "Angry giant rat": {
     "examine": "He looks a little on the cross side!",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Angry_giant_rat_(level_47_1).png/130px-Angry_giant_rat_(level_47_1).png",
+    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Angry_giant_rat_%28level_45%2C_1%29.png/250px-Angry_giant_rat_%28level_45%2C_1%29.png",
     "tier": "Rare",
     "regions": [
       "Misthalin"
@@ -33783,7 +33783,7 @@
   },
   "Skeleton": {
     "examine": "Could do with gaining a few pounds.",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Skeleton_(level_25_2).png/130px-Skeleton_(level_25_2).png",
+    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Skeleton_%28level_21%2C_1%29.png/140px-Skeleton_%28level_21%2C_1%29.png",
     "tier": "Uncommon",
     "regions": [
       "Kourend",
@@ -33923,7 +33923,7 @@
   },
   "Undead one": {
     "examine": "The animated dead; one of Rashiliyia's minions.",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Undead_one_(Zombie_4).png/130px-Undead_one_(Zombie_4).png",
+    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Undead_one_%28Skeletal%2C_3%29.png/140px-Undead_one_%28Skeletal%2C_3%29.png",
     "tier": "Rare",
     "regions": [
       "Karamja"
@@ -34216,7 +34216,7 @@
   },
   "Vampyre Juvinate": {
     "examine": "A juvinate vampyre. It looks really hungry!",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Vampyre_Juvinate_(Temple_Trekking_level_119).png/130px-Vampyre_Juvinate_(Temple_Trekking_level_119).png",
+    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Vampyre_Juvinate_%28In_Aid_of_the_Myreque%2C_level_50%29.png/100px-Vampyre_Juvinate_%28In_Aid_of_the_Myreque%2C_level_50%29.png",
     "tier": "Epic",
     "regions": [
       "Morytania"
@@ -34477,7 +34477,7 @@
   },
   "Black Guard": {
     "examine": "A member of the Black Guard, a special division of the dwarven army.",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Black_Guard_(level_48_1).png/130px-Black_Guard_(level_48_1).png",
+    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Black_Guard_%28level_25%2C_1%29.png/162px-Black_Guard_%28level_25%2C_1%29.png",
     "tier": "Rare",
     "regions": [
       "Fremennik"
@@ -34910,7 +34910,7 @@
   },
   "Cave goblin": {
     "examine": "A goblin with big bulging eyes.",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Cave_goblin_(monster_blue).png/130px-Cave_goblin_(monster_blue).png",
+    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Cave_goblin_%28Blue_hood%29.png/160px-Cave_goblin_%28Blue_hood%29.png",
     "tier": "Common",
     "regions": [
       "Fremennik",
@@ -35234,7 +35234,7 @@
   },
   "Gangster": {
     "examine": "He'd never let his personal morality stand in the way of profit.",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Gangster_(level_50_1).png/130px-Gangster_(level_50_1).png",
+    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Gangster_%28level_45%2C_1%29.png/104px-Gangster_%28level_45%2C_1%29.png",
     "tier": "Rare",
     "regions": [
       "Kourend"
@@ -35919,7 +35919,7 @@
   },
   "Guardian": {
     "examine": "A guardian statue carved from the rock.",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Guardian_(Chambers_of_Xeric_female).png/130px-Guardian_(Chambers_of_Xeric_female).png",
+    "imageUrl": "https://oldschool.runescape.wiki/images/Guardian.png",
     "tier": "Epic",
     "regions": [
       "Kourend"
@@ -36244,7 +36244,7 @@
   },
   "Thief": {
     "examine": "Watch your pockets.",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Thief_(The_Warrens_1).png/130px-Thief_(The_Warrens_1).png",
+    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Thief_%28Standard%2C_2%29.png/114px-Thief_%28Standard%2C_2%29.png",
     "tier": "Uncommon",
     "regions": [
       "No",
@@ -36409,7 +36409,7 @@
   },
   "Brundt the Chieftain": {
     "examine": "The Fremennik tribe's chieftain.",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Brundt_the_Chieftain_(Dragon_Slayer_II_Varrock).png/130px-Brundt_the_Chieftain_(Dragon_Slayer_II_Varrock).png",
+    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Brundt_the_Chieftain.png/129px-Brundt_the_Chieftain.png",
     "tier": "Rare",
     "regions": [
       "Fremennik"
@@ -37131,7 +37131,7 @@
   },
   "Guard": {
     "examine": "He tries to keep order around here.",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Guard_(Falador_sword_1).png/130px-Guard_(Falador_sword_1).png",
+    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Guard_%28Edgeville%2C_1%29.png/129px-Guard_%28Edgeville%2C_1%29.png",
     "tier": "Uncommon",
     "regions": [
       "Asgarnia",
@@ -38338,7 +38338,7 @@
   },
   "Scarred lesser demon": {
     "examine": "The power of the Scar has changed them somehow.",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Scarred_lesser_demon_(level_121_mage).png/130px-Scarred_lesser_demon_(level_121_mage).png",
+    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Scarred_lesser_demon_%28level_85%29.png/130px-Scarred_lesser_demon_%28level_85%29.png",
     "tier": "Epic",
     "regions": [
       "Desert"
@@ -39134,7 +39134,7 @@
   },
   "Emissary Acolyte": {
     "examine": "A newly-initiated member of the Twilight Emissaries.",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Emissary_Acolyte_(Monster_6).png/130px-Emissary_Acolyte_(Monster_6).png",
+    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Emissary_Acolyte_%28NPC%2C_1%29.png/110px-Emissary_Acolyte_%28NPC%2C_1%29.png",
     "tier": "Uncommon",
     "regions": [
       "Varlamore"
@@ -39142,7 +39142,7 @@
   },
   "Emissary Chosen": {
     "examine": "An experienced member of the Twilight Emissaries.",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Emissary_Chosen_(Monster_1).png/130px-Emissary_Chosen_(Monster_1).png",
+    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Emissary_Chosen_%28NPC%29.png/120px-Emissary_Chosen_%28NPC%29.png",
     "tier": "Rare",
     "regions": [
       "Varlamore"
@@ -39150,7 +39150,7 @@
   },
   "Emissary Ascended": {
     "examine": "A highly experienced member of the Twilight Emissaries.",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Emissary_Ascended_(Monster_1).png/130px-Emissary_Ascended_(Monster_1).png",
+    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Emissary_Ascended_%28NPC%2C_1%29.png/120px-Emissary_Ascended_%28NPC%2C_1%29.png",
     "tier": "Epic",
     "regions": [
       "Varlamore"
@@ -39158,7 +39158,7 @@
   },
   "Emissary Brawler": {
     "examine": "A fierce fighter of the Twilight Emissaries.",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Emissary_Brawler_(level_86_1).png/130px-Emissary_Brawler_(level_86_1).png",
+    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Emissary_Brawler_%28level_74%2C_1%29.png/93px-Emissary_Brawler_%28level_74%2C_1%29.png",
     "tier": "Rare",
     "regions": [
       "Varlamore"
@@ -39174,7 +39174,7 @@
   },
   "Prince Itzla Arkan": {
     "examine": "The heir to the throne of Varlamore, going undercover.",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Prince_Itzla_Arkan_(disguised_sword).png/130px-Prince_Itzla_Arkan_(disguised_sword).png",
+    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Prince_Itzla_Arkan.png/110px-Prince_Itzla_Arkan.png",
     "tier": "Epic",
     "regions": [
       "Varlamore"
@@ -39230,7 +39230,7 @@
   },
   "Armoured zombie": {
     "examine": "This is a rotten one.This one sure looks grave.It hasn't quite got round to dying.",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Armoured_zombie_(Zemouregal's_Fort_1).png/130px-Armoured_zombie_(Zemouregal's_Fort_1).png",
+    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Armoured_zombie_%28melee%2C_5%29.png/120px-Armoured_zombie_%28melee%2C_5%29.png",
     "tier": "Epic",
     "regions": [
       "Misthalin",
@@ -39507,7 +39507,7 @@
   },
   "Floopa": {
     "examine": "She seems a little better now.",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Floopa_(Troubled_Tortugans_recovering_1).png/130px-Floopa_(Troubled_Tortugans_recovering_1).png",
+    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Injured_Tortugan.png/120px-Injured_Tortugan.png",
     "tier": "Uncommon",
     "regions": [
       "No"
@@ -39955,7 +39955,7 @@
   },
   "Mister U.": {
     "examine": "Mister who? Mister me? Mister E? No. Mister U.",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Mister_U.png/130px-Mister_U.png",
+    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Mister_U..png/96px-Mister_U..png",
     "tier": "Rare",
     "regions": []
   },
@@ -40063,7 +40063,7 @@
   },
   "Lowerniel Drakan": {
     "examine": "The ruler of Morytania and the Lord of Vampyrium, untethered.",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Lowerniel_Drakan_(The_Blood_Moon_Rises_final_battle).png/130px-Lowerniel_Drakan_(The_Blood_Moon_Rises_final_battle).png",
+    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Lowerniel_Drakan.png/180px-Lowerniel_Drakan.png",
     "tier": "Mythic",
     "regions": [
       "Morytania"
