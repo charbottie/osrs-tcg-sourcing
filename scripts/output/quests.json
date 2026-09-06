@@ -1300,7 +1300,7 @@
       "Earth elemental"
     ],
     "rewardItems": [],
-    "questNpc": "bookcase",
+    "questNpc": "",
     "questPoints": 1,
     "members": true,
     "wikiPage": "Elemental_Workshop_I"
@@ -1697,7 +1697,7 @@
       "Experiment"
     ],
     "rewardItems": [],
-    "questNpc": "signpost",
+    "questNpc": "",
     "questPoints": 2,
     "members": true,
     "wikiPage": "Creature_of_Fenkenstrain"
@@ -5127,7 +5127,7 @@
       "Sourhog"
     ],
     "rewardItems": [],
-    "questNpc": "notice board",
+    "questNpc": "",
     "questPoints": 1,
     "members": true,
     "wikiPage": "A_Porcine_of_Interest"
@@ -5683,7 +5683,7 @@
     "itemsRequired": [],
     "killsRequired": [],
     "rewardItems": [],
-    "questNpc": "empty display",
+    "questNpc": "",
     "questPoints": 1,
     "members": true,
     "wikiPage": "Ethically_Acquired_Antiquities"
@@ -6010,7 +6010,7 @@
       "Strange creatures"
     ],
     "rewardItems": [],
-    "questNpc": "notice board",
+    "questNpc": "",
     "questPoints": 2,
     "members": true,
     "wikiPage": "Shadows_of_Custodia"

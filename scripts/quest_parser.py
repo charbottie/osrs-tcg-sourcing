@@ -43,7 +43,8 @@ class QuestInfo(TypedDict):
     prerequisites: list[str]           # quest names required first
     reward_items: list[str]            # item names given as quest rewards
     start_npc: str                     # best-effort starting NPC name
-    kills: list[str]                   # NPC names to kill
+    kills: list[str]                   # NPC names that MUST be killed
+    avoidable_kills: list[str]         # NPC names that can be avoided (wiki: "(can be avoided)")
     skill_requirements: list[SkillReq] # skill levels needed
     items_required: list[str]          # items the player must bring
 
@@ -65,11 +66,13 @@ def parse_quest(html: str) -> QuestInfo:
 
     rows = _parse_questdetails(qd)
 
+    required, avoidable = _extract_kills(rows.get("enemies to defeat"))
     return QuestInfo(
         prerequisites=_extract_prerequisites(rows.get("requirements")),
         reward_items=[],   # rewards are JavaScript-rendered; not reliably parseable
         start_npc=_extract_start_npc(rows.get("start point")),
-        kills=_extract_kills(rows.get("enemies to defeat")),
+        kills=required,
+        avoidable_kills=avoidable,
         skill_requirements=_extract_skill_requirements(rows.get("requirements")),
         items_required=_extract_items_required(rows.get("items required")),
     )
@@ -226,30 +229,66 @@ def _extract_items_required(cell: Tag | None) -> list[str]:
     return items
 
 
-def _extract_kills(cell: Tag | None) -> list[str]:
-    """Extract NPC names from the 'Enemies to defeat' cell."""
-    if cell is None:
-        return []
-    if cell.get_text(strip=True).lower() in ("none", "none.", ""):
-        return []
+def _extract_kills(cell: Tag | None) -> tuple[list[str], list[str]]:
+    """Extract NPC names from the 'Enemies to defeat' cell.
 
-    kills: list[str] = []
+    Returns (required_kills, avoidable_kills).
+    Avoidable kills are those followed by the wiki marker <i>(can be avoided)</i>.
+    """
+    if cell is None:
+        return [], []
+    if cell.get_text(strip=True).lower() in ("none", "none.", ""):
+        return [], []
+
+    required: list[str] = []
+    avoidable: list[str] = []
     seen: set[str] = set()
+
     for a in cell.find_all("a"):
         href = a.get("href", "")
         if "File:" in href or "action=" in href:
             continue
         name = a.get_text(strip=True)
-        if name and len(name) > 1 and name not in seen:
-            seen.add(name)
-            kills.append(name)
+        if not name or len(name) <= 1 or name in seen:
+            continue
+        seen.add(name)
 
-    return kills
+        # Check siblings after this <a> for the avoidable marker.
+        # Pattern: <a>Name</a> <i>(level N)</i> <i>(can be avoided)</i>
+        is_avoidable = False
+        sibling = a.next_sibling
+        while sibling is not None:
+            if isinstance(sibling, Tag) and sibling.name == "a":
+                break  # hit next enemy link — stop looking
+            if isinstance(sibling, Tag) and sibling.name in ("i", "em"):
+                if "can be avoided" in sibling.get_text(strip=True).lower():
+                    is_avoidable = True
+                    break
+            sibling = sibling.next_sibling
+
+        if is_avoidable:
+            avoidable.append(name)
+        else:
+            required.append(name)
+
+    return required, avoidable
 
 
 def _extract_start_npc(cell: Tag | None) -> str:
-    """Extract the starting NPC name from the 'Start point' cell."""
+    """Extract the starting NPC name from the 'Start point' cell.
+
+    Only returns a name when the cell describes talking/speaking to an NPC.
+    Cells that say 'Inspect', 'Search', 'Enter', 'Read', etc. describe
+    object/location interactions and return "".
+    """
     if cell is None:
+        return ""
+
+    cell_text = cell.get_text(" ", strip=True).lower()
+    is_talk_to = any(p in cell_text for p in (
+        "talk to", "speak to", "speak with", "ask ",
+    ))
+    if not is_talk_to:
         return ""
 
     for a in cell.find_all("a"):

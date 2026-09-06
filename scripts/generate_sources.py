@@ -69,6 +69,8 @@ def load_cards(card_json_path: str) -> list[dict]:
                 "examine":   entry.get("examine", ""),
                 "imagePath": entry.get("imagePath", ""),
                 "tags":      {"labels": tcg_tags.get("labels", [])},
+                "tierLabel": tcg.get("tierLabel", ""),
+                "regions":   entry.get("regions", []),
             }
             # Carry equipment fields so generate_equipment.py's filter still works
             slot = tcg_tags.get("slot")
@@ -80,7 +82,8 @@ def load_cards(card_json_path: str) -> list[dict]:
                 card["value"] = 0
             flat.append(card)
         for entry in data["npcs"]:
-            tcg_tags = entry.get("tcg", {}).get("tags", {})
+            tcg      = entry.get("tcg", {})
+            tcg_tags = tcg.get("tags", {})
             flat.append({
                 "name":      entry["name"],
                 "category":  ["Monster"],
@@ -89,6 +92,8 @@ def load_cards(card_json_path: str) -> list[dict]:
                 "examine":   entry.get("examine", ""),
                 "imagePath": entry.get("imagePath", ""),
                 "tags":      {"labels": tcg_tags.get("labels", [])},
+                "tierLabel": tcg.get("tierLabel", ""),
+                "regions":   entry.get("regions", []),
             })
         return flat
     return data
@@ -313,6 +318,21 @@ def build_quest_chains(
 # Step 4: Enrich item_sources with quest data
 # ---------------------------------------------------------------------------
 
+# POH trophy/painting items sold by Sir Renitee that are quest-completion-locked.
+# These don't appear as quest rewards but are only purchasable after completing
+# the listed quests, so we surface them on the card detail page.
+_RENITEE_QUEST_REQUIREMENTS: dict[str, list[str]] = {
+    "Elena portrait":      ["Plague City"],
+    "Arthur portrait":     ["Merlin's Crystal", "Holy Grail"],
+    "Keldagrim portrait":  ["The Giant Dwarf"],
+    "Lumbridge painting":  ["Cook's Assistant", "Rune Mysteries", "Sheep Shearer", "Restless Ghost"],
+    "Desert painting":     ["Prince Ali Rescue", "Tourist Trap", "The Feud", "The Golem"],
+    "Morytania painting":  ["Ghosts Ahoy", "Shades of Mort'ton", "Creature of Fenkenstrain", "Haunted Mine"],
+    "Karamja painting":    ["Pirate's Treasure", "Shilo Village", "Tai Bwo Wannai Trio"],
+    "Isafdar painting":    ["Roving Elves"],
+}
+
+
 def enrich_with_quests(
     item_sources: dict[str, dict],
     quest_chains: dict[str, dict],
@@ -323,6 +343,13 @@ def enrich_with_quests(
             if reward_card in item_sources:
                 if quest_name not in item_sources[reward_card]["quests"]:
                     item_sources[reward_card]["quests"].append(quest_name)
+
+    # Sir Renitee quest-locked POH items
+    for item_name, req_quests in _RENITEE_QUEST_REQUIREMENTS.items():
+        if item_name in item_sources:
+            for q in req_quests:
+                if q not in item_sources[item_name]["quests"]:
+                    item_sources[item_name]["quests"].append(q)
 
     # Also mark always-available items (shop-bought heuristic deferred —
     # Card.json doesn't have a shopBought field today; leave as False)
@@ -452,6 +479,8 @@ def _write_card_metadata(cards: list[dict], out_dir: Path) -> None:
         details[name] = {
             "examine":  examine,
             "imageUrl": _wiki_image_url(image_path) if image_path else "",
+            "tier":     card.get("tierLabel", ""),
+            "regions":  card.get("regions", []),
         }
 
     write_json(out_dir / "card_categories.json", categories,

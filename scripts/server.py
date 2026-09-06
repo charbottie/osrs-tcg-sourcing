@@ -36,6 +36,26 @@ _OUT_DIR     = _SCRIPTS_DIR / "output"
 _COLLECTION  = _OUT_DIR / "my_collection.json"
 _GENERATE_LOG = _OUT_DIR / "generate.log"
 
+# ── Pack catalog cache ───────────────────────────────────────────────────────
+_PACK_CATALOG_URL = "https://api.osrs-tcg.net/api/v1/packs"
+_PACK_CATALOG_TTL = 86400   # 24 hours
+_pack_catalog_data: dict | None = None
+_pack_catalog_ts: float = 0.0
+
+
+def _get_pack_catalog() -> dict:
+    global _pack_catalog_data, _pack_catalog_ts
+    if _pack_catalog_data is None or (time.time() - _pack_catalog_ts) > _PACK_CATALOG_TTL:
+        req = urllib.request.Request(
+            _PACK_CATALOG_URL,
+            headers={"User-Agent": "osrs-tcg-preview/1.0"},
+        )
+        with urllib.request.urlopen(req, timeout=10) as r:
+            _pack_catalog_data = json.loads(r.read())
+        _pack_catalog_ts = time.time()
+    return _pack_catalog_data
+
+
 # ── Background job state ────────────────────────────────────────────────────
 _generate_lock   = threading.Lock()
 _generate_proc   = None   # subprocess.Popen while running
@@ -111,6 +131,8 @@ class Handler(http.server.SimpleHTTPRequestHandler):
             self._api_accounts_list()
         elif path == "/api/collection/source-mtime":
             self._api_collection_source_mtime()
+        elif path == "/api/packs":
+            self._api_packs()
         else:
             self.send_error(404)
 
@@ -366,6 +388,16 @@ class Handler(http.server.SimpleHTTPRequestHandler):
             "sourceMtime": best,
             "sourceTime":  datetime.fromtimestamp(best).isoformat(timespec="seconds") if best else None,
         })
+
+    # ── Pack catalog proxy ────────────────────────────────────────────────
+
+    def _api_packs(self):
+        """Proxy /api/packs to the OSRS TCG API with a 24-hour cache."""
+        try:
+            data = _get_pack_catalog()
+            self._json_response(data)
+        except Exception as exc:
+            self._json_response({"error": str(exc)}, status=502)
 
     # ── Helpers ───────────────────────────────────────────────────────────
 
