@@ -34,6 +34,8 @@ import wiki_fetcher
 
 _OUT = Path(__file__).parent / "output" / "clue_steps.json"
 
+_DIG_RE = re.compile(r'\bdig\b', re.IGNORECASE)
+
 EMOTE_TIERS    = ["Beginner", "Easy", "Medium", "Hard", "Elite", "Master"]
 SHERLOCK_TIERS = ["Elite", "Master"]
 CRYPTIC_TIERS  = ["Beginner", "Easy", "Medium", "Hard", "Elite", "Master"]
@@ -635,24 +637,37 @@ def scrape_step_counts(
     counts["anagram"]  = {t: len(v) for t, v in anagram.items()}
     counts["cipher"]   = {t: len(v) for t, v in cipher.items()}
 
-    # ── Cryptic — count ALL rows (not just talk-to) ───────────────────────────
+    # ── Cryptic — count ALL rows (not just talk-to) + dig rows separately ────
     html = wiki_fetcher.fetch("Treasure_Trails/Guide/Cryptic_clues",
                                force_refresh=force_refresh)
     if html:
         soup = BeautifulSoup(html, "html.parser")
         by_tier = _split_by_tier_headers(soup, CRYPTIC_TIERS)
         cryptic_counts: dict[str, int] = {}
+        cryptic_dig:    dict[str, int] = {}
         for tier in CRYPTIC_TIERS:
-            total = 0
+            total = dig = 0
             for table in by_tier[tier]:
                 if "wikitable" not in table.get("class", []):
                     continue
+                headers = [th.get_text().strip().lower()
+                           for th in table.find_all("th")]
+                col_clue = next((i for i, h in enumerate(headers)
+                                 if "clue" in h), 0)
                 for tr in table.find_all("tr"):
-                    if tr.find_all("td"):
-                        total += 1
+                    cells = tr.find_all("td")
+                    if not cells:
+                        continue
+                    total += 1
+                    clue_text = cells[min(col_clue, len(cells)-1)].get_text(" ").strip()
+                    if _DIG_RE.search(clue_text):
+                        dig += 1
             cryptic_counts[tier] = total
-        counts["cryptic"] = cryptic_counts
+            cryptic_dig[tier]    = dig
+        counts["cryptic"]    = cryptic_counts
+        counts["crypticDig"] = cryptic_dig
         print("  Cryptic totals:", {t: cryptic_counts[t] for t in CRYPTIC_TIERS})
+        print("  Cryptic dig:   ", {t: cryptic_dig[t] for t in CRYPTIC_TIERS if cryptic_dig[t]})
 
     # ── Map clues ─────────────────────────────────────────────────────────────
     html = wiki_fetcher.fetch("Treasure_Trails/Guide/Maps",
@@ -757,11 +772,18 @@ def main():
         if step.get("npc") == "Charlie the Tramp":
             step["charlieItems"] = CHARLIE_ITEMS
 
+    print("Scraping total step counts…")
+    step_counts = scrape_step_counts(emote, sherlock, falo, anagram, cipher, force)
+
     print("Building indexes…")
     item_index, npc_index = _build_indexes(emote, sherlock, falo, cryptic, anagram, cipher)
 
-    print("Scraping total step counts…")
-    step_counts = scrape_step_counts(emote, sherlock, falo, anagram, cipher, force)
+    # Cryptic dig steps — Spade required; one index entry per tier
+    for tier, count in step_counts.get("crypticDig", {}).items():
+        if count:
+            item_index.setdefault("Spade", []).append(
+                {"type": "cryptic_dig", "tier": tier, "count": count}
+            )
 
     # Structured dig-clue info for the browser (tiers + Spade + combat NPCs)
     dig_info = {

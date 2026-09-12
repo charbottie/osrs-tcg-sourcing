@@ -3368,6 +3368,14 @@
       "Elite": 44,
       "Master": 33
     },
+    "crypticDig": {
+      "Beginner": 0,
+      "Easy": 8,
+      "Medium": 1,
+      "Hard": 8,
+      "Elite": 5,
+      "Master": 6
+    },
     "map": {
       "Beginner": 5,
       "Easy": 7,
@@ -8153,6 +8161,31 @@
       {
         "type": "coordinate",
         "tier": "Master"
+      },
+      {
+        "type": "cryptic_dig",
+        "tier": "Easy",
+        "count": 8
+      },
+      {
+        "type": "cryptic_dig",
+        "tier": "Medium",
+        "count": 1
+      },
+      {
+        "type": "cryptic_dig",
+        "tier": "Hard",
+        "count": 8
+      },
+      {
+        "type": "cryptic_dig",
+        "tier": "Elite",
+        "count": 5
+      },
+      {
+        "type": "cryptic_dig",
+        "tier": "Master",
+        "count": 6
       }
     ],
     "Trowel": [

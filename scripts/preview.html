@@ -2279,9 +2279,12 @@ function renderClueScroll(tier, container) {
       _row('Emote', achievable, emoteSteps.length, 'items required');
     }
 
-    // Cryptic
-    const crypticTotal = (sc.cryptic || {})[capTier] || 0;
-    if (crypticTotal) _row('Cryptic', crypticTotal, crypticTotal, 'no card req.');
+    // Cryptic — split into dig (needs Spade) and non-dig (always achievable)
+    const crypticTotal = (sc.cryptic    || {})[capTier] || 0;
+    const crypticDig   = (sc.crypticDig || {})[capTier] || 0;
+    const crypticNonDig = crypticTotal - crypticDig;
+    if (crypticNonDig) _row('Cryptic',       crypticNonDig, crypticNonDig, 'no card req.');
+    if (crypticDig)    _row('Cryptic (dig)', spadeOwned ? crypticDig : 0, crypticDig, 'Spade');
 
     // Anagram
     const anagramTotal = (sc.anagram || {})[capTier] || 0;
@@ -3049,6 +3052,13 @@ function clueStepUsageHtml(itemName) {
         }
       }
       html += `</div>`;
+
+    } else if (step.type === 'cryptic_dig') {
+      const col = TIER_COLOR[step.tier] || '#888';
+      html += `<div style="margin:6px 0;padding:8px;background:#0d0d0d;border-radius:4px;border-left:3px solid ${col}">
+        <div style="font-size:10px;color:${col};font-weight:600;margin-bottom:4px">Cryptic Clue (dig) · ${step.tier}</div>
+        <div style="font-size:12px;color:#bbb">${step.count} dig-type step${step.count!==1?'s':''} — required to dig at the clue location</div>
+      </div>`;
 
     } else if (step.type === 'map') {
       const col = TIER_COLOR[step.tier] || '#888';
