@@ -2242,6 +2242,112 @@ function renderClueScroll(tier, container) {
       </div>
     </div>`;
 
+  // ── Step achievability summary ────────────────────────────────────────────
+  if (clueSteps && clueSteps.stepCounts) {
+    const capTier = tier.charAt(0).toUpperCase() + tier.slice(1);
+    const sc = clueSteps.stepCounts;
+    const TIER_COLOR = {
+      Beginner:'#c8a830', Easy:'#50c050', Medium:'#c8c030',
+      Hard:'#4080c0', Elite:'#9050d0', Master:'#d03030',
+    };
+    const col = TIER_COLOR[capTier] || '#888';
+    const spadeOwned = isOwned('Spade');
+
+    // Compute achievable + total per type for this tier
+    const rows = [];
+
+    // Helper — ownership bar spark
+    function _bar(done, total) {
+      if (!total) return '';
+      const pct = Math.round(done / total * 100);
+      return `<div style="display:inline-block;width:60px;height:4px;background:#222;border-radius:2px;vertical-align:middle;margin-left:6px">
+        <div style="width:${pct}%;height:100%;background:${done===total?'#76c442':done>0?col:'#555'};border-radius:2px"></div>
+      </div>`;
+    }
+
+    function _row(label, done, total, note) {
+      if (!total) return;
+      rows.push({label, done, total, note: note||''});
+    }
+
+    // Emote
+    const emoteSteps = (clueSteps.emote || {})[capTier] || [];
+    if (emoteSteps.length) {
+      const achievable = emoteSteps.filter(s =>
+        !s.items || s.items.length === 0 || s.items.every(i => isOwned(i))
+      ).length;
+      _row('Emote', achievable, emoteSteps.length, 'items required');
+    }
+
+    // Cryptic
+    const crypticTotal = (sc.cryptic || {})[capTier] || 0;
+    if (crypticTotal) _row('Cryptic', crypticTotal, crypticTotal, 'no card req.');
+
+    // Anagram
+    const anagramTotal = (sc.anagram || {})[capTier] || 0;
+    if (anagramTotal) _row('Anagram', anagramTotal, anagramTotal, 'no card req.');
+
+    // Cipher
+    const cipherTotal = (sc.cipher || {})[capTier] || 0;
+    if (cipherTotal) _row('Cipher', cipherTotal, cipherTotal, 'no card req.');
+
+    // Map — achievable only if Spade owned
+    const mapTotal = (sc.map || {})[capTier] || 0;
+    if (mapTotal) _row('Map', spadeOwned ? mapTotal : 0, mapTotal, 'Spade');
+
+    // Coordinate — achievable only if Spade owned
+    const coordTotal = (sc.coordinate || {})[capTier] || 0;
+    if (coordTotal) _row('Coordinate', spadeOwned ? coordTotal : 0, coordTotal, 'Spade');
+
+    // Hot/cold
+    const hotcoldTotal = (sc.hotcold || {})[capTier] || 0;
+    if (hotcoldTotal) _row('Hot/cold', hotcoldTotal, hotcoldTotal, 'no card req.');
+
+    // Scan
+    const scanTotal = (sc.scan || {})[capTier] || 0;
+    if (scanTotal) _row('Scan', scanTotal, scanTotal, 'no card req.');
+
+    // Sherlock
+    const sherlockSteps = (clueSteps.sherlock || {})[capTier] || [];
+    if (sherlockSteps.length) {
+      const achievable = sherlockSteps.filter(t =>
+        (t.items || []).every(i => !itemSources[i] || isOwned(i))
+      ).length;
+      _row('Sherlock', achievable, sherlockSteps.length, 'items required');
+    }
+
+    // Falo
+    const faloSteps = capTier === 'Master' ? (clueSteps.falo || []) : [];
+    if (faloSteps.length) {
+      const achievable = faloSteps.filter(s => s.items.some(i => isOwned(i))).length;
+      _row('Falo', achievable, faloSteps.length, 'equip one item');
+    }
+
+    if (rows.length) {
+      const grandTotal     = rows.reduce((s, r) => s + r.total, 0);
+      const grandAchievable = rows.reduce((s, r) => s + r.done, 0);
+      html += `<div class="section">
+        <div class="section-header">Step Achievability
+          <span style="float:right;font-size:11px;font-weight:400;color:${grandAchievable===grandTotal?'#76c442':col}">
+            ${grandAchievable} / ${grandTotal} steps
+          </span>
+        </div>`;
+      for (const r of rows) {
+        const allDone = r.done === r.total;
+        const pct = r.total ? Math.round(r.done / r.total * 100) : 0;
+        html += `<div style="display:flex;align-items:center;padding:3px 0;font-size:12px">
+          <span style="width:80px;color:#888;flex-shrink:0">${r.label}</span>
+          <div style="flex:1;height:5px;background:#1a1a1a;border-radius:3px;margin:0 8px">
+            <div style="width:${pct}%;height:100%;background:${allDone?'#76c442':r.done>0?col:'#333'};border-radius:3px;transition:width .3s"></div>
+          </div>
+          <span style="width:52px;text-align:right;color:${allDone?'#76c442':r.done>0?col:'#555'};flex-shrink:0">${r.done}<span style="color:#444"> / ${r.total}</span></span>
+          ${r.note ? `<span style="width:80px;text-align:right;font-size:10px;color:#444;flex-shrink:0">${r.note}</span>` : ''}
+        </div>`;
+      }
+      html += `</div>`;
+    }
+  }
+
   // Monster sources section
   html += `<div class="section">
     <div class="section-header">Monster Sources ${progressPill(ownedMonSrc, monsterSources.length, false)}</div>`;
@@ -2531,15 +2637,36 @@ function renderClueScroll(tier, container) {
       </div>`;
     }
 
-    // Coordinate clues — Spade + optional combat NPCs (Hard only)
+    // Coordinate clues — Spade + combat NPCs (Hard: Sara/Zamo, Elite: Armadylean/Bandosian, Master: Ancient Wizards/Brassican)
     const COORD_TIERS = ['Medium','Hard','Elite','Master'];
     if (COORD_TIERS.includes(capTier)) {
       const spadeOwned = isOwned('Spade');
-      const isHard = capTier === 'Hard';
-      const saraOwned  = isHard && isOwned('Saradomin wizard');
-      const zamoOwned  = isHard && isOwned('Zamorak wizard');
-      const saraCard   = isHard && monsterDrops['Saradomin wizard'] !== undefined;
-      const zamoCard   = isHard && monsterDrops['Zamorak wizard'] !== undefined;
+
+      // Per-tier combat NPC config
+      const COORD_COMBAT = {
+        Hard:   [{npc:'Saradomin wizard', label:'outside Wilderness'},
+                 {npc:'Zamorak wizard',   label:'inside Wilderness'}],
+        Elite:  [{npc:'Armadylean guard', label:'one of two possible'},
+                 {npc:'Bandosian guard',  label:'one of two possible'}],
+        Master: [{npc:'Ancient Wizard',   label:'multi-combat area (×3)'},
+                 {npc:'Brassican Mage',   label:'single-combat area'}],
+      };
+      const combatNpcs = COORD_COMBAT[capTier] || [];
+
+      function _npcBadge(npc, label) {
+        const hasCard = monsterDrops[npc] !== undefined;
+        const owned   = hasCard && isOwned(npc);
+        return `<div style="display:flex;align-items:center;gap:6px;margin-top:4px">
+          <span style="font-size:11px;padding:2px 7px;border-radius:3px;
+            background:${hasCard?(owned?'#0d1c09':'#1c0d09'):'#111'};
+            color:${hasCard?(owned?'#76c442':'#c84a00'):'#888'};
+            cursor:${hasCard?'pointer':'default'}"
+            ${hasCard ? `data-nav="${escHtml(npc)}" data-nav-type="monster" onclick="showCard(this.dataset.nav,this.dataset.navType)"` : ''}
+            >${hasCard?(owned?'✓ ':'✗ '):''}${escHtml(npc)}</span>
+          <span style="font-size:10px;color:#444">${label}</span>
+        </div>`;
+      }
+
       html += `<div class="section">
         <div class="section-header">Coordinate Clues</div>
         <div style="margin:4px 0;padding:8px;background:#0d0d0d;border-radius:4px;border-left:3px solid ${spadeOwned?'#76c442':'#c84a00'}">
@@ -2548,23 +2675,8 @@ function renderClueScroll(tier, container) {
             background:${spadeOwned?'#0d1c09':'#1c0d09'};color:${spadeOwned?'#76c442':'#c84a00'};cursor:pointer"
             data-nav="Spade" data-nav-type="item"
             onclick="showCard(this.dataset.nav,this.dataset.navType)">${spadeOwned?'✓':'✗'} Spade</span>
-          ${isHard ? `<div style="font-size:10px;color:#555;margin-top:6px">Hard coords also spawn a combat NPC at the dig spot:</div>
-            <div style="margin-top:4px;display:flex;flex-wrap:wrap;gap:4px">
-              <span style="font-size:11px;padding:2px 7px;border-radius:3px;
-                background:${saraCard?(saraOwned?'#0d1c09':'#1c0d09'):'#111'};
-                color:${saraCard?(saraOwned?'#76c442':'#c84a00'):'#888'};
-                cursor:${saraCard?'pointer':'default'}"
-                ${saraCard ? `data-nav="Saradomin wizard" data-nav-type="monster" onclick="showCard(this.dataset.nav,this.dataset.navType)"` : ''}
-                >${saraCard?(saraOwned?'✓ ':'✗ '):''}Saradomin wizard</span>
-              <span style="font-size:10px;color:#444;align-self:center">outside Wilderness</span>
-              <span style="font-size:11px;padding:2px 7px;border-radius:3px;
-                background:${zamoCard?(zamoOwned?'#0d1c09':'#1c0d09'):'#111'};
-                color:${zamoCard?(zamoOwned?'#76c442':'#c84a00'):'#888'};
-                cursor:${zamoCard?'pointer':'default'}"
-                ${zamoCard ? `data-nav="Zamorak wizard" data-nav-type="monster" onclick="showCard(this.dataset.nav,this.dataset.navType)"` : ''}
-                >${zamoCard?(zamoOwned?'✓ ':'✗ '):''}Zamorak wizard</span>
-              <span style="font-size:10px;color:#444;align-self:center">inside Wilderness</span>
-            </div>` : ''}
+          ${combatNpcs.length ? `<div style="font-size:10px;color:#555;margin-top:8px">${capTier} coords spawn a combat NPC at the dig spot:</div>
+            ${combatNpcs.map(c => _npcBadge(c.npc, c.label)).join('')}` : ''}
         </div>
       </div>`;
     }
@@ -3025,10 +3137,16 @@ function clueStepNpcHtml(npcName) {
       </div>`;
 
     } else if (step.type === 'coordinate_combat') {
-      const wilderLabel = step.wilderness ? ' · Wilderness' : ' · Outside Wilderness';
+      const sub = step.alt ? ' (alternate)' : step.wilderness ? ' · Wilderness' : '';
       html += `<div style="margin:4px 0;padding:8px;background:#0d0d0d;border-radius:4px;border-left:3px solid ${col}">
-        <div style="font-size:10px;color:${col};font-weight:600;margin-bottom:4px">Coordinate Clue · ${step.tier} · Combat${wilderLabel}</div>
+        <div style="font-size:10px;color:${col};font-weight:600;margin-bottom:4px">Coordinate Clue · ${step.tier} · Combat${sub}</div>
         <div style="font-size:12px;color:#bbb">Spawns at the dig spot — must be defeated</div>
+      </div>`;
+
+    } else if (step.type === 'hotcold_combat') {
+      html += `<div style="margin:4px 0;padding:8px;background:#0d0d0d;border-radius:4px;border-left:3px solid ${col}">
+        <div style="font-size:10px;color:${col};font-weight:600;margin-bottom:4px">Hot/Cold Clue · ${step.tier} · Combat</div>
+        <div style="font-size:12px;color:#bbb">Spawns when digging in single-combat areas</div>
       </div>`;
     }
   }

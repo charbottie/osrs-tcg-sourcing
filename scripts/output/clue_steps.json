@@ -3322,8 +3322,72 @@
         "combatNpc": "Saradomin wizard",
         "wildernessNpc": "Zamorak wizard"
       },
-      "Elite": {},
-      "Master": {}
+      "Elite": {
+        "combatNpc": "Armadylean guard",
+        "altCombatNpc": "Bandosian guard"
+      },
+      "Master": {
+        "combatNpc": "Ancient Wizard",
+        "altCombatNpc": "Brassican Mage"
+      }
+    }
+  },
+  "stepCounts": {
+    "emote": {
+      "Beginner": 6,
+      "Easy": 33,
+      "Medium": 25,
+      "Hard": 17,
+      "Elite": 19,
+      "Master": 25
+    },
+    "sherlock": {
+      "Elite": 25,
+      "Master": 26
+    },
+    "falo": {
+      "Master": 20
+    },
+    "anagram": {
+      "Beginner": 9,
+      "Medium": 48,
+      "Hard": 18,
+      "Elite": 12,
+      "Master": 16
+    },
+    "cipher": {
+      "Easy": 0,
+      "Medium": 6,
+      "Hard": 11
+    },
+    "cryptic": {
+      "Beginner": 6,
+      "Easy": 121,
+      "Medium": 28,
+      "Hard": 70,
+      "Elite": 44,
+      "Master": 33
+    },
+    "map": {
+      "Beginner": 5,
+      "Easy": 7,
+      "Medium": 11,
+      "Hard": 7,
+      "Elite": 6
+    },
+    "coordinate": {
+      "Medium": 132,
+      "Hard": 161,
+      "Elite": 123,
+      "Master": 83
+    },
+    "scan": {
+      "Elite": 11,
+      "Master": 0
+    },
+    "hotcold": {
+      "Beginner": 5,
+      "Master": 135
     }
   },
   "itemIndex": {
@@ -11514,14 +11578,58 @@
       {
         "type": "coordinate_combat",
         "tier": "Hard",
-        "wilderness": false
+        "wilderness": false,
+        "alt": false
       }
     ],
     "Zamorak wizard": [
       {
         "type": "coordinate_combat",
         "tier": "Hard",
-        "wilderness": true
+        "wilderness": true,
+        "alt": false
+      }
+    ],
+    "Armadylean guard": [
+      {
+        "type": "coordinate_combat",
+        "tier": "Elite",
+        "wilderness": false,
+        "alt": false
+      }
+    ],
+    "Bandosian guard": [
+      {
+        "type": "coordinate_combat",
+        "tier": "Elite",
+        "wilderness": false,
+        "alt": true
+      }
+    ],
+    "Ancient Wizard": [
+      {
+        "type": "coordinate_combat",
+        "tier": "Master",
+        "wilderness": false,
+        "alt": false
+      },
+      {
+        "type": "hotcold_combat",
+        "tier": "Master",
+        "wilderness": false
+      }
+    ],
+    "Brassican Mage": [
+      {
+        "type": "coordinate_combat",
+        "tier": "Master",
+        "wilderness": false,
+        "alt": true
+      },
+      {
+        "type": "hotcold_combat",
+        "tier": "Master",
+        "wilderness": false
       }
     ]
   }

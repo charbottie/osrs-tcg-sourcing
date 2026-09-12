@@ -52,14 +52,15 @@ CHARLIE_ITEMS = ["Iron ore", "Iron dagger", "Raw herring", "Raw trout"]
 MAP_CLUE_TIERS = ["Beginner", "Easy", "Medium", "Hard", "Elite"]
 
 # Tiers that contain coordinate clues — Spade required.
-# Hard tier also spawns a combat NPC at the dig spot (Saradomin wizard outside Wilderness,
-# Zamorak wizard inside Wilderness).
+# Hard:   Saradomin wizard (outside Wilderness) or Zamorak wizard (inside Wilderness)
+# Elite:  Armadylean guard or Bandosian guard (randomly chosen)
+# Master: Three Ancient Wizards (multi-combat) or Brassican Mage (single-combat)
 # Source: https://oldschool.runescape.wiki/w/Treasure_Trails/Guide/Coordinates
 COORDINATE_CLUE_TIERS: dict[str, dict] = {
     "Medium": {},
     "Hard":   {"combatNpc": "Saradomin wizard", "wildernessNpc": "Zamorak wizard"},
-    "Elite":  {},
-    "Master": {},
+    "Elite":  {"combatNpc": "Armadylean guard", "altCombatNpc": "Bandosian guard"},
+    "Master": {"combatNpc": "Ancient Wizard",   "altCombatNpc": "Brassican Mage"},
 }
 
 
@@ -583,17 +584,144 @@ def _build_indexes(
     for tier in MAP_CLUE_TIERS:
         _add_item("Spade", {"type": "map", "tier": tier})
 
-    # Coordinate clues — Spade + optional wizard NPCs
+    # Coordinate clues — Spade + optional combat NPCs per tier
     for tier, info in COORDINATE_CLUE_TIERS.items():
         _add_item("Spade", {"type": "coordinate", "tier": tier})
         if info.get("combatNpc"):
             _add_npc(info["combatNpc"],
-                     {"type": "coordinate_combat", "tier": tier, "wilderness": False})
+                     {"type": "coordinate_combat", "tier": tier,
+                      "wilderness": False, "alt": False})
         if info.get("wildernessNpc"):
             _add_npc(info["wildernessNpc"],
-                     {"type": "coordinate_combat", "tier": tier, "wilderness": True})
+                     {"type": "coordinate_combat", "tier": tier,
+                      "wilderness": True, "alt": False})
+        if info.get("altCombatNpc"):
+            _add_npc(info["altCombatNpc"],
+                     {"type": "coordinate_combat", "tier": tier,
+                      "wilderness": False, "alt": True})
+
+    # Hot/cold (Master) — Brassican Mage spawns in single-combat areas
+    # Source: https://oldschool.runescape.wiki/w/Brassican_Mage
+    _add_npc("Brassican Mage",  {"type": "hotcold_combat", "tier": "Master",
+                                   "wilderness": False})
+    _add_npc("Ancient Wizard",  {"type": "hotcold_combat", "tier": "Master",
+                                   "wilderness": False})
 
     return item_index, npc_index
+
+
+# ── Total step counts (for achievability display) ─────────────────────────────
+
+def scrape_step_counts(
+    emote:    dict[str, list[dict]],
+    sherlock: dict[str, list[dict]],
+    falo:     list[dict],
+    anagram:  dict[str, list[dict]],
+    cipher:   dict[str, list[dict]],
+    force_refresh: bool,
+) -> dict[str, dict[str, int]]:
+    """Return total step counts per type per tier.
+
+    For types already fully scraped we derive counts directly.
+    For cryptic (where we only kept talk-to rows), map, coordinate, scan, and
+    hot/cold we fetch the wiki page and count rows/gallery items.
+    """
+    counts: dict[str, dict[str, int]] = {}
+
+    # ── Already fully scraped ─────────────────────────────────────────────────
+    counts["emote"]    = {t: len(v) for t, v in emote.items()}
+    counts["sherlock"] = {t: len(v) for t, v in sherlock.items()}
+    counts["falo"]     = {"Master": len(falo)}
+    counts["anagram"]  = {t: len(v) for t, v in anagram.items()}
+    counts["cipher"]   = {t: len(v) for t, v in cipher.items()}
+
+    # ── Cryptic — count ALL rows (not just talk-to) ───────────────────────────
+    html = wiki_fetcher.fetch("Treasure_Trails/Guide/Cryptic_clues",
+                               force_refresh=force_refresh)
+    if html:
+        soup = BeautifulSoup(html, "html.parser")
+        by_tier = _split_by_tier_headers(soup, CRYPTIC_TIERS)
+        cryptic_counts: dict[str, int] = {}
+        for tier in CRYPTIC_TIERS:
+            total = 0
+            for table in by_tier[tier]:
+                if "wikitable" not in table.get("class", []):
+                    continue
+                for tr in table.find_all("tr"):
+                    if tr.find_all("td"):
+                        total += 1
+            cryptic_counts[tier] = total
+        counts["cryptic"] = cryptic_counts
+        print("  Cryptic totals:", {t: cryptic_counts[t] for t in CRYPTIC_TIERS})
+
+    # ── Map clues ─────────────────────────────────────────────────────────────
+    html = wiki_fetcher.fetch("Treasure_Trails/Guide/Maps",
+                               force_refresh=force_refresh)
+    if html:
+        soup = BeautifulSoup(html, "html.parser")
+        by_tier = _split_by_tier_headers(soup, MAP_CLUE_TIERS)
+        map_counts: dict[str, int] = {}
+        for tier in MAP_CLUE_TIERS:
+            total = 0
+            for table in by_tier[tier]:
+                if "wikitable" not in table.get("class", []):
+                    continue
+                for tr in table.find_all("tr"):
+                    if tr.find_all("td"):
+                        total += 1
+            # Gallery items (li.gallerybox) for tiers that use image galleries
+            # collected under the same tier header
+            map_counts[tier] = total if total else map_counts.get(tier, 0)
+        counts["map"] = map_counts
+        print("  Map totals:", map_counts)
+
+    # ── Coordinate clues ──────────────────────────────────────────────────────
+    html = wiki_fetcher.fetch("Treasure_Trails/Guide/Coordinates",
+                               force_refresh=force_refresh)
+    if html:
+        soup = BeautifulSoup(html, "html.parser")
+        coord_tier_names = list(COORDINATE_CLUE_TIERS.keys())
+        by_tier = _split_by_tier_headers(soup, coord_tier_names)
+        coord_counts: dict[str, int] = {}
+        for tier in coord_tier_names:
+            total = 0
+            for table in by_tier[tier]:
+                if "wikitable" not in table.get("class", []):
+                    continue
+                for tr in table.find_all("tr"):
+                    if tr.find_all("td"):
+                        total += 1
+            coord_counts[tier] = total
+        counts["coordinate"] = coord_counts
+        print("  Coordinate totals:", coord_counts)
+
+    # ── Scan clues — no dedicated wiki guide page exists; no card requirements ─
+    # Scan clues exist in Elite and Master tiers. They have no item/NPC card
+    # dependency (just scan an area with a strange device), so all are achievable.
+    # Counts are hard-coded from the wiki's main Treasure Trails guide page.
+    counts["scan"] = {"Elite": 11, "Master": 0}   # Master uses hot/cold instead
+
+    # ── Hot/cold clues (Beginner and Master) ─────────────────────────────────
+    HOT_COLD_TIERS = ["Beginner", "Master"]
+    html = wiki_fetcher.fetch("Treasure_Trails/Guide/Hot_Cold",
+                               force_refresh=force_refresh)
+    if html:
+        soup = BeautifulSoup(html, "html.parser")
+        by_tier = _split_by_tier_headers(soup, HOT_COLD_TIERS)
+        hotcold_counts: dict[str, int] = {}
+        for tier in HOT_COLD_TIERS:
+            total = 0
+            for table in by_tier[tier]:
+                if "wikitable" not in table.get("class", []):
+                    continue
+                for tr in table.find_all("tr"):
+                    if tr.find_all("td"):
+                        total += 1
+            hotcold_counts[tier] = total
+        counts["hotcold"] = hotcold_counts
+        print("  Hot/cold totals:", hotcold_counts)
+
+    return counts
 
 
 # ── Entry point ───────────────────────────────────────────────────────────────
@@ -632,6 +760,9 @@ def main():
     print("Building indexes…")
     item_index, npc_index = _build_indexes(emote, sherlock, falo, cryptic, anagram, cipher)
 
+    print("Scraping total step counts…")
+    step_counts = scrape_step_counts(emote, sherlock, falo, anagram, cipher, force)
+
     # Structured dig-clue info for the browser (tiers + Spade + combat NPCs)
     dig_info = {
         "map": {tier: {} for tier in MAP_CLUE_TIERS},
@@ -648,6 +779,7 @@ def main():
         "anagram":    anagram,
         "cipher":     cipher,
         "digInfo":    dig_info,
+        "stepCounts": step_counts,
         "itemIndex":  item_index,
         "npcIndex":   npc_index,
     }
