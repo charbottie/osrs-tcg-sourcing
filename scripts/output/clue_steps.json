@@ -3199,6 +3199,133 @@
       }
     ]
   },
+  "cipher": {
+    "Easy": [],
+    "Medium": [
+      {
+        "tier": "Medium",
+        "cipher": "BMJ UIF LFCBC TFMMFS",
+        "npc": "Ali the Kebab seller",
+        "challenge": "399"
+      },
+      {
+        "tier": "Medium",
+        "cipher": "ECRVCKP MJCNGF",
+        "npc": "Captain Khaled",
+        "challenge": "5"
+      },
+      {
+        "tier": "Medium",
+        "cipher": "GUHCHO",
+        "npc": "Drezel",
+        "challenge": "7"
+      },
+      {
+        "tier": "Medium",
+        "cipher": "HQNM LZM STSNQ",
+        "npc": "Ironman tutor",
+        "challenge": "666"
+      },
+      {
+        "tier": "Medium",
+        "cipher": "QSPGFTTPS HSBDLMFCPOF",
+        "npc": "Professor Gracklebone",
+        "challenge": "9"
+      },
+      {
+        "tier": "Medium",
+        "cipher": "XJABSE USBJCPSO",
+        "npc": "Wizard Traiborn",
+        "challenge": "3150"
+      }
+    ],
+    "Hard": [
+      {
+        "tier": "Hard",
+        "cipher": "BSOPME MZETQPS",
+        "npc": "Arnold Lydspor",
+        "challenge": "Puzzle box"
+      },
+      {
+        "tier": "Hard",
+        "cipher": "BXJA UNJMNA YRCAR",
+        "npc": "Soar Leader Pitri",
+        "challenge": "Puzzle box"
+      },
+      {
+        "tier": "Hard",
+        "cipher": "GBJSZ RVFFO",
+        "npc": "Fairy Queen",
+        "challenge": "Puzzle box"
+      },
+      {
+        "tier": "Hard",
+        "cipher": "HCKTA IQFHCVJGT",
+        "npc": "Fairy Godfather",
+        "challenge": "64"
+      },
+      {
+        "tier": "Hard",
+        "cipher": "IWPPLQTP",
+        "npc": "Gunnjorn",
+        "challenge": "Puzzle box"
+      },
+      {
+        "tier": "Hard",
+        "cipher": "OVEXON",
+        "npc": "Eluned",
+        "challenge": "53,000"
+      },
+      {
+        "tier": "Hard",
+        "cipher": "UZZU MUJHRKYYKJ",
+        "npc": "Otto Godblessed",
+        "challenge": "3"
+      },
+      {
+        "tier": "Hard",
+        "cipher": "VTYR APCNTGLW",
+        "npc": "King Percival",
+        "challenge": "5"
+      },
+      {
+        "tier": "Hard",
+        "cipher": "YAROYGR",
+        "npc": "Sulisal",
+        "challenge": "4"
+      },
+      {
+        "tier": "Hard",
+        "cipher": "ZHLUG ROG PDQ",
+        "npc": "Weird Old Man",
+        "challenge": "150"
+      },
+      {
+        "tier": "Hard",
+        "cipher": "ZSBKDO ZODO",
+        "npc": "Pirate Pete",
+        "challenge": "Puzzle box"
+      }
+    ]
+  },
+  "digInfo": {
+    "map": {
+      "Beginner": {},
+      "Easy": {},
+      "Medium": {},
+      "Hard": {},
+      "Elite": {}
+    },
+    "coordinate": {
+      "Medium": {},
+      "Hard": {
+        "combatNpc": "Saradomin wizard",
+        "wildernessNpc": "Zamorak wizard"
+      },
+      "Elite": {},
+      "Master": {}
+    }
+  },
   "itemIndex": {
     "Gold ring": [
       {
@@ -7926,6 +8053,42 @@
           "Superior garden",
           "Farming Guild"
         ]
+      },
+      {
+        "type": "map",
+        "tier": "Beginner"
+      },
+      {
+        "type": "map",
+        "tier": "Easy"
+      },
+      {
+        "type": "map",
+        "tier": "Medium"
+      },
+      {
+        "type": "map",
+        "tier": "Hard"
+      },
+      {
+        "type": "map",
+        "tier": "Elite"
+      },
+      {
+        "type": "coordinate",
+        "tier": "Medium"
+      },
+      {
+        "type": "coordinate",
+        "tier": "Hard"
+      },
+      {
+        "type": "coordinate",
+        "tier": "Elite"
+      },
+      {
+        "type": "coordinate",
+        "tier": "Master"
       }
     ],
     "Trowel": [
@@ -10637,6 +10800,12 @@
         "tier": "Medium",
         "anagram": "GOBLETS ODD TOES",
         "challenge": "2"
+      },
+      {
+        "type": "cipher",
+        "tier": "Hard",
+        "cipher": "UZZU MUJHRKYYKJ",
+        "challenge": "3"
       }
     ],
     "King Bolren": [
@@ -11211,6 +11380,148 @@
         "tier": "Master",
         "anagram": "Twenty Cure Iron",
         "challenge": "Light box or puzzle box"
+      }
+    ],
+    "Ali the Kebab seller": [
+      {
+        "type": "cipher",
+        "tier": "Medium",
+        "cipher": "BMJ UIF LFCBC TFMMFS",
+        "challenge": "399"
+      }
+    ],
+    "Captain Khaled": [
+      {
+        "type": "cipher",
+        "tier": "Medium",
+        "cipher": "ECRVCKP MJCNGF",
+        "challenge": "5"
+      }
+    ],
+    "Drezel": [
+      {
+        "type": "cipher",
+        "tier": "Medium",
+        "cipher": "GUHCHO",
+        "challenge": "7"
+      }
+    ],
+    "Ironman tutor": [
+      {
+        "type": "cipher",
+        "tier": "Medium",
+        "cipher": "HQNM LZM STSNQ",
+        "challenge": "666"
+      }
+    ],
+    "Professor Gracklebone": [
+      {
+        "type": "cipher",
+        "tier": "Medium",
+        "cipher": "QSPGFTTPS HSBDLMFCPOF",
+        "challenge": "9"
+      }
+    ],
+    "Wizard Traiborn": [
+      {
+        "type": "cipher",
+        "tier": "Medium",
+        "cipher": "XJABSE USBJCPSO",
+        "challenge": "3150"
+      }
+    ],
+    "Arnold Lydspor": [
+      {
+        "type": "cipher",
+        "tier": "Hard",
+        "cipher": "BSOPME MZETQPS",
+        "challenge": "Puzzle box"
+      }
+    ],
+    "Soar Leader Pitri": [
+      {
+        "type": "cipher",
+        "tier": "Hard",
+        "cipher": "BXJA UNJMNA YRCAR",
+        "challenge": "Puzzle box"
+      }
+    ],
+    "Fairy Queen": [
+      {
+        "type": "cipher",
+        "tier": "Hard",
+        "cipher": "GBJSZ RVFFO",
+        "challenge": "Puzzle box"
+      }
+    ],
+    "Fairy Godfather": [
+      {
+        "type": "cipher",
+        "tier": "Hard",
+        "cipher": "HCKTA IQFHCVJGT",
+        "challenge": "64"
+      }
+    ],
+    "Gunnjorn": [
+      {
+        "type": "cipher",
+        "tier": "Hard",
+        "cipher": "IWPPLQTP",
+        "challenge": "Puzzle box"
+      }
+    ],
+    "Eluned": [
+      {
+        "type": "cipher",
+        "tier": "Hard",
+        "cipher": "OVEXON",
+        "challenge": "53,000"
+      }
+    ],
+    "King Percival": [
+      {
+        "type": "cipher",
+        "tier": "Hard",
+        "cipher": "VTYR APCNTGLW",
+        "challenge": "5"
+      }
+    ],
+    "Sulisal": [
+      {
+        "type": "cipher",
+        "tier": "Hard",
+        "cipher": "YAROYGR",
+        "challenge": "4"
+      }
+    ],
+    "Weird Old Man": [
+      {
+        "type": "cipher",
+        "tier": "Hard",
+        "cipher": "ZHLUG ROG PDQ",
+        "challenge": "150"
+      }
+    ],
+    "Pirate Pete": [
+      {
+        "type": "cipher",
+        "tier": "Hard",
+        "cipher": "ZSBKDO ZODO",
+        "challenge": "Puzzle box"
+      }
+    ],
+    "Saradomin wizard": [
+      {
+        "type": "coordinate_combat",
+        "tier": "Hard",
+        "wilderness": false
+      }
+    ],
+    "Zamorak wizard": [
+      {
+        "type": "coordinate_combat",
+        "tier": "Hard",
+        "wilderness": true
       }
     ]
   }

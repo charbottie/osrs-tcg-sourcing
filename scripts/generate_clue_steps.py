@@ -1,12 +1,14 @@
 #!/usr/bin/env python3
 """Scrape clue step data from the OSRS Wiki.
 
-Produces scripts/output/clue_steps.json with five sections:
+Produces scripts/output/clue_steps.json with sections:
   emote    — emote clues per tier (items + combat NPC for Hard/Elite/Master)
   sherlock — Sherlock tasks per tier (Elite / Master, items required)
   falo     — Falo the Bard steps (lyric → valid items)
   cryptic  — cryptic "talk to NPC" steps per tier
   anagram  — anagram clues per tier (anagram → NPC to talk to)
+  cipher   — cipher clues per tier (cipher → NPC to talk to)
+  digInfo  — map/coordinate tiers with Spade requirement + combat NPC info
 
 Plus two reverse indexes:
   itemIndex — item name → [step refs]
@@ -33,16 +35,32 @@ import wiki_fetcher
 _OUT = Path(__file__).parent / "output" / "clue_steps.json"
 
 EMOTE_TIERS    = ["Beginner", "Easy", "Medium", "Hard", "Elite", "Master"]
+SHERLOCK_TIERS = ["Elite", "Master"]
+CRYPTIC_TIERS  = ["Beginner", "Easy", "Medium", "Hard", "Elite", "Master"]
+ANAGRAM_TIERS  = ["Beginner", "Medium", "Hard", "Elite", "Master"]
+CIPHER_TIERS   = ["Easy", "Medium", "Hard"]   # Easy has no challenge answer; Medium/Hard do
+
+# Emote clue tiers where a Double Agent must be defeated before collecting reward
+DOUBLE_AGENT_TIERS = {"Hard", "Elite", "Master"}
 
 # Charlie the Tramp asks for one of these items in beginner clue scrolls.
 # Source: https://oldschool.runescape.wiki/w/Charlie_the_Tramp
 CHARLIE_ITEMS = ["Iron ore", "Iron dagger", "Raw herring", "Raw trout"]
-SHERLOCK_TIERS = ["Elite", "Master"]
-CRYPTIC_TIERS  = ["Beginner", "Easy", "Medium", "Hard", "Elite", "Master"]
-ANAGRAM_TIERS  = ["Beginner", "Medium", "Hard", "Elite", "Master"]
 
-# Emote clue tiers where a Double Agent must be defeated before collecting reward
-DOUBLE_AGENT_TIERS = {"Hard", "Elite", "Master"}
+# Tiers that contain map clues (dig at X) — Spade required.
+# Source: https://oldschool.runescape.wiki/w/Treasure_Trails/Guide/Maps
+MAP_CLUE_TIERS = ["Beginner", "Easy", "Medium", "Hard", "Elite"]
+
+# Tiers that contain coordinate clues — Spade required.
+# Hard tier also spawns a combat NPC at the dig spot (Saradomin wizard outside Wilderness,
+# Zamorak wizard inside Wilderness).
+# Source: https://oldschool.runescape.wiki/w/Treasure_Trails/Guide/Coordinates
+COORDINATE_CLUE_TIERS: dict[str, dict] = {
+    "Medium": {},
+    "Hard":   {"combatNpc": "Saradomin wizard", "wildernessNpc": "Zamorak wizard"},
+    "Elite":  {},
+    "Master": {},
+}
 
 
 # ── Helpers ──────────────────────────────────────────────────────────────────
@@ -406,6 +424,75 @@ def scrape_anagram_clues(force_refresh: bool) -> dict[str, list[dict]]:
     return result
 
 
+# ── Cipher clues ──────────────────────────────────────────────────────────────
+
+def _parse_cipher_table(table: Tag, tier: str) -> list[dict]:
+    """Extract rows from one cipher clue wikitable.
+
+    Columns: Cipher | Solution (NPC or location) | Shift distance | Location | Challenge answer
+    Rows where Solution is a plain location string (no wikilink) are dig/search steps — skip.
+    """
+    steps: list[dict] = []
+    headers = [th.get_text(" ").strip().lower() for th in table.find_all("th")]
+
+    col_cipher    = next((i for i, h in enumerate(headers) if "cipher" in h), 0)
+    col_solution  = next((i for i, h in enumerate(headers)
+                          if "solution" in h or "npc" in h), 1)
+    col_challenge = next((i for i, h in enumerate(headers)
+                          if "challenge" in h), -1)
+
+    for tr in table.find_all("tr"):
+        cells = tr.find_all("td")
+        if len(cells) < 2:
+            continue
+
+        cipher_text  = _cell_text(cells[min(col_cipher,   len(cells)-1)])
+        solution_cell = cells[min(col_solution, len(cells)-1)]
+        npc = _first_link_in_cell(solution_cell)
+        if not npc:
+            continue   # plain-text location (no NPC card) — skip
+
+        challenge = None
+        if col_challenge >= 0 and col_challenge < len(cells):
+            raw = _cell_text(cells[col_challenge]).strip()
+            if raw and raw.lower() not in ("-", "", "none"):
+                challenge = raw
+
+        if cipher_text and npc:
+            steps.append({
+                "tier":      tier,
+                "cipher":    cipher_text,
+                "npc":       npc,
+                "challenge": challenge,
+            })
+
+    return steps
+
+
+def scrape_cipher_clues(force_refresh: bool) -> dict[str, list[dict]]:
+    """Scrape cipher clue steps that resolve to an NPC."""
+    html = wiki_fetcher.fetch("Treasure_Trails/Guide/Ciphers",
+                               force_refresh=force_refresh)
+    if not html:
+        print("  [WARN] Could not fetch cipher clues page")
+        return {t: [] for t in CIPHER_TIERS}
+
+    soup    = BeautifulSoup(html, "html.parser")
+    by_tier = _split_by_tier_headers(soup, CIPHER_TIERS)
+    result: dict[str, list[dict]] = {}
+
+    for tier in CIPHER_TIERS:
+        steps: list[dict] = []
+        for table in by_tier[tier]:
+            if "wikitable" not in table.get("class", []):
+                continue
+            steps.extend(_parse_cipher_table(table, tier))
+        result[tier] = steps
+        print(f"  Cipher {tier}: {len(steps)} clues")
+
+    return result
+
+
 # ── Reverse indexes ───────────────────────────────────────────────────────────
 
 def _build_indexes(
@@ -414,6 +501,7 @@ def _build_indexes(
     falo:     list[dict],
     cryptic:  dict[str, list[dict]],
     anagram:  dict[str, list[dict]],
+    cipher:   dict[str, list[dict]],
 ) -> tuple[dict, dict]:
     """Return (itemIndex, npcIndex) for fast O(1) browser lookup."""
     item_index: dict[str, list[dict]] = {}
@@ -483,6 +571,28 @@ def _build_indexes(
                                         "anagram": step["anagram"],
                                         "challenge": step.get("challenge")})
 
+    # Cipher — NPC only
+    for tier, steps in cipher.items():
+        for step in steps:
+            if step.get("npc"):
+                _add_npc(step["npc"], {"type": "cipher", "tier": tier,
+                                        "cipher": step["cipher"],
+                                        "challenge": step.get("challenge")})
+
+    # Map clues — Spade required for each tier
+    for tier in MAP_CLUE_TIERS:
+        _add_item("Spade", {"type": "map", "tier": tier})
+
+    # Coordinate clues — Spade + optional wizard NPCs
+    for tier, info in COORDINATE_CLUE_TIERS.items():
+        _add_item("Spade", {"type": "coordinate", "tier": tier})
+        if info.get("combatNpc"):
+            _add_npc(info["combatNpc"],
+                     {"type": "coordinate_combat", "tier": tier, "wilderness": False})
+        if info.get("wildernessNpc"):
+            _add_npc(info["wildernessNpc"],
+                     {"type": "coordinate_combat", "tier": tier, "wilderness": True})
+
     return item_index, npc_index
 
 
@@ -511,13 +621,24 @@ def main():
     print("Scraping anagram clues…")
     anagram = scrape_anagram_clues(force)
 
+    print("Scraping cipher clues…")
+    cipher = scrape_cipher_clues(force)
+
     # Inject Charlie the Tramp's item requests into his cryptic clue steps
     for step in cryptic.get("Beginner", []):
         if step.get("npc") == "Charlie the Tramp":
             step["charlieItems"] = CHARLIE_ITEMS
 
     print("Building indexes…")
-    item_index, npc_index = _build_indexes(emote, sherlock, falo, cryptic, anagram)
+    item_index, npc_index = _build_indexes(emote, sherlock, falo, cryptic, anagram, cipher)
+
+    # Structured dig-clue info for the browser (tiers + Spade + combat NPCs)
+    dig_info = {
+        "map": {tier: {} for tier in MAP_CLUE_TIERS},
+        "coordinate": {
+            tier: info for tier, info in COORDINATE_CLUE_TIERS.items()
+        },
+    }
 
     output = {
         "emote":      emote,
@@ -525,6 +646,8 @@ def main():
         "falo":       falo,
         "cryptic":    cryptic,
         "anagram":    anagram,
+        "cipher":     cipher,
+        "digInfo":    dig_info,
         "itemIndex":  item_index,
         "npcIndex":   npc_index,
     }
@@ -537,12 +660,14 @@ def main():
     total_sherlock = sum(len(v) for v in sherlock.values())
     total_cryptic  = sum(len(v) for v in cryptic.values())
     total_anagram  = sum(len(v) for v in anagram.values())
+    total_cipher   = sum(len(v) for v in cipher.values())
     print(f"\nWrote {_OUT}")
     print(f"  Emote steps:         {total_emote}")
     print(f"  Sherlock tasks:      {total_sherlock}")
     print(f"  Falo steps:          {len(falo)}")
     print(f"  Cryptic talk-to:     {total_cryptic}")
     print(f"  Anagram clues:       {total_anagram}")
+    print(f"  Cipher clues:        {total_cipher}")
     print(f"  Item index entries:  {len(item_index)}")
     print(f"  NPC index entries:   {len(npc_index)}")
 

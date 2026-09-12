@@ -2488,6 +2488,86 @@ function renderClueScroll(tier, container) {
       }
       html += `</div>`;
     }
+
+    // Cipher clues (Easy / Medium / Hard)
+    const cipherSteps = (clueSteps.cipher || {})[capTier] || [];
+    if (cipherSteps.length > 0) {
+      const ownedCiphers = cipherSteps.filter(s => s.npc && isOwned(s.npc)).length;
+      const cardCiphers  = cipherSteps.filter(s => s.npc && monsterDrops[s.npc] !== undefined).length;
+      html += `<div class="section">
+        <div class="section-header">Cipher Clues ${cardCiphers > 0 ? progressPill(ownedCiphers, cardCiphers, false) : ''}</div>
+        <div style="font-size:10px;color:#555;padding:0 0 6px">${cipherSteps.length} ciphers · decode and talk to the NPC</div>`;
+      for (const step of cipherSteps) {
+        const npcCard  = step.npc && monsterDrops[step.npc] !== undefined;
+        const npcOwned = npcCard && isOwned(step.npc);
+        const borderCol = npcCard ? (npcOwned ? '#76c442' : '#c84a00') : '#333';
+        html += `<div style="margin:4px 0;padding:8px;background:#0d0d0d;border-radius:4px;border-left:3px solid ${borderCol}">
+          <div style="font-size:11px;color:#888;font-family:monospace;letter-spacing:2px;margin-bottom:4px">${escHtml(step.cipher)}</div>
+          ${step.npc ? `<span style="font-size:11px;padding:2px 7px;border-radius:3px;
+            background:${npcCard?(npcOwned?'#0d1c09':'#1c0d09'):'#111'};
+            color:${npcCard?(npcOwned?'#76c442':'#c84a00'):'#888'};
+            cursor:${npcCard?'pointer':'default'}"
+            ${npcCard ? `data-nav="${escHtml(step.npc)}" data-nav-type="monster" onclick="showCard(this.dataset.nav,this.dataset.navType)"` : ''}
+            >${npcCard?(npcOwned?'✓ ':'✗ '):''}${escHtml(step.npc)}</span>` : ''}
+          ${step.challenge ? `<span style="font-size:10px;color:#555;margin-left:8px">answer: ${escHtml(step.challenge)}</span>` : ''}
+        </div>`;
+      }
+      html += `</div>`;
+    }
+
+    // Map clues — Spade required for Beginner through Elite
+    const MAP_TIERS = ['Beginner','Easy','Medium','Hard','Elite'];
+    if (MAP_TIERS.includes(capTier)) {
+      const spadeOwned = isOwned('Spade');
+      html += `<div class="section">
+        <div class="section-header">Map Clues</div>
+        <div style="margin:4px 0;padding:8px;background:#0d0d0d;border-radius:4px;border-left:3px solid ${spadeOwned?'#76c442':'#c84a00'}">
+          <div style="font-size:11px;color:#666;margin-bottom:4px">Dig at the marked location</div>
+          <span style="font-size:11px;padding:2px 7px;border-radius:3px;
+            background:${spadeOwned?'#0d1c09':'#1c0d09'};color:${spadeOwned?'#76c442':'#c84a00'};cursor:pointer"
+            data-nav="Spade" data-nav-type="item"
+            onclick="showCard(this.dataset.nav,this.dataset.navType)">${spadeOwned?'✓':'✗'} Spade</span>
+        </div>
+      </div>`;
+    }
+
+    // Coordinate clues — Spade + optional combat NPCs (Hard only)
+    const COORD_TIERS = ['Medium','Hard','Elite','Master'];
+    if (COORD_TIERS.includes(capTier)) {
+      const spadeOwned = isOwned('Spade');
+      const isHard = capTier === 'Hard';
+      const saraOwned  = isHard && isOwned('Saradomin wizard');
+      const zamoOwned  = isHard && isOwned('Zamorak wizard');
+      const saraCard   = isHard && monsterDrops['Saradomin wizard'] !== undefined;
+      const zamoCard   = isHard && monsterDrops['Zamorak wizard'] !== undefined;
+      html += `<div class="section">
+        <div class="section-header">Coordinate Clues</div>
+        <div style="margin:4px 0;padding:8px;background:#0d0d0d;border-radius:4px;border-left:3px solid ${spadeOwned?'#76c442':'#c84a00'}">
+          <div style="font-size:11px;color:#666;margin-bottom:4px">Dig at the given coordinates</div>
+          <span style="font-size:11px;padding:2px 7px;border-radius:3px;
+            background:${spadeOwned?'#0d1c09':'#1c0d09'};color:${spadeOwned?'#76c442':'#c84a00'};cursor:pointer"
+            data-nav="Spade" data-nav-type="item"
+            onclick="showCard(this.dataset.nav,this.dataset.navType)">${spadeOwned?'✓':'✗'} Spade</span>
+          ${isHard ? `<div style="font-size:10px;color:#555;margin-top:6px">Hard coords also spawn a combat NPC at the dig spot:</div>
+            <div style="margin-top:4px;display:flex;flex-wrap:wrap;gap:4px">
+              <span style="font-size:11px;padding:2px 7px;border-radius:3px;
+                background:${saraCard?(saraOwned?'#0d1c09':'#1c0d09'):'#111'};
+                color:${saraCard?(saraOwned?'#76c442':'#c84a00'):'#888'};
+                cursor:${saraCard?'pointer':'default'}"
+                ${saraCard ? `data-nav="Saradomin wizard" data-nav-type="monster" onclick="showCard(this.dataset.nav,this.dataset.navType)"` : ''}
+                >${saraCard?(saraOwned?'✓ ':'✗ '):''}Saradomin wizard</span>
+              <span style="font-size:10px;color:#444;align-self:center">outside Wilderness</span>
+              <span style="font-size:11px;padding:2px 7px;border-radius:3px;
+                background:${zamoCard?(zamoOwned?'#0d1c09':'#1c0d09'):'#111'};
+                color:${zamoCard?(zamoOwned?'#76c442':'#c84a00'):'#888'};
+                cursor:${zamoCard?'pointer':'default'}"
+                ${zamoCard ? `data-nav="Zamorak wizard" data-nav-type="monster" onclick="showCard(this.dataset.nav,this.dataset.navType)"` : ''}
+                >${zamoCard?(zamoOwned?'✓ ':'✗ '):''}Zamorak wizard</span>
+              <span style="font-size:10px;color:#444;align-self:center">inside Wilderness</span>
+            </div>` : ''}
+        </div>
+      </div>`;
+    }
   }
 
   container.innerHTML = html;
@@ -2857,6 +2937,20 @@ function clueStepUsageHtml(itemName) {
         }
       }
       html += `</div>`;
+
+    } else if (step.type === 'map') {
+      const col = TIER_COLOR[step.tier] || '#888';
+      html += `<div style="margin:6px 0;padding:8px;background:#0d0d0d;border-radius:4px;border-left:3px solid ${col}">
+        <div style="font-size:10px;color:${col};font-weight:600;margin-bottom:4px">Map Clue · ${step.tier}</div>
+        <div style="font-size:12px;color:#bbb">Required to dig at the marked location</div>
+      </div>`;
+
+    } else if (step.type === 'coordinate') {
+      const col = TIER_COLOR[step.tier] || '#888';
+      html += `<div style="margin:6px 0;padding:8px;background:#0d0d0d;border-radius:4px;border-left:3px solid ${col}">
+        <div style="font-size:10px;color:${col};font-weight:600;margin-bottom:4px">Coordinate Clue · ${step.tier}</div>
+        <div style="font-size:12px;color:#bbb">Required to dig at the given coordinates</div>
+      </div>`;
     }
   }
 
@@ -2921,6 +3015,20 @@ function clueStepNpcHtml(npcName) {
         <div style="font-size:10px;color:${col};font-weight:600;margin-bottom:4px">Anagram Clue · ${step.tier}</div>
         <div style="font-size:12px;color:#888;font-family:monospace;letter-spacing:2px">${escHtml(step.anagram)}</div>
         ${step.challenge ? `<div style="font-size:11px;color:#555;margin-top:4px">Challenge answer: ${escHtml(step.challenge)}</div>` : ''}
+      </div>`;
+
+    } else if (step.type === 'cipher') {
+      html += `<div style="margin:4px 0;padding:8px;background:#0d0d0d;border-radius:4px;border-left:3px solid ${col}">
+        <div style="font-size:10px;color:${col};font-weight:600;margin-bottom:4px">Cipher Clue · ${step.tier}</div>
+        <div style="font-size:12px;color:#888;font-family:monospace;letter-spacing:2px">${escHtml(step.cipher)}</div>
+        ${step.challenge ? `<div style="font-size:11px;color:#555;margin-top:4px">Challenge answer: ${escHtml(step.challenge)}</div>` : ''}
+      </div>`;
+
+    } else if (step.type === 'coordinate_combat') {
+      const wilderLabel = step.wilderness ? ' · Wilderness' : ' · Outside Wilderness';
+      html += `<div style="margin:4px 0;padding:8px;background:#0d0d0d;border-radius:4px;border-left:3px solid ${col}">
+        <div style="font-size:10px;color:${col};font-weight:600;margin-bottom:4px">Coordinate Clue · ${step.tier} · Combat${wilderLabel}</div>
+        <div style="font-size:12px;color:#bbb">Spawns at the dig spot — must be defeated</div>
       </div>`;
     }
   }
