@@ -2347,13 +2347,13 @@ function renderClueScroll(tier, container) {
     const coordTotal = (sc.coordinate || {})[capTier] || 0;
     if (coordTotal) _row('Coordinate', spadeOwned ? coordTotal : 0, coordTotal);
 
-    // Hot/cold
+    // Hot/cold — all steps end in a dig (Spade required); some also spawn a combat NPC
     const hotcoldTotal = (sc.hotcold || {})[capTier] || 0;
-    if (hotcoldTotal) _row('Hot/cold', hotcoldTotal, hotcoldTotal);
+    if (hotcoldTotal) _row('Hot/cold', spadeOwned ? hotcoldTotal : 0, hotcoldTotal);
 
-    // Scan
+    // Scan — all steps end in a dig (Spade required)
     const scanTotal = (sc.scan || {})[capTier] || 0;
-    if (scanTotal) _row('Scan', scanTotal, scanTotal);
+    if (scanTotal) _row('Scan', spadeOwned ? scanTotal : 0, scanTotal);
 
     // Sherlock
     const sherlockSteps = (clueSteps.sherlock || {})[capTier] || [];
