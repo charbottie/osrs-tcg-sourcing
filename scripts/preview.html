@@ -2270,6 +2270,26 @@ function renderClueScroll(tier, container) {
       rows.push({label, done, total, note: note||''});
     }
 
+    // Quest-locked location patterns for clue step achievability
+    const _CLUE_QUEST_LOCKS = [
+      { re: /canifis|mort myre|port phasmatys|burgh de rott/i, quest: 'Priest in Peril' },
+      { re: /lletya/i,                                          quest: 'Underground Pass' },
+      { re: /prifddinas/i,                                      quest: 'Song of the Elves' },
+      { re: /\bape atoll\b/i,                                   quest: 'Monkey Madness I' },
+      { re: /sophanem|pyramid plunder/i,                        quest: "Icthlarin's Little Helper" },
+      { re: /zul-andra/i,                                       quest: 'Regicide' },
+      { re: /tyras camp/i,                                      quest: 'Regicide' },
+      { re: /neitiznot/i,                                       quest: 'The Fremennik Isles' },
+      { re: /lunar isle|astral altar/i,                         quest: 'Lunar Diplomacy' },
+      { re: /\bweiss\b/i,                                       quest: 'Making Friends with My Arm' },
+      { re: /cam torum/i,                                       quest: "Twilight's Promise" },
+    ];
+    function _locLocked(loc) {
+      // Only gate if we have quest data; empty set → assume all areas accessible
+      if (!loc || completedQuests.size === 0) return false;
+      return _CLUE_QUEST_LOCKS.some(({re, quest}) => re.test(loc) && !completedQuests.has(quest));
+    }
+
     // Emote
     const emoteSteps = (clueSteps.emote || {})[capTier] || [];
     if (emoteSteps.length) {
@@ -2279,16 +2299,27 @@ function renderClueScroll(tier, container) {
       _row('Emote', achievable, emoteSteps.length, 'items required');
     }
 
-    // Cryptic — split into dig (needs Spade) and non-dig (always achievable)
+    // Cryptic — split into dig (needs Spade) and non-dig
+    // Non-dig: check quest locks on structured steps; unstructured steps assumed achievable
     const crypticTotal = (sc.cryptic    || {})[capTier] || 0;
     const crypticDig   = (sc.crypticDig || {})[capTier] || 0;
     const crypticNonDig = crypticTotal - crypticDig;
-    if (crypticNonDig) _row('Cryptic',       crypticNonDig, crypticNonDig, 'no card req.');
+    const crypticStructured = (clueSteps.cryptic || {})[capTier] || [];
+    const crypticQuestLocked = crypticStructured.filter(s => _locLocked(s.location)).length;
+    if (crypticNonDig) _row('Cryptic',
+      crypticNonDig - crypticQuestLocked,
+      crypticNonDig,
+      crypticQuestLocked > 0 ? `${crypticQuestLocked} quest-locked` : 'no card req.');
     if (crypticDig)    _row('Cryptic (dig)', spadeOwned ? crypticDig : 0, crypticDig, 'Spade');
 
-    // Anagram
+    // Anagram — fully structured, check quest locks
     const anagramTotal = (sc.anagram || {})[capTier] || 0;
-    if (anagramTotal) _row('Anagram', anagramTotal, anagramTotal, 'no card req.');
+    const anagramStructured = (clueSteps.anagram || {})[capTier] || [];
+    const anagramQuestLocked = anagramStructured.filter(s => _locLocked(s.location)).length;
+    if (anagramTotal) _row('Anagram',
+      anagramTotal - anagramQuestLocked,
+      anagramTotal,
+      anagramQuestLocked > 0 ? `${anagramQuestLocked} quest-locked` : 'no card req.');
 
     // Cipher
     const cipherTotal = (sc.cipher || {})[capTier] || 0;
@@ -2347,7 +2378,10 @@ function renderClueScroll(tier, container) {
           ${r.note ? `<span style="width:80px;text-align:right;font-size:10px;color:#444;flex-shrink:0">${r.note}</span>` : ''}
         </div>`;
       }
-      html += `</div>`;
+      const questNote = completedQuests.size === 0
+        ? `<div style="margin-top:6px;font-size:10px;color:#444">Quest-locked areas not tracked — sync quests in the Questing tab for a more accurate count.</div>`
+        : `<div style="margin-top:6px;font-size:10px;color:#444">Quest locks checked against ${completedQuests.size} completed quest${completedQuests.size===1?'':'s'}. Cryptic counts exclude unstructured step data.</div>`;
+      html += questNote + `</div>`;
     }
   }
 
