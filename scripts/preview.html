@@ -2343,9 +2343,26 @@ function renderClueScroll(tier, container) {
     const mapTotal = (sc.map || {})[capTier] || 0;
     if (mapTotal) _row('Map', spadeOwned ? mapTotal : 0, mapTotal);
 
-    // Coordinate — achievable only if Spade owned
+    // Coordinate — Spade required; Hard/Elite/Master also spawn a combat NPC.
+    // Hard: Saradomin wizard (non-Wilderness, vast majority of coords).
+    // Elite: randomly Armadylean guard OR Bandosian guard — need both since you can't predict which.
+    // Master: randomly Ancient Wizard OR Brassican Mage — same.
     const coordTotal = (sc.coordinate || {})[capTier] || 0;
-    if (coordTotal) _row('Coordinate', spadeOwned ? coordTotal : 0, coordTotal);
+    if (coordTotal) {
+      let coordOk = spadeOwned;
+      if (coordOk) {
+        const coordCombat = {
+          Hard:   {primary: 'Saradomin wizard'},
+          Elite:  {primary: 'Armadylean guard', alt: 'Bandosian guard'},
+          Master: {primary: 'Ancient Wizard',   alt: 'Brassican Mage'},
+        }[capTier];
+        if (coordCombat) {
+          coordOk = isOwned(coordCombat.primary) &&
+                    (!coordCombat.alt || isOwned(coordCombat.alt));
+        }
+      }
+      _row('Coordinate', coordOk ? coordTotal : 0, coordTotal);
+    }
 
     // Hot/cold — all steps end in a dig (Spade required).
     // Beginner: no combat NPC. Master: each step spawns Brassican Mage or Ancient Wizard.
@@ -2548,8 +2565,12 @@ function renderClueScroll(tier, container) {
         for (const task of sherlockTasks) {
           const items = task.items || [];
           const hasItems = items.length > 0;
-          const allItemsOwned = hasItems && items.every(i => isOwned(i));
-          const borderCol = allItemsOwned ? '#76c442' : (hasItems ? '#9050d0' : '#333');
+          // Only card items (in itemSources) create a Bronzeman gate; non-card items are neutral
+          const cardItems = items.filter(it => !!itemSources[it]);
+          const allCardItemsOwned = cardItems.length > 0 && cardItems.every(i => isOwned(i));
+          const borderCol = cardItems.length > 0
+            ? (allCardItemsOwned ? '#76c442' : '#9050d0')
+            : '#333';
           html += `<div style="margin:4px 0;padding:8px;background:#0d0d0d;border-radius:4px;border-left:3px solid ${borderCol}">
             <div style="font-size:12px;color:#bbb;margin-bottom:${hasItems?'6px':'0'}">${escHtml(task.task)}</div>`;
           if (hasItems) {
@@ -2601,24 +2622,50 @@ function renderClueScroll(tier, container) {
       }
     }
 
-    // Cryptic talk-to NPC steps for this tier
+    // Cryptic clue steps for this tier — dig / talk / search
     const crypticSteps = (clueSteps.cryptic || {})[capTier] || [];
     if (crypticSteps.length > 0) {
+      const cTalk   = crypticSteps.filter(s => s.type === 'talk').length;
+      const cDig    = crypticSteps.filter(s => s.type === 'dig').length;
+      const cSearch = crypticSteps.filter(s => s.type === 'search').length;
+      const typeSummary = [
+        cTalk   ? `${cTalk} talk`   : '',
+        cDig    ? `${cDig} dig`     : '',
+        cSearch ? `${cSearch} search` : '',
+      ].filter(Boolean).join(' · ');
       html += `<div class="section">
-        <div class="section-header">Cryptic Clues — Talk to NPC</div>
-        <div style="font-size:10px;color:#555;padding:0 0 6px">${crypticSteps.length} steps · speak to the named NPC</div>`;
+        <div class="section-header">Cryptic Clues</div>
+        <div style="font-size:10px;color:#555;padding:0 0 6px">${crypticSteps.length} steps · ${typeSummary}</div>`;
       for (const step of crypticSteps) {
-        const npcCard = step.npc && monsterDrops[step.npc] !== undefined;
-        const npcOwned = npcCard && isOwned(step.npc);
-        const borderCol = npcCard ? (npcOwned ? '#76c442' : '#c84a00') : '#333';
+        let borderCol, badge = '';
+        if (step.type === 'dig') {
+          const sp = isOwned('Spade');
+          borderCol = sp ? '#76c442' : '#c84a00';
+          badge = `<span style="font-size:11px;padding:2px 7px;border-radius:3px;
+            background:${sp?'#0d1c09':'#1c0d09'};color:${sp?'#76c442':'#c84a00'};cursor:pointer"
+            data-nav="Spade" data-nav-type="item"
+            onclick="showCard(this.dataset.nav,this.dataset.navType)">${sp?'✓':'✗'} Spade</span>`;
+        } else if (step.type === 'talk') {
+          const npcCard  = step.npc && monsterDrops[step.npc] !== undefined;
+          const npcOwned = npcCard && isOwned(step.npc);
+          const locLocked = _locLocked(step.location);
+          borderCol = locLocked ? '#888' : npcCard ? (npcOwned ? '#76c442' : '#c84a00') : '#333';
+          if (step.npc) {
+            badge = `<span style="font-size:11px;padding:2px 7px;border-radius:3px;
+              background:${npcCard?(npcOwned?'#0d1c09':'#1c0d09'):'#111'};
+              color:${npcCard?(npcOwned?'#76c442':'#c84a00'):'#888'};
+              cursor:${npcCard?'pointer':'default'}"
+              ${npcCard ? `data-nav="${escHtml(step.npc)}" data-nav-type="monster" onclick="showCard(this.dataset.nav,this.dataset.navType)"` : ''}
+              >${npcCard?(npcOwned?'✓ ':'✗ '):''}${escHtml(step.npc)}</span>`;
+          }
+        } else {
+          // search — no card required; show dim if location-locked
+          const locLocked = _locLocked(step.location);
+          borderCol = locLocked ? '#888' : '#333';
+        }
         html += `<div style="margin:4px 0;padding:8px;background:#0d0d0d;border-radius:4px;border-left:3px solid ${borderCol}">
-          <div style="font-size:12px;color:#bbb;margin-bottom:4px">${escHtml(step.clueText)}</div>
-          ${step.npc ? `<span style="font-size:11px;padding:2px 7px;border-radius:3px;
-            background:${npcCard?(npcOwned?'#0d1c09':'#1c0d09'):'#111'};
-            color:${npcCard?(npcOwned?'#76c442':'#c84a00'):'#888'};
-            cursor:${npcCard?'pointer':'default'}"
-            ${npcCard ? `data-nav="${escHtml(step.npc)}" data-nav-type="monster" onclick="showCard(this.dataset.nav,this.dataset.navType)"` : ''}
-            >${npcCard?(npcOwned?'✓ ':'✗ '):''}${escHtml(step.npc)}</span>` : ''}
+          <div style="font-size:12px;color:#bbb;margin-bottom:${badge?'6px':'0'}">${escHtml(step.clueText)}</div>
+          ${badge}
           ${step.charlieItems ? `<div style="margin-top:6px"><span style="font-size:10px;color:#555">Brings one of: </span>${step.charlieItems.map(it => {
             const own = isOwned(it);
             return `<span style="font-size:11px;background:${own?'#0d1c09':'#1c0d09'};color:${own?'#76c442':'#c84a00'};border-radius:3px;padding:2px 6px;margin-left:4px;cursor:pointer"
