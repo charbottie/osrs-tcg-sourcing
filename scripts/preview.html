@@ -2347,9 +2347,22 @@ function renderClueScroll(tier, container) {
     const coordTotal = (sc.coordinate || {})[capTier] || 0;
     if (coordTotal) _row('Coordinate', spadeOwned ? coordTotal : 0, coordTotal);
 
-    // Hot/cold — all steps end in a dig (Spade required); some also spawn a combat NPC
-    const hotcoldTotal = (sc.hotcold || {})[capTier] || 0;
-    if (hotcoldTotal) _row('Hot/cold', spadeOwned ? hotcoldTotal : 0, hotcoldTotal);
+    // Hot/cold — all steps end in a dig (Spade required).
+    // Beginner: no combat NPC. Master: each step spawns Brassican Mage or Ancient Wizard.
+    const hotcoldSteps = (clueSteps.hotcold || {})[capTier] || [];
+    const hotcoldTotal = hotcoldSteps.length || (sc.hotcold || {})[capTier] || 0;
+    if (hotcoldTotal) {
+      if (!spadeOwned) {
+        _row('Hot/cold', 0, hotcoldTotal);
+      } else if (hotcoldSteps.length) {
+        const achievable = hotcoldSteps.filter(s =>
+          !s.combatNpc || isOwned(s.combatNpc)
+        ).length;
+        _row('Hot/cold', achievable, hotcoldSteps.length);
+      } else {
+        _row('Hot/cold', hotcoldTotal, hotcoldTotal);
+      }
+    }
 
     // Scan — all steps end in a dig (Spade required)
     const scanTotal = (sc.scan || {})[capTier] || 0;

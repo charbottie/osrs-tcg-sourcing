@@ -65,6 +65,16 @@ COORDINATE_CLUE_TIERS: dict[str, dict] = {
     "Master": {"combatNpc": "Ancient Wizard",   "altCombatNpc": "Brassican Mage"},
 }
 
+# Hot/cold clue tiers and their per-step combat NPC mapping.
+# Beginner: no combat NPC spawns.
+# Master: Combat Type column says "Single" (→ Brassican Mage) or "Multi" (→ Ancient Wizard).
+# Source: https://oldschool.runescape.wiki/w/Treasure_Trails/Guide/Hot_Cold
+HOT_COLD_TIERS = ["Beginner", "Master"]
+HOT_COLD_COMBAT: dict[str, str] = {
+    "Single": "Brassican Mage",
+    "Multi":  "Ancient Wizard",
+}
+
 
 # ── Helpers ──────────────────────────────────────────────────────────────────
 
@@ -506,6 +516,61 @@ def scrape_cipher_clues(force_refresh: bool) -> dict[str, list[dict]]:
     return result
 
 
+# ── Hot/cold clues ────────────────────────────────────────────────────────────
+
+def _parse_hotcold_page(tier: str, force_refresh: bool) -> list[dict]:
+    """Scrape one hot/cold tier subpage.
+
+    Beginner columns: Location | Image | Map  (no combat NPC)
+    Master columns:   Location | Image | Map | Combat Type  (Single→Brassican Mage, Multi→Ancient Wizard)
+    """
+    page = f"Treasure_Trails/Guide/Hot_Cold/{tier}"
+    html = wiki_fetcher.fetch(page, force_refresh=force_refresh)
+    if not html:
+        print(f"  [WARN] Could not fetch {page}")
+        return []
+
+    soup  = BeautifulSoup(html, "html.parser")
+    steps: list[dict] = []
+
+    for table in soup.find_all("table", class_="wikitable"):
+        headers = [th.get_text(" ").strip().lower() for th in table.find_all("th")]
+        if "location" not in " ".join(headers):
+            continue
+
+        col_location = next((i for i, h in enumerate(headers) if "location" in h), 0)
+        col_combat   = next((i for i, h in enumerate(headers) if "combat" in h), -1)
+
+        for tr in table.find_all("tr"):
+            cells = tr.find_all("td")
+            if not cells:
+                continue
+
+            location = _cell_text(cells[min(col_location, len(cells) - 1)])
+            if not location:
+                continue
+
+            step: dict = {"tier": tier, "location": location}
+
+            if col_combat >= 0 and col_combat < len(cells):
+                combat_text = _cell_text(cells[col_combat]).strip()
+                npc = HOT_COLD_COMBAT.get(combat_text)
+                if npc:
+                    step["combatNpc"] = npc
+                elif not npc and "border" in location.lower():
+                    # Single/multi-combat border — wiki recommends single (Brassican Mage)
+                    step["combatNpc"] = "Brassican Mage"
+
+            steps.append(step)
+
+    print(f"  Hot/cold {tier}: {len(steps)} steps")
+    return steps
+
+
+def scrape_hotcold_clues(force_refresh: bool) -> dict[str, list[dict]]:
+    return {tier: _parse_hotcold_page(tier, force_refresh) for tier in HOT_COLD_TIERS}
+
+
 # ── Reverse indexes ───────────────────────────────────────────────────────────
 
 def _build_indexes(
@@ -515,6 +580,7 @@ def _build_indexes(
     cryptic:  dict[str, list[dict]],
     anagram:  dict[str, list[dict]],
     cipher:   dict[str, list[dict]],
+    hotcold:  dict[str, list[dict]],
 ) -> tuple[dict, dict]:
     """Return (itemIndex, npcIndex) for fast O(1) browser lookup."""
     item_index: dict[str, list[dict]] = {}
@@ -612,12 +678,14 @@ def _build_indexes(
                      {"type": "coordinate_combat", "tier": tier,
                       "wilderness": False, "alt": True})
 
-    # Hot/cold (Master) — Brassican Mage spawns in single-combat areas
-    # Source: https://oldschool.runescape.wiki/w/Brassican_Mage
-    _add_npc("Brassican Mage",  {"type": "hotcold_combat", "tier": "Master",
-                                   "wilderness": False})
-    _add_npc("Ancient Wizard",  {"type": "hotcold_combat", "tier": "Master",
-                                   "wilderness": False})
+    # Hot/cold — Spade required for all tiers; Master steps also spawn a combat NPC
+    for tier, steps in hotcold.items():
+        _add_item("Spade", {"type": "hotcold", "tier": tier})
+        for step in steps:
+            if step.get("combatNpc"):
+                _add_npc(step["combatNpc"],
+                         {"type": "hotcold_combat", "tier": tier,
+                          "location": step["location"]})
 
     return item_index, npc_index
 
@@ -631,6 +699,7 @@ def scrape_step_counts(
     cryptic:  dict[str, list[dict]],
     anagram:  dict[str, list[dict]],
     cipher:   dict[str, list[dict]],
+    hotcold:  dict[str, list[dict]],
     force_refresh: bool,
 ) -> dict[str, dict[str, int]]:
     """Return total step counts per type per tier.
@@ -702,25 +771,9 @@ def scrape_step_counts(
     # Counts are hard-coded from the wiki's main Treasure Trails guide page.
     counts["scan"] = {"Elite": 11, "Master": 0}   # Master uses hot/cold instead
 
-    # ── Hot/cold clues (Beginner and Master) ─────────────────────────────────
-    HOT_COLD_TIERS = ["Beginner", "Master"]
-    html = wiki_fetcher.fetch("Treasure_Trails/Guide/Hot_Cold",
-                               force_refresh=force_refresh)
-    if html:
-        soup = BeautifulSoup(html, "html.parser")
-        by_tier = _split_by_tier_headers(soup, HOT_COLD_TIERS)
-        hotcold_counts: dict[str, int] = {}
-        for tier in HOT_COLD_TIERS:
-            total = 0
-            for table in by_tier[tier]:
-                if "wikitable" not in table.get("class", []):
-                    continue
-                for tr in table.find_all("tr"):
-                    if tr.find_all("td"):
-                        total += 1
-            hotcold_counts[tier] = total
-        counts["hotcold"] = hotcold_counts
-        print("  Hot/cold totals:", hotcold_counts)
+    # ── Hot/cold clues — derived from fully-structured data ──────────────────
+    counts["hotcold"] = {t: len(v) for t, v in hotcold.items()}
+    print("  Hot/cold totals:", counts["hotcold"])
 
     return counts
 
@@ -753,16 +806,19 @@ def main():
     print("Scraping cipher clues…")
     cipher = scrape_cipher_clues(force)
 
+    print("Scraping hot/cold clue steps…")
+    hotcold = scrape_hotcold_clues(force)
+
     # Inject Charlie the Tramp's item requests into his cryptic clue steps
     for step in cryptic.get("Beginner", []):
         if step.get("npc") == "Charlie the Tramp":
             step["charlieItems"] = CHARLIE_ITEMS
 
     print("Scraping total step counts…")
-    step_counts = scrape_step_counts(emote, sherlock, falo, cryptic, anagram, cipher, force)
+    step_counts = scrape_step_counts(emote, sherlock, falo, cryptic, anagram, cipher, hotcold, force)
 
     print("Building indexes…")
-    item_index, npc_index = _build_indexes(emote, sherlock, falo, cryptic, anagram, cipher)
+    item_index, npc_index = _build_indexes(emote, sherlock, falo, cryptic, anagram, cipher, hotcold)
 
     # Cryptic dig steps — Spade required; one index entry per tier
     for tier, count in step_counts.get("crypticDig", {}).items():
@@ -786,6 +842,7 @@ def main():
         "cryptic":    cryptic,
         "anagram":    anagram,
         "cipher":     cipher,
+        "hotcold":    hotcold,
         "digInfo":    dig_info,
         "stepCounts": step_counts,
         "itemIndex":  item_index,
