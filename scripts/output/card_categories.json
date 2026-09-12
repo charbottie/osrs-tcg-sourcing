@@ -5,7 +5,8 @@
     "Smithing"
   ],
   "Ammo mould": [
-    "Smithing"
+    "Smithing",
+    "Tool"
   ],
   "Excalibur": [
     "Construction",
@@ -15,7 +16,8 @@
   "Candle": [
     "Construction",
     "Crafting",
-    "Firemaking"
+    "Firemaking",
+    "Tool"
   ],
   "Opal bolt tips": [
     "Fletching"
@@ -57,11 +59,13 @@
   ],
   "Vial of water": [
     "F2P",
-    "Herblore"
+    "Herblore",
+    "Tool"
   ],
   "Vial": [
     "F2P",
-    "Herblore"
+    "Herblore",
+    "Tool"
   ],
   "Snape grass": [
     "Herblore"
@@ -144,10 +148,12 @@
   ],
   "Small fishing net": [
     "F2P",
-    "Fishing"
+    "Fishing",
+    "Tool"
   ],
   "Big fishing net": [
-    "Fishing"
+    "Fishing",
+    "Tool"
   ],
   "Fishing rod": [
     "F2P",
@@ -161,7 +167,8 @@
   ],
   "Harpoon": [
     "F2P",
-    "Fishing"
+    "Fishing",
+    "Tool"
   ],
   "Fishing bait": [
     "Agility",
@@ -528,7 +535,8 @@
     "Construction",
     "F2P",
     "Firemaking",
-    "Sailing"
+    "Sailing",
+    "Tool"
   ],
   "Ashes": [
     "Cooking",
@@ -538,7 +546,8 @@
   "Torch": [
     "Construction",
     "F2P",
-    "Firemaking"
+    "Firemaking",
+    "Tool"
   ],
   "Coins": [
     "Construction",
@@ -909,7 +918,8 @@
   "Knife": [
     "Construction",
     "F2P",
-    "Sailing"
+    "Sailing",
+    "Tool"
   ],
   "Bear fur": [
     "Crafting",
@@ -930,6 +940,7 @@
     "Fletching",
     "Sailing",
     "Smithing",
+    "Tool",
     "Woodcutting"
   ],
   "Flyer": [
@@ -963,6 +974,7 @@
   ],
   "Machete": [
     "Melee",
+    "Tool",
     "Weapon"
   ],
   "Brass key": [
@@ -1600,36 +1612,42 @@
     "F2P",
     "Melee",
     "Mining",
+    "Tool",
     "Weapon"
   ],
   "Iron pickaxe": [
     "F2P",
     "Melee",
     "Mining",
+    "Tool",
     "Weapon"
   ],
   "Steel pickaxe": [
     "F2P",
     "Melee",
     "Mining",
+    "Tool",
     "Weapon"
   ],
   "Adamant pickaxe": [
     "F2P",
     "Melee",
     "Mining",
+    "Tool",
     "Weapon"
   ],
   "Mithril pickaxe": [
     "F2P",
     "Melee",
     "Mining",
+    "Tool",
     "Weapon"
   ],
   "Rune pickaxe": [
     "F2P",
     "Melee",
     "Mining",
+    "Tool",
     "Weapon"
   ],
   "Bronze sword": [
@@ -1845,6 +1863,7 @@
     "F2P",
     "Melee",
     "Smithing",
+    "Tool",
     "Weapon",
     "Woodcutting"
   ],
@@ -1852,6 +1871,7 @@
     "F2P",
     "Melee",
     "Smithing",
+    "Tool",
     "Weapon",
     "Woodcutting"
   ],
@@ -1859,6 +1879,7 @@
     "F2P",
     "Melee",
     "Smithing",
+    "Tool",
     "Weapon",
     "Woodcutting"
   ],
@@ -1866,6 +1887,7 @@
     "F2P",
     "Melee",
     "Smithing",
+    "Tool",
     "Weapon",
     "Woodcutting"
   ],
@@ -1873,12 +1895,14 @@
     "F2P",
     "Melee",
     "Smithing",
+    "Tool",
     "Weapon"
   ],
   "Rune axe": [
     "F2P",
     "Melee",
     "Smithing",
+    "Tool",
     "Weapon",
     "Woodcutting"
   ],
@@ -1886,6 +1910,7 @@
     "F2P",
     "Melee",
     "Smithing",
+    "Tool",
     "Weapon",
     "Woodcutting"
   ],
@@ -2173,7 +2198,8 @@
     "Woodcutting"
   ],
   "Lockpick": [
-    "Thieving"
+    "Thieving",
+    "Tool"
   ],
   "Steel nails": [
     "Construction",
@@ -2368,6 +2394,7 @@
   "Thread": [
     "Crafting",
     "F2P",
+    "Tool",
     "Woodcutting"
   ],
   "Shears": [
@@ -2412,7 +2439,8 @@
   "Chisel": [
     "Crafting",
     "F2P",
-    "Mining"
+    "Mining",
+    "Tool"
   ],
   "Brown apron": [
     "Equipment",
@@ -2480,7 +2508,8 @@
     "Construction",
     "Crafting",
     "Farming",
-    "Magic"
+    "Magic",
+    "Tool"
   ],
   "Glassblowing pipe": [
     "Crafting"
@@ -2562,29 +2591,34 @@
   ],
   "Bowl of water": [
     "Cooking",
-    "F2P"
+    "F2P",
+    "Tool"
   ],
   "Bowl": [
     "Cooking",
     "Crafting",
-    "F2P"
+    "F2P",
+    "Tool"
   ],
   "Bucket": [
     "Construction",
     "Cooking",
     "F2P",
     "Farming",
-    "Hunter"
+    "Hunter",
+    "Tool"
   ],
   "Bucket of milk": [
     "Construction",
     "Cooking",
-    "F2P"
+    "F2P",
+    "Tool"
   ],
   "Bucket of water": [
     "Construction",
     "Cooking",
-    "F2P"
+    "F2P",
+    "Tool"
   ],
   "Pot": [
     "Crafting",
@@ -2595,11 +2629,13 @@
     "F2P"
   ],
   "Jug": [
-    "F2P"
+    "F2P",
+    "Tool"
   ],
   "Jug of water": [
     "Cooking",
-    "F2P"
+    "F2P",
+    "Tool"
   ],
   "Swamp tar": [
     "Construction",
@@ -2685,11 +2721,13 @@
   ],
   "Half full wine jug": [
     "F2P",
-    "Holiday"
+    "Holiday",
+    "Tool"
   ],
   "Jug of wine": [
     "Cooking",
-    "F2P"
+    "F2P",
+    "Tool"
   ],
   "Stew": [
     "Cooking",
@@ -4166,7 +4204,8 @@
   ],
   "Bucket of slime": [
     "Construction",
-    "Prayer"
+    "Prayer",
+    "Tool"
   ],
   "Ham shirt": [
     "Equipment"
@@ -4200,16 +4239,20 @@
   ],
   "Giant frog legs": [],
   "Oil lamp": [
-    "Crafting"
+    "Crafting",
+    "Tool"
   ],
   "Candle lantern": [
-    "Firemaking"
+    "Firemaking",
+    "Tool"
   ],
   "Oil lantern": [
-    "Crafting"
+    "Crafting",
+    "Tool"
   ],
   "Bullseye lantern": [
-    "Crafting"
+    "Crafting",
+    "Tool"
   ],
   "Spiny helmet": [
     "Crafting",
@@ -4621,7 +4664,8 @@
     "Farming"
   ],
   "Gardening trowel": [
-    "Farming"
+    "Farming",
+    "Tool"
   ],
   "Secateurs": [
     "Tool"
@@ -5327,7 +5371,9 @@
   "Flippers": [
     "Equipment"
   ],
-  "Empty fishbowl": [],
+  "Empty fishbowl": [
+    "Tool"
+  ],
   "Tiny net": [],
   "Saradomin brew": [
     "Herblore"
@@ -5385,6 +5431,7 @@
     "Firemaking",
     "Melee",
     "Smithing",
+    "Tool",
     "Weapon",
     "Woodcutting"
   ],
@@ -5488,7 +5535,8 @@
     "Mining"
   ],
   "Unlit bug lantern": [
-    "Equipment"
+    "Equipment",
+    "Tool"
   ],
   "Chilli potato": [],
   "Egg potato": [],
@@ -5887,6 +5935,7 @@
   ],
   "Kitchen knife": [
     "Melee",
+    "Tool",
     "Weapon"
   ],
   "Meat tenderiser": [
@@ -6758,6 +6807,7 @@
   "Dashing kebbit fur": [],
   "Barb-tail harpoon": [
     "Melee",
+    "Tool",
     "Weapon"
   ],
   "Strung rabbit foot": [
@@ -7676,6 +7726,7 @@
   "Magic secateurs": [
     "Construction",
     "Melee",
+    "Tool",
     "Weapon"
   ],
   "Super ranging": [
@@ -7829,6 +7880,7 @@
     "Melee",
     "Mining",
     "Smithing",
+    "Tool",
     "Weapon"
   ],
   "Malediction ward": [
@@ -8226,6 +8278,7 @@
     "F2P",
     "Melee",
     "Mining",
+    "Tool",
     "Weapon"
   ],
   "White headband": [
@@ -9010,6 +9063,7 @@
     "Fishing",
     "Mining",
     "Smithing",
+    "Tool",
     "Woodcutting"
   ],
   "Eternal boots": [
@@ -9532,12 +9586,14 @@
     "Clue",
     "Melee",
     "Smithing",
+    "Tool",
     "Weapon"
   ],
   "3rd age pickaxe": [
     "Clue",
     "Melee",
     "Mining",
+    "Tool",
     "Weapon"
   ],
   "Ring of coins": [
@@ -9741,6 +9797,7 @@
     "Weapon"
   ],
   "Large spade": [
+    "Tool",
     "Weapon"
   ],
   "Wooden shield (g)": [
@@ -10014,6 +10071,7 @@
   "Burnt page": [],
   "Bruma torch": [
     "Equipment",
+    "Tool",
     "Weapon"
   ],
   "Leaf-bladed battleaxe": [
@@ -10049,9 +10107,12 @@
     "Weapon"
   ],
   "Kindling": [],
-  "Empty gourd vial": [],
+  "Empty gourd vial": [
+    "Tool"
+  ],
   "Water-filled gourd vial": [
-    "Herblore"
+    "Herblore",
+    "Tool"
   ],
   "Dragon thrownaxe": [
     "Ranged",
@@ -10150,6 +10211,7 @@
     "Fishing",
     "Melee",
     "Smithing",
+    "Tool",
     "Weapon"
   ],
   "Dexterous prayer scroll": [],
@@ -10674,7 +10736,8 @@
     "Herblore"
   ],
   "Vial of blood": [
-    "Herblore"
+    "Herblore",
+    "Tool"
   ],
   "Battlemage potion": [
     "Herblore"
@@ -11080,17 +11143,20 @@
     "F2P",
     "Melee",
     "Mining",
+    "Tool",
     "Weapon"
   ],
   "Gilded axe": [
     "Clue",
     "F2P",
     "Melee",
+    "Tool",
     "Weapon"
   ],
   "Gilded spade": [
     "Clue",
     "F2P",
+    "Tool",
     "Weapon"
   ],
   "Mole slippers": [
@@ -11332,11 +11398,13 @@
     "Crafting",
     "Melee",
     "Smithing",
+    "Tool",
     "Weapon"
   ],
   "Crystal pickaxe": [
     "Melee",
     "Mining",
+    "Tool",
     "Weapon"
   ],
   "Youngllef": [
@@ -11347,12 +11415,15 @@
   ],
   "Crystal harpoon": [
     "Melee",
+    "Tool",
     "Weapon"
   ],
   "Gauntlet cape": [
     "Equipment"
   ],
-  "Water-filled vial": [],
+  "Water-filled vial": [
+    "Tool"
+  ],
   "Egniol potion": [
     "Herblore"
   ],
@@ -11575,7 +11646,9 @@
     "Agility",
     "Equipment"
   ],
-  "Strange old lockpick": [],
+  "Strange old lockpick": [
+    "Tool"
+  ],
   "Mysterious page": [],
   "Blood pint": [],
   "Amulet of blood fury": [
@@ -11591,7 +11664,9 @@
   "Pat of not garlic butter": [
     "Cooking"
   ],
-  "Long rope": [],
+  "Long rope": [
+    "Tool"
+  ],
   "Severed leg": [
     "Weapon"
   ],
@@ -11637,6 +11712,7 @@
     "Construction",
     "Equipment",
     "Melee",
+    "Tool",
     "Weapon"
   ],
   "Plank sack": [
@@ -12057,7 +12133,8 @@
   ],
   "Abyssal lantern": [
     "Equipment",
-    "Runecraft"
+    "Runecraft",
+    "Tool"
   ],
   "Hat of the eye": [
     "Equipment",
@@ -12292,9 +12369,12 @@
   "Secateurs blade": [
     "Crafting",
     "Smithing",
+    "Tool",
     "Woodcutting"
   ],
-  "Secateurs attachment": [],
+  "Secateurs attachment": [
+    "Tool"
+  ],
   "Clothes pouch": [],
   "Forestry top": [
     "Equipment",
@@ -13085,7 +13165,8 @@
     "Fletching"
   ],
   "Fletching knife": [
-    "Equipment"
+    "Equipment",
+    "Tool"
   ],
   "Dirty arrowtips": [],
   "Redwood hiking staff": [
@@ -13545,7 +13626,8 @@
   ],
   "Narwhal horn knife": [
     "Construction",
-    "Sailing"
+    "Sailing",
+    "Tool"
   ],
   "Ray barbs": [
     "Construction",
@@ -13971,7 +14053,8 @@
     "Sailing"
   ],
   "Dull knife": [
-    "Sailing"
+    "Sailing",
+    "Tool"
   ],
   "Broken compass": [],
   "Rusty coin": [
@@ -14096,7 +14179,8 @@
   ],
   "Garlic cocktail": [],
   "Bucket of bloodwood sap": [
-    "Fletching"
+    "Fletching",
+    "Tool"
   ],
   "Leechfin": [
     "Cooking"
@@ -14165,7 +14249,9 @@
     "F2P"
   ],
   "Sunstone": [],
-  "Jeweller's chisel": [],
+  "Jeweller's chisel": [
+    "Tool"
+  ],
   "Hallowfell": [
     "Melee",
     "Sailing",
@@ -14794,7 +14880,9 @@
     "F2P"
   ],
   "Otherworldly being": [],
-  "Magic axe": [],
+  "Magic axe": [
+    "Tool"
+  ],
   "Black unicorn": [],
   "Veos": [
     "F2P"
@@ -14995,7 +15083,9 @@
   "Swordchick": [],
   "Jubster": [],
   "Newtroost": [],
-  "Possessed pickaxe": [],
+  "Possessed pickaxe": [
+    "Tool"
+  ],
   "Skeletal miner": [],
   "King Vargas": [],
   "Ragnar": [],
@@ -15400,7 +15490,9 @@
     "Construction"
   ],
   "Giant skeleton": [],
-  "Animated spade": [],
+  "Animated spade": [
+    "Tool"
+  ],
   "Terror dog": [
     "Slayer"
   ],
