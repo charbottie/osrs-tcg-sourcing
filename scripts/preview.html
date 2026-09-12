@@ -2290,6 +2290,12 @@ function renderClueScroll(tier, container) {
       return _CLUE_QUEST_LOCKS.some(({re, quest}) => re.test(loc) && !completedQuests.has(quest));
     }
 
+    // Case-insensitive monster card check (NPC names in step data may differ in case)
+    const _monsterCardNames = new Set(Object.keys(monsterDrops).map(k => k.toLowerCase()));
+    function _npcBlocked(npc) {
+      return npc && _monsterCardNames.has(npc.toLowerCase()) && !isOwned(npc);
+    }
+
     // Emote
     const emoteSteps = (clueSteps.emote || {})[capTier] || [];
     if (emoteSteps.length) {
@@ -2299,19 +2305,19 @@ function renderClueScroll(tier, container) {
       _row('Emote', achievable, emoteSteps.length);
     }
 
-    // Cryptic — quest-locked structured steps + dig steps (need Spade) reduce achievable count
+    // Cryptic — dig (Spade), quest-locked areas, and unowned NPC cards all block steps
     const crypticTotal = (sc.cryptic    || {})[capTier] || 0;
     const crypticDig   = (sc.crypticDig || {})[capTier] || 0;
     const crypticStructured = (clueSteps.cryptic || {})[capTier] || [];
-    const crypticQuestLocked = crypticStructured.filter(s => _locLocked(s.location)).length;
-    const crypticAchievable = crypticTotal - crypticQuestLocked - (spadeOwned ? 0 : crypticDig);
+    const crypticBlocked = crypticStructured.filter(s => _locLocked(s.location) || _npcBlocked(s.npc)).length;
+    const crypticAchievable = crypticTotal - crypticBlocked - (spadeOwned ? 0 : crypticDig);
     if (crypticTotal) _row('Cryptic', crypticAchievable, crypticTotal);
 
-    // Anagram — fully structured, check quest locks
+    // Anagram — fully structured; quest-locked areas and unowned NPC cards block steps
     const anagramTotal = (sc.anagram || {})[capTier] || 0;
     const anagramStructured = (clueSteps.anagram || {})[capTier] || [];
-    const anagramQuestLocked = anagramStructured.filter(s => _locLocked(s.location)).length;
-    if (anagramTotal) _row('Anagram', anagramTotal - anagramQuestLocked, anagramTotal);
+    const anagramBlocked = anagramStructured.filter(s => _locLocked(s.location) || _npcBlocked(s.npc)).length;
+    if (anagramTotal) _row('Anagram', anagramTotal - anagramBlocked, anagramTotal);
 
     // Cipher
     const cipherTotal = (sc.cipher || {})[capTier] || 0;
