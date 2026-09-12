@@ -2296,49 +2296,42 @@ function renderClueScroll(tier, container) {
       const achievable = emoteSteps.filter(s =>
         !s.items || s.items.length === 0 || s.items.every(i => isOwned(i))
       ).length;
-      _row('Emote', achievable, emoteSteps.length, 'items required');
+      _row('Emote', achievable, emoteSteps.length);
     }
 
-    // Cryptic — combined row (dig steps gated on Spade, quest-locked steps from structured data)
+    // Cryptic — quest-locked structured steps + dig steps (need Spade) reduce achievable count
     const crypticTotal = (sc.cryptic    || {})[capTier] || 0;
     const crypticDig   = (sc.crypticDig || {})[capTier] || 0;
     const crypticStructured = (clueSteps.cryptic || {})[capTier] || [];
     const crypticQuestLocked = crypticStructured.filter(s => _locLocked(s.location)).length;
     const crypticAchievable = crypticTotal - crypticQuestLocked - (spadeOwned ? 0 : crypticDig);
-    const crypticNote = [
-      crypticQuestLocked > 0 ? `${crypticQuestLocked} quest-locked` : '',
-      !spadeOwned && crypticDig > 0 ? `${crypticDig} need Spade` : '',
-    ].filter(Boolean).join(', ') || 'no card req.';
-    if (crypticTotal) _row('Cryptic', crypticAchievable, crypticTotal, crypticNote);
+    if (crypticTotal) _row('Cryptic', crypticAchievable, crypticTotal);
 
     // Anagram — fully structured, check quest locks
     const anagramTotal = (sc.anagram || {})[capTier] || 0;
     const anagramStructured = (clueSteps.anagram || {})[capTier] || [];
     const anagramQuestLocked = anagramStructured.filter(s => _locLocked(s.location)).length;
-    if (anagramTotal) _row('Anagram',
-      anagramTotal - anagramQuestLocked,
-      anagramTotal,
-      anagramQuestLocked > 0 ? `${anagramQuestLocked} quest-locked` : 'no card req.');
+    if (anagramTotal) _row('Anagram', anagramTotal - anagramQuestLocked, anagramTotal);
 
     // Cipher
     const cipherTotal = (sc.cipher || {})[capTier] || 0;
-    if (cipherTotal) _row('Cipher', cipherTotal, cipherTotal, 'no card req.');
+    if (cipherTotal) _row('Cipher', cipherTotal, cipherTotal);
 
     // Map — achievable only if Spade owned
     const mapTotal = (sc.map || {})[capTier] || 0;
-    if (mapTotal) _row('Map', spadeOwned ? mapTotal : 0, mapTotal, 'Spade');
+    if (mapTotal) _row('Map', spadeOwned ? mapTotal : 0, mapTotal);
 
     // Coordinate — achievable only if Spade owned
     const coordTotal = (sc.coordinate || {})[capTier] || 0;
-    if (coordTotal) _row('Coordinate', spadeOwned ? coordTotal : 0, coordTotal, 'Spade');
+    if (coordTotal) _row('Coordinate', spadeOwned ? coordTotal : 0, coordTotal);
 
     // Hot/cold
     const hotcoldTotal = (sc.hotcold || {})[capTier] || 0;
-    if (hotcoldTotal) _row('Hot/cold', hotcoldTotal, hotcoldTotal, 'no card req.');
+    if (hotcoldTotal) _row('Hot/cold', hotcoldTotal, hotcoldTotal);
 
     // Scan
     const scanTotal = (sc.scan || {})[capTier] || 0;
-    if (scanTotal) _row('Scan', scanTotal, scanTotal, 'no card req.');
+    if (scanTotal) _row('Scan', scanTotal, scanTotal);
 
     // Sherlock
     const sherlockSteps = (clueSteps.sherlock || {})[capTier] || [];
@@ -2346,14 +2339,14 @@ function renderClueScroll(tier, container) {
       const achievable = sherlockSteps.filter(t =>
         (t.items || []).every(i => !itemSources[i] || isOwned(i))
       ).length;
-      _row('Sherlock', achievable, sherlockSteps.length, 'items required');
+      _row('Sherlock', achievable, sherlockSteps.length);
     }
 
     // Falo
     const faloSteps = capTier === 'Master' ? (clueSteps.falo || []) : [];
     if (faloSteps.length) {
       const achievable = faloSteps.filter(s => s.items.some(i => isOwned(i))).length;
-      _row('Falo', achievable, faloSteps.length, 'equip one item');
+      _row('Falo', achievable, faloSteps.length);
     }
 
     if (rows.length) {
@@ -2377,10 +2370,7 @@ function renderClueScroll(tier, container) {
           ${r.note ? `<span style="width:80px;text-align:right;font-size:10px;color:#444;flex-shrink:0">${r.note}</span>` : ''}
         </div>`;
       }
-      const questNote = completedQuests.size === 0
-        ? `<div style="margin-top:6px;font-size:10px;color:#444">Quest-locked areas not tracked — sync quests in the Questing tab for a more accurate count.</div>`
-        : `<div style="margin-top:6px;font-size:10px;color:#444">Quest locks checked against ${completedQuests.size} completed quest${completedQuests.size===1?'':'s'}. Cryptic counts exclude unstructured step data.</div>`;
-      html += questNote + `</div>`;
+      html += `</div>`;
     }
   }
 
