@@ -33,6 +33,10 @@ import wiki_fetcher
 _OUT = Path(__file__).parent / "output" / "clue_steps.json"
 
 EMOTE_TIERS    = ["Beginner", "Easy", "Medium", "Hard", "Elite", "Master"]
+
+# Charlie the Tramp asks for one of these items in beginner clue scrolls.
+# Source: https://oldschool.runescape.wiki/w/Charlie_the_Tramp
+CHARLIE_ITEMS = ["Iron ore", "Iron dagger", "Raw herring", "Raw trout"]
 SHERLOCK_TIERS = ["Elite", "Master"]
 CRYPTIC_TIERS  = ["Beginner", "Easy", "Medium", "Hard", "Elite", "Master"]
 ANAGRAM_TIERS  = ["Beginner", "Medium", "Hard", "Elite", "Master"]
@@ -455,12 +459,21 @@ def _build_indexes(
         _add_npc("Falo the Bard", {"type": "falo", "lyric": step["lyric"],
                                     "items": step["items"]})
 
-    # Cryptic — NPC only
+    # Cryptic — NPC; Charlie the Tramp steps also index his possible items
     for tier, steps in cryptic.items():
         for step in steps:
-            if step.get("npc"):
-                _add_npc(step["npc"], {"type": "cryptic", "tier": tier,
-                                        "clueText": step["clueText"]})
+            if not step.get("npc"):
+                continue
+            ref = {"type": "cryptic", "tier": tier, "clueText": step["clueText"]}
+            if step["npc"] == "Charlie the Tramp" and step.get("charlieItems"):
+                ref["charlieItems"] = step["charlieItems"]
+            _add_npc(step["npc"], ref)
+            # Charlie's item requests go into the item index too
+            if step["npc"] == "Charlie the Tramp":
+                for item in CHARLIE_ITEMS:
+                    _add_item(item, {"type": "charlie", "tier": "Beginner",
+                                     "clueText": step["clueText"],
+                                     "charlieItems": CHARLIE_ITEMS})
 
     # Anagram — NPC only
     for tier, steps in anagram.items():
@@ -497,6 +510,11 @@ def main():
 
     print("Scraping anagram clues…")
     anagram = scrape_anagram_clues(force)
+
+    # Inject Charlie the Tramp's item requests into his cryptic clue steps
+    for step in cryptic.get("Beginner", []):
+        if step.get("npc") == "Charlie the Tramp":
+            step["charlieItems"] = CHARLIE_ITEMS
 
     print("Building indexes…")
     item_index, npc_index = _build_indexes(emote, sherlock, falo, cryptic, anagram)

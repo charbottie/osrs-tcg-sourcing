@@ -1822,7 +1822,13 @@
         "tier": "Beginner",
         "clueText": "Talk to Charlie the Tramp in Varrock .",
         "npc": "Charlie the Tramp",
-        "location": "Talk to Charlie the Tramp by the southern entrance to Varrock . He will give you a task."
+        "location": "Talk to Charlie the Tramp by the southern entrance to Varrock . He will give you a task.",
+        "charlieItems": [
+          "Iron ore",
+          "Iron dagger",
+          "Raw herring",
+          "Raw trout"
+        ]
       },
       {
         "tier": "Beginner",
@@ -8881,6 +8887,58 @@
           "Dragon keel parts"
         ]
       }
+    ],
+    "Iron ore": [
+      {
+        "type": "charlie",
+        "tier": "Beginner",
+        "clueText": "Talk to Charlie the Tramp in Varrock .",
+        "charlieItems": [
+          "Iron ore",
+          "Iron dagger",
+          "Raw herring",
+          "Raw trout"
+        ]
+      }
+    ],
+    "Iron dagger": [
+      {
+        "type": "charlie",
+        "tier": "Beginner",
+        "clueText": "Talk to Charlie the Tramp in Varrock .",
+        "charlieItems": [
+          "Iron ore",
+          "Iron dagger",
+          "Raw herring",
+          "Raw trout"
+        ]
+      }
+    ],
+    "Raw herring": [
+      {
+        "type": "charlie",
+        "tier": "Beginner",
+        "clueText": "Talk to Charlie the Tramp in Varrock .",
+        "charlieItems": [
+          "Iron ore",
+          "Iron dagger",
+          "Raw herring",
+          "Raw trout"
+        ]
+      }
+    ],
+    "Raw trout": [
+      {
+        "type": "charlie",
+        "tier": "Beginner",
+        "clueText": "Talk to Charlie the Tramp in Varrock .",
+        "charlieItems": [
+          "Iron ore",
+          "Iron dagger",
+          "Raw herring",
+          "Raw trout"
+        ]
+      }
     ]
   },
   "npcIndex": {
@@ -9657,7 +9715,13 @@
       {
         "type": "cryptic",
         "tier": "Beginner",
-        "clueText": "Talk to Charlie the Tramp in Varrock ."
+        "clueText": "Talk to Charlie the Tramp in Varrock .",
+        "charlieItems": [
+          "Iron ore",
+          "Iron dagger",
+          "Raw herring",
+          "Raw trout"
+        ]
       },
       {
         "type": "anagram",

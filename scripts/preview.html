@@ -2452,6 +2452,12 @@ function renderClueScroll(tier, container) {
             cursor:${npcCard?'pointer':'default'}"
             ${npcCard ? `data-nav="${escHtml(step.npc)}" data-nav-type="monster" onclick="showCard(this.dataset.nav,this.dataset.navType)"` : ''}
             >${npcCard?(npcOwned?'✓ ':'✗ '):''}${escHtml(step.npc)}</span>` : ''}
+          ${step.charlieItems ? `<div style="margin-top:6px"><span style="font-size:10px;color:#555">Brings one of: </span>${step.charlieItems.map(it => {
+            const own = isOwned(it);
+            return `<span style="font-size:11px;background:${own?'#0d1c09':'#1c0d09'};color:${own?'#76c442':'#c84a00'};border-radius:3px;padding:2px 6px;margin-left:4px;cursor:pointer"
+              data-nav="${escHtml(it)}" data-nav-type="item"
+              onclick="showCard(this.dataset.nav,this.dataset.navType)">${own?'✓':'✗'} ${escHtml(it)}</span>`;
+          }).join('')}</div>` : ''}
         </div>`;
       }
       html += `</div>`;
@@ -2833,6 +2839,24 @@ function clueStepUsageHtml(itemName) {
         }
       }
       html += `</div>`;
+
+    } else if (step.type === 'charlie') {
+      const otherItems = (step.charlieItems || []).filter(i => i !== itemName);
+      html += `<div style="margin:6px 0;padding:8px;background:#0d0d0d;border-radius:4px;border-left:3px solid #c8a830">
+        <div style="font-size:10px;color:#c8a830;font-weight:600;margin-bottom:4px">
+          Charlie the Tramp · Beginner
+        </div>
+        <div style="font-size:12px;color:#bbb;margin-bottom:${otherItems.length?'6px':'0'}">Bring him this item (one of 4 possible)</div>`;
+      if (otherItems.length) {
+        html += `<div style="font-size:11px;color:#666;margin-top:4px">Other possible items:</div>`;
+        for (const it of otherItems) {
+          const own = isOwned(it);
+          html += `<div style="font-size:11px;padding:2px 0;cursor:pointer;color:${own?'#76c442':'#aaa'}"
+            data-nav="${escHtml(it)}" data-nav-type="item"
+            onclick="showCard(this.dataset.nav,this.dataset.navType)">${escHtml(it)}</div>`;
+        }
+      }
+      html += `</div>`;
     }
   }
 
@@ -2878,7 +2902,18 @@ function clueStepNpcHtml(npcName) {
     } else if (step.type === 'cryptic') {
       html += `<div style="margin:4px 0;padding:8px;background:#0d0d0d;border-radius:4px;border-left:3px solid ${col}">
         <div style="font-size:10px;color:${col};font-weight:600;margin-bottom:4px">Cryptic Clue · ${step.tier}</div>
-        <div style="font-size:12px;color:#bbb">${escHtml(step.clueText)}</div>
+        <div style="font-size:12px;color:#bbb;margin-bottom:${step.charlieItems?'6px':'0'}">${escHtml(step.clueText)}</div>
+        ${step.charlieItems ? (() => {
+          const items = step.charlieItems;
+          let s = `<div style="font-size:11px;color:#666;margin-bottom:4px">Brings one of:</div><div style="display:flex;flex-wrap:wrap;gap:4px">`;
+          for (const it of items) {
+            const own = isOwned(it);
+            s += `<span style="font-size:11px;background:${own?'#0d1c09':'#1c0d09'};color:${own?'#76c442':'#c84a00'};border-radius:3px;padding:2px 7px;cursor:pointer"
+              data-nav="${escHtml(it)}" data-nav-type="item"
+              onclick="showCard(this.dataset.nav,this.dataset.navType)">${own?'✓':'✗'} ${escHtml(it)}</span>`;
+          }
+          return s + '</div>';
+        })() : ''}
       </div>`;
 
     } else if (step.type === 'anagram') {
