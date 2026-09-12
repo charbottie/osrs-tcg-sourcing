@@ -1,10 +1,16 @@
 #!/usr/bin/env python3
 """Scrape clue step data from the OSRS Wiki.
 
-Produces scripts/output/clue_steps.json with three sections:
-  emote    — emote clues per tier (items required for each step)
+Produces scripts/output/clue_steps.json with five sections:
+  emote    — emote clues per tier (items + combat NPC for Hard/Elite/Master)
   sherlock — Sherlock tasks per tier (Elite / Master, items required)
   falo     — Falo the Bard steps (lyric → valid items)
+  cryptic  — cryptic "talk to NPC" steps per tier
+  anagram  — anagram clues per tier (anagram → NPC to talk to)
+
+Plus two reverse indexes:
+  itemIndex — item name → [step refs]
+  npcIndex  — NPC card name → [step refs]
 
 Usage:
   python scripts/generate_clue_steps.py
@@ -26,11 +32,13 @@ import wiki_fetcher
 
 _OUT = Path(__file__).parent / "output" / "clue_steps.json"
 
-EMOTE_TIERS = ["Beginner", "Easy", "Medium", "Hard", "Elite", "Master"]
+EMOTE_TIERS    = ["Beginner", "Easy", "Medium", "Hard", "Elite", "Master"]
 SHERLOCK_TIERS = ["Elite", "Master"]
+CRYPTIC_TIERS  = ["Beginner", "Easy", "Medium", "Hard", "Elite", "Master"]
+ANAGRAM_TIERS  = ["Beginner", "Medium", "Hard", "Elite", "Master"]
 
-# Items listed in these columns are not actual equippable items — skip them
-_SKILL_WORDS = frozenset({"None", "Completion", "completion", "required"})
+# Emote clue tiers where a Double Agent must be defeated before collecting reward
+DOUBLE_AGENT_TIERS = {"Hard", "Elite", "Master"}
 
 
 # ── Helpers ──────────────────────────────────────────────────────────────────
@@ -43,11 +51,10 @@ def _cell_text(td: Tag) -> str:
 
 
 def _links_in_cell(td: Tag) -> list[str]:
-    """Return canonical item names from all wiki links in a <td>.
+    """Return canonical page names from all wiki links in a <td>.
 
-    Uses the `title` attribute of <a> tags (most reliable for canonical names).
-    Skips red links (title ends with ' (page does not exist)').
-    Skips file/template/category links.
+    Uses the `title` attribute of <a> tags.
+    Skips red links, File/Category/Template namespaced links.
     """
     items: list[str] = []
     for a in td.find_all("a", href=True):
@@ -58,14 +65,37 @@ def _links_in_cell(td: Tag) -> list[str]:
         if not title:
             continue
         if title.endswith("(page does not exist)"):
-            # Red link — use the visible text instead
             title = a.get_text().strip()
-        if ":" in title and not title.startswith("("):
-            # File:, Category:, Template:, etc.
-            continue
+        if ":" in title:
+            continue  # File:, Category:, Template:, etc.
         if title and title not in items:
             items.append(title)
     return items
+
+
+def _first_link_in_cell(td: Tag) -> str | None:
+    links = _links_in_cell(td)
+    return links[0] if links else None
+
+
+def _split_by_tier_headers(soup: BeautifulSoup, tier_names: list[str],
+                             header_tags: tuple = ("h2", "h3")
+                             ) -> dict[str, list[Tag]]:
+    """Walk the page and group <table> elements by the nearest preceding tier header."""
+    result: dict[str, list[Tag]] = {t: [] for t in tier_names}
+    current: str | None = None
+
+    for el in soup.find_all(True):
+        if el.name in header_tags:
+            text = el.get_text(" ").strip()
+            for tier in tier_names:
+                if tier.lower() in text.lower():
+                    current = tier
+                    break
+        elif el.name == "table" and current:
+            result[current].append(el)
+
+    return result
 
 
 # ── Emote clues ───────────────────────────────────────────────────────────────
@@ -77,15 +107,14 @@ def _parse_emote_tier(tier: str, force_refresh: bool) -> list[dict]:
         print(f"  [WARN] Could not fetch {page}")
         return []
 
-    soup = BeautifulSoup(html, "html.parser")
+    soup  = BeautifulSoup(html, "html.parser")
     steps: list[dict] = []
 
     for table in soup.find_all("table", class_="wikitable"):
         headers = [th.get_text().strip().lower() for th in table.find_all("th")]
-        if "clue" not in headers or "items" not in " ".join(headers):
+        if "clue" not in headers or "item" not in " ".join(headers):
             continue
 
-        # Identify column indices
         col_clue  = next((i for i, h in enumerate(headers) if h == "clue"), 0)
         col_items = next((i for i, h in enumerate(headers) if "item" in h), 1)
 
@@ -94,30 +123,23 @@ def _parse_emote_tier(tier: str, force_refresh: bool) -> list[dict]:
             if len(cells) <= max(col_clue, col_items):
                 continue
 
-            clue_td  = cells[col_clue]
-            items_td = cells[col_items]
-
-            clue_text = _cell_text(clue_td)
-            items     = _links_in_cell(items_td)
+            clue_text = _cell_text(cells[col_clue])
+            items     = _links_in_cell(cells[col_items])
 
             if not clue_text:
                 continue
 
-            steps.append({
-                "tier":      tier,
-                "clueText":  clue_text,
-                "items":     items,
-            })
+            step: dict = {"tier": tier, "clueText": clue_text, "items": items}
+            if tier in DOUBLE_AGENT_TIERS:
+                step["combatNpc"] = "Double agent"
+            steps.append(step)
 
     print(f"  Emote {tier}: {len(steps)} steps")
     return steps
 
 
 def scrape_emote_clues(force_refresh: bool) -> dict[str, list[dict]]:
-    result: dict[str, list[dict]] = {}
-    for tier in EMOTE_TIERS:
-        result[tier] = _parse_emote_tier(tier, force_refresh)
-    return result
+    return {tier: _parse_emote_tier(tier, force_refresh) for tier in EMOTE_TIERS}
 
 
 # ── Sherlock ─────────────────────────────────────────────────────────────────
@@ -129,7 +151,7 @@ def _parse_sherlock_tier(tier: str, force_refresh: bool) -> list[dict]:
         print(f"  [WARN] Could not fetch {page}")
         return []
 
-    soup = BeautifulSoup(html, "html.parser")
+    soup  = BeautifulSoup(html, "html.parser")
     tasks: list[dict] = []
 
     for table in soup.find_all("table", class_="wikitable"):
@@ -138,7 +160,6 @@ def _parse_sherlock_tier(tier: str, force_refresh: bool) -> list[dict]:
         if "task" not in joined and "skill" not in joined:
             continue
 
-        # Find the "Items required" column index
         col_task  = next((i for i, h in enumerate(headers) if "task" in h), 0)
         col_items = next((i for i, h in enumerate(headers) if "item" in h), -1)
         if col_items < 0:
@@ -151,10 +172,7 @@ def _parse_sherlock_tier(tier: str, force_refresh: bool) -> list[dict]:
 
             task_text = _cell_text(cells[col_task])
             items_td  = cells[col_items]
-
-            # Items may be slash-separated links OR free text — gather links first
-            items = _links_in_cell(items_td)
-            # Fallback: split on "/" if there are no links but there is text
+            items     = _links_in_cell(items_td)
             if not items:
                 raw = _cell_text(items_td)
                 if raw and raw.lower() not in ("none", "-", ""):
@@ -167,9 +185,10 @@ def _parse_sherlock_tier(tier: str, force_refresh: bool) -> list[dict]:
                 continue
 
             tasks.append({
-                "tier":     tier,
-                "task":     task_text,
-                "items":    items,
+                "tier":  tier,
+                "task":  task_text,
+                "items": items,
+                "npc":   "Sherlock",
             })
 
     print(f"  Sherlock {tier}: {len(tasks)} tasks")
@@ -177,10 +196,7 @@ def _parse_sherlock_tier(tier: str, force_refresh: bool) -> list[dict]:
 
 
 def scrape_sherlock(force_refresh: bool) -> dict[str, list[dict]]:
-    result: dict[str, list[dict]] = {}
-    for tier in SHERLOCK_TIERS:
-        result[tier] = _parse_sherlock_tier(tier, force_refresh)
-    return result
+    return {tier: _parse_sherlock_tier(tier, force_refresh) for tier in SHERLOCK_TIERS}
 
 
 # ── Falo the Bard ─────────────────────────────────────────────────────────────
@@ -191,98 +207,270 @@ def scrape_falo(force_refresh: bool) -> list[dict]:
         print("  [WARN] Could not fetch Falo_the_Bard")
         return []
 
-    soup = BeautifulSoup(html, "html.parser")
+    soup  = BeautifulSoup(html, "html.parser")
     steps: list[dict] = []
 
     for table in soup.find_all("table", class_="wikitable"):
         headers = [th.get_text().strip().lower() for th in table.find_all("th")]
-        joined  = " ".join(headers)
-        if "lyric" not in joined and "item" not in joined:
+        if "lyric" not in " ".join(headers) and "item" not in " ".join(headers):
             continue
 
-        # Falo table uses rowspan on lyric cells for multi-item rows.
-        # Strategy: walk rows, tracking current_lyric + remaining_rowspan.
-        current_lyric: str = ""
-        lyric_items:   list[str] = []
+        current_lyric: str  = ""
+        lyric_items: list[str] = []
         remaining_rows: int = 0
 
         def _flush():
             nonlocal current_lyric, lyric_items
             if current_lyric and lyric_items:
-                steps.append({"lyric": current_lyric, "items": list(lyric_items)})
+                steps.append({"lyric": current_lyric, "items": list(lyric_items),
+                               "npc": "Falo the Bard"})
             current_lyric = ""
             lyric_items   = []
 
         for tr in table.find_all("tr"):
             cells = tr.find_all("td")
             if not cells:
-                continue  # header row
-
+                continue
             if remaining_rows > 0:
-                # Lyric cell is omitted (rowspan continuation) — only item cell present
                 remaining_rows -= 1
-                items = _links_in_cell(cells[0])
-                lyric_items.extend(i for i in items if i not in lyric_items)
+                for item in _links_in_cell(cells[0]):
+                    if item not in lyric_items:
+                        lyric_items.append(item)
             else:
-                # New lyric row
                 _flush()
                 if len(cells) < 2:
                     continue
-                lyric_td = cells[0]
-                item_td  = cells[1]
-
-                # Check for rowspan attribute
-                rowspan = int(lyric_td.get("rowspan", 1))
+                rowspan        = int(cells[0].get("rowspan", 1))
                 remaining_rows = rowspan - 1
-
-                current_lyric = _cell_text(lyric_td)
-                items = _links_in_cell(item_td)
-                lyric_items = list(items)
+                current_lyric  = _cell_text(cells[0])
+                lyric_items    = list(_links_in_cell(cells[1]))
 
         _flush()
-        break  # only one Falo table
+        break
 
     print(f"  Falo: {len(steps)} steps")
     return steps
 
 
-# ── Reverse index: item → steps ───────────────────────────────────────────────
+# ── Cryptic clues — "talk to NPC" type ───────────────────────────────────────
 
-def _build_item_index(
-    emote: dict[str, list[dict]],
+_TALK_RE = re.compile(r'\b(talk|speak)\b', re.IGNORECASE)
+
+
+def _parse_cryptic_table(table: Tag, tier: str) -> list[dict]:
+    """Extract talk-to-NPC rows from one cryptic clue wikitable."""
+    steps: list[dict] = []
+    headers = [th.get_text(" ").strip().lower() for th in table.find_all("th")]
+
+    # Identify which column is "Solution" / "Notes" (contains NPC location)
+    # Typical columns: Clue | Solution / Notes | ...
+    # The Notes/Solution cell usually has the NPC name as a wikilink.
+    col_clue  = next((i for i, h in enumerate(headers) if "clue" in h), 0)
+    col_notes = next((i for i, h in enumerate(headers)
+                      if any(k in h for k in ("solution", "note", "task", "answer"))), 1)
+
+    for tr in table.find_all("tr"):
+        cells = tr.find_all("td")
+        if not cells:
+            continue
+        idx_clue  = min(col_clue,  len(cells) - 1)
+        idx_notes = min(col_notes, len(cells) - 1)
+
+        clue_text  = _cell_text(cells[idx_clue])
+        notes_text = _cell_text(cells[idx_notes]) if idx_notes < len(cells) else ""
+
+        # Only keep rows that are "talk to NPC" type
+        combined = clue_text + " " + notes_text
+        if not _TALK_RE.search(combined):
+            continue
+
+        # Extract NPC: first wikilink in the notes cell, then clue cell
+        npc = _first_link_in_cell(cells[idx_notes])
+        if not npc and idx_clue != idx_notes:
+            npc = _first_link_in_cell(cells[idx_clue])
+
+        if not clue_text or not npc:
+            continue
+
+        steps.append({
+            "tier":      tier,
+            "clueText":  clue_text,
+            "npc":       npc,
+            "location":  notes_text,
+        })
+
+    return steps
+
+
+def scrape_cryptic_clues(force_refresh: bool) -> dict[str, list[dict]]:
+    """Scrape talk-to-NPC type cryptic clue steps from the wiki."""
+    html = wiki_fetcher.fetch("Treasure_Trails/Guide/Cryptic_clues",
+                               force_refresh=force_refresh)
+    if not html:
+        print("  [WARN] Could not fetch cryptic clues page")
+        return {t: [] for t in CRYPTIC_TIERS}
+
+    soup    = BeautifulSoup(html, "html.parser")
+    by_tier = _split_by_tier_headers(soup, CRYPTIC_TIERS)
+    result: dict[str, list[dict]] = {}
+
+    for tier in CRYPTIC_TIERS:
+        steps: list[dict] = []
+        for table in by_tier[tier]:
+            if "wikitable" not in table.get("class", []):
+                continue
+            steps.extend(_parse_cryptic_table(table, tier))
+        # Deduplicate by (clueText, npc)
+        seen: set[tuple] = set()
+        deduped: list[dict] = []
+        for s in steps:
+            key = (s["clueText"], s["npc"])
+            if key not in seen:
+                seen.add(key)
+                deduped.append(s)
+        result[tier] = deduped
+        print(f"  Cryptic {tier} (talk-to): {len(deduped)} steps")
+
+    return result
+
+
+# ── Anagram clues ─────────────────────────────────────────────────────────────
+
+def _parse_anagram_table(table: Tag, tier: str) -> list[dict]:
+    """Extract rows from one anagram clue wikitable.
+
+    Expected columns: Anagram | Solution (NPC) | Location | Challenge Answer
+    """
+    steps: list[dict] = []
+    headers = [th.get_text(" ").strip().lower() for th in table.find_all("th")]
+
+    col_anagram  = next((i for i, h in enumerate(headers) if "anagram" in h), 0)
+    col_solution = next((i for i, h in enumerate(headers)
+                         if any(k in h for k in ("solution", "npc", "answer to anagram"))), 1)
+    col_location = next((i for i, h in enumerate(headers) if "location" in h), 2)
+    col_challenge = next((i for i, h in enumerate(headers)
+                          if "challenge" in h or "puzzle" in h), -1)
+
+    for tr in table.find_all("tr"):
+        cells = tr.find_all("td")
+        if len(cells) < 2:
+            continue
+
+        anagram  = _cell_text(cells[min(col_anagram,  len(cells)-1)])
+        npc_cell = cells[min(col_solution, len(cells)-1)]
+        npc      = _first_link_in_cell(npc_cell) or _cell_text(npc_cell).strip()
+        location = _cell_text(cells[min(col_location, len(cells)-1)]) if len(cells) > 2 else ""
+        challenge = None
+        if col_challenge >= 0 and col_challenge < len(cells):
+            raw = _cell_text(cells[col_challenge]).strip()
+            if raw and raw.lower() not in ("-", "", "none", "puzzle box", "light box"):
+                challenge = raw
+
+        if anagram and npc:
+            steps.append({
+                "tier":      tier,
+                "anagram":   anagram,
+                "npc":       npc,
+                "location":  location,
+                "challenge": challenge,
+            })
+
+    return steps
+
+
+def scrape_anagram_clues(force_refresh: bool) -> dict[str, list[dict]]:
+    """Scrape all anagram clue steps from the wiki."""
+    html = wiki_fetcher.fetch("Treasure_Trails/Guide/Anagrams",
+                               force_refresh=force_refresh)
+    if not html:
+        print("  [WARN] Could not fetch anagram clues page")
+        return {t: [] for t in ANAGRAM_TIERS}
+
+    soup    = BeautifulSoup(html, "html.parser")
+    by_tier = _split_by_tier_headers(soup, ANAGRAM_TIERS)
+    result: dict[str, list[dict]] = {}
+
+    for tier in ANAGRAM_TIERS:
+        steps: list[dict] = []
+        for table in by_tier[tier]:
+            if "wikitable" not in table.get("class", []):
+                continue
+            steps.extend(_parse_anagram_table(table, tier))
+        result[tier] = steps
+        print(f"  Anagram {tier}: {len(steps)} clues")
+
+    return result
+
+
+# ── Reverse indexes ───────────────────────────────────────────────────────────
+
+def _build_indexes(
+    emote:    dict[str, list[dict]],
     sherlock: dict[str, list[dict]],
-    falo: list[dict],
-) -> dict[str, list[dict]]:
-    """Return {item_name: [step_ref, ...]} for fast lookup in the browser."""
-    index: dict[str, list[dict]] = {}
+    falo:     list[dict],
+    cryptic:  dict[str, list[dict]],
+    anagram:  dict[str, list[dict]],
+) -> tuple[dict, dict]:
+    """Return (itemIndex, npcIndex) for fast O(1) browser lookup."""
+    item_index: dict[str, list[dict]] = {}
+    npc_index:  dict[str, list[dict]] = {}
 
-    def _add(item: str, ref: dict):
-        key = item.strip()
-        if not key:
-            return
-        index.setdefault(key, []).append(ref)
+    def _add_item(item: str, ref: dict):
+        k = item.strip()
+        if k:
+            item_index.setdefault(k, []).append(ref)
 
+    def _add_npc(npc: str, ref: dict):
+        k = npc.strip()
+        if k:
+            npc_index.setdefault(k, []).append(ref)
+
+    # Emote — items + Double Agent
     for tier, steps in emote.items():
         for step in steps:
+            ref = {"type": "emote", "tier": tier,
+                   "clueText": step["clueText"], "items": step["items"]}
             for item in step["items"]:
-                _add(item, {"type": "emote", "tier": tier,
-                            "clueText": step["clueText"],
-                            "items": step["items"]})
+                _add_item(item, ref)
+            if step.get("combatNpc"):
+                _add_npc(step["combatNpc"],
+                         {"type": "emote_combat", "tier": tier,
+                          "clueText": step["clueText"]})
 
+    # Sherlock — items + NPC
     for tier, tasks in sherlock.items():
         for task in tasks:
+            ref = {"type": "sherlock", "tier": tier,
+                   "task": task["task"], "items": task["items"]}
             for item in task["items"]:
-                _add(item, {"type": "sherlock", "tier": tier,
-                            "task": task["task"],
-                            "items": task["items"]})
+                _add_item(item, ref)
+            _add_npc("Sherlock", {"type": "sherlock", "tier": tier,
+                                  "task": task["task"]})
 
+    # Falo — items + NPC
     for step in falo:
+        ref = {"type": "falo", "lyric": step["lyric"], "items": step["items"]}
         for item in step["items"]:
-            _add(item, {"type": "falo",
-                        "lyric": step["lyric"],
-                        "items": step["items"]})
+            _add_item(item, ref)
+        _add_npc("Falo the Bard", {"type": "falo", "lyric": step["lyric"],
+                                    "items": step["items"]})
 
-    return index
+    # Cryptic — NPC only
+    for tier, steps in cryptic.items():
+        for step in steps:
+            if step.get("npc"):
+                _add_npc(step["npc"], {"type": "cryptic", "tier": tier,
+                                        "clueText": step["clueText"]})
+
+    # Anagram — NPC only
+    for tier, steps in anagram.items():
+        for step in steps:
+            if step.get("npc"):
+                _add_npc(step["npc"], {"type": "anagram", "tier": tier,
+                                        "anagram": step["anagram"],
+                                        "challenge": step.get("challenge")})
+
+    return item_index, npc_index
 
 
 # ── Entry point ───────────────────────────────────────────────────────────────
@@ -293,7 +481,6 @@ def main():
     p.add_argument("--force-refresh", action="store_true",
                    help="Re-fetch pages even if cached")
     args = p.parse_args()
-
     force = args.force_refresh
 
     print("Scraping emote clue steps…")
@@ -305,14 +492,23 @@ def main():
     print("Scraping Falo the Bard…")
     falo = scrape_falo(force)
 
-    print("Building item reverse index…")
-    item_index = _build_item_index(emote, sherlock, falo)
+    print("Scraping cryptic clue talk-to steps…")
+    cryptic = scrape_cryptic_clues(force)
+
+    print("Scraping anagram clues…")
+    anagram = scrape_anagram_clues(force)
+
+    print("Building indexes…")
+    item_index, npc_index = _build_indexes(emote, sherlock, falo, cryptic, anagram)
 
     output = {
-        "emote":     emote,
-        "sherlock":  sherlock,
-        "falo":      falo,
-        "itemIndex": item_index,
+        "emote":      emote,
+        "sherlock":   sherlock,
+        "falo":       falo,
+        "cryptic":    cryptic,
+        "anagram":    anagram,
+        "itemIndex":  item_index,
+        "npcIndex":   npc_index,
     }
 
     _OUT.parent.mkdir(parents=True, exist_ok=True)
@@ -321,11 +517,16 @@ def main():
 
     total_emote    = sum(len(v) for v in emote.values())
     total_sherlock = sum(len(v) for v in sherlock.values())
+    total_cryptic  = sum(len(v) for v in cryptic.values())
+    total_anagram  = sum(len(v) for v in anagram.values())
     print(f"\nWrote {_OUT}")
-    print(f"  Emote steps:    {total_emote}")
-    print(f"  Sherlock tasks: {total_sherlock}")
-    print(f"  Falo steps:     {len(falo)}")
-    print(f"  Item index:     {len(item_index)} items")
+    print(f"  Emote steps:         {total_emote}")
+    print(f"  Sherlock tasks:      {total_sherlock}")
+    print(f"  Falo steps:          {len(falo)}")
+    print(f"  Cryptic talk-to:     {total_cryptic}")
+    print(f"  Anagram clues:       {total_anagram}")
+    print(f"  Item index entries:  {len(item_index)}")
+    print(f"  NPC index entries:   {len(npc_index)}")
 
 
 if __name__ == "__main__":

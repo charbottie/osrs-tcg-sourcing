@@ -1887,6 +1887,9 @@ function renderMonster(name, container) {
   // ── Required for quests ───────────────────────────────────────────────────
   html += requiredForQuestsHtml(name);
 
+  // ── Clue step NPC usage ────────────────────────────────────────────────────
+  html += clueStepNpcHtml(name);
+
   container.innerHTML = html;
 }
 
@@ -2325,11 +2328,20 @@ function renderClueScroll(tier, container) {
 
     // Emote clue steps for this tier
     const emoteSteps = (clueSteps.emote || {})[capTier] || [];
+    const hasDoubleAgent = ['Hard','Elite','Master'].includes(capTier);
     if (emoteSteps.length > 0) {
       const stepsWithItems = emoteSteps.filter(s => s.items && s.items.length > 0);
       const allOwned = stepsWithItems.filter(s => s.items.every(i => isOwned(i))).length;
+      const daOwned  = hasDoubleAgent && isOwned('Double agent');
       html += `<div class="section">
         <div class="section-header">Emote Clue Steps ${progressPill(allOwned, stepsWithItems.length, false)}</div>
+        ${hasDoubleAgent ? `<div style="margin:0 0 6px;padding:6px 8px;background:#1c0a0a;border-radius:4px;border-left:3px solid #c84a00;font-size:11px">
+          <span style="color:${daOwned?'#76c442':'#c84a00'};font-weight:600">${daOwned?'✓':'✗'} Double agent</span>
+          <span style="color:#555;margin-left:6px">must be defeated before collecting reward</span>
+          <span style="cursor:pointer;color:#4a6aaa;margin-left:8px;font-size:10px"
+            data-nav="Double agent" data-nav-type="monster"
+            onclick="showCard(this.dataset.nav,this.dataset.navType)">→ card</span>
+        </div>` : ''}
         <div style="font-size:10px;color:#555;padding:0 0 6px">Steps requiring items · ${stepsWithItems.length} of ${emoteSteps.length} total</div>`;
       for (const step of emoteSteps) {
         const items = step.items || [];
@@ -2420,6 +2432,55 @@ function renderClueScroll(tier, container) {
         }
         html += `</div>`;
       }
+    }
+
+    // Cryptic talk-to NPC steps for this tier
+    const crypticSteps = (clueSteps.cryptic || {})[capTier] || [];
+    if (crypticSteps.length > 0) {
+      html += `<div class="section">
+        <div class="section-header">Cryptic Clues — Talk to NPC</div>
+        <div style="font-size:10px;color:#555;padding:0 0 6px">${crypticSteps.length} steps · speak to the named NPC</div>`;
+      for (const step of crypticSteps) {
+        const npcCard = step.npc && monsterDrops[step.npc] !== undefined;
+        const npcOwned = npcCard && isOwned(step.npc);
+        const borderCol = npcCard ? (npcOwned ? '#76c442' : '#c84a00') : '#333';
+        html += `<div style="margin:4px 0;padding:8px;background:#0d0d0d;border-radius:4px;border-left:3px solid ${borderCol}">
+          <div style="font-size:12px;color:#bbb;margin-bottom:4px">${escHtml(step.clueText)}</div>
+          ${step.npc ? `<span style="font-size:11px;padding:2px 7px;border-radius:3px;
+            background:${npcCard?(npcOwned?'#0d1c09':'#1c0d09'):'#111'};
+            color:${npcCard?(npcOwned?'#76c442':'#c84a00'):'#888'};
+            cursor:${npcCard?'pointer':'default'}"
+            ${npcCard ? `data-nav="${escHtml(step.npc)}" data-nav-type="monster" onclick="showCard(this.dataset.nav,this.dataset.navType)"` : ''}
+            >${npcCard?(npcOwned?'✓ ':'✗ '):''}${escHtml(step.npc)}</span>` : ''}
+        </div>`;
+      }
+      html += `</div>`;
+    }
+
+    // Anagram clue steps for this tier
+    const anagramSteps = (clueSteps.anagram || {})[capTier] || [];
+    if (anagramSteps.length > 0) {
+      const ownedAnagrams = anagramSteps.filter(s => s.npc && isOwned(s.npc)).length;
+      const cardAnagrams  = anagramSteps.filter(s => s.npc && monsterDrops[s.npc] !== undefined).length;
+      html += `<div class="section">
+        <div class="section-header">Anagram Clues ${cardAnagrams > 0 ? progressPill(ownedAnagrams, cardAnagrams, false) : ''}</div>
+        <div style="font-size:10px;color:#555;padding:0 0 6px">${anagramSteps.length} anagrams · solve and talk to the NPC</div>`;
+      for (const step of anagramSteps) {
+        const npcCard  = step.npc && monsterDrops[step.npc] !== undefined;
+        const npcOwned = npcCard && isOwned(step.npc);
+        const borderCol = npcCard ? (npcOwned ? '#76c442' : '#c84a00') : '#333';
+        html += `<div style="margin:4px 0;padding:8px;background:#0d0d0d;border-radius:4px;border-left:3px solid ${borderCol}">
+          <div style="font-size:11px;color:#888;font-family:monospace;letter-spacing:2px;margin-bottom:4px">${escHtml(step.anagram)}</div>
+          ${step.npc ? `<span style="font-size:11px;padding:2px 7px;border-radius:3px;
+            background:${npcCard?(npcOwned?'#0d1c09':'#1c0d09'):'#111'};
+            color:${npcCard?(npcOwned?'#76c442':'#c84a00'):'#888'};
+            cursor:${npcCard?'pointer':'default'}"
+            ${npcCard ? `data-nav="${escHtml(step.npc)}" data-nav-type="monster" onclick="showCard(this.dataset.nav,this.dataset.navType)"` : ''}
+            >${npcCard?(npcOwned?'✓ ':'✗ '):''}${escHtml(step.npc)}</span>` : ''}
+          ${step.challenge ? `<span style="font-size:10px;color:#555;margin-left:8px">answer: ${escHtml(step.challenge)}</span>` : ''}
+        </div>`;
+      }
+      html += `</div>`;
     }
   }
 
@@ -2772,6 +2833,60 @@ function clueStepUsageHtml(itemName) {
         }
       }
       html += `</div>`;
+    }
+  }
+
+  html += `</div>`;
+  return html;
+}
+
+// ─── Clue step NPC usage (monster/NPC card detail view) ───────────────────
+// Shows clue steps that require talking to / fighting this NPC.
+function clueStepNpcHtml(npcName) {
+  if (!clueSteps || !clueSteps.npcIndex) return '';
+  const steps = clueSteps.npcIndex[npcName];
+  if (!steps || steps.length === 0) return '';
+
+  const TIER_COLOR = {
+    Beginner:'#c8a830', Easy:'#50c050', Medium:'#c8c030',
+    Hard:'#4080c0', Elite:'#9050d0', Master:'#d03030',
+  };
+
+  let html = `<div class="section"><div class="section-header">Required for Clue Steps</div>`;
+
+  for (const step of steps) {
+    const col = TIER_COLOR[step.tier] || '#888';
+
+    if (step.type === 'emote_combat') {
+      html += `<div style="margin:4px 0;padding:8px;background:#0d0d0d;border-radius:4px;border-left:3px solid ${col}">
+        <div style="font-size:10px;color:${col};font-weight:600;margin-bottom:4px">Emote Clue · ${step.tier} · Combat</div>
+        <div style="font-size:12px;color:#bbb">${escHtml(step.clueText)}</div>
+      </div>`;
+
+    } else if (step.type === 'sherlock') {
+      html += `<div style="margin:4px 0;padding:8px;background:#0d0d0d;border-radius:4px;border-left:3px solid ${col}">
+        <div style="font-size:10px;color:${col};font-weight:600;margin-bottom:4px">Sherlock · ${step.tier}</div>
+        <div style="font-size:12px;color:#bbb">${escHtml(step.task)}</div>
+      </div>`;
+
+    } else if (step.type === 'falo') {
+      html += `<div style="margin:4px 0;padding:8px;background:#0d0d0d;border-radius:4px;border-left:3px solid #d03030">
+        <div style="font-size:10px;color:#d03030;font-weight:600;margin-bottom:4px">Falo the Bard · Master</div>
+        <div style="font-size:12px;color:#888;font-style:italic">"${escHtml(step.lyric)}"</div>
+      </div>`;
+
+    } else if (step.type === 'cryptic') {
+      html += `<div style="margin:4px 0;padding:8px;background:#0d0d0d;border-radius:4px;border-left:3px solid ${col}">
+        <div style="font-size:10px;color:${col};font-weight:600;margin-bottom:4px">Cryptic Clue · ${step.tier}</div>
+        <div style="font-size:12px;color:#bbb">${escHtml(step.clueText)}</div>
+      </div>`;
+
+    } else if (step.type === 'anagram') {
+      html += `<div style="margin:4px 0;padding:8px;background:#0d0d0d;border-radius:4px;border-left:3px solid ${col}">
+        <div style="font-size:10px;color:${col};font-weight:600;margin-bottom:4px">Anagram Clue · ${step.tier}</div>
+        <div style="font-size:12px;color:#888;font-family:monospace;letter-spacing:2px">${escHtml(step.anagram)}</div>
+        ${step.challenge ? `<div style="font-size:11px;color:#555;margin-top:4px">Challenge answer: ${escHtml(step.challenge)}</div>` : ''}
+      </div>`;
     }
   }
 

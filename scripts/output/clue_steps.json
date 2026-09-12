@@ -562,7 +562,8 @@
         "items": [
           "Rune heraldic armour",
           "Stole"
-        ]
+        ],
+        "combatNpc": "Double agent"
       },
       {
         "tier": "Hard",
@@ -571,7 +572,8 @@
           "Mystic hat",
           "Bone spear",
           "Rune platebody"
-        ]
+        ],
+        "combatNpc": "Double agent"
       },
       {
         "tier": "Hard",
@@ -580,7 +582,8 @@
           "Elemental shield",
           "Blue d'hide chaps",
           "Rune warhammer"
-        ]
+        ],
+        "combatNpc": "Double agent"
       },
       {
         "tier": "Hard",
@@ -588,7 +591,8 @@
         "items": [
           "Blue d'hide body",
           "Blue d'hide vambraces"
-        ]
+        ],
+        "combatNpc": "Double agent"
       },
       {
         "tier": "Hard",
@@ -596,7 +600,8 @@
         "items": [
           "Mystic robe top",
           "Rune heraldic armour"
-        ]
+        ],
+        "combatNpc": "Double agent"
       },
       {
         "tier": "Hard",
@@ -605,7 +610,8 @@
           "Ring of life",
           "Amulet of glory",
           "Adamant 2h sword"
-        ]
+        ],
+        "combatNpc": "Double agent"
       },
       {
         "tier": "Hard",
@@ -614,7 +620,8 @@
           "Mystic fire staff",
           "Diamond bracelet",
           "Rune boots"
-        ]
+        ],
+        "combatNpc": "Double agent"
       },
       {
         "tier": "Hard",
@@ -623,7 +630,8 @@
           "Rune spear",
           "Rune platelegs",
           "Rune heraldic armour"
-        ]
+        ],
+        "combatNpc": "Double agent"
       },
       {
         "tier": "Hard",
@@ -632,7 +640,8 @@
           "Rune full helm",
           "Blue d'hide chaps",
           "Fire battlestaff"
-        ]
+        ],
+        "combatNpc": "Double agent"
       },
       {
         "tier": "Hard",
@@ -641,12 +650,14 @@
           "Mithril platelegs",
           "Ring of life",
           "Rune axe"
-        ]
+        ],
+        "combatNpc": "Double agent"
       },
       {
         "tier": "Hard",
         "clueText": "Panic in the heart of the Haunted Woods. Beware of double agents! Have no items equipped when you do.",
-        "items": []
+        "items": [],
+        "combatNpc": "Double agent"
       },
       {
         "tier": "Hard",
@@ -654,7 +665,8 @@
         "items": [
           "Headband",
           "Crozier"
-        ]
+        ],
+        "combatNpc": "Double agent"
       },
       {
         "tier": "Hard",
@@ -663,7 +675,8 @@
           "Rune longsword",
           "Rune platebody",
           "Rune plateskirt"
-        ]
+        ],
+        "combatNpc": "Double agent"
       },
       {
         "tier": "Hard",
@@ -671,7 +684,8 @@
         "items": [
           "Diamond ring",
           "Amulet of power"
-        ]
+        ],
+        "combatNpc": "Double agent"
       },
       {
         "tier": "Hard",
@@ -680,7 +694,8 @@
           "Rune halberd",
           "Rune platebody",
           "Amulet of strength"
-        ]
+        ],
+        "combatNpc": "Double agent"
       },
       {
         "tier": "Hard",
@@ -689,7 +704,8 @@
           "Rune platelegs",
           "Iron platebody",
           "Blue d'hide vambraces"
-        ]
+        ],
+        "combatNpc": "Double agent"
       },
       {
         "tier": "Hard",
@@ -698,7 +714,8 @@
           "Adamant sq shield",
           "Blue d'hide vambraces",
           "Rune pickaxe"
-        ]
+        ],
+        "combatNpc": "Double agent"
       }
     ],
     "Elite": [
@@ -709,7 +726,8 @@
           "Black d'hide chaps",
           "Spotted cape",
           "Rolling pin"
-        ]
+        ],
+        "combatNpc": "Double agent"
       },
       {
         "tier": "Elite",
@@ -718,14 +736,16 @@
           "Cape of legends",
           "Dragon battleaxe",
           "Amulet of glory(4)"
-        ]
+        ],
+        "combatNpc": "Double agent"
       },
       {
         "tier": "Elite",
         "clueText": "Bow upstairs in the Edgeville Monastery. Equip a completed prayer book .",
         "items": [
           "God book"
-        ]
+        ],
+        "combatNpc": "Double agent"
       },
       {
         "tier": "Elite",
@@ -734,7 +754,8 @@
           "Sunfire fanatic helm",
           "Sunfire fanatic cuirass",
           "Sunfire fanatic chausses"
-        ]
+        ],
+        "combatNpc": "Double agent"
       },
       {
         "tier": "Elite",
@@ -743,7 +764,8 @@
           "Rune crossbow",
           "Climbing boots",
           "Mitre"
-        ]
+        ],
+        "combatNpc": "Double agent"
       },
       {
         "tier": "Elite",
@@ -752,7 +774,8 @@
           "Barrows gloves",
           "Amulet of glory(4)",
           "Dragon med helm"
-        ]
+        ],
+        "combatNpc": "Double agent"
       },
       {
         "tier": "Elite",
@@ -760,7 +783,8 @@
         "items": [
           "Crab helmet",
           "Crab claw"
-        ]
+        ],
+        "combatNpc": "Double agent"
       },
       {
         "tier": "Elite",
@@ -769,7 +793,8 @@
           "Seercull",
           "Combat bracelet",
           "Helm of Neitiznot"
-        ]
+        ],
+        "combatNpc": "Double agent"
       },
       {
         "tier": "Elite",
@@ -778,7 +803,8 @@
           "Pirate bandana",
           "Dragon necklace",
           "Magic longbow"
-        ]
+        ],
+        "combatNpc": "Double agent"
       },
       {
         "tier": "Elite",
@@ -787,7 +813,8 @@
           "Rune boots",
           "Proselyte hauberk",
           "Dragonstone ring"
-        ]
+        ],
+        "combatNpc": "Double agent"
       },
       {
         "tier": "Elite",
@@ -796,7 +823,8 @@
           "Granite shield",
           "Splitbark body",
           "Rune heraldic armour"
-        ]
+        ],
+        "combatNpc": "Double agent"
       },
       {
         "tier": "Elite",
@@ -805,7 +833,8 @@
           "Splitbark legs",
           "Dragon boots",
           "Rune longsword"
-        ]
+        ],
+        "combatNpc": "Double agent"
       },
       {
         "tier": "Elite",
@@ -814,7 +843,8 @@
           "Castle wars bracelet",
           "Dragonstone amulet",
           "Ring of forging"
-        ]
+        ],
+        "combatNpc": "Double agent"
       },
       {
         "tier": "Elite",
@@ -823,7 +853,8 @@
           "Blue d'hide vambraces",
           "Dragon spear",
           "Rune plateskirt"
-        ]
+        ],
+        "combatNpc": "Double agent"
       },
       {
         "tier": "Elite",
@@ -832,14 +863,16 @@
           "Farmer's strawhat",
           "Shayzien body (5)",
           "Pyromancer robe"
-        ]
+        ],
+        "combatNpc": "Double agent"
       },
       {
         "tier": "Elite",
         "clueText": "Salute in the warriors' guild bank. Equip only a black salamander .",
         "items": [
           "Black salamander"
-        ]
+        ],
+        "combatNpc": "Double agent"
       },
       {
         "tier": "Elite",
@@ -848,7 +881,8 @@
           "Mystic robe bottom",
           "Rune kiteshield",
           "Bob shirt"
-        ]
+        ],
+        "combatNpc": "Double agent"
       },
       {
         "tier": "Elite",
@@ -856,7 +890,8 @@
         "items": [
           "Dragon spear",
           "Red d'hide chaps"
-        ]
+        ],
+        "combatNpc": "Double agent"
       },
       {
         "tier": "Elite",
@@ -865,7 +900,8 @@
           "Lava battlestaff",
           "Black d'hide vambraces",
           "Mind shield"
-        ]
+        ],
+        "combatNpc": "Double agent"
       }
     ],
     "Master": [
@@ -875,7 +911,8 @@
         "items": [
           "Bryophyta's staff",
           "Nature tiara"
-        ]
+        ],
+        "combatNpc": "Double agent"
       },
       {
         "tier": "Master",
@@ -883,7 +920,8 @@
         "items": [
           "Zamorak full helm",
           "Shadow sword"
-        ]
+        ],
+        "combatNpc": "Double agent"
       },
       {
         "tier": "Master",
@@ -892,7 +930,8 @@
           "Dragon battleaxe",
           "Dragon defender",
           "Slayer helmet"
-        ]
+        ],
+        "combatNpc": "Double agent"
       },
       {
         "tier": "Master",
@@ -900,7 +939,8 @@
         "items": [
           "Medallion of the Deep",
           "Rosewood blowpipe"
-        ]
+        ],
+        "combatNpc": "Double agent"
       },
       {
         "tier": "Master",
@@ -908,7 +948,8 @@
         "items": [
           "Crystal bow",
           "Bow of Faerdhinen"
-        ]
+        ],
+        "combatNpc": "Double agent"
       },
       {
         "tier": "Master",
@@ -917,7 +958,8 @@
           "Black d'hide body",
           "Black d'hide chaps",
           "Black d'hide vambraces"
-        ]
+        ],
+        "combatNpc": "Double agent"
       },
       {
         "tier": "Master",
@@ -925,7 +967,8 @@
         "items": [
           "Flared trousers",
           "Lockpick"
-        ]
+        ],
+        "combatNpc": "Double agent"
       },
       {
         "tier": "Master",
@@ -933,7 +976,8 @@
         "items": [
           "Fire cape",
           "Toktz-xil-ul"
-        ]
+        ],
+        "combatNpc": "Double agent"
       },
       {
         "tier": "Master",
@@ -942,7 +986,8 @@
           "Iban's staff",
           "Mystic robe top (dark)",
           "Mystic robe bottom (dark)"
-        ]
+        ],
+        "combatNpc": "Double agent"
       },
       {
         "tier": "Master",
@@ -951,14 +996,16 @@
           "Black d'hide body",
           "Black d'hide vambraces",
           "Black dragon mask"
-        ]
+        ],
+        "combatNpc": "Double agent"
       },
       {
         "tier": "Master",
         "clueText": "Do a jig at the Barrows chest. Beware of double agents! Equip any full barrows set .",
         "items": [
           "Barrows equipment"
-        ]
+        ],
+        "combatNpc": "Double agent"
       },
       {
         "tier": "Master",
@@ -967,7 +1014,8 @@
           "Death tiara",
           "Cape of legends",
           "Ring of wealth"
-        ]
+        ],
+        "combatNpc": "Double agent"
       },
       {
         "tier": "Master",
@@ -976,7 +1024,8 @@
           "Bandos platebody",
           "Bandos cloak",
           "Bandos godsword"
-        ]
+        ],
+        "combatNpc": "Double agent"
       },
       {
         "tier": "Master",
@@ -985,7 +1034,8 @@
           "Dragon 2h sword",
           "Bandos boots",
           "Obsidian cape"
-        ]
+        ],
+        "combatNpc": "Double agent"
       },
       {
         "tier": "Master",
@@ -996,7 +1046,8 @@
           "Rune platebody",
           "Brine sabre",
           "Amulet of glory"
-        ]
+        ],
+        "combatNpc": "Double agent"
       },
       {
         "tier": "Master",
@@ -1006,7 +1057,8 @@
           "Blue moon chestplate",
           "Blue moon tassets",
           "Blue moon spear"
-        ]
+        ],
+        "combatNpc": "Double agent"
       },
       {
         "tier": "Master",
@@ -1015,14 +1067,16 @@
           "Abyssal whip",
           "Cape of legends",
           "Spined chaps"
-        ]
+        ],
+        "combatNpc": "Double agent"
       },
       {
         "tier": "Master",
         "clueText": "Show your anger towards the Statue of Saradomin in Ellamaria's garden. Beware of double agents! Equip a Zamorak godsword .",
         "items": [
           "Zamorak godsword"
-        ]
+        ],
+        "combatNpc": "Double agent"
       },
       {
         "tier": "Master",
@@ -1030,7 +1084,8 @@
         "items": [
           "Arclight",
           "Amulet of the Damned"
-        ]
+        ],
+        "combatNpc": "Double agent"
       },
       {
         "tier": "Master",
@@ -1039,14 +1094,16 @@
           "Dragon pickaxe",
           "Helm of Neitiznot",
           "Rune boots"
-        ]
+        ],
+        "combatNpc": "Double agent"
       },
       {
         "tier": "Master",
         "clueText": "Stamp in the Enchanted valley west of the waterfall. Beware of double agents! Equip a dragon axe .",
         "items": [
           "Dragon axe"
-        ]
+        ],
+        "combatNpc": "Double agent"
       },
       {
         "tier": "Master",
@@ -1056,7 +1113,8 @@
           "Dragon plateskirt",
           "Climbing boots",
           "Dragon chainbody"
-        ]
+        ],
+        "combatNpc": "Double agent"
       },
       {
         "tier": "Master",
@@ -1065,7 +1123,8 @@
           "Dragon sq shield",
           "Splitbark body",
           "Boater"
-        ]
+        ],
+        "combatNpc": "Double agent"
       },
       {
         "tier": "Master",
@@ -1075,7 +1134,8 @@
           "Menaphite purple hat",
           "Menaphite purple top",
           "Menaphite purple robe"
-        ]
+        ],
+        "combatNpc": "Double agent"
       },
       {
         "tier": "Master",
@@ -1083,7 +1143,8 @@
         "items": [
           "Hueycoatl hide coif",
           "Hueycoatl hide vambraces"
-        ]
+        ],
+        "combatNpc": "Double agent"
       }
     ]
   },
@@ -1095,7 +1156,8 @@
         "items": [
           "Dragon scimitar",
           "Dragon scimitar (or)"
-        ]
+        ],
+        "npc": "Sherlock"
       },
       {
         "tier": "Elite",
@@ -1105,7 +1167,8 @@
           "Earth rune",
           "Dragonstone",
           "Enchant dragonstone"
-        ]
+        ],
+        "npc": "Sherlock"
       },
       {
         "tier": "Elite",
@@ -1119,7 +1182,8 @@
           "Pure essence",
           "Guardians of the Rift",
           "Ourania Altar"
-        ]
+        ],
+        "npc": "Sherlock"
       },
       {
         "tier": "Elite",
@@ -1128,14 +1192,16 @@
           "Fish offcuts",
           "Fine fish offcuts",
           "King worm"
-        ]
+        ],
+        "npc": "Sherlock"
       },
       {
         "tier": "Elite",
         "task": "Score a goal in skullball .",
         "items": [
           "Ring of Charos"
-        ]
+        ],
+        "npc": "Sherlock"
       },
       {
         "tier": "Elite",
@@ -1143,7 +1209,8 @@
         "items": [
           "Ninja monkey greegree",
           "Kruk monkey greegree"
-        ]
+        ],
+        "npc": "Sherlock"
       },
       {
         "tier": "Elite",
@@ -1151,14 +1218,16 @@
         "items": [
           "Cadantine potion (unf)",
           "White berries"
-        ]
+        ],
+        "npc": "Sherlock"
       },
       {
         "tier": "Elite",
         "task": "Steal from a chest in Ardougne Castle .",
         "items": [
           "None (The chests are on the 1 floor 2 floor , behind a door that needs to be picked)"
-        ]
+        ],
+        "npc": "Sherlock"
       },
       {
         "tier": "Elite",
@@ -1167,7 +1236,8 @@
           "Needle",
           "Thread",
           "Green dragon leather"
-        ]
+        ],
+        "npc": "Sherlock"
       },
       {
         "tier": "Elite",
@@ -1177,7 +1247,8 @@
           "Yew longbow (u)",
           "Knife",
           "Yew logs"
-        ]
+        ],
+        "npc": "Sherlock"
       },
       {
         "tier": "Elite",
@@ -1185,7 +1256,8 @@
         "items": [
           "Facemask",
           "Slayer helmet"
-        ]
+        ],
+        "npc": "Sherlock"
       },
       {
         "tier": "Elite",
@@ -1193,21 +1265,24 @@
         "items": [
           "Butterfly net",
           "Butterfly jar"
-        ]
+        ],
+        "npc": "Sherlock"
       },
       {
         "tier": "Elite",
         "task": "Catch a red chinchompa .",
         "items": [
           "Box trap"
-        ]
+        ],
+        "npc": "Sherlock"
       },
       {
         "tier": "Elite",
         "task": "Mine a mithril ore .",
         "items": [
           "Pickaxe"
-        ]
+        ],
+        "npc": "Sherlock"
       },
       {
         "tier": "Elite",
@@ -1215,7 +1290,8 @@
         "items": [
           "Hammer",
           "Mithril bar"
-        ]
+        ],
+        "npc": "Sherlock"
       },
       {
         "tier": "Elite",
@@ -1223,21 +1299,24 @@
         "items": [
           "Harpoon",
           "Big shark"
-        ]
+        ],
+        "npc": "Sherlock"
       },
       {
         "tier": "Elite",
         "task": "Cut a yew log .",
         "items": [
           "Axe"
-        ]
+        ],
+        "npc": "Sherlock"
       },
       {
         "tier": "Elite",
         "task": "Fix a magical lamp in Dorgesh-Kaan .",
         "items": [
           "Light orb"
-        ]
+        ],
+        "npc": "Sherlock"
       },
       {
         "tier": "Elite",
@@ -1245,14 +1324,16 @@
         "items": [
           "Tinderbox",
           "Yew logs"
-        ]
+        ],
+        "npc": "Sherlock"
       },
       {
         "tier": "Elite",
         "task": "Cook a swordfish",
         "items": [
           "Raw swordfish"
-        ]
+        ],
+        "npc": "Sherlock"
       },
       {
         "tier": "Elite",
@@ -1265,7 +1346,8 @@
           "Abyss",
           "Pure essence",
           "Guardians of the Rift"
-        ]
+        ],
+        "npc": "Sherlock"
       },
       {
         "tier": "Elite",
@@ -1274,26 +1356,30 @@
           "Rake",
           "Seed dibber",
           "Watermelon seed"
-        ]
+        ],
+        "npc": "Sherlock"
       },
       {
         "tier": "Elite",
         "task": "Activate the Chivalry prayer.",
-        "items": []
+        "items": [],
+        "npc": "Sherlock"
       },
       {
         "tier": "Elite",
         "task": "Smith a tier 2 or above Shayzien platebody .",
         "items": [
           "Lovakite bar"
-        ]
+        ],
+        "npc": "Sherlock"
       },
       {
         "tier": "Elite",
         "task": "Mine some nickel .",
         "items": [
           "Pickaxe"
-        ]
+        ],
+        "npc": "Sherlock"
       }
     ],
     "Master": [
@@ -1306,7 +1392,8 @@
           "Volcanic abyssal whip",
           "Abyssal tentacle",
           "Abyssal whip (or)"
-        ]
+        ],
+        "npc": "Sherlock"
       },
       {
         "tier": "Master",
@@ -1314,7 +1401,8 @@
         "items": [
           "Hammer",
           "Runite bar"
-        ]
+        ],
+        "npc": "Sherlock"
       },
       {
         "tier": "Master",
@@ -1326,7 +1414,8 @@
           "Spirit tree (Construction)",
           "Superior garden",
           "Farming Guild"
-        ]
+        ],
+        "npc": "Sherlock"
       },
       {
         "tier": "Master",
@@ -1336,19 +1425,22 @@
           "Soul rune",
           "Law rune",
           "Blood rune"
-        ]
+        ],
+        "npc": "Sherlock"
       },
       {
         "tier": "Master",
         "task": "Slay a Nechryael in the Slayer Tower .",
-        "items": []
+        "items": [],
+        "npc": "Sherlock"
       },
       {
         "tier": "Master",
         "task": "Kill the spiritual, magic and godly whilst representing their own god.",
         "items": [
           "Spiritual mage"
-        ]
+        ],
+        "npc": "Sherlock"
       },
       {
         "tier": "Master",
@@ -1357,7 +1449,8 @@
           "Gold bar",
           "Dragonstone",
           "Amulet mould"
-        ]
+        ],
+        "npc": "Sherlock"
       },
       {
         "tier": "Master",
@@ -1365,7 +1458,8 @@
         "items": [
           "Tinderbox",
           "Magic logs"
-        ]
+        ],
+        "npc": "Sherlock"
       },
       {
         "tier": "Master",
@@ -1373,7 +1467,8 @@
         "items": [
           "Tinderbox",
           "Redwood logs"
-        ]
+        ],
+        "npc": "Sherlock"
       },
       {
         "tier": "Master",
@@ -1381,7 +1476,8 @@
         "items": [
           "Small fishing net",
           "Rope"
-        ]
+        ],
+        "npc": "Sherlock"
       },
       {
         "tier": "Master",
@@ -1390,7 +1486,8 @@
           "Graceful outfit",
           "Agility cape",
           "Graceful cape"
-        ]
+        ],
+        "npc": "Sherlock"
       },
       {
         "tier": "Master",
@@ -1398,7 +1495,8 @@
         "items": [
           "Antidote++",
           "Zulrah's scales"
-        ]
+        ],
+        "npc": "Sherlock"
       },
       {
         "tier": "Master",
@@ -1410,17 +1508,20 @@
           "Varrock armour 4",
           "Prospector jacket",
           "Blast Mine"
-        ]
+        ],
+        "npc": "Sherlock"
       },
       {
         "tier": "Master",
         "task": "Steal a gem from the Ardougne market.",
-        "items": []
+        "items": [],
+        "npc": "Sherlock"
       },
       {
         "tier": "Master",
         "task": "Pickpocket an elf .",
-        "items": []
+        "items": [],
+        "npc": "Sherlock"
       },
       {
         "tier": "Master",
@@ -1429,7 +1530,8 @@
           "Dark essence fragments",
           "Pure essence",
           "Daeyalt essence"
-        ]
+        ],
+        "npc": "Sherlock"
       },
       {
         "tier": "Master",
@@ -1437,7 +1539,8 @@
         "items": [
           "Ranging potion (2)",
           "Caviar"
-        ]
+        ],
+        "npc": "Sherlock"
       },
       {
         "tier": "Master",
@@ -1445,7 +1548,8 @@
         "items": [
           "Rune dart tip",
           "Feather"
-        ]
+        ],
+        "npc": "Sherlock"
       },
       {
         "tier": "Master",
@@ -1455,7 +1559,8 @@
           "Redwood pyre logs",
           "Tinderbox",
           "Fiyr remains"
-        ]
+        ],
+        "npc": "Sherlock"
       },
       {
         "tier": "Master",
@@ -1463,14 +1568,16 @@
         "items": [
           "Knife",
           "Sacred eel"
-        ]
+        ],
+        "npc": "Sherlock"
       },
       {
         "tier": "Master",
         "task": "Kill a lizardman shaman .",
         "items": [
           "Combat equipment"
-        ]
+        ],
+        "npc": "Sherlock"
       },
       {
         "tier": "Master",
@@ -1480,7 +1587,8 @@
           "Sandworms",
           "Angler's outfit",
           "Spirit angler's outfit"
-        ]
+        ],
+        "npc": "Sherlock"
       },
       {
         "tier": "Master",
@@ -1491,7 +1599,8 @@
           "Forestry outfit",
           "Forestry kit",
           "Forestry basket"
-        ]
+        ],
+        "npc": "Sherlock"
       },
       {
         "tier": "Master",
@@ -1501,7 +1610,8 @@
           "Empty light orb",
           "Glassblowing pipe",
           "Molten glass"
-        ]
+        ],
+        "npc": "Sherlock"
       },
       {
         "tier": "Master",
@@ -1511,7 +1621,8 @@
           "Soul rune",
           "Blood rune",
           "Nature rune"
-        ]
+        ],
+        "npc": "Sherlock"
       },
       {
         "tier": "Master",
@@ -1520,7 +1631,8 @@
           "Shade key",
           "Yew pyre logs",
           "Asyn remains"
-        ]
+        ],
+        "npc": "Sherlock"
       }
     ]
   },
@@ -1531,21 +1643,24 @@
         "Dragon scimitar",
         "Dragon scimitar (or)",
         "Dragon scimitar (cr)"
-      ]
+      ],
+      "npc": "Falo the Bard"
     },
     {
       "lyric": "A book that preaches of some great figure, lending strength, might and vigour.",
       "items": [
         "God book",
         "God book (or)"
-      ]
+      ],
+      "npc": "Falo the Bard"
     },
     {
       "lyric": "A bow of elven craft was made, it shimmers bright, but will soon fade.",
       "items": [
         "Crystal bow",
         "Bow of Faerdhinen"
-      ]
+      ],
+      "npc": "Falo the Bard"
     },
     {
       "lyric": "A fiery axe of great inferno, when you use it, you'll wonder where the logs go.",
@@ -1553,25 +1668,29 @@
         "Infernal axe",
         "Infernal axe (or)",
         "Infernal axe (or) (Trailblazer Reloaded)"
-      ]
+      ],
+      "npc": "Falo the Bard"
     },
     {
       "lyric": "A mark used to increase one's grace, found atop a seer's place.",
       "items": [
         "Mark of Grace"
-      ]
+      ],
+      "npc": "Falo the Bard"
     },
     {
       "lyric": "A molten beast with fiery breath, you acquire these with its death.",
       "items": [
         "Lava dragon bones"
-      ]
+      ],
+      "npc": "Falo the Bard"
     },
     {
       "lyric": "A shiny helmet of flight, to obtain this with melee, struggle you might.",
       "items": [
         "Armadyl helmet"
-      ]
+      ],
+      "npc": "Falo the Bard"
     },
     {
       "lyric": "A sword held in the other hand, red its colour, Cyclops strength you must withstand.",
@@ -1579,70 +1698,81 @@
         "Dragon defender",
         "Dragon defender (t)",
         "Avernic defender"
-      ]
+      ],
+      "npc": "Falo the Bard"
     },
     {
       "lyric": "A token used to kill mythical beasts, in hopes of a blade or just for an xp feast.",
       "items": [
         "Warrior guild token"
-      ]
+      ],
+      "npc": "Falo the Bard"
     },
     {
       "lyric": "Green is my favourite, mature ale I do love, this takes your herblore above.",
       "items": [
         "Greenman's ale(m)"
-      ]
+      ],
+      "npc": "Falo the Bard"
     },
     {
       "lyric": "It can hold down a boat or crush a goat, this object, you see, is quite heavy.",
       "items": [
         "Barrelchest anchor",
         "Barrelchest anchor (bh)"
-      ]
+      ],
+      "npc": "Falo the Bard"
     },
     {
       "lyric": "It comes from the ground, underneath the snowy plain. Trolls aplenty, with what looks like a mane.",
       "items": [
         "Basalt"
-      ]
+      ],
+      "npc": "Falo the Bard"
     },
     {
       "lyric": "No attack to wield, only strength is required, made of obsidian, but with no room for a shield.",
       "items": [
         "Tzhaar-ket-om",
         "Tzhaar-ket-om (t)"
-      ]
+      ],
+      "npc": "Falo the Bard"
     },
     {
       "lyric": "Penance healers runners and more, obtaining this body often gives much deplore.",
       "items": [
         "Fighter torso",
         "Fighter torso (or)"
-      ]
+      ],
+      "npc": "Falo the Bard"
     },
     {
       "lyric": "Strangely found in a chest, many believe these gloves are the best.",
       "items": [
         "Barrows gloves"
-      ]
+      ],
+      "npc": "Falo the Bard"
     },
     {
       "lyric": "These gloves of white won't help you fight, but aid in cooking, they just might.",
       "items": [
         "Cooking gauntlets"
-      ]
+      ],
+      "npc": "Falo the Bard"
     },
     {
       "lyric": "They come from some time ago, from a land unto the east. Fossilised they have become, this small and gentle beast.",
       "items": [
         "Numulite"
-      ]
+      ],
+      "npc": "Falo the Bard"
     },
     {
       "lyric": "To slay a dragon you must first do, before this chest piece can be put on you.",
       "items": [
         "Rune platebody"
-      ]
+      ],
+      "npc": "Falo the Bard"
     },
     {
       "lyric": "Vampyres are agile opponents, damaged best with a weapon of many components.",
@@ -1651,15 +1781,1418 @@
         "Rod of Ivandis",
         "Blisterwood flail",
         "Hallowed flail"
-      ]
+      ],
+      "npc": "Falo the Bard"
     },
     {
       "lyric": "You won't bring me to heel, unless you have a bright red keel.",
       "items": [
         "Dragon keel parts"
-      ]
+      ],
+      "npc": "Falo the Bard"
     }
   ],
+  "cryptic": {
+    "Beginner": [
+      {
+        "tier": "Beginner",
+        "clueText": "Always walking around the castle grounds and somehow knows everyone's age .",
+        "npc": "Hans",
+        "location": "Talk to Hans walking around Lumbridge Castle ."
+      },
+      {
+        "tier": "Beginner",
+        "clueText": "Buried beneath the ground, who knows where it's found. Lucky for you, A man called Reldo may have a clue.",
+        "npc": "Reldo",
+        "location": "Speak to Reldo to receive a strange device used by Hot and Cold clues to locate the location of the next clue. Players can immediately start the search without speaking to Reldo if they already own a strange device ."
+      },
+      {
+        "tier": "Beginner",
+        "clueText": "In the place Duke Horacio calls home, talk to a man with a hat dropped by goblins .",
+        "npc": "Cook (Lumbridge)",
+        "location": "Talk to the Cook in Lumbridge Castle ."
+      },
+      {
+        "tier": "Beginner",
+        "clueText": "In a village of barbarians, I am the one who guards the village from up high .",
+        "npc": "Hunding",
+        "location": "Talk to Hunding atop the tower on the east side of Barbarian Village ."
+      },
+      {
+        "tier": "Beginner",
+        "clueText": "Talk to Charlie the Tramp in Varrock .",
+        "npc": "Charlie the Tramp",
+        "location": "Talk to Charlie the Tramp by the southern entrance to Varrock . He will give you a task."
+      },
+      {
+        "tier": "Beginner",
+        "clueText": "Near the open desert I reside, to get past me you must abide. Go forward if you dare, for when you pass me, you'll be sweating by your hair .",
+        "npc": "Shantay",
+        "location": "Talk to Shantay at the Shantay Pass south of Al Kharid ."
+      }
+    ],
+    "Easy": [
+      {
+        "tier": "Easy",
+        "clueText": "Belladonna, my dear. If only I had gloves, then I could hold you at last.",
+        "npc": "Tool leprechaun",
+        "location": "Talk to the Tool leprechaun at the Belladonna farming patch at Draynor Manor ."
+      },
+      {
+        "tier": "Easy",
+        "clueText": "He's been studying unusual tree migrations.",
+        "npc": "Ranulph",
+        "location": "Talk to Ranulph at the western end of Auburnvale ."
+      },
+      {
+        "tier": "Easy",
+        "clueText": "I'd like to hear some music. Come and see me on the bridge in Falador Park, and play: <some music> Thanks, Cecilia",
+        "npc": "Cecilia",
+        "location": "Speak to Cecilia on the bridge in Falador Park ."
+      },
+      {
+        "tier": "Easy",
+        "clueText": "I wonder how many bronze swords he has handed out.",
+        "npc": "Vannaka",
+        "location": "Talk to Vannaka in Edgeville Dungeon ."
+      },
+      {
+        "tier": "Easy",
+        "clueText": "I would make a chemistry joke, but I'm afraid I wouldn't get a reaction.",
+        "npc": "Chemist",
+        "location": "Talk to the Chemist west of Rimmington 's house portal."
+      },
+      {
+        "tier": "Easy",
+        "clueText": "I wouldn't wear this jean on my legs.",
+        "npc": "Father Jean",
+        "location": "Talk to Father Jean in the Hosidius church."
+      },
+      {
+        "tier": "Easy",
+        "clueText": "One of the sailors in Port Sarim is your next destination.",
+        "npc": "Captain Tobias",
+        "location": "Speak to Captain Tobias on the docks of Port Sarim ."
+      },
+      {
+        "tier": "Easy",
+        "clueText": "Salty peter.",
+        "npc": "Konoo",
+        "location": "Talk to Konoo who is digging saltpetre in Hosidius , east of the Woodcutting Guild."
+      },
+      {
+        "tier": "Easy",
+        "clueText": "Search the bucket in the Port Sarim jail.",
+        "npc": "Shantay",
+        "location": "Talk to Shantay at the Shantay Pass , ask what this place is, and identify yourself as an outlaw. After you're jailed, refuse to pay the 5gp fine twice and you'll be sent to the Port Sarim jail ."
+      },
+      {
+        "tier": "Easy",
+        "clueText": "Someone watching the fights in the Emir's Arena is your next destination.",
+        "npc": "Jeed",
+        "location": "Talk to Jeed , found on the upper floor of the south east arena, at the Emir's Arena ."
+      },
+      {
+        "tier": "Easy",
+        "clueText": "Speak to Arhein in Catherby.",
+        "npc": "Arhein",
+        "location": "Arhein is just south of the Catherby bank."
+      },
+      {
+        "tier": "Easy",
+        "clueText": "Speak to Doric, who lives north of Falador.",
+        "npc": "Doric",
+        "location": "Doric is found north of Falador and east of the Taverley gate."
+      },
+      {
+        "tier": "Easy",
+        "clueText": "Speak to Ellis in Al Kharid.",
+        "npc": "Ellis",
+        "location": "Ellis is the tanner just north of the Al Kharid bank."
+      },
+      {
+        "tier": "Easy",
+        "clueText": "Speak to Gaius in Taverley.",
+        "npc": "Gaius",
+        "location": "Gaius is found in his shop in the north-west corner in Taverley , just south of Taverley's house portal."
+      },
+      {
+        "tier": "Easy",
+        "clueText": "Speak to Hans to solve the clue.",
+        "npc": "Hans",
+        "location": "Hans can be found at Lumbridge Castle ."
+      },
+      {
+        "tier": "Easy",
+        "clueText": "Speak to Jatix in Taverley.",
+        "npc": "Jatix",
+        "location": "Jatix is found in the middle of Taverley ."
+      },
+      {
+        "tier": "Easy",
+        "clueText": "Speak to Ned in Draynor Village.",
+        "npc": "Ned",
+        "location": "Ned is found north or the Draynor bank."
+      },
+      {
+        "tier": "Easy",
+        "clueText": "Speak to Rusty north of Falador.",
+        "npc": "Rusty",
+        "location": "Rusty can be found north-east of Falador on the way to the Mind Altar ."
+      },
+      {
+        "tier": "Easy",
+        "clueText": "Speak to Sarah at Falador farm.",
+        "npc": "Sarah",
+        "location": "Talk to Sarah at Falador farm , north of Port Sarim ."
+      },
+      {
+        "tier": "Easy",
+        "clueText": "Speak to Sir Kay in Camelot Castle.",
+        "npc": "Sir Kay",
+        "location": "Sir Kay can be found in the courtyard at Camelot Castle ."
+      },
+      {
+        "tier": "Easy",
+        "clueText": "Speak to the bartender of the Blue Moon Inn in Varrock.",
+        "npc": "Bartender (Blue Moon Inn)",
+        "location": "Talk to the bartender in Blue Moon Inn in Varrock ."
+      },
+      {
+        "tier": "Easy",
+        "clueText": "Speak to the Lady of the Lake.",
+        "npc": "Lady of the Lake",
+        "location": "Talk to the Lady of the Lake in Taverley ."
+      },
+      {
+        "tier": "Easy",
+        "clueText": "Speak to the staff of Sinclair mansion.",
+        "npc": "Louisa",
+        "location": "Speak to Louisa , on the ground floor 1 floor , found at the Sinclair Mansion ."
+      },
+      {
+        "tier": "Easy",
+        "clueText": "Strength potions with red spiders' eggs? He is quite a herbalist.",
+        "npc": "Apothecary",
+        "location": "Talk to Apothecary in south-western Varrock . (The) Apothecary is just north-west of the Varrock Swordshop ."
+      },
+      {
+        "tier": "Easy",
+        "clueText": "Surrounded by white walls and gems.",
+        "npc": "Herquin",
+        "location": "Talk to Herquin , the gem store owner in Falador ."
+      },
+      {
+        "tier": "Easy",
+        "clueText": "Talk to Ali the Leaflet Dropper north of the Al Kharid mine.",
+        "npc": "Ali the Leaflet Dropper",
+        "location": "Ali the Leaflet Dropper can be found roaming north of the Al Kharid mine ."
+      },
+      {
+        "tier": "Easy",
+        "clueText": "Talk to Ambassador Spanfipple in the White Knights Castle.",
+        "npc": "Ambassador Spanfipple",
+        "location": "Ambassador Spanfipple can be found roaming on the 1 floor 2 floor of the White Knights' Castle ."
+      },
+      {
+        "tier": "Easy",
+        "clueText": "Talk to a party-goer in Falador.",
+        "npc": "Lucy",
+        "location": "Lucy is the bartender on the 1 floor 2 floor of the Party Room ."
+      },
+      {
+        "tier": "Easy",
+        "clueText": "Talk to Cassie in Falador.",
+        "npc": "Cassie",
+        "location": "Cassie is found just south-east of the northern Falador gate."
+      },
+      {
+        "tier": "Easy",
+        "clueText": "Talk to Charles at Port Piscarilius.",
+        "npc": "Charles",
+        "location": "Charles is found by Veos ' ship in Port Piscarilius ."
+      },
+      {
+        "tier": "Easy",
+        "clueText": "Talk to the cook in the Blue Moon Inn in Varrock.",
+        "npc": "Blue Moon Inn",
+        "location": "The Blue Moon Inn can be found by the southern entrance to Varrock ."
+      },
+      {
+        "tier": "Easy",
+        "clueText": "Talk to Ermin.",
+        "npc": "Ermin",
+        "location": "Ermin can be found on the 1 floor 2 floor of the tree house south-east of the Gnome Agility Course ."
+      },
+      {
+        "tier": "Easy",
+        "clueText": "Talk to the barber in the Falador barber shop.",
+        "npc": "Hairdresser",
+        "location": "The Hairdresser can be found in the barber shop, north of the west Falador bank."
+      },
+      {
+        "tier": "Easy",
+        "clueText": "Talk to the bartender of the Rusty Anchor in Port Sarim.",
+        "npc": "Bartender (Rusty Anchor Inn)",
+        "location": "The Bartender can be found in the Rusty Anchor Inn , which is located in the northern part of Port Sarim ."
+      },
+      {
+        "tier": "Easy",
+        "clueText": "Talk to the Doomsayer.",
+        "npc": "Doomsayer",
+        "location": "The Doomsayer can be found just north of Lumbridge Castle entrance."
+      },
+      {
+        "tier": "Easy",
+        "clueText": "Talk to Morgan in his house at Draynor Village.",
+        "npc": "Morgan",
+        "location": "Morgan can be found in the house with the map icon."
+      },
+      {
+        "tier": "Easy",
+        "clueText": "Talk to the mother of a basement dwelling son.",
+        "npc": "Doris",
+        "location": "Evil Dave's mother, Doris , is located in the house west of Edgeville bank."
+      },
+      {
+        "tier": "Easy",
+        "clueText": "Talk to the Squire in the White Knights' castle in Falador.",
+        "npc": "Squire",
+        "location": "The Squire is located in the courtyard of the White Knights' Castle ."
+      },
+      {
+        "tier": "Easy",
+        "clueText": "Talk to Turael in Burthorpe.",
+        "npc": "Turael",
+        "location": "Turael is located in the small house east of The Toad and Chicken inn."
+      },
+      {
+        "tier": "Easy",
+        "clueText": "Talk to Wayne at Wayne's Chains in Falador.",
+        "npc": "Wayne",
+        "location": "Wayne 's shop is found directly south of the White Knights' Castle ."
+      },
+      {
+        "tier": "Easy",
+        "clueText": "Talk to Zeke in Al Kharid.",
+        "npc": "Zeke",
+        "location": "Zeke is the owner of the scimitar shop in Al Kharid ."
+      },
+      {
+        "tier": "Easy",
+        "clueText": "The hand ain't listening.",
+        "npc": "The Face",
+        "location": "Talk to The Face located by the manhole just north of the Port Sarim fishing shop."
+      }
+    ],
+    "Medium": [
+      {
+        "tier": "Medium",
+        "clueText": "Are you somewhat entertained?",
+        "npc": "Gloria",
+        "location": "Speak to Gloria inside the Fortis Colosseum ."
+      },
+      {
+        "tier": "Medium",
+        "clueText": "Go to this building to be illuminated, and check the drawers while you are there.",
+        "npc": "Lighthouse",
+        "location": "The 1 floor 2 floor of the Lighthouse ( fairy ring code A L P ). Kill a Rellekka marketplace guard to obtain the key. ( Note: Starting the Horror from the Deep quest and speaking to Gunnjorn to obtain the Lighthouse key is required! Level 35 Agility is required to talk to Gunnjorn. You must also repair the bridge with two wooden planks , a hammer and 60 steel nails .)"
+      },
+      {
+        "tier": "Medium",
+        "clueText": "I'd like to hear some music. Come and see me on the bridge in Falador Park, and play: <some music> Thanks, Cecilia",
+        "npc": "Cecilia",
+        "location": "Speak to Cecilia , who is located on the bridge in Falador Park ."
+      },
+      {
+        "tier": "Medium",
+        "clueText": "Speak to a referee.",
+        "npc": "Gnome ball referee",
+        "location": "Talk to a Gnome ball referee found on the Gnome Ball field in the Gnome Stronghold . You will receive a challenge scroll that you have to answer. Answer: 5096"
+      },
+      {
+        "tier": "Medium",
+        "clueText": "Speak to Donovan, the Family Handyman.",
+        "npc": "Donovan the Family Handyman",
+        "location": "Donovan the Family Handyman is found on the 1 floor 2 floor of Sinclair Mansion ."
+      },
+      {
+        "tier": "Medium",
+        "clueText": "Speak to Hajedy.",
+        "npc": "Hajedy",
+        "location": "Hajedy is found by the cart , located just south of the Brimhaven docks."
+      },
+      {
+        "tier": "Medium",
+        "clueText": "Speak to Kangai Mau .",
+        "npc": "Kangai Mau",
+        "location": "Kangai Mau is found in the Shrimp and Parrot in Brimhaven ."
+      },
+      {
+        "tier": "Medium",
+        "clueText": "Speak to Roavar.",
+        "npc": "Roavar",
+        "location": "Talk to Roavar in the Canifis tavern ."
+      },
+      {
+        "tier": "Medium",
+        "clueText": "Speak to Uglug Nar.",
+        "npc": "Uglug Nar",
+        "location": "Uglug Nar is an ogre shaman outside of Jiggig , south of Castle Wars . You will receive a challenge scroll that you have to answer. Answer: 6859"
+      },
+      {
+        "tier": "Medium",
+        "clueText": "Speak to Ulizius.",
+        "npc": "Ulizius",
+        "location": "Ulizius is the monk who guards the gate into Mort Myre Swamp . ( fairy ring code C K S )"
+      }
+    ],
+    "Hard": [
+      {
+        "tier": "Hard",
+        "clueText": "'A bag belt only?', he asked his balding brothers.",
+        "npc": "Abbot Langley",
+        "location": "Talk to Abbot Langley in the monastery near Edgeville ."
+      },
+      {
+        "tier": "Hard",
+        "clueText": "A general who sets a 'shining' example.",
+        "npc": "General Hining",
+        "location": "Speak to General Hining found at Tyras Camp ."
+      },
+      {
+        "tier": "Hard",
+        "clueText": "Citric cellar.",
+        "npc": "Heckel Funch",
+        "location": "Speak to Heckel Funch on the 1 floor 2 floor in the Grand Tree ."
+      },
+      {
+        "tier": "Hard",
+        "clueText": "Come have a cip with this great soot covered denizen.",
+        "npc": "Miner Magnus",
+        "location": "Talk to Miner Magnus east of the fairy ring (code C I P ). Answer: 8"
+      },
+      {
+        "tier": "Hard",
+        "clueText": "Generally speaking, his nose was very bent.",
+        "npc": "General Bentnoze",
+        "location": "Talk to General Bentnoze , found in the northernmost part of Goblin Village ; he'll give you a puzzle box."
+      },
+      {
+        "tier": "Hard",
+        "clueText": "Gold I see, yet gold I require. Give me 875 if death you desire.",
+        "npc": "Saniboch",
+        "location": "Speak to Saniboch at the Brimhaven Dungeon entrance."
+      },
+      {
+        "tier": "Hard",
+        "clueText": "He knows just how easy it is to lose track of time.",
+        "npc": "Brother Kojo",
+        "location": "Speak to Brother Kojo in the Clock Tower . Answer: 22."
+      },
+      {
+        "tier": "Hard",
+        "clueText": "I'd like to hear some music. Come and see me on the bridge in Falador Park, and play: <some music> Thanks, Cecilia",
+        "npc": "Cecilia",
+        "location": "Speak to Cecilia , who is located on the bridge in Falador Park ."
+      },
+      {
+        "tier": "Hard",
+        "clueText": "I watch the sea. I watch you fish. I watch your tree.",
+        "npc": "Ellena",
+        "location": "Speak to Ellena at Catherby fruit tree patch ."
+      },
+      {
+        "tier": "Hard",
+        "clueText": "Identify the back of this over-acting brother. (He's a long way from home.)",
+        "npc": "Hamid",
+        "location": "Talk to Hamid , the monk at the altar in the Emir's Arena hospital. You will receive a puzzle box ."
+      },
+      {
+        "tier": "Hard",
+        "clueText": "If a man carried my burden, he would break his back. I am not rich, but leave silver in my track. Speak to the keeper of my trail.",
+        "npc": "Gerrant",
+        "location": "Speak to Gerrant in the fish shop in Port Sarim ."
+      },
+      {
+        "tier": "Hard",
+        "clueText": "In the city where merchants are said to have lived, talk to a man with a splendid cape, but a hat dropped by goblins.",
+        "npc": "Head chef",
+        "location": "Talk to the head chef in Cooks' Guild west of Varrock . Remember to wear a Chef's Hat or Varrock armour 3 and above."
+      },
+      {
+        "tier": "Hard",
+        "clueText": "Leader of the Yak City.",
+        "npc": "Mawnis Burowgar",
+        "location": "Talk to Mawnis Burowgar in Neitiznot . The Fremennik Isles quest upto the jester part or a silly jester costume is required."
+      },
+      {
+        "tier": "Hard",
+        "clueText": "My name is like a tree, yet it is spelt with a 'g'. Come see the fur which is right near me.",
+        "npc": "Wilough",
+        "location": "Speak to Wilough , next to the fur merchant in Varrock Square ."
+      },
+      {
+        "tier": "Hard",
+        "clueText": "Often sought out by scholars of histories past, find me where words of wisdom speak volumes.",
+        "npc": "Examiner",
+        "location": "Speak to an examiner at the Exam Centre . You might need to talk to several different examiners."
+      },
+      {
+        "tier": "Hard",
+        "clueText": "'Small shoe.' Often found with rod on mushroom.",
+        "npc": "Gnome trainer",
+        "location": "Talk to any Gnome trainer in the Agility area of the Tree Gnome Stronghold ."
+      },
+      {
+        "tier": "Hard",
+        "clueText": "Snah? I feel all confused, like one of those cakes...",
+        "npc": "Hans",
+        "location": "Talk to Hans roaming around Lumbridge Castle . (Walk anti-clockwise around castle to meet Hans quicker.)"
+      },
+      {
+        "tier": "Hard",
+        "clueText": "Surprising? I bet he is...",
+        "npc": "Sir Prysin",
+        "location": "Talk to Sir Prysin in Varrock Palace ."
+      },
+      {
+        "tier": "Hard",
+        "clueText": "Surviving.",
+        "npc": "Sir Vyvin",
+        "location": "Talk to Sir Vyvin on the 2 floor 3 floor of Falador Castle (east side)."
+      },
+      {
+        "tier": "Hard",
+        "clueText": "The keeper of Melzars...Spare? Skeleton? Anar?",
+        "npc": "Oziach",
+        "location": "Speak to Oziach in Edgeville ."
+      },
+      {
+        "tier": "Hard",
+        "clueText": "The King's magic shouldn't be wasted by me.",
+        "npc": "Guardian mummy",
+        "location": "Talk to the Guardian mummy inside the Pyramid Plunder minigame in Sophanem . Partial completion of Icthlarin's Little Helper is required. The mummy will only be found in one of the four entrances, this might require players to check the other entrances."
+      },
+      {
+        "tier": "Hard",
+        "clueText": "The magic of 4 colours, an early experience you could learn. The large beast caged up top, rages, as his demised kin's loot now returns.",
+        "npc": "Wizard Mizgog",
+        "location": "Speak to Wizard Mizgog at the top of the Wizards' Tower south of Draynor . Fairy ring code D I S takes you to the wizard's tower. The Amulet of the Eye allows easy access to the wizard tower basement, use it to teleport to the Temple of the Eye and then leave via the portal."
+      },
+      {
+        "tier": "Hard",
+        "clueText": "The mother of the reptilian sacrifice.",
+        "npc": "Zul-Cheray",
+        "location": "Talk to Zul-Cheray in a house near the sacrificial boat at Zul-Andra . Use fairy ring code B J S , treading on stepping stones (requiring 76 Agility) then walk east."
+      }
+    ],
+    "Elite": [
+      {
+        "tier": "Elite",
+        "clueText": "A reck you say; let's pray there aren't any ghosts.",
+        "npc": "Father Aereck",
+        "location": "Speak to Father Aereck in Lumbridge ."
+      },
+      {
+        "tier": "Elite",
+        "clueText": "Has no one told you it is rude to ask a lady her age?",
+        "npc": "Mawrth",
+        "location": "Speak to Mawrth in Lletya"
+      },
+      {
+        "tier": "Elite",
+        "clueText": "His bark is worse than his bite.",
+        "npc": "Barker",
+        "location": "Speak to Barker at Canifis 's Barkers' Haberdashery ."
+      },
+      {
+        "tier": "Elite",
+        "clueText": "I am the one who watches the giants. The giants in turn watch me. I watch with two while they watch with one. Come seek where I may be.",
+        "npc": "Kamfreena",
+        "location": "Speak to Kamfreena on the top floor of the Warriors' Guild ."
+      },
+      {
+        "tier": "Elite",
+        "clueText": "I burn between heroes and legends.",
+        "npc": "Candle maker",
+        "location": "Speak to the candle maker in Catherby ."
+      },
+      {
+        "tier": "Elite",
+        "clueText": "I live in a deserted crack collecting soles.",
+        "npc": "Nardah",
+        "location": "Enter the crack west of Nardah rug merchant, and talk to the genie . A rope and a lightsource are required (partial completion of Spirits of the Elid required)."
+      },
+      {
+        "tier": "Elite",
+        "clueText": "'See you in your dreams' said the vegetable man.",
+        "npc": "Dominic Onion",
+        "location": "Speak to Dominic Onion at the Nightmare Zone teleport spot."
+      },
+      {
+        "tier": "Elite",
+        "clueText": "Speak to a Wyse man.",
+        "npc": "Wyson the gardener",
+        "location": "Talk to Wyson the gardener at Falador Park ."
+      },
+      {
+        "tier": "Elite",
+        "clueText": "Varrock is where I reside, not the land of the dead, but I am so old, I should be there instead. Let's hope your reward is as good as it says, just 1 gold one and you can have it read.",
+        "npc": "Aris",
+        "location": "Talk to Aris , west of Varrock Square ."
+      },
+      {
+        "tier": "Elite",
+        "clueText": "With a name like that, you'd expect a little more than just a few scimitars.",
+        "npc": "Daga",
+        "location": "Speak to Daga on Ape Atoll . Note: If Monkey Madness II has not been completed, you must be wielding any Monkey Greegree to speak to Daga. Either way, you do NOT need a M'speak amulet"
+      },
+      {
+        "tier": "Elite",
+        "clueText": "With drinks and dwarves I make my way, upon my head a glass will stay.",
+        "npc": "Funbo",
+        "location": "Speak to Funbo in The Lost Pickaxe pub in Cam Torum ."
+      },
+      {
+        "tier": "Elite",
+        "clueText": "You must be 100 to play with me.",
+        "npc": "Veteran boat squire",
+        "location": "Speak to the Veteran boat squire at Pest Control ."
+      },
+      {
+        "tier": "Elite",
+        "clueText": "You were 3 and I was the 6th. Come speak to me.",
+        "npc": "Vannaka",
+        "location": "Speak to Vannaka in Edgeville Dungeon ."
+      }
+    ],
+    "Master": [
+      {
+        "tier": "Master",
+        "clueText": "A chisel and hammer reside in his home, strange for one of magic. Impress him with your magical equipment.",
+        "npc": "Wizard Cromperty",
+        "location": "Wizard Cromperty at the north-east corner of East Ardougne . Speak to him while wearing equipment adding up to at least +100 in magical attack bonus. The passive magic attack multiplication effect of Tumeken's shadow does not count towards the +100 requirement, but its base magic attack bonus of +35 will."
+      },
+      {
+        "tier": "Master",
+        "clueText": "Anger Abbot Langley.",
+        "npc": "Abbot Langley",
+        "location": "Speak to Abbot Langley while you have a negative prayer bonus (currently only possible with an Ancient staff or an Ancient sceptre )."
+      },
+      {
+        "tier": "Master",
+        "clueText": "Buried beneath the ground, who knows where it's found. Lucky for you, A man called Jorral may have a clue.",
+        "npc": "Jorral",
+        "location": "Speak to Jorral to receive a strange device , which works similarly to the enchanted key (must have Making History quest completed). For a list of all possible locations, see here ."
+      },
+      {
+        "tier": "Master",
+        "clueText": "Come brave adventurer, your sense is on fire. If you talk to me, it's an old god you desire.",
+        "npc": "Viggora",
+        "location": "Speak to Viggora . Note that he can be found (is visible) in 3 locations, but you can only speak to (and continue the clue) the version of him that you spoke to during Curse of the Empty Lord miniquest . You can check your quest log to find out which location. Paddewwa , Edgeville Dungeon , near the earth warriors . 1 floor 2 floor of the Rogues' Castle in the deep Wilderness . 1 floor 2 floor of the Canifis Slayer Tower , just before the Infernal Mage . A ring of visibility or a ring of shadows and ghostspeak amulet are required to make progress through the clue."
+      },
+      {
+        "tier": "Master",
+        "clueText": "Darkness wanders around me, but fills my mind with knowledge.",
+        "npc": "Biblia",
+        "location": "Speak to Biblia on the Arceuus Library 's top floor."
+      },
+      {
+        "tier": "Master",
+        "clueText": "Falo the bard wants to see you.",
+        "npc": "Falo the Bard",
+        "location": "Speak to Falo the Bard , who is located on the road to the Fremennik Province ."
+      },
+      {
+        "tier": "Master",
+        "clueText": "The doorman of the Warriors' Guild wishes to be impressed by how strong your equipment is.",
+        "npc": "Ghommal",
+        "location": "Speak to Ghommal (or Laidee Gnonock after While Guthix Sleeps ) with a total Melee Strength bonus of 100 or more. ( Note: Amulet of strength gives +10, even better than a fury for this clue. A dragon battleaxe gives +85 and is relatively easy to obtain for earlier-game players. A Godsword or Barrelchest anchor on its own is over 100 Strength bonus.)"
+      },
+      {
+        "tier": "Master",
+        "clueText": "Here, there are tears, but nobody is crying. Speak to the guardian and show off your alignment to balance.",
+        "npc": "Juna",
+        "location": "Talk to Juna while wearing three Guthix-affiliated items. All Void Knight equipment is Guthix-affiliated."
+      },
+      {
+        "tier": "Master",
+        "clueText": "Hopefully this set of armour will help you to keep surviving.",
+        "npc": "Sir Vyvin",
+        "location": "Speak to Sir Vyvin while wearing white platebody and white platelegs / white plateskirt ( white full helm is not needed)."
+      },
+      {
+        "tier": "Master",
+        "clueText": "My life was spared but these voices remain, now guarding these iron gates is my bane.",
+        "npc": "Key Master",
+        "location": "Speak to the Key Master in Cerberus' Lair ."
+      },
+      {
+        "tier": "Master",
+        "clueText": "One of several rhyming brothers, in business attire with an obsession for paper work.",
+        "npc": "Piles",
+        "location": "Speak to Piles in the Resource Area . An entry fee of 7,500 coins is required (6,000 if the medium Wilderness Diary is completed, 3,750 if the hard diary is completed, or free if the elite diary is completed)."
+      },
+      {
+        "tier": "Master",
+        "clueText": "Robin wishes to see your finest ranged equipment.",
+        "npc": "Robin",
+        "location": "Robin at the inn in Port Phasmatys . Speak to him while wearing equipment adding up to 180 ranged attack bonus or over ( crystal bow gives +100 ranged attack bonus on its own). The bonuses from a toxic blowpipe does not count."
+      },
+      {
+        "tier": "Master",
+        "clueText": "She's small but can build both literally and figuratively.",
+        "npc": "Lovada",
+        "location": "Speak to Lovada south of the Lovakengj blast mine ."
+      },
+      {
+        "tier": "Master",
+        "clueText": "Shhhh!",
+        "npc": "Logosia",
+        "location": "Speak to Logosia in the Arceuus Library 's ground floor."
+      },
+      {
+        "tier": "Master",
+        "clueText": "Where safe to speak, the man who offers the pouch of smallest size wishes to see your alignment.",
+        "npc": "Mage of Zamorak",
+        "location": "Speak to the Mage of Zamorak in the Zamorakian chapel south of Aubury's Rune Shop in East Varrock while wearing three items aligned to Zamorak ."
+      }
+    ]
+  },
+  "anagram": {
+    "Beginner": [
+      {
+        "tier": "Beginner",
+        "anagram": "AN EARL",
+        "npc": "Ranael",
+        "location": "Al Kharid skirt shop",
+        "challenge": null
+      },
+      {
+        "tier": "Beginner",
+        "anagram": "CHAR GAME DISORDER",
+        "npc": "Archmage Sedridor",
+        "location": "Wizards' Tower basement",
+        "challenge": null
+      },
+      {
+        "tier": "Beginner",
+        "anagram": "CARPET AHOY",
+        "npc": "Apothecary",
+        "location": "South-west Varrock",
+        "challenge": null
+      },
+      {
+        "tier": "Beginner",
+        "anagram": "I CORD",
+        "npc": "Doric",
+        "location": "North of Falador",
+        "challenge": null
+      },
+      {
+        "tier": "Beginner",
+        "anagram": "IN BAR",
+        "npc": "Brian",
+        "location": "Port Sarim battleaxe shop",
+        "challenge": null
+      },
+      {
+        "tier": "Beginner",
+        "anagram": "RAIN COVE",
+        "npc": "Veronica",
+        "location": "Outside Draynor Manor",
+        "challenge": null
+      },
+      {
+        "tier": "Beginner",
+        "anagram": "RUG DETER",
+        "npc": "Gertrude",
+        "location": "West of Varrock , south of the Cooks' Guild",
+        "challenge": null
+      },
+      {
+        "tier": "Beginner",
+        "anagram": "SIR SHARE RED",
+        "npc": "Hairdresser",
+        "location": "Western Falador",
+        "challenge": null
+      },
+      {
+        "tier": "Beginner",
+        "anagram": "TAUNT ROOF",
+        "npc": "Fortunato",
+        "location": "Draynor Village Market",
+        "challenge": null
+      }
+    ],
+    "Medium": [
+      {
+        "tier": "Medium",
+        "anagram": "A BAKER",
+        "npc": "Baraek",
+        "location": "Varrock Square ( fur trader )",
+        "challenge": "5"
+      },
+      {
+        "tier": "Medium",
+        "anagram": "A BAS",
+        "npc": "Saba",
+        "location": "Found in the cave on the path towards the Death Plateau west of Burthorpe .",
+        "challenge": null
+      },
+      {
+        "tier": "Medium",
+        "anagram": "A BASIC ANTI POT",
+        "npc": "Captain Tobias",
+        "location": "Port Sarim",
+        "challenge": "6"
+      },
+      {
+        "tier": "Medium",
+        "anagram": "AHA JAR",
+        "npc": "Jaraah",
+        "location": "The hospital of the Emir's Arena .",
+        "challenge": null
+      },
+      {
+        "tier": "Medium",
+        "anagram": "A HEART",
+        "npc": "Aretha",
+        "location": "Soul Altar",
+        "challenge": "2"
+      },
+      {
+        "tier": "Medium",
+        "anagram": "ARC O LINE",
+        "npc": "Caroline",
+        "location": "North Witchaven next to the row boat. After the Sea Slug quest, she is found wandering the coast.",
+        "challenge": "11"
+      },
+      {
+        "tier": "Medium",
+        "anagram": "AREA CHEF TREK",
+        "npc": "Father Aereck",
+        "location": "Found in the church in Lumbridge . Note: If players failed to save Jarvis during the 2017 Halloween event , the answer is '20' instead of '19'.",
+        "challenge": "19"
+      },
+      {
+        "tier": "Medium",
+        "anagram": "ARE COL",
+        "npc": "Oracle",
+        "location": "The peak of Ice Mountain west of Edgeville .",
+        "challenge": "48"
+      },
+      {
+        "tier": "Medium",
+        "anagram": "ARMCHAIR THE PELT",
+        "npc": "Charlie the Tramp",
+        "location": "Next to the south entrance of Varrock .",
+        "challenge": "0"
+      },
+      {
+        "tier": "Medium",
+        "anagram": "BAIL TRIMS",
+        "npc": "Brimstail",
+        "location": "In the cave west of the Stronghold Slayer Cave entrance in the Tree Gnome Stronghold .",
+        "challenge": null
+      },
+      {
+        "tier": "Medium",
+        "anagram": "CALAMARI MADE MUD",
+        "npc": "Madame Caldarium",
+        "location": "Next to a spa in the Corsair Cove .",
+        "challenge": "6"
+      },
+      {
+        "tier": "Medium",
+        "anagram": "CLASH ION",
+        "npc": "Nicholas",
+        "location": "Most north-eastern point of Port Piscarilius , north of the fishing shop.",
+        "challenge": "4"
+      },
+      {
+        "tier": "Medium",
+        "anagram": "CUTE HI",
+        "npc": "Teicuh",
+        "location": "Rune Shop in Tal Teklan .",
+        "challenge": "4097"
+      },
+      {
+        "tier": "Medium",
+        "anagram": "DT RUN B",
+        "npc": "Brundt the Chieftain",
+        "location": "Rellekka , inside the main hall.",
+        "challenge": "5"
+      },
+      {
+        "tier": "Medium",
+        "anagram": "EEK ZERO OP",
+        "npc": "Zoo keeper",
+        "location": "Ardougne Zoo Note: If the player has completed Eagles' Peak , the answer is '51' instead of '50'.",
+        "challenge": "50"
+      },
+      {
+        "tier": "Medium",
+        "anagram": "EL OW",
+        "npc": "Lowe",
+        "location": "Varrock archery store",
+        "challenge": null
+      },
+      {
+        "tier": "Medium",
+        "anagram": "GOBLETS ODD TOES",
+        "npc": "Otto Godblessed",
+        "location": "South of the Barbarian Outpost , in Otto's Grotto .",
+        "challenge": "2"
+      },
+      {
+        "tier": "Medium",
+        "anagram": "GOBLIN KERN",
+        "npc": "King Bolren",
+        "location": "Tree Gnome Village , next to the spirit tree .",
+        "challenge": null
+      },
+      {
+        "tier": "Medium",
+        "anagram": "GOT A BOY",
+        "npc": "Gabooty",
+        "location": "Centre of Tai Bwo Wannai .",
+        "challenge": "11"
+      },
+      {
+        "tier": "Medium",
+        "anagram": "HALT US",
+        "npc": "Luthas",
+        "location": "The owner of the banana plantation on Musa Point ( Karamja ).",
+        "challenge": null
+      },
+      {
+        "tier": "Medium",
+        "anagram": "HEORIC",
+        "npc": "Eohric",
+        "location": "Burthorpe Castle , top floor.",
+        "challenge": "36"
+      },
+      {
+        "tier": "Medium",
+        "anagram": "HICK JET",
+        "npc": "Jethick",
+        "location": "Town square of West Ardougne .",
+        "challenge": "38"
+      },
+      {
+        "tier": "Medium",
+        "anagram": "HIS PHOR",
+        "npc": "Horphis",
+        "location": "Arceuus Library",
+        "challenge": "1"
+      },
+      {
+        "tier": "Medium",
+        "anagram": "I AM SIR",
+        "npc": "Marisi",
+        "location": "Marisi is a farmer found in the allotment patch located within Hosidius .",
+        "challenge": "5"
+      },
+      {
+        "tier": "Medium",
+        "anagram": "ICY FE",
+        "npc": "Fycie",
+        "location": "Rantz 's cave, south-east of Gu'Tanoth and far eastern portion of Feldip Hills (near the coast, north-east of gnome glider and A K S ).",
+        "challenge": null
+      },
+      {
+        "tier": "Medium",
+        "anagram": "I DOOM ICON INN",
+        "npc": "Dominic Onion",
+        "location": "Nightmare Zone",
+        "challenge": "9,500"
+      },
+      {
+        "tier": "Medium",
+        "anagram": "I EVEN",
+        "npc": "Nieve",
+        "location": "The Slayer master in Gnome Stronghold .",
+        "challenge": "2"
+      },
+      {
+        "tier": "Medium",
+        "anagram": "KAY SIR",
+        "npc": "Sir Kay",
+        "location": "The courtyard in Camelot Castle .",
+        "challenge": "6"
+      },
+      {
+        "tier": "Medium",
+        "anagram": "LAME T",
+        "npc": "Metla",
+        "location": "Stonecutter Outpost in the Avium Savannah .",
+        "challenge": null
+      },
+      {
+        "tier": "Medium",
+        "anagram": "LARK IN DOG",
+        "npc": "King Roald",
+        "location": "Ground floor of Varrock Palace .",
+        "challenge": "24"
+      },
+      {
+        "tier": "Medium",
+        "anagram": "LEAKEY",
+        "npc": "Kaylee",
+        "location": "Rising Sun Inn in Falador .",
+        "challenge": "18"
+      },
+      {
+        "tier": "Medium",
+        "anagram": "LOW LAG",
+        "npc": "Gallow",
+        "location": "Vinery in Hosidius .",
+        "challenge": "12"
+      },
+      {
+        "tier": "Medium",
+        "anagram": "ME IF",
+        "npc": "Femi",
+        "location": "Just outside the gates of Tree Gnome Stronghold .",
+        "challenge": null
+      },
+      {
+        "tier": "Medium",
+        "anagram": "NOD MED",
+        "npc": "Edmond",
+        "location": "Behind the most north-western house in East Ardougne .",
+        "challenge": "3"
+      },
+      {
+        "tier": "Medium",
+        "anagram": "NOT RAG",
+        "npc": "Elder Torgan",
+        "location": "To the north-west of the market in the Summer Shore , in the house with the cooking range symbol .",
+        "challenge": null
+      },
+      {
+        "tier": "Medium",
+        "anagram": "OK CO",
+        "npc": "Cook (Lumbridge)",
+        "location": "Ground floor of Lumbridge Castle .",
+        "challenge": "9"
+      },
+      {
+        "tier": "Medium",
+        "anagram": "PACINNG A TAIE",
+        "npc": "Captain Ginea",
+        "location": "East of the War Tent in the Shayzien Encampment .",
+        "challenge": "113"
+      },
+      {
+        "tier": "Medium",
+        "anagram": "PEAK REFLEX",
+        "npc": "Flax keeper",
+        "location": "Flax field south of Seers' Village .",
+        "challenge": "676"
+      },
+      {
+        "tier": "Medium",
+        "anagram": "PEATY PERT",
+        "npc": "Party Pete",
+        "location": "Falador Party Room",
+        "challenge": null
+      },
+      {
+        "tier": "Medium",
+        "anagram": "QUE SIR",
+        "npc": "Squire",
+        "location": "Falador Castle Courtyard",
+        "challenge": "654"
+      },
+      {
+        "tier": "Medium",
+        "anagram": "R AK MI",
+        "npc": "Karim",
+        "location": "Al Kharid kebab shop just south of the furnace.",
+        "challenge": "5"
+      },
+      {
+        "tier": "Medium",
+        "anagram": "RATAI",
+        "npc": "Taria",
+        "location": "Rimmington bush patch",
+        "challenge": "7"
+      },
+      {
+        "tier": "Medium",
+        "anagram": "R SLICER",
+        "npc": "Clerris",
+        "location": "Dense essence mine",
+        "challenge": "738"
+      },
+      {
+        "tier": "Medium",
+        "anagram": "SAND NUT",
+        "npc": "Dunstan",
+        "location": "Anvil in north-eastern Burthorpe .",
+        "challenge": "8"
+      },
+      {
+        "tier": "Medium",
+        "anagram": "TAMED ROCKS",
+        "npc": "Dockmaster",
+        "location": "Port Piscarilius , building north-east of the general store.",
+        "challenge": "5"
+      },
+      {
+        "tier": "Medium",
+        "anagram": "THICKNO",
+        "npc": "Hickton",
+        "location": "Hickton's Archery Emporium in Catherby . Second house east of the bank.",
+        "challenge": "2"
+      },
+      {
+        "tier": "Medium",
+        "anagram": "UESNKRL NRIEDDO",
+        "npc": "Drunken soldier",
+        "location": "The Cloak and Stagger tavern in Shayzien .",
+        "challenge": "598"
+      },
+      {
+        "tier": "Medium",
+        "anagram": "VESTE",
+        "npc": "Steve",
+        "location": "By the entrance to the Stronghold Slayer Cave .",
+        "challenge": "2"
+      }
+    ],
+    "Hard": [
+      {
+        "tier": "Hard",
+        "anagram": "BAKER CLIMB",
+        "npc": "Brambickle",
+        "location": "Located on Trollweiss Mountain .",
+        "challenge": null
+      },
+      {
+        "tier": "Hard",
+        "anagram": "BLUE GRIM GUIDED",
+        "npc": "Lumbridge Guide",
+        "location": "Just outside of Lumbridge Castle .",
+        "challenge": null
+      },
+      {
+        "tier": "Hard",
+        "anagram": "BY LOOK",
+        "npc": "Bolkoy",
+        "location": "In the Tree Gnome Village general store.",
+        "challenge": "13"
+      },
+      {
+        "tier": "Hard",
+        "anagram": "C ON GAME HOC",
+        "npc": "Gnome Coach",
+        "location": "Walking around outside the Gnome Ball course, west of the Grand Tree .",
+        "challenge": "6"
+      },
+      {
+        "tier": "Hard",
+        "anagram": "COPPER ORE CRYPTS",
+        "npc": "Prospector Percy",
+        "location": "Motherlode Mine , a pickaxe is needed to reach him.",
+        "challenge": "12"
+      },
+      {
+        "tier": "Hard",
+        "anagram": "DARN DRAKE",
+        "npc": "Daer Krand",
+        "location": "Upstairs in the eastern wing of the Sisterhood Sanctuary , just north of the The Nightmare 's arena.",
+        "challenge": null
+      },
+      {
+        "tier": "Hard",
+        "anagram": "DEKAGRAM",
+        "npc": "Dark Mage (Abyss)",
+        "location": "Centre of the inner ring of the Abyss . Astral Contact does not work.",
+        "challenge": "13"
+      },
+      {
+        "tier": "Hard",
+        "anagram": "DO SAY MORE",
+        "npc": "Doomsayer",
+        "location": "East of Lumbridge Castle , near the Lumbridge Guide .",
+        "challenge": "95"
+      },
+      {
+        "tier": "Hard",
+        "anagram": "DRAGONS LAMENT",
+        "npc": "Strange Old Man",
+        "location": "Gravedigger at the Barrows .",
+        "challenge": "40"
+      },
+      {
+        "tier": "Hard",
+        "anagram": "DR WARDEN FUNK",
+        "npc": "Drunken Dwarf (Keldagrim)",
+        "location": "In Keldagrim , east side in the house with broken glass.",
+        "challenge": null
+      },
+      {
+        "tier": "Hard",
+        "anagram": "MOTHERBOARD",
+        "npc": "Brother Omad",
+        "location": "Monastery south of Ardougne .",
+        "challenge": "129"
+      },
+      {
+        "tier": "Hard",
+        "anagram": "MY MANGLE LAL",
+        "npc": "Lammy Langle",
+        "location": "Hosidius spirit tree patch",
+        "challenge": null
+      },
+      {
+        "tier": "Hard",
+        "anagram": "O BIRDZ A ZANY EN PC",
+        "npc": "Cap'n Izzy no Beard",
+        "location": "Entrance of the Brimhaven Agility Arena .",
+        "challenge": "33"
+      },
+      {
+        "tier": "Hard",
+        "anagram": "QUIT HORRIBLE TYRANT",
+        "npc": "Brother Tranquility",
+        "location": "Mos Le'Harmless or Harmony Island",
+        "challenge": "7"
+      },
+      {
+        "tier": "Hard",
+        "anagram": "RAT MAT WITHIN",
+        "npc": "Martin Thwait",
+        "location": "Rogues' Den",
+        "challenge": "2"
+      },
+      {
+        "tier": "Hard",
+        "anagram": "SLIDE WOMAN",
+        "npc": "Wise Old Man",
+        "location": "Draynor Village",
+        "challenge": "28"
+      },
+      {
+        "tier": "Hard",
+        "anagram": "VEIL VEDA",
+        "npc": "Evil Dave",
+        "location": "Down the trapdoor in the house directly west of Edgeville bank, where the evil rats are located for the Recipe for Disaster quest. (Requires completion of Shadow of the Storm quest to open the trapdoor.) (On Examine: A clue suggested by Marfn.)",
+        "challenge": "666"
+      },
+      {
+        "tier": "Hard",
+        "anagram": "WOO AN EGG KIWI",
+        "npc": "King Awowogei",
+        "location": "Must have at least partially completed Monkey Madness I . Located in the building south of the Ape Atoll Teleport . Remember to bring a Karamjan monkey greegree and an M'speak amulet , unless the player has competed Monkey Madness II . Talk to the Elder Guard to gain entrance.",
+        "challenge": "24"
+      }
+    ],
+    "Elite": [
+      {
+        "tier": "Elite",
+        "anagram": "AT HERG",
+        "npc": "Regath",
+        "location": "South-eastern corner of Arceuus in the General Store .",
+        "challenge": "25"
+      },
+      {
+        "tier": "Elite",
+        "anagram": "CAREER IN MOON",
+        "npc": "Oneiromancer",
+        "location": "Astral Altar on Lunar Isle .",
+        "challenge": "25"
+      },
+      {
+        "tier": "Elite",
+        "anagram": "Cirr Jad",
+        "npc": "Jardric",
+        "location": "Fossil Island museum camp .",
+        "challenge": "1"
+      },
+      {
+        "tier": "Elite",
+        "anagram": "COOL NERD",
+        "npc": "Old Crone",
+        "location": "East of the Slayer Tower .",
+        "challenge": "619"
+      },
+      {
+        "tier": "Elite",
+        "anagram": "DR HITMAN",
+        "npc": "Mandrith",
+        "location": "Outside the Wilderness Resource Area .",
+        "challenge": "28"
+      },
+      {
+        "tier": "Elite",
+        "anagram": "LADDER MEMO GUV",
+        "npc": "Guard Vemmeldo",
+        "location": "Bank east of the Stronghold Slayer Cave .",
+        "challenge": "3"
+      },
+      {
+        "tier": "Elite",
+        "anagram": "MACHETE CLAM",
+        "npc": "Cam the Camel",
+        "location": "Just outside the gates of the Emir's Arena , Camulet not required.",
+        "challenge": "6"
+      },
+      {
+        "tier": "Elite",
+        "anagram": "MAJORS LAVA BADS AIR",
+        "npc": "Ambassador Alvijar",
+        "location": "North-east Dorgesh-Kaan , middle floor, just south of the house with the quest symbol. (You must complete Another Slice of H.A.M. before attempting).",
+        "challenge": "2,505"
+      },
+      {
+        "tier": "Elite",
+        "anagram": "NO OWNER",
+        "npc": "Oronwen",
+        "location": "Lletya Seamstress shop in Lletya .",
+        "challenge": "20"
+      },
+      {
+        "tier": "Elite",
+        "anagram": "OUR OWN NEEDS",
+        "npc": "Nurse Wooned",
+        "location": "Infirmary in the Shayzien Encampment .",
+        "challenge": "16"
+      },
+      {
+        "tier": "Elite",
+        "anagram": "SNAKES SO I SAIL",
+        "npc": "Lisse Isaakson",
+        "location": "Neitiznot",
+        "challenge": "2"
+      },
+      {
+        "tier": "Elite",
+        "anagram": "UNLEASH NIGHT MIST",
+        "npc": "Sigli the Huntsman",
+        "location": "Rellekka",
+        "challenge": "302"
+      }
+    ],
+    "Master": [
+      {
+        "tier": "Master",
+        "anagram": "A Elf Knows",
+        "npc": "Snowflake",
+        "location": "Weiss",
+        "challenge": "Light box or puzzle box ."
+      },
+      {
+        "tier": "Master",
+        "anagram": "Brucie Catnap",
+        "npc": "Captain Bruce",
+        "location": "Shayzien",
+        "challenge": "Light box or puzzle box ."
+      },
+      {
+        "tier": "Master",
+        "anagram": "Car If Ices",
+        "npc": "Sacrifice",
+        "location": "Zul-Andra , on the dock near Priestess Zul-Gwenwynig .",
+        "challenge": "Light box or puzzle box ."
+      },
+      {
+        "tier": "Master",
+        "anagram": "Ded War",
+        "npc": "Edward",
+        "location": "Inside Rogues' Castle",
+        "challenge": "Light box or puzzle box ."
+      },
+      {
+        "tier": "Master",
+        "anagram": "Dim Tharn",
+        "npc": "Mandrith",
+        "location": "Outside the Wilderness Resource Area .",
+        "challenge": "Light box or Puzzle box"
+      },
+      {
+        "tier": "Master",
+        "anagram": "Duo Plug",
+        "npc": "Dugopul",
+        "location": "Graveyard on Ape Atoll , south of Awowogei 's throne room.",
+        "challenge": "Light box or puzzle box ."
+      },
+      {
+        "tier": "Master",
+        "anagram": "Forlun",
+        "npc": "Runolf",
+        "location": "Miscellania and Etceteria Dungeon (Requires partial completion of Royal Trouble .)",
+        "challenge": "Light box or puzzle box ."
+      },
+      {
+        "tier": "Master",
+        "anagram": "Im N Zezim",
+        "npc": "Immenizz",
+        "location": "The impling inside Puro-Puro .",
+        "challenge": "Light box or puzzle box ."
+      },
+      {
+        "tier": "Master",
+        "anagram": "Mal in Tau",
+        "npc": "Luminata",
+        "location": "East of the Burgh de Rott entrance, in town.",
+        "challenge": "Light box or puzzle box ."
+      },
+      {
+        "tier": "Master",
+        "anagram": "Mold La Ran",
+        "npc": "Old Man Ral",
+        "location": "Meiyerditch",
+        "challenge": "Light box or puzzle box ."
+      },
+      {
+        "tier": "Master",
+        "anagram": "Mus Kil Reader",
+        "npc": "Radimus Erkle",
+        "location": "Legends' Guild",
+        "challenge": "Light box or puzzle box ."
+      },
+      {
+        "tier": "Master",
+        "anagram": "Rip Maul",
+        "npc": "Primula",
+        "location": "Myths' Guild",
+        "challenge": "Light box or puzzle box ."
+      },
+      {
+        "tier": "Master",
+        "anagram": "Rue Go",
+        "npc": "Goreu",
+        "location": "Lletya",
+        "challenge": "Light box or puzzle box ."
+      },
+      {
+        "tier": "Master",
+        "anagram": "Slam Duster Grail",
+        "npc": "Guildmaster Lars",
+        "location": "Woodcutting Guild in Hosidius .",
+        "challenge": "Light box or puzzle box ."
+      },
+      {
+        "tier": "Master",
+        "anagram": "Ten Wigs On",
+        "npc": "Wingstone",
+        "location": "Between Nardah and the Agility Pyramid .",
+        "challenge": "Light box or puzzle box ."
+      },
+      {
+        "tier": "Master",
+        "anagram": "Twenty Cure Iron",
+        "npc": "New Recruit Tony",
+        "location": "Graveyard of Heroes in Shayzien .",
+        "challenge": "Light box or puzzle box"
+      }
+    ]
+  },
   "itemIndex": {
     "Gold ring": [
       {
@@ -7347,6 +8880,2273 @@
         "items": [
           "Dragon keel parts"
         ]
+      }
+    ]
+  },
+  "npcIndex": {
+    "Double agent": [
+      {
+        "type": "emote_combat",
+        "tier": "Hard",
+        "clueText": "Beckon on the east coast of the Kharazi Jungle. Beware of double agents! Equip any vestment stole and a heraldic rune shield ."
+      },
+      {
+        "type": "emote_combat",
+        "tier": "Hard",
+        "clueText": "Blow a kiss between the tables in Shilo Village bank. Beware of double agents! Equip a blue mystic hat , bone spear and rune platebody ."
+      },
+      {
+        "type": "emote_combat",
+        "tier": "Hard",
+        "clueText": "Blow a raspberry in the Fishing Guild bank. Beware of double agents! Equip an elemental shield , blue d'hide chaps and a rune warhammer ."
+      },
+      {
+        "type": "emote_combat",
+        "tier": "Hard",
+        "clueText": "Bow at the top of the lighthouse. Beware of double agents! Equip a blue d'hide body , blue d'hide vambraces and no jewellery."
+      },
+      {
+        "type": "emote_combat",
+        "tier": "Hard",
+        "clueText": "Cheer at the top of the agility pyramid. Beware of double agents! Equip a blue mystic robe top , and any rune heraldic shield ."
+      },
+      {
+        "type": "emote_combat",
+        "tier": "Hard",
+        "clueText": "Dance at the cat-doored pyramid in Sophanem. Beware of double agents! Equip a ring of life , an uncharged amulet of glory and an adamant two-handed sword ."
+      },
+      {
+        "type": "emote_combat",
+        "tier": "Hard",
+        "clueText": "Headbang at the exam centre. Beware of double agents! Equip a mystic fire staff , a diamond bracelet and rune boots ."
+      },
+      {
+        "type": "emote_combat",
+        "tier": "Hard",
+        "clueText": "Jig at Jiggig. Beware of double agents! Equip a rune spear , rune platelegs and any rune heraldic helm ."
+      },
+      {
+        "type": "emote_combat",
+        "tier": "Hard",
+        "clueText": "Laugh in Jokul's tent in the Mountain Camp. Beware of double agents! Equip a rune full helmet , blue d'hide chaps and a fire battlestaff ."
+      },
+      {
+        "type": "emote_combat",
+        "tier": "Hard",
+        "clueText": "Panic by the pilot on White Wolf Mountain. Beware of double agents! Equip mithril platelegs , a ring of life , and a rune axe ."
+      },
+      {
+        "type": "emote_combat",
+        "tier": "Hard",
+        "clueText": "Panic in the heart of the Haunted Woods. Beware of double agents! Have no items equipped when you do."
+      },
+      {
+        "type": "emote_combat",
+        "tier": "Hard",
+        "clueText": "Panic on the Wilderness volcano bridge. Beware of double agents! Equip any headband and crozier ."
+      },
+      {
+        "type": "emote_combat",
+        "tier": "Hard",
+        "clueText": "Panic outside the Twilight Temple. Beware of double agents! Equip a rune longsword , rune platebody and a rune plateskirt ."
+      },
+      {
+        "type": "emote_combat",
+        "tier": "Hard",
+        "clueText": "Salute in the banana plantation. Beware of double agents! Equip a diamond ring , amulet of power , and nothing on your chest and legs."
+      },
+      {
+        "type": "emote_combat",
+        "tier": "Hard",
+        "clueText": "Salute in the centre of the mess hall. Beware of double agents! Equip a rune halberd , rune platebody and an amulet of strength ."
+      },
+      {
+        "type": "emote_combat",
+        "tier": "Hard",
+        "clueText": "Shrug in the woods east of the Level 19 Wilderness Obelisk. Beware of double agents! Equip rune platelegs, an iron platebody and blue d'hide vambraces ."
+      },
+      {
+        "type": "emote_combat",
+        "tier": "Hard",
+        "clueText": "Yawn in the rogues' general store. Beware of double agents! Equip an adamant square shield , blue dragon vambraces and a rune pickaxe ."
+      },
+      {
+        "type": "emote_combat",
+        "tier": "Elite",
+        "clueText": "Blow a kiss in the heart of the lava maze. Equip black d'hide chaps , a spotted cape and a rolling pin ."
+      },
+      {
+        "type": "emote_combat",
+        "tier": "Elite",
+        "clueText": "Bow on the ground floor of the Legend's guild. Equip Legend's cape , a dragon battleaxe and an amulet of glory ."
+      },
+      {
+        "type": "emote_combat",
+        "tier": "Elite",
+        "clueText": "Bow upstairs in the Edgeville Monastery. Equip a completed prayer book ."
+      },
+      {
+        "type": "emote_combat",
+        "tier": "Elite",
+        "clueText": "Bow within the temple in Civitas illa Fortis. Equip any piece of sunfire fanatic armour ."
+      },
+      {
+        "type": "emote_combat",
+        "tier": "Elite",
+        "clueText": "Cheer in the Shadow dungeon. Equip a rune crossbow , climbing boots and any mitre ."
+      },
+      {
+        "type": "emote_combat",
+        "tier": "Elite",
+        "clueText": "Dance on the Fishing Platform. Equip barrows gloves , an amulet of glory and a dragon med helm ."
+      },
+      {
+        "type": "emote_combat",
+        "tier": "Elite",
+        "clueText": "Do the crab dance by the monument on Wintumber Island. Equip a crab helmet and a crab claw ."
+      },
+      {
+        "type": "emote_combat",
+        "tier": "Elite",
+        "clueText": "Headbang at the top of the Slayer Tower. Equip a seercull , a combat bracelet , and helm of Neitiznot ."
+      },
+      {
+        "type": "emote_combat",
+        "tier": "Elite",
+        "clueText": "Headbang in the Fight Arena pub. Equip a pirate bandana , a dragonstone necklace and a magic longbow ."
+      },
+      {
+        "type": "emote_combat",
+        "tier": "Elite",
+        "clueText": "Jump for joy at the Neitiznot rune rock. Equip rune boots , a proselyte hauberk and a dragonstone ring ."
+      },
+      {
+        "type": "emote_combat",
+        "tier": "Elite",
+        "clueText": "Jump for joy in the Ancient Cavern. Equip a granite shield , splitbark body , and any rune heraldic helm ."
+      },
+      {
+        "type": "emote_combat",
+        "tier": "Elite",
+        "clueText": "Laugh by the fountain of heroes. Equip splitbark legs , dragon boots and a rune longsword ."
+      },
+      {
+        "type": "emote_combat",
+        "tier": "Elite",
+        "clueText": "Laugh in front of the gem store in Ardougne market. Equip a Castle wars bracelet , a dragonstone amulet and a ring of forging ."
+      },
+      {
+        "type": "emote_combat",
+        "tier": "Elite",
+        "clueText": "Panic at the area flowers meet snow. Equip blue d'hide vambraces , a dragon spear and a rune plateskirt ."
+      },
+      {
+        "type": "emote_combat",
+        "tier": "Elite",
+        "clueText": "Salute by the Charcoal Burners. Equip a Farmer's strawhat , Shayzien body (5) , and Pyromancer robes ."
+      },
+      {
+        "type": "emote_combat",
+        "tier": "Elite",
+        "clueText": "Salute in the warriors' guild bank. Equip only a black salamander ."
+      },
+      {
+        "type": "emote_combat",
+        "tier": "Elite",
+        "clueText": "Shrug in the Shayzien war tent. Equip a blue mystic robe bottom , a rune kiteshield and any bob shirt ."
+      },
+      {
+        "type": "emote_combat",
+        "tier": "Elite",
+        "clueText": "Spin in West Ardougne Church. Equip a dragon spear and red d'hide chaps ."
+      },
+      {
+        "type": "emote_combat",
+        "tier": "Elite",
+        "clueText": "Yawn at the top of Trollheim. Equip a lava battlestaff , black d'hide vambraces and a mind shield ."
+      },
+      {
+        "type": "emote_combat",
+        "tier": "Master",
+        "clueText": "Beckon by a collection of crystalline maple trees. Beware of double agents! Equip Bryophyta's staff and a nature tiara ."
+      },
+      {
+        "type": "emote_combat",
+        "tier": "Master",
+        "clueText": "Blow a kiss outside K'ril Tsutsaroth's chamber. Beware of double agents! Equip a Zamorak full helm and the Shadow sword ."
+      },
+      {
+        "type": "emote_combat",
+        "tier": "Master",
+        "clueText": "Blow a raspberry at the bank of the Warrior's guild. Beware of double agents! Equip a dragon battleaxe , a slayer helm of any kind and a dragon defender or avernic defender ."
+      },
+      {
+        "type": "emote_combat",
+        "tier": "Master",
+        "clueText": "Bow in front of the cave on Brittle Isle. Beware of double agents! Equip a medallion of the deep and a rosewood blowpipe ."
+      },
+      {
+        "type": "emote_combat",
+        "tier": "Master",
+        "clueText": "Bow in the Iorwerth Camp. Beware of double agents! Equip a charged crystal bow ."
+      },
+      {
+        "type": "emote_combat",
+        "tier": "Master",
+        "clueText": "Cheer in the Entrana church. Beware of double agents! Equip a set of full black dragonhide armour ."
+      },
+      {
+        "type": "emote_combat",
+        "tier": "Master",
+        "clueText": "Clap in the magic axe hut. Beware of double agents! Equip only flared trousers ."
+      },
+      {
+        "type": "emote_combat",
+        "tier": "Master",
+        "clueText": "Cry in the Tzhaar gem store. Beware of the double agents! Equip a fire cape and a TokTz-Xil-Ul ."
+      },
+      {
+        "type": "emote_combat",
+        "tier": "Master",
+        "clueText": "Dance in Iban's temple. Beware of double agents! Equip Iban's staff , a black mystic top , and a black mystic bottom ."
+      },
+      {
+        "type": "emote_combat",
+        "tier": "Master",
+        "clueText": "Dance in the King Black Dragon's lair. Beware of double agents! Equip a black d'hide body , black d'hide vambraces and a black dragon mask ."
+      },
+      {
+        "type": "emote_combat",
+        "tier": "Master",
+        "clueText": "Do a jig at the Barrows chest. Beware of double agents! Equip any full barrows set ."
+      },
+      {
+        "type": "emote_combat",
+        "tier": "Master",
+        "clueText": "Flap at the Death Altar. Beware of double agents! Equip a death tiara , a legend's cape and any ring of wealth ."
+      },
+      {
+        "type": "emote_combat",
+        "tier": "Master",
+        "clueText": "Goblin Salute at the Goblin Village. Beware of double agents! Equip a Bandos platebody , Bandos cloak and Bandos godsword ."
+      },
+      {
+        "type": "emote_combat",
+        "tier": "Master",
+        "clueText": "Jump for joy in the centre of Zul-Andra. Beware of double agents! Equip a dragon 2h sword , Bandos boots and an obsidian cape ."
+      },
+      {
+        "type": "emote_combat",
+        "tier": "Master",
+        "clueText": "Panic by the big egg where no one dare goes and the ground is burnt. Beware of double agents! Equip a dragon med helm , a TokTz-Ket-Xil , a brine sabre , rune platebody and an uncharged amulet of glory ."
+      },
+      {
+        "type": "emote_combat",
+        "tier": "Master",
+        "clueText": "Salute outside the gates of Cam Torum. Beware of double agents! Equip a full set of blue moon equipment ."
+      },
+      {
+        "type": "emote_combat",
+        "tier": "Master",
+        "clueText": "Show your anger at the Wise old man. Beware of double agents! Equip an abyssal whip , a legend's cape and some spined chaps ."
+      },
+      {
+        "type": "emote_combat",
+        "tier": "Master",
+        "clueText": "Show your anger towards the Statue of Saradomin in Ellamaria's garden. Beware of double agents! Equip a Zamorak godsword ."
+      },
+      {
+        "type": "emote_combat",
+        "tier": "Master",
+        "clueText": "Slap your head in the centre of the Kourend catacombs. Beware of double agents! Equip arclight or emberlight along with the amulet of the damned ."
+      },
+      {
+        "type": "emote_combat",
+        "tier": "Master",
+        "clueText": "Spin in front of the Soul Altar. Beware of double agents! Equip a dragon pickaxe , helm of Neitiznot and a pair of rune boots ."
+      },
+      {
+        "type": "emote_combat",
+        "tier": "Master",
+        "clueText": "Stamp in the Enchanted valley west of the waterfall. Beware of double agents! Equip a dragon axe ."
+      },
+      {
+        "type": "emote_combat",
+        "tier": "Master",
+        "clueText": "Swing a bullroarer at the top of the watchtower. Beware of double agents! Equip a dragon plateskirt , climbing boots and a dragon chainbody ."
+      },
+      {
+        "type": "emote_combat",
+        "tier": "Master",
+        "clueText": "Wave on the northern wall of the Castle Drakan. Beware of double agents! Wear a dragon sq shield , splitbark body and any boater ."
+      },
+      {
+        "type": "emote_combat",
+        "tier": "Master",
+        "clueText": "Yawn in the 7th room of Pyramid Plunder. Beware of double agents! Equip a pharaoh's sceptre and a full set of menaphite robes ."
+      },
+      {
+        "type": "emote_combat",
+        "tier": "Master",
+        "clueText": "Think on the western coast of Salvager Overlook. Beware of double agents! Equip a Hueycoatl hide coif and some Hueycoatl hide vambraces ."
+      }
+    ],
+    "Sherlock": [
+      {
+        "type": "sherlock",
+        "tier": "Elite",
+        "task": "Equip a Dragon Scimitar ."
+      },
+      {
+        "type": "sherlock",
+        "tier": "Elite",
+        "task": "Enchant a piece of dragonstone jewellery."
+      },
+      {
+        "type": "sherlock",
+        "tier": "Elite",
+        "task": "Craft a nature rune ."
+      },
+      {
+        "type": "sherlock",
+        "tier": "Elite",
+        "task": "Catch a mottled eel with aerial fishing in Lake Molch ."
+      },
+      {
+        "type": "sherlock",
+        "tier": "Elite",
+        "task": "Score a goal in skullball ."
+      },
+      {
+        "type": "sherlock",
+        "tier": "Elite",
+        "task": "Complete a lap of Ape Atoll agility course ."
+      },
+      {
+        "type": "sherlock",
+        "tier": "Elite",
+        "task": "Create a super defence potion ."
+      },
+      {
+        "type": "sherlock",
+        "tier": "Elite",
+        "task": "Steal from a chest in Ardougne Castle ."
+      },
+      {
+        "type": "sherlock",
+        "tier": "Elite",
+        "task": "Craft a green dragonhide body ."
+      },
+      {
+        "type": "sherlock",
+        "tier": "Elite",
+        "task": "String a yew longbow ."
+      },
+      {
+        "type": "sherlock",
+        "tier": "Elite",
+        "task": "Slay a dust devil ."
+      },
+      {
+        "type": "sherlock",
+        "tier": "Elite",
+        "task": "Catch a black warlock ."
+      },
+      {
+        "type": "sherlock",
+        "tier": "Elite",
+        "task": "Catch a red chinchompa ."
+      },
+      {
+        "type": "sherlock",
+        "tier": "Elite",
+        "task": "Mine a mithril ore ."
+      },
+      {
+        "type": "sherlock",
+        "tier": "Elite",
+        "task": "Smith a Mithril 2h Sword ."
+      },
+      {
+        "type": "sherlock",
+        "tier": "Elite",
+        "task": "Catch a raw shark ."
+      },
+      {
+        "type": "sherlock",
+        "tier": "Elite",
+        "task": "Cut a yew log ."
+      },
+      {
+        "type": "sherlock",
+        "tier": "Elite",
+        "task": "Fix a magical lamp in Dorgesh-Kaan ."
+      },
+      {
+        "type": "sherlock",
+        "tier": "Elite",
+        "task": "Burn a yew log ."
+      },
+      {
+        "type": "sherlock",
+        "tier": "Elite",
+        "task": "Cook a swordfish"
+      },
+      {
+        "type": "sherlock",
+        "tier": "Elite",
+        "task": "Craft multiple cosmic runes from a single essence."
+      },
+      {
+        "type": "sherlock",
+        "tier": "Elite",
+        "task": "Plant a watermelon seed ."
+      },
+      {
+        "type": "sherlock",
+        "tier": "Elite",
+        "task": "Activate the Chivalry prayer."
+      },
+      {
+        "type": "sherlock",
+        "tier": "Elite",
+        "task": "Smith a tier 2 or above Shayzien platebody ."
+      },
+      {
+        "type": "sherlock",
+        "tier": "Elite",
+        "task": "Mine some nickel ."
+      },
+      {
+        "type": "sherlock",
+        "tier": "Master",
+        "task": "Equip an abyssal whip in front of the abyssal demons of the Slayer Tower ."
+      },
+      {
+        "type": "sherlock",
+        "tier": "Master",
+        "task": "Smith a runite med helm ."
+      },
+      {
+        "type": "sherlock",
+        "tier": "Master",
+        "task": "Teleport to a spirit tree you planted yourself."
+      },
+      {
+        "type": "sherlock",
+        "tier": "Master",
+        "task": "Create a Barrows teleport tablet ."
+      },
+      {
+        "type": "sherlock",
+        "tier": "Master",
+        "task": "Slay a Nechryael in the Slayer Tower ."
+      },
+      {
+        "type": "sherlock",
+        "tier": "Master",
+        "task": "Kill the spiritual, magic and godly whilst representing their own god."
+      },
+      {
+        "type": "sherlock",
+        "tier": "Master",
+        "task": "Create an unstrung dragonstone amulet at a furnace."
+      },
+      {
+        "type": "sherlock",
+        "tier": "Master",
+        "task": "Burn a magic log ."
+      },
+      {
+        "type": "sherlock",
+        "tier": "Master",
+        "task": "Burn a redwood log ."
+      },
+      {
+        "type": "sherlock",
+        "tier": "Master",
+        "task": "Catch a tecu salamander ."
+      },
+      {
+        "type": "sherlock",
+        "tier": "Master",
+        "task": "Complete a lap of the Rellekka rooftop agility course whilst sporting the finest amount of grace ."
+      },
+      {
+        "type": "sherlock",
+        "tier": "Master",
+        "task": "Mix an anti-venom potion."
+      },
+      {
+        "type": "sherlock",
+        "tier": "Master",
+        "task": "Mine a piece of runite ore whilst sporting the finest mining gear ."
+      },
+      {
+        "type": "sherlock",
+        "tier": "Master",
+        "task": "Steal a gem from the Ardougne market."
+      },
+      {
+        "type": "sherlock",
+        "tier": "Master",
+        "task": "Pickpocket an elf ."
+      },
+      {
+        "type": "sherlock",
+        "tier": "Master",
+        "task": "Bind a blood rune at the Blood Altar . Either blood altar may be used."
+      },
+      {
+        "type": "sherlock",
+        "tier": "Master",
+        "task": "Mix a ranging mix potion."
+      },
+      {
+        "type": "sherlock",
+        "tier": "Master",
+        "task": "Fletch a rune dart ."
+      },
+      {
+        "type": "sherlock",
+        "tier": "Master",
+        "task": "Cremate a set of fiyr remains ."
+      },
+      {
+        "type": "sherlock",
+        "tier": "Master",
+        "task": "Dissect a sacred eel ."
+      },
+      {
+        "type": "sherlock",
+        "tier": "Master",
+        "task": "Kill a lizardman shaman ."
+      },
+      {
+        "type": "sherlock",
+        "tier": "Master",
+        "task": "Angle for an Anglerfish in your finest fishing gear ."
+      },
+      {
+        "type": "sherlock",
+        "tier": "Master",
+        "task": "Chop a redwood log whilst sporting the finest lumberjack gear ."
+      },
+      {
+        "type": "sherlock",
+        "tier": "Master",
+        "task": "Craft a light orb in the Dorgesh-Kaan bank."
+      },
+      {
+        "type": "sherlock",
+        "tier": "Master",
+        "task": "Kill a reanimated abyssal ."
+      },
+      {
+        "type": "sherlock",
+        "tier": "Master",
+        "task": "Kill a Fiyr shade inside Mort'tons shade catacombs ."
+      }
+    ],
+    "Falo the Bard": [
+      {
+        "type": "falo",
+        "lyric": "A blood red weapon, a strong curved sword, found on the island of primate lords.",
+        "items": [
+          "Dragon scimitar",
+          "Dragon scimitar (or)",
+          "Dragon scimitar (cr)"
+        ]
+      },
+      {
+        "type": "falo",
+        "lyric": "A book that preaches of some great figure, lending strength, might and vigour.",
+        "items": [
+          "God book",
+          "God book (or)"
+        ]
+      },
+      {
+        "type": "falo",
+        "lyric": "A bow of elven craft was made, it shimmers bright, but will soon fade.",
+        "items": [
+          "Crystal bow",
+          "Bow of Faerdhinen"
+        ]
+      },
+      {
+        "type": "falo",
+        "lyric": "A fiery axe of great inferno, when you use it, you'll wonder where the logs go.",
+        "items": [
+          "Infernal axe",
+          "Infernal axe (or)",
+          "Infernal axe (or) (Trailblazer Reloaded)"
+        ]
+      },
+      {
+        "type": "falo",
+        "lyric": "A mark used to increase one's grace, found atop a seer's place.",
+        "items": [
+          "Mark of Grace"
+        ]
+      },
+      {
+        "type": "falo",
+        "lyric": "A molten beast with fiery breath, you acquire these with its death.",
+        "items": [
+          "Lava dragon bones"
+        ]
+      },
+      {
+        "type": "falo",
+        "lyric": "A shiny helmet of flight, to obtain this with melee, struggle you might.",
+        "items": [
+          "Armadyl helmet"
+        ]
+      },
+      {
+        "type": "falo",
+        "lyric": "A sword held in the other hand, red its colour, Cyclops strength you must withstand.",
+        "items": [
+          "Dragon defender",
+          "Dragon defender (t)",
+          "Avernic defender"
+        ]
+      },
+      {
+        "type": "falo",
+        "lyric": "A token used to kill mythical beasts, in hopes of a blade or just for an xp feast.",
+        "items": [
+          "Warrior guild token"
+        ]
+      },
+      {
+        "type": "falo",
+        "lyric": "Green is my favourite, mature ale I do love, this takes your herblore above.",
+        "items": [
+          "Greenman's ale(m)"
+        ]
+      },
+      {
+        "type": "falo",
+        "lyric": "It can hold down a boat or crush a goat, this object, you see, is quite heavy.",
+        "items": [
+          "Barrelchest anchor",
+          "Barrelchest anchor (bh)"
+        ]
+      },
+      {
+        "type": "falo",
+        "lyric": "It comes from the ground, underneath the snowy plain. Trolls aplenty, with what looks like a mane.",
+        "items": [
+          "Basalt"
+        ]
+      },
+      {
+        "type": "falo",
+        "lyric": "No attack to wield, only strength is required, made of obsidian, but with no room for a shield.",
+        "items": [
+          "Tzhaar-ket-om",
+          "Tzhaar-ket-om (t)"
+        ]
+      },
+      {
+        "type": "falo",
+        "lyric": "Penance healers runners and more, obtaining this body often gives much deplore.",
+        "items": [
+          "Fighter torso",
+          "Fighter torso (or)"
+        ]
+      },
+      {
+        "type": "falo",
+        "lyric": "Strangely found in a chest, many believe these gloves are the best.",
+        "items": [
+          "Barrows gloves"
+        ]
+      },
+      {
+        "type": "falo",
+        "lyric": "These gloves of white won't help you fight, but aid in cooking, they just might.",
+        "items": [
+          "Cooking gauntlets"
+        ]
+      },
+      {
+        "type": "falo",
+        "lyric": "They come from some time ago, from a land unto the east. Fossilised they have become, this small and gentle beast.",
+        "items": [
+          "Numulite"
+        ]
+      },
+      {
+        "type": "falo",
+        "lyric": "To slay a dragon you must first do, before this chest piece can be put on you.",
+        "items": [
+          "Rune platebody"
+        ]
+      },
+      {
+        "type": "falo",
+        "lyric": "Vampyres are agile opponents, damaged best with a weapon of many components.",
+        "items": [
+          "Ivandis flail",
+          "Rod of Ivandis",
+          "Blisterwood flail",
+          "Hallowed flail"
+        ]
+      },
+      {
+        "type": "falo",
+        "lyric": "You won't bring me to heel, unless you have a bright red keel.",
+        "items": [
+          "Dragon keel parts"
+        ]
+      },
+      {
+        "type": "cryptic",
+        "tier": "Master",
+        "clueText": "Falo the bard wants to see you."
+      }
+    ],
+    "Hans": [
+      {
+        "type": "cryptic",
+        "tier": "Beginner",
+        "clueText": "Always walking around the castle grounds and somehow knows everyone's age ."
+      },
+      {
+        "type": "cryptic",
+        "tier": "Easy",
+        "clueText": "Speak to Hans to solve the clue."
+      },
+      {
+        "type": "cryptic",
+        "tier": "Hard",
+        "clueText": "Snah? I feel all confused, like one of those cakes..."
+      }
+    ],
+    "Reldo": [
+      {
+        "type": "cryptic",
+        "tier": "Beginner",
+        "clueText": "Buried beneath the ground, who knows where it's found. Lucky for you, A man called Reldo may have a clue."
+      }
+    ],
+    "Cook (Lumbridge)": [
+      {
+        "type": "cryptic",
+        "tier": "Beginner",
+        "clueText": "In the place Duke Horacio calls home, talk to a man with a hat dropped by goblins ."
+      },
+      {
+        "type": "anagram",
+        "tier": "Medium",
+        "anagram": "OK CO",
+        "challenge": "9"
+      }
+    ],
+    "Hunding": [
+      {
+        "type": "cryptic",
+        "tier": "Beginner",
+        "clueText": "In a village of barbarians, I am the one who guards the village from up high ."
+      }
+    ],
+    "Charlie the Tramp": [
+      {
+        "type": "cryptic",
+        "tier": "Beginner",
+        "clueText": "Talk to Charlie the Tramp in Varrock ."
+      },
+      {
+        "type": "anagram",
+        "tier": "Medium",
+        "anagram": "ARMCHAIR THE PELT",
+        "challenge": "0"
+      }
+    ],
+    "Shantay": [
+      {
+        "type": "cryptic",
+        "tier": "Beginner",
+        "clueText": "Near the open desert I reside, to get past me you must abide. Go forward if you dare, for when you pass me, you'll be sweating by your hair ."
+      },
+      {
+        "type": "cryptic",
+        "tier": "Easy",
+        "clueText": "Search the bucket in the Port Sarim jail."
+      }
+    ],
+    "Tool leprechaun": [
+      {
+        "type": "cryptic",
+        "tier": "Easy",
+        "clueText": "Belladonna, my dear. If only I had gloves, then I could hold you at last."
+      }
+    ],
+    "Ranulph": [
+      {
+        "type": "cryptic",
+        "tier": "Easy",
+        "clueText": "He's been studying unusual tree migrations."
+      }
+    ],
+    "Cecilia": [
+      {
+        "type": "cryptic",
+        "tier": "Easy",
+        "clueText": "I'd like to hear some music. Come and see me on the bridge in Falador Park, and play: <some music> Thanks, Cecilia"
+      },
+      {
+        "type": "cryptic",
+        "tier": "Medium",
+        "clueText": "I'd like to hear some music. Come and see me on the bridge in Falador Park, and play: <some music> Thanks, Cecilia"
+      },
+      {
+        "type": "cryptic",
+        "tier": "Hard",
+        "clueText": "I'd like to hear some music. Come and see me on the bridge in Falador Park, and play: <some music> Thanks, Cecilia"
+      }
+    ],
+    "Vannaka": [
+      {
+        "type": "cryptic",
+        "tier": "Easy",
+        "clueText": "I wonder how many bronze swords he has handed out."
+      },
+      {
+        "type": "cryptic",
+        "tier": "Elite",
+        "clueText": "You were 3 and I was the 6th. Come speak to me."
+      }
+    ],
+    "Chemist": [
+      {
+        "type": "cryptic",
+        "tier": "Easy",
+        "clueText": "I would make a chemistry joke, but I'm afraid I wouldn't get a reaction."
+      }
+    ],
+    "Father Jean": [
+      {
+        "type": "cryptic",
+        "tier": "Easy",
+        "clueText": "I wouldn't wear this jean on my legs."
+      }
+    ],
+    "Captain Tobias": [
+      {
+        "type": "cryptic",
+        "tier": "Easy",
+        "clueText": "One of the sailors in Port Sarim is your next destination."
+      },
+      {
+        "type": "anagram",
+        "tier": "Medium",
+        "anagram": "A BASIC ANTI POT",
+        "challenge": "6"
+      }
+    ],
+    "Konoo": [
+      {
+        "type": "cryptic",
+        "tier": "Easy",
+        "clueText": "Salty peter."
+      }
+    ],
+    "Jeed": [
+      {
+        "type": "cryptic",
+        "tier": "Easy",
+        "clueText": "Someone watching the fights in the Emir's Arena is your next destination."
+      }
+    ],
+    "Arhein": [
+      {
+        "type": "cryptic",
+        "tier": "Easy",
+        "clueText": "Speak to Arhein in Catherby."
+      }
+    ],
+    "Doric": [
+      {
+        "type": "cryptic",
+        "tier": "Easy",
+        "clueText": "Speak to Doric, who lives north of Falador."
+      },
+      {
+        "type": "anagram",
+        "tier": "Beginner",
+        "anagram": "I CORD",
+        "challenge": null
+      }
+    ],
+    "Ellis": [
+      {
+        "type": "cryptic",
+        "tier": "Easy",
+        "clueText": "Speak to Ellis in Al Kharid."
+      }
+    ],
+    "Gaius": [
+      {
+        "type": "cryptic",
+        "tier": "Easy",
+        "clueText": "Speak to Gaius in Taverley."
+      }
+    ],
+    "Jatix": [
+      {
+        "type": "cryptic",
+        "tier": "Easy",
+        "clueText": "Speak to Jatix in Taverley."
+      }
+    ],
+    "Ned": [
+      {
+        "type": "cryptic",
+        "tier": "Easy",
+        "clueText": "Speak to Ned in Draynor Village."
+      }
+    ],
+    "Rusty": [
+      {
+        "type": "cryptic",
+        "tier": "Easy",
+        "clueText": "Speak to Rusty north of Falador."
+      }
+    ],
+    "Sarah": [
+      {
+        "type": "cryptic",
+        "tier": "Easy",
+        "clueText": "Speak to Sarah at Falador farm."
+      }
+    ],
+    "Sir Kay": [
+      {
+        "type": "cryptic",
+        "tier": "Easy",
+        "clueText": "Speak to Sir Kay in Camelot Castle."
+      },
+      {
+        "type": "anagram",
+        "tier": "Medium",
+        "anagram": "KAY SIR",
+        "challenge": "6"
+      }
+    ],
+    "Bartender (Blue Moon Inn)": [
+      {
+        "type": "cryptic",
+        "tier": "Easy",
+        "clueText": "Speak to the bartender of the Blue Moon Inn in Varrock."
+      }
+    ],
+    "Lady of the Lake": [
+      {
+        "type": "cryptic",
+        "tier": "Easy",
+        "clueText": "Speak to the Lady of the Lake."
+      }
+    ],
+    "Louisa": [
+      {
+        "type": "cryptic",
+        "tier": "Easy",
+        "clueText": "Speak to the staff of Sinclair mansion."
+      }
+    ],
+    "Apothecary": [
+      {
+        "type": "cryptic",
+        "tier": "Easy",
+        "clueText": "Strength potions with red spiders' eggs? He is quite a herbalist."
+      },
+      {
+        "type": "anagram",
+        "tier": "Beginner",
+        "anagram": "CARPET AHOY",
+        "challenge": null
+      }
+    ],
+    "Herquin": [
+      {
+        "type": "cryptic",
+        "tier": "Easy",
+        "clueText": "Surrounded by white walls and gems."
+      }
+    ],
+    "Ali the Leaflet Dropper": [
+      {
+        "type": "cryptic",
+        "tier": "Easy",
+        "clueText": "Talk to Ali the Leaflet Dropper north of the Al Kharid mine."
+      }
+    ],
+    "Ambassador Spanfipple": [
+      {
+        "type": "cryptic",
+        "tier": "Easy",
+        "clueText": "Talk to Ambassador Spanfipple in the White Knights Castle."
+      }
+    ],
+    "Lucy": [
+      {
+        "type": "cryptic",
+        "tier": "Easy",
+        "clueText": "Talk to a party-goer in Falador."
+      }
+    ],
+    "Cassie": [
+      {
+        "type": "cryptic",
+        "tier": "Easy",
+        "clueText": "Talk to Cassie in Falador."
+      }
+    ],
+    "Charles": [
+      {
+        "type": "cryptic",
+        "tier": "Easy",
+        "clueText": "Talk to Charles at Port Piscarilius."
+      }
+    ],
+    "Blue Moon Inn": [
+      {
+        "type": "cryptic",
+        "tier": "Easy",
+        "clueText": "Talk to the cook in the Blue Moon Inn in Varrock."
+      }
+    ],
+    "Ermin": [
+      {
+        "type": "cryptic",
+        "tier": "Easy",
+        "clueText": "Talk to Ermin."
+      }
+    ],
+    "Hairdresser": [
+      {
+        "type": "cryptic",
+        "tier": "Easy",
+        "clueText": "Talk to the barber in the Falador barber shop."
+      },
+      {
+        "type": "anagram",
+        "tier": "Beginner",
+        "anagram": "SIR SHARE RED",
+        "challenge": null
+      }
+    ],
+    "Bartender (Rusty Anchor Inn)": [
+      {
+        "type": "cryptic",
+        "tier": "Easy",
+        "clueText": "Talk to the bartender of the Rusty Anchor in Port Sarim."
+      }
+    ],
+    "Doomsayer": [
+      {
+        "type": "cryptic",
+        "tier": "Easy",
+        "clueText": "Talk to the Doomsayer."
+      },
+      {
+        "type": "anagram",
+        "tier": "Hard",
+        "anagram": "DO SAY MORE",
+        "challenge": "95"
+      }
+    ],
+    "Morgan": [
+      {
+        "type": "cryptic",
+        "tier": "Easy",
+        "clueText": "Talk to Morgan in his house at Draynor Village."
+      }
+    ],
+    "Doris": [
+      {
+        "type": "cryptic",
+        "tier": "Easy",
+        "clueText": "Talk to the mother of a basement dwelling son."
+      }
+    ],
+    "Squire": [
+      {
+        "type": "cryptic",
+        "tier": "Easy",
+        "clueText": "Talk to the Squire in the White Knights' castle in Falador."
+      },
+      {
+        "type": "anagram",
+        "tier": "Medium",
+        "anagram": "QUE SIR",
+        "challenge": "654"
+      }
+    ],
+    "Turael": [
+      {
+        "type": "cryptic",
+        "tier": "Easy",
+        "clueText": "Talk to Turael in Burthorpe."
+      }
+    ],
+    "Wayne": [
+      {
+        "type": "cryptic",
+        "tier": "Easy",
+        "clueText": "Talk to Wayne at Wayne's Chains in Falador."
+      }
+    ],
+    "Zeke": [
+      {
+        "type": "cryptic",
+        "tier": "Easy",
+        "clueText": "Talk to Zeke in Al Kharid."
+      }
+    ],
+    "The Face": [
+      {
+        "type": "cryptic",
+        "tier": "Easy",
+        "clueText": "The hand ain't listening."
+      }
+    ],
+    "Gloria": [
+      {
+        "type": "cryptic",
+        "tier": "Medium",
+        "clueText": "Are you somewhat entertained?"
+      }
+    ],
+    "Lighthouse": [
+      {
+        "type": "cryptic",
+        "tier": "Medium",
+        "clueText": "Go to this building to be illuminated, and check the drawers while you are there."
+      }
+    ],
+    "Gnome ball referee": [
+      {
+        "type": "cryptic",
+        "tier": "Medium",
+        "clueText": "Speak to a referee."
+      }
+    ],
+    "Donovan the Family Handyman": [
+      {
+        "type": "cryptic",
+        "tier": "Medium",
+        "clueText": "Speak to Donovan, the Family Handyman."
+      }
+    ],
+    "Hajedy": [
+      {
+        "type": "cryptic",
+        "tier": "Medium",
+        "clueText": "Speak to Hajedy."
+      }
+    ],
+    "Kangai Mau": [
+      {
+        "type": "cryptic",
+        "tier": "Medium",
+        "clueText": "Speak to Kangai Mau ."
+      }
+    ],
+    "Roavar": [
+      {
+        "type": "cryptic",
+        "tier": "Medium",
+        "clueText": "Speak to Roavar."
+      }
+    ],
+    "Uglug Nar": [
+      {
+        "type": "cryptic",
+        "tier": "Medium",
+        "clueText": "Speak to Uglug Nar."
+      }
+    ],
+    "Ulizius": [
+      {
+        "type": "cryptic",
+        "tier": "Medium",
+        "clueText": "Speak to Ulizius."
+      }
+    ],
+    "Abbot Langley": [
+      {
+        "type": "cryptic",
+        "tier": "Hard",
+        "clueText": "'A bag belt only?', he asked his balding brothers."
+      },
+      {
+        "type": "cryptic",
+        "tier": "Master",
+        "clueText": "Anger Abbot Langley."
+      }
+    ],
+    "General Hining": [
+      {
+        "type": "cryptic",
+        "tier": "Hard",
+        "clueText": "A general who sets a 'shining' example."
+      }
+    ],
+    "Heckel Funch": [
+      {
+        "type": "cryptic",
+        "tier": "Hard",
+        "clueText": "Citric cellar."
+      }
+    ],
+    "Miner Magnus": [
+      {
+        "type": "cryptic",
+        "tier": "Hard",
+        "clueText": "Come have a cip with this great soot covered denizen."
+      }
+    ],
+    "General Bentnoze": [
+      {
+        "type": "cryptic",
+        "tier": "Hard",
+        "clueText": "Generally speaking, his nose was very bent."
+      }
+    ],
+    "Saniboch": [
+      {
+        "type": "cryptic",
+        "tier": "Hard",
+        "clueText": "Gold I see, yet gold I require. Give me 875 if death you desire."
+      }
+    ],
+    "Brother Kojo": [
+      {
+        "type": "cryptic",
+        "tier": "Hard",
+        "clueText": "He knows just how easy it is to lose track of time."
+      }
+    ],
+    "Ellena": [
+      {
+        "type": "cryptic",
+        "tier": "Hard",
+        "clueText": "I watch the sea. I watch you fish. I watch your tree."
+      }
+    ],
+    "Hamid": [
+      {
+        "type": "cryptic",
+        "tier": "Hard",
+        "clueText": "Identify the back of this over-acting brother. (He's a long way from home.)"
+      }
+    ],
+    "Gerrant": [
+      {
+        "type": "cryptic",
+        "tier": "Hard",
+        "clueText": "If a man carried my burden, he would break his back. I am not rich, but leave silver in my track. Speak to the keeper of my trail."
+      }
+    ],
+    "Head chef": [
+      {
+        "type": "cryptic",
+        "tier": "Hard",
+        "clueText": "In the city where merchants are said to have lived, talk to a man with a splendid cape, but a hat dropped by goblins."
+      }
+    ],
+    "Mawnis Burowgar": [
+      {
+        "type": "cryptic",
+        "tier": "Hard",
+        "clueText": "Leader of the Yak City."
+      }
+    ],
+    "Wilough": [
+      {
+        "type": "cryptic",
+        "tier": "Hard",
+        "clueText": "My name is like a tree, yet it is spelt with a 'g'. Come see the fur which is right near me."
+      }
+    ],
+    "Examiner": [
+      {
+        "type": "cryptic",
+        "tier": "Hard",
+        "clueText": "Often sought out by scholars of histories past, find me where words of wisdom speak volumes."
+      }
+    ],
+    "Gnome trainer": [
+      {
+        "type": "cryptic",
+        "tier": "Hard",
+        "clueText": "'Small shoe.' Often found with rod on mushroom."
+      }
+    ],
+    "Sir Prysin": [
+      {
+        "type": "cryptic",
+        "tier": "Hard",
+        "clueText": "Surprising? I bet he is..."
+      }
+    ],
+    "Sir Vyvin": [
+      {
+        "type": "cryptic",
+        "tier": "Hard",
+        "clueText": "Surviving."
+      },
+      {
+        "type": "cryptic",
+        "tier": "Master",
+        "clueText": "Hopefully this set of armour will help you to keep surviving."
+      }
+    ],
+    "Oziach": [
+      {
+        "type": "cryptic",
+        "tier": "Hard",
+        "clueText": "The keeper of Melzars...Spare? Skeleton? Anar?"
+      }
+    ],
+    "Guardian mummy": [
+      {
+        "type": "cryptic",
+        "tier": "Hard",
+        "clueText": "The King's magic shouldn't be wasted by me."
+      }
+    ],
+    "Wizard Mizgog": [
+      {
+        "type": "cryptic",
+        "tier": "Hard",
+        "clueText": "The magic of 4 colours, an early experience you could learn. The large beast caged up top, rages, as his demised kin's loot now returns."
+      }
+    ],
+    "Zul-Cheray": [
+      {
+        "type": "cryptic",
+        "tier": "Hard",
+        "clueText": "The mother of the reptilian sacrifice."
+      }
+    ],
+    "Father Aereck": [
+      {
+        "type": "cryptic",
+        "tier": "Elite",
+        "clueText": "A reck you say; let's pray there aren't any ghosts."
+      },
+      {
+        "type": "anagram",
+        "tier": "Medium",
+        "anagram": "AREA CHEF TREK",
+        "challenge": "19"
+      }
+    ],
+    "Mawrth": [
+      {
+        "type": "cryptic",
+        "tier": "Elite",
+        "clueText": "Has no one told you it is rude to ask a lady her age?"
+      }
+    ],
+    "Barker": [
+      {
+        "type": "cryptic",
+        "tier": "Elite",
+        "clueText": "His bark is worse than his bite."
+      }
+    ],
+    "Kamfreena": [
+      {
+        "type": "cryptic",
+        "tier": "Elite",
+        "clueText": "I am the one who watches the giants. The giants in turn watch me. I watch with two while they watch with one. Come seek where I may be."
+      }
+    ],
+    "Candle maker": [
+      {
+        "type": "cryptic",
+        "tier": "Elite",
+        "clueText": "I burn between heroes and legends."
+      }
+    ],
+    "Nardah": [
+      {
+        "type": "cryptic",
+        "tier": "Elite",
+        "clueText": "I live in a deserted crack collecting soles."
+      }
+    ],
+    "Dominic Onion": [
+      {
+        "type": "cryptic",
+        "tier": "Elite",
+        "clueText": "'See you in your dreams' said the vegetable man."
+      },
+      {
+        "type": "anagram",
+        "tier": "Medium",
+        "anagram": "I DOOM ICON INN",
+        "challenge": "9,500"
+      }
+    ],
+    "Wyson the gardener": [
+      {
+        "type": "cryptic",
+        "tier": "Elite",
+        "clueText": "Speak to a Wyse man."
+      }
+    ],
+    "Aris": [
+      {
+        "type": "cryptic",
+        "tier": "Elite",
+        "clueText": "Varrock is where I reside, not the land of the dead, but I am so old, I should be there instead. Let's hope your reward is as good as it says, just 1 gold one and you can have it read."
+      }
+    ],
+    "Daga": [
+      {
+        "type": "cryptic",
+        "tier": "Elite",
+        "clueText": "With a name like that, you'd expect a little more than just a few scimitars."
+      }
+    ],
+    "Funbo": [
+      {
+        "type": "cryptic",
+        "tier": "Elite",
+        "clueText": "With drinks and dwarves I make my way, upon my head a glass will stay."
+      }
+    ],
+    "Veteran boat squire": [
+      {
+        "type": "cryptic",
+        "tier": "Elite",
+        "clueText": "You must be 100 to play with me."
+      }
+    ],
+    "Wizard Cromperty": [
+      {
+        "type": "cryptic",
+        "tier": "Master",
+        "clueText": "A chisel and hammer reside in his home, strange for one of magic. Impress him with your magical equipment."
+      }
+    ],
+    "Jorral": [
+      {
+        "type": "cryptic",
+        "tier": "Master",
+        "clueText": "Buried beneath the ground, who knows where it's found. Lucky for you, A man called Jorral may have a clue."
+      }
+    ],
+    "Viggora": [
+      {
+        "type": "cryptic",
+        "tier": "Master",
+        "clueText": "Come brave adventurer, your sense is on fire. If you talk to me, it's an old god you desire."
+      }
+    ],
+    "Biblia": [
+      {
+        "type": "cryptic",
+        "tier": "Master",
+        "clueText": "Darkness wanders around me, but fills my mind with knowledge."
+      }
+    ],
+    "Ghommal": [
+      {
+        "type": "cryptic",
+        "tier": "Master",
+        "clueText": "The doorman of the Warriors' Guild wishes to be impressed by how strong your equipment is."
+      }
+    ],
+    "Juna": [
+      {
+        "type": "cryptic",
+        "tier": "Master",
+        "clueText": "Here, there are tears, but nobody is crying. Speak to the guardian and show off your alignment to balance."
+      }
+    ],
+    "Key Master": [
+      {
+        "type": "cryptic",
+        "tier": "Master",
+        "clueText": "My life was spared but these voices remain, now guarding these iron gates is my bane."
+      }
+    ],
+    "Piles": [
+      {
+        "type": "cryptic",
+        "tier": "Master",
+        "clueText": "One of several rhyming brothers, in business attire with an obsession for paper work."
+      }
+    ],
+    "Robin": [
+      {
+        "type": "cryptic",
+        "tier": "Master",
+        "clueText": "Robin wishes to see your finest ranged equipment."
+      }
+    ],
+    "Lovada": [
+      {
+        "type": "cryptic",
+        "tier": "Master",
+        "clueText": "She's small but can build both literally and figuratively."
+      }
+    ],
+    "Logosia": [
+      {
+        "type": "cryptic",
+        "tier": "Master",
+        "clueText": "Shhhh!"
+      }
+    ],
+    "Mage of Zamorak": [
+      {
+        "type": "cryptic",
+        "tier": "Master",
+        "clueText": "Where safe to speak, the man who offers the pouch of smallest size wishes to see your alignment."
+      }
+    ],
+    "Ranael": [
+      {
+        "type": "anagram",
+        "tier": "Beginner",
+        "anagram": "AN EARL",
+        "challenge": null
+      }
+    ],
+    "Archmage Sedridor": [
+      {
+        "type": "anagram",
+        "tier": "Beginner",
+        "anagram": "CHAR GAME DISORDER",
+        "challenge": null
+      }
+    ],
+    "Brian": [
+      {
+        "type": "anagram",
+        "tier": "Beginner",
+        "anagram": "IN BAR",
+        "challenge": null
+      }
+    ],
+    "Veronica": [
+      {
+        "type": "anagram",
+        "tier": "Beginner",
+        "anagram": "RAIN COVE",
+        "challenge": null
+      }
+    ],
+    "Gertrude": [
+      {
+        "type": "anagram",
+        "tier": "Beginner",
+        "anagram": "RUG DETER",
+        "challenge": null
+      }
+    ],
+    "Fortunato": [
+      {
+        "type": "anagram",
+        "tier": "Beginner",
+        "anagram": "TAUNT ROOF",
+        "challenge": null
+      }
+    ],
+    "Baraek": [
+      {
+        "type": "anagram",
+        "tier": "Medium",
+        "anagram": "A BAKER",
+        "challenge": "5"
+      }
+    ],
+    "Saba": [
+      {
+        "type": "anagram",
+        "tier": "Medium",
+        "anagram": "A BAS",
+        "challenge": null
+      }
+    ],
+    "Jaraah": [
+      {
+        "type": "anagram",
+        "tier": "Medium",
+        "anagram": "AHA JAR",
+        "challenge": null
+      }
+    ],
+    "Aretha": [
+      {
+        "type": "anagram",
+        "tier": "Medium",
+        "anagram": "A HEART",
+        "challenge": "2"
+      }
+    ],
+    "Caroline": [
+      {
+        "type": "anagram",
+        "tier": "Medium",
+        "anagram": "ARC O LINE",
+        "challenge": "11"
+      }
+    ],
+    "Oracle": [
+      {
+        "type": "anagram",
+        "tier": "Medium",
+        "anagram": "ARE COL",
+        "challenge": "48"
+      }
+    ],
+    "Brimstail": [
+      {
+        "type": "anagram",
+        "tier": "Medium",
+        "anagram": "BAIL TRIMS",
+        "challenge": null
+      }
+    ],
+    "Madame Caldarium": [
+      {
+        "type": "anagram",
+        "tier": "Medium",
+        "anagram": "CALAMARI MADE MUD",
+        "challenge": "6"
+      }
+    ],
+    "Nicholas": [
+      {
+        "type": "anagram",
+        "tier": "Medium",
+        "anagram": "CLASH ION",
+        "challenge": "4"
+      }
+    ],
+    "Teicuh": [
+      {
+        "type": "anagram",
+        "tier": "Medium",
+        "anagram": "CUTE HI",
+        "challenge": "4097"
+      }
+    ],
+    "Brundt the Chieftain": [
+      {
+        "type": "anagram",
+        "tier": "Medium",
+        "anagram": "DT RUN B",
+        "challenge": "5"
+      }
+    ],
+    "Zoo keeper": [
+      {
+        "type": "anagram",
+        "tier": "Medium",
+        "anagram": "EEK ZERO OP",
+        "challenge": "50"
+      }
+    ],
+    "Lowe": [
+      {
+        "type": "anagram",
+        "tier": "Medium",
+        "anagram": "EL OW",
+        "challenge": null
+      }
+    ],
+    "Otto Godblessed": [
+      {
+        "type": "anagram",
+        "tier": "Medium",
+        "anagram": "GOBLETS ODD TOES",
+        "challenge": "2"
+      }
+    ],
+    "King Bolren": [
+      {
+        "type": "anagram",
+        "tier": "Medium",
+        "anagram": "GOBLIN KERN",
+        "challenge": null
+      }
+    ],
+    "Gabooty": [
+      {
+        "type": "anagram",
+        "tier": "Medium",
+        "anagram": "GOT A BOY",
+        "challenge": "11"
+      }
+    ],
+    "Luthas": [
+      {
+        "type": "anagram",
+        "tier": "Medium",
+        "anagram": "HALT US",
+        "challenge": null
+      }
+    ],
+    "Eohric": [
+      {
+        "type": "anagram",
+        "tier": "Medium",
+        "anagram": "HEORIC",
+        "challenge": "36"
+      }
+    ],
+    "Jethick": [
+      {
+        "type": "anagram",
+        "tier": "Medium",
+        "anagram": "HICK JET",
+        "challenge": "38"
+      }
+    ],
+    "Horphis": [
+      {
+        "type": "anagram",
+        "tier": "Medium",
+        "anagram": "HIS PHOR",
+        "challenge": "1"
+      }
+    ],
+    "Marisi": [
+      {
+        "type": "anagram",
+        "tier": "Medium",
+        "anagram": "I AM SIR",
+        "challenge": "5"
+      }
+    ],
+    "Fycie": [
+      {
+        "type": "anagram",
+        "tier": "Medium",
+        "anagram": "ICY FE",
+        "challenge": null
+      }
+    ],
+    "Nieve": [
+      {
+        "type": "anagram",
+        "tier": "Medium",
+        "anagram": "I EVEN",
+        "challenge": "2"
+      }
+    ],
+    "Metla": [
+      {
+        "type": "anagram",
+        "tier": "Medium",
+        "anagram": "LAME T",
+        "challenge": null
+      }
+    ],
+    "King Roald": [
+      {
+        "type": "anagram",
+        "tier": "Medium",
+        "anagram": "LARK IN DOG",
+        "challenge": "24"
+      }
+    ],
+    "Kaylee": [
+      {
+        "type": "anagram",
+        "tier": "Medium",
+        "anagram": "LEAKEY",
+        "challenge": "18"
+      }
+    ],
+    "Gallow": [
+      {
+        "type": "anagram",
+        "tier": "Medium",
+        "anagram": "LOW LAG",
+        "challenge": "12"
+      }
+    ],
+    "Femi": [
+      {
+        "type": "anagram",
+        "tier": "Medium",
+        "anagram": "ME IF",
+        "challenge": null
+      }
+    ],
+    "Edmond": [
+      {
+        "type": "anagram",
+        "tier": "Medium",
+        "anagram": "NOD MED",
+        "challenge": "3"
+      }
+    ],
+    "Elder Torgan": [
+      {
+        "type": "anagram",
+        "tier": "Medium",
+        "anagram": "NOT RAG",
+        "challenge": null
+      }
+    ],
+    "Captain Ginea": [
+      {
+        "type": "anagram",
+        "tier": "Medium",
+        "anagram": "PACINNG A TAIE",
+        "challenge": "113"
+      }
+    ],
+    "Flax keeper": [
+      {
+        "type": "anagram",
+        "tier": "Medium",
+        "anagram": "PEAK REFLEX",
+        "challenge": "676"
+      }
+    ],
+    "Party Pete": [
+      {
+        "type": "anagram",
+        "tier": "Medium",
+        "anagram": "PEATY PERT",
+        "challenge": null
+      }
+    ],
+    "Karim": [
+      {
+        "type": "anagram",
+        "tier": "Medium",
+        "anagram": "R AK MI",
+        "challenge": "5"
+      }
+    ],
+    "Taria": [
+      {
+        "type": "anagram",
+        "tier": "Medium",
+        "anagram": "RATAI",
+        "challenge": "7"
+      }
+    ],
+    "Clerris": [
+      {
+        "type": "anagram",
+        "tier": "Medium",
+        "anagram": "R SLICER",
+        "challenge": "738"
+      }
+    ],
+    "Dunstan": [
+      {
+        "type": "anagram",
+        "tier": "Medium",
+        "anagram": "SAND NUT",
+        "challenge": "8"
+      }
+    ],
+    "Dockmaster": [
+      {
+        "type": "anagram",
+        "tier": "Medium",
+        "anagram": "TAMED ROCKS",
+        "challenge": "5"
+      }
+    ],
+    "Hickton": [
+      {
+        "type": "anagram",
+        "tier": "Medium",
+        "anagram": "THICKNO",
+        "challenge": "2"
+      }
+    ],
+    "Drunken soldier": [
+      {
+        "type": "anagram",
+        "tier": "Medium",
+        "anagram": "UESNKRL NRIEDDO",
+        "challenge": "598"
+      }
+    ],
+    "Steve": [
+      {
+        "type": "anagram",
+        "tier": "Medium",
+        "anagram": "VESTE",
+        "challenge": "2"
+      }
+    ],
+    "Brambickle": [
+      {
+        "type": "anagram",
+        "tier": "Hard",
+        "anagram": "BAKER CLIMB",
+        "challenge": null
+      }
+    ],
+    "Lumbridge Guide": [
+      {
+        "type": "anagram",
+        "tier": "Hard",
+        "anagram": "BLUE GRIM GUIDED",
+        "challenge": null
+      }
+    ],
+    "Bolkoy": [
+      {
+        "type": "anagram",
+        "tier": "Hard",
+        "anagram": "BY LOOK",
+        "challenge": "13"
+      }
+    ],
+    "Gnome Coach": [
+      {
+        "type": "anagram",
+        "tier": "Hard",
+        "anagram": "C ON GAME HOC",
+        "challenge": "6"
+      }
+    ],
+    "Prospector Percy": [
+      {
+        "type": "anagram",
+        "tier": "Hard",
+        "anagram": "COPPER ORE CRYPTS",
+        "challenge": "12"
+      }
+    ],
+    "Daer Krand": [
+      {
+        "type": "anagram",
+        "tier": "Hard",
+        "anagram": "DARN DRAKE",
+        "challenge": null
+      }
+    ],
+    "Dark Mage (Abyss)": [
+      {
+        "type": "anagram",
+        "tier": "Hard",
+        "anagram": "DEKAGRAM",
+        "challenge": "13"
+      }
+    ],
+    "Strange Old Man": [
+      {
+        "type": "anagram",
+        "tier": "Hard",
+        "anagram": "DRAGONS LAMENT",
+        "challenge": "40"
+      }
+    ],
+    "Drunken Dwarf (Keldagrim)": [
+      {
+        "type": "anagram",
+        "tier": "Hard",
+        "anagram": "DR WARDEN FUNK",
+        "challenge": null
+      }
+    ],
+    "Brother Omad": [
+      {
+        "type": "anagram",
+        "tier": "Hard",
+        "anagram": "MOTHERBOARD",
+        "challenge": "129"
+      }
+    ],
+    "Lammy Langle": [
+      {
+        "type": "anagram",
+        "tier": "Hard",
+        "anagram": "MY MANGLE LAL",
+        "challenge": null
+      }
+    ],
+    "Cap'n Izzy no Beard": [
+      {
+        "type": "anagram",
+        "tier": "Hard",
+        "anagram": "O BIRDZ A ZANY EN PC",
+        "challenge": "33"
+      }
+    ],
+    "Brother Tranquility": [
+      {
+        "type": "anagram",
+        "tier": "Hard",
+        "anagram": "QUIT HORRIBLE TYRANT",
+        "challenge": "7"
+      }
+    ],
+    "Martin Thwait": [
+      {
+        "type": "anagram",
+        "tier": "Hard",
+        "anagram": "RAT MAT WITHIN",
+        "challenge": "2"
+      }
+    ],
+    "Wise Old Man": [
+      {
+        "type": "anagram",
+        "tier": "Hard",
+        "anagram": "SLIDE WOMAN",
+        "challenge": "28"
+      }
+    ],
+    "Evil Dave": [
+      {
+        "type": "anagram",
+        "tier": "Hard",
+        "anagram": "VEIL VEDA",
+        "challenge": "666"
+      }
+    ],
+    "King Awowogei": [
+      {
+        "type": "anagram",
+        "tier": "Hard",
+        "anagram": "WOO AN EGG KIWI",
+        "challenge": "24"
+      }
+    ],
+    "Regath": [
+      {
+        "type": "anagram",
+        "tier": "Elite",
+        "anagram": "AT HERG",
+        "challenge": "25"
+      }
+    ],
+    "Oneiromancer": [
+      {
+        "type": "anagram",
+        "tier": "Elite",
+        "anagram": "CAREER IN MOON",
+        "challenge": "25"
+      }
+    ],
+    "Jardric": [
+      {
+        "type": "anagram",
+        "tier": "Elite",
+        "anagram": "Cirr Jad",
+        "challenge": "1"
+      }
+    ],
+    "Old Crone": [
+      {
+        "type": "anagram",
+        "tier": "Elite",
+        "anagram": "COOL NERD",
+        "challenge": "619"
+      }
+    ],
+    "Mandrith": [
+      {
+        "type": "anagram",
+        "tier": "Elite",
+        "anagram": "DR HITMAN",
+        "challenge": "28"
+      },
+      {
+        "type": "anagram",
+        "tier": "Master",
+        "anagram": "Dim Tharn",
+        "challenge": "Light box or Puzzle box"
+      }
+    ],
+    "Guard Vemmeldo": [
+      {
+        "type": "anagram",
+        "tier": "Elite",
+        "anagram": "LADDER MEMO GUV",
+        "challenge": "3"
+      }
+    ],
+    "Cam the Camel": [
+      {
+        "type": "anagram",
+        "tier": "Elite",
+        "anagram": "MACHETE CLAM",
+        "challenge": "6"
+      }
+    ],
+    "Ambassador Alvijar": [
+      {
+        "type": "anagram",
+        "tier": "Elite",
+        "anagram": "MAJORS LAVA BADS AIR",
+        "challenge": "2,505"
+      }
+    ],
+    "Oronwen": [
+      {
+        "type": "anagram",
+        "tier": "Elite",
+        "anagram": "NO OWNER",
+        "challenge": "20"
+      }
+    ],
+    "Nurse Wooned": [
+      {
+        "type": "anagram",
+        "tier": "Elite",
+        "anagram": "OUR OWN NEEDS",
+        "challenge": "16"
+      }
+    ],
+    "Lisse Isaakson": [
+      {
+        "type": "anagram",
+        "tier": "Elite",
+        "anagram": "SNAKES SO I SAIL",
+        "challenge": "2"
+      }
+    ],
+    "Sigli the Huntsman": [
+      {
+        "type": "anagram",
+        "tier": "Elite",
+        "anagram": "UNLEASH NIGHT MIST",
+        "challenge": "302"
+      }
+    ],
+    "Snowflake": [
+      {
+        "type": "anagram",
+        "tier": "Master",
+        "anagram": "A Elf Knows",
+        "challenge": "Light box or puzzle box ."
+      }
+    ],
+    "Captain Bruce": [
+      {
+        "type": "anagram",
+        "tier": "Master",
+        "anagram": "Brucie Catnap",
+        "challenge": "Light box or puzzle box ."
+      }
+    ],
+    "Sacrifice": [
+      {
+        "type": "anagram",
+        "tier": "Master",
+        "anagram": "Car If Ices",
+        "challenge": "Light box or puzzle box ."
+      }
+    ],
+    "Edward": [
+      {
+        "type": "anagram",
+        "tier": "Master",
+        "anagram": "Ded War",
+        "challenge": "Light box or puzzle box ."
+      }
+    ],
+    "Dugopul": [
+      {
+        "type": "anagram",
+        "tier": "Master",
+        "anagram": "Duo Plug",
+        "challenge": "Light box or puzzle box ."
+      }
+    ],
+    "Runolf": [
+      {
+        "type": "anagram",
+        "tier": "Master",
+        "anagram": "Forlun",
+        "challenge": "Light box or puzzle box ."
+      }
+    ],
+    "Immenizz": [
+      {
+        "type": "anagram",
+        "tier": "Master",
+        "anagram": "Im N Zezim",
+        "challenge": "Light box or puzzle box ."
+      }
+    ],
+    "Luminata": [
+      {
+        "type": "anagram",
+        "tier": "Master",
+        "anagram": "Mal in Tau",
+        "challenge": "Light box or puzzle box ."
+      }
+    ],
+    "Old Man Ral": [
+      {
+        "type": "anagram",
+        "tier": "Master",
+        "anagram": "Mold La Ran",
+        "challenge": "Light box or puzzle box ."
+      }
+    ],
+    "Radimus Erkle": [
+      {
+        "type": "anagram",
+        "tier": "Master",
+        "anagram": "Mus Kil Reader",
+        "challenge": "Light box or puzzle box ."
+      }
+    ],
+    "Primula": [
+      {
+        "type": "anagram",
+        "tier": "Master",
+        "anagram": "Rip Maul",
+        "challenge": "Light box or puzzle box ."
+      }
+    ],
+    "Goreu": [
+      {
+        "type": "anagram",
+        "tier": "Master",
+        "anagram": "Rue Go",
+        "challenge": "Light box or puzzle box ."
+      }
+    ],
+    "Guildmaster Lars": [
+      {
+        "type": "anagram",
+        "tier": "Master",
+        "anagram": "Slam Duster Grail",
+        "challenge": "Light box or puzzle box ."
+      }
+    ],
+    "Wingstone": [
+      {
+        "type": "anagram",
+        "tier": "Master",
+        "anagram": "Ten Wigs On",
+        "challenge": "Light box or puzzle box ."
+      }
+    ],
+    "New Recruit Tony": [
+      {
+        "type": "anagram",
+        "tier": "Master",
+        "anagram": "Twenty Cure Iron",
+        "challenge": "Light box or puzzle box"
       }
     ]
   }
