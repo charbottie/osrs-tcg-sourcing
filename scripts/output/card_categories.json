@@ -38,7 +38,8 @@
   ],
   "Strength potion": [
     "F2P",
-    "Herblore"
+    "Herblore",
+    "Potion"
   ],
   "Weapon poison": [],
   "Potion": [
@@ -87,6 +88,7 @@
   "Wine of zamorak": [
     "Cooking",
     "F2P",
+    "Food",
     "Herblore"
   ],
   "Jangerberries": [
@@ -187,7 +189,8 @@
   ],
   "Shrimps": [
     "Cooking",
-    "F2P"
+    "F2P",
+    "Food"
   ],
   "Raw shrimps": [
     "F2P",
@@ -195,7 +198,8 @@
   ],
   "Anchovies": [
     "Cooking",
-    "F2P"
+    "F2P",
+    "Food"
   ],
   "Raw anchovies": [
     "F2P",
@@ -203,7 +207,8 @@
   ],
   "Sardine": [
     "Cooking",
-    "F2P"
+    "F2P",
+    "Food"
   ],
   "Raw sardine": [
     "F2P",
@@ -211,7 +216,8 @@
   ],
   "Salmon": [
     "Cooking",
-    "F2P"
+    "F2P",
+    "Food"
   ],
   "Raw salmon": [
     "F2P",
@@ -219,14 +225,16 @@
   ],
   "Trout": [
     "Cooking",
-    "F2P"
+    "F2P",
+    "Food"
   ],
   "Raw trout": [
     "F2P",
     "Fishing"
   ],
   "Cod": [
-    "Cooking"
+    "Cooking",
+    "Food"
   ],
   "Raw cod": [
     "Fishing"
@@ -237,7 +245,8 @@
   ],
   "Herring": [
     "Cooking",
-    "F2P"
+    "F2P",
+    "Food"
   ],
   "Raw pike": [
     "F2P",
@@ -245,13 +254,15 @@
   ],
   "Pike": [
     "Cooking",
-    "F2P"
+    "F2P",
+    "Food"
   ],
   "Raw mackerel": [
     "Fishing"
   ],
   "Mackerel": [
-    "Cooking"
+    "Cooking",
+    "Food"
   ],
   "Raw tuna": [
     "F2P",
@@ -259,13 +270,15 @@
   ],
   "Tuna": [
     "Cooking",
-    "F2P"
+    "F2P",
+    "Food"
   ],
   "Raw bass": [
     "Fishing"
   ],
   "Bass": [
-    "Cooking"
+    "Cooking",
+    "Food"
   ],
   "Raw swordfish": [
     "F2P",
@@ -273,7 +286,8 @@
   ],
   "Swordfish": [
     "Cooking",
-    "F2P"
+    "F2P",
+    "Food"
   ],
   "Raw lobster": [
     "F2P",
@@ -281,13 +295,15 @@
   ],
   "Lobster": [
     "Cooking",
-    "F2P"
+    "F2P",
+    "Food"
   ],
   "Raw shark": [
     "Fishing"
   ],
   "Shark": [
-    "Cooking"
+    "Cooking",
+    "Food"
   ],
   "Raw manta ray": [
     "Fishing"
@@ -299,15 +315,18 @@
     "Fishing"
   ],
   "Sea turtle": [
-    "Cooking"
+    "Cooking",
+    "Food"
   ],
   "Seaweed": [
     "Cooking",
     "Crafting",
+    "Food",
     "Magic"
   ],
   "Edible seaweed": [
-    "Cooking"
+    "Cooking",
+    "Food"
   ],
   "Casket": [],
   "Oyster": [],
@@ -317,6 +336,7 @@
   "Clay": [
     "Cooking",
     "F2P",
+    "Food",
     "Magic",
     "Mining"
   ],
@@ -431,69 +451,84 @@
   "Fire rune": [
     "Cooking",
     "F2P",
+    "Food",
     "Magic",
+    "Rune",
     "Runecraft",
     "Smithing"
   ],
   "Water rune": [
     "F2P",
     "Magic",
+    "Rune",
     "Runecraft"
   ],
   "Air rune": [
     "F2P",
     "Magic",
+    "Rune",
     "Runecraft"
   ],
   "Earth rune": [
     "F2P",
     "Magic",
+    "Rune",
     "Runecraft"
   ],
   "Mind rune": [
     "F2P",
     "Magic",
+    "Rune",
     "Runecraft"
   ],
   "Body rune": [
     "F2P",
     "Magic",
+    "Rune",
     "Runecraft"
   ],
   "Death rune": [
     "F2P",
     "Magic",
+    "Rune",
     "Runecraft"
   ],
   "Nature rune": [
     "Cooking",
     "F2P",
+    "Food",
     "Magic",
+    "Rune",
     "Runecraft",
     "Smithing"
   ],
   "Chaos rune": [
     "F2P",
     "Magic",
+    "Rune",
     "Runecraft"
   ],
   "Law rune": [
     "F2P",
     "Magic",
+    "Rune",
     "Runecraft"
   ],
   "Cosmic rune": [
     "F2P",
     "Magic",
+    "Rune",
     "Runecraft"
   ],
   "Blood rune": [
     "Magic",
+    "Rune",
     "Runecraft"
   ],
   "Soul rune": [
     "Magic",
     "Prayer",
+    "Rune",
     "Runecraft",
     "Smithing"
   ],
@@ -541,6 +576,7 @@
   "Ashes": [
     "Cooking",
     "F2P",
+    "Food",
     "Herblore"
   ],
   "Torch": [
@@ -954,6 +990,7 @@
     "Cooking",
     "Crafting",
     "F2P",
+    "Food",
     "Prayer",
     "Sailing"
   ],
@@ -2080,6 +2117,7 @@
   "Rune essence": [
     "F2P",
     "Mining",
+    "Rune",
     "Runecraft"
   ],
   "Air talisman": [
@@ -2207,6 +2245,7 @@
     "Crafting",
     "F2P",
     "Fletching",
+    "Food",
     "Sailing",
     "Smithing",
     "Woodcutting"
@@ -2537,44 +2576,54 @@
     "Cooking"
   ],
   "Ugthanki meat": [
-    "Cooking"
+    "Cooking",
+    "Food"
   ],
   "Pitta dough": [
-    "Cooking"
+    "Cooking",
+    "Food"
   ],
   "Pitta bread": [
-    "Cooking"
+    "Cooking",
+    "Food"
   ],
   "Ugthanki kebab": [
-    "Cooking"
+    "Cooking",
+    "Food"
   ],
   "Cake tin": [
     "Cooking",
-    "F2P"
+    "F2P",
+    "Food"
   ],
   "Uncooked cake": [
     "Cooking",
-    "F2P"
+    "F2P",
+    "Food"
   ],
   "Cake": [
     "Cooking",
-    "F2P"
+    "F2P",
+    "Food"
   ],
   "Chocolate cake": [
     "Cooking",
-    "F2P"
+    "F2P",
+    "Food"
   ],
   "Asgarnian ale": [
     "Construction",
     "Cooking",
-    "F2P"
+    "F2P",
+    "Food"
   ],
   "Wizard's mind bomb": [
     "F2P"
   ],
   "Dragon bitter": [
     "Construction",
-    "Cooking"
+    "Cooking",
+    "Food"
   ],
   "Dwarven stout": [
     "F2P"
@@ -2587,7 +2636,8 @@
   ],
   "Beer glass": [
     "Cooking",
-    "F2P"
+    "F2P",
+    "Food"
   ],
   "Bowl of water": [
     "Cooking",
@@ -2626,7 +2676,8 @@
   ],
   "Pot of flour": [
     "Cooking",
-    "F2P"
+    "F2P",
+    "Food"
   ],
   "Jug": [
     "F2P",
@@ -2644,15 +2695,18 @@
   ],
   "Swamp paste": [
     "Construction",
-    "Cooking"
+    "Cooking",
+    "Food"
   ],
   "Potato": [
     "Cooking",
-    "F2P"
+    "F2P",
+    "Food"
   ],
   "Egg": [
     "Cooking",
-    "F2P"
+    "F2P",
+    "Food"
   ],
   "Grain": [
     "F2P"
@@ -2663,19 +2717,23 @@
   ],
   "Redberries": [
     "Cooking",
-    "F2P"
+    "F2P",
+    "Food"
   ],
   "Pastry dough": [
     "Cooking",
-    "F2P"
+    "F2P",
+    "Food"
   ],
   "Cooking apple": [
     "Cooking",
-    "F2P"
+    "F2P",
+    "Food"
   ],
   "Onion": [
     "Cooking",
-    "F2P"
+    "F2P",
+    "Food"
   ],
   "Banana": [
     "F2P",
@@ -2683,7 +2741,8 @@
   ],
   "Cabbage": [
     "Cooking",
-    "F2P"
+    "F2P",
+    "Food"
   ],
   "Spinach roll": [
     "F2P"
@@ -2694,30 +2753,36 @@
   ],
   "Chocolate bar": [
     "Cooking",
-    "F2P"
+    "F2P",
+    "Food"
   ],
   "Chocolate dust": [
     "Cooking",
     "F2P",
+    "Food",
     "Herblore"
   ],
   "Chocolatey milk": [],
   "Empty cup": [
     "Cooking",
+    "Food",
     "Herblore"
   ],
   "Tomato": [
     "Cooking",
     "F2P",
-    "Farming"
+    "Farming",
+    "Food"
   ],
   "Cheese": [
     "Cooking",
-    "F2P"
+    "F2P",
+    "Food"
   ],
   "Grapes": [
     "Cooking",
-    "F2P"
+    "F2P",
+    "Food"
   ],
   "Half full wine jug": [
     "F2P",
@@ -2731,30 +2796,38 @@
   ],
   "Stew": [
     "Cooking",
-    "F2P"
+    "F2P",
+    "Food"
   ],
   "Spice": [
-    "Cooking"
+    "Cooking",
+    "Food"
   ],
   "Curry": [
-    "Cooking"
+    "Cooking",
+    "Food"
   ],
   "Vodka": [
-    "Cooking"
+    "Cooking",
+    "Food"
   ],
   "Whisky": [
-    "Cooking"
+    "Cooking",
+    "Food"
   ],
   "Gin": [
-    "Cooking"
+    "Cooking",
+    "Food"
   ],
   "Brandy": [
     "Cooking",
+    "Food",
     "Sailing"
   ],
   "Cocktail shaker": [],
   "Cocktail glass": [
-    "Cooking"
+    "Cooking",
+    "Food"
   ],
   "Premade blurb' sp.": [],
   "Premade choc s'dy": [],
@@ -2769,26 +2842,33 @@
   "Choc saturday": [],
   "Short green guy": [],
   "Fruit blast": [
-    "Cooking"
+    "Cooking",
+    "Food"
   ],
   "Drunk dragon": [],
   "Lemon": [
-    "Cooking"
+    "Cooking",
+    "Food"
   ],
   "Orange": [
-    "Cooking"
+    "Cooking",
+    "Food"
   ],
   "Pineapple": [
-    "Cooking"
+    "Cooking",
+    "Food"
   ],
   "Lime": [
-    "Cooking"
+    "Cooking",
+    "Food"
   ],
   "Equa leaves": [
-    "Cooking"
+    "Cooking",
+    "Food"
   ],
   "Pot of cream": [
-    "Cooking"
+    "Cooking",
+    "Food"
   ],
   "Raw beef": [
     "F2P",
@@ -2810,14 +2890,17 @@
   "Cooked chicken": [
     "Cooking",
     "F2P",
+    "Food",
     "Woodcutting"
   ],
   "Cooked meat": [
     "Cooking",
-    "F2P"
+    "F2P",
+    "Food"
   ],
   "Swamp toad": [
     "Cooking",
+    "Food",
     "Herblore"
   ],
   "Equa toad's legs": [],
@@ -2825,44 +2908,56 @@
   "King worm": [
     "Cooking",
     "Fishing",
+    "Food",
     "Hunter"
   ],
   "Batta tin": [],
   "Crunchy tray": [
-    "Cooking"
+    "Cooking",
+    "Food"
   ],
   "Gnomebowl mould": [
     "Tool"
   ],
   "Gnome spice": [
-    "Cooking"
+    "Cooking",
+    "Food"
   ],
   "Gianne dough": [
-    "Cooking"
+    "Cooking",
+    "Food"
   ],
   "Chocolate bomb": [
-    "Cooking"
+    "Cooking",
+    "Food"
   ],
   "Tangled toad's legs": [
-    "Cooking"
+    "Cooking",
+    "Food"
   ],
   "Worm hole": [
-    "Cooking"
+    "Cooking",
+    "Food"
   ],
   "Veg ball": [
-    "Cooking"
+    "Cooking",
+    "Food"
   ],
   "Worm crunchies": [
-    "Cooking"
+    "Cooking",
+    "Food"
   ],
   "Chocchip crunchies": [
-    "Cooking"
+    "Cooking",
+    "Food"
   ],
   "Spicy crunchies": [
-    "Cooking"
+    "Cooking",
+    "Food"
   ],
   "Toad crunchies": [
-    "Cooking"
+    "Cooking",
+    "Food"
   ],
   "Premade w'm batta": [],
   "Premade t'd batta": [],
@@ -2877,56 +2972,70 @@
   "Premade s'y crunch": [],
   "Premade t'd crunch": [],
   "Worm batta": [
-    "Cooking"
+    "Cooking",
+    "Food"
   ],
   "Toad batta": [
-    "Cooking"
+    "Cooking",
+    "Food"
   ],
   "Fruit batta": [
-    "Cooking"
+    "Cooking",
+    "Food"
   ],
   "Vegetable batta": [
-    "Cooking"
+    "Cooking",
+    "Food"
   ],
   "Plain pizza": [
     "Cooking",
-    "F2P"
+    "F2P",
+    "Food"
   ],
   "Meat pizza": [
     "Cooking",
-    "F2P"
+    "F2P",
+    "Food"
   ],
   "Anchovy pizza": [
     "Cooking",
-    "F2P"
+    "F2P",
+    "Food"
   ],
   "Pineapple pizza": [
-    "Cooking"
+    "Cooking",
+    "Food"
   ],
   "Bread dough": [
     "Cooking",
-    "F2P"
+    "F2P",
+    "Food"
   ],
   "Bread": [
     "Cooking",
-    "F2P"
+    "F2P",
+    "Food"
   ],
   "Pie dish": [
     "Cooking",
     "Crafting",
-    "F2P"
+    "F2P",
+    "Food"
   ],
   "Apple pie": [
     "Cooking",
-    "F2P"
+    "F2P",
+    "Food"
   ],
   "Redberry pie": [
     "Cooking",
-    "F2P"
+    "F2P",
+    "Food"
   ],
   "Meat pie": [
     "Cooking",
-    "F2P"
+    "F2P",
+    "Food"
   ],
   "Raw oomlie": [
     "Fishing"
@@ -2955,6 +3064,7 @@
     "Crafting",
     "F2P",
     "Firemaking",
+    "Food",
     "Sailing",
     "Smithing"
   ],
@@ -3020,45 +3130,58 @@
     "Weapon"
   ],
   "Attack potion": [
-    "Herblore"
+    "Herblore",
+    "Potion"
   ],
   "Restore potion": [
-    "Herblore"
+    "Herblore",
+    "Potion"
   ],
   "Defence potion": [
-    "Herblore"
+    "Herblore",
+    "Potion"
   ],
   "Prayer potion": [
     "Construction",
-    "Herblore"
+    "Herblore",
+    "Potion"
   ],
   "Super attack": [
-    "Herblore"
+    "Herblore",
+    "Potion"
   ],
   "Fishing potion": [
-    "Herblore"
+    "Herblore",
+    "Potion"
   ],
   "Super strength": [
-    "Herblore"
+    "Herblore",
+    "Potion"
   ],
   "Super defence": [
-    "Herblore"
+    "Herblore",
+    "Potion"
   ],
   "Ranging potion": [
-    "Herblore"
+    "Herblore",
+    "Potion"
   ],
   "Antipoison": [
     "F2P",
-    "Herblore"
+    "Herblore",
+    "Potion"
   ],
   "Superantipoison": [
-    "Herblore"
+    "Herblore",
+    "Potion"
   ],
   "Zamorak brew": [
-    "Herblore"
+    "Herblore",
+    "Potion"
   ],
   "Antifire potion": [
-    "Herblore"
+    "Herblore",
+    "Potion"
   ],
   "Flowers": [
     "Herblore",
@@ -3409,7 +3532,8 @@
   ],
   "Cooked chompy": [
     "Cooking",
-    "Firemaking"
+    "Firemaking",
+    "Food"
   ],
   "Elemental shield": [
     "Equipment",
@@ -3543,20 +3667,25 @@
   ],
   "Energy potion": [
     "F2P",
-    "Herblore"
+    "Herblore",
+    "Potion"
   ],
   "Super energy": [
-    "Herblore"
+    "Herblore",
+    "Potion"
   ],
   "Super restore": [
     "Construction",
-    "Herblore"
+    "Herblore",
+    "Potion"
   ],
   "Agility potion": [
-    "Herblore"
+    "Herblore",
+    "Potion"
   ],
   "Magic potion": [
-    "Herblore"
+    "Herblore",
+    "Potion"
   ],
   "Lava battlestaff": [
     "Melee",
@@ -3634,6 +3763,7 @@
   "Jogre bones": [
     "Cooking",
     "Firemaking",
+    "Food",
     "Magic",
     "Prayer"
   ],
@@ -3648,7 +3778,8 @@
     "Fishing"
   ],
   "Cooked karambwan": [
-    "Cooking"
+    "Cooking",
+    "Food"
   ],
   "Raw karambwanji": [
     "Fishing"
@@ -3731,13 +3862,16 @@
     "Crafting"
   ],
   "Thin snail": [
-    "Cooking"
+    "Cooking",
+    "Food"
   ],
   "Lean snail": [
-    "Cooking"
+    "Cooking",
+    "Food"
   ],
   "Fat snail": [
-    "Cooking"
+    "Cooking",
+    "Food"
   ],
   "Thin snail meat": [],
   "Lean snail meat": [],
@@ -4197,7 +4331,8 @@
     "Melee"
   ],
   "Nettle tea": [
-    "Cooking"
+    "Cooking",
+    "Food"
   ],
   "Ecto-token": [
     "Currency"
@@ -4464,7 +4599,8 @@
     "Fishing"
   ],
   "Cave eel": [
-    "Cooking"
+    "Cooking",
+    "Food"
   ],
   "Frog spawn": [],
   "Mining helmet": [
@@ -4697,7 +4833,8 @@
   "Cabbages": [],
   "Strawberry": [
     "Cooking",
-    "Farming"
+    "Farming",
+    "Food"
   ],
   "Small pouch": [
     "Crafting",
@@ -4818,15 +4955,18 @@
   "Axeman's folly": [],
   "Chef's delight": [
     "Construction",
-    "Cooking"
+    "Cooking",
+    "Food"
   ],
   "Slayer's respite": [],
   "Cider": [
     "Construction",
-    "Cooking"
+    "Cooking",
+    "Food"
   ],
   "Calquat keg": [
-    "Cooking"
+    "Cooking",
+    "Food"
   ],
   "Jute fibre": [
     "Crafting"
@@ -4844,14 +4984,17 @@
     "Herblore"
   ],
   "Antidote+": [
-    "Herblore"
+    "Herblore",
+    "Potion"
   ],
   "Antidote++": [
-    "Herblore"
+    "Herblore",
+    "Potion"
   ],
   "Tomatoes": [],
   "Curry leaf": [
-    "Cooking"
+    "Cooking",
+    "Food"
   ],
   "Papaya fruit": [],
   "Coconut": [],
@@ -4860,44 +5003,56 @@
   "Calquat fruit": [],
   "Watermelon": [
     "Cooking",
-    "Farming"
+    "Farming",
+    "Food"
   ],
   "Watermelon slice": [],
   "Sweetcorn": [
-    "Cooking"
+    "Cooking",
+    "Food"
   ],
   "Cooked sweetcorn": [
-    "Cooking"
+    "Cooking",
+    "Food"
   ],
   "Apple mush": [
-    "Cooking"
+    "Cooking",
+    "Food"
   ],
   "Hammerstone hops": [
-    "Cooking"
+    "Cooking",
+    "Food"
   ],
   "Asgarnian hops": [
-    "Cooking"
+    "Cooking",
+    "Food"
   ],
   "Yanillian hops": [
-    "Cooking"
+    "Cooking",
+    "Food"
   ],
   "Krandorian hops": [
-    "Cooking"
+    "Cooking",
+    "Food"
   ],
   "Wildblood hops": [
-    "Cooking"
+    "Cooking",
+    "Food"
   ],
   "Mushroom": [
     "Construction",
     "Cooking",
-    "Farming"
+    "Farming",
+    "Food"
   ],
   "Barley": [
     "Cooking",
+    "Food",
     "Hunter"
   ],
   "Barley malt": [
-    "Cooking"
+    "Cooking",
+    "Food"
   ],
   "Marigolds": [
     "Herblore"
@@ -4917,37 +5072,44 @@
   "Leaves": [
     "Cooking",
     "Fletching",
+    "Food",
     "Woodcutting"
   ],
   "Oak leaves": [
     "Cooking",
     "Fletching",
+    "Food",
     "Woodcutting"
   ],
   "Willow leaves": [
     "Cooking",
     "Fletching",
+    "Food",
     "Woodcutting"
   ],
   "Yew leaves": [
     "Cooking",
     "Fletching",
+    "Food",
     "Woodcutting"
   ],
   "Maple leaves": [
     "Cooking",
     "Fletching",
+    "Food",
     "Woodcutting"
   ],
   "Magic leaves": [
     "Cooking",
     "Fletching",
+    "Food",
     "Woodcutting"
   ],
   "Compost": [
     "Construction",
     "Cooking",
-    "Farming"
+    "Farming",
+    "Food"
   ],
   "Supercompost": [
     "Construction",
@@ -4963,7 +5125,8 @@
   ],
   "Oak roots": [
     "Cooking",
-    "Crafting"
+    "Crafting",
+    "Food"
   ],
   "Willow roots": [
     "Crafting"
@@ -5100,10 +5263,12 @@
   ],
   "Spider carcass": [],
   "Spider on stick": [
-    "Cooking"
+    "Cooking",
+    "Food"
   ],
   "Spider on shaft": [
-    "Cooking"
+    "Cooking",
+    "Food"
   ],
   "Skewer stick": [],
   "Trading sticks": [
@@ -5206,7 +5371,8 @@
   ],
   "Compost potion": [
     "Farming",
-    "Herblore"
+    "Herblore",
+    "Potion"
   ],
   "Toktz-xil-ul": [
     "Construction",
@@ -5376,22 +5542,27 @@
   ],
   "Tiny net": [],
   "Saradomin brew": [
-    "Herblore"
+    "Herblore",
+    "Potion"
   ],
   "Ice cooler": [
     "Construction"
   ],
   "Pat of butter": [
-    "Cooking"
+    "Cooking",
+    "Food"
   ],
   "Baked potato": [
-    "Cooking"
+    "Cooking",
+    "Food"
   ],
   "Potato with butter": [
-    "Cooking"
+    "Cooking",
+    "Food"
   ],
   "Potato with cheese": [
-    "Cooking"
+    "Cooking",
+    "Food"
   ],
   "Holy wrench": [],
   "Slayer gloves": [
@@ -5542,43 +5713,56 @@
   "Egg potato": [],
   "Mushroom potato": [],
   "Tuna potato": [
-    "Cooking"
+    "Cooking",
+    "Food"
   ],
   "Chilli con carne": [
-    "Cooking"
+    "Cooking",
+    "Food"
   ],
   "Egg and tomato": [
-    "Cooking"
+    "Cooking",
+    "Food"
   ],
   "Mushroom & onion": [
-    "Cooking"
+    "Cooking",
+    "Food"
   ],
   "Tuna and corn": [
-    "Cooking"
+    "Cooking",
+    "Food"
   ],
   "Minced meat": [
-    "Cooking"
+    "Cooking",
+    "Food"
   ],
   "Spicy sauce": [
-    "Cooking"
+    "Cooking",
+    "Food"
   ],
   "Chopped garlic": [
-    "Cooking"
+    "Cooking",
+    "Food"
   ],
   "Scrambled egg": [
-    "Cooking"
+    "Cooking",
+    "Food"
   ],
   "Sliced mushrooms": [
-    "Cooking"
+    "Cooking",
+    "Food"
   ],
   "Fried mushrooms": [
-    "Cooking"
+    "Cooking",
+    "Food"
   ],
   "Fried onions": [
-    "Cooking"
+    "Cooking",
+    "Food"
   ],
   "Chopped tuna": [
-    "Cooking"
+    "Cooking",
+    "Food"
   ],
   "Burnt onion": [],
   "Burnt mushroom": [],
@@ -5619,41 +5803,48 @@
   ],
   "Mud pie": [
     "Cooking",
+    "Food",
     "Weapon"
   ],
   "Raw garden pie": [
     "Cooking"
   ],
   "Garden pie": [
-    "Cooking"
+    "Cooking",
+    "Food"
   ],
   "Raw fish pie": [
     "Cooking"
   ],
   "Fish pie": [
-    "Cooking"
+    "Cooking",
+    "Food"
   ],
   "Raw admiral pie": [
     "Cooking"
   ],
   "Admiral pie": [
-    "Cooking"
+    "Cooking",
+    "Food"
   ],
   "Raw wild pie": [
     "Cooking"
   ],
   "Wild pie": [
-    "Cooking"
+    "Cooking",
+    "Food"
   ],
   "Raw summer pie": [
     "Cooking"
   ],
   "Summer pie": [
-    "Cooking"
+    "Cooking",
+    "Food"
   ],
   "Roast rabbit": [],
   "Skewered rabbit": [
-    "Cooking"
+    "Cooking",
+    "Food"
   ],
   "Iron spit": [],
   "Red boater": [
@@ -6021,14 +6212,17 @@
   ],
   "Guthix balance": [],
   "Kettle": [
-    "Cooking"
+    "Cooking",
+    "Food"
   ],
   "Teapot": [
-    "Cooking"
+    "Cooking",
+    "Food"
   ],
   "Greenman's ale": [
     "Construction",
-    "Cooking"
+    "Cooking",
+    "Food"
   ],
   "Yin yang amulet": [
     "Equipment",
@@ -6039,6 +6233,7 @@
   "Pure essence": [
     "Crafting",
     "F2P",
+    "Rune",
     "Runecraft"
   ],
   "Tortoise shell": [],
@@ -6046,7 +6241,8 @@
     "Fishing"
   ],
   "Monkfish": [
-    "Cooking"
+    "Cooking",
+    "Food"
   ],
   "Crawling hand": [
     "Construction",
@@ -6136,6 +6332,7 @@
     "Construction",
     "Cooking",
     "Crafting",
+    "Food",
     "Sailing",
     "Smithing"
   ],
@@ -6538,7 +6735,8 @@
   ],
   "Mint cake": [],
   "Half made batta": [
-    "Cooking"
+    "Cooking",
+    "Food"
   ],
   "Half made bowl": [
     "Cooking"
@@ -6604,7 +6802,8 @@
     "Sailing"
   ],
   "Combat potion": [
-    "Herblore"
+    "Herblore",
+    "Potion"
   ],
   "Cap and goggles": [
     "Equipment"
@@ -6617,7 +6816,8 @@
   "Roast bird meat": [],
   "Skewered bird meat": [
     "Cooking",
-    "Firemaking"
+    "Firemaking",
+    "Food"
   ],
   "Raw beast meat": [
     "Cooking",
@@ -6625,12 +6825,14 @@
     "Hunter"
   ],
   "Roast beast meat": [
-    "Cooking"
+    "Cooking",
+    "Food"
   ],
   "Spicy tomato": [],
   "Spicy minced meat": [],
   "Hunter potion": [
-    "Herblore"
+    "Herblore",
+    "Potion"
   ],
   "Bird snare": [
     "Tool"
@@ -6818,6 +7020,7 @@
   ],
   "Rainbow fish": [
     "Cooking",
+    "Food",
     "Hunter",
     "Sailing"
   ],
@@ -7418,16 +7621,20 @@
     "Equipment"
   ],
   "Spring sq'irkjuice": [
-    "Cooking"
+    "Cooking",
+    "Food"
   ],
   "Summer sq'irkjuice": [
-    "Cooking"
+    "Cooking",
+    "Food"
   ],
   "Autumn sq'irkjuice": [
-    "Cooking"
+    "Cooking",
+    "Food"
   ],
   "Winter sq'irkjuice": [
-    "Cooking"
+    "Cooking",
+    "Food"
   ],
   "Tea flask": [],
   "Plain satchel": [
@@ -7517,6 +7724,7 @@
   "Swamp weed": [
     "Cooking",
     "Crafting",
+    "Food",
     "Magic"
   ],
   "Empty light orb": [
@@ -7634,13 +7842,16 @@
     "Strength"
   ],
   "Leaping trout": [
-    "Cooking"
+    "Cooking",
+    "Food"
   ],
   "Leaping salmon": [
-    "Cooking"
+    "Cooking",
+    "Food"
   ],
   "Leaping sturgeon": [
-    "Cooking"
+    "Cooking",
+    "Food"
   ],
   "Fish offcuts": [
     "Agility",
@@ -7730,7 +7941,8 @@
     "Weapon"
   ],
   "Super ranging": [
-    "Herblore"
+    "Herblore",
+    "Potion"
   ],
   "Absorption": [
     "Herblore"
@@ -7895,7 +8107,8 @@
     "Fishing"
   ],
   "Dark crab": [
-    "Cooking"
+    "Cooking",
+    "Food"
   ],
   "Dark fishing bait": [
     "Fishing"
@@ -7907,7 +8120,8 @@
     "Prayer"
   ],
   "Extended antifire": [
-    "Herblore"
+    "Herblore",
+    "Potion"
   ],
   "Black chinchompa": [
     "Ranged",
@@ -8846,7 +9060,8 @@
   ],
   "Stamina potion": [
     "Construction",
-    "Herblore"
+    "Herblore",
+    "Potion"
   ],
   "Saradomin halo": [
     "Equipment"
@@ -8897,7 +9112,8 @@
     "Pet"
   ],
   "Super combat potion": [
-    "Herblore"
+    "Herblore",
+    "Potion"
   ],
   "Pet penance queen": [
     "Pet"
@@ -9128,7 +9344,8 @@
     "Pet"
   ],
   "Sacred eel": [
-    "Cooking"
+    "Cooking",
+    "Food"
   ],
   "Gricoller's can": [
     "Tool"
@@ -9199,11 +9416,13 @@
     "Fishing"
   ],
   "Anglerfish": [
-    "Cooking"
+    "Cooking",
+    "Food"
   ],
   "Dark essence block": [
     "Crafting",
     "Magic",
+    "Rune",
     "Runecraft"
   ],
   "Ensouled goblin head": [
@@ -9378,13 +9597,16 @@
   ],
   "Soul bearer": [],
   "Golovanova fruit top": [
-    "Cooking"
+    "Cooking",
+    "Food"
   ],
   "Uncooked botanical pie": [
-    "Cooking"
+    "Cooking",
+    "Food"
   ],
   "Botanical pie": [
-    "Cooking"
+    "Cooking",
+    "Food"
   ],
   "Damaged monkey tail": [
     "Crafting"
@@ -10043,7 +10265,8 @@
     "Herblore"
   ],
   "Rejuvenation potion": [
-    "Herblore"
+    "Herblore",
+    "Potion"
   ],
   "Pyromancer garb": [
     "Equipment",
@@ -10096,7 +10319,8 @@
   ],
   "Bologa's blessing": [],
   "Zamorak's grapes": [
-    "Cooking"
+    "Cooking",
+    "Food"
   ],
   "Giant key": [
     "F2P"
@@ -10147,21 +10371,26 @@
     "Herblore"
   ],
   "Elder potion": [
-    "Herblore"
+    "Herblore",
+    "Potion"
   ],
   "Twisted potion": [
-    "Herblore"
+    "Herblore",
+    "Potion"
   ],
   "Kodai potion": [
-    "Herblore"
+    "Herblore",
+    "Potion"
   ],
   "Revitalisation potion": [
-    "Herblore"
+    "Herblore",
+    "Potion"
   ],
   "Prayer enhance": [],
   "Xeric's aid": [],
   "Overload": [
-    "Herblore"
+    "Herblore",
+    "Potion"
   ],
   "Twisted bow": [
     "Ranged",
@@ -10360,6 +10589,7 @@
   "Giant seaweed": [
     "Cooking",
     "Crafting",
+    "Food",
     "Magic"
   ],
   "Herbi": [
@@ -10386,7 +10616,8 @@
     "F2P"
   ],
   "Sulliuscep cap": [
-    "Cooking"
+    "Cooking",
+    "Food"
   ],
   "Ancient wyvern shield": [
     "Equipment",
@@ -10415,10 +10646,12 @@
   ],
   "Experimental note": [],
   "Uncooked mushroom pie": [
-    "Cooking"
+    "Cooking",
+    "Food"
   ],
   "Mushroom pie": [
-    "Cooking"
+    "Cooking",
+    "Food"
   ],
   "Bowl of fish": [],
   "Diving helmet": [
@@ -10555,7 +10788,8 @@
     "Ranged"
   ],
   "Super antifire potion": [
-    "Herblore"
+    "Herblore",
+    "Potion"
   ],
   "Vorki": [
     "Pet"
@@ -10606,7 +10840,8 @@
     "Currency"
   ],
   "Extended super antifire": [
-    "Herblore"
+    "Herblore",
+    "Potion"
   ],
   "Dragon boots ornament kit": [
     "Clue"
@@ -10733,17 +10968,20 @@
   ],
   "Bloody bracer": [],
   "Cadantine blood potion (unf)": [
-    "Herblore"
+    "Herblore",
+    "Potion"
   ],
   "Vial of blood": [
     "Herblore",
     "Tool"
   ],
   "Battlemage potion": [
-    "Herblore"
+    "Herblore",
+    "Potion"
   ],
   "Bastion potion": [
-    "Herblore"
+    "Herblore",
+    "Potion"
   ],
   "Lil' zik": [
     "Pet"
@@ -10821,10 +11059,12 @@
     "Slayer"
   ],
   "Uncooked dragonfruit pie": [
-    "Cooking"
+    "Cooking",
+    "Food"
   ],
   "Dragonfruit pie": [
-    "Cooking"
+    "Cooking",
+    "Food"
   ],
   "Dragon knife": [
     "Ranged",
@@ -10837,16 +11077,20 @@
     "Currency"
   ],
   "Bluegill": [
-    "Cooking"
+    "Cooking",
+    "Food"
   ],
   "Common tench": [
-    "Cooking"
+    "Cooking",
+    "Food"
   ],
   "Mottled eel": [
-    "Cooking"
+    "Cooking",
+    "Food"
   ],
   "Greater siren": [
-    "Cooking"
+    "Cooking",
+    "Food"
   ],
   "Fish sack": [
     "Equipment"
@@ -10897,7 +11141,8 @@
     "Farming"
   ],
   "Dragonfruit": [
-    "Cooking"
+    "Cooking",
+    "Food"
   ],
   "White lily": [],
   "Celastrus bark": [
@@ -11425,7 +11670,8 @@
     "Tool"
   ],
   "Egniol potion": [
-    "Herblore"
+    "Herblore",
+    "Potion"
   ],
   "Crystal bow": [
     "Crafting",
@@ -11620,6 +11866,7 @@
     "Weapon"
   ],
   "Daeyalt essence": [
+    "Rune",
     "Runecraft"
   ],
   "Hallowed crystal shard": [],
@@ -11659,10 +11906,12 @@
     "Cooking"
   ],
   "Cooked mystery meat": [
-    "Cooking"
+    "Cooking",
+    "Food"
   ],
   "Pat of not garlic butter": [
-    "Cooking"
+    "Cooking",
+    "Food"
   ],
   "Long rope": [
     "Tool"
@@ -11859,7 +12108,8 @@
   "Harpoonfish": [
     "Construction",
     "Cooking",
-    "Fishing"
+    "Fishing",
+    "Food"
   ],
   "Tome of water": [
     "Equipment",
@@ -11912,7 +12162,8 @@
   ],
   "Guppy": [
     "Cooking",
-    "F2P"
+    "F2P",
+    "Food"
   ],
   "Raw cavefish": [
     "F2P",
@@ -11920,7 +12171,8 @@
   ],
   "Cavefish": [
     "Cooking",
-    "F2P"
+    "F2P",
+    "Food"
   ],
   "Raw tetra": [
     "F2P",
@@ -11928,13 +12180,15 @@
   ],
   "Tetra": [
     "Cooking",
-    "F2P"
+    "F2P",
+    "Food"
   ],
   "Raw catfish": [
     "Fishing"
   ],
   "Catfish": [
     "Cooking",
+    "Food",
     "Sailing"
   ],
   "Barronite shards": [
@@ -11971,7 +12225,8 @@
     "Runecraft"
   ],
   "Antipoison potion": [
-    "Herblore"
+    "Herblore",
+    "Potion"
   ],
   "Fiendish ashes": [
     "F2P"
@@ -12068,7 +12323,8 @@
     "Construction"
   ],
   "Ancient brew": [
-    "Herblore"
+    "Herblore",
+    "Potion"
   ],
   "Nexling": [
     "Pet"
@@ -12100,6 +12356,7 @@
     "Runecraft"
   ],
   "Blood essence": [
+    "Rune",
     "Runecraft"
   ],
   "Scroll of imbuing": [
@@ -12309,7 +12566,8 @@
     "Weapon"
   ],
   "Forgotten brew": [
-    "Herblore"
+    "Herblore",
+    "Potion"
   ],
   "Saturated heart": [
     "Magic"
@@ -12643,7 +12901,8 @@
   ],
   "Cooked moss lizard": [],
   "Moonlight potion": [
-    "Herblore"
+    "Herblore",
+    "Potion"
   ],
   "Sulphur blades": [
     "Melee",
@@ -12690,21 +12949,26 @@
   "Cooked wild kebbit": [],
   "Cooked barb-tailed kebbit": [],
   "Cooked dashing kebbit": [
-    "Cooking"
+    "Cooking",
+    "Food"
   ],
   "Cooked pyre fox": [
-    "Cooking"
+    "Cooking",
+    "Food"
   ],
   "Cooked sunlight antelope": [
-    "Cooking"
+    "Cooking",
+    "Food"
   ],
   "Cooked moonlight antelope": [
-    "Cooking"
+    "Cooking",
+    "Food"
   ],
   "Cooked larupia": [],
   "Cooked graahk": [],
   "Cooked kyatt": [
-    "Cooking"
+    "Cooking",
+    "Food"
   ],
   "Fox fur": [
     "Crafting",
@@ -12979,7 +13243,8 @@
     "Herblore"
   ],
   "Mammoth-might mix": [
-    "Herblore"
+    "Herblore",
+    "Potion"
   ],
   "Mystic mana amalgam": [
     "Herblore"
@@ -12994,7 +13259,8 @@
     "Herblore"
   ],
   "Azure aura mix": [
-    "Herblore"
+    "Herblore",
+    "Potion"
   ],
   "Liplack liquor": [
     "Herblore"
@@ -13006,7 +13272,8 @@
     "Herblore"
   ],
   "Mixalot": [
-    "Herblore"
+    "Herblore",
+    "Potion"
   ],
   "Grape barrel": [],
   "Termites": [
@@ -13056,10 +13323,12 @@
     "F2P"
   ],
   "Prayer regeneration potion": [
-    "Herblore"
+    "Herblore",
+    "Potion"
   ],
   "Goading potion": [
-    "Herblore"
+    "Herblore",
+    "Potion"
   ],
   "Huberte": [
     "Pet"
@@ -13122,7 +13391,8 @@
   "Jim's wet cloth": [],
   "Aether rune": [],
   "Surge potion": [
-    "Herblore"
+    "Herblore",
+    "Potion"
   ],
   "Yami": [
     "Pet"
@@ -13146,7 +13416,8 @@
     "Weapon"
   ],
   "Damiana tea": [
-    "Cooking"
+    "Cooking",
+    "Food"
   ],
   "Ent seed": [
     "Farming"
@@ -13380,6 +13651,7 @@
   ],
   "Swordtip squid": [
     "Cooking",
+    "Food",
     "Sailing"
   ],
   "Raw jumbo squid": [
@@ -13388,6 +13660,7 @@
   ],
   "Jumbo squid": [
     "Cooking",
+    "Food",
     "Sailing"
   ],
   "Squid paste": [
@@ -13418,30 +13691,38 @@
   ],
   "Haemostatic dressing": [],
   "Super fishing potion": [
-    "Herblore"
+    "Herblore",
+    "Potion"
   ],
   "Extreme energy potion": [
-    "Herblore"
+    "Herblore",
+    "Potion"
   ],
   "Super hunter potion": [
-    "Herblore"
+    "Herblore",
+    "Potion"
   ],
   "Extended stamina potion": [
-    "Herblore"
+    "Herblore",
+    "Potion"
   ],
   "Armadyl brew": [
-    "Herblore"
+    "Herblore",
+    "Potion"
   ],
   "Red crab": [
     "Cooking",
+    "Food",
     "Sailing"
   ],
   "Blue crab": [
     "Cooking",
+    "Food",
     "Sailing"
   ],
   "Rainbow crab": [
     "Cooking",
+    "Food",
     "Sailing"
   ],
   "Raw red crab meat": [
@@ -13450,6 +13731,7 @@
   ],
   "Red crab meat": [
     "Cooking",
+    "Food",
     "Sailing"
   ],
   "Raw blue crab meat": [
@@ -13458,6 +13740,7 @@
   ],
   "Blue crab meat": [
     "Cooking",
+    "Food",
     "Sailing"
   ],
   "Raw rainbow crab meat": [
@@ -13466,6 +13749,7 @@
   ],
   "Rainbow crab meat": [
     "Cooking",
+    "Food",
     "Sailing"
   ],
   "Crab paste": [
@@ -13843,6 +14127,7 @@
   ],
   "Giant krill": [
     "Cooking",
+    "Food",
     "Sailing"
   ],
   "Raw haddock": [
@@ -13851,6 +14136,7 @@
   ],
   "Haddock": [
     "Cooking",
+    "Food",
     "Sailing"
   ],
   "Raw yellowfin": [
@@ -13859,6 +14145,7 @@
   ],
   "Yellowfin": [
     "Cooking",
+    "Food",
     "Sailing"
   ],
   "Raw halibut": [
@@ -13867,6 +14154,7 @@
   ],
   "Halibut": [
     "Cooking",
+    "Food",
     "Sailing"
   ],
   "Raw bluefin": [
@@ -13875,6 +14163,7 @@
   ],
   "Bluefin": [
     "Cooking",
+    "Food",
     "Sailing"
   ],
   "Raw marlin": [
@@ -13883,6 +14172,7 @@
   ],
   "Marlin": [
     "Cooking",
+    "Food",
     "Sailing"
   ],
   "Haddock eye": [
@@ -14145,7 +14435,8 @@
   ],
   "Cooked t-bone steak": [
     "Cooking",
-    "F2P"
+    "F2P",
+    "Food"
   ],
   "Bull bones": [
     "F2P",
@@ -14154,6 +14445,7 @@
   "Abyssal potato": [],
   "Beef": [
     "Cooking",
+    "Food",
     "Pet"
   ],
   "Pristine spider silk": [],
@@ -14183,7 +14475,8 @@
     "Tool"
   ],
   "Leechfin": [
-    "Cooking"
+    "Cooking",
+    "Food"
   ],
   "Blood sac": [],
   "Dull ancient medal": [],
@@ -14858,7 +15151,8 @@
   "Aluft Gianne snr.": [],
   "Head chef": [
     "Cooking",
-    "F2P"
+    "F2P",
+    "Food"
   ],
   "Cow calf": [
     "F2P"
