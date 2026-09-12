@@ -614,6 +614,7 @@
   }
   .view-card-btn:hover { color: #999; border-color: #555; }
   .equip-2h-tag { font-size: 9px; color: #6a5a30; margin-left: 4px; }
+  .doll-slot-blocked { opacity: 0.35; cursor: default !important; pointer-events: none; }
 
   /* Equipment stats summary panel */
   #equip-right-pane { flex: 1; display: flex; flex-direction: column; overflow: hidden; }
@@ -5457,7 +5458,12 @@ const STAT_SHORT = {
 function computeTotalStats() {
   const totals = {};
   for (const k of STAT_KEYS) totals[k] = 0;
+  // If a 2H weapon is equipped, ignore the shield slot entirely
+  const wpnName = getEquipped('weapon');
+  const wpnItem = wpnName ? (equipBySlot['weapon'] || []).find(i => i.name === wpnName) : null;
+  const has2h   = wpnItem && wpnItem.is2h;
   for (const slot of Object.keys(SLOT_FULL)) {
+    if (slot === 'shield' && has2h) continue;
     const eq = getEquipped(slot);
     if (!eq) continue;
     const item = (equipBySlot[slot] || []).find(i => i.name === eq);
@@ -5728,6 +5734,19 @@ function getEquipped(slot) { return localStorage.getItem(equipKey(slot)) || ''; 
 function setEquipped(slot, name) {
   hideEquipTooltip();
   localStorage.setItem(equipKey(slot), name);
+
+  // 2H weapon clears the shield slot; equipping a shield clears a 2H weapon
+  if (slot === 'weapon' && name) {
+    const item = (equipBySlot['weapon'] || []).find(i => i.name === name);
+    if (item && item.is2h) localStorage.setItem(equipKey('shield'), '');
+  } else if (slot === 'shield' && name) {
+    const wpnName = getEquipped('weapon');
+    if (wpnName) {
+      const wpn = (equipBySlot['weapon'] || []).find(i => i.name === wpnName);
+      if (wpn && wpn.is2h) localStorage.setItem(equipKey('weapon'), '');
+    }
+  }
+
   refreshEquipDoll();
   renderGearStats();
   updateDpsOutput();
@@ -5828,6 +5847,10 @@ function updateEquipCount() {
 function refreshEquipDoll() {
   const pane = document.getElementById('equip-doll-pane');
   if (!pane) return;
+  // Determine if a 2H weapon is currently equipped (blocks shield slot)
+  const _wpnName = getEquipped('weapon');
+  const _wpnItem = _wpnName ? (equipBySlot['weapon'] || []).find(i => i.name === _wpnName) : null;
+  const has2h    = !!(_wpnItem && _wpnItem.is2h);
   let html = '';
   for (const row of DOLL_LAYOUT) {
     html += `<div class="doll-row">`;
@@ -5840,26 +5863,31 @@ function refreshEquipDoll() {
       const eq         = getEquipped(slot);
       const upgrade    = slotHasUpgrade(slot);
       const isSelected = selectedEquipSlot === slot;
+      // Shield is unavailable when a 2H weapon is equipped
+      const shieldBlocked = slot === 'shield' && has2h;
       let cls = 'doll-slot';
-      if (upgrade)    cls += ' has-upgrade';
-      if (isSelected) cls += ' selected';
-      const upgradeDot = upgrade ? `<div class="doll-upgrade-dot"></div>` : '';
+      if (upgrade && !shieldBlocked) cls += ' has-upgrade';
+      if (isSelected)                cls += ' selected';
+      if (shieldBlocked)             cls += ' doll-slot-blocked';
+      const upgradeDot = (upgrade && !shieldBlocked) ? `<div class="doll-upgrade-dot"></div>` : '';
 
       let inner;
-      if (eq) {
+      if (eq && !shieldBlocked) {
         const imgUrl = (cardDetails[eq] || {}).imageUrl || '';
         inner = imgUrl
           ? `<img src="${imgUrl}" class="doll-item-img" onerror="this.style.display='none'">`
           : `<div class="doll-slot-item owned">${eq.length > 10 ? eq.slice(0,9)+'…' : eq}</div>`;
+      } else if (shieldBlocked) {
+        inner = `<div class="doll-slot-label" style="color:#3a3a3a">2H</div>`;
       } else {
         inner = `<div class="doll-slot-label">${lbl}</div>`;
       }
 
-      const slotTitle = eq ? eq : lbl;
-      html += `<div class="${cls}" title="${slotTitle}" onclick="selectEquipSlot('${slot}')">
+      const slotTitle = shieldBlocked ? '2H weapon equipped — shield slot unavailable' : (eq ? eq : lbl);
+      html += `<div class="${cls}" title="${slotTitle}" onclick="${shieldBlocked ? '' : `selectEquipSlot('${slot}')`}">
         ${upgradeDot}
         ${inner}
-        ${eq ? `<div class="doll-slot-label doll-slot-label-overlay">${lbl}</div>` : ''}
+        ${(eq && !shieldBlocked) ? `<div class="doll-slot-label doll-slot-label-overlay">${lbl}</div>` : ''}
       </div>`;
     }
     html += `</div>`;
