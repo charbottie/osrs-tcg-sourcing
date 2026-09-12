@@ -2296,15 +2296,19 @@ function renderClueScroll(tier, container) {
       return npc && _monsterCardNames.has(npc.toLowerCase()) && !isOwned(npc);
     }
 
-    // Emote — Hard/Elite/Master always spawn a Double Agent; need that card too
+    // Emote — only count item-requiring steps (no-item steps are trivially doable
+    // for any Bronzeman and add no signal). Hard/Elite/Master also require Double Agent.
     const emoteSteps = (clueSteps.emote || {})[capTier] || [];
     if (emoteSteps.length) {
-      const daRequired = ['Hard','Elite','Master'].includes(capTier);
-      const daOwned    = !daRequired || isOwned('Double agent');
-      const achievable = !daOwned ? 0 : emoteSteps.filter(s =>
-        !s.items || s.items.length === 0 || s.items.every(i => isOwned(i))
-      ).length;
-      _row('Emote', achievable, emoteSteps.length);
+      const itemSteps  = emoteSteps.filter(s => s.items && s.items.length > 0);
+      if (itemSteps.length) {
+        const daRequired = ['Hard','Elite','Master'].includes(capTier);
+        const daOwned    = !daRequired || isOwned('Double agent');
+        const achievable = !daOwned ? 0 : itemSteps.filter(s =>
+          s.items.every(i => isOwned(i))
+        ).length;
+        _row('Emote', achievable, itemSteps.length);
+      }
     }
 
     // Cryptic — all steps now fully structured; check each step individually
