@@ -2305,23 +2305,33 @@ function renderClueScroll(tier, container) {
       _row('Emote', achievable, emoteSteps.length);
     }
 
-    // Cryptic — dig (Spade), quest-locked areas, and unowned NPC cards all block steps
-    const crypticTotal = (sc.cryptic    || {})[capTier] || 0;
-    const crypticDig   = (sc.crypticDig || {})[capTier] || 0;
-    const crypticStructured = (clueSteps.cryptic || {})[capTier] || [];
-    const crypticBlocked = crypticStructured.filter(s => _locLocked(s.location) || _npcBlocked(s.npc)).length;
-    const crypticAchievable = crypticTotal - crypticBlocked - (spadeOwned ? 0 : crypticDig);
-    if (crypticTotal) _row('Cryptic', crypticAchievable, crypticTotal);
+    // Cryptic — all steps now fully structured; check each step individually
+    const crypticSteps = (clueSteps.cryptic || {})[capTier] || [];
+    if (crypticSteps.length) {
+      const achievable = crypticSteps.filter(s => {
+        if (s.type === 'dig')    return spadeOwned;
+        if (_locLocked(s.location)) return false;
+        if (s.type === 'talk')   return !_npcBlocked(s.npc);
+        return true; // search/inspect — no card required
+      }).length;
+      _row('Cryptic', achievable, crypticSteps.length);
+    }
 
     // Anagram — fully structured; quest-locked areas and unowned NPC cards block steps
-    const anagramTotal = (sc.anagram || {})[capTier] || 0;
-    const anagramStructured = (clueSteps.anagram || {})[capTier] || [];
-    const anagramBlocked = anagramStructured.filter(s => _locLocked(s.location) || _npcBlocked(s.npc)).length;
-    if (anagramTotal) _row('Anagram', anagramTotal - anagramBlocked, anagramTotal);
+    const anagramSteps = (clueSteps.anagram || {})[capTier] || [];
+    if (anagramSteps.length) {
+      const achievable = anagramSteps.filter(s =>
+        !_locLocked(s.location) && !_npcBlocked(s.npc)
+      ).length;
+      _row('Anagram', achievable, anagramSteps.length);
+    }
 
-    // Cipher
-    const cipherTotal = (sc.cipher || {})[capTier] || 0;
-    if (cipherTotal) _row('Cipher', cipherTotal, cipherTotal);
+    // Cipher — all talk-to NPC steps; check NPC card ownership
+    const cipherSteps = (clueSteps.cipher || {})[capTier] || [];
+    if (cipherSteps.length) {
+      const achievable = cipherSteps.filter(s => !_npcBlocked(s.npc)).length;
+      _row('Cipher', achievable, cipherSteps.length);
+    }
 
     // Map — achievable only if Spade owned
     const mapTotal = (sc.map || {})[capTier] || 0;

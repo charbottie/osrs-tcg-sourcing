@@ -277,19 +277,22 @@ def scrape_falo(force_refresh: bool) -> list[dict]:
     return steps
 
 
-# ── Cryptic clues — "talk to NPC" type ───────────────────────────────────────
+# ── Cryptic clues — all step types ───────────────────────────────────────────
 
 _TALK_RE = re.compile(r'\b(talk|speak)\b', re.IGNORECASE)
 
 
 def _parse_cryptic_table(table: Tag, tier: str) -> list[dict]:
-    """Extract talk-to-NPC rows from one cryptic clue wikitable."""
+    """Extract ALL rows from one cryptic clue wikitable.
+
+    Each step gets a "type" field:
+      "talk"   — talk/speak to an NPC (npc field populated)
+      "dig"    — dig at a location (needs Spade)
+      "search" — search/inspect an object (no card required)
+    """
     steps: list[dict] = []
     headers = [th.get_text(" ").strip().lower() for th in table.find_all("th")]
 
-    # Identify which column is "Solution" / "Notes" (contains NPC location)
-    # Typical columns: Clue | Solution / Notes | ...
-    # The Notes/Solution cell usually has the NPC name as a wikilink.
     col_clue  = next((i for i, h in enumerate(headers) if "clue" in h), 0)
     col_notes = next((i for i, h in enumerate(headers)
                       if any(k in h for k in ("solution", "note", "task", "answer"))), 1)
@@ -304,31 +307,36 @@ def _parse_cryptic_table(table: Tag, tier: str) -> list[dict]:
         clue_text  = _cell_text(cells[idx_clue])
         notes_text = _cell_text(cells[idx_notes]) if idx_notes < len(cells) else ""
 
-        # Only keep rows that are "talk to NPC" type
+        if not clue_text:
+            continue
+
         combined = clue_text + " " + notes_text
-        if not _TALK_RE.search(combined):
-            continue
 
-        # Extract NPC: first wikilink in the notes cell, then clue cell
-        npc = _first_link_in_cell(cells[idx_notes])
-        if not npc and idx_clue != idx_notes:
-            npc = _first_link_in_cell(cells[idx_clue])
+        step: dict = {
+            "tier":     tier,
+            "clueText": clue_text,
+            "location": notes_text,
+        }
 
-        if not clue_text or not npc:
-            continue
+        if _DIG_RE.search(clue_text):
+            step["type"] = "dig"
+        elif _TALK_RE.search(combined):
+            step["type"] = "talk"
+            npc = _first_link_in_cell(cells[idx_notes])
+            if not npc and idx_clue != idx_notes:
+                npc = _first_link_in_cell(cells[idx_clue])
+            if npc:
+                step["npc"] = npc
+        else:
+            step["type"] = "search"
 
-        steps.append({
-            "tier":      tier,
-            "clueText":  clue_text,
-            "npc":       npc,
-            "location":  notes_text,
-        })
+        steps.append(step)
 
     return steps
 
 
 def scrape_cryptic_clues(force_refresh: bool) -> dict[str, list[dict]]:
-    """Scrape talk-to-NPC type cryptic clue steps from the wiki."""
+    """Scrape all cryptic clue steps from the wiki (all types)."""
     html = wiki_fetcher.fetch("Treasure_Trails/Guide/Cryptic_clues",
                                force_refresh=force_refresh)
     if not html:
@@ -345,16 +353,18 @@ def scrape_cryptic_clues(force_refresh: bool) -> dict[str, list[dict]]:
             if "wikitable" not in table.get("class", []):
                 continue
             steps.extend(_parse_cryptic_table(table, tier))
-        # Deduplicate by (clueText, npc)
-        seen: set[tuple] = set()
+        # Deduplicate by clue text (a clue can appear once per tier)
+        seen: set[str] = set()
         deduped: list[dict] = []
         for s in steps:
-            key = (s["clueText"], s["npc"])
-            if key not in seen:
-                seen.add(key)
+            if s["clueText"] not in seen:
+                seen.add(s["clueText"])
                 deduped.append(s)
         result[tier] = deduped
-        print(f"  Cryptic {tier} (talk-to): {len(deduped)} steps")
+        talk  = sum(1 for s in deduped if s["type"] == "talk")
+        dig   = sum(1 for s in deduped if s["type"] == "dig")
+        srch  = sum(1 for s in deduped if s["type"] == "search")
+        print(f"  Cryptic {tier}: {len(deduped)} steps (talk={talk} dig={dig} search={srch})")
 
     return result
 
@@ -618,56 +628,32 @@ def scrape_step_counts(
     emote:    dict[str, list[dict]],
     sherlock: dict[str, list[dict]],
     falo:     list[dict],
+    cryptic:  dict[str, list[dict]],
     anagram:  dict[str, list[dict]],
     cipher:   dict[str, list[dict]],
     force_refresh: bool,
 ) -> dict[str, dict[str, int]]:
     """Return total step counts per type per tier.
 
-    For types already fully scraped we derive counts directly.
-    For cryptic (where we only kept talk-to rows), map, coordinate, scan, and
-    hot/cold we fetch the wiki page and count rows/gallery items.
+    All clue types are now fully scraped, so counts are derived directly
+    from the structured data.  Only map, coordinate, scan, and hot/cold
+    still need wiki fetches (they have no per-step structured data).
     """
     counts: dict[str, dict[str, int]] = {}
 
-    # ── Already fully scraped ─────────────────────────────────────────────────
+    # ── Fully scraped — derive counts directly ────────────────────────────────
     counts["emote"]    = {t: len(v) for t, v in emote.items()}
     counts["sherlock"] = {t: len(v) for t, v in sherlock.items()}
     counts["falo"]     = {"Master": len(falo)}
     counts["anagram"]  = {t: len(v) for t, v in anagram.items()}
     counts["cipher"]   = {t: len(v) for t, v in cipher.items()}
 
-    # ── Cryptic — count ALL rows (not just talk-to) + dig rows separately ────
-    html = wiki_fetcher.fetch("Treasure_Trails/Guide/Cryptic_clues",
-                               force_refresh=force_refresh)
-    if html:
-        soup = BeautifulSoup(html, "html.parser")
-        by_tier = _split_by_tier_headers(soup, CRYPTIC_TIERS)
-        cryptic_counts: dict[str, int] = {}
-        cryptic_dig:    dict[str, int] = {}
-        for tier in CRYPTIC_TIERS:
-            total = dig = 0
-            for table in by_tier[tier]:
-                if "wikitable" not in table.get("class", []):
-                    continue
-                headers = [th.get_text().strip().lower()
-                           for th in table.find_all("th")]
-                col_clue = next((i for i, h in enumerate(headers)
-                                 if "clue" in h), 0)
-                for tr in table.find_all("tr"):
-                    cells = tr.find_all("td")
-                    if not cells:
-                        continue
-                    total += 1
-                    clue_text = cells[min(col_clue, len(cells)-1)].get_text(" ").strip()
-                    if _DIG_RE.search(clue_text):
-                        dig += 1
-            cryptic_counts[tier] = total
-            cryptic_dig[tier]    = dig
-        counts["cryptic"]    = cryptic_counts
-        counts["crypticDig"] = cryptic_dig
-        print("  Cryptic totals:", {t: cryptic_counts[t] for t in CRYPTIC_TIERS})
-        print("  Cryptic dig:   ", {t: cryptic_dig[t] for t in CRYPTIC_TIERS if cryptic_dig[t]})
+    # Cryptic — total and dig counts derived from the fully-structured data
+    counts["cryptic"]    = {t: len(v) for t, v in cryptic.items()}
+    counts["crypticDig"] = {
+        t: sum(1 for s in v if s.get("type") == "dig")
+        for t, v in cryptic.items()
+    }
 
     # ── Map clues ─────────────────────────────────────────────────────────────
     html = wiki_fetcher.fetch("Treasure_Trails/Guide/Maps",
@@ -773,7 +759,7 @@ def main():
             step["charlieItems"] = CHARLIE_ITEMS
 
     print("Scraping total step counts…")
-    step_counts = scrape_step_counts(emote, sherlock, falo, anagram, cipher, force)
+    step_counts = scrape_step_counts(emote, sherlock, falo, cryptic, anagram, cipher, force)
 
     print("Building indexes…")
     item_index, npc_index = _build_indexes(emote, sherlock, falo, cryptic, anagram, cipher)
@@ -819,7 +805,7 @@ def main():
     print(f"  Emote steps:         {total_emote}")
     print(f"  Sherlock tasks:      {total_sherlock}")
     print(f"  Falo steps:          {len(falo)}")
-    print(f"  Cryptic talk-to:     {total_cryptic}")
+    print(f"  Cryptic steps:       {total_cryptic}")
     print(f"  Anagram clues:       {total_anagram}")
     print(f"  Cipher clues:        {total_cipher}")
     print(f"  Item index entries:  {len(item_index)}")
