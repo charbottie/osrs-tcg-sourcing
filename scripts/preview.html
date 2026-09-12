@@ -979,6 +979,7 @@ let ingredientInfo      = {};   // non-card ingredient name → {production, sho
 let questsData          = {};   // quest name → {prerequisites, skillRequirements, ...}
 let bmQuestCards        = {};   // quest name → {sections, ...} from bronzeman plugin data
 let allCollections      = {};   // displayName → {cardCount, ownedCards, credits, updatedAt}
+let clueSteps           = null; // {emote, sherlock, falo, itemIndex} from clue_steps.json
 // Two separate stores: screenshot-derived (file) and manually toggled (user).
 // completedQuests = union of both; re-running the script only touches the file set.
 let _currentRsn = '';
@@ -1050,6 +1051,10 @@ function cleanSpawnText(s) {
   // Remove duplicate consecutive floor references e.g. "1st floor 2nd floor" → "1st floor"
   s = s.replace(/(\d+(?:st|nd|rd|th)\s+floor)\s+\d+(?:st|nd|rd|th)\s+floor/gi, '$1');
   return s.trim();
+}
+
+function escHtml(str) {
+  return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
 }
 
 function wikiLink(name) {
@@ -1174,7 +1179,7 @@ function simulateRandom() {
 async function loadData() {
   try {
     const cb = `?v=${Date.now()}`;  // cache-bust so updated JSON files are always fresh
-    const [md, is, cc, cd, css, cs, crr, ii, qd, ed, fd, bmqc, cq, ac] = await Promise.all([
+    const [md, is, cc, cd, css, cs, crr, ii, qd, ed, fd, bmqc, cq, ac, cst] = await Promise.all([
       fetch(`output/monster_drops.json${cb}`).then(r => r.json()).catch(() => ({})),
       fetch(`output/item_sources.json${cb}`).then(r => r.json()).catch(() => ({})),
       fetch(`output/card_categories.json${cb}`).then(r => r.json()).catch(() => ({})),
@@ -1189,6 +1194,7 @@ async function loadData() {
       fetch(`output/bm_quest_cards.json${cb}`).then(r => r.json()).catch(() => ({quests:[]})),
       fetch(`output/completed_quests.json${cb}`).then(r => r.json()).catch(() => ({completedQuests:[]})),
       fetch(`output/all_collections.json${cb}`).then(r => r.json()).catch(() => ({profiles:{}})),
+      fetch(`output/clue_steps.json${cb}`).then(r => r.json()).catch(() => null),
     ]);
     monsterDrops = md; itemSources = is; cardCategories = cc; cardDetails = cd;
     equipBySlot = ed; foodData = fd;
@@ -1197,6 +1203,7 @@ async function loadData() {
     ingredientInfo     = ii;
     questsData         = qd;
     allCollections     = ac.profiles || {};
+    clueSteps          = cst;
     // Build quest name → BM card requirement map; track miniquests separately
     bmQuestCards = {};
     for (const q of (bmqc.quests || [])) {
@@ -2312,6 +2319,110 @@ function renderClueScroll(tier, container) {
   }
   html += `</div>`;
 
+  // ── Clue-specific step sections ────────────────────────────────────────────
+  if (clueSteps) {
+    const capTier = tier.charAt(0).toUpperCase() + tier.slice(1);
+
+    // Emote clue steps for this tier
+    const emoteSteps = (clueSteps.emote || {})[capTier] || [];
+    if (emoteSteps.length > 0) {
+      const stepsWithItems = emoteSteps.filter(s => s.items && s.items.length > 0);
+      const allOwned = stepsWithItems.filter(s => s.items.every(i => isOwned(i))).length;
+      html += `<div class="section">
+        <div class="section-header">Emote Clue Steps ${progressPill(allOwned, stepsWithItems.length, false)}</div>
+        <div style="font-size:10px;color:#555;padding:0 0 6px">Steps requiring items · ${stepsWithItems.length} of ${emoteSteps.length} total</div>`;
+      for (const step of emoteSteps) {
+        const items = step.items || [];
+        const hasItems = items.length > 0;
+        const allItemsOwned = hasItems && items.every(i => isOwned(i));
+        const anyOwned = items.some(i => isOwned(i));
+        const borderCol = allItemsOwned ? '#76c442' : anyOwned ? '#c8a830' : (hasItems ? '#c84a00' : '#333');
+        html += `<div style="margin:4px 0;padding:8px;background:#0d0d0d;border-radius:4px;border-left:3px solid ${borderCol}">
+          <div style="font-size:12px;color:#bbb;margin-bottom:${hasItems?'6px':'0'}">${escHtml(step.clueText)}</div>`;
+        if (hasItems) {
+          html += `<div style="display:flex;flex-wrap:wrap;gap:4px;margin-top:4px">`;
+          for (const it of items) {
+            const own = isOwned(it);
+            const bg  = own ? '#0d1c09' : '#1c0d09';
+            const col = own ? '#76c442' : '#c84a00';
+            const sym = own ? '✓' : '✗';
+            html += `<span style="font-size:11px;background:${bg};color:${col};border-radius:3px;padding:2px 7px;cursor:pointer"
+              data-nav="${escHtml(it)}" data-nav-type="item"
+              onclick="showCard(this.dataset.nav,this.dataset.navType)">${sym} ${escHtml(it)}</span>`;
+          }
+          html += `</div>`;
+        }
+        html += `</div>`;
+      }
+      html += `</div>`;
+    }
+
+    // Sherlock tasks for Elite / Master
+    const sherlockTier = capTier === 'Elite' ? 'Elite' : capTier === 'Master' ? 'Master' : null;
+    if (sherlockTier) {
+      const sherlockTasks = (clueSteps.sherlock || {})[sherlockTier] || [];
+      const tasksWithItems = sherlockTasks.filter(t => t.items && t.items.length > 0);
+      if (sherlockTasks.length > 0) {
+        html += `<div class="section">
+          <div class="section-header">Sherlock Tasks</div>
+          <div style="font-size:10px;color:#555;padding:0 0 6px">${sherlockTasks.length} tasks · items required where known</div>`;
+        for (const task of sherlockTasks) {
+          const items = task.items || [];
+          const hasItems = items.length > 0;
+          const allItemsOwned = hasItems && items.every(i => isOwned(i));
+          const borderCol = allItemsOwned ? '#76c442' : (hasItems ? '#9050d0' : '#333');
+          html += `<div style="margin:4px 0;padding:8px;background:#0d0d0d;border-radius:4px;border-left:3px solid ${borderCol}">
+            <div style="font-size:12px;color:#bbb;margin-bottom:${hasItems?'6px':'0'}">${escHtml(task.task)}</div>`;
+          if (hasItems) {
+            html += `<div style="display:flex;flex-wrap:wrap;gap:4px;margin-top:4px">`;
+            for (const it of items) {
+              const own = isOwned(it);
+              // Only items that are cards show owned state; others shown neutral
+              const isCard = !!itemSources[it];
+              const bg  = isCard ? (own ? '#0d1c09' : '#1c0d09') : '#111';
+              const col = isCard ? (own ? '#76c442' : '#c84a00') : '#888';
+              const sym = isCard ? (own ? '✓ ' : '✗ ') : '';
+              html += `<span style="font-size:11px;background:${bg};color:${col};border-radius:3px;padding:2px 7px;cursor:${isCard?'pointer':'default'}"
+                ${isCard ? `data-nav="${escHtml(it)}" data-nav-type="item" onclick="showCard(this.dataset.nav,this.dataset.navType)"` : ''}>${sym}${escHtml(it)}</span>`;
+            }
+            html += `</div>`;
+          }
+          html += `</div>`;
+        }
+        html += `</div>`;
+      }
+    }
+
+    // Falo the Bard for Master tier
+    if (capTier === 'Master') {
+      const faloSteps = clueSteps.falo || [];
+      if (faloSteps.length > 0) {
+        html += `<div class="section">
+          <div class="section-header">Falo the Bard</div>
+          <div style="font-size:10px;color:#555;padding:0 0 6px">Equip any one valid item per step</div>`;
+        for (const step of faloSteps) {
+          const items = step.items || [];
+          const anyOwned = items.some(i => isOwned(i));
+          const borderCol = anyOwned ? '#76c442' : '#d03030';
+          html += `<div style="margin:4px 0;padding:8px;background:#0d0d0d;border-radius:4px;border-left:3px solid ${borderCol}">
+            <div style="font-size:12px;color:#888;font-style:italic;margin-bottom:6px">"${escHtml(step.lyric)}"</div>
+            <div style="display:flex;flex-wrap:wrap;gap:4px">`;
+          for (const it of items) {
+            const own = isOwned(it);
+            const bg  = own ? '#0d1c09' : '#1c0d09';
+            const col = own ? '#76c442' : '#c84a00';
+            const sym = own ? '✓' : '✗';
+            html += `<span style="font-size:11px;background:${bg};color:${col};border-radius:3px;padding:2px 7px;cursor:pointer"
+              data-nav="${escHtml(it)}" data-nav-type="item"
+              onclick="showCard(this.dataset.nav,this.dataset.navType)">${sym} ${escHtml(it)}</span>`;
+          }
+          html += `</div></div>`;
+        }
+        html += `</div>`;
+      }
+    }
+  }
+
   container.innerHTML = html;
 }
 
@@ -2396,6 +2507,10 @@ function renderItem(name, container) {
     ${shops.length ? `<div class="stat-block">
       <div class="stat-label">Shops</div>
       <div class="stat-value" style="font-size:13px;color:#8ab4d4">${shops.length}</div>
+    </div>` : ''}
+    ${clueSteps?.itemIndex?.[name]?.length ? `<div class="stat-block">
+      <div class="stat-label">Clue Steps</div>
+      <div class="stat-value" style="font-size:13px;color:#c8a830">${clueSteps.itemIndex[name].length}</div>
     </div>` : ''}
   </div>`;
 
@@ -2578,7 +2693,90 @@ function renderItem(name, container) {
   // ── Required for quests (from BM quest card data) ─────────────────────────
   html += requiredForQuestsHtml(name);
 
+  // ── Clue step usage ────────────────────────────────────────────────────────
+  html += clueStepUsageHtml(name);
+
   container.innerHTML = html;
+}
+
+// ─── Clue step usage section (item detail view) ───────────────────────────
+// Returns HTML showing every emote/Sherlock/Falo step that requires this item.
+function clueStepUsageHtml(itemName) {
+  if (!clueSteps || !clueSteps.itemIndex) return '';
+  const steps = clueSteps.itemIndex[itemName];
+  if (!steps || steps.length === 0) return '';
+
+  const TIER_COLOR = {
+    Beginner:'#c8a830', Easy:'#50c050', Medium:'#c8c030',
+    Hard:'#4080c0', Elite:'#9050d0', Master:'#d03030',
+  };
+
+  let html = `<div class="section"><div class="section-header">Clue Step Requirements</div>`;
+
+  for (const step of steps) {
+    const otherItems = (step.items || []).filter(i => i !== itemName);
+
+    if (step.type === 'emote') {
+      const col = TIER_COLOR[step.tier] || '#888';
+      html += `<div style="margin:6px 0;padding:8px;background:#0d0d0d;border-radius:4px;border-left:3px solid ${col}">
+        <div style="font-size:10px;color:${col};font-weight:600;margin-bottom:4px">
+          Emote Clue · ${step.tier}
+        </div>
+        <div style="font-size:12px;color:#bbb;margin-bottom:${otherItems.length?'6px':'0'}">${escHtml(step.clueText)}</div>`;
+      if (otherItems.length) {
+        html += `<div style="font-size:11px;color:#666;margin-top:4px">Also need:</div>`;
+        for (const it of otherItems) {
+          const own = isOwned(it);
+          const cls = own ? '#76c442' : '#c84a00';
+          const sym = own ? '✓' : '✗';
+          html += `<div style="font-size:11px;padding:2px 0;cursor:pointer;color:${cls}"
+            data-nav="${escHtml(it)}" data-nav-type="item"
+            onclick="showCard(this.dataset.nav,this.dataset.navType)">${sym} ${escHtml(it)}</div>`;
+        }
+      }
+      html += `</div>`;
+
+    } else if (step.type === 'sherlock') {
+      const col = step.tier === 'Master' ? '#d03030' : '#9050d0';
+      html += `<div style="margin:6px 0;padding:8px;background:#0d0d0d;border-radius:4px;border-left:3px solid ${col}">
+        <div style="font-size:10px;color:${col};font-weight:600;margin-bottom:4px">
+          Sherlock · ${step.tier}
+        </div>
+        <div style="font-size:12px;color:#bbb;margin-bottom:${otherItems.length?'6px':'0'}">${escHtml(step.task)}</div>`;
+      if (otherItems.length) {
+        html += `<div style="font-size:11px;color:#666;margin-top:4px">Also accepted:</div>`;
+        for (const it of otherItems) {
+          const own = isOwned(it);
+          const cls = own ? '#76c442' : '#aaa';
+          html += `<div style="font-size:11px;padding:2px 0;cursor:pointer;color:${cls}"
+            data-nav="${escHtml(it)}" data-nav-type="item"
+            onclick="showCard(this.dataset.nav,this.dataset.navType)">${escHtml(it)}</div>`;
+        }
+      }
+      html += `</div>`;
+
+    } else if (step.type === 'falo') {
+      html += `<div style="margin:6px 0;padding:8px;background:#0d0d0d;border-radius:4px;border-left:3px solid #d03030">
+        <div style="font-size:10px;color:#d03030;font-weight:600;margin-bottom:4px">
+          Falo the Bard · Master
+        </div>
+        <div style="font-size:12px;color:#888;font-style:italic;margin-bottom:${otherItems.length?'6px':'0'}">"${escHtml(step.lyric)}"</div>`;
+      if (otherItems.length) {
+        html += `<div style="font-size:11px;color:#666;margin-top:4px">Also accepted:</div>`;
+        for (const it of otherItems) {
+          const own = isOwned(it);
+          const cls = own ? '#76c442' : '#aaa';
+          html += `<div style="font-size:11px;padding:2px 0;cursor:pointer;color:${cls}"
+            data-nav="${escHtml(it)}" data-nav-type="item"
+            onclick="showCard(this.dataset.nav,this.dataset.navType)">${escHtml(it)}</div>`;
+        }
+      }
+      html += `</div>`;
+    }
+  }
+
+  html += `</div>`;
+  return html;
 }
 
 // ─── Tool tier rows HTML ───────────────────────────────────────────────────
