@@ -290,12 +290,25 @@ def scrape_falo(force_refresh: bool) -> list[dict]:
 # ── Cryptic clues — all step types ───────────────────────────────────────────
 
 _TALK_RE = re.compile(r'\b(talk|speak)\b', re.IGNORECASE)
+_KILL_RE2 = re.compile(r'\bkill\b', re.IGNORECASE)  # detect kill-the-NPC steps in notes
+
+# Monster card names for filtering kill targets (loaded once at module level)
+_MONSTER_CARD_NAMES: set[str] = set()
+
+
+def _load_monster_card_names() -> None:
+    global _MONSTER_CARD_NAMES
+    p = Path(__file__).parent / "output" / "monster_drops.json"
+    if p.exists() and not _MONSTER_CARD_NAMES:
+        import json as _json
+        _MONSTER_CARD_NAMES = {k.lower() for k in _json.loads(p.read_text()).keys()}
 
 
 def _parse_cryptic_table(table: Tag, tier: str) -> list[dict]:
     """Extract ALL rows from one cryptic clue wikitable.
 
     Each step gets a "type" field:
+      "kill"   — kill an NPC to obtain a key or casket (killNpcs field populated)
       "talk"   — talk/speak to an NPC (npc field populated)
       "dig"    — dig at a location (needs Spade)
       "search" — search/inspect an object (no card required)
@@ -330,6 +343,14 @@ def _parse_cryptic_table(table: Tag, tier: str) -> list[dict]:
 
         if _DIG_RE.search(clue_text):
             step["type"] = "dig"
+        elif _KILL_RE2.search(notes_text):
+            step["type"] = "kill"
+            # Extract wiki-linked names that are monster cards as kill options.
+            # Many steps allow alternatives ("or"), so store all card-linked targets.
+            all_links = _links_in_cell(cells[idx_notes])
+            kill_npcs = [n for n in all_links if n.lower() in _MONSTER_CARD_NAMES]
+            if kill_npcs:
+                step["killNpcs"] = kill_npcs
         elif _TALK_RE.search(combined):
             step["type"] = "talk"
             npc = _first_link_in_cell(cells[idx_notes])
@@ -347,6 +368,7 @@ def _parse_cryptic_table(table: Tag, tier: str) -> list[dict]:
 
 def scrape_cryptic_clues(force_refresh: bool) -> dict[str, list[dict]]:
     """Scrape all cryptic clue steps from the wiki (all types)."""
+    _load_monster_card_names()
     html = wiki_fetcher.fetch("Treasure_Trails/Guide/Cryptic_clues",
                                force_refresh=force_refresh)
     if not html:
@@ -373,8 +395,9 @@ def scrape_cryptic_clues(force_refresh: bool) -> dict[str, list[dict]]:
         result[tier] = deduped
         talk  = sum(1 for s in deduped if s["type"] == "talk")
         dig   = sum(1 for s in deduped if s["type"] == "dig")
+        kill  = sum(1 for s in deduped if s["type"] == "kill")
         srch  = sum(1 for s in deduped if s["type"] == "search")
-        print(f"  Cryptic {tier}: {len(deduped)} steps (talk={talk} dig={dig} search={srch})")
+        print(f"  Cryptic {tier}: {len(deduped)} steps (talk={talk} dig={dig} kill={kill} search={srch})")
 
     return result
 

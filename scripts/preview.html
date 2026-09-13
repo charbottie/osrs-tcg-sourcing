@@ -2316,9 +2316,14 @@ function renderClueScroll(tier, container) {
     const crypticSteps = (clueSteps.cryptic || {})[capTier] || [];
     if (crypticSteps.length) {
       const achievable = crypticSteps.filter(s => {
-        if (s.type === 'dig')    return spadeOwned;
+        if (s.type === 'dig')  return spadeOwned;
+        if (s.type === 'kill') {
+          const npcs = s.killNpcs || [];
+          // Achievable if no identified card target, OR at least one kill option is owned
+          return !npcs.length || npcs.some(n => !_npcBlocked(n));
+        }
         if (_locLocked(s.location)) return false;
-        if (s.type === 'talk')   return !_npcBlocked(s.npc);
+        if (s.type === 'talk') return !_npcBlocked(s.npc);
         return true; // search/inspect — no card required
       }).length;
       _row('Cryptic', achievable, crypticSteps.length);
@@ -2628,10 +2633,12 @@ function renderClueScroll(tier, container) {
     if (crypticSteps.length > 0) {
       const cTalk   = crypticSteps.filter(s => s.type === 'talk').length;
       const cDig    = crypticSteps.filter(s => s.type === 'dig').length;
+      const cKill   = crypticSteps.filter(s => s.type === 'kill').length;
       const cSearch = crypticSteps.filter(s => s.type === 'search').length;
       const typeSummary = [
-        cTalk   ? `${cTalk} talk`   : '',
-        cDig    ? `${cDig} dig`     : '',
+        cTalk   ? `${cTalk} talk`     : '',
+        cDig    ? `${cDig} dig`       : '',
+        cKill   ? `${cKill} kill`     : '',
         cSearch ? `${cSearch} search` : '',
       ].filter(Boolean).join(' · ');
       html += `<div class="section">
@@ -2646,6 +2653,24 @@ function renderClueScroll(tier, container) {
             background:${sp?'#0d1c09':'#1c0d09'};color:${sp?'#76c442':'#c84a00'};cursor:pointer"
             data-nav="Spade" data-nav-type="item"
             onclick="showCard(this.dataset.nav,this.dataset.navType)">${sp?'✓':'✗'} Spade</span>`;
+        } else if (step.type === 'kill') {
+          const npcs = step.killNpcs || [];
+          const anyOwned = npcs.some(n => isOwned(n));
+          const anyCard  = npcs.some(n => _monsterCardNames.has(n.toLowerCase()));
+          borderCol = anyCard ? (anyOwned ? '#76c442' : '#c84a00') : '#333';
+          if (npcs.length) {
+            badge = npcs.map((n, i) => {
+              const isCard = _monsterCardNames.has(n.toLowerCase());
+              const owned  = isCard && isOwned(n);
+              const sep    = i > 0 ? `<span style="color:#444;font-size:10px;margin:0 3px">or</span>` : '';
+              return sep + `<span style="font-size:11px;padding:2px 7px;border-radius:3px;
+                background:${isCard?(owned?'#0d1c09':'#1c0d09'):'#111'};
+                color:${isCard?(owned?'#76c442':'#c84a00'):'#888'};
+                cursor:${isCard?'pointer':'default'}"
+                ${isCard ? `data-nav="${escHtml(n)}" data-nav-type="monster" onclick="showCard(this.dataset.nav,this.dataset.navType)"` : ''}
+                >${isCard?(owned?'✓ ':'✗ '):''}${escHtml(n)}</span>`;
+            }).join('');
+          }
         } else if (step.type === 'talk') {
           const npcCard  = step.npc && monsterDrops[step.npc] !== undefined;
           const npcOwned = npcCard && isOwned(step.npc);

@@ -2618,7 +2618,10 @@
         "tier": "Medium",
         "clueText": "A graceful man of many colours, his crates must be full of many delights.",
         "location": "Kill a hill giant to obtain the key. Search the crate on the 2 floor 3 floor of Osten 's shop in Shayzien .",
-        "type": "search"
+        "type": "kill",
+        "killNpcs": [
+          "Hill giant"
+        ]
       },
       {
         "tier": "Medium",
@@ -2643,14 +2646,16 @@
         "tier": "Medium",
         "clueText": "Go to the village being attacked by trolls, search the drawers in one of the houses.",
         "location": "Go to Dunstan 's house in the north-east corner of Burthorpe . Kill Penda in The Toad and Chicken to obtain the key.",
-        "type": "search"
+        "type": "kill",
+        "killNpcs": [
+          "Penda"
+        ]
       },
       {
         "tier": "Medium",
         "clueText": "Go to this building to be illuminated, and check the drawers while you are there.",
         "location": "The 1 floor 2 floor of the Lighthouse ( fairy ring code A L P ). Kill a Rellekka marketplace guard to obtain the key. ( Note: Starting the Horror from the Deep quest and speaking to Gunnjorn to obtain the Lighthouse key is required! Level 35 Agility is required to talk to Gunnjorn. You must also repair the bridge with two wooden planks , a hammer and 60 steel nails .)",
-        "type": "talk",
-        "npc": "Lighthouse"
+        "type": "kill"
       },
       {
         "tier": "Medium",
@@ -2663,25 +2668,37 @@
         "tier": "Medium",
         "clueText": "In a town where everyone has perfect vision, seek some locked drawers in a house that sits opposite a workshop.",
         "location": "The drawers is in Seers' Village in the house south of the Elemental Workshop entrance . Kill any chicken to obtain a key. ( Note: The closest chicken is just by the entrance of the Ranging Guild , west of Seers' Village .)",
-        "type": "search"
+        "type": "kill",
+        "killNpcs": [
+          "Chicken"
+        ]
       },
       {
         "tier": "Medium",
         "clueText": "In a town where the guards are armed with maces, search the upstairs rooms of the Public House.",
         "location": "Search the drawers in the pub north of Ardougne Castle . Kill a guard dog at Handelmort Mansion to obtain the key.",
-        "type": "search"
+        "type": "kill",
+        "killNpcs": [
+          "Guard dog"
+        ]
       },
       {
         "tier": "Medium",
         "clueText": "In a town where thieves steal from stalls, search for some drawers in the upstairs of a house near the bank.",
         "location": "Kill any guard located around East Ardougne for a medium key . Then, search the drawers in the upstairs hallway of Jerico 's house, which is the house with pigeon cages located south of the northern East Ardougne bank.",
-        "type": "search"
+        "type": "kill",
+        "killNpcs": [
+          "Guard"
+        ]
       },
       {
         "tier": "Medium",
         "clueText": "In a town where wizards are known to gather, search upstairs in a large house to the north.",
         "location": "Travel to Yanille and head to the house north-west of the bank. Kill a man nearby to receive a key. Go upstairs in the house and search the chest.",
-        "type": "search"
+        "type": "kill",
+        "killNpcs": [
+          "Man"
+        ]
       },
       {
         "tier": "Medium",
@@ -2693,7 +2710,10 @@
         "tier": "Medium",
         "clueText": "Probably filled with wizards socks.",
         "location": "Kill one of the wizards for the key. Search the drawers in the basement of the Wizards' Tower south of Draynor Village . ( fairy ring code D I S )",
-        "type": "search"
+        "type": "kill",
+        "killNpcs": [
+          "Wizard"
+        ]
       },
       {
         "tier": "Medium",
@@ -2711,7 +2731,10 @@
         "tier": "Medium",
         "clueText": "Search the upstairs drawers of a house in a village where pirates are known to have a good time.",
         "location": "The house in the south-east corner of Brimhaven , north-east of Davon's Amulet Store . Kill any pirate located around Brimhaven to obtain the key.",
-        "type": "search"
+        "type": "kill",
+        "killNpcs": [
+          "Pirate"
+        ]
       },
       {
         "tier": "Medium",
@@ -2790,7 +2813,10 @@
         "tier": "Medium",
         "clueText": "You'll need to look for a town with a central fountain. Look for a locked chest in the town's chapel.",
         "location": "Search the chest by the stairs in the Varrock church, east of the palace . Kill a monk in Ardougne Monastery to obtain the key.",
-        "type": "search"
+        "type": "kill",
+        "killNpcs": [
+          "Monk"
+        ]
       }
     ],
     "Hard": [
@@ -3243,7 +3269,11 @@
         "tier": "Elite",
         "clueText": "A demon's best friend holds the next step of this clue.",
         "location": "Kill a hellhound . Note: Killing Cerberus will count, but hellhounds inside the God Wars Dungeon will not count.",
-        "type": "search"
+        "type": "kill",
+        "killNpcs": [
+          "Hellhound",
+          "Cerberus"
+        ]
       },
       {
         "tier": "Elite",
@@ -3268,13 +3298,20 @@
         "tier": "Elite",
         "clueText": "Banish a chilling spirit.",
         "location": "Kill a Frost Nagua . Amoxliatl also counts for this.",
-        "type": "search"
+        "type": "kill",
+        "killNpcs": [
+          "Frost Nagua",
+          "Amoxliatl"
+        ]
       },
       {
         "tier": "Elite",
         "clueText": "Crush the spirited earth.",
         "location": "Kill an Earthen Nagua .",
-        "type": "search"
+        "type": "kill",
+        "killNpcs": [
+          "Earthen Nagua"
+        ]
       },
       {
         "tier": "Elite",
@@ -3316,7 +3353,10 @@
         "tier": "Elite",
         "clueText": "Ghostly bones.",
         "location": "Kill an Ankou , which can be found on the 4th level of Stronghold of Security , the Stronghold Slayer Cave (Slayer task required), the Catacombs of Kourend , and The Forgotten Cemetery .",
-        "type": "search"
+        "type": "kill",
+        "killNpcs": [
+          "Ankou"
+        ]
       },
       {
         "tier": "Elite",
@@ -3363,19 +3403,29 @@
         "tier": "Elite",
         "clueText": "In a while...",
         "location": "Kill a crocodile .",
-        "type": "search"
+        "type": "kill",
+        "killNpcs": [
+          "Crocodile"
+        ]
       },
       {
         "tier": "Elite",
         "clueText": "Let's hope you don't meet a watery death when you encounter this fiend.",
         "location": "Kill a waterfiend . Players cannot kill those found in the Kraken Cove as part of this clue.",
-        "type": "search"
+        "type": "kill",
+        "killNpcs": [
+          "Waterfiend"
+        ]
       },
       {
         "tier": "Elite",
         "clueText": "Mix yellow with blue and add heat, make sure you bring protection.",
         "location": "Kill a green dragon or brutal green dragon . Players who have completed Dragon Slayer II can use the Myths' Guild basement to kill green dragons outside the Wilderness .",
-        "type": "search"
+        "type": "kill",
+        "killNpcs": [
+          "Green dragon",
+          "Brutal green dragon"
+        ]
       },
       {
         "tier": "Elite",
@@ -3393,7 +3443,11 @@
         "tier": "Elite",
         "clueText": "Reflection is the weakness for these eyes of evil.",
         "location": "Kill a basilisk , which requires a mirror shield and 40 Slayer . Basilisk knights also count, requiring 60 Slayer and completion of The Fremennik Exiles .",
-        "type": "search"
+        "type": "kill",
+        "killNpcs": [
+          "Basilisk",
+          "Basilisk knight"
+        ]
       },
       {
         "tier": "Elite",
@@ -3405,7 +3459,10 @@
         "tier": "Elite",
         "clueText": "Scattered coins and gems fill the floor. The chest you seek is in the north east.",
         "location": "Kill the King Black Dragon for a key (elite) , and then open the closed chest in the north-east corner of the lair .",
-        "type": "search"
+        "type": "kill",
+        "killNpcs": [
+          "King Black Dragon"
+        ]
       },
       {
         "tier": "Elite",
@@ -3431,7 +3488,12 @@
         "tier": "Elite",
         "clueText": "Surround my bones in fire, on top the wooden pyre. Finally lay me to rest, before my one last test.",
         "location": "Kill a confused barbarian or lost barbarian within the Ancient Cavern to receive mangled bones . Construct a pyre ship and burn the bones onto the pyre with logs , a tinderbox , and an axe . Kill the ferocious barbarian spirit that spawns to receive the next clue.",
-        "type": "search"
+        "type": "kill",
+        "killNpcs": [
+          "Confused barbarian",
+          "Lost barbarian",
+          "Ferocious barbarian spirit"
+        ]
       },
       {
         "tier": "Elite",
@@ -3443,7 +3505,10 @@
         "tier": "Elite",
         "clueText": "Their bane awaits, but don't be going in there without permission.",
         "location": "Kill the shellbane gryphon . A gryphon Slayer task is not required to complete the clue step.",
-        "type": "search"
+        "type": "kill",
+        "killNpcs": [
+          "Shellbane gryphon"
+        ]
       },
       {
         "tier": "Elite",
@@ -3482,19 +3547,30 @@
         "tier": "Elite",
         "clueText": "You'll get licked.",
         "location": "Kill a bloodveld . Mutated variants do work . Bloodvelds in the God Wars Dungeon do work .",
-        "type": "search"
+        "type": "kill",
+        "killNpcs": [
+          "Bloodveld",
+          "Mutated Bloodveld"
+        ]
       },
       {
         "tier": "Elite",
         "clueText": "You'll have to plug your nose if you use this source of herbs.",
         "location": "Kill an aberrant spectre or deviant spectre and pick up the clue or casket that it drops.",
-        "type": "search"
+        "type": "kill",
+        "killNpcs": [
+          "Aberrant spectre",
+          "Deviant spectre"
+        ]
       },
       {
         "tier": "Elite",
         "clueText": "You might have to turn over a few stones to progress.",
         "location": "Kill a rock crab and pick up the casket or clue that it drops.",
-        "type": "search"
+        "type": "kill",
+        "killNpcs": [
+          "Rock crab"
+        ]
       },
       {
         "tier": "Elite",
@@ -3514,7 +3590,10 @@
         "tier": "Elite",
         "clueText": "You will have to fly high where a sword cannot help you.",
         "location": "Kill an aviansie .",
-        "type": "search"
+        "type": "kill",
+        "killNpcs": [
+          "Aviansie"
+        ]
       }
     ],
     "Master": [
@@ -12320,13 +12399,6 @@
         "type": "cryptic",
         "tier": "Medium",
         "clueText": "Are you somewhat entertained?"
-      }
-    ],
-    "Lighthouse": [
-      {
-        "type": "cryptic",
-        "tier": "Medium",
-        "clueText": "Go to this building to be illuminated, and check the drawers while you are there."
       }
     ],
     "Gnome ball referee": [
