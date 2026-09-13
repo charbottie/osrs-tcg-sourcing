@@ -2656,11 +2656,11 @@ function renderClueScroll(tier, container) {
         } else if (step.type === 'kill') {
           const npcs = step.killNpcs || [];
           const anyOwned = npcs.some(n => isOwned(n));
-          const anyCard  = npcs.some(n => _monsterCardNames.has(n.toLowerCase()));
+          const anyCard  = npcs.some(n => !!monsterDrops[n]);
           borderCol = anyCard ? (anyOwned ? '#76c442' : '#c84a00') : '#333';
           if (npcs.length) {
             badge = npcs.map((n, i) => {
-              const isCard = _monsterCardNames.has(n.toLowerCase());
+              const isCard = !!monsterDrops[n];
               const owned  = isCard && isOwned(n);
               const sep    = i > 0 ? `<span style="color:#444;font-size:10px;margin:0 3px">or</span>` : '';
               return sep + `<span style="font-size:11px;padding:2px 7px;border-radius:3px;
