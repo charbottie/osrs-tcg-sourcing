@@ -2524,7 +2524,7 @@ function renderClueScroll(tier, container) {
       const allOwned = stepsWithItems.filter(s => s.items.every(i => isOwned(i))).length;
       const daOwned  = hasDoubleAgent && isOwned('Double agent');
       html += `<div class="section">
-        <div class="section-header">Emote Clue Steps ${progressPill(allOwned, stepsWithItems.length, false)}</div>
+        <div class="section-header">Emote Clue Steps ${progressPill(!hasDoubleAgent || daOwned ? allOwned : 0, stepsWithItems.length, false)}</div>
         ${hasDoubleAgent ? `<div style="margin:0 0 6px;padding:6px 8px;background:#1c0a0a;border-radius:4px;border-left:3px solid #c84a00;font-size:11px">
           <span style="color:${daOwned?'#76c442':'#c84a00'};font-weight:600">${daOwned?'✓':'✗'} Double agent</span>
           <span style="color:#555;margin-left:6px">must be defeated before collecting reward</span>
@@ -2706,10 +2706,11 @@ function renderClueScroll(tier, container) {
     // Anagram clue steps for this tier
     const anagramSteps = (clueSteps.anagram || {})[capTier] || [];
     if (anagramSteps.length > 0) {
-      const ownedAnagrams = anagramSteps.filter(s => s.npc && isOwned(s.npc)).length;
-      const cardAnagrams  = anagramSteps.filter(s => s.npc && monsterDrops[s.npc] !== undefined).length;
+      const achievableAnagrams = anagramSteps.filter(s =>
+        !_locLocked(s.location) && !_npcBlocked(s.npc)
+      ).length;
       html += `<div class="section">
-        <div class="section-header">Anagram Clues ${cardAnagrams > 0 ? progressPill(ownedAnagrams, cardAnagrams, false) : ''}</div>
+        <div class="section-header">Anagram Clues ${progressPill(achievableAnagrams, anagramSteps.length, false)}</div>
         <div style="font-size:10px;color:#555;padding:0 0 6px">${anagramSteps.length} anagrams · solve and talk to the NPC</div>`;
       for (const step of anagramSteps) {
         const npcCard  = step.npc && monsterDrops[step.npc] !== undefined;
@@ -2732,10 +2733,9 @@ function renderClueScroll(tier, container) {
     // Cipher clues (Easy / Medium / Hard)
     const cipherSteps = (clueSteps.cipher || {})[capTier] || [];
     if (cipherSteps.length > 0) {
-      const ownedCiphers = cipherSteps.filter(s => s.npc && isOwned(s.npc)).length;
-      const cardCiphers  = cipherSteps.filter(s => s.npc && monsterDrops[s.npc] !== undefined).length;
+      const achievableCiphers = cipherSteps.filter(s => !_npcBlocked(s.npc)).length;
       html += `<div class="section">
-        <div class="section-header">Cipher Clues ${cardCiphers > 0 ? progressPill(ownedCiphers, cardCiphers, false) : ''}</div>
+        <div class="section-header">Cipher Clues ${progressPill(achievableCiphers, cipherSteps.length, false)}</div>
         <div style="font-size:10px;color:#555;padding:0 0 6px">${cipherSteps.length} ciphers · decode and talk to the NPC</div>`;
       for (const step of cipherSteps) {
         const npcCard  = step.npc && monsterDrops[step.npc] !== undefined;
