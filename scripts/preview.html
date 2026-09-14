@@ -2410,10 +2410,12 @@ function renderClueScroll(tier, container) {
     if (rows.length) {
       const grandTotal     = rows.reduce((s, r) => s + r.total, 0);
       const grandAchievable = rows.reduce((s, r) => s + r.done, 0);
+      const grandPct = grandTotal ? Math.round(grandAchievable / grandTotal * 100) : 0;
       html += `<div class="section">
         <div class="section-header">Step Achievability
           <span style="float:right;font-size:11px;font-weight:400;color:${grandAchievable===grandTotal?'#76c442':col}">
             ${grandAchievable} / ${grandTotal} steps
+            <span style="color:#555;margin-left:4px">(${grandPct}%)</span>
           </span>
         </div>`;
       for (const r of rows) {
@@ -2424,7 +2426,7 @@ function renderClueScroll(tier, container) {
           <div style="flex:1;height:5px;background:#1a1a1a;border-radius:3px;margin:0 8px">
             <div style="width:${pct}%;height:100%;background:${allDone?'#76c442':r.done>0?col:'#333'};border-radius:3px;transition:width .3s"></div>
           </div>
-          <span style="width:52px;text-align:right;color:${allDone?'#76c442':r.done>0?col:'#555'};flex-shrink:0">${r.done}<span style="color:#444"> / ${r.total}</span></span>
+          <span style="width:80px;text-align:right;color:${allDone?'#76c442':r.done>0?col:'#555'};flex-shrink:0">${r.done}<span style="color:#444"> / ${r.total}</span><span style="color:#555;font-size:10px;margin-left:4px">${pct}%</span></span>
           ${r.note ? `<span style="width:80px;text-align:right;font-size:10px;color:#444;flex-shrink:0">${r.note}</span>` : ''}
         </div>`;
       }
