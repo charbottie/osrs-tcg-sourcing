@@ -693,6 +693,10 @@
         <option value="owned">Owned only</option>
         <option value="not-owned">Not owned</option>
       </select>
+      <select id="sort-select" onchange="filterCards()" title="Sort order">
+        <option value="name">A–Z</option>
+        <option value="recently-pulled">Recently pulled</option>
+      </select>
     </div>
     <div id="filter-row2" style="display:flex;gap:6px;">
       <select id="cat-filter" onchange="filterCards()" style="flex:1">
@@ -980,6 +984,7 @@ let ingredientInfo      = {};   // non-card ingredient name → {production, sho
 let questsData          = {};   // quest name → {prerequisites, skillRequirements, ...}
 let bmQuestCards        = {};   // quest name → {sections, ...} from bronzeman plugin data
 let allCollections      = {};   // displayName → {cardCount, ownedCards, credits, updatedAt}
+let cardTimestamps      = {};   // card_name_lowercase → ISO timestamp (first seen in backup)
 let clueSteps           = null; // {emote, sherlock, falo, itemIndex} from clue_steps.json
 // Two separate stores: screenshot-derived (file) and manually toggled (user).
 // completedQuests = union of both; re-running the script only touches the file set.
@@ -1090,6 +1095,9 @@ async function loadCollection() {
   try {
     const data = await fetch('output/my_collection.json').then(r => r.json());
     owned = new Set(data.ownedCards.map(n => n.toLowerCase()));
+    cardTimestamps = {};
+    for (const [n, t] of Object.entries(data.cardTimestamps || {}))
+      cardTimestamps[n.toLowerCase()] = t;
     document.getElementById('sim-summary').textContent =
       `${data.cardCount} cards owned (real collection)`;
     document.getElementById('sim-btn').style.display = 'inline-block';
@@ -1326,17 +1334,27 @@ function buildCardList() {
   renderList(allCards);
 }
 
+// Format an ISO timestamp as "31 Aug" or "31 Aug 2025" if not the current year
+function _fmtPullDate(iso) {
+  const d = new Date(iso);
+  const now = new Date();
+  const opts = {day:'numeric', month:'short'};
+  if (d.getFullYear() !== now.getFullYear()) opts.year = 'numeric';
+  return d.toLocaleDateString('en-GB', opts);
+}
+
 function filterCards() {
   const q       = document.getElementById('search').value.toLowerCase();
   const owned_f = document.getElementById('owned-filter').value;
   const catFil  = document.getElementById('cat-filter').value;
   const setFil  = document.getElementById('set-filter')?.value || 'all';
+  const sortBy  = document.getElementById('sort-select')?.value || 'name';
 
   // Resolve the pack object once for set filtering
   const setPackObj = (setFil !== 'all' && packCatalog)
     ? packCatalog.packs.find(p => p.id === setFil) : null;
 
-  renderList(allCards.filter(c => {
+  let cards = allCards.filter(c => {
     if (q && !c.name.toLowerCase().includes(q)) return false;
     // Clue scroll virtual cards: skip owned/set filters; pass cat filter when 'all' or 'clueScrolls'
     if (c.type === 'clue') {
@@ -1358,7 +1376,20 @@ function filterCards() {
     }
     if (setPackObj && !_cardInPack(c.name, setPackObj)) return false;
     return true;
-  }));
+  });
+
+  if (sortBy === 'recently-pulled') {
+    cards = [...cards].sort((a, b) => {
+      const aOwned = isOwned(a.name), bOwned = isOwned(b.name);
+      if (aOwned !== bOwned) return aOwned ? -1 : 1;
+      const ta = cardTimestamps[a.name.toLowerCase()] || '';
+      const tb = cardTimestamps[b.name.toLowerCase()] || '';
+      if (ta !== tb) return ta > tb ? -1 : 1;
+      return a.name.localeCompare(b.name);
+    });
+  }
+
+  renderList(cards, sortBy);
 }
 
 // Items that should be classified as Currency regardless of Card.json categories
@@ -1377,7 +1408,8 @@ const CAT_ABBR = {
   Slayer:'Slay', General:'Gen', Currency:'Coin',
 };
 
-function renderList(cards) {
+function renderList(cards, sortBy) {
+  const showDate = sortBy === 'recently-pulled';
   const list = document.getElementById('card-list');
   list.innerHTML = '';
   for (const card of cards) {
@@ -1388,7 +1420,8 @@ function renderList(cards) {
       el.innerHTML = `<span class="card-name">${card.name}</span>`
         + `<span style="font-size:9px;color:${cfg.color};background:${cfg.bg};border-radius:2px;padding:1px 5px">${cfg.label}</span>`;
     } else {
-      const ownedCls = isOwned(card.name) ? ' owned-card' : '';
+      const owned = isOwned(card.name);
+      const ownedCls = owned ? ' owned-card' : '';
       el.className = 'card-item' + (card.name === selected ? ' selected' : '') + ownedCls;
       const firstCat = card.cats?.[0];
       let catTag;
@@ -1409,7 +1442,11 @@ function renderList(cards) {
       } else {
         catTag = `<span class="card-type">${card.type}</span>`;
       }
-      el.innerHTML = `<span class="card-name">${card.name}</span>${catTag}`;
+      const ts = showDate && owned ? cardTimestamps[card.name.toLowerCase()] : null;
+      const dateTag = ts
+        ? `<span style="font-size:9px;color:#555;margin-left:4px;flex-shrink:0">${_fmtPullDate(ts)}</span>`
+        : '';
+      el.innerHTML = `<span class="card-name">${card.name}</span>${catTag}${dateTag}`;
     }
     el.onclick = () => showCard(card.name, card.type);
     list.appendChild(el);
@@ -3383,6 +3420,9 @@ async function refreshCollection() {
     });
     if (data.error) throw new Error(data.error);
     owned = new Set(data.ownedCards.map(n => n.toLowerCase()));
+    cardTimestamps = {};
+    for (const [n, t] of Object.entries(data.cardTimestamps || {}))
+      cardTimestamps[n.toLowerCase()] = t;
     _canGetCache = {};
     // Also update allCollections so subsequent client-side switches are fresh
     if (rsn && data.ownedCards) {
