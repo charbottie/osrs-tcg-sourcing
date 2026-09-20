@@ -112,89 +112,6 @@ def _try_decode_save_file(f: pathlib.Path) -> tuple[pathlib.Path, dict] | None:
         return None
 
 
-def build_card_timestamps(account_dir: pathlib.Path) -> dict[str, str]:
-    """Diff backup snapshots oldest→newest to find when each card first appeared.
-
-    Returns {card_name: iso_timestamp} for all cards with a known first-seen date.
-    Cards present in the very first snapshot get that snapshot's timestamp.
-    """
-    saves_json = account_dir / "saves.json"
-    if not saves_json.exists():
-        return {}
-    try:
-        saves = json.loads(saves_json.read_text(encoding="utf-8")).get("saves", [])
-    except Exception:
-        return {}
-
-    # Sort oldest → newest
-    saves_sorted = sorted(
-        [s for s in saves if s.get("savedAt") and s.get("name")],
-        key=lambda s: s["savedAt"],
-    )
-
-    timestamps: dict[str, str] = {}
-    seen: set[str] = set()
-
-    for entry in saves_sorted:
-        backup_file = account_dir / entry["name"]
-        if not backup_file.exists():
-            continue
-        result = _try_decode_save_file(backup_file)
-        if not result:
-            continue
-        _, state = result
-        names, _ = extract_owned_names(state)
-        saved_at = entry["savedAt"]
-        for card in set(names) - seen:
-            timestamps[card] = saved_at
-        seen = set(names)
-
-    return timestamps
-
-
-def find_backup_dir_for_cards(
-    backups_dir: pathlib.Path, owned_cards: list[str]
-) -> pathlib.Path | None:
-    """Find the backup account dir whose most recent save best matches the given card list.
-
-    Used to locate the right account dir when the player was decoded from profiles2
-    rather than directly from a backup file.
-    """
-    if not backups_dir.exists():
-        return None
-    owned_set = set(owned_cards)
-    best_dir: pathlib.Path | None = None
-    best_overlap = -1
-
-    for account_dir in backups_dir.iterdir():
-        if not account_dir.is_dir():
-            continue
-        saves_json = account_dir / "saves.json"
-        if not saves_json.exists():
-            continue
-        try:
-            saves = json.loads(saves_json.read_text(encoding="utf-8")).get("saves", [])
-            if not saves:
-                continue
-            latest = max(saves, key=lambda s: s.get("savedAt", ""))
-            backup_file = account_dir / latest.get("name", "")
-            if not backup_file.exists():
-                continue
-            result = _try_decode_save_file(backup_file)
-            if not result:
-                continue
-            _, state = result
-            names, _ = extract_owned_names(state)
-            overlap = len(set(names) & owned_set)
-            if overlap > best_overlap:
-                best_overlap = overlap
-                best_dir = account_dir
-        except Exception:
-            continue
-
-    return best_dir
-
-
 def find_best_backup(backups_dir: pathlib.Path) -> tuple[pathlib.Path, dict] | None:
     """Return (path, state) for the most recently modified save file, or None.
 
@@ -443,40 +360,10 @@ def main() -> int:
         if match:
             out_path = pathlib.Path(args.out)
             out_path.parent.mkdir(parents=True, exist_ok=True)
-            backup_dir = find_backup_dir_for_cards(BACKUPS_DIR, match["ownedCards"])
-            timestamps = build_card_timestamps(backup_dir) if backup_dir else {}
-            no_ts = {n for n in match["ownedCards"] if n not in timestamps}
-            if no_ts and TCG_PROFILES_DIR.exists():
-                best_live: pathlib.Path | None = None
-                best_live_overlap = 0
-                for profile_dir in TCG_PROFILES_DIR.iterdir():
-                    save = profile_dir / "tcg.save"
-                    if not save.is_file():
-                        continue
-                    r = _try_decode_save_file(save)
-                    if not r:
-                        continue
-                    _, _state = r
-                    _names, _ = extract_owned_names(_state)
-                    overlap = len(set(_names) & no_ts)
-                    if overlap > best_live_overlap:
-                        best_live_overlap = overlap
-                        best_live = save
-                if best_live and best_live_overlap > 0:
-                    live_time = datetime.datetime.fromtimestamp(
-                        best_live.stat().st_mtime
-                    ).isoformat(timespec="seconds")
-                    for card in no_ts:
-                        timestamps[card] = live_time
-            result = {
-                "cardCount":      match["cardCount"],
-                "ownedCards":     match["ownedCards"],
-                "cardTimestamps": timestamps,
-            }
+            result = {"cardCount": match["cardCount"], "ownedCards": match["ownedCards"]}
             out_path.write_text(json.dumps(result, indent=2, ensure_ascii=False) + "\n",
                                 encoding="utf-8")
-            print(f"\nWrote {match['cardCount']} cards for '{args.player}' → {out_path}"
-                  + (f" ({len(timestamps)} with pull timestamps)" if timestamps else ""))
+            print(f"\nWrote {match['cardCount']} cards for '{args.player}' → {out_path}")
             return 0
         else:
             print(f"WARNING: player '{args.player}' not found in profiles2. "
@@ -535,48 +422,13 @@ def main() -> int:
 
     out_path = pathlib.Path(args.out)
     out_path.parent.mkdir(parents=True, exist_ok=True)
-    # Timestamps: find the backup account dir whose history matches this card set.
-    # (find_best_backup may return a file from TCG_PROFILES_DIR which has no saves.json)
-    backup_dir = find_backup_dir_for_cards(BACKUPS_DIR, sorted(all_names))
-    timestamps = build_card_timestamps(backup_dir) if backup_dir else {}
-
-    # Cards not in any backup snapshot are newer than the last saved state.
-    # Scan TCG_PROFILES_DIR live saves for any that contain these cards and
-    # assign them the save file's mtime (= roughly when they were received).
-    no_ts = {n for n in all_names if n not in timestamps}
-    if no_ts and TCG_PROFILES_DIR.exists():
-        best_live: pathlib.Path | None = None
-        best_live_overlap = 0
-        for profile_dir in TCG_PROFILES_DIR.iterdir():
-            save = profile_dir / "tcg.save"
-            if not save.is_file():
-                continue
-            r = _try_decode_save_file(save)
-            if not r:
-                continue
-            _, _state = r
-            _names, _ = extract_owned_names(_state)
-            overlap = len(set(_names) & no_ts)
-            if overlap > best_live_overlap:
-                best_live_overlap = overlap
-                best_live = save
-        if best_live and best_live_overlap > 0:
-            live_time = datetime.datetime.fromtimestamp(
-                best_live.stat().st_mtime
-            ).isoformat(timespec="seconds")
-            for card in no_ts:
-                timestamps[card] = live_time
-            print(f"  {best_live_overlap} card(s) timestamped from live save ({live_time})")
-
     result = {
-        "cardCount":      len(all_names),
-        "ownedCards":     sorted(all_names),
-        "cardTimestamps": timestamps,
+        "cardCount":  len(all_names),
+        "ownedCards": sorted(all_names),
     }
     out_path.write_text(json.dumps(result, indent=2, ensure_ascii=False) + "\n",
                         encoding="utf-8")
-    print(f"\nWrote {len(all_names)} unique owned card names → {out_path}"
-          + (f" ({len(timestamps)} with pull timestamps)" if timestamps else ""))
+    print(f"\nWrote {len(all_names)} unique owned card names → {out_path}")
     return 0
 
 
