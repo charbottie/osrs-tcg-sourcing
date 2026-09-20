@@ -445,6 +445,29 @@ def main() -> int:
             out_path.parent.mkdir(parents=True, exist_ok=True)
             backup_dir = find_backup_dir_for_cards(BACKUPS_DIR, match["ownedCards"])
             timestamps = build_card_timestamps(backup_dir) if backup_dir else {}
+            no_ts = {n for n in match["ownedCards"] if n not in timestamps}
+            if no_ts and TCG_PROFILES_DIR.exists():
+                best_live: pathlib.Path | None = None
+                best_live_overlap = 0
+                for profile_dir in TCG_PROFILES_DIR.iterdir():
+                    save = profile_dir / "tcg.save"
+                    if not save.is_file():
+                        continue
+                    r = _try_decode_save_file(save)
+                    if not r:
+                        continue
+                    _, _state = r
+                    _names, _ = extract_owned_names(_state)
+                    overlap = len(set(_names) & no_ts)
+                    if overlap > best_live_overlap:
+                        best_live_overlap = overlap
+                        best_live = save
+                if best_live and best_live_overlap > 0:
+                    live_time = datetime.datetime.fromtimestamp(
+                        best_live.stat().st_mtime
+                    ).isoformat(timespec="seconds")
+                    for card in no_ts:
+                        timestamps[card] = live_time
             result = {
                 "cardCount":      match["cardCount"],
                 "ownedCards":     match["ownedCards"],
@@ -516,6 +539,35 @@ def main() -> int:
     # (find_best_backup may return a file from TCG_PROFILES_DIR which has no saves.json)
     backup_dir = find_backup_dir_for_cards(BACKUPS_DIR, sorted(all_names))
     timestamps = build_card_timestamps(backup_dir) if backup_dir else {}
+
+    # Cards not in any backup snapshot are newer than the last saved state.
+    # Scan TCG_PROFILES_DIR live saves for any that contain these cards and
+    # assign them the save file's mtime (= roughly when they were received).
+    no_ts = {n for n in all_names if n not in timestamps}
+    if no_ts and TCG_PROFILES_DIR.exists():
+        best_live: pathlib.Path | None = None
+        best_live_overlap = 0
+        for profile_dir in TCG_PROFILES_DIR.iterdir():
+            save = profile_dir / "tcg.save"
+            if not save.is_file():
+                continue
+            r = _try_decode_save_file(save)
+            if not r:
+                continue
+            _, _state = r
+            _names, _ = extract_owned_names(_state)
+            overlap = len(set(_names) & no_ts)
+            if overlap > best_live_overlap:
+                best_live_overlap = overlap
+                best_live = save
+        if best_live and best_live_overlap > 0:
+            live_time = datetime.datetime.fromtimestamp(
+                best_live.stat().st_mtime
+            ).isoformat(timespec="seconds")
+            for card in no_ts:
+                timestamps[card] = live_time
+            print(f"  {best_live_overlap} card(s) timestamped from live save ({live_time})")
+
     result = {
         "cardCount":      len(all_names),
         "ownedCards":     sorted(all_names),

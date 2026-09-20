@@ -123193,7 +123193,13 @@
     "monsters": [],
     "rdtMonsters": [],
     "quests": [],
-    "gathering": null,
+    "gathering": {
+      "skill": "Hunter",
+      "level": 47,
+      "method": "Net trap (Uzer Mastaba)",
+      "tool": "Small fishing net + Rope",
+      "xp": 146.2
+    },
     "production": null,
     "spawns": [],
     "shopBought": false,
@@ -123205,7 +123211,13 @@
     "monsters": [],
     "rdtMonsters": [],
     "quests": [],
-    "gathering": null,
+    "gathering": {
+      "skill": "Hunter",
+      "level": 59,
+      "method": "Net trap (Ourania Hunter Area)",
+      "tool": "Small fishing net + Rope",
+      "xp": 272.0
+    },
     "production": null,
     "spawns": [],
     "shopBought": false,
@@ -123217,7 +123229,13 @@
     "monsters": [],
     "rdtMonsters": [],
     "quests": [],
-    "gathering": null,
+    "gathering": {
+      "skill": "Hunter",
+      "level": 67,
+      "method": "Net trap (Boneyard Hunter Area)",
+      "tool": "Small fishing net + Rope",
+      "xp": 434.0
+    },
     "production": null,
     "spawns": [],
     "shopBought": false,
@@ -174015,6 +174033,24 @@
     "rdtMonsters": [],
     "quests": [],
     "gathering": null,
+    "production": null,
+    "spawns": [],
+    "shopBought": false,
+    "shops": [],
+    "clueTiers": [],
+    "alwaysAvailable": false
+  },
+  "Green salamander": {
+    "monsters": [],
+    "rdtMonsters": [],
+    "quests": [],
+    "gathering": {
+      "skill": "Hunter",
+      "level": 29,
+      "method": "Net trap (Mort Myre Swamp)",
+      "tool": "Small fishing net + Rope",
+      "xp": 100.0
+    },
     "production": null,
     "spawns": [],
     "shopBought": false,
