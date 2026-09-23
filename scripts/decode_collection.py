@@ -29,6 +29,8 @@ import json
 import pathlib
 import re
 import sys
+import urllib.parse
+import urllib.request
 
 # XOR salt from TcgStateStorageEncoding.java (v2 format only)
 XOR_SALT = bytes([
@@ -168,6 +170,58 @@ def find_state_blobs_from_profiles(profiles_dir: pathlib.Path) -> list[tuple[str
     return results
 
 
+# ── Cloud API fetch ──────────────────────────────────────────────────────────
+
+_CLOUD_API_BASE = "https://api.osrs-tcg.net"
+
+
+def _fetch_cloud_cards(account_dir: pathlib.Path) -> tuple[list[str], int] | None:
+    """Fetch card collection from the OSRS TCG cloud API.
+
+    Reads cloud-session.json from the TCG profiles directory for this account,
+    then paginates through /api/v1/me/cards using the stored JWT access token.
+
+    Returns (sorted_unique_names, total_instance_count), or None if unavailable.
+    """
+    cloud_session_file = account_dir / "cloud-session.json"
+    if not cloud_session_file.is_file():
+        return None
+
+    try:
+        sess = json.loads(cloud_session_file.read_text(encoding="utf-8"))
+    except Exception:
+        return None
+
+    token = sess.get("accessToken")
+    if not token:
+        return None
+
+    all_cards: list[dict] = []
+    cursor: str | None = None
+
+    try:
+        while True:
+            url = f"{_CLOUD_API_BASE}/api/v1/me/cards"
+            if cursor:
+                url += f"?cursor={urllib.parse.quote(cursor)}"
+            req = urllib.request.Request(url, headers={
+                "Authorization": f"Bearer {token}",
+                "User-Agent":    "osrs-tcg-preview/1.0",
+            })
+            with urllib.request.urlopen(req, timeout=15) as r:
+                data = json.loads(r.read())
+            all_cards.extend(data.get("cards", []))
+            if not data.get("hasMore"):
+                break
+            cursor = data.get("nextCursor")
+    except Exception as exc:
+        print(f"  [cloud API] fetch failed — {exc}")
+        return None
+
+    names = sorted({c["cardName"] for c in all_cards if "cardName" in c})
+    return names, len(all_cards)
+
+
 # ── Per-profile extraction (keyed by RS displayName) ────────────────────────
 
 _STATE_KEY_RE         = re.compile(r'^osrstcg\.rsprofile\.([^.]+)\.state=(.+)$')
@@ -301,15 +355,28 @@ def find_per_profile_collections(profiles_dir: pathlib.Path) -> dict[str, dict]:
                     "updatedAt":  updated,
                 }
             else:
-                # Save exists but has no cards — still include so account appears in dropdown
+                # Save exists but has no local cards — this account is cloud-managed.
+                # Try fetching the collection from the OSRS TCG cloud API.
+                cloud_result = _fetch_cloud_cards(account_dir)
                 mtime = save_file.stat().st_mtime
                 updated = datetime.datetime.fromtimestamp(mtime).isoformat(timespec="seconds")
-                result[display_name] = {
-                    "cardCount":  0,
-                    "ownedCards": [],
-                    "credits":    0,
-                    "updatedAt":  updated,
-                }
+                if cloud_result:
+                    names, instance_count = cloud_result
+                    print(f"  [{display_name}] cloud account — {len(names)} cards via API")
+                    result[display_name] = {
+                        "cardCount":  len(names),
+                        "ownedCards": names,
+                        "credits":    0,
+                        "updatedAt":  updated,
+                    }
+                else:
+                    # Cloud fetch unavailable — show placeholder so account appears in dropdown
+                    result[display_name] = {
+                        "cardCount":  0,
+                        "ownedCards": [],
+                        "credits":    0,
+                        "updatedAt":  updated,
+                    }
 
     # Source 3: cloud-only accounts with no local save at all (0 cards placeholder)
     for profile_hash in hash_to_cloud:
