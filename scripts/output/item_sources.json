@@ -118696,26 +118696,14 @@
     "monsters": [],
     "rdtMonsters": [],
     "quests": [],
-    "gathering": null,
-    "production": {
-      "skill": "Fletching",
-      "level": 24,
-      "xp": 10.0,
-      "facilities": null,
-      "tools": null,
-      "quests": null,
-      "ingredients": [
-        {
-          "item": "Blurite bolts (unf)",
-          "quantity": 10
-        },
-        {
-          "item": "Feather",
-          "quantity": 10
-        }
-      ],
-      "outputQuantity": 10
+    "gathering": {
+      "skill": "Mining",
+      "level": 47,
+      "method": "Rock (Asgarnian Ice Dungeon)",
+      "tool": "Pickaxe",
+      "xp": 17.5
     },
+    "production": null,
     "spawns": [],
     "shopBought": false,
     "shops": [],
