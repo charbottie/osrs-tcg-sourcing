@@ -9400,20 +9400,6 @@
                 "Dwarf gang member"
               ],
               "type": "enemy"
-            },
-            {
-              "label": "Big Wolf",
-              "cards": [
-                "Big Wolf"
-              ],
-              "type": "enemy"
-            },
-            {
-              "label": "Bouncer",
-              "cards": [
-                "Bouncer"
-              ],
-              "type": "enemy"
             }
           ]
         }
