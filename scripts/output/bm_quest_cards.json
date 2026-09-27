@@ -16343,6 +16343,13 @@
                 "Feather"
               ],
               "type": "item"
+            },
+            {
+              "label": "Ana in a barrel",
+              "cards": [
+                "Ana in a barrel"
+              ],
+              "type": "item"
             }
           ]
         },
