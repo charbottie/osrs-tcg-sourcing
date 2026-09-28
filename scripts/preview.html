@@ -522,6 +522,40 @@
   ::-webkit-scrollbar-track { background: #111; }
   ::-webkit-scrollbar-thumb { background: #333; border-radius: 3px; }
 
+  /* ── Packs tab ── */
+  #pack-panel { flex: 1; display: flex; overflow: hidden; }
+  #pack-list-pane {
+    width: 240px; min-width: 240px;
+    background: #141414;
+    border-right: 1px solid #333;
+    overflow-y: auto;
+    padding: 12px;
+  }
+  #pack-detail-pane { flex: 1; overflow-y: auto; padding: 20px 24px; }
+  .pack-list-item {
+    background: #1a1a1a;
+    border: 1px solid #333;
+    border-radius: 4px;
+    padding: 8px 10px;
+    cursor: pointer;
+    margin-bottom: 6px;
+  }
+  .pack-list-item:hover { border-color: #555; }
+  .pack-list-item.selected { border-color: #e8c97a; background: #1e1a00; }
+  .pack-mini-bar { height: 3px; background: #2a2a2a; border-radius: 2px; margin-top: 6px; }
+  .pack-mini-fill { height: 3px; background: #e8c97a; border-radius: 2px; }
+  .pack-chip {
+    display: inline-block;
+    border-radius: 3px;
+    padding: 2px 7px;
+    font-size: 10px;
+    cursor: pointer;
+    white-space: nowrap;
+  }
+  .pack-chip.owned   { background: #0d2210; border: 1px solid #2a5a2a; color: #76c442; font-weight: 500; }
+  .pack-chip.missing { background: #111; border: 1px solid #222; color: #444; }
+  .pack-chip:hover   { filter: brightness(1.5); }
+
   /* ── Equipment tab ── */
   #equip-panel { flex: 1; display: flex; flex-direction: column; overflow: hidden; }
   #equip-style-bar {
@@ -669,6 +703,7 @@
   <button class="tab-btn"        onclick="switchTab('skilling')" id="tab-skilling">Skilling</button>
   <button class="tab-btn"        onclick="switchTab('questing')" id="tab-questing">Questing</button>
   <button class="tab-btn"        onclick="switchTab('equipment')" id="tab-equipment">Equipment</button>
+  <button class="tab-btn"        onclick="switchTab('packs')"    id="tab-packs">Packs</button>
   <button class="tab-btn"        onclick="switchTab('rules')"    id="tab-rules">Rules</button>
   <div style="flex:1"></div>
   <div id="global-nav" style="display:flex;align-items:center;padding:0 8px;gap:4px;">
@@ -990,6 +1025,7 @@ let questsData          = {};   // quest name → {prerequisites, skillRequireme
 let bmQuestCards        = {};   // quest name → {sections, ...} from bronzeman plugin data
 let allCollections      = {};   // displayName → {cardCount, ownedCards, credits, updatedAt}
 let cardTimestamps      = {};   // card name → most recent pulledAt ms (cloud accounts only)
+let cardFirstTimestamps = {};   // card name → earliest pulledAt ms (cloud accounts only)
 let clueSteps           = null; // {emote, sherlock, falo, itemIndex} from clue_steps.json
 // Two separate stores: screenshot-derived (file) and manually toggled (user).
 // completedQuests = union of both; re-running the script only touches the file set.
@@ -1038,6 +1074,7 @@ let selected = null, selectedType = null;
 let activeTab = 'cards';
 let selectedSkill = null;   // currently selected skill in Skilling tab
 let selectedQuest = null;   // currently selected quest in Questing tab
+let selectedPack  = null;   // currently selected pack in Packs tab
 let _lastSourceMtime = 0;   // newest RuneLite save file mtime at last refresh
 let _refreshInProgress = false;
 
@@ -1106,6 +1143,7 @@ async function loadCollection() {
     const data = await fetch('output/my_collection.json').then(r => r.json());
     owned = new Set(data.ownedCards.map(n => n.toLowerCase()));
     cardTimestamps = data.cardTimestamps || {};
+    cardFirstTimestamps = data.cardFirstTimestamps || {};
     _updateSortVisibility();
     document.getElementById('sim-summary').textContent =
       `${data.cardCount} cards owned (real collection)`;
@@ -1132,6 +1170,7 @@ function switchCollection(rsn) {
   const profile = allCollections[key];
   owned = new Set(profile.ownedCards.map(n => n.toLowerCase()));
   cardTimestamps = profile.cardTimestamps || {};
+  cardFirstTimestamps = profile.cardFirstTimestamps || {};
   _updateSortVisibility();
   _canGetCache = {};
   document.getElementById('sim-summary').textContent =
@@ -1142,6 +1181,7 @@ function switchCollection(rsn) {
   refreshDetail();
   if (activeTab === 'skilling')   renderSkillGrid();
   if (activeTab === 'questing')   renderQuestList();
+  if (activeTab === 'packs')    { renderPackList(); if (selectedPack) showPackDetail(selectedPack); }
   if (activeTab === 'equipment') { refreshEquipDoll(); updateEquipCount(); renderGearStats(); updateDpsOutput(); }
 }
 
@@ -1458,7 +1498,7 @@ let navForward = [];
 
 function captureState() {
   return {tab: activeTab, name: selected, type: selectedType,
-          skill: selectedSkill, quest: selectedQuest};
+          skill: selectedSkill, quest: selectedQuest, pack: selectedPack};
 }
 
 function pushHistoryEntry() {
@@ -1489,6 +1529,10 @@ function navigate(state) {
     selectedQuest = null;
     if (state.quest) showQuestDetail(state.quest, false);
     else renderQuestList();
+  } else if (state.tab === 'packs') {
+    selectedPack = state.pack || null;
+    renderPackList();
+    if (selectedPack) showPackDetail(selectedPack);
   } else if (state.tab === 'cards') {
     selected = state.name; selectedType = state.type;
     filterCards();
@@ -1725,6 +1769,138 @@ function packAcquisitionHtml(name) {
   </div>`;
 }
 
+// ─── Pack tab ──────────────────────────────────────────────────────────────
+
+const PACK_TIER_ORDER = ['Common','Uncommon','Rare','Epic','Legendary','Mythic','Godly'];
+
+function _getPackCards(pack) {
+  // All allCards entries that belong to this pack and have a tier (excludes virtual clue scroll cards)
+  return allCards.filter(c => {
+    if (!(cardDetails[c.name] || {}).tier) return false;
+    return _cardInPack(c.name, pack);
+  });
+}
+
+function renderPackList() {
+  const pane = document.getElementById('pack-list-pane');
+  if (!pane || !packCatalog) return;
+  const singles = packCatalog.packs.filter(p => !p.id.endsWith('_large'));
+  let html = `<div style="font-size:10px;color:#666;text-transform:uppercase;letter-spacing:1px;margin-bottom:10px">Packs</div>`;
+  for (const pack of singles) {
+    const cards = _getPackCards(pack);
+    const total = cards.length;
+    const ownedCount = cards.filter(c => isOwned(c.name)).length;
+    const pct = total ? Math.round(ownedCount / total * 100) : 0;
+    const isSel = selectedPack === pack.id;
+    const barColor  = pct === 100 ? '#00c853' : pct >= 75 ? '#76c442' : pct >= 40 ? '#e8c97a' : '#c87030';
+    const pctColor  = pct === 100 ? '#00c853' : pct >= 75 ? '#76c442' : pct >= 40 ? '#e8c97a' : '#888';
+    const nameColor = isSel ? '#e8c97a' : pct === 100 ? '#76c442' : '#ccc';
+    html += `<div class="pack-list-item${isSel ? ' selected' : ''}" onclick="showPackDetail('${pack.id}')">
+      <div style="display:flex;justify-content:space-between;align-items:baseline">
+        <span style="font-size:12px;color:${nameColor};font-weight:${isSel ? 600 : 400}">${pack.name}</span>
+        <span style="font-size:10px;color:#555">${pack.price.toLocaleString()} cr</span>
+      </div>
+      <div style="display:flex;justify-content:space-between;margin-top:3px">
+        <span style="font-size:10px;color:#888">${ownedCount.toLocaleString()} / ${total.toLocaleString()}</span>
+        <span style="font-size:10px;color:${pctColor}">${pct}%</span>
+      </div>
+      <div class="pack-mini-bar"><div class="pack-mini-fill" style="width:${pct}%;background:${barColor}"></div></div>
+    </div>`;
+  }
+  pane.innerHTML = html;
+}
+
+function showPackDetail(packId, filter) {
+  selectedPack = packId;
+  renderPackList();
+
+  const pane = document.getElementById('pack-detail-pane');
+  if (!pane || !packCatalog) return;
+
+  const pack = packCatalog.packs.find(p => p.id === packId);
+  if (!pack) return;
+
+  // Preserve filter selection across re-renders
+  const currentFilter = filter
+    || document.getElementById('pack-filter-sel')?.value
+    || 'all';
+
+  const allPackCards = _getPackCards(pack);
+  const total      = allPackCards.length;
+  const ownedCount = allPackCards.filter(c => isOwned(c.name)).length;
+  const missing    = total - ownedCount;
+  const pct        = total ? Math.round(ownedCount / total * 100) : 0;
+
+  // Group by tier
+  const byTier = {};
+  for (const c of allPackCards) {
+    const tier = (cardDetails[c.name] || {}).tier || 'Unknown';
+    (byTier[tier] = byTier[tier] || []).push(c);
+  }
+
+  // Use local proxy so the image is served from localhost (avoids CDN blocking)
+  const packImgUrl = pack.thumbnail ? pack.thumbnail : '';
+  const packImgHtml = packImgUrl
+    ? `<img src="${packImgUrl}" style="float:right;width:48px;height:48px;border-radius:3px;margin:0 0 12px 16px;box-shadow:0 2px 6px #000" onerror="this.style.display='none'">`
+    : '';
+
+  let html = `<h1>${pack.name}${packImgHtml}</h1>
+    <div class="subtitle" style="margin-bottom:12px">
+      ${pack.price.toLocaleString()} credits · 5 cards per pack
+      · <span style="color:#e8c97a">${ownedCount.toLocaleString()} / ${total.toLocaleString()} owned (${pct}%)</span>
+      · <span style="color:#c84a00">${missing.toLocaleString()} missing</span>
+    </div>
+    <div style="margin-bottom:16px">
+      <select id="pack-filter-sel" onchange="showPackDetail('${packId}', this.value)"
+        style="background:#222;border:1px solid #444;color:#ccc;padding:4px 8px;border-radius:3px;font-size:11px">
+        <option value="all"    ${currentFilter==='all'    ?' selected':''}>All cards</option>
+        <option value="missing"${currentFilter==='missing'?' selected':''}>Missing only</option>
+        <option value="owned"  ${currentFilter==='owned'  ?' selected':''}>Owned only</option>
+      </select>
+    </div>`;
+
+  // Stats bar by tier
+  html += `<div class="stats-bar" style="flex-wrap:wrap;gap:6px;margin-bottom:16px">`;
+  for (const tier of PACK_TIER_ORDER) {
+    const t = byTier[tier];
+    if (!t) continue;
+    const to = t.filter(c => isOwned(c.name)).length;
+    html += `<div class="stat-block">
+      <div class="stat-label"><span class="tier-badge tier-${tier}" style="font-size:9px">${tier}</span></div>
+      <div class="stat-value${to===t.length?' complete':''}" style="font-size:12px">${to}<span class="den"> / ${t.length}</span></div>
+    </div>`;
+  }
+  html += `</div>`;
+
+  // Card chips by tier
+  for (const tier of PACK_TIER_ORDER) {
+    const t = byTier[tier];
+    if (!t) continue;
+    let tierCards = [...t].sort((a, b) => a.name.localeCompare(b.name));
+    if (currentFilter === 'missing') tierCards = tierCards.filter(c => !isOwned(c.name));
+    if (currentFilter === 'owned')   tierCards = tierCards.filter(c =>  isOwned(c.name));
+    if (tierCards.length === 0) continue;
+
+    const to = t.filter(c => isOwned(c.name)).length;
+    html += `<div class="section">
+      <div class="section-header">
+        <span class="tier-badge tier-${tier}">${tier}</span>
+        <span style="font-size:10px;font-weight:400;color:#555;margin-left:8px">${to} / ${t.length} owned</span>
+      </div>
+      <div style="display:flex;flex-wrap:wrap;gap:4px;padding:8px 0">`;
+
+    for (const c of tierCards) {
+      const own = isOwned(c.name);
+      html += `<span class="pack-chip ${own ? 'owned' : 'missing'}"
+        onclick="showCard(${JSON.stringify(c.name)}, ${JSON.stringify(c.type)})">${own ? '✓ ' : ''}${c.name}</span>`;
+    }
+
+    html += `</div></div>`;
+  }
+
+  pane.innerHTML = html;
+}
+
 function tierBadgeHtml(name) {
   const tier = (cardDetails[name] || {}).tier;
   if (!tier) return '';
@@ -1756,9 +1932,13 @@ function renderMonster(name, container) {
     : '';
 
   const monsterOwned = isOwned(name);
-  const monsterPulledTs = cardTimestamps[name];
-  const monsterPulledHtml = monsterPulledTs
-    ? ` · <span style="color:#555;font-size:10px">Pulled ${new Date(monsterPulledTs).toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'})}</span>`
+  const monsterLastTs  = cardTimestamps[name];
+  const monsterFirstTs = cardFirstTimestamps[name];
+  const _fmtDate = ts => new Date(ts).toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'});
+  const monsterPulledHtml = monsterLastTs
+    ? (monsterFirstTs && monsterFirstTs !== monsterLastTs
+        ? ` · <span style="color:#555;font-size:10px">First pulled ${_fmtDate(monsterFirstTs)} · Last pulled ${_fmtDate(monsterLastTs)}</span>`
+        : ` · <span style="color:#555;font-size:10px">Pulled ${_fmtDate(monsterLastTs)}</span>`)
     : '';
   let html = `<h1>${name}${mImgHtml}${wikiLink(name)}</h1>
     <div class="subtitle">
@@ -2900,9 +3080,13 @@ function renderItem(name, container) {
     ? `<div style="font-size:11px;color:#888;font-style:italic;margin-top:3px">${detail.examine}</div>`
     : '';
 
-  const itemPulledTs = cardTimestamps[name];
-  const itemPulledHtml = itemPulledTs
-    ? ` · <span style="color:#555;font-size:10px">Pulled ${new Date(itemPulledTs).toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'})}</span>`
+  const itemLastTs  = cardTimestamps[name];
+  const itemFirstTs = cardFirstTimestamps[name];
+  const _fmtItemDate = ts => new Date(ts).toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'});
+  const itemPulledHtml = itemLastTs
+    ? (itemFirstTs && itemFirstTs !== itemLastTs
+        ? ` · <span style="color:#555;font-size:10px">First pulled ${_fmtItemDate(itemFirstTs)} · Last pulled ${_fmtItemDate(itemLastTs)}</span>`
+        : ` · <span style="color:#555;font-size:10px">Pulled ${_fmtItemDate(itemLastTs)}</span>`)
     : '';
   let html = `<h1>${name}${imgHtml}${wikiLink(name)}</h1>
     <div class="subtitle">Item card${tierBadgeHtml(name)}${catBadges} · <span style="color:${itemOwned?'#00c853':'#7a5020'}">${itemOwned?'✓ Owned':'✗ Not owned'}</span>
@@ -3474,13 +3658,15 @@ async function refreshCollection() {
     if (data.error) throw new Error(data.error);
     owned = new Set(data.ownedCards.map(n => n.toLowerCase()));
     cardTimestamps = data.cardTimestamps || {};
+    cardFirstTimestamps = data.cardFirstTimestamps || {};
     _updateSortVisibility();
     _canGetCache = {};
     // Also update allCollections so subsequent client-side switches are fresh
     if (rsn && data.ownedCards) {
       const acKey = Object.keys(allCollections).find(k => k.toLowerCase() === rsn.toLowerCase()) || rsn;
       allCollections[acKey] = { cardCount: data.cardCount, ownedCards: data.ownedCards,
-                                credits: data.credits || 0, cardTimestamps: data.cardTimestamps || {} };
+                                credits: data.credits || 0, cardTimestamps: data.cardTimestamps || {},
+                                cardFirstTimestamps: data.cardFirstTimestamps || {} };
     }
     const label = rsn ? `${data.cardCount} cards owned · ${rsn}` : `${data.cardCount} cards owned · refreshed ${new Date().toLocaleTimeString()}`;
     document.getElementById('sim-summary').textContent = label;
@@ -3609,7 +3795,7 @@ function switchTab(tab) {
 function _renderTab(tab, resetSelection = true) {
   activeTab = tab;
   // Update tab button styles
-  for (const t of ['cards','skilling','questing','equipment','rules'])
+  for (const t of ['cards','skilling','questing','packs','equipment','rules'])
     document.getElementById(`tab-${t}`).classList.toggle('active', t === tab);
 
   const sidebar     = document.getElementById('sidebar');
@@ -3692,6 +3878,16 @@ function _renderTab(tab, resetSelection = true) {
         </div>
       </div>`;
       renderQuestList();
+    } else if (tab === 'packs') {
+      if (resetSelection) selectedPack = null;
+      mainContent.innerHTML = `<div id="pack-panel">
+        <div id="pack-list-pane"></div>
+        <div id="pack-detail-pane">
+          <div class="placeholder" style="margin-top:60px;color:#444">← Select a pack</div>
+        </div>
+      </div>`;
+      renderPackList();
+      if (selectedPack) showPackDetail(selectedPack);
     } else if (tab === 'equipment') {
       mainContent.innerHTML = renderEquipmentTab();
       initEquipmentTab();

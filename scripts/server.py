@@ -151,15 +151,24 @@ class Handler(http.server.SimpleHTTPRequestHandler):
 
     def log_message(self, fmt, *args):
         # Suppress per-request noise; only print API calls
-        if "/api/" in (args[0] if args else ""):
+        if "/api/" in str(args[0] if args else ""):
             super().log_message(fmt, *args)
 
     def do_GET(self):
         path = urllib.parse.urlparse(self.path).path
         if path.startswith("/api/"):
             self._handle_api(path)
+        elif path.startswith("/images/packs/"):
+            self._proxy_pack_image(path)
         else:
             super().do_GET()
+
+    def do_HEAD(self):
+        path = urllib.parse.urlparse(self.path).path
+        if path.startswith("/images/packs/"):
+            self._proxy_pack_image(path)
+        else:
+            super().do_HEAD()
 
     def do_POST(self):
         path = urllib.parse.urlparse(self.path).path
@@ -493,7 +502,7 @@ class Handler(http.server.SimpleHTTPRequestHandler):
         except Exception as exc:
             self._json_response({"error": str(exc)}, status=502)
 
-    # ── Pack catalog proxy ────────────────────────────────────────────────
+    # ── Pack catalog + image proxy ────────────────────────────────────────
 
     def _api_packs(self):
         """Proxy /api/packs to the OSRS TCG API with a 24-hour cache."""
@@ -502,6 +511,31 @@ class Handler(http.server.SimpleHTTPRequestHandler):
             self._json_response(data)
         except Exception as exc:
             self._json_response({"error": str(exc)}, status=502)
+
+    _pack_img_cache: dict = {}   # path → bytes
+
+    def _proxy_pack_image(self, path: str):
+        """Proxy /images/packs/*.png from osrs-tcg.net with in-memory cache."""
+        if path in self._pack_img_cache:
+            data = self._pack_img_cache[path]
+        else:
+            try:
+                req = urllib.request.Request(
+                    f"https://osrs-tcg.net{path}",
+                    headers={"User-Agent": "osrs-tcg-preview/1.0"},
+                )
+                with urllib.request.urlopen(req, timeout=10) as r:
+                    data = r.read()
+                Handler._pack_img_cache[path] = data
+            except Exception:
+                self.send_error(502)
+                return
+        self.send_response(200)
+        self.send_header("Content-Type", "image/png")
+        self.send_header("Content-Length", str(len(data)))
+        self.send_header("Cache-Control", "max-age=172800")
+        self.end_headers()
+        self.wfile.write(data)
 
     # ── Helpers ───────────────────────────────────────────────────────────
 
