@@ -175,13 +175,14 @@ def find_state_blobs_from_profiles(profiles_dir: pathlib.Path) -> list[tuple[str
 _CLOUD_API_BASE = "https://api.osrs-tcg.net"
 
 
-def _fetch_cloud_cards(account_dir: pathlib.Path) -> tuple[list[str], int] | None:
+def _fetch_cloud_cards(account_dir: pathlib.Path) -> tuple[list[str], int, dict[str, int]] | None:
     """Fetch card collection from the OSRS TCG cloud API.
 
     Reads cloud-session.json from the TCG profiles directory for this account,
     then paginates through /api/v1/me/cards using the stored JWT access token.
 
-    Returns (sorted_unique_names, total_instance_count), or None if unavailable.
+    Returns (sorted_unique_names, total_instance_count, timestamps), or None if
+    unavailable.  timestamps maps card name → most recent pulledAt (ms epoch).
     """
     cloud_session_file = account_dir / "cloud-session.json"
     if not cloud_session_file.is_file():
@@ -219,7 +220,18 @@ def _fetch_cloud_cards(account_dir: pathlib.Path) -> tuple[list[str], int] | Non
         return None
 
     names = sorted({c["cardName"] for c in all_cards if "cardName" in c})
-    return names, len(all_cards)
+
+    # Most-recent pulledAt per card name (ms epoch).  Used by the preview tool
+    # to sort cards by when they were most recently pulled from a pack.
+    timestamps: dict[str, int] = {}
+    for c in all_cards:
+        name = c.get("cardName")
+        ts   = c.get("pulledAt")
+        if name and ts:
+            if name not in timestamps or ts > timestamps[name]:
+                timestamps[name] = ts
+
+    return names, len(all_cards), timestamps
 
 
 # ── Per-profile extraction (keyed by RS displayName) ────────────────────────
@@ -348,12 +360,26 @@ def find_per_profile_collections(profiles_dir: pathlib.Path) -> dict[str, dict]:
                 credits = state.get("credits", 0)
                 mtime = save_file.stat().st_mtime
                 updated = datetime.datetime.fromtimestamp(mtime).isoformat(timespec="seconds")
-                result[display_name] = {
+                entry: dict = {
                     "cardCount":  len(names),
                     "ownedCards": names,
                     "credits":    credits,
                     "updatedAt":  updated,
                 }
+                # Cloud accounts cache data locally but may be stale for current-session cards
+                # (tcg.save is written on logout; cloud API always reflects live state).
+                # Use cloud names + timestamps if available so newly-pulled cards are included.
+                cloud_ts_result = _fetch_cloud_cards(account_dir)
+                if cloud_ts_result:
+                    cloud_names, _, timestamps = cloud_ts_result
+                    if cloud_names:
+                        entry["cardCount"] = len(cloud_names)
+                        entry["ownedCards"] = cloud_names
+                        print(f"  [{display_name}] cloud names used ({len(cloud_names)} cards, local save had {len(names)})")
+                    if timestamps:
+                        entry["cardTimestamps"] = timestamps
+                        print(f"  [{display_name}] cloud timestamps fetched ({len(timestamps)} cards)")
+                result[display_name] = entry
             else:
                 # Save exists but has no local cards — this account is cloud-managed.
                 # Try fetching the collection from the OSRS TCG cloud API.
@@ -361,13 +387,14 @@ def find_per_profile_collections(profiles_dir: pathlib.Path) -> dict[str, dict]:
                 mtime = save_file.stat().st_mtime
                 updated = datetime.datetime.fromtimestamp(mtime).isoformat(timespec="seconds")
                 if cloud_result:
-                    names, instance_count = cloud_result
+                    names, instance_count, timestamps = cloud_result
                     print(f"  [{display_name}] cloud account — {len(names)} cards via API")
                     result[display_name] = {
-                        "cardCount":  len(names),
-                        "ownedCards": names,
-                        "credits":    0,
-                        "updatedAt":  updated,
+                        "cardCount":      len(names),
+                        "ownedCards":     names,
+                        "credits":        0,
+                        "updatedAt":      updated,
+                        "cardTimestamps": timestamps,
                     }
                 else:
                     # Cloud fetch unavailable — show placeholder so account appears in dropdown
@@ -427,7 +454,9 @@ def main() -> int:
         if match:
             out_path = pathlib.Path(args.out)
             out_path.parent.mkdir(parents=True, exist_ok=True)
-            result = {"cardCount": match["cardCount"], "ownedCards": match["ownedCards"]}
+            result: dict = {"cardCount": match["cardCount"], "ownedCards": match["ownedCards"]}
+            if match.get("cardTimestamps"):
+                result["cardTimestamps"] = match["cardTimestamps"]
             out_path.write_text(json.dumps(result, indent=2, ensure_ascii=False) + "\n",
                                 encoding="utf-8")
             print(f"\nWrote {match['cardCount']} cards for '{args.player}' → {out_path}")

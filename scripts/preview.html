@@ -674,6 +674,7 @@
   <div id="global-nav" style="display:flex;align-items:center;padding:0 8px;gap:4px;">
     <select id="rsn-input" onchange="onAccountChange(this.value)" style="background:#111;border:1px solid #333;color:#aaa;padding:3px 6px;border-radius:3px;font-size:10px;max-width:180px;min-width:60px;outline:none;cursor:pointer"><option value="">— loading —</option></select>
     <button id="refresh-btn" onclick="refreshAll()" style="background:#222;border:1px solid #444;color:#888;padding:3px 0;border-radius:3px;cursor:pointer;font-size:10px;width:52px;flex-shrink:0">↻ Refresh</button>
+
     <button id="sim-btn" onclick="reroll()" style="background:#222;border:1px solid #333;color:#888;padding:3px 0;border-radius:3px;cursor:pointer;font-size:10px;width:52px;flex-shrink:0;display:none">Re-roll</button>
     <button id="global-back-btn" onclick="navigateBack()" style="font-size:11px;padding:2px 10px;cursor:pointer;border:1px solid #444;border-radius:3px;background:#222;color:#aaa;" disabled>← Back</button>
     <button id="global-fwd-btn"  onclick="navigateForward()" style="font-size:11px;padding:2px 10px;cursor:pointer;border:1px solid #444;border-radius:3px;background:#222;color:#aaa;" disabled>Forward →</button>
@@ -715,6 +716,12 @@
     <div id="filter-row3" style="display:flex;gap:6px;">
       <select id="set-filter" onchange="filterCards()" style="flex:1">
         <option value="all">All sets</option>
+      </select>
+    </div>
+    <div id="filter-row4" style="display:none;gap:6px;">
+      <select id="sort-select" onchange="filterCards()" style="flex:1">
+        <option value="name">Sort: Name (A–Z)</option>
+        <option value="recent">Sort: Recently pulled</option>
       </select>
     </div>
   </div>
@@ -982,6 +989,7 @@ let ingredientInfo      = {};   // non-card ingredient name → {production, sho
 let questsData          = {};   // quest name → {prerequisites, skillRequirements, ...}
 let bmQuestCards        = {};   // quest name → {sections, ...} from bronzeman plugin data
 let allCollections      = {};   // displayName → {cardCount, ownedCards, credits, updatedAt}
+let cardTimestamps      = {};   // card name → most recent pulledAt ms (cloud accounts only)
 let clueSteps           = null; // {emote, sherlock, falo, itemIndex} from clue_steps.json
 // Two separate stores: screenshot-derived (file) and manually toggled (user).
 // completedQuests = union of both; re-running the script only touches the file set.
@@ -1087,11 +1095,18 @@ function updateSimBar() {
   el.textContent = `~15% owned · ${lvls}`;
 }
 
+function _updateSortVisibility() {
+  const row = document.getElementById('filter-row4');
+  if (row) row.style.display = Object.keys(cardTimestamps).length ? 'flex' : 'none';
+}
+
 async function loadCollection() {
   // Try real collection first; fall back to random simulation
   try {
     const data = await fetch('output/my_collection.json').then(r => r.json());
     owned = new Set(data.ownedCards.map(n => n.toLowerCase()));
+    cardTimestamps = data.cardTimestamps || {};
+    _updateSortVisibility();
     document.getElementById('sim-summary').textContent =
       `${data.cardCount} cards owned (real collection)`;
     document.getElementById('sim-btn').style.display = 'inline-block';
@@ -1116,11 +1131,14 @@ function switchCollection(rsn) {
   }
   const profile = allCollections[key];
   owned = new Set(profile.ownedCards.map(n => n.toLowerCase()));
+  cardTimestamps = profile.cardTimestamps || {};
+  _updateSortVisibility();
   _canGetCache = {};
   document.getElementById('sim-summary').textContent =
     `${profile.cardCount} cards owned · ${key}`;
   document.getElementById('sim-btn').style.display = 'none';
   filterCards();
+  if (Object.keys(cardTimestamps).length) _startLiveSync(key); else _stopLiveSync();
   refreshDetail();
   if (activeTab === 'skilling')   renderSkillGrid();
   if (activeTab === 'questing')   renderQuestList();
@@ -1338,7 +1356,9 @@ function filterCards() {
   const setPackObj = (setFil !== 'all' && packCatalog)
     ? packCatalog.packs.find(p => p.id === setFil) : null;
 
-  renderList(allCards.filter(c => {
+  const sortBy = document.getElementById('sort-select')?.value || 'name';
+
+  let filtered = allCards.filter(c => {
     if (q && !c.name.toLowerCase().includes(q)) return false;
     // Clue scroll virtual cards: skip owned/set filters; pass cat filter when 'all' or 'clueScrolls'
     if (c.type === 'clue') {
@@ -1360,7 +1380,17 @@ function filterCards() {
     }
     if (setPackObj && !_cardInPack(c.name, setPackObj)) return false;
     return true;
-  }));
+  });
+
+  if (sortBy === 'recent') {
+    filtered = [...filtered].sort((a, b) => {
+      const ta = cardTimestamps[a.name] || 0;
+      const tb = cardTimestamps[b.name] || 0;
+      return tb !== ta ? tb - ta : a.name.localeCompare(b.name);
+    });
+  }
+
+  renderList(filtered, sortBy);
 }
 
 // Items that should be classified as Currency regardless of Card.json categories
@@ -1379,7 +1409,7 @@ const CAT_ABBR = {
   Slayer:'Slay', General:'Gen', Currency:'Coin',
 };
 
-function renderList(cards) {
+function renderList(cards, sortBy = 'name') {
   const list = document.getElementById('card-list');
   list.innerHTML = '';
   for (const card of cards) {
@@ -1726,12 +1756,16 @@ function renderMonster(name, container) {
     : '';
 
   const monsterOwned = isOwned(name);
+  const monsterPulledTs = cardTimestamps[name];
+  const monsterPulledHtml = monsterPulledTs
+    ? ` · <span style="color:#555;font-size:10px">Pulled ${new Date(monsterPulledTs).toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'})}</span>`
+    : '';
   let html = `<h1>${name}${mImgHtml}${wikiLink(name)}</h1>
     <div class="subtitle">
       ${data.combatLevel ? 'Monster card' : 'NPC card'}${tierBadgeHtml(name)}
       ${data.combatLevel ? ` · Combat ${data.combatLevel}` : ''}
       · <span style="color:${monsterOwned?'#00c853':'#7a5020'}">${monsterOwned?'✓ Owned':'✗ Not owned'}</span>
-      <span style="color:#555;font-size:10px;margin-left:8px;cursor:pointer" data-nav="${name}" onclick="toggleOwned(this.dataset.nav)">(toggle)</span>
+      <span style="color:#555;font-size:10px;margin-left:8px;cursor:pointer" data-nav="${name}" onclick="toggleOwned(this.dataset.nav)">(toggle)</span>${monsterPulledHtml}
       ${reqs.map(r => `<span style="margin-left:8px;padding:2px 7px;border-radius:10px;font-size:10px;
         background:${r.locked?'#3a1a00':'#003d1f'};color:${r.locked?'#c84a00':'#00c853'}">${r.label}</span>`).join('')}
       ${mExamHtml}
@@ -2866,9 +2900,13 @@ function renderItem(name, container) {
     ? `<div style="font-size:11px;color:#888;font-style:italic;margin-top:3px">${detail.examine}</div>`
     : '';
 
+  const itemPulledTs = cardTimestamps[name];
+  const itemPulledHtml = itemPulledTs
+    ? ` · <span style="color:#555;font-size:10px">Pulled ${new Date(itemPulledTs).toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'})}</span>`
+    : '';
   let html = `<h1>${name}${imgHtml}${wikiLink(name)}</h1>
     <div class="subtitle">Item card${tierBadgeHtml(name)}${catBadges} · <span style="color:${itemOwned?'#00c853':'#7a5020'}">${itemOwned?'✓ Owned':'✗ Not owned'}</span>
-      <span style="color:#555;font-size:10px;margin-left:8px;cursor:pointer" data-nav="${name}" onclick="toggleOwned(this.dataset.nav)">(toggle)</span>
+      <span style="color:#555;font-size:10px;margin-left:8px;cursor:pointer" data-nav="${name}" onclick="toggleOwned(this.dataset.nav)">(toggle)</span>${itemPulledHtml}
       ${examHtml}
     </div>`;
 
@@ -3353,6 +3391,42 @@ function renderToolTiers(tiers, skillName) {
   return html + `</div>`;
 }
 
+// ─── Live sync — polls cloud revision every 15 s for cloud accounts ──────────
+let _liveStateHash = null;
+let _liveTimer     = null;
+
+function _startLiveSync(rsn) {
+  _stopLiveSync();
+  if (!rsn) return;
+
+  async function _poll() {
+    try {
+      const data = await fetch(`/api/collection/revision?player=${encodeURIComponent(rsn)}`,
+        { signal: AbortSignal.timeout(8000) }).then(r => r.json());
+      if (!data.isCloud) { _stopLiveSync(); return; }
+      if (_liveStateHash === null) {
+        // First successful poll — record baseline, don't refresh yet
+        _liveStateHash = data.stateHash;
+        return;
+      }
+      if (data.stateHash !== _liveStateHash) {
+        _liveStateHash = data.stateHash;
+        await refreshCollection();
+      }
+    } catch {
+      // Server not running or network error — hide the indicator silently
+    }
+  }
+
+  _liveTimer = setInterval(_poll, 15000);
+  _poll();  // fire immediately to set baseline
+}
+
+function _stopLiveSync() {
+  if (_liveTimer) { clearInterval(_liveTimer); _liveTimer = null; }
+  _liveStateHash = null;
+}
+
 // ─── Refresh all — collection + levels + quest sync ───────────────────────
 async function refreshAll() {
   if (_refreshInProgress) return;
@@ -3399,11 +3473,14 @@ async function refreshCollection() {
     });
     if (data.error) throw new Error(data.error);
     owned = new Set(data.ownedCards.map(n => n.toLowerCase()));
+    cardTimestamps = data.cardTimestamps || {};
+    _updateSortVisibility();
     _canGetCache = {};
     // Also update allCollections so subsequent client-side switches are fresh
     if (rsn && data.ownedCards) {
       const acKey = Object.keys(allCollections).find(k => k.toLowerCase() === rsn.toLowerCase()) || rsn;
-      allCollections[acKey] = { cardCount: data.cardCount, ownedCards: data.ownedCards, credits: data.credits || 0 };
+      allCollections[acKey] = { cardCount: data.cardCount, ownedCards: data.ownedCards,
+                                credits: data.credits || 0, cardTimestamps: data.cardTimestamps || {} };
     }
     const label = rsn ? `${data.cardCount} cards owned · ${rsn}` : `${data.cardCount} cards owned · refreshed ${new Date().toLocaleTimeString()}`;
     document.getElementById('sim-summary').textContent = label;
@@ -3414,6 +3491,8 @@ async function refreshCollection() {
     if (activeTab === 'questing') renderQuestList();
     btn.textContent = '↻ Refresh';
     btn.disabled = false;
+    // Start live sync if this is a cloud account (has timestamps); stop if not
+    if (Object.keys(cardTimestamps).length && rsn) _startLiveSync(rsn); else _stopLiveSync();
   } catch (e) {
     console.error('Refresh failed:', e);
     btn.textContent = '✗ Error';

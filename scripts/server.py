@@ -19,10 +19,12 @@ Endpoints:
 
 from __future__ import annotations
 
+import hashlib
 import http.server
 import json
 import os
 import pathlib
+import re
 import subprocess
 import sys
 import threading
@@ -88,6 +90,60 @@ def _run_generate_background(extra_args: list[str]) -> None:
     _generate_proc   = None
 
 
+# ── Cloud account helpers ────────────────────────────────────────────────────
+
+_PROFILES2_DIR   = pathlib.Path.home() / ".runelite" / "profiles2"
+_TCG_PROFILES    = pathlib.Path.home() / ".runelite" / "OSRS-TCG" / "profiles"
+_DISPLAY_NAME_RE = re.compile(r'^rsprofile\.rsprofile\.([^.]+)\.displayName=(.+)$')
+_ACCOUNT_HASH_RE = re.compile(r'^rsprofile\.rsprofile\.([^.]+)\.accountHash=(.+)$')
+
+_cloud_session_cache: dict[str, dict] = {}   # player_lower → session dict (or {})
+
+
+def _find_cloud_session(player: str) -> dict | None:
+    """Return the cloud-session.json dict for *player*, or None if not a cloud account.
+
+    Uses the same SHA-256(accountHash) directory-name scheme as decode_collection.py.
+    Result is cached in-process (sessions don't rotate during a server run).
+    """
+    key = player.lower()
+    if key in _cloud_session_cache:
+        sess = _cloud_session_cache[key]
+        return sess if sess else None
+
+    # Build hash → displayName map from $rsprofile*.properties
+    hash_to_name: dict[str, str] = {}
+    for props_file in _PROFILES2_DIR.glob("$rsprofile*.properties"):
+        text = props_file.read_text(encoding="utf-8", errors="replace")
+        pk_ah: dict[str, str]   = {}
+        pk_name: dict[str, str] = {}
+        for line in text.splitlines():
+            m = _ACCOUNT_HASH_RE.match(line)
+            if m: pk_ah[m.group(1)] = m.group(2).strip()
+            m = _DISPLAY_NAME_RE.match(line)
+            if m: pk_name[m.group(1)] = m.group(2).strip()
+        for pk, ah in pk_ah.items():
+            dir_name = hashlib.sha256(ah.encode("utf-8")).hexdigest()
+            hash_to_name[dir_name] = pk_name.get(pk, pk)
+
+    # Scan TCG profiles dirs for matching display name
+    if _TCG_PROFILES.exists():
+        for acct_dir in _TCG_PROFILES.iterdir():
+            if not acct_dir.is_dir():
+                continue
+            name = hash_to_name.get(acct_dir.name, "")
+            if name.lower() != key:
+                continue
+            cs = acct_dir / "cloud-session.json"
+            if cs.is_file():
+                sess = json.loads(cs.read_text(encoding="utf-8"))
+                _cloud_session_cache[key] = sess
+                return sess
+
+    _cloud_session_cache[key] = {}   # not a cloud account — cache negative result
+    return None
+
+
 # ── Request handler ─────────────────────────────────────────────────────────
 class Handler(http.server.SimpleHTTPRequestHandler):
     def __init__(self, *args, **kwargs):
@@ -131,6 +187,8 @@ class Handler(http.server.SimpleHTTPRequestHandler):
             self._api_accounts_list()
         elif path == "/api/collection/source-mtime":
             self._api_collection_source_mtime()
+        elif path == "/api/collection/revision":
+            self._api_collection_revision()
         elif path == "/api/packs":
             self._api_packs()
         else:
@@ -390,6 +448,50 @@ class Handler(http.server.SimpleHTTPRequestHandler):
             "sourceMtime": best,
             "sourceTime":  datetime.fromtimestamp(best).isoformat(timespec="seconds") if best else None,
         })
+
+    # ── Cloud revision check ──────────────────────────────────────────────
+
+    def _api_collection_revision(self):
+        """Return the current cloud revision for a player without fetching all cards.
+
+        Calls /api/v1/me/cards?limit=1 (≈450 bytes) so the browser can detect
+        when new cards have been pulled without triggering a full decode.
+
+        Query params:
+          ?player=<display_name>   — required; must be a cloud account
+        """
+        qs = urllib.parse.parse_qs(urllib.parse.urlparse(self.path).query)
+        player = (qs.get("player") or [""])[0].strip()
+        if not player:
+            self._json_response({"error": "missing player parameter"}, status=400)
+            return
+
+        sess = _find_cloud_session(player)
+        if not sess:
+            self._json_response({"isCloud": False, "player": player})
+            return
+
+        token = sess.get("accessToken")
+        if not token:
+            self._json_response({"isCloud": False, "player": player})
+            return
+
+        url = "https://api.osrs-tcg.net/api/v1/me/cards?limit=1"
+        req = urllib.request.Request(url, headers={
+            "Authorization": f"Bearer {token}",
+            "User-Agent":    "osrs-tcg-preview/1.0",
+        })
+        try:
+            with urllib.request.urlopen(req, timeout=8) as r:
+                data = json.loads(r.read())
+            self._json_response({
+                "isCloud":   True,
+                "player":    player,
+                "revision":  data.get("revision"),
+                "stateHash": data.get("stateHash"),
+            })
+        except Exception as exc:
+            self._json_response({"error": str(exc)}, status=502)
 
     # ── Pack catalog proxy ────────────────────────────────────────────────
 
