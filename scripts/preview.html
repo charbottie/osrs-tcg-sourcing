@@ -1559,6 +1559,7 @@ function navigateForward() {
 function showCard(name, type, push = true) {
   if (push) pushHistoryEntry();
   selected = name; selectedType = type;
+  if (activeTab !== 'cards') _renderTab('cards', false);
   filterCards();
   refreshDetail();
 }
@@ -1891,8 +1892,10 @@ function showPackDetail(packId, filter) {
 
     for (const c of tierCards) {
       const own = isOwned(c.name);
+      const safeName = c.name.replace(/&/g,'&amp;').replace(/"/g,'&quot;');
       html += `<span class="pack-chip ${own ? 'owned' : 'missing'}"
-        onclick="showCard(${JSON.stringify(c.name)}, ${JSON.stringify(c.type)})">${own ? '✓ ' : ''}${c.name}</span>`;
+        data-card="${safeName}" data-type="${c.type}"
+        onclick="showCard(this.dataset.card,this.dataset.type)">${own ? '✓ ' : ''}${c.name}</span>`;
     }
 
     html += `</div></div>`;
