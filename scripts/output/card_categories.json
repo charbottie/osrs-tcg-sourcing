@@ -334,9 +334,7 @@
     "Fletching"
   ],
   "Clay": [
-    "Cooking",
     "F2P",
-    "Food",
     "Magic",
     "Mining"
   ],
@@ -449,13 +447,10 @@
     "F2P"
   ],
   "Fire rune": [
-    "Cooking",
     "F2P",
-    "Food",
     "Magic",
     "Rune",
-    "Runecraft",
-    "Smithing"
+    "Runecraft"
   ],
   "Water rune": [
     "F2P",
@@ -494,13 +489,10 @@
     "Runecraft"
   ],
   "Nature rune": [
-    "Cooking",
     "F2P",
-    "Food",
     "Magic",
     "Rune",
-    "Runecraft",
-    "Smithing"
+    "Runecraft"
   ],
   "Chaos rune": [
     "F2P",
@@ -527,10 +519,8 @@
   ],
   "Soul rune": [
     "Magic",
-    "Prayer",
     "Rune",
-    "Runecraft",
-    "Smithing"
+    "Runecraft"
   ],
   "Unpowered orb": [
     "Construction",
@@ -987,11 +977,8 @@
   ],
   "Plank": [
     "Construction",
-    "Cooking",
     "Crafting",
     "F2P",
-    "Food",
-    "Prayer",
     "Sailing"
   ],
   "Christmas cracker": [
@@ -2241,11 +2228,8 @@
   ],
   "Steel nails": [
     "Construction",
-    "Cooking",
     "Crafting",
     "F2P",
-    "Fletching",
-    "Food",
     "Sailing",
     "Smithing",
     "Woodcutting"
@@ -2694,9 +2678,7 @@
     "Sailing"
   ],
   "Swamp paste": [
-    "Construction",
-    "Cooking",
-    "Food"
+    "Construction"
   ],
   "Potato": [
     "Cooking",
@@ -3060,11 +3042,8 @@
   ],
   "Steel bar": [
     "Construction",
-    "Cooking",
     "Crafting",
     "F2P",
-    "Firemaking",
-    "Food",
     "Sailing",
     "Smithing"
   ],
@@ -3761,9 +3740,7 @@
     "Prayer"
   ],
   "Jogre bones": [
-    "Cooking",
     "Firemaking",
-    "Food",
     "Magic",
     "Prayer"
   ],
@@ -4432,7 +4409,9 @@
   "Smoke rune": [],
   "Mud rune": [],
   "Lava rune": [
-    "Construction"
+    "Magic",
+    "Rune",
+    "Runecraft"
   ],
   "Ahrim's hood": [
     "Equipment",
@@ -5107,9 +5086,7 @@
   ],
   "Compost": [
     "Construction",
-    "Cooking",
-    "Farming",
-    "Food"
+    "Farming"
   ],
   "Supercompost": [
     "Construction",
@@ -6231,7 +6208,6 @@
   "Bottle of wine": [],
   "Field ration": [],
   "Pure essence": [
-    "Crafting",
     "F2P",
     "Rune",
     "Runecraft"
@@ -6330,9 +6306,7 @@
   ],
   "Oak plank": [
     "Construction",
-    "Cooking",
     "Crafting",
-    "Food",
     "Sailing",
     "Smithing"
   ],
@@ -6529,7 +6503,9 @@
   "Astral rune": [
     "Construction",
     "Crafting",
-    "Magic"
+    "Magic",
+    "Rune",
+    "Runecraft"
   ],
   "Lunar staff": [
     "Crafting",
@@ -9274,7 +9250,6 @@
     "Pet"
   ],
   "Smouldering stone": [
-    "Cooking",
     "Firemaking",
     "Fishing",
     "Mining",

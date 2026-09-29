@@ -1599,14 +1599,14 @@ function showCard(name, type, push = true) {
   selected = name; selectedType = type;
   if (activeTab !== 'cards') _renderTab('cards', false);
   filterCards();
-  refreshDetail();
+  refreshDetail(true);
 }
 
-function refreshDetail() {
+function refreshDetail(resetScroll = false) {
   if (!selected) return;
   const detail = document.getElementById('detail');
   if (!detail) return;
-  const scroll = detail.scrollTop;
+  const scroll = resetScroll ? 0 : detail.scrollTop;
   if (selectedType === 'monster') renderMonster(selected, detail);
   else if (selectedType === 'clue') renderClueScroll(selected.match(/\((\w+)\)$/)?.[1], detail);
   else if (selectedType === 'ingredient') renderIngredient(selected, detail);
@@ -2836,6 +2836,14 @@ function facilityNote(f) {
   if (!opts) return `<span style="color:#888">Requires: ${f}</span>`;
   const sep = ' <span style="color:#555">/</span> ';
   const parts = opts.map(opt => {
+    if (opt === 'Abyss') {
+      const abyssOk = completedQuests.has('Enter the Abyss');
+      const col = abyssOk ? '#76c442' : '#3a3a3a';
+      const sym = abyssOk ? ' ✓' : '';
+      const label = abyssOk ? 'Abyss' : 'Abyss (locked)';
+      return `<span style="cursor:pointer;color:${col};text-decoration:underline dotted" title="Enter the Abyss miniquest"
+        onclick="pushHistoryEntry();selectedQuest='Enter the Abyss';_renderTab('questing',false);showQuestDetail('Enter the Abyss',false)">${label}${sym}</span>`;
+    }
     const isCard = itemSources[opt] !== undefined;
     if (!isCard) return `<span style="color:#666">${opt}</span>`;
     const owned = isOwned(opt);
@@ -5677,8 +5685,23 @@ function getTrainingMethods(skillName) {
         status = 'no-card'; note = 'need: ' + missingCards.slice(0,3).join(', ');
       } else {
         status = 'available';
-        if (missingTiara) note = `use ${missingTiara} or Abyss`;
-        else {
+        if (skillName === 'Runecrafting') {
+          // Prefer talisman > tiara > Abyss (requires Enter the Abyss miniquest)
+          const altarOpts = FACILITY_NOTES[p.facilities] || [];
+          const talisman = altarOpts.find(o => o.toLowerCase().endsWith('talisman'));
+          const tiara    = altarOpts.find(o => o.toLowerCase().endsWith('tiara'));
+          const hasTalisman = talisman && isOwned(talisman);
+          const hasTiara    = tiara    && isOwned(tiara);
+          const abyssOk     = completedQuests.has('Enter the Abyss');
+          const ess = ings[0]?.item || '';
+          if (hasTalisman)        note = ess ? `${ess} + ${talisman}` : talisman;
+          else if (hasTiara)      note = ess ? `${ess} + ${tiara}` : tiara;
+          else if (abyssOk)       note = `via Abyss`;
+          else if (talisman) {
+            const abyssLink = `<span style="color:#3a3a3a;cursor:pointer;text-decoration:underline dotted" onclick="pushHistoryEntry();selectedQuest='Enter the Abyss';_renderTab('questing',false);showQuestDetail('Enter the Abyss',false)" title="Enter the Abyss miniquest">Abyss (locked)</span>`;
+            note = `need ${talisman} · ${abyssLink}`;
+          } else                  note = ess;
+        } else {
           const parts = [...ings.slice(0, 2).map(i => i.item), ...hardTools.slice(0, 1)];
           note = parts.join(' + ');
         }
