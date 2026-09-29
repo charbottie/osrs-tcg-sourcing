@@ -14475,7 +14475,9 @@
   "Huge spider": [],
   "Baby red dragon": [],
   "Kalphite Soldier": [],
-  "Dagannoth": [],
+  "Dagannoth": [
+    "Quest"
+  ],
   "Tok-Xil": [],
   "Demon": [],
   "Rocnar": [],
@@ -14507,12 +14509,14 @@
   ],
   "Salarin the twisted": [],
   "Lumbridge Guide": [
+    "Quest",
     "F2P"
   ],
   "Dr Jekyll": [
     "Randomevent"
   ],
   "Ironman tutor": [
+    "Quest",
     "F2P"
   ],
   "Corporeal Beast": [],
@@ -14522,6 +14526,7 @@
     "F2P"
   ],
   "Drunken Dwarf": [
+    "Quest",
     "Randomevent",
     "F2P"
   ],
@@ -14663,7 +14668,9 @@
   "Chaos druid warrior": [],
   "Sorebones": [],
   "Zombie pirate": [],
-  "Pirate Pete": [],
+  "Pirate Pete": [
+    "Quest"
+  ],
   "Zombie swab": [],
   "Evil spirit": [],
   "Fever spider": [
@@ -14676,7 +14683,9 @@
     "F2P"
   ],
   "Stranger": [],
-  "Eblis": [],
+  "Eblis": [
+    "Quest"
+  ],
   "Mummy": [],
   "Scarabs": [],
   "Azzanadra": [],
@@ -14684,57 +14693,97 @@
     "F2P"
   ],
   "Fred the Farmer": [
+    "Quest",
     "F2P"
   ],
   "Bandit champion": [],
-  "My Arm": [],
-  "Baby Roc": [],
-  "Queen Sigrid": [],
+  "My Arm": [
+    "Quest"
+  ],
+  "Baby Roc": [
+    "Quest"
+  ],
+  "Queen Sigrid": [
+    "Quest"
+  ],
   "Skraeling": [],
   "Suqah": [],
   "Locust rider": [],
-  "Olaf the Bard": [],
-  "Fossegrimen": [],
+  "Olaf the Bard": [
+    "Quest"
+  ],
+  "Fossegrimen": [
+    "Quest"
+  ],
   "Duke Horacio": [
+    "Quest",
     "F2P"
   ],
   "Wormbrain": [
+    "Quest",
     "F2P"
   ],
   "Oracle": [
+    "Quest",
     "F2P"
   ],
   "Oziach": [
+    "Quest",
     "F2P"
   ],
   "Melzar the Mad": [
+    "Quest",
     "F2P"
   ],
   "Cabin Boy Jenkins": [
     "Sailing",
     "F2P"
   ],
-  "Larry": [],
-  "Ping": [],
-  "Pong": [],
-  "Noodle": [],
-  "Icelord": [],
-  "Zogre": [],
-  "Skogre": [],
-  "Zavistic Rarve": [],
-  "Slash Bash": [],
-  "Evil Dave": [],
+  "Larry": [
+    "Quest"
+  ],
+  "Ping": [
+    "Quest"
+  ],
+  "Pong": [
+    "Quest"
+  ],
+  "Noodle": [
+    "Quest"
+  ],
+  "Icelord": [
+    "Quest"
+  ],
+  "Zogre": [
+    "Quest"
+  ],
+  "Skogre": [
+    "Quest"
+  ],
+  "Zavistic Rarve": [
+    "Quest"
+  ],
+  "Slash Bash": [
+    "Quest"
+  ],
+  "Evil Dave": [
+    "Quest"
+  ],
   "Clay golem": [],
   "Stick": [],
   "Pee Hat": [],
   "Kraka": [],
   "Dung": [],
   "Ash": [],
-  "Nature Spirit": [],
+  "Nature Spirit": [
+    "Quest"
+  ],
   "Kalphite Worker": [],
   "Kalphite Guardian": [],
   "Kalphite Queen": [],
-  "Veliaf Hurtz": [],
+  "Veliaf Hurtz": [
+    "Quest"
+  ],
   "Zygomite": [
     "Slayer"
   ],
@@ -14752,7 +14801,9 @@
     "Slayer"
   ],
   "Mac": [],
-  "Tolna": [],
+  "Tolna": [
+    "Quest"
+  ],
   "Sea Snake Young": [
     "Slayer"
   ],
@@ -14760,20 +14811,34 @@
     "Slayer"
   ],
   "Giant Sea Snake": [],
-  "Elena": [],
+  "Elena": [
+    "Quest"
+  ],
   "Man": [
     "F2P"
   ],
-  "Barrelchest": [],
-  "Giant Scarab": [],
-  "Dessous": [],
-  "Kamil": [],
-  "Damis": [],
+  "Barrelchest": [
+    "Quest"
+  ],
+  "Giant Scarab": [
+    "Quest"
+  ],
+  "Dessous": [
+    "Quest"
+  ],
+  "Kamil": [
+    "Quest"
+  ],
+  "Damis": [
+    "Quest"
+  ],
   "Woman": [
     "F2P"
   ],
   "Ogre": [],
-  "Fairy Queen": [],
+  "Fairy Queen": [
+    "Quest"
+  ],
   "Monk of Entrana": [
     "F2P"
   ],
@@ -14781,15 +14846,30 @@
   "Hazeel": [],
   "Clivet": [],
   "Khazard Guard": [],
-  "General Khazard": [],
+  "General Khazard": [
+    "Quest"
+  ],
   "Khazard Ogre": [],
-  "Khazard Scorpion": [],
-  "Arzinian Avatar of Strength": [],
-  "Arzinian Avatar of Ranging": [],
-  "Arzinian Avatar of Magic": [],
-  "Arzinian Being": [],
-  "Evil Creature": [],
+  "Khazard Scorpion": [
+    "Quest"
+  ],
+  "Arzinian Avatar of Strength": [
+    "Quest"
+  ],
+  "Arzinian Avatar of Ranging": [
+    "Quest"
+  ],
+  "Arzinian Avatar of Magic": [
+    "Quest"
+  ],
+  "Arzinian Being": [
+    "Quest"
+  ],
+  "Evil Creature": [
+    "Quest"
+  ],
   "Fortunato": [
+    "Quest",
     "F2P"
   ],
   "Ram": [
@@ -14797,13 +14877,16 @@
   ],
   "Vulture": [],
   "Experiment": [],
-  "Loar Shade": [],
+  "Loar Shade": [
+    "Quest"
+  ],
   "Phrin Shade": [],
   "Riyl Shade": [],
   "Asyn Shade": [],
   "Fiyr Shade": [],
   "Afflicted": [],
   "Makeover Mage": [
+    "Quest",
     "F2P"
   ],
   "Seagull": [
@@ -14814,11 +14897,17 @@
   "Air elemental": [],
   "Water elemental": [],
   "Camp dweller": [],
-  "Queen Ellamaria": [],
+  "Queen Ellamaria": [
+    "Quest"
+  ],
   "PKMaster0036": [],
-  "Hazelmere": [],
+  "Hazelmere": [
+    "Quest"
+  ],
   "Foreman": [],
-  "Rantz": [],
+  "Rantz": [
+    "Quest"
+  ],
   "Chompy bird": [],
   "Kebbit": [],
   "Hunting expert": [
@@ -14841,7 +14930,9 @@
   "Air wizard": [
     "F2P"
   ],
-  "Kolodion": [],
+  "Kolodion": [
+    "Quest"
+  ],
   "Battle mage": [],
   "Priestess Zul-Gwenwynig": [],
   "Baby impling": [
@@ -14876,12 +14967,24 @@
   ],
   "Penance Runner": [],
   "Penance Healer": [],
-  "Strange Old Man": [],
-  "Ahrim the Blighted": [],
-  "Guthan the Infested": [],
-  "Karil the Tainted": [],
-  "Torag the Corrupted": [],
-  "Verac the Defiled": [],
+  "Strange Old Man": [
+    "Quest"
+  ],
+  "Ahrim the Blighted": [
+    "Quest"
+  ],
+  "Guthan the Infested": [
+    "Quest"
+  ],
+  "Karil the Tainted": [
+    "Quest"
+  ],
+  "Torag the Corrupted": [
+    "Quest"
+  ],
+  "Verac the Defiled": [
+    "Quest"
+  ],
   "Bloodworm": [],
   "Crypt rat": [],
   "Giant crypt rat": [],
@@ -14894,6 +14997,7 @@
   "Defiler": [],
   "Brawler": [],
   "Squire": [
+    "Quest",
     "F2P"
   ],
   "Uri": [
@@ -14905,6 +15009,7 @@
   "Goat": [],
   "Billy Goat": [],
   "Osman": [
+    "Quest",
     "F2P"
   ],
   "White Knight": [
@@ -14915,11 +15020,16 @@
   ],
   "Stag": [],
   "Sir Amik Varze": [
+    "Quest",
     "F2P"
   ],
   "Baby black dragon": [],
-  "Mawnis Burowgar": [],
-  "King Gjuki Sorvott IV": [],
+  "Mawnis Burowgar": [
+    "Quest"
+  ],
+  "King Gjuki Sorvott IV": [
+    "Quest"
+  ],
   "Duckling": [
     "F2P"
   ],
@@ -14960,7 +15070,9 @@
   "Ork": [],
   "Giant Rock Crab": [],
   "Dagannoth fledgeling": [],
-  "Oldak": [],
+  "Oldak": [
+    "Quest"
+  ],
   "Zanik": [],
   "Movario": [],
   "Animated Bronze Armour": [],
@@ -14990,7 +15102,9 @@
     "F2P"
   ],
   "H.A.M. Guard": [],
-  "H.A.M. Member": [],
+  "H.A.M. Member": [
+    "Quest"
+  ],
   "Wingstone": [],
   "Brother Jered": [
     "Prayer",
@@ -15026,8 +15140,12 @@
   "Vera": [],
   "Zoja": [],
   "Liliya": [],
-  "Bob": [],
-  "Neite": [],
+  "Bob": [
+    "Quest"
+  ],
+  "Neite": [
+    "Quest"
+  ],
   "Blood Blamish Snail": [],
   "Bruise Blamish Snail": [],
   "Bark Blamish Snail": [],
@@ -15064,17 +15182,21 @@
   ],
   "Black unicorn": [],
   "Veos": [
+    "Quest",
     "F2P"
   ],
   "Shadow warrior": [],
   "Dungeon rat": [],
   "Zaff": [
+    "Quest",
     "F2P"
   ],
   "Horvik": [
+    "Quest",
     "F2P"
   ],
   "Aubury": [
+    "Quest",
     "Runecraft",
     "F2P"
   ],
@@ -15082,6 +15204,7 @@
     "Fishing"
   ],
   "Otto Godblessed": [
+    "Quest",
     "Herblore",
     "Farming",
     "Firemaking",
@@ -15097,7 +15220,9 @@
   "Zamorak wizard": [],
   "Saradomin wizard": [],
   "Big Snake": [],
-  "Necrovarus": [],
+  "Necrovarus": [
+    "Quest"
+  ],
   "Undead cow": [],
   "Undead chicken": [],
   "Tortured soul": [],
@@ -15120,6 +15245,7 @@
   ],
   "Sir Renitee": [],
   "Hans": [
+    "Quest",
     "F2P"
   ],
   "Farmer": [
@@ -15207,6 +15333,7 @@
   "Hero": [],
   "Forester": [],
   "Gielinor Guide": [
+    "Quest",
     "F2P"
   ],
   "Chicken": [
@@ -15225,8 +15352,12 @@
   "Lesser Demon Champion": [],
   "Skeleton Champion": [],
   "Leon d'Cour": [],
-  "Awowogei": [],
-  "Morvran": [],
+  "Awowogei": [
+    "Quest"
+  ],
+  "Morvran": [
+    "Quest"
+  ],
   "Rabbit": [
     "F2P"
   ],
@@ -15234,28 +15365,48 @@
   "Dire Wolf": [],
   "Iorwerth Archer": [],
   "Iorwerth Warrior": [],
-  "Lucien": [],
+  "Lucien": [
+    "Quest"
+  ],
   "Guardian of Armadyl": [],
-  "Fire Warrior of Lesarkus": [],
+  "Fire Warrior of Lesarkus": [
+    "Quest"
+  ],
   "Shadow Hound": [],
-  "Cyrisus": [],
-  "The Illusive": [],
+  "Cyrisus": [
+    "Quest"
+  ],
+  "The Illusive": [
+    "Quest"
+  ],
   "A Doubt": [],
-  "Sin Seer": [],
+  "Sin Seer": [
+    "Quest"
+  ],
   "Renegade knight": [],
   "Thrantax the Mighty": [],
-  "Sir Mordred": [],
-  "Merlin": [],
-  "King Arthur": [],
+  "Sir Mordred": [
+    "Quest"
+  ],
+  "Merlin": [
+    "Quest"
+  ],
+  "King Arthur": [
+    "Quest"
+  ],
   "Ali Morrisane": [
+    "Quest",
     "F2P"
   ],
   "Menaphite Thug": [],
   "Tough Guy": [],
   "Professor Oddenstein": [
+    "Quest",
     "F2P"
   ],
-  "Homunculus": [],
+  "Homunculus": [
+    "Quest"
+  ],
   "Frogeel": [],
   "Unicow": [],
   "Spidine": [],
@@ -15266,7 +15417,9 @@
     "Tool"
   ],
   "Skeletal miner": [],
-  "King Vargas": [],
+  "King Vargas": [
+    "Quest"
+  ],
   "Ragnar": [],
   "Einar": [],
   "Alrik": [],
@@ -15282,18 +15435,28 @@
   "Vyrewatch": [],
   "Vanescula Drakan": [],
   "Aeonisig Raispher": [
+    "Quest",
     "F2P"
   ],
-  "Safalaan Hallow": [],
-  "Oneiromancer": [],
+  "Safalaan Hallow": [
+    "Quest"
+  ],
+  "Oneiromancer": [
+    "Quest"
+  ],
   "Jake": [],
   "Wilson": [],
   "Palmer": [],
-  "Maisa": [],
+  "Maisa": [
+    "Quest"
+  ],
   "Doric": [
+    "Quest",
     "F2P"
   ],
-  "Peer the Seer": [],
+  "Peer the Seer": [
+    "Quest"
+  ],
   "Fox": [
     "Slayer"
   ],
@@ -15305,7 +15468,9 @@
     "Sailing"
   ],
   "Black unicorn Foal": [],
-  "The Draugen": [],
+  "The Draugen": [
+    "Quest"
+  ],
   "Freidir": [],
   "Borrokar": [],
   "Lanzig": [],
@@ -15313,25 +15478,39 @@
   "Jennella": [],
   "Market Guard": [],
   "Warrior": [],
-  "Radimus Erkle": [],
-  "Ungadulu": [],
+  "Radimus Erkle": [
+    "Quest"
+  ],
+  "Ungadulu": [
+    "Quest"
+  ],
   "Tormented Warrior": [],
   "Viyeldi": [],
-  "San Tojalon": [],
-  "Irvig Senay": [],
-  "Ranalph Devere": [],
+  "San Tojalon": [
+    "Quest"
+  ],
+  "Irvig Senay": [
+    "Quest"
+  ],
+  "Ranalph Devere": [
+    "Quest"
+  ],
   "Zombie rat": [
     "F2P"
   ],
   "Witch's experiment": [],
-  "Shadow": [],
+  "Shadow": [
+    "Quest"
+  ],
   "Dark beast": [
     "Slayer"
   ],
   "Mike": [],
   "Pirate": [],
   "The Fisher King": [],
-  "Denulth": [],
+  "Denulth": [
+    "Quest"
+  ],
   "Eadburg": [],
   "Archer": [],
   "Servant": [],
@@ -15340,7 +15519,9 @@
   "Penda": [],
   "Hygd": [],
   "Ceolburg": [],
-  "Fareed": [],
+  "Fareed": [
+    "Quest"
+  ],
   "Troll general": [],
   "Troll spectator": [],
   "Twig": [],
@@ -15352,9 +15533,12 @@
   ],
   "Jackal": [],
   "Apparition": [],
-  "Icthlarin": [],
+  "Icthlarin": [
+    "Quest"
+  ],
   "Possessed Priest": [],
   "Reldo": [
+    "Quest",
     "F2P"
   ],
   "Head Thief": [],
@@ -15362,10 +15546,13 @@
     "F2P"
   ],
   "Ned": [
+    "Quest",
     "F2P"
   ],
   "Sea troll": [],
-  "Sea Troll Queen": [],
+  "Sea Troll Queen": [
+    "Quest"
+  ],
   "Skeleton Mage": [],
   "Sir Lucan": [],
   "Sir Palomedes": [],
@@ -15379,14 +15566,19 @@
   "Gorad": [],
   "City guard": [],
   "Enclave guard": [],
-  "Ogre shaman": [],
+  "Ogre shaman": [
+    "Quest"
+  ],
   "Tower guard": [],
   "Colonel Radick": [],
   "Ava": [
+    "Quest",
     "Ranged"
   ],
   "Cow31337Killer": [],
-  "Gadderanks": [],
+  "Gadderanks": [
+    "Quest"
+  ],
   "Skeleton fremennik": [],
   "Ulfric": [],
   "Brine rat": [
@@ -15394,10 +15586,13 @@
   ],
   "Blessed spider": [],
   "Blessed giant rat": [],
-  "Jimmy Dazzler": [],
+  "Jimmy Dazzler": [
+    "Quest"
+  ],
   "Rowdy slave": [],
   "Mercenary Captain": [],
   "Shantay": [
+    "Quest",
     "F2P"
   ],
   "Shantay Guard": [
@@ -15407,75 +15602,129 @@
   "Ugthanki": [],
   "Bedabin Nomad Fighter": [],
   "Mercenary": [],
-  "Sir Leye": [],
-  "Sir Tiffy Cashien": [],
-  "Angry unicorn": [],
+  "Sir Leye": [
+    "Quest"
+  ],
+  "Sir Tiffy Cashien": [
+    "Quest"
+  ],
+  "Angry unicorn": [
+    "Quest"
+  ],
   "Angry giant rat": [],
-  "Angry goblin": [],
-  "Angry bear": [],
-  "Fear reaper": [],
-  "Confusion beast": [],
-  "Hopeless creature": [],
+  "Angry goblin": [
+    "Quest"
+  ],
+  "Angry bear": [
+    "Quest"
+  ],
+  "Fear reaper": [
+    "Quest"
+  ],
+  "Confusion beast": [
+    "Quest"
+  ],
+  "Hopeless creature": [
+    "Quest"
+  ],
   "The Shaikahan": [],
   "Thurgo": [
+    "Quest",
     "Smithing",
     "F2P"
   ],
   "Sir Vyvin": [
+    "Quest",
     "F2P"
   ],
-  "Black golem": [],
-  "White golem": [],
-  "Grey golem": [],
-  "Zahur": [],
+  "Black golem": [
+    "Quest"
+  ],
+  "White golem": [
+    "Quest"
+  ],
+  "Grey golem": [
+    "Quest"
+  ],
+  "Zahur": [
+    "Quest"
+  ],
   "Tarik": [],
   "Poltenip": [],
   "Radat": [],
   "Fortress Guard": [
     "F2P"
   ],
-  "Slug Prince": [],
+  "Slug Prince": [
+    "Quest"
+  ],
   "Crab": [],
   "Mudskipper": [],
   "Jubbly bird": [],
-  "Grip": [],
-  "Ice Queen": [],
+  "Grip": [
+    "Quest"
+  ],
+  "Ice Queen": [
+    "Quest"
+  ],
   "Pirate Guard": [],
   "Entrana firebird": [],
-  "Lord Daquarius": [],
-  "King Bolren": [],
+  "Lord Daquarius": [
+    "Quest"
+  ],
+  "King Bolren": [
+    "Quest"
+  ],
   "Khazard trooper": [],
   "Khazard commander": [],
   "Wizard Grayzag": [
+    "Quest",
     "F2P"
   ],
   "Juliet": [
+    "Quest",
     "F2P"
   ],
   "Romeo": [
+    "Quest",
     "F2P"
   ],
-  "Suit of armour": [],
+  "Suit of armour": [
+    "Quest"
+  ],
   "Sanfew": [
+    "Quest",
     "Herblore"
   ],
   "Kaqemeex": [
+    "Quest",
     "Herblore"
   ],
   "Delrith": [
+    "Quest",
     "F2P"
   ],
   "Wizard Traiborn": [
+    "Quest",
     "F2P"
   ],
   "Experiment No.2": [],
   "Mouse": [],
-  "Desert Phoenix": [],
-  "Sigmund": [],
-  "H.A.M. Archer": [],
-  "H.A.M. Mage": [],
+  "Desert Phoenix": [
+    "Quest"
+  ],
+  "Sigmund": [
+    "Quest"
+  ],
+  "H.A.M. Archer": [
+    "Quest"
+  ],
+  "H.A.M. Mage": [
+    "Quest"
+  ],
   "Baby green dragon": [],
   "Charlie the Tramp": [
+    "Quest",
     "F2P"
   ],
   "Jonny the Beard": [
@@ -15497,11 +15746,14 @@
   "Monkey Zombie": [],
   "Elf Warrior": [],
   "Elf Archer": [],
-  "Eluned": [],
+  "Eluned": [
+    "Quest"
+  ],
   "Cave goblin miner": [],
   "Cave goblin guard": [],
   "Undead one": [],
   "Observatory professor": [
+    "Quest",
     "Clue"
   ],
   "Goblin guard": [],
@@ -15568,7 +15820,9 @@
   "Penance Queen": [],
   "Queen spawn": [],
   "Giant Mole": [],
-  "Juna": [],
+  "Juna": [
+    "Quest"
+  ],
   "Simon Templeton": [],
   "Cap'n Izzy No-Beard": [
     "Agility"
@@ -15582,6 +15836,7 @@
   ],
   "Yak": [],
   "Martin the Master Gardener": [
+    "Quest",
     "Farming"
   ],
   "Baby tanglefoot": [],
@@ -15597,11 +15852,16 @@
   "Spinolyp": [],
   "Gnome troop": [],
   "Gnome": [],
-  "Justiciar Zachariah": [],
+  "Justiciar Zachariah": [
+    "Quest"
+  ],
   "Pet rock": [
+    "Quest",
     "Pet"
   ],
-  "Rewards Guardian": [],
+  "Rewards Guardian": [
+    "Quest"
+  ],
   "Orlando Smith": [],
   "Black Guard": [],
   "Armour salesman": [
@@ -15617,47 +15877,109 @@
   "Gnome Mage": [],
   "Bush snake": [],
   "Elvarg": [
+    "Quest",
     "F2P"
   ],
-  "The Inadequacy": [],
-  "The Everlasting": [],
-  "The Untouchable": [],
+  "The Inadequacy": [
+    "Quest"
+  ],
+  "The Everlasting": [
+    "Quest"
+  ],
+  "The Untouchable": [
+    "Quest"
+  ],
   "Urium Shade": [],
   "Large mosquito": [],
-  "Tanglefoot": [],
-  "Chronozon": [],
-  "Bouncer": [],
-  "Ice Troll King": [],
+  "Tanglefoot": [
+    "Quest"
+  ],
+  "Chronozon": [
+    "Quest"
+  ],
+  "Bouncer": [
+    "Quest"
+  ],
+  "Ice Troll King": [
+    "Quest"
+  ],
   "Black demon": [],
-  "Glod": [],
-  "Treus Dayth": [],
+  "Glod": [
+    "Quest"
+  ],
+  "Treus Dayth": [
+    "Quest"
+  ],
   "Black Knight Titan": [],
   "Dagannoth mother": [],
-  "Evil Chicken": [],
-  "Culinaromancer": [],
-  "Agrith-Na-Na": [],
-  "Flambeed": [],
-  "Karamel": [],
-  "Dessourt": [],
-  "Gelatinnoth Mother": [],
-  "Nezikchened": [],
-  "Tree spirit": [],
-  "Me": [],
-  "Jungle Demon": [],
-  "The Kendal": [],
-  "Giant Roc": [],
-  "Slagilith": [],
-  "Moss Guardian": [],
-  "Skeleton Hellhound": [],
-  "Agrith Naar": [],
-  "King Roald": [],
-  "Khazard warlord": [],
-  "Dad": [],
+  "Evil Chicken": [
+    "Quest"
+  ],
+  "Culinaromancer": [
+    "Quest"
+  ],
+  "Agrith-Na-Na": [
+    "Quest"
+  ],
+  "Flambeed": [
+    "Quest"
+  ],
+  "Karamel": [
+    "Quest"
+  ],
+  "Dessourt": [
+    "Quest"
+  ],
+  "Gelatinnoth Mother": [
+    "Quest"
+  ],
+  "Nezikchened": [
+    "Quest"
+  ],
+  "Tree spirit": [
+    "Quest"
+  ],
+  "Me": [
+    "Quest"
+  ],
+  "Jungle Demon": [
+    "Quest"
+  ],
+  "The Kendal": [
+    "Quest"
+  ],
+  "Giant Roc": [
+    "Quest"
+  ],
+  "Slagilith": [
+    "Quest"
+  ],
+  "Moss Guardian": [
+    "Quest"
+  ],
+  "Skeleton Hellhound": [
+    "Quest"
+  ],
+  "Agrith Naar": [
+    "Quest"
+  ],
+  "King Roald": [
+    "Quest"
+  ],
+  "Khazard warlord": [
+    "Quest"
+  ],
+  "Dad": [
+    "Quest"
+  ],
   "Arrg": [],
   "Count Draynor": [
+    "Quest",
     "F2P"
   ],
-  "Nazastarool": [],
+  "Nazastarool": [
+    "Quest"
+  ],
   "Cow": [
     "F2P"
   ],
@@ -15676,11 +15998,14 @@
     "Slayer"
   ],
   "Tarn": [
+    "Quest",
     "Slayer"
   ],
   "Callisto": [],
   "Venenatis": [],
-  "Blurberry": [],
+  "Blurberry": [
+    "Quest"
+  ],
   "Prospector Percy": [
     "Mining"
   ],
@@ -15720,12 +16045,15 @@
     "F2P"
   ],
   "Nieve": [
+    "Quest",
     "Slayer"
   ],
   "Steve": [
     "Slayer"
   ],
-  "Kruk": [],
+  "Kruk": [
+    "Quest"
+  ],
   "Gangster": [],
   "Gang boss": [],
   "Soldier": [],
@@ -15735,9 +16063,15 @@
     "Farming"
   ],
   "Tortured gorilla": [],
-  "Glough": [],
-  "Keef": [],
-  "Kob": [],
+  "Glough": [
+    "Quest"
+  ],
+  "Keef": [
+    "Quest"
+  ],
+  "Kob": [
+    "Quest"
+  ],
   "Maniacal monkey": [],
   "Demonic gorilla": [],
   "Giant rat": [
@@ -15780,6 +16114,7 @@
     "Slayer"
   ],
   "Gertrude": [
+    "Quest",
     "F2P"
   ],
   "Skotizo": [],
@@ -15799,6 +16134,7 @@
     "Clue"
   ],
   "Ignisia": [
+    "Quest",
     "Firemaking"
   ],
   "Crushing hand": [
@@ -15820,6 +16156,7 @@
     "Slayer"
   ],
   "Monstrous basilisk": [
+    "Quest",
     "Slayer"
   ],
   "Insatiable Bloodveld": [
@@ -15856,6 +16193,7 @@
     "Slayer"
   ],
   "Count Check": [
+    "Quest",
     "Randomevent",
     "F2P"
   ],
@@ -15867,9 +16205,15 @@
   "Zamorak mage": [],
   "Cave lizard": [],
   "Zamorak crafter": [],
-  "Perdu": [],
-  "Derwen": [],
-  "Porazdir": [],
+  "Perdu": [
+    "Quest"
+  ],
+  "Derwen": [
+    "Quest"
+  ],
+  "Porazdir": [
+    "Quest"
+  ],
   "Vespula": [],
   "Tekton": [],
   "Scavenger beast": [],
@@ -15882,7 +16226,9 @@
   "Guardian": [],
   "Ice demon": [],
   "Skeletal Mystics": [],
-  "Temple Guardian": [],
+  "Temple Guardian": [
+    "Quest"
+  ],
   "Krystilia": [
     "Slayer",
     "F2P"
@@ -15933,8 +16279,12 @@
   "Dusk": [
     "Slayer"
   ],
-  "Sand Snake": [],
-  "Lady Shauna Piscarilius": [],
+  "Sand Snake": [
+    "Quest"
+  ],
+  "Lady Shauna Piscarilius": [
+    "Quest"
+  ],
   "Thief": [],
   "Revenant goblin": [],
   "Revenant pyrefiend": [],
@@ -15948,6 +16298,7 @@
   "Revenant dragon": [],
   "Corsair Traitor": [],
   "Ithoi the Navigator": [
+    "Quest",
     "F2P"
   ],
   "Ogress Warrior": [
@@ -15956,21 +16307,39 @@
   "Ogress Shaman": [
     "F2P"
   ],
-  "Corrupt Lizardman": [],
-  "King Narnode Shareen": [],
-  "Rune dragon": [],
+  "Corrupt Lizardman": [
+    "Quest"
+  ],
+  "King Narnode Shareen": [
+    "Quest"
+  ],
+  "Rune dragon": [
+    "Quest"
+  ],
   "Adamant dragon": [],
-  "King Lathas": [],
-  "Brundt the Chieftain": [],
-  "Spawn": [],
-  "Robert the Strong": [],
+  "King Lathas": [
+    "Quest"
+  ],
+  "Brundt the Chieftain": [
+    "Quest"
+  ],
+  "Spawn": [
+    "Quest"
+  ],
+  "Robert the Strong": [
+    "Quest"
+  ],
   "Vorkath": [],
   "Zombified Spawn": [],
   "Stone Guardian": [],
-  "Galvek": [],
+  "Galvek": [
+    "Quest"
+  ],
   "Not Bob": [],
   "Camorra": [],
-  "Torfinn": [],
+  "Torfinn": [
+    "Quest"
+  ],
   "Zorgoth": [],
   "Spider": [],
   "Growthling": [
@@ -15979,23 +16348,53 @@
   "Bryophyta": [
     "F2P"
   ],
-  "Vertida Sefalatis": [],
-  "Ranis Drakan": [],
-  "Abomination": [],
+  "Vertida Sefalatis": [
+    "Quest"
+  ],
+  "Ranis Drakan": [
+    "Quest"
+  ],
+  "Abomination": [
+    "Quest"
+  ],
   "Swamp Crab": [],
-  "Nylocas Ischyros": [],
-  "Nylocas Toxobolos": [],
-  "Nylocas Hagios": [],
-  "Nylocas Vasilias": [],
+  "Nylocas Ischyros": [
+    "Quest"
+  ],
+  "Nylocas Toxobolos": [
+    "Quest"
+  ],
+  "Nylocas Hagios": [
+    "Quest"
+  ],
+  "Nylocas Vasilias": [
+    "Quest"
+  ],
   "Blood spawn": [],
-  "Verzik Vitur": [],
-  "Nylocas Athanatos": [],
-  "Askeladden": [],
-  "Mother": [],
-  "Don't Know What": [],
-  "Lord Trobin Arceuus": [],
-  "Tormented Soul": [],
-  "Trapped Soul": [],
+  "Verzik Vitur": [
+    "Quest"
+  ],
+  "Nylocas Athanatos": [
+    "Quest"
+  ],
+  "Askeladden": [
+    "Quest"
+  ],
+  "Mother": [
+    "Quest"
+  ],
+  "Don't Know What": [
+    "Quest"
+  ],
+  "Lord Trobin Arceuus": [
+    "Quest"
+  ],
+  "Tormented Soul": [
+    "Quest"
+  ],
+  "Trapped Soul": [
+    "Quest"
+  ],
   "Jatix": [],
   "Swamp frog": [],
   "Guildmaster Jane": [
@@ -16021,6 +16420,7 @@
   "Third Age Ranger": [],
   "Third Age Mage": [],
   "Diango": [
+    "Quest",
     "F2P"
   ],
   "Frog": [
@@ -16034,18 +16434,36 @@
   "Crystal impling": [
     "Hunter"
   ],
-  "Lord Iorwerth": [],
-  "Baxtorian": [],
-  "Paladin": [],
-  "Knight of Ardougne": [],
-  "Fragment of Seren": [],
+  "Lord Iorwerth": [
+    "Quest"
+  ],
+  "Baxtorian": [
+    "Quest"
+  ],
+  "Paladin": [
+    "Quest"
+  ],
+  "Knight of Ardougne": [
+    "Quest"
+  ],
+  "Fragment of Seren": [
+    "Quest"
+  ],
   "Sir Jerro": [],
   "Sir Carl": [],
   "Sir Harry": [],
-  "Kalrag": [],
-  "Othainian": [],
-  "Doomion": [],
-  "Holthion": [],
+  "Kalrag": [
+    "Quest"
+  ],
+  "Othainian": [
+    "Quest"
+  ],
+  "Doomion": [
+    "Quest"
+  ],
+  "Holthion": [
+    "Quest"
+  ],
   "Disciple of Iban": [],
   "King Thoros": [],
   "Mourner": [],
@@ -16073,21 +16491,28 @@
   "Guard": [
     "F2P"
   ],
-  "Arianwyn": [],
-  "Essyllt": [],
+  "Arianwyn": [
+    "Quest"
+  ],
+  "Essyllt": [
+    "Quest"
+  ],
   "Basilisk Sentinel": [
     "Slayer"
   ],
   "Basilisk Youngling": [
+    "Quest",
     "Slayer"
   ],
   "The Jormungand": [
+    "Quest",
     "Slayer"
   ],
   "Basilisk Knight": [
     "Slayer"
   ],
   "Typhor": [
+    "Quest",
     "Slayer"
   ],
   "Phosani's Nightmare": [],
@@ -16098,11 +16523,19 @@
   ],
   "Husk": [],
   "Parasite": [],
-  "Kroy": [],
-  "Damien Leucurte": [],
-  "Vanstrom Klause": [],
+  "Kroy": [
+    "Quest"
+  ],
+  "Damien Leucurte": [
+    "Quest"
+  ],
+  "Vanstrom Klause": [
+    "Quest"
+  ],
   "Acidic Bloodveld": [],
-  "Drezel": [],
+  "Drezel": [
+    "Quest"
+  ],
   "Vyrewatch Sentinel": [
     "Slayer"
   ],
@@ -16122,6 +16555,7 @@
     "Slayer"
   ],
   "Spria": [
+    "Quest",
     "Slayer"
   ],
   "Sourhog": [
@@ -16130,7 +16564,9 @@
   "Thessalia": [
     "F2P"
   ],
-  "Headless Beast": [],
+  "Headless Beast": [
+    "Quest"
+  ],
   "Wolf": [],
   "Forgotten Soul": [],
   "Soulwars Avatars": [],
@@ -16140,6 +16576,7 @@
     "Fishing"
   ],
   "Ramarno": [
+    "Quest",
     "F2P"
   ],
   "Chaos Golem": [],
@@ -16152,21 +16589,43 @@
   "Flawed Golem": [
     "F2P"
   ],
-  "Xarpus": [],
+  "Xarpus": [
+    "Quest"
+  ],
   "Nylocas Prinkipas": [],
-  "Pestilent Bloat": [],
-  "The Maiden of Sugadinti": [],
-  "Nylocas Matomenos": [],
+  "Pestilent Bloat": [
+    "Quest"
+  ],
+  "The Maiden of Sugadinti": [
+    "Quest"
+  ],
+  "Nylocas Matomenos": [
+    "Quest"
+  ],
   "Sotetseg": [],
-  "Martin Holt": [],
-  "Commander Fullore": [],
-  "Judge of Yama": [],
-  "Xamphur": [],
+  "Martin Holt": [
+    "Quest"
+  ],
+  "Commander Fullore": [
+    "Quest"
+  ],
+  "Judge of Yama": [
+    "Quest"
+  ],
+  "Xamphur": [
+    "Quest"
+  ],
   "Phantom Hand": [],
-  "Lord Shiro Shayzien": [],
+  "Lord Shiro Shayzien": [
+    "Quest"
+  ],
   "King Kandur Hosidius": [],
-  "Lady Vulcana Lovakengj": [],
-  "Barbarian Warlord": [],
+  "Lady Vulcana Lovakengj": [
+    "Quest"
+  ],
+  "Barbarian Warlord": [
+    "Quest"
+  ],
   "Queen Zyanyi Arkan": [],
   "Boar": [],
   "Lynx": [],
@@ -16177,23 +16636,37 @@
   "Araxyte": [
     "Slayer"
   ],
-  "Hespori": [],
+  "Hespori": [
+    "Quest"
+  ],
   "Enraged Boar": [
     "F2P"
   ],
   "Revenant maledictus": [],
   "Skoblin": [],
-  "Snothead": [],
-  "Snailfeet": [],
-  "Mosschin": [],
-  "Redeyes": [],
-  "Strongbones": [],
+  "Snothead": [
+    "Quest"
+  ],
+  "Snailfeet": [
+    "Quest"
+  ],
+  "Mosschin": [
+    "Quest"
+  ],
+  "Redeyes": [
+    "Quest"
+  ],
+  "Strongbones": [
+    "Quest"
+  ],
   "Nex": [],
   "Fumus": [],
   "Umbra": [],
   "Cruor": [],
   "Glacies": [],
-  "Ashuelot Reis": [],
+  "Ashuelot Reis": [
+    "Quest"
+  ],
   "Spiritual Warrior": [
     "Slayer"
   ],
@@ -16204,26 +16677,43 @@
     "Slayer"
   ],
   "Blood Reaver": [],
-  "The Great Guardian": [],
+  "The Great Guardian": [
+    "Quest"
+  ],
   "Archmage Sedridor": [
+    "Quest",
     "F2P"
   ],
   "Menaphite Shadow": [],
   "Kovac": [
+    "Quest",
     "Smithing"
   ],
-  "Champion of Scabaras": [],
-  "Menaphite Akh": [],
-  "Pharaoh Kemesis": [],
+  "Champion of Scabaras": [
+    "Quest"
+  ],
+  "Menaphite Akh": [
+    "Quest"
+  ],
+  "Pharaoh Kemesis": [
+    "Quest"
+  ],
   "Scarab Mage": [],
-  "Head Menaphite Guard": [],
+  "Head Menaphite Guard": [
+    "Quest"
+  ],
   "Prince Ali": [
+    "Quest",
     "F2P"
   ],
   "Locust": [],
   "Plague frog": [],
-  "Amascut": [],
-  "Osmumten": [],
+  "Amascut": [
+    "Quest"
+  ],
+  "Osmumten": [
+    "Quest"
+  ],
   "Scarab": [],
   "Crocodile": [],
   "Baboon Brawler": [],
@@ -16233,16 +16723,26 @@
   "Volatile Baboon": [],
   "Cursed Baboon": [],
   "Baboon Thrall": [],
-  "Kephri": [],
+  "Kephri": [
+    "Quest"
+  ],
   "Soldier Scarab": [],
   "Spitting Scarab": [],
   "Arcane Scarab": [],
   "Agile Scarab": [],
-  "Zebak": [],
-  "The Wardens": [],
-  "Ba-Ba": [],
+  "Zebak": [
+    "Quest"
+  ],
+  "The Wardens": [
+    "Quest"
+  ],
+  "Ba-Ba": [
+    "Quest"
+  ],
   "Baboon": [],
-  "Akkha": [],
+  "Akkha": [
+    "Quest"
+  ],
   "Tribeswoman": [],
   "Alomone": [],
   "Grizzly bear": [],
@@ -16251,38 +16751,66 @@
   "Spindel": [],
   "Venenatis' Spiderling": [],
   "Spindel's Spiderling": [],
-  "Evelot": [],
-  "Assassin": [],
+  "Evelot": [
+    "Quest"
+  ],
+  "Assassin": [
+    "Quest"
+  ],
   "Phantom Muspah": [],
-  "Elias White": [],
-  "Asgarnia Smith": [],
+  "Elias White": [
+    "Quest"
+  ],
+  "Asgarnia Smith": [
+    "Quest"
+  ],
   "Duke Sucellus": [],
   "The Whisperer": [],
   "The Leviathan": [],
   "Vardorvis": [],
   "Shadow Keeper": [],
-  "Ghost": [],
-  "Kasonde": [],
+  "Ghost": [
+    "Quest"
+  ],
+  "Kasonde": [
+    "Quest"
+  ],
   "Strangled": [],
   "Strangled Bear": [],
   "Strangled Boar": [],
   "Strangled Lynx": [],
-  "Mysterious Figure": [],
+  "Mysterious Figure": [
+    "Quest"
+  ],
   "Sliske": [],
-  "The Forsaken Assassin": [],
-  "Ketla the Unworthy": [],
-  "Kasonde the Craven": [],
-  "Persten the Deceitful": [],
+  "The Forsaken Assassin": [
+    "Quest"
+  ],
+  "Ketla the Unworthy": [
+    "Quest"
+  ],
+  "Kasonde the Craven": [
+    "Quest"
+  ],
+  "Persten the Deceitful": [
+    "Quest"
+  ],
   "Wighted Leech": [],
-  "Ancient Guardian": [],
-  "Jhallan": [],
+  "Ancient Guardian": [
+    "Quest"
+  ],
+  "Jhallan": [
+    "Quest"
+  ],
   "Scarred lesser demon": [],
   "Crimson sanguisphera": [],
   "Radiant sanguisphera": [],
   "Abyssal antibody": [],
   "Scarred greater demon": [],
   "Scarred hellhound": [],
-  "Scarred imp": [],
+  "Scarred imp": [
+    "Quest"
+  ],
   "Scarred black demon": [],
   "Abyssal leech": [],
   "Abyssal walker": [],
@@ -16290,7 +16818,9 @@
   "King Black Dragon": [],
   "Dagannoth Supreme": [],
   "Dagannoth Prime": [],
-  "Dharok the Wretched": [],
+  "Dharok the Wretched": [
+    "Quest"
+  ],
   "Greater abyssal demon": [],
   "Flaming pyrelord": [],
   "Cave abomination": [],
@@ -16312,10 +16842,14 @@
     "Slayer"
   ],
   "Branda the Fire Queen": [],
-  "Furia Tullus": [],
+  "Furia Tullus": [
+    "Quest"
+  ],
   "Minimus": [],
   "Serpent shaman": [],
-  "Minotaur": [],
+  "Minotaur": [
+    "Quest"
+  ],
   "Fremennik warband archer": [],
   "Fremennik warband seer": [],
   "Fremennik warband berserker": [],
@@ -16324,23 +16858,38 @@
   "Shockwave Colossus": [],
   "Sol Heredit": [],
   "Passionate Supporter": [],
-  "Eyatlalli": [],
+  "Eyatlalli": [
+    "Quest"
+  ],
   "Sulphur Nagua": [
+    "Quest",
     "Slayer"
   ],
   "Augur Metzli": [],
-  "Knight of Varlamore": [],
-  "Cultist": [],
-  "Cuthbert": [],
+  "Knight of Varlamore": [
+    "Quest"
+  ],
+  "Cultist": [
+    "Quest"
+  ],
+  "Cuthbert": [
+    "Quest"
+  ],
   "Capybara": [],
   "Jaguar": [],
   "Jaguar cub": [],
   "White jaguar": [],
   "Buffalo": [],
   "Oryx": [],
-  "Blood Moon": [],
-  "Eclipse Moon": [],
-  "Blue Moon": [],
+  "Blood Moon": [
+    "Quest"
+  ],
+  "Eclipse Moon": [
+    "Quest"
+  ],
+  "Blue Moon": [
+    "Quest"
+  ],
   "Blood jaguar": [],
   "Grimy Lizard": [
     "Slayer"
@@ -16353,22 +16902,35 @@
     "Slayer"
   ],
   "Guildmaster Apatura": [
+    "Quest",
     "Hunter"
   ],
   "Embertailed jerboa": [],
-  "Renu": [],
+  "Renu": [
+    "Quest"
+  ],
   "Elite Black Knight": [],
   "Elite Dark Warrior": [],
   "Elite Dark Ranger": [],
   "Elite Dark Mage": [],
-  "Surok Magis": [],
+  "Surok Magis": [
+    "Quest"
+  ],
   "Agile Warrior": [],
   "Strong Warrior": [],
-  "Ivy Sophista": [],
-  "Balance Elemental": [],
+  "Ivy Sophista": [
+    "Quest"
+  ],
+  "Balance Elemental": [
+    "Quest"
+  ],
   "Elite Khazard Guard": [],
-  "Mercenary axeman": [],
-  "Mercenary mage": [],
+  "Mercenary axeman": [
+    "Quest"
+  ],
+  "Mercenary mage": [
+    "Quest"
+  ],
   "Idria": [],
   "Akrisae": [],
   "V": [],
@@ -16378,12 +16940,15 @@
     "Strength"
   ],
   "Turael": [
+    "Quest",
     "Slayer"
   ],
   "Aya": [
+    "Quest",
     "Slayer"
   ],
   "Mazchna": [
+    "Quest",
     "Slayer"
   ],
   "Duradel": [
@@ -16422,23 +16987,36 @@
   "Emissary Acolyte": [],
   "Emissary Chosen": [],
   "Emissary Ascended": [],
-  "Emissary Brawler": [],
-  "Emissary Conjurer": [],
-  "Prince Itzla Arkan": [],
+  "Emissary Brawler": [
+    "Quest"
+  ],
+  "Emissary Conjurer": [
+    "Quest"
+  ],
+  "Prince Itzla Arkan": [
+    "Quest"
+  ],
   "Frost Crab": [],
   "Chilled jelly": [
     "Sailing",
     "Slayer"
   ],
   "Dire Wolf Alpha": [],
-  "Adala": [],
+  "Adala": [
+    "Quest"
+  ],
   "Porcupine": [],
   "The Hueycoatl": [],
   "Armoured zombie": [],
-  "Golem guard": [],
+  "Golem guard": [
+    "Quest"
+  ],
   "Small scarab": [],
-  "Arrav": [],
+  "Arrav": [
+    "Quest"
+  ],
   "Weaponsmaster": [
+    "Quest",
     "F2P"
   ],
   "Eldric the Ice King": [],
@@ -16446,17 +17024,29 @@
   "Ice elemental": [],
   "Yama": [],
   "Void Flare": [],
-  "Emissary Enforcer": [],
-  "Ennius Tullus": [],
-  "Chimalli": [],
-  "Lucius": [],
+  "Emissary Enforcer": [
+    "Quest"
+  ],
+  "Ennius Tullus": [
+    "Quest"
+  ],
+  "Chimalli": [
+    "Quest"
+  ],
+  "Lucius": [
+    "Quest"
+  ],
   "Emissary Archer": [],
   "Earthen Nagua": [
     "Slayer"
   ],
   "Humphrey Dumphrey": [],
-  "Large chicken": [],
-  "Black jaguar": [],
+  "Large chicken": [
+    "Quest"
+  ],
+  "Black jaguar": [
+    "Quest"
+  ],
   "Ancient Custodian": [
     "Slayer"
   ],
@@ -16495,13 +17085,18 @@
     "Sailing"
   ],
   "Floopa": [
+    "Quest",
     "Sailing"
   ],
   "Black Eye Bethel": [
+    "Quest",
     "Sailing"
   ],
-  "Giant lobster": [],
+  "Giant lobster": [
+    "Quest"
+  ],
   "Mayor of Catherby": [
+    "Quest",
     "Pet"
   ],
   "Drink troll": [
@@ -16514,12 +17109,14 @@
     "Sailing"
   ],
   "Daddy's special water": [
+    "Quest",
     "Sailing"
   ],
   "The rocks": [
     "Sailing"
   ],
   "Chuck up": [
+    "Quest",
     "Sailing"
   ],
   "Angry tortugan": [
@@ -16631,6 +17228,7 @@
     "Sailing"
   ],
   "Brutus": [
+    "Quest",
     "F2P"
   ],
   "Oaky Doak": [
@@ -16670,7 +17268,9 @@
     "Slayer"
   ],
   "Efaritay Hallow": [],
-  "Lowerniel Drakan": [],
+  "Lowerniel Drakan": [
+    "Quest"
+  ],
   "Wyrd": [],
   "Webbed-winged Crow": [],
   "Maxilla beast": [],
