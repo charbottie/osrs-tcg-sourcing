@@ -321,7 +321,6 @@
   "Seaweed": [
     "Cooking",
     "Crafting",
-    "Food",
     "Magic"
   ],
   "Edible seaweed": [
@@ -3037,8 +3036,7 @@
     "Crafting",
     "F2P",
     "Sailing",
-    "Smithing",
-    "Woodcutting"
+    "Smithing"
   ],
   "Steel bar": [
     "Construction",
@@ -3049,7 +3047,8 @@
   ],
   "Silver bar": [
     "Crafting",
-    "F2P"
+    "F2P",
+    "Smithing"
   ],
   "Gold bar": [
     "Construction",
@@ -3068,8 +3067,7 @@
     "Construction",
     "F2P",
     "Sailing",
-    "Smithing",
-    "Woodcutting"
+    "Smithing"
   ],
   "Runite bar": [
     "Construction",
@@ -7700,7 +7698,6 @@
   "Swamp weed": [
     "Cooking",
     "Crafting",
-    "Food",
     "Magic"
   ],
   "Empty light orb": [
@@ -10564,7 +10561,6 @@
   "Giant seaweed": [
     "Cooking",
     "Crafting",
-    "Food",
     "Magic"
   ],
   "Herbi": [
@@ -12083,8 +12079,7 @@
   "Harpoonfish": [
     "Construction",
     "Cooking",
-    "Fishing",
-    "Food"
+    "Fishing"
   ],
   "Tome of water": [
     "Equipment",
@@ -14345,11 +14340,13 @@
   ],
   "Lead bar": [
     "Construction",
-    "Sailing"
+    "Sailing",
+    "Smithing"
   ],
   "Cupronickel bar": [
     "Construction",
-    "Sailing"
+    "Sailing",
+    "Smithing"
   ],
   "Camphor logs": [
     "Construction",
