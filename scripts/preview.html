@@ -1849,9 +1849,24 @@ function removeFromWishlist(name) {
 }
 
 function removeQuestFromWishlist(questName) {
+  // Smart cleanup: strip quest name from auto-added card notes
+  const questCards = (bmQuestCards[questName]?.sections || [])
+    .flatMap(s => s.requirements || []).flatMap(r => r.cards || [])
+    .filter((c, i, a) => a.indexOf(c) === i);
+  for (const card of questCards) {
+    if (!wishlist.has(card)) continue;
+    const entry   = wishlist.get(card);
+    const cleaned = _noteRemoveTag(entry.note, questName);
+    if (!cleaned) wishlist.delete(card); else entry.note = cleaned;
+  }
   wishlistedQuests.delete(questName);
   _saveWishlist();
   if (activeTab === 'wishlist') renderWishlist();
+}
+
+// Strip a single tag from a comma-separated note string
+function _noteRemoveTag(note, tag) {
+  return note.split(',').map(p => p.trim()).filter(p => p && p !== tag).join(', ');
 }
 
 function clearWishlist() {
@@ -1964,7 +1979,6 @@ function openGroupEditor(gi) {
       </div>
     </div>`;
   document.body.appendChild(overlay);
-  overlay.addEventListener('click', e => { if (e.target === overlay) closeGroupEditor(); });
   _geRenderChips();
   document.getElementById('ge-name').focus();
 }
@@ -2026,14 +2040,47 @@ function saveGroupEditor(gi) {
   const name   = (nameEl ? nameEl.value.trim() : '') || 'Unnamed group';
   const cards  = window._geCards || [];
   if (!cards.length) { closeGroupEditor(); return; }
-  if (gi >= 0 && gi < wishlistGroups.length) wishlistGroups[gi] = {name, cards: [...cards]};
+
+  // If editing, strip the old group name from any auto-added notes first
+  const oldGroup = (gi >= 0 && gi < wishlistGroups.length) ? wishlistGroups[gi] : null;
+  if (oldGroup) {
+    for (const card of oldGroup.cards) {
+      if (!wishlist.has(card)) continue;
+      const entry   = wishlist.get(card);
+      const cleaned = _noteRemoveTag(entry.note, oldGroup.name);
+      if (!cleaned) wishlist.delete(card); else entry.note = cleaned;
+    }
+  }
+
+  // Save group
+  if (oldGroup) wishlistGroups[gi] = {name, cards: [...cards]};
   else wishlistGroups.push({name, cards: [...cards]});
+
+  // Auto-populate individual wishlist with group name as note
+  for (const card of cards) {
+    if (wishlist.has(card)) {
+      const entry = wishlist.get(card);
+      if (!entry.note.includes(name)) entry.note = entry.note ? entry.note + ', ' + name : name;
+    } else {
+      wishlist.set(card, {note: name});
+    }
+  }
+
   _saveWishlist();
   closeGroupEditor();
   if (activeTab === 'wishlist') renderWishlist();
 }
 
 function removeGroup(gi) {
+  const g = wishlistGroups[gi];
+  if (!g) return;
+  // Smart cleanup: strip group name from auto-added card notes
+  for (const card of g.cards) {
+    if (!wishlist.has(card)) continue;
+    const entry   = wishlist.get(card);
+    const cleaned = _noteRemoveTag(entry.note, g.name);
+    if (!cleaned) wishlist.delete(card); else entry.note = cleaned;
+  }
   wishlistGroups.splice(gi, 1);
   _saveWishlist();
   if (activeTab === 'wishlist') renderWishlist();
@@ -2135,9 +2182,16 @@ function renderWishlist() {
         <div style="display:flex;flex-wrap:wrap;gap:4px">`;
       for (const c of unique.sort()) {
         const own  = isOwned(c);
+        const wled = wishlist.has(c);
         const safe = c.replace(/&/g,'&amp;').replace(/"/g,'&quot;');
         const type = monsterDrops[c] ? 'monster' : 'item';
-        html += `<span style="background:${own?'#0d2210':'#111'};border:1px solid ${own?'#2a5a2a':'#222'};color:${own?'#76c442':'#555'};border-radius:3px;padding:2px 7px;font-size:10px;cursor:pointer"
+        const chipStyle = own
+          ? 'background:#0d2210;border-color:#2a5a2a;color:#76c442'
+          : wled
+            ? 'background:#111;border-color:#222;color:#555'
+            : 'background:#1a0808;border-color:#4a1a1a;color:#6a2a2a;text-decoration:line-through';
+        const chipTitle = wled ? '' : `title="${c.replace(/"/g,'&quot;')} removed from wishlist"`;
+        html += `<span style="${chipStyle};border:1px solid;border-radius:3px;padding:2px 7px;font-size:10px;cursor:pointer" ${chipTitle}
           data-card="${safe}" data-type="${type}" onclick="showCard(this.dataset.card,this.dataset.type)">${own?'✓ ':''}${c}</span>`;
       }
       html += `</div></div>`;
@@ -2165,10 +2219,17 @@ function renderWishlist() {
         </div>
         <div style="display:flex;flex-wrap:wrap;gap:4px">`;
       for (const c of g.cards) {
-        const own = isOwned(c);
+        const own  = isOwned(c);
+        const wled = wishlist.has(c);
         const safe = c.replace(/&/g,'&amp;').replace(/"/g,'&quot;');
         const type = monsterDrops[c] ? 'monster' : 'item';
-        html += `<span style="background:${own?'#0d2210':'#111'};border:1px solid ${own?'#2a5a2a':'#222'};color:${own?'#76c442':'#555'};border-radius:3px;padding:2px 7px;font-size:10px;cursor:pointer"
+        const chipStyle = own
+          ? 'background:#0d2210;border-color:#2a5a2a;color:#76c442'
+          : wled
+            ? 'background:#111;border-color:#222;color:#555'
+            : 'background:#1a0808;border-color:#4a1a1a;color:#6a2a2a;text-decoration:line-through';
+        const chipTitle = wled ? '' : `title="${c.replace(/"/g,'&quot;')} removed from wishlist"`;
+        html += `<span style="${chipStyle};border:1px solid;border-radius:3px;padding:2px 7px;font-size:10px;cursor:pointer" ${chipTitle}
           data-card="${safe}" data-type="${type}" onclick="showCard(this.dataset.card,this.dataset.type)">${own?'✓ ':''}${c}</span>`;
       }
       html += `</div></div>`;
@@ -2202,13 +2263,21 @@ function renderWishlist() {
       const imgUrl = (cardDetails[name] || {}).imageUrl || '';
       const hasNote = meta.note && meta.note.trim();
       const noteTitle = hasNote ? meta.note.replace(/"/g,'&quot;') : '';
+      // Orange badge: not owned, but a group containing this card is satisfied via another card
+      const groupCovered = !own && wishlistGroups.some(g =>
+        g.cards.includes(name) && g.cards.some(c => c !== name && isOwned(c)));
+      const badge = own
+        ? `<div style="position:absolute;top:3px;right:3px;background:#00c853;color:#000;border-radius:2px;font-size:8px;padding:1px 4px;font-weight:700;line-height:1.5" title="Owned">✓</div>`
+        : groupCovered
+          ? `<div style="position:absolute;top:3px;right:3px;background:#a05000;color:#ffd080;border-radius:2px;font-size:8px;padding:1px 4px;font-weight:700;line-height:1.5" title="Group satisfied by another card">✓</div>`
+          : '';
       html += `<div class="wl-tile" style="border:1px solid ${own?'#1e3a1e':'#222'};border-radius:4px;overflow:hidden;background:#0f0f0f">
         <div style="position:relative;cursor:pointer;background:#080808;aspect-ratio:1;overflow:hidden"
           data-card="${safe}" data-type="${type}" onclick="showCard(this.dataset.card,this.dataset.type)">
           ${imgUrl
             ? `<img src="${imgUrl}" style="width:100%;height:100%;object-fit:contain;image-rendering:pixelated;display:block;${own?'opacity:0.5':''}" onerror="this.style.opacity=0.04">`
             : `<div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;color:#1a1a1a;font-size:22px">?</div>`}
-          ${own ? `<div style="position:absolute;top:3px;right:3px;background:#00c853;color:#000;border-radius:2px;font-size:8px;padding:1px 4px;font-weight:700;line-height:1.5">✓</div>` : ''}
+          ${badge}
         </div>
         <div style="padding:4px 5px 5px;background:#141414">
           <div data-card="${safe}" data-type="${type}" onclick="showCard(this.dataset.card,this.dataset.type)"
