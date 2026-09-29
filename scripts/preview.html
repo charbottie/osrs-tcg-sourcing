@@ -2189,6 +2189,7 @@ function _wlCategory(name) {
   const cats = cardCategories[name] || [];
   if (cats.includes('Tool')) return 'tool';
   if (cats.some(c => _EQUIP_CATS.has(c))) return 'equipment';
+  if (cats.includes('Currency')) return 'currency';
   return 'other';
 }
 
@@ -2311,12 +2312,13 @@ function renderWishlist() {
   const SECTIONS = [
     {key:'tool',      label:'Tools'},
     {key:'equipment', label:'Equipment'},
+    {key:'currency',  label:'Currency'},
     {key:'monster',   label:'Monsters'},
     {key:'npc',       label:'NPCs'},
     {key:'other',     label:'Other'},
   ];
 
-  const byCategory = {tool:[], equipment:[], monster:[], npc:[], other:[]};
+  const byCategory = {tool:[], equipment:[], currency:[], monster:[], npc:[], other:[]};
   for (const [name] of wishlist) byCategory[_wlCategory(name)]?.push(name);
 
   for (const {key, label} of SECTIONS) {
