@@ -3959,6 +3959,13 @@
                 "Hammer"
               ],
               "type": "item"
+            },
+            {
+              "label": "Ammo mould",
+              "cards": [
+                "Ammo mould"
+              ],
+              "type": "item"
             }
           ]
         }
