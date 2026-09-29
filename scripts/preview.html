@@ -1488,7 +1488,8 @@ function renderList(cards, sortBy = 'name') {
     if (card.type === 'clue') {
       const cfg = CLUE_TIER_CONFIG[card.tier] || {};
       el.className = 'card-item' + (card.name === selected ? ' selected' : '');
-      el.innerHTML = `<span class="card-name">${card.name}</span>`
+      const clueImgHtml = `<img src="https://oldschool.runescape.wiki/images/Clue_scroll_(${card.tier}).png" style="width:20px;height:20px;object-fit:contain;image-rendering:pixelated;flex-shrink:0;margin-right:5px" onerror="this.style.display='none'">`;
+      el.innerHTML = clueImgHtml + `<span class="card-name">${card.name}</span>`
         + `<span style="font-size:9px;color:${cfg.color};background:${cfg.bg};border-radius:2px;padding:1px 5px">${cfg.label}</span>`;
     } else {
       const ownedCls = isOwned(card.name) ? ' owned-card' : '';
