@@ -1852,12 +1852,93 @@ function clearWishlist() {
 
 function saveWishlistNote(name, note) {
   const entry = wishlist.get(name);
-  if (entry) { entry.note = note; _saveWishlist(); }
+  if (entry) { entry.note = note.trim(); _saveWishlist(); }
+}
+
+// ── Note popover ──────────────────────────────────────────────────────────────
+let _notePopoverCloseHandler = null;
+
+function openNotePopover(btn, cardName) {
+  // Close any existing popover first
+  _closeNotePopover();
+
+  const meta = wishlist.get(cardName) || {note:''};
+  const pop = document.createElement('div');
+  pop.id = 'note-popover';
+  pop.style.cssText = 'position:fixed;z-index:9999;background:#1c1c1c;border:1px solid #333;border-radius:4px;padding:10px;box-shadow:0 4px 16px rgba(0,0,0,0.6);width:220px';
+
+  const safeCard = cardName.replace(/&/g,'&amp;').replace(/"/g,'&quot;');
+  pop.innerHTML = `
+    <div style="font-size:10px;color:#777;margin-bottom:6px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${cardName}</div>
+    <textarea id="note-popover-input" placeholder="Why do you want this?" rows="3"
+      style="width:100%;box-sizing:border-box;background:#111;border:1px solid #333;color:#ccc;padding:5px 7px;border-radius:3px;font-size:11px;resize:vertical;outline:none;font-family:inherit">${meta.note}</textarea>
+    <div style="display:flex;gap:5px;margin-top:7px;justify-content:flex-end">
+      <button onclick="_closeNotePopover()" style="background:none;border:1px solid #2a2a2a;color:#666;padding:2px 9px;border-radius:3px;font-size:10px;cursor:pointer">Cancel</button>
+      <button data-card="${safeCard}" onclick="_saveNotePopover(this.dataset.card)"
+        style="background:#1a2a1a;border:1px solid #2a4a2a;color:#76c442;padding:2px 9px;border-radius:3px;font-size:10px;cursor:pointer">Save</button>
+    </div>`;
+  document.body.appendChild(pop);
+
+  // Position below the button, left-aligned, clamped to viewport
+  const rect = btn.getBoundingClientRect();
+  let top  = rect.bottom + 5;
+  let left = rect.left;
+  pop.style.top  = top  + 'px';
+  pop.style.left = left + 'px';
+  // After paint, clamp right edge
+  requestAnimationFrame(() => {
+    const pr = pop.getBoundingClientRect();
+    if (pr.right > window.innerWidth - 8)  pop.style.left = (window.innerWidth - pr.width - 8) + 'px';
+    if (pr.bottom > window.innerHeight - 8) pop.style.top  = (rect.top - pr.height - 5) + 'px';
+  });
+
+  pop.querySelector('#note-popover-input').focus();
+
+  // Close on outside click (next tick so this click doesn't immediately close it)
+  setTimeout(() => {
+    _notePopoverCloseHandler = e => { if (!pop.contains(e.target)) _closeNotePopover(); };
+    document.addEventListener('click', _notePopoverCloseHandler);
+  }, 0);
+}
+
+function _closeNotePopover() {
+  const pop = document.getElementById('note-popover');
+  if (pop) pop.remove();
+  if (_notePopoverCloseHandler) {
+    document.removeEventListener('click', _notePopoverCloseHandler);
+    _notePopoverCloseHandler = null;
+  }
+}
+
+function _saveNotePopover(cardName) {
+  const input = document.getElementById('note-popover-input');
+  if (input) saveWishlistNote(cardName, input.value);
+  _closeNotePopover();
+  // Re-render so button colour/title updates
+  if (activeTab === 'wishlist') renderWishlist();
 }
 
 function wishlistQuest(questName) {
   if (wishlistedQuests.has(questName)) return 0;
   wishlistedQuests.add(questName);
+
+  // Also add each BM quest card to the individual wishlist with the quest name as the note
+  const questCards = (bmQuestCards[questName]?.sections || [])
+    .flatMap(s => s.requirements || [])
+    .flatMap(r => r.cards || [])
+    .filter((c, i, a) => a.indexOf(c) === i);
+  for (const card of questCards) {
+    if (wishlist.has(card)) {
+      // Append quest name to existing note if not already mentioned
+      const entry = wishlist.get(card);
+      if (!entry.note.includes(questName)) {
+        entry.note = entry.note ? entry.note + ', ' + questName : questName;
+      }
+    } else {
+      wishlist.set(card, {note: questName});
+    }
+  }
+
   _saveWishlist();
   if (activeTab === 'wishlist') renderWishlist();
   return 1;
@@ -1959,16 +2040,16 @@ function renderWishlist() {
       const meta = wishlist.get(name) || {note:''};
       const safe = name.replace(/&/g,'&amp;').replace(/"/g,'&quot;');
       const type = monsterDrops[name] ? 'monster' : 'item';
+      const hasNote = meta.note && meta.note.trim();
+      const noteTitle = hasNote ? meta.note.replace(/"/g,'&quot;') : 'Add a note';
+      const noteBtn = `<button title="${noteTitle}" data-card="${safe}" onclick="openNotePopover(this,this.dataset.card)"
+        style="background:none;border:1px solid ${hasNote?'#3a3a1a':'#1e1e1e'};color:${hasNote?'#9a9a3a':'#333'};padding:1px 6px;border-radius:3px;font-size:10px;cursor:pointer;flex-shrink:0;line-height:1.4">✎</button>`;
       html += `<div style="display:flex;align-items:center;gap:8px;padding:5px 4px;border-bottom:1px solid #1a1a1a">
         <span style="font-size:11px;color:${own?'#00c853':'#555'};flex-shrink:0;width:12px">${own?'✓':'○'}</span>
-        <span style="font-size:12px;color:${own?'#666':'#ccc'};${own?'text-decoration:line-through':''}flex:0 0 auto;cursor:pointer;min-width:100px"
+        <span style="font-size:12px;color:${own?'#666':'#ccc'};${own?'text-decoration:line-through;':''}cursor:pointer"
           data-card="${safe}" data-type="${type}" onclick="showCard(this.dataset.card,this.dataset.type)">${name}</span>
-        <input type="text" placeholder="Add a note…" value="${meta.note.replace(/"/g,'&quot;')}"
-          data-card="${safe}"
-          onblur="saveWishlistNote(this.dataset.card,this.value)"
-          onkeydown="if(event.key==='Enter')this.blur()"
-          style="flex:1;background:#111;border:1px solid #222;color:#888;padding:2px 6px;border-radius:3px;font-size:10px;min-width:0;outline:none"
-          onfocus="this.style.borderColor='#444'" />
+        <span style="flex:1"></span>
+        ${noteBtn}
         <span class="wl-remove" data-card="${safe}" onclick="removeFromWishlist(this.dataset.card)" style="flex-shrink:0">×</span>
       </div>`;
     }
