@@ -1860,6 +1860,58 @@ function _buildAutoNote(name) {
   return tags.join(', ');
 }
 
+// ── Wishlist left-panel search ────────────────────────────────────────────────
+function _wlSearchInput(q) {
+  const el = document.getElementById('wl-search-results');
+  if (!el) return;
+  const lower = q.trim().toLowerCase();
+
+  // Decide which cards to show: matches if query, otherwise recently-added or hint
+  let cards;
+  if (lower.length > 0) {
+    cards = allCards.filter(c => c.type !== 'clue' && c.name.toLowerCase().includes(lower));
+  } else {
+    // No query: show all wishlisted cards (so user can un-star from here too)
+    cards = allCards.filter(c => wishlist.has(c.name));
+  }
+
+  if (!lower && !cards.length) {
+    el.innerHTML = '<div style="padding:20px 12px;color:#333;font-size:11px;text-align:center;line-height:1.7">Type a card name<br>to search &amp; add</div>';
+    return;
+  }
+  if (lower && !cards.length) {
+    el.innerHTML = '<div style="padding:10px 12px;color:#444;font-size:11px">No cards found</div>';
+    return;
+  }
+
+  el.innerHTML = cards.slice(0, 50).map(c => {
+    const wled = wishlist.has(c.name);
+    const own  = isOwned(c.name);
+    const safe = c.name.replace(/&/g,'&amp;').replace(/"/g,'&quot;');
+    const imgUrl = (cardDetails[c.name] || {}).imageUrl || '';
+    return `<div style="display:flex;align-items:center;gap:7px;padding:5px 10px;cursor:pointer;border-bottom:1px solid #0f0f0f"
+      data-card="${safe}" onclick="_wlSearchToggle(this.dataset.card)"
+      onmouseenter="this.style.background='#161616'" onmouseleave="this.style.background=''">
+      ${imgUrl ? `<img src="${imgUrl}" style="width:20px;height:20px;object-fit:contain;image-rendering:pixelated;flex-shrink:0" onerror="this.style.display='none'">` : '<span style="width:20px;flex-shrink:0"></span>'}
+      <span style="flex:1;font-size:11px;color:${own?'#76c442':'#aaa'};overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${c.name}</span>
+      <span style="font-size:12px;flex-shrink:0;color:${wled?'#4a7a4a':'#2a4a2a'};font-weight:700" title="${wled?'Remove from wishlist':'Add to wishlist'}">${wled?'★':'☆'}</span>
+    </div>`;
+  }).join('');
+}
+
+function _wlSearchToggle(name) {
+  if (wishlist.has(name)) {
+    wishlist.delete(name);
+  } else {
+    wishlist.set(name, {note: _buildAutoNote(name)});
+  }
+  _saveWishlist();
+  renderWishlist();
+  // Refresh the panel list to show updated ★/☆ states
+  const input = document.getElementById('wl-search');
+  if (input) _wlSearchInput(input.value);
+}
+
 function removeFromWishlist(name) {
   wishlist.delete(name);
   _saveWishlist();
@@ -4449,8 +4501,24 @@ function _renderTab(tab, resetSelection = true) {
       renderPackList();
       if (selectedPack) showPackDetail(selectedPack);
     } else if (tab === 'wishlist') {
-      mainContent.innerHTML = `<div id="wishlist-content" style="padding:20px 24px;overflow-y:auto;height:100%"></div>`;
+      mainContent.innerHTML = `
+        <div style="display:flex;height:100%;overflow:hidden">
+          <div style="width:260px;min-width:260px;display:flex;flex-direction:column;border-right:1px solid #1a1a1a;background:#0d0d0d">
+            <div style="padding:10px 12px;border-bottom:1px solid #1a1a1a;flex-shrink:0">
+              <div style="position:relative">
+                <input id="wl-search" placeholder="Search to add…" autocomplete="off"
+                  oninput="_wlSearchInput(this.value)"
+                  onkeydown="if(event.key==='Escape'){this.value='';_wlSearchInput('');}"
+                  style="width:100%;box-sizing:border-box;background:#111;border:1px solid #2a2a2a;color:#ccc;padding:5px 8px 5px 26px;border-radius:3px;font-size:11px;outline:none">
+                <span style="position:absolute;left:8px;top:50%;transform:translateY(-50%);color:#444;font-size:11px;pointer-events:none">⌕</span>
+              </div>
+            </div>
+            <div id="wl-search-results" style="flex:1;overflow-y:auto"></div>
+          </div>
+          <div id="wishlist-content" style="flex:1;padding:20px 24px;overflow-y:auto"></div>
+        </div>`;
       renderWishlist();
+      _wlSearchInput('');
     } else if (tab === 'equipment') {
       mainContent.innerHTML = renderEquipmentTab();
       initEquipmentTab();
