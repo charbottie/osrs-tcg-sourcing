@@ -1871,25 +1871,26 @@ function _wlSearchInput(q) {
   if (!el) return;
   const lower = q.trim().toLowerCase();
 
-  // Decide which cards to show: matches if query, otherwise recently-added or hint
-  let cards;
+  let cards, quests;
   if (lower.length > 0) {
-    cards = allCards.filter(c => c.type !== 'clue' && c.name.toLowerCase().includes(lower));
+    cards  = allCards.filter(c => c.type !== 'clue' && c.name.toLowerCase().includes(lower));
+    quests = Object.keys(questsData).filter(n => n.toLowerCase().includes(lower));
   } else {
-    // No query: show all wishlisted cards (so user can un-star from here too)
-    cards = allCards.filter(c => wishlist.has(c.name));
+    // No query: show all wishlisted items
+    cards  = allCards.filter(c => wishlist.has(c.name));
+    quests = [...wishlistedQuests];
   }
 
-  if (!lower && !cards.length) {
-    el.innerHTML = '<div style="padding:20px 12px;color:#333;font-size:11px;text-align:center;line-height:1.7">Type a card name<br>to search &amp; add</div>';
+  if (!lower && !cards.length && !quests.length) {
+    el.innerHTML = '<div style="padding:20px 12px;color:#333;font-size:11px;text-align:center;line-height:1.7">Type a card or quest name<br>to search &amp; add</div>';
     return;
   }
-  if (lower && !cards.length) {
-    el.innerHTML = '<div style="padding:10px 12px;color:#444;font-size:11px">No cards found</div>';
+  if (lower && !cards.length && !quests.length) {
+    el.innerHTML = '<div style="padding:10px 12px;color:#444;font-size:11px">No cards or quests found</div>';
     return;
   }
 
-  el.innerHTML = cards.slice(0, 50).map(c => {
+  const cardHtml = cards.slice(0, 40).map(c => {
     const wled = wishlist.has(c.name);
     const own  = isOwned(c.name);
     const safe = c.name.replace(/&/g,'&amp;').replace(/"/g,'&quot;');
@@ -1902,6 +1903,38 @@ function _wlSearchInput(q) {
       <span style="font-size:12px;flex-shrink:0;color:${wled?'#4a7a4a':'#2a4a2a'};font-weight:700" title="${wled?'Remove from wishlist':'Add to wishlist'}">${wled?'★':'☆'}</span>
     </div>`;
   }).join('');
+
+  const questHtml = quests.slice(0, 20).map(qn => {
+    const wled = wishlistedQuests.has(qn);
+    const safe = qn.replace(/&/g,'&amp;').replace(/"/g,'&quot;');
+    return `<div style="display:flex;align-items:center;gap:7px;padding:5px 10px;cursor:pointer;border-bottom:1px solid #0f0f0f"
+      data-quest="${safe}" onclick="_wlQuestToggle(this.dataset.quest)"
+      onmouseenter="this.style.background='#161616'" onmouseleave="this.style.background=''">
+      <span style="width:20px;flex-shrink:0;font-size:10px;text-align:center;color:#7a6a3a">Q</span>
+      <span style="flex:1;font-size:11px;color:#aaa;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${qn}</span>
+      <span style="font-size:12px;flex-shrink:0;color:${wled?'#7a6a3a':'#2a2a1a'};font-weight:700" title="${wled?'Remove quest from wishlist':'Add quest cards to wishlist'}">${wled?'★':'☆'}</span>
+    </div>`;
+  }).join('');
+
+  // If both sections have results and we have a query, show section headers
+  let html = '';
+  if (lower && quests.length && cards.length) {
+    if (cardHtml) html += `<div style="padding:4px 10px;font-size:9px;color:#444;letter-spacing:.05em;text-transform:uppercase;background:#0a0a0a">Cards</div>${cardHtml}`;
+    if (questHtml) html += `<div style="padding:4px 10px;font-size:9px;color:#444;letter-spacing:.05em;text-transform:uppercase;background:#0a0a0a">Quests</div>${questHtml}`;
+  } else {
+    html = cardHtml + questHtml;
+  }
+  el.innerHTML = html;
+}
+
+function _wlQuestToggle(questName) {
+  if (wishlistedQuests.has(questName)) {
+    removeQuestFromWishlist(questName);
+  } else {
+    wishlistQuest(questName);
+  }
+  const input = document.getElementById('wl-search');
+  if (input) _wlSearchInput(input.value);
 }
 
 function _wlSearchToggle(name) {
@@ -2715,6 +2748,53 @@ function renderMonster(name, container) {
       </div>`;
     }
     html += `</div></div>`;
+  }
+
+  // ── Assigned by slayer masters ────────────────────────────────────────────
+  {
+    const slayerAssignedBy = [];
+    for (const [masterKey, master] of Object.entries(SLAYER_TASKS)) {
+      const totalWeight = master.tasks.reduce((s,t) => s + t.weight, 0);
+      const matchingTasks = master.tasks.filter(t => t.cards.includes(name));
+      if (matchingTasks.length === 0) continue;
+      const combinedWeight = matchingTasks.reduce((s,t) => s + t.weight, 0);
+      const pct = ((combinedWeight / totalWeight) * 100).toFixed(1);
+      const taskLabel = [...new Set(matchingTasks.map(t => t.task))].join(' / ');
+      const _mCards = Object.entries(SLAYER_MASTER_MAP).filter(([,k]) => k === masterKey).map(([c]) => c);
+      const masterOwned = _mCards.length === 0 || _mCards.some(c => isOwned(c));
+      const masterCardName = _mCards.find(c => isOwned(c)) || _mCards[0] || masterKey;
+      const slayerOk = getLevel('Slayer') >= (master.slayerReq || 1);
+      slayerAssignedBy.push({masterKey, masterCardName, masterOwned, slayerOk, taskLabel, pct, slayerReq: master.slayerReq});
+    }
+    if (slayerAssignedBy.length > 0) {
+      // Sort: unlocked masters first, then by pct desc
+      slayerAssignedBy.sort((a,b) => {
+        const aOk = a.slayerOk && a.masterOwned, bOk = b.slayerOk && b.masterOwned;
+        if (aOk !== bOk) return aOk ? -1 : 1;
+        return parseFloat(b.pct) - parseFloat(a.pct);
+      });
+      html += `<div class="section">
+        <div class="section-header">Assigned by Slayer masters</div>
+        <div style="margin-top:8px">`;
+      for (const m of slayerAssignedBy) {
+        const safeKey = m.masterKey.replace(/'/g, "\\'");
+        const indCls2 = !m.slayerOk ? 'locked' : !m.masterOwned ? 'no-card' : 'available';
+        const mImgUrl2 = (cardDetails[m.masterCardName] || {}).imageUrl || '';
+        const mImgHtml2 = mImgUrl2
+          ? `<img src="${mImgUrl2}" style="width:16px;height:16px;object-fit:contain;image-rendering:pixelated;flex-shrink:0;margin-right:4px" onerror="this.style.display='none'">`
+          : '<span style="width:16px;flex-shrink:0;margin-right:4px"></span>';
+        const noteText2 = !m.slayerOk ? `Slayer ${m.slayerReq} req` : !m.masterOwned ? 'no master card' : m.taskLabel;
+        html += `<div class="method-row">
+          <div class="method-indicator ${indCls2}"></div>
+          ${mImgHtml2}
+          <span class="method-name ${indCls2}" style="cursor:pointer"
+            onclick="showCard('${m.masterCardName.replace(/'/g,"\\'")}','monster')">${m.masterKey}</span>
+          <span class="method-level" style="min-width:46px;text-align:right">${m.pct}%</span>
+          <span class="method-note">${noteText2}</span>
+        </div>`;
+      }
+      html += `</div></div>`;
+    }
   }
 
   // ── Required for quests ───────────────────────────────────────────────────
@@ -5620,10 +5700,16 @@ function getTrainingMethods(skillName) {
   } else if (skillName === 'Slayer') {
     for (const [masterName, master] of Object.entries(SLAYER_TASKS)) {
       const levelOk = myLevel >= (master.slayerReq || 1);
+      const mCards = Object.entries(SLAYER_MASTER_MAP).filter(([,k]) => k === masterName).map(([c]) => c);
+      const masterCardOk = mCards.length === 0 || mCards.some(c => isOwned(c));
+      const masterCardName = mCards.find(c => isOwned(c)) || mCards[0] || masterName;
       const availTasks = master.tasks.filter(t => t.cards.some(c => isOwned(c))).length;
-      const status = !levelOk ? 'locked-level' : availTasks > 0 ? 'available' : 'no-card';
+      const totalTasks = master.tasks.length;
+      const reqStr = master.slayerReq > 1 ? `Sl ${master.slayerReq}` : master.combatReq > 3 ? `Cb ${master.combatReq}` : '';
+      const status = !levelOk || !masterCardOk ? 'locked' : availTasks > 0 ? 'available' : 'no-card';
       results.push({name:masterName, level:master.slayerReq||0,
-        status, cardOwned:availTasks > 0, note:`${availTasks}/${master.tasks.length} tasks`, type:'slayer'});
+        status, cardOwned:availTasks > 0, note:`${availTasks}/${totalTasks} tasks`,
+        type:'slayer', masterCardName, availTasks, totalTasks, reqStr});
     }
   }
 
@@ -5646,7 +5732,7 @@ function countAvailableMethods(skillName) {
   if (skillName === 'Prayer')
     return PRAYER_BONES.filter(b => itemSources[b.name] && isOwned(b.name) && canGetItem(b.name)).length;
   if (skillName === 'Agility') return AGILITY_COURSES.filter(c => getLevel('Agility') >= c.level).length;
-  if (skillName === 'Slayer')  return Object.values(SLAYER_TASKS).filter(m => getLevel('Slayer') >= (m.slayerReq||1) && m.tasks.some(t => t.cards.some(c => isOwned(c)))).length;
+  if (skillName === 'Slayer')  return getTrainingMethods('Slayer').filter(m => m.status === 'available').length;
   return getTrainingMethods(skillName).filter(m => m.status === 'available').length;
 }
 
@@ -5662,7 +5748,7 @@ function renderSkillGrid() {
     html += `<div class="skill-cell${sel}${hasMeth}" onclick="showSkillDetail('${skill}')">
       <div class="skill-cell-name">${skillIcon(skill, 14)} ${skill}</div>
       <div class="skill-cell-level">${lvl}</div>
-      <div class="skill-cell-count ${count===0?'zero':''}">${count} method${count!==1?'s':''}</div>
+      <div class="skill-cell-count ${count===0?'zero':''}">${count} ${skill==='Slayer'?`master${count!==1?'s':''}`:`method${count!==1?'s':''}`}</div>
     </div>`;
   }
   grid.innerHTML = html;
@@ -5715,26 +5801,21 @@ function showSkillDetail(skillName, push = true) {
 
   let rows = '';
   if (skillName === 'Slayer') {
-    // Custom master list — each master is clickable to drill into its task list
+    // Render from methods (computed by getTrainingMethods — single source of truth)
     rows = `<div class="section"><div class="section-header">Slayer masters</div><div style="margin-top:8px">`;
-    for (const [masterName, master] of Object.entries(SLAYER_TASKS)) {
-      const levelOk = getLevel('Slayer') >= (master.slayerReq || 1);
-      const availTasks = master.tasks.filter(t => t.cards.some(c => isOwned(c))).length;
-      const totalTasks = master.tasks.length;
-      const reqStr = master.slayerReq > 1 ? `Sl ${master.slayerReq}` : master.combatReq > 3 ? `Cb ${master.combatReq}` : '';
-      const indCls = !levelOk ? 'locked' : availTasks > 0 ? 'available' : 'no-card';
-      const nameCls = indCls;
-      const _smCardName = SLAYER_KEY_TO_CARD[masterName] || masterName;
-      const _smImgUrl = (cardDetails[_smCardName] || {}).imageUrl || '';
-      const _smImg = _smImgUrl
-        ? `<img src="${_smImgUrl}" style="width:18px;height:18px;object-fit:contain;image-rendering:pixelated;flex-shrink:0" onerror="this.style.display='none'">`
+    for (const m of methods) {
+      const indCls = m.status === 'available' ? 'available' : m.status === 'no-card' ? 'no-card' : 'locked';
+      const imgUrl = (cardDetails[m.masterCardName] || {}).imageUrl || '';
+      const img = imgUrl
+        ? `<img src="${imgUrl}" style="width:18px;height:18px;object-fit:contain;image-rendering:pixelated;flex-shrink:0" onerror="this.style.display='none'">`
         : '<span style="width:18px;flex-shrink:0"></span>';
-      rows += `<div class="method-row" style="cursor:pointer" onclick="showSlayerMasterDetail('${masterName.replace(/'/g,"\\'")}')">
+      const safeCard = m.masterCardName.replace(/'/g, "\\'");
+      rows += `<div class="method-row" style="cursor:pointer" onclick="showCard('${safeCard}','monster')">
         <div class="method-indicator ${indCls}"></div>
-        ${_smImg}
-        <span class="method-name ${nameCls}">${masterName}</span>
-        <span class="method-level">${reqStr}</span>
-        <span class="method-note">${availTasks}/${totalTasks} tasks →</span>
+        ${img}
+        <span class="method-name ${indCls}">${m.name}</span>
+        <span class="method-level">${m.reqStr}</span>
+        <span class="method-note">${m.availTasks}/${m.totalTasks} tasks →</span>
       </div>`;
     }
     rows += `</div></div>`;
@@ -5811,7 +5892,7 @@ function showSkillDetail(skillName, push = true) {
     <h1>${skillIcon(skillName, 18)} ${skillName}
       <span style="font-size:13px;color:#888;font-weight:normal;margin-left:8px">Level ${myLevel}</span>
     </h1>
-    <div class="subtitle">${avail} training method${avail!==1?'s':''} available</div>
+    <div class="subtitle">${skillName === 'Slayer' ? `${avail} slayer master${avail!==1?'s':''} available` : `${avail} training method${avail!==1?'s':''} available`}</div>
     ${intro}
     ${rows}
   `;
@@ -5859,10 +5940,16 @@ function showSlayerMasterDetail(masterName) {
   rows += `</div></div>`;
 
   const reqStr = master.slayerReq > 1 ? `Slayer ${master.slayerReq}` : master.combatReq > 3 ? `Combat ${master.combatReq}` : 'No req';
+  const _masterCardsD = Object.entries(SLAYER_MASTER_MAP).filter(([,k]) => k === masterName).map(([c]) => c);
+  const _masterCardNameD = _masterCardsD.find(c => isOwned(c)) || _masterCardsD[0] || masterName;
+  const _masterImgUrlD = (cardDetails[_masterCardNameD] || {}).imageUrl || '';
+  const _masterImgHtmlD = _masterImgUrlD
+    ? `<img src="${_masterImgUrlD}" style="float:right;max-width:52px;max-height:52px;image-rendering:pixelated;margin-left:8px" onerror="this.style.display='none'">`
+    : '';
   pane.innerHTML = `
     <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px">
       <button onclick="showSkillDetail('Slayer')" style="background:#2a2a2a;border:1px solid #444;color:#aaa;padding:4px 10px;cursor:pointer;border-radius:3px;font-size:12px">← Slayer</button>
-      <h1 style="margin:0;font-size:16px">${masterName}</h1>
+      <h1 style="margin:0;font-size:16px">${_masterImgHtmlD}${masterName}</h1>
     </div>
     <div class="subtitle">${availCount}/${tasks.length} tasks available · ${reqStr}</div>
     <p style="color:#666;font-size:11px;margin-bottom:12px">% = chance of being assigned. Green = you own the relevant monster card.</p>
