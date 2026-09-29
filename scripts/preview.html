@@ -5068,6 +5068,10 @@ const SLAYER_MASTER_MAP = {
   'Steve':           'Nieve',    // replaces Nieve after Monkey Madness II
   'Duradel':         'Duradel',
 };
+// Reverse map: SLAYER_TASKS key → canonical card name for image/card lookups
+const SLAYER_KEY_TO_CARD = Object.fromEntries(
+  Object.entries(SLAYER_MASTER_MAP).map(([card, key]) => [key, card])
+);
 
 // Lazy reverse index: card name → [quest names that require it via bm_quest_cards.json]
 let _questCardIndex = null;
@@ -5720,7 +5724,8 @@ function showSkillDetail(skillName, push = true) {
       const reqStr = master.slayerReq > 1 ? `Sl ${master.slayerReq}` : master.combatReq > 3 ? `Cb ${master.combatReq}` : '';
       const indCls = !levelOk ? 'locked' : availTasks > 0 ? 'available' : 'no-card';
       const nameCls = indCls;
-      const _smImgUrl = (cardDetails[masterName] || {}).imageUrl || '';
+      const _smCardName = SLAYER_KEY_TO_CARD[masterName] || masterName;
+      const _smImgUrl = (cardDetails[_smCardName] || {}).imageUrl || '';
       const _smImg = _smImgUrl
         ? `<img src="${_smImgUrl}" style="width:18px;height:18px;object-fit:contain;image-rendering:pixelated;flex-shrink:0" onerror="this.style.display='none'">`
         : '<span style="width:18px;flex-shrink:0"></span>';
