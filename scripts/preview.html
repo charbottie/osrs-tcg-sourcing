@@ -1512,7 +1512,11 @@ function renderList(cards, sortBy = 'name') {
       } else {
         catTag = `<span class="card-type">${card.type}</span>`;
       }
-      el.innerHTML = `<span class="card-name">${card.name}</span>${catTag}`;
+      const imgUrl = (cardDetails[card.name] || {}).imageUrl || '';
+      const imgHtml = imgUrl
+        ? `<img src="${imgUrl}" style="width:20px;height:20px;object-fit:contain;image-rendering:pixelated;flex-shrink:0;margin-right:5px" onerror="this.style.display='none'">`
+        : '<span style="width:20px;flex-shrink:0;margin-right:5px"></span>';
+      el.innerHTML = `${imgHtml}<span class="card-name">${card.name}</span>${catTag}`;
     }
     el.onclick = () => showCard(card.name, card.type);
     list.appendChild(el);
@@ -2126,8 +2130,9 @@ function saveGroupEditor(gi) {
   if (oldGroup) wishlistGroups[gi] = {name, cards: [...cards]};
   else wishlistGroups.push({name, cards: [...cards]});
 
-  // Auto-populate individual wishlist with group name as note
+  // Auto-populate individual wishlist with group name as note (unowned cards only)
   for (const card of cards) {
+    if (isOwned(card)) continue;  // already have it — show in group but don't clutter wishlist
     if (wishlist.has(card)) {
       const entry = wishlist.get(card);
       if (!entry.note.includes(name)) entry.note = entry.note ? entry.note + ', ' + name : name;
@@ -2160,18 +2165,16 @@ function wishlistQuest(questName) {
   if (wishlistedQuests.has(questName)) return 0;
   wishlistedQuests.add(questName);
 
-  // Also add each BM quest card to the individual wishlist with the quest name as the note
+  // Add unowned BM quest cards to the individual wishlist with the quest name as the note
   const questCards = (bmQuestCards[questName]?.sections || [])
     .flatMap(s => s.requirements || [])
     .flatMap(r => r.cards || [])
     .filter((c, i, a) => a.indexOf(c) === i);
   for (const card of questCards) {
+    if (isOwned(card)) continue;  // already have it — no need to wishlist
     if (wishlist.has(card)) {
-      // Append quest name to existing note if not already mentioned
       const entry = wishlist.get(card);
-      if (!entry.note.includes(questName)) {
-        entry.note = entry.note ? entry.note + ', ' + questName : questName;
-      }
+      if (!entry.note.includes(questName)) entry.note = entry.note ? entry.note + ', ' + questName : questName;
     } else {
       wishlist.set(card, {note: questName});
     }
@@ -5777,8 +5780,14 @@ function showSkillDetail(skillName, push = true) {
         ? `<span class="method-note" style="color:#a06800" title="Quest required">🗺 ${m.quests[0]}</span>`
         : '';
 
+      const _mImgName = m.type === 'ranged-setup' ? m.weapon : (m.displayNav || m.name);
+      const _mImgUrl  = (cardDetails[_mImgName] || {}).imageUrl || '';
+      const _mImg = _mImgUrl
+        ? `<img src="${_mImgUrl}" style="width:18px;height:18px;object-fit:contain;image-rendering:pixelated;flex-shrink:0" onerror="this.style.display='none'">`
+        : '<span style="width:18px;flex-shrink:0"></span>';
       rows += `<div class="method-row">
         <div class="method-indicator ${indCls}"></div>
+        ${_mImg}
         ${nameHtml}
         <span class="method-level">${levelStr}</span>
         ${noteStr}${questStr}
@@ -6177,8 +6186,10 @@ function showQuestDetail(questName, push = true) {
             const nav = isCard
               ? `style="cursor:pointer" onclick="pushHistoryEntry();_renderTab('cards');setTimeout(()=>showCard('${card.replace(/'/g,"\\'")}','monster',false),50)"`
               : '';
+            const _npcImg = (cardDetails[card]||{}).imageUrl ? `<img src="${(cardDetails[card]||{}).imageUrl}" style="width:16px;height:16px;object-fit:contain;image-rendering:pixelated;flex-shrink:0" onerror="this.style.display='none'">` : '';
             npcRows.push({ ok, html: `<div class="req-row">
               <span class="req-icon ${ok?'ok':'fail'}">${ok?'✓':'✗'}</span>
+              ${_npcImg}
               <span class="req-label" ${nav}>${label}</span>
               <span class="req-note">${ok ? 'card owned' : (isCard ? 'need card' : 'no TCG card')}</span>
             </div>` });
@@ -6191,16 +6202,18 @@ function showQuestDetail(questName, push = true) {
             const nav = isCard
               ? `style="cursor:pointer" onclick="pushHistoryEntry();_renderTab('cards');setTimeout(()=>showCard('${card.replace(/'/g,"\\'")}','monster',false),50)"`
               : '';
+            const _monImg = (cardDetails[card]||{}).imageUrl ? `<img src="${(cardDetails[card]||{}).imageUrl}" style="width:16px;height:16px;object-fit:contain;image-rendering:pixelated;flex-shrink:0" onerror="this.style.display='none'">` : '';
             if (req.optional) {
-              // Avoidable enemy — show dimmed with an "optional" tag
               monsterRows.push({ ok: true, optional: true, html: `<div class="req-row" style="opacity:0.5">
                 <span class="req-icon" style="color:#666">~</span>
+                ${_monImg}
                 <span class="req-label" ${nav} style="color:#666">${card}</span>
                 <span class="req-note" style="color:#555">${ok ? 'card owned' : (isCard ? 'no card' : 'no TCG card')} · can be avoided</span>
               </div>` });
             } else {
               monsterRows.push({ ok, html: `<div class="req-row">
                 <span class="req-icon ${ok?'ok':'fail'}">${ok?'✓':'✗'}</span>
+                ${_monImg}
                 <span class="req-label" ${nav}>${card}</span>
                 <span class="req-note">${ok ? 'card owned' : (isCard ? 'need card' : 'no TCG card')}</span>
               </div>` });
@@ -6218,8 +6231,10 @@ function showQuestDetail(questName, push = true) {
             : '';
           const displayLabel = (label !== card) ? `${label} <span style="font-size:10px;color:#666">(${card})</span>` : `${card}${altTag}`;
           const noteText = altOk ? `${req.skillAlt.skill} ${req.skillAlt.level} ✓` : ok ? 'owned' : 'need card';
+          const _itemImg = (cardDetails[card]||{}).imageUrl ? `<img src="${(cardDetails[card]||{}).imageUrl}" style="width:16px;height:16px;object-fit:contain;image-rendering:pixelated;flex-shrink:0" onerror="this.style.display='none'">` : '';
           itemRows.push({ ok, html: `<div class="req-row">
             <span class="req-icon ${ok?'ok':'fail'}">${ok?'✓':'✗'}</span>
+            ${_itemImg}
             <span class="req-label" ${nav}>${displayLabel}</span>
             <span class="req-note">${noteText}</span>
           </div>` });
@@ -7102,6 +7117,10 @@ function renderEquipSlotDetail(slot) {
         ? `<button class="equip-set-btn" onclick="event.stopPropagation();setEquipped('${slot}','')">Clear</button>`
         : '';
 
+      const _eImgUrl = (cardDetails[item.name] || {}).imageUrl || '';
+      const _eImg = _eImgUrl
+        ? `<img src="${_eImgUrl}" style="width:20px;height:20px;object-fit:contain;image-rendering:pixelated;flex-shrink:0" onerror="this.style.display='none'">`
+        : '<span style="width:20px;flex-shrink:0"></span>';
       html += `<div class="equip-item-row${rowCls}"
         data-slot="${slot}" data-item="${safeItem}"
         title="${rowTitle}"
@@ -7109,6 +7128,7 @@ function renderEquipSlotDetail(slot) {
         onmouseleave="hideEquipTooltip()"
         onclick="${rowOnclick}">
         <div class="equip-dot ${dotCls}"></div>
+        ${_eImg}
         <div class="equip-item-name ${nameCls}"${styleExtra}>${item.name}${tag2h}</div>
         ${combatBadge}
         <div class="equip-item-value">${valStr}</div>
