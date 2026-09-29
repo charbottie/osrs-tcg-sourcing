@@ -567,6 +567,10 @@
   .wl-item.selected { background: #1a1600; border-color: #554a00; }
   .wl-remove { color: #333; cursor: pointer; font-size: 13px; padding: 0 2px; flex-shrink:0; }
   .wl-remove:hover { color: #c84a00; }
+  .wl-tile-remove:hover { color: #c84a00 !important; }
+  .wl-tile-img:hover { opacity: 0.8; }
+  .wl-tile { transition: border-color 0.1s; }
+  .wl-tile:hover { border-color: #444 !important; }
   .wish-star { cursor: pointer; font-size: 14px; user-select: none; }
   .wish-star.active { color: #e8c97a; }
   .wish-star:not(.active) { color: #444; }
@@ -2034,23 +2038,34 @@ function renderWishlist() {
     if (!items.length) continue;
     const got = items.filter(n => isOwned(n)).length;
     html += `<div class="section"><div class="section-header">${label} <span style="font-size:10px;font-weight:400;color:#555;margin-left:6px">${got}/${items.length} obtained</span></div>
-      <div style="margin-top:6px">`;
+      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(110px,1fr));gap:8px;margin-top:10px">`;
     for (const name of items) {
       const own  = isOwned(name);
       const meta = wishlist.get(name) || {note:''};
       const safe = name.replace(/&/g,'&amp;').replace(/"/g,'&quot;');
       const type = monsterDrops[name] ? 'monster' : 'item';
+      const imgUrl = (cardDetails[name] || {}).imageUrl || '';
       const hasNote = meta.note && meta.note.trim();
-      const noteTitle = hasNote ? meta.note.replace(/"/g,'&quot;') : 'Add a note';
-      const noteBtn = `<button title="${noteTitle}" data-card="${safe}" onclick="openNotePopover(this,this.dataset.card)"
-        style="background:none;border:1px solid ${hasNote?'#3a3a1a':'#1e1e1e'};color:${hasNote?'#9a9a3a':'#333'};padding:1px 6px;border-radius:3px;font-size:10px;cursor:pointer;flex-shrink:0;line-height:1.4">✎</button>`;
-      html += `<div style="display:flex;align-items:center;gap:8px;padding:5px 4px;border-bottom:1px solid #1a1a1a">
-        <span style="font-size:11px;color:${own?'#00c853':'#555'};flex-shrink:0;width:12px">${own?'✓':'○'}</span>
-        <span style="font-size:12px;color:${own?'#666':'#ccc'};${own?'text-decoration:line-through;':''}cursor:pointer"
-          data-card="${safe}" data-type="${type}" onclick="showCard(this.dataset.card,this.dataset.type)">${name}</span>
-        <span style="flex:1"></span>
-        ${noteBtn}
-        <span class="wl-remove" data-card="${safe}" onclick="removeFromWishlist(this.dataset.card)" style="flex-shrink:0">×</span>
+      const nameTitle = hasNote ? meta.note.replace(/"/g,'&quot;') : name.replace(/"/g,'&quot;');
+      html += `<div class="wl-tile" style="border:1px solid ${own?'#1e3a1e':'#222'};border-radius:4px;overflow:hidden;background:#0f0f0f">
+        <div style="position:relative;cursor:pointer;background:#080808;aspect-ratio:1;overflow:hidden"
+          data-card="${safe}" data-type="${type}" onclick="showCard(this.dataset.card,this.dataset.type)">
+          ${imgUrl
+            ? `<img src="${imgUrl}" style="width:100%;height:100%;object-fit:contain;image-rendering:pixelated;display:block;${own?'opacity:0.5':''}" onerror="this.style.opacity=0.04">`
+            : `<div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;color:#1a1a1a;font-size:22px">?</div>`}
+          ${own ? `<div style="position:absolute;top:3px;right:3px;background:#00c853;color:#000;border-radius:2px;font-size:8px;padding:1px 4px;font-weight:700;line-height:1.5">✓</div>` : ''}
+        </div>
+        <div style="padding:4px 5px 5px;background:#141414">
+          <div title="${nameTitle}" data-card="${safe}" data-type="${type}"
+            onclick="showCard(this.dataset.card,this.dataset.type)"
+            style="font-size:10px;color:${own?'#555':'#ccc'};${own?'text-decoration:line-through;':''}cursor:pointer;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-bottom:4px">${name}</div>
+          <div style="display:flex;justify-content:space-between;align-items:center">
+            <button data-card="${safe}" onclick="openNotePopover(this,this.dataset.card)" title="Edit note"
+              style="background:none;border:1px solid ${hasNote?'#3a3a1a':'#1e1e1e'};color:${hasNote?'#9a9a3a':'#2a2a2a'};padding:1px 5px;border-radius:2px;font-size:9px;cursor:pointer;line-height:1.5">✎</button>
+            <span class="wl-tile-remove" data-card="${safe}" onclick="removeFromWishlist(this.dataset.card)"
+              style="color:#2a2a2a;cursor:pointer;font-size:14px;line-height:1;padding:0 2px" title="Remove">×</span>
+          </div>
+        </div>
       </div>`;
     }
     html += `</div></div>`;
