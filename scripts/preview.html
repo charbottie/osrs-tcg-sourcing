@@ -3830,15 +3830,15 @@ function renderItem(name, container) {
         <div class="stat-label">Gathering</div>
         <div class="stat-value" style="color:${gColor};font-size:13px">${gathering.skill} ${gathering.level}</div>
       </div>`;
-    })() : (production ? (() => {
-      const canP = getLevel(production.skill) >= production.level;
+    })() : (productionValid ? (() => {
+      const canP = !production.skill || getLevel(production.skill) >= production.level;
       const implP = getImplicitTools(production.skill, production.ingredients, production.tools, production.facilities);
       const allOwned = (production.ingredients || []).every(i => !itemSources[i.item] || isOwned(i.item))
                     && implP.every(t => isOwned(t));
       const pColor = (canP && allOwned) ? '#6a8aee' : '#c84a00';
       return `<div class="stat-block">
         <div class="stat-label">Craftable</div>
-        <div class="stat-value" style="color:${pColor};font-size:13px">${production.skill} ${production.level}</div>
+        <div class="stat-value" style="color:${pColor};font-size:13px">${production.skill || 'Assembly'} ${production.skill ? production.level : ''}</div>
       </div>`;
     })() : '')}
     ${spawns.length ? `<div class="stat-block">
