@@ -37,9 +37,9 @@
     "Equipment"
   ],
   "Strength potion": [
-    "F2P",
     "Herblore",
-    "Potion"
+    "Potion",
+    "F2P"
   ],
   "Weapon poison": [],
   "Potion": [
@@ -47,26 +47,26 @@
   ],
   "Poison chalice": [],
   "Eye of newt": [
-    "F2P",
-    "Herblore"
+    "Herblore",
+    "F2P"
   ],
   "Red spiders' eggs": [
-    "F2P",
-    "Herblore"
+    "Herblore",
+    "F2P"
   ],
   "Limpwurt root": [
-    "F2P",
-    "Herblore"
+    "Herblore",
+    "F2P"
   ],
   "Vial of water": [
-    "F2P",
     "Herblore",
-    "Tool"
+    "Tool",
+    "F2P"
   ],
   "Vial": [
-    "F2P",
     "Herblore",
-    "Tool"
+    "Tool",
+    "F2P"
   ],
   "Snape grass": [
     "Herblore"
@@ -87,56 +87,56 @@
   ],
   "Wine of zamorak": [
     "Cooking",
-    "F2P",
     "Food",
-    "Herblore"
+    "Herblore",
+    "F2P"
   ],
   "Jangerberries": [
     "Herblore"
   ],
   "Guam leaf": [
-    "Farming",
-    "Herblore"
+    "Herblore",
+    "Farming"
   ],
   "Marrentill": [
-    "Farming",
-    "Herblore"
+    "Herblore",
+    "Farming"
   ],
   "Tarromin": [
-    "Farming",
-    "Herblore"
+    "Herblore",
+    "Farming"
   ],
   "Harralander": [
-    "Farming",
-    "Herblore"
+    "Herblore",
+    "Farming"
   ],
   "Ranarr weed": [
-    "Farming",
-    "Herblore"
+    "Herblore",
+    "Farming"
   ],
   "Irit leaf": [
-    "Farming",
-    "Herblore"
+    "Herblore",
+    "Farming"
   ],
   "Avantoe": [
-    "Farming",
-    "Herblore"
+    "Herblore",
+    "Farming"
   ],
   "Kwuarm": [
-    "Farming",
-    "Herblore"
+    "Herblore",
+    "Farming"
   ],
   "Cadantine": [
-    "Farming",
-    "Herblore"
+    "Herblore",
+    "Farming"
   ],
   "Dwarf weed": [
-    "Farming",
-    "Herblore"
+    "Herblore",
+    "Farming"
   ],
   "Torstol": [
-    "Farming",
-    "Herblore"
+    "Herblore",
+    "Farming"
   ],
   "Goblin mail": [
     "Equipment",
@@ -144,93 +144,89 @@
   ],
   "Mithril seeds": [],
   "Lobster pot": [
-    "F2P",
     "Fishing",
-    "Tool"
+    "Tool",
+    "F2P"
   ],
   "Small fishing net": [
-    "F2P",
     "Fishing",
-    "Tool"
+    "Tool",
+    "F2P"
   ],
   "Big fishing net": [
     "Fishing",
     "Tool"
   ],
   "Fishing rod": [
-    "F2P",
     "Fishing",
-    "Tool"
+    "Tool",
+    "F2P"
   ],
   "Fly fishing rod": [
-    "F2P",
     "Fishing",
-    "Tool"
+    "Tool",
+    "F2P"
   ],
   "Harpoon": [
-    "F2P",
     "Fishing",
-    "Tool"
+    "Tool",
+    "F2P"
   ],
   "Fishing bait": [
-    "Agility",
-    "Construction",
-    "F2P",
     "Fishing",
-    "Sailing",
-    "Strength"
+    "F2P"
   ],
   "Feather": [
     "Agility",
-    "F2P",
     "Fishing",
     "Fletching",
-    "Strength"
+    "Strength",
+    "F2P"
   ],
   "Shrimps": [
     "Cooking",
-    "F2P",
-    "Food"
+    "Food",
+    "F2P"
   ],
   "Raw shrimps": [
-    "F2P",
-    "Fishing"
+    "Fishing",
+    "F2P"
   ],
   "Anchovies": [
     "Cooking",
-    "F2P",
-    "Food"
+    "Food",
+    "F2P"
   ],
   "Raw anchovies": [
-    "F2P",
-    "Fishing"
+    "Fishing",
+    "F2P"
   ],
   "Sardine": [
     "Cooking",
-    "F2P",
-    "Food"
+    "Food",
+    "F2P"
   ],
   "Raw sardine": [
-    "F2P",
-    "Fishing"
+    "Fishing",
+    "F2P"
   ],
   "Salmon": [
     "Cooking",
-    "F2P",
-    "Food"
+    "Food",
+    "F2P"
   ],
   "Raw salmon": [
-    "F2P",
-    "Fishing"
+    "Fishing",
+    "F2P"
   ],
   "Trout": [
     "Cooking",
-    "F2P",
-    "Food"
+    "Food",
+    "F2P"
   ],
   "Raw trout": [
-    "F2P",
-    "Fishing"
+    "Fishing",
+    "F2P"
   ],
   "Cod": [
     "Cooking",
@@ -240,22 +236,22 @@
     "Fishing"
   ],
   "Raw herring": [
-    "F2P",
-    "Fishing"
+    "Fishing",
+    "F2P"
   ],
   "Herring": [
     "Cooking",
-    "F2P",
-    "Food"
+    "Food",
+    "F2P"
   ],
   "Raw pike": [
-    "F2P",
-    "Fishing"
+    "Fishing",
+    "F2P"
   ],
   "Pike": [
     "Cooking",
-    "F2P",
-    "Food"
+    "Food",
+    "F2P"
   ],
   "Raw mackerel": [
     "Fishing"
@@ -265,13 +261,13 @@
     "Food"
   ],
   "Raw tuna": [
-    "F2P",
-    "Fishing"
+    "Fishing",
+    "F2P"
   ],
   "Tuna": [
     "Cooking",
-    "F2P",
-    "Food"
+    "Food",
+    "F2P"
   ],
   "Raw bass": [
     "Fishing"
@@ -281,22 +277,22 @@
     "Food"
   ],
   "Raw swordfish": [
-    "F2P",
-    "Fishing"
+    "Fishing",
+    "F2P"
   ],
   "Swordfish": [
     "Cooking",
-    "F2P",
-    "Food"
+    "Food",
+    "F2P"
   ],
   "Raw lobster": [
-    "F2P",
-    "Fishing"
+    "Fishing",
+    "F2P"
   ],
   "Lobster": [
     "Cooking",
-    "F2P",
-    "Food"
+    "Food",
+    "F2P"
   ],
   "Raw shark": [
     "Fishing"
@@ -333,88 +329,78 @@
     "Fletching"
   ],
   "Clay": [
-    "F2P",
-    "Magic",
-    "Mining"
+    "Crafting",
+    "Mining",
+    "F2P"
   ],
   "Copper ore": [
-    "F2P",
-    "Magic",
+    "Smithing",
     "Mining",
-    "Smithing"
+    "F2P"
   ],
   "Tin ore": [
-    "F2P",
-    "Magic",
+    "Smithing",
     "Mining",
-    "Smithing"
+    "F2P"
   ],
   "Iron ore": [
-    "F2P",
-    "Magic",
+    "Smithing",
     "Mining",
-    "Smithing"
+    "F2P"
   ],
   "Silver ore": [
-    "F2P",
-    "Magic",
+    "Smithing",
     "Mining",
-    "Smithing"
+    "F2P"
   ],
   "Gold ore": [
-    "F2P",
-    "Magic",
+    "Smithing",
     "Mining",
-    "Smithing"
+    "F2P"
   ],
   "Mithril ore": [
-    "F2P",
-    "Magic",
+    "Smithing",
     "Mining",
-    "Smithing"
+    "F2P"
   ],
   "Adamantite ore": [
-    "F2P",
-    "Magic",
+    "Smithing",
     "Mining",
-    "Smithing"
+    "F2P"
   ],
   "Runite ore": [
-    "F2P",
-    "Magic",
+    "Smithing",
     "Mining",
-    "Smithing"
+    "F2P"
   ],
   "Coal": [
-    "Construction",
-    "F2P",
-    "Magic",
+    "Smithing",
     "Mining",
-    "Smithing"
+    "F2P"
   ],
   "Strange fruit": [],
   "Bones": [
+    "Prayer",
     "Construction",
     "Crafting",
-    "F2P",
-    "Prayer"
+    "F2P"
   ],
   "Bat bones": [
-    "Crafting",
-    "Prayer"
+    "Prayer",
+    "Crafting"
   ],
   "Big bones": [
+    "Prayer",
     "Crafting",
-    "F2P",
-    "Prayer"
+    "F2P"
   ],
   "Babydragon bones": [
-    "Crafting",
-    "Prayer"
+    "Prayer",
+    "Crafting"
   ],
   "Dragon bones": [
-    "Crafting",
-    "Prayer"
+    "Prayer",
+    "Crafting"
   ],
   "Druid's robe": [
     "Equipment"
@@ -446,70 +432,70 @@
     "F2P"
   ],
   "Fire rune": [
-    "F2P",
     "Magic",
     "Rune",
-    "Runecraft"
+    "Runecraft",
+    "F2P"
   ],
   "Water rune": [
-    "F2P",
     "Magic",
     "Rune",
-    "Runecraft"
+    "Runecraft",
+    "F2P"
   ],
   "Air rune": [
-    "F2P",
     "Magic",
     "Rune",
-    "Runecraft"
+    "Runecraft",
+    "F2P"
   ],
   "Earth rune": [
-    "F2P",
     "Magic",
     "Rune",
-    "Runecraft"
+    "Runecraft",
+    "F2P"
   ],
   "Mind rune": [
-    "F2P",
     "Magic",
     "Rune",
-    "Runecraft"
+    "Runecraft",
+    "F2P"
   ],
   "Body rune": [
-    "F2P",
     "Magic",
     "Rune",
-    "Runecraft"
+    "Runecraft",
+    "F2P"
   ],
   "Death rune": [
-    "F2P",
     "Magic",
     "Rune",
-    "Runecraft"
+    "Runecraft",
+    "F2P"
   ],
   "Nature rune": [
-    "F2P",
     "Magic",
     "Rune",
-    "Runecraft"
+    "Runecraft",
+    "F2P"
   ],
   "Chaos rune": [
-    "F2P",
     "Magic",
     "Rune",
-    "Runecraft"
+    "Runecraft",
+    "F2P"
   ],
   "Law rune": [
-    "F2P",
     "Magic",
     "Rune",
-    "Runecraft"
+    "Runecraft",
+    "F2P"
   ],
   "Cosmic rune": [
-    "F2P",
     "Magic",
     "Rune",
-    "Runecraft"
+    "Runecraft",
+    "F2P"
   ],
   "Blood rune": [
     "Magic",
@@ -540,39 +526,39 @@
   "Blue wizard robe": [
     "Crafting",
     "Equipment",
-    "F2P",
-    "Magic"
+    "Magic",
+    "F2P"
   ],
   "Blue wizard hat": [
     "Crafting",
     "Equipment",
-    "F2P",
-    "Magic"
+    "Magic",
+    "F2P"
   ],
   "Black robe": [
     "Crafting",
     "Equipment",
-    "F2P",
-    "Magic"
+    "Magic",
+    "F2P"
   ],
   "Tinderbox": [
-    "Construction",
-    "F2P",
     "Firemaking",
+    "Tool",
+    "Construction",
     "Sailing",
-    "Tool"
+    "F2P"
   ],
   "Ashes": [
     "Cooking",
-    "F2P",
     "Food",
-    "Herblore"
+    "Herblore",
+    "F2P"
   ],
   "Torch": [
     "Construction",
-    "F2P",
     "Firemaking",
-    "Tool"
+    "Tool",
+    "F2P"
   ],
   "Coins": [
     "Construction",
@@ -770,86 +756,76 @@
     "Ranged"
   ],
   "Crossbow": [
-    "F2P",
     "Ranged",
-    "Weapon"
+    "Weapon",
+    "F2P"
   ],
   "Longbow": [
-    "F2P",
-    "Fletching",
     "Ranged",
-    "Weapon"
+    "Fletching",
+    "Weapon",
+    "F2P"
   ],
   "Shortbow": [
-    "F2P",
-    "Fletching",
     "Ranged",
-    "Weapon"
+    "Fletching",
+    "Weapon",
+    "F2P"
   ],
   "Oak shortbow": [
-    "Construction",
-    "F2P",
-    "Fletching",
     "Ranged",
-    "Weapon"
+    "Fletching",
+    "Weapon",
+    "F2P"
   ],
   "Oak longbow": [
-    "Construction",
-    "F2P",
-    "Fletching",
     "Ranged",
-    "Weapon"
+    "Fletching",
+    "Weapon",
+    "F2P"
   ],
   "Willow longbow": [
-    "Construction",
-    "F2P",
-    "Fletching",
     "Ranged",
-    "Weapon"
+    "Fletching",
+    "Weapon",
+    "F2P"
   ],
   "Willow shortbow": [
-    "Construction",
-    "F2P",
-    "Fletching",
     "Ranged",
-    "Weapon"
+    "Fletching",
+    "Weapon",
+    "F2P"
   ],
   "Maple longbow": [
-    "Construction",
-    "F2P",
-    "Fletching",
     "Ranged",
-    "Weapon"
+    "Fletching",
+    "Weapon",
+    "F2P"
   ],
   "Maple shortbow": [
-    "Construction",
-    "F2P",
-    "Fletching",
     "Ranged",
-    "Weapon"
+    "Fletching",
+    "Weapon",
+    "F2P"
   ],
   "Yew longbow": [
-    "Construction",
-    "Fletching",
     "Ranged",
+    "Fletching",
     "Weapon"
   ],
   "Yew shortbow": [
-    "Construction",
-    "Fletching",
     "Ranged",
+    "Fletching",
     "Weapon"
   ],
   "Magic longbow": [
-    "Construction",
-    "Fletching",
     "Ranged",
+    "Fletching",
     "Weapon"
   ],
   "Magic shortbow": [
-    "Construction",
-    "Fletching",
     "Ranged",
+    "Fletching",
     "Weapon"
   ],
   "Iron knife": [
@@ -888,9 +864,9 @@
   ],
   "Bronze bolts": [
     "Ammo",
-    "F2P",
     "Fletching",
-    "Ranged"
+    "Ranged",
+    "F2P"
   ],
   "Opal bolts": [
     "Ammo",
@@ -907,33 +883,33 @@
   ],
   "Bronze arrow": [
     "Ammo",
-    "F2P",
     "Fletching",
-    "Ranged"
+    "Ranged",
+    "F2P"
   ],
   "Iron arrow": [
     "Ammo",
-    "F2P",
     "Fletching",
-    "Ranged"
+    "Ranged",
+    "F2P"
   ],
   "Steel arrow": [
     "Ammo",
-    "F2P",
     "Fletching",
-    "Ranged"
+    "Ranged",
+    "F2P"
   ],
   "Mithril arrow": [
     "Ammo",
-    "F2P",
     "Fletching",
-    "Ranged"
+    "Ranged",
+    "F2P"
   ],
   "Adamant arrow": [
     "Ammo",
-    "F2P",
     "Fletching",
-    "Ranged"
+    "Ranged",
+    "F2P"
   ],
   "Rune arrow": [
     "Ammo",
@@ -942,9 +918,9 @@
   ],
   "Knife": [
     "Fletching",
-    "F2P",
     "Sailing",
-    "Tool"
+    "Tool",
+    "F2P"
   ],
   "Bear fur": [
     "Crafting",
@@ -955,18 +931,12 @@
     "F2P"
   ],
   "Spade": [
-    "F2P",
-    "Tool"
+    "Tool",
+    "F2P"
   ],
   "Rope": [
-    "Construction",
-    "Crafting",
-    "F2P",
-    "Fletching",
-    "Sailing",
-    "Smithing",
     "Tool",
-    "Woodcutting"
+    "F2P"
   ],
   "Flyer": [
     "F2P"
@@ -977,12 +947,12 @@
   "Plank": [
     "Construction",
     "Crafting",
-    "F2P",
-    "Sailing"
+    "Sailing",
+    "F2P"
   ],
   "Christmas cracker": [
-    "F2P",
-    "Holiday"
+    "Holiday",
+    "F2P"
   ],
   "Skull": [
     "Construction",
@@ -1041,8 +1011,8 @@
   "Wizard hat": [
     "Crafting",
     "Equipment",
-    "F2P",
-    "Magic"
+    "Magic",
+    "F2P"
   ],
   "Black cape": [
     "Crafting",
@@ -1079,43 +1049,43 @@
   ],
   "Zamorak monk bottom": [
     "Equipment",
-    "F2P",
-    "Magic"
+    "Magic",
+    "F2P"
   ],
   "Zamorak monk top": [
     "Equipment",
-    "F2P",
-    "Magic"
+    "Magic",
+    "F2P"
   ],
   "Red partyhat": [
     "Equipment",
-    "F2P",
-    "Holiday"
+    "Holiday",
+    "F2P"
   ],
   "Yellow partyhat": [
     "Equipment",
-    "F2P",
-    "Holiday"
+    "Holiday",
+    "F2P"
   ],
   "Blue partyhat": [
     "Equipment",
-    "F2P",
-    "Holiday"
+    "Holiday",
+    "F2P"
   ],
   "Green partyhat": [
     "Equipment",
-    "F2P",
-    "Holiday"
+    "Holiday",
+    "F2P"
   ],
   "Purple partyhat": [
     "Equipment",
-    "F2P",
-    "Holiday"
+    "Holiday",
+    "F2P"
   ],
   "Santa hat": [
     "Equipment",
-    "F2P",
-    "Holiday"
+    "Holiday",
+    "F2P"
   ],
   "Cape of legends": [
     "Construction",
@@ -1123,18 +1093,18 @@
   ],
   "Green halloween mask": [
     "Equipment",
-    "F2P",
-    "Holiday"
+    "Holiday",
+    "F2P"
   ],
   "Blue halloween mask": [
     "Equipment",
-    "F2P",
-    "Holiday"
+    "Holiday",
+    "F2P"
   ],
   "Red halloween mask": [
     "Equipment",
-    "F2P",
-    "Holiday"
+    "Holiday",
+    "F2P"
   ],
   "Leather gloves": [
     "Crafting",
@@ -1149,132 +1119,132 @@
   "Leather vambraces": [
     "Crafting",
     "Equipment",
-    "F2P",
-    "Ranged"
+    "Ranged",
+    "F2P"
   ],
   "Green d'hide vambraces": [
     "Crafting",
     "Equipment",
-    "F2P",
-    "Ranged"
+    "Ranged",
+    "F2P"
   ],
   "Iron platelegs": [
     "Equipment",
-    "F2P",
     "Melee",
-    "Smithing"
+    "Smithing",
+    "F2P"
   ],
   "Steel platelegs": [
     "Equipment",
-    "F2P",
     "Melee",
-    "Smithing"
+    "Smithing",
+    "F2P"
   ],
   "Mithril platelegs": [
     "Equipment",
-    "F2P",
     "Melee",
-    "Smithing"
+    "Smithing",
+    "F2P"
   ],
   "Adamant platelegs": [
     "Equipment",
-    "F2P",
     "Melee",
-    "Smithing"
+    "Smithing",
+    "F2P"
   ],
   "Bronze platelegs": [
     "Equipment",
-    "F2P",
     "Melee",
-    "Smithing"
+    "Smithing",
+    "F2P"
   ],
   "Black platelegs": [
     "Equipment",
-    "F2P",
-    "Melee"
+    "Melee",
+    "F2P"
   ],
   "Rune platelegs": [
     "Equipment",
-    "F2P",
     "Melee",
-    "Smithing"
+    "Smithing",
+    "F2P"
   ],
   "Iron plateskirt": [
     "Equipment",
-    "F2P",
     "Melee",
-    "Smithing"
+    "Smithing",
+    "F2P"
   ],
   "Steel plateskirt": [
     "Equipment",
-    "F2P",
     "Melee",
-    "Smithing"
+    "Smithing",
+    "F2P"
   ],
   "Mithril plateskirt": [
     "Construction",
     "Equipment",
-    "F2P",
     "Melee",
-    "Smithing"
+    "Smithing",
+    "F2P"
   ],
   "Bronze plateskirt": [
     "Equipment",
-    "F2P",
     "Melee",
-    "Smithing"
+    "Smithing",
+    "F2P"
   ],
   "Black plateskirt": [
     "Equipment",
-    "F2P",
-    "Melee"
+    "Melee",
+    "F2P"
   ],
   "Adamant plateskirt": [
     "Construction",
     "Equipment",
-    "F2P",
     "Melee",
-    "Smithing"
+    "Smithing",
+    "F2P"
   ],
   "Rune plateskirt": [
     "Construction",
     "Equipment",
-    "F2P",
     "Melee",
-    "Smithing"
+    "Smithing",
+    "F2P"
   ],
   "Leather chaps": [
     "Crafting",
     "Equipment",
-    "F2P",
-    "Ranged"
+    "Ranged",
+    "F2P"
   ],
   "Studded chaps": [
     "Crafting",
     "Equipment",
-    "F2P",
-    "Ranged"
+    "Ranged",
+    "F2P"
   ],
   "Green d'hide chaps": [
     "Crafting",
     "Equipment",
-    "F2P",
-    "Ranged"
+    "Ranged",
+    "F2P"
   ],
   "Iron chainbody": [
     "Equipment",
-    "F2P",
-    "Smithing"
+    "Smithing",
+    "F2P"
   ],
   "Bronze chainbody": [
     "Equipment",
-    "F2P",
-    "Smithing"
+    "Smithing",
+    "F2P"
   ],
   "Steel chainbody": [
     "Equipment",
-    "F2P",
-    "Smithing"
+    "Smithing",
+    "F2P"
   ],
   "Black chainbody": [
     "Equipment",
@@ -1282,116 +1252,116 @@
   ],
   "Mithril chainbody": [
     "Equipment",
-    "F2P",
-    "Smithing"
+    "Smithing",
+    "F2P"
   ],
   "Adamant chainbody": [
     "Equipment",
-    "F2P",
-    "Smithing"
+    "Smithing",
+    "F2P"
   ],
   "Rune chainbody": [
     "Equipment",
-    "F2P",
-    "Smithing"
+    "Smithing",
+    "F2P"
   ],
   "Iron platebody": [
     "Equipment",
-    "F2P",
     "Melee",
-    "Smithing"
+    "Smithing",
+    "F2P"
   ],
   "Bronze platebody": [
     "Equipment",
-    "F2P",
     "Melee",
-    "Smithing"
+    "Smithing",
+    "F2P"
   ],
   "Steel platebody": [
     "Equipment",
-    "F2P",
     "Melee",
-    "Smithing"
+    "Smithing",
+    "F2P"
   ],
   "Mithril platebody": [
     "Construction",
     "Equipment",
-    "F2P",
     "Melee",
-    "Smithing"
+    "Smithing",
+    "F2P"
   ],
   "Adamant platebody": [
     "Construction",
     "Equipment",
-    "F2P",
     "Melee",
-    "Smithing"
+    "Smithing",
+    "F2P"
   ],
   "Black platebody": [
     "Equipment",
-    "F2P",
-    "Melee"
+    "Melee",
+    "F2P"
   ],
   "Rune platebody": [
     "Construction",
     "Equipment",
-    "F2P",
     "Melee",
-    "Smithing"
+    "Smithing",
+    "F2P"
   ],
   "Leather body": [
     "Crafting",
     "Equipment",
-    "F2P",
-    "Ranged"
+    "Ranged",
+    "F2P"
   ],
   "Hardleather body": [
     "Crafting",
     "Equipment",
-    "F2P",
-    "Ranged"
+    "Ranged",
+    "F2P"
   ],
   "Studded body": [
     "Crafting",
     "Equipment",
-    "F2P",
-    "Ranged"
+    "Ranged",
+    "F2P"
   ],
   "Green d'hide body": [
     "Crafting",
     "Equipment",
-    "F2P",
-    "Ranged"
+    "Ranged",
+    "F2P"
   ],
   "Iron med helm": [
     "Equipment",
-    "F2P",
-    "Smithing"
+    "Smithing",
+    "F2P"
   ],
   "Bronze med helm": [
     "Equipment",
-    "F2P",
-    "Smithing"
+    "Smithing",
+    "F2P"
   ],
   "Steel med helm": [
     "Equipment",
-    "F2P",
-    "Smithing"
+    "Smithing",
+    "F2P"
   ],
   "Mithril med helm": [
     "Equipment",
-    "F2P",
-    "Smithing"
+    "Smithing",
+    "F2P"
   ],
   "Adamant med helm": [
     "Equipment",
-    "F2P",
-    "Smithing"
+    "Smithing",
+    "F2P"
   ],
   "Rune med helm": [
     "Equipment",
-    "F2P",
-    "Smithing"
+    "Smithing",
+    "F2P"
   ],
   "Dragon med helm": [
     "Equipment"
@@ -1402,66 +1372,66 @@
   ],
   "Iron full helm": [
     "Equipment",
-    "F2P",
     "Melee",
-    "Smithing"
+    "Smithing",
+    "F2P"
   ],
   "Bronze full helm": [
     "Equipment",
-    "F2P",
     "Melee",
-    "Smithing"
+    "Smithing",
+    "F2P"
   ],
   "Steel full helm": [
     "Construction",
     "Crafting",
     "Equipment",
-    "F2P",
     "Melee",
     "Prayer",
-    "Smithing"
+    "Smithing",
+    "F2P"
   ],
   "Mithril full helm": [
     "Construction",
     "Equipment",
-    "F2P",
     "Melee",
-    "Smithing"
+    "Smithing",
+    "F2P"
   ],
   "Adamant full helm": [
     "Construction",
     "Crafting",
     "Equipment",
-    "F2P",
     "Melee",
     "Prayer",
-    "Smithing"
+    "Smithing",
+    "F2P"
   ],
   "Rune full helm": [
     "Construction",
     "Crafting",
     "Equipment",
-    "F2P",
     "Melee",
     "Prayer",
-    "Smithing"
+    "Smithing",
+    "F2P"
   ],
   "Black full helm": [
     "Equipment",
-    "F2P",
-    "Melee"
+    "Melee",
+    "F2P"
   ],
   "Leather cowl": [
     "Crafting",
     "Equipment",
-    "F2P",
-    "Ranged"
+    "Ranged",
+    "F2P"
   ],
   "Coif": [
     "Crafting",
     "Equipment",
-    "F2P",
-    "Ranged"
+    "Ranged",
+    "F2P"
   ],
   "Wooden shield": [
     "Equipment",
@@ -1469,18 +1439,18 @@
   ],
   "Bronze sq shield": [
     "Equipment",
-    "F2P",
-    "Smithing"
+    "Smithing",
+    "F2P"
   ],
   "Iron sq shield": [
     "Equipment",
-    "F2P",
-    "Smithing"
+    "Smithing",
+    "F2P"
   ],
   "Steel sq shield": [
     "Equipment",
-    "F2P",
-    "Smithing"
+    "Smithing",
+    "F2P"
   ],
   "Black sq shield": [
     "Equipment",
@@ -1488,113 +1458,113 @@
   ],
   "Mithril sq shield": [
     "Equipment",
-    "F2P",
-    "Smithing"
+    "Smithing",
+    "F2P"
   ],
   "Adamant sq shield": [
     "Equipment",
-    "F2P",
-    "Smithing"
+    "Smithing",
+    "F2P"
   ],
   "Rune sq shield": [
     "Equipment",
-    "F2P",
-    "Smithing"
+    "Smithing",
+    "F2P"
   ],
   "Bronze kiteshield": [
     "Equipment",
-    "F2P",
     "Melee",
-    "Smithing"
+    "Smithing",
+    "F2P"
   ],
   "Iron kiteshield": [
     "Equipment",
-    "F2P",
     "Melee",
-    "Smithing"
+    "Smithing",
+    "F2P"
   ],
   "Steel kiteshield": [
     "Construction",
     "Crafting",
     "Equipment",
-    "F2P",
     "Melee",
     "Prayer",
-    "Smithing"
+    "Smithing",
+    "F2P"
   ],
   "Black kiteshield": [
     "Equipment",
-    "F2P",
-    "Melee"
+    "Melee",
+    "F2P"
   ],
   "Mithril kiteshield": [
     "Equipment",
-    "F2P",
     "Melee",
-    "Smithing"
+    "Smithing",
+    "F2P"
   ],
   "Adamant kiteshield": [
     "Construction",
     "Crafting",
     "Equipment",
-    "F2P",
     "Melee",
     "Prayer",
-    "Smithing"
+    "Smithing",
+    "F2P"
   ],
   "Rune kiteshield": [
     "Construction",
     "Crafting",
     "Equipment",
-    "F2P",
     "Melee",
     "Prayer",
-    "Smithing"
+    "Smithing",
+    "F2P"
   ],
   "Iron dagger": [
-    "F2P",
     "Melee",
     "Smithing",
-    "Weapon"
+    "Weapon",
+    "F2P"
   ],
   "Bronze dagger": [
-    "F2P",
     "Melee",
     "Smithing",
-    "Weapon"
+    "Weapon",
+    "F2P"
   ],
   "Steel dagger": [
-    "F2P",
     "Melee",
     "Smithing",
-    "Weapon"
+    "Weapon",
+    "F2P"
   ],
   "Mithril dagger": [
-    "F2P",
     "Melee",
     "Smithing",
-    "Weapon"
+    "Weapon",
+    "F2P"
   ],
   "Adamant dagger": [
-    "F2P",
     "Melee",
     "Smithing",
-    "Weapon"
+    "Weapon",
+    "F2P"
   ],
   "Rune dagger": [
-    "F2P",
     "Melee",
     "Smithing",
-    "Weapon"
+    "Weapon",
+    "F2P"
   ],
   "Dragon dagger": [
     "Melee",
     "Weapon"
   ],
   "Black dagger": [
-    "F2P",
     "Melee",
-    "Weapon"
+    "Weapon",
+    "F2P"
   ],
   "Bronze spear": [
     "Farming",
@@ -1632,385 +1602,378 @@
     "Weapon"
   ],
   "Bronze pickaxe": [
-    "F2P",
-    "Melee",
     "Mining",
     "Tool",
-    "Weapon"
+    "Melee",
+    "Weapon",
+    "F2P"
   ],
   "Iron pickaxe": [
-    "F2P",
-    "Melee",
     "Mining",
     "Tool",
-    "Weapon"
+    "Melee",
+    "Weapon",
+    "F2P"
   ],
   "Steel pickaxe": [
-    "F2P",
-    "Melee",
     "Mining",
     "Tool",
-    "Weapon"
+    "Melee",
+    "Weapon",
+    "F2P"
   ],
   "Adamant pickaxe": [
-    "F2P",
-    "Melee",
     "Mining",
     "Tool",
-    "Weapon"
+    "Melee",
+    "Weapon",
+    "F2P"
   ],
   "Mithril pickaxe": [
-    "F2P",
-    "Melee",
     "Mining",
     "Tool",
-    "Weapon"
+    "Melee",
+    "Weapon",
+    "F2P"
   ],
   "Rune pickaxe": [
-    "F2P",
-    "Melee",
     "Mining",
     "Tool",
-    "Weapon"
+    "Melee",
+    "Weapon",
+    "F2P"
   ],
   "Bronze sword": [
-    "F2P",
     "Melee",
     "Smithing",
-    "Weapon"
+    "Weapon",
+    "F2P"
   ],
   "Iron sword": [
-    "F2P",
     "Melee",
     "Smithing",
-    "Weapon"
+    "Weapon",
+    "F2P"
   ],
   "Steel sword": [
-    "F2P",
     "Melee",
     "Smithing",
-    "Weapon"
+    "Weapon",
+    "F2P"
   ],
   "Black sword": [
-    "F2P",
     "Melee",
-    "Weapon"
+    "Weapon",
+    "F2P"
   ],
   "Mithril sword": [
-    "F2P",
     "Melee",
     "Smithing",
-    "Weapon"
+    "Weapon",
+    "F2P"
   ],
   "Adamant sword": [
-    "F2P",
     "Melee",
     "Smithing",
-    "Weapon"
+    "Weapon",
+    "F2P"
   ],
   "Rune sword": [
-    "F2P",
     "Melee",
     "Smithing",
-    "Weapon"
+    "Weapon",
+    "F2P"
   ],
   "Bronze longsword": [
-    "F2P",
     "Melee",
     "Smithing",
-    "Weapon"
+    "Weapon",
+    "F2P"
   ],
   "Iron longsword": [
-    "F2P",
     "Melee",
     "Smithing",
-    "Weapon"
+    "Weapon",
+    "F2P"
   ],
   "Steel longsword": [
-    "F2P",
     "Melee",
     "Smithing",
-    "Weapon"
+    "Weapon",
+    "F2P"
   ],
   "Black longsword": [
-    "F2P",
     "Melee",
-    "Weapon"
+    "Weapon",
+    "F2P"
   ],
   "Mithril longsword": [
-    "F2P",
     "Melee",
     "Smithing",
-    "Weapon"
+    "Weapon",
+    "F2P"
   ],
   "Adamant longsword": [
-    "F2P",
     "Melee",
     "Smithing",
-    "Weapon"
+    "Weapon",
+    "F2P"
   ],
   "Rune longsword": [
-    "F2P",
     "Melee",
     "Smithing",
-    "Weapon"
+    "Weapon",
+    "F2P"
   ],
   "Dragon longsword": [
     "Melee",
     "Weapon"
   ],
   "Bronze 2h sword": [
-    "F2P",
     "Melee",
     "Smithing",
-    "Weapon"
+    "Weapon",
+    "F2P"
   ],
   "Iron 2h sword": [
-    "F2P",
     "Melee",
     "Smithing",
-    "Weapon"
+    "Weapon",
+    "F2P"
   ],
   "Steel 2h sword": [
-    "F2P",
     "Melee",
     "Smithing",
-    "Weapon"
+    "Weapon",
+    "F2P"
   ],
   "Black 2h sword": [
-    "F2P",
     "Melee",
-    "Weapon"
+    "Weapon",
+    "F2P"
   ],
   "Mithril 2h sword": [
-    "F2P",
     "Melee",
     "Smithing",
-    "Weapon"
+    "Weapon",
+    "F2P"
   ],
   "Adamant 2h sword": [
-    "F2P",
     "Melee",
     "Smithing",
-    "Weapon"
+    "Weapon",
+    "F2P"
   ],
   "Rune 2h sword": [
-    "F2P",
     "Melee",
     "Smithing",
-    "Weapon"
+    "Weapon",
+    "F2P"
   ],
   "Bronze scimitar": [
-    "F2P",
     "Melee",
     "Smithing",
-    "Weapon"
+    "Weapon",
+    "F2P"
   ],
   "Iron scimitar": [
-    "F2P",
     "Melee",
     "Smithing",
-    "Weapon"
+    "Weapon",
+    "F2P"
   ],
   "Steel scimitar": [
-    "F2P",
     "Melee",
     "Smithing",
-    "Weapon"
+    "Weapon",
+    "F2P"
   ],
   "Black scimitar": [
-    "F2P",
     "Melee",
-    "Weapon"
+    "Weapon",
+    "F2P"
   ],
   "Mithril scimitar": [
-    "F2P",
     "Melee",
     "Smithing",
-    "Weapon"
+    "Weapon",
+    "F2P"
   ],
   "Adamant scimitar": [
-    "F2P",
     "Melee",
     "Smithing",
-    "Weapon"
+    "Weapon",
+    "F2P"
   ],
   "Rune scimitar": [
-    "F2P",
     "Melee",
     "Smithing",
-    "Weapon"
+    "Weapon",
+    "F2P"
   ],
   "Iron warhammer": [
-    "F2P",
     "Melee",
     "Smithing",
-    "Weapon"
+    "Weapon",
+    "F2P"
   ],
   "Bronze warhammer": [
-    "F2P",
     "Melee",
     "Smithing",
-    "Weapon"
+    "Weapon",
+    "F2P"
   ],
   "Steel warhammer": [
-    "F2P",
     "Melee",
     "Smithing",
-    "Weapon"
+    "Weapon",
+    "F2P"
   ],
   "Black warhammer": [
-    "F2P",
     "Melee",
-    "Weapon"
+    "Weapon",
+    "F2P"
   ],
   "Mithril warhammer": [
-    "F2P",
     "Melee",
     "Smithing",
-    "Weapon"
+    "Weapon",
+    "F2P"
   ],
   "Adamant warhammer": [
-    "F2P",
     "Melee",
     "Smithing",
-    "Weapon"
+    "Weapon",
+    "F2P"
   ],
   "Rune warhammer": [
-    "F2P",
     "Melee",
     "Smithing",
-    "Weapon"
+    "Weapon",
+    "F2P"
   ],
   "Iron axe": [
-    "F2P",
-    "Melee",
-    "Smithing",
+    "Woodcutting",
     "Tool",
+    "Melee",
     "Weapon",
-    "Woodcutting"
+    "F2P"
   ],
   "Bronze axe": [
-    "F2P",
-    "Melee",
-    "Smithing",
+    "Woodcutting",
     "Tool",
+    "Melee",
     "Weapon",
-    "Woodcutting"
+    "F2P"
   ],
   "Steel axe": [
-    "F2P",
-    "Melee",
-    "Smithing",
+    "Woodcutting",
     "Tool",
+    "Melee",
     "Weapon",
-    "Woodcutting"
+    "F2P"
   ],
   "Mithril axe": [
-    "F2P",
-    "Melee",
-    "Smithing",
+    "Woodcutting",
     "Tool",
+    "Melee",
     "Weapon",
-    "Woodcutting"
+    "F2P"
   ],
   "Adamant axe": [
-    "F2P",
-    "Melee",
-    "Smithing",
     "Tool",
-    "Weapon"
+    "Melee",
+    "Weapon",
+    "F2P"
   ],
   "Rune axe": [
-    "F2P",
-    "Melee",
-    "Smithing",
+    "Woodcutting",
     "Tool",
+    "Melee",
     "Weapon",
-    "Woodcutting"
+    "F2P"
   ],
   "Black axe": [
-    "F2P",
-    "Melee",
-    "Smithing",
+    "Woodcutting",
     "Tool",
+    "Melee",
     "Weapon",
-    "Woodcutting"
+    "F2P"
   ],
   "Iron battleaxe": [
-    "F2P",
     "Melee",
     "Smithing",
-    "Weapon"
+    "Weapon",
+    "F2P"
   ],
   "Steel battleaxe": [
-    "F2P",
     "Melee",
     "Smithing",
-    "Weapon"
+    "Weapon",
+    "F2P"
   ],
   "Black battleaxe": [
-    "F2P",
     "Melee",
-    "Weapon"
+    "Weapon",
+    "F2P"
   ],
   "Mithril battleaxe": [
-    "F2P",
     "Melee",
     "Smithing",
-    "Weapon"
+    "Weapon",
+    "F2P"
   ],
   "Adamant battleaxe": [
-    "F2P",
     "Melee",
     "Smithing",
-    "Weapon"
+    "Weapon",
+    "F2P"
   ],
   "Rune battleaxe": [
-    "F2P",
     "Melee",
     "Smithing",
-    "Weapon"
+    "Weapon",
+    "F2P"
   ],
   "Bronze battleaxe": [
-    "F2P",
     "Melee",
     "Smithing",
-    "Weapon"
+    "Weapon",
+    "F2P"
   ],
   "Dragon battleaxe": [
     "Melee",
     "Weapon"
   ],
   "Staff": [
-    "F2P",
     "Melee",
-    "Weapon"
+    "Weapon",
+    "F2P"
   ],
   "Staff of air": [
-    "F2P",
     "Magic",
-    "Weapon"
+    "Weapon",
+    "F2P"
   ],
   "Staff of water": [
-    "F2P",
     "Magic",
-    "Weapon"
+    "Weapon",
+    "F2P"
   ],
   "Staff of earth": [
-    "F2P",
     "Magic",
-    "Weapon"
+    "Weapon",
+    "F2P"
   ],
   "Staff of fire": [
-    "F2P",
     "Magic",
-    "Weapon"
+    "Weapon",
+    "F2P"
   ],
   "Magic staff": [
-    "F2P",
     "Magic",
-    "Weapon"
+    "Weapon",
+    "F2P"
   ],
   "Battlestaff": [
     "Crafting",
@@ -2055,80 +2018,80 @@
     "Weapon"
   ],
   "Iron mace": [
-    "F2P",
     "Melee",
     "Smithing",
-    "Weapon"
+    "Weapon",
+    "F2P"
   ],
   "Bronze mace": [
-    "F2P",
     "Melee",
     "Smithing",
-    "Weapon"
+    "Weapon",
+    "F2P"
   ],
   "Steel mace": [
-    "F2P",
     "Melee",
     "Smithing",
-    "Weapon"
+    "Weapon",
+    "F2P"
   ],
   "Black mace": [
-    "F2P",
     "Melee",
     "Smithing",
-    "Weapon"
+    "Weapon",
+    "F2P"
   ],
   "Mithril mace": [
-    "F2P",
     "Melee",
     "Smithing",
-    "Weapon"
+    "Weapon",
+    "F2P"
   ],
   "Adamant mace": [
-    "F2P",
     "Melee",
     "Smithing",
-    "Weapon"
+    "Weapon",
+    "F2P"
   ],
   "Rune mace": [
-    "F2P",
     "Melee",
     "Smithing",
-    "Weapon"
+    "Weapon",
+    "F2P"
   ],
   "Dragon mace": [
     "Melee",
     "Weapon"
   ],
   "Rune essence": [
-    "F2P",
     "Mining",
     "Rune",
-    "Runecraft"
+    "Runecraft",
+    "F2P"
   ],
   "Air talisman": [
-    "F2P",
-    "Runecraft"
+    "Runecraft",
+    "F2P"
   ],
   "Earth talisman": [
-    "F2P",
-    "Runecraft"
+    "Runecraft",
+    "F2P"
   ],
   "Fire talisman": [
-    "F2P",
-    "Runecraft"
+    "Runecraft",
+    "F2P"
   ],
   "Water talisman": [
-    "F2P",
-    "Runecraft"
+    "Runecraft",
+    "F2P"
   ],
   "Body talisman": [
-    "F2P",
-    "Runecraft"
+    "Runecraft",
+    "F2P"
   ],
   "Mind talisman": [
-    "F2P",
-    "Runecraft"
+    "Runecraft",
+    "F2P"
   ],
   "Blood talisman": [
     "Runecraft"
@@ -2154,72 +2117,52 @@
   ],
   "Amulet of accuracy": [
     "Equipment",
-    "F2P",
-    "Ranged"
+    "Ranged",
+    "F2P"
   ],
   "Logs": [
-    "Construction",
-    "Crafting",
-    "F2P",
     "Firemaking",
     "Fletching",
-    "Magic",
-    "Prayer",
+    "Construction",
+    "Woodcutting",
     "Sailing",
-    "Smithing",
     "Weapon",
-    "Woodcutting"
+    "F2P"
   ],
   "Magic logs": [
-    "Construction",
-    "Crafting",
     "Firemaking",
     "Fletching",
-    "Prayer",
-    "Smithing",
+    "Construction",
     "Woodcutting"
   ],
   "Yew logs": [
-    "Construction",
-    "Crafting",
-    "F2P",
     "Firemaking",
     "Fletching",
-    "Prayer",
-    "Smithing",
-    "Woodcutting"
+    "Construction",
+    "Woodcutting",
+    "F2P"
   ],
   "Maple logs": [
-    "Construction",
-    "Crafting",
-    "F2P",
     "Firemaking",
     "Fletching",
-    "Prayer",
-    "Smithing",
-    "Woodcutting"
+    "Construction",
+    "Woodcutting",
+    "F2P"
   ],
   "Willow logs": [
-    "Construction",
-    "Crafting",
-    "F2P",
     "Firemaking",
     "Fletching",
-    "Prayer",
-    "Smithing",
-    "Woodcutting"
+    "Construction",
+    "Woodcutting",
+    "F2P"
   ],
   "Oak logs": [
-    "Construction",
-    "Crafting",
-    "F2P",
     "Firemaking",
     "Fletching",
-    "Magic",
-    "Prayer",
+    "Construction",
+    "Woodcutting",
     "Sailing",
-    "Smithing",
-    "Woodcutting"
+    "F2P"
   ],
   "Lockpick": [
     "Thieving",
@@ -2228,14 +2171,14 @@
   "Steel nails": [
     "Construction",
     "Crafting",
-    "F2P",
     "Sailing",
     "Smithing",
-    "Woodcutting"
+    "Woodcutting",
+    "F2P"
   ],
   "Garlic": [
-    "F2P",
-    "Herblore"
+    "Herblore",
+    "F2P"
   ],
   "Cat training medal": [
     "Equipment"
@@ -2245,43 +2188,43 @@
   ],
   "Dusty key": [],
   "Ring mould": [
-    "F2P",
-    "Tool"
+    "Tool",
+    "F2P"
   ],
   "Unholy mould": [
     "Tool"
   ],
   "Amulet mould": [
-    "F2P",
-    "Tool"
+    "Tool",
+    "F2P"
   ],
   "Necklace mould": [
-    "F2P",
-    "Tool"
+    "Tool",
+    "F2P"
   ],
   "Holy mould": [
-    "F2P",
-    "Tool"
+    "Tool",
+    "F2P"
   ],
   "Diamond": [
     "Crafting",
-    "F2P",
-    "Fletching"
+    "Fletching",
+    "F2P"
   ],
   "Ruby": [
     "Crafting",
-    "F2P",
-    "Fletching"
+    "Fletching",
+    "F2P"
   ],
   "Emerald": [
     "Crafting",
-    "F2P",
-    "Fletching"
+    "Fletching",
+    "F2P"
   ],
   "Sapphire": [
     "Crafting",
-    "F2P",
-    "Fletching"
+    "Fletching",
+    "F2P"
   ],
   "Opal": [
     "Crafting",
@@ -2307,14 +2250,14 @@
   "Ruby ring": [
     "Crafting",
     "Equipment",
-    "F2P",
-    "Magic"
+    "Magic",
+    "F2P"
   ],
   "Diamond ring": [
     "Crafting",
     "Equipment",
-    "F2P",
-    "Magic"
+    "Magic",
+    "F2P"
   ],
   "Gold necklace": [
     "Crafting",
@@ -2325,63 +2268,63 @@
     "Construction",
     "Crafting",
     "Equipment",
-    "F2P",
-    "Magic"
+    "Magic",
+    "F2P"
   ],
   "Emerald necklace": [
     "Crafting",
     "Equipment",
-    "F2P",
-    "Magic"
+    "Magic",
+    "F2P"
   ],
   "Ruby necklace": [
     "Crafting",
     "Equipment",
-    "F2P",
-    "Magic"
+    "Magic",
+    "F2P"
   ],
   "Diamond necklace": [
     "Crafting",
     "Equipment",
-    "F2P",
-    "Magic"
+    "Magic",
+    "F2P"
   ],
   "Gold amulet": [
     "Crafting",
     "Equipment",
-    "F2P",
-    "Magic"
+    "Magic",
+    "F2P"
   ],
   "Sapphire amulet": [
     "Crafting",
     "Equipment",
-    "F2P",
-    "Magic"
+    "Magic",
+    "F2P"
   ],
   "Emerald amulet": [
     "Crafting",
     "Equipment",
-    "F2P",
-    "Magic"
+    "Magic",
+    "F2P"
   ],
   "Ruby amulet": [
     "Crafting",
     "Equipment",
-    "F2P",
-    "Magic"
+    "Magic",
+    "F2P"
   ],
   "Diamond amulet": [
     "Crafting",
     "Equipment",
-    "F2P",
-    "Magic"
+    "Magic",
+    "F2P"
   ],
   "Holy symbol": [
     "Crafting",
     "Equipment",
-    "F2P",
     "Magic",
-    "Prayer"
+    "Prayer",
+    "F2P"
   ],
   "Unholy symbol": [
     "Crafting",
@@ -2391,13 +2334,13 @@
   ],
   "Amulet of strength": [
     "Equipment",
-    "F2P",
-    "Melee"
+    "Melee",
+    "F2P"
   ],
   "Amulet of magic": [
     "Equipment",
-    "F2P",
-    "Magic"
+    "Magic",
+    "F2P"
   ],
   "Amulet of defence": [
     "Equipment",
@@ -2405,23 +2348,23 @@
   ],
   "Amulet of power": [
     "Equipment",
-    "F2P",
-    "Ranged"
+    "Ranged",
+    "F2P"
   ],
   "Needle": [
     "Crafting",
-    "F2P",
-    "Tool"
+    "Tool",
+    "F2P"
   ],
   "Thread": [
     "Crafting",
-    "F2P",
     "Tool",
-    "Woodcutting"
+    "Woodcutting",
+    "F2P"
   ],
   "Shears": [
-    "F2P",
-    "Tool"
+    "Tool",
+    "F2P"
   ],
   "Wool": [
     "Construction",
@@ -2430,13 +2373,13 @@
   ],
   "Cowhide": [
     "Crafting",
-    "F2P",
-    "Magic"
+    "Magic",
+    "F2P"
   ],
   "Leather": [
     "Crafting",
-    "F2P",
-    "Woodcutting"
+    "Woodcutting",
+    "F2P"
   ],
   "Hard leather": [
     "Crafting",
@@ -2460,9 +2403,9 @@
   ],
   "Chisel": [
     "Crafting",
-    "F2P",
     "Mining",
-    "Tool"
+    "Tool",
+    "F2P"
   ],
   "Brown apron": [
     "Equipment",
@@ -2476,38 +2419,38 @@
   "Soft clay": [
     "Construction",
     "Crafting",
-    "F2P",
-    "Magic"
+    "Magic",
+    "F2P"
   ],
   "Red dye": [
     "Construction",
     "Crafting",
-    "F2P",
-    "Sailing"
+    "Sailing",
+    "F2P"
   ],
   "Yellow dye": [
     "Construction",
     "Crafting",
-    "F2P",
-    "Sailing"
+    "Sailing",
+    "F2P"
   ],
   "Blue dye": [
     "Construction",
     "Crafting",
-    "F2P",
-    "Sailing"
+    "Sailing",
+    "F2P"
   ],
   "Green dye": [
     "Construction",
     "Crafting",
-    "F2P",
-    "Sailing"
+    "Sailing",
+    "F2P"
   ],
   "Purple dye": [
     "Construction",
     "Crafting",
-    "F2P",
-    "Sailing"
+    "Sailing",
+    "F2P"
   ],
   "Molten glass": [
     "Construction",
@@ -2523,14 +2466,12 @@
     "Magic"
   ],
   "Soda ash": [
-    "Crafting",
-    "Magic"
+    "Crafting"
   ],
   "Bucket of sand": [
-    "Construction",
     "Crafting",
+    "Construction",
     "Farming",
-    "Magic",
     "Tool"
   ],
   "Glassblowing pipe": [
@@ -2576,29 +2517,29 @@
   ],
   "Cake tin": [
     "Cooking",
-    "F2P",
-    "Food"
+    "Food",
+    "F2P"
   ],
   "Uncooked cake": [
     "Cooking",
-    "F2P",
-    "Food"
+    "Food",
+    "F2P"
   ],
   "Cake": [
     "Cooking",
-    "F2P",
-    "Food"
+    "Food",
+    "F2P"
   ],
   "Chocolate cake": [
     "Cooking",
-    "F2P",
-    "Food"
+    "Food",
+    "F2P"
   ],
   "Asgarnian ale": [
     "Construction",
     "Cooking",
-    "F2P",
-    "Food"
+    "Food",
+    "F2P"
   ],
   "Wizard's mind bomb": [
     "F2P"
@@ -2619,39 +2560,39 @@
   ],
   "Beer glass": [
     "Cooking",
-    "F2P",
-    "Food"
+    "Food",
+    "F2P"
   ],
   "Bowl of water": [
     "Cooking",
-    "F2P",
-    "Tool"
+    "Tool",
+    "F2P"
   ],
   "Bowl": [
     "Cooking",
     "Crafting",
-    "F2P",
-    "Tool"
+    "Tool",
+    "F2P"
   ],
   "Bucket": [
     "Construction",
     "Cooking",
-    "F2P",
     "Farming",
     "Hunter",
-    "Tool"
+    "Tool",
+    "F2P"
   ],
   "Bucket of milk": [
     "Construction",
     "Cooking",
-    "F2P",
-    "Tool"
+    "Tool",
+    "F2P"
   ],
   "Bucket of water": [
     "Construction",
     "Cooking",
-    "F2P",
-    "Tool"
+    "Tool",
+    "F2P"
   ],
   "Pot": [
     "Crafting",
@@ -2659,17 +2600,17 @@
   ],
   "Pot of flour": [
     "Cooking",
-    "F2P",
-    "Food"
+    "Food",
+    "F2P"
   ],
   "Jug": [
-    "F2P",
-    "Tool"
+    "Tool",
+    "F2P"
   ],
   "Jug of water": [
     "Cooking",
-    "F2P",
-    "Tool"
+    "Tool",
+    "F2P"
   ],
   "Swamp tar": [
     "Construction",
@@ -2681,13 +2622,13 @@
   ],
   "Potato": [
     "Cooking",
-    "F2P",
-    "Food"
+    "Food",
+    "F2P"
   ],
   "Egg": [
     "Cooking",
-    "F2P",
-    "Food"
+    "Food",
+    "F2P"
   ],
   "Grain": [
     "F2P"
@@ -2698,50 +2639,50 @@
   ],
   "Redberries": [
     "Cooking",
-    "F2P",
-    "Food"
+    "Food",
+    "F2P"
   ],
   "Pastry dough": [
     "Cooking",
-    "F2P",
-    "Food"
+    "Food",
+    "F2P"
   ],
   "Cooking apple": [
     "Cooking",
-    "F2P",
-    "Food"
+    "Food",
+    "F2P"
   ],
   "Onion": [
     "Cooking",
-    "F2P",
-    "Food"
+    "Food",
+    "F2P"
   ],
   "Banana": [
-    "F2P",
-    "Hunter"
+    "Hunter",
+    "F2P"
   ],
   "Cabbage": [
     "Cooking",
-    "F2P",
-    "Food"
+    "Food",
+    "F2P"
   ],
   "Spinach roll": [
     "F2P"
   ],
   "Kebab": [
-    "F2P",
-    "Sailing"
+    "Sailing",
+    "F2P"
   ],
   "Chocolate bar": [
     "Cooking",
-    "F2P",
-    "Food"
+    "Food",
+    "F2P"
   ],
   "Chocolate dust": [
     "Cooking",
-    "F2P",
     "Food",
-    "Herblore"
+    "Herblore",
+    "F2P"
   ],
   "Chocolatey milk": [],
   "Empty cup": [
@@ -2751,34 +2692,34 @@
   ],
   "Tomato": [
     "Cooking",
-    "F2P",
     "Farming",
-    "Food"
+    "Food",
+    "F2P"
   ],
   "Cheese": [
     "Cooking",
-    "F2P",
-    "Food"
+    "Food",
+    "F2P"
   ],
   "Grapes": [
     "Cooking",
-    "F2P",
-    "Food"
+    "Food",
+    "F2P"
   ],
   "Half full wine jug": [
-    "F2P",
     "Holiday",
-    "Tool"
+    "Tool",
+    "F2P"
   ],
   "Jug of wine": [
     "Cooking",
-    "F2P",
-    "Tool"
+    "Tool",
+    "F2P"
   ],
   "Stew": [
     "Cooking",
-    "F2P",
-    "Food"
+    "Food",
+    "F2P"
   ],
   "Spice": [
     "Cooking",
@@ -2852,32 +2793,32 @@
     "Food"
   ],
   "Raw beef": [
-    "F2P",
-    "Fishing"
+    "Fishing",
+    "F2P"
   ],
   "Raw rat meat": [
     "Cooking",
-    "F2P",
-    "Hunter"
+    "Hunter",
+    "F2P"
   ],
   "Raw bear meat": [
     "Cooking",
     "F2P"
   ],
   "Raw chicken": [
-    "F2P",
-    "Fishing"
+    "Fishing",
+    "F2P"
   ],
   "Cooked chicken": [
     "Cooking",
-    "F2P",
     "Food",
-    "Woodcutting"
+    "Woodcutting",
+    "F2P"
   ],
   "Cooked meat": [
     "Cooking",
-    "F2P",
-    "Food"
+    "Food",
+    "F2P"
   ],
   "Swamp toad": [
     "Cooking",
@@ -2970,18 +2911,18 @@
   ],
   "Plain pizza": [
     "Cooking",
-    "F2P",
-    "Food"
+    "Food",
+    "F2P"
   ],
   "Meat pizza": [
     "Cooking",
-    "F2P",
-    "Food"
+    "Food",
+    "F2P"
   ],
   "Anchovy pizza": [
     "Cooking",
-    "F2P",
-    "Food"
+    "Food",
+    "F2P"
   ],
   "Pineapple pizza": [
     "Cooking",
@@ -2989,91 +2930,91 @@
   ],
   "Bread dough": [
     "Cooking",
-    "F2P",
-    "Food"
+    "Food",
+    "F2P"
   ],
   "Bread": [
     "Cooking",
-    "F2P",
-    "Food"
+    "Food",
+    "F2P"
   ],
   "Pie dish": [
     "Cooking",
     "Crafting",
-    "F2P",
-    "Food"
+    "Food",
+    "F2P"
   ],
   "Apple pie": [
     "Cooking",
-    "F2P",
-    "Food"
+    "Food",
+    "F2P"
   ],
   "Redberry pie": [
     "Cooking",
-    "F2P",
-    "Food"
+    "Food",
+    "F2P"
   ],
   "Meat pie": [
     "Cooking",
-    "F2P",
-    "Food"
+    "Food",
+    "F2P"
   ],
   "Raw oomlie": [
     "Fishing"
   ],
   "Hammer": [
-    "F2P",
-    "Tool"
+    "Tool",
+    "F2P"
   ],
   "Bronze bar": [
+    "Smithing",
     "Construction",
-    "F2P",
     "Sailing",
-    "Smithing"
+    "F2P"
   ],
   "Iron bar": [
+    "Smithing",
     "Construction",
     "Crafting",
-    "F2P",
     "Sailing",
-    "Smithing"
+    "F2P"
   ],
   "Steel bar": [
+    "Smithing",
     "Construction",
     "Crafting",
-    "F2P",
     "Sailing",
-    "Smithing"
+    "F2P"
   ],
   "Silver bar": [
     "Crafting",
-    "F2P",
-    "Smithing"
+    "Smithing",
+    "F2P"
   ],
   "Gold bar": [
-    "Construction",
     "Crafting",
-    "F2P",
-    "Smithing"
+    "Smithing",
+    "Construction",
+    "F2P"
   ],
   "Mithril bar": [
+    "Smithing",
     "Construction",
     "Crafting",
-    "F2P",
     "Sailing",
-    "Smithing"
+    "F2P"
   ],
   "Adamantite bar": [
+    "Smithing",
     "Construction",
-    "F2P",
     "Sailing",
-    "Smithing"
+    "F2P"
   ],
   "Runite bar": [
+    "Smithing",
     "Construction",
-    "F2P",
     "Sailing",
-    "Smithing"
+    "F2P"
   ],
   "Steel studs": [
     "Crafting"
@@ -3119,9 +3060,9 @@
     "Potion"
   ],
   "Prayer potion": [
-    "Construction",
     "Herblore",
-    "Potion"
+    "Potion",
+    "Construction"
   ],
   "Super attack": [
     "Herblore",
@@ -3144,9 +3085,9 @@
     "Potion"
   ],
   "Antipoison": [
-    "F2P",
     "Herblore",
-    "Potion"
+    "Potion",
+    "F2P"
   ],
   "Superantipoison": [
     "Herblore",
@@ -3165,8 +3106,8 @@
     "Weapon"
   ],
   "Lantadyme": [
-    "Farming",
-    "Herblore"
+    "Herblore",
+    "Farming"
   ],
   "Blue d'hide vambraces": [
     "Crafting",
@@ -3209,8 +3150,8 @@
   ],
   "Rotten tomato": [],
   "Lamp": [
-    "F2P",
-    "Randomevent"
+    "Randomevent",
+    "F2P"
   ],
   "Ring of recoil": [
     "Equipment",
@@ -3249,146 +3190,146 @@
   "Black platebody (t)": [
     "Clue",
     "Equipment",
-    "F2P",
-    "Melee"
+    "Melee",
+    "F2P"
   ],
   "Black platelegs (t)": [
     "Clue",
     "Equipment",
-    "F2P",
-    "Melee"
+    "Melee",
+    "F2P"
   ],
   "Black full helm (t)": [
     "Clue",
     "Equipment",
-    "F2P",
-    "Melee"
+    "Melee",
+    "F2P"
   ],
   "Black kiteshield (t)": [
     "Clue",
     "Equipment",
-    "F2P",
-    "Melee"
+    "Melee",
+    "F2P"
   ],
   "Black platebody (g)": [
     "Clue",
     "Equipment",
-    "F2P",
-    "Melee"
+    "Melee",
+    "F2P"
   ],
   "Black platelegs (g)": [
     "Clue",
     "Equipment",
-    "F2P",
-    "Melee"
+    "Melee",
+    "F2P"
   ],
   "Black full helm (g)": [
     "Clue",
     "Equipment",
-    "F2P",
-    "Melee"
+    "Melee",
+    "F2P"
   ],
   "Black kiteshield (g)": [
     "Clue",
     "Equipment",
-    "F2P",
-    "Melee"
+    "Melee",
+    "F2P"
   ],
   "Adamant platebody (t)": [
     "Clue",
     "Equipment",
-    "F2P",
-    "Melee"
+    "Melee",
+    "F2P"
   ],
   "Adamant platelegs (t)": [
     "Clue",
     "Equipment",
-    "F2P",
-    "Melee"
+    "Melee",
+    "F2P"
   ],
   "Adamant kiteshield (t)": [
     "Clue",
     "Equipment",
-    "F2P",
-    "Melee"
+    "Melee",
+    "F2P"
   ],
   "Adamant full helm (t)": [
     "Clue",
     "Equipment",
-    "F2P",
-    "Melee"
+    "Melee",
+    "F2P"
   ],
   "Adamant platebody (g)": [
     "Clue",
     "Equipment",
-    "F2P",
-    "Melee"
+    "Melee",
+    "F2P"
   ],
   "Adamant platelegs (g)": [
     "Clue",
     "Equipment",
-    "F2P",
-    "Melee"
+    "Melee",
+    "F2P"
   ],
   "Adamant kiteshield (g)": [
     "Clue",
     "Equipment",
-    "F2P",
-    "Melee"
+    "Melee",
+    "F2P"
   ],
   "Adamant full helm (g)": [
     "Clue",
     "Equipment",
-    "F2P",
-    "Melee"
+    "Melee",
+    "F2P"
   ],
   "Rune platebody (g)": [
     "Clue",
     "Equipment",
-    "F2P",
-    "Melee"
+    "Melee",
+    "F2P"
   ],
   "Rune platelegs (g)": [
     "Clue",
     "Equipment",
-    "F2P",
-    "Melee"
+    "Melee",
+    "F2P"
   ],
   "Rune full helm (g)": [
     "Clue",
     "Equipment",
-    "F2P",
-    "Melee"
+    "Melee",
+    "F2P"
   ],
   "Rune kiteshield (g)": [
     "Clue",
     "Equipment",
-    "F2P",
-    "Melee"
+    "Melee",
+    "F2P"
   ],
   "Rune platebody (t)": [
     "Clue",
     "Equipment",
-    "F2P",
-    "Melee"
+    "Melee",
+    "F2P"
   ],
   "Rune platelegs (t)": [
     "Clue",
     "Equipment",
-    "F2P",
-    "Melee"
+    "Melee",
+    "F2P"
   ],
   "Rune full helm (t)": [
     "Clue",
     "Equipment",
-    "F2P",
-    "Melee"
+    "Melee",
+    "F2P"
   ],
   "Rune kiteshield (t)": [
     "Clue",
     "Equipment",
-    "F2P",
-    "Melee"
+    "Melee",
+    "F2P"
   ],
   "Blue beret": [
     "Clue",
@@ -3433,79 +3374,79 @@
   "Zamorak platebody": [
     "Clue",
     "Equipment",
-    "F2P",
-    "Melee"
+    "Melee",
+    "F2P"
   ],
   "Zamorak platelegs": [
     "Clue",
     "Equipment",
-    "F2P",
-    "Melee"
+    "Melee",
+    "F2P"
   ],
   "Zamorak full helm": [
     "Clue",
     "Equipment",
-    "F2P",
-    "Melee"
+    "Melee",
+    "F2P"
   ],
   "Zamorak kiteshield": [
     "Clue",
     "Equipment",
-    "F2P",
-    "Melee"
+    "Melee",
+    "F2P"
   ],
   "Saradomin platebody": [
     "Clue",
     "Equipment",
-    "F2P",
-    "Melee"
+    "Melee",
+    "F2P"
   ],
   "Saradomin platelegs": [
     "Clue",
     "Equipment",
-    "F2P",
-    "Melee"
+    "Melee",
+    "F2P"
   ],
   "Saradomin full helm": [
     "Clue",
     "Equipment",
-    "F2P",
-    "Melee"
+    "Melee",
+    "F2P"
   ],
   "Saradomin kiteshield": [
     "Clue",
     "Equipment",
-    "F2P",
-    "Melee"
+    "Melee",
+    "F2P"
   ],
   "Guthix platebody": [
     "Clue",
     "Equipment",
-    "F2P",
-    "Melee"
+    "Melee",
+    "F2P"
   ],
   "Guthix platelegs": [
     "Clue",
     "Equipment",
-    "F2P",
-    "Melee"
+    "Melee",
+    "F2P"
   ],
   "Guthix full helm": [
     "Clue",
     "Equipment",
-    "F2P",
-    "Melee"
+    "Melee",
+    "F2P"
   ],
   "Guthix kiteshield": [
     "Clue",
     "Equipment",
-    "F2P",
-    "Melee"
+    "Melee",
+    "F2P"
   ],
   "Wolf bones": [
+    "Prayer",
     "Crafting",
-    "Fletching",
-    "Prayer"
+    "Fletching"
   ],
   "Cooked chompy": [
     "Cooking",
@@ -3635,26 +3576,26 @@
     "Equipment"
   ],
   "Toadflax": [
-    "Farming",
-    "Herblore"
+    "Herblore",
+    "Farming"
   ],
   "Snapdragon": [
-    "Farming",
-    "Herblore"
+    "Herblore",
+    "Farming"
   ],
   "Energy potion": [
-    "F2P",
     "Herblore",
-    "Potion"
+    "Potion",
+    "F2P"
   ],
   "Super energy": [
     "Herblore",
     "Potion"
   ],
   "Super restore": [
-    "Construction",
     "Herblore",
-    "Potion"
+    "Potion",
+    "Construction"
   ],
   "Agility potion": [
     "Herblore",
@@ -3738,9 +3679,9 @@
     "Prayer"
   ],
   "Jogre bones": [
+    "Prayer",
     "Firemaking",
-    "Magic",
-    "Prayer"
+    "Magic"
   ],
   "Potato cactus": [
     "Herblore"
@@ -3770,8 +3711,8 @@
   ],
   "Monkey corpse": [],
   "Monkey bones": [
-    "F2P",
-    "Prayer"
+    "Prayer",
+    "F2P"
   ],
   "Cleaning cloth": [],
   "Bronze halberd": [
@@ -3898,86 +3839,86 @@
   "Black plateskirt (t)": [
     "Clue",
     "Equipment",
-    "F2P",
-    "Melee"
+    "Melee",
+    "F2P"
   ],
   "Black plateskirt (g)": [
     "Clue",
     "Equipment",
-    "F2P",
-    "Melee"
+    "Melee",
+    "F2P"
   ],
   "Adamant plateskirt (t)": [
     "Clue",
     "Equipment",
-    "F2P",
-    "Melee"
+    "Melee",
+    "F2P"
   ],
   "Adamant plateskirt (g)": [
     "Clue",
     "Equipment",
-    "F2P",
-    "Melee"
+    "Melee",
+    "F2P"
   ],
   "Rune plateskirt (g)": [
     "Clue",
     "Equipment",
-    "F2P",
-    "Melee"
+    "Melee",
+    "F2P"
   ],
   "Rune plateskirt (t)": [
     "Clue",
     "Equipment",
-    "F2P",
-    "Melee"
+    "Melee",
+    "F2P"
   ],
   "Zamorak plateskirt": [
     "Clue",
     "Equipment",
-    "F2P",
-    "Melee"
+    "Melee",
+    "F2P"
   ],
   "Saradomin plateskirt": [
     "Clue",
     "Equipment",
-    "F2P",
-    "Melee"
+    "Melee",
+    "F2P"
   ],
   "Guthix plateskirt": [
     "Clue",
     "Equipment",
-    "F2P",
-    "Melee"
+    "Melee",
+    "F2P"
   ],
   "Gilded platebody": [
     "Clue",
     "Equipment",
-    "F2P",
-    "Melee"
+    "Melee",
+    "F2P"
   ],
   "Gilded platelegs": [
     "Clue",
     "Equipment",
-    "F2P",
-    "Melee"
+    "Melee",
+    "F2P"
   ],
   "Gilded plateskirt": [
     "Clue",
     "Equipment",
-    "F2P",
-    "Melee"
+    "Melee",
+    "F2P"
   ],
   "Gilded full helm": [
     "Clue",
     "Equipment",
-    "F2P",
-    "Melee"
+    "Melee",
+    "F2P"
   ],
   "Gilded kiteshield": [
     "Clue",
     "Equipment",
-    "F2P",
-    "Melee"
+    "Melee",
+    "F2P"
   ],
   "Flamtaer hammer": [],
   "Fremennik helm": [
@@ -4131,15 +4072,15 @@
     "F2P"
   ],
   "Decorative sword": [
-    "F2P",
     "Melee",
-    "Weapon"
+    "Weapon",
+    "F2P"
   ],
   "Decorative armour": [
     "Construction",
     "Equipment",
-    "F2P",
-    "Melee"
+    "Melee",
+    "F2P"
   ],
   "Decorative helm": [
     "Construction",
@@ -4149,8 +4090,8 @@
   "Decorative shield": [
     "Construction",
     "Equipment",
-    "F2P",
-    "Melee"
+    "Melee",
+    "F2P"
   ],
   "Dragon platelegs": [
     "Equipment",
@@ -4512,8 +4453,8 @@
     "Melee"
   ],
   "Zogre bones": [
-    "Crafting",
-    "Prayer"
+    "Prayer",
+    "Crafting"
   ],
   "Bronze nails": [
     "Construction",
@@ -4551,21 +4492,21 @@
     "Sailing"
   ],
   "Comp ogre bow": [
-    "Fletching",
     "Ranged",
+    "Fletching",
     "Weapon"
   ],
   "Fayrg bones": [
-    "Crafting",
-    "Prayer"
+    "Prayer",
+    "Crafting"
   ],
   "Raurg bones": [
-    "Crafting",
-    "Prayer"
+    "Prayer",
+    "Crafting"
   ],
   "Ourg bones": [
-    "Crafting",
-    "Prayer"
+    "Prayer",
+    "Crafting"
   ],
   "Relicym's balm": [
     "Construction",
@@ -4833,43 +4774,43 @@
     "Runecraft"
   ],
   "Tiara mould": [
-    "F2P",
-    "Tool"
+    "Tool",
+    "F2P"
   ],
   "Tiara": [
     "Equipment",
-    "F2P",
-    "Runecraft"
+    "Runecraft",
+    "F2P"
   ],
   "Air tiara": [
     "Equipment",
-    "F2P",
-    "Runecraft"
+    "Runecraft",
+    "F2P"
   ],
   "Mind tiara": [
     "Equipment",
-    "F2P",
-    "Runecraft"
+    "Runecraft",
+    "F2P"
   ],
   "Water tiara": [
     "Equipment",
-    "F2P",
-    "Runecraft"
+    "Runecraft",
+    "F2P"
   ],
   "Body tiara": [
     "Equipment",
-    "F2P",
-    "Runecraft"
+    "Runecraft",
+    "F2P"
   ],
   "Earth tiara": [
     "Equipment",
-    "F2P",
-    "Runecraft"
+    "Runecraft",
+    "F2P"
   ],
   "Fire tiara": [
     "Equipment",
-    "F2P",
-    "Runecraft"
+    "Runecraft",
+    "F2P"
   ],
   "Cosmic tiara": [
     "Equipment",
@@ -5220,8 +5161,8 @@
     "F2P"
   ],
   "Raw fishlike thing": [
-    "F2P",
-    "Fishing"
+    "Fishing",
+    "F2P"
   ],
   "Broodoo shield": [
     "Equipment",
@@ -5272,21 +5213,15 @@
     "Ranged"
   ],
   "Mahogany logs": [
-    "Construction",
-    "Crafting",
     "Firemaking",
     "Fletching",
-    "Magic",
-    "Prayer",
+    "Construction",
     "Sailing"
   ],
   "Teak logs": [
-    "Construction",
-    "Crafting",
     "Firemaking",
     "Fletching",
-    "Magic",
-    "Prayer",
+    "Construction",
     "Sailing"
   ],
   "Tribal mask": [
@@ -5345,8 +5280,8 @@
     "Weapon"
   ],
   "Compost potion": [
-    "Farming",
     "Herblore",
+    "Farming",
     "Potion"
   ],
   "Toktz-xil-ul": [
@@ -5549,8 +5484,8 @@
     "Weapon"
   ],
   "Dagannoth bones": [
-    "Crafting",
-    "Prayer"
+    "Prayer",
+    "Crafting"
   ],
   "Seers ring": [
     "Crafting",
@@ -5573,13 +5508,12 @@
     "Melee"
   ],
   "Dragon axe": [
+    "Woodcutting",
+    "Tool",
     "Crafting",
     "Firemaking",
     "Melee",
-    "Smithing",
-    "Tool",
-    "Weapon",
-    "Woodcutting"
+    "Weapon"
   ],
   "Darklight": [
     "Construction",
@@ -5613,8 +5547,8 @@
     "Melee"
   ],
   "Wyvern bones": [
-    "Crafting",
     "Prayer",
+    "Crafting",
     "Slayer"
   ],
   "Fur": [
@@ -5854,138 +5788,138 @@
   "Black shield (h1)": [
     "Clue",
     "Equipment",
-    "F2P",
-    "Melee"
+    "Melee",
+    "F2P"
   ],
   "Adamant shield (h1)": [
     "Clue",
     "Equipment",
-    "F2P",
     "Melee",
-    "Smithing"
+    "Smithing",
+    "F2P"
   ],
   "Rune shield (h1)": [
     "Clue",
     "Equipment",
-    "F2P",
     "Melee",
-    "Smithing"
+    "Smithing",
+    "F2P"
   ],
   "Black shield (h2)": [
     "Clue",
     "Equipment",
-    "F2P",
-    "Melee"
+    "Melee",
+    "F2P"
   ],
   "Adamant shield (h2)": [
     "Clue",
     "Equipment",
-    "F2P",
     "Melee",
-    "Smithing"
+    "Smithing",
+    "F2P"
   ],
   "Rune shield (h2)": [
     "Clue",
     "Equipment",
-    "F2P",
     "Melee",
-    "Smithing"
+    "Smithing",
+    "F2P"
   ],
   "Black shield (h3)": [
     "Clue",
     "Equipment",
-    "F2P",
-    "Melee"
+    "Melee",
+    "F2P"
   ],
   "Adamant shield (h3)": [
     "Clue",
     "Equipment",
-    "F2P",
     "Melee",
-    "Smithing"
+    "Smithing",
+    "F2P"
   ],
   "Rune shield (h3)": [
     "Clue",
     "Equipment",
-    "F2P",
     "Melee",
-    "Smithing"
+    "Smithing",
+    "F2P"
   ],
   "Black shield (h4)": [
     "Clue",
     "Equipment",
-    "F2P",
-    "Melee"
+    "Melee",
+    "F2P"
   ],
   "Adamant shield (h4)": [
     "Clue",
     "Equipment",
-    "F2P",
     "Melee",
-    "Smithing"
+    "Smithing",
+    "F2P"
   ],
   "Rune shield (h4)": [
     "Clue",
     "Equipment",
-    "F2P",
     "Melee",
-    "Smithing"
+    "Smithing",
+    "F2P"
   ],
   "Black shield (h5)": [
     "Clue",
     "Equipment",
-    "F2P",
-    "Melee"
+    "Melee",
+    "F2P"
   ],
   "Adamant shield (h5)": [
     "Clue",
     "Equipment",
-    "F2P",
     "Melee",
-    "Smithing"
+    "Smithing",
+    "F2P"
   ],
   "Rune shield (h5)": [
     "Clue",
     "Equipment",
-    "F2P",
     "Melee",
-    "Smithing"
+    "Smithing",
+    "F2P"
   ],
   "Studded body (g)": [
     "Clue",
     "Equipment",
-    "F2P",
-    "Ranged"
+    "Ranged",
+    "F2P"
   ],
   "Studded body (t)": [
     "Clue",
     "Equipment",
-    "F2P",
-    "Ranged"
+    "Ranged",
+    "F2P"
   ],
   "Studded chaps (g)": [
     "Clue",
     "Equipment",
-    "F2P",
-    "Ranged"
+    "Ranged",
+    "F2P"
   ],
   "Studded chaps (t)": [
     "Clue",
     "Equipment",
-    "F2P",
-    "Ranged"
+    "Ranged",
+    "F2P"
   ],
   "Green d'hide body (g)": [
     "Clue",
     "Equipment",
-    "F2P",
-    "Ranged"
+    "Ranged",
+    "F2P"
   ],
   "Green d'hide body (t)": [
     "Clue",
     "Equipment",
-    "F2P",
-    "Ranged"
+    "Ranged",
+    "F2P"
   ],
   "Blue d'hide body (g)": [
     "Clue",
@@ -6000,14 +5934,14 @@
   "Green d'hide chaps (g)": [
     "Clue",
     "Equipment",
-    "F2P",
-    "Ranged"
+    "Ranged",
+    "F2P"
   ],
   "Green d'hide chaps (t)": [
     "Clue",
     "Equipment",
-    "F2P",
-    "Ranged"
+    "Ranged",
+    "F2P"
   ],
   "Blue d'hide chaps (g)": [
     "Clue",
@@ -6032,26 +5966,26 @@
   "Blue wizard robe (g)": [
     "Clue",
     "Equipment",
-    "F2P",
-    "Magic"
+    "Magic",
+    "F2P"
   ],
   "Blue wizard robe (t)": [
     "Clue",
     "Equipment",
-    "F2P",
-    "Magic"
+    "Magic",
+    "F2P"
   ],
   "Blue wizard hat (g)": [
     "Clue",
     "Equipment",
-    "F2P",
-    "Magic"
+    "Magic",
+    "F2P"
   ],
   "Blue wizard hat (t)": [
     "Clue",
     "Equipment",
-    "F2P",
-    "Magic"
+    "Magic",
+    "F2P"
   ],
   "Enchanted robe": [
     "Clue",
@@ -6206,9 +6140,9 @@
   "Bottle of wine": [],
   "Field ration": [],
   "Pure essence": [
-    "F2P",
     "Rune",
-    "Runecraft"
+    "Runecraft",
+    "F2P"
   ],
   "Tortoise shell": [],
   "Raw monkfish": [
@@ -6239,16 +6173,16 @@
     "Slayer"
   ],
   "Kbd heads": [
-    "Attack",
     "Construction",
+    "Attack",
     "Defence",
     "Magic",
     "Prayer",
     "Strength"
   ],
   "Kq head": [
-    "Attack",
     "Construction",
+    "Attack",
     "Defence",
     "Magic",
     "Strength"
@@ -6444,18 +6378,18 @@
   ],
   "Fancy boots": [
     "Equipment",
-    "F2P",
-    "Melee"
+    "Melee",
+    "F2P"
   ],
   "Fighting boots": [
     "Equipment",
-    "F2P",
-    "Melee"
+    "Melee",
+    "F2P"
   ],
   "Skull sceptre": [
-    "F2P",
     "Magic",
-    "Weapon"
+    "Weapon",
+    "F2P"
   ],
   "Ivory comb": [],
   "Golden scarab": [],
@@ -6542,11 +6476,11 @@
     "Magic"
   ],
   "Blurite ore": [
+    "Smithing",
     "Ammo",
     "Construction",
     "Fletching",
-    "Ranged",
-    "Smithing"
+    "Ranged"
   ],
   "Iron bolts": [
     "Ammo",
@@ -6579,48 +6513,44 @@
     "Ranged"
   ],
   "Bronze crossbow": [
-    "Fletching",
     "Ranged",
+    "Fletching",
     "Smithing",
     "Weapon"
   ],
   "Blurite crossbow": [
-    "Construction",
-    "Fletching",
     "Ranged",
+    "Fletching",
     "Smithing",
     "Weapon"
   ],
   "Iron crossbow": [
-    "Construction",
-    "Fletching",
     "Ranged",
+    "Fletching",
     "Smithing",
     "Weapon"
   ],
   "Steel crossbow": [
-    "Fletching",
     "Ranged",
+    "Fletching",
     "Smithing",
     "Weapon"
   ],
   "Mithril crossbow": [
-    "Construction",
-    "Fletching",
     "Ranged",
+    "Fletching",
     "Smithing",
     "Weapon"
   ],
   "Adamant crossbow": [
-    "Fletching",
     "Ranged",
+    "Fletching",
     "Smithing",
     "Weapon"
   ],
   "Rune crossbow": [
-    "Construction",
-    "Fletching",
     "Ranged",
+    "Fletching",
     "Smithing",
     "Weapon"
   ],
@@ -6750,23 +6680,23 @@
     "Prayer"
   ],
   "Training sword": [
-    "F2P",
     "Melee",
-    "Weapon"
+    "Weapon",
+    "F2P"
   ],
   "Training shield": [
     "Equipment",
     "F2P"
   ],
   "Training bow": [
-    "F2P",
     "Ranged",
-    "Weapon"
+    "Weapon",
+    "F2P"
   ],
   "Training arrows": [
     "Ammo",
-    "F2P",
-    "Ranged"
+    "Ranged",
+    "F2P"
   ],
   "Mind shield": [
     "Equipment"
@@ -7044,8 +6974,8 @@
     "Weapon"
   ],
   "Hunters' crossbow": [
-    "Fletching",
     "Ranged",
+    "Fletching",
     "Weapon"
   ],
   "Kebbit bolts": [
@@ -7058,9 +6988,9 @@
   ],
   "Willow comp bow": [
     "Clue",
-    "F2P",
     "Ranged",
-    "Weapon"
+    "Weapon",
+    "F2P"
   ],
   "Yew comp bow": [
     "Clue",
@@ -7075,102 +7005,102 @@
   "Rune helm (h1)": [
     "Clue",
     "Equipment",
-    "F2P",
     "Melee",
-    "Smithing"
+    "Smithing",
+    "F2P"
   ],
   "Rune helm (h2)": [
     "Clue",
     "Equipment",
-    "F2P",
     "Melee",
-    "Smithing"
+    "Smithing",
+    "F2P"
   ],
   "Rune helm (h3)": [
     "Clue",
     "Equipment",
-    "F2P",
     "Melee",
-    "Smithing"
+    "Smithing",
+    "F2P"
   ],
   "Rune helm (h4)": [
     "Clue",
     "Equipment",
-    "F2P",
     "Melee",
-    "Smithing"
+    "Smithing",
+    "F2P"
   ],
   "Rune helm (h5)": [
     "Clue",
     "Equipment",
-    "F2P",
     "Melee",
-    "Smithing"
+    "Smithing",
+    "F2P"
   ],
   "Adamant helm (h1)": [
     "Clue",
     "Equipment",
-    "F2P",
     "Melee",
-    "Smithing"
+    "Smithing",
+    "F2P"
   ],
   "Adamant helm (h2)": [
     "Clue",
     "Equipment",
-    "F2P",
     "Melee",
-    "Smithing"
+    "Smithing",
+    "F2P"
   ],
   "Adamant helm (h3)": [
     "Clue",
     "Equipment",
-    "F2P",
     "Melee",
-    "Smithing"
+    "Smithing",
+    "F2P"
   ],
   "Adamant helm (h4)": [
     "Clue",
     "Equipment",
-    "F2P",
     "Melee",
-    "Smithing"
+    "Smithing",
+    "F2P"
   ],
   "Adamant helm (h5)": [
     "Clue",
     "Equipment",
-    "F2P",
     "Melee",
-    "Smithing"
+    "Smithing",
+    "F2P"
   ],
   "Black helm (h1)": [
     "Clue",
     "Equipment",
-    "F2P",
-    "Melee"
+    "Melee",
+    "F2P"
   ],
   "Black helm (h2)": [
     "Clue",
     "Equipment",
-    "F2P",
-    "Melee"
+    "Melee",
+    "F2P"
   ],
   "Black helm (h3)": [
     "Clue",
     "Equipment",
-    "F2P",
-    "Melee"
+    "Melee",
+    "F2P"
   ],
   "Black helm (h4)": [
     "Clue",
     "Equipment",
-    "F2P",
-    "Melee"
+    "Melee",
+    "F2P"
   ],
   "Black helm (h5)": [
     "Clue",
     "Equipment",
-    "F2P",
-    "Melee"
+    "Melee",
+    "F2P"
   ],
   "Bob's red shirt": [
     "Clue",
@@ -7265,14 +7195,14 @@
   "Strength amulet (t)": [
     "Clue",
     "Equipment",
-    "F2P",
-    "Melee"
+    "Melee",
+    "F2P"
   ],
   "Amulet of magic (t)": [
     "Clue",
     "Equipment",
-    "F2P",
-    "Magic"
+    "Magic",
+    "F2P"
   ],
   "Zamorak bracers": [
     "Clue",
@@ -7556,9 +7486,7 @@
     "Melee"
   ],
   "Arctic pine logs": [
-    "Crafting",
     "Firemaking",
-    "Prayer",
     "Woodcutting"
   ],
   "Hair": [
@@ -7838,12 +7766,12 @@
     "Melee"
   ],
   "Mangled bones": [
-    "Firemaking",
-    "Prayer"
+    "Prayer",
+    "Firemaking"
   ],
   "Chewed bones": [
-    "Firemaking",
-    "Prayer"
+    "Prayer",
+    "Firemaking"
   ],
   "Bronze hasta": [
     "Melee",
@@ -7891,16 +7819,16 @@
     "Equipment"
   ],
   "Cursed goblin hammer": [
-    "F2P",
-    "Weapon"
+    "Weapon",
+    "F2P"
   ],
   "Cursed goblin bow": [
-    "F2P",
-    "Weapon"
+    "Weapon",
+    "F2P"
   ],
   "Cursed goblin staff": [
-    "F2P",
-    "Weapon"
+    "Weapon",
+    "F2P"
   ],
   "Anti-dragon shield": [
     "Construction",
@@ -8061,11 +7989,11 @@
     "Weapon"
   ],
   "Dragon pickaxe": [
-    "Crafting",
-    "Melee",
     "Mining",
-    "Smithing",
     "Tool",
+    "Crafting",
+    "Smithing",
+    "Melee",
     "Weapon"
   ],
   "Malediction ward": [
@@ -8089,8 +8017,8 @@
   "Looting bag": [],
   "Ecumenical key": [],
   "Lava dragon bones": [
-    "Crafting",
-    "Prayer"
+    "Prayer",
+    "Crafting"
   ],
   "Extended antifire": [
     "Herblore",
@@ -8207,122 +8135,122 @@
   "Bronze platebody (g)": [
     "Clue",
     "Equipment",
-    "F2P",
-    "Melee"
+    "Melee",
+    "F2P"
   ],
   "Bronze platelegs (g)": [
     "Clue",
     "Equipment",
-    "F2P",
-    "Melee"
+    "Melee",
+    "F2P"
   ],
   "Bronze plateskirt (g)": [
     "Clue",
     "Equipment",
-    "F2P",
-    "Melee"
+    "Melee",
+    "F2P"
   ],
   "Bronze full helm (g)": [
     "Clue",
     "Equipment",
-    "F2P",
-    "Melee"
+    "Melee",
+    "F2P"
   ],
   "Bronze kiteshield (g)": [
     "Clue",
     "Equipment",
-    "F2P",
-    "Melee"
+    "Melee",
+    "F2P"
   ],
   "Bronze platebody (t)": [
     "Clue",
     "Equipment",
-    "F2P",
-    "Melee"
+    "Melee",
+    "F2P"
   ],
   "Bronze platelegs (t)": [
     "Clue",
     "Equipment",
-    "F2P",
-    "Melee"
+    "Melee",
+    "F2P"
   ],
   "Bronze plateskirt (t)": [
     "Clue",
     "Equipment",
-    "F2P",
-    "Melee"
+    "Melee",
+    "F2P"
   ],
   "Bronze full helm (t)": [
     "Clue",
     "Equipment",
-    "F2P",
-    "Melee"
+    "Melee",
+    "F2P"
   ],
   "Bronze kiteshield (t)": [
     "Clue",
     "Equipment",
-    "F2P",
-    "Melee"
+    "Melee",
+    "F2P"
   ],
   "Iron platebody (t)": [
     "Clue",
     "Equipment",
-    "F2P",
-    "Melee"
+    "Melee",
+    "F2P"
   ],
   "Iron platelegs (t)": [
     "Clue",
     "Equipment",
-    "F2P",
-    "Melee"
+    "Melee",
+    "F2P"
   ],
   "Iron plateskirt (t)": [
     "Clue",
     "Equipment",
-    "F2P",
-    "Melee"
+    "Melee",
+    "F2P"
   ],
   "Iron full helm (t)": [
     "Clue",
     "Equipment",
-    "F2P",
-    "Melee"
+    "Melee",
+    "F2P"
   ],
   "Iron kiteshield (t)": [
     "Clue",
     "Equipment",
-    "F2P",
-    "Melee"
+    "Melee",
+    "F2P"
   ],
   "Iron platebody (g)": [
     "Clue",
     "Equipment",
-    "F2P",
-    "Melee"
+    "Melee",
+    "F2P"
   ],
   "Iron platelegs (g)": [
     "Clue",
     "Equipment",
-    "F2P",
-    "Melee"
+    "Melee",
+    "F2P"
   ],
   "Iron plateskirt (g)": [
     "Clue",
     "Equipment",
-    "F2P",
-    "Melee"
+    "Melee",
+    "F2P"
   ],
   "Iron full helm (g)": [
     "Clue",
     "Equipment",
-    "F2P",
-    "Melee"
+    "Melee",
+    "F2P"
   ],
   "Iron kiteshield (g)": [
     "Clue",
     "Equipment",
-    "F2P",
-    "Melee"
+    "Melee",
+    "F2P"
   ],
   "Beanie": [
     "Clue",
@@ -8403,70 +8331,70 @@
   "Mithril platebody (g)": [
     "Clue",
     "Equipment",
-    "F2P",
-    "Melee"
+    "Melee",
+    "F2P"
   ],
   "Mithril platelegs (g)": [
     "Clue",
     "Equipment",
-    "F2P",
-    "Melee"
+    "Melee",
+    "F2P"
   ],
   "Mithril kiteshield (g)": [
     "Clue",
     "Equipment",
-    "F2P",
-    "Melee"
+    "Melee",
+    "F2P"
   ],
   "Mithril full helm (g)": [
     "Clue",
     "Equipment",
-    "F2P",
-    "Melee"
+    "Melee",
+    "F2P"
   ],
   "Mithril plateskirt (g)": [
     "Clue",
     "Equipment",
-    "F2P",
-    "Melee"
+    "Melee",
+    "F2P"
   ],
   "Mithril platebody (t)": [
     "Clue",
     "Equipment",
-    "F2P",
-    "Melee"
+    "Melee",
+    "F2P"
   ],
   "Mithril platelegs (t)": [
     "Clue",
     "Equipment",
-    "F2P",
-    "Melee"
+    "Melee",
+    "F2P"
   ],
   "Mithril kiteshield (t)": [
     "Clue",
     "Equipment",
-    "F2P",
-    "Melee"
+    "Melee",
+    "F2P"
   ],
   "Mithril full helm (t)": [
     "Clue",
     "Equipment",
-    "F2P",
-    "Melee"
+    "Melee",
+    "F2P"
   ],
   "Mithril plateskirt (t)": [
     "Clue",
     "Equipment",
-    "F2P",
-    "Melee"
+    "Melee",
+    "F2P"
   ],
   "Black pickaxe": [
     "Clue",
-    "F2P",
-    "Melee",
     "Mining",
     "Tool",
-    "Weapon"
+    "Melee",
+    "Weapon",
+    "F2P"
   ],
   "White headband": [
     "Clue",
@@ -8665,9 +8593,9 @@
   ],
   "Gilded scimitar": [
     "Clue",
-    "F2P",
     "Melee",
-    "Weapon"
+    "Weapon",
+    "F2P"
   ],
   "Gilded boots": [
     "Clue",
@@ -8755,116 +8683,116 @@
   "Black wizard robe (g)": [
     "Clue",
     "Equipment",
-    "F2P",
-    "Magic"
+    "Magic",
+    "F2P"
   ],
   "Black wizard robe (t)": [
     "Clue",
     "Equipment",
-    "F2P",
-    "Magic"
+    "Magic",
+    "F2P"
   ],
   "Black wizard hat (g)": [
     "Clue",
     "Equipment",
-    "F2P",
-    "Magic"
+    "Magic",
+    "F2P"
   ],
   "Black wizard hat (t)": [
     "Clue",
     "Equipment",
-    "F2P",
-    "Magic"
+    "Magic",
+    "F2P"
   ],
   "Ancient platebody": [
     "Clue",
     "Equipment",
-    "F2P",
-    "Melee"
+    "Melee",
+    "F2P"
   ],
   "Ancient platelegs": [
     "Clue",
     "Equipment",
-    "F2P",
-    "Melee"
+    "Melee",
+    "F2P"
   ],
   "Ancient plateskirt": [
     "Clue",
     "Equipment",
-    "F2P",
-    "Melee"
+    "Melee",
+    "F2P"
   ],
   "Ancient full helm": [
     "Clue",
     "Equipment",
-    "F2P",
-    "Melee"
+    "Melee",
+    "F2P"
   ],
   "Ancient kiteshield": [
     "Clue",
     "Equipment",
-    "F2P",
-    "Melee"
+    "Melee",
+    "F2P"
   ],
   "Armadyl platebody": [
     "Clue",
     "Equipment",
-    "F2P",
-    "Melee"
+    "Melee",
+    "F2P"
   ],
   "Armadyl platelegs": [
     "Clue",
     "Equipment",
-    "F2P",
-    "Melee"
+    "Melee",
+    "F2P"
   ],
   "Armadyl plateskirt": [
     "Clue",
     "Equipment",
-    "F2P",
-    "Melee"
+    "Melee",
+    "F2P"
   ],
   "Armadyl full helm": [
     "Clue",
     "Equipment",
-    "F2P",
-    "Melee"
+    "Melee",
+    "F2P"
   ],
   "Armadyl kiteshield": [
     "Clue",
     "Equipment",
-    "F2P",
-    "Melee"
+    "Melee",
+    "F2P"
   ],
   "Bandos platebody": [
     "Clue",
     "Equipment",
-    "F2P",
-    "Melee"
+    "Melee",
+    "F2P"
   ],
   "Bandos platelegs": [
     "Clue",
     "Equipment",
-    "F2P",
-    "Melee"
+    "Melee",
+    "F2P"
   ],
   "Bandos plateskirt": [
     "Clue",
     "Equipment",
-    "F2P",
-    "Melee"
+    "Melee",
+    "F2P"
   ],
   "Bandos full helm": [
     "Clue",
     "Equipment",
-    "F2P",
-    "Melee"
+    "Melee",
+    "F2P"
   ],
   "Bandos kiteshield": [
     "Clue",
     "Equipment",
-    "F2P",
-    "Melee"
+    "Melee",
+    "F2P"
   ],
   "Ancient bracers": [
     "Clue",
@@ -9032,9 +8960,9 @@
     "Clue"
   ],
   "Stamina potion": [
-    "Construction",
     "Herblore",
-    "Potion"
+    "Potion",
+    "Construction"
   ],
   "Saradomin halo": [
     "Equipment"
@@ -9327,7 +9255,6 @@
   ],
   "Juniper logs": [],
   "Lovakite ore": [
-    "Magic",
     "Smithing"
   ],
   "Shayzien gloves": [
@@ -9584,11 +9511,9 @@
     "Crafting"
   ],
   "Redwood logs": [
-    "Construction",
-    "Crafting",
     "Firemaking",
     "Fletching",
-    "Prayer"
+    "Construction"
   ],
   "Arclight": [
     "Melee",
@@ -9778,16 +9703,15 @@
   ],
   "3rd age axe": [
     "Clue",
-    "Melee",
-    "Smithing",
     "Tool",
+    "Melee",
     "Weapon"
   ],
   "3rd age pickaxe": [
     "Clue",
-    "Melee",
     "Mining",
     "Tool",
+    "Melee",
     "Weapon"
   ],
   "Ring of coins": [
@@ -9976,9 +9900,9 @@
   ],
   "Gilded 2h sword": [
     "Clue",
-    "F2P",
     "Melee",
-    "Weapon"
+    "Weapon",
+    "F2P"
   ],
   "Gilded spear": [
     "Clue",
@@ -10002,62 +9926,62 @@
   "Steel platebody (g)": [
     "Clue",
     "Equipment",
-    "F2P",
-    "Melee"
+    "Melee",
+    "F2P"
   ],
   "Steel platelegs (g)": [
     "Clue",
     "Equipment",
-    "F2P",
-    "Melee"
+    "Melee",
+    "F2P"
   ],
   "Steel plateskirt (g)": [
     "Clue",
     "Equipment",
-    "F2P",
-    "Melee"
+    "Melee",
+    "F2P"
   ],
   "Steel full helm (g)": [
     "Clue",
     "Equipment",
-    "F2P",
-    "Melee"
+    "Melee",
+    "F2P"
   ],
   "Steel kiteshield (g)": [
     "Clue",
     "Equipment",
-    "F2P",
-    "Melee"
+    "Melee",
+    "F2P"
   ],
   "Steel platebody (t)": [
     "Clue",
     "Equipment",
-    "F2P",
-    "Melee"
+    "Melee",
+    "F2P"
   ],
   "Steel platelegs (t)": [
     "Clue",
     "Equipment",
-    "F2P",
-    "Melee"
+    "Melee",
+    "F2P"
   ],
   "Steel plateskirt (t)": [
     "Clue",
     "Equipment",
-    "F2P",
-    "Melee"
+    "Melee",
+    "F2P"
   ],
   "Steel full helm (t)": [
     "Clue",
     "Equipment",
-    "F2P",
-    "Melee"
+    "Melee",
+    "F2P"
   ],
   "Steel kiteshield (t)": [
     "Clue",
     "Equipment",
-    "F2P",
-    "Melee"
+    "Melee",
+    "F2P"
   ],
   "Monk's robe top (g)": [
     "Clue",
@@ -10196,12 +10120,12 @@
   ],
   "Climbing boots": [
     "Equipment",
-    "F2P",
-    "Melee"
+    "Melee",
+    "F2P"
   ],
   "Stale baguette": [
-    "F2P",
-    "Weapon"
+    "Weapon",
+    "F2P"
   ],
   "Elder chaos hood": [
     "Equipment",
@@ -10298,9 +10222,9 @@
     "F2P"
   ],
   "Hill giant club": [
-    "F2P",
     "Melee",
-    "Weapon"
+    "Weapon",
+    "F2P"
   ],
   "Kindling": [],
   "Empty gourd vial": [
@@ -10322,16 +10246,16 @@
   ],
   "Cavern grubs": [],
   "Noxifer": [
-    "Farming",
-    "Herblore"
+    "Herblore",
+    "Farming"
   ],
   "Golpar": [
-    "Farming",
-    "Herblore"
+    "Herblore",
+    "Farming"
   ],
   "Buchu leaf": [
-    "Farming",
-    "Herblore"
+    "Herblore",
+    "Farming"
   ],
   "Stinkhorn mushroom": [
     "Herblore"
@@ -10580,8 +10504,8 @@
   "Unidentified large fossil": [],
   "Unidentified rare fossil": [],
   "Volcanic ash": [
-    "Farming",
-    "Herblore"
+    "Herblore",
+    "Farming"
   ],
   "Hoop snake": [
     "F2P"
@@ -10627,13 +10551,13 @@
   "Bowl of fish": [],
   "Diving helmet": [
     "Equipment",
-    "F2P",
-    "Sailing"
+    "Sailing",
+    "F2P"
   ],
   "Diving apparatus": [
     "Equipment",
-    "F2P",
-    "Sailing"
+    "Sailing",
+    "F2P"
   ],
   "Brittle key": [],
   "Granite dust": [
@@ -10688,8 +10612,8 @@
   "Revenant ether": [],
   "Shaman mask": [
     "Equipment",
-    "F2P",
-    "Magic"
+    "Magic",
+    "F2P"
   ],
   "Wrath rune": [],
   "Dragon platebody": [
@@ -10701,9 +10625,8 @@
     "Melee"
   ],
   "Dragon crossbow": [
-    "Construction",
-    "Fletching",
     "Ranged",
+    "Fletching",
     "Weapon"
   ],
   "Dragon bolts": [
@@ -10712,8 +10635,8 @@
     "Ranged"
   ],
   "Vorkath's head": [
-    "Attack",
     "Construction",
+    "Attack",
     "Defence",
     "Magic",
     "Strength"
@@ -10793,9 +10716,9 @@
     "Runecraft"
   ],
   "Superior dragon bones": [
+    "Prayer",
     "Crafting",
-    "Herblore",
-    "Prayer"
+    "Herblore"
   ],
   "Adamant heraldic helm": [
     "Equipment",
@@ -10922,9 +10845,9 @@
     "Melee"
   ],
   "Bryophyta's staff": [
-    "F2P",
     "Melee",
-    "Weapon"
+    "Weapon",
+    "F2P"
   ],
   "Bryophyta's essence": [
     "Crafting",
@@ -10973,8 +10896,8 @@
     "Weapon"
   ],
   "Craw's bow": [
-    "Fletching",
     "Ranged",
+    "Fletching",
     "Weapon"
   ],
   "Thammaron's sceptre": [
@@ -11015,18 +10938,18 @@
     "Pet"
   ],
   "Wyrm bones": [
-    "Crafting",
     "Prayer",
+    "Crafting",
     "Slayer"
   ],
   "Drake bones": [
-    "Crafting",
     "Prayer",
+    "Crafting",
     "Slayer"
   ],
   "Hydra bones": [
-    "Crafting",
     "Prayer",
+    "Crafting",
     "Slayer"
   ],
   "Uncooked dragonfruit pie": [
@@ -11070,16 +10993,16 @@
     "Weapon"
   ],
   "Pearl barbarian rod": [
-    "F2P",
-    "Weapon"
+    "Weapon",
+    "F2P"
   ],
   "Pearl fly fishing rod": [
-    "F2P",
-    "Weapon"
+    "Weapon",
+    "F2P"
   ],
   "Pearl fishing rod": [
-    "F2P",
-    "Weapon"
+    "Weapon",
+    "F2P"
   ],
   "Celastrus seed": [
     "Farming"
@@ -11179,8 +11102,8 @@
   ],
   "Jar of chemicals": [],
   "Alchemical hydra heads": [
-    "Attack",
     "Construction",
+    "Attack",
     "Defence",
     "Magic",
     "Prayer",
@@ -11197,8 +11120,8 @@
   ],
   "Ornate legs": [
     "Equipment",
-    "F2P",
-    "Melee"
+    "Melee",
+    "F2P"
   ],
   "Ornate top": [
     "Equipment",
@@ -11210,8 +11133,8 @@
   ],
   "Ornate helm": [
     "Equipment",
-    "F2P",
-    "Melee"
+    "Melee",
+    "F2P"
   ],
   "Ring of 3rd age": [
     "Equipment",
@@ -11255,37 +11178,37 @@
   "Rune platebody (h1)": [
     "Clue",
     "Equipment",
-    "F2P",
     "Melee",
-    "Smithing"
+    "Smithing",
+    "F2P"
   ],
   "Rune platebody (h2)": [
     "Clue",
     "Equipment",
-    "F2P",
     "Melee",
-    "Smithing"
+    "Smithing",
+    "F2P"
   ],
   "Rune platebody (h3)": [
     "Clue",
     "Equipment",
-    "F2P",
     "Melee",
-    "Smithing"
+    "Smithing",
+    "F2P"
   ],
   "Rune platebody (h4)": [
     "Clue",
     "Equipment",
-    "F2P",
     "Melee",
-    "Smithing"
+    "Smithing",
+    "F2P"
   ],
   "Rune platebody (h5)": [
     "Clue",
     "Equipment",
-    "F2P",
     "Melee",
-    "Smithing"
+    "Smithing",
+    "F2P"
   ],
   "Thieving bag": [
     "Clue",
@@ -11331,20 +11254,20 @@
   "Gilded d'hide vambraces": [
     "Clue",
     "Equipment",
-    "F2P",
-    "Ranged"
+    "Ranged",
+    "F2P"
   ],
   "Gilded d'hide body": [
     "Clue",
     "Equipment",
-    "F2P",
-    "Ranged"
+    "Ranged",
+    "F2P"
   ],
   "Gilded d'hide chaps": [
     "Clue",
     "Equipment",
-    "F2P",
-    "Ranged"
+    "Ranged",
+    "F2P"
   ],
   "Adamant dragon mask": [
     "Clue",
@@ -11356,24 +11279,24 @@
   ],
   "Gilded pickaxe": [
     "Clue",
-    "F2P",
-    "Melee",
     "Mining",
     "Tool",
-    "Weapon"
+    "Melee",
+    "Weapon",
+    "F2P"
   ],
   "Gilded axe": [
     "Clue",
-    "F2P",
-    "Melee",
     "Tool",
-    "Weapon"
+    "Melee",
+    "Weapon",
+    "F2P"
   ],
   "Gilded spade": [
     "Clue",
-    "F2P",
     "Tool",
-    "Weapon"
+    "Weapon",
+    "F2P"
   ],
   "Mole slippers": [
     "Clue",
@@ -11475,8 +11398,8 @@
   "Amulet of power (t)": [
     "Clue",
     "Equipment",
-    "F2P",
-    "Ranged"
+    "Ranged",
+    "F2P"
   ],
   "Rain bow": [
     "Clue",
@@ -11485,8 +11408,8 @@
   ],
   "Ham joint": [
     "Clue",
-    "F2P",
-    "Weapon"
+    "Weapon",
+    "F2P"
   ],
   "Staff of bob the cat": [
     "Clue",
@@ -11496,44 +11419,44 @@
   "Black platebody (h1)": [
     "Clue",
     "Equipment",
-    "F2P",
-    "Melee"
+    "Melee",
+    "F2P"
   ],
   "Black platebody (h2)": [
     "Clue",
     "Equipment",
-    "F2P",
-    "Melee"
+    "Melee",
+    "F2P"
   ],
   "Black platebody (h3)": [
     "Clue",
     "Equipment",
-    "F2P",
-    "Melee"
+    "Melee",
+    "F2P"
   ],
   "Black platebody (h4)": [
     "Clue",
     "Equipment",
-    "F2P",
-    "Melee"
+    "Melee",
+    "F2P"
   ],
   "Black platebody (h5)": [
     "Clue",
     "Equipment",
-    "F2P",
-    "Melee"
+    "Melee",
+    "F2P"
   ],
   "Leather body (g)": [
     "Clue",
     "Equipment",
-    "F2P",
-    "Ranged"
+    "Ranged",
+    "F2P"
   ],
   "Leather chaps (g)": [
     "Clue",
     "Equipment",
-    "F2P",
-    "Ranged"
+    "Ranged",
+    "F2P"
   ],
   "Spiked manacles": [
     "Clue",
@@ -11543,37 +11466,37 @@
   "Adamant platebody (h1)": [
     "Clue",
     "Equipment",
-    "F2P",
     "Melee",
-    "Smithing"
+    "Smithing",
+    "F2P"
   ],
   "Adamant platebody (h2)": [
     "Clue",
     "Equipment",
-    "F2P",
     "Melee",
-    "Smithing"
+    "Smithing",
+    "F2P"
   ],
   "Adamant platebody (h3)": [
     "Clue",
     "Equipment",
-    "F2P",
     "Melee",
-    "Smithing"
+    "Smithing",
+    "F2P"
   ],
   "Adamant platebody (h4)": [
     "Clue",
     "Equipment",
-    "F2P",
     "Melee",
-    "Smithing"
+    "Smithing",
+    "F2P"
   ],
   "Adamant platebody (h5)": [
     "Clue",
     "Equipment",
-    "F2P",
     "Melee",
-    "Smithing"
+    "Smithing",
+    "F2P"
   ],
   "Wolf mask": [
     "Clue",
@@ -11611,16 +11534,15 @@
     "Farming"
   ],
   "Crystal axe": [
+    "Tool",
     "Crafting",
     "Melee",
-    "Smithing",
-    "Tool",
     "Weapon"
   ],
   "Crystal pickaxe": [
-    "Melee",
     "Mining",
     "Tool",
+    "Melee",
     "Weapon"
   ],
   "Youngllef": [
@@ -11645,8 +11567,8 @@
     "Potion"
   ],
   "Crystal bow": [
-    "Crafting",
     "Ranged",
+    "Crafting",
     "Smithing",
     "Weapon"
   ],
@@ -11723,18 +11645,18 @@
   ],
   "Dragonstone full helm": [
     "Equipment",
-    "F2P",
-    "Melee"
+    "Melee",
+    "F2P"
   ],
   "Dragonstone platebody": [
     "Equipment",
-    "F2P",
-    "Melee"
+    "Melee",
+    "F2P"
   ],
   "Dragonstone platelegs": [
     "Equipment",
-    "F2P",
-    "Melee"
+    "Melee",
+    "F2P"
   ],
   "Dragonstone boots": [
     "Equipment",
@@ -11770,8 +11692,8 @@
   ],
   "Guthixian icon": [],
   "Swift blade": [
-    "F2P",
-    "Weapon"
+    "Weapon",
+    "F2P"
   ],
   "Neitiznot faceguard": [
     "Equipment",
@@ -11962,13 +11884,13 @@
   ],
   "Decorative boots": [
     "Equipment",
-    "F2P",
-    "Melee"
+    "Melee",
+    "F2P"
   ],
   "Decorative full helm": [
     "Equipment",
-    "F2P",
-    "Melee"
+    "Melee",
+    "F2P"
   ],
   "Ectoplasmator": [],
   "Lil' creator": [
@@ -12061,8 +11983,8 @@
   "Stardust": [
     "Crafting",
     "Currency",
-    "F2P",
-    "Smithing"
+    "Smithing",
+    "F2P"
   ],
   "Celestial ring": [
     "Crafting",
@@ -12112,9 +12034,9 @@
     "Pet"
   ],
   "Barronite mace": [
-    "F2P",
     "Melee",
-    "Weapon"
+    "Weapon",
+    "F2P"
   ],
   "Imcando hammer": [
     "Equipment",
@@ -12127,31 +12049,31 @@
     "F2P"
   ],
   "Raw guppy": [
-    "F2P",
-    "Fishing"
+    "Fishing",
+    "F2P"
   ],
   "Guppy": [
     "Cooking",
-    "F2P",
-    "Food"
+    "Food",
+    "F2P"
   ],
   "Raw cavefish": [
-    "F2P",
-    "Fishing"
+    "Fishing",
+    "F2P"
   ],
   "Cavefish": [
     "Cooking",
-    "F2P",
-    "Food"
+    "Food",
+    "F2P"
   ],
   "Raw tetra": [
-    "F2P",
-    "Fishing"
+    "Fishing",
+    "F2P"
   ],
   "Tetra": [
     "Cooking",
-    "F2P",
-    "Food"
+    "Food",
+    "F2P"
   ],
   "Raw catfish": [
     "Fishing"
@@ -12184,12 +12106,12 @@
     "F2P"
   ],
   "Mind core": [
-    "F2P",
-    "Runecraft"
+    "Runecraft",
+    "F2P"
   ],
   "Body core": [
-    "F2P",
-    "Runecraft"
+    "Runecraft",
+    "F2P"
   ],
   "Chaos core": [
     "Runecraft"
@@ -12216,8 +12138,8 @@
   ],
   "Lizardkicker": [],
   "Raw boar meat": [
-    "F2P",
-    "Fishing"
+    "Fishing",
+    "F2P"
   ],
   "Orange egg sac": [],
   "Blue egg sac": [],
@@ -12426,13 +12348,13 @@
   ],
   "Ghostly hood": [
     "Equipment",
-    "F2P",
-    "Magic"
+    "Magic",
+    "F2P"
   ],
   "Ghostly robe": [
     "Equipment",
-    "F2P",
-    "Magic"
+    "Magic",
+    "F2P"
   ],
   "Menaphite remedy": [
     "Herblore"
@@ -12730,8 +12652,8 @@
   ],
   "Fancier boots": [
     "Equipment",
-    "F2P",
-    "Melee"
+    "Melee",
+    "F2P"
   ],
   "Bone mace": [
     "Melee",
@@ -12783,8 +12705,8 @@
   "Sunlight moth": [],
   "Moonlight moth": [],
   "Wyrmling bones": [
-    "Crafting",
-    "Prayer"
+    "Prayer",
+    "Crafting"
   ],
   "Tonalztics of ralos": [
     "Ranged",
@@ -13067,8 +12989,8 @@
   "House keys": [],
   "Valuables": [],
   "Sun-kissed bones": [
-    "Crafting",
-    "Prayer"
+    "Prayer",
+    "Crafting"
   ],
   "Blessed bone shards": [
     "Crafting",
@@ -13281,8 +13203,8 @@
     "Farming"
   ],
   "Huasca": [
-    "Farming",
-    "Herblore"
+    "Herblore",
+    "Farming"
   ],
   "Moon key": [],
   "Helmet of the moon": [
@@ -13732,15 +13654,13 @@
   ],
   "Anti-odour salt": [],
   "Lead ore": [
-    "Magic",
+    "Smithing",
     "Mining",
-    "Sailing",
-    "Smithing"
+    "Sailing"
   ],
   "Nickel ore": [
-    "Magic",
-    "Sailing",
-    "Smithing"
+    "Smithing",
+    "Sailing"
   ],
   "Rubium splinters": [
     "Mining",
@@ -13751,12 +13671,12 @@
     "Sailing"
   ],
   "Strykewyrm bones": [
-    "Crafting",
-    "Prayer"
+    "Prayer",
+    "Crafting"
   ],
   "Frost dragon bones": [
-    "Crafting",
     "Prayer",
+    "Crafting",
     "Sailing"
   ],
   "Barrel stand": [
@@ -14349,28 +14269,21 @@
     "Smithing"
   ],
   "Camphor logs": [
-    "Construction",
-    "Crafting",
     "Firemaking",
     "Fletching",
-    "Magic",
-    "Prayer",
+    "Construction",
     "Sailing"
   ],
   "Ironwood logs": [
-    "Construction",
     "Firemaking",
     "Fletching",
-    "Magic",
-    "Prayer",
+    "Construction",
     "Sailing"
   ],
   "Rosewood logs": [
-    "Construction",
     "Firemaking",
     "Fletching",
-    "Magic",
-    "Prayer",
+    "Construction",
     "Sailing"
   ],
   "Jar of feathers": [
@@ -14394,8 +14307,8 @@
   ],
   "Mooleta": [
     "Equipment",
-    "F2P",
-    "Melee"
+    "Melee",
+    "F2P"
   ],
   "Cowbell amulet": [
     "Equipment",
@@ -14407,12 +14320,12 @@
   ],
   "Cooked t-bone steak": [
     "Cooking",
-    "F2P",
-    "Food"
+    "Food",
+    "F2P"
   ],
   "Bull bones": [
-    "F2P",
-    "Prayer"
+    "Prayer",
+    "F2P"
   ],
   "Abyssal potato": [],
   "Beef": [
@@ -14605,51 +14518,51 @@
   "Corporeal Beast": [],
   "Dark energy core": [],
   "Mime": [
-    "F2P",
-    "Randomevent"
+    "Randomevent",
+    "F2P"
   ],
   "Drunken Dwarf": [
-    "F2P",
-    "Randomevent"
+    "Randomevent",
+    "F2P"
   ],
   "Strange plant": [
     "Randomevent"
   ],
   "Genie": [
-    "F2P",
-    "Randomevent"
+    "Randomevent",
+    "F2P"
   ],
   "Sergeant Damien": [
-    "F2P",
-    "Randomevent"
+    "Randomevent",
+    "F2P"
   ],
   "Molly": [
-    "F2P",
-    "Randomevent"
+    "Randomevent",
+    "F2P"
   ],
   "Prison Pete": [
-    "F2P",
-    "Randomevent"
+    "Randomevent",
+    "F2P"
   ],
   "Freaky Forester": [
-    "F2P",
-    "Randomevent"
+    "Randomevent",
+    "F2P"
   ],
   "Rick Turpentine": [
-    "F2P",
-    "Randomevent"
+    "Randomevent",
+    "F2P"
   ],
   "Quiz Master": [
-    "F2P",
-    "Randomevent"
+    "Randomevent",
+    "F2P"
   ],
   "Pillory Guard": [
-    "F2P",
-    "Randomevent"
+    "Randomevent",
+    "F2P"
   ],
   "Evil Bob": [
-    "F2P",
-    "Randomevent"
+    "Randomevent",
+    "F2P"
   ],
   "Vannaka": [
     "Slayer"
@@ -14709,8 +14622,8 @@
     "Slayer"
   ],
   "Giant frog": [
-    "F2P",
-    "Sailing"
+    "Sailing",
+    "F2P"
   ],
   "Big frog": [],
   "Cave slime": [
@@ -14798,8 +14711,8 @@
     "F2P"
   ],
   "Cabin Boy Jenkins": [
-    "F2P",
-    "Sailing"
+    "Sailing",
+    "F2P"
   ],
   "Larry": [],
   "Ping": [],
@@ -15067,8 +14980,8 @@
     "F2P"
   ],
   "Goblin": [
-    "F2P",
-    "Slayer"
+    "Slayer",
+    "F2P"
   ],
   "Rat": [
     "F2P"
@@ -15080,8 +14993,8 @@
   "H.A.M. Member": [],
   "Wingstone": [],
   "Brother Jered": [
-    "F2P",
-    "Prayer"
+    "Prayer",
+    "F2P"
   ],
   "Monk": [
     "F2P"
@@ -15123,16 +15036,16 @@
   "Aluft Gianne snr.": [],
   "Head chef": [
     "Cooking",
-    "F2P",
-    "Food"
+    "Food",
+    "F2P"
   ],
   "Cow calf": [
     "F2P"
   ],
   "Bat": [],
   "Mysterious Old Man": [
-    "F2P",
-    "Randomevent"
+    "Randomevent",
+    "F2P"
   ],
   "Giant bat": [],
   "Unicorn": [
@@ -15162,17 +15075,17 @@
     "F2P"
   ],
   "Aubury": [
-    "F2P",
-    "Runecraft"
+    "Runecraft",
+    "F2P"
   ],
   "Master fisher": [
     "Fishing"
   ],
   "Otto Godblessed": [
+    "Herblore",
     "Farming",
     "Firemaking",
     "Fishing",
-    "Herblore",
     "Smithing"
   ],
   "Waterfiend": [],
@@ -15191,16 +15104,16 @@
   "Shadow spider": [],
   "Jungle spider": [],
   "Deadly red spider": [
-    "F2P",
-    "Sailing"
+    "Sailing",
+    "F2P"
   ],
   "Ice spider": [],
   "Poison spider": [],
   "Poison Scorpion": [],
   "Pit Scorpion": [],
   "King Scorpion": [
-    "F2P",
-    "Sailing"
+    "Sailing",
+    "F2P"
   ],
   "Barbarian": [
     "F2P"
@@ -15245,13 +15158,13 @@
     "F2P"
   ],
   "Woodsman tutor": [
-    "F2P",
-    "Woodcutting"
+    "Woodcutting",
+    "F2P"
   ],
   "Leech": [],
   "Bee keeper": [
-    "F2P",
-    "Randomevent"
+    "Randomevent",
+    "F2P"
   ],
   "Wizard Sinina": [
     "Magic"
@@ -15505,8 +15418,8 @@
   "Hopeless creature": [],
   "The Shaikahan": [],
   "Thurgo": [
-    "F2P",
-    "Smithing"
+    "Smithing",
+    "F2P"
   ],
   "Sir Vyvin": [
     "F2P"
@@ -15598,29 +15511,29 @@
     "F2P"
   ],
   "Capt' Arnav": [
-    "F2P",
-    "Randomevent"
+    "Randomevent",
+    "F2P"
   ],
   "Flippa": [
-    "F2P",
-    "Randomevent"
+    "Randomevent",
+    "F2P"
   ],
   "Niles": [
-    "F2P",
-    "Randomevent"
+    "Randomevent",
+    "F2P"
   ],
   "Cap'n Hand": [
-    "F2P",
-    "Randomevent"
+    "Randomevent",
+    "F2P"
   ],
   "Shipyard worker": [],
   "Dunce": [
-    "F2P",
-    "Randomevent"
+    "Randomevent",
+    "F2P"
   ],
   "Sandwich lady": [
-    "F2P",
-    "Randomevent"
+    "Randomevent",
+    "F2P"
   ],
   "Lesser Fanatic": [],
   "Two-pints": [],
@@ -15943,8 +15856,8 @@
     "Slayer"
   ],
   "Count Check": [
-    "F2P",
-    "Randomevent"
+    "Randomevent",
+    "F2P"
   ],
   "Obor": [
     "F2P"
@@ -15971,8 +15884,8 @@
   "Skeletal Mystics": [],
   "Temple Guardian": [],
   "Krystilia": [
-    "F2P",
-    "Slayer"
+    "Slayer",
+    "F2P"
   ],
   "TzHaar-Ket": [],
   "Jal-Nib": [],
