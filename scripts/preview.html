@@ -1007,12 +1007,15 @@ function canGetItem(itemName, visited = new Set()) {
   // Tools (Hammer, Chisel, Knife, Needle, etc.) are TCG cards; you must own them to use them.
   if (src.production) {
     const p = src.production;
-    if (!p.skill || getLevel(p.skill) >= (p.level || 1)) {
-      const prodTools = getImplicitTools(p.skill, p.ingredients || [], p.tools || [], p.facilities);
+    const ings = p.ingredients || [];
+    // Skip self-referential recipes (item lists itself as an ingredient)
+    const isSelfRef = ings.some(i => i.item === itemName);
+    if (!isSelfRef && (!p.skill || getLevel(p.skill) >= (p.level || 1))) {
+      const prodTools = getImplicitTools(p.skill, ings, p.tools || [], p.facilities);
       const toolsOk   = prodTools.every(t => !itemSources[t] || isOwned(t));
       if (toolsOk) {
         const newVisited = new Set([...visited, itemName]);
-        const ok = (p.ingredients || []).every(ing => {
+        const ok = ings.every(ing => {
           if (itemSources[ing.item] && !isOwned(ing.item)) return false; // need card to use as ingredient
           return canGetItem(ing.item, newVisited);
         });
@@ -1911,7 +1914,9 @@ function _wlSearchInput(q) {
       data-quest="${safe}" onclick="_wlQuestToggle(this.dataset.quest)"
       onmouseenter="this.style.background='#161616'" onmouseleave="this.style.background=''">
       <span style="width:20px;flex-shrink:0;font-size:10px;text-align:center;color:#7a6a3a">Q</span>
-      <span style="flex:1;font-size:11px;color:#aaa;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${qn}</span>
+      <span style="flex:1;font-size:11px;color:#bba050;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;text-decoration:underline dotted"
+        onclick="event.stopPropagation();pushHistoryEntry();selectedQuest='${safe}';_renderTab('questing',false);showQuestDetail('${safe}',false)"
+        title="Open quest page">${qn}</span>
       <span style="font-size:12px;flex-shrink:0;color:${wled?'#7a6a3a':'#2a2a1a'};font-weight:700" title="${wled?'Remove quest from wishlist':'Add quest cards to wishlist'}">${wled?'★':'☆'}</span>
     </div>`;
   }).join('');
@@ -3112,10 +3117,10 @@ function renderProduction(prod) {
     <div class="section-header">Production</div>
     <div class="production-card">
       <div class="production-skill">
-        ${skill}
-        <span class="level-req${canCraft?'':' locked'}" style="background:${canCraft?'':'#3a1a00'};color:${canCraft?skillColor:'#c84a00'}">
+        ${skill || 'Assembly'}
+        ${skill ? `<span class="level-req${canCraft?'':' locked'}" style="background:${canCraft?'':'#3a1a00'};color:${canCraft?skillColor:'#c84a00'}">
           Level ${level}${canCraft?' ✓':' — need '+(level-playerLevel)+' more lvls'}
-        </span>
+        </span>` : ''}
       </div>
       ${facilityNote(facilities) ? `<div class="production-facilities">${facilityNote(facilities)}</div>` : ''}
       <div class="production-ingredients">${rows}</div>
@@ -3911,7 +3916,10 @@ function renderItem(name, container) {
   }
 
   // Production (crafting/cooking/smithing/fletching/etc.)
-  if (production) {
+  // Skip if any ingredient is the item itself (poisoned weapon recipes, upgrade kits, etc.)
+  const productionValid = production &&
+    !(production.ingredients || []).some(i => i.item === name);
+  if (productionValid) {
     html += renderProduction(production);
   }
 
