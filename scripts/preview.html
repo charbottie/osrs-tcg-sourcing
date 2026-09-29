@@ -556,6 +556,22 @@
   .pack-chip.missing { background: #111; border: 1px solid #222; color: #444; }
   .pack-chip:hover   { filter: brightness(1.5); }
 
+  /* ── Wishlist tab ── */
+  #wishlist-content { flex: 1; overflow-y: auto; }
+  .wl-item {
+    display: flex; align-items: center; gap: 6px;
+    padding: 5px 6px; border-radius: 3px; cursor: pointer;
+    border: 1px solid transparent; margin-bottom: 2px;
+  }
+  .wl-item:hover { background: #1e1e1e; border-color: #333; }
+  .wl-item.selected { background: #1a1600; border-color: #554a00; }
+  .wl-remove { color: #333; cursor: pointer; font-size: 13px; padding: 0 2px; flex-shrink:0; }
+  .wl-remove:hover { color: #c84a00; }
+  .wish-star { cursor: pointer; font-size: 14px; user-select: none; }
+  .wish-star.active { color: #e8c97a; }
+  .wish-star:not(.active) { color: #444; }
+  .wish-star:hover { color: #e8c97a !important; }
+
   /* ── Equipment tab ── */
   #equip-panel { flex: 1; display: flex; flex-direction: column; overflow: hidden; }
   #equip-style-bar {
@@ -704,6 +720,7 @@
   <button class="tab-btn"        onclick="switchTab('questing')" id="tab-questing">Questing</button>
   <button class="tab-btn"        onclick="switchTab('equipment')" id="tab-equipment">Equipment</button>
   <button class="tab-btn"        onclick="switchTab('packs')"    id="tab-packs">Packs</button>
+  <button class="tab-btn"        onclick="switchTab('wishlist')" id="tab-wishlist">Wishlist</button>
   <button class="tab-btn"        onclick="switchTab('rules')"    id="tab-rules">Rules</button>
   <div style="flex:1"></div>
   <div id="global-nav" style="display:flex;align-items:center;padding:0 8px;gap:4px;">
@@ -746,6 +763,7 @@
         <option value="clueScrolls">Clue Scrolls</option>
         <option value="Clue">Clue rewards</option>
         <option value="other">Misc / Other</option>
+        <option value="wishlisted">Wishlisted</option>
       </select>
     </div>
     <div id="filter-row3" style="display:flex;gap:6px;">
@@ -1075,6 +1093,8 @@ let activeTab = 'cards';
 let selectedSkill = null;   // currently selected skill in Skilling tab
 let selectedQuest = null;   // currently selected quest in Questing tab
 let selectedPack  = null;   // currently selected pack in Packs tab
+let wishlist = new Map();          // card name → {note:string}  (starred cards)
+let wishlistedQuests = new Set();  // quest names bulk-added via quest button
 let _lastSourceMtime = 0;   // newest RuneLite save file mtime at last refresh
 let _refreshInProgress = false;
 
@@ -1182,6 +1202,7 @@ function switchCollection(rsn) {
   if (activeTab === 'skilling')   renderSkillGrid();
   if (activeTab === 'questing')   renderQuestList();
   if (activeTab === 'packs')    { renderPackList(); if (selectedPack) showPackDetail(selectedPack); }
+  if (activeTab === 'wishlist') renderWishlist();
   if (activeTab === 'equipment') { refreshEquipDoll(); updateEquipCount(); renderGearStats(); updateDpsOutput(); }
 }
 
@@ -1299,6 +1320,7 @@ async function loadData() {
     }
     await loadCollection();
     buildCardList();
+    _loadWishlist();
     // Load pack catalog from server (non-blocking — enhances card detail pages once ready)
     fetch('/api/packs').then(r => r.json()).then(data => {
       packCatalog = data;
@@ -1408,6 +1430,7 @@ function filterCards() {
     if (owned_f === 'not-owned' &&  isOwned(c.name)) return false;
     if (catFil !== 'all') {
       if (catFil === 'clueScrolls') return false;
+      if (catFil === 'wishlisted')  return wishlist.has(c.name);
       if (catFil === 'monsters') return c.type === 'monster';
       if (catFil === 'npcs')     return c.type === 'npc';
       if (c.type !== 'item') return false;
@@ -1533,6 +1556,8 @@ function navigate(state) {
     selectedPack = state.pack || null;
     renderPackList();
     if (selectedPack) showPackDetail(selectedPack);
+  } else if (state.tab === 'wishlist') {
+    renderWishlist();
   } else if (state.tab === 'cards') {
     selected = state.name; selectedType = state.type;
     filterCards();
@@ -1770,6 +1795,196 @@ function packAcquisitionHtml(name) {
   </div>`;
 }
 
+// ─── Wishlist ──────────────────────────────────────────────────────────────
+
+function _loadWishlist() {
+  try {
+    const raw = localStorage.getItem('tcg_wishlist');
+    if (!raw) return;
+    const d = JSON.parse(raw);
+    if (d.v === 2) {
+      wishlist = new Map(Object.entries(d.items || {}));
+      wishlistedQuests = new Set(d.quests || []);
+    } else {
+      // Migrate from old Set format (v1 — just an array of names)
+      wishlist = new Map((Array.isArray(d) ? d : []).map(n => [n, {note:''}]));
+      wishlistedQuests = new Set();
+    }
+  } catch { wishlist = new Map(); wishlistedQuests = new Set(); }
+}
+
+function _saveWishlist() {
+  const items = {};
+  for (const [k, v] of wishlist) items[k] = v;
+  localStorage.setItem('tcg_wishlist', JSON.stringify({
+    v: 2,
+    items,
+    quests: [...wishlistedQuests].sort(),
+  }));
+}
+
+function toggleWishlist(name) {
+  if (wishlist.has(name)) wishlist.delete(name);
+  else wishlist.set(name, {note: ''});
+  _saveWishlist();
+  refreshDetail();
+  if (activeTab === 'wishlist') renderWishlist();
+}
+
+function removeFromWishlist(name) {
+  wishlist.delete(name);
+  _saveWishlist();
+  if (activeTab === 'wishlist') renderWishlist();
+}
+
+function removeQuestFromWishlist(questName) {
+  wishlistedQuests.delete(questName);
+  _saveWishlist();
+  if (activeTab === 'wishlist') renderWishlist();
+}
+
+function clearWishlist() {
+  wishlist.clear();
+  wishlistedQuests.clear();
+  _saveWishlist();
+  if (activeTab === 'wishlist') renderWishlist();
+}
+
+function saveWishlistNote(name, note) {
+  const entry = wishlist.get(name);
+  if (entry) { entry.note = note; _saveWishlist(); }
+}
+
+function wishlistQuest(questName) {
+  if (wishlistedQuests.has(questName)) return 0;
+  wishlistedQuests.add(questName);
+  _saveWishlist();
+  if (activeTab === 'wishlist') renderWishlist();
+  return 1;
+}
+
+// ── Category helper ───────────────────────────────────────────────────────────
+const _EQUIP_CATS = new Set(['Weapon','Armour','Ammo','Shield','Cape','Helm','Boot','Glove','Amulet','Ring','Jewellery']);
+function _wlCategory(name) {
+  if (monsterDrops[name]) return monsterDrops[name].combatLevel ? 'monster' : 'npc';
+  const cats = cardCategories[name] || [];
+  if (cats.includes('Tool')) return 'tool';
+  if (cats.some(c => _EQUIP_CATS.has(c))) return 'equipment';
+  return 'other';
+}
+
+// ── Main render ───────────────────────────────────────────────────────────────
+function renderWishlist() {
+  const container = document.getElementById('wishlist-content');
+  if (!container) return;
+
+  const isEmpty = wishlist.size === 0 && wishlistedQuests.size === 0;
+
+  if (isEmpty) {
+    container.innerHTML = `<div style="color:#444;font-size:13px;line-height:2;margin:60px auto;max-width:360px;text-align:center">
+      <div style="font-size:22px;margin-bottom:12px">☆</div>
+      No cards wishlisted yet.<br>
+      <span style="font-size:11px;color:#555">Click <span style="color:#e8c97a">☆</span> on any card detail page to add a card,<br>
+      or use the <em>☆ Wishlist quest cards</em> button on a quest page.</span>
+    </div>`;
+    return;
+  }
+
+  // Stats
+  const allItems  = [...wishlist.keys()];
+  const obtained  = allItems.filter(n => isOwned(n)).length;
+  const questCards = [...wishlistedQuests].flatMap(qn => {
+    const bm = bmQuestCards[qn];
+    if (!bm) return [];
+    return (bm.sections || []).flatMap(s => (s.requirements || []).flatMap(r => r.cards || []));
+  });
+  const uniqueQuestCards = [...new Set(questCards)];
+  const questObtained = uniqueQuestCards.filter(n => isOwned(n)).length;
+
+  let html = `<div style="display:flex;gap:16px;flex-wrap:wrap;margin-bottom:20px;align-items:center">
+    ${wishlist.size ? `<span style="font-size:12px;color:#888">★ Cards: <span style="color:${obtained===wishlist.size?'#00c853':'#e8c97a'}">${obtained}/${wishlist.size}</span> obtained</span>` : ''}
+    ${wishlistedQuests.size ? `<span style="font-size:12px;color:#888">📋 Quests: <span style="color:#aaa">${wishlistedQuests.size}</span> tracked · <span style="color:${questObtained===uniqueQuestCards.length?'#00c853':'#e8c97a'}">${questObtained}/${uniqueQuestCards.length}</span> cards obtained</span>` : ''}
+    <button onclick="clearWishlist()" style="margin-left:auto;background:none;border:1px solid #3a1a1a;color:#7a3a3a;padding:3px 10px;border-radius:3px;font-size:10px;cursor:pointer">Clear all</button>
+  </div>`;
+
+  // ── Quest sections ──────────────────────────────────────────────────────────
+  if (wishlistedQuests.size) {
+    html += `<div class="section"><div class="section-header">Wishlisted Quests</div>`;
+    for (const qn of [...wishlistedQuests].sort()) {
+      const bm = bmQuestCards[qn];
+      const cards = bm ? (bm.sections || []).flatMap(s => (s.requirements || []).flatMap(r => r.cards || [])) : [];
+      const unique = [...new Set(cards)];
+      const got = unique.filter(n => isOwned(n)).length;
+      const qSafe = qn.replace(/&/g,'&amp;').replace(/"/g,'&quot;');
+      html += `<div style="margin:10px 0;background:#161616;border:1px solid #2a2a2a;border-radius:4px;padding:10px 12px">
+        <div style="display:flex;align-items:baseline;gap:8px;margin-bottom:8px">
+          <span style="font-size:13px;color:#ccc;font-weight:500">${qn}</span>
+          <span style="font-size:10px;color:${got===unique.length&&unique.length?'#00c853':'#888'}">${got}/${unique.length} obtained</span>
+          <button data-quest="${qSafe}" onclick="removeQuestFromWishlist(this.dataset.quest)"
+            style="margin-left:auto;background:none;border:none;color:#444;cursor:pointer;font-size:12px" title="Remove quest">×</button>
+        </div>
+        <div style="display:flex;flex-wrap:wrap;gap:4px">`;
+      for (const c of unique.sort()) {
+        const own  = isOwned(c);
+        const safe = c.replace(/&/g,'&amp;').replace(/"/g,'&quot;');
+        const type = monsterDrops[c] ? 'monster' : 'item';
+        html += `<span style="background:${own?'#0d2210':'#111'};border:1px solid ${own?'#2a5a2a':'#222'};color:${own?'#76c442':'#555'};border-radius:3px;padding:2px 7px;font-size:10px;cursor:pointer"
+          data-card="${safe}" data-type="${type}" onclick="showCard(this.dataset.card,this.dataset.type)">${own?'✓ ':''}${c}</span>`;
+      }
+      html += `</div></div>`;
+    }
+    html += `</div>`;
+  }
+
+  // ── Individual card sections ────────────────────────────────────────────────
+  const SECTIONS = [
+    {key:'tool',      label:'Tools'},
+    {key:'equipment', label:'Equipment'},
+    {key:'monster',   label:'Monsters'},
+    {key:'npc',       label:'NPCs'},
+    {key:'other',     label:'Other'},
+  ];
+
+  const byCategory = {tool:[], equipment:[], monster:[], npc:[], other:[]};
+  for (const [name] of wishlist) byCategory[_wlCategory(name)]?.push(name);
+
+  for (const {key, label} of SECTIONS) {
+    const items = byCategory[key].sort();
+    if (!items.length) continue;
+    const got = items.filter(n => isOwned(n)).length;
+    html += `<div class="section"><div class="section-header">${label} <span style="font-size:10px;font-weight:400;color:#555;margin-left:6px">${got}/${items.length} obtained</span></div>
+      <div style="margin-top:6px">`;
+    for (const name of items) {
+      const own  = isOwned(name);
+      const meta = wishlist.get(name) || {note:''};
+      const safe = name.replace(/&/g,'&amp;').replace(/"/g,'&quot;');
+      const type = monsterDrops[name] ? 'monster' : 'item';
+      html += `<div style="display:flex;align-items:center;gap:8px;padding:5px 4px;border-bottom:1px solid #1a1a1a">
+        <span style="font-size:11px;color:${own?'#00c853':'#555'};flex-shrink:0;width:12px">${own?'✓':'○'}</span>
+        <span style="font-size:12px;color:${own?'#666':'#ccc'};${own?'text-decoration:line-through':''}flex:0 0 auto;cursor:pointer;min-width:100px"
+          data-card="${safe}" data-type="${type}" onclick="showCard(this.dataset.card,this.dataset.type)">${name}</span>
+        <input type="text" placeholder="Add a note…" value="${meta.note.replace(/"/g,'&quot;')}"
+          data-card="${safe}"
+          onblur="saveWishlistNote(this.dataset.card,this.value)"
+          onkeydown="if(event.key==='Enter')this.blur()"
+          style="flex:1;background:#111;border:1px solid #222;color:#888;padding:2px 6px;border-radius:3px;font-size:10px;min-width:0;outline:none"
+          onfocus="this.style.borderColor='#444'" />
+        <span class="wl-remove" data-card="${safe}" onclick="removeFromWishlist(this.dataset.card)" style="flex-shrink:0">×</span>
+      </div>`;
+    }
+    html += `</div></div>`;
+  }
+
+  container.innerHTML = html;
+}
+
+// Keep for backwards compat (called from navigate/switchCollection)
+function renderWishlistList() { renderWishlist(); }
+
+function showWishlistCard(name, type, push = false) {
+  showCard(name, type);
+}
+
 // ─── Pack tab ──────────────────────────────────────────────────────────────
 
 const PACK_TIER_ORDER = ['Common','Uncommon','Rare','Epic','Legendary','Mythic','Godly'];
@@ -1943,12 +2158,14 @@ function renderMonster(name, container) {
         ? ` · <span style="color:#555;font-size:10px">First pulled ${_fmtDate(monsterFirstTs)} · Last pulled ${_fmtDate(monsterLastTs)}</span>`
         : ` · <span style="color:#555;font-size:10px">Pulled ${_fmtDate(monsterLastTs)}</span>`)
     : '';
+  const monsterWishSafe = name.replace(/&/g,'&amp;').replace(/"/g,'&quot;');
+  const monsterWishHtml = `<span class="wish-star${wishlist.has(name)?' active':''}" data-card="${monsterWishSafe}" onclick="toggleWishlist(this.dataset.card)" title="${wishlist.has(name)?'Remove from wishlist':'Add to wishlist'}" style="margin-left:8px">${wishlist.has(name)?'★':'☆'}</span>`;
   let html = `<h1>${name}${mImgHtml}${wikiLink(name)}</h1>
     <div class="subtitle">
       ${data.combatLevel ? 'Monster card' : 'NPC card'}${tierBadgeHtml(name)}
       ${data.combatLevel ? ` · Combat ${data.combatLevel}` : ''}
       · <span style="color:${monsterOwned?'#00c853':'#7a5020'}">${monsterOwned?'✓ Owned':'✗ Not owned'}</span>
-      <span style="color:#555;font-size:10px;margin-left:8px;cursor:pointer" data-nav="${name}" onclick="toggleOwned(this.dataset.nav)">(toggle)</span>${monsterPulledHtml}
+      <span style="color:#555;font-size:10px;margin-left:8px;cursor:pointer" data-nav="${name}" onclick="toggleOwned(this.dataset.nav)">(toggle)</span>${monsterWishHtml}${monsterPulledHtml}
       ${reqs.map(r => `<span style="margin-left:8px;padding:2px 7px;border-radius:10px;font-size:10px;
         background:${r.locked?'#3a1a00':'#003d1f'};color:${r.locked?'#c84a00':'#00c853'}">${r.label}</span>`).join('')}
       ${mExamHtml}
@@ -3091,9 +3308,11 @@ function renderItem(name, container) {
         ? ` · <span style="color:#555;font-size:10px">First pulled ${_fmtItemDate(itemFirstTs)} · Last pulled ${_fmtItemDate(itemLastTs)}</span>`
         : ` · <span style="color:#555;font-size:10px">Pulled ${_fmtItemDate(itemLastTs)}</span>`)
     : '';
+  const itemWishSafe = name.replace(/&/g,'&amp;').replace(/"/g,'&quot;');
+  const itemWishHtml = `<span class="wish-star${wishlist.has(name)?' active':''}" data-card="${itemWishSafe}" onclick="toggleWishlist(this.dataset.card)" title="${wishlist.has(name)?'Remove from wishlist':'Add to wishlist'}" style="margin-left:8px">${wishlist.has(name)?'★':'☆'}</span>`;
   let html = `<h1>${name}${imgHtml}${wikiLink(name)}</h1>
     <div class="subtitle">Item card${tierBadgeHtml(name)}${catBadges} · <span style="color:${itemOwned?'#00c853':'#7a5020'}">${itemOwned?'✓ Owned':'✗ Not owned'}</span>
-      <span style="color:#555;font-size:10px;margin-left:8px;cursor:pointer" data-nav="${name}" onclick="toggleOwned(this.dataset.nav)">(toggle)</span>${itemPulledHtml}
+      <span style="color:#555;font-size:10px;margin-left:8px;cursor:pointer" data-nav="${name}" onclick="toggleOwned(this.dataset.nav)">(toggle)</span>${itemWishHtml}${itemPulledHtml}
       ${examHtml}
     </div>`;
 
@@ -3798,7 +4017,7 @@ function switchTab(tab) {
 function _renderTab(tab, resetSelection = true) {
   activeTab = tab;
   // Update tab button styles
-  for (const t of ['cards','skilling','questing','packs','equipment','rules'])
+  for (const t of ['cards','skilling','questing','packs','wishlist','equipment','rules'])
     document.getElementById(`tab-${t}`).classList.toggle('active', t === tab);
 
   const sidebar     = document.getElementById('sidebar');
@@ -3891,6 +4110,9 @@ function _renderTab(tab, resetSelection = true) {
       </div>`;
       renderPackList();
       if (selectedPack) showPackDetail(selectedPack);
+    } else if (tab === 'wishlist') {
+      mainContent.innerHTML = `<div id="wishlist-content" style="padding:20px 24px;overflow-y:auto;height:100%"></div>`;
+      renderWishlist();
     } else if (tab === 'equipment') {
       mainContent.innerHTML = renderEquipmentTab();
       initEquipmentTab();
@@ -5447,10 +5669,23 @@ function showQuestDetail(questName, push = true) {
     ${isDone ? '✓ Completed — mark undone' : 'Mark as completed'}
   </button>`;
 
+  const _bmWishCards = (bmQuestCards[questName]?.sections || [])
+    .flatMap(s => s.requirements || [])
+    .flatMap(r => r.cards || [])
+    .filter((c, i, a) => a.indexOf(c) === i); // dedupe
+  const _bmMissing = _bmWishCards.filter(c => !isOwned(c) && !wishlist.has(c));
+  const _qnSafe = questName.replace(/&/g,'&amp;').replace(/"/g,'&quot;');
+  const wishQuestBtn = _bmWishCards.length
+    ? `<button data-quest="${_qnSafe}" onclick="const n=wishlistQuest(this.dataset.quest);this.textContent=n?'★ Wishlisted!':'★ Already wishlisted';this.disabled=true;this.style.color='#888'"
+        style="margin-left:8px;background:none;border:1px solid #3a3a1a;color:#9a9a3a;padding:3px 9px;border-radius:3px;font-size:10px;cursor:pointer">
+        ☆ Wishlist quest cards${_bmMissing.length ? ' ('+_bmMissing.length+' missing)' : ''}
+      </button>`
+    : '';
+
   let html = `<h1>${questName} ${wikiLink(questName)}
     <span style="font-size:12px;color:${isDone?'#b07a30':statusColor};font-weight:normal;margin-left:8px">${isDone?'Done':statusLabel}</span>
   </h1>
-  <div class="subtitle">${typeStr}${qpStr} ${doneBtn}</div>`;
+  <div class="subtitle">${typeStr}${qpStr} ${doneBtn}${wishQuestBtn}</div>`;
 
   if (mini) {
     html += `<div style="background:#150e1a;border:1px solid #3a2850;border-radius:4px;padding:8px 12px;margin:10px 0;font-size:11px;color:#8a6aaa;line-height:1.6">
