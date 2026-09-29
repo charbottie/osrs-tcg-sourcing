@@ -5720,8 +5720,13 @@ function showSkillDetail(skillName, push = true) {
       const reqStr = master.slayerReq > 1 ? `Sl ${master.slayerReq}` : master.combatReq > 3 ? `Cb ${master.combatReq}` : '';
       const indCls = !levelOk ? 'locked' : availTasks > 0 ? 'available' : 'no-card';
       const nameCls = indCls;
+      const _smImgUrl = (cardDetails[masterName] || {}).imageUrl || '';
+      const _smImg = _smImgUrl
+        ? `<img src="${_smImgUrl}" style="width:18px;height:18px;object-fit:contain;image-rendering:pixelated;flex-shrink:0" onerror="this.style.display='none'">`
+        : '<span style="width:18px;flex-shrink:0"></span>';
       rows += `<div class="method-row" style="cursor:pointer" onclick="showSlayerMasterDetail('${masterName.replace(/'/g,"\\'")}')">
         <div class="method-indicator ${indCls}"></div>
+        ${_smImg}
         <span class="method-name ${nameCls}">${masterName}</span>
         <span class="method-level">${reqStr}</span>
         <span class="method-note">${availTasks}/${totalTasks} tasks →</span>
