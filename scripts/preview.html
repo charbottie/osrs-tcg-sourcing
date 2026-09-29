@@ -1835,11 +1835,29 @@ function _saveWishlist() {
 }
 
 function toggleWishlist(name) {
-  if (wishlist.has(name)) wishlist.delete(name);
-  else wishlist.set(name, {note: ''});
+  if (wishlist.has(name)) {
+    wishlist.delete(name);
+  } else {
+    wishlist.set(name, {note: _buildAutoNote(name)});
+  }
   _saveWishlist();
   refreshDetail();
   if (activeTab === 'wishlist') renderWishlist();
+}
+
+// Build a note for a newly-added card by checking which wishlisted quests
+// and groups it belongs to, so the label is restored on re-add.
+function _buildAutoNote(name) {
+  const tags = [];
+  for (const qn of wishlistedQuests) {
+    const cards = (bmQuestCards[qn]?.sections || [])
+      .flatMap(s => s.requirements || []).flatMap(r => r.cards || []);
+    if (cards.includes(name)) tags.push(qn);
+  }
+  for (const g of wishlistGroups) {
+    if (g.cards.includes(name)) tags.push(g.name);
+  }
+  return tags.join(', ');
 }
 
 function removeFromWishlist(name) {
