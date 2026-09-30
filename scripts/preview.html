@@ -4457,6 +4457,7 @@ async function refreshCollection() {
     if (Object.keys(cardTimestamps).length && rsn) _startLiveSync(rsn); else _stopLiveSync();
   } catch (e) {
     console.error('Refresh failed:', e);
+    showToast('⚠ Refresh failed — is the server running? (' + e.message + ')', 'error');
     btn.textContent = '✗ Error';
     btn.style.color = '#c84a00';
     setTimeout(() => {
