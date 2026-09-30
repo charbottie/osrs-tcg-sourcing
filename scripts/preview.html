@@ -1792,7 +1792,7 @@ function packAcquisitionHtml(name) {
     if (!_cardInPack(name, pack)) continue;
     const tierPool  = (packPools[pack.id] || {})[tier] || 0;
     const totalPool = Object.values(packPools[pack.id] || {}).reduce((s, n) => s + n, 0);
-    rows.push({ name: pack.name, price: pack.price, tierPool, totalPool });
+    rows.push({ id: pack.id, name: pack.name, price: pack.price, tierPool, totalPool });
   }
   if (rows.length === 0) return '';
 
@@ -1802,7 +1802,8 @@ function packAcquisitionHtml(name) {
     <table class="pack-table">
       <tr><th>Pack</th><th class="r">Price</th><th class="r">${tier}s / set size</th></tr>
       ${rows.map(r => `<tr>
-        <td style="color:#ccc">${r.name}</td>
+        <td style="cursor:pointer;color:#bba050;text-decoration:underline dotted"
+          onclick="pushHistoryEntry();_renderTab('packs',false);showPackDetail('${r.id}')">${r.name}</td>
         <td class="r" style="color:#e8c97a">${fmt(r.price)}</td>
         <td class="r"><span style="color:#888">${r.tierPool}</span><span style="color:#444"> / ${fmt(r.totalPool)}</span></td>
       </tr>`).join('')}
