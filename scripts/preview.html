@@ -1751,7 +1751,7 @@ function dropRowHtml(cardName, rarity, fraction, isRdt) {
 
   const reqTags = monsterReqTags(monsterDrops[cardName]);
 
-  return `<div class="drop-row ${rowClass}" style="cursor:pointer" data-nav="${cardName}" data-nav-type="item" onclick="showCard(this.dataset.nav,this.dataset.navType)">
+  return `<div class="drop-row ${rowClass}" style="cursor:pointer" data-nav="${escHtml(cardName)}" data-nav-type="item" onclick="showCard(this.dataset.nav,this.dataset.navType)">
     <div class="drop-indicator ${indClass}">${symbol}</div>
     <span class="drop-name ${nameClass}">${cardName}${reqTags}</span>
     <span class="rarity-badge ${rarityClass(rarity)}" style="${rarityBg}">${rarity}</span>
@@ -1845,7 +1845,7 @@ function packAcquisitionHtml(name) {
       <tr><th>Pack</th><th class="r">Price</th><th class="r">${tier}s / set size</th></tr>
       ${rows.map(r => `<tr>
         <td style="cursor:pointer;color:#bba050;text-decoration:underline dotted"
-          onclick="pushHistoryEntry();_renderTab('packs',false);showPackDetail('${r.id}',null,false)">${r.name}</td>
+          data-pack="${r.id}" onclick="_navToPack(this)">${r.name}</td>
         <td class="r" style="color:#e8c97a">${fmt(r.price)}</td>
         <td class="r"><span style="color:#888">${r.tierPool}</span><span style="color:#444"> / ${fmt(r.totalPool)}</span></td>
       </tr>`).join('')}
@@ -2652,7 +2652,7 @@ function renderMonster(name, container) {
       ${data.combatLevel ? 'Monster card' : 'NPC card'}${tierBadgeHtml(name)}
       ${data.combatLevel ? ` · Combat ${data.combatLevel}` : ''}
       · <span style="color:${monsterOwned?'#00c853':'#7a5020'}">${monsterOwned?'✓ Owned':'✗ Not owned'}</span>
-      <span style="color:#555;font-size:10px;margin-left:8px;cursor:pointer" data-nav="${name}" onclick="toggleOwned(this.dataset.nav)">(toggle)</span>${monsterWishHtml}${monsterPulledHtml}
+      <span style="color:#555;font-size:10px;margin-left:8px;cursor:pointer" data-nav="${escHtml(name)}" onclick="toggleOwned(this.dataset.nav)">(toggle)</span>${monsterWishHtml}${monsterPulledHtml}
       ${reqs.map(r => `<span style="margin-left:8px;padding:2px 7px;border-radius:10px;font-size:10px;
         background:${r.locked?'#3a1a00':'#003d1f'};color:${r.locked?'#c84a00':'#00c853'}">${r.label}</span>`).join('')}
       ${mExamHtml}
@@ -2907,7 +2907,7 @@ function facilityNote(f) {
     const owned = isOwned(opt);
     const col = owned ? '#76c442' : '#c84a00';
     const sym = owned ? '✓' : '✗';
-    return `<span style="cursor:pointer;color:${col}" data-nav="${opt}" data-nav-type="item" onclick="showCard(this.dataset.nav,this.dataset.navType)">${opt} ${sym}</span>`;
+    return `<span style="cursor:pointer;color:${col}" data-nav="${escHtml(opt)}" data-nav-type="item" onclick="showCard(this.dataset.nav,this.dataset.navType)">${opt} ${sym}</span>`;
   });
   return `Access: ${parts.join(sep)}`;
 }
@@ -2915,7 +2915,7 @@ function facilityNote(f) {
 // ─── Non-card ingredient row (navigates to its own page) ───────────────────
 function renderNonCardIngredient(itemName, quantity) {
   return `<div class="prod-ingredient" style="cursor:pointer"
-    data-nav="${itemName}" data-nav-type="ingredient"
+    data-nav="${escHtml(itemName)}" data-nav-type="ingredient"
     onclick="showCard(this.dataset.nav,this.dataset.navType)">
     <div class="drop-indicator" style="color:#555">○</div>
     <span class="prod-ingredient-name" style="color:#777">${itemName}</span>
@@ -2957,7 +2957,7 @@ function renderIngredient(name, container) {
       if (!isCard) {
         // Nested non-card ingredient — clickable to its own page
         return `<div class="prod-ingredient" style="cursor:pointer"
-          data-nav="${ing.item}" data-nav-type="ingredient"
+          data-nav="${escHtml(ing.item)}" data-nav-type="ingredient"
           onclick="showCard(this.dataset.nav,this.dataset.navType)">
           <div class="drop-indicator" style="color:#555">○</div>
           <span class="prod-ingredient-name" style="color:#777">${ing.item}</span>
@@ -2970,7 +2970,7 @@ function renderIngredient(name, container) {
       const cls = ingOwned ? 'owned' : 'locked';
       const sym = ingOwned ? '✓' : '✗';
       return `<div class="prod-ingredient" style="cursor:pointer"
-        data-nav="${ing.item}" data-nav-type="item"
+        data-nav="${escHtml(ing.item)}" data-nav-type="item"
         onclick="showCard(this.dataset.nav,this.dataset.navType)">
         <div class="drop-indicator ${cls}">${sym}</div>
         <span class="prod-ingredient-name ${cls}">${ing.item}</span>
@@ -2987,7 +2987,7 @@ function renderIngredient(name, container) {
       const isToolCard = itemSources[tool] !== undefined;
       if (isToolCard) {
         return `<div class="prod-ingredient" style="cursor:pointer"
-          data-nav="${tool}" data-nav-type="item"
+          data-nav="${escHtml(tool)}" data-nav-type="item"
           onclick="showCard(this.dataset.nav,this.dataset.navType)">
           <div class="drop-indicator ${cls}">${sym}</div>
           <span class="prod-ingredient-name ${cls}">${tool}</span>
@@ -3022,7 +3022,7 @@ function renderIngredient(name, container) {
       const sym = curOwned === true ? ' ✓' : curOwned === false ? ' ✗' : '';
       const price = s.price != null ? `${s.price.toLocaleString()}× ` : '';
       const curHtml = isCard
-        ? `<span style="cursor:pointer;color:${col}" data-nav="${s.currency}" data-nav-type="item"
+        ? `<span style="cursor:pointer;color:${col}" data-nav="${escHtml(s.currency)}" data-nav-type="item"
             onclick="showCard(this.dataset.nav,this.dataset.navType)">${price}${s.currency}${sym}</span>`
         : `<span style="color:#888">${price}${s.currency}</span>`;
       return `<div class="drop-row" style="cursor:default;background:#0d0d0d">
@@ -3077,7 +3077,7 @@ function renderIngredient(name, container) {
 
       if (isCard) {
         return `<div class="drop-row ${indCls}" style="cursor:pointer"
-          data-nav="${s.source}" data-nav-type="${cardType}"
+          data-nav="${escHtml(s.source)}" data-nav-type="${cardType}"
           onclick="showCard(this.dataset.nav,this.dataset.navType)">
           <div class="drop-indicator ${indCls}">${sym}</div>
           <span class="drop-name ${indCls}">${s.source}${lvlHtml}${qtyHtml}</span>
@@ -3105,7 +3105,7 @@ function renderIngredient(name, container) {
       const cls = cardOwned ? 'owned' : 'locked';
       const sym = cardOwned ? '✓' : '✗';
       return `<div class="drop-row ${cls}" style="cursor:pointer"
-        data-nav="${cardName}" data-nav-type="item"
+        data-nav="${escHtml(cardName)}" data-nav-type="item"
         onclick="showCard(this.dataset.nav,this.dataset.navType)">
         <div class="drop-indicator ${cls}">${sym}</div>
         <span class="drop-name ${cls}">${cardName}</span>
@@ -3147,7 +3147,7 @@ function renderProduction(prod) {
     }
     const cls = ingOwned ? 'owned' : 'locked';
     const sym = ingOwned ? '✓' : '✗';
-    return `<div class="prod-ingredient" style="cursor:pointer" data-nav="${ing.item}" data-nav-type="item" onclick="showCard(this.dataset.nav,this.dataset.navType)">
+    return `<div class="prod-ingredient" style="cursor:pointer" data-nav="${escHtml(ing.item)}" data-nav-type="item" onclick="showCard(this.dataset.nav,this.dataset.navType)">
       <div class="drop-indicator ${cls}">${sym}</div>
       <span class="prod-ingredient-name ${cls}">${ing.item}</span>
       <span class="prod-ingredient-qty">×${ing.quantity}</span>
@@ -3159,7 +3159,7 @@ function renderProduction(prod) {
     const toolOwned = isOwned(tool);
     const cls = toolOwned ? 'owned' : 'locked';
     const sym = toolOwned ? '✓' : '✗';
-    return `<div class="prod-ingredient" style="cursor:pointer" data-nav="${tool}" data-nav-type="item" onclick="showCard(this.dataset.nav,this.dataset.navType)">
+    return `<div class="prod-ingredient" style="cursor:pointer" data-nav="${escHtml(tool)}" data-nav-type="item" onclick="showCard(this.dataset.nav,this.dataset.navType)">
       <div class="drop-indicator ${cls}">${sym}</div>
       <span class="prod-ingredient-name ${cls}">${tool}</span>
       <span class="prod-ingredient-qty" style="color:#555;font-style:italic">tool</span>
@@ -3437,7 +3437,7 @@ function renderClueScroll(tier, container) {
       const rarHtml  = s.rarity
         ? `<span class="rarity-badge ${rarityClass(rarLabel)}">${rarLabel}</span><span class="fraction">${s.rarity}</span>`
         : '';
-      html += `<div class="drop-row ${cls}" style="cursor:pointer" data-nav="${s.source}" data-nav-type="monster" onclick="showCard(this.dataset.nav,this.dataset.navType)">
+      html += `<div class="drop-row ${cls}" style="cursor:pointer" data-nav="${escHtml(s.source)}" data-nav-type="monster" onclick="showCard(this.dataset.nav,this.dataset.navType)">
         <div class="drop-indicator ${cls}">${sym}</div>
         <span class="drop-name ${cls}">${s.source}${cmbHtml}${reqTags}</span>
         ${rarHtml}
@@ -3485,7 +3485,7 @@ function renderClueScroll(tier, container) {
       const rarHtml  = frac
         ? `<span class="rarity-badge ${rarityClass(rarLabel)}">${rarLabel}</span><span class="fraction">${frac}</span>`
         : '';
-      html += `<div class="drop-row ${cls}" style="cursor:pointer" data-nav="${name}" data-nav-type="item" onclick="showCard(this.dataset.nav,this.dataset.navType)">
+      html += `<div class="drop-row ${cls}" style="cursor:pointer" data-nav="${escHtml(name)}" data-nav-type="item" onclick="showCard(this.dataset.nav,this.dataset.navType)">
         <div class="drop-indicator ${cls}">${sym}</div>
         <span class="drop-name ${cls}">${name}</span>
         ${rarHtml}
@@ -3854,7 +3854,7 @@ function renderItem(name, container) {
   const itemWishHtml = `<span class="wish-star${wishlist.has(name)?' active':''}" data-card="${itemWishSafe}" onclick="toggleWishlist(this.dataset.card)" title="${wishlist.has(name)?'Remove from wishlist':'Add to wishlist'}" style="margin-left:8px">${wishlist.has(name)?'★':'☆'}</span>`;
   let html = `<h1>${name}${imgHtml}${wikiLink(name)}</h1>
     <div class="subtitle">Item card${tierBadgeHtml(name)}${catBadges} · <span style="color:${itemOwned?'#00c853':'#7a5020'}">${itemOwned?'✓ Owned':'✗ Not owned'}</span>
-      <span style="color:#555;font-size:10px;margin-left:8px;cursor:pointer" data-nav="${name}" onclick="toggleOwned(this.dataset.nav)">(toggle)</span>${itemWishHtml}${itemPulledHtml}
+      <span style="color:#555;font-size:10px;margin-left:8px;cursor:pointer" data-nav="${escHtml(name)}" onclick="toggleOwned(this.dataset.nav)">(toggle)</span>${itemWishHtml}${itemPulledHtml}
       ${examHtml}
     </div>`;
 
@@ -3928,7 +3928,7 @@ function renderItem(name, container) {
     const allToolsOwned = tiers ? !!bestTier : toolParts.every(p => p.owned);
 
     const tieredToolNote = !tiers ? '' : bestTier
-      ? ` — best owned: <strong style="color:#e8c97a;cursor:pointer" data-nav="${bestTier.name}" data-nav-type="item" onclick="showCard(this.dataset.nav,this.dataset.navType)">${bestTier.name}</strong>`
+      ? ` — best owned: <strong style="color:#e8c97a;cursor:pointer" data-nav="${escHtml(bestTier.name)}" data-nav-type="item" onclick="showCard(this.dataset.nav,this.dataset.navType)">${bestTier.name}</strong>`
       : ` — <span style="color:#c84a00">no ${gathering.tool.toLowerCase()} in collection</span>`;
 
     // Build the tool display HTML
@@ -3946,7 +3946,7 @@ function renderItem(name, container) {
         const isCard   = itemSources[p.label] !== undefined;
         const inner    = `<strong style="color:${col}">${p.label} ${sym}</strong>${noteHtml}`;
         return sep + (isCard
-          ? `<span style="cursor:pointer" data-nav="${p.label}" data-nav-type="item" onclick="showCard(this.dataset.nav,this.dataset.navType)">${inner}</span>`
+          ? `<span style="cursor:pointer" data-nav="${escHtml(p.label)}" data-nav-type="item" onclick="showCard(this.dataset.nav,this.dataset.navType)">${inner}</span>`
           : inner);
       }).join('');
     }
@@ -4020,7 +4020,7 @@ function renderItem(name, container) {
       const curSym    = curOwned === true ? ' ✓' : curOwned === false ? ' ✗' : '';
       const priceStr  = shop.price != null ? `${shop.price.toLocaleString()}× ` : '';
       const curHtml   = isCard
-        ? `<span style="cursor:pointer;color:${curCol}" data-nav="${shop.currency}" data-nav-type="item" onclick="showCard(this.dataset.nav,this.dataset.navType)">${priceStr}${shop.currency}${curSym}</span>`
+        ? `<span style="cursor:pointer;color:${curCol}" data-nav="${escHtml(shop.currency)}" data-nav-type="item" onclick="showCard(this.dataset.nav,this.dataset.navType)">${priceStr}${shop.currency}${curSym}</span>`
         : `<span style="color:#888">${priceStr}${shop.currency}</span>`;
       html += `<div class="drop-row" style="cursor:default;background:#0d0d0d">
         <div class="drop-indicator" style="color:#6a8aaa">◈</div>
@@ -4054,7 +4054,7 @@ function renderItem(name, container) {
       const cmb      = monsterDrops[m.card]?.combatLevel;
       const cmbHtml  = cmb ? `<span style="font-size:10px;color:#555;margin-left:4px">Cmb ${cmb}</span>` : '';
       const reqTags  = monsterReqTags(monsterDrops[m.card]);
-      html += `<div class="drop-row ${mOwned?'owned':'locked'}" style="cursor:pointer" data-nav="${m.card}" data-nav-type="monster" onclick="showCard(this.dataset.nav,this.dataset.navType)">
+      html += `<div class="drop-row ${mOwned?'owned':'locked'}" style="cursor:pointer" data-nav="${escHtml(m.card)}" data-nav-type="monster" onclick="showCard(this.dataset.nav,this.dataset.navType)">
         <div class="drop-indicator ${indCls}">${symbol}</div>
         <span class="drop-name ${indCls}">${m.card}${cmbHtml}${reqTags}</span>
         <span class="rarity-badge ${rarityClass(m.rarity)}">${m.rarity}</span>
@@ -4333,7 +4333,7 @@ function renderToolTiers(tiers, skillName) {
     html += `<div class="tool-tier-row ${cls}">
       <div class="tier-dot"></div>
       <span class="tier-name"${t.rare ? ' style="font-style:italic"' : ''}>
-        <span style="cursor:pointer" data-nav="${t.name}" data-nav-type="item"
+        <span style="cursor:pointer" data-nav="${escHtml(t.name)}" data-nav-type="item"
           onclick="showCard(this.dataset.nav,this.dataset.navType)">${t.name}</span>
       </span>
       <span class="tier-req">${label}</span>
