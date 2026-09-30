@@ -199,6 +199,21 @@ All navigation onclick handlers in the file use the `data-*` attribute + `_navTo
 
 ---
 
+## 2026-09-30 — Session 7: productionValid TDZ bug fix
+
+**Goal**: Fix regression from session 6 where clicking any card failed to load the detail panel.
+
+### What was done
+
+**Root cause**: `productionValid` was declared with `const` at line 3973 (inside `renderItem`) but referenced in a template literal at line 3886, before the declaration — putting it in the JavaScript Temporal Dead Zone. Every item card click threw `ReferenceError: Cannot access 'productionValid' before initialization`, silently eating the render.
+
+**Fix**: Moved the `productionValid` declaration up to the top of `renderItem` alongside the other data variable initialisations (after `production` is set up at line 3820), and removed the now-duplicate declaration that was at line 3973.
+
+### Context used this session
+~15%
+
+---
+
 ## Future Work
 
 ### Browser session fallback for cloud collection

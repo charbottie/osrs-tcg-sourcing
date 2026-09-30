@@ -359,6 +359,15 @@ def enrich_with_quests(
 # Step 5: Item production + spawns (scraped from item wiki pages)
 # ---------------------------------------------------------------------------
 
+# Dye items: the wiki lists dye-based productions as Crafting with 2.5 XP,
+# but using a dye in-game gives NO XP. Strip the skill so they render as
+# Assembly (no skill requirement, no XP).
+_DYE_ITEMS: frozenset[str] = frozenset({
+    "Red dye", "Blue dye", "Yellow dye", "Black dye",
+    "Green dye", "Purple dye", "Orange dye", "Pink dye",
+})
+
+
 def _has_source(entry: dict) -> bool:
     """Return True if an item_sources entry already has any sourcing data."""
     return bool(
@@ -397,7 +406,16 @@ def build_production_spawns(
         shops   = item_scraper.parse_shop_locations(html)
 
         if methods:
-            item_sources[name]["production"] = methods[0]   # primary method only
+            m = methods[0]
+            # Dye-based recipes: wiki says Crafting 2.5 XP but no XP is awarded
+            # in-game. Treat as Assembly (skill=None) so they don't appear in
+            # Crafting skilling lists.
+            ings = [i["item"] for i in (m.get("ingredients") or [])]
+            if any(d in ings for d in _DYE_ITEMS):
+                m["skill"] = None
+                m["level"] = None
+                m["xp"] = None
+            item_sources[name]["production"] = m   # primary method only
         if spawns:
             item_sources[name]["spawns"] = spawns
         if shops:

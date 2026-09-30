@@ -552,8 +552,9 @@
     cursor: pointer;
     white-space: nowrap;
   }
-  .pack-chip.owned   { background: #0d2210; border: 1px solid #2a5a2a; color: #76c442; font-weight: 500; }
-  .pack-chip.missing { background: #111; border: 1px solid #222; color: #444; }
+  .pack-chip.owned      { background: #0d2210; border: 1px solid #2a5a2a; color: #76c442; font-weight: 500; }
+  .pack-chip.wishlisted { background: #1e1800; border: 1px solid #4a3800; color: #e8c97a; font-weight: 500; }
+  .pack-chip.missing    { background: #111; border: 1px solid #222; color: #444; }
   .pack-chip:hover   { filter: brightness(1.5); }
 
   /* ── Wishlist tab ── */
@@ -818,6 +819,7 @@ function _navToQuest(el) {
   showQuestDetail(el.dataset.quest, false);
 }
 function _navToPack(el) {
+  _hidePackTip(null);
   pushHistoryEntry();
   _renderTab('packs', false);
   showPackDetail(el.dataset.pack, null, false);
@@ -1148,6 +1150,7 @@ let selectedPack  = null;   // currently selected pack in Packs tab
 let wishlist = new Map();          // card name → {note:string}  (starred cards)
 let wishlistedQuests = new Set();  // quest names bulk-added via quest button
 let wishlistGroups = [];           // [{name, cards}] — "any one of these" groups
+let _wishlistTipCards = [];        // sorted unowned targets, kept fresh by renderWishlist for pack tooltips
 let _lastSourceMtime = 0;   // newest RuneLite save file mtime at last refresh
 let _refreshInProgress = false;
 
@@ -1856,6 +1859,115 @@ function packAcquisitionHtml(name) {
 
 // ─── Wishlist ──────────────────────────────────────────────────────────────
 
+// All wishlisted card names across all sources (owned or not).
+function _wishlistedCardSet() {
+  const s = new Set(wishlist.keys());
+  for (const qn of wishlistedQuests) {
+    const bm = bmQuestCards[qn];
+    if (!bm) continue;
+    for (const sec of (bm.sections || []))
+      for (const r of (sec.requirements || []))
+        for (const c of (r.cards || [])) s.add(c);
+  }
+  for (const g of wishlistGroups)
+    for (const c of g.cards) s.add(c);
+  return s;
+}
+
+// Collect every unowned card the player still needs across all wishlist sources.
+function _wishlistUnownedTargets() {
+  const targets = new Set();
+  // Individual starred cards
+  for (const [name] of wishlist) {
+    if (!isOwned(name)) targets.add(name);
+  }
+  // Quest-wishlisted cards (all requirement cards in every section)
+  for (const qn of wishlistedQuests) {
+    const bm = bmQuestCards[qn];
+    if (!bm) continue;
+    for (const s of (bm.sections || []))
+      for (const r of (s.requirements || []))
+        for (const c of (r.cards || []))
+          if (!isOwned(c)) targets.add(c);
+  }
+  // Groups: only include cards from unsatisfied groups
+  for (const g of wishlistGroups) {
+    if (g.cards.some(c => isOwned(c))) continue; // already satisfied
+    for (const c of g.cards) if (!isOwned(c)) targets.add(c);
+  }
+  return targets;
+}
+
+// For each non-large pack, count how many unowned targets fall in its pool.
+// Returns [{id, name, thumbnail, count, totalPool, cards}] sorted by count desc, then pool asc.
+function _wishlistPackRecs(targets) {
+  if (!packCatalog || !packPools || !targets.size) return [];
+  const recs = [];
+  for (const pack of packCatalog.packs) {
+    if (pack.id.endsWith('_large')) continue;
+    const matching = [];
+    for (const name of targets) {
+      if ((cardDetails[name] || {}).tier && _cardInPack(name, pack)) matching.push(name);
+    }
+    if (!matching.length) continue;
+    const totalPool = Object.values(packPools[pack.id] || {}).reduce((s, n) => s + n, 0);
+    recs.push({ id: pack.id, name: pack.name, thumbnail: pack.thumbnail || '', count: matching.length, totalPool });
+  }
+  return recs.sort((a, b) => b.count - a.count || a.totalPool - b.totalPool);
+}
+
+function _showPackTip(event, el) {
+  el.style.borderColor = '#4a4030';
+  if (!_wishlistTipCards.length || !packCatalog) return;
+  const pack = packCatalog.packs.find(p => p.id === el.dataset.pack);
+  if (!pack) return;
+
+  let tip = document.getElementById('_pack-wishlist-tip');
+  if (!tip) {
+    tip = document.createElement('div');
+    tip.id = '_pack-wishlist-tip';
+    tip.style.cssText = 'position:fixed;z-index:9999;background:#1c1c1c;border:1px solid #3a3020;border-radius:4px;padding:8px;box-shadow:0 4px 16px rgba(0,0,0,.75);pointer-events:none;display:none';
+    document.body.appendChild(tip);
+  }
+
+  const inPack = [], notInPack = [];
+  for (const name of _wishlistTipCards) {
+    const hasTier = !!(cardDetails[name] || {}).tier;
+    if (hasTier && _cardInPack(name, pack)) inPack.push(name);
+    else notInPack.push(name);
+  }
+
+  const chipHtml = (c, dim) => {
+    const img = (cardDetails[c] || {}).imageUrl;
+    const style = `display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;border-radius:3px;overflow:hidden;background:#111;border:1px solid ${dim?'#222':'#4a3800'};opacity:${dim?'0.3':'1'}`;
+    const inner = img
+      ? `<img src="${img}" style="width:28px;height:28px;object-fit:contain;image-rendering:pixelated" title="${c.replace(/"/g,'&quot;')}" onerror="this.style.display='none'">`
+      : `<span style="font-size:8px;color:#666;padding:2px;text-align:center;line-height:1.1">${c.slice(0,6)}</span>`;
+    return `<div style="${style}" title="${c.replace(/"/g,'&quot;')}">${inner}</div>`;
+  };
+
+  tip.innerHTML = `<div style="display:flex;flex-wrap:wrap;gap:4px;max-width:200px">` +
+    inPack.map(c => chipHtml(c, false)).join('') +
+    notInPack.map(c => chipHtml(c, true)).join('') +
+    `</div>`;
+
+  const rect = el.getBoundingClientRect();
+  tip.style.display = 'block';
+  tip.style.left = rect.left + 'px';
+  tip.style.top  = (rect.bottom + 6) + 'px';
+  requestAnimationFrame(() => {
+    const tr = tip.getBoundingClientRect();
+    if (tr.right  > window.innerWidth  - 8) tip.style.left = (window.innerWidth  - tr.width  - 8) + 'px';
+    if (tr.bottom > window.innerHeight - 8) tip.style.top  = (rect.top - tr.height - 6) + 'px';
+  });
+}
+
+function _hidePackTip(el) {
+  if (el) el.style.borderColor = '#2a2a2a';
+  const tip = document.getElementById('_pack-wishlist-tip');
+  if (tip) tip.style.display = 'none';
+}
+
 function _loadWishlist() {
   try {
     const raw = localStorage.getItem('tcg_wishlist');
@@ -2318,6 +2430,11 @@ function renderWishlist() {
   const questObtained = uniqueQuestCards.filter(n => isOwned(n)).length;
   const groupsSatisfied = wishlistGroups.filter(g => g.cards.some(c => isOwned(c))).length;
 
+  const unownedTargets = _wishlistUnownedTargets();
+  _wishlistTipCards = [...unownedTargets].sort();
+  const packRecs = _wishlistPackRecs(unownedTargets);
+  const packTargetCount = [...unownedTargets].filter(n => (cardDetails[n] || {}).tier).length;
+
   let html = `<div style="display:flex;gap:16px;flex-wrap:wrap;margin-bottom:20px;align-items:center">
     ${wishlist.size ? `<span style="font-size:12px;color:#888">★ Cards: <span style="color:${obtained===wishlist.size?'#00c853':'#e8c97a'}">${obtained}/${wishlist.size}</span> obtained</span>` : ''}
     ${wishlistedQuests.size ? `<span style="font-size:12px;color:#888">📋 Quests: <span style="color:#aaa">${wishlistedQuests.size}</span> tracked · <span style="color:${questObtained===uniqueQuestCards.length?'#00c853':'#e8c97a'}">${questObtained}/${uniqueQuestCards.length}</span> cards obtained</span>` : ''}
@@ -2326,16 +2443,41 @@ function renderWishlist() {
     <button onclick="clearWishlist()" style="background:none;border:1px solid #3a1a1a;color:#7a3a3a;padding:3px 10px;border-radius:3px;font-size:10px;cursor:pointer">Clear all</button>
   </div>`;
 
-  // ── Quest sections ──────────────────────────────────────────────────────────
+  // ── Pack suggestions ────────────────────────────────────────────────────────
+  if (packRecs.length) {
+    html += `<div class="section">
+      <div class="section-header">Suggested Packs
+        <span style="font-size:10px;font-weight:400;color:#444;margin-left:6px">· ${packTargetCount} pack-eligible target${packTargetCount !== 1 ? 's' : ''}</span>
+      </div>
+      <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:10px">`;
+    for (const r of packRecs) {
+      html += `<div style="flex:0 0 80px;cursor:pointer;border:1px solid #2a2a2a;border-radius:4px;overflow:hidden;background:#0d0d0d;transition:border-color .15s"
+        onmouseover="_showPackTip(event,this)" onmouseout="_hidePackTip(this)"
+        data-pack="${r.id}" onclick="_navToPack(this)">
+        ${r.thumbnail
+          ? `<img src="${r.thumbnail}" style="width:80px;height:80px;object-fit:cover;display:block;pointer-events:none" onerror="this.style.background='#1a1a1a'">`
+          : `<div style="width:80px;height:80px;background:#1a1a1a;display:flex;align-items:center;justify-content:center;color:#333;font-size:11px;pointer-events:none">?</div>`}
+        <div style="padding:5px 6px 6px;border-top:1px solid #1e1e1e;pointer-events:none">
+          <div style="font-size:10px;color:#888;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-bottom:3px">${r.name}</div>
+          <div style="font-size:11px;color:#e8c97a;font-weight:600">${r.count} targets</div>
+        </div>
+      </div>`;
+    }
+    html += `</div>
+    </div>`;
+  }
+
+  // ── Quest sections (built now, appended after individual cards) ────────────
+  let questHtml = '';
   if (wishlistedQuests.size) {
-    html += `<div class="section"><div class="section-header">Wishlisted Quests</div>`;
+    questHtml += `<div class="section"><div class="section-header">Wishlisted Quests</div>`;
     for (const qn of [...wishlistedQuests].sort()) {
       const bm = bmQuestCards[qn];
       const cards = bm ? (bm.sections || []).flatMap(s => (s.requirements || []).flatMap(r => r.cards || [])) : [];
       const unique = [...new Set(cards)];
       const got = unique.filter(n => isOwned(n)).length;
       const qSafe = qn.replace(/&/g,'&amp;').replace(/"/g,'&quot;');
-      html += `<div style="margin:10px 0;background:#161616;border:1px solid #2a2a2a;border-radius:4px;padding:10px 12px">
+      questHtml += `<div style="margin:10px 0;background:#161616;border:1px solid #2a2a2a;border-radius:4px;padding:10px 12px">
         <div style="display:flex;align-items:baseline;gap:8px;margin-bottom:8px">
           <span style="font-size:13px;color:#bba050;font-weight:500;cursor:pointer;text-decoration:underline dotted"
             data-quest="${qSafe}" onclick="_navToQuest(this)"
@@ -2356,12 +2498,12 @@ function renderWishlist() {
             ? 'background:#111;border-color:#222;color:#555'
             : 'background:#1a0808;border-color:#4a1a1a;color:#6a2a2a;text-decoration:line-through';
         const chipTitle = wled ? '' : `title="${c.replace(/"/g,'&quot;')} removed from wishlist"`;
-        html += `<span style="${chipStyle};border:1px solid;border-radius:3px;padding:2px 7px;font-size:10px;cursor:pointer" ${chipTitle}
+        questHtml += `<span style="${chipStyle};border:1px solid;border-radius:3px;padding:2px 7px;font-size:10px;cursor:pointer" ${chipTitle}
           data-card="${safe}" data-type="${type}" onclick="showCard(this.dataset.card,this.dataset.type)">${own?'✓ ':''}${c}</span>`;
       }
-      html += `</div></div>`;
+      questHtml += `</div></div>`;
     }
-    html += `</div>`;
+    questHtml += `</div>`;
   }
 
   // ── Groups sections ─────────────────────────────────────────────────────────
@@ -2461,6 +2603,7 @@ function renderWishlist() {
     html += `</div></div>`;
   }
 
+  html += questHtml;
   container.innerHTML = html;
 }
 
@@ -2576,6 +2719,8 @@ function showPackDetail(packId, filter, push = true) {
   html += `</div>`;
 
   // Card chips by tier
+  const wishlisted = _wishlistedCardSet();
+
   for (const tier of PACK_TIER_ORDER) {
     const t = byTier[tier];
     if (!t) continue;
@@ -2585,19 +2730,24 @@ function showPackDetail(packId, filter, push = true) {
     if (tierCards.length === 0) continue;
 
     const to = t.filter(c => isOwned(c.name)).length;
+    const tw = t.filter(c => !isOwned(c.name) && wishlisted.has(c.name)).length;
     html += `<div class="section">
       <div class="section-header">
         <span class="tier-badge tier-${tier}">${tier}</span>
         <span style="font-size:10px;font-weight:400;color:#555;margin-left:8px">${to} / ${t.length} owned</span>
+        ${tw ? `<span style="font-size:10px;font-weight:400;color:#a08030;margin-left:6px">· ${tw} wishlisted</span>` : ''}
       </div>
       <div style="display:flex;flex-wrap:wrap;gap:4px;padding:8px 0">`;
 
     for (const c of tierCards) {
-      const own = isOwned(c.name);
+      const own  = isOwned(c.name);
+      const wled = !own && wishlisted.has(c.name);
       const safeName = c.name.replace(/&/g,'&amp;').replace(/"/g,'&quot;');
-      html += `<span class="pack-chip ${own ? 'owned' : 'missing'}"
+      const chipClass = own ? 'owned' : wled ? 'wishlisted' : 'missing';
+      const prefix    = own ? '✓ ' : wled ? '★ ' : '';
+      html += `<span class="pack-chip ${chipClass}"
         data-card="${safeName}" data-type="${c.type}"
-        onclick="showCard(this.dataset.card,this.dataset.type)">${own ? '✓ ' : ''}${c.name}</span>`;
+        onclick="showCard(this.dataset.card,this.dataset.type)">${prefix}${c.name}</span>`;
     }
 
     html += `</div></div>`;
@@ -3818,6 +3968,8 @@ function renderItem(name, container) {
   const quests      = data.quests      || [];
   const gathering   = data.gathering;
   const production  = data.production  || null;
+  const productionValid = production &&
+    !(production.ingredients || []).some(i => i.item === name);
   const spawns      = data.spawns      || [];
   const shops       = data.shops       || [];
   const clueTiers   = data.clueTiers   || [];
@@ -3970,8 +4122,6 @@ function renderItem(name, container) {
 
   // Production (crafting/cooking/smithing/fletching/etc.)
   // Skip if any ingredient is the item itself (poisoned weapon recipes, upgrade kits, etc.)
-  const productionValid = production &&
-    !(production.ingredients || []).some(i => i.item === name);
   if (productionValid) {
     html += renderProduction(production);
   }
