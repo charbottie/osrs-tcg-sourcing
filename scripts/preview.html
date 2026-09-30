@@ -799,7 +799,31 @@
 
 </div><!-- #app-content -->
 
+<!-- Toast notification -->
+<div id="toast" style="display:none;position:fixed;bottom:24px;left:50%;transform:translateX(-50%);
+  max-width:480px;padding:10px 16px;border-radius:6px;font-size:12px;line-height:1.5;
+  box-shadow:0 4px 16px #000;z-index:9999;pointer-events:none"></div>
+
 <script>
+// ─── Toast notifications ──────────────────────────────────────────────────
+let _toastTimer = null;
+function showToast(msg, type = 'warn', duration = 6000) {
+  const el = document.getElementById('toast');
+  if (!el) return;
+  const styles = {
+    warn:  { bg: '#2a1f00', border: '#6a4a00', color: '#e8c97a' },
+    error: { bg: '#2a0a00', border: '#6a1a00', color: '#e87a5a' },
+    info:  { bg: '#0a1a2a', border: '#1a4a6a', color: '#7ab4d4' },
+  }[type] || { bg: '#1a1a1a', border: '#444', color: '#ccc' };
+  el.style.background  = styles.bg;
+  el.style.border      = `1px solid ${styles.border}`;
+  el.style.color       = styles.color;
+  el.textContent = msg;
+  el.style.display = 'block';
+  if (_toastTimer) clearTimeout(_toastTimer);
+  _toastTimer = setTimeout(() => { el.style.display = 'none'; }, duration);
+}
+
 // ─── Tool tiers ────────────────────────────────────────────────────────────
 // skillReq = Mining/WC level needed to USE the tool (from OSRS wiki skill pages)
 
@@ -4385,6 +4409,15 @@ async function refreshCollection() {
     }
     const label = rsn ? `${data.cardCount} cards owned · ${rsn}` : `${data.cardCount} cards owned · refreshed ${new Date().toLocaleTimeString()}`;
     document.getElementById('sim-summary').textContent = label;
+    // Surface decode warnings (cloud API failures, auth errors, etc.)
+    const log = data.log || '';
+    if (/401|unauthorized/i.test(log)) {
+      showToast('⚠ Cloud auth failed (401) — game may be offline or account not logged in. Showing last cached collection.', 'warn');
+    } else if (/fetch failed|error/i.test(log) && data.cardCount === 0) {
+      showToast('⚠ Collection decode returned 0 cards — check server log for details.', 'warn');
+    } else if (data.cardCount === 0 && rsn) {
+      showToast(`⚠ No cards found for "${rsn}" — account may be new or not yet decoded.`, 'warn');
+    }
     document.getElementById('sim-btn').style.display = 'none';
     filterCards();
     refreshDetail();
