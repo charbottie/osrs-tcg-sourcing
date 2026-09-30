@@ -1236,7 +1236,7 @@ function switchCollection(rsn) {
   refreshDetail();
   if (activeTab === 'skilling')   renderSkillGrid();
   if (activeTab === 'questing')   renderQuestList();
-  if (activeTab === 'packs')    { renderPackList(); if (selectedPack) showPackDetail(selectedPack); }
+  if (activeTab === 'packs')    { renderPackList(); if (selectedPack) showPackDetail(selectedPack, null, false); }
   if (activeTab === 'wishlist') renderWishlist();
   if (activeTab === 'equipment') { refreshEquipDoll(); updateEquipCount(); renderGearStats(); updateDpsOutput(); }
 }
@@ -1595,7 +1595,7 @@ function navigate(state) {
   } else if (state.tab === 'packs') {
     selectedPack = state.pack || null;
     renderPackList();
-    if (selectedPack) showPackDetail(selectedPack);
+    if (selectedPack) showPackDetail(selectedPack, null, false);
   } else if (state.tab === 'wishlist') {
     renderWishlist();
   } else if (state.tab === 'cards') {
@@ -1827,7 +1827,7 @@ function packAcquisitionHtml(name) {
       <tr><th>Pack</th><th class="r">Price</th><th class="r">${tier}s / set size</th></tr>
       ${rows.map(r => `<tr>
         <td style="cursor:pointer;color:#bba050;text-decoration:underline dotted"
-          onclick="pushHistoryEntry();_renderTab('packs',false);showPackDetail('${r.id}')">${r.name}</td>
+          onclick="pushHistoryEntry();_renderTab('packs',false);showPackDetail('${r.id}',null,false)">${r.name}</td>
         <td class="r" style="color:#e8c97a">${fmt(r.price)}</td>
         <td class="r"><span style="color:#888">${r.tierPool}</span><span style="color:#444"> / ${fmt(r.totalPool)}</span></td>
       </tr>`).join('')}
@@ -2485,7 +2485,8 @@ function renderPackList() {
   pane.innerHTML = html;
 }
 
-function showPackDetail(packId, filter) {
+function showPackDetail(packId, filter, push = true) {
+  if (push) pushHistoryEntry();
   selectedPack = packId;
   renderPackList();
 
@@ -2526,7 +2527,7 @@ function showPackDetail(packId, filter) {
       · <span style="color:#c84a00">${missing.toLocaleString()} missing</span>
     </div>
     <div style="margin-bottom:16px">
-      <select id="pack-filter-sel" onchange="showPackDetail('${packId}', this.value)"
+      <select id="pack-filter-sel" onchange="showPackDetail('${packId}', this.value, false)"
         style="background:#222;border:1px solid #444;color:#ccc;padding:4px 8px;border-radius:3px;font-size:11px">
         <option value="all"    ${currentFilter==='all'    ?' selected':''}>All cards</option>
         <option value="missing"${currentFilter==='missing'?' selected':''}>Missing only</option>
@@ -4635,7 +4636,7 @@ function _renderTab(tab, resetSelection = true) {
         </div>
       </div>`;
       renderPackList();
-      if (selectedPack) showPackDetail(selectedPack);
+      if (selectedPack) showPackDetail(selectedPack, null, false);
     } else if (tab === 'wishlist') {
       mainContent.innerHTML = `
         <div style="display:flex;height:100%;overflow:hidden">
