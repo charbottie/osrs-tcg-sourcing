@@ -7349,13 +7349,8 @@ function hideEquipTooltip() {
 // Navigate to an item in the Cards tab (reuse existing showCard logic)
 function navigateToCard(name) {
   hideEquipTooltip();
-  pushHistoryEntry();
-  _renderTab('cards', false);
-  selected = name;
-  selectedType = 'item';
-  // Find the card in the list and highlight it
-  const items = allCards.filter(c => c.name === name);
-  if (items.length) showCard(name, items[0].type || 'item');
+  const match = allCards.find(c => c.name === name);
+  showCard(name, match ? (match.type || 'item') : 'item');
 }
 
 function formatGp(n) {
