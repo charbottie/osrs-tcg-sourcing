@@ -805,6 +805,24 @@
   box-shadow:0 4px 16px #000;z-index:9999;pointer-events:none"></div>
 
 <script>
+// ─── Universal navigation helpers ─────────────────────────────────────────
+// All cross-tab navigation reads identity from data-* attributes so card/quest
+// names with apostrophes, quotes, or other special characters are handled safely.
+function _navToCard(el) {
+  showCard(el.dataset.nav, el.dataset.navType || 'item');
+}
+function _navToQuest(el) {
+  pushHistoryEntry();
+  selectedQuest = el.dataset.quest;
+  _renderTab('questing', false);
+  showQuestDetail(el.dataset.quest, false);
+}
+function _navToPack(el) {
+  pushHistoryEntry();
+  _renderTab('packs', false);
+  showPackDetail(el.dataset.pack, null, false);
+}
+
 // ─── Toast notifications ──────────────────────────────────────────────────
 let _toastTimer = null;
 function showToast(msg, type = 'warn', duration = 6000) {
@@ -1929,7 +1947,7 @@ function _wlSearchInput(q) {
       onmouseenter="this.style.background='#161616'" onmouseleave="this.style.background=''">
       ${imgUrl ? `<img src="${imgUrl}" style="width:20px;height:20px;object-fit:contain;image-rendering:pixelated;flex-shrink:0" onerror="this.style.display='none'">` : '<span style="width:20px;flex-shrink:0"></span>'}
       <span style="flex:1;font-size:11px;color:${own?'#76c442':'#aaa'};overflow:hidden;text-overflow:ellipsis;white-space:nowrap;text-decoration:underline dotted"
-        onclick="event.stopPropagation();showCard('${safe}','${ctype}')" title="View card">${c.name}</span>
+        data-nav="${safe}" data-nav-type="${ctype}" onclick="event.stopPropagation();_navToCard(this)" title="View card">${c.name}</span>
       <span style="font-size:12px;flex-shrink:0;color:${wled?'#4a7a4a':'#2a4a2a'};font-weight:700" title="${wled?'Remove from wishlist':'Add to wishlist'}">${wled?'★':'☆'}</span>
     </div>`;
   }).join('');
@@ -1942,7 +1960,7 @@ function _wlSearchInput(q) {
       onmouseenter="this.style.background='#161616'" onmouseleave="this.style.background=''">
       <span style="width:20px;flex-shrink:0;font-size:10px;text-align:center;color:#7a6a3a">Q</span>
       <span style="flex:1;font-size:11px;color:#bba050;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;text-decoration:underline dotted"
-        onclick="event.stopPropagation();pushHistoryEntry();selectedQuest='${safe}';_renderTab('questing',false);showQuestDetail('${safe}',false)"
+        data-quest="${safe}" onclick="event.stopPropagation();_navToQuest(this)"
         title="Open quest page">${qn}</span>
       <span style="font-size:12px;flex-shrink:0;color:${wled?'#7a6a3a':'#2a2a1a'};font-weight:700" title="${wled?'Remove quest from wishlist':'Add quest cards to wishlist'}">${wled?'★':'☆'}</span>
     </div>`;
@@ -2320,7 +2338,7 @@ function renderWishlist() {
       html += `<div style="margin:10px 0;background:#161616;border:1px solid #2a2a2a;border-radius:4px;padding:10px 12px">
         <div style="display:flex;align-items:baseline;gap:8px;margin-bottom:8px">
           <span style="font-size:13px;color:#bba050;font-weight:500;cursor:pointer;text-decoration:underline dotted"
-            onclick="pushHistoryEntry();selectedQuest='${qSafe}';_renderTab('questing',false);showQuestDetail('${qSafe}',false)"
+            data-quest="${qSafe}" onclick="_navToQuest(this)"
             title="Open quest page">${qn}</span>
           <span style="font-size:10px;color:${got===unique.length&&unique.length?'#00c853':'#888'}">${got}/${unique.length} obtained</span>
           <button data-quest="${qSafe}" onclick="removeQuestFromWishlist(this.dataset.quest)"
@@ -2479,7 +2497,7 @@ function renderPackList() {
     const barColor  = pct === 100 ? '#00c853' : pct >= 75 ? '#76c442' : pct >= 40 ? '#e8c97a' : '#c87030';
     const pctColor  = pct === 100 ? '#00c853' : pct >= 75 ? '#76c442' : pct >= 40 ? '#e8c97a' : '#888';
     const nameColor = isSel ? '#e8c97a' : pct === 100 ? '#76c442' : '#ccc';
-    html += `<div class="pack-list-item${isSel ? ' selected' : ''}" onclick="showPackDetail('${pack.id}')">
+    html += `<div class="pack-list-item${isSel ? ' selected' : ''}" data-pack="${pack.id}" onclick="showPackDetail(this.dataset.pack)">
       <div style="display:flex;justify-content:space-between;align-items:baseline">
         <span style="font-size:12px;color:${nameColor};font-weight:${isSel ? 600 : 400}">${pack.name}</span>
         <span style="font-size:10px;color:#555">${pack.price.toLocaleString()} cr</span>
@@ -2710,11 +2728,11 @@ function renderMonster(name, container) {
       const sym   = qDone ? '✓' : qOk ? '~' : '✗';
       const cls   = qDone ? 'ok' : qOk ? 'close' : 'fail';
       const note  = qDone ? 'complete' : qOk ? 'completable' : 'locked';
-      const safeQ = gate.questRequired.replace(/'/g, "\\'");
+      const safeQ = gate.questRequired.replace(/&/g,'&amp;').replace(/"/g,'&quot;');
       html += `<div class="req-row">
         <span class="req-icon ${cls}">${sym}</span>
         <span class="req-label" style="cursor:pointer"
-          onclick="pushHistoryEntry();selectedQuest='${safeQ}';_renderTab('questing',false);showQuestDetail('${safeQ}',false)">Quest: ${gate.questRequired}</span>
+          data-quest="${safeQ}" onclick="_navToQuest(this)">Quest: ${gate.questRequired}</span>
         <span class="req-note">${note}</span>
       </div>`;
     }
@@ -2722,11 +2740,11 @@ function renderMonster(name, container) {
       const nOk = isOwned(gate.npcRequired);
       const sym  = nOk ? '✓' : '✗';
       const cls  = nOk ? 'ok' : 'fail';
-      const safeN = gate.npcRequired.replace(/'/g, "\\'");
+      const safeN = gate.npcRequired.replace(/&/g,'&amp;').replace(/"/g,'&quot;');
       html += `<div class="req-row">
         <span class="req-icon ${cls}">${sym}</span>
         <span class="req-label" style="cursor:pointer"
-          onclick="pushHistoryEntry();_renderTab('cards');setTimeout(()=>showCard('${safeN}','monster',false),50)">NPC card: ${gate.npcRequired}</span>
+          data-nav="${safeN}" data-nav-type="monster" onclick="_navToCard(this)">NPC card: ${gate.npcRequired}</span>
         <span class="req-note">${nOk ? 'card owned' : 'need card'}</span>
       </div>`;
     }
@@ -2734,11 +2752,11 @@ function renderMonster(name, container) {
       const iOk = isOwned(item);
       const sym  = iOk ? '✓' : '✗';
       const cls  = iOk ? 'ok' : 'fail';
-      const safeI = item.replace(/'/g, "\\'");
+      const safeI = item.replace(/&/g,'&amp;').replace(/"/g,'&quot;');
       html += `<div class="req-row">
         <span class="req-icon ${cls}">${sym}</span>
         <span class="req-label" style="cursor:pointer"
-          onclick="pushHistoryEntry();_renderTab('cards');setTimeout(()=>showCard('${safeI}','item',false),50)">Item: ${item}</span>
+          data-nav="${safeI}" data-nav-type="item" onclick="_navToCard(this)">Item: ${item}</span>
         <span class="req-note">${iOk ? 'owned' : 'need card'}</span>
       </div>`;
     }
@@ -2747,11 +2765,11 @@ function renderMonster(name, container) {
       const iOk = isOwned(item);
       const sym  = iOk ? '✓' : '✗';
       const cls  = iOk ? 'ok' : 'fail';
-      const safeI = item.replace(/'/g, "\\'");
+      const safeI = item.replace(/&/g,'&amp;').replace(/"/g,'&quot;');
       html += `<div class="req-row">
         <span class="req-icon ${cls}">${sym}</span>
         <span class="req-label" style="cursor:pointer"
-          onclick="pushHistoryEntry();_renderTab('cards');setTimeout(()=>showCard('${safeI}','item',false),50)">${item}</span>
+          data-nav="${safeI}" data-nav-type="item" onclick="_navToCard(this)">${item}</span>
         <span class="req-note">${iOk ? 'owned' : 'need card'}</span>
       </div>`;
     }
@@ -2778,11 +2796,11 @@ function renderMonster(name, container) {
       const owned = t.cards.some(c => isOwned(c));
       const pct = ((t.weight / totalWeight) * 100).toFixed(1);
       const ownedCard = t.cards.find(c => isOwned(c)) || t.cards[0];
-      const navCard = t.cards[0].replace(/'/g, "\\'");
+      const navCard = t.cards[0].replace(/&/g,'&amp;').replace(/"/g,'&quot;');
       html += `<div class="method-row">
         <div class="method-indicator ${owned ? 'available' : 'locked'}"></div>
         <span class="method-name ${owned ? 'available' : 'locked'}" style="cursor:pointer"
-          onclick="pushHistoryEntry();_renderTab('cards');setTimeout(()=>showCard('${navCard}','monster',false),50)">${t.task}</span>
+          data-nav="${navCard}" data-nav-type="monster" onclick="_navToCard(this)">${t.task}</span>
         <span class="method-level" style="min-width:46px;text-align:right">${pct}%</span>
         <span class="method-note">${owned ? ownedCard : 'no card'}</span>
       </div>`;
@@ -2817,7 +2835,7 @@ function renderMonster(name, container) {
         <div class="section-header">Assigned by Slayer masters</div>
         <div style="margin-top:8px">`;
       for (const m of slayerAssignedBy) {
-        const safeKey = m.masterKey.replace(/'/g, "\\'");
+        const safeMasterName = m.masterCardName.replace(/&/g,'&amp;').replace(/"/g,'&quot;');
         const indCls2 = !m.slayerOk ? 'locked' : !m.masterOwned ? 'no-card' : 'available';
         const mImgUrl2 = (cardDetails[m.masterCardName] || {}).imageUrl || '';
         const mImgHtml2 = mImgUrl2
@@ -2828,7 +2846,7 @@ function renderMonster(name, container) {
           <div class="method-indicator ${indCls2}"></div>
           ${mImgHtml2}
           <span class="method-name ${indCls2}" style="cursor:pointer"
-            onclick="showCard('${m.masterCardName.replace(/'/g,"\\'")}','monster')">${m.masterKey}</span>
+            data-nav="${safeMasterName}" data-nav-type="monster" onclick="_navToCard(this)">${m.masterKey}</span>
           <span class="method-level" style="min-width:46px;text-align:right">${m.pct}%</span>
           <span class="method-note">${noteText2}</span>
         </div>`;
@@ -2882,7 +2900,7 @@ function facilityNote(f) {
       const sym = abyssOk ? ' ✓' : '';
       const label = abyssOk ? 'Abyss' : 'Abyss (locked)';
       return `<span style="cursor:pointer;color:${col};text-decoration:underline dotted" title="Enter the Abyss miniquest"
-        onclick="pushHistoryEntry();selectedQuest='Enter the Abyss';_renderTab('questing',false);showQuestDetail('Enter the Abyss',false)">${label}${sym}</span>`;
+        data-quest="Enter the Abyss" onclick="_navToQuest(this)">${label}${sym}</span>`;
     }
     const isCard = itemSources[opt] !== undefined;
     if (!isCard) return `<span style="color:#666">${opt}</span>`;
@@ -3982,7 +4000,7 @@ function renderItem(name, container) {
       const s    = TIER_STYLE[tier] || {bg:'#1a1a1a',color:'#888',label:tier};
       const frac = (clueRewardRarities[tier] || {})[name] || '';
       const rarLabel = frac ? fractionToRarity(frac) : '';
-      html += `<div class="drop-row" style="cursor:pointer" onclick="showCard('Clue scroll (${tier})','clue')">
+      html += `<div class="drop-row" style="cursor:pointer" data-nav="Clue scroll (${tier})" data-nav-type="clue" onclick="_navToCard(this)">
         <div class="drop-indicator" style="color:${s.color}">◈</div>
         <span class="drop-name" style="color:${s.color}">${s.label}</span>
         ${frac ? `<span class="rarity-badge ${rarityClass(rarLabel)}">${rarLabel}</span><span class="fraction">${frac}</span>` : ''}
@@ -5249,7 +5267,7 @@ function requiredForQuestsHtml(cardName) {
     const sym  = done ? '☑' : ok ? '✓' : '✗';
     const status = done ? 'done' : ok ? 'available' : 'locked';
     html += `<div class="req-row" style="cursor:pointer"
-      onclick="pushHistoryEntry();selectedQuest='${qName.replace(/'/g,"\\'")}';_renderTab('questing',false);showQuestDetail('${qName.replace(/'/g,"\\'")}',false)">
+      data-quest="${escHtml(qName)}" onclick="_navToQuest(this)">
       <span class="req-icon" style="color:${col}">${sym}</span>
       <span class="req-label" style="color:${col}">${qName}</span>
       <span class="req-note">${status}</span>
@@ -5750,7 +5768,7 @@ function getTrainingMethods(skillName) {
           else if (hasTiara)      note = ess ? `${ess} + ${tiara}` : tiara;
           else if (abyssOk)       note = `via Abyss`;
           else if (talisman) {
-            const abyssLink = `<span style="color:#3a3a3a;cursor:pointer;text-decoration:underline dotted" onclick="pushHistoryEntry();selectedQuest='Enter the Abyss';_renderTab('questing',false);showQuestDetail('Enter the Abyss',false)" title="Enter the Abyss miniquest">Abyss (locked)</span>`;
+            const abyssLink = `<span style="color:#3a3a3a;cursor:pointer;text-decoration:underline dotted" data-quest="Enter the Abyss" onclick="_navToQuest(this)" title="Enter the Abyss miniquest">Abyss (locked)</span>`;
             note = `need ${talisman} · ${abyssLink}`;
           } else                  note = ess;
         } else {
@@ -5884,8 +5902,7 @@ function showSkillDetail(skillName, push = true) {
       const img = imgUrl
         ? `<img src="${imgUrl}" style="width:18px;height:18px;object-fit:contain;image-rendering:pixelated;flex-shrink:0" onerror="this.style.display='none'">`
         : '<span style="width:18px;flex-shrink:0"></span>';
-      const safeCard = m.masterCardName.replace(/'/g, "\\'");
-      rows += `<div class="method-row" style="cursor:pointer" onclick="showCard('${safeCard}','monster')">
+      rows += `<div class="method-row" style="cursor:pointer" data-nav="${escHtml(m.masterCardName)}" data-nav-type="monster" onclick="_navToCard(this)">
         <div class="method-indicator ${indCls}"></div>
         ${img}
         <span class="method-name ${indCls}">${m.name}</span>
@@ -5911,23 +5928,22 @@ function showSkillDetail(skillName, push = true) {
 
       // Name HTML — clickable for items, monsters
       let nameHtml;
-      const safeNav = (n, t) => `pushHistoryEntry();_renderTab('cards');setTimeout(()=>showCard('${n.replace(/\\/g,'\\\\').replace(/'/g,"\\'")}','${t}',false),50)`;
       if (m.type === 'gathering' || m.type === 'production' || m.type === 'prayer' || m.type === 'firemaking') {
         const navName = m.displayNav || m.name;
         const dispName = m.displayName || m.name;
         const navType = itemSources[navName] ? 'item' : 'ingredient';
-        nameHtml = `<span class="method-name ${nameCls}" style="cursor:pointer" onclick="${safeNav(navName,navType)}">${dispName}</span>`;
+        nameHtml = `<span class="method-name ${nameCls}" style="cursor:pointer" data-nav="${escHtml(navName)}" data-nav-type="${navType}" onclick="_navToCard(this)">${dispName}</span>`;
       } else if (m.type === 'hunter' && itemSources[m.name]) {
-        nameHtml = `<span class="method-name ${nameCls}" style="cursor:pointer" onclick="${safeNav(m.name,'item')}">${m.name}</span>`;
+        nameHtml = `<span class="method-name ${nameCls}" style="cursor:pointer" data-nav="${escHtml(m.name)}" data-nav-type="item" onclick="_navToCard(this)">${m.name}</span>`;
       } else if (m.type === 'combat') {
-        nameHtml = `<span class="method-name ${nameCls}" style="cursor:pointer" onclick="${safeNav(m.name,'monster')}">${m.name}</span>`;
+        nameHtml = `<span class="method-name ${nameCls}" style="cursor:pointer" data-nav="${escHtml(m.name)}" data-nav-type="monster" onclick="_navToCard(this)">${m.name}</span>`;
       } else if (m.type === 'ranged-setup') {
         // Weapon is clickable; show combo name
         const weaponLink = m.weapon && itemSources[m.weapon]
-          ? `<span style="cursor:pointer" onclick="${safeNav(m.weapon,'item')}">${m.weapon}</span>`
+          ? `<span style="cursor:pointer" data-nav="${escHtml(m.weapon)}" data-nav-type="item" onclick="_navToCard(this)">${m.weapon}</span>`
           : m.weapon || '';
         const ammoLink = m.ammo && itemSources[m.ammo]
-          ? ` + <span style="cursor:pointer" onclick="${safeNav(m.ammo,'item')}">${m.ammo}</span>`
+          ? ` + <span style="cursor:pointer" data-nav="${escHtml(m.ammo)}" data-nav-type="item" onclick="_navToCard(this)">${m.ammo}</span>`
           : '';
         nameHtml = `<span class="method-name ${nameCls}">${weaponLink}${ammoLink}</span>`;
       } else if (m.type === 'magic-spell') {
@@ -6128,7 +6144,7 @@ function questItemHtml(name, data, completable) {
   const qp = data.questPoints ? `<span class="quest-qp">${data.questPoints}qp</span>` : '';
   const mem = data.members ? `<span class="quest-members-tag">M</span>` : '';
   const mini = isMiniquest(name) ? `<span class="quest-miniquest-tag">mini</span>` : '';
-  return `<div class="quest-item${sel}${doneCls}" onclick="showQuestDetail('${name.replace(/'/g,"\\'")}')">
+  return `<div class="quest-item${sel}${doneCls}" data-quest="${escHtml(name)}" onclick="showQuestDetail(this.dataset.quest)">
     <span class="quest-badge ${st}">${badge}</span>
     <span class="quest-name">${name}</span>
     ${qp}${mem}${mini}
@@ -6251,7 +6267,7 @@ function showQuestDetail(questName, push = true) {
   const qpStr   = q.questPoints ? ` · ${q.questPoints} quest point${q.questPoints!==1?'s':''}` : '';
 
   const isDone = completedQuests.has(questName);
-  const doneBtn = `<button onclick="toggleQuestDone('${questName.replace(/'/g,"\\'")}')"
+  const doneBtn = `<button data-quest="${escHtml(questName)}" onclick="toggleQuestDone(this.dataset.quest)"
     style="float:right;margin-top:2px;padding:4px 10px;font-size:11px;cursor:pointer;border-radius:3px;border:1px solid;
       ${isDone
         ? 'background:#2a1e08;border-color:#7a5020;color:#b07a30'
@@ -6308,7 +6324,7 @@ function showQuestDetail(questName, push = true) {
       html += `<div class="req-row">
         <span class="req-icon ${iCls}">${sym}</span>
         <span class="req-label" style="cursor:pointer;color:${col}"
-          onclick="showQuestDetail('${prereq.replace(/'/g,"\\'")}')">
+          data-quest="${escHtml(prereq)}" onclick="showQuestDetail(this.dataset.quest)">
           ${prereq}</span>
         <span class="req-note">${note}</span>
       </div>`;
@@ -6357,7 +6373,7 @@ function showQuestDetail(questName, push = true) {
             const ok = isOwned(card);
             const isCard = !!monsterDrops[card];
             const nav = isCard
-              ? `style="cursor:pointer" onclick="pushHistoryEntry();_renderTab('cards');setTimeout(()=>showCard('${card.replace(/'/g,"\\'")}','monster',false),50)"`
+              ? `style="cursor:pointer" data-nav="${escHtml(card)}" data-nav-type="monster" onclick="_navToCard(this)"`
               : '';
             const _npcImg = (cardDetails[card]||{}).imageUrl ? `<img src="${(cardDetails[card]||{}).imageUrl}" style="width:16px;height:16px;object-fit:contain;image-rendering:pixelated;flex-shrink:0" onerror="this.style.display='none'">` : '';
             npcRows.push({ ok, html: `<div class="req-row">
@@ -6373,7 +6389,7 @@ function showQuestDetail(questName, push = true) {
             const ok = isOwned(card);
             const isCard = !!monsterDrops[card];
             const nav = isCard
-              ? `style="cursor:pointer" onclick="pushHistoryEntry();_renderTab('cards');setTimeout(()=>showCard('${card.replace(/'/g,"\\'")}','monster',false),50)"`
+              ? `style="cursor:pointer" data-nav="${escHtml(card)}" data-nav-type="monster" onclick="_navToCard(this)"`
               : '';
             const _monImg = (cardDetails[card]||{}).imageUrl ? `<img src="${(cardDetails[card]||{}).imageUrl}" style="width:16px;height:16px;object-fit:contain;image-rendering:pixelated;flex-shrink:0" onerror="this.style.display='none'">` : '';
             if (req.optional) {
@@ -6400,7 +6416,7 @@ function showQuestDetail(questName, push = true) {
           const ok = isOwned(card) || altOk;
           const isItemCard = !!itemSources[card];
           const nav = isItemCard
-            ? `style="cursor:pointer" onclick="pushHistoryEntry();_renderTab('cards');setTimeout(()=>showCard('${card.replace(/'/g,"\\'")}','item',false),50)"`
+            ? `style="cursor:pointer" data-nav="${escHtml(card)}" data-nav-type="item" onclick="_navToCard(this)"`
             : '';
           const displayLabel = (label !== card) ? `${label} <span style="font-size:10px;color:#666">(${card})</span>` : `${card}${altTag}`;
           const noteText = altOk ? `${req.skillAlt.skill} ${req.skillAlt.level} ✓` : ok ? 'owned' : 'need card';
@@ -6429,7 +6445,7 @@ function showQuestDetail(questName, push = true) {
             const sep   = i > 0 ? `<span style="color:${sepColor}"> · </span>` : '';
             const inner = `<span style="color:${color}">${c}</span>`;
             return sep + (itemSources[c]
-              ? `<span style="cursor:pointer" onclick="pushHistoryEntry();_renderTab('cards');setTimeout(()=>showCard('${c.replace(/'/g,"\\'")}','item',false),50)">${inner}</span>`
+              ? `<span style="cursor:pointer" data-nav="${escHtml(c)}" data-nav-type="item" onclick="_navToCard(this)">${inner}</span>`
               : inner);
           }).join('');
 
@@ -6480,7 +6496,7 @@ function showQuestDetail(questName, push = true) {
         const isCard = !!itemSources[item];
         html += `<div class="req-row">
           <span class="req-icon ${ok?'ok':'fail'}">${ok?'✓':'✗'}</span>
-          <span class="req-label" ${isCard?`style="cursor:pointer" onclick="pushHistoryEntry();_renderTab('cards');setTimeout(()=>showCard('${item.replace(/'/g,"\\'")}','item',false),50)"`:''}>${item}</span>
+          <span class="req-label" ${isCard?`style="cursor:pointer" data-nav="${escHtml(item)}" data-nav-type="item" onclick="_navToCard(this)"`:''}>${item}</span>
           <span class="req-note">${ok ? 'owned' : (isCard ? 'need card' : 'no TCG card')}</span>
         </div>`;
       }
@@ -6493,7 +6509,7 @@ function showQuestDetail(questName, push = true) {
         const isCard = !!monsterDrops[kill];
         html += `<div class="req-row">
           <span class="req-icon ${ok?'ok':'fail'}">${ok?'✓':'✗'}</span>
-          <span class="req-label" ${isCard?`style="cursor:pointer" onclick="pushHistoryEntry();_renderTab('cards');setTimeout(()=>showCard('${kill.replace(/'/g,"\\'")}','monster',false),50)"`:''}>${kill}</span>
+          <span class="req-label" ${isCard?`style="cursor:pointer" data-nav="${escHtml(kill)}" data-nav-type="monster" onclick="_navToCard(this)"`:''}>${kill}</span>
           <span class="req-note">${ok ? 'card owned' : (isCard ? 'need monster card' : 'no TCG card')}</span>
         </div>`;
       }
@@ -7246,8 +7262,8 @@ function renderEquipSlotDetail(slot) {
       const styleExtra = (!item.styleMatch && item.combatType !== 'all')
         ? ' style="opacity:0.55"'
         : '';
-      const escapedName = item.name.replace(/'/g, "\\'");
       const safeItem = encodeURIComponent(item.name);
+      const safeNavName = escHtml(item.name);
 
       // Row click: equip for owned+meets-req, clear for equipped, view sourcing otherwise
       let rowOnclick, rowTitle;
@@ -7255,13 +7271,13 @@ function renderEquipSlotDetail(slot) {
         rowOnclick = `setEquipped('${slot}','')`;
         rowTitle   = 'Click to remove';
       } else if (item.owned && item.meetsReq) {
-        rowOnclick = `setEquipped('${slot}','${escapedName}')`;
+        rowOnclick = `setEquipped('${slot}', decodeURIComponent(this.dataset.item))`;
         rowTitle   = 'Click to equip';
       } else if (item.owned && !item.meetsReq) {
         rowOnclick = ``;
         rowTitle   = 'Level too low to equip';
       } else {
-        rowOnclick = `navigateToCard('${escapedName}')`;
+        rowOnclick = `navigateToCard(this.dataset.nav)`;
         rowTitle   = 'Click to view sourcing';
       }
 
@@ -7282,7 +7298,7 @@ function renderEquipSlotDetail(slot) {
 
       // "View ↗" for owned items (click=equip, so they need another route to sourcing)
       const viewBtn = item.owned
-        ? `<button class="view-card-btn" title="View card sourcing" onclick="event.stopPropagation();navigateToCard('${escapedName}')">↗ Card</button>`
+        ? `<button class="view-card-btn" title="View card sourcing" data-nav="${safeNavName}" onclick="event.stopPropagation();navigateToCard(this.dataset.nav)">↗ Card</button>`
         : '';
 
       // Clear button on equipped item
@@ -7295,7 +7311,7 @@ function renderEquipSlotDetail(slot) {
         ? `<img src="${_eImgUrl}" style="width:20px;height:20px;object-fit:contain;image-rendering:pixelated;flex-shrink:0" onerror="this.style.display='none'">`
         : '<span style="width:20px;flex-shrink:0"></span>';
       html += `<div class="equip-item-row${rowCls}"
-        data-slot="${slot}" data-item="${safeItem}"
+        data-slot="${slot}" data-item="${safeItem}" data-nav="${safeNavName}"
         title="${rowTitle}"
         onmouseenter="showEquipTooltip(event)"
         onmouseleave="hideEquipTooltip()"
