@@ -1923,11 +1923,13 @@ function _wlSearchInput(q) {
     const own  = isOwned(c.name);
     const safe = c.name.replace(/&/g,'&amp;').replace(/"/g,'&quot;');
     const imgUrl = (cardDetails[c.name] || {}).imageUrl || '';
+    const ctype = c.type || 'item';
     return `<div style="display:flex;align-items:center;gap:7px;padding:5px 10px;cursor:pointer;border-bottom:1px solid #0f0f0f"
       data-card="${safe}" onclick="_wlSearchToggle(this.dataset.card)"
       onmouseenter="this.style.background='#161616'" onmouseleave="this.style.background=''">
       ${imgUrl ? `<img src="${imgUrl}" style="width:20px;height:20px;object-fit:contain;image-rendering:pixelated;flex-shrink:0" onerror="this.style.display='none'">` : '<span style="width:20px;flex-shrink:0"></span>'}
-      <span style="flex:1;font-size:11px;color:${own?'#76c442':'#aaa'};overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${c.name}</span>
+      <span style="flex:1;font-size:11px;color:${own?'#76c442':'#aaa'};overflow:hidden;text-overflow:ellipsis;white-space:nowrap;text-decoration:underline dotted"
+        onclick="event.stopPropagation();showCard('${safe}','${ctype}')" title="View card">${c.name}</span>
       <span style="font-size:12px;flex-shrink:0;color:${wled?'#4a7a4a':'#2a4a2a'};font-weight:700" title="${wled?'Remove from wishlist':'Add to wishlist'}">${wled?'★':'☆'}</span>
     </div>`;
   }).join('');
@@ -2260,6 +2262,11 @@ function _wlCategory(name) {
   return 'other';
 }
 
+function _cardType(name) {
+  const card = allCards.find(c => c.name === name);
+  return card ? card.type : (monsterDrops[name] ? 'monster' : 'item');
+}
+
 // ── Main render ───────────────────────────────────────────────────────────────
 function renderWishlist() {
   const container = document.getElementById('wishlist-content');
@@ -2312,7 +2319,9 @@ function renderWishlist() {
       const qSafe = qn.replace(/&/g,'&amp;').replace(/"/g,'&quot;');
       html += `<div style="margin:10px 0;background:#161616;border:1px solid #2a2a2a;border-radius:4px;padding:10px 12px">
         <div style="display:flex;align-items:baseline;gap:8px;margin-bottom:8px">
-          <span style="font-size:13px;color:#ccc;font-weight:500">${qn}</span>
+          <span style="font-size:13px;color:#bba050;font-weight:500;cursor:pointer;text-decoration:underline dotted"
+            onclick="pushHistoryEntry();selectedQuest='${qSafe}';_renderTab('questing',false);showQuestDetail('${qSafe}',false)"
+            title="Open quest page">${qn}</span>
           <span style="font-size:10px;color:${got===unique.length&&unique.length?'#00c853':'#888'}">${got}/${unique.length} obtained</span>
           <button data-quest="${qSafe}" onclick="removeQuestFromWishlist(this.dataset.quest)"
             style="margin-left:auto;background:none;border:none;color:#444;cursor:pointer;font-size:12px" title="Remove quest">×</button>
@@ -2322,7 +2331,7 @@ function renderWishlist() {
         const own  = isOwned(c);
         const wled = wishlist.has(c);
         const safe = c.replace(/&/g,'&amp;').replace(/"/g,'&quot;');
-        const type = monsterDrops[c] ? 'monster' : 'item';
+        const type = _cardType(c);
         const chipStyle = own
           ? 'background:#0d2210;border-color:#2a5a2a;color:#76c442'
           : wled
@@ -2360,7 +2369,7 @@ function renderWishlist() {
         const own  = isOwned(c);
         const wled = wishlist.has(c);
         const safe = c.replace(/&/g,'&amp;').replace(/"/g,'&quot;');
-        const type = monsterDrops[c] ? 'monster' : 'item';
+        const type = _cardType(c);
         const chipStyle = own
           ? 'background:#0d2210;border-color:#2a5a2a;color:#76c442'
           : wled
@@ -2398,7 +2407,7 @@ function renderWishlist() {
       const own  = isOwned(name);
       const meta = wishlist.get(name) || {note:''};
       const safe = name.replace(/&/g,'&amp;').replace(/"/g,'&quot;');
-      const type = monsterDrops[name] ? 'monster' : 'item';
+      const type = _cardType(name);
       const imgUrl = (cardDetails[name] || {}).imageUrl || '';
       const hasNote = meta.note && meta.note.trim();
       const noteTitle = hasNote ? meta.note.replace(/"/g,'&quot;') : '';
