@@ -2679,33 +2679,38 @@ function renderWishlist() {
   let clueStepHtml = '';
   if (wishlistedClueSteps.length) {
     clueStepHtml += `<div class="section"><div class="section-header">Clue Steps</div>`;
+    const _WL_TIER_COLORS = {
+      Beginner:'#c8a830', Easy:'#50c050', Medium:'#c8c030',
+      Hard:'#4080c0', Elite:'#9050d0', Master:'#d03030',
+    };
+    const _WL_TYPE_LABELS = {
+      emote:'Emote', sherlock:'Sherlock', falo:'Falo',
+      cryptic:'Cryptic', anagram:'Anagram', cipher:'Cipher',
+    };
     for (const step of wishlistedClueSteps) {
-      const cardItems = (step.items || []).filter(it => !!itemSources[it]);
-      const allReady  = cardItems.length > 0 && cardItems.every(i => isOwned(i));
-      const anyReady  = cardItems.some(i => isOwned(i));
-      const borderCol = allReady ? '#76c442' : anyReady ? '#c8a830' : (cardItems.length ? '#c84a00' : '#333');
-      const typeLabel = step.type === 'falo' ? 'Falo · Master'
-                      : step.type === 'sherlock' ? `Sherlock · ${step.tier}`
-                      : `Emote · ${step.tier}`;
+      const allItems  = step.items || [];
+      // Determine nav type per item: monster card → 'monster', else 'item'
+      const anyReady  = allItems.some(i => isOwned(i));
+      const allReady  = allItems.length > 0 && allItems.every(i => isOwned(i));
+      const borderCol = allReady ? '#76c442' : anyReady ? '#c8a830' : (allItems.length ? '#c84a00' : '#333');
+      const tierCol   = _WL_TIER_COLORS[step.tier] || '#666';
+      const typeStr   = _WL_TYPE_LABELS[step.type] || step.type;
+      const tierBadge = `<span style="font-size:9px;color:${tierCol};border:1px solid ${tierCol}55;background:${tierCol}18;border-radius:2px;padding:1px 5px;white-space:nowrap;flex-shrink:0">${step.tier} clue · ${typeStr}</span>`;
       const textSafe = step.text.replace(/&/g,'&amp;').replace(/"/g,'&quot;');
+      const displayText = step.type === 'falo' ? `"${escHtml(step.text)}"` : escHtml(step.text);
+      const textStyle = step.type === 'falo' ? 'font-style:italic;color:#888' : 'color:#bbb';
       clueStepHtml += `<div style="margin:6px 0;background:#161616;border:1px solid #2a2a2a;border-radius:4px;padding:8px 10px;border-left:3px solid ${borderCol}">
-        <div style="display:flex;align-items:flex-start;gap:8px;margin-bottom:${step.items?.length?'6px':'0'}">
-          <span style="font-size:11px;color:#bbb;flex:1;font-style:${step.type==='falo'?'italic':'normal'}">${step.type==='falo'?'"':''}${step.text.replace(/&/g,'&amp;')}${step.type==='falo'?'"':''}</span>
-          <span style="font-size:10px;color:#444;white-space:nowrap;flex-shrink:0">${typeLabel}</span>
+        <div style="display:flex;align-items:flex-start;gap:8px;margin-bottom:${allItems.length?'6px':'0'}">
+          <span style="font-size:11px;flex:1;${textStyle}">${displayText}</span>
+          ${tierBadge}
           <button data-step-text="${textSafe}" onclick="removeClueStep(this.dataset.stepText)"
             style="background:none;border:none;color:#333;cursor:pointer;font-size:14px;line-height:1;flex-shrink:0" title="Remove">×</button>
         </div>`;
-      if (step.items && step.items.length) {
+      if (allItems.length) {
         clueStepHtml += `<div style="display:flex;flex-wrap:wrap;gap:4px">`;
-        for (const it of step.items) {
-          const own    = isOwned(it);
-          const isCard = !!itemSources[it];
-          const bg     = isCard ? (own ? '#0d1c09' : '#1c0d09') : '#111';
-          const col    = isCard ? (own ? '#76c442' : '#c84a00') : '#888';
-          const sym    = isCard ? (own ? '✓ ' : '✗ ') : '';
-          const safe   = it.replace(/&/g,'&amp;').replace(/"/g,'&quot;');
-          clueStepHtml += `<span style="${isCard?'cursor:pointer;':''}font-size:11px;background:${bg};color:${col};border-radius:3px;padding:2px 7px"
-            ${isCard ? `data-nav="${safe}" data-nav-type="item" onclick="showCard(this.dataset.nav,this.dataset.navType)"` : ''}>${sym}${it.replace(/&/g,'&amp;')}</span>`;
+        for (const it of allItems) {
+          const navType = monsterDrops[it] ? 'monster' : 'item';
+          clueStepHtml += _clueCardChipHtml(it, navType);
         }
         clueStepHtml += `</div>`;
       }
@@ -3793,23 +3798,19 @@ function renderClueScroll(tier, container) {
         const allItemsOwned = hasItems && items.every(i => isOwned(i));
         const anyOwned = items.some(i => isOwned(i));
         const borderCol = allItemsOwned ? '#76c442' : anyOwned ? '#c8a830' : (hasItems ? '#c84a00' : '#333');
-        const wled = hasItems && _isClueStepWishlisted(step.clueText);
-        html += `<div style="margin:4px 0;padding:8px;background:#0d0d0d;border-radius:4px;border-left:3px solid ${borderCol}">
-          <div style="display:flex;align-items:flex-start;gap:6px">
-            <div style="font-size:12px;color:#bbb;flex:1;margin-bottom:${hasItems?'6px':'0'}">${escHtml(step.clueText)}</div>
-            ${hasItems ? `<span class="wish-star${wled?' active':''}"
-              data-step-type="emote" data-step-tier="${escHtml(capTier)}"
-              data-step-text="${escHtml(step.clueText)}"
-              data-step-items="${escHtml(JSON.stringify(items))}"
-              onclick="_toggleClueStepWish(this)"
-              title="${wled?'Remove from wishlist':'Add to wishlist'}">${wled?'★':'☆'}</span>` : ''}
-          </div>`;
-        if (hasItems) {
-          html += `<div style="display:flex;flex-wrap:wrap;gap:4px;margin-top:4px">`;
-          for (const it of items) html += _clueCardChipHtml(it, 'item');
-          html += `</div>`;
-        }
-        html += `</div>`;
+        const wled = _isClueStepWishlisted(step.clueText);
+        html += `<div style="margin:4px 0;padding:8px;background:#0d0d0d;border-radius:4px;border-left:3px solid ${borderCol};display:flex;align-items:flex-start;gap:6px">
+          <div style="flex:1">
+            <div style="font-size:12px;color:#bbb${hasItems?';margin-bottom:6px':''}">${escHtml(step.clueText)}</div>
+            ${hasItems ? `<div style="display:flex;flex-wrap:wrap;gap:4px">${items.map(it=>_clueCardChipHtml(it,'item')).join('')}</div>` : ''}
+          </div>
+          <span class="wish-star${wled?' active':''}" style="flex-shrink:0"
+            data-step-type="emote" data-step-tier="${escHtml(capTier)}"
+            data-step-text="${escHtml(step.clueText)}"
+            data-step-items="${escHtml(JSON.stringify(items))}"
+            onclick="_toggleClueStepWish(this)"
+            title="${wled?'Remove from wishlist':'Add to wishlist'}">${wled?'★':'☆'}</span>
+        </div>`;
       }
       html += `</div>`;
     }
@@ -3832,31 +3833,19 @@ function renderClueScroll(tier, container) {
           const borderCol = cardItems.length > 0
             ? (allCardItemsOwned ? '#76c442' : '#9050d0')
             : '#333';
-          const wledSh = hasItems && _isClueStepWishlisted(task.task);
-          html += `<div style="margin:4px 0;padding:8px;background:#0d0d0d;border-radius:4px;border-left:3px solid ${borderCol}">
-            <div style="display:flex;align-items:flex-start;gap:6px">
-              <div style="font-size:12px;color:#bbb;flex:1;margin-bottom:${hasItems?'6px':'0'}">${escHtml(task.task)}</div>
-              ${hasItems ? `<span class="wish-star${wledSh?' active':''}"
-                data-step-type="sherlock" data-step-tier="${escHtml(sherlockTier)}"
-                data-step-text="${escHtml(task.task)}"
-                data-step-items="${escHtml(JSON.stringify(items))}"
-                onclick="_toggleClueStepWish(this)"
-                title="${wledSh?'Remove from wishlist':'Add to wishlist'}">${wledSh?'★':'☆'}</span>` : ''}
-            </div>`;
-          if (hasItems) {
-            html += `<div style="display:flex;flex-wrap:wrap;gap:4px;margin-top:4px">`;
-            for (const it of items) {
-              const isCard = !!itemSources[it];
-              if (isCard) {
-                html += _clueCardChipHtml(it, 'item');
-              } else {
-                // Non-card item — shown neutral, no star
-                html += `<span style="font-size:11px;background:#111;color:#888;border-radius:3px;padding:2px 7px">${escHtml(it)}</span>`;
-              }
-            }
-            html += `</div>`;
-          }
-          html += `</div>`;
+          const wledSh = _isClueStepWishlisted(task.task);
+          html += `<div style="margin:4px 0;padding:8px;background:#0d0d0d;border-radius:4px;border-left:3px solid ${borderCol};display:flex;align-items:flex-start;gap:6px">
+            <div style="flex:1">
+              <div style="font-size:12px;color:#bbb${hasItems?';margin-bottom:6px':''}">${escHtml(task.task)}</div>
+              ${hasItems ? `<div style="display:flex;flex-wrap:wrap;gap:4px">${items.map(it => !!itemSources[it] ? _clueCardChipHtml(it,'item') : `<span style="font-size:11px;background:#111;color:#888;border-radius:3px;padding:2px 7px">${escHtml(it)}</span>`).join('')}</div>` : ''}
+            </div>
+            <span class="wish-star${wledSh?' active':''}" style="flex-shrink:0"
+              data-step-type="sherlock" data-step-tier="${escHtml(sherlockTier)}"
+              data-step-text="${escHtml(task.task)}"
+              data-step-items="${escHtml(JSON.stringify(items))}"
+              onclick="_toggleClueStepWish(this)"
+              title="${wledSh?'Remove from wishlist':'Add to wishlist'}">${wledSh?'★':'☆'}</span>
+          </div>`;
         }
         html += `</div>`;
       }
@@ -3874,19 +3863,18 @@ function renderClueScroll(tier, container) {
           const anyOwned = items.some(i => isOwned(i));
           const borderCol = anyOwned ? '#76c442' : '#d03030';
           const wledF = _isClueStepWishlisted(step.lyric);
-          html += `<div style="margin:4px 0;padding:8px;background:#0d0d0d;border-radius:4px;border-left:3px solid ${borderCol}">
-            <div style="display:flex;align-items:flex-start;gap:6px;margin-bottom:6px">
-              <div style="font-size:12px;color:#888;font-style:italic;flex:1">"${escHtml(step.lyric)}"</div>
-              <span class="wish-star${wledF?' active':''}"
-                data-step-type="falo" data-step-tier="Master"
-                data-step-text="${escHtml(step.lyric)}"
-                data-step-items="${escHtml(JSON.stringify(items))}"
-                onclick="_toggleClueStepWish(this)"
-                title="${wledF?'Remove from wishlist':'Add to wishlist'}">${wledF?'★':'☆'}</span>
+          html += `<div style="margin:4px 0;padding:8px;background:#0d0d0d;border-radius:4px;border-left:3px solid ${borderCol};display:flex;align-items:flex-start;gap:6px">
+            <div style="flex:1">
+              <div style="font-size:12px;color:#888;font-style:italic;margin-bottom:6px">"${escHtml(step.lyric)}"</div>
+              <div style="display:flex;flex-wrap:wrap;gap:4px">${items.map(it=>_clueCardChipHtml(it,'item')).join('')}</div>
             </div>
-            <div style="display:flex;flex-wrap:wrap;gap:4px">`;
-          for (const it of items) html += _clueCardChipHtml(it, 'item');
-          html += `</div></div>`;
+            <span class="wish-star${wledF?' active':''}" style="flex-shrink:0"
+              data-step-type="falo" data-step-tier="Master"
+              data-step-text="${escHtml(step.lyric)}"
+              data-step-items="${escHtml(JSON.stringify(items))}"
+              onclick="_toggleClueStepWish(this)"
+              title="${wledF?'Remove from wishlist':'Add to wishlist'}">${wledF?'★':'☆'}</span>
+          </div>`;
         }
         html += `</div>`;
       }
@@ -3909,16 +3897,18 @@ function renderClueScroll(tier, container) {
         <div class="section-header">Cryptic Clues</div>
         <div style="font-size:10px;color:#555;padding:0 0 6px">${crypticSteps.length} steps · ${typeSummary}</div>`;
       for (const step of crypticSteps) {
-        let borderCol, badge = '';
+        let borderCol, badge = '', stepItems = [];
         if (step.type === 'dig') {
           const sp = isOwned('Spade');
           borderCol = sp ? '#76c442' : '#c84a00';
           badge = _clueCardChipHtml('Spade', 'item');
+          stepItems = ['Spade'];
         } else if (step.type === 'kill') {
           const npcs = step.killNpcs || [];
           const anyOwned = npcs.some(n => isOwned(n));
           const anyCard  = npcs.some(n => !!monsterDrops[n]);
           borderCol = anyCard ? (anyOwned ? '#76c442' : '#c84a00') : '#333';
+          stepItems = npcs.filter(n => !!monsterDrops[n]);
           if (npcs.length) {
             badge = npcs.map((n, i) => {
               const isCard = !!monsterDrops[n];
@@ -3932,6 +3922,7 @@ function renderClueScroll(tier, container) {
           const npcOwned = npcCard && isOwned(step.npc);
           const locLocked = _locLocked(step.location);
           borderCol = locLocked ? '#888' : npcCard ? (npcOwned ? '#76c442' : '#c84a00') : '#333';
+          if (npcCard) stepItems = [step.npc];
           if (step.npc) {
             badge = npcCard
               ? _clueCardChipHtml(step.npc, 'monster')
@@ -3942,10 +3933,20 @@ function renderClueScroll(tier, container) {
           const locLocked = _locLocked(step.location);
           borderCol = locLocked ? '#888' : '#333';
         }
-        html += `<div style="margin:4px 0;padding:8px;background:#0d0d0d;border-radius:4px;border-left:3px solid ${borderCol}">
-          <div style="font-size:12px;color:#bbb;margin-bottom:${badge?'6px':'0'}">${escHtml(step.clueText)}</div>
-          ${badge}
-          ${step.charlieItems ? `<div style="margin-top:6px;display:flex;flex-wrap:wrap;align-items:center;gap:4px"><span style="font-size:10px;color:#555">Brings one of:</span>${step.charlieItems.map(it => _clueCardChipHtml(it, 'item')).join('')}</div>` : ''}
+        const _wledCry = _isClueStepWishlisted(step.clueText);
+        const _hasBadge = !!(badge || step.charlieItems);
+        html += `<div style="margin:4px 0;padding:8px;background:#0d0d0d;border-radius:4px;border-left:3px solid ${borderCol};display:flex;align-items:flex-start;gap:6px">
+          <div style="flex:1">
+            <div style="font-size:12px;color:#bbb${_hasBadge?';margin-bottom:6px':''}">${escHtml(step.clueText)}</div>
+            ${badge ? `<div style="display:flex;flex-wrap:wrap;gap:4px;align-items:center">${badge}</div>` : ''}
+            ${step.charlieItems ? `<div style="margin-top:${badge?'4px':'0'};display:flex;flex-wrap:wrap;align-items:center;gap:4px"><span style="font-size:10px;color:#555">Brings one of:</span>${step.charlieItems.map(it => _clueCardChipHtml(it, 'item')).join('')}</div>` : ''}
+          </div>
+          <span class="wish-star${_wledCry?' active':''}" style="flex-shrink:0"
+            data-step-type="cryptic" data-step-tier="${escHtml(capTier)}"
+            data-step-text="${escHtml(step.clueText)}"
+            data-step-items="${escHtml(JSON.stringify(stepItems))}"
+            onclick="_toggleClueStepWish(this)"
+            title="${_wledCry?'Remove from wishlist':'Add to wishlist'}">${_wledCry?'★':'☆'}</span>
         </div>`;
       }
       html += `</div>`;
@@ -3964,10 +3965,22 @@ function renderClueScroll(tier, container) {
         const npcCard  = step.npc && monsterDrops[step.npc] !== undefined;
         const npcOwned = npcCard && isOwned(step.npc);
         const borderCol = npcCard ? (npcOwned ? '#76c442' : '#c84a00') : '#333';
-        html += `<div style="margin:4px 0;padding:8px;background:#0d0d0d;border-radius:4px;border-left:3px solid ${borderCol}">
-          <div style="font-size:11px;color:#888;font-family:monospace;letter-spacing:2px;margin-bottom:4px">${escHtml(step.anagram)}</div>
-          ${step.npc ? (npcCard ? _clueCardChipHtml(step.npc, 'monster') : `<span style="font-size:11px;padding:2px 7px;border-radius:3px;background:#111;color:#888">${escHtml(step.npc)}</span>`) : ''}
-          ${step.challenge ? `<span style="font-size:10px;color:#555;margin-left:8px">answer: ${escHtml(step.challenge)}</span>` : ''}
+        const _wledAna = _isClueStepWishlisted(step.anagram);
+        const _anaItems = npcCard ? [step.npc] : [];
+        html += `<div style="margin:4px 0;padding:8px;background:#0d0d0d;border-radius:4px;border-left:3px solid ${borderCol};display:flex;align-items:flex-start;gap:6px">
+          <div style="flex:1">
+            <div style="font-size:11px;color:#888;font-family:monospace;letter-spacing:2px;margin-bottom:4px">${escHtml(step.anagram)}</div>
+            <div style="display:flex;flex-wrap:wrap;align-items:center;gap:4px">
+              ${step.npc ? (npcCard ? _clueCardChipHtml(step.npc, 'monster') : `<span style="font-size:11px;padding:2px 7px;border-radius:3px;background:#111;color:#888">${escHtml(step.npc)}</span>`) : ''}
+              ${step.challenge ? `<span style="font-size:10px;color:#555">answer: ${escHtml(step.challenge)}</span>` : ''}
+            </div>
+          </div>
+          <span class="wish-star${_wledAna?' active':''}" style="flex-shrink:0"
+            data-step-type="anagram" data-step-tier="${escHtml(capTier)}"
+            data-step-text="${escHtml(step.anagram)}"
+            data-step-items="${escHtml(JSON.stringify(_anaItems))}"
+            onclick="_toggleClueStepWish(this)"
+            title="${_wledAna?'Remove from wishlist':'Add to wishlist'}">${_wledAna?'★':'☆'}</span>
         </div>`;
       }
       html += `</div>`;
@@ -3984,10 +3997,22 @@ function renderClueScroll(tier, container) {
         const npcCard  = step.npc && monsterDrops[step.npc] !== undefined;
         const npcOwned = npcCard && isOwned(step.npc);
         const borderCol = npcCard ? (npcOwned ? '#76c442' : '#c84a00') : '#333';
-        html += `<div style="margin:4px 0;padding:8px;background:#0d0d0d;border-radius:4px;border-left:3px solid ${borderCol}">
-          <div style="font-size:11px;color:#888;font-family:monospace;letter-spacing:2px;margin-bottom:4px">${escHtml(step.cipher)}</div>
-          ${step.npc ? (npcCard ? _clueCardChipHtml(step.npc, 'monster') : `<span style="font-size:11px;padding:2px 7px;border-radius:3px;background:#111;color:#888">${escHtml(step.npc)}</span>`) : ''}
-          ${step.challenge ? `<span style="font-size:10px;color:#555;margin-left:8px">answer: ${escHtml(step.challenge)}</span>` : ''}
+        const _wledCip = _isClueStepWishlisted(step.cipher);
+        const _cipItems = npcCard ? [step.npc] : [];
+        html += `<div style="margin:4px 0;padding:8px;background:#0d0d0d;border-radius:4px;border-left:3px solid ${borderCol};display:flex;align-items:flex-start;gap:6px">
+          <div style="flex:1">
+            <div style="font-size:11px;color:#888;font-family:monospace;letter-spacing:2px;margin-bottom:4px">${escHtml(step.cipher)}</div>
+            <div style="display:flex;flex-wrap:wrap;align-items:center;gap:4px">
+              ${step.npc ? (npcCard ? _clueCardChipHtml(step.npc, 'monster') : `<span style="font-size:11px;padding:2px 7px;border-radius:3px;background:#111;color:#888">${escHtml(step.npc)}</span>`) : ''}
+              ${step.challenge ? `<span style="font-size:10px;color:#555">answer: ${escHtml(step.challenge)}</span>` : ''}
+            </div>
+          </div>
+          <span class="wish-star${_wledCip?' active':''}" style="flex-shrink:0"
+            data-step-type="cipher" data-step-tier="${escHtml(capTier)}"
+            data-step-text="${escHtml(step.cipher)}"
+            data-step-items="${escHtml(JSON.stringify(_cipItems))}"
+            onclick="_toggleClueStepWish(this)"
+            title="${_wledCip?'Remove from wishlist':'Add to wishlist'}">${_wledCip?'★':'☆'}</span>
         </div>`;
       }
       html += `</div>`;
