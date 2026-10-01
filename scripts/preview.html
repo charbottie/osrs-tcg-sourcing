@@ -2012,6 +2012,30 @@ function _isClueStepWishlisted(text) {
   return wishlistedClueSteps.some(s => s.text === text);
 }
 
+// Strip a step's card contributions from wishlist when it is un-starred.
+function _removeClueStepCards(step) {
+  const noteTag = `${step.tier} clue`;
+  for (const card of (step.items || [])) {
+    if (!wishlist.has(card)) continue;
+    const entry = wishlist.get(card);
+    // Remove this tag from the note
+    const newNote = entry.note
+      .split(',').map(t => t.trim()).filter(t => t !== noteTag).join(', ');
+    if (newNote) {
+      entry.note = newNote;
+    } else {
+      // Note is now empty — only remove if no other wishlist source has this card
+      const inQuest = [...wishlistedQuests].some(qn =>
+        (bmQuestCards[qn]?.sections || [])
+          .flatMap(s => s.requirements || []).flatMap(r => r.cards || []).includes(card));
+      const inGroup = wishlistGroups.some(g => g.cards.includes(card));
+      const inOtherStep = wishlistedClueSteps.some(s => s.text !== step.text && (s.items||[]).includes(card));
+      if (!inQuest && !inGroup && !inOtherStep) wishlist.delete(card);
+      else entry.note = newNote;
+    }
+  }
+}
+
 function _toggleClueStepWish(el) {
   const text  = el.dataset.stepText;
   const type  = el.dataset.stepType;
@@ -2019,13 +2043,11 @@ function _toggleClueStepWish(el) {
   const items = JSON.parse(el.dataset.stepItems || '[]');
   const idx   = wishlistedClueSteps.findIndex(s => s.text === text);
   if (idx >= 0) {
+    const step = wishlistedClueSteps[idx];
     wishlistedClueSteps.splice(idx, 1);
-    el.textContent = '☆';
-    el.classList.remove('active');
+    _removeClueStepCards(step);
   } else {
     wishlistedClueSteps.push({ type, tier, text, items });
-    el.textContent = '★';
-    el.classList.add('active');
     // Add unowned items to the main wishlist card grid (same pattern as wishlistQuest)
     const noteTag = `${tier} clue`;
     for (const card of items) {
@@ -2039,11 +2061,14 @@ function _toggleClueStepWish(el) {
     }
   }
   _saveWishlist();
+  refreshDetail();
   if (activeTab === 'wishlist') renderWishlist();
 }
 
 function removeClueStep(text) {
+  const step = wishlistedClueSteps.find(s => s.text === text);
   wishlistedClueSteps = wishlistedClueSteps.filter(s => s.text !== text);
+  if (step) _removeClueStepCards(step);
   _saveWishlist();
   if (activeTab === 'wishlist') renderWishlist();
 }
