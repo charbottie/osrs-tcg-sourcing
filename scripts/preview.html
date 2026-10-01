@@ -1760,6 +1760,7 @@ function dropRowHtml(cardName, rarity, fraction, isRdt) {
     <span class="drop-name ${nameClass}">${cardName}${reqTags}</span>
     <span class="rarity-badge ${rarityClass(rarity)}" style="${rarityBg}">${rarity}</span>
     <span class="fraction">${fraction || '—'}</span>
+    ${_rowWishStar(cardName, ownedCard)}
   </div>`;
 }
 
@@ -2034,6 +2035,17 @@ function removeClueStep(text) {
   wishlistedClueSteps = wishlistedClueSteps.filter(s => s.text !== text);
   _saveWishlist();
   if (activeTab === 'wishlist') renderWishlist();
+}
+
+// Small inline wish star for use inside rows (drop tables, quest requirements, etc.).
+// owned=true → greyed out (you already have it); stop propagation to avoid row navigation.
+function _rowWishStar(name, owned) {
+  const wled = wishlist.has(name);
+  return `<span class="wish-star${wled?' active':''}"
+    style="flex-shrink:0;font-size:12px${owned?';opacity:0.3':''}"
+    data-card="${escHtml(name)}"
+    onclick="event.stopPropagation();toggleWishlist(this.dataset.card)"
+    title="${wled?'Remove from wishlist':'Add to wishlist'}">${wled?'★':'☆'}</span>`;
 }
 
 function toggleWishlist(name) {
@@ -3312,6 +3324,7 @@ function renderIngredient(name, container) {
           <div class="drop-indicator ${indCls}">${sym}</div>
           <span class="drop-name ${indCls}">${s.source}${lvlHtml}${qtyHtml}</span>
           ${rarHtml}
+          ${_rowWishStar(s.source, srcOwned === true)}
         </div>`;
       }
       return `<div class="drop-row" style="cursor:default">
@@ -6687,6 +6700,7 @@ function showQuestDetail(questName, push = true) {
               ${_npcImg}
               <span class="req-label" ${nav}>${label}</span>
               <span class="req-note">${ok ? 'card owned' : (isCard ? 'need card' : 'no TCG card')}</span>
+              ${isCard ? _rowWishStar(card, ok) : ''}
             </div>` });
           }
         } else if (req.type === 'enemy') {
@@ -6711,6 +6725,7 @@ function showQuestDetail(questName, push = true) {
                 ${_monImg}
                 <span class="req-label" ${nav}>${card}</span>
                 <span class="req-note">${ok ? 'card owned' : (isCard ? 'need card' : 'no TCG card')}</span>
+                ${isCard ? _rowWishStar(card, ok) : ''}
               </div>` });
             }
           }
@@ -6732,6 +6747,7 @@ function showQuestDetail(questName, push = true) {
             ${_itemImg}
             <span class="req-label" ${nav}>${displayLabel}</span>
             <span class="req-note">${noteText}</span>
+            ${isItemCard ? _rowWishStar(card, ok) : ''}
           </div>` });
         } else {
           // Any-of group — tier owned → obtainable → locked
@@ -6804,6 +6820,7 @@ function showQuestDetail(questName, push = true) {
           <span class="req-icon ${ok?'ok':'fail'}">${ok?'✓':'✗'}</span>
           <span class="req-label" ${isCard?`style="cursor:pointer" data-nav="${escHtml(item)}" data-nav-type="item" onclick="_navToCard(this)"`:''}>${item}</span>
           <span class="req-note">${ok ? 'owned' : (isCard ? 'need card' : 'no TCG card')}</span>
+          ${isCard ? _rowWishStar(item, ok) : ''}
         </div>`;
       }
       html += `</div></div>`;
@@ -6817,6 +6834,7 @@ function showQuestDetail(questName, push = true) {
           <span class="req-icon ${ok?'ok':'fail'}">${ok?'✓':'✗'}</span>
           <span class="req-label" ${isCard?`style="cursor:pointer" data-nav="${escHtml(kill)}" data-nav-type="monster" onclick="_navToCard(this)"`:''}>${kill}</span>
           <span class="req-note">${ok ? 'card owned' : (isCard ? 'need monster card' : 'no TCG card')}</span>
+          ${isCard ? _rowWishStar(kill, ok) : ''}
         </div>`;
       }
       html += `</div></div>`;
