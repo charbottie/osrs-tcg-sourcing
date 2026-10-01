@@ -1744,7 +1744,7 @@ function monsterReqTags(monsterData) {
   return html;
 }
 
-function dropRowHtml(cardName, rarity, fraction, isRdt) {
+function dropRowHtml(cardName, rarity, fraction, isRdt, note) {
   const ownedCard = isOwned(cardName);
   // RDT rows still show ownership — owned = green tick, not-owned = dimmed diamond
   const indClass  = ownedCard ? 'owned' : (isRdt ? 'rdt' : 'locked');
@@ -1760,7 +1760,7 @@ function dropRowHtml(cardName, rarity, fraction, isRdt) {
     <span class="drop-name ${nameClass}">${cardName}${reqTags}</span>
     <span class="rarity-badge ${rarityClass(rarity)}" style="${rarityBg}">${rarity}</span>
     <span class="fraction">${fraction || '—'}</span>
-    ${_rowWishStar(cardName, ownedCard)}
+    ${_rowWishStar(cardName, ownedCard, note)}
   </div>`;
 }
 
@@ -2090,20 +2090,23 @@ function _clueCardChipHtml(name, navType) {
 
 // Small inline wish star for use inside rows (drop tables, quest requirements, etc.).
 // owned=true → greyed out (you already have it); stop propagation to avoid row navigation.
-function _rowWishStar(name, owned) {
+function _rowWishStar(name, owned, note) {
   const wled = wishlist.has(name);
   return `<span class="wish-star${wled?' active':''}"
     style="flex-shrink:0;font-size:12px${owned?';opacity:0.3':''}"
     data-card="${escHtml(name)}"
-    onclick="event.stopPropagation();toggleWishlist(this.dataset.card)"
+    ${note ? `data-note="${escHtml(note)}"` : ''}
+    onclick="event.stopPropagation();toggleWishlist(this.dataset.card,this.dataset.note)"
     title="${wled?'Remove from wishlist':'Add to wishlist'}">${wled?'★':'☆'}</span>`;
 }
 
-function toggleWishlist(name) {
+function toggleWishlist(name, note) {
   if (wishlist.has(name)) {
     wishlist.delete(name);
   } else {
-    wishlist.set(name, {note: _buildAutoNote(name)});
+    const autoNote = _buildAutoNote(name);
+    const combined = [note, autoNote].filter(Boolean).join(', ');
+    wishlist.set(name, {note: combined});
   }
   _saveWishlist();
   refreshDetail();
@@ -2996,7 +2999,7 @@ function renderMonster(name, container) {
       return 0;
     });
     for (const d of sorted)
-      html += dropRowHtml(d.card, d.rarity, d.fraction, false);
+      html += dropRowHtml(d.card, d.rarity, d.fraction, false, selected);
   }
   html += `</div>`;
 
@@ -3014,7 +3017,7 @@ function renderMonster(name, container) {
       return 0;
     });
     for (const d of sorted)
-      html += dropRowHtml(d.card, d.rarity, d.fraction, true);
+      html += dropRowHtml(d.card, d.rarity, d.fraction, true, selected);
     html += `</div>`;
   }
 
@@ -4356,6 +4359,7 @@ function renderItem(name, container) {
         <span class="drop-name ${indCls}">${m.card}${cmbHtml}${reqTags}</span>
         <span class="rarity-badge ${rarityClass(m.rarity)}">${m.rarity}</span>
         <span class="fraction">${m.fraction||'—'}</span>
+        ${_rowWishStar(m.card, mOwned, selected)}
       </div>`;
     }
   }
@@ -4367,7 +4371,7 @@ function renderItem(name, container) {
       <div class="section-header">Also on Rare Drop Table <span class="rdt-header-note">${rdtMonsters.length} monsters</span></div>
       <div class="rdt-banner">This item appears on the shared Rare &amp; Gem Drop Table. Many monsters can drop it via the RDT — these are not monster-specific sources.</div>`;
     for (const m of rdtMonsters.slice(0, 6))
-      html += dropRowHtml(m.card, m.rarity, m.fraction, true);
+      html += dropRowHtml(m.card, m.rarity, m.fraction, true, selected);
     if (rdtMonsters.length > 6)
       html += `<div class="empty-note" style="padding:6px 0">…and ${rdtMonsters.length-6} more</div>`;
     html += `</div>`;
