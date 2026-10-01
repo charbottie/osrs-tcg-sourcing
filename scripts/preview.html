@@ -571,10 +571,13 @@
   .wl-tile-remove:hover { color: #c84a00 !important; }
   .wl-tile { transition: border-color 0.1s; }
   .wl-tile:hover { border-color: #444 !important; }
-  .wl-tile-note { flex:1;font-size:9px;color:#555;cursor:pointer;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;padding:1px 0;line-height:1.4 }
-  .wl-tile-note:hover { color:#999; }
-  .wl-tile-note.empty { color:#1e1e1e; }
-  .wl-tile:hover .wl-tile-note.empty { color:#333; }
+  .wl-tile-note { flex:1;cursor:pointer;padding:1px 0;display:flex;flex-wrap:wrap;gap:2px;align-items:center;min-width:0 }
+  .wl-tile-note.empty { font-size:9px;color:#1e1e1e; }
+  .wl-tile-note.empty:hover { color:#444; }
+  .wl-tag-chip { display:inline-flex;align-items:center;background:#1c1c1c;border:1px solid #2a2a2a;border-radius:2px;gap:1px;flex-shrink:0;max-width:100% }
+  .wl-tag-chip span:first-child { font-size:8px;color:#777;padding:1px 2px 1px 4px;max-width:72px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap }
+  .wl-tag-chip-x { color:#383838;cursor:pointer;font-size:10px;line-height:1;padding:0 3px;flex-shrink:0 }
+  .wl-tag-chip-x:hover { color:#c84a00 !important; }
   .wish-star {
     cursor: pointer;
     font-size: 14px;
@@ -2271,6 +2274,17 @@ function removeFromWishlist(name) {
   if (activeTab === 'wishlist') renderWishlist();
 }
 
+function removeWishlistTag(name, tag) {
+  if (!wishlist.has(name)) return;
+  const entry = wishlist.get(name);
+  const remaining = entry.note.split(',').map(t => t.trim()).filter(t => t && t !== tag);
+  if (remaining.length === 0) wishlist.delete(name);
+  else entry.note = remaining.join(', ');
+  _saveWishlist();
+  renderWishlist();
+  refreshDetail();
+}
+
 function removeQuestFromWishlist(questName) {
   // Smart cleanup: strip quest name from auto-added card notes
   const questCards = (bmQuestCards[questName]?.sections || [])
@@ -2724,7 +2738,15 @@ function renderWishlist() {
       const type = _cardType(name);
       const imgUrl = (cardDetails[name] || {}).imageUrl || '';
       const hasNote = meta.note && meta.note.trim();
-      const noteTitle = hasNote ? meta.note.replace(/"/g,'&quot;') : '';
+      const noteTags = hasNote ? meta.note.split(',').map(t => t.trim()).filter(Boolean) : [];
+      const noteChips = noteTags.map(tag =>
+        `<span class="wl-tag-chip">` +
+        `<span title="${escHtml(tag)}">${escHtml(tag)}</span>` +
+        `<span class="wl-tag-chip-x" data-card="${safe}" data-tag="${escHtml(tag)}"` +
+        ` onclick="event.stopPropagation();removeWishlistTag(this.dataset.card,this.dataset.tag)"` +
+        ` title="Remove tag">×</span>` +
+        `</span>`
+      ).join('');
       // Orange badge: not owned, but a group containing this card is satisfied via another card
       const groupCovered = !own && wishlistGroups.some(g =>
         g.cards.includes(name) && g.cards.some(c => c !== name && isOwned(c)));
@@ -2747,7 +2769,7 @@ function renderWishlist() {
           <div style="display:flex;align-items:center;gap:3px">
             <div class="wl-tile-note${hasNote?'':' empty'}" data-card="${safe}"
               onclick="openNotePopover(this,this.dataset.card)"
-              title="${hasNote?'Click to edit · '+noteTitle:'Click to add a note'}">${hasNote?meta.note:'note…'}</div>
+              title="${hasNote?'Click to add/edit note':'Click to add a note'}">${hasNote?noteChips:'note…'}</div>
             <span class="wl-tile-remove" data-card="${safe}" onclick="removeFromWishlist(this.dataset.card)"
               style="color:#2a2a2a;cursor:pointer;font-size:14px;line-height:1;padding:0 2px;flex-shrink:0" title="Remove">×</span>
           </div>
