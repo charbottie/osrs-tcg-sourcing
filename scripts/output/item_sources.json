@@ -107604,15 +107604,46 @@
       "quests": null,
       "ingredients": [
         {
-          "item": "Watermelon",
-          "quantity": 15
-        },
-        {
           "item": "Bucket",
           "quantity": 15
         }
       ],
-      "outputQuantity": 15
+      "outputQuantity": 15,
+      "ingredientChoice": {
+        "label": "any supercompost-level item",
+        "quantity": 15,
+        "items": [
+          "Pineapple",
+          "Watermelon",
+          "Snape grass",
+          "Papaya fruit",
+          "Coconut",
+          "Coconut shell",
+          "Half coconut",
+          "Dragonfruit",
+          "Mushroom",
+          "Jangerberries",
+          "White berries",
+          "Poison ivy berries",
+          "Toadflax",
+          "Avantoe",
+          "Kwuarm",
+          "Snapdragon",
+          "Cadantine",
+          "Lantadyme",
+          "Dwarf weed",
+          "Torstol",
+          "Oak roots",
+          "Willow roots",
+          "Maple roots",
+          "Yew roots",
+          "Magic roots",
+          "Celastrus bark",
+          "Calquat fruit",
+          "White lily",
+          "Ent branch"
+        ]
+      }
     },
     "spawns": [],
     "shopBought": true,

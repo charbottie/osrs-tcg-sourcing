@@ -1072,11 +1072,16 @@ function canGetItem(itemName, visited = new Set()) {
       const toolsOk   = prodTools.every(t => !itemSources[t] || isOwned(t));
       if (toolsOk) {
         const newVisited = new Set([...visited, itemName]);
-        const ok = ings.every(ing => {
-          if (itemSources[ing.item] && !isOwned(ing.item)) return false; // need card to use as ingredient
+        const ingrOk = ings.every(ing => {
+          if (itemSources[ing.item] && !isOwned(ing.item)) return false;
           return canGetItem(ing.item, newVisited);
         });
-        if (ok) { _canGetCache[itemName] = true; return true; }
+        // ingredientChoice: satisfied if ANY of the options can be obtained
+        const choiceOk = !p.ingredientChoice || p.ingredientChoice.items.some(item => {
+          if (itemSources[item] && !isOwned(item)) return false;
+          return canGetItem(item, newVisited);
+        });
+        if (ingrOk && choiceOk) { _canGetCache[itemName] = true; return true; }
       }
     }
     // production failed — fall through
@@ -3507,9 +3512,12 @@ function renderProduction(prod) {
   }[skill] || '#6a8aee';
 
   const implicitTools = getImplicitTools(skill, ingredients, prod.tools, prod.facilities);
+  const choice = prod.ingredientChoice || null;
   // Non-card ingredients are skipped from ownership check (they can't be collected)
+  const choiceOwned = !choice || choice.items.some(i => isOwned(i));
   const allIngredientsOwned = ingredients.every(i => !itemSources[i.item] || isOwned(i.item))
-                           && implicitTools.every(t => isOwned(t));
+                           && implicitTools.every(t => isOwned(t))
+                           && choiceOwned;
 
   let rows = ingredients.map(ing => {
     const isCard   = itemSources[ing.item] !== undefined;
@@ -3525,6 +3533,28 @@ function renderProduction(prod) {
       <span class="prod-ingredient-qty">×${ing.quantity}</span>
     </div>`;
   }).join('');
+
+  // Ingredient choice: any-of options (e.g. Supercompost — any supercompost-level item)
+  if (choice) {
+    const anyOwned = choice.items.some(i => isOwned(i));
+    const sym = anyOwned ? '✓' : '✗';
+    const cls = anyOwned ? 'owned' : 'locked';
+    const chips = choice.items.map(item => {
+      const own = isOwned(item);
+      const chipCol = own ? '#76c442' : '#c84a00';
+      const chipBg  = own ? '#0d1c09' : '#1c0d09';
+      return `<span style="display:inline-flex;align-items:center;background:${chipBg};border-radius:3px;font-size:9px;color:${chipCol};padding:1px 6px;cursor:pointer;white-space:nowrap"
+        data-nav="${escHtml(item)}" data-nav-type="item"
+        onclick="event.stopPropagation();showCard(this.dataset.nav,this.dataset.navType)">${own?'✓':''} ${escHtml(item)}</span>`;
+    }).join('');
+    rows += `<div class="prod-ingredient" style="align-items:flex-start">
+      <div class="drop-indicator ${cls}" style="margin-top:2px">${sym}</div>
+      <span style="flex:1;min-width:0">
+        <span style="font-size:10px;color:#888">${escHtml(choice.label)} ×${choice.quantity}</span>
+        <div style="display:flex;flex-wrap:wrap;gap:3px;margin-top:5px">${chips}</div>
+      </span>
+    </div>`;
+  }
 
   // Implicit tools (Hammer for smithing, Needle for leather crafting)
   rows += implicitTools.map(tool => {
