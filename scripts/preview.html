@@ -2099,23 +2099,49 @@ function _clueCardChipHtml(name, navType) {
 
 // Small inline wish star for use inside rows (drop tables, quest requirements, etc.).
 // owned=true → greyed out (you already have it); stop propagation to avoid row navigation.
+// When note is provided, active state reflects whether that specific context tag is present,
+// so each page's star toggles its own contribution independently.
 function _rowWishStar(name, owned, note) {
-  const wled = wishlist.has(name);
+  let wled;
+  if (note) {
+    const entry = wishlist.get(name);
+    wled = entry ? entry.note.split(',').map(t => t.trim()).includes(note) : false;
+  } else {
+    wled = wishlist.has(name);
+  }
   return `<span class="wish-star${wled?' active':''}"
     ${owned ? 'style="opacity:0.3"' : ''}
     data-card="${escHtml(name)}"
     ${note ? `data-note="${escHtml(note)}"` : ''}
     onclick="event.stopPropagation();toggleWishlist(this.dataset.card,this.dataset.note)"
-    title="${wled?'Remove from wishlist':'Add to wishlist'}">${wled?'★':'☆'}</span>`;
+    title="${wled?'Remove tag':'Add to wishlist'}">${wled?'★':'☆'}</span>`;
 }
 
 function toggleWishlist(name, note) {
-  if (wishlist.has(name)) {
-    wishlist.delete(name);
+  if (note) {
+    // Context-aware toggle: add/remove just this tag, keep other tags intact
+    if (wishlist.has(name)) {
+      const entry = wishlist.get(name);
+      const parts = entry.note.split(',').map(t => t.trim()).filter(Boolean);
+      if (parts.includes(note)) {
+        // This tag is already present — remove it
+        const remaining = parts.filter(t => t !== note);
+        if (remaining.length === 0) wishlist.delete(name);
+        else entry.note = remaining.join(', ');
+      } else {
+        // Append this tag to the existing entry
+        entry.note = [...parts, note].join(', ');
+      }
+    } else {
+      // Not yet wishlisted — add with context + any auto-discovered tags
+      const autoNote = _buildAutoNote(name);
+      const combined = [note, autoNote].filter(Boolean).join(', ');
+      wishlist.set(name, {note: combined});
+    }
   } else {
-    const autoNote = _buildAutoNote(name);
-    const combined = [note, autoNote].filter(Boolean).join(', ');
-    wishlist.set(name, {note: combined});
+    // No context — simple toggle (header stars)
+    if (wishlist.has(name)) wishlist.delete(name);
+    else wishlist.set(name, {note: _buildAutoNote(name)});
   }
   _saveWishlist();
   refreshDetail();
