@@ -1150,6 +1150,7 @@ let selectedPack  = null;   // currently selected pack in Packs tab
 let wishlist = new Map();          // card name → {note:string}  (starred cards)
 let wishlistedQuests = new Set();  // quest names bulk-added via quest button
 let wishlistGroups = [];           // [{name, cards}] — "any one of these" groups
+let wishlistedClueSteps = [];      // [{type, tier, text, items}] — starred clue steps
 let _wishlistTipCards = [];        // sorted unowned targets, kept fresh by renderWishlist for pack tooltips
 let _lastSourceMtime = 0;   // newest RuneLite save file mtime at last refresh
 let _refreshInProgress = false;
@@ -1895,6 +1896,12 @@ function _wishlistUnownedTargets() {
     if (g.cards.some(c => isOwned(c))) continue; // already satisfied
     for (const c of g.cards) if (!isOwned(c)) targets.add(c);
   }
+  // Clue steps: include unowned items from wishlisted steps
+  for (const step of wishlistedClueSteps) {
+    for (const item of (step.items || [])) {
+      if (!isOwned(item)) targets.add(item);
+    }
+  }
   return targets;
 }
 
@@ -1977,13 +1984,15 @@ function _loadWishlist() {
       wishlist = new Map(Object.entries(d.items || {}));
       wishlistedQuests = new Set(d.quests || []);
       wishlistGroups = d.groups || [];
+      wishlistedClueSteps = d.clueSteps || [];
     } else {
       // Migrate from old Set format (v1 — just an array of names)
       wishlist = new Map((Array.isArray(d) ? d : []).map(n => [n, {note:''}]));
       wishlistedQuests = new Set();
       wishlistGroups = [];
+      wishlistedClueSteps = [];
     }
-  } catch { wishlist = new Map(); wishlistedQuests = new Set(); wishlistGroups = []; }
+  } catch { wishlist = new Map(); wishlistedQuests = new Set(); wishlistGroups = []; wishlistedClueSteps = []; }
 }
 
 function _saveWishlist() {
@@ -1994,7 +2003,37 @@ function _saveWishlist() {
     items,
     quests: [...wishlistedQuests].sort(),
     groups: wishlistGroups,
+    clueSteps: wishlistedClueSteps,
   }));
+}
+
+function _isClueStepWishlisted(text) {
+  return wishlistedClueSteps.some(s => s.text === text);
+}
+
+function _toggleClueStepWish(el) {
+  const text  = el.dataset.stepText;
+  const type  = el.dataset.stepType;
+  const tier  = el.dataset.stepTier;
+  const items = JSON.parse(el.dataset.stepItems || '[]');
+  const idx   = wishlistedClueSteps.findIndex(s => s.text === text);
+  if (idx >= 0) {
+    wishlistedClueSteps.splice(idx, 1);
+    el.textContent = '☆';
+    el.classList.remove('active');
+  } else {
+    wishlistedClueSteps.push({ type, tier, text, items });
+    el.textContent = '★';
+    el.classList.add('active');
+  }
+  _saveWishlist();
+  if (activeTab === 'wishlist') renderWishlist();
+}
+
+function removeClueStep(text) {
+  wishlistedClueSteps = wishlistedClueSteps.filter(s => s.text !== text);
+  _saveWishlist();
+  if (activeTab === 'wishlist') renderWishlist();
 }
 
 function toggleWishlist(name) {
@@ -2402,7 +2441,7 @@ function renderWishlist() {
   const container = document.getElementById('wishlist-content');
   if (!container) return;
 
-  const isEmpty = wishlist.size === 0 && wishlistedQuests.size === 0 && wishlistGroups.length === 0;
+  const isEmpty = wishlist.size === 0 && wishlistedQuests.size === 0 && wishlistGroups.length === 0 && wishlistedClueSteps.length === 0;
 
   if (isEmpty) {
     container.innerHTML = `<div style="color:#444;font-size:13px;line-height:2;margin:60px auto;max-width:360px;text-align:center">
@@ -2439,6 +2478,7 @@ function renderWishlist() {
     ${wishlist.size ? `<span style="font-size:12px;color:#888">★ Cards: <span style="color:${obtained===wishlist.size?'#00c853':'#e8c97a'}">${obtained}/${wishlist.size}</span> obtained</span>` : ''}
     ${wishlistedQuests.size ? `<span style="font-size:12px;color:#888">📋 Quests: <span style="color:#aaa">${wishlistedQuests.size}</span> tracked · <span style="color:${questObtained===uniqueQuestCards.length?'#00c853':'#e8c97a'}">${questObtained}/${uniqueQuestCards.length}</span> cards obtained</span>` : ''}
     ${wishlistGroups.length ? `<span style="font-size:12px;color:#888">⊕ Groups: <span style="color:${groupsSatisfied===wishlistGroups.length?'#00c853':'#e8c97a'}">${groupsSatisfied}/${wishlistGroups.length}</span> satisfied</span>` : ''}
+    ${wishlistedClueSteps.length ? (() => { const csOk = wishlistedClueSteps.filter(s => (s.items||[]).every(i => isOwned(i))).length; return `<span style="font-size:12px;color:#888">🗺 Clue steps: <span style="color:${csOk===wishlistedClueSteps.length?'#00c853':'#e8c97a'}">${csOk}/${wishlistedClueSteps.length}</span> ready</span>`; })() : ''}
     <button onclick="openGroupEditor(-1)" style="margin-left:auto;background:none;border:1px solid #2a3a2a;color:#5a8a5a;padding:3px 10px;border-radius:3px;font-size:10px;cursor:pointer">+ New group</button>
     <button onclick="clearWishlist()" style="background:none;border:1px solid #3a1a1a;color:#7a3a3a;padding:3px 10px;border-radius:3px;font-size:10px;cursor:pointer">Clear all</button>
   </div>`;
@@ -2603,7 +2643,47 @@ function renderWishlist() {
     html += `</div></div>`;
   }
 
+  // ── Clue step sections ──────────────────────────────────────────────────────
+  let clueStepHtml = '';
+  if (wishlistedClueSteps.length) {
+    clueStepHtml += `<div class="section"><div class="section-header">Clue Steps</div>`;
+    for (const step of wishlistedClueSteps) {
+      const cardItems = (step.items || []).filter(it => !!itemSources[it]);
+      const allReady  = cardItems.length > 0 && cardItems.every(i => isOwned(i));
+      const anyReady  = cardItems.some(i => isOwned(i));
+      const borderCol = allReady ? '#76c442' : anyReady ? '#c8a830' : (cardItems.length ? '#c84a00' : '#333');
+      const typeLabel = step.type === 'falo' ? 'Falo · Master'
+                      : step.type === 'sherlock' ? `Sherlock · ${step.tier}`
+                      : `Emote · ${step.tier}`;
+      const textSafe = step.text.replace(/&/g,'&amp;').replace(/"/g,'&quot;');
+      clueStepHtml += `<div style="margin:6px 0;background:#161616;border:1px solid #2a2a2a;border-radius:4px;padding:8px 10px;border-left:3px solid ${borderCol}">
+        <div style="display:flex;align-items:flex-start;gap:8px;margin-bottom:${step.items?.length?'6px':'0'}">
+          <span style="font-size:11px;color:#bbb;flex:1;font-style:${step.type==='falo'?'italic':'normal'}">${step.type==='falo'?'"':''}${step.text.replace(/&/g,'&amp;')}${step.type==='falo'?'"':''}</span>
+          <span style="font-size:10px;color:#444;white-space:nowrap;flex-shrink:0">${typeLabel}</span>
+          <button data-step-text="${textSafe}" onclick="removeClueStep(this.dataset.stepText)"
+            style="background:none;border:none;color:#333;cursor:pointer;font-size:14px;line-height:1;flex-shrink:0" title="Remove">×</button>
+        </div>`;
+      if (step.items && step.items.length) {
+        clueStepHtml += `<div style="display:flex;flex-wrap:wrap;gap:4px">`;
+        for (const it of step.items) {
+          const own    = isOwned(it);
+          const isCard = !!itemSources[it];
+          const bg     = isCard ? (own ? '#0d1c09' : '#1c0d09') : '#111';
+          const col    = isCard ? (own ? '#76c442' : '#c84a00') : '#888';
+          const sym    = isCard ? (own ? '✓ ' : '✗ ') : '';
+          const safe   = it.replace(/&/g,'&amp;').replace(/"/g,'&quot;');
+          clueStepHtml += `<span style="${isCard?'cursor:pointer;':''}font-size:11px;background:${bg};color:${col};border-radius:3px;padding:2px 7px"
+            ${isCard ? `data-nav="${safe}" data-nav-type="item" onclick="showCard(this.dataset.nav,this.dataset.navType)"` : ''}>${sym}${it.replace(/&/g,'&amp;')}</span>`;
+        }
+        clueStepHtml += `</div>`;
+      }
+      clueStepHtml += `</div>`;
+    }
+    clueStepHtml += `</div>`;
+  }
+
   html += questHtml;
+  html += clueStepHtml;
   container.innerHTML = html;
 }
 
@@ -3680,8 +3760,17 @@ function renderClueScroll(tier, container) {
         const allItemsOwned = hasItems && items.every(i => isOwned(i));
         const anyOwned = items.some(i => isOwned(i));
         const borderCol = allItemsOwned ? '#76c442' : anyOwned ? '#c8a830' : (hasItems ? '#c84a00' : '#333');
+        const wled = hasItems && _isClueStepWishlisted(step.clueText);
         html += `<div style="margin:4px 0;padding:8px;background:#0d0d0d;border-radius:4px;border-left:3px solid ${borderCol}">
-          <div style="font-size:12px;color:#bbb;margin-bottom:${hasItems?'6px':'0'}">${escHtml(step.clueText)}</div>`;
+          <div style="display:flex;align-items:flex-start;gap:6px">
+            <div style="font-size:12px;color:#bbb;flex:1;margin-bottom:${hasItems?'6px':'0'}">${escHtml(step.clueText)}</div>
+            ${hasItems ? `<span class="wish-star${wled?' active':''}"
+              data-step-type="emote" data-step-tier="${escHtml(capTier)}"
+              data-step-text="${escHtml(step.clueText)}"
+              data-step-items="${escHtml(JSON.stringify(items))}"
+              onclick="_toggleClueStepWish(this)"
+              title="${wled?'Remove from wishlist':'Add to wishlist'}">${wled?'★':'☆'}</span>` : ''}
+          </div>`;
         if (hasItems) {
           html += `<div style="display:flex;flex-wrap:wrap;gap:4px;margin-top:4px">`;
           for (const it of items) {
@@ -3718,8 +3807,17 @@ function renderClueScroll(tier, container) {
           const borderCol = cardItems.length > 0
             ? (allCardItemsOwned ? '#76c442' : '#9050d0')
             : '#333';
+          const wledSh = hasItems && _isClueStepWishlisted(task.task);
           html += `<div style="margin:4px 0;padding:8px;background:#0d0d0d;border-radius:4px;border-left:3px solid ${borderCol}">
-            <div style="font-size:12px;color:#bbb;margin-bottom:${hasItems?'6px':'0'}">${escHtml(task.task)}</div>`;
+            <div style="display:flex;align-items:flex-start;gap:6px">
+              <div style="font-size:12px;color:#bbb;flex:1;margin-bottom:${hasItems?'6px':'0'}">${escHtml(task.task)}</div>
+              ${hasItems ? `<span class="wish-star${wledSh?' active':''}"
+                data-step-type="sherlock" data-step-tier="${escHtml(sherlockTier)}"
+                data-step-text="${escHtml(task.task)}"
+                data-step-items="${escHtml(JSON.stringify(items))}"
+                onclick="_toggleClueStepWish(this)"
+                title="${wledSh?'Remove from wishlist':'Add to wishlist'}">${wledSh?'★':'☆'}</span>` : ''}
+            </div>`;
           if (hasItems) {
             html += `<div style="display:flex;flex-wrap:wrap;gap:4px;margin-top:4px">`;
             for (const it of items) {
@@ -3751,8 +3849,17 @@ function renderClueScroll(tier, container) {
           const items = step.items || [];
           const anyOwned = items.some(i => isOwned(i));
           const borderCol = anyOwned ? '#76c442' : '#d03030';
+          const wledF = _isClueStepWishlisted(step.lyric);
           html += `<div style="margin:4px 0;padding:8px;background:#0d0d0d;border-radius:4px;border-left:3px solid ${borderCol}">
-            <div style="font-size:12px;color:#888;font-style:italic;margin-bottom:6px">"${escHtml(step.lyric)}"</div>
+            <div style="display:flex;align-items:flex-start;gap:6px;margin-bottom:6px">
+              <div style="font-size:12px;color:#888;font-style:italic;flex:1">"${escHtml(step.lyric)}"</div>
+              <span class="wish-star${wledF?' active':''}"
+                data-step-type="falo" data-step-tier="Master"
+                data-step-text="${escHtml(step.lyric)}"
+                data-step-items="${escHtml(JSON.stringify(items))}"
+                onclick="_toggleClueStepWish(this)"
+                title="${wledF?'Remove from wishlist':'Add to wishlist'}">${wledF?'★':'☆'}</span>
+            </div>
             <div style="display:flex;flex-wrap:wrap;gap:4px">`;
           for (const it of items) {
             const own = isOwned(it);
@@ -4265,9 +4372,16 @@ function clueStepUsageHtml(itemName) {
 
     if (step.type === 'emote') {
       const col = TIER_COLOR[step.tier] || '#888';
+      const _wled0 = _isClueStepWishlisted(step.clueText);
       html += `<div style="margin:6px 0;padding:8px;background:#0d0d0d;border-radius:4px;border-left:3px solid ${col}">
-        <div style="font-size:10px;color:${col};font-weight:600;margin-bottom:4px">
-          Emote Clue · ${step.tier}
+        <div style="font-size:10px;color:${col};font-weight:600;margin-bottom:4px;display:flex;justify-content:space-between;align-items:center">
+          <span>Emote Clue · ${step.tier}</span>
+          <span class="wish-star${_wled0?' active':''}"
+            data-step-type="emote" data-step-tier="${escHtml(step.tier)}"
+            data-step-text="${escHtml(step.clueText)}"
+            data-step-items="${escHtml(JSON.stringify(step.items||[]))}"
+            onclick="_toggleClueStepWish(this)"
+            title="${_wled0?'Remove from wishlist':'Add to wishlist'}">${_wled0?'★':'☆'}</span>
         </div>
         <div style="font-size:12px;color:#bbb;margin-bottom:${otherItems.length?'6px':'0'}">${escHtml(step.clueText)}</div>`;
       if (otherItems.length) {
@@ -4285,9 +4399,16 @@ function clueStepUsageHtml(itemName) {
 
     } else if (step.type === 'sherlock') {
       const col = step.tier === 'Master' ? '#d03030' : '#9050d0';
+      const _wled1 = _isClueStepWishlisted(step.task);
       html += `<div style="margin:6px 0;padding:8px;background:#0d0d0d;border-radius:4px;border-left:3px solid ${col}">
-        <div style="font-size:10px;color:${col};font-weight:600;margin-bottom:4px">
-          Sherlock · ${step.tier}
+        <div style="font-size:10px;color:${col};font-weight:600;margin-bottom:4px;display:flex;justify-content:space-between;align-items:center">
+          <span>Sherlock · ${step.tier}</span>
+          <span class="wish-star${_wled1?' active':''}"
+            data-step-type="sherlock" data-step-tier="${escHtml(step.tier)}"
+            data-step-text="${escHtml(step.task)}"
+            data-step-items="${escHtml(JSON.stringify(step.items||[]))}"
+            onclick="_toggleClueStepWish(this)"
+            title="${_wled1?'Remove from wishlist':'Add to wishlist'}">${_wled1?'★':'☆'}</span>
         </div>
         <div style="font-size:12px;color:#bbb;margin-bottom:${otherItems.length?'6px':'0'}">${escHtml(step.task)}</div>`;
       if (otherItems.length) {
@@ -4303,9 +4424,16 @@ function clueStepUsageHtml(itemName) {
       html += `</div>`;
 
     } else if (step.type === 'falo') {
+      const _wled2 = _isClueStepWishlisted(step.lyric);
       html += `<div style="margin:6px 0;padding:8px;background:#0d0d0d;border-radius:4px;border-left:3px solid #d03030">
-        <div style="font-size:10px;color:#d03030;font-weight:600;margin-bottom:4px">
-          Falo the Bard · Master
+        <div style="font-size:10px;color:#d03030;font-weight:600;margin-bottom:4px;display:flex;justify-content:space-between;align-items:center">
+          <span>Falo the Bard · Master</span>
+          <span class="wish-star${_wled2?' active':''}"
+            data-step-type="falo" data-step-tier="Master"
+            data-step-text="${escHtml(step.lyric)}"
+            data-step-items="${escHtml(JSON.stringify(step.items||[]))}"
+            onclick="_toggleClueStepWish(this)"
+            title="${_wled2?'Remove from wishlist':'Add to wishlist'}">${_wled2?'★':'☆'}</span>
         </div>
         <div style="font-size:12px;color:#888;font-style:italic;margin-bottom:${otherItems.length?'6px':'0'}">"${escHtml(step.lyric)}"</div>`;
       if (otherItems.length) {
@@ -4383,20 +4511,47 @@ function clueStepNpcHtml(npcName) {
     const col = TIER_COLOR[step.tier] || '#888';
 
     if (step.type === 'emote_combat') {
+      const _nwled0 = _isClueStepWishlisted(step.clueText);
       html += `<div style="margin:4px 0;padding:8px;background:#0d0d0d;border-radius:4px;border-left:3px solid ${col}">
-        <div style="font-size:10px;color:${col};font-weight:600;margin-bottom:4px">Emote Clue · ${step.tier} · Combat</div>
+        <div style="font-size:10px;color:${col};font-weight:600;margin-bottom:4px;display:flex;justify-content:space-between;align-items:center">
+          <span>Emote Clue · ${step.tier} · Combat</span>
+          <span class="wish-star${_nwled0?' active':''}"
+            data-step-type="emote" data-step-tier="${escHtml(step.tier)}"
+            data-step-text="${escHtml(step.clueText)}"
+            data-step-items="${escHtml(JSON.stringify(step.items||[]))}"
+            onclick="_toggleClueStepWish(this)"
+            title="${_nwled0?'Remove from wishlist':'Add to wishlist'}">${_nwled0?'★':'☆'}</span>
+        </div>
         <div style="font-size:12px;color:#bbb">${escHtml(step.clueText)}</div>
       </div>`;
 
     } else if (step.type === 'sherlock') {
+      const _nwled1 = _isClueStepWishlisted(step.task);
       html += `<div style="margin:4px 0;padding:8px;background:#0d0d0d;border-radius:4px;border-left:3px solid ${col}">
-        <div style="font-size:10px;color:${col};font-weight:600;margin-bottom:4px">Sherlock · ${step.tier}</div>
+        <div style="font-size:10px;color:${col};font-weight:600;margin-bottom:4px;display:flex;justify-content:space-between;align-items:center">
+          <span>Sherlock · ${step.tier}</span>
+          <span class="wish-star${_nwled1?' active':''}"
+            data-step-type="sherlock" data-step-tier="${escHtml(step.tier)}"
+            data-step-text="${escHtml(step.task)}"
+            data-step-items="${escHtml(JSON.stringify(step.items||[]))}"
+            onclick="_toggleClueStepWish(this)"
+            title="${_nwled1?'Remove from wishlist':'Add to wishlist'}">${_nwled1?'★':'☆'}</span>
+        </div>
         <div style="font-size:12px;color:#bbb">${escHtml(step.task)}</div>
       </div>`;
 
     } else if (step.type === 'falo') {
+      const _nwled2 = _isClueStepWishlisted(step.lyric);
       html += `<div style="margin:4px 0;padding:8px;background:#0d0d0d;border-radius:4px;border-left:3px solid #d03030">
-        <div style="font-size:10px;color:#d03030;font-weight:600;margin-bottom:4px">Falo the Bard · Master</div>
+        <div style="font-size:10px;color:#d03030;font-weight:600;margin-bottom:4px;display:flex;justify-content:space-between;align-items:center">
+          <span>Falo the Bard · Master</span>
+          <span class="wish-star${_nwled2?' active':''}"
+            data-step-type="falo" data-step-tier="Master"
+            data-step-text="${escHtml(step.lyric)}"
+            data-step-items="${escHtml(JSON.stringify(step.items||[]))}"
+            onclick="_toggleClueStepWish(this)"
+            title="${_nwled2?'Remove from wishlist':'Add to wishlist'}">${_nwled2?'★':'☆'}</span>
+        </div>
         <div style="font-size:12px;color:#888;font-style:italic">"${escHtml(step.lyric)}"</div>
       </div>`;
 
