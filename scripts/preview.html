@@ -2037,6 +2037,26 @@ function removeClueStep(text) {
   if (activeTab === 'wishlist') renderWishlist();
 }
 
+// Clue step card chip — navigatable chip with an embedded ★ split off to the right.
+// navType: 'item' or 'monster'
+function _clueCardChipHtml(name, navType) {
+  const own = isOwned(name);
+  const bg  = own ? '#0d1c09' : '#1c0d09';
+  const col = own ? '#76c442' : '#c84a00';
+  const sym = own ? '✓' : '✗';
+  const wled = wishlist.has(name);
+  const divCol = own ? '#1a3a0d' : '#3a1a0d';
+  return `<span style="display:inline-flex;align-items:center;background:${bg};border-radius:3px;overflow:hidden">` +
+    `<span style="font-size:11px;color:${col};padding:2px 6px 2px 7px;cursor:pointer"` +
+    ` data-nav="${escHtml(name)}" data-nav-type="${navType}"` +
+    ` onclick="showCard(this.dataset.nav,this.dataset.navType)">${sym} ${escHtml(name)}</span>` +
+    `<span class="wish-star${wled?' active':''}" style="font-size:10px;padding:2px 5px;border-left:1px solid ${divCol}"` +
+    ` data-card="${escHtml(name)}"` +
+    ` onclick="event.stopPropagation();toggleWishlist(this.dataset.card)"` +
+    ` title="${wled?'Remove from wishlist':'Add to wishlist'}">${wled?'★':'☆'}</span>` +
+    `</span>`;
+}
+
 // Small inline wish star for use inside rows (drop tables, quest requirements, etc.).
 // owned=true → greyed out (you already have it); stop propagation to avoid row navigation.
 function _rowWishStar(name, owned) {
@@ -3786,15 +3806,7 @@ function renderClueScroll(tier, container) {
           </div>`;
         if (hasItems) {
           html += `<div style="display:flex;flex-wrap:wrap;gap:4px;margin-top:4px">`;
-          for (const it of items) {
-            const own = isOwned(it);
-            const bg  = own ? '#0d1c09' : '#1c0d09';
-            const col = own ? '#76c442' : '#c84a00';
-            const sym = own ? '✓' : '✗';
-            html += `<span style="font-size:11px;background:${bg};color:${col};border-radius:3px;padding:2px 7px;cursor:pointer"
-              data-nav="${escHtml(it)}" data-nav-type="item"
-              onclick="showCard(this.dataset.nav,this.dataset.navType)">${sym} ${escHtml(it)}</span>`;
-          }
+          for (const it of items) html += _clueCardChipHtml(it, 'item');
           html += `</div>`;
         }
         html += `</div>`;
@@ -3834,14 +3846,13 @@ function renderClueScroll(tier, container) {
           if (hasItems) {
             html += `<div style="display:flex;flex-wrap:wrap;gap:4px;margin-top:4px">`;
             for (const it of items) {
-              const own = isOwned(it);
-              // Only items that are cards show owned state; others shown neutral
               const isCard = !!itemSources[it];
-              const bg  = isCard ? (own ? '#0d1c09' : '#1c0d09') : '#111';
-              const col = isCard ? (own ? '#76c442' : '#c84a00') : '#888';
-              const sym = isCard ? (own ? '✓ ' : '✗ ') : '';
-              html += `<span style="font-size:11px;background:${bg};color:${col};border-radius:3px;padding:2px 7px;cursor:${isCard?'pointer':'default'}"
-                ${isCard ? `data-nav="${escHtml(it)}" data-nav-type="item" onclick="showCard(this.dataset.nav,this.dataset.navType)"` : ''}>${sym}${escHtml(it)}</span>`;
+              if (isCard) {
+                html += _clueCardChipHtml(it, 'item');
+              } else {
+                // Non-card item — shown neutral, no star
+                html += `<span style="font-size:11px;background:#111;color:#888;border-radius:3px;padding:2px 7px">${escHtml(it)}</span>`;
+              }
             }
             html += `</div>`;
           }
@@ -3874,15 +3885,7 @@ function renderClueScroll(tier, container) {
                 title="${wledF?'Remove from wishlist':'Add to wishlist'}">${wledF?'★':'☆'}</span>
             </div>
             <div style="display:flex;flex-wrap:wrap;gap:4px">`;
-          for (const it of items) {
-            const own = isOwned(it);
-            const bg  = own ? '#0d1c09' : '#1c0d09';
-            const col = own ? '#76c442' : '#c84a00';
-            const sym = own ? '✓' : '✗';
-            html += `<span style="font-size:11px;background:${bg};color:${col};border-radius:3px;padding:2px 7px;cursor:pointer"
-              data-nav="${escHtml(it)}" data-nav-type="item"
-              onclick="showCard(this.dataset.nav,this.dataset.navType)">${sym} ${escHtml(it)}</span>`;
-          }
+          for (const it of items) html += _clueCardChipHtml(it, 'item');
           html += `</div></div>`;
         }
         html += `</div>`;
@@ -3910,10 +3913,7 @@ function renderClueScroll(tier, container) {
         if (step.type === 'dig') {
           const sp = isOwned('Spade');
           borderCol = sp ? '#76c442' : '#c84a00';
-          badge = `<span style="font-size:11px;padding:2px 7px;border-radius:3px;
-            background:${sp?'#0d1c09':'#1c0d09'};color:${sp?'#76c442':'#c84a00'};cursor:pointer"
-            data-nav="Spade" data-nav-type="item"
-            onclick="showCard(this.dataset.nav,this.dataset.navType)">${sp?'✓':'✗'} Spade</span>`;
+          badge = _clueCardChipHtml('Spade', 'item');
         } else if (step.type === 'kill') {
           const npcs = step.killNpcs || [];
           const anyOwned = npcs.some(n => isOwned(n));
@@ -3922,14 +3922,9 @@ function renderClueScroll(tier, container) {
           if (npcs.length) {
             badge = npcs.map((n, i) => {
               const isCard = !!monsterDrops[n];
-              const owned  = isCard && isOwned(n);
               const sep    = i > 0 ? `<span style="color:#444;font-size:10px;margin:0 3px">or</span>` : '';
-              return sep + `<span style="font-size:11px;padding:2px 7px;border-radius:3px;
-                background:${isCard?(owned?'#0d1c09':'#1c0d09'):'#111'};
-                color:${isCard?(owned?'#76c442':'#c84a00'):'#888'};
-                cursor:${isCard?'pointer':'default'}"
-                ${isCard ? `data-nav="${escHtml(n)}" data-nav-type="monster" onclick="showCard(this.dataset.nav,this.dataset.navType)"` : ''}
-                >${isCard?(owned?'✓ ':'✗ '):''}${escHtml(n)}</span>`;
+              if (isCard) return sep + _clueCardChipHtml(n, 'monster');
+              return sep + `<span style="font-size:11px;padding:2px 7px;border-radius:3px;background:#111;color:#888">${escHtml(n)}</span>`;
             }).join('');
           }
         } else if (step.type === 'talk') {
@@ -3938,12 +3933,9 @@ function renderClueScroll(tier, container) {
           const locLocked = _locLocked(step.location);
           borderCol = locLocked ? '#888' : npcCard ? (npcOwned ? '#76c442' : '#c84a00') : '#333';
           if (step.npc) {
-            badge = `<span style="font-size:11px;padding:2px 7px;border-radius:3px;
-              background:${npcCard?(npcOwned?'#0d1c09':'#1c0d09'):'#111'};
-              color:${npcCard?(npcOwned?'#76c442':'#c84a00'):'#888'};
-              cursor:${npcCard?'pointer':'default'}"
-              ${npcCard ? `data-nav="${escHtml(step.npc)}" data-nav-type="monster" onclick="showCard(this.dataset.nav,this.dataset.navType)"` : ''}
-              >${npcCard?(npcOwned?'✓ ':'✗ '):''}${escHtml(step.npc)}</span>`;
+            badge = npcCard
+              ? _clueCardChipHtml(step.npc, 'monster')
+              : `<span style="font-size:11px;padding:2px 7px;border-radius:3px;background:#111;color:#888">${escHtml(step.npc)}</span>`;
           }
         } else {
           // search — no card required; show dim if location-locked
@@ -3953,12 +3945,7 @@ function renderClueScroll(tier, container) {
         html += `<div style="margin:4px 0;padding:8px;background:#0d0d0d;border-radius:4px;border-left:3px solid ${borderCol}">
           <div style="font-size:12px;color:#bbb;margin-bottom:${badge?'6px':'0'}">${escHtml(step.clueText)}</div>
           ${badge}
-          ${step.charlieItems ? `<div style="margin-top:6px"><span style="font-size:10px;color:#555">Brings one of: </span>${step.charlieItems.map(it => {
-            const own = isOwned(it);
-            return `<span style="font-size:11px;background:${own?'#0d1c09':'#1c0d09'};color:${own?'#76c442':'#c84a00'};border-radius:3px;padding:2px 6px;margin-left:4px;cursor:pointer"
-              data-nav="${escHtml(it)}" data-nav-type="item"
-              onclick="showCard(this.dataset.nav,this.dataset.navType)">${own?'✓':'✗'} ${escHtml(it)}</span>`;
-          }).join('')}</div>` : ''}
+          ${step.charlieItems ? `<div style="margin-top:6px;display:flex;flex-wrap:wrap;align-items:center;gap:4px"><span style="font-size:10px;color:#555">Brings one of:</span>${step.charlieItems.map(it => _clueCardChipHtml(it, 'item')).join('')}</div>` : ''}
         </div>`;
       }
       html += `</div>`;
@@ -3979,12 +3966,7 @@ function renderClueScroll(tier, container) {
         const borderCol = npcCard ? (npcOwned ? '#76c442' : '#c84a00') : '#333';
         html += `<div style="margin:4px 0;padding:8px;background:#0d0d0d;border-radius:4px;border-left:3px solid ${borderCol}">
           <div style="font-size:11px;color:#888;font-family:monospace;letter-spacing:2px;margin-bottom:4px">${escHtml(step.anagram)}</div>
-          ${step.npc ? `<span style="font-size:11px;padding:2px 7px;border-radius:3px;
-            background:${npcCard?(npcOwned?'#0d1c09':'#1c0d09'):'#111'};
-            color:${npcCard?(npcOwned?'#76c442':'#c84a00'):'#888'};
-            cursor:${npcCard?'pointer':'default'}"
-            ${npcCard ? `data-nav="${escHtml(step.npc)}" data-nav-type="monster" onclick="showCard(this.dataset.nav,this.dataset.navType)"` : ''}
-            >${npcCard?(npcOwned?'✓ ':'✗ '):''}${escHtml(step.npc)}</span>` : ''}
+          ${step.npc ? (npcCard ? _clueCardChipHtml(step.npc, 'monster') : `<span style="font-size:11px;padding:2px 7px;border-radius:3px;background:#111;color:#888">${escHtml(step.npc)}</span>`) : ''}
           ${step.challenge ? `<span style="font-size:10px;color:#555;margin-left:8px">answer: ${escHtml(step.challenge)}</span>` : ''}
         </div>`;
       }
@@ -4004,12 +3986,7 @@ function renderClueScroll(tier, container) {
         const borderCol = npcCard ? (npcOwned ? '#76c442' : '#c84a00') : '#333';
         html += `<div style="margin:4px 0;padding:8px;background:#0d0d0d;border-radius:4px;border-left:3px solid ${borderCol}">
           <div style="font-size:11px;color:#888;font-family:monospace;letter-spacing:2px;margin-bottom:4px">${escHtml(step.cipher)}</div>
-          ${step.npc ? `<span style="font-size:11px;padding:2px 7px;border-radius:3px;
-            background:${npcCard?(npcOwned?'#0d1c09':'#1c0d09'):'#111'};
-            color:${npcCard?(npcOwned?'#76c442':'#c84a00'):'#888'};
-            cursor:${npcCard?'pointer':'default'}"
-            ${npcCard ? `data-nav="${escHtml(step.npc)}" data-nav-type="monster" onclick="showCard(this.dataset.nav,this.dataset.navType)"` : ''}
-            >${npcCard?(npcOwned?'✓ ':'✗ '):''}${escHtml(step.npc)}</span>` : ''}
+          ${step.npc ? (npcCard ? _clueCardChipHtml(step.npc, 'monster') : `<span style="font-size:11px;padding:2px 7px;border-radius:3px;background:#111;color:#888">${escHtml(step.npc)}</span>`) : ''}
           ${step.challenge ? `<span style="font-size:10px;color:#555;margin-left:8px">answer: ${escHtml(step.challenge)}</span>` : ''}
         </div>`;
       }
@@ -4024,10 +4001,7 @@ function renderClueScroll(tier, container) {
         <div class="section-header">Map Clues</div>
         <div style="margin:4px 0;padding:8px;background:#0d0d0d;border-radius:4px;border-left:3px solid ${spadeOwned?'#76c442':'#c84a00'}">
           <div style="font-size:11px;color:#666;margin-bottom:4px">Dig at the marked location</div>
-          <span style="font-size:11px;padding:2px 7px;border-radius:3px;
-            background:${spadeOwned?'#0d1c09':'#1c0d09'};color:${spadeOwned?'#76c442':'#c84a00'};cursor:pointer"
-            data-nav="Spade" data-nav-type="item"
-            onclick="showCard(this.dataset.nav,this.dataset.navType)">${spadeOwned?'✓':'✗'} Spade</span>
+          ${_clueCardChipHtml('Spade', 'item')}
         </div>
       </div>`;
     }
@@ -4050,14 +4024,8 @@ function renderClueScroll(tier, container) {
 
       function _npcBadge(npc, label) {
         const hasCard = monsterDrops[npc] !== undefined;
-        const owned   = hasCard && isOwned(npc);
         return `<div style="display:flex;align-items:center;gap:6px;margin-top:4px">
-          <span style="font-size:11px;padding:2px 7px;border-radius:3px;
-            background:${hasCard?(owned?'#0d1c09':'#1c0d09'):'#111'};
-            color:${hasCard?(owned?'#76c442':'#c84a00'):'#888'};
-            cursor:${hasCard?'pointer':'default'}"
-            ${hasCard ? `data-nav="${escHtml(npc)}" data-nav-type="monster" onclick="showCard(this.dataset.nav,this.dataset.navType)"` : ''}
-            >${hasCard?(owned?'✓ ':'✗ '):''}${escHtml(npc)}</span>
+          ${hasCard ? _clueCardChipHtml(npc, 'monster') : `<span style="font-size:11px;padding:2px 7px;border-radius:3px;background:#111;color:#888">${escHtml(npc)}</span>`}
           <span style="font-size:10px;color:#444">${label}</span>
         </div>`;
       }
@@ -4066,10 +4034,7 @@ function renderClueScroll(tier, container) {
         <div class="section-header">Coordinate Clues</div>
         <div style="margin:4px 0;padding:8px;background:#0d0d0d;border-radius:4px;border-left:3px solid ${spadeOwned?'#76c442':'#c84a00'}">
           <div style="font-size:11px;color:#666;margin-bottom:4px">Dig at the given coordinates</div>
-          <span style="font-size:11px;padding:2px 7px;border-radius:3px;
-            background:${spadeOwned?'#0d1c09':'#1c0d09'};color:${spadeOwned?'#76c442':'#c84a00'};cursor:pointer"
-            data-nav="Spade" data-nav-type="item"
-            onclick="showCard(this.dataset.nav,this.dataset.navType)">${spadeOwned?'✓':'✗'} Spade</span>
+          ${_clueCardChipHtml('Spade', 'item')}
           ${combatNpcs.length ? `<div style="font-size:10px;color:#555;margin-top:8px">${capTier} coords spawn a combat NPC at the dig spot:</div>
             ${combatNpcs.map(c => _npcBadge(c.npc, c.label)).join('')}` : ''}
         </div>
