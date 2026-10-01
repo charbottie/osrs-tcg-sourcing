@@ -109,6 +109,9 @@ def apply_rules(name: str, tags: list[str]) -> list[str]:  # noqa: C901
     if name == "Tinderbox":
         return prioritise(tags, ["Firemaking", "Tool"], last=["F2P"])
 
+    if n.endswith("compost") and "Farming" in tags:
+        return prioritise(tags, ["Farming"], last=["F2P"])
+
     # ── ORES ─────────────────────────────────────────────────────────────────
 
     if n.endswith(" ore") or n == "coal":

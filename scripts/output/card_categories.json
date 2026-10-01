@@ -5024,12 +5024,12 @@
     "Woodcutting"
   ],
   "Compost": [
-    "Construction",
-    "Farming"
+    "Farming",
+    "Construction"
   ],
   "Supercompost": [
-    "Construction",
-    "Farming"
+    "Farming",
+    "Construction"
   ],
   "Plant cure": [],
   "Magic string": [
@@ -15204,9 +15204,9 @@
     "Fishing"
   ],
   "Otto Godblessed": [
-    "Quest",
     "Herblore",
     "Farming",
+    "Quest",
     "Firemaking",
     "Fishing",
     "Smithing"
