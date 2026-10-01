@@ -2026,6 +2026,17 @@ function _toggleClueStepWish(el) {
     wishlistedClueSteps.push({ type, tier, text, items });
     el.textContent = '★';
     el.classList.add('active');
+    // Add unowned items to the main wishlist card grid (same pattern as wishlistQuest)
+    const noteTag = `${tier} clue`;
+    for (const card of items) {
+      if (isOwned(card)) continue;
+      if (wishlist.has(card)) {
+        const entry = wishlist.get(card);
+        if (!entry.note.includes(noteTag)) entry.note = entry.note ? entry.note + ', ' + noteTag : noteTag;
+      } else {
+        wishlist.set(card, { note: noteTag });
+      }
+    }
   }
   _saveWishlist();
   if (activeTab === 'wishlist') renderWishlist();
@@ -2079,8 +2090,8 @@ function toggleWishlist(name) {
   if (activeTab === 'wishlist') renderWishlist();
 }
 
-// Build a note for a newly-added card by checking which wishlisted quests
-// and groups it belongs to, so the label is restored on re-add.
+// Build a note for a newly-added card by checking which wishlisted quests,
+// groups, and clue steps it belongs to, so the label is restored on re-add.
 function _buildAutoNote(name) {
   const tags = [];
   for (const qn of wishlistedQuests) {
@@ -2090,6 +2101,12 @@ function _buildAutoNote(name) {
   }
   for (const g of wishlistGroups) {
     if (g.cards.includes(name)) tags.push(g.name);
+  }
+  for (const step of wishlistedClueSteps) {
+    if ((step.items || []).includes(name)) {
+      const tag = `${step.tier} clue`;
+      if (!tags.includes(tag)) tags.push(tag);
+    }
   }
   return tags.join(', ');
 }
