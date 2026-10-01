@@ -2018,20 +2018,11 @@ function _removeClueStepCards(step) {
   for (const card of (step.items || [])) {
     if (!wishlist.has(card)) continue;
     const entry = wishlist.get(card);
-    // Remove this tag from the note
-    const newNote = entry.note
-      .split(',').map(t => t.trim()).filter(t => t !== noteTag).join(', ');
-    if (newNote) {
-      entry.note = newNote;
+    const remaining = entry.note.split(',').map(t => t.trim()).filter(t => t && t !== noteTag);
+    if (remaining.length === 0) {
+      wishlist.delete(card);
     } else {
-      // Note is now empty — only remove if no other wishlist source has this card
-      const inQuest = [...wishlistedQuests].some(qn =>
-        (bmQuestCards[qn]?.sections || [])
-          .flatMap(s => s.requirements || []).flatMap(r => r.cards || []).includes(card));
-      const inGroup = wishlistGroups.some(g => g.cards.includes(card));
-      const inOtherStep = wishlistedClueSteps.some(s => s.text !== step.text && (s.items||[]).includes(card));
-      if (!inQuest && !inGroup && !inOtherStep) wishlist.delete(card);
-      else entry.note = newNote;
+      entry.note = remaining.join(', ');
     }
   }
 }
@@ -2046,6 +2037,8 @@ function _toggleClueStepWish(el) {
     const step = wishlistedClueSteps[idx];
     wishlistedClueSteps.splice(idx, 1);
     _removeClueStepCards(step);
+    el.textContent = '☆';
+    el.classList.remove('active');
   } else {
     wishlistedClueSteps.push({ type, tier, text, items });
     // Add unowned items to the main wishlist card grid (same pattern as wishlistQuest)
@@ -2059,6 +2052,8 @@ function _toggleClueStepWish(el) {
         wishlist.set(card, { note: noteTag });
       }
     }
+    el.textContent = '★';
+    el.classList.add('active');
   }
   _saveWishlist();
   refreshDetail();
