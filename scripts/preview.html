@@ -586,7 +586,8 @@
     transition: color 0.15s, background 0.15s;
   }
   .wish-star.active { color: #e8c97a; }
-  .wish-star:not(.active) { color: #555; }
+  .wish-star.elsewhere { color: rgba(232,201,122,0.35); }
+  .wish-star:not(.active):not(.elsewhere) { color: #555; }
   .wish-star:hover { color: #e8c97a !important; background: rgba(232,201,122,0.1); }
 
   /* ── Equipment tab ── */
@@ -2102,19 +2103,25 @@ function _clueCardChipHtml(name, navType) {
 // When note is provided, active state reflects whether that specific context tag is present,
 // so each page's star toggles its own contribution independently.
 function _rowWishStar(name, owned, note) {
-  let wled;
+  const inWishlist = wishlist.has(name);
+  let wled, elsewhere;
   if (note) {
     const entry = wishlist.get(name);
     wled = entry ? entry.note.split(',').map(t => t.trim()).includes(note) : false;
+    elsewhere = inWishlist && !wled;
   } else {
-    wled = wishlist.has(name);
+    wled = inWishlist;
+    elsewhere = false;
   }
-  return `<span class="wish-star${wled?' active':''}"
+  const cls = wled ? ' active' : (elsewhere ? ' elsewhere' : '');
+  const sym = (wled || elsewhere) ? '★' : '☆';
+  const tip = wled ? 'Remove tag' : (elsewhere ? 'Already wishlisted — click to add this tag' : 'Add to wishlist');
+  return `<span class="wish-star${cls}"
     ${owned ? 'style="opacity:0.3"' : ''}
     data-card="${escHtml(name)}"
     ${note ? `data-note="${escHtml(note)}"` : ''}
     onclick="event.stopPropagation();toggleWishlist(this.dataset.card,this.dataset.note)"
-    title="${wled?'Remove tag':'Add to wishlist'}">${wled?'★':'☆'}</span>`;
+    title="${tip}">${sym}</span>`;
 }
 
 function toggleWishlist(name, note) {
