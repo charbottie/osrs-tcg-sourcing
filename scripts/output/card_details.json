@@ -1756,7 +1756,7 @@
   },
   "Cape of legends": {
     "examine": "The cape worn by members of the Legends Guild.",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Cape_of_legends_detail.png/130px-Cape_of_legends_detail.png",
+    "imageUrl": "https://oldschool.runescape.wiki/images/Cape_of_Legends.png",
     "tier": "Uncommon",
     "regions": [
       "Kandarin"
@@ -4655,7 +4655,7 @@
   },
   "Robin hood hat": {
     "examine": "Endorsed by Robin Hood.",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Robin_hood_hat_detail.png/130px-Robin_hood_hat_detail.png",
+    "imageUrl": "https://oldschool.runescape.wiki/images/Robin_Hood_hat.png",
     "tier": "Uncommon",
     "regions": [
       "General"
@@ -14549,7 +14549,7 @@
   },
   "Jar of dirt": {
     "examine": "It's just a jar of dirt.",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Jar_of_dirt_detail.png/130px-Jar_of_dirt_detail.png",
+    "imageUrl": "https://oldschool.runescape.wiki/images/Jar_of_Dirt.png",
     "tier": "Epic",
     "regions": [
       "Kandarin"
@@ -17136,7 +17136,7 @@
   },
   "Book of arcane knowledge": {
     "examine": "Secrets you may benefit from learning.",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Book_of_arcane_knowledge_detail.png/130px-Book_of_arcane_knowledge_detail.png",
+    "imageUrl": "https://oldschool.runescape.wiki/images/Book_of_Arcane_Knowledge.png",
     "tier": "Common",
     "regions": [
       "Kourend"
@@ -23261,7 +23261,7 @@
   },
   "Scroll of imbuing": {
     "examine": "A magical scroll used to imbue a variety of items.",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Scroll_of_imbuing_detail.png/130px-Scroll_of_imbuing_detail.png",
+    "imageUrl": "https://oldschool.runescape.wiki/images/Scroll_of_Imbuing.png",
     "tier": "Uncommon",
     "regions": [
       "Desert"
@@ -23738,37 +23738,37 @@
   },
   "Hood of ruin": {
     "examine": "A magical-looking hood.",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Hood_of_ruin_detail.png/130px-Hood_of_ruin_detail.png",
+    "imageUrl": "https://oldschool.runescape.wiki/images/Hood_of_Ruin.png",
     "tier": "Common",
     "regions": []
   },
   "Robe top of ruin": {
     "examine": "A magical-looking robe top.",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Robe_top_of_ruin_detail.png/130px-Robe_top_of_ruin_detail.png",
+    "imageUrl": "https://oldschool.runescape.wiki/images/Robe_top_of_Ruin.png",
     "tier": "Common",
     "regions": []
   },
   "Robe bottom of ruin": {
     "examine": "A magical-looking robe bottom.",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Robe_bottom_of_ruin_detail.png/130px-Robe_bottom_of_ruin_detail.png",
+    "imageUrl": "https://oldschool.runescape.wiki/images/Robe_bottom_of_Ruin.png",
     "tier": "Common",
     "regions": []
   },
   "Gloves of ruin": {
     "examine": "A pair of magical-looking gloves.",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Gloves_of_ruin_detail.png/130px-Gloves_of_ruin_detail.png",
+    "imageUrl": "https://oldschool.runescape.wiki/images/Gloves_of_Ruin.png",
     "tier": "Common",
     "regions": []
   },
   "Socks of ruin": {
     "examine": "A pair of magical-looking socks.",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Socks_of_ruin_detail.png/130px-Socks_of_ruin_detail.png",
+    "imageUrl": "https://oldschool.runescape.wiki/images/Socks_of_Ruin.png",
     "tier": "Common",
     "regions": []
   },
   "Cloak of ruin": {
     "examine": "A magical-looking cloak.",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Cloak_of_ruin_detail.png/130px-Cloak_of_ruin_detail.png",
+    "imageUrl": "https://oldschool.runescape.wiki/images/Cloak_of_Ruin.png",
     "tier": "Common",
     "regions": []
   },
@@ -24565,7 +24565,7 @@
   },
   "Blue moon spear": {
     "examine": "A magical staff of ancient origin...",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Blue_moon_spear_detail.png/130px-Blue_moon_spear_detail.png",
+    "imageUrl": "https://oldschool.runescape.wiki/images/Blue_Moon_spear.png",
     "tier": "Legendary",
     "regions": [
       "Varlamore"
@@ -24589,7 +24589,7 @@
   },
   "Eclipse moon chestplate": {
     "examine": "The chestplate of the Eclipse Moon.",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Eclipse_moon_chestplate_detail.png/130px-Eclipse_moon_chestplate_detail.png",
+    "imageUrl": "https://oldschool.runescape.wiki/images/Eclipse_Moon_chestplate.png",
     "tier": "Legendary",
     "regions": [
       "Varlamore"
@@ -24597,7 +24597,7 @@
   },
   "Eclipse moon tassets": {
     "examine": "The tassets of the Eclipse Moon.",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Eclipse_moon_tassets_detail.png/130px-Eclipse_moon_tassets_detail.png",
+    "imageUrl": "https://oldschool.runescape.wiki/images/Eclipse_Moon_tassets.png",
     "tier": "Legendary",
     "regions": [
       "Varlamore"
@@ -24605,7 +24605,7 @@
   },
   "Eclipse moon helm": {
     "examine": "The helm of the Eclipse Moon.",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Eclipse_moon_helm_detail.png/130px-Eclipse_moon_helm_detail.png",
+    "imageUrl": "https://oldschool.runescape.wiki/images/Eclipse_Moon_helm.png",
     "tier": "Legendary",
     "regions": [
       "Varlamore"
@@ -24613,7 +24613,7 @@
   },
   "Blue moon chestplate": {
     "examine": "The chestplate of the Blue Moon.",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Blue_moon_chestplate_detail.png/130px-Blue_moon_chestplate_detail.png",
+    "imageUrl": "https://oldschool.runescape.wiki/images/Blue_Moon_chestplate.png",
     "tier": "Legendary",
     "regions": [
       "Varlamore"
@@ -24621,7 +24621,7 @@
   },
   "Blue moon tassets": {
     "examine": "The tassets of the Blue Moon.",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Blue_moon_tassets_detail.png/130px-Blue_moon_tassets_detail.png",
+    "imageUrl": "https://oldschool.runescape.wiki/images/Blue_Moon_tassets.png",
     "tier": "Legendary",
     "regions": [
       "Varlamore"
@@ -24629,7 +24629,7 @@
   },
   "Blue moon helm": {
     "examine": "The helm of the Blue Moon.",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Blue_moon_helm_detail.png/130px-Blue_moon_helm_detail.png",
+    "imageUrl": "https://oldschool.runescape.wiki/images/Blue_Moon_helm.png",
     "tier": "Legendary",
     "regions": [
       "Varlamore"
@@ -24637,7 +24637,7 @@
   },
   "Blood moon chestplate": {
     "examine": "The chestplate of the Blood Moon.",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Blood_moon_chestplate_detail.png/130px-Blood_moon_chestplate_detail.png",
+    "imageUrl": "https://oldschool.runescape.wiki/images/Blood_Moon_chestplate.png",
     "tier": "Legendary",
     "regions": [
       "Varlamore"
@@ -24645,7 +24645,7 @@
   },
   "Blood moon tassets": {
     "examine": "The tassets of the Blood Moon.",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Blood_moon_tassets_detail.png/130px-Blood_moon_tassets_detail.png",
+    "imageUrl": "https://oldschool.runescape.wiki/images/Blood_Moon_tassets.png",
     "tier": "Legendary",
     "regions": [
       "Varlamore"
@@ -24653,7 +24653,7 @@
   },
   "Blood moon helm": {
     "examine": "The helm of the Blood Moon.",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Blood_moon_helm_detail.png/130px-Blood_moon_helm_detail.png",
+    "imageUrl": "https://oldschool.runescape.wiki/images/Blood_Moon_helm.png",
     "tier": "Legendary",
     "regions": [
       "Varlamore"
@@ -28239,13 +28239,13 @@
   },
   "Wyrmscraig top": {
     "examine": "A plain and simple robe top.",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Wyrmscraig_villager_robe_top_(A_green)_detail_v413f2f67.png/130px-Wyrmscraig_villager_robe_top_(A_green)_detail_v413f2f67.png",
+    "imageUrl": "https://oldschool.runescape.wiki/images/Wyrmscraig_villager_robe_top_%28A%2C_green%29.png",
     "tier": "Uncommon",
     "regions": []
   },
   "Wyrmscraig bottom": {
     "examine": "A plain and simple robe bottom.",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Wyrmscraig_villager_robe_bottom_(A_green)_detail_ve1d68b82.png/130px-Wyrmscraig_villager_robe_bottom_(A_green)_detail_ve1d68b82.png",
+    "imageUrl": "https://oldschool.runescape.wiki/images/Wyrmscraig_villager_robe_bottom_%28A%2C_green%29.png",
     "tier": "Uncommon",
     "regions": []
   },
@@ -29264,7 +29264,7 @@
   },
   "Goblin Generals": {
     "examine": "Ugly green creatures.",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/YYdjHBQ.png/130px-YYdjHBQ.png",
+    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/General_Bentnoze.png/260px-General_Bentnoze.png",
     "tier": "Uncommon",
     "regions": [
       "Asgarnia",
@@ -35935,7 +35935,7 @@
   },
   "Skeletal Mystics": {
     "examine": "Sounds like some kind of hybrid clothing, actually.",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/skeletal_mystics.png/130px-skeletal_mystics.png",
+    "imageUrl": "https://oldschool.runescape.wiki/images/Skeletal_mystic_%281%29.png",
     "tier": "Legendary",
     "regions": [
       "Kourend"
@@ -40110,5 +40110,11 @@
     "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Golem_(sunstone).png/130px-Golem_(sunstone).png",
     "tier": "Uncommon",
     "regions": []
+  },
+  "Green salamander": {
+    "examine": "",
+    "imageUrl": "https://oldschool.runescape.wiki/images/Swamp_lizard.png",
+    "regions": [],
+    "tier": ""
   }
 }
