@@ -575,10 +575,19 @@
   .wl-tile-note:hover { color:#999; }
   .wl-tile-note.empty { color:#1e1e1e; }
   .wl-tile:hover .wl-tile-note.empty { color:#333; }
-  .wish-star { cursor: pointer; font-size: 14px; user-select: none; }
+  .wish-star {
+    cursor: pointer;
+    font-size: 14px;
+    user-select: none;
+    flex-shrink: 0;
+    margin-left: 8px;
+    padding: 2px 6px;
+    border-radius: 3px;
+    transition: color 0.15s, background 0.15s;
+  }
   .wish-star.active { color: #e8c97a; }
-  .wish-star:not(.active) { color: #444; }
-  .wish-star:hover { color: #e8c97a !important; }
+  .wish-star:not(.active) { color: #555; }
+  .wish-star:hover { color: #e8c97a !important; background: rgba(232,201,122,0.1); }
 
   /* ── Equipment tab ── */
   #equip-panel { flex: 1; display: flex; flex-direction: column; overflow: hidden; }
@@ -2093,7 +2102,7 @@ function _clueCardChipHtml(name, navType) {
 function _rowWishStar(name, owned, note) {
   const wled = wishlist.has(name);
   return `<span class="wish-star${wled?' active':''}"
-    style="flex-shrink:0;font-size:12px${owned?';opacity:0.3':''}"
+    ${owned ? 'style="opacity:0.3"' : ''}
     data-card="${escHtml(name)}"
     ${note ? `data-note="${escHtml(note)}"` : ''}
     onclick="event.stopPropagation();toggleWishlist(this.dataset.card,this.dataset.note)"
