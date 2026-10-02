@@ -2156,7 +2156,12 @@ function toggleWishlist(name, note) {
   } else {
     // No context — simple toggle (header stars)
     if (wishlist.has(name)) wishlist.delete(name);
-    else wishlist.set(name, {note: _buildAutoNote(name)});
+    else {
+      // Add '★' marker so manual pins survive quest/clue/group auto-removal
+      const autoNote = _buildAutoNote(name);
+      const combined = ['★', autoNote].filter(Boolean).join(', ');
+      wishlist.set(name, {note: combined});
+    }
   }
   _saveWishlist();
   refreshDetail();
@@ -2744,14 +2749,20 @@ function renderWishlist() {
       const imgUrl = (cardDetails[name] || {}).imageUrl || '';
       const hasNote = meta.note && meta.note.trim();
       const noteTags = hasNote ? meta.note.split(',').map(t => t.trim()).filter(Boolean) : [];
-      const noteChips = noteTags.map(tag =>
-        `<span class="wl-tag-chip">` +
-        `<span title="${escHtml(tag)}">${escHtml(tag)}</span>` +
-        `<span class="wl-tag-chip-x" data-card="${safe}" data-tag="${escHtml(tag)}"` +
-        ` onclick="event.stopPropagation();removeWishlistTag(this.dataset.card,this.dataset.tag)"` +
-        ` title="Remove tag">×</span>` +
-        `</span>`
-      ).join('');
+      const noteChips = noteTags.map(tag => {
+        const isPin = tag === '★';
+        const chipStyle = isPin ? ' style="border-color:#3a2a00;background:#1a1400"' : '';
+        const labelStyle = isPin ? ' style="color:#e8c97a;padding:1px 3px 1px 5px"' : '';
+        const label = isPin ? '★ pinned' : escHtml(tag);
+        const title = isPin ? 'Manually pinned' : escHtml(tag);
+        const removeTitle = isPin ? 'Remove pin' : 'Remove tag';
+        return `<span class="wl-tag-chip"${chipStyle}>` +
+          `<span title="${title}"${labelStyle}>${label}</span>` +
+          `<span class="wl-tag-chip-x" data-card="${safe}" data-tag="${escHtml(tag)}"` +
+          ` onclick="event.stopPropagation();removeWishlistTag(this.dataset.card,this.dataset.tag)"` +
+          ` title="${removeTitle}">×</span>` +
+          `</span>`;
+      }).join('');
       // Orange badge: not owned, but a group containing this card is satisfied via another card
       const groupCovered = !own && wishlistGroups.some(g =>
         g.cards.includes(name) && g.cards.some(c => c !== name && isOwned(c)));
