@@ -6161,16 +6161,17 @@ function getTrainingMethods(skillName) {
       } else if (bowOwned) {
         results.push({name:bow, level:cfg.level, status:'no-card', cardOwned:false,
           note:`no ammo`, weapon:bow, ammo:null, type:'ranged-setup'});
-      } else if (ownedAmmo.length) {
+      } else if (ownedAmmo.length && canGetItem(bow)) {
         results.push({name:bow, level:cfg.level, status:'no-card', cardOwned:false,
           note:`no bow`, weapon:bow, ammo:null, type:'ranged-setup'});
       }
-      // If neither bow nor any ammo owned — skip
+      // If neither bow nor any ammo owned, or bow not obtainable — skip
     }
     for (const t of STANDALONE_THROWN) {
       if (!itemSources[t.name]) continue;
       const owned = isOwned(t.name);
       const levelOk = myLevel >= t.level;
+      if (!owned && !canGetItem(t.name)) continue; // not obtainable — skip
       results.push({name:t.name, level:t.level,
         status: !owned ? 'no-card' : !levelOk ? 'locked-level' : 'available',
         cardOwned:owned, note:'', weapon:t.name, ammo:null, type:'ranged-setup'});
