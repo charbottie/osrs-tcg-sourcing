@@ -1080,10 +1080,13 @@ function canGetItem(itemName, visited = new Set()) {
     // no owned monster card — fall through
   }
 
-  // Clue scroll reward — reachable if the item has any clue tier.
-  // Any player can accumulate clue scrolls over time; treat all tiers as obtainable.
-  // The detail panel already shows which tier(s) the item comes from.
-  if (src.clueTiers && src.clueTiers.length > 0) { _canGetCache[itemName] = true; return true; }
+  // Clue scroll reward — only counts if the player has combat capability.
+  // In Bronzeman, clue scrolls drop from monsters you own the card for.
+  // A player with zero monster cards cannot fight anything → cannot get clue scrolls.
+  if (src.clueTiers && src.clueTiers.length > 0) {
+    const canFightMonsters = Object.keys(monsterDrops).some(m => isOwned(m));
+    if (canFightMonsters) { _canGetCache[itemName] = true; return true; }
+  }
 
   // Production chain — recurse into ingredients and check production tools.
   // Tools (Hammer, Chisel, Knife, Needle, etc.) are TCG cards; you must own them to use them.
