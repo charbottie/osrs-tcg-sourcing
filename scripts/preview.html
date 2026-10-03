@@ -990,6 +990,25 @@ function resolveToolParts(toolStr) {
 // tools, and card ownership? Checks ALL source routes as OR conditions.
 // Never returns false from a single failed route — exhausts all options first.
 // Memoised per collection state (cache cleared on refreshCollection / lookupLevels).
+// Skill requirements for entering skill-gated guild areas that contain item spawns.
+// Keys are location name prefixes (location strings start with the guild name).
+const SPAWN_SKILL_REQS = {
+  'Ranging Guild':     {skill:'Ranged',      level:40},
+  'Crafting Guild':    {skill:'Crafting',    level:40},
+  'Mining Guild':      {skill:'Mining',      level:60},
+  'Fishing Guild':     {skill:'Fishing',     level:68},
+  "Cooks' Guild":      {skill:'Cooking',     level:32},
+  'Farming Guild':     {skill:'Farming',     level:45},
+  "Wizards' Guild":    {skill:'Magic',       level:66},
+  'Woodcutting Guild': {skill:'Woodcutting', level:60},
+};
+function spawnSkillReq(loc) {
+  for (const [prefix, req] of Object.entries(SPAWN_SKILL_REQS)) {
+    if (loc.startsWith(prefix)) return req;
+  }
+  return null;
+}
+
 let _canGetCache = {};
 
 function canGetItem(itemName, visited = new Set()) {
@@ -1015,8 +1034,14 @@ function canGetItem(itemName, visited = new Set()) {
     if (!hasSrc) { _canGetCache[itemName] = true; return true; }
   }
 
-  // Ground spawn — no Bronzeman restriction (free pickup)
-  if (src.spawns && src.spawns.length > 0) { _canGetCache[itemName] = true; return true; }
+  // Ground spawn — free pickup, but check skill-gated guild areas.
+  if (src.spawns && src.spawns.length > 0) {
+    const accessibleSpawn = src.spawns.some(s => {
+      const req = spawnSkillReq(s);
+      return !req || getLevel(req.skill) >= req.level;
+    });
+    if (accessibleSpawn) { _canGetCache[itemName] = true; return true; }
+  }
 
   // Shop — check whether the item is available via a shop the player can access.
   // item_sources.json records per-shop currency; many items have ONLY special-currency
@@ -4385,7 +4410,12 @@ function renderItem(name, container) {
   if (spawns.length) {
     html += `<div class="section">
       <div class="section-header">Ground Spawns <span style="font-size:10px;color:#666;font-weight:normal;text-transform:none;letter-spacing:0">${spawns.length} location${spawns.length!==1?'s':''}</span></div>
-      ${spawns.map(s => `<div class="spawn-row">📍 ${cleanSpawnText(s)}</div>`).join('')}
+      ${spawns.map(s => {
+        const req = spawnSkillReq(s);
+        const locked = req && getLevel(req.skill) < req.level;
+        const badge = req ? `<span style="font-size:9px;padding:1px 5px;border-radius:3px;background:${locked?'#2a0a0a':'#0a2a0a'};color:${locked?'#c84a00':'#76c442'};margin-left:4px">${req.skill} ${req.level}+</span>` : '';
+        return `<div class="spawn-row"${locked?' style="opacity:0.5"':''}>📍 ${cleanSpawnText(s)}${badge}</div>`;
+      }).join('')}
     </div>`;
   }
 
