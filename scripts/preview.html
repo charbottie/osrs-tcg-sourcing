@@ -1080,12 +1080,14 @@ function canGetItem(itemName, visited = new Set()) {
     // no owned monster card — fall through
   }
 
-  // Clue scroll reward — only counts if the player has combat capability.
-  // In Bronzeman, clue scrolls drop from monsters you own the card for.
-  // A player with zero monster cards cannot fight anything → cannot get clue scrolls.
+  // Clue scroll reward — only counts if the player can realistically complete clues:
+  //   • owns at least one monster card (Bronzeman: can only fight owned monsters → only
+  //     way to get clue scroll drops)
+  //   • owns Spade (coordinate steps appear in virtually every tier)
   if (src.clueTiers && src.clueTiers.length > 0) {
     const canFightMonsters = Object.keys(monsterDrops).some(m => isOwned(m));
-    if (canFightMonsters) { _canGetCache[itemName] = true; return true; }
+    const hasSpade = isOwned('Spade');
+    if (canFightMonsters && hasSpade) { _canGetCache[itemName] = true; return true; }
   }
 
   // Production chain — recurse into ingredients and check production tools.
