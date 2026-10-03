@@ -5771,6 +5771,18 @@
               "type": "item"
             }
           ]
+        },
+        {
+          "label": "NPCs",
+          "requirements": [
+            {
+              "label": "Goblin Generals (General Bentnoze & Wartface)",
+              "cards": [
+                "Goblin Generals"
+              ],
+              "type": "npc"
+            }
+          ]
         }
       ],
       "notes": ""

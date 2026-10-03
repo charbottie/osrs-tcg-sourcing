@@ -14377,6 +14377,13 @@
         "tier": "Master",
         "location": "At the northern part of Drumstick Isle ."
       }
+    ],
+    "Goblin Generals": [
+      {
+        "type": "cryptic",
+        "tier": "Hard",
+        "clueText": "Generally speaking, his nose was very bent."
+      }
     ]
   }
 }
