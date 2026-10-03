@@ -6152,16 +6152,20 @@ function getTrainingMethods(skillName) {
       const bowOwned = isOwned(bow);
       const levelOk = myLevel >= cfg.level;
       const ownedAmmo = cfg.ammo.filter(a => isOwned(a));
+      const canGetBow = canGetItem(bow);
       if (bowOwned && ownedAmmo.length) {
         for (const ammo of ownedAmmo) {
+          const canGetAmmo = canGetItem(ammo);
+          const status = !canGetBow ? 'no-source' : !canGetAmmo ? 'no-source'
+                       : !levelOk   ? 'locked-level' : 'available';
+          const note   = !canGetBow ? 'no bow source' : !canGetAmmo ? 'no ammo source' : '';
           results.push({name:`${bow} + ${ammo}`, level:cfg.level,
-            status: levelOk ? 'available' : 'locked-level',
-            cardOwned:true, note:'', weapon:bow, ammo, type:'ranged-setup'});
+            status, cardOwned:true, note, weapon:bow, ammo, type:'ranged-setup'});
         }
-      } else if (bowOwned) {
+      } else if (bowOwned && canGetBow) {
         results.push({name:bow, level:cfg.level, status:'no-card', cardOwned:false,
           note:`no ammo`, weapon:bow, ammo:null, type:'ranged-setup'});
-      } else if (ownedAmmo.length && canGetItem(bow)) {
+      } else if (ownedAmmo.length && canGetBow) {
         results.push({name:bow, level:cfg.level, status:'no-card', cardOwned:false,
           note:`no bow`, weapon:bow, ammo:null, type:'ranged-setup'});
       }
@@ -6171,10 +6175,12 @@ function getTrainingMethods(skillName) {
       if (!itemSources[t.name]) continue;
       const owned = isOwned(t.name);
       const levelOk = myLevel >= t.level;
-      if (!owned && !canGetItem(t.name)) continue; // not obtainable — skip
+      const canGet = canGetItem(t.name);
+      if (!owned && !canGet) continue; // not obtainable — skip
+      const tStatus = !canGet ? 'no-source' : !owned ? 'no-card' : !levelOk ? 'locked-level' : 'available';
       results.push({name:t.name, level:t.level,
-        status: !owned ? 'no-card' : !levelOk ? 'locked-level' : 'available',
-        cardOwned:owned, note:'', weapon:t.name, ammo:null, type:'ranged-setup'});
+        status: tStatus, cardOwned:owned, note: !canGet ? 'no source' : '',
+        weapon:t.name, ammo:null, type:'ranged-setup'});
     }
 
   } else if (MELEE_SKILLS.has(skillName)) {
