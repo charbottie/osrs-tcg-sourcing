@@ -36,7 +36,7 @@ discord/private-ticket.md
 .idea/
 .vscode/
 
-# ── Plugin repos (separate git repos — not part of this project) ──────────────
+# ── Plugin repos (separate git repos — reference only, not part of this project) ──
 plugins/
 
 # ── Session / working files ────────────────────────────────────────────────────
@@ -46,5 +46,9 @@ docs/bronzeman-architecture.md
 docs/osrs-tcg-architecture.md
 docs/opportunities.md
 docs/opportunities/
-research/
+
+# ── Research / raw data ────────────────────────────────────────────────────────
+# card-catalog-v1.json is tracked — needed by server.py to decode collections
+research/*
+!research/card-catalog-v1.json
 
