@@ -1157,6 +1157,27 @@ let _cqFile   = new Set();
 let _cqManual = new Set();
 let completedQuests = new Set();
 
+// ─── Slayer wishlist group helper ────────────────────────────────────────────
+function toggleSlayerWishlistGroup(taskName) {
+  const idx = wishlistGroups.findIndex(g => g.name === taskName);
+  if (idx >= 0) {
+    wishlistGroups.splice(idx, 1);
+  } else {
+    const cards = [], seen = new Set();
+    for (const master of Object.values(SLAYER_TASKS)) {
+      for (const t of master.tasks) {
+        if (t.task === taskName) {
+          for (const c of t.cards) if (!seen.has(c)) { seen.add(c); cards.push(c); }
+        }
+      }
+    }
+    wishlistGroups.push({name: taskName, cards});
+  }
+  _saveWishlist();
+  refreshDetail(false);
+  if (activeTab === 'wishlist') renderWishlist();
+}
+
 function _cqFileKey(rsn)   { return rsn ? `cq_file_${rsn}`   : 'cq_file'; }
 function _cqManualKey(rsn) { return rsn ? `cq_manual_${rsn}` : 'cq_manual'; }
 
@@ -3206,21 +3227,36 @@ function renderMonster(name, container) {
     });
     const availCount = tasks.filter(t => t.cards.some(c => isOwned(c))).length;
     const alias = (name !== slayerKey) ? ` <span style="font-size:10px;color:#555;font-weight:normal">(same list as ${slayerKey})</span>` : '';
+
     html += `<div class="section">
       <div class="section-header">Slayer Tasks${alias} <span style="font-size:10px;color:#555;font-weight:normal">${availCount}/${tasks.length} available</span></div>
       <div style="margin-top:8px">`;
     for (const t of sorted2) {
       const owned = t.cards.some(c => isOwned(c));
+      const wishlisted = wishlistGroups.some(g => g.name === t.task);
       const pct = ((t.weight / totalWeight) * 100).toFixed(1);
       const ownedCard = t.cards.find(c => isOwned(c)) || t.cards[0];
-      const navCard = t.cards[0].replace(/&/g,'&amp;').replace(/"/g,'&quot;');
+      const navCard = escHtml(t.cards[0]);
+      const starStyle = wishlisted
+        ? 'color:#c8a020;background:none;border:none;cursor:pointer;font-size:13px;padding:0 2px;flex-shrink:0;line-height:1;margin-left:auto'
+        : 'color:#555;background:none;border:none;cursor:pointer;font-size:13px;padding:0 2px;flex-shrink:0;line-height:1;margin-left:auto';
       html += `<div class="method-row">
         <div class="method-indicator ${owned ? 'available' : 'locked'}"></div>
         <span class="method-name ${owned ? 'available' : 'locked'}" style="cursor:pointer"
-          data-nav="${navCard}" data-nav-type="monster" onclick="_navToCard(this)">${t.task}</span>
+          data-nav="${navCard}" data-nav-type="monster" onclick="_navToCard(this)">${escHtml(t.task)}</span>
         <span class="method-level" style="min-width:46px;text-align:right">${pct}%</span>
-        <span class="method-note">${owned ? ownedCard : 'no card'}</span>
-      </div>`;
+        <span class="method-note">${owned ? escHtml(ownedCard) : 'no card'}</span>
+        <button style="${starStyle}" onclick="toggleSlayerWishlistGroup(${escHtml(JSON.stringify(t.task))})" title="${wishlisted?'Remove from wishlist':'Add to wishlist'}">${wishlisted?'★':'☆'}</button>
+      </div>
+      <div style="display:flex;flex-wrap:wrap;gap:3px;padding:2px 0 5px 20px">`;
+      for (const card of t.cards) {
+        const cardOwned = isOwned(card);
+        const imgUrl = (cardDetails[card] || {}).imageUrl || '';
+        const img = imgUrl ? `<img src="${imgUrl}" style="width:12px;height:12px;object-fit:contain;image-rendering:pixelated;flex-shrink:0;opacity:${cardOwned?1:0.4}" onerror="this.style.display='none'">` : '';
+        html += `<span style="display:inline-flex;align-items:center;gap:3px;font-size:10px;color:${cardOwned?'#aaa':'#555'};background:${cardOwned?'#172017':'#1a1a1a'};border:1px solid ${cardOwned?'#2a4a2a':'#2a2a2a'};border-radius:3px;padding:1px 4px;cursor:pointer"
+          data-nav="${escHtml(card)}" data-nav-type="monster" onclick="_navToCard(this)">${img}${escHtml(card)}</span>`;
+      }
+      html += `</div>`;
     }
     html += `</div></div>`;
   }
@@ -5232,38 +5268,38 @@ const SLAYER_TASKS = {
   'Turael': {
     slayerReq:1, combatReq:3,
     tasks:[
-      {task:'Banshees',        cards:['Banshee'],                                                        weight:8},
-      {task:'Bats',            cards:['Bat'],                                                            weight:7},
-      {task:'Bears',           cards:['Bear'],                                                           weight:7},
-      {task:'Birds',           cards:['Chicken','Seagull'],                                              weight:6},
+      {task:'Banshees',        cards:['Banshee','Twisted Banshee','Screaming banshee','Screaming twisted banshee'],                                                        weight:8},
+      {task:'Bats',            cards:['Bat','Giant bat','Albino bat','Dire bat'],                                                            weight:7},
+      {task:'Bears',           cards:['Black bear','Grizzly bear','Grizzly bear cub','Bear Cub','Angry bear'],                                                           weight:7},
+      {task:'Birds',           cards:['Chicken','Seagull','Duck','Vulture','Penguin'],                                              weight:6},
       {task:'Cave bugs',       cards:['Cave bug'],                                                       weight:8},
       {task:'Cave crawlers',   cards:['Cave crawler'],                                                   weight:8},
       {task:'Cave slime',      cards:['Cave slime'],                                                     weight:8},
-      {task:'Cows',            cards:['Cow'],                                                            weight:8},
+      {task:'Cows',            cards:['Cow','Cow calf','Buffalo'],                                                            weight:8},
       {task:'Crawling Hands',  cards:['Crawling Hand'],                                                  weight:8},
-      {task:'Dogs',            cards:['Dog'],                                                            weight:7},
-      {task:'Dwarves',         cards:['Dwarf'],                                                          weight:7},
-      {task:'Ghosts',          cards:['Ghost'],                                                          weight:7},
-      {task:'Goblins',         cards:['Goblin'],                                                         weight:7},
+      {task:'Dogs',            cards:['Wild dog','Guard dog','Jackal'],                                                            weight:7},
+      {task:'Dwarves',         cards:['Dwarf','Chaos dwarf'],                                                          weight:7},
+      {task:'Ghosts',          cards:['Ghost','Tortured soul'],                                                          weight:7},
+      {task:'Goblins',         cards:['Goblin','Goblin guard','Goblin Champion','Angry goblin'],                                                         weight:7},
       {task:'Icefiends',       cards:['Icefiend'],                                                       weight:8},
       {task:'Kalphite',        cards:['Kalphite Worker','Kalphite Soldier','Kalphite Guardian','Kalphite Queen'], weight:6},
-      {task:'Lizards',         cards:['Lizard','Desert lizard'],                                         weight:8},
+      {task:'Lizards',         cards:['Desert Lizard','Sulphur Lizard','Cave lizard','Grimy Lizard'],                                         weight:8},
       {task:'Minotaurs',       cards:['Minotaur'],                                                       weight:7},
-      {task:'Monkeys',         cards:['Monkey'],                                                         weight:6},
-      {task:'Rats',            cards:['Rat'],                                                            weight:7},
-      {task:'Scorpions',       cards:['Scorpion'],                                                       weight:7},
-      {task:'Skeletons',       cards:['Skeleton'],                                                       weight:7},
-      {task:'Spiders',         cards:['Spider'],                                                         weight:6},
-      {task:'Wolves',          cards:['Wolf'],                                                           weight:7},
-      {task:'Zombies',         cards:['Zombie'],                                                         weight:7},
+      {task:'Monkeys',         cards:['Monkey','Maniacal monkey'],                                                         weight:6},
+      {task:'Rats',            cards:['Rat','Giant rat','Dungeon rat','Crypt rat','Giant crypt rat','Blessed giant rat','Angry giant rat'],                                                            weight:7},
+      {task:'Scorpions',       cards:['Scorpion','King Scorpion','Poison Scorpion','Pit Scorpion','Khazard Scorpion','Grave scorpion'],                                                       weight:7},
+      {task:'Skeletons',       cards:['Skeleton','Skeleton hero','Skeleton brute','Skeleton warlord','Skeleton heavy','Skeleton thug','Skeleton Mage','Skeleton fremennik','Giant skeleton','Skeleton Champion'],                                                       weight:7},
+      {task:'Spiders',         cards:['Spider','Giant spider','Jungle spider','Fever spider','Deadly red spider','Ice spider','Poison spider','Crypt spider','Giant crypt spider','Huge spider','Shadow spider'],                                                         weight:6},
+      {task:'Wolves',          cards:['Wolf','Big Wolf','White wolf','Ice wolf','Jungle Wolf','Desert Wolf','Dire Wolf'],                                                           weight:7},
+      {task:'Zombies',         cards:['Zombie','Zombie pirate','Zombie swab','Armoured zombie'],                                                         weight:7},
     ]
   },
   'Mazchna': {
     slayerReq:1, combatReq:20,
     tasks:[
-      {task:'Banshees',        cards:['Banshee'],                                                        weight:8},
-      {task:'Bats',            cards:['Bat'],                                                            weight:7},
-      {task:'Bears',           cards:['Bear'],                                                           weight:6},
+      {task:'Banshees',        cards:['Banshee','Twisted Banshee','Screaming banshee','Screaming twisted banshee'],                                                        weight:8},
+      {task:'Bats',            cards:['Bat','Giant bat','Albino bat','Dire bat'],                                                            weight:7},
+      {task:'Bears',           cards:['Black bear','Grizzly bear','Grizzly bear cub','Bear Cub','Angry bear'],                                                           weight:6},
       {task:'Catablepon',      cards:['Catablepon'],                                                     weight:8},
       {task:'Cave bugs',       cards:['Cave bug'],                                                       weight:8},
       {task:'Cave crawlers',   cards:['Cave crawler'],                                                   weight:8},
@@ -5271,26 +5307,26 @@ const SLAYER_TASKS = {
       {task:'Cockatrice',      cards:['Cockatrice'],                                                     weight:8},
       {task:'Crabs',           cards:['Rock Crab','Sand Crab','Ammonite Crab','Swamp Crab'],             weight:8},
       {task:'Crawling Hands',  cards:['Crawling Hand'],                                                  weight:8},
-      {task:'Dogs',            cards:['Dog'],                                                            weight:7},
+      {task:'Dogs',            cards:['Wild dog','Guard dog','Jackal'],                                                            weight:7},
       {task:'Flesh Crawlers',  cards:['Flesh Crawler'],                                                  weight:7},
-      {task:'Ghosts',          cards:['Ghost'],                                                          weight:7},
+      {task:'Ghosts',          cards:['Ghost','Tortured soul'],                                                          weight:7},
       {task:'Ghouls',          cards:['Ghoul'],                                                          weight:7},
       {task:'Hill Giants',     cards:['Hill Giant'],                                                     weight:7},
-      {task:'Hobgoblins',      cards:['Hobgoblin'],                                                      weight:7},
+      {task:'Hobgoblins',      cards:['Hobgoblin','Hobgoblin Champion'],                                                      weight:7},
       {task:'Ice warriors',    cards:['Ice Warrior'],                                                    weight:7},
       {task:'Kalphite',        cards:['Kalphite Worker','Kalphite Soldier','Kalphite Guardian','Kalphite Queen'], weight:6},
       {task:'Killerwatts',     cards:['Killerwatt'],                                                     weight:6},
-      {task:'Lizards',         cards:['Lizard','Desert lizard'],                                         weight:8},
+      {task:'Lizards',         cards:['Desert Lizard','Sulphur Lizard','Cave lizard','Grimy Lizard'],                                         weight:8},
       {task:'Mogres',          cards:['Mogre'],                                                          weight:8},
       {task:'Pyrefiends',      cards:['Pyrefiend'],                                                      weight:8},
       {task:'Rockslugs',       cards:['Rockslug'],                                                       weight:8},
-      {task:'Scorpions',       cards:['Scorpion'],                                                       weight:7},
-      {task:'Shades',          cards:['Shade'],                                                          weight:8},
-      {task:'Skeletons',       cards:['Skeleton'],                                                       weight:7},
-      {task:'Vampyres',        cards:['Vampyre'],                                                        weight:6},
+      {task:'Scorpions',       cards:['Scorpion','King Scorpion','Poison Scorpion','Pit Scorpion','Khazard Scorpion','Grave scorpion'],                                                       weight:7},
+      {task:'Shades',          cards:['Shade','Loar Shade','Phrin Shade','Riyl Shade','Asyn Shade','Fiyr Shade','Urium Shade'],                                                          weight:8},
+      {task:'Skeletons',       cards:['Skeleton','Skeleton hero','Skeleton brute','Skeleton warlord','Skeleton heavy','Skeleton thug','Skeleton Mage','Skeleton fremennik','Giant skeleton','Skeleton Champion'],                                                       weight:7},
+      {task:'Vampyres',        cards:['Feral Vampyre','Vampyre Juvinate','Vampyre Juvenile'],                                                        weight:6},
       {task:'Wall beasts',     cards:['Wall beast'],                                                     weight:7},
-      {task:'Wolves',          cards:['Wolf'],                                                           weight:7},
-      {task:'Zombies',         cards:['Zombie'],                                                         weight:7},
+      {task:'Wolves',          cards:['Wolf','Big Wolf','White wolf','Ice wolf','Jungle Wolf','Desert Wolf','Dire Wolf'],                                                           weight:7},
+      {task:'Zombies',         cards:['Zombie','Zombie pirate','Zombie swab','Armoured zombie'],                                                         weight:7},
     ]
   },
   'Vannaka': {
@@ -5299,10 +5335,10 @@ const SLAYER_TASKS = {
       {task:'Aberrant spectres',   cards:['Aberrant spectre'],                                           weight:8},
       {task:'Abyssal demons',      cards:['Abyssal demon'],                                              weight:8},
       {task:'Ankou',               cards:['Ankou'],                                                      weight:8},
-      {task:'Banshees',            cards:['Banshee'],                                                    weight:8},
+      {task:'Banshees',            cards:['Banshee','Twisted Banshee','Screaming banshee','Screaming twisted banshee'],                                                    weight:8},
       {task:'Basilisks',           cards:['Basilisk'],                                                   weight:8},
-      {task:'Bats',                cards:['Bat'],                                                        weight:7},
-      {task:'Bears',               cards:['Bear'],                                                       weight:7},
+      {task:'Bats',                cards:['Bat','Giant bat','Albino bat','Dire bat'],                                                        weight:7},
+      {task:'Bears',               cards:['Black bear','Grizzly bear','Grizzly bear cub','Bear Cub','Angry bear'],                                                       weight:7},
       {task:'Bloodveld',           cards:['Bloodveld'],                                                  weight:8},
       {task:'Blue dragons',        cards:['Baby blue dragon','Blue dragon'],                             weight:7},
       {task:'Cave bugs',           cards:['Cave bug'],                                                   weight:8},
@@ -5312,22 +5348,22 @@ const SLAYER_TASKS = {
       {task:'Crawling Hands',      cards:['Crawling Hand'],                                              weight:8},
       {task:'Crocodiles',          cards:['Crocodile'],                                                  weight:8},
       {task:'Dagannoth',           cards:['Dagannoth','Dagannoth Prime','Dagannoth Rex','Dagannoth Supreme'], weight:7},
-      {task:'Dogs',                cards:['Dog'],                                                        weight:7},
+      {task:'Dogs',                cards:['Wild dog','Guard dog','Jackal'],                                                        weight:7},
       {task:'Dust devils',         cards:['Dust devil'],                                                 weight:8},
-      {task:'Dwarves',             cards:['Dwarf'],                                                      weight:7},
+      {task:'Dwarves',             cards:['Dwarf','Chaos dwarf'],                                                      weight:7},
       {task:'Earth warriors',      cards:['Earth Warrior'],                                              weight:8},
       {task:'Elves',               cards:['Elf'],                                                        weight:8},
       {task:'Fire giants',         cards:['Fire Giant'],                                                 weight:8},
       {task:'Flesh Crawlers',      cards:['Flesh Crawler'],                                              weight:7},
       {task:'Gargoyles',           cards:['Gargoyle'],                                                   weight:5},
-      {task:'Ghosts',              cards:['Ghost'],                                                      weight:7},
+      {task:'Ghosts',              cards:['Ghost','Tortured soul'],                                                      weight:7},
       {task:'Ghouls',              cards:['Ghoul'],                                                      weight:7},
       {task:'Green dragons',       cards:['Green dragon','Baby green dragon'],                           weight:7},
       {task:'Gryphons',            cards:['Gryphon'],                                                    weight:10},
       {task:'Guards',              cards:['Guard'],                                                      weight:7},
       {task:'Hellhounds',          cards:['Hellhound'],                                                  weight:8},
       {task:'Hill giants',         cards:['Hill Giant'],                                                 weight:7},
-      {task:'Hobgoblins',          cards:['Hobgoblin'],                                                  weight:7},
+      {task:'Hobgoblins',          cards:['Hobgoblin','Hobgoblin Champion'],                                                  weight:7},
       {task:'Ice giants',          cards:['Ice Giant'],                                                  weight:7},
       {task:'Ice warriors',        cards:['Ice Warrior'],                                                weight:7},
       {task:'Infernal Mages',      cards:['Infernal Mage'],                                             weight:8},
@@ -5335,24 +5371,24 @@ const SLAYER_TASKS = {
       {task:'Kalphite',            cards:['Kalphite Worker','Kalphite Soldier','Kalphite Guardian','Kalphite Queen'], weight:7},
       {task:'Killerwatts',         cards:['Killerwatt'],                                                 weight:7},
       {task:'Kurask',              cards:['Kurask'],                                                     weight:8},
-      {task:'Lizards',             cards:['Lizard','Desert lizard'],                                     weight:8},
+      {task:'Lizards',             cards:['Desert Lizard','Sulphur Lizard','Cave lizard','Grimy Lizard'],                                     weight:8},
       {task:'Mogres',              cards:['Mogre'],                                                      weight:8},
       {task:'Molanisks',           cards:['Molanisk'],                                                   weight:8},
       {task:'Nechryael',           cards:['Nechryael'],                                                  weight:8},
       {task:'Otherworldly beings', cards:['Otherworldly being'],                                         weight:8},
       {task:'Pyrefiends',          cards:['Pyrefiend'],                                                  weight:8},
       {task:'Rockslugs',           cards:['Rockslug'],                                                   weight:8},
-      {task:'Scorpions',           cards:['Scorpion'],                                                   weight:7},
-      {task:'Shades',              cards:['Shade'],                                                      weight:7},
+      {task:'Scorpions',           cards:['Scorpion','King Scorpion','Poison Scorpion','Pit Scorpion','Khazard Scorpion','Grave scorpion'],                                                   weight:7},
+      {task:'Shades',              cards:['Shade','Loar Shade','Phrin Shade','Riyl Shade','Asyn Shade','Fiyr Shade','Urium Shade'],                                                      weight:7},
       {task:'Skeletal wyverns',    cards:['Skeletal Wyvern'],                                            weight:5},
-      {task:'Skeletons',           cards:['Skeleton'],                                                   weight:7},
-      {task:'Spiders',             cards:['Spider'],                                                     weight:7},
+      {task:'Skeletons',           cards:['Skeleton','Skeleton hero','Skeleton brute','Skeleton warlord','Skeleton heavy','Skeleton thug','Skeleton Mage','Skeleton fremennik','Giant skeleton','Skeleton Champion'],                                                   weight:7},
+      {task:'Spiders',             cards:['Spider','Giant spider','Jungle spider','Fever spider','Deadly red spider','Ice spider','Poison spider','Crypt spider','Giant crypt spider','Huge spider','Shadow spider'],                                                     weight:7},
       {task:'Trolls',              cards:['Troll'],                                                      weight:7},
       {task:'Turoth',              cards:['Turoth'],                                                     weight:8},
-      {task:'Vampyres',            cards:['Vampyre'],                                                    weight:7},
+      {task:'Vampyres',            cards:['Feral Vampyre','Vampyre Juvinate','Vampyre Juvenile'],                                                    weight:7},
       {task:'Wall beasts',         cards:['Wall beast'],                                                 weight:7},
-      {task:'Wolves',              cards:['Wolf'],                                                       weight:7},
-      {task:'Zombies',             cards:['Zombie'],                                                     weight:7},
+      {task:'Wolves',              cards:['Wolf','Big Wolf','White wolf','Ice wolf','Jungle Wolf','Desert Wolf','Dire Wolf'],                                                       weight:7},
+      {task:'Zombies',             cards:['Zombie','Zombie pirate','Zombie swab','Armoured zombie'],                                                     weight:7},
     ]
   },
   'Chaeldar': {
@@ -5361,7 +5397,7 @@ const SLAYER_TASKS = {
       {task:'Aberrant spectres',   cards:['Aberrant spectre'],                                           weight:8},
       {task:'Abyssal demons',      cards:['Abyssal demon'],                                              weight:12},
       {task:'Aviansie',            cards:['Aviansie'],                                                   weight:9},
-      {task:'Banshees',            cards:['Banshee'],                                                    weight:8},
+      {task:'Banshees',            cards:['Banshee','Twisted Banshee','Screaming banshee','Screaming twisted banshee'],                                                    weight:8},
       {task:'Black demons',        cards:['Black Demon'],                                                weight:10},
       {task:'Black dragons',       cards:['Black dragon','Baby black dragon'],                           weight:8},
       {task:'Bloodveld',           cards:['Bloodveld'],                                                  weight:10},
@@ -5980,7 +6016,7 @@ function getTrainingMethods(skillName) {
     // Hardcoded creature list — level + tool only (gathering rule, no card needed)
     for (const c of HUNTER_CREATURES) {
       const parts = resolveToolParts(c.tool);
-      const missingCardParts = parts.filter(p => itemSources[p.label] && !p.owned);
+      const missingCardParts = parts.filter(p => itemSources[p.label] && (!p.owned || !canGetItem(p.label)));
       let status, note;
       if (myLevel < c.level) {
         status = 'locked-level';
@@ -6008,21 +6044,25 @@ function getTrainingMethods(skillName) {
       let toolLocked = false;
       if (g.tool && TOOL_TIERS[g.tool]) {
         const tiers = TOOL_TIERS[g.tool];
-        const hasTool = tiers.some(t => isOwned(t.name) && myLevel >= t.skillReq);
+        // Tool is usable only if: card owned + level met + physically obtainable
+        const hasTool = tiers.some(t => isOwned(t.name) && canGetItem(t.name) && myLevel >= t.skillReq);
         if (!hasTool) {
           toolLocked = true;
-          const ownedAny = tiers.some(t => isOwned(t.name));
-          toolNote = ownedAny ? 'level too low for tool' : 'no tool';
+          const ownedAndLevelMet = tiers.some(t => isOwned(t.name) && myLevel >= t.skillReq);
+          const ownedAny         = tiers.some(t => isOwned(t.name));
+          toolNote = ownedAndLevelMet ? 'no tool source'
+                   : ownedAny        ? 'level too low for tool'
+                   : 'no tool';
         } else {
-          const bestTool = [...tiers].reverse().find(t => isOwned(t.name) && myLevel >= t.skillReq);
+          const bestTool = [...tiers].reverse().find(t => isOwned(t.name) && canGetItem(t.name) && myLevel >= t.skillReq);
           if (bestTool) toolNote = bestTool.name;
         }
       } else if (g.tool && g.tool !== 'None') {
         const parts = resolveToolParts(g.tool);
         const cardParts = parts.filter(p => itemSources[p.label]);
         if (cardParts.length > 0) {
-          // At least one part is a known card — check ownership
-          const missingCardParts = cardParts.filter(p => !p.owned);
+          // Part missing = not owned OR owned but no physical source
+          const missingCardParts = cardParts.filter(p => !p.owned || !canGetItem(p.label));
           if (missingCardParts.length > 0) {
             toolLocked = true;
             toolNote = missingCardParts.map(p => p.label).join(', ') + ' needed';
@@ -6067,20 +6107,28 @@ function getTrainingMethods(skillName) {
     }
 
   } else if (skillName === 'Firemaking') {
-    // Burning logs requires: log card + tinderbox card + Firemaking level
-    const hasTinderbox = isOwned('Tinderbox');
+    // Burning logs requires: log card + tinderbox card (physical) + Firemaking level
+    const hasTinderboxCard  = isOwned('Tinderbox');
+    const canGetTinderbox   = canGetItem('Tinderbox');
     for (const [logName, fireLevel] of Object.entries(FIREMAKING_LEVELS)) {
       if (!itemSources[logName]) continue;
       const cardOwned = isOwned(logName);
+      const canGetLog = canGetItem(logName);
       let status, note;
-      if (!hasTinderbox) {
+      if (!hasTinderboxCard) {
         status = 'locked-tool';
         note = 'no Tinderbox';
+      } else if (!canGetTinderbox) {
+        status = 'no-source';
+        note = 'no Tinderbox source';
       } else if (myLevel < fireLevel) {
         status = 'locked-level';
         note = '';
       } else if (!cardOwned) {
         status = 'no-card';
+        note = '';
+      } else if (!canGetLog) {
+        status = 'no-source';
         note = '';
       } else {
         status = 'available';
@@ -6130,19 +6178,22 @@ function getTrainingMethods(skillName) {
   } else if (skillName === 'Magic') {
     // Show actual castable spells based on rune card ownership + level
     for (const spell of MAGIC_SPELLS) {
-      const missingRunes = Object.keys(spell.runes).filter(r => !isOwned(r));
+      const missingCards      = Object.keys(spell.runes).filter(r => !isOwned(r));
+      const unobtainableRunes = Object.keys(spell.runes).filter(r => isOwned(r) && !canGetItem(r));
       const levelOk = myLevel >= spell.level;
       let status, note;
       if (!levelOk) {
         status = 'locked-level';
-        note = missingRunes.length ? 'need: ' + missingRunes.slice(0,2).join(', ') : '';
-      } else if (missingRunes.length > 0) {
-        status = 'no-card'; note = 'need: ' + missingRunes.slice(0,3).join(', ');
+        note = missingCards.length ? 'need: ' + missingCards.slice(0,2).join(', ') : '';
+      } else if (missingCards.length > 0) {
+        status = 'no-card'; note = 'need: ' + missingCards.slice(0,3).join(', ');
+      } else if (unobtainableRunes.length > 0) {
+        status = 'no-source'; note = 'no source: ' + unobtainableRunes.slice(0,2).join(', ');
       } else {
         status = 'available'; note = Object.keys(spell.runes).join(', ');
       }
       results.push({name:spell.name, level:spell.level, status,
-        cardOwned:missingRunes.length===0, note, type:'magic-spell'});
+        cardOwned:missingCards.length===0, note, type:'magic-spell'});
     }
 
   } else if (skillName === 'Ranged') {
@@ -6185,14 +6236,25 @@ function getTrainingMethods(skillName) {
 
   } else if (MELEE_SKILLS.has(skillName)) {
     // Melee combat: need monster card to fight — NPCs with no combat level cannot be trained on
+    const mySlayer = getLevel('Slayer');
     for (const mName of Object.keys(monsterDrops)) {
       if (!isOwned(mName)) continue;
       const cbLv = monsterDrops[mName].combatLevel;
       if (!cbLv) continue;   // NPC card — no combat level, can't train on
-      results.push({name:mName, level:cbLv, status:'available',
-        cardOwned:true, note:'', combatLevel:cbLv, type:'combat'});
+      const slayerReq = monsterDrops[mName].slayerLevel || 0;
+      const slayerLocked = slayerReq > mySlayer;
+      const status = slayerLocked ? 'locked-level' : 'available';
+      results.push({name:mName, level:cbLv, status,
+        cardOwned:true, note: slayerLocked ? `Slayer ${slayerReq}` : '',
+        combatLevel:cbLv, slayerReq, type:'combat'});
     }
-    results.sort((a,b) => (a.level||0) - (b.level||0));
+    results.sort((a,b) => {
+      // Available monsters first (by combat level), locked monsters second (by combat level)
+      const aAvail = a.status === 'available' ? 0 : 1;
+      const bAvail = b.status === 'available' ? 0 : 1;
+      if (aAvail !== bAvail) return aAvail - bAvail;
+      return (a.level||0) - (b.level||0);
+    });
     return results;
 
   } else if (PRODUCTION_SKILLS.has(skillName)) {
@@ -6314,9 +6376,9 @@ function getTrainingMethods(skillName) {
 
 function countAvailableMethods(skillName) {
   if (['Attack','Strength','Defence','Hitpoints'].includes(skillName))
-    return Object.keys(monsterDrops).filter(m => isOwned(m) && monsterDrops[m].combatLevel).length;
+    return getTrainingMethods(skillName).filter(m => m.status === 'available').length;
   if (skillName === 'Magic')
-    return MAGIC_SPELLS.filter(s => getLevel('Magic') >= s.level && Object.keys(s.runes).every(r => isOwned(r))).length;
+    return getTrainingMethods('Magic').filter(m => m.status === 'available').length;
   if (skillName === 'Ranged')
     return getTrainingMethods('Ranged').filter(m => m.status === 'available').length;
   if (skillName === 'Prayer')
@@ -6351,6 +6413,7 @@ function showSkillDetail(skillName, push = true) {
   renderSkillGrid();
   const pane = document.getElementById('skill-detail-pane');
   if (!pane) return;
+  delete pane.dataset.masterName; // clear master context when showing skill overview
 
   const myLevel = getLevel(skillName);
   const methods = getTrainingMethods(skillName);
@@ -6367,8 +6430,12 @@ function showSkillDetail(skillName, push = true) {
   } else if (skillName === 'Hunter') {
     intro = `<p style="color:#666;font-size:11px;margin-bottom:12px">Hunting is gated by level and the catching tool only — no card needed for the creature. Caught items can only be used once you own the item card.</p>`;
   } else if (skillName === 'Firemaking') {
-    const hasTinderbox = isOwned('Tinderbox');
-    intro = `<p style="color:#666;font-size:11px;margin-bottom:12px">Burning logs requires the log card (using an item = card required) and a Tinderbox card. Tinderbox: ${hasTinderbox?'<b style="color:#3a8a3a">owned</b>':'<b style="color:#aa4040">not owned</b>'}.</p>`;
+    const hasTinderboxCard = isOwned('Tinderbox');
+    const canGetTinderbox  = canGetItem('Tinderbox');
+    const tbStatus = !hasTinderboxCard ? '<b style="color:#aa4040">not owned</b>'
+                   : !canGetTinderbox  ? '<b style="color:#cc7700">owned (no source)</b>'
+                   : '<b style="color:#3a8a3a">owned</b>';
+    intro = `<p style="color:#666;font-size:11px;margin-bottom:12px">Burning logs requires the log card and a physical Tinderbox. Tinderbox: ${tbStatus}.</p>`;
   } else if (skillName === 'Thieving') {
     intro = `<p style="color:#666;font-size:11px;margin-bottom:12px">Stalls are free — level only. Pickpocketing NPCs requires their monster card.</p>`;
   } else if (skillName === 'Prayer') {
@@ -6378,7 +6445,7 @@ function showSkillDetail(skillName, push = true) {
   } else if (skillName === 'Ranged') {
     intro = `<p style="color:#666;font-size:11px;margin-bottom:12px">Shows weapon + ammo combos you can use. Use any available setup on monsters you own the card for.</p>`;
   } else if (MELEE_SKILLS.has(skillName)) {
-    intro = `<p style="color:#666;font-size:11px;margin-bottom:12px">You need the monster card to fight. Sorted by combat level.</p>`;
+    intro = `<p style="color:#666;font-size:11px;margin-bottom:12px">You need the monster card to fight. Grey = Slayer level required. Sorted by combat level.</p>`;
   } else if (PRODUCTION_SKILLS.has(skillName)) {
     let prodNote = 'Ingredient cards required. Orange = have the card but no way to obtain the item right now. Output card not required to produce.';
     if (skillName === 'Construction') prodNote += ' <b>Note: POH furniture data not yet scraped — only ship construction items shown. Your house costs 1,000 coins from an Estate Agent (no card needed for the NPC, but coins required).</b>';
@@ -6386,13 +6453,13 @@ function showSkillDetail(skillName, push = true) {
   } else if (skillName === 'Agility') {
     intro = `<p style="color:#666;font-size:11px;margin-bottom:12px">Agility courses need no card — level only.</p>`;
   } else if (skillName === 'Slayer') {
-    intro = `<p style="color:#666;font-size:11px;margin-bottom:12px">Click a master to see their full task list and assignment probabilities. Green = you own at least one card for that task.</p>`;
+    intro = `<p style="color:#666;font-size:11px;margin-bottom:12px">Click a master to see their task list and available monsters. Star (☆) a task to add it to your Wishlist as a group.</p>`;
   }
 
   let rows = '';
   if (skillName === 'Slayer') {
-    // Render from methods (computed by getTrainingMethods — single source of truth)
-    rows = `<div class="section"><div class="section-header">Slayer masters</div><div style="margin-top:8px">`;
+    // ── Master list ────────────────────────────────────────────────────────
+    rows += `<div class="section"><div class="section-header">Slayer masters</div><div style="margin-top:8px">`;
     for (const m of methods) {
       const indCls = m.status === 'available' ? 'available' : m.status === 'no-card' ? 'no-card' : 'locked';
       const imgUrl = (cardDetails[m.masterCardName] || {}).imageUrl || '';
@@ -6482,65 +6549,6 @@ function showSkillDetail(skillName, push = true) {
     </h1>
     <div class="subtitle">${skillName === 'Slayer' ? `${avail} slayer master${avail!==1?'s':''} available` : `${avail} training method${avail!==1?'s':''} available`}</div>
     ${intro}
-    ${rows}
-  `;
-}
-
-// ─── Slayer master detail ──────────────────────────────────────────────────
-
-function showSlayerMasterDetail(masterName) {
-  const master = SLAYER_TASKS[masterName];
-  if (!master) return;
-  const pane = document.getElementById('skill-detail-pane');
-  if (!pane) return;
-
-  const tasks = master.tasks;
-  const totalWeight = tasks.reduce((s, t) => s + t.weight, 0);
-
-  // Sort: owned tasks first, then by weight desc
-  const sorted = [...tasks].sort((a, b) => {
-    const aOwned = a.cards.some(c => isOwned(c));
-    const bOwned = b.cards.some(c => isOwned(c));
-    if (aOwned !== bOwned) return aOwned ? -1 : 1;
-    return b.weight - a.weight;
-  });
-
-  const availCount = tasks.filter(t => t.cards.some(c => isOwned(c))).length;
-
-  let rows = `<div class="section">
-    <div class="section-header">${availCount} of ${tasks.length} tasks — you have a card</div>
-    <div style="margin-top:8px">`;
-
-  for (const t of sorted) {
-    const ownedCards = t.cards.filter(c => isOwned(c));
-    const owned = ownedCards.length > 0;
-    const pct = ((t.weight / totalWeight) * 100).toFixed(1);
-    const indCls = owned ? 'available' : 'locked';
-    const nameCls = owned ? 'available' : 'locked';
-    const noteText = owned ? ownedCards.join(', ') : 'no card';
-    rows += `<div class="method-row">
-      <div class="method-indicator ${indCls}"></div>
-      <span class="method-name ${nameCls}">${t.task}</span>
-      <span class="method-level" style="min-width:46px;text-align:right">${pct}%</span>
-      <span class="method-note">${noteText}</span>
-    </div>`;
-  }
-  rows += `</div></div>`;
-
-  const reqStr = master.slayerReq > 1 ? `Slayer ${master.slayerReq}` : master.combatReq > 3 ? `Combat ${master.combatReq}` : 'No req';
-  const _masterCardsD = Object.entries(SLAYER_MASTER_MAP).filter(([,k]) => k === masterName).map(([c]) => c);
-  const _masterCardNameD = _masterCardsD.find(c => isOwned(c)) || _masterCardsD[0] || masterName;
-  const _masterImgUrlD = (cardDetails[_masterCardNameD] || {}).imageUrl || '';
-  const _masterImgHtmlD = _masterImgUrlD
-    ? `<img src="${_masterImgUrlD}" style="float:right;max-width:52px;max-height:52px;image-rendering:pixelated;margin-left:8px" onerror="this.style.display='none'">`
-    : '';
-  pane.innerHTML = `
-    <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px">
-      <button onclick="showSkillDetail('Slayer')" style="background:#2a2a2a;border:1px solid #444;color:#aaa;padding:4px 10px;cursor:pointer;border-radius:3px;font-size:12px">← Slayer</button>
-      <h1 style="margin:0;font-size:16px">${_masterImgHtmlD}${masterName}</h1>
-    </div>
-    <div class="subtitle">${availCount}/${tasks.length} tasks available · ${reqStr}</div>
-    <p style="color:#666;font-size:11px;margin-bottom:12px">% = chance of being assigned. Green = you own the relevant monster card.</p>
     ${rows}
   `;
 }
