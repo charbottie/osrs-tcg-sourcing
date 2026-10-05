@@ -742,6 +742,7 @@
   <button class="tab-btn"        onclick="switchTab('equipment')" id="tab-equipment">Equipment</button>
   <button class="tab-btn"        onclick="switchTab('packs')"    id="tab-packs">Packs</button>
   <button class="tab-btn"        onclick="switchTab('wishlist')" id="tab-wishlist">Wishlist</button>
+  <button class="tab-btn"        onclick="switchTab('bosses')"   id="tab-bosses">Bosses</button>
   <button class="tab-btn"        onclick="switchTab('rules')"    id="tab-rules">Rules</button>
   <div style="flex:1"></div>
   <div id="global-nav" style="display:flex;align-items:center;padding:0 8px;gap:4px;">
@@ -1161,7 +1162,15 @@ let completedQuests = new Set();
 function toggleSlayerWishlistGroup(taskName) {
   const idx = wishlistGroups.findIndex(g => g.name === taskName);
   if (idx >= 0) {
+    const cards = wishlistGroups[idx].cards;
     wishlistGroups.splice(idx, 1);
+    for (const c of cards) {
+      const entry = wishlist.get(c);
+      if (!entry) continue;
+      const tags = entry.note ? entry.note.split(',').map(t => t.trim()).filter(t => t && t !== taskName) : [];
+      if (tags.length === 0) wishlist.delete(c);
+      else wishlist.set(c, {note: tags.join(', ')});
+    }
   } else {
     const cards = [], seen = new Set();
     for (const master of Object.values(SLAYER_TASKS)) {
@@ -1172,6 +1181,15 @@ function toggleSlayerWishlistGroup(taskName) {
       }
     }
     wishlistGroups.push({name: taskName, cards});
+    for (const c of cards) {
+      if (!wishlist.has(c)) {
+        wishlist.set(c, {note: taskName});
+      } else {
+        const entry = wishlist.get(c);
+        const tags = entry.note ? entry.note.split(',').map(t => t.trim()).filter(Boolean) : [];
+        if (!tags.includes(taskName)) wishlist.set(c, {note: [...tags, taskName].join(', ')});
+      }
+    }
   }
   _saveWishlist();
   refreshDetail(false);
@@ -1329,6 +1347,7 @@ function switchCollection(rsn) {
   if (activeTab === 'questing')   renderQuestList();
   if (activeTab === 'packs')    { renderPackList(); if (selectedPack) showPackDetail(selectedPack, null, false); }
   if (activeTab === 'wishlist') renderWishlist();
+  if (activeTab === 'bosses') renderBossing();
   if (activeTab === 'equipment') { refreshEquipDoll(); updateEquipCount(); renderGearStats(); updateDpsOutput(); }
 }
 
@@ -2761,11 +2780,8 @@ function renderWishlist() {
         const type = _cardType(c);
         const chipStyle = own
           ? 'background:#0d2210;border-color:#2a5a2a;color:#76c442'
-          : wled
-            ? 'background:#111;border-color:#222;color:#555'
-            : 'background:#1a0808;border-color:#4a1a1a;color:#6a2a2a;text-decoration:line-through';
-        const chipTitle = wled ? '' : `title="${c.replace(/"/g,'&quot;')} removed from wishlist"`;
-        html += `<span style="${chipStyle};border:1px solid;border-radius:3px;padding:2px 7px;font-size:10px;cursor:pointer" ${chipTitle}
+          : 'background:#111;border-color:#222;color:#555';
+        html += `<span style="${chipStyle};border:1px solid;border-radius:3px;padding:2px 7px;font-size:10px;cursor:pointer"
           data-card="${safe}" data-type="${type}" onclick="showCard(this.dataset.card,this.dataset.type)">${own?'✓ ':''}${c}</span>`;
       }
       html += `</div></div>`;
@@ -3252,9 +3268,9 @@ function renderMonster(name, container) {
       for (const card of t.cards) {
         const cardOwned = isOwned(card);
         const imgUrl = (cardDetails[card] || {}).imageUrl || '';
-        const img = imgUrl ? `<img src="${imgUrl}" style="width:12px;height:12px;object-fit:contain;image-rendering:pixelated;flex-shrink:0;opacity:${cardOwned?1:0.4}" onerror="this.style.display='none'">` : '';
-        html += `<span style="display:inline-flex;align-items:center;gap:3px;font-size:10px;color:${cardOwned?'#aaa':'#555'};background:${cardOwned?'#172017':'#1a1a1a'};border:1px solid ${cardOwned?'#2a4a2a':'#2a2a2a'};border-radius:3px;padding:1px 4px;cursor:pointer"
-          data-nav="${escHtml(card)}" data-nav-type="monster" onclick="_navToCard(this)">${img}${escHtml(card)}</span>`;
+        const img = imgUrl ? `<img src="${imgUrl}" style="width:12px;height:12px;object-fit:contain;image-rendering:pixelated;flex-shrink:0;opacity:${cardOwned?1:0.35}" onerror="this.style.display='none'">` : '';
+        html += `<span style="display:inline-flex;align-items:center;gap:3px;font-size:10px;color:${cardOwned?'#76c442':'#555'};background:${cardOwned?'#0d2210':'#111'};border:1px solid ${cardOwned?'#2a5a2a':'#222'};border-radius:3px;padding:1px 4px;cursor:pointer"
+          data-nav="${escHtml(card)}" data-nav-type="monster" onclick="_navToCard(this)">${img}${cardOwned?'✓ ':''}${escHtml(card)}</span>`;
       }
       html += `</div>`;
     }
@@ -5212,6 +5228,9 @@ function _renderTab(tab, resetSelection = true) {
     } else if (tab === 'equipment') {
       mainContent.innerHTML = renderEquipmentTab();
       initEquipmentTab();
+    } else if (tab === 'bosses') {
+      mainContent.innerHTML = '<div id="bosses-content" style="flex:1;padding:20px 24px;overflow-y:auto;height:100%;box-sizing:border-box"></div>';
+      renderBossing();
     } else if (tab === 'rules') {
       mainContent.innerHTML = renderRulesTab();
     }
@@ -5535,6 +5554,155 @@ const SLAYER_TASKS = {
     ]
   },
 };
+
+// ── Boss definitions ───────────────────────────────────────────────────────
+// monsters: card names that must be owned (all required unless cardsMode:'any1')
+// items: item card names required (e.g. Spade)
+// quests: quest names that must be completed
+// levels: {SkillName: level} hard gates
+// area: key into AREA_GATES
+// cardsMode: 'all' (default) or 'any1' (just need one)
+const BOSS_DATA = [
+  // ── Raids & instanced content ───────────────────────────────────────────
+  { name:'Fight Caves',           category:'raid',
+    monsters:['Tz-Kih','Tz-Kek','Tok-Xil','Yt-MejKot','Ket-Zek','Yt-HurKot','TzTok-Jad'],
+    note:'Solo wave content — all spawn cards required' },
+  { name:'Inferno',               category:'raid',
+    monsters:['Jal-Nib','Jal-MejRah','Jal-Ak','Jal-ImKot','Jal-Xil','Jal-Zek','JalTok-Jad','Jal-MejJak','Jal-AkRek-Mej','Jal-AkRek-Ket','Jal-AkRek-Xil','TzKal-Zuk','Yt-HurKot'],
+    note:'Fire Cape required to enter' },
+  { name:'Fortis Colosseum',      category:'raid', area:'Varlamore',
+    monsters:['Fremennik warband archer','Fremennik warband berserker','Fremennik warband seer','Jaguar warrior','Javelin Colossus','Manticore','Minotaur','Serpent shaman','Shockwave Colossus','Sol Heredit'],
+    note:'Solo wave content in Varlamore' },
+  { name:'Chambers of Xeric',     category:'raid', area:'Kourend',
+    monsters:['Great Olm','Lizardman shaman'],
+    note:'Other monsters encountered inside also require their card' },
+  { name:'Theatre of Blood',      category:'raid', area:'Morytania',
+    monsters:['The Maiden of Sugadinti','Pestilent Bloat','Nylocas Vasilias','Nylocas Hagios','Nylocas Ischyros','Nylocas Toxobolos','Nylocas Matomenos','Nylocas Athanatos','Nylocas Prinkipas','Sotetseg','Xarpus','Blood spawn','Verzik Vitur'],
+    note:'All Theatre monsters must be owned' },
+  { name:'Tombs of Amascut',      category:'raid', area:'Desert', quests:["Icthlarin's Little Helper"],
+    monsters:['Akkha','Ba-Ba','Kephri','Zebak','The Wardens','Baboon Brawler','Baboon Mage','Baboon Thrower','Baboon Thrall','Baboon Shaman','Cursed Baboon','Volatile Baboon','Agile Scarab','Arcane Scarab','Soldier Scarab','Spitting Scarab','Scarab','Scarab Swarm','Crocodile'],
+    note:'All ToA monsters must be owned' },
+  { name:'The Gauntlet',          category:'raid', area:'Prifddinas', quests:['Song of the Elves'],
+    monsters:['Crystalline Hunllef'],
+    note:'Crystalline creatures inside also require their cards' },
+  { name:'Corrupted Gauntlet',    category:'raid', area:'Prifddinas', quests:['Song of the Elves'],
+    monsters:['Corrupted Hunllef','Corrupted Bat','Corrupted Bear','Corrupted Dark Beast','Corrupted Dragon','Corrupted Rat','Corrupted Scorpion','Corrupted Spider','Corrupted Unicorn','Corrupted Wolf'],
+    note:'All corrupted creature cards required' },
+
+  // ── Skilling bosses ─────────────────────────────────────────────────────
+  { name:'Wintertodt',            category:'skilling',
+    levels:{Firemaking:50}, items:['Tinderbox'],
+    note:'Warm clothing reduces cold damage' },
+  { name:'Tempoross',             category:'skilling',
+    levels:{Fishing:35},
+    note:'Use a harpoon or fishing rod inside' },
+  { name:'Zalcano',               category:'skilling', area:'Prifddinas', quests:['Song of the Elves'],
+    monsters:['Zalcano'],
+    note:'Pickaxe needed to mine tephra inside' },
+  { name:'Hespori',               category:'skilling',
+    levels:{Farming:65}, monsters:['Hespori'],
+    note:'Plant Hespori seed in Farming Guild cave patch' },
+  { name:'Amoxliatl',             category:'skilling', area:'Varlamore',
+    levels:{Slayer:48}, monsters:['Amoxliatl'],
+    note:'Slayer 48 required — Varlamore boss' },
+
+  // ── Regular bosses ──────────────────────────────────────────────────────
+  { name:'Barrows',               category:'boss', area:'Morytania',
+    monsters:['Ahrim the Blighted','Dharok the Wretched','Guthan the Infested','Karil the Tainted','Torag the Corrupted','Verac the Defiled','Crypt rat'],
+    items:['Spade'],
+    note:'Any 1 brother for basic access; all 6 for full chest rewards. Crypt rats for KC.' },
+  { name:'Giant Mole',            category:'boss',
+    monsters:['Giant Mole'], items:['Spade'],
+    note:'Spade to dig up mole hills in Falador Park' },
+  { name:'King Black Dragon',     category:'boss',
+    monsters:['King Black Dragon'],
+    note:'Anti-dragon shield or DFS recommended' },
+  { name:'Sarachnis',             category:'boss', area:'Kourend',
+    monsters:['Sarachnis','Spawn of Sarachnis'],
+    note:'Forthos Dungeon, Great Kourend' },
+  { name:'Dagannoth Kings',       category:'boss', area:'Waterbirth Island',
+    monsters:['Dagannoth Rex','Dagannoth Prime','Dagannoth Supreme'],
+    note:'Waterbirth Island — all three kings' },
+  { name:'Corporeal Beast',       category:'boss',
+    monsters:['Corporeal Beast'],
+    note:'Deep Wilderness — corp cave' },
+  { name:'General Graardor',      category:'boss',
+    monsters:['General Graardor','Sergeant Strongstack','Sergeant Steelwill','Sergeant Grimspike'],
+    note:'40 Bandos KC to enter boss room' },
+  { name:"Kree'arra",             category:'boss',
+    monsters:["Kree'arra",'Flight Kilisa','Flockleader Geerin','Wingman Skree'],
+    note:'40 Armadyl KC to enter boss room' },
+  { name:"K'ril Tsutsaroth",      category:'boss',
+    monsters:["K'ril Tsutsaroth",'Tstanon Karlak','Balfrug Kreeyath',"Zakl'n Gritch"],
+    note:'40 Zamorak KC to enter boss room' },
+  { name:'Commander Zilyana',     category:'boss',
+    levels:{Agility:70},
+    monsters:['Commander Zilyana','Starlight','Bree','Growler'],
+    note:'40 Sara KC + 70 Agility for stepping stones' },
+  { name:'Nex',                   category:'boss',
+    monsters:['Nex'],
+    note:'Ancient Prison — 40 Nex soldier KC or ecumenical key' },
+  { name:'Zulrah',                category:'boss', quests:['Regicide'],
+    monsters:['Zulrah'],
+    note:'Zul-Andra via Regicide — bring anti-venom' },
+  { name:'Vorkath',               category:'boss', quests:['Dragon Slayer II'],
+    monsters:['Vorkath'],
+    note:'Dragon Slayer II required — Ungael island' },
+  { name:'The Nightmare',         category:'boss', area:'Morytania',
+    monsters:['The Nightmare'],
+    note:'Slepe in Morytania — multi-team boss' },
+  { name:"Phosani's Nightmare",   category:'boss', area:'Morytania',
+    monsters:["Phosani's Nightmare"],
+    note:'Solo version of Nightmare' },
+  { name:'Phantom Muspah',        category:'boss', quests:['Secrets of the North'],
+    monsters:['Phantom Muspah'],
+    note:'Secrets of the North required' },
+  { name:'Abyssal Sire',          category:'boss', levels:{Slayer:85},
+    monsters:['Abyssal Sire'],
+    note:'Slayer 85 — Abyssal Nexus' },
+  { name:'Kraken',                category:'boss', levels:{Slayer:87},
+    monsters:['Kraken'],
+    note:'Slayer 87 — Cave Kraken task needed' },
+  { name:'Grotesque Guardians',   category:'boss', levels:{Slayer:75},
+    monsters:['Dusk','Dawn'],
+    note:'Slayer 75 — Gargoyle task + brittle key' },
+  { name:'Thermonuclear Smoke Devil', category:'boss', levels:{Slayer:93},
+    monsters:['Thermonuclear smoke devil','Nuclear smoke devil'],
+    note:'Slayer 93 — Smoke Devil task needed' },
+  { name:'Alchemical Hydra',      category:'boss', area:'Kourend', levels:{Slayer:95},
+    monsters:['Alchemical Hydra'],
+    note:'Slayer 95 — Karuulm Slayer Dungeon' },
+  { name:'Cerberus',              category:'boss', levels:{Slayer:91},
+    monsters:['Cerberus'],
+    note:'Slayer 91 — Hellhound task required' },
+  { name:'Desert Treasure II',    category:'boss', area:'DT2', quests:['Desert Treasure II - The Fallen Empire'],
+    monsters:['Vardorvis','The Whisperer','The Leviathan','Duke Sucellus'],
+    note:'All four DT2 bosses unlocked by the quest' },
+  { name:'Araxxor',               category:'boss', levels:{Slayer:92},
+    monsters:['Araxxor'],
+    note:'Slayer 92 — Araxyte Lair' },
+  { name:'The Hueycoatl',         category:'boss', area:'Varlamore',
+    monsters:['The Hueycoatl'],
+    note:'Varlamore — combat serpent boss' },
+  { name:'Demonic Gorillas',      category:'boss', area:'Ape Atoll', quests:['Monkey Madness II'],
+    monsters:['Demonic gorilla','Tortured gorilla'],
+    note:'Monkey Madness II required' },
+  { name:'Skotizo',               category:'boss', area:'Kourend',
+    monsters:['Skotizo'],
+    note:'Summon with Dark Totem from Catacombs monsters' },
+
+  // ── Wilderness bosses ───────────────────────────────────────────────────
+  { name:'Callisto',              category:'wilderness', monsters:['Callisto'],    note:'Deep wilderness' },
+  { name:'Artio',                 category:'wilderness', monsters:['Artio'],       note:'Safer alternative — Wilderness Slayer Cave' },
+  { name:'Venenatis',             category:'wilderness', monsters:['Venenatis'],   note:'Deep wilderness' },
+  { name:'Spindel',               category:'wilderness', monsters:['Spindel'],     note:'Safer alternative — Wilderness Slayer Cave' },
+  { name:"Vet'ion",               category:'wilderness', monsters:["Vet'ion"],     note:'Deep wilderness' },
+  { name:"Calvar'ion",            category:'wilderness', monsters:["Calvar'ion"],  note:'Safer alternative — Wilderness Slayer Cave' },
+  { name:'Scorpia',               category:'wilderness', monsters:['Scorpia'],     note:'Scorpion Pit' },
+  { name:'Chaos Elemental',       category:'wilderness', monsters:['Chaos Elemental'], note:'Deep wilderness' },
+  { name:'Chaos Fanatic',         category:'wilderness', monsters:['Chaos Fanatic'],   note:'West of lava maze' },
+  { name:'Crazy Archaeologist',   category:'wilderness', monsters:['Crazy archaeologist'], note:'Ruins north of Graveyard of Shadows' },
+];
 
 // ── Area access requirements ───────────────────────────────────────────────
 // Each area gate defines what a player needs before they can even reach a location.
@@ -6136,6 +6304,17 @@ function getTrainingMethods(skillName) {
       }
       results.push({name:logName, level:fireLevel, status, cardOwned, note, type:'firemaking'});
     }
+    // Wintertodt — minigame requiring only Tinderbox, no log cards
+    {
+      const hasTinderbox  = isOwned('Tinderbox');
+      const canGetTinderbox = canGetItem('Tinderbox');
+      let wStatus, wNote;
+      if (myLevel < 50)          { wStatus = 'locked-level'; wNote = ''; }
+      else if (!hasTinderbox)    { wStatus = 'locked-tool';  wNote = 'no Tinderbox'; }
+      else if (!canGetTinderbox) { wStatus = 'no-source';    wNote = 'no Tinderbox source'; }
+      else                       { wStatus = 'available';    wNote = 'Tinderbox'; }
+      results.push({name:'Wintertodt', level:50, status:wStatus, cardOwned:hasTinderbox, note:wNote, type:'firemaking'});
+    }
 
   } else if (skillName === 'Thieving') {
     // ── Stalls: hardcoded list (stolen items go to inventory, no card gate) ──
@@ -6341,6 +6520,17 @@ function getTrainingMethods(skillName) {
       const cardIngs = ings.filter(i => !!itemSources[i.item]).map(i => i.item);
       const singleIng = skillName === 'Cooking' && ings.length === 1 && cardIngs.length === 1 ? cardIngs[0] : null;
       results.push({name:cardName, displayName:singleIng||cardName, displayNav:singleIng||cardName, level, status, cardOwned:isOwned(cardName), note, xp:p.xp, type:'production', quests:p.quests||null});
+    }
+    // ── Smithing: activity methods requiring only a tool, no ingredient cards ─
+    if (skillName === 'Smithing') {
+      const hasHammer = isOwned('Hammer');
+      const canGetHammer = canGetItem('Hammer');
+      let mStatus, mNote;
+      if (myLevel < 30)       { mStatus = 'locked-level'; mNote = ''; }
+      else if (!hasHammer)    { mStatus = 'locked-tool';  mNote = 'no Hammer'; }
+      else if (!canGetHammer) { mStatus = 'no-source';    mNote = 'no Hammer source'; }
+      else                    { mStatus = 'available';    mNote = 'Hammer'; }
+      results.push({name:'Motherlode Mine (wheel repair)', level:30, status:mStatus, cardOwned:hasHammer, note:mNote, type:'production'});
     }
 
   } else if (skillName === 'Agility') {
@@ -6551,6 +6741,147 @@ function showSkillDetail(skillName, push = true) {
     ${intro}
     ${rows}
   `;
+}
+
+// ─── Bosses tab ────────────────────────────────────────────────────────────
+
+function evaluateBoss(boss) {
+  const blockers = [];
+
+  // Area gate
+  if (boss.area && AREA_GATES[boss.area]) {
+    const gate = AREA_GATES[boss.area];
+    if (gate.questRequired && !completedQuests.has(gate.questRequired)) {
+      blockers.push('Quest: ' + gate.questRequired);
+    }
+    if (gate.npcRequired && !isOwned(gate.npcRequired)) {
+      blockers.push('Card: ' + gate.npcRequired);
+    }
+    if (gate.itemsRequired) {
+      for (const it of gate.itemsRequired) {
+        if (itemSources[it] && !isOwned(it)) blockers.push('Card: ' + it);
+      }
+    }
+  }
+
+  // Quest requirements
+  for (const q of (boss.quests || [])) {
+    if (!completedQuests.has(q)) blockers.push('Quest: ' + q);
+  }
+
+  // Skill level requirements
+  for (const [skill, req] of Object.entries(boss.levels || {})) {
+    const have = getLevel(skill);
+    if (have < req) blockers.push(`${skill} ${have}/${req}`);
+  }
+
+  // Item card requirements
+  for (const item of (boss.items || [])) {
+    if (itemSources[item] && !isOwned(item)) blockers.push('Card: ' + item);
+  }
+
+  // Monster card requirements
+  const ownedMonsters  = (boss.monsters || []).filter(m => isOwned(m));
+  const missingMonsters = (boss.monsters || []).filter(m => !isOwned(m));
+
+  let status;
+  if (blockers.length > 0) status = 'locked';
+  else if (missingMonsters.length > 0) status = 'partial';
+  else status = 'available';
+
+  return { status, ownedMonsters, missingMonsters, blockers };
+}
+
+function renderBossing() {
+  const el = document.getElementById('bosses-content');
+  if (!el) return;
+
+  const CATEGORIES = [
+    { key:'raid',      label:'Raids & Instanced Content' },
+    { key:'skilling',  label:'Skilling Bosses' },
+    { key:'boss',      label:'Regular Bosses' },
+    { key:'wilderness',label:'Wilderness Bosses' },
+  ];
+
+  const STATUS_ORDER = { available:0, partial:1, locked:2 };
+
+  let html = '';
+  for (const { key, label } of CATEGORIES) {
+    const bosses = BOSS_DATA.filter(b => b.category === key);
+    const evaluated = bosses.map(b => ({ boss:b, ...evaluateBoss(b) }));
+    evaluated.sort((a,b) => {
+      const so = STATUS_ORDER[a.status] - STATUS_ORDER[b.status];
+      if (so !== 0) return so;
+      // Within same status, sort by card completion % desc
+      const aTotal = (a.boss.monsters || []).length;
+      const bTotal = (b.boss.monsters || []).length;
+      const aPct = aTotal ? a.ownedMonsters.length / aTotal : 1;
+      const bPct = bTotal ? b.ownedMonsters.length / bTotal : 1;
+      return bPct - aPct;
+    });
+
+    const avail = evaluated.filter(e => e.status === 'available').length;
+    const partial = evaluated.filter(e => e.status === 'partial').length;
+
+    html += `<div class="section" style="margin-bottom:20px">
+      <div class="section-header">${label}
+        <span style="font-size:10px;font-weight:400;color:#555;margin-left:8px">${avail} ready · ${partial} partial</span>
+      </div>
+      <div style="margin-top:10px;display:flex;flex-direction:column;gap:6px">`;
+
+    for (const { boss, status, ownedMonsters, missingMonsters, blockers } of evaluated) {
+      const total = (boss.monsters || []).length;
+      const owned = ownedMonsters.length;
+      const indCol = status === 'available' ? '#76c442' : status === 'partial' ? '#c8a020' : '#6a2a2a';
+      const indBg  = status === 'available' ? '#0d2210' : status === 'partial' ? '#1a1400' : '#1a0808';
+      const indBorder = status === 'available' ? '#2a5a2a' : status === 'partial' ? '#3a2a00' : '#4a1a1a';
+
+      // Build card chips
+      let chipsHtml = '';
+      for (const m of (boss.monsters || [])) {
+        const own = isOwned(m);
+        const safe = escHtml(m);
+        const type = _cardType(m) || 'monster';
+        chipsHtml += `<span style="display:inline-flex;align-items:center;gap:2px;font-size:10px;color:${own?'#76c442':'#555'};background:${own?'#0d2210':'#111'};border:1px solid ${own?'#2a5a2a':'#222'};border-radius:3px;padding:1px 5px;cursor:pointer;white-space:nowrap"
+          data-card="${safe}" data-type="${type}" onclick="showCard(this.dataset.card,this.dataset.type)">${own?'✓ ':''}${safe}</span>`;
+      }
+      for (const item of (boss.items || [])) {
+        if (!itemSources[item]) continue;
+        const own = isOwned(item);
+        const safe = escHtml(item);
+        chipsHtml += `<span style="display:inline-flex;align-items:center;gap:2px;font-size:10px;color:${own?'#76c442':'#e8a030'};background:${own?'#0d2210':'#1a0f00'};border:1px solid ${own?'#2a5a2a':'#4a2800'};border-radius:3px;padding:1px 5px;cursor:pointer;white-space:nowrap"
+          data-card="${safe}" data-type="item" onclick="showCard(this.dataset.card,'item')">${own?'✓ ':'⚑ '}${safe}</span>`;
+      }
+
+      // Blocker badges
+      let blockersHtml = '';
+      for (const b of blockers) {
+        blockersHtml += `<span style="font-size:10px;color:#c85040;background:#1a0808;border:1px solid #4a1a1a;border-radius:3px;padding:1px 6px;white-space:nowrap">✗ ${escHtml(b)}</span>`;
+      }
+
+      const progressStr = total > 0 ? `${owned}/${total} cards` : '';
+      const lvlEntries = Object.entries(boss.levels || {});
+      let lvlHtml = '';
+      for (const [skill, req] of lvlEntries) {
+        const have = getLevel(skill);
+        const ok = have >= req;
+        const col = ok ? '#76c442' : have >= req * 0.8 ? '#c8a020' : '#c85040';
+        lvlHtml += `<span style="font-size:10px;color:${col};background:#111;border:1px solid #222;border-radius:3px;padding:1px 6px;white-space:nowrap">${skill} ${have}/${req}</span>`;
+      }
+
+      html += `<div style="background:${indBg};border:1px solid ${indBorder};border-radius:4px;padding:8px 10px">
+        <div style="display:flex;align-items:baseline;gap:8px;margin-bottom:${(chipsHtml||blockersHtml||lvlHtml)?'6px':'0'}">
+          <span style="font-size:12px;font-weight:600;color:${indCol};flex:1">${escHtml(boss.name)}</span>
+          ${progressStr ? `<span style="font-size:10px;color:${status==='available'?'#76c442':status==='partial'?'#c8a020':'#666'};flex-shrink:0">${progressStr}</span>` : ''}
+        </div>
+        ${lvlHtml || blockersHtml ? `<div style="display:flex;flex-wrap:wrap;gap:4px;margin-bottom:${chipsHtml?'5px':'0'}">${lvlHtml}${blockersHtml}</div>` : ''}
+        ${chipsHtml ? `<div style="display:flex;flex-wrap:wrap;gap:3px">${chipsHtml}</div>` : ''}
+        ${boss.note ? `<div style="font-size:10px;color:#444;margin-top:4px">${escHtml(boss.note)}</div>` : ''}
+      </div>`;
+    }
+    html += `</div></div>`;
+  }
+  el.innerHTML = html;
 }
 
 // ─── Questing tab ──────────────────────────────────────────────────────────
