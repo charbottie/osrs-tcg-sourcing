@@ -1,0 +1,4127 @@
+{
+  "Chambers of Xeric": {
+    "source": "Ancient chest",
+    "page": "Ancient_chest",
+    "drops": [
+      {
+        "card": "Dexterous prayer scroll",
+        "rarity": "Unique",
+        "fraction": "14/60"
+      },
+      {
+        "card": "Arcane prayer scroll",
+        "rarity": "Unique",
+        "fraction": "14/60"
+      },
+      {
+        "card": "Twisted buckler",
+        "rarity": "Unique",
+        "fraction": "4/60"
+      },
+      {
+        "card": "Dragon hunter crossbow",
+        "rarity": "Unique",
+        "fraction": "4/60"
+      },
+      {
+        "card": "Dinh's bulwark",
+        "rarity": "Unique",
+        "fraction": "3/60"
+      },
+      {
+        "card": "Ancestral hat",
+        "rarity": "Unique",
+        "fraction": "4/60"
+      },
+      {
+        "card": "Ancestral robe top",
+        "rarity": "Unique",
+        "fraction": "4/60"
+      },
+      {
+        "card": "Ancestral robe bottom",
+        "rarity": "Unique",
+        "fraction": "4/60"
+      },
+      {
+        "card": "Dragon claws",
+        "rarity": "Unique",
+        "fraction": "3/60"
+      },
+      {
+        "card": "Elder maul",
+        "rarity": "Unique",
+        "fraction": "2/60"
+      },
+      {
+        "card": "Kodai wand",
+        "rarity": "Unique",
+        "fraction": "2/60"
+      },
+      {
+        "card": "Twisted bow",
+        "rarity": "Unique",
+        "fraction": "2/60"
+      },
+      {
+        "card": "Death rune",
+        "rarity": "Common",
+        "fraction": "2 × 1/33",
+        "rate": "1/16.8"
+      },
+      {
+        "card": "Blood rune",
+        "rarity": "Common",
+        "fraction": "2 × 1/33",
+        "rate": "1/16.8"
+      },
+      {
+        "card": "Soul rune",
+        "rarity": "Common",
+        "fraction": "2 × 1/33",
+        "rate": "1/16.8"
+      },
+      {
+        "card": "Rune arrow",
+        "rarity": "Common",
+        "fraction": "2 × 1/33",
+        "rate": "1/16.8"
+      },
+      {
+        "card": "Dragon arrow",
+        "rarity": "Common",
+        "fraction": "2 × 1/33",
+        "rate": "1/16.8"
+      },
+      {
+        "card": "Ranarr weed",
+        "rarity": "Common",
+        "fraction": "2 × 1/33",
+        "rate": "1/16.8",
+        "notes": [
+          "33% of these herbs will drop as seeds instead (at a rate of 7 herbs per seed)."
+        ]
+      },
+      {
+        "card": "Toadflax",
+        "rarity": "Common",
+        "fraction": "2 × 1/33",
+        "rate": "1/16.8",
+        "notes": [
+          "33% of these herbs will drop as seeds instead (at a rate of 8 herbs per seed)."
+        ]
+      },
+      {
+        "card": "Irit leaf",
+        "rarity": "Common",
+        "fraction": "2 × 1/33",
+        "rate": "1/16.8",
+        "notes": [
+          "33% of these herbs will drop as seeds instead (at a rate of 8 herbs per seed)."
+        ]
+      },
+      {
+        "card": "Avantoe",
+        "rarity": "Common",
+        "fraction": "2 × 1/33",
+        "rate": "1/16.8",
+        "notes": [
+          "33% of these herbs will drop as seeds instead (at a rate of 8 herbs per seed)."
+        ]
+      },
+      {
+        "card": "Kwuarm",
+        "rarity": "Common",
+        "fraction": "2 × 1/33",
+        "rate": "1/16.8",
+        "notes": [
+          "33% of these herbs will drop as seeds instead (at a rate of 8 herbs per seed)."
+        ]
+      },
+      {
+        "card": "Snapdragon",
+        "rarity": "Common",
+        "fraction": "2 × 1/33",
+        "rate": "1/16.8",
+        "notes": [
+          "33% of these herbs will drop as seeds instead (at a rate of 7 herbs per seed)."
+        ]
+      },
+      {
+        "card": "Cadantine",
+        "rarity": "Common",
+        "fraction": "2 × 1/33",
+        "rate": "1/16.8",
+        "notes": [
+          "33% of these herbs will drop as seeds instead (at a rate of 8 herbs per seed)."
+        ]
+      },
+      {
+        "card": "Lantadyme",
+        "rarity": "Common",
+        "fraction": "2 × 1/33",
+        "rate": "1/16.8",
+        "notes": [
+          "33% of these herbs will drop as seeds instead (at a rate of 8 herbs per seed)."
+        ]
+      },
+      {
+        "card": "Dwarf weed",
+        "rarity": "Common",
+        "fraction": "2 × 1/33",
+        "rate": "1/16.8",
+        "notes": [
+          "33% of these herbs will drop as seeds instead (at a rate of 8 herbs per seed)."
+        ]
+      },
+      {
+        "card": "Torstol",
+        "rarity": "Common",
+        "fraction": "2 × 1/33",
+        "rate": "1/16.8",
+        "notes": [
+          "33% of these herbs will drop as seeds instead (at a rate of 7 herbs per seed)."
+        ]
+      },
+      {
+        "card": "Silver ore",
+        "rarity": "Common",
+        "fraction": "2 × 1/33",
+        "rate": "1/16.8"
+      },
+      {
+        "card": "Coal",
+        "rarity": "Common",
+        "fraction": "2 × 1/33",
+        "rate": "1/16.8"
+      },
+      {
+        "card": "Gold ore",
+        "rarity": "Common",
+        "fraction": "2 × 1/33",
+        "rate": "1/16.8"
+      },
+      {
+        "card": "Mithril ore",
+        "rarity": "Common",
+        "fraction": "2 × 1/33",
+        "rate": "1/16.8"
+      },
+      {
+        "card": "Adamantite ore",
+        "rarity": "Common",
+        "fraction": "2 × 1/33",
+        "rate": "1/16.8"
+      },
+      {
+        "card": "Runite ore",
+        "rarity": "Common",
+        "fraction": "2 × 1/33",
+        "rate": "1/16.8"
+      },
+      {
+        "card": "Sapphire",
+        "rarity": "Common",
+        "fraction": "2 × 1/33",
+        "rate": "1/16.8"
+      },
+      {
+        "card": "Emerald",
+        "rarity": "Common",
+        "fraction": "2 × 1/33",
+        "rate": "1/16.8"
+      },
+      {
+        "card": "Ruby",
+        "rarity": "Common",
+        "fraction": "2 × 1/33",
+        "rate": "1/16.8"
+      },
+      {
+        "card": "Diamond",
+        "rarity": "Common",
+        "fraction": "2 × 1/33",
+        "rate": "1/16.8"
+      },
+      {
+        "card": "Lizardman fang",
+        "rarity": "Common",
+        "fraction": "2 × 1/33",
+        "rate": "1/16.8"
+      },
+      {
+        "card": "Pure essence",
+        "rarity": "Common",
+        "fraction": "2 × 1/33",
+        "rate": "1/16.8"
+      },
+      {
+        "card": "Saltpetre",
+        "rarity": "Common",
+        "fraction": "2 × 1/33",
+        "rate": "1/16.8"
+      },
+      {
+        "card": "Teak plank",
+        "rarity": "Common",
+        "fraction": "2 × 1/33",
+        "rate": "1/16.8"
+      },
+      {
+        "card": "Mahogany plank",
+        "rarity": "Common",
+        "fraction": "2 × 1/33",
+        "rate": "1/16.8"
+      },
+      {
+        "card": "Dynamite",
+        "rarity": "Common",
+        "fraction": "2 × 1/33",
+        "rate": "1/16.8"
+      },
+      {
+        "card": "Torn prayer scroll",
+        "rarity": "Common",
+        "fraction": "2 × 1/33",
+        "rate": "1/16.8"
+      },
+      {
+        "card": "Dark relic",
+        "rarity": "Common",
+        "fraction": "2 × 1/33",
+        "rate": "1/16.8"
+      },
+      {
+        "card": "Olmlet",
+        "rarity": "Unique",
+        "fraction": "1/53",
+        "notes": [
+          "Olmlet is only rolled when the player gets a broadcasted unique reward; with 26,025 points per raid, the Olmlet rate is ~1/1,765."
+        ]
+      },
+      {
+        "card": "Twisted ancestral colour kit",
+        "rarity": "Conditional",
+        "fraction": "1/75",
+        "notes": [
+          "Only obtainable in Challenge Mode and if the raid was completed within a certain time."
+        ]
+      },
+      {
+        "card": "Metamorphic dust",
+        "rarity": "Conditional",
+        "fraction": "1/400",
+        "notes": [
+          "Only obtainable in Challenge Mode and if the raid was completed within a certain time."
+        ]
+      },
+      {
+        "card": "Xeric's cape",
+        "rarity": "Conditional",
+        "fraction": "Always",
+        "notes": [
+          "Received at 100, 500, 1,000, 1,500 and 2,000 completions."
+        ]
+      }
+    ],
+    "uniqueRoll": "1% unique chance per 8,676 points (capped at 65.7%). Normal-mode weights shown."
+  },
+  "Theatre of Blood": {
+    "source": "Monumental chest",
+    "page": "Monumental_chest",
+    "drops": [
+      {
+        "card": "Cabbage",
+        "rarity": "Conditional",
+        "fraction": "Always",
+        "notes": [
+          "Only obtained if a player ends the raid with 0 individual contribution points."
+        ]
+      },
+      {
+        "card": "Avernic defender",
+        "rarity": "Unique",
+        "fraction": "8/19"
+      },
+      {
+        "card": "Ghrazi rapier",
+        "rarity": "Unique",
+        "fraction": "2/19"
+      },
+      {
+        "card": "Sanguinesti staff",
+        "rarity": "Unique",
+        "fraction": "2/19"
+      },
+      {
+        "card": "Justiciar faceguard",
+        "rarity": "Unique",
+        "fraction": "2/19"
+      },
+      {
+        "card": "Justiciar chestguard",
+        "rarity": "Unique",
+        "fraction": "2/19"
+      },
+      {
+        "card": "Justiciar legguards",
+        "rarity": "Unique",
+        "fraction": "2/19"
+      },
+      {
+        "card": "Scythe of Vitur",
+        "rarity": "Unique",
+        "fraction": "1/19"
+      },
+      {
+        "card": "Vial of blood",
+        "rarity": "Common",
+        "fraction": "3 × 2/30",
+        "rate": "1/5.3"
+      },
+      {
+        "card": "Death rune",
+        "rarity": "Common",
+        "fraction": "3 × 1/30",
+        "rate": "1/10.3"
+      },
+      {
+        "card": "Blood rune",
+        "rarity": "Common",
+        "fraction": "3 × 1/30",
+        "rate": "1/10.3"
+      },
+      {
+        "card": "Swamp tar",
+        "rarity": "Common",
+        "fraction": "3 × 1/30",
+        "rate": "1/10.3"
+      },
+      {
+        "card": "Coal",
+        "rarity": "Common",
+        "fraction": "3 × 1/30",
+        "rate": "1/10.3"
+      },
+      {
+        "card": "Gold ore",
+        "rarity": "Common",
+        "fraction": "3 × 1/30",
+        "rate": "1/10.3"
+      },
+      {
+        "card": "Molten glass",
+        "rarity": "Common",
+        "fraction": "3 × 1/30",
+        "rate": "1/10.3"
+      },
+      {
+        "card": "Adamantite ore",
+        "rarity": "Common",
+        "fraction": "3 × 1/30",
+        "rate": "1/10.3"
+      },
+      {
+        "card": "Runite ore",
+        "rarity": "Common",
+        "fraction": "3 × 1/30",
+        "rate": "1/10.3"
+      },
+      {
+        "card": "Wine of zamorak",
+        "rarity": "Common",
+        "fraction": "3 × 1/30",
+        "rate": "1/10.3"
+      },
+      {
+        "card": "Potato cactus",
+        "rarity": "Common",
+        "fraction": "3 × 1/30",
+        "rate": "1/10.3"
+      },
+      {
+        "card": "Cadantine",
+        "rarity": "Common",
+        "fraction": "3 × 1/30",
+        "rate": "1/10.3"
+      },
+      {
+        "card": "Avantoe",
+        "rarity": "Common",
+        "fraction": "3 × 1/30",
+        "rate": "1/10.3"
+      },
+      {
+        "card": "Toadflax",
+        "rarity": "Common",
+        "fraction": "3 × 1/30",
+        "rate": "1/10.3"
+      },
+      {
+        "card": "Kwuarm",
+        "rarity": "Common",
+        "fraction": "3 × 1/30",
+        "rate": "1/10.3"
+      },
+      {
+        "card": "Irit leaf",
+        "rarity": "Common",
+        "fraction": "3 × 1/30",
+        "rate": "1/10.3"
+      },
+      {
+        "card": "Ranarr weed",
+        "rarity": "Common",
+        "fraction": "3 × 1/30",
+        "rate": "1/10.3"
+      },
+      {
+        "card": "Snapdragon",
+        "rarity": "Common",
+        "fraction": "3 × 1/30",
+        "rate": "1/10.3"
+      },
+      {
+        "card": "Lantadyme",
+        "rarity": "Common",
+        "fraction": "3 × 1/30",
+        "rate": "1/10.3"
+      },
+      {
+        "card": "Dwarf weed",
+        "rarity": "Common",
+        "fraction": "3 × 1/30",
+        "rate": "1/10.3"
+      },
+      {
+        "card": "Torstol",
+        "rarity": "Common",
+        "fraction": "3 × 1/30",
+        "rate": "1/10.3"
+      },
+      {
+        "card": "Battlestaff",
+        "rarity": "Common",
+        "fraction": "3 × 1/30",
+        "rate": "1/10.3"
+      },
+      {
+        "card": "Rune battleaxe",
+        "rarity": "Common",
+        "fraction": "3 × 1/30",
+        "rate": "1/10.3"
+      },
+      {
+        "card": "Rune platebody",
+        "rarity": "Common",
+        "fraction": "3 × 1/30",
+        "rate": "1/10.3"
+      },
+      {
+        "card": "Rune chainbody",
+        "rarity": "Common",
+        "fraction": "3 × 1/30",
+        "rate": "1/10.3"
+      },
+      {
+        "card": "Palm tree seed",
+        "rarity": "Common",
+        "fraction": "3 × 1/30",
+        "rate": "1/10.3"
+      },
+      {
+        "card": "Yew seed",
+        "rarity": "Common",
+        "fraction": "3 × 1/30",
+        "rate": "1/10.3"
+      },
+      {
+        "card": "Magic seed",
+        "rarity": "Common",
+        "fraction": "3 × 1/30",
+        "rate": "1/10.3"
+      },
+      {
+        "card": "Mahogany seed",
+        "rarity": "Common",
+        "fraction": "3 × 1/30",
+        "rate": "1/10.3"
+      },
+      {
+        "card": "Lil' zik",
+        "rarity": "Rare",
+        "fraction": "1/650 ; 1/500",
+        "notes": [
+          "Drop rate scales down based on the individual's performance during the raid.",
+          "The base rate for Lil' Zik is 1/650 in Normal Mode and 1/500 in Hard Mode. [ 3 ]"
+        ]
+      },
+      {
+        "card": "Sinhaza shroud",
+        "rarity": "Conditional",
+        "fraction": "Always",
+        "notes": [
+          "Received from the Mysterious Stranger at 100, 500, 1,000, 1,500 and 2,000 completions."
+        ]
+      }
+    ],
+    "uniqueRoll": "1/9.1 unique chance per raid across the team with no deaths (Hard Mode 1/7.7). Normal-mode weights shown."
+  },
+  "Tombs of Amascut": {
+    "source": "Chest (Tombs of Amascut)",
+    "page": "Chest_(Tombs_of_Amascut)",
+    "drops": [
+      {
+        "card": "Fossilised dung",
+        "rarity": "Conditional",
+        "fraction": "Always",
+        "notes": [
+          "Only obtained if a player ends the raid with less than 1,500 total reward points."
+        ]
+      },
+      {
+        "card": "Osmumten's fang",
+        "rarity": "Unique",
+        "fraction": "7/24",
+        "notes": [
+          "Rate drastically reduced for raid levels 0-49, with an additional 1/50 roll.",
+          "Drop rate decreased for raid levels above 300. See above for more information."
+        ]
+      },
+      {
+        "card": "Tumeken's shadow",
+        "rarity": "Unique",
+        "fraction": "1/24",
+        "notes": [
+          "Rate drastically reduced for raid levels 0-149, with an additional 1/50 roll.",
+          "Drop rate increased for raid levels above 300. See above for more information."
+        ]
+      },
+      {
+        "card": "Elidinis' ward",
+        "rarity": "Unique",
+        "fraction": "3/24",
+        "notes": [
+          "Rate drastically reduced for raid levels 0-149, with an additional 1/50 roll.",
+          "Drop rate increased for raid levels above 300. See above for more information."
+        ]
+      },
+      {
+        "card": "Lightbearer",
+        "rarity": "Unique",
+        "fraction": "7/24",
+        "notes": [
+          "Rate drastically reduced for raid levels 0-49, with an additional 1/50 roll.",
+          "Drop rate decreased for raid levels above 300. See above for more information."
+        ]
+      },
+      {
+        "card": "Masori mask",
+        "rarity": "Unique",
+        "fraction": "2/24",
+        "notes": [
+          "Rate drastically reduced for raid levels 0-149, with an additional 1/50 roll.",
+          "Drop rate increased for raid levels above 300. See above for more information."
+        ]
+      },
+      {
+        "card": "Masori body",
+        "rarity": "Unique",
+        "fraction": "2/24",
+        "notes": [
+          "Rate drastically reduced for raid levels 0-149, with an additional 1/50 roll.",
+          "Drop rate increased for raid levels above 300. See above for more information."
+        ]
+      },
+      {
+        "card": "Masori chaps",
+        "rarity": "Unique",
+        "fraction": "2/24",
+        "notes": [
+          "Rate drastically reduced for raid levels 0-149, with an additional 1/50 roll.",
+          "Drop rate increased for raid levels above 300. See above for more information."
+        ]
+      },
+      {
+        "card": "Cache of runes",
+        "rarity": "Common",
+        "fraction": "3 × 1/27",
+        "rate": "1/9.3"
+      },
+      {
+        "card": "Coins",
+        "rarity": "Common",
+        "fraction": "3 × 1/27",
+        "rate": "1/9.3"
+      },
+      {
+        "card": "Death rune",
+        "rarity": "Common",
+        "fraction": "3 × 1/27",
+        "rate": "1/9.3"
+      },
+      {
+        "card": "Soul rune",
+        "rarity": "Common",
+        "fraction": "3 × 1/27",
+        "rate": "1/9.3"
+      },
+      {
+        "card": "Gold ore",
+        "rarity": "Common",
+        "fraction": "3 × 1/27",
+        "rate": "1/9.3"
+      },
+      {
+        "card": "Dragon dart",
+        "rarity": "Common",
+        "fraction": "3 × 1/27",
+        "rate": "1/9.3"
+      },
+      {
+        "card": "Mahogany logs",
+        "rarity": "Common",
+        "fraction": "3 × 1/27",
+        "rate": "1/9.3"
+      },
+      {
+        "card": "Sapphire",
+        "rarity": "Common",
+        "fraction": "3 × 1/27",
+        "rate": "1/9.3"
+      },
+      {
+        "card": "Emerald",
+        "rarity": "Common",
+        "fraction": "3 × 1/27",
+        "rate": "1/9.3"
+      },
+      {
+        "card": "Gold bar",
+        "rarity": "Common",
+        "fraction": "3 × 1/27",
+        "rate": "1/9.3"
+      },
+      {
+        "card": "Potato cactus",
+        "rarity": "Common",
+        "fraction": "3 × 1/27",
+        "rate": "1/9.3"
+      },
+      {
+        "card": "Raw shark",
+        "rarity": "Common",
+        "fraction": "3 × 1/27",
+        "rate": "1/9.3"
+      },
+      {
+        "card": "Ruby",
+        "rarity": "Common",
+        "fraction": "3 × 1/27",
+        "rate": "1/9.3"
+      },
+      {
+        "card": "Diamond",
+        "rarity": "Common",
+        "fraction": "3 × 1/27",
+        "rate": "1/9.3"
+      },
+      {
+        "card": "Raw manta ray",
+        "rarity": "Common",
+        "fraction": "3 × 1/27",
+        "rate": "1/9.3"
+      },
+      {
+        "card": "Cactus spine",
+        "rarity": "Common",
+        "fraction": "3 × 1/27",
+        "rate": "1/9.3"
+      },
+      {
+        "card": "Dragonstone",
+        "rarity": "Common",
+        "fraction": "3 × 1/27",
+        "rate": "1/9.3"
+      },
+      {
+        "card": "Battlestaff",
+        "rarity": "Common",
+        "fraction": "3 × 1/27",
+        "rate": "1/9.3"
+      },
+      {
+        "card": "Coconut milk",
+        "rarity": "Common",
+        "fraction": "3 × 1/27",
+        "rate": "1/9.3"
+      },
+      {
+        "card": "Lily of the sands",
+        "rarity": "Common",
+        "fraction": "3 × 1/27",
+        "rate": "1/9.3"
+      },
+      {
+        "card": "Toadflax seed",
+        "rarity": "Common",
+        "fraction": "3 × 1/27",
+        "rate": "1/9.3"
+      },
+      {
+        "card": "Ranarr seed",
+        "rarity": "Common",
+        "fraction": "3 × 1/27",
+        "rate": "1/9.3"
+      },
+      {
+        "card": "Torstol seed",
+        "rarity": "Common",
+        "fraction": "3 × 1/27",
+        "rate": "1/9.3"
+      },
+      {
+        "card": "Snapdragon seed",
+        "rarity": "Common",
+        "fraction": "3 × 1/27",
+        "rate": "1/9.3"
+      },
+      {
+        "card": "Dragon med helm",
+        "rarity": "Common",
+        "fraction": "3 × 1/27",
+        "rate": "1/9.3"
+      },
+      {
+        "card": "Magic seed",
+        "rarity": "Common",
+        "fraction": "3 × 1/27",
+        "rate": "1/9.3"
+      },
+      {
+        "card": "Blood essence",
+        "rarity": "Common",
+        "fraction": "3 × 1/27",
+        "rate": "1/9.3"
+      },
+      {
+        "card": "Thread of elidinis",
+        "rarity": "Common",
+        "fraction": "1/10 – 3/10 ; 1/50",
+        "notes": [
+          "The first thread of Elidinis possesses a Bad luck mitigation mechanic, where its rarity scales linearly until it is three times as common when the player's total raid completion count reaches 1.5 times the base rate denominator. In other words, the thread of Elidinis has a drop rate of 1/3.33 at 15 completions. This does not apply anymore when the player has received it at least once, after which the drop rate is set to 1/50. [ 9 ]"
+        ]
+      },
+      {
+        "card": "Eye of the corruptor",
+        "rarity": "Uncommon",
+        "fraction": "1/50 – 3/50 ; 1/50",
+        "notes": [
+          "The four jewels possess a bad luck mitigation mechanic, where their rarity scales linearly until they are three times as common when the player's total raid completion count reaches 1.5 times the base rate denominator. In other words, the drop rate of any given jewel scales from 1/50 up to 3/50 after reaching a kill count of 75.",
+          "There is a 1/12.5 chance to get any Keris partisan jewel. If the player is missing one or more of the four jewels, they will be guaranteed to receive an unobtained one upon successfully rolling for a jewel. This effectively changes the rarity of unowned jewels to 1/37.5, 1/25, and 1/12.5 when owning one, two, or three unique jewels respectively. When the player owns all four jewels already, this mechanic does not apply."
+        ]
+      },
+      {
+        "card": "Jewel of the sun",
+        "rarity": "Uncommon",
+        "fraction": "1/50 – 3/50 ; 1/50",
+        "notes": [
+          "The four jewels possess a bad luck mitigation mechanic, where their rarity scales linearly until they are three times as common when the player's total raid completion count reaches 1.5 times the base rate denominator. In other words, the drop rate of any given jewel scales from 1/50 up to 3/50 after reaching a kill count of 75.",
+          "There is a 1/12.5 chance to get any Keris partisan jewel. If the player is missing one or more of the four jewels, they will be guaranteed to receive an unobtained one upon successfully rolling for a jewel. This effectively changes the rarity of unowned jewels to 1/37.5, 1/25, and 1/12.5 when owning one, two, or three unique jewels respectively. When the player owns all four jewels already, this mechanic does not apply."
+        ]
+      },
+      {
+        "card": "Breach of the scarab",
+        "rarity": "Uncommon",
+        "fraction": "1/50 – 3/50 ; 1/50",
+        "notes": [
+          "The four jewels possess a bad luck mitigation mechanic, where their rarity scales linearly until they are three times as common when the player's total raid completion count reaches 1.5 times the base rate denominator. In other words, the drop rate of any given jewel scales from 1/50 up to 3/50 after reaching a kill count of 75.",
+          "There is a 1/12.5 chance to get any Keris partisan jewel. If the player is missing one or more of the four jewels, they will be guaranteed to receive an unobtained one upon successfully rolling for a jewel. This effectively changes the rarity of unowned jewels to 1/37.5, 1/25, and 1/12.5 when owning one, two, or three unique jewels respectively. When the player owns all four jewels already, this mechanic does not apply."
+        ]
+      },
+      {
+        "card": "Jewel of amascut",
+        "rarity": "Uncommon",
+        "fraction": "1/50 – 3/50 ; 1/50",
+        "notes": [
+          "The four jewels possess a bad luck mitigation mechanic, where their rarity scales linearly until they are three times as common when the player's total raid completion count reaches 1.5 times the base rate denominator. In other words, the drop rate of any given jewel scales from 1/50 up to 3/50 after reaching a kill count of 75.",
+          "There is a 1/12.5 chance to get any Keris partisan jewel. If the player is missing one or more of the four jewels, they will be guaranteed to receive an unobtained one upon successfully rolling for a jewel. This effectively changes the rarity of unowned jewels to 1/37.5, 1/25, and 1/12.5 when owning one, two, or three unique jewels respectively. When the player owns all four jewels already, this mechanic does not apply."
+        ]
+      },
+      {
+        "card": "Tumeken's guardian",
+        "rarity": "Varies",
+        "fraction": "Varies",
+        "notes": [
+          "See above for more information."
+        ]
+      },
+      {
+        "card": "Masori assembler",
+        "rarity": "Always",
+        "fraction": "Always",
+        "notes": [
+          "See above for more information."
+        ]
+      },
+      {
+        "card": "Icthlarin's shroud",
+        "rarity": "Conditional",
+        "fraction": "Always",
+        "notes": [
+          "Received at 100, 500, 1,000, 1,500 and 2,000 completions."
+        ]
+      }
+    ],
+    "uniqueRoll": "Unique chance scales with raid level and points (capped at 55%)."
+  },
+  "Fortis Colosseum": {
+    "source": "Rewards Chest (Fortis Colosseum)",
+    "page": "Rewards_Chest_(Fortis_Colosseum)",
+    "drops": [
+      {
+        "card": "Sunfire splinters",
+        "rarity": "Always",
+        "fraction": "Always"
+      },
+      {
+        "card": "Rune platebody",
+        "rarity": "Common",
+        "fraction": "1/7"
+      },
+      {
+        "card": "Death rune",
+        "rarity": "Common",
+        "fraction": "360/2,080"
+      },
+      {
+        "card": "Chaos rune",
+        "rarity": "Common",
+        "fraction": "1/7"
+      },
+      {
+        "card": "Steel cannonball",
+        "rarity": "Common",
+        "fraction": "1/7"
+      },
+      {
+        "card": "Rune kiteshield",
+        "rarity": "Common",
+        "fraction": "2,340/16,000"
+      },
+      {
+        "card": "Rune chainbody",
+        "rarity": "Common",
+        "fraction": "1/7"
+      },
+      {
+        "card": "Onyx bolts",
+        "rarity": "Common",
+        "fraction": "360/2,080"
+      },
+      {
+        "card": "Snapdragon seed",
+        "rarity": "Common",
+        "fraction": "2,725/19,250"
+      },
+      {
+        "card": "Dragon platelegs",
+        "rarity": "Common",
+        "fraction": "360/2,080"
+      },
+      {
+        "card": "Earth orb",
+        "rarity": "Common",
+        "fraction": "2,725/19,250"
+      },
+      {
+        "card": "Rune 2h sword",
+        "rarity": "Common",
+        "fraction": "2,725/19,250"
+      },
+      {
+        "card": "Gold ore",
+        "rarity": "Common",
+        "fraction": "2,725/19,250"
+      },
+      {
+        "card": "Token",
+        "rarity": "Varies",
+        "fraction": "Varies",
+        "notes": [
+          "See Token_(Varlamore)#Token_sources"
+        ]
+      },
+      {
+        "card": "Echo boots",
+        "rarity": "Uncommon",
+        "fraction": "135/4,800"
+      },
+      {
+        "card": "Sunfire fanatic helm",
+        "rarity": "Uncommon",
+        "fraction": "75/4,800",
+        "notes": [
+          "Players are guaranteed to receive a full set prior to receiving duplicate Sunfire Fanatic pieces."
+        ]
+      },
+      {
+        "card": "Sunfire fanatic cuirass",
+        "rarity": "Uncommon",
+        "fraction": "75/4,800",
+        "notes": [
+          "Players are guaranteed to receive a full set prior to receiving duplicate Sunfire Fanatic pieces."
+        ]
+      },
+      {
+        "card": "Sunfire fanatic chausses",
+        "rarity": "Uncommon",
+        "fraction": "75/4,800",
+        "notes": [
+          "Players are guaranteed to receive a full set prior to receiving duplicate Sunfire Fanatic pieces."
+        ]
+      },
+      {
+        "card": "Dragon bolts",
+        "rarity": "Common",
+        "fraction": "3,180/21,600"
+      },
+      {
+        "card": "Ranarr seed",
+        "rarity": "Common",
+        "fraction": "3,180/21,600"
+      },
+      {
+        "card": "Dragon arrow",
+        "rarity": "Common",
+        "fraction": "792/4,800"
+      },
+      {
+        "card": "Adamantite ore",
+        "rarity": "Common",
+        "fraction": "3,180/21,600"
+      },
+      {
+        "card": "Tonalztics of ralos",
+        "rarity": "Rare",
+        "fraction": "25/4,800"
+      },
+      {
+        "card": "Runite ore",
+        "rarity": "Common",
+        "fraction": "2,340/16,000"
+      },
+      {
+        "card": "Rune warhammer",
+        "rarity": "Common",
+        "fraction": "360/2,080"
+      },
+      {
+        "card": "Dragon plateskirt",
+        "rarity": "Uncommon",
+        "fraction": "50/2,080"
+      },
+      {
+        "card": "Dizana's quiver",
+        "rarity": "Always",
+        "fraction": "Always"
+      },
+      {
+        "card": "Smol heredit",
+        "rarity": "Rare",
+        "fraction": "1/200"
+      },
+      {
+        "card": "Onyx",
+        "rarity": "Uncommon",
+        "fraction": "110/4,800"
+      }
+    ],
+    "basis": "Rates are per wave claimed; the best wave's rate is shown."
+  },
+  "The Gauntlet": {
+    "source": "Reward Chest (The Gauntlet)",
+    "page": "Reward_Chest_(The_Gauntlet)",
+    "drops": [
+      {
+        "card": "Crystal shard",
+        "rarity": "Always",
+        "fraction": "Always"
+      },
+      {
+        "card": "Battlestaff",
+        "rarity": "Common",
+        "fraction": "2 × 1/24",
+        "rate": "1/12.3"
+      },
+      {
+        "card": "Rune full helm",
+        "rarity": "Common",
+        "fraction": "2 × 1/24",
+        "rate": "1/12.3"
+      },
+      {
+        "card": "Rune chainbody",
+        "rarity": "Common",
+        "fraction": "2 × 1/24",
+        "rate": "1/12.3"
+      },
+      {
+        "card": "Rune platebody",
+        "rarity": "Common",
+        "fraction": "2 × 1/24",
+        "rate": "1/12.3"
+      },
+      {
+        "card": "Rune platelegs",
+        "rarity": "Common",
+        "fraction": "2 × 1/24",
+        "rate": "1/12.3"
+      },
+      {
+        "card": "Rune plateskirt",
+        "rarity": "Common",
+        "fraction": "2 × 1/24",
+        "rate": "1/12.3"
+      },
+      {
+        "card": "Rune halberd",
+        "rarity": "Common",
+        "fraction": "2 × 1/24",
+        "rate": "1/12.3"
+      },
+      {
+        "card": "Rune pickaxe",
+        "rarity": "Common",
+        "fraction": "2 × 1/24",
+        "rate": "1/12.3"
+      },
+      {
+        "card": "Dragon halberd",
+        "rarity": "Common",
+        "fraction": "2 × 1/24",
+        "rate": "1/12.3"
+      },
+      {
+        "card": "Cosmic rune",
+        "rarity": "Common",
+        "fraction": "2 × 1/24",
+        "rate": "1/12.3"
+      },
+      {
+        "card": "Nature rune",
+        "rarity": "Common",
+        "fraction": "2 × 1/24",
+        "rate": "1/12.3"
+      },
+      {
+        "card": "Law rune",
+        "rarity": "Common",
+        "fraction": "2 × 1/24",
+        "rate": "1/12.3"
+      },
+      {
+        "card": "Chaos rune",
+        "rarity": "Common",
+        "fraction": "2 × 1/24",
+        "rate": "1/12.3"
+      },
+      {
+        "card": "Death rune",
+        "rarity": "Common",
+        "fraction": "2 × 1/24",
+        "rate": "1/12.3"
+      },
+      {
+        "card": "Blood rune",
+        "rarity": "Common",
+        "fraction": "2 × 1/24",
+        "rate": "1/12.3"
+      },
+      {
+        "card": "Mithril arrow",
+        "rarity": "Common",
+        "fraction": "2 × 1/24",
+        "rate": "1/12.3"
+      },
+      {
+        "card": "Adamant arrow",
+        "rarity": "Common",
+        "fraction": "2 × 1/24",
+        "rate": "1/12.3"
+      },
+      {
+        "card": "Rune arrow",
+        "rarity": "Common",
+        "fraction": "2 × 1/24",
+        "rate": "1/12.3"
+      },
+      {
+        "card": "Dragon arrow",
+        "rarity": "Common",
+        "fraction": "2 × 1/24",
+        "rate": "1/12.3"
+      },
+      {
+        "card": "Sapphire",
+        "rarity": "Common",
+        "fraction": "2 × 1/24",
+        "rate": "1/12.3"
+      },
+      {
+        "card": "Emerald",
+        "rarity": "Common",
+        "fraction": "2 × 1/24",
+        "rate": "1/12.3"
+      },
+      {
+        "card": "Ruby",
+        "rarity": "Common",
+        "fraction": "2 × 1/24",
+        "rate": "1/12.3"
+      },
+      {
+        "card": "Diamond",
+        "rarity": "Common",
+        "fraction": "2 × 1/24",
+        "rate": "1/12.3"
+      },
+      {
+        "card": "Coins",
+        "rarity": "Common",
+        "fraction": "2 × 1/24",
+        "rate": "1/12.3"
+      },
+      {
+        "card": "Crystal weapon seed",
+        "rarity": "Rare",
+        "fraction": "1/120"
+      },
+      {
+        "card": "Youngllef",
+        "rarity": "Very Rare",
+        "fraction": "1/2,000"
+      }
+    ]
+  },
+  "Corrupted Gauntlet": {
+    "source": "Reward Chest (The Gauntlet)",
+    "page": "Reward_Chest_(The_Gauntlet)",
+    "drops": [
+      {
+        "card": "Crystal shard",
+        "rarity": "Always",
+        "fraction": "Always"
+      },
+      {
+        "card": "Gauntlet cape",
+        "rarity": "Conditional",
+        "fraction": "Always",
+        "notes": [
+          "Awarded if the player does not already have a Gauntlet cape"
+        ]
+      },
+      {
+        "card": "Battlestaff",
+        "rarity": "Common",
+        "fraction": "3 × 1/24",
+        "rate": "1/8.3"
+      },
+      {
+        "card": "Rune full helm",
+        "rarity": "Common",
+        "fraction": "3 × 1/24",
+        "rate": "1/8.3"
+      },
+      {
+        "card": "Rune chainbody",
+        "rarity": "Common",
+        "fraction": "3 × 1/24",
+        "rate": "1/8.3"
+      },
+      {
+        "card": "Rune platebody",
+        "rarity": "Common",
+        "fraction": "3 × 1/24",
+        "rate": "1/8.3"
+      },
+      {
+        "card": "Rune platelegs",
+        "rarity": "Common",
+        "fraction": "3 × 1/24",
+        "rate": "1/8.3"
+      },
+      {
+        "card": "Rune plateskirt",
+        "rarity": "Common",
+        "fraction": "3 × 1/24",
+        "rate": "1/8.3"
+      },
+      {
+        "card": "Rune halberd",
+        "rarity": "Common",
+        "fraction": "3 × 1/24",
+        "rate": "1/8.3"
+      },
+      {
+        "card": "Rune pickaxe",
+        "rarity": "Common",
+        "fraction": "3 × 1/24",
+        "rate": "1/8.3"
+      },
+      {
+        "card": "Dragon halberd",
+        "rarity": "Common",
+        "fraction": "3 × 0.5/24",
+        "rate": "1/16.3"
+      },
+      {
+        "card": "Cosmic rune",
+        "rarity": "Common",
+        "fraction": "3 × 1/24",
+        "rate": "1/8.3"
+      },
+      {
+        "card": "Nature rune",
+        "rarity": "Common",
+        "fraction": "3 × 1/24",
+        "rate": "1/8.3"
+      },
+      {
+        "card": "Law rune",
+        "rarity": "Common",
+        "fraction": "3 × 1/24",
+        "rate": "1/8.3"
+      },
+      {
+        "card": "Chaos rune",
+        "rarity": "Common",
+        "fraction": "3 × 1/24",
+        "rate": "1/8.3"
+      },
+      {
+        "card": "Death rune",
+        "rarity": "Common",
+        "fraction": "3 × 1/24",
+        "rate": "1/8.3"
+      },
+      {
+        "card": "Blood rune",
+        "rarity": "Common",
+        "fraction": "3 × 1/24",
+        "rate": "1/8.3"
+      },
+      {
+        "card": "Mithril arrow",
+        "rarity": "Common",
+        "fraction": "3 × 1/24",
+        "rate": "1/8.3"
+      },
+      {
+        "card": "Adamant arrow",
+        "rarity": "Common",
+        "fraction": "3 × 1/24",
+        "rate": "1/8.3"
+      },
+      {
+        "card": "Rune arrow",
+        "rarity": "Common",
+        "fraction": "3 × 1/24",
+        "rate": "1/8.3"
+      },
+      {
+        "card": "Dragon arrow",
+        "rarity": "Common",
+        "fraction": "3 × 1/24",
+        "rate": "1/8.3"
+      },
+      {
+        "card": "Sapphire",
+        "rarity": "Common",
+        "fraction": "3 × 1/24",
+        "rate": "1/8.3"
+      },
+      {
+        "card": "Emerald",
+        "rarity": "Common",
+        "fraction": "3 × 1/24",
+        "rate": "1/8.3"
+      },
+      {
+        "card": "Ruby",
+        "rarity": "Common",
+        "fraction": "3 × 1/24",
+        "rate": "1/8.3"
+      },
+      {
+        "card": "Diamond",
+        "rarity": "Common",
+        "fraction": "3 × 1/24",
+        "rate": "1/8.3"
+      },
+      {
+        "card": "Coins",
+        "rarity": "Common",
+        "fraction": "3 × 1.5/24",
+        "rate": "1/5.7"
+      },
+      {
+        "card": "Crystal weapon seed",
+        "rarity": "Uncommon",
+        "fraction": "1/50"
+      },
+      {
+        "card": "Youngllef",
+        "rarity": "Rare",
+        "fraction": "1/800"
+      }
+    ]
+  },
+  "Barrows": {
+    "source": "Chest (Barrows)",
+    "page": "Chest_(Barrows)",
+    "drops": [
+      {
+        "card": "Ahrim's hood",
+        "rarity": "Rare",
+        "fraction": "7 × 1/2,448",
+        "rate": "1/350.1"
+      },
+      {
+        "card": "Ahrim's robetop",
+        "rarity": "Rare",
+        "fraction": "7 × 1/2,448",
+        "rate": "1/350.1"
+      },
+      {
+        "card": "Ahrim's robeskirt",
+        "rarity": "Rare",
+        "fraction": "7 × 1/2,448",
+        "rate": "1/350.1"
+      },
+      {
+        "card": "Ahrim's staff",
+        "rarity": "Rare",
+        "fraction": "7 × 1/2,448",
+        "rate": "1/350.1"
+      },
+      {
+        "card": "Dharok's helm",
+        "rarity": "Rare",
+        "fraction": "7 × 1/2,448",
+        "rate": "1/350.1"
+      },
+      {
+        "card": "Dharok's platebody",
+        "rarity": "Rare",
+        "fraction": "7 × 1/2,448",
+        "rate": "1/350.1"
+      },
+      {
+        "card": "Dharok's platelegs",
+        "rarity": "Rare",
+        "fraction": "7 × 1/2,448",
+        "rate": "1/350.1"
+      },
+      {
+        "card": "Dharok's greataxe",
+        "rarity": "Rare",
+        "fraction": "7 × 1/2,448",
+        "rate": "1/350.1"
+      },
+      {
+        "card": "Guthan's helm",
+        "rarity": "Rare",
+        "fraction": "7 × 1/2,448",
+        "rate": "1/350.1"
+      },
+      {
+        "card": "Guthan's platebody",
+        "rarity": "Rare",
+        "fraction": "7 × 1/2,448",
+        "rate": "1/350.1"
+      },
+      {
+        "card": "Guthan's chainskirt",
+        "rarity": "Rare",
+        "fraction": "7 × 1/2,448",
+        "rate": "1/350.1"
+      },
+      {
+        "card": "Guthan's warspear",
+        "rarity": "Rare",
+        "fraction": "7 × 1/2,448",
+        "rate": "1/350.1"
+      },
+      {
+        "card": "Karil's coif",
+        "rarity": "Rare",
+        "fraction": "7 × 1/2,448",
+        "rate": "1/350.1"
+      },
+      {
+        "card": "Karil's leathertop",
+        "rarity": "Rare",
+        "fraction": "7 × 1/2,448",
+        "rate": "1/350.1"
+      },
+      {
+        "card": "Karil's leatherskirt",
+        "rarity": "Rare",
+        "fraction": "7 × 1/2,448",
+        "rate": "1/350.1"
+      },
+      {
+        "card": "Karil's crossbow",
+        "rarity": "Rare",
+        "fraction": "7 × 1/2,448",
+        "rate": "1/350.1"
+      },
+      {
+        "card": "Torag's helm",
+        "rarity": "Rare",
+        "fraction": "7 × 1/2,448",
+        "rate": "1/350.1"
+      },
+      {
+        "card": "Torag's platebody",
+        "rarity": "Rare",
+        "fraction": "7 × 1/2,448",
+        "rate": "1/350.1"
+      },
+      {
+        "card": "Torag's platelegs",
+        "rarity": "Rare",
+        "fraction": "7 × 1/2,448",
+        "rate": "1/350.1"
+      },
+      {
+        "card": "Torag's hammers",
+        "rarity": "Rare",
+        "fraction": "7 × 1/2,448",
+        "rate": "1/350.1"
+      },
+      {
+        "card": "Verac's helm",
+        "rarity": "Rare",
+        "fraction": "7 × 1/2,448",
+        "rate": "1/350.1"
+      },
+      {
+        "card": "Verac's brassard",
+        "rarity": "Rare",
+        "fraction": "7 × 1/2,448",
+        "rate": "1/350.1"
+      },
+      {
+        "card": "Verac's plateskirt",
+        "rarity": "Rare",
+        "fraction": "7 × 1/2,448",
+        "rate": "1/350.1"
+      },
+      {
+        "card": "Verac's flail",
+        "rarity": "Rare",
+        "fraction": "7 × 1/2,448",
+        "rate": "1/350.1"
+      },
+      {
+        "card": "Coins",
+        "rarity": "Common",
+        "fraction": "7 × 379/1,012",
+        "rate": "1/1.0",
+        "notes": [
+          "Requires 1 reward potential to roll."
+        ]
+      },
+      {
+        "card": "Mind rune",
+        "rarity": "Common",
+        "fraction": "7 × 125/1,012",
+        "rate": "1/1.7",
+        "notes": [
+          "Requires 381 reward potential to roll."
+        ]
+      },
+      {
+        "card": "Chaos rune",
+        "rarity": "Common",
+        "fraction": "7 × 125/1,012",
+        "rate": "1/1.7",
+        "notes": [
+          "Requires 506 reward potential to roll."
+        ]
+      },
+      {
+        "card": "Death rune",
+        "rarity": "Common",
+        "fraction": "7 × 125/1,012",
+        "rate": "1/1.7",
+        "notes": [
+          "Requires 631 reward potential to roll."
+        ]
+      },
+      {
+        "card": "Blood rune",
+        "rarity": "Common",
+        "fraction": "7 × 125/1,012",
+        "rate": "1/1.7",
+        "notes": [
+          "Requires 756 reward potential to roll."
+        ]
+      },
+      {
+        "card": "Bolt rack",
+        "rarity": "Common",
+        "fraction": "7 × 125/1,012",
+        "rate": "1/1.7",
+        "notes": [
+          "Requires 881 reward potential to roll."
+        ]
+      },
+      {
+        "card": "Loop half of key",
+        "rarity": "Uncommon",
+        "fraction": "7 × 3/1,012",
+        "rate": "1/48.6",
+        "notes": [
+          "Requires 1,006 reward potential to roll."
+        ]
+      },
+      {
+        "card": "Tooth half of key",
+        "rarity": "Uncommon",
+        "fraction": "7 × 3/1,012",
+        "rate": "1/48.6",
+        "notes": [
+          "Requires 1,006 reward potential to roll."
+        ]
+      },
+      {
+        "card": "Dragon med helm",
+        "rarity": "Rare",
+        "fraction": "7 × 1/1,012",
+        "rate": "1/145.0",
+        "notes": [
+          "Requires 1,012 reward potential to roll."
+        ]
+      }
+    ],
+    "basis": "Assumes all 6 brothers killed and full reward potential."
+  },
+  "Grotesque Guardians": {
+    "source": "Grotesque Guardians",
+    "page": "Grotesque_Guardians",
+    "drops": [
+      {
+        "card": "Granite dust",
+        "rarity": "Always",
+        "fraction": "Always"
+      },
+      {
+        "card": "Granite maul",
+        "rarity": "Rare",
+        "fraction": "2 × 1/250",
+        "rate": "1/125.3"
+      },
+      {
+        "card": "Granite gloves",
+        "rarity": "Rare",
+        "fraction": "2 × 1/500",
+        "rate": "1/250.3"
+      },
+      {
+        "card": "Granite ring",
+        "rarity": "Rare",
+        "fraction": "2 × 1/500",
+        "rate": "1/250.3"
+      },
+      {
+        "card": "Granite hammer",
+        "rarity": "Rare",
+        "fraction": "2 × 1/750",
+        "rate": "1/375.3"
+      },
+      {
+        "card": "Black tourmaline core",
+        "rarity": "Rare",
+        "fraction": "2 × 1/1,000",
+        "rate": "1/500.3"
+      },
+      {
+        "card": "Rune pickaxe",
+        "rarity": "Common",
+        "fraction": "2 × 6/142",
+        "rate": "1/12.1"
+      },
+      {
+        "card": "Rune full helm",
+        "rarity": "Common",
+        "fraction": "2 × 5/142",
+        "rate": "1/14.5"
+      },
+      {
+        "card": "Rune platelegs",
+        "rarity": "Common",
+        "fraction": "2 × 5/142",
+        "rate": "1/14.5"
+      },
+      {
+        "card": "Rune 2h sword",
+        "rarity": "Common",
+        "fraction": "2 × 4/142",
+        "rate": "1/18.0"
+      },
+      {
+        "card": "Rune battleaxe",
+        "rarity": "Common",
+        "fraction": "2 × 3/142",
+        "rate": "1/23.9"
+      },
+      {
+        "card": "Dragon longsword",
+        "rarity": "Uncommon",
+        "fraction": "2 × 1/142",
+        "rate": "1/71.3"
+      },
+      {
+        "card": "Adamant boots",
+        "rarity": "Uncommon",
+        "fraction": "2 × 1/142",
+        "rate": "1/71.3"
+      },
+      {
+        "card": "Dragon med helm",
+        "rarity": "Uncommon",
+        "fraction": "2 × 1/142",
+        "rate": "1/71.3"
+      },
+      {
+        "card": "Mushroom potato",
+        "rarity": "Common",
+        "fraction": "2 × 10/142",
+        "rate": "1/7.4"
+      },
+      {
+        "card": "Saradomin brew",
+        "rarity": "Common",
+        "fraction": "2 × 8/142",
+        "rate": "1/9.1"
+      },
+      {
+        "card": "Magic potion",
+        "rarity": "Common",
+        "fraction": "2 × 6/142",
+        "rate": "1/12.1",
+        "notes": [
+          "These three potions are always dropped together."
+        ]
+      },
+      {
+        "card": "Ranging potion",
+        "rarity": "Common",
+        "fraction": "2 × 6/142",
+        "rate": "1/12.1",
+        "notes": [
+          "These three potions are always dropped together."
+        ]
+      },
+      {
+        "card": "Super combat potion",
+        "rarity": "Common",
+        "fraction": "2 × 6/142",
+        "rate": "1/12.1",
+        "notes": [
+          "These three potions are always dropped together."
+        ]
+      },
+      {
+        "card": "Prayer potion",
+        "rarity": "Common",
+        "fraction": "2 × 4/142",
+        "rate": "1/18.0"
+      },
+      {
+        "card": "Gold ore",
+        "rarity": "Common",
+        "fraction": "2 × 7/142",
+        "rate": "1/10.4"
+      },
+      {
+        "card": "Adamantite bar",
+        "rarity": "Common",
+        "fraction": "2 × 6/142",
+        "rate": "1/12.1"
+      },
+      {
+        "card": "Gold bar",
+        "rarity": "Common",
+        "fraction": "2 × 6/142",
+        "rate": "1/12.1"
+      },
+      {
+        "card": "Mithril bar",
+        "rarity": "Common",
+        "fraction": "2 × 6/142",
+        "rate": "1/12.1"
+      },
+      {
+        "card": "Coal",
+        "rarity": "Common",
+        "fraction": "2 × 5/142",
+        "rate": "1/14.5"
+      },
+      {
+        "card": "Runite ore",
+        "rarity": "Common",
+        "fraction": "2 × 4/142",
+        "rate": "1/18.0"
+      },
+      {
+        "card": "Runite bar",
+        "rarity": "Common",
+        "fraction": "2 × 3/142",
+        "rate": "1/23.9"
+      },
+      {
+        "card": "Raw shark",
+        "rarity": "Uncommon",
+        "fraction": "2 × 1.5/142",
+        "rate": "1/47.6"
+      },
+      {
+        "card": "Shark lure",
+        "rarity": "Uncommon",
+        "fraction": "2 × 1.5/142",
+        "rate": "1/47.6"
+      },
+      {
+        "card": "Raw sea turtle",
+        "rarity": "Uncommon",
+        "fraction": "2 × 1/142",
+        "rate": "1/71.3"
+      },
+      {
+        "card": "Coins",
+        "rarity": "Common",
+        "fraction": "2 × 10/142",
+        "rate": "1/7.4"
+      },
+      {
+        "card": "Chaos rune",
+        "rarity": "Common",
+        "fraction": "2 × 8/142",
+        "rate": "1/9.1"
+      },
+      {
+        "card": "Crystal key",
+        "rarity": "Common",
+        "fraction": "2 × 5/142",
+        "rate": "1/14.5"
+      },
+      {
+        "card": "Death rune",
+        "rarity": "Common",
+        "fraction": "2 × 5/142",
+        "rate": "1/14.5"
+      },
+      {
+        "card": "Dragon dart",
+        "rarity": "Common",
+        "fraction": "2 × 5/142",
+        "rate": "1/14.5"
+      },
+      {
+        "card": "Diamond bolt tips",
+        "rarity": "Common",
+        "fraction": "2 × 3/142",
+        "rate": "1/23.9"
+      },
+      {
+        "card": "Dragonstone bolts",
+        "rarity": "Uncommon",
+        "fraction": "2 × 2/142",
+        "rate": "1/35.8"
+      },
+      {
+        "card": "Onyx bolt tips",
+        "rarity": "Uncommon",
+        "fraction": "2 × 2/142",
+        "rate": "1/35.8"
+      },
+      {
+        "card": "Dragon arrow",
+        "rarity": "Uncommon",
+        "fraction": "2 × 1/142",
+        "rate": "1/71.3"
+      },
+      {
+        "card": "Soul rune",
+        "rarity": "Uncommon",
+        "fraction": "2 × 1/142",
+        "rate": "1/71.3"
+      },
+      {
+        "card": "Brimstone key",
+        "rarity": "Conditional",
+        "fraction": "1/44",
+        "notes": [
+          "Brimstone keys are only dropped if killed on a Slayer task given by Konar quo Maten ."
+        ]
+      },
+      {
+        "card": "Noon",
+        "rarity": "Very Rare",
+        "fraction": "1/3,000",
+        "notes": [
+          "The player will always receive Noon, but they can use the \"Metamorphosis\" option while being followed to switch between Noon and Midnight."
+        ]
+      },
+      {
+        "card": "Jar of stone",
+        "rarity": "Very Rare",
+        "fraction": "1/5,000"
+      }
+    ]
+  },
+  "Blood Moon": {
+    "source": "Lunar Chest",
+    "page": "Lunar_Chest",
+    "drops": [
+      {
+        "card": "Dual macuahuitl",
+        "rarity": "Rare",
+        "fraction": "1/224"
+      },
+      {
+        "card": "Blood moon helm",
+        "rarity": "Rare",
+        "fraction": "1/224"
+      },
+      {
+        "card": "Blood moon chestplate",
+        "rarity": "Rare",
+        "fraction": "1/224"
+      },
+      {
+        "card": "Blood moon tassets",
+        "rarity": "Rare",
+        "fraction": "1/224"
+      },
+      {
+        "card": "Atlatl dart",
+        "rarity": "Common",
+        "fraction": "6 × 5/30",
+        "rate": "1/1.5"
+      },
+      {
+        "card": "Blessed bone shards",
+        "rarity": "Common",
+        "fraction": "6 × 2/30",
+        "rate": "1/3.0"
+      },
+      {
+        "card": "Wyrmling bones",
+        "rarity": "Common",
+        "fraction": "6 × 1/30",
+        "rate": "1/5.4"
+      },
+      {
+        "card": "Sun-kissed bones",
+        "rarity": "Common",
+        "fraction": "6 × 3/30",
+        "rate": "1/2.1"
+      },
+      {
+        "card": "Swamp tar",
+        "rarity": "Common",
+        "fraction": "6 × 4/30",
+        "rate": "1/1.7"
+      },
+      {
+        "card": "Water orb",
+        "rarity": "Common",
+        "fraction": "6 × 2/30",
+        "rate": "1/3.0"
+      },
+      {
+        "card": "Supercompost",
+        "rarity": "Common",
+        "fraction": "6 × 3/30",
+        "rate": "1/2.1"
+      },
+      {
+        "card": "Soft clay",
+        "rarity": "Common",
+        "fraction": "6 × 3/30",
+        "rate": "1/2.1"
+      },
+      {
+        "card": "Harralander",
+        "rarity": "Common",
+        "fraction": "6 × 3/30",
+        "rate": "1/2.1"
+      },
+      {
+        "card": "Irit leaf",
+        "rarity": "Common",
+        "fraction": "6 × 1/30",
+        "rate": "1/5.4"
+      },
+      {
+        "card": "Maple seed",
+        "rarity": "Common",
+        "fraction": "6 × 2/30",
+        "rate": "1/3.0"
+      },
+      {
+        "card": "Yew seed",
+        "rarity": "Common",
+        "fraction": "6 × 1/30",
+        "rate": "1/5.4"
+      }
+    ],
+    "basis": "Lunar Chest — uniques shown are this Moon's own set."
+  },
+  "Blue Moon": {
+    "source": "Lunar Chest",
+    "page": "Lunar_Chest",
+    "drops": [
+      {
+        "card": "Blue moon spear",
+        "rarity": "Rare",
+        "fraction": "1/224"
+      },
+      {
+        "card": "Blue moon helm",
+        "rarity": "Rare",
+        "fraction": "1/224"
+      },
+      {
+        "card": "Blue moon chestplate",
+        "rarity": "Rare",
+        "fraction": "1/224"
+      },
+      {
+        "card": "Blue moon tassets",
+        "rarity": "Rare",
+        "fraction": "1/224"
+      },
+      {
+        "card": "Atlatl dart",
+        "rarity": "Common",
+        "fraction": "6 × 5/30",
+        "rate": "1/1.5"
+      },
+      {
+        "card": "Blessed bone shards",
+        "rarity": "Common",
+        "fraction": "6 × 2/30",
+        "rate": "1/3.0"
+      },
+      {
+        "card": "Wyrmling bones",
+        "rarity": "Common",
+        "fraction": "6 × 1/30",
+        "rate": "1/5.4"
+      },
+      {
+        "card": "Sun-kissed bones",
+        "rarity": "Common",
+        "fraction": "6 × 3/30",
+        "rate": "1/2.1"
+      },
+      {
+        "card": "Swamp tar",
+        "rarity": "Common",
+        "fraction": "6 × 4/30",
+        "rate": "1/1.7"
+      },
+      {
+        "card": "Water orb",
+        "rarity": "Common",
+        "fraction": "6 × 2/30",
+        "rate": "1/3.0"
+      },
+      {
+        "card": "Supercompost",
+        "rarity": "Common",
+        "fraction": "6 × 3/30",
+        "rate": "1/2.1"
+      },
+      {
+        "card": "Soft clay",
+        "rarity": "Common",
+        "fraction": "6 × 3/30",
+        "rate": "1/2.1"
+      },
+      {
+        "card": "Harralander",
+        "rarity": "Common",
+        "fraction": "6 × 3/30",
+        "rate": "1/2.1"
+      },
+      {
+        "card": "Irit leaf",
+        "rarity": "Common",
+        "fraction": "6 × 1/30",
+        "rate": "1/5.4"
+      },
+      {
+        "card": "Maple seed",
+        "rarity": "Common",
+        "fraction": "6 × 2/30",
+        "rate": "1/3.0"
+      },
+      {
+        "card": "Yew seed",
+        "rarity": "Common",
+        "fraction": "6 × 1/30",
+        "rate": "1/5.4"
+      }
+    ],
+    "basis": "Lunar Chest — uniques shown are this Moon's own set."
+  },
+  "Eclipse Moon": {
+    "source": "Lunar Chest",
+    "page": "Lunar_Chest",
+    "drops": [
+      {
+        "card": "Eclipse atlatl",
+        "rarity": "Rare",
+        "fraction": "1/224"
+      },
+      {
+        "card": "Eclipse moon helm",
+        "rarity": "Rare",
+        "fraction": "1/224"
+      },
+      {
+        "card": "Eclipse moon chestplate",
+        "rarity": "Rare",
+        "fraction": "1/224"
+      },
+      {
+        "card": "Eclipse moon tassets",
+        "rarity": "Rare",
+        "fraction": "1/224"
+      },
+      {
+        "card": "Atlatl dart",
+        "rarity": "Common",
+        "fraction": "6 × 5/30",
+        "rate": "1/1.5"
+      },
+      {
+        "card": "Blessed bone shards",
+        "rarity": "Common",
+        "fraction": "6 × 2/30",
+        "rate": "1/3.0"
+      },
+      {
+        "card": "Wyrmling bones",
+        "rarity": "Common",
+        "fraction": "6 × 1/30",
+        "rate": "1/5.4"
+      },
+      {
+        "card": "Sun-kissed bones",
+        "rarity": "Common",
+        "fraction": "6 × 3/30",
+        "rate": "1/2.1"
+      },
+      {
+        "card": "Swamp tar",
+        "rarity": "Common",
+        "fraction": "6 × 4/30",
+        "rate": "1/1.7"
+      },
+      {
+        "card": "Water orb",
+        "rarity": "Common",
+        "fraction": "6 × 2/30",
+        "rate": "1/3.0"
+      },
+      {
+        "card": "Supercompost",
+        "rarity": "Common",
+        "fraction": "6 × 3/30",
+        "rate": "1/2.1"
+      },
+      {
+        "card": "Soft clay",
+        "rarity": "Common",
+        "fraction": "6 × 3/30",
+        "rate": "1/2.1"
+      },
+      {
+        "card": "Harralander",
+        "rarity": "Common",
+        "fraction": "6 × 3/30",
+        "rate": "1/2.1"
+      },
+      {
+        "card": "Irit leaf",
+        "rarity": "Common",
+        "fraction": "6 × 1/30",
+        "rate": "1/5.4"
+      },
+      {
+        "card": "Maple seed",
+        "rarity": "Common",
+        "fraction": "6 × 2/30",
+        "rate": "1/3.0"
+      },
+      {
+        "card": "Yew seed",
+        "rarity": "Common",
+        "fraction": "6 × 1/30",
+        "rate": "1/5.4"
+      }
+    ],
+    "basis": "Lunar Chest — uniques shown are this Moon's own set."
+  },
+  "Abyssal Sire": {
+    "source": "Abyssal Sire drops + Unsired",
+    "page": "Unsired",
+    "drops": [
+      {
+        "card": "Abyssal bludgeon",
+        "rarity": "Rare",
+        "fraction": "62/128 ; 62/123 per Unsired",
+        "rate": "1/206.5"
+      },
+      {
+        "card": "Abyssal dagger",
+        "rarity": "Rare",
+        "fraction": "26/128 ; 26/123 per Unsired",
+        "rate": "1/492.3"
+      },
+      {
+        "card": "Abyssal whip",
+        "rarity": "Very Rare",
+        "fraction": "12/128 ; 12/123 per Unsired",
+        "rate": "1/1,066.7"
+      },
+      {
+        "card": "Jar of miasma",
+        "rarity": "Rare",
+        "fraction": "13/128 ; 13/123 per Unsired",
+        "rate": "1/984.6"
+      },
+      {
+        "card": "Abyssal head",
+        "rarity": "Very Rare",
+        "fraction": "10/128 ; 10/123 per Unsired",
+        "rate": "1/1,280.0"
+      },
+      {
+        "card": "Abyssal orphan",
+        "rarity": "Very Rare",
+        "fraction": "5/128 ; Never per Unsired",
+        "rate": "1/2,560.0",
+        "notes": [
+          "The pet is removed as a potential drop if one is already owned, unless it is currently reclaimable from Probita . [ 3 ]"
+        ]
+      },
+      {
+        "card": "Unsired",
+        "rarity": "Rare",
+        "fraction": "1/100"
+      },
+      {
+        "card": "Abyssal ashes",
+        "rarity": "Always",
+        "fraction": "1/1"
+      },
+      {
+        "card": "Battlestaff",
+        "rarity": "Common",
+        "fraction": "6/139"
+      },
+      {
+        "card": "Rune full helm",
+        "rarity": "Uncommon",
+        "fraction": "4/139"
+      },
+      {
+        "card": "Mystic lava staff",
+        "rarity": "Uncommon",
+        "fraction": "4/139"
+      },
+      {
+        "card": "Rune sword",
+        "rarity": "Uncommon",
+        "fraction": "4/139"
+      },
+      {
+        "card": "Rune platebody",
+        "rarity": "Uncommon",
+        "fraction": "4/139"
+      },
+      {
+        "card": "Rune kiteshield",
+        "rarity": "Uncommon",
+        "fraction": "3/139"
+      },
+      {
+        "card": "Mystic air staff",
+        "rarity": "Uncommon",
+        "fraction": "2/139"
+      },
+      {
+        "card": "Air battlestaff",
+        "rarity": "Uncommon",
+        "fraction": "2/139"
+      },
+      {
+        "card": "Blood rune",
+        "rarity": "Uncommon",
+        "fraction": "5/139"
+      },
+      {
+        "card": "Death rune",
+        "rarity": "Uncommon",
+        "fraction": "5/139"
+      },
+      {
+        "card": "Law rune",
+        "rarity": "Uncommon",
+        "fraction": "5/139"
+      },
+      {
+        "card": "Soul rune",
+        "rarity": "Uncommon",
+        "fraction": "5/139"
+      },
+      {
+        "card": "Cosmic rune",
+        "rarity": "Uncommon",
+        "fraction": "4/139"
+      },
+      {
+        "card": "Steel cannonball",
+        "rarity": "Uncommon",
+        "fraction": "4/139"
+      },
+      {
+        "card": "Kwuarm",
+        "rarity": "Uncommon",
+        "fraction": "25/2,224"
+      },
+      {
+        "card": "Dwarf weed",
+        "rarity": "Rare",
+        "fraction": "20/2,224"
+      },
+      {
+        "card": "Cadantine",
+        "rarity": "Rare",
+        "fraction": "20/2,224"
+      },
+      {
+        "card": "Lantadyme",
+        "rarity": "Rare",
+        "fraction": "15/2,224"
+      },
+      {
+        "card": "Ranarr seed",
+        "rarity": "Rare",
+        "fraction": "1/231.7"
+      },
+      {
+        "card": "Snapdragon seed",
+        "rarity": "Rare",
+        "fraction": "1/248.2"
+      },
+      {
+        "card": "Torstol seed",
+        "rarity": "Rare",
+        "fraction": "1/315.9"
+      },
+      {
+        "card": "Watermelon seed",
+        "rarity": "Rare",
+        "fraction": "1/331"
+      },
+      {
+        "card": "Willow seed",
+        "rarity": "Rare",
+        "fraction": "1/347.5"
+      },
+      {
+        "card": "Mahogany seed",
+        "rarity": "Rare",
+        "fraction": "1/386.1"
+      },
+      {
+        "card": "Maple seed",
+        "rarity": "Rare",
+        "fraction": "1/386.1"
+      },
+      {
+        "card": "Teak seed",
+        "rarity": "Rare",
+        "fraction": "1/386.1"
+      },
+      {
+        "card": "Yew seed",
+        "rarity": "Rare",
+        "fraction": "1/386.1"
+      },
+      {
+        "card": "Papaya tree seed",
+        "rarity": "Rare",
+        "fraction": "1/496.4"
+      },
+      {
+        "card": "Magic seed",
+        "rarity": "Rare",
+        "fraction": "1/631.8"
+      },
+      {
+        "card": "Palm tree seed",
+        "rarity": "Rare",
+        "fraction": "1/695"
+      },
+      {
+        "card": "Spirit seed",
+        "rarity": "Rare",
+        "fraction": "1/868.8"
+      },
+      {
+        "card": "Dragonfruit tree seed",
+        "rarity": "Very Rare",
+        "fraction": "1/1,158.3"
+      },
+      {
+        "card": "Celastrus seed",
+        "rarity": "Very Rare",
+        "fraction": "1/1,737.5"
+      },
+      {
+        "card": "Redwood tree seed",
+        "rarity": "Very Rare",
+        "fraction": "1/1,737.5"
+      },
+      {
+        "card": "Earth orb",
+        "rarity": "Uncommon",
+        "fraction": "5/139"
+      },
+      {
+        "card": "Pure essence",
+        "rarity": "Uncommon",
+        "fraction": "5/139"
+      },
+      {
+        "card": "Magic logs",
+        "rarity": "Uncommon",
+        "fraction": "5/139"
+      },
+      {
+        "card": "Diamond",
+        "rarity": "Uncommon",
+        "fraction": "5/139"
+      },
+      {
+        "card": "Coal",
+        "rarity": "Uncommon",
+        "fraction": "4/139"
+      },
+      {
+        "card": "Runite ore",
+        "rarity": "Uncommon",
+        "fraction": "4/139"
+      },
+      {
+        "card": "Onyx bolt tips",
+        "rarity": "Uncommon",
+        "fraction": "3/139"
+      },
+      {
+        "card": "Runite bar",
+        "rarity": "Uncommon",
+        "fraction": "2/139"
+      },
+      {
+        "card": "Aether catalyst",
+        "rarity": "Uncommon",
+        "fraction": "2/139"
+      },
+      {
+        "card": "Air talisman",
+        "rarity": "Rare",
+        "fraction": "1/324.3"
+      },
+      {
+        "card": "Body talisman",
+        "rarity": "Rare",
+        "fraction": "1/324.3"
+      },
+      {
+        "card": "Earth talisman",
+        "rarity": "Rare",
+        "fraction": "1/324.3"
+      },
+      {
+        "card": "Fire talisman",
+        "rarity": "Rare",
+        "fraction": "1/324.3"
+      },
+      {
+        "card": "Mind talisman",
+        "rarity": "Rare",
+        "fraction": "1/324.3"
+      },
+      {
+        "card": "Water talisman",
+        "rarity": "Rare",
+        "fraction": "1/324.3"
+      },
+      {
+        "card": "Cosmic talisman",
+        "rarity": "Rare",
+        "fraction": "1/810.8"
+      },
+      {
+        "card": "Chaos talisman",
+        "rarity": "Very Rare",
+        "fraction": "1/1,081.1"
+      },
+      {
+        "card": "Nature talisman",
+        "rarity": "Very Rare",
+        "fraction": "1/1,081.1"
+      },
+      {
+        "card": "Coins",
+        "rarity": "Common",
+        "fraction": "11/139"
+      },
+      {
+        "card": "Chilli potato",
+        "rarity": "Common",
+        "fraction": "7/139"
+      },
+      {
+        "card": "Super restore",
+        "rarity": "Uncommon",
+        "fraction": "5/139"
+      },
+      {
+        "card": "Emerald necklace",
+        "rarity": "Uncommon",
+        "fraction": "4/139"
+      },
+      {
+        "card": "Saradomin brew",
+        "rarity": "Uncommon",
+        "fraction": "2/139"
+      },
+      {
+        "card": "Jug of water",
+        "rarity": "Uncommon",
+        "fraction": "2/139"
+      },
+      {
+        "card": "Brimstone key",
+        "rarity": "Uncommon",
+        "fraction": "1/40"
+      }
+    ],
+    "basis": "Uniques come from offering an Unsired at the Font of Consumption."
+  },
+  "Obor": {
+    "source": "Obor drops + Chest (Obor's lair)",
+    "page": "Chest_(Obor's_lair)",
+    "drops": [
+      {
+        "card": "Ensouled giant head",
+        "rarity": "Always",
+        "fraction": "Always"
+      },
+      {
+        "card": "Hill giant club",
+        "rarity": "Rare",
+        "fraction": "1/118"
+      },
+      {
+        "card": "Rune kiteshield",
+        "rarity": "Uncommon",
+        "fraction": "3/118"
+      },
+      {
+        "card": "Rune full helm",
+        "rarity": "Common",
+        "fraction": "5/118"
+      },
+      {
+        "card": "Rune med helm",
+        "rarity": "Common",
+        "fraction": "6/118"
+      },
+      {
+        "card": "Rune chainbody",
+        "rarity": "Uncommon",
+        "fraction": "3/118"
+      },
+      {
+        "card": "Rune platelegs",
+        "rarity": "Uncommon",
+        "fraction": "3/118"
+      },
+      {
+        "card": "Rune plateskirt",
+        "rarity": "Uncommon",
+        "fraction": "3/118"
+      },
+      {
+        "card": "Rune battleaxe",
+        "rarity": "Uncommon",
+        "fraction": "4/118"
+      },
+      {
+        "card": "Rune longsword",
+        "rarity": "Common",
+        "fraction": "5/118"
+      },
+      {
+        "card": "Rune 2h sword",
+        "rarity": "Uncommon",
+        "fraction": "3/118"
+      },
+      {
+        "card": "Law rune",
+        "rarity": "Common",
+        "fraction": "12/118"
+      },
+      {
+        "card": "Cosmic rune",
+        "rarity": "Common",
+        "fraction": "12/118"
+      },
+      {
+        "card": "Chaos rune",
+        "rarity": "Common",
+        "fraction": "10/118"
+      },
+      {
+        "card": "Death rune",
+        "rarity": "Common",
+        "fraction": "10/118"
+      },
+      {
+        "card": "Nature rune",
+        "rarity": "Common",
+        "fraction": "7/118"
+      },
+      {
+        "card": "Coins",
+        "rarity": "Common",
+        "fraction": "6/118"
+      },
+      {
+        "card": "Limpwurt root",
+        "rarity": "Common",
+        "fraction": "8/118"
+      },
+      {
+        "card": "Big bones",
+        "rarity": "Common",
+        "fraction": "8/118"
+      },
+      {
+        "card": "Ruby",
+        "rarity": "Common",
+        "fraction": "5/118",
+        "notes": [
+          "Uncut rubies and diamonds always drop together."
+        ]
+      },
+      {
+        "card": "Diamond",
+        "rarity": "Common",
+        "fraction": "5/118",
+        "notes": [
+          "Uncut rubies and diamonds always drop together."
+        ]
+      },
+      {
+        "card": "Giant key",
+        "rarity": "Common",
+        "fraction": "1/16"
+      },
+      {
+        "card": "Giant bones",
+        "rarity": "Always",
+        "fraction": "1/1"
+      },
+      {
+        "card": "Iron full helm",
+        "rarity": "Uncommon",
+        "fraction": "5/135"
+      },
+      {
+        "card": "Iron dagger",
+        "rarity": "Uncommon",
+        "fraction": "4/135"
+      },
+      {
+        "card": "Iron kiteshield",
+        "rarity": "Uncommon",
+        "fraction": "3/135"
+      },
+      {
+        "card": "Steel longsword",
+        "rarity": "Uncommon",
+        "fraction": "2/135"
+      },
+      {
+        "card": "Iron arrow",
+        "rarity": "Common",
+        "fraction": "6/135"
+      },
+      {
+        "card": "Fire rune",
+        "rarity": "Uncommon",
+        "fraction": "3/135"
+      },
+      {
+        "card": "Water rune",
+        "rarity": "Uncommon",
+        "fraction": "3/135"
+      },
+      {
+        "card": "Steel arrow",
+        "rarity": "Uncommon",
+        "fraction": "2/135"
+      },
+      {
+        "card": "Mind rune",
+        "rarity": "Uncommon",
+        "fraction": "2/135"
+      },
+      {
+        "card": "Guam leaf",
+        "rarity": "Uncommon",
+        "fraction": "1/77.1"
+      },
+      {
+        "card": "Marrentill",
+        "rarity": "Rare",
+        "fraction": "1/102.9"
+      },
+      {
+        "card": "Tarromin",
+        "rarity": "Rare",
+        "fraction": "1/137.1"
+      },
+      {
+        "card": "Harralander",
+        "rarity": "Rare",
+        "fraction": "1/176.3"
+      },
+      {
+        "card": "Ranarr weed",
+        "rarity": "Rare",
+        "fraction": "1/224.4"
+      },
+      {
+        "card": "Irit leaf",
+        "rarity": "Rare",
+        "fraction": "1/308.6"
+      },
+      {
+        "card": "Avantoe",
+        "rarity": "Rare",
+        "fraction": "1/411.4"
+      },
+      {
+        "card": "Kwuarm",
+        "rarity": "Rare",
+        "fraction": "1/493.7"
+      },
+      {
+        "card": "Cadantine",
+        "rarity": "Rare",
+        "fraction": "1/617.1"
+      },
+      {
+        "card": "Lantadyme",
+        "rarity": "Rare",
+        "fraction": "1/822.9"
+      },
+      {
+        "card": "Dwarf weed",
+        "rarity": "Rare",
+        "fraction": "1/822.9"
+      },
+      {
+        "card": "Potato seed",
+        "rarity": "Uncommon",
+        "fraction": "1/44"
+      },
+      {
+        "card": "Onion seed",
+        "rarity": "Uncommon",
+        "fraction": "1/59"
+      },
+      {
+        "card": "Cabbage seed",
+        "rarity": "Uncommon",
+        "fraction": "1/89"
+      },
+      {
+        "card": "Tomato seed",
+        "rarity": "Rare",
+        "fraction": "1/179"
+      },
+      {
+        "card": "Sweetcorn seed",
+        "rarity": "Rare",
+        "fraction": "1/359"
+      },
+      {
+        "card": "Strawberry seed",
+        "rarity": "Rare",
+        "fraction": "1/718"
+      },
+      {
+        "card": "Watermelon seed",
+        "rarity": "Very Rare",
+        "fraction": "1/1,502"
+      },
+      {
+        "card": "Snape grass seed",
+        "rarity": "Very Rare",
+        "fraction": "1/2,065"
+      },
+      {
+        "card": "Barley seed",
+        "rarity": "Rare",
+        "fraction": "1/142"
+      },
+      {
+        "card": "Hammerstone seed",
+        "rarity": "Rare",
+        "fraction": "1/143"
+      },
+      {
+        "card": "Asgarnian seed",
+        "rarity": "Rare",
+        "fraction": "1/190"
+      },
+      {
+        "card": "Jute seed",
+        "rarity": "Rare",
+        "fraction": "1/191"
+      },
+      {
+        "card": "Yanillian seed",
+        "rarity": "Rare",
+        "fraction": "1/286"
+      },
+      {
+        "card": "Krandorian seed",
+        "rarity": "Rare",
+        "fraction": "1/573"
+      },
+      {
+        "card": "Wildblood seed",
+        "rarity": "Very Rare",
+        "fraction": "1/1,128"
+      },
+      {
+        "card": "Marigold seed",
+        "rarity": "Rare",
+        "fraction": "1/173"
+      },
+      {
+        "card": "Nasturtium seed",
+        "rarity": "Rare",
+        "fraction": "1/261"
+      },
+      {
+        "card": "Rosemary seed",
+        "rarity": "Rare",
+        "fraction": "1/404"
+      },
+      {
+        "card": "Woad seed",
+        "rarity": "Rare",
+        "fraction": "1/547"
+      },
+      {
+        "card": "Limpwurt seed",
+        "rarity": "Rare",
+        "fraction": "1/685"
+      },
+      {
+        "card": "Redberry seed",
+        "rarity": "Rare",
+        "fraction": "1/204"
+      },
+      {
+        "card": "Cadavaberry seed",
+        "rarity": "Rare",
+        "fraction": "1/292"
+      },
+      {
+        "card": "Dwellberry seed",
+        "rarity": "Rare",
+        "fraction": "1/409"
+      },
+      {
+        "card": "Jangerberry seed",
+        "rarity": "Very Rare",
+        "fraction": "1/1,024"
+      },
+      {
+        "card": "Whiteberry seed",
+        "rarity": "Very Rare",
+        "fraction": "1/2,826"
+      },
+      {
+        "card": "Poison ivy seed",
+        "rarity": "Very Rare",
+        "fraction": "1/7,450"
+      },
+      {
+        "card": "Guam seed",
+        "rarity": "Rare",
+        "fraction": "1/517"
+      },
+      {
+        "card": "Marrentill seed",
+        "rarity": "Rare",
+        "fraction": "1/759"
+      },
+      {
+        "card": "Tarromin seed",
+        "rarity": "Very Rare",
+        "fraction": "1/1,111"
+      },
+      {
+        "card": "Harralander seed",
+        "rarity": "Very Rare",
+        "fraction": "1/1,639"
+      },
+      {
+        "card": "Ranarr seed",
+        "rarity": "Very Rare",
+        "fraction": "1/2,400"
+      },
+      {
+        "card": "Toadflax seed",
+        "rarity": "Very Rare",
+        "fraction": "1/3,523"
+      },
+      {
+        "card": "Irit seed",
+        "rarity": "Very Rare",
+        "fraction": "1/5,175"
+      },
+      {
+        "card": "Avantoe seed",
+        "rarity": "Very Rare",
+        "fraction": "1/7,528"
+      },
+      {
+        "card": "Kwuarm seed",
+        "rarity": "Very Rare",
+        "fraction": "1/11,041"
+      },
+      {
+        "card": "Snapdragon seed",
+        "rarity": "Very Rare",
+        "fraction": "1/16,562"
+      },
+      {
+        "card": "Cadantine seed",
+        "rarity": "Very Rare",
+        "fraction": "1/23,660"
+      },
+      {
+        "card": "Lantadyme seed",
+        "rarity": "Very Rare",
+        "fraction": "1/33,125"
+      },
+      {
+        "card": "Dwarf weed seed",
+        "rarity": "Very Rare",
+        "fraction": "1/55,208"
+      },
+      {
+        "card": "Torstol seed",
+        "rarity": "Very Rare",
+        "fraction": "1/82,812"
+      },
+      {
+        "card": "Mushroom spore",
+        "rarity": "Rare",
+        "fraction": "1/269"
+      },
+      {
+        "card": "Belladonna seed",
+        "rarity": "Rare",
+        "fraction": "1/448"
+      },
+      {
+        "card": "Cactus seed",
+        "rarity": "Rare",
+        "fraction": "1/672"
+      },
+      {
+        "card": "Potato cactus seed",
+        "rarity": "Very Rare",
+        "fraction": "1/1,345"
+      },
+      {
+        "card": "Beer",
+        "rarity": "Common",
+        "fraction": "6/135"
+      },
+      {
+        "card": "Body talisman",
+        "rarity": "Uncommon",
+        "fraction": "2/135"
+      },
+      {
+        "card": "Long bone",
+        "rarity": "Rare",
+        "fraction": "1/400"
+      },
+      {
+        "card": "Giant champion scroll",
+        "rarity": "Very Rare",
+        "fraction": "1/5,000"
+      },
+      {
+        "card": "Curved bone",
+        "rarity": "Very Rare",
+        "fraction": "1/5,012.5"
+      }
+    ],
+    "basis": "Chest opened with a Giant key after the kill, plus Obor's own drops."
+  },
+  "Bryophyta": {
+    "source": "Bryophyta drops + Chest (Bryophyta's lair)",
+    "page": "Chest_(Bryophyta's_lair)",
+    "drops": [
+      {
+        "card": "Rune longsword",
+        "rarity": "Common",
+        "fraction": "6/118"
+      },
+      {
+        "card": "Rune med helm",
+        "rarity": "Common",
+        "fraction": "6/118"
+      },
+      {
+        "card": "Rune chainbody",
+        "rarity": "Common",
+        "fraction": "6/118"
+      },
+      {
+        "card": "Rune plateskirt",
+        "rarity": "Common",
+        "fraction": "6/118"
+      },
+      {
+        "card": "Rune platelegs",
+        "rarity": "Common",
+        "fraction": "12/118"
+      },
+      {
+        "card": "Rune sq shield",
+        "rarity": "Common",
+        "fraction": "6/118"
+      },
+      {
+        "card": "Rune sword",
+        "rarity": "Common",
+        "fraction": "5/118"
+      },
+      {
+        "card": "Adamant platebody",
+        "rarity": "Uncommon",
+        "fraction": "3/118"
+      },
+      {
+        "card": "Battlestaff",
+        "rarity": "Uncommon",
+        "fraction": "3/118"
+      },
+      {
+        "card": "Adamant kiteshield",
+        "rarity": "Rare",
+        "fraction": "1/118"
+      },
+      {
+        "card": "Nature rune",
+        "rarity": "Common",
+        "fraction": "8/118"
+      },
+      {
+        "card": "Cosmic rune",
+        "rarity": "Common",
+        "fraction": "6/118"
+      },
+      {
+        "card": "Law rune",
+        "rarity": "Common",
+        "fraction": "6/118"
+      },
+      {
+        "card": "Death rune",
+        "rarity": "Common",
+        "fraction": "6/118"
+      },
+      {
+        "card": "Chaos rune",
+        "rarity": "Common",
+        "fraction": "6/118"
+      },
+      {
+        "card": "Blood rune",
+        "rarity": "Rare",
+        "fraction": "1/118"
+      },
+      {
+        "card": "Adamant arrow",
+        "rarity": "Rare",
+        "fraction": "1/118"
+      },
+      {
+        "card": "Guam leaf",
+        "rarity": "Uncommon",
+        "fraction": "1/94.4"
+      },
+      {
+        "card": "Marrentill",
+        "rarity": "Rare",
+        "fraction": "1/125.9"
+      },
+      {
+        "card": "Tarromin",
+        "rarity": "Rare",
+        "fraction": "1/167.8"
+      },
+      {
+        "card": "Harralander",
+        "rarity": "Rare",
+        "fraction": "1/215.8"
+      },
+      {
+        "card": "Ranarr weed",
+        "rarity": "Rare",
+        "fraction": "1/274.6"
+      },
+      {
+        "card": "Irit leaf",
+        "rarity": "Rare",
+        "fraction": "1/377.6"
+      },
+      {
+        "card": "Avantoe",
+        "rarity": "Rare",
+        "fraction": "1/503.5"
+      },
+      {
+        "card": "Kwuarm",
+        "rarity": "Rare",
+        "fraction": "1/604.2"
+      },
+      {
+        "card": "Cadantine",
+        "rarity": "Rare",
+        "fraction": "1/755.2"
+      },
+      {
+        "card": "Lantadyme",
+        "rarity": "Very Rare",
+        "fraction": "1/1,006.9"
+      },
+      {
+        "card": "Dwarf weed",
+        "rarity": "Very Rare",
+        "fraction": "1/1,006.9"
+      },
+      {
+        "card": "Limpwurt seed",
+        "rarity": "Rare",
+        "fraction": "1/150.4"
+      },
+      {
+        "card": "Strawberry seed",
+        "rarity": "Rare",
+        "fraction": "1/157.3"
+      },
+      {
+        "card": "Marrentill seed",
+        "rarity": "Rare",
+        "fraction": "1/164.9"
+      },
+      {
+        "card": "Jangerberry seed",
+        "rarity": "Rare",
+        "fraction": "1/224"
+      },
+      {
+        "card": "Tarromin seed",
+        "rarity": "Rare",
+        "fraction": "1/242.5"
+      },
+      {
+        "card": "Wildblood seed",
+        "rarity": "Rare",
+        "fraction": "1/248.3"
+      },
+      {
+        "card": "Watermelon seed",
+        "rarity": "Rare",
+        "fraction": "1/327.2"
+      },
+      {
+        "card": "Harralander seed",
+        "rarity": "Rare",
+        "fraction": "1/368"
+      },
+      {
+        "card": "Snape grass seed",
+        "rarity": "Rare",
+        "fraction": "1/515.3"
+      },
+      {
+        "card": "Ranarr seed",
+        "rarity": "Rare",
+        "fraction": "1/528.5"
+      },
+      {
+        "card": "Whiteberry seed",
+        "rarity": "Rare",
+        "fraction": "1/606.2"
+      },
+      {
+        "card": "Mushroom spore",
+        "rarity": "Rare",
+        "fraction": "1/710.7"
+      },
+      {
+        "card": "Toadflax seed",
+        "rarity": "Rare",
+        "fraction": "1/763.4"
+      },
+      {
+        "card": "Belladonna seed",
+        "rarity": "Very Rare",
+        "fraction": "1/1,145"
+      },
+      {
+        "card": "Irit seed",
+        "rarity": "Very Rare",
+        "fraction": "1/1,145"
+      },
+      {
+        "card": "Poison ivy seed",
+        "rarity": "Very Rare",
+        "fraction": "1/1,585.4"
+      },
+      {
+        "card": "Avantoe seed",
+        "rarity": "Very Rare",
+        "fraction": "1/1,717.6"
+      },
+      {
+        "card": "Cactus seed",
+        "rarity": "Very Rare",
+        "fraction": "1/1,717.6"
+      },
+      {
+        "card": "Kwuarm seed",
+        "rarity": "Very Rare",
+        "fraction": "1/2,290.1"
+      },
+      {
+        "card": "Potato cactus seed",
+        "rarity": "Very Rare",
+        "fraction": "1/2,576.3"
+      },
+      {
+        "card": "Snapdragon seed",
+        "rarity": "Very Rare",
+        "fraction": "1/4,122.1"
+      },
+      {
+        "card": "Cadantine seed",
+        "rarity": "Very Rare",
+        "fraction": "1/5,152.7"
+      },
+      {
+        "card": "Lantadyme seed",
+        "rarity": "Very Rare",
+        "fraction": "1/6,870.2"
+      },
+      {
+        "card": "Dwarf weed seed",
+        "rarity": "Very Rare",
+        "fraction": "1/10,305.3"
+      },
+      {
+        "card": "Torstol seed",
+        "rarity": "Very Rare",
+        "fraction": "1/20,610.7"
+      },
+      {
+        "card": "Runite bar",
+        "rarity": "Common",
+        "fraction": "6/118"
+      },
+      {
+        "card": "Ruby",
+        "rarity": "Uncommon",
+        "fraction": "4/118",
+        "notes": [
+          "Uncut rubies and uncut diamonds are always dropped together."
+        ]
+      },
+      {
+        "card": "Diamond",
+        "rarity": "Uncommon",
+        "fraction": "4/118",
+        "notes": [
+          "Uncut rubies and uncut diamonds are always dropped together."
+        ]
+      },
+      {
+        "card": "Steel bar",
+        "rarity": "Uncommon",
+        "fraction": "3/118"
+      },
+      {
+        "card": "Coins",
+        "rarity": "Common",
+        "fraction": "5/118"
+      },
+      {
+        "card": "Bryophyta's essence",
+        "rarity": "Rare",
+        "fraction": "1/118"
+      },
+      {
+        "card": "Mossy key",
+        "rarity": "Common",
+        "fraction": "1/16"
+      },
+      {
+        "card": "Giant bones",
+        "rarity": "Always",
+        "fraction": "1/1"
+      },
+      {
+        "card": "Black sq shield",
+        "rarity": "Uncommon",
+        "fraction": "5/128"
+      },
+      {
+        "card": "Magic staff",
+        "rarity": "Uncommon",
+        "fraction": "2/128"
+      },
+      {
+        "card": "Steel med helm",
+        "rarity": "Uncommon",
+        "fraction": "2/128"
+      },
+      {
+        "card": "Mithril sword",
+        "rarity": "Uncommon",
+        "fraction": "2/128"
+      },
+      {
+        "card": "Mithril spear",
+        "rarity": "Uncommon",
+        "fraction": "2/128"
+      },
+      {
+        "card": "Steel kiteshield",
+        "rarity": "Rare",
+        "fraction": "1/128"
+      },
+      {
+        "card": "Air rune",
+        "rarity": "Uncommon",
+        "fraction": "3/128"
+      },
+      {
+        "card": "Earth rune",
+        "rarity": "Uncommon",
+        "fraction": "3/128"
+      },
+      {
+        "card": "Iron arrow",
+        "rarity": "Uncommon",
+        "fraction": "2/128"
+      },
+      {
+        "card": "Steel arrow",
+        "rarity": "Rare",
+        "fraction": "1/128"
+      },
+      {
+        "card": "Coal",
+        "rarity": "Rare",
+        "fraction": "1/128"
+      },
+      {
+        "card": "Spinach roll",
+        "rarity": "Rare",
+        "fraction": "1/128"
+      },
+      {
+        "card": "Ensouled giant head",
+        "rarity": "Common",
+        "fraction": "1/24"
+      },
+      {
+        "card": "Long bone",
+        "rarity": "Rare",
+        "fraction": "1/400"
+      },
+      {
+        "card": "Giant champion scroll",
+        "rarity": "Very Rare",
+        "fraction": "1/5,000"
+      },
+      {
+        "card": "Curved bone",
+        "rarity": "Very Rare",
+        "fraction": "1/5,012.5"
+      },
+      {
+        "card": "Big bones",
+        "rarity": "Always",
+        "fraction": "1/1"
+      }
+    ],
+    "basis": "Chest opened with a Mossy key after the kill, plus Bryophyta's own drops."
+  },
+  "Wintertodt": {
+    "source": "Reward cart",
+    "page": "Reward_cart",
+    "drops": [
+      {
+        "card": "Burnt page",
+        "rarity": "Uncommon",
+        "fraction": "4/180"
+      },
+      {
+        "card": "Warm gloves",
+        "rarity": "Rare",
+        "fraction": "1/150",
+        "notes": [
+          "If the player already has three pairs of warm gloves and it is successfully rolled, a magic seed is given. [ 4 ]"
+        ]
+      },
+      {
+        "card": "Bruma torch",
+        "rarity": "Rare",
+        "fraction": "1/150",
+        "notes": [
+          "If the player already has three bruma torches and it is successfully rolled, some torstol seeds are given. [ 4 ]"
+        ]
+      },
+      {
+        "card": "Pyromancer hood",
+        "rarity": "Rare",
+        "fraction": "1/150",
+        "notes": [
+          "There is a 1/150 chance to receive a piece of the pyromancer's outfit players have the least of. At zero and any other tie, they are given in this order: Garb , hood , robe , and boots ."
+        ]
+      },
+      {
+        "card": "Pyromancer garb",
+        "rarity": "Rare",
+        "fraction": "1/150",
+        "notes": [
+          "There is a 1/150 chance to receive a piece of the pyromancer's outfit players have the least of. At zero and any other tie, they are given in this order: Garb , hood , robe , and boots ."
+        ]
+      },
+      {
+        "card": "Pyromancer robe",
+        "rarity": "Rare",
+        "fraction": "1/150",
+        "notes": [
+          "There is a 1/150 chance to receive a piece of the pyromancer's outfit players have the least of. At zero and any other tie, they are given in this order: Garb , hood , robe , and boots ."
+        ]
+      },
+      {
+        "card": "Pyromancer boots",
+        "rarity": "Rare",
+        "fraction": "1/150",
+        "notes": [
+          "There is a 1/150 chance to receive a piece of the pyromancer's outfit players have the least of. At zero and any other tie, they are given in this order: Garb , hood , robe , and boots ."
+        ]
+      },
+      {
+        "card": "Tome of fire",
+        "rarity": "Very Rare",
+        "fraction": "1/1,000"
+      },
+      {
+        "card": "Phoenix",
+        "rarity": "Very Rare",
+        "fraction": "1/5,000"
+      },
+      {
+        "card": "Dragon axe",
+        "rarity": "Very Rare",
+        "fraction": "1/10,000"
+      },
+      {
+        "card": "Oak logs",
+        "rarity": "Varies",
+        "fraction": "Varies"
+      },
+      {
+        "card": "Willow logs",
+        "rarity": "Varies",
+        "fraction": "Varies"
+      },
+      {
+        "card": "Teak logs",
+        "rarity": "Varies",
+        "fraction": "Varies"
+      },
+      {
+        "card": "Maple logs",
+        "rarity": "Varies",
+        "fraction": "Varies"
+      },
+      {
+        "card": "Mahogany logs",
+        "rarity": "Varies",
+        "fraction": "Varies",
+        "notes": [
+          "Mahogany logs, yew logs, and magic logs require at least level 25, 36, and 50 Woodcutting respectively for a chance to obtain."
+        ]
+      },
+      {
+        "card": "Yew logs",
+        "rarity": "Varies",
+        "fraction": "Varies",
+        "notes": [
+          "Mahogany logs, yew logs, and magic logs require at least level 25, 36, and 50 Woodcutting respectively for a chance to obtain."
+        ]
+      },
+      {
+        "card": "Magic logs",
+        "rarity": "Varies",
+        "fraction": "Varies",
+        "notes": [
+          "Mahogany logs, yew logs, and magic logs require at least level 25, 36, and 50 Woodcutting respectively for a chance to obtain."
+        ]
+      },
+      {
+        "card": "Sapphire",
+        "rarity": "Varies",
+        "fraction": "Varies"
+      },
+      {
+        "card": "Emerald",
+        "rarity": "Varies",
+        "fraction": "Varies"
+      },
+      {
+        "card": "Ruby",
+        "rarity": "Varies",
+        "fraction": "Varies"
+      },
+      {
+        "card": "Diamond",
+        "rarity": "Varies",
+        "fraction": "Varies"
+      },
+      {
+        "card": "Pure essence",
+        "rarity": "Varies",
+        "fraction": "Varies"
+      },
+      {
+        "card": "Limestone",
+        "rarity": "Varies",
+        "fraction": "Varies"
+      },
+      {
+        "card": "Silver ore",
+        "rarity": "Varies",
+        "fraction": "Varies"
+      },
+      {
+        "card": "Iron ore",
+        "rarity": "Varies",
+        "fraction": "Varies"
+      },
+      {
+        "card": "Coal",
+        "rarity": "Varies",
+        "fraction": "Varies"
+      },
+      {
+        "card": "Gold ore",
+        "rarity": "Varies",
+        "fraction": "Varies"
+      },
+      {
+        "card": "Mithril ore",
+        "rarity": "Varies",
+        "fraction": "Varies",
+        "notes": [
+          "Mithril ore, Adamantite ore, and Runite ore require at least level 14, 39, and 60 Mining respectively for a chance to obtain."
+        ]
+      },
+      {
+        "card": "Adamantite ore",
+        "rarity": "Varies",
+        "fraction": "Varies",
+        "notes": [
+          "Mithril ore, Adamantite ore, and Runite ore require at least level 14, 39, and 60 Mining respectively for a chance to obtain."
+        ]
+      },
+      {
+        "card": "Runite ore",
+        "rarity": "Varies",
+        "fraction": "Varies",
+        "notes": [
+          "Mithril ore, Adamantite ore, and Runite ore require at least level 14, 39, and 60 Mining respectively for a chance to obtain."
+        ]
+      },
+      {
+        "card": "Guam leaf",
+        "rarity": "Varies",
+        "fraction": "Varies"
+      },
+      {
+        "card": "Marrentill",
+        "rarity": "Varies",
+        "fraction": "Varies"
+      },
+      {
+        "card": "Tarromin",
+        "rarity": "Varies",
+        "fraction": "Varies"
+      },
+      {
+        "card": "Harralander",
+        "rarity": "Varies",
+        "fraction": "Varies"
+      },
+      {
+        "card": "Ranarr weed",
+        "rarity": "Varies",
+        "fraction": "Varies"
+      },
+      {
+        "card": "Irit leaf",
+        "rarity": "Varies",
+        "fraction": "Varies"
+      },
+      {
+        "card": "Avantoe",
+        "rarity": "Varies",
+        "fraction": "Varies"
+      },
+      {
+        "card": "Kwuarm",
+        "rarity": "Varies",
+        "fraction": "Varies"
+      },
+      {
+        "card": "Cadantine",
+        "rarity": "Varies",
+        "fraction": "Varies",
+        "notes": [
+          "Cadantine, Lantadyme, Dwarf weed, and Torstol require at least 14, 34, 50, and 64 Herblore respectively for a chance to obtain."
+        ]
+      },
+      {
+        "card": "Lantadyme",
+        "rarity": "Varies",
+        "fraction": "Varies",
+        "notes": [
+          "Cadantine, Lantadyme, Dwarf weed, and Torstol require at least 14, 34, 50, and 64 Herblore respectively for a chance to obtain."
+        ]
+      },
+      {
+        "card": "Dwarf weed",
+        "rarity": "Varies",
+        "fraction": "Varies",
+        "notes": [
+          "Cadantine, Lantadyme, Dwarf weed, and Torstol require at least 14, 34, 50, and 64 Herblore respectively for a chance to obtain."
+        ]
+      },
+      {
+        "card": "Torstol",
+        "rarity": "Varies",
+        "fraction": "Varies",
+        "notes": [
+          "Cadantine, Lantadyme, Dwarf weed, and Torstol require at least 14, 34, 50, and 64 Herblore respectively for a chance to obtain."
+        ]
+      },
+      {
+        "card": "Acorn",
+        "rarity": "Varies",
+        "fraction": "Varies"
+      },
+      {
+        "card": "Willow seed",
+        "rarity": "Varies",
+        "fraction": "Varies"
+      },
+      {
+        "card": "Maple seed",
+        "rarity": "Varies",
+        "fraction": "Varies"
+      },
+      {
+        "card": "Banana tree seed",
+        "rarity": "Varies",
+        "fraction": "Varies"
+      },
+      {
+        "card": "Teak seed",
+        "rarity": "Varies",
+        "fraction": "Varies"
+      },
+      {
+        "card": "Mahogany seed",
+        "rarity": "Varies",
+        "fraction": "Varies"
+      },
+      {
+        "card": "Yew seed",
+        "rarity": "Varies",
+        "fraction": "Varies"
+      },
+      {
+        "card": "Ranarr seed",
+        "rarity": "Varies",
+        "fraction": "Varies"
+      },
+      {
+        "card": "Tarromin seed",
+        "rarity": "Varies",
+        "fraction": "Varies"
+      },
+      {
+        "card": "Harralander seed",
+        "rarity": "Varies",
+        "fraction": "Varies"
+      },
+      {
+        "card": "Toadflax seed",
+        "rarity": "Varies",
+        "fraction": "Varies"
+      },
+      {
+        "card": "Irit seed",
+        "rarity": "Varies",
+        "fraction": "Varies"
+      },
+      {
+        "card": "Avantoe seed",
+        "rarity": "Varies",
+        "fraction": "Varies"
+      },
+      {
+        "card": "Kwuarm seed",
+        "rarity": "Varies",
+        "fraction": "Varies",
+        "notes": [
+          "Watermelon, Snape grass, Kwuarm, Snapdragon, Cadantine, Lantadyme, Dwarf weed, and spirit seeds require at least level 7, 11, 12, 21, 50, 67, 71, and 80 Farming respectively for a chance to obtain."
+        ]
+      },
+      {
+        "card": "Snapdragon seed",
+        "rarity": "Varies",
+        "fraction": "Varies",
+        "notes": [
+          "Watermelon, Snape grass, Kwuarm, Snapdragon, Cadantine, Lantadyme, Dwarf weed, and spirit seeds require at least level 7, 11, 12, 21, 50, 67, 71, and 80 Farming respectively for a chance to obtain."
+        ]
+      },
+      {
+        "card": "Cadantine seed",
+        "rarity": "Varies",
+        "fraction": "Varies",
+        "notes": [
+          "Watermelon, Snape grass, Kwuarm, Snapdragon, Cadantine, Lantadyme, Dwarf weed, and spirit seeds require at least level 7, 11, 12, 21, 50, 67, 71, and 80 Farming respectively for a chance to obtain."
+        ]
+      },
+      {
+        "card": "Lantadyme seed",
+        "rarity": "Varies",
+        "fraction": "Varies",
+        "notes": [
+          "Watermelon, Snape grass, Kwuarm, Snapdragon, Cadantine, Lantadyme, Dwarf weed, and spirit seeds require at least level 7, 11, 12, 21, 50, 67, 71, and 80 Farming respectively for a chance to obtain."
+        ]
+      },
+      {
+        "card": "Dwarf weed seed",
+        "rarity": "Varies",
+        "fraction": "Varies",
+        "notes": [
+          "Watermelon, Snape grass, Kwuarm, Snapdragon, Cadantine, Lantadyme, Dwarf weed, and spirit seeds require at least level 7, 11, 12, 21, 50, 67, 71, and 80 Farming respectively for a chance to obtain."
+        ]
+      },
+      {
+        "card": "Watermelon seed",
+        "rarity": "Varies",
+        "fraction": "Varies",
+        "notes": [
+          "Watermelon, Snape grass, Kwuarm, Snapdragon, Cadantine, Lantadyme, Dwarf weed, and spirit seeds require at least level 7, 11, 12, 21, 50, 67, 71, and 80 Farming respectively for a chance to obtain."
+        ]
+      },
+      {
+        "card": "Snape grass seed",
+        "rarity": "Varies",
+        "fraction": "Varies",
+        "notes": [
+          "Watermelon, Snape grass, Kwuarm, Snapdragon, Cadantine, Lantadyme, Dwarf weed, and spirit seeds require at least level 7, 11, 12, 21, 50, 67, 71, and 80 Farming respectively for a chance to obtain."
+        ]
+      },
+      {
+        "card": "Spirit seed",
+        "rarity": "Varies",
+        "fraction": "Varies",
+        "notes": [
+          "Watermelon, Snape grass, Kwuarm, Snapdragon, Cadantine, Lantadyme, Dwarf weed, and spirit seeds require at least level 7, 11, 12, 21, 50, 67, 71, and 80 Farming respectively for a chance to obtain."
+        ]
+      },
+      {
+        "card": "Magic seed",
+        "rarity": "Varies",
+        "fraction": "Varies"
+      },
+      {
+        "card": "Torstol seed",
+        "rarity": "Varies",
+        "fraction": "Varies"
+      },
+      {
+        "card": "Raw anchovies",
+        "rarity": "Varies",
+        "fraction": "Varies"
+      },
+      {
+        "card": "Raw trout",
+        "rarity": "Varies",
+        "fraction": "Varies"
+      },
+      {
+        "card": "Raw salmon",
+        "rarity": "Varies",
+        "fraction": "Varies"
+      },
+      {
+        "card": "Raw tuna",
+        "rarity": "Varies",
+        "fraction": "Varies"
+      },
+      {
+        "card": "Raw lobster",
+        "rarity": "Varies",
+        "fraction": "Varies",
+        "notes": [
+          "Lobster, Swordfish, and Shark require at least level 15, 34, and 43 Fishing respectively for a chance to obtain."
+        ]
+      },
+      {
+        "card": "Raw swordfish",
+        "rarity": "Varies",
+        "fraction": "Varies",
+        "notes": [
+          "Lobster, Swordfish, and Shark require at least level 15, 34, and 43 Fishing respectively for a chance to obtain."
+        ]
+      },
+      {
+        "card": "Raw shark",
+        "rarity": "Varies",
+        "fraction": "Varies",
+        "notes": [
+          "Lobster, Swordfish, and Shark require at least level 15, 34, and 43 Fishing respectively for a chance to obtain."
+        ]
+      },
+      {
+        "card": "Coins",
+        "rarity": "Common",
+        "fraction": "5/25"
+      },
+      {
+        "card": "Saltpetre",
+        "rarity": "Common",
+        "fraction": "1/25"
+      },
+      {
+        "card": "Dynamite",
+        "rarity": "Common",
+        "fraction": "1/25"
+      }
+    ]
+  },
+  "Tempoross": {
+    "source": "Reward pool",
+    "page": "Reward_pool",
+    "drops": [
+      {
+        "card": "Spirit flakes",
+        "rarity": "Common",
+        "fraction": "1/4"
+      },
+      {
+        "card": "Casket",
+        "rarity": "Common",
+        "fraction": "1/20"
+      },
+      {
+        "card": "Soaked page",
+        "rarity": "Uncommon",
+        "fraction": "149/8,000"
+      },
+      {
+        "card": "Fish barrel",
+        "rarity": "Rare",
+        "fraction": "1/400"
+      },
+      {
+        "card": "Tackle box",
+        "rarity": "Rare",
+        "fraction": "1/400"
+      },
+      {
+        "card": "Harpoonfish",
+        "rarity": "Very Rare",
+        "fraction": "1/1,600"
+      },
+      {
+        "card": "Tome of water",
+        "rarity": "Very Rare",
+        "fraction": "1/1,600"
+      },
+      {
+        "card": "Tiny tempor",
+        "rarity": "Very Rare",
+        "fraction": "1/8,000"
+      },
+      {
+        "card": "Dragon harpoon",
+        "rarity": "Very Rare",
+        "fraction": "1/8,000"
+      },
+      {
+        "card": "Raw herring",
+        "rarity": "Common",
+        "fraction": "900/6,400"
+      },
+      {
+        "card": "Raw mackerel",
+        "rarity": "Common",
+        "fraction": "900/6,400"
+      },
+      {
+        "card": "Raw pike",
+        "rarity": "Common",
+        "fraction": "900/6,400"
+      },
+      {
+        "card": "Raw salmon",
+        "rarity": "Common",
+        "fraction": "900/6,400"
+      },
+      {
+        "card": "Raw tuna",
+        "rarity": "Common",
+        "fraction": "900/6,400"
+      },
+      {
+        "card": "Raw lobster",
+        "rarity": "Common",
+        "fraction": "900/6,400"
+      },
+      {
+        "card": "Raw bass",
+        "rarity": "Common",
+        "fraction": "900/6,400"
+      },
+      {
+        "card": "Raw swordfish",
+        "rarity": "Common",
+        "fraction": "810/6,400"
+      },
+      {
+        "card": "Raw shark",
+        "rarity": "Common",
+        "fraction": "720/6,400"
+      },
+      {
+        "card": "Raw sea turtle",
+        "rarity": "Common",
+        "fraction": "630/6,400"
+      },
+      {
+        "card": "Raw manta ray",
+        "rarity": "Common",
+        "fraction": "540/6,400"
+      },
+      {
+        "card": "Plank",
+        "rarity": "Common",
+        "fraction": "7/160"
+      },
+      {
+        "card": "Oak plank",
+        "rarity": "Uncommon",
+        "fraction": "1/32"
+      },
+      {
+        "card": "Seaweed",
+        "rarity": "Uncommon",
+        "fraction": "1/40"
+      },
+      {
+        "card": "Steel nails",
+        "rarity": "Uncommon",
+        "fraction": "1/80"
+      },
+      {
+        "card": "Feather",
+        "rarity": "Uncommon",
+        "fraction": "1/80"
+      },
+      {
+        "card": "Fishing bait",
+        "rarity": "Uncommon",
+        "fraction": "1/80"
+      }
+    ]
+  },
+  "Fight Caves": {
+    "source": "Completion reward + TzTok-Jad drops",
+    "page": null,
+    "drops": [
+      {
+        "card": "Fire cape",
+        "rarity": "Always",
+        "fraction": "Always"
+      },
+      {
+        "card": "Tokkul",
+        "rarity": "Always",
+        "fraction": "Always"
+      },
+      {
+        "card": "Tzrek-jad",
+        "rarity": "Rare",
+        "fraction": "1/200"
+      }
+    ]
+  },
+  "Inferno": {
+    "source": "Completion reward + TzKal-Zuk drops",
+    "page": null,
+    "drops": [
+      {
+        "card": "Infernal cape",
+        "rarity": "Always",
+        "fraction": "Always"
+      },
+      {
+        "card": "Tokkul",
+        "rarity": "Always",
+        "fraction": "Always"
+      },
+      {
+        "card": "Jal-nib-rek",
+        "rarity": "Rare",
+        "fraction": "1/100"
+      }
+    ]
+  },
+  "Barbarian Assault": {
+    "source": "Honour points shop",
+    "page": null,
+    "drops": [
+      {
+        "card": "Fighter hat",
+        "rarity": "Always",
+        "fraction": "Always"
+      },
+      {
+        "card": "Ranger hat",
+        "rarity": "Always",
+        "fraction": "Always"
+      },
+      {
+        "card": "Runner hat",
+        "rarity": "Always",
+        "fraction": "Always"
+      },
+      {
+        "card": "Healer hat",
+        "rarity": "Always",
+        "fraction": "Always"
+      },
+      {
+        "card": "Fighter torso",
+        "rarity": "Always",
+        "fraction": "Always"
+      },
+      {
+        "card": "Penance skirt",
+        "rarity": "Always",
+        "fraction": "Always"
+      },
+      {
+        "card": "Runner boots",
+        "rarity": "Always",
+        "fraction": "Always"
+      },
+      {
+        "card": "Penance gloves",
+        "rarity": "Always",
+        "fraction": "Always"
+      },
+      {
+        "card": "Granite helm",
+        "rarity": "Always",
+        "fraction": "Always"
+      },
+      {
+        "card": "Granite body",
+        "rarity": "Always",
+        "fraction": "Always"
+      },
+      {
+        "card": "Pet penance queen",
+        "rarity": "Very Rare",
+        "fraction": "1/1,000",
+        "notes": [
+          "Per high-level gamble."
+        ]
+      }
+    ]
+  },
+  "Yama": {
+    "extra": [
+      {
+        "card": "Rite of vile transference",
+        "rarity": "Rare",
+        "fraction": "1/181.5",
+        "notes": [
+          "From dossiers: 1/15 per dossier, and dossiers are a 1/12.1 drop."
+        ]
+      }
+    ]
+  }
+}

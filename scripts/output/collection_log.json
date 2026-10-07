@@ -1,0 +1,797 @@
+{
+  "Fight Caves": {
+    "log": "The Fight Caves",
+    "items": [
+      "Tzrek-jad",
+      "Fire cape"
+    ]
+  },
+  "Inferno": {
+    "log": "The Inferno",
+    "items": [
+      "Jal-nib-rek",
+      "Infernal cape"
+    ]
+  },
+  "Fortis Colosseum": {
+    "log": "Fortis Colosseum",
+    "items": [
+      "Smol heredit",
+      "Dizana's quiver",
+      "Sunfire fanatic cuirass",
+      "Sunfire fanatic chausses",
+      "Sunfire fanatic helm",
+      "Echo boots",
+      "Tonalztics of ralos",
+      "Sunfire splinters",
+      "Onyx"
+    ]
+  },
+  "Chambers of Xeric": {
+    "log": "Chambers of Xeric",
+    "items": [
+      "Olmlet",
+      "Metamorphic dust",
+      "Twisted bow",
+      "Elder maul",
+      "Kodai wand",
+      "Dragon claws",
+      "Ancestral hat",
+      "Ancestral robe top",
+      "Ancestral robe bottom",
+      "Dinh's bulwark",
+      "Dexterous prayer scroll",
+      "Arcane prayer scroll",
+      "Dragon hunter crossbow",
+      "Twisted buckler",
+      "Torn prayer scroll",
+      "Dark relic",
+      "Onyx",
+      "Twisted ancestral colour kit",
+      "Xeric's cape"
+    ]
+  },
+  "Theatre of Blood": {
+    "log": "Theatre of Blood",
+    "items": [
+      "Lil' zik",
+      "Scythe of Vitur",
+      "Ghrazi rapier",
+      "Sanguinesti staff",
+      "Justiciar faceguard",
+      "Justiciar chestguard",
+      "Justiciar legguards",
+      "Avernic defender",
+      "Vial of blood",
+      "Sinhaza shroud"
+    ]
+  },
+  "Tombs of Amascut": {
+    "log": "Tombs of Amascut",
+    "items": [
+      "Tumeken's guardian",
+      "Tumeken's shadow",
+      "Elidinis' ward",
+      "Masori mask",
+      "Masori body",
+      "Masori chaps",
+      "Lightbearer",
+      "Osmumten's fang",
+      "Thread of elidinis",
+      "Breach of the scarab",
+      "Eye of the corruptor",
+      "Jewel of the sun",
+      "Jewel of amascut",
+      "Masori assembler",
+      "Cache of runes",
+      "Icthlarin's shroud"
+    ]
+  },
+  "The Gauntlet": {
+    "log": "The Gauntlet",
+    "items": [
+      "Youngllef",
+      "Crystal weapon seed",
+      "Gauntlet cape"
+    ]
+  },
+  "Corrupted Gauntlet": {
+    "log": "The Gauntlet",
+    "items": [
+      "Youngllef",
+      "Crystal weapon seed",
+      "Gauntlet cape"
+    ]
+  },
+  "Barbarian Assault": {
+    "log": "Barbarian Assault",
+    "items": [
+      "Pet penance queen",
+      "Fighter hat",
+      "Ranger hat",
+      "Runner hat",
+      "Healer hat",
+      "Fighter torso",
+      "Penance skirt",
+      "Runner boots",
+      "Penance gloves",
+      "Granite helm",
+      "Granite body"
+    ]
+  },
+  "Wintertodt": {
+    "log": "Wintertodt",
+    "items": [
+      "Phoenix",
+      "Tome of fire",
+      "Burnt page",
+      "Pyromancer garb",
+      "Pyromancer hood",
+      "Pyromancer robe",
+      "Pyromancer boots",
+      "Warm gloves",
+      "Bruma torch",
+      "Dragon axe"
+    ]
+  },
+  "Tempoross": {
+    "log": "Tempoross",
+    "items": [
+      "Tiny tempor",
+      "Harpoonfish",
+      "Spirit angler headband",
+      "Spirit angler top",
+      "Spirit angler waders",
+      "Spirit angler boots",
+      "Tome of water",
+      "Soaked page",
+      "Tackle box",
+      "Fish barrel",
+      "Dragon harpoon",
+      "Spirit flakes"
+    ]
+  },
+  "Zalcano": {
+    "log": "Zalcano",
+    "items": [
+      "Smolcano",
+      "Zalcano shard",
+      "Onyx"
+    ]
+  },
+  "Hespori": {
+    "log": "Hespori",
+    "items": [
+      "Bottomless compost bucket",
+      "Iasor seed",
+      "Kronos seed",
+      "Attas seed"
+    ]
+  },
+  "Amoxliatl": {
+    "log": "Amoxliatl",
+    "items": [
+      "Moxi",
+      "Glacial temotli",
+      "Pendant of ates",
+      "Frozen tear"
+    ]
+  },
+  "Barrows": {
+    "log": "Barrows Chests",
+    "items": [
+      "Karil's coif",
+      "Karil's leathertop",
+      "Karil's leatherskirt",
+      "Karil's crossbow",
+      "Ahrim's hood",
+      "Ahrim's robetop",
+      "Ahrim's robeskirt",
+      "Ahrim's staff",
+      "Dharok's helm",
+      "Dharok's platebody",
+      "Dharok's platelegs",
+      "Dharok's greataxe",
+      "Guthan's helm",
+      "Guthan's platebody",
+      "Guthan's chainskirt",
+      "Guthan's warspear",
+      "Torag's helm",
+      "Torag's platebody",
+      "Torag's platelegs",
+      "Torag's hammers",
+      "Verac's helm",
+      "Verac's brassard",
+      "Verac's plateskirt",
+      "Verac's flail",
+      "Bolt rack"
+    ]
+  },
+  "Obor": {
+    "log": "Obor",
+    "items": [
+      "Hill giant club"
+    ]
+  },
+  "Bryophyta": {
+    "log": "Bryophyta",
+    "items": [
+      "Bryophyta's essence"
+    ]
+  },
+  "Giant Mole": {
+    "log": "Giant Mole",
+    "items": [
+      "Baby mole",
+      "Mole skin",
+      "Mole claw",
+      "Immaculate mole skin"
+    ]
+  },
+  "Kalphite Queen": {
+    "log": "Kalphite Queen",
+    "items": [
+      "Kalphite princess",
+      "Kq head",
+      "Jar of sand",
+      "Dragon 2h sword",
+      "Dragon chainbody",
+      "Dragon pickaxe"
+    ]
+  },
+  "King Black Dragon": {
+    "log": "King Black Dragon",
+    "items": [
+      "Prince Black Dragon",
+      "Kbd heads",
+      "Dragon pickaxe",
+      "Dragonfire shield"
+    ]
+  },
+  "Sarachnis": {
+    "log": "Sarachnis",
+    "items": [
+      "Sraracha",
+      "Jar of eyes",
+      "Giant egg sac",
+      "Sarachnis cudgel",
+      "Pristine spider silk"
+    ]
+  },
+  "Dagannoth Kings": {
+    "log": "Dagannoth Kings",
+    "items": [
+      "Pet dagannoth prime",
+      "Pet dagannoth supreme",
+      "Pet dagannoth rex",
+      "Berserker ring",
+      "Archers ring",
+      "Seers ring",
+      "Warrior ring",
+      "Dragon axe",
+      "Seercull",
+      "Mud battlestaff"
+    ]
+  },
+  "Corporeal Beast": {
+    "log": "Corporeal Beast",
+    "items": [
+      "Pet dark core",
+      "Elysian spirit shield",
+      "Spectral spirit shield",
+      "Arcane spirit shield",
+      "Holy elixir",
+      "Spirit shield",
+      "Jar of spirits"
+    ]
+  },
+  "General Graardor": {
+    "log": "General Graardor",
+    "items": [
+      "Pet general graardor",
+      "Bandos chestplate",
+      "Bandos tassets",
+      "Bandos boots",
+      "Bandos godsword",
+      "Godsword shard 1",
+      "Godsword shard 2",
+      "Godsword shard 3"
+    ]
+  },
+  "Kree'arra": {
+    "log": "Kree'arra",
+    "items": [
+      "Pet kree'arra",
+      "Armadyl helmet",
+      "Armadyl chestplate",
+      "Armadyl chainskirt",
+      "Armadyl godsword",
+      "Godsword shard 1",
+      "Godsword shard 2",
+      "Godsword shard 3"
+    ]
+  },
+  "K'ril Tsutsaroth": {
+    "log": "K'ril Tsutsaroth",
+    "items": [
+      "Pet k'ril tsutsaroth",
+      "Staff of the dead",
+      "Zamorakian spear",
+      "Steam battlestaff",
+      "Zamorak godsword",
+      "Godsword shard 1",
+      "Godsword shard 2",
+      "Godsword shard 3"
+    ]
+  },
+  "Commander Zilyana": {
+    "log": "Commander Zilyana",
+    "items": [
+      "Pet zilyana",
+      "Armadyl crossbow",
+      "Saradomin godsword",
+      "Saradomin sword",
+      "Saradomin's light",
+      "Godsword shard 1",
+      "Godsword shard 2",
+      "Godsword shard 3"
+    ]
+  },
+  "Nex": {
+    "log": "Nex",
+    "items": [
+      "Nexling",
+      "Ancient godsword",
+      "Zaryte crossbow",
+      "Zaryte vambraces",
+      "Torva full helm",
+      "Torva platebody",
+      "Torva platelegs",
+      "Nihil shard"
+    ]
+  },
+  "Zulrah": {
+    "log": "Zulrah",
+    "items": [
+      "Pet snakeling",
+      "Jar of swamp",
+      "Trident of the swamp",
+      "Serpentine helm",
+      "Toxic blowpipe",
+      "Onyx",
+      "Zulrah's scales"
+    ]
+  },
+  "Vorkath": {
+    "log": "Vorkath",
+    "items": [
+      "Vorki",
+      "Vorkath's head",
+      "Dragonfire shield",
+      "Dragonfire ward",
+      "Jar of decay",
+      "Dragonbone necklace"
+    ]
+  },
+  "The Nightmare": {
+    "log": "The Nightmare",
+    "items": [
+      "Little nightmare",
+      "Inquisitor's mace",
+      "Inquisitor's great helm",
+      "Inquisitor's hauberk",
+      "Inquisitor's plateskirt",
+      "Nightmare staff",
+      "Volatile orb",
+      "Harmonised orb",
+      "Eldritch orb",
+      "Jar of dreams"
+    ]
+  },
+  "Phosani's Nightmare": {
+    "log": "The Nightmare",
+    "items": [
+      "Little nightmare",
+      "Inquisitor's mace",
+      "Inquisitor's great helm",
+      "Inquisitor's hauberk",
+      "Inquisitor's plateskirt",
+      "Nightmare staff",
+      "Volatile orb",
+      "Harmonised orb",
+      "Eldritch orb",
+      "Jar of dreams"
+    ]
+  },
+  "Phantom Muspah": {
+    "log": "Phantom Muspah",
+    "items": [
+      "Muphin",
+      "Venator bow",
+      "Ancient sceptre",
+      "Frozen cache",
+      "Ancient essence"
+    ]
+  },
+  "Abyssal Sire": {
+    "log": "Abyssal Sire",
+    "items": [
+      "Abyssal orphan",
+      "Unsired",
+      "Abyssal head",
+      "Abyssal bludgeon",
+      "Jar of miasma",
+      "Abyssal dagger",
+      "Abyssal whip"
+    ]
+  },
+  "Kraken": {
+    "log": "Kraken",
+    "items": [
+      "Pet kraken",
+      "Abyssal tentacle",
+      "Trident of the seas",
+      "Jar of dirt"
+    ]
+  },
+  "Grotesque Guardians": {
+    "log": "Grotesque Guardians",
+    "items": [
+      "Noon",
+      "Black tourmaline core",
+      "Granite gloves",
+      "Granite ring",
+      "Granite hammer",
+      "Jar of stone",
+      "Granite dust"
+    ]
+  },
+  "Thermonuclear Smoke Devil": {
+    "log": "Thermonuclear smoke devil",
+    "items": [
+      "Pet smoke devil",
+      "Occult necklace",
+      "Smoke battlestaff",
+      "Dragon chainbody",
+      "Jar of smoke"
+    ]
+  },
+  "Alchemical Hydra": {
+    "log": "Alchemical Hydra",
+    "items": [
+      "Ikkle hydra",
+      "Dragon knife",
+      "Dragon thrownaxe",
+      "Jar of chemicals",
+      "Alchemical hydra heads"
+    ]
+  },
+  "Cerberus": {
+    "log": "Cerberus",
+    "items": [
+      "Hellpuppy",
+      "Eternal boots",
+      "Pegasian boots",
+      "Primordial boots",
+      "Jar of souls",
+      "Smouldering stone"
+    ]
+  },
+  "Vardorvis": {
+    "log": "Vardorvis",
+    "items": [
+      "Butch",
+      "Soulreaper axe",
+      "Virtus mask",
+      "Virtus robe top",
+      "Virtus robe bottom",
+      "Ultor ring",
+      "Blood quartz",
+      "Chromium ingot",
+      "Awakener's orb"
+    ]
+  },
+  "Duke Sucellus": {
+    "log": "Duke Sucellus",
+    "items": [
+      "Baron",
+      "Soulreaper axe",
+      "Virtus mask",
+      "Virtus robe top",
+      "Virtus robe bottom",
+      "Magus ring",
+      "Ice quartz",
+      "Chromium ingot",
+      "Awakener's orb"
+    ]
+  },
+  "The Leviathan": {
+    "log": "The Leviathan",
+    "items": [
+      "Lil'viathan",
+      "Soulreaper axe",
+      "Virtus mask",
+      "Virtus robe top",
+      "Virtus robe bottom",
+      "Venator ring",
+      "Smoke quartz",
+      "Chromium ingot",
+      "Awakener's orb"
+    ]
+  },
+  "The Whisperer": {
+    "log": "The Whisperer",
+    "items": [
+      "Wisp",
+      "Soulreaper axe",
+      "Virtus mask",
+      "Virtus robe top",
+      "Virtus robe bottom",
+      "Bellator ring",
+      "Shadow quartz",
+      "Chromium ingot",
+      "Awakener's orb"
+    ]
+  },
+  "Araxxor": {
+    "log": "Araxxor",
+    "items": [
+      "Nid",
+      "Araxyte venom sac",
+      "Amulet of rancour",
+      "Noxious halberd",
+      "Araxyte head",
+      "Jar of venom"
+    ]
+  },
+  "The Hueycoatl": {
+    "log": "The Hueycoatl",
+    "items": [
+      "Huberte",
+      "Dragon hunter wand",
+      "Tome of earth",
+      "Soiled page",
+      "Hueycoatl hide",
+      "Huasca seed"
+    ]
+  },
+  "Skotizo": {
+    "log": "Skotizo",
+    "items": [
+      "Skotos",
+      "Jar of darkness",
+      "Dark claw",
+      "Dark totem",
+      "Onyx",
+      "Ancient shard"
+    ]
+  },
+  "Scurrius": {
+    "log": "Scurrius",
+    "items": [
+      "Scurry",
+      "Scurrius' spine"
+    ]
+  },
+  "Deranged Archaeologist": {
+    "log": "Deranged Archaeologist",
+    "items": [
+      "Steel ring"
+    ]
+  },
+  "Blood Moon": {
+    "log": "Moons of Peril",
+    "items": [
+      "Eclipse moon chestplate",
+      "Eclipse moon tassets",
+      "Eclipse moon helm",
+      "Eclipse atlatl",
+      "Blue moon chestplate",
+      "Blue moon tassets",
+      "Blue moon helm",
+      "Blue moon spear",
+      "Blood moon chestplate",
+      "Blood moon tassets",
+      "Blood moon helm",
+      "Dual macuahuitl",
+      "Atlatl dart"
+    ]
+  },
+  "Blue Moon": {
+    "log": "Moons of Peril",
+    "items": [
+      "Eclipse moon chestplate",
+      "Eclipse moon tassets",
+      "Eclipse moon helm",
+      "Eclipse atlatl",
+      "Blue moon chestplate",
+      "Blue moon tassets",
+      "Blue moon helm",
+      "Blue moon spear",
+      "Blood moon chestplate",
+      "Blood moon tassets",
+      "Blood moon helm",
+      "Dual macuahuitl",
+      "Atlatl dart"
+    ]
+  },
+  "Eclipse Moon": {
+    "log": "Moons of Peril",
+    "items": [
+      "Eclipse moon chestplate",
+      "Eclipse moon tassets",
+      "Eclipse moon helm",
+      "Eclipse atlatl",
+      "Blue moon chestplate",
+      "Blue moon tassets",
+      "Blue moon helm",
+      "Blue moon spear",
+      "Blood moon chestplate",
+      "Blood moon tassets",
+      "Blood moon helm",
+      "Dual macuahuitl",
+      "Atlatl dart"
+    ]
+  },
+  "Royal Titans": {
+    "log": "Royal Titans",
+    "items": [
+      "Bran",
+      "Deadeye prayer scroll",
+      "Mystic vigour prayer scroll",
+      "Giantsoul amulet",
+      "Twinflame staff",
+      "Desiccated page"
+    ]
+  },
+  "Yama": {
+    "log": "Yama",
+    "items": [
+      "Yami",
+      "Oathplate helm",
+      "Oathplate chest",
+      "Oathplate legs",
+      "Soulflame horn",
+      "Rite of vile transference",
+      "Forgotten lockbox",
+      "Dossier",
+      "Barrel of demonic tallow"
+    ]
+  },
+  "Maggot King": {
+    "log": "Maggot King",
+    "items": [
+      "Maggot marquess",
+      "Crimson kisten",
+      "Necklace of rupture"
+    ]
+  },
+  "Brutus": {
+    "log": "Brutus",
+    "items": [
+      "Beef",
+      "Mooleta",
+      "Bottomless milk bucket",
+      "Cow slippers"
+    ]
+  },
+  "Callisto": {
+    "log": "Callisto and Artio",
+    "items": [
+      "Callisto cub",
+      "Tyrannical ring",
+      "Dragon pickaxe",
+      "Dragon 2h sword",
+      "Voidwaker"
+    ]
+  },
+  "Artio": {
+    "log": "Callisto and Artio",
+    "items": [
+      "Callisto cub",
+      "Tyrannical ring",
+      "Dragon pickaxe",
+      "Dragon 2h sword",
+      "Voidwaker"
+    ]
+  },
+  "Venenatis": {
+    "log": "Venenatis and Spindel",
+    "items": [
+      "Venenatis spiderling",
+      "Treasonous ring",
+      "Dragon pickaxe",
+      "Dragon 2h sword",
+      "Voidwaker"
+    ]
+  },
+  "Spindel": {
+    "log": "Venenatis and Spindel",
+    "items": [
+      "Venenatis spiderling",
+      "Treasonous ring",
+      "Dragon pickaxe",
+      "Dragon 2h sword",
+      "Voidwaker"
+    ]
+  },
+  "Vet'ion": {
+    "log": "Vet'ion and Calvar'ion",
+    "items": [
+      "Vet'ion jr.",
+      "Ring of the gods",
+      "Dragon pickaxe",
+      "Dragon 2h sword",
+      "Voidwaker"
+    ]
+  },
+  "Calvar'ion": {
+    "log": "Vet'ion and Calvar'ion",
+    "items": [
+      "Vet'ion jr.",
+      "Ring of the gods",
+      "Dragon pickaxe",
+      "Dragon 2h sword",
+      "Voidwaker"
+    ]
+  },
+  "Scorpia": {
+    "log": "Scorpia",
+    "items": [
+      "Scorpia's offspring",
+      "Odium ward",
+      "Malediction ward",
+      "Dragon 2h sword"
+    ]
+  },
+  "Chaos Elemental": {
+    "log": "Chaos Elemental",
+    "items": [
+      "Pet chaos elemental",
+      "Dragon pickaxe",
+      "Dragon 2h sword"
+    ]
+  },
+  "Chaos Fanatic": {
+    "log": "Chaos Fanatic",
+    "items": [
+      "Pet chaos elemental",
+      "Odium ward",
+      "Malediction ward"
+    ]
+  },
+  "Crazy Archaeologist": {
+    "log": "Crazy archaeologist",
+    "items": [
+      "Odium ward",
+      "Malediction ward",
+      "Fedora"
+    ]
+  },
+  "Revenant Maledictus": {
+    "log": "Revenants",
+    "items": [
+      "Viggora's chainmace",
+      "Craw's bow",
+      "Thammaron's sceptre",
+      "Amulet of avarice",
+      "Bracelet of ethereum",
+      "Ancient crystal",
+      "Ancient relic",
+      "Ancient effigy",
+      "Ancient medallion",
+      "Ancient statuette",
+      "Ancient totem",
+      "Ancient emblem",
+      "Revenant ether"
+    ]
+  },
+  "Shellbane Gryphon": {
+    "log": "Shellbane Gryphon",
+    "items": [
+      "Jar of feathers",
+      "Belle's folly",
+      "Gryphon feather"
+    ]
+  }
+}

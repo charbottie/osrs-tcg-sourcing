@@ -6,11 +6,12 @@ A local web app for **OSRS TCG** players running the **Bronzeman TCG** RuneLite 
 
 ## What it does
 
-- **Collection browser** — view all 6,000+ TCG cards; filter by owned, skill, tier
+- **Collection browser** — view all 5,200 TCG cards (v1.0 catalog); filter by owned, skill, tier
 - **Questing tab** — see which quests you can complete with your current cards, what's blocking you, and what each quest unlocks
 - **Skilling tab** — find available training methods per skill based on cards you own
 - **Monster detail** — drops, Slayer task probabilities, area access requirements (gated zones like Morytania, Kourend, Varlamore)
-- **Item detail** — how to obtain it, which quests need it, production requirements
+- **Item detail** — how to obtain it, which quests need it, production requirements, which bosses/raid chests reward it
+- **Bosses tab** — raids, wave content, minigames, skilling bosses and bosses (sub-grouped Low/Mid/High/God Wars/Slayer/Wilderness), with access requirements and a loot table per boss; collection-log uniques are marked ◆
 - **Equipment tab** — gear setups and DPS calculator filtered to owned cards
 - **Multi-account** — auto-discovers all TCG accounts in your RuneLite profiles
 
@@ -79,6 +80,8 @@ All game data lives in `scripts/output/` and is pre-generated from the OSRS Wiki
 | `food_data.json` | Food heal values |
 | `card_categories.json` | Card → skill/category mapping |
 | `card_details.json` | Card metadata (tier, description) |
+| `boss_loot.json` | Loot for chest/reward-based bosses (raid chests, Barrows, Moons, Gauntlet, lair chests, Unsired…) |
+| `collection_log.json` | Each boss's collection-log items — used to mark uniques |
 
 ### Regenerating data from the wiki
 
@@ -92,7 +95,20 @@ python scripts/generate_quests.py
 # Rebuild equipment / food
 python scripts/generate_equipment.py
 python scripts/generate_food.py
+
+# Rebuild boss chest loot + collection log (run after generate_sources)
+python scripts/generate_boss_loot.py --card-json research/card-catalog-v1.json
 ```
+
+> **Careful:** some committed output files carry hand fixes (production sources, images, categories). Regenerate into a scratch directory with `--out-dir` and diff before replacing anything.
+
+### How drops and rarity are interpreted
+
+- **Item → card matching** uses the catalog's `tcg.variants` lists — the TCG's own mapping, also used by Bronzeman for ownership. So *Grimy ranarr weed* counts for the Ranarr weed card, *Uncut diamond* for Diamond, *Prayer potion(4)* for Prayer potion.
+- **Rarity labels match the OSRS Wiki's tiers:** Common ≤1/25, Uncommon <1/100, Rare <1/1,000, Very Rare beyond.
+- **Unique** — raid unique-table items (CoX/ToB/ToA), shown with their share of the unique roll (e.g. Twisted bow 2/60); the roll itself depends on points/team/raid level, so no per-raid rate is invented.
+- **Conditional** — items gated by an extra requirement per the wiki's footnotes (consolation loot, first completions, Challenge Mode time limits, Konar-only keys, KC milestones).
+- Multi-roll chest rates are combined (Barrows `7 × 1/2,448` ≈ 1/350 per piece). Monster pages linked to Deadman / NMZ / PvM Arena / Construction variants fall back to the main-game page.
 
 Scraped HTML is cached in `scripts/cache/` (~800 MB, gitignored) so repeat runs are fast.
 
@@ -108,6 +124,7 @@ osrs_tcg/
 │   ├── decode_collection.py      # Decodes RuneLite RLTCG config blobs
 │   ├── decode_completed_quests.py
 │   ├── generate_sources.py       # Scrapes wiki → monster_drops + item_sources
+│   ├── generate_boss_loot.py     # Wiki chest pages + Collection log → boss_loot + collection_log
 │   ├── generate_quests.py        # Scrapes wiki → quests + quest_chains
 │   ├── generate_equipment.py
 │   ├── generate_food.py

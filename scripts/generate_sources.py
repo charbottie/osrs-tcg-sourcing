@@ -167,17 +167,30 @@ def build_monster_drops(
             continue
 
         raw_drops = loot_parser.parse_drops(html)
-        # Filter to only items that have a TCG card; split main vs RDT
-        tcg_drops = [
-            {
-                "card": d["item"],
-                "rarity": d["rarity"],
-                "fraction": d["fraction"],
-                "fromRdt": d["is_rdt"],
-            }
-            for d in raw_drops
-            if d["item"].lower() in item_names_lc and d["rarity"] != "Unknown"
-        ]
+        tcg_drops = _tcg_drops(raw_drops, item_names_lc)
+
+        # The catalog sometimes links a variant page with no drop table
+        # (e.g. "Callisto (PvM Arena)", "Hespori (A Night at the Theatre)").
+        # Cards are keyed by name, so any same-named NPC's drops apply —
+        # fall back to the plain-name page. Variants from game modes outside
+        # the main game (Deadman's shared loot table, NMZ, PvM Arena, POH)
+        # are never used for drops, even when they have a table.
+        name_page = wiki_page_name(name)
+        non_main_game = _NON_MAIN_GAME_RE.search(page.replace("_", " ")) is not None
+        if (not tcg_drops or non_main_game) and name_page != page:
+            alt_html, alt_from = wiki_fetcher.fetch_with_loot_fallback(name_page)
+            # Only accept the same NPC: not a redirect (e.g. "Duke" → Duke Sucellus)
+            # and a combat monster (excludes shop/reward NPCs like Rewards Guardian).
+            if (alt_html and not _is_redirect(alt_html)
+                    and loot_parser.parse_monster_info(alt_html)["combatLevel"] is not None):
+                alt_raw = loot_parser.parse_drops(alt_html)
+                alt_drops = _tcg_drops(alt_raw, item_names_lc)
+                if alt_drops:
+                    why = "is a non-main-game variant" if non_main_game else "had no drops"
+                    print(f"    [fallback] {page} {why}; using /w/{alt_from}")
+                    html, fetched_from, raw_drops, tcg_drops = alt_html, alt_from, alt_raw, alt_drops
+            if non_main_game and fetched_from == page:
+                tcg_drops = []  # no main-game page found — don't keep e.g. Deadman loot
 
         monster_info = loot_parser.parse_monster_info(html)
         quests: list[str] = []  # populated later by quest pass
@@ -195,6 +208,83 @@ def build_monster_drops(
             print(f"    [{len(tcg_drops)} TCG drops] from {len(raw_drops)} raw rows")
 
     return result
+
+
+_NON_MAIN_GAME_RE = re.compile(r"\((Deadman|PvM Arena|Nightmare Zone|Construction)\)$")
+
+
+def _is_redirect(html: str) -> bool:
+    """True if the wiki served this page via a redirect from another title."""
+    return 'class="mw-redirectedfrom"' in html or "Redirected from" in html
+
+
+def _alias_key(name: str) -> str:
+    """Normalise item names for variant matching: "Adamant bolts (p)" == "Adamant bolts(p)"."""
+    return re.sub(r"\s+\(", "(", name.strip().lower())
+
+
+def load_variant_aliases(card_json_path: str) -> dict[str, str]:
+    """Item variant name -> card name, from the catalog's tcg.variants lists.
+
+    This is the TCG's own definition of which items a card covers (potion
+    doses, poisoned weapons, "(damaged)" Torva, "(full)" trident, "(u)" revenant
+    weapons…), so wiki drop rows naming a variant count for the card.
+    """
+    with open(card_json_path, encoding="utf-8") as f:
+        data = json.load(f)
+    aliases: dict[str, str] = {}
+    for entry in data.get("items", []) if isinstance(data, dict) else []:
+        for v in entry.get("tcg", {}).get("variants", []):
+            if v.get("name"):
+                aliases.setdefault(_alias_key(v["name"]), entry["name"])
+                if _alias_key(v["name"]) == _alias_key(entry["name"]):
+                    # A variant shares the card's in-game name (e.g. moon-key
+                    # "Tooth half of key", seed "Bird nest"): the wiki tells these
+                    # apart with a disambiguator, so "<name> (…)" also counts.
+                    aliases.setdefault(_SAME_NAME_MARK + _alias_key(entry["name"]), entry["name"])
+    return aliases
+
+
+_SAME_NAME_MARK = "\0same:"
+_WIKI_DISAMBIG_RE = re.compile(r"\s*\([^)]*\)$")
+
+
+_VARIANT_ALIASES: dict[str, str] = {}  # set by main() / callers via set_variant_aliases
+
+
+def set_variant_aliases(aliases: dict[str, str]) -> None:
+    _VARIANT_ALIASES.clear()
+    _VARIANT_ALIASES.update(aliases)
+
+
+def _card_for_drop(item: str, item_names_lc: set[str]) -> str | None:
+    """TCG card name for a wiki drop row (exact name or catalog variant), or None."""
+    if item.lower() in item_names_lc:
+        return item
+    card = _VARIANT_ALIASES.get(_alias_key(item))
+    if card:
+        return card
+    base = _WIKI_DISAMBIG_RE.sub("", item)
+    if base == item:
+        return None
+    if item.lower().endswith("(item)") and base.lower() in item_names_lc:
+        return base  # wiki's item-vs-NPC disambiguator, e.g. "Crawling hand (item)"
+    return _VARIANT_ALIASES.get(_SAME_NAME_MARK + _alias_key(base))
+
+
+def _tcg_drops(raw_drops: list[dict], item_names_lc: set[str]) -> list[dict]:
+    """Filter raw wiki drop rows to TCG item cards with a known rarity."""
+    best: dict[tuple, dict] = {}  # (card, is_rdt) -> row; keep the higher rate if a suffix collides
+    for d in raw_drops:
+        card = _card_for_drop(d["item"], item_names_lc)
+        if not card or d["rarity"] == "Unknown":
+            continue
+        key = (card.lower(), d["is_rdt"])
+        row = {"card": card, "rarity": d["rarity"], "fraction": d["fraction"], "fromRdt": d["is_rdt"]}
+        prev = best.get(key)
+        if prev is None or loot_parser._fraction_rate(d["fraction"]) > loot_parser._fraction_rate(prev["fraction"]):
+            best[key] = row
+    return list(best.values())
 
 
 def _empty_monster_entry(card: dict) -> dict:
@@ -544,6 +634,7 @@ def main() -> int:
           f"{len(quest_items)} quest-item cards")
 
     item_names_lc = card_name_set(items)
+    set_variant_aliases(load_variant_aliases(args.card_json))
     monster_names_lc = card_name_set(monsters)
 
     # --- Pass 1: Monster drops ---

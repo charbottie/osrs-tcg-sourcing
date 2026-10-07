@@ -4,13 +4,14 @@ The wiki shows drop rarities as fractions ("1/512") and/or labels
 ("Rare"). We normalise both to our own label set so the sourcing panel
 can bucket consistently across all monsters.
 
-Rarity buckets:
-  Always        — 1/1 or "always" text
-  Common        — 1/2 – 1/25
-  Uncommon      — 1/26 – 1/128
-  Rare          — 1/129 – 1/512
-  Very Rare     — 1/513 – 1/5000
-  Extremely Rare — 1/5001+
+Rarity buckets match the OSRS Wiki's own drop-table colours, so a label means
+the same thing here as it does on the wiki (verified empirically against the
+table-bg-* classes on ~1,200 cached pages, 2026-10):
+  Always    — 1/1 or "always" text
+  Common    — 1/1 – 1/25
+  Uncommon  — rarer than 1/25, up to 1/99.99
+  Rare      — 1/100 – 1/999.99
+  Very Rare — 1/1,000 and rarer (the wiki has no tier above this)
 """
 
 from __future__ import annotations
@@ -25,13 +26,13 @@ _LABEL_MAP = {
     "extremely rare": "Extremely Rare",
 }
 
-# Fraction thresholds — upper bound of each bucket (1-in-N, higher N = rarer)
-_THRESHOLDS: list[tuple[int, str]] = [
+# Fraction thresholds — 1-in-N strictly below this bound falls in the bucket
+# (higher N = rarer). Always/Common are inclusive of 1 and 25 respectively.
+_THRESHOLDS: list[tuple[float, str]] = [
     (1, "Always"),
     (25, "Common"),
-    (128, "Uncommon"),
-    (512, "Rare"),
-    (5000, "Very Rare"),
+    (100, "Uncommon"),
+    (1000, "Rare"),
 ]
 
 
@@ -59,10 +60,14 @@ def from_fraction(fraction: str) -> str:
     except (ValueError, ZeroDivisionError):
         return "Unknown"
 
-    for threshold, label in _THRESHOLDS:
-        if ratio <= threshold:
+    if ratio <= 1:
+        return "Always"
+    if ratio <= 25:
+        return "Common"
+    for threshold, label in _THRESHOLDS[2:]:
+        if ratio < threshold:
             return label
-    return "Extremely Rare"
+    return "Very Rare"
 
 
 def from_wiki_label(label: str) -> str:

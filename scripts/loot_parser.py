@@ -18,7 +18,7 @@ The rarity cell class encodes the colour tier:
   table-bg-green  → Common
   table-bg-yellow → Uncommon
   table-bg-orange → Rare
-  table-bg-red    → Very Rare / Extremely Rare
+  table-bg-red    → Very Rare
 
 We use the cell text as the fraction directly when it matches N/D format,
 and fall back to the bg-colour class if not.

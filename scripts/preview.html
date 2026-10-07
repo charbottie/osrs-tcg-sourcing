@@ -197,6 +197,12 @@
     border-bottom: 1px solid #222;
     position: sticky; top: 0; z-index: 1;
   }
+  .boss-subsection-header {
+    padding: 5px 12px 3px 18px;
+    font-size: 10px; font-weight: 600;
+    color: #6a5a3a; background: #0d0d0d;
+    border-bottom: 1px solid #1a1a1a;
+  }
   .boss-status-dot {
     width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0;
   }
@@ -407,6 +413,9 @@
   .rarity-Very-Rare      { background: #1e0030; color: #b060e0; }
   .rarity-Extremely-Rare { background: #2e1000; color: #ff7020; }
   .rarity-Unknown        { background: #1a1a1a; color: #555; }
+  .rarity-Unique         { background: #2a1a00; color: #e8c97a; }
+  .rarity-Conditional    { background: #161616; color: #888; border: 1px dashed #333; }
+  .rarity-Varies         { background: #141a1a; color: #6a9a9a; }
 
   .fraction { font-size: 10px; color: #555; min-width: 60px; text-align: right; flex-shrink: 0; }
 
@@ -1217,6 +1226,8 @@ function canGetItem(itemName, visited = new Set()) {
 
 // ─── State ─────────────────────────────────────────────────────────────────
 let monsterDrops = {}, itemSources = {}, cardCategories = {}, cardDetails = {}, foodData = {};
+let bossLoot = {};   // boss name → {source, page, drops} for chest/reward-based bosses (boss_loot.json)
+let collectionLog = {};  // boss name → {log, items} — collection-log items = the boss's uniques
 let packCatalog  = null;   // {catalogVersion, packSize, packs:[...]} from /api/packs
 let packPools    = null;   // {packId: {tierLabel: count}} precomputed at load time
 let equipBySlot  = {};   // slot → [{name, value, is2h, itemIds}]
@@ -1508,7 +1519,7 @@ function simulateRandom() {
 async function loadData() {
   try {
     const cb = `?v=${Date.now()}`;  // cache-bust so updated JSON files are always fresh
-    const [md, is, cc, cd, css, cs, crr, ii, qd, ed, fd, bmqc, cq, ac, cst] = await Promise.all([
+    const [md, is, cc, cd, css, cs, crr, ii, qd, ed, fd, bmqc, cq, ac, cst, bl, clg] = await Promise.all([
       fetch(`output/monster_drops.json${cb}`).then(r => r.json()).catch(() => ({})),
       fetch(`output/item_sources.json${cb}`).then(r => r.json()).catch(() => ({})),
       fetch(`output/card_categories.json${cb}`).then(r => r.json()).catch(() => ({})),
@@ -1524,6 +1535,8 @@ async function loadData() {
       fetch(`output/completed_quests.json${cb}`).then(r => r.json()).catch(() => ({completedQuests:[]})),
       fetch(`output/all_collections.json${cb}`).then(r => r.json()).catch(() => ({profiles:{}})),
       fetch(`output/clue_steps.json${cb}`).then(r => r.json()).catch(() => null),
+      fetch(`output/boss_loot.json${cb}`).then(r => r.json()).catch(() => ({})),
+      fetch(`output/collection_log.json${cb}`).then(r => r.json()).catch(() => ({})),
     ]);
     monsterDrops = md; itemSources = is; cardCategories = cc; cardDetails = cd;
     _cardLcMap = null; // invalidate case-insensitive card lookup cache
@@ -1534,6 +1547,10 @@ async function loadData() {
     questsData         = qd;
     allCollections     = ac.profiles || {};
     clueSteps          = cst;
+    bossLoot           = bl || {};
+    collectionLog      = clg || {};
+    _bossLootByItem    = null;  // invalidate reverse index
+    try { _validateDataNames(); } catch (e) { console.warn("[data check] failed", e); }
     // Build quest name → BM card requirement map; track miniquests separately
     bmQuestCards = {};
     for (const q of (bmqc.quests || [])) {
@@ -1866,14 +1883,15 @@ function rarityClass(r) { return 'rarity-' + (r||'Unknown').replace(/ /g,'-'); }
 function fractionToRarity(frac) {
   if (!frac) return 'Unknown';
   if (frac === '1/1') return 'Always';
-  const m = frac.match(/^([\d.]+)\/([\d,]+)$/);
+  const m = frac.match(/^([\d.]+)\/([\d,.]+)$/);
   if (!m) return 'Unknown';
-  const rate = parseFloat(m[1]) / parseFloat(m[2].replace(/,/g,''));
-  if (rate >= 0.1)    return 'Common';
-  if (rate >= 0.02)   return 'Uncommon';
-  if (rate >= 0.005)  return 'Rare';
-  if (rate >= 0.001)  return 'Very Rare';
-  return 'Extremely Rare';
+  // Same buckets as scripts/rarity_mapper.py, which match the OSRS Wiki's colours
+  const n = parseFloat(m[2].replace(/,/g,'')) / parseFloat(m[1]);  // 1-in-n
+  if (n <= 1)    return 'Always';
+  if (n <= 25)   return 'Common';
+  if (n < 100)   return 'Uncommon';
+  if (n < 1000)  return 'Rare';
+  return 'Very Rare';
 }
 
 // ─── Rarity helpers ────────────────────────────────────────────────────────
@@ -1972,7 +1990,7 @@ function dedupeDrops(drops) {
     // Compare probabilities: parse "N/D" → rate, keep higher rate
     const rate = frac => {
       if (!frac) return 0;
-      const m = frac.match(/^([\d.]+)\/([\d,]+)$/);
+      const m = frac.match(/^([\d.]+)\/([\d,.]+)$/);
       return m ? parseFloat(m[1]) / parseFloat(m[2].replace(/,/g,'')) : 0;
     };
     if (rate(d.fraction) > rate(best.get(key).fraction)) best.set(key, d);
@@ -2451,9 +2469,6 @@ function _wlSearchToggle(name) {
   }
   _saveWishlist();
   renderWishlist();
-  // Refresh the panel list to show updated ★/☆ states
-  const input = document.getElementById('wl-search');
-  if (input) _wlSearchInput(input.value);
 }
 
 function removeFromWishlist(name) {
@@ -2753,7 +2768,15 @@ function _cardType(name) {
 }
 
 // ── Main render ───────────────────────────────────────────────────────────────
+// Re-renders both the main wishlist page and the left panel, so removals made
+// from the main page (tile ✕, tag ✕, group/quest removal) show up in the panel immediately.
 function renderWishlist() {
+  _renderWishlistMain();
+  const input = document.getElementById('wl-search');
+  if (input) _wlSearchInput(input.value);
+}
+
+function _renderWishlistMain() {
   const container = document.getElementById('wishlist-content');
   if (!container) return;
 
@@ -2896,7 +2919,7 @@ function renderWishlist() {
           : 'background:#111;border-color:#222;color:#555';
         const _gateDesc = (() => {
           if (!blocked) return '';
-          const g2 = SLAYER_CARD_GATES[c];
+          const g2 = _slayerGate(c);
           return [
             ...((g2.quests||[]).filter(q => !completedQuests.has(q)).map(q => 'Quest: '+q)),
             ...(Object.entries(g2.skills||{}).filter(([s,l]) => getLevel(s)<l).map(([s,l]) => s+' '+l+' req')),
@@ -3389,7 +3412,7 @@ function renderMonster(name, container) {
       <div style="display:flex;flex-wrap:wrap;gap:3px;padding:2px 0 5px 20px">`;
       for (const card of t.cards) {
         const cardOwned = isOwned(card);
-        const _gate = SLAYER_CARD_GATES[card] || null;
+        const _gate = _slayerGate(card);
         let _gateMet = true, _gateDesc = '';
         if (_gate) {
           const _qFail = (_gate.quests || []).filter(q => !completedQuests.has(q));
@@ -3472,7 +3495,7 @@ function renderMonster(name, container) {
   html += clueStepNpcHtml(name);
 
   // ── Boss Encounters cross-link ────────────────────────────────────────────
-  const _mBossEncs = (typeof BOSS_BY_CARD !== 'undefined') ? (BOSS_BY_CARD[name] || []) : [];
+  const _mBossEncs = (typeof BOSS_BY_CARD !== 'undefined') ? (BOSS_BY_CARD[name.toLowerCase()] || []) : [];
   if (_mBossEncs.length) {
     const BOSS_ROLE_LABEL = {monster:'Boss Room',kc:'Kill Count',item:'Required Item',tool:'Tool',optional:'Optional',related:'Related',warm:'Warm Clothing',light:'Light Source',dragonfire:'Dragonfire Protection'};
     html += `<h2 style="font-size:12px;text-transform:uppercase;letter-spacing:1px;color:#555;margin:20px 0 8px;padding-top:16px;border-top:1px solid #222">Boss Encounters</h2>`;
@@ -3486,7 +3509,7 @@ function renderMonster(name, container) {
   }
 
   // ── Diary Requirements cross-link ─────────────────────────────────────────
-  const _mDiaryEncs = (typeof DIARY_BY_CARD !== 'undefined') ? (DIARY_BY_CARD[name] || []) : [];
+  const _mDiaryEncs = (typeof DIARY_BY_CARD !== 'undefined') ? (DIARY_BY_CARD[name.toLowerCase()] || []) : [];
   if (_mDiaryEncs.length) {
     const DTIER_COLOR_M = {easy:'#50c050',medium:'#c8c030',hard:'#4080c0',elite:'#9050d0'};
     html += `<h2 style="font-size:12px;text-transform:uppercase;letter-spacing:1px;color:#555;margin:20px 0 8px;padding-top:16px;border-top:1px solid #222">Diary Requirements</h2>`;
@@ -4761,7 +4784,7 @@ function renderItem(name, container) {
   html += clueStepUsageHtml(name);
 
   // ── Boss Encounters cross-link ─────────────────────────────────────────────
-  const _iBossEncs = (typeof BOSS_BY_CARD !== 'undefined') ? (BOSS_BY_CARD[name] || []) : [];
+  const _iBossEncs = (typeof BOSS_BY_CARD !== 'undefined') ? (BOSS_BY_CARD[name.toLowerCase()] || []) : [];
   if (_iBossEncs.length) {
     const ROLE_LABEL = {monster:'Boss Room',kc:'Kill Count',item:'Required Item',tool:'Tool',optional:'Optional',related:'Related',warm:'Warm Clothing',light:'Light Source',dragonfire:'Dragonfire Protection'};
     html += `<div class="section"><div class="section-header">Boss Encounters</div><div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:4px">`;
@@ -4773,8 +4796,21 @@ function renderItem(name, container) {
     html += `</div></div>`;
   }
 
+  // ── Boss rewards (raid chests, Barrows, Moons, Gauntlet…) ──────────────────
+  const _iBossRewards = _bossRewardsFor(name);
+  if (_iBossRewards.length) {
+    html += `<div class="section"><div class="section-header">Boss Rewards</div><div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:4px">`;
+    for (const { bossName, source, drop } of _iBossRewards) {
+      const rarity = drop.rarity, tip = [source, _lootTip(drop)].filter(Boolean).join('\n');
+      html += `<span data-boss="${escHtml(bossName)}" onclick="showBoss(this.dataset.boss);event.stopPropagation()"
+        style="display:inline-flex;align-items:center;gap:5px;font-size:11px;color:#aaa;background:#161616;border:1px solid #2a2a2a;border-radius:3px;padding:3px 9px;cursor:pointer;white-space:nowrap"
+        title="${escHtml(tip)}">${escHtml(bossName)} <span class="rarity-badge ${rarityClass(rarity)}" style="font-size:9px">${escHtml(rarity)}${rarity === 'Unique' && drop.fraction ? ' ' + escHtml(drop.fraction) : ''}</span></span>`;
+    }
+    html += `</div></div>`;
+  }
+
   // ── Diary Requirements cross-link ──────────────────────────────────────────
-  const _iDiaryEncs = (typeof DIARY_BY_CARD !== 'undefined') ? (DIARY_BY_CARD[name] || []) : [];
+  const _iDiaryEncs = (typeof DIARY_BY_CARD !== 'undefined') ? (DIARY_BY_CARD[name.toLowerCase()] || []) : [];
   if (_iDiaryEncs.length) {
     const DTIER_COLOR = {easy:'#50c050',medium:'#c8c030',hard:'#4080c0',elite:'#9050d0'};
     html += `<div class="section"><div class="section-header">Diary Requirements</div><div style="display:flex;flex-direction:column;gap:4px;margin-top:4px">`;
@@ -5554,11 +5590,15 @@ const SLAYER_CARD_GATES = {
   'Cerberus':             {skills:{Slayer:91}},
 };
 
+// Case-insensitive gate lookup (card names in data may differ in case from the catalog).
+const _SLAYER_GATES_LC = Object.fromEntries(Object.entries(SLAYER_CARD_GATES).map(([k,v]) => [k.toLowerCase(), v]));
+function _slayerGate(card) { return _SLAYER_GATES_LC[card.toLowerCase()] || null; }
+
 // Returns true if card is owned AND all access gates are met.
 // For cards with no entry in SLAYER_CARD_GATES, equivalent to isOwned(card).
 function _slayerCardFeasible(card) {
   if (!isOwned(card)) return false;
-  const gate = SLAYER_CARD_GATES[card];
+  const gate = _slayerGate(card);
   if (!gate) return true;
   if ((gate.quests || []).some(q => !completedQuests.has(q))) return false;
   if (Object.entries(gate.skills || {}).some(([s,l]) => getLevel(s) < l)) return false;
@@ -5616,7 +5656,7 @@ const SLAYER_TASKS = {
       {task:'Ghouls',          cards:['Ghoul'],                                                          weight:7},
       {task:'Hill Giants',     cards:['Hill Giant'],                                                     weight:7},
       {task:'Hobgoblins',      cards:['Hobgoblin','Hobgoblin Champion'],                                                      weight:7},
-      {task:'Ice warriors',    cards:['Ice Warrior'],                                                    weight:7},
+      {task:'Ice warriors',    cards:['Ice warrior'],                                                    weight:7},
       {task:'Kalphite',        cards:['Kalphite Worker','Kalphite Soldier','Kalphite Guardian','Kalphite Queen'], weight:6},
       {task:'Killerwatts',     cards:['Killerwatt'],                                                     weight:6},
       {task:'Lizards',         cards:['Desert Lizard','Sulphur Lizard','Cave lizard','Grimy Lizard'],                                         weight:8},
@@ -5654,9 +5694,9 @@ const SLAYER_TASKS = {
       {task:'Dogs',                cards:['Wild dog','Guard dog','Jackal'],                                                        weight:7},
       {task:'Dust devils',         cards:['Dust devil'],                                                 weight:8},
       {task:'Dwarves',             cards:['Dwarf','Chaos dwarf'],                                                      weight:7},
-      {task:'Earth warriors',      cards:['Earth Warrior'],                                              weight:8},
-      {task:'Elves',               cards:['Elf'],                                                        weight:8},
-      {task:'Fire giants',         cards:['Fire Giant'],                                                 weight:8},
+      {task:'Earth warriors',      cards:['Earth warrior'],                                              weight:8},
+      {task:'Elves',               cards:['Elf Warrior','Elf Archer','Iorwerth Warrior','Iorwerth Archer'],                                                        weight:8},
+      {task:'Fire giants',         cards:['Fire giant'],                                                 weight:8},
       {task:'Flesh Crawlers',      cards:['Flesh Crawler'],                                              weight:7},
       {task:'Gargoyles',           cards:['Gargoyle'],                                                   weight:5},
       {task:'Ghosts',              cards:['Ghost','Tortured soul'],                                                      weight:7},
@@ -5667,8 +5707,8 @@ const SLAYER_TASKS = {
       {task:'Hellhounds',          cards:['Hellhound','Skeleton Hellhound','Greater Skeleton Hellhound','Cerberus'],                                                  weight:8},
       {task:'Hill giants',         cards:['Hill Giant'],                                                 weight:7},
       {task:'Hobgoblins',          cards:['Hobgoblin','Hobgoblin Champion'],                                                  weight:7},
-      {task:'Ice giants',          cards:['Ice Giant'],                                                  weight:7},
-      {task:'Ice warriors',        cards:['Ice Warrior'],                                                weight:7},
+      {task:'Ice giants',          cards:['Ice giant'],                                                  weight:7},
+      {task:'Ice warriors',        cards:['Ice warrior'],                                                weight:7},
       {task:'Infernal Mages',      cards:['Infernal Mage'],                                             weight:8},
       {task:'Jellies',             cards:['Jelly'],                                                      weight:8},
       {task:'Kalphite',            cards:['Kalphite Worker','Kalphite Soldier','Kalphite Guardian','Kalphite Queen'], weight:7},
@@ -5701,27 +5741,27 @@ const SLAYER_TASKS = {
       {task:'Abyssal demons',      cards:['Abyssal demon'],                                              weight:12},
       {task:'Aviansie',            cards:['Aviansie'],                                                   weight:9},
       {task:'Banshees',            cards:['Banshee','Twisted Banshee','Screaming banshee','Screaming twisted banshee'],                                                    weight:8},
-      {task:'Black demons',        cards:['Black Demon'],                                                weight:10},
+      {task:'Black demons',        cards:['Black demon'],                                                weight:10},
       {task:'Black dragons',       cards:['Black dragon','Baby black dragon'],                           weight:8},
       {task:'Bloodveld',           cards:['Bloodveld'],                                                  weight:10},
       {task:'Blue dragons',        cards:['Baby blue dragon','Blue dragon'],                             weight:8},
-      {task:'Cave horrors',        cards:['Cave Horror'],                                                weight:10},
-      {task:'Cave kraken',         cards:['Cave Kraken'],                                               weight:12},
+      {task:'Cave horrors',        cards:['Cave horror'],                                                weight:10},
+      {task:'Cave kraken',         cards:['Cave kraken'],                                               weight:12},
       {task:'Dagannoth',           cards:['Dagannoth','Dagannoth Prime','Dagannoth Rex','Dagannoth Supreme','Dagannoth spawn','Dagannoth fledgeling','Dagannoth mother'], weight:11},
-      {task:'Dark beasts',         cards:['Dark Beast'],                                                 weight:10},
+      {task:'Dark beasts',         cards:['Dark beast'],                                                 weight:10},
       {task:'Dust devils',         cards:['Dust devil'],                                                 weight:12},
-      {task:'Elves',               cards:['Elf'],                                                        weight:10},
-      {task:'Fire giants',         cards:['Fire Giant'],                                                 weight:12},
+      {task:'Elves',               cards:['Elf Warrior','Elf Archer','Iorwerth Warrior','Iorwerth Archer'],                                                        weight:10},
+      {task:'Fire giants',         cards:['Fire giant'],                                                 weight:12},
       {task:'Gargoyles',           cards:['Gargoyle'],                                                   weight:11},
       {task:'Grotesque Guardians', cards:['Dusk','Dawn'],                                                weight:5},
       {task:'Hellhounds',          cards:['Hellhound','Skeleton Hellhound','Greater Skeleton Hellhound','Cerberus'],                                                  weight:12},
       {task:'Hydra',               cards:['Hydra'],                                                      weight:15},
       {task:'Jellies',             cards:['Jelly'],                                                      weight:12},
       {task:'Kurask',              cards:['Kurask'],                                                     weight:12},
-      {task:'Lizardmen',           cards:['Lizardman','Lizardman Brute','Lizardman Shaman'],             weight:10},
+      {task:'Lizardmen',           cards:['Lizardman','Lizardman brute','Lizardman shaman'],             weight:10},
       {task:'Nechryael',           cards:['Nechryael'],                                                  weight:12},
       {task:'Smoke devils',        cards:['Smoke devil'],                                                weight:12},
-      {task:'Spiritual creatures', cards:['Spiritual warrior','Spiritual ranger','Spiritual mage'],      weight:12},
+      {task:'Spiritual creatures', cards:['Spiritual Warrior','Spiritual Ranger','Spiritual Mage'],      weight:12},
       {task:'Turoth',              cards:['Turoth'],                                                     weight:12},
       {task:'Waterfiends',         cards:['Waterfiend'],                                                 weight:9},
     ]
@@ -5733,33 +5773,33 @@ const SLAYER_TASKS = {
       {task:'Adamant dragons',     cards:['Adamant dragon'],                                             weight:5},
       {task:'Ankou',               cards:['Ankou'],                                                      weight:5},
       {task:'Basilisks',           cards:['Basilisk'],                                                   weight:7},
-      {task:'Black demons',        cards:['Black Demon'],                                                weight:9},
+      {task:'Black demons',        cards:['Black demon'],                                                weight:9},
       {task:'Black dragons',       cards:['Black dragon','Baby black dragon'],                           weight:9},
       {task:'Blue dragons',        cards:['Baby blue dragon','Blue dragon'],                             weight:9},
-      {task:'Cave horrors',        cards:['Cave Horror'],                                                weight:5},
-      {task:'Cave kraken',         cards:['Cave Kraken'],                                               weight:9},
+      {task:'Cave horrors',        cards:['Cave horror'],                                                weight:5},
+      {task:'Cave kraken',         cards:['Cave kraken'],                                               weight:9},
       {task:'Dagannoth',           cards:['Dagannoth','Dagannoth Prime','Dagannoth Rex','Dagannoth Supreme','Dagannoth spawn','Dagannoth fledgeling','Dagannoth mother'], weight:9},
-      {task:'Dark beasts',         cards:['Dark Beast'],                                                 weight:9},
+      {task:'Dark beasts',         cards:['Dark beast'],                                                 weight:9},
       {task:'Drake',               cards:['Drake'],                                                      weight:10},
       {task:'Dust devils',         cards:['Dust devil'],                                                 weight:9},
-      {task:'Elves',               cards:['Elf'],                                                        weight:5},
-      {task:'Fire giants',         cards:['Fire Giant'],                                                 weight:9},
+      {task:'Elves',               cards:['Elf Warrior','Elf Archer','Iorwerth Warrior','Iorwerth Archer'],                                                        weight:5},
+      {task:'Fire giants',         cards:['Fire giant'],                                                 weight:9},
       {task:'Fossil Island wyverns',cards:['Ancient Wyvern','Long-tailed Wyvern','Spitting Wyvern','Taloned Wyvern'], weight:5},
       {task:'Gargoyles',           cards:['Gargoyle'],                                                   weight:7},
-      {task:'Greater demons',      cards:['Greater Demon'],                                              weight:9},
+      {task:'Greater demons',      cards:['Greater demon'],                                              weight:9},
       {task:'Hellhounds',          cards:['Hellhound','Skeleton Hellhound','Greater Skeleton Hellhound','Cerberus'],                                                  weight:9},
       {task:'Hydras',              cards:['Hydra'],                                                      weight:10},
       {task:'Iron dragons',        cards:['Iron dragon'],                                                weight:9},
       {task:'Jellies',             cards:['Jelly'],                                                      weight:5},
       {task:'Kurask',              cards:['Kurask'],                                                     weight:5},
-      {task:'Lizardmen',           cards:['Lizardman','Lizardman Brute','Lizardman Shaman'],             weight:10},
+      {task:'Lizardmen',           cards:['Lizardman','Lizardman brute','Lizardman shaman'],             weight:10},
       {task:'Metal dragons',       cards:['Iron dragon','Steel dragon','Mithril dragon','Adamant dragon','Rune dragon'], weight:15},
       {task:'Nechryael',           cards:['Nechryael'],                                                  weight:9},
       {task:'Rune dragons',        cards:['Rune dragon'],                                                weight:5},
       {task:'Skeletal wyverns',    cards:['Skeletal Wyvern'],                                            weight:5},
       {task:'Smoke devils',        cards:['Smoke devil'],                                                weight:9},
       {task:'Steel dragons',       cards:['Steel dragon'],                                               weight:9},
-      {task:'Sulphur lizards',     cards:['Sulphur lizard'],                                             weight:5},
+      {task:'Sulphur lizards',     cards:['Sulphur Lizard'],                                             weight:5},
       {task:'Wyrms',               cards:['Wyrm'],                                                       weight:10},
     ]
   },
@@ -5769,29 +5809,29 @@ const SLAYER_TASKS = {
       {task:'Abyssal demons',      cards:['Abyssal demon'],                                              weight:9},
       {task:'Ankou',               cards:['Ankou'],                                                      weight:5},
       {task:'Aviansie',            cards:['Aviansie'],                                                   weight:8},
-      {task:'Black demons',        cards:['Black Demon'],                                                weight:9},
+      {task:'Black demons',        cards:['Black demon'],                                                weight:9},
       {task:'Bloodveld',           cards:['Bloodveld'],                                                  weight:9},
       {task:'Blue dragons',        cards:['Baby blue dragon','Blue dragon'],                             weight:4},
-      {task:'Cave horrors',        cards:['Cave Horror'],                                                weight:5},
-      {task:'Cave kraken',         cards:['Cave Kraken'],                                               weight:9},
+      {task:'Cave horrors',        cards:['Cave horror'],                                                weight:5},
+      {task:'Cave kraken',         cards:['Cave kraken'],                                               weight:9},
       {task:'Dagannoth',           cards:['Dagannoth','Dagannoth Prime','Dagannoth Rex','Dagannoth Supreme','Dagannoth spawn','Dagannoth fledgeling','Dagannoth mother'], weight:9},
-      {task:'Dark beasts',         cards:['Dark Beast'],                                                 weight:9},
+      {task:'Dark beasts',         cards:['Dark beast'],                                                 weight:9},
       {task:'Dust devils',         cards:['Dust devil'],                                                 weight:9},
-      {task:'Elves',               cards:['Elf'],                                                        weight:9},
-      {task:'Fire giants',         cards:['Fire Giant'],                                                 weight:9},
+      {task:'Elves',               cards:['Elf Warrior','Elf Archer','Iorwerth Warrior','Iorwerth Archer'],                                                        weight:9},
+      {task:'Fire giants',         cards:['Fire giant'],                                                 weight:9},
       {task:'Fossil Island wyverns',cards:['Ancient Wyvern','Long-tailed Wyvern','Spitting Wyvern','Taloned Wyvern'], weight:5},
       {task:'Gargoyles',           cards:['Gargoyle'],                                                   weight:8},
-      {task:'Greater demons',      cards:['Greater Demon'],                                              weight:9},
+      {task:'Greater demons',      cards:['Greater demon'],                                              weight:9},
       {task:'Hellhounds',          cards:['Hellhound','Skeleton Hellhound','Greater Skeleton Hellhound','Cerberus'],                                                  weight:8},
       {task:'Iron dragons',        cards:['Iron dragon'],                                                weight:5},
       {task:'Kalphite',            cards:['Kalphite Worker','Kalphite Soldier','Kalphite Guardian','Kalphite Queen'], weight:9},
       {task:'Kurask',              cards:['Kurask'],                                                     weight:4},
-      {task:'Lizardmen',           cards:['Lizardman','Lizardman Brute','Lizardman Shaman'],             weight:9},
+      {task:'Lizardmen',           cards:['Lizardman','Lizardman brute','Lizardman shaman'],             weight:9},
       {task:'Metal dragons',       cards:['Iron dragon','Steel dragon','Mithril dragon','Adamant dragon'], weight:12},
       {task:'Nechryael',           cards:['Nechryael'],                                                  weight:9},
       {task:'Skeletal wyverns',    cards:['Skeletal Wyvern'],                                            weight:5},
       {task:'Smoke devils',        cards:['Smoke devil'],                                                weight:9},
-      {task:'Spiritual creatures', cards:['Spiritual warrior','Spiritual ranger','Spiritual mage'],      weight:9},
+      {task:'Spiritual creatures', cards:['Spiritual Warrior','Spiritual Ranger','Spiritual Mage'],      weight:9},
       {task:'Steel dragons',       cards:['Steel dragon'],                                               weight:5},
       {task:'TzHaar',              cards:['TzHaar-Ket','TzHaar-Xil','TzHaar-Mej','TzHaar-Hur','TzTok-Jad','TzKal-Zuk'],                     weight:10},
       {task:'Waterfiends',         cards:['Waterfiend'],                                                 weight:5},
@@ -5805,33 +5845,33 @@ const SLAYER_TASKS = {
       {task:'Ankou',               cards:['Ankou'],                                                      weight:5},
       {task:'Araxytes',            cards:['Araxxor','Araxyte'],                                          weight:10},
       {task:'Aviansie',            cards:['Aviansie'],                                                   weight:8},
-      {task:'Black demons',        cards:['Black Demon'],                                                weight:12},
+      {task:'Black demons',        cards:['Black demon'],                                                weight:12},
       {task:'Black dragons',       cards:['Black dragon','Baby black dragon'],                           weight:9},
       {task:'Bloodveld',           cards:['Bloodveld'],                                                  weight:10},
       {task:'Blue dragons',        cards:['Baby blue dragon','Blue dragon'],                             weight:4},
-      {task:'Cave horrors',        cards:['Cave Horror'],                                                weight:5},
-      {task:'Cave kraken',         cards:['Cave Kraken'],                                               weight:10},
+      {task:'Cave horrors',        cards:['Cave horror'],                                                weight:5},
+      {task:'Cave kraken',         cards:['Cave kraken'],                                               weight:10},
       {task:'Dagannoth',           cards:['Dagannoth','Dagannoth Prime','Dagannoth Rex','Dagannoth Supreme','Dagannoth spawn','Dagannoth fledgeling','Dagannoth mother'], weight:12},
-      {task:'Dark beasts',         cards:['Dark Beast'],                                                 weight:11},
+      {task:'Dark beasts',         cards:['Dark beast'],                                                 weight:11},
       {task:'Dust devils',         cards:['Dust devil'],                                                 weight:8},
-      {task:'Elves',               cards:['Elf'],                                                        weight:8},
-      {task:'Fire giants',         cards:['Fire Giant'],                                                 weight:8},
+      {task:'Elves',               cards:['Elf Warrior','Elf Archer','Iorwerth Warrior','Iorwerth Archer'],                                                        weight:8},
+      {task:'Fire giants',         cards:['Fire giant'],                                                 weight:8},
       {task:'Fossil Island wyverns',cards:['Ancient Wyvern','Long-tailed Wyvern','Spitting Wyvern','Taloned Wyvern'], weight:5},
       {task:'Gargoyles',           cards:['Gargoyle'],                                                   weight:10},
-      {task:'Greater demons',      cards:['Greater Demon'],                                              weight:9},
+      {task:'Greater demons',      cards:['Greater demon'],                                              weight:9},
       {task:'Hellhounds',          cards:['Hellhound','Skeleton Hellhound','Greater Skeleton Hellhound','Cerberus'],                                                  weight:10},
       {task:'Hydras',              cards:['Hydra'],                                                      weight:10},
       {task:'Iron dragons',        cards:['Iron dragon'],                                                weight:5},
       {task:'Kalphite',            cards:['Kalphite Worker','Kalphite Soldier','Kalphite Guardian','Kalphite Queen'], weight:8},
       {task:'Kurask',              cards:['Kurask'],                                                     weight:4},
-      {task:'Lizardmen',           cards:['Lizardman','Lizardman Brute','Lizardman Shaman'],             weight:10},
+      {task:'Lizardmen',           cards:['Lizardman','Lizardman brute','Lizardman shaman'],             weight:10},
       {task:'Metal dragons',       cards:['Iron dragon','Steel dragon','Mithril dragon','Adamant dragon','Rune dragon'], weight:14},
-      {task:'Mutated zygomites',   cards:['Mutated zygomite'],                                          weight:2},
+      {task:'Mutated zygomites',   cards:['Zygomite'],                                          weight:2},
       {task:'Nechryael',           cards:['Nechryael'],                                                  weight:12},
       {task:'Rune dragons',        cards:['Rune dragon'],                                                weight:6},
       {task:'Skeletal wyverns',    cards:['Skeletal Wyvern'],                                            weight:5},
       {task:'Smoke devils',        cards:['Smoke devil'],                                                weight:10},
-      {task:'Spiritual creatures', cards:['Spiritual warrior','Spiritual ranger','Spiritual mage'],      weight:8},
+      {task:'Spiritual creatures', cards:['Spiritual Warrior','Spiritual Ranger','Spiritual Mage'],      weight:8},
       {task:'Steel dragons',       cards:['Steel dragon'],                                               weight:5},
       {task:'TzHaar',              cards:['TzHaar-Ket','TzHaar-Xil','TzHaar-Mej','TzHaar-Hur','TzTok-Jad','TzKal-Zuk'],                     weight:10},
       {task:'Waterfiends',         cards:['Waterfiend'],                                                 weight:5},
@@ -5847,17 +5887,18 @@ const SLAYER_TASKS = {
 // area: key into AREA_GATES
 // cardsMode: 'all' (default) or 'any1' (just need one)
 const BOSS_DATA = [
-  // ── Raids & instanced content ───────────────────────────────────────────
-  { name:'Fight Caves',           category:'raid',
+  // ── Wave content (Fight Caves, Inferno, Colosseum) — category:'wave' ──────
+  { name:'Fight Caves',           category:'wave',
     monsters:['Tz-Kih','Tz-Kek','Tok-Xil','Yt-MejKot','Ket-Zek','Yt-HurKot','TzTok-Jad'],
     note:'Solo wave content — all spawn cards required' },
-  { name:'Inferno',               category:'raid',
+  { name:'Inferno',               category:'wave',
     items:['Fire cape'],
     monsters:['Jal-Nib','Jal-MejRah','Jal-Ak','Jal-ImKot','Jal-Xil','Jal-Zek','JalTok-Jad','Jal-MejJak','Jal-AkRek-Mej','Jal-AkRek-Ket','Jal-AkRek-Xil','TzKal-Zuk','Yt-HurKot'],
     note:'Fire Cape consumed on entry — one-time cost to unlock access to TzHaar-Ket-Keh.' },
-  { name:'Fortis Colosseum',      category:'raid', area:'Varlamore', quests:['Children of the Sun'],
+  { name:'Fortis Colosseum',      category:'wave', area:'Varlamore', quests:['Children of the Sun'],
     monsters:['Fremennik warband archer','Fremennik warband berserker','Fremennik warband seer','Jaguar warrior','Javelin Colossus','Manticore','Minotaur','Serpent shaman','Shockwave Colossus','Sol Heredit'],
     note:'Children of the Sun required. Solo wave content — all 11 waves before Sol Heredit.' },
+  // ── Raids (CoX, ToB, ToA) — category:'raid' ─────────────────────────────
   { name:'Chambers of Xeric',     category:'raid', area:'Kourend',
     monsters:['Ice demon','Muttadile','Skeletal Mystics','Tekton','Vasa Nistirio','Vespula','Scavenger beast','Lizardman shaman','Great Olm'],
     relatedCards:['Overload',"Xeric's aid",'Prayer enhance','Stinkhorn mushroom','Cicely','Endarkened juice','Kindling','Mallignum root plank'],
@@ -5869,14 +5910,15 @@ const BOSS_DATA = [
     monsters:['Akkha','Ba-Ba','Kephri','Zebak','The Wardens','Baboon Brawler','Baboon Mage','Baboon Thrower','Baboon Thrall','Baboon Shaman','Cursed Baboon','Volatile Baboon','Agile Scarab','Arcane Scarab','Soldier Scarab','Spitting Scarab','Scarab','Scarab Swarm','Crocodile'],
     relatedCards:['Honey locust','Ambrosia','Silk dressing','Nectar','Blessed crystal scarab','Smelling salts','Liquid adrenaline'],
     note:'Beneath Cursed Sands required to access. The Helpful Spirit provides supplies mid-raid — need the cards to pick them up.' },
-  { name:'The Gauntlet',          category:'raid', area:'Prifddinas', quests:['Song of the Elves'],
+  // ── Minigames / instances (Gauntlet, BA) — category:'minigame' ──────────
+  { name:'The Gauntlet',          category:'minigame', area:'Prifddinas', quests:['Song of the Elves'],
     monsters:['Crystalline Hunllef','Crystalline Spider','Crystalline Rat','Crystalline Bat','Crystalline Unicorn','Crystalline Scorpion','Crystalline Wolf','Crystalline Bear','Crystalline Dragon','Crystalline Dark Beast'],
     relatedCards:['Egniol potion'],
     note:'No items brought in — all equipment gathered inside. Kill crystalline creatures to gather resources and craft equipment before facing the Hunllef. Egniol potion (from Grym leaf inside) is the only healing available.' },
-  { name:'Corrupted Gauntlet',    category:'raid', area:'Prifddinas', quests:['Song of the Elves'],
+  { name:'Corrupted Gauntlet',    category:'minigame', area:'Prifddinas', quests:['Song of the Elves'],
     monsters:['Corrupted Hunllef','Corrupted Bat','Corrupted Bear','Corrupted Dark Beast','Corrupted Dragon','Corrupted Rat','Corrupted Scorpion','Corrupted Spider','Corrupted Unicorn','Corrupted Wolf'],
     note:'All corrupted creature cards required' },
-  { name:'Barbarian Assault',     category:'raid', area:'Kandarin',
+  { name:'Barbarian Assault',     category:'minigame', area:'Kandarin',
     monsters:['Penance Fighter','Penance Healer','Penance Ranger','Penance Runner','Penance Queen'],
     relatedCards:['Fighter hat','Ranger hat','Healer hat','Runner hat','Penance gloves','Penance skirt','Granite body','Pet penance queen'],
     note:'Team minigame — 10 waves. Penance Queen appears in wave 10. Honour point rewards require killing all Penance types.' },
@@ -5906,183 +5948,241 @@ const BOSS_DATA = [
     monsters:['Hespori'],
     items:['Hespori seed','Rake','Seed dibber','Spade'],
     note:'Clear the cave patch with a rake, plant the seed with a seed dibber, wait ~22 hours for growth, then use a spade to awaken the boss.' },
-  { name:'Amoxliatl',             category:'skilling', area:'Varlamore',
-    levels:{Slayer:48, Attack:60, Strength:60, Prayer:37},
+  { name:'Amoxliatl',             category:'boss', sub:'low', area:'Varlamore',
+    levels:{Slayer:48},
     monsters:['Amoxliatl'],
     quests:['The Heart of Darkness'],
     note:'The Heart of Darkness quest required to access the boss. Frost Nagua in the Ruins of Tapoyauik — uses crush attacks, protect from magic recommended.' },
 
   // ── Regular bosses ──────────────────────────────────────────────────────
-  { name:'Barrows',               category:'boss', area:'Morytania',
+  { name:'Barrows',               category:'boss', sub:'mid', area:'Morytania',
     monsters:['Ahrim the Blighted','Dharok the Wretched','Guthan the Infested','Karil the Tainted','Torag the Corrupted','Verac the Defiled','Crypt rat','Crypt spider','Bloodworm','Giant crypt rat','Giant crypt spider'],
     items:['Spade'],
     note:'All 6 brothers for full chest rewards. Crypt tunnels also contain Crypt spiders, Bloodworms, and Giant variants.' },
-  { name:'Obor',                  category:'boss',
+  { name:'Obor',                  category:'boss', sub:'low',
     kcMonsters:['Hill Giant'],
     monsters:['Obor'],
     items:['Giant key'],
     note:'Giant key dropped by Hill Giants — required to enter the lair in Edgeville Dungeon.' },
-  { name:'Bryophyta',             category:'boss',
+  { name:'Bryophyta',             category:'boss', sub:'low',
     kcMonsters:['Moss Giant'],
     monsters:['Bryophyta','Growthling'],
     items:['Mossy key','Magic secateurs'],
     note:'Mossy key dropped by Moss Giants — required to enter the lair. Growthlings spawn during the fight; Bryophyta is immune while they live, and they can only be effectively killed with Magic Secateurs.' },
-  { name:'Giant Mole',            category:'boss',
+  { name:'Giant Mole',            category:'boss', sub:'low',
     monsters:['Giant Mole'], items:['Spade'], optionalItems:['Tinderbox'],
     lightSource:true,
     note:'Spade to dig up mole hills. A light source is required to navigate the dark tunnels — Tinderbox needed unless your light source is self-illuminating (Mining helmet, Firemaking cape).' },
-  { name:'Kalphite Queen',        category:'boss',
+  { name:'Kalphite Queen',        category:'boss', sub:'mid',
     monsters:['Kalphite Queen'],
     items:['Rope'],
     note:'Two ropes required on first visit to enter the lair (become permanent after Hard Desert Diary).' },
-  { name:'King Black Dragon',     category:'boss',
+  { name:'King Black Dragon',     category:'boss', sub:'mid',
     monsters:['King Black Dragon'],
     dragonfire: true,
     note:'Edgeville Dungeon — dragonfire protection required. Super antifire works standalone; regular antifire needs a shield for full protection.' },
-  { name:'Sarachnis',             category:'boss', area:'Kourend',
+  { name:'Sarachnis',             category:'boss', sub:'mid', area:'Kourend',
     monsters:['Sarachnis','Spawn of Sarachnis'],
     note:'Forthos Dungeon, Great Kourend. A slash weapon or knife is needed to cut webs blocking the entrance (Aranea Boots bypass this).' },
-  { name:'Dagannoth Kings',       category:'boss', area:'Waterbirth Island',
+  { name:'Dagannoth Kings',       category:'boss', sub:'mid', area:'Waterbirth Island',
+    lootFrom:['Dagannoth Rex','Dagannoth Prime','Dagannoth Supreme'],
     monsters:['Dagannoth Rex','Dagannoth Prime','Dagannoth Supreme'],
     optionalItems:['Thrownaxe'],
-    relatedCards:['Dagannoth','Dagannoth spawn','Dagannoth fledgeling','Giant rock crab','Rock lobster'],
+    relatedCards:['Dagannoth','Dagannoth spawn','Dagannoth fledgeling','Giant Rock Crab','Rock lobster'],
     note:'Waterbirth Island — all three kings. Thrownaxe needed to operate door switches in the dungeon solo (optional with a companion). Tunnel monsters shown for reference — cards needed to fight through.' },
-  { name:'Corporeal Beast',       category:'boss',
+  { name:'Corporeal Beast',       category:'boss', sub:'high',
     monsters:['Corporeal Beast','Dark energy core'],
     note:'Dark energy core spawns during the fight and leeches HP to heal Corp — must be killed.' },
-  { name:'General Graardor',      category:'boss',
+  { name:'General Graardor',      category:'boss', sub:'gwd',
     levels:{Strength:70},
     kcMonsters:['Goblin','Hobgoblin','Ogre','Jogre','Cyclops','Ork','Spiritual Mage','Spiritual Ranger','Spiritual Warrior'],
     monsters:['General Graardor','Sergeant Strongstack','Sergeant Steelwill','Sergeant Grimspike'],
     note:'40 Bandos KC to enter boss room. 70 Strength to enter God Wars Dungeon.' },
-  { name:"Kree'arra",             category:'boss',
+  { name:"Kree'arra",             category:'boss', sub:'gwd',
     levels:{Ranged:70},
     kcMonsters:['Aviansie','Spiritual Mage','Spiritual Ranger','Spiritual Warrior'],
     monsters:["Kree'arra",'Flight Kilisa','Flockleader Geerin','Wingman Skree'],
     note:'40 Armadyl KC to enter boss room. 70 Ranged to enter God Wars Dungeon via Armadyl corridor.' },
-  { name:"K'ril Tsutsaroth",      category:'boss',
+  { name:"K'ril Tsutsaroth",      category:'boss', sub:'gwd',
     kcMonsters:['Imp','Icefiend','Pyrefiend','Feral Vampyre','Bloodveld','Werewolf','Hellhound','Gorak','Spiritual Mage','Spiritual Ranger','Spiritual Warrior'],
     monsters:["K'ril Tsutsaroth",'Tstanon Karlak','Balfrug Kreeyath',"Zakl'n Gritch"],
     note:'40 Zamorak KC to enter boss room. Imp (lv7) is the lowest-level option.' },
-  { name:'Commander Zilyana',     category:'boss',
+  { name:'Commander Zilyana',     category:'boss', sub:'gwd',
     levels:{Agility:70},
     kcMonsters:['Knight of Saradomin','Saradomin priest','Spiritual Mage','Spiritual Ranger','Spiritual Warrior'],
     monsters:['Commander Zilyana','Starlight','Bree','Growler'],
     items:['Rope'],
     note:'40 Saradomin KC to enter boss room. 70 Agility for stepping stones shortcut. Rope required on first visit to cross the bridge.' },
-  { name:'Nex',                   category:'boss',
+  { name:'Nex',                   category:'boss', sub:'gwd',
     kcMonsters:['Spiritual Mage','Spiritual Ranger','Spiritual Warrior','Blood Reaver'],
     monsters:['Nex','Fumus','Umbra','Cruor','Glacies'],
     items:['Ecumenical key'],
     note:'40 Zarosian KC in the Ancient Prison (Spiritual Mage/Ranger/Warrior or Blood Reaver), or use an Ecumenical key to bypass. Fumus, Umbra, Cruor and Glacies spawn sequentially during the fight.' },
-  { name:'Zulrah',                category:'boss', quests:['Regicide'],
+  { name:'Zulrah',                category:'boss', sub:'high', quests:['Regicide'],
     monsters:['Zulrah','Snakeling'],
     note:'Zul-Andra via Regicide. Snakelings spawn during the fight.' },
-  { name:'Vorkath',               category:'boss', quests:['Dragon Slayer II'],
+  { name:'Vorkath',               category:'boss', sub:'high', quests:['Dragon Slayer II'],
     monsters:['Vorkath','Zombified Spawn'],
     dragonfire: true,
     note:'Dragon Slayer II required — Ungael island. Dragonfire protection required. Zombified Spawn erupts periodically; Vorkath is immune until the spawn is killed.' },
-  { name:'The Nightmare',         category:'boss', area:'Morytania',
+  { name:'The Nightmare',         category:'boss', sub:'high', area:'Morytania',
     monsters:['The Nightmare','Husk','Parasite','Sleepwalker'],
     note:'Slepe in Morytania — multi-team boss. Husks, Parasites and Sleepwalkers spawn during the fight.' },
-  { name:"Phosani's Nightmare",   category:'boss', area:'Morytania',
+  { name:"Phosani's Nightmare",   category:'boss', sub:'high', area:'Morytania',
     monsters:["Phosani's Nightmare",'Husk','Parasite','Sleepwalker'],
     note:'Solo version of Nightmare. Same mechanics — Husks, Parasites and Sleepwalkers spawn during the fight.' },
-  { name:'Phantom Muspah',        category:'boss', quests:['Secrets of the North'],
+  { name:'Phantom Muspah',        category:'boss', sub:'high', quests:['Secrets of the North'],
     monsters:['Phantom Muspah'],
     note:'Secrets of the North required' },
-  { name:'Abyssal Sire',          category:'boss', levels:{Slayer:85},
-    monsters:['Abyssal Sire','Respiratory system','Tentacle','Spawn','Scion'],
+  { name:'Abyssal Sire',          category:'boss', sub:'slayer', levels:{Slayer:85},
+    monsters:['Abyssal Sire','Tentacle','Spawn','Scion'],
     note:'Slayer 85 — Abyssal Nexus. Phase 1: destroy all 4 Respiratory systems (protected by Tentacles) to stun the Sire. Spawns are launched during the fight; if left alive they mature into Scions.' },
-  { name:'Kraken',                category:'boss', levels:{Slayer:87},
+  { name:'Kraken',                category:'boss', sub:'slayer', levels:{Slayer:87},
     monsters:['Kraken','Enormous Tentacle'],
     note:'Slayer 87 — Cave Kraken task needed. Four Enormous Tentacles surround the whirlpool and must all be hit to awaken the Kraken.' },
-  { name:'Grotesque Guardians',   category:'boss', levels:{Slayer:75},
+  { name:'Grotesque Guardians',   category:'boss', sub:'slayer', levels:{Slayer:75},
     kcMonsters:['Gargoyle'],
     monsters:['Dusk','Dawn'],
     items:['Brittle key'],
     note:'Slayer 75 on a Gargoyle task. Brittle key dropped by Gargoyles — required to unlock the rooftop arena.' },
-  { name:'Thermonuclear Smoke Devil', category:'boss', levels:{Slayer:93},
+  { name:'Thermonuclear Smoke Devil', category:'boss', sub:'slayer', levels:{Slayer:93},
     monsters:['Thermonuclear smoke devil','Nuclear smoke devil'],
     items:['Facemask'],
     note:'Slayer 93 — Smoke Devil task needed. Facemask (or Slayer helmet) required to block smoke attacks; without it every hit deals unavoidable damage.' },
-  { name:'Alchemical Hydra',      category:'boss', area:'Kourend', levels:{Slayer:95},
+  { name:'Alchemical Hydra',      category:'boss', sub:'slayer', area:'Kourend', levels:{Slayer:95},
     monsters:['Alchemical Hydra'],
     items:['Boots of stone'],
     note:'Slayer 95 — Karuulm Slayer Dungeon. Boots of stone (or equivalent) required to walk on the hot dungeon floor without taking damage.' },
-  { name:'Cerberus',              category:'boss', levels:{Slayer:91},
+  { name:'Cerberus',              category:'boss', sub:'slayer', levels:{Slayer:91},
     monsters:['Cerberus'],
     note:'Slayer 91 — Hellhound task required' },
-  { name:'Desert Treasure II',    category:'boss', area:'DT2', quests:['Desert Treasure II - The Fallen Empire'],
-    monsters:['Vardorvis','Vardorvis\' Head','Large Tendril','The Whisperer','The Leviathan','Abyssal pathfinder','Duke Sucellus'],
-    note:'All four DT2 bosses. Vardorvis: severed Head and Large Tendril are active during the fight. Leviathan: Abyssal pathfinder spawns during the enrage phase.' },
-  { name:'Araxxor',               category:'boss', levels:{Slayer:92},
+  { name:'Vardorvis',             category:'boss', sub:'high', area:'DT2', quests:['Desert Treasure II - The Fallen Empire'],
+    monsters:['Vardorvis'],
+    note:'Desert Treasure II boss. Severed heads and tendrils are fight mechanics, not cards.' },
+  { name:'Duke Sucellus',         category:'boss', sub:'high', area:'DT2', quests:['Desert Treasure II - The Fallen Empire'],
+    monsters:['Duke Sucellus'],
+    note:'Desert Treasure II boss.' },
+  { name:'The Leviathan',         category:'boss', sub:'high', area:'DT2', quests:['Desert Treasure II - The Fallen Empire'],
+    monsters:['The Leviathan'],
+    note:'Desert Treasure II boss. The Abyssal pathfinder in the enrage phase is a fight mechanic, not a card.' },
+  { name:'The Whisperer',         category:'boss', sub:'high', area:'DT2', quests:['Desert Treasure II - The Fallen Empire'],
+    monsters:['The Whisperer'],
+    note:'Desert Treasure II boss.' },
+  { name:'Araxxor',               category:'boss', sub:'slayer', levels:{Slayer:92},
     monsters:['Araxxor','Acidic Araxyte','Mirrorback Araxyte','Ruptura Araxyte'],
     note:'Slayer 92 — Araxyte Lair. Eggs hatch into three araxyte types during the fight depending on the path chosen.' },
-  { name:'The Hueycoatl',         category:'boss', area:'Varlamore', quests:['Children of the Sun'],
+  { name:'The Hueycoatl',         category:'boss', sub:'mid', area:'Varlamore', quests:['Children of the Sun'],
     monsters:['The Hueycoatl'],
     note:'Children of the Sun required. Varlamore — combat serpent boss.' },
-  { name:'Demonic Gorillas',      category:'boss', area:'Ape Atoll', quests:['Monkey Madness II'],
-    monsters:['Demonic gorilla','Tortured gorilla'],
-    note:'Monkey Madness II required' },
-  { name:'Skotizo',               category:'boss', area:'Kourend',
+  { name:'Skotizo',               category:'boss', sub:'mid', area:'Kourend',
     monsters:['Skotizo','Dark Ankou'],
     items:['Dark totem'],
     note:'Dark Totem required to summon — assembled from 3 pieces dropped by Catacombs monsters. Dark Ankou can be summoned during the fight.' },
-  { name:'Scurrius',              category:'boss',
+  { name:'Scurrius',              category:'boss', sub:'low',
     monsters:['Scurrius','Giant rat'],
     note:'Varrock Sewers — Giant Rats spawn during the fight and feed Scurrius, healing it.' },
-  { name:'The Mimic',            category:'boss',
+  { name:'The Mimic',            category:'boss', sub:'mid',
     monsters:['The Mimic','Third Age Warrior','Third Age Mage','Third Age Ranger'],
     note:'Triggered by Elite or Master clue scroll casket. Third Age warriors, mages and rangers spawn inside.' },
-  { name:'Deranged Archaeologist', category:'boss', area:'Fossil Island',
+  { name:'Deranged Archaeologist', category:'boss', sub:'low', area:'Fossil Island',
     monsters:['Deranged archaeologist'],
     note:'Fossil Island — requires Bone Voyage quest to access the island.' },
-  { name:'Blood Moon',           category:'boss', quests:['Perilous Moons'],
+  { name:'Blood Moon',           category:'boss', sub:'mid', quests:['Perilous Moons'],
     monsters:['Blood Moon','Blood jaguar'],
     note:'Perilous Moons quest required. Blood Jaguars spawn during the fight.' },
-  { name:'Blue Moon',            category:'boss', quests:['Perilous Moons'],
-    monsters:['Blue Moon','Blue crab'],
+  { name:'Blue Moon',            category:'boss', sub:'mid', quests:['Perilous Moons'],
+    monsters:['Blue Moon'], relatedCards:['Blue crab'],
     note:'Perilous Moons quest required.' },
-  { name:'Eclipse Moon',         category:'boss', quests:['Perilous Moons'],
-    monsters:['Eclipse Moon','Eclipse moth'],
+  { name:'Eclipse Moon',         category:'boss', sub:'mid', quests:['Perilous Moons'],
+    monsters:['Eclipse Moon'],
     note:'Perilous Moons quest required.' },
-  { name:'Royal Titans',         category:'boss',
+  { name:'Royal Titans',         category:'boss', sub:'mid',
+    lootFrom:['Branda the Fire Queen','Eldric the Ice King'],
     monsters:['Branda the Fire Queen','Eldric the Ice King','Fire elemental','Ice elemental'],
     note:'Fire and Ice elementals spawn during the fight. Both titans must be defeated.' },
-  { name:'Yama',                 category:'boss', area:'Varlamore', quests:['A Kingdom Divided'],
+  { name:'Yama',                 category:'boss', sub:'high', area:'Varlamore', quests:['A Kingdom Divided'],
     monsters:['Yama','Judge of Yama','Void Flare'],
     note:'A Kingdom Divided quest required. Judges of Yama and Void Flares spawn during the encounter.' },
-  { name:'Gemstone Crab',        category:'boss', area:'Varlamore', quests:['Children of the Sun'],
+  { name:'Gemstone Crab',        category:'skilling', area:'Varlamore', quests:['Children of the Sun'],
     tools:['Pickaxe'],
-    monsters:['Gemstone crab'],
+    monsters:['Gemstone Crab'],
     note:'Children of the Sun required. Mining boss — a pickaxe is needed to expose its gem-encrusted shell.' },
-  { name:'Maggot King',          category:'boss', quests:['The Blood Moon Rises'],
+  { name:'Maggot King',          category:'boss', sub:'high', quests:['The Blood Moon Rises'],
     monsters:['Maggot King'],
     note:'The Blood Moon Rises quest required.' },
-  { name:'Brutus',               category:'boss',
+  { name:'Brutus',               category:'boss', sub:'low',
     monsters:['Brutus'],
     note:'Combat boss.' },
-  { name:'Mad Angel',            category:'boss',
+  { name:'Mad Angel',            category:'boss', sub:'mid',
     monsters:['Mad Angel'],
     note:'Combat boss.' },
 
   // ── Wilderness bosses ───────────────────────────────────────────────────
-  { name:'Callisto',              category:'wilderness', monsters:['Callisto'],    note:'Deep wilderness' },
-  { name:'Artio',                 category:'wilderness', monsters:['Artio'],       note:'Safer alternative — Wilderness Slayer Cave' },
-  { name:'Venenatis',             category:'wilderness', monsters:['Venenatis',"Venenatis' Spiderling"],   note:"Deep wilderness. Venenatis' Spiderlings spawn during the fight." },
-  { name:'Spindel',               category:'wilderness', monsters:['Spindel',"Spindel's Spiderling"],     note:"Safer alternative — Wilderness Slayer Cave. Spindel's Spiderlings spawn during the fight." },
-  { name:"Vet'ion",               category:'wilderness', monsters:["Vet'ion",'Skeleton Hellhound','Greater Skeleton Hellhound'],     note:"Deep wilderness. Skeleton Hellhounds and Greater Skeleton Hellhounds spawn; Vet'ion is immune to damage while they live." },
-  { name:"Calvar'ion",            category:'wilderness', monsters:["Calvar'ion",'Skeleton Hellhound'],    note:"Safer alternative — Wilderness Slayer Cave. Skeleton Hellhounds spawn during the fight." },
-  { name:'Scorpia',               category:'wilderness', monsters:['Scorpia',"Scorpia's offspring"], note:'Scorpion Pit — offspring fill the arena' },
-  { name:'Chaos Elemental',       category:'wilderness', monsters:['Chaos Elemental'], note:'Deep wilderness' },
-  { name:'Chaos Fanatic',         category:'wilderness', monsters:['Chaos Fanatic'],   note:'West of lava maze' },
-  { name:'Crazy Archaeologist',   category:'wilderness', monsters:['Crazy archaeologist'], note:'Ruins north of Graveyard of Shadows' },
-  { name:'Revenant Maledictus',  category:'wilderness', monsters:['Revenant maledictus'], note:'Wilderness — rare revenant boss encounter.' },
-  { name:'Shellbane Gryphon',    category:'wilderness', levels:{Slayer:51}, quests:['Troubled Tortugans'],
+  { name:'Callisto',              category:'boss', sub:'wilderness', monsters:['Callisto'],    note:'Deep wilderness' },
+  { name:'Artio',                 category:'boss', sub:'wilderness', monsters:['Artio'],       note:'Safer alternative — Wilderness Slayer Cave' },
+  { name:'Venenatis',             category:'boss', sub:'wilderness', monsters:['Venenatis',"Venenatis' Spiderling"],   note:"Deep wilderness. Venenatis' Spiderlings spawn during the fight." },
+  { name:'Spindel',               category:'boss', sub:'wilderness', monsters:['Spindel',"Spindel's Spiderling"],     note:"Safer alternative — Wilderness Slayer Cave. Spindel's Spiderlings spawn during the fight." },
+  { name:"Vet'ion",               category:'boss', sub:'wilderness', monsters:["Vet'ion",'Skeleton Hellhound','Greater Skeleton Hellhound'],     note:"Deep wilderness. Skeleton Hellhounds and Greater Skeleton Hellhounds spawn; Vet'ion is immune to damage while they live." },
+  { name:"Calvar'ion",            category:'boss', sub:'wilderness', monsters:["Calvar'ion",'Skeleton Hellhound'],    note:"Safer alternative — Wilderness Slayer Cave. Skeleton Hellhounds spawn during the fight." },
+  { name:'Scorpia',               category:'boss', sub:'wilderness', monsters:['Scorpia',"Scorpia's offspring"], note:'Scorpion Pit — offspring fill the arena' },
+  { name:'Chaos Elemental',       category:'boss', sub:'wilderness', monsters:['Chaos Elemental'], note:'Deep wilderness' },
+  { name:'Chaos Fanatic',         category:'boss', sub:'wilderness', monsters:['Chaos Fanatic'],   note:'West of lava maze' },
+  { name:'Crazy Archaeologist',   category:'boss', sub:'wilderness', monsters:['Crazy archaeologist'], note:'Ruins north of Graveyard of Shadows' },
+  { name:'Revenant Maledictus',  category:'boss', sub:'wilderness', monsters:['Revenant maledictus'], note:'Wilderness — rare revenant boss encounter.' },
+  { name:'Shellbane Gryphon',    category:'boss', sub:'wilderness', levels:{Slayer:51}, quests:['Troubled Tortugans'],
     monsters:['Shellbane gryphon'],
     note:'Troubled Tortugans quest required. Slayer 51 — Wilderness Slayer Cave.' },
 ];
+
+// ── Boss loot ───────────────────────────────────────────────────────────────
+// Chest/reward-based bosses (raids, Barrows, Moons, Gauntlet…) come from
+// boss_loot.json. Everything else uses the main boss monster's drop table:
+// boss.lootFrom if set, else the monster named like the boss, else monsters[0].
+// 'Unique' = share of a raid's unique roll (not a per-raid chance); 'Conditional' = consolation /
+// first-completion items (see boss_loot.json notes). Both come from generate_boss_loot.py.
+const _RARITY_RANK = {'Unique':-1, 'Extremely Rare':0, 'Very Rare':1, 'Rare':2, 'Uncommon':3, 'Common':4, 'Always':5, 'Varies':6, 'Conditional':7};
+// Tooltip text for a loot row: wiki rarity text, combined per-chest rate, wiki notes
+function _lootTip(d) {
+  const parts = [];
+  if (d.rarity === 'Unique') parts.push(`${d.fraction} of uniques`);
+  else if (d.fraction) parts.push(d.fraction + (d.rate ? ` (\u2248 ${d.rate} per chest)` : ''));
+  for (const n of (d.notes || [])) parts.push(n);
+  return parts.join('\n');
+}
+function _bossLoot(boss) {
+  const chest = bossLoot[boss.name];
+  if (chest && chest.drops) return { source: chest.source, page: chest.page, drops: chest.drops,
+                                     uniqueRoll: chest.uniqueRoll, basis: chest.basis };
+  // Otherwise: the boss monster's drop table, plus any wiki-stated extras
+  // (chest.extra — e.g. Yama's dossier-only Rite of vile transference).
+  const mons = boss.monsters || [];
+  const from = boss.lootFrom ||
+    [mons.find(m => m.toLowerCase() === boss.name.toLowerCase()) || mons[0]].filter(Boolean);
+  const seen = new Map();
+  for (const m of from) {
+    const exact = _cardInfo(m)?.exact || m;
+    for (const d of (monsterDrops[exact]?.drops || [])) {
+      if (d.fromRdt) continue;  // shared rare drop table — not boss loot
+      const prev = seen.get(d.card);
+      if (!prev || (_RARITY_RANK[d.rarity] ?? 9) < (_RARITY_RANK[prev.rarity] ?? 9)) seen.set(d.card, d);
+    }
+  }
+  for (const e of (chest?.extra || [])) if (!seen.has(e.card)) seen.set(e.card, e);
+  return { source: from.join(', '), page: null, drops: [...seen.values()] };
+}
+
+// item card name (lowercase) → [{bossName, rarity, fraction, source}] — chest loot only
+// (monster-table drops already appear as monster sources on item pages).
+let _bossLootByItem = null;
+function _bossRewardsFor(itemName) {
+  if (!_bossLootByItem) {
+    _bossLootByItem = {};
+    for (const [bossName, e] of Object.entries(bossLoot))
+      for (const d of [...(e.drops || []), ...(e.extra || [])])
+        (_bossLootByItem[d.card.toLowerCase()] ||= []).push({ bossName, source: e.source, drop: d });
+  }
+  return _bossLootByItem[itemName.toLowerCase()] || [];
+}
 
 // ── Boss ↔ card reverse lookup ─────────────────────────────────────────────
 // Maps card name → [{bossName, role}] for "Boss Encounters" cross-links.
@@ -6090,6 +6190,7 @@ var BOSS_BY_CARD = {};
 (function _buildBossByCard() {
   function _add(card, bossName, role) {
     if (!card) return;
+    card = card.toLowerCase();  // keyed lowercase — look up with name.toLowerCase()
     if (!BOSS_BY_CARD[card]) BOSS_BY_CARD[card] = [];
     BOSS_BY_CARD[card].push({ bossName, role });
   }
@@ -7155,7 +7256,7 @@ function showSkillDetail(skillName, push = true) {
 
 function evaluateBoss(boss) {
   const blockers = [];    // hard gates: quest / area / card — make boss 'locked'
-  const levelGates = [];  // skill level gates — shown as amber badges, not hard locks
+  const levelGates = [];  // skill level gates — unmet ones lock the boss, same as quests
 
   // Area gate
   if (boss.area && AREA_GATES[boss.area]) {
@@ -7178,7 +7279,7 @@ function evaluateBoss(boss) {
     if (!completedQuests.has(q) && !blockers.includes('Quest: ' + q)) blockers.push('Quest: ' + q);
   }
 
-  // Skill level requirements — informational only, not hard blockers
+  // Skill level requirements — hard access gates (Slayer bosses, GWD doors, Wintertodt…)
   for (const [skill, req] of Object.entries(boss.levels || {})) {
     const have = getLevel(skill);
     levelGates.push({ skill, have, req, ok: have >= req });
@@ -7224,7 +7325,7 @@ function evaluateBoss(boss) {
   const dfMissing    = boss.dragonfire ? DRAGONFIRE_ITEMS.filter(i => !isOwned(i)) : [];
 
   let status;
-  if (blockers.length > 0) status = 'locked';
+  if (blockers.length > 0 || levelGates.some(g => !g.ok)) status = 'locked';
   else if (missingMonsters.length > 0 || missingKcMonsters.length > 0 || missingItems.length > 0 || missingTools.length > 0
         || (boss.lightSource    && lightOwned.length === 0)
         || (boss.dragonfire && dfOwned.length === 0)) status = 'partial';
@@ -7237,9 +7338,17 @@ function evaluateBoss(boss) {
 
 const _BOSS_CATEGORIES = [
   { key:'raid',       label:'Raids' },
+  { key:'wave',       label:'Waves' },
+  { key:'minigame',   label:'Minigames' },
   { key:'skilling',   label:'Skilling' },
-  { key:'boss',       label:'Bosses' },
-  { key:'wilderness', label:'Wilderness' },
+  { key:'boss',       label:'Bosses', subs:[
+    { key:'low',        label:'Low level' },
+    { key:'mid',        label:'Mid level' },
+    { key:'high',       label:'High level' },
+    { key:'gwd',        label:'God Wars' },
+    { key:'slayer',     label:'Slayer' },
+    { key:'wilderness', label:'Wilderness' },
+  ]},
 ];
 
 function _renderBossFilterBtns() {
@@ -7273,12 +7382,8 @@ function renderBossList() {
     ? _BOSS_CATEGORIES
     : _BOSS_CATEGORIES.filter(c => c.key === bossFilter);
 
-  let html = '';
-  for (const { key, label } of cats) {
-    const bosses = BOSS_DATA.filter(b => b.category === key &&
-      (!bossSearch || b.name.toLowerCase().includes(bossSearch)));
-    if (!bosses.length) continue;
-
+  // Evaluate + sort (ready first, then by owned-card fraction)
+  function _evalSorted(bosses) {
     const evaluated = bosses.map(b => ({ boss:b, ...evaluateBoss(b) }));
     evaluated.sort((a, b) => {
       const so = ({available:0,partial:1,locked:2}[a.status]||0) - ({available:0,partial:1,locked:2}[b.status]||0);
@@ -7289,13 +7394,11 @@ function renderBossList() {
       const bP = bT ? (b.ownedMonsters.length + b.ownedKcMonsters.length) / bT : 1;
       return bP - aP;
     });
-
-    const avail   = evaluated.filter(e => e.status === 'available').length;
-    const partial = evaluated.filter(e => e.status === 'partial').length;
-
-    html += `<div class="boss-section-header">${label}
-      <span style="font-weight:400;color:#444;margin-left:6px">${avail} ready \xb7 ${partial} partial</span></div>`;
-
+    return evaluated;
+  }
+  const _counts = ev => `${ev.filter(e => e.status === 'available').length} ready \xb7 ${ev.filter(e => e.status === 'partial').length} partial`;
+  function _itemsHtml(evaluated) {
+    let html = '';
     for (const { boss, status, ownedMonsters, ownedKcMonsters } of evaluated) {
       const dot = status==='available' ? '#76c442' : status==='partial' ? '#c8a020' : '#6a2a2a';
       const total = (boss.monsters||[]).length + (boss.kcMonsters||[]).length;
@@ -7309,6 +7412,30 @@ function renderBossList() {
         ${countStr ? `<span style="font-size:10px;color:#555">${countStr}</span>` : ''}
       </div>`;
     }
+    return html;
+  }
+
+  let html = '';
+  for (const { key, label, subs } of cats) {
+    const bosses = BOSS_DATA.filter(b => b.category === key &&
+      (!bossSearch || b.name.toLowerCase().includes(bossSearch)));
+    if (!bosses.length) continue;
+
+    const evaluated = _evalSorted(bosses);
+    html += `<div class="boss-section-header">${label}
+      <span style="font-weight:400;color:#444;margin-left:6px">${_counts(evaluated)}</span></div>`;
+
+    if (!subs) { html += _itemsHtml(evaluated); continue; }
+    // Sub-grouped category (e.g. Bosses → Low level / God Wars / Wilderness…)
+    for (const sc of subs) {
+      const subEv = evaluated.filter(e => e.boss.sub === sc.key);
+      if (!subEv.length) continue;
+      html += `<div class="boss-subsection-header">${sc.label}
+        <span style="font-weight:400;color:#3a3a3a;margin-left:6px">${_counts(subEv)}</span></div>`;
+      html += _itemsHtml(subEv);
+    }
+    const other = evaluated.filter(e => !subs.some(sc => sc.key === e.boss.sub));
+    if (other.length) html += `<div class="boss-subsection-header">Other</div>` + _itemsHtml(other);
   }
 
   listEl.innerHTML = html ||
@@ -7334,7 +7461,10 @@ function showBossDetail(name) {
   const statusLabel = status==='available' ? 'Ready'   : status==='partial' ? 'Partial' : 'Locked';
   const statusBg    = status==='available' ? '#0d2210' : status==='partial' ? '#1a1400' : '#1a0808';
   const statusBdr   = status==='available' ? '#2a5a2a' : status==='partial' ? '#3a2a00' : '#4a1a1a';
-  const catLabel    = {raid:'Raid',skilling:'Skilling Boss',boss:'Boss',wilderness:'Wilderness Boss'}[boss.category] || boss.category;
+  const _subLabel   = _BOSS_CATEGORIES.find(c => c.key === boss.category)?.subs?.find(sc => sc.key === boss.sub)?.label;
+  const catLabel    = boss.sub === 'wilderness' ? 'Wilderness Boss'
+    : ({raid:'Raid',wave:'Wave Content',minigame:'Minigame',skilling:'Skilling Boss',boss:'Boss'}[boss.category] || boss.category)
+      + (_subLabel ? ' \xb7 ' + _subLabel : '');
 
   // Helper — clickable card chip with image
   function cardChip(cardName, opts) {
@@ -7364,9 +7494,9 @@ function showBossDetail(name) {
     reqHtml += `<div style="display:flex;align-items:center;gap:6px;padding:3px 0;font-size:12px"><span style="color:#c85040">\u2717</span><span style="color:#888">${escHtml(b)}</span></div>`;
   for (const { skill, have, req, ok } of (levelGates||[]))
     reqHtml += `<div style="display:flex;align-items:center;gap:6px;padding:3px 0;font-size:12px">
-      <span style="color:${ok?'#76c442':'#c8a020'}">${ok?'\u2713':'\u007e'}</span>
-      <span style="color:#aaa">${skill} ${req}</span>
-      <span style="color:${ok?'#555':'#c8a020'};font-size:10px">(you: ${have})</span></div>`;
+      <span style="color:${ok?'#76c442':'#c85040'}">${ok?'\u2713':'\u2717'}</span>
+      <span style="color:${ok?'#aaa':'#888'}">${skill} ${req}</span>
+      <span style="color:${ok?'#555':'#c85040'};font-size:10px">(you: ${have})</span></div>`;
 
   // Boss room monsters
   let monsHtml = '';
@@ -7479,6 +7609,45 @@ function showBossDetail(name) {
     dfHtml += `<div style="font-size:10px;color:#444;margin-top:4px">Super/Extended super antifire work standalone. Regular antifire needs a shield for full protection.</div>`;
   }
 
+  // Loot — one list grouped by rarity, rarest first. Collection-log items (the boss's
+  // uniques) lead each rarity row with a gold border + ◆. Chips green when owned.
+  let lootHtml = '';
+  const loot = _bossLoot(boss);
+  if (loot.drops.length) {
+    const ownedN = loot.drops.filter(d => isOwned(d.card)).length;
+    const srcHtml = loot.page
+      ? `<a href="https://oldschool.runescape.wiki/w/${encodeURIComponent(loot.page)}" target="_blank" style="color:#4a6a8a;text-decoration:none">${escHtml(loot.source)}</a>`
+      : escHtml(loot.source);
+    const logSet = new Set(((collectionLog[boss.name] || {}).items || []).map(c => c.toLowerCase()));
+    const isUnique = d => logSet.has(d.card.toLowerCase());
+    lootHtml = sHead('Loot', `${ownedN}/${loot.drops.length} owned`);
+    lootHtml += `<div style="font-size:10px;color:#444;margin:-2px 0 6px">From ${srcHtml}`
+      + (loot.drops.some(isUnique) ? ` \xb7 <span style="color:#b08a3a">\u25c6</span> collection log unique` : '') + `</div>`;
+    for (const line of [loot.uniqueRoll && 'Unique roll: ' + loot.uniqueRoll, loot.basis].filter(Boolean))
+      lootHtml += `<div style="font-size:10px;color:#6a5a3a;margin:-2px 0 6px">${escHtml(line)}</div>`;
+
+    const byRarity = {};
+    for (const d of loot.drops) (byRarity[d.rarity] ||= []).push(d);
+    const order = Object.keys(byRarity).sort((x, y) => (_RARITY_RANK[x] ?? 9) - (_RARITY_RANK[y] ?? 9));
+    for (const r of order) {
+      lootHtml += `<div style="display:flex;gap:6px;align-items:flex-start;margin-bottom:5px">
+        <span class="rarity-badge ${rarityClass(r)}" style="flex-shrink:0;min-width:74px;text-align:center">${escHtml(r)}</span>
+        <div style="display:flex;flex-wrap:wrap;gap:4px">`;
+      const rowDrops = byRarity[r].sort((x, y) => (isUnique(y) - isUnique(x)) || x.card.localeCompare(y.card));
+      for (const d of rowDrops) {
+        let chip = cardChip(d.card, {type:'item', owned:isOwned(d.card), required:false, dashed:true});
+        if (isUnique(d))
+          chip = chip.replace('<span style="', '<span style="border-color:#8a6a2a !important;border-style:solid !important;')
+                     .replace(/<\/span>$/, ` <span style="font-size:8px;color:#b08a3a">\u25c6</span></span>`);
+        if (d.rarity === 'Unique' && d.fraction)  // share of the unique roll, shown inline
+          chip = chip.replace(/<\/span>$/, ` <span style="font-size:9px;color:#8a7a4a">${escHtml(d.fraction)}</span></span>`);
+        const tip = _lootTip(d);
+        lootHtml += tip ? chip.replace('<span ', `<span title="${escHtml(tip)}" `) : chip;
+      }
+      lootHtml += `</div></div>`;
+    }
+  }
+
   // Boss image — try boss card first, then first monster card
   const bossImg = (cardDetails[boss.name]||{}).imageUrl ||
     (boss.monsters && boss.monsters[0] && (cardDetails[boss.monsters[0]]||{}).imageUrl) || '';
@@ -7508,6 +7677,7 @@ function showBossDetail(name) {
       ${warmHtml}
       ${lightHtml}
       ${dfHtml}
+      ${lootHtml}
       ${boss.note ? `<div style="margin-top:14px;font-size:11px;color:#555;line-height:1.5;border-top:1px solid #1e1e1e;padding-top:10px">${escHtml(boss.note)}</div>` : ''}
     </div>`;
 }
@@ -7574,7 +7744,7 @@ const DIARY_DATA = [
   // monsters  = monster card names (DIARY_BY_CARD cross-links)
   // tasks     = actual in-game tasks to tick off
 
-  { name:'Ardougne', rewardNpc:'Two-Pints',
+  { name:'Ardougne', rewardNpc:'Two-pints',
     easy:{
       skills:{Thieving:5},
       quests:[],
@@ -7595,7 +7765,7 @@ const DIARY_DATA = [
     },
     medium:{
       skills:{Agility:39, Magic:51, Farming:31, Thieving:38, Firemaking:42},
-      quests:['Plague City','Underground Pass','Biohazard','Regicide','Enlightened Journey','Hand in the Sand','Fairytale II - Cure a Queen','Sea Slug','Watchtower','Tower of Life'],
+      quests:['Plague City','Underground Pass','Biohazard','Regicide','Enlightened Journey','The Hand in the Sand','Fairytale II - Cure a Queen','Sea Slug','Watchtower','Tower of Life'],
       items:[],
       monsters:['Swordchick'],
       tasks:[
@@ -7604,7 +7774,7 @@ const DIARY_DATA = [
         { task:'Harvest some strawberries from the Ardougne farming patch', skills:{Farming:31}, items:['Strawberry seed','Seed dibber','Rake','Spade','Watering can'] },
         { task:'Cast the Ardougne Teleport spell', skills:{Magic:51}, items:['Law rune','Water rune'], quests:['Plague City'] },
         { task:'Travel to Castle Wars by Hot Air Balloon', skills:{Firemaking:42}, items:['Willow logs','Tinderbox'], quests:['Enlightened Journey'] },
-        { task:'Claim buckets of sand from Bert in Yanille', npc:'Bert', quests:['Hand in the Sand'] },
+        { task:'Claim buckets of sand from Bert in Yanille', npc:'Bert', quests:['The Hand in the Sand'] },
         { task:'Catch any fish on the Fishing Platform', items:['Small fishing net'], quests:['Sea Slug'] },
         { task:'Pickpocket the master farmer north of Ardougne', skills:{Thieving:38}, npc:'Master farmer' },
         { task:'Collect some Nightshade from the Skavid Caves', quests:['Watchtower'] },
@@ -7674,17 +7844,17 @@ const DIARY_DATA = [
     medium:{
       skills:{Agility:30, Slayer:22, Hunter:47, Thieving:25, Herblore:36, Woodcutting:35},
       quests:['The Feud',"Spirits of the Elid","Enakhra's Lament","Eagles' Peak",'The Golem'],
-      items:[],
-      monsters:['Desert Lizard','Orange salamander'],
+      items:['Orange salamander'],
+      monsters:['Desert Lizard'],
       tasks:[
         { task:'Climb to the summit of the Agility Pyramid', skills:{Agility:30} },
         { task:'Slay a desert lizard', skills:{Slayer:22}, monsters:['Desert Lizard'], items:['Ice cooler'] },
-        { task:'Catch an Orange Salamander', skills:{Hunter:47}, monsters:['Orange salamander'], items:['Rope','Small fishing net'] },
+        { task:'Catch an Orange Salamander', skills:{Hunter:47}, items:['Orange salamander','Rope','Small fishing net'] },
         { task:'Steal a feather from the Desert Phoenix', skills:{Thieving:25} },
         { task:'Travel to Uzer via Magic Carpet', quests:['The Golem'], items:['Coins'] },
         { task:'Travel to the Desert via Eagle', quests:["Eagles' Peak"], items:['Rope'] },
         { task:'Pray at the Elidinis statuette in Nardah', quests:["Spirits of the Elid"] },
-        { task:'Create a combat potion in the desert', skills:{Herblore:36}, items:['Harralander','Goat horn dust','Vial of water'] },
+        { task:'Create a combat potion in the desert', skills:{Herblore:36}, items:['Harralander','Desert goat horn','Vial of water'] },
         { task:"Teleport to Enakhra's Temple with the Camulet", quests:["Enakhra's Lament"], tools:['Camulet'] },
         { task:'Visit the Genie', npc:'Genie', quests:["Spirits of the Elid"], items:['Rope'] },
         { task:'Teleport to Pollnivneach with a redirected teleport to house tablet', items:['Scroll of redirection'] },
@@ -7695,14 +7865,14 @@ const DIARY_DATA = [
       skills:{Thieving:65, Mining:45, Magic:68, Slayer:65, Agility:70, Smithing:68, Firemaking:60},
       quests:['The Feud','Desert Treasure I','Dream Mentor','Contact!'],
       items:[],
-      monsters:['Kalphite Queen','Locust rider','Dust Devil'],
+      monsters:['Kalphite Queen','Locust rider','Dust devil'],
       tasks:[
         { task:'Knock out and pickpocket a Menaphite Thug', skills:{Thieving:65}, npc:'Menaphite Thug', tools:['Blackjack'], quests:['The Feud'] },
         { task:'Mine some Granite', skills:{Mining:45}, tools:['any pickaxe'] },
         { task:'Refill your waterskins in the Desert using Lunar magic', skills:{Magic:68}, quests:['Dream Mentor'], items:['Astral rune','Fire rune','Water rune','Waterskin'] },
         { task:'Kill the Kalphite Queen', monsters:['Kalphite Queen'], items:['Rope'] },
         { task:'Complete a lap of the Pollnivneach agility course', skills:{Agility:70} },
-        { task:'Slay a Dust Devil in the desert cave with a Slayer helmet equipped', skills:{Slayer:65}, monsters:['Dust Devil'], items:['Slayer helmet'], quests:['Desert Treasure I'] },
+        { task:'Slay a Dust Devil in the desert cave with a Slayer helmet equipped', skills:{Slayer:65}, monsters:['Dust devil'], items:['Slayer helmet'], quests:['Desert Treasure I'] },
         { task:'Activate Ancient Magicks at the altar in the Jaldraocht Pyramid', quests:['Desert Treasure I'] },
         { task:'Defeat a Locust Rider with Keris', monsters:['Locust rider'], tools:['Keris'], quests:['Contact!'] },
         { task:"Burn some yew logs on the Nardah Mayor's balcony", skills:{Firemaking:60}, items:['Yew logs','Tinderbox'] },
@@ -7715,7 +7885,7 @@ const DIARY_DATA = [
       items:[],
       monsters:['Kalphite Queen'],
       tasks:[
-        { task:'Bake a wild pie at the Nardah Clay Oven', skills:{Cooking:85}, items:['Pie dish','Pastry dough','Raw bear meat','Raw chompy','Raw rabbit'] },
+        { task:'Bake a wild pie at the Nardah Clay Oven', skills:{Cooking:85}, items:['Pie dish','Pastry dough','Raw bear meat','Raw rabbit'], monsters:['Chompy bird'] },
         { task:'Cast Ice Barrage against a foe in the Desert', skills:{Magic:94}, items:['Blood rune','Death rune','Water rune'], quests:['Desert Treasure I'] },
         { task:'Fletch some Dragon darts at the Bedabin Camp', skills:{Fletching:95}, items:['Feather'], tools:['Dragon dart tip'] },
         { task:'Speak to the KQ head in your POH', skills:{Construction:78}, monsters:['Kalphite Queen'], items:['Mahogany plank','Gold leaf','Saw','Hammer'], tools:['Kalphite Queen head'], npc:'Taxidermist', quests:['Priest in Peril'] },
@@ -7742,16 +7912,16 @@ const DIARY_DATA = [
         { task:'Take the boat to Entrana' },
         { task:'Repair a broken strut in the Motherlode Mine', skills:{Mining:30}, items:['Hammer'] },
         { task:'Claim a security book from the Security guard at Port Sarim jail', npc:'Security guard' },
-        { task:"Smith some Blurite Limbs on Doric's anvil", skills:{Smithing:13}, items:['Blurite bar','Hammer'], quests:["Doric's Quest"] },
+        { task:"Smith some Blurite Limbs on Doric's anvil", skills:{Smithing:13}, items:['Blurite ore','Hammer'], quests:["Doric's Quest"] },
       ],
     },
     medium:{
       skills:{Agility:42, Magic:37, Thieving:40, Mining:40, Firemaking:49, Farming:23, Crafting:36, Construction:15},
-      quests:["Black Knights' Fortress",'Recruitment Drive','Wanted!','Slug Menace'],
+      quests:["Black Knights' Fortress",'Recruitment Drive','Wanted!','The Slug Menace'],
       items:[],
       monsters:['Mogre'],
       tasks:[
-        { task:"Light a Bullseye lantern at the Chemist's in Rimmington", skills:{Firemaking:49}, items:['Bullseye lantern','Lamp oil','Tinderbox'] },
+        { task:"Light a Bullseye lantern at the Chemist's in Rimmington", skills:{Firemaking:49}, items:['Bullseye lantern','Tinderbox'] },
         { task:'Telegrab some Wine of Zamorak at the Chaos Temple', skills:{Magic:33}, items:['Air rune','Law rune'] },
         { task:'Unlock the Crystal chest in Taverley', items:['Crystal key'] },
         { task:'Place a Scarecrow in the Falador farm flower patch', skills:{Farming:23}, items:['Watermelon','Bronze spear','Hay sack'] },
@@ -7759,7 +7929,7 @@ const DIARY_DATA = [
         { task:'Visit the Port Sarim Rat Pits' },
         { task:'Grapple up and then jump off the north Falador wall', skills:{Agility:11, Ranged:19, Strength:37}, tools:['Mithril grapple','any crossbow'] },
         { task:'Pickpocket a Falador guard', skills:{Thieving:40}, npc:'Guard' },
-        { task:'Pray at the Altar of Guthix in Taverley whilst wearing full Initiate', skills:{Prayer:10}, items:['Initiate sallet','Initiate hauberk','Initiate cuisse'], quests:['Slug Menace'] },
+        { task:'Pray at the Altar of Guthix in Taverley whilst wearing full Initiate', skills:{Prayer:10}, items:['Initiate sallet','Initiate hauberk','Initiate cuisse'], quests:['The Slug Menace'] },
         { task:'Mine some Gold ore at the Crafting Guild', skills:{Mining:40}, tools:['any pickaxe'] },
         { task:'Squeeze through the crevice in the Dwarven mines', skills:{Agility:42} },
         { task:'Chop and burn some Willow logs in Taverley', skills:{Woodcutting:30, Firemaking:30}, tools:['any axe'], items:['Tinderbox'] },
@@ -7769,7 +7939,7 @@ const DIARY_DATA = [
     },
     hard:{
       skills:{Runecrafting:56, Slayer:72, Agility:80, Mining:60, Thieving:50, Attack:65, Prayer:52},
-      quests:["Black Knights' Fortress",'Recruitment Drive','Wanted!','Slug Menace',"Heroes' Quest"],
+      quests:["Black Knights' Fortress",'Recruitment Drive','Wanted!','The Slug Menace',"Heroes' Quest"],
       items:[],
       monsters:['Skeletal Wyvern','Giant Mole','Blue dragon'],
       tasks:[
@@ -7781,14 +7951,14 @@ const DIARY_DATA = [
         { task:'Enter the mining guild while wearing a Prospector helmet', skills:{Mining:60}, items:['Prospector helmet'] },
         { task:"Kill the Blue Dragon under the Heroes' Guild", monsters:['Blue dragon'], quests:["Heroes' Quest"] },
         { task:"Crack a wall safe within Rogues' Den", skills:{Thieving:50} },
-        { task:'Recharge your prayer in the Port Sarim church wearing Proselyte', items:['Proselyte sallet','Proselyte hauberk','Proselyte cuisse'], quests:['Slug Menace'] },
+        { task:'Recharge your prayer in the Port Sarim church wearing Proselyte', items:['Proselyte sallet','Proselyte hauberk','Proselyte cuisse'], quests:['The Slug Menace'] },
         { task:"Enter the Warriors' Guild", skills:{Attack:65} },
         { task:'Equip a dwarven helmet within the dwarven mines' },
       ],
     },
     elite:{
       skills:{Runecrafting:88, Agility:82, Herblore:81, Farming:75},
-      quests:["Black Knights' Fortress",'Recruitment Drive','Wanted!','Slug Menace','Grim Tales'],
+      quests:["Black Knights' Fortress",'Recruitment Drive','Wanted!','The Slug Menace','Grim Tales'],
       items:[],
       monsters:[],
       tasks:[
@@ -7797,7 +7967,7 @@ const DIARY_DATA = [
         { task:'Find at least 3 magic roots at once when digging up your magic tree', skills:{Farming:75}, items:['Spade'] },
         { task:'Perform a skillcape or quest cape emote at the top of Falador Castle' },
         { task:'Jump over the strange floor in Taverley dungeon', skills:{Agility:82} },
-        { task:"Mix a Saradomin brew in Falador east bank", skills:{Herblore:81}, items:['Toadflax',"Crushed bird's nest",'Vial of water'] },
+        { task:"Mix a Saradomin brew in Falador east bank", skills:{Herblore:81}, items:['Toadflax','Bird nest','Vial of water'] },
       ],
     },
   },
@@ -7825,9 +7995,9 @@ const DIARY_DATA = [
       skills:{Slayer:47, Mining:40, Thieving:42, Hunter:35},
       quests:['The Fremennik Trials',"Eagles' Peak",'Fairytale II - Cure a Queen','Between a Rock...'],
       items:[],
-      monsters:['Brine Rat'],
+      monsters:['Brine rat'],
       tasks:[
-        { task:'Slay a Brine rat', skills:{Slayer:47}, monsters:['Brine Rat'] },
+        { task:'Slay a Brine rat', skills:{Slayer:47}, monsters:['Brine rat'] },
         { task:'Travel to the Snowy Hunter Area via Eagle', quests:["Eagles' Peak"], items:['Rope'] },
         { task:'Mine some coal in Rellekka', skills:{Mining:30}, tools:['any pickaxe'] },
         { task:'Steal from the Rellekka Fish stalls', skills:{Thieving:42} },
@@ -7845,7 +8015,7 @@ const DIARY_DATA = [
       monsters:[],
       tasks:[
         { task:'Teleport to Trollheim', skills:{Magic:61}, items:['Fire rune','Law rune'] },
-        { task:'Catch a Sabre-toothed Kyatt', skills:{Hunter:55}, items:['Deadfall trap'] },
+        { task:'Catch a Sabre-toothed Kyatt', skills:{Hunter:55} },
         { task:'Mix a super defence potion in the Fremennik Province', skills:{Herblore:66}, items:['Cadantine','White berries','Vial of water'] },
         { task:'Steal from the Keldagrim Gem Stall', skills:{Thieving:75} },
         { task:'Craft a Neitiznot shield on Neitiznot', skills:{Crafting:56}, items:['Iron bar','Rope'], quests:['The Fremennik Isles'] },
@@ -7909,7 +8079,7 @@ const DIARY_DATA = [
         { task:'Exchange gems for a machete', items:['Coins'] },
         { task:'Use the gnome glider to travel to Karamja' },
         { task:'Grow a healthy fruit tree in the patch near Brimhaven', skills:{Farming:27}, items:['Apple tree seed','Seed dibber','Rake','Spade'] },
-        { task:'Trap a horned graahk', skills:{Hunter:41}, items:['Rope','Stake'] },
+        { task:'Trap a horned graahk', skills:{Hunter:41}, items:['Rope'] },
         { task:'Chop the vines to gain deeper access to Brimhaven Dungeon', skills:{Woodcutting:10}, tools:['any axe'] },
         { task:'Cross the lava using the stepping stones within Brimhaven Dungeon', skills:{Agility:12} },
         { task:'Climb the stairs within Brimhaven Dungeon' },
@@ -7925,7 +8095,7 @@ const DIARY_DATA = [
       tasks:[
         { task:'Become the Champion of the Fight Pits' },
         { task:'Kill a Ket-Zek in the Fight Caves', monsters:['Ket-Zek'] },
-        { task:'Eat an oomlie wrap', skills:{Cooking:50}, items:['Oomlie bird meat','Palm leaf'] },
+        { task:'Eat an oomlie wrap', skills:{Cooking:50}, items:['Raw oomlie'] },
         { task:'Craft some nature runes from Essence', skills:{Runecrafting:44}, items:['Pure essence'] },
         { task:'Cook a karambwan thoroughly', skills:{Cooking:30}, items:['Raw karambwan'], quests:['Tai Bwo Wannai Trio'] },
         { task:'Kill a deathwing in the dungeon under the Kharazi Jungle', quests:["Legends' Quest"] },
@@ -7974,7 +8144,7 @@ const DIARY_DATA = [
       skills:{Agility:36, Herblore:48, Fishing:46, Cooking:43, Magic:45, Fletching:55, Farming:26, Smithing:26, Thieving:47, Mining:20},
       quests:['Waterfall Quest','Sea Slug','Fishing Contest','Fairytale II - Cure a Queen','Elemental Workshop I'],
       items:[],
-      monsters:['Fire Giant','Penance Fighter','Penance Healer','Penance Ranger','Penance Runner'],
+      monsters:['Fire giant','Penance Fighter','Penance Healer','Penance Ranger','Penance Runner'],
       tasks:[
         { task:'Complete a lap of the Barbarian agility course', skills:{Agility:35} },
         { task:'Create a Super Antipoison potion from scratch in the Seers/Catherby Area', skills:{Herblore:48}, items:['Irit leaf',"Red spiders' eggs",'Vial of water'] },
@@ -7985,7 +8155,7 @@ const DIARY_DATA = [
         { task:"String a Maple shortbow in Seers' Village bank", skills:{Fletching:55}, items:['Maple shortbow'] },
         { task:'Pick some Limpwurt root from the farming patch in Catherby', skills:{Farming:26}, items:['Limpwurt seed','Seed dibber','Rake','Spade'] },
         { task:'Create a Mind helmet', skills:{Smithing:26}, items:['Steel bar','Hammer'], quests:['Elemental Workshop I'] },
-        { task:'Kill a Fire Giant inside Baxtorian Waterfall', monsters:['Fire Giant'], quests:['Waterfall Quest'] },
+        { task:'Kill a Fire Giant inside Baxtorian Waterfall', monsters:['Fire giant'], quests:['Waterfall Quest'] },
         { task:'Complete a wave of Barbarian Assault', monsters:['Penance Fighter','Penance Healer','Penance Ranger','Penance Runner'] },
         { task:'Steal from the chest in Hemenster', skills:{Thieving:47} },
         { task:"Travel to McGrubor's Wood by Fairy Ring", quests:['Fairytale II - Cure a Queen'] },
@@ -7994,35 +8164,35 @@ const DIARY_DATA = [
     },
     hard:{
       skills:{Fishing:70, Agility:60, Fletching:70, Magic:56, Firemaking:45, Smithing:75, Prayer:70},
-      quests:['Waterfall Quest','Sea Slug','Fishing Contest','Barbarian Firemaking','Enlightened Journey',"Legends' Quest","King's Ransom",'Desert Treasure I'],
+      quests:['Waterfall Quest','Sea Slug','Fishing Contest','Barbarian Training','Enlightened Journey',"Legends' Quest","King's Ransom",'Desert Treasure I'],
       items:[],
-      monsters:['Mithril Dragon','Shadow Hound','Penance Fighter','Penance Healer','Penance Ranger','Penance Runner'],
+      monsters:['Mithril dragon','Shadow Hound','Penance Fighter','Penance Healer','Penance Ranger','Penance Runner'],
       tasks:[
-        { task:'Catch a Leaping Sturgeon', skills:{Fishing:70, Strength:45, Agility:45}, items:['Pearl barbarian rod','Feather'], quests:['Barbarian Firemaking'] },
+        { task:'Catch a Leaping Sturgeon', skills:{Fishing:70, Strength:45, Agility:45}, items:['Pearl barbarian rod','Feather'], quests:['Barbarian Training'] },
         { task:"Complete a lap of the Seers' Village agility course", skills:{Agility:60} },
         { task:"Create a Yew Longbow from scratch around Seers' Village", skills:{Fletching:70, Woodcutting:60}, tools:['any axe'] },
         { task:"Enter the Seers' Village courthouse with piety turned on", skills:{Prayer:70}, quests:["King's Ransom"] },
         { task:'Charge a Water Orb', skills:{Magic:56}, items:['Unpowered orb','Cosmic rune','Water rune'] },
         { task:"Burn some Maple logs with a bow in Seers' Village", skills:{Firemaking:45}, items:['Maple logs'] },
-        { task:'Kill a Shadow Hound in the Shadow dungeon', monsters:['Shadow Hound'], items:['Ring of visibility'], quests:['Desert Treasure I'] },
-        { task:'Kill a Mithril Dragon', monsters:['Mithril Dragon'], quests:['Barbarian Firemaking'] },
+        { task:'Kill a Shadow Hound in the Shadow dungeon', monsters:['Shadow Hound'], quests:['Desert Treasure I'] },
+        { task:'Kill a Mithril Dragon', monsters:['Mithril dragon'], quests:['Barbarian Training'] },
         { task:'Purchase and equip a granite body from Barbarian Assault', skills:{Defence:50, Strength:50}, items:['Granite body'], monsters:['Penance Fighter','Penance Healer','Penance Ranger','Penance Runner'] },
         { task:"Have the Seers' estate agent decorate your house with Fancy Stone", skills:{Construction:50}, items:['Coins'] },
-        { task:"Smith an Adamant spear at Otto's Grotto", skills:{Smithing:75}, items:['Adamantite bar','Logs','Hammer'], quests:['Barbarian Firemaking'] },
+        { task:"Smith an Adamant spear at Otto's Grotto", skills:{Smithing:75}, items:['Adamantite bar','Logs','Hammer'], quests:['Barbarian Training'] },
       ],
     },
     elite:{
       skills:{Fishing:76, Herblore:86, Cooking:80, Smithing:90, Firemaking:80, Crafting:80, Magic:87},
-      quests:['Waterfall Quest','Sea Slug','Fishing Contest','Barbarian Firemaking','Enlightened Journey',"Legends' Quest",'Lunar Diplomacy','Family Crest'],
+      quests:['Waterfall Quest','Sea Slug','Fishing Contest','Barbarian Training','Enlightened Journey',"Legends' Quest",'Lunar Diplomacy','Family Crest'],
       items:[],
       monsters:['Penance Fighter','Penance Healer','Penance Ranger','Penance Runner','Penance Queen'],
       tasks:[
         { task:'Read the Blackboard at Barbarian Assault after reaching level 5 in every role', monsters:['Penance Fighter','Penance Healer','Penance Ranger','Penance Runner','Penance Queen'] },
         { task:'Pick some Dwarf weed from the herb patch at Catherby', skills:{Farming:79}, items:['Spade'] },
-        { task:'Fish and Cook 5 Sharks in Catherby using the Cooking gauntlets', skills:{Fishing:76, Cooking:80}, items:['Harpoon','Cooking gauntlets'], quests:['Family Crest'] },
-        { task:"Mix a Stamina Mix on top of the Seers' Village bank", skills:{Herblore:86}, items:['Stamina potion','Caviar'], quests:['Barbarian Firemaking'] },
-        { task:"Smith a Rune Hasta at Otto's Grotto", skills:{Smithing:90}, items:['Runite bar','Logs','Hammer'], quests:['Barbarian Firemaking'] },
-        { task:'Construct a Pyre ship from Magic Logs', skills:{Firemaking:80, Crafting:80}, tools:['any axe'], items:['Magic logs','Rope','Tinderbox'], quests:['Barbarian Firemaking'] },
+        { task:'Fish and Cook 5 Sharks in Catherby using the Cooking gauntlets', skills:{Fishing:76, Cooking:80}, items:['Harpoon'], quests:['Family Crest'] },
+        { task:"Mix a Stamina Mix on top of the Seers' Village bank", skills:{Herblore:86}, items:['Stamina potion','Caviar'], quests:['Barbarian Training'] },
+        { task:"Smith a Rune Hasta at Otto's Grotto", skills:{Smithing:90}, items:['Runite bar','Logs','Hammer'], quests:['Barbarian Training'] },
+        { task:'Construct a Pyre ship from Magic Logs', skills:{Firemaking:80, Crafting:80}, tools:['any axe'], items:['Magic logs','Rope','Tinderbox'], quests:['Barbarian Training'] },
         { task:'Teleport to Catherby', skills:{Magic:87}, items:['Water rune','Astral rune','Law rune'], quests:['Lunar Diplomacy'] },
       ],
     },
@@ -8057,7 +8227,7 @@ const DIARY_DATA = [
       tasks:[
         { task:'Travel to the Fairy Ring south of Mount Karuulm', quests:['Fairytale II - Cure a Queen'] },
         { task:'Kill a Lizardman', monsters:['Lizardman'], quests:['Client of Kourend'] },
-        { task:"Use Kharedst's memoirs to teleport to all five cities in Great Kourend", items:["Kharedst's memoirs"], quests:['Client of Kourend'] },
+        { task:"Use Kharedst's memoirs to teleport to all five cities in Great Kourend", quests:['Client of Kourend'] },
         { task:'Mine some Volcanic Sulphur', skills:{Mining:42}, tools:['any pickaxe'] },
         { task:'Enter the Farming Guild', skills:{Farming:45} },
         { task:'Switch to the Necromancy Spellbook at Tyss' },
@@ -8074,13 +8244,13 @@ const DIARY_DATA = [
       skills:{Woodcutting:60, Smithing:70, Slayer:62, Mining:65, Farming:74, Magic:66, Agility:60},
       quests:['Client of Kourend','The Depths of Despair','Tale of the Righteous','The Forsaken Tower','The Ascent of Arceuus'],
       items:[],
-      monsters:['Lizardman Shaman','Wyrm'],
+      monsters:['Lizardman shaman','Wyrm'],
       tasks:[
         { task:'Enter the Woodcutting Guild', skills:{Woodcutting:60} },
         { task:'Smelt an Adamantite bar in The Forsaken Tower', skills:{Smithing:70}, items:['Adamantite ore','Coal'], quests:['The Forsaken Tower'] },
-        { task:'Kill a Lizardman Shaman in the Lizardman Temple', monsters:['Lizardman Shaman'] },
+        { task:'Kill a Lizardman Shaman in the Lizardman Temple', monsters:['Lizardman shaman'] },
         { task:'Mine some Lovakite', skills:{Mining:65}, tools:['any pickaxe'] },
-        { task:'Plant some Logavano seeds at the Tithe Farm', skills:{Farming:74}, items:['Logavano seed'] },
+        { task:'Plant some Logavano seeds at the Tithe Farm', skills:{Farming:74} },
         { task:'Kill a Zombie in the Shayzien Crypts' },
         { task:"Teleport to Xeric's Heart using Xeric's Talisman", items:["Xeric's talisman"] },
         { task:'Deliver an artefact to Captain Khaled', npc:'Captain Khaled' },
@@ -8111,7 +8281,7 @@ const DIARY_DATA = [
       skills:{Agility:10, Runecrafting:5, Woodcutting:15, Firemaking:15, Fishing:15, Mining:15, Slayer:7},
       quests:['Rune Mysteries'],
       items:[],
-      monsters:[],
+      monsters:['Zombie'],
       tasks:[
         { task:'Complete a lap of the Draynor Village agility course', skills:{Agility:10} },
         { task:'Slay a Cave bug beneath Lumbridge Swamp', skills:{Slayer:7} },
@@ -8189,7 +8359,7 @@ const DIARY_DATA = [
       items:[],
       monsters:['Banshee','Ghoul'],
       tasks:[
-        { task:'Craft any Snelm from scratch in Morytania', skills:{Crafting:15}, items:['Snail shell'], tools:['Chisel'] },
+        { task:'Craft any Snelm from scratch in Morytania', skills:{Crafting:15}, tools:['Chisel'] },
         { task:'Cook a thin Snail on the Port Phasmatys range', skills:{Cooking:12}, items:['Thin snail'] },
         { task:'Get a slayer task from the Slayer Master in Canifis', npc:'Mazchna' },
         { task:'Kill a Banshee in the Slayer Tower', skills:{Slayer:15}, monsters:['Banshee'] },
@@ -8197,7 +8367,7 @@ const DIARY_DATA = [
         { task:'Enter Mort Myre Swamp', quests:['Nature Spirit'] },
         { task:'Kill a Ghoul', monsters:['Ghoul'] },
         { task:'Place a Scarecrow in the Morytania flower patch', skills:{Farming:23}, items:['Watermelon','Bronze spear','Hay sack'] },
-        { task:'Offer some bonemeal at the Ectofuntus', items:['Bonemeal','Bucket of slime'] },
+        { task:'Offer some bonemeal at the Ectofuntus', items:['Bucket of slime'] },
         { task:'Kill a werewolf in its human form using the Wolfbane Dagger', items:['Wolfbane'] },
         { task:'Restore your prayer points at the nature altar', quests:['Nature Spirit'] },
       ],
@@ -8206,18 +8376,18 @@ const DIARY_DATA = [
       skills:{Hunter:29, Agility:40, Woodcutting:45, Slayer:52, Smithing:35, Herblore:22},
       quests:['Priest in Peril','In Search of the Myreque','Haunted Mine','Ghosts Ahoy','Cabin Fever','Rum Deal'],
       items:[],
-      monsters:['Terror Dog','Fever Spider'],
+      monsters:['Terror dog','Fever spider'],
       tasks:[
         { task:'Catch a swamp lizard', skills:{Hunter:29}, items:['Rope','Small fishing net'] },
         { task:'Complete a lap of the Canifis agility course', skills:{Agility:40} },
         { task:'Obtain some Bark from a Hollow tree', skills:{Woodcutting:45}, tools:['any axe'] },
         { task:'Travel to Dragontooth Isle', quests:['Ghosts Ahoy'] },
-        { task:'Kill a Terror Dog', skills:{Slayer:52}, monsters:['Terror Dog'], quests:['Haunted Mine'] },
+        { task:'Kill a Terror Dog', skills:{Slayer:52}, monsters:['Terror dog'], quests:['Haunted Mine'] },
         { task:'Complete a game of trouble brewing', quests:['Cabin Fever'] },
         { task:'Board the Swampy boat at the Hollows' },
         { task:'Make a batch of cannonballs at the Port Phasmatys furnace', skills:{Smithing:35}, items:['Steel bar'], tools:['Cannonball mould'] },
-        { task:'Kill a Fever Spider on Braindeath Island', skills:{Slayer:42}, monsters:['Fever Spider'], quests:['Rum Deal'] },
-        { task:'Use an ectophial to return to Port Phasmatys', items:['Ectophial'], quests:['Ghosts Ahoy'] },
+        { task:'Kill a Fever Spider on Braindeath Island', skills:{Slayer:42}, monsters:['Fever spider'], quests:['Rum Deal'] },
+        { task:'Use an ectophial to return to Port Phasmatys', quests:['Ghosts Ahoy'] },
         { task:'Mix a Guthix Balance potion while in Morytania', skills:{Herblore:22}, items:['Restore potion','Garlic','Silver dust'] },
       ],
     },
@@ -8225,14 +8395,14 @@ const DIARY_DATA = [
       skills:{Construction:50, Agility:71, Farming:53, Woodcutting:50, Firemaking:50, Slayer:58, Prayer:70, Mining:55},
       quests:['Priest in Peril','In Search of the Myreque','Haunted Mine','Darkness of Hallowvale','Lunar Diplomacy',"King's Ransom",'Cabin Fever','One Small Favour'],
       items:[],
-      monsters:['Cave Horror'],
+      monsters:['Cave horror'],
       tasks:[
         { task:'Enter the Kharyrll Portal in your POH', skills:{Construction:50}, quests:['Desert Treasure I'] },
         { task:'Climb up the advanced spike chain within Slayer Tower', skills:{Agility:71} },
         { task:'Harvest some Watermelon from the Allotment patch on Harmony Island', skills:{Farming:47}, items:['Watermelon seed','Seed dibber','Rake','Spade','Compost'], quests:['One Small Favour'] },
         { task:"Chop and burn some mahogany logs on Mos Le'Harmless", skills:{Woodcutting:50, Firemaking:50}, tools:['any axe'], items:['Tinderbox'], quests:['Cabin Fever'] },
         { task:'Complete a temple trek with a hard companion', quests:['In Aid of the Myreque'] },
-        { task:'Kill a Cave Horror', skills:{Slayer:58}, monsters:['Cave Horror'], items:['Witchwood icon'], quests:['Cabin Fever'] },
+        { task:'Kill a Cave Horror', skills:{Slayer:58}, monsters:['Cave horror'], items:['Witchwood icon'], quests:['Cabin Fever'] },
         { task:'Harvest some Bittercap Mushrooms from the patch in Canifis', skills:{Farming:53}, items:['Mushroom spore','Spade'] },
         { task:'Pray at the Altar of Nature with Piety activated', skills:{Prayer:70}, quests:["King's Ransom",'Nature Spirit'] },
         { task:'Use the shortcut to get to the bridge over the Salve', skills:{Agility:65} },
@@ -8284,7 +8454,7 @@ const DIARY_DATA = [
       items:[],
       monsters:[],
       tasks:[
-        { task:'Have the Apothecary in Varrock make you a strength potion', npc:'Apothecary', items:['Limpwurt root','Red berries'] },
+        { task:'Have the Apothecary in Varrock make you a strength potion', npc:'Apothecary', items:['Limpwurt root','Redberries'] },
         { task:"Enter the Champions' Guild" },
         { task:'Select a colour for your kitten', quests:["Gertrude's Cat"] },
         { task:'Use the spirit tree north of Varrock', quests:['Tree Gnome Village'] },
@@ -8369,7 +8539,7 @@ const DIARY_DATA = [
         { task:"Travel from Eagles' Peak to the Feldip Hills by Eagle", quests:["Eagles' Peak"] },
         { task:'Make a Chocolate Bomb at the Grand Tree', skills:{Cooking:42}, items:['Gianne dough','Gnomebowl mould','Chocolate bar','Equa leaves','Pot of cream','Chocolate dust'] },
         { task:'Complete a delivery for the Gnome Restaurant', npc:'Gianne jnr.' },
-        { task:'Turn your small crystal seed into a Crystal saw', skills:{Crafting:57}, items:['Small crystal seed'] },
+        { task:'Turn your small crystal seed into a Crystal saw', skills:{Crafting:57} },
         { task:'Mine some Gold ore underneath the Grand Tree', skills:{Mining:40}, tools:['any pickaxe'] },
       ],
     },
@@ -8398,10 +8568,10 @@ const DIARY_DATA = [
       skills:{Fletching:85, Woodcutting:75, Slayer:93, Farming:75, Thieving:85},
       quests:['Big Chompy Bird Hunting','Monkey Madness I','Zogre Flesh Eaters','Regicide','Roving Elves','Recipe for Disaster'],
       items:[],
-      monsters:['Thermonuclear Smoke Devil'],
+      monsters:['Thermonuclear smoke devil'],
       tasks:[
         { task:'Fletch a Magic Longbow in Tirannwn', skills:{Fletching:85, Woodcutting:75}, tools:['any axe'], items:['Magic logs'], quests:['Regicide'] },
-        { task:'Kill the Thermonuclear Smoke Devil', skills:{Slayer:93}, monsters:['Thermonuclear Smoke Devil'] },
+        { task:'Kill the Thermonuclear Smoke Devil', skills:{Slayer:93}, monsters:['Thermonuclear smoke devil'] },
         { task:'Have Prissy Scilla protect your Magic tree', npc:'Prissy Scilla', skills:{Farming:75} },
         { task:'Use the Elven overpass advanced cliffside shortcut', quests:['Regicide'] },
         { task:'Equip any complete void set' },
@@ -8416,14 +8586,14 @@ const DIARY_DATA = [
       skills:{Magic:21, Mining:15},
       quests:[],
       items:[],
-      monsters:['Mammoth','Earth Warrior'],
+      monsters:['Mammoth','Earth warrior'],
       tasks:[
         { task:'Cast Low Alchemy at the Fountain of Rune', skills:{Magic:21}, items:['Fire rune','Nature rune'] },
         { task:'Enter the Wilderness from the Ardougne or Edgeville lever' },
         { task:'Pray at the Chaos Altar in the Western Wilderness' },
         { task:'Enter the Chaos Runecrafting temple' },
         { task:'Kill a Mammoth in the Wilderness', monsters:['Mammoth'] },
-        { task:'Kill an Earth Warrior in the Wilderness beneath Edgeville', monsters:['Earth Warrior'] },
+        { task:'Kill an Earth Warrior in the Wilderness beneath Edgeville', monsters:['Earth warrior'] },
         { task:'Restore some prayer points at the demonic ruins' },
         { task:"Enter the King Black Dragon's lair" },
         { task:"Collect 5 Red spiders' eggs from the Wilderness", items:["Red spiders' eggs"] },
@@ -8436,13 +8606,13 @@ const DIARY_DATA = [
       skills:{Mining:55, Woodcutting:42, Magic:60, Smithing:50, Agility:52},
       quests:[],
       items:[],
-      monsters:['Green Dragon','Ankou','Bloodveld'],
+      monsters:['Green dragon','Ankou','Bloodveld'],
       tasks:[
         { task:'Mine some Mithril ore in the wilderness', skills:{Mining:55}, tools:['any pickaxe'] },
         { task:'Chop some yew logs from a fallen Ent', skills:{Woodcutting:42}, tools:['any axe'] },
         { task:'Enter the Wilderness Godwars Dungeon' },
         { task:'Complete a lap of the Wilderness Agility course', skills:{Agility:52} },
-        { task:'Kill a Green Dragon', monsters:['Green Dragon'] },
+        { task:'Kill a Green Dragon', monsters:['Green dragon'] },
         { task:'Kill an Ankou in the Wilderness', monsters:['Ankou'] },
         { task:'Charge an Earth Orb', skills:{Magic:60}, items:['Unpowered orb','Cosmic rune','Earth rune'] },
         { task:'Kill a Bloodveld in the Wilderness Godwars Dungeon', monsters:['Bloodveld'] },
@@ -8455,7 +8625,7 @@ const DIARY_DATA = [
       skills:{Magic:80, Agility:64, Smithing:75, Hunter:67, Slayer:68, Fishing:53},
       quests:['Desert Treasure I'],
       items:[],
-      monsters:['Chaos Elemental','Lava dragon','Chaos Fanatic','Crazy Archaeologist','Scorpia'],
+      monsters:['Chaos Elemental','Lava dragon','Chaos Fanatic','Crazy archaeologist','Scorpia'],
       tasks:[
         { task:'Cast any of the 3 God spells against another player in the Wilderness', skills:{Magic:80}, quests:['Desert Treasure I'] },
         { task:'Charge an Air Orb', skills:{Magic:66}, items:['Unpowered orb','Cosmic rune','Air rune'] },
@@ -8463,7 +8633,7 @@ const DIARY_DATA = [
         { task:'Smith an Adamant scimitar in the Resource Area', skills:{Smithing:75}, items:['Adamantite bar','Hammer'] },
         { task:'Kill a Lava Dragon', monsters:['Lava dragon'] },
         { task:'Kill the Chaos Elemental', monsters:['Chaos Elemental'] },
-        { task:'Kill the Crazy Archaeologist, Chaos Fanatic & Scorpia', monsters:['Chaos Fanatic','Crazy Archaeologist','Scorpia'] },
+        { task:'Kill the Crazy Archaeologist, Chaos Fanatic & Scorpia', monsters:['Chaos Fanatic','Crazy archaeologist','Scorpia'] },
         { task:'Take the agility shortcut from Trollheim into the Wilderness', skills:{Agility:64} },
         { task:'Kill a Spiritual warrior in the Wilderness Godwars Dungeon', skills:{Slayer:68} },
         { task:'Fish some Raw Lava Eel in the Wilderness', skills:{Fishing:53}, items:['Fishing rod','Fishing bait'] },
@@ -8494,6 +8664,7 @@ var DIARY_BY_CARD = {};
 (function _buildDiaryByCard() {
   function _add(card, diaryName, tier, role, taskText) {
     if (!card) return;
+    card = card.toLowerCase();  // keyed lowercase — look up with name.toLowerCase()
     if (!DIARY_BY_CARD[card]) DIARY_BY_CARD[card] = [];
     // Avoid duplicate entries when same card appears at both tier and task level
     const key = `${diaryName}|${tier}|${role}|${taskText||''}`;
@@ -8515,6 +8686,42 @@ var DIARY_BY_CARD = {};
     }
   }
 })();
+
+// ── Dev check: card/quest names in hand-written data ───────────────────────
+// Runs after data load. Warns (console only) for any name in SLAYER_TASKS,
+// SLAYER_CARD_GATES, BOSS_DATA or DIARY_DATA that isn't a TCG card, and any
+// quest name missing from quests.json (would never match completedQuests).
+// Diary `npc` fields are skipped — many task NPCs intentionally aren't cards.
+function _validateDataNames() {
+  if (!Object.keys(monsterDrops).length || !Object.keys(questsData).length) return;
+  const bad = [];
+  const card = (n, where) => { if (!_cardInfo(n)) bad.push(`card "${n}" (${where})`); };
+  const quest = (q, where) => { if (!(q in questsData)) bad.push(`quest "${q}" (${where})`); };
+  for (const [c, g] of Object.entries(SLAYER_CARD_GATES)) {
+    card(c, 'SLAYER_CARD_GATES');
+    (g.quests || []).forEach(q => quest(q, 'SLAYER_CARD_GATES ' + c));
+  }
+  for (const [m, v] of Object.entries(SLAYER_TASKS))
+    for (const t of v.tasks) t.cards.forEach(c => card(c, `SLAYER_TASKS ${m}/${t.task}`));
+  for (const b of BOSS_DATA) {
+    ['monsters','kcMonsters','items','relatedCards'].forEach(k => (b[k] || []).forEach(c => card(c, `BOSS_DATA ${b.name}`)));
+    (b.quests || []).forEach(q => quest(q, `BOSS_DATA ${b.name}`));
+  }
+  for (const qs of Object.values(AREA_QUESTS)) qs.forEach(q => quest(q, 'AREA_QUESTS'));
+  for (const area of DIARY_DATA) for (const tier of DIARY_TIERS) {
+    const t = area[tier]; if (!t) continue;
+    const where = `DIARY_DATA ${area.name} ${tier}`;
+    [...(t.items || []), ...(t.monsters || [])].forEach(c => card(c, where));
+    (t.quests || []).forEach(q => quest(q, where));
+    for (const x of (t.tasks || [])) {
+      if (typeof x !== 'object') continue;
+      [...(x.items || []), ...(x.monsters || [])].forEach(c => card(c, where));
+      (x.quests || []).forEach(q => quest(q, where));
+    }
+  }
+  if (bad.length) console.warn(`[data check] ${bad.length} unresolved name(s):\n  ` + [...new Set(bad)].join('\n  '));
+  else console.info('[data check] all card and quest names resolve');
+}
 
 // ── Evaluate a single tier ──────────────────────────────────────────────────
 function evaluateDiaryTier(area, tier) {
