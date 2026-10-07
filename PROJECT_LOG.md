@@ -249,3 +249,38 @@ All navigation onclick handlers in the file use the `data-*` attribute + `_navTo
 4. **`server.py`** — surface the fallback status in the API response so the toast can distinguish "used browser session fallback" from a real failure.
 
 **Why the plugin token expires but the browser one doesn't**: The plugin's refresh token is bound to the RS profile key (derived from RuneLite's `ConfigManager.getRSProfileKey()`). When the game is unreachable or the profile rotates, the plugin can't refresh. The browser token uses a stable random key stored in localStorage, so it survives game downtime.
+
+---
+
+## 2026-10-04 to 2026-10-07 — Sessions: Diary cross-links, Boss tab, Slayer audit
+
+### Session 2026-10-04 to 2026-10-06 — Diary system + Boss tab
+**What was done**
+- Added full `BOSS_DATA` constant and Bosses tab (raids, skilling bosses, regular, wilderness)
+- `BOSS_BY_CARD` reverse-lookup built at startup — card pages now show "Boss Encounters"
+- Added `DIARY_DATA` task-level annotations across all 12 diary areas
+- `AREA_QUESTS` constant centralises area-wide quest requirements (Morytania → Priest in Peril)
+- `_buildDiaryByCard` refactored to scan task-level data with task text; enables "Diary Requirements" on card pages
+- `evaluateDiaryTier()` extended with `taskQuestGates` — prerequisites panel shows "Some tasks require" section for per-task quests
+- CRITICAL BUG FIX: `renderMonster` had no Boss/Diary cross-link sections — they were dead code inside `renderClueScroll` (wrong scope, `name` was undefined). Fixed by moving sections to `renderMonster`.
+- Barbarian Assault added to BOSS_DATA; GWD generals cross-linked to Fremennik elite diary task
+- Sherlock and Falo the Bard render as card chips in clue step displays
+- Synced tier-level monster arrays with task-level: Duck (Falador easy), Blue dragon (Falador hard), Penance types (Kandarin), Terrorbird (Western)
+- Fixed names: Maple shortbow (u) → Maple shortbow; removed Bowstring (not a card)
+
+### Session 2026-10-07 — Slayer task audit + feasibility system
+**What was done**
+- Full audit of SLAYER_TASKS against OSRS wiki (`Bat_(Slayer_task)` etc.) and card catalog
+- **Removed** fabricated entries: Dire bat, Angry bear, Blessed giant rat, Angry giant rat, Khazard Scorpion, Goblin Champion
+- **Added** wiki-confirmed monsters: Death wing, Artio, Callisto, Terrorbird, Chompy bird, Undead cow, Zombie rat, Brine rat, Scurrius, Scorpia, Cave goblin variants, Zogre, Vorkath, Monkey Zombie, Vyrewatch, Vyrewatch Sentinel, Dire gryphon, Shellbane gryphon, Cerberus, Skeleton Hellhound, Greater Skeleton Hellhound, Dagannoth spawn/fledgeling/mother, TzHaar-Hur, TzTok-Jad, TzKal-Zuk
+- Implemented `SLAYER_CARD_GATES` — per-card quest/skill access gates independent of ownership
+- Implemented `_slayerCardFeasible(card)` — returns owned AND accessible; used everywhere
+- Gates: Slayer Tower monsters (Priest in Peril), Cave Horror (Cabin Fever), Wall beast (Haunted Mine), Death wing (Legends' Quest), Vorkath (Dragon Slayer II), Monkey Zombie (Monkey Madness I), Vyrewatch (In Aid of the Myreque), Cerberus (Slayer 91)
+- Note: Twisted Banshee / Screaming twisted banshee have NO gate (Catacombs of Kourend alternative)
+- Wishlist groups show orange ⚠ border/header + orange chip when task is owned-but-inaccessible
+- Fixed 4 diary quest annotations: Falador easy (Doric's Quest), Fremennik elite (Fremennik Isles), Karamja medium+hard (Tai Bwo Wannai Trio)
+
+**Commits this block**
+- `b60dc4e` — Diary cross-links: boss/diary card pages, task-level quest gates, BA + GWD annotations
+- `0b0d78f` — Add Bosses tab with raids, skilling, regular & wilderness bosses
+- Pending commit: slayer audit + feasibility system (this session)
