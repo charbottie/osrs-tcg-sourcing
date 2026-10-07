@@ -2510,10 +2510,21 @@ function _noteRemoveTag(note, tag) {
 }
 
 function clearWishlist() {
+  const parts = [
+    wishlist.size && `${wishlist.size} card${wishlist.size === 1 ? '' : 's'}`,
+    wishlistedQuests.size && `${wishlistedQuests.size} quest${wishlistedQuests.size === 1 ? '' : 's'}`,
+    wishlistGroups.length && `${wishlistGroups.length} group${wishlistGroups.length === 1 ? '' : 's'}`,
+    wishlistedClueSteps.length && `${wishlistedClueSteps.length} clue step${wishlistedClueSteps.length === 1 ? '' : 's'}`,
+  ].filter(Boolean);
+  if (!parts.length) return;
+  if (!confirm(`Clear your whole wishlist?\n\nThis removes ${parts.join(', ')}. It can't be undone.`)) return;
   wishlist.clear();
   wishlistedQuests.clear();
+  wishlistGroups = [];
+  wishlistedClueSteps = [];
   _saveWishlist();
   if (activeTab === 'wishlist') renderWishlist();
+  refreshDetail();  // un-star any open card page
 }
 
 function saveWishlistNote(name, note) {
@@ -5926,14 +5937,14 @@ const BOSS_DATA = [
   // ── Skilling bosses ─────────────────────────────────────────────────────
   { name:'Wintertodt',            category:'skilling',
     levels:{Firemaking:50},
-    items:['Tinderbox','Bruma root','Bruma kindling'], tools:['Axe'],
-    optionalItems:['Hammer','Knife','Bruma herb','Pestle and mortar','Vial of water'],
+    items:['Tinderbox','Bruma root'], tools:['Axe'],
+    optionalItems:['Bruma kindling','Hammer','Knife','Bruma herb','Pestle and mortar','Vial of water'],
     warmClothing:['Pyromancer hood','Pyromancer garb','Pyromancer robe','Pyromancer boots',
                   'Larupia hat','Larupia top','Larupia legs',
                   'Clue hunter gloves','Clue hunter trousers','Clue hunter cloak','Clue hunter boots',
                   'Graceful hood','Graceful top','Graceful legs','Graceful gloves','Graceful boots','Graceful cape',
                   'Cap and goggles','Wolf mask','Earmuffs'],
-    note:'Axe to chop bruma roots (spawn inside). Bruma root added to brazier = primary damage; Bruma kindling (fletched from root with Knife) gives more points. Hammer repairs broken braziers. Optional herblore: grind Bruma herb with Pestle and mortar, add to Vial of water to make a rejuvenation potion. Need 4 warm clothing items to cap cold damage reduction.' },
+    note:'Axe to chop bruma roots (spawn inside). Bruma root added to brazier = primary damage; Bruma kindling (fletched from root with Knife) is optional — it gives more points, but burning roots alone works. Hammer repairs broken braziers. Optional herblore: grind Bruma herb with Pestle and mortar, add to Vial of water to make a rejuvenation potion. Need 4 warm clothing items to cap cold damage reduction.' },
   { name:'Tempoross',             category:'skilling',
     levels:{Fishing:35},
     monsters:['Tempoross'],
