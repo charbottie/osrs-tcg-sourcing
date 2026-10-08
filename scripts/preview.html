@@ -1519,7 +1519,7 @@ function simulateRandom() {
 async function loadData() {
   try {
     const cb = `?v=${Date.now()}`;  // cache-bust so updated JSON files are always fresh
-    const [md, is, cc, cd, css, cs, crr, ii, qd, ed, fd, bmqc, cq, ac, cst, bl, clg] = await Promise.all([
+    const [md, is, cc, cd, css, cs, crr, ii, qd, ed, fd, bmqc, cq, ac, cst, bl, clg, dd] = await Promise.all([
       fetch(`output/monster_drops.json${cb}`).then(r => r.json()).catch(() => ({})),
       fetch(`output/item_sources.json${cb}`).then(r => r.json()).catch(() => ({})),
       fetch(`output/card_categories.json${cb}`).then(r => r.json()).catch(() => ({})),
@@ -1537,6 +1537,7 @@ async function loadData() {
       fetch(`output/clue_steps.json${cb}`).then(r => r.json()).catch(() => null),
       fetch(`output/boss_loot.json${cb}`).then(r => r.json()).catch(() => ({})),
       fetch(`output/collection_log.json${cb}`).then(r => r.json()).catch(() => ({})),
+      fetch(`output/diaries.json${cb}`).then(r => r.json()).catch(() => []),
     ]);
     monsterDrops = md; itemSources = is; cardCategories = cc; cardDetails = cd;
     _cardLcMap = null; // invalidate case-insensitive card lookup cache
@@ -1549,6 +1550,8 @@ async function loadData() {
     clueSteps          = cst;
     bossLoot           = bl || {};
     collectionLog      = clg || {};
+    DIARY_DATA         = Array.isArray(dd) ? dd : [];
+    _buildDiaryByCard();
     _bossLootByItem    = null;  // invalidate reverse index
     try { _validateDataNames(); } catch (e) { console.warn("[data check] failed", e); }
     // Build quest name → BM card requirement map; track miniquests separately
@@ -1783,6 +1786,15 @@ function renderList(cards, sortBy = 'name') {
 
 // ─── Skill levels ──────────────────────────────────────────────────────────
 function getLevel(skill) { return skills[skill] || 1; }
+// OSRS combat level from current stats (Hitpoints defaults to 10, as on a new account)
+function getCombatLevel() {
+  const lv = k => skills[k] || (k === 'Hitpoints' ? 10 : 1);
+  const base  = 0.25 * (lv('Defence') + lv('Hitpoints') + Math.floor(lv('Prayer') / 2));
+  const melee = 0.325 * (lv('Attack') + lv('Strength'));
+  const range = 0.325 * Math.floor(lv('Ranged') * 1.5);
+  const mage  = 0.325 * Math.floor(lv('Magic') * 1.5);
+  return Math.floor(base + Math.max(melee, range, mage));
+}
 
 // ─── Cross-tab navigation history ─────────────────────────────────────────
 // Each entry: {tab, name, type, skill, quest} — full app state snapshot
@@ -2136,6 +2148,69 @@ function _wishlistPackRecs(targets) {
     recs.push({ id: pack.id, name: pack.name, thumbnail: pack.thumbnail || '', count: matching.length, totalPool });
   }
   return recs.sort((a, b) => b.count - a.count || a.totalPool - b.totalPool);
+}
+
+// Shared hover grid for "any one of these" chips (tool tiers, crossbows, light sources…):
+// card images, owned ones bright and first, the rest dimmed — same look as the pack tooltip.
+// Usage: <span ${_cardGridTipAttrs(cards, 'Any axe')}>…</span>
+function _cardGridTipAttrs(cards, caption) {
+  return `data-tipcards="${escHtml(JSON.stringify(cards))}" data-tipcaption="${escHtml(caption || '')}"` +
+    ` onmouseover="_showCardGridTip(this)" onmouseout="_hideCardGridTip()"`;
+}
+// Rows variant: one line per option, e.g. each Barrows brother then their set pieces.
+// rows = [{label, cards:[…], need?:[…]}]; a row whose `need` cards are all owned is marked complete.
+function _cardRowsTipAttrs(rows, caption) {
+  return `data-tiprows="${escHtml(JSON.stringify(rows))}" data-tipcaption="${escHtml(caption || '')}"` +
+    ` onmouseover="_showCardGridTip(this)" onmouseout="_hideCardGridTip()"`;
+}
+function _showCardGridTip(el) {
+  let cards = [], rows = null;
+  try {
+    cards = JSON.parse(el.dataset.tipcards || '[]');
+    rows = el.dataset.tiprows ? JSON.parse(el.dataset.tiprows) : null;
+  } catch (e) { return; }
+  if (!cards.length && !(rows && rows.length)) return;
+  let tip = document.getElementById('_card-grid-tip');
+  if (!tip) {
+    tip = document.createElement('div');
+    tip.id = '_card-grid-tip';
+    tip.style.cssText = 'position:fixed;z-index:9999;background:#1c1c1c;border:1px solid #3a3020;border-radius:4px;padding:8px;box-shadow:0 4px 16px rgba(0,0,0,.75);pointer-events:none;display:none';
+    document.body.appendChild(tip);
+  }
+  const owned = cards.filter(c => isOwned(c)), missing = cards.filter(c => !isOwned(c));
+  const cell = (c, own) => {
+    const img = (cardDetails[c] || {}).imageUrl;
+    const inner = img
+      ? `<img src="${img}" style="width:28px;height:28px;object-fit:contain;image-rendering:pixelated" onerror="this.style.display='none'">`
+      : `<span style="font-size:8px;color:#666;padding:2px;text-align:center;line-height:1.1">${escHtml(c.slice(0, 8))}</span>`;
+    return `<div title="${escHtml(c)}" style="display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;border-radius:3px;overflow:hidden;background:#111;border:1px solid ${own ? '#2a5a2a' : '#222'};opacity:${own ? 1 : 0.3}">${inner}</div>`;
+  };
+  const cap = el.dataset.tipcaption;
+  if (rows) {
+    tip.innerHTML = (cap ? `<div style="font-size:10px;color:#888;margin-bottom:6px">${escHtml(cap)}</div>` : '')
+      + rows.map(r => {
+          const done = (r.need || r.cards).every(c => isOwned(c));
+          return `<div style="display:flex;align-items:center;gap:4px;margin-bottom:3px">
+            <span style="width:62px;font-size:10px;color:${done ? '#76c442' : '#888'}">${done ? '\u2713 ' : ''}${escHtml(r.label)}</span>
+            ${r.cards.map(c => cell(c, isOwned(c))).join('')}</div>`;
+        }).join('');
+  } else {
+    tip.innerHTML = `<div style="font-size:10px;color:#888;margin-bottom:6px">${cap ? escHtml(cap) + ' \xb7 ' : ''}${owned.length}/${cards.length} owned${owned.length ? ' \u2014 ' + escHtml(owned.join(', ')) : ''}</div>`
+      + `<div style="display:flex;flex-wrap:wrap;gap:4px;max-width:260px">${owned.map(c => cell(c, true)).join('')}${missing.map(c => cell(c, false)).join('')}</div>`;
+  }
+  const rect = el.getBoundingClientRect();
+  tip.style.display = 'block';
+  tip.style.left = rect.left + 'px';
+  tip.style.top = (rect.bottom + 6) + 'px';
+  requestAnimationFrame(() => {
+    const tr = tip.getBoundingClientRect();
+    if (tr.right > window.innerWidth - 8) tip.style.left = (window.innerWidth - tr.width - 8) + 'px';
+    if (tr.bottom > window.innerHeight - 8) tip.style.top = (rect.top - tr.height - 6) + 'px';
+  });
+}
+function _hideCardGridTip() {
+  const tip = document.getElementById('_card-grid-tip');
+  if (tip) tip.style.display = 'none';
 }
 
 function _showPackTip(event, el) {
@@ -7302,7 +7377,7 @@ function evaluateBoss(boss) {
   for (const toolKey of (boss.tools || [])) {
     const tiers = TOOL_TIERS[toolKey];
     if (!tiers) continue;
-    const best = [...tiers].reverse().find(t => isOwned(t.name));
+    const best = tiers.find(t => isOwned(t.name));   // lowest owned tier — the most accessible one
     if (best) ownedToolName[toolKey] = best.name;
     else missingTools.push(toolKey);
   }
@@ -7560,7 +7635,7 @@ function showBossDetail(name) {
           data-card="${escHtml(tier.name)}" onclick="showCard(this.dataset.card,'item')" title="${escHtml(tier.name)}">${imgHtml}${escHtml(tier.name)}</span>`;
       }
     }
-    toolsHtml += `</div><div style="font-size:10px;color:#444;margin-top:4px">Any tier satisfies the requirement${Object.keys(ownedToolName).length?' \u2014 best owned highlighted':''}</div>`;
+    toolsHtml += `</div><div style="font-size:10px;color:#444;margin-top:4px">Any tier satisfies the requirement${Object.keys(ownedToolName).length?' \u2014 lowest owned highlighted':''}</div>`;
   }
 
   // Optional items
@@ -7748,931 +7823,19 @@ const AREA_QUESTS = {
   Morytania: ['Priest in Peril'],
 };
 
-const DIARY_DATA = [
-  // skills    = approximate skill levels required (informational)
-  // quests    = quest prerequisites
-  // items     = item card names (DIARY_BY_CARD cross-links)
-  // monsters  = monster card names (DIARY_BY_CARD cross-links)
-  // tasks     = actual in-game tasks to tick off
-
-  { name:'Ardougne', rewardNpc:'Two-pints',
-    easy:{
-      skills:{Thieving:5},
-      quests:[],
-      items:['Silk'],
-      monsters:[],
-      tasks:[
-        { task:'Have Wizard Cromperty teleport you to the Rune Essence mine', npc:'Wizard Cromperty', quests:['Rune Mysteries'] },
-        { task:'Steal a cake from the Ardougne market stalls', skills:{Thieving:5} },
-        { task:'Sell Silk to the Silk trader in Ardougne for 60 coins each', items:['Silk'], npc:'Silk merchant' },
-        { task:"Use the altar in East Ardougne's church" },
-        { task:'Go out fishing on the Fishing Trawler', npc:'Murphy', items:['Swamp paste'] },
-        { task:'Enter the Combat Training Camp north of West Ardougne' },
-        { task:'Have Tindel Marchant identify a Rusted Sword for you', npc:'Tindel Marchant' },
-        { task:'Use the Ardougne Lever to teleport to the Wilderness' },
-        { task:"View Aleck's Hunter Emporium in Yanille", npc:'Aleck' },
-        { task:'Check what pets you have Insured with Probita in Ardougne', npc:'Probita' },
-      ],
-    },
-    medium:{
-      skills:{Agility:39, Magic:51, Farming:31, Thieving:38, Firemaking:42},
-      quests:['Plague City','Underground Pass','Biohazard','Regicide','Enlightened Journey','The Hand in the Sand','Fairytale II - Cure a Queen','Sea Slug','Watchtower','Tower of Life'],
-      items:[],
-      monsters:['Swordchick'],
-      tasks:[
-        { task:'Enter the Unicorn pen in Ardougne zoo using Fairy rings', items:['Dramen staff'], quests:['Fairytale II - Cure a Queen'] },
-        { task:"Grapple over Yanille's south wall", skills:{Agility:39, Ranged:37, Strength:38}, tools:['Mithril grapple','any crossbow'] },
-        { task:'Harvest some strawberries from the Ardougne farming patch', skills:{Farming:31}, items:['Strawberry seed','Seed dibber','Rake','Spade','Watering can'] },
-        { task:'Cast the Ardougne Teleport spell', skills:{Magic:51}, items:['Law rune','Water rune'], quests:['Plague City'] },
-        { task:'Travel to Castle Wars by Hot Air Balloon', skills:{Firemaking:42}, items:['Willow logs','Tinderbox'], quests:['Enlightened Journey'] },
-        { task:'Claim buckets of sand from Bert in Yanille', npc:'Bert', quests:['The Hand in the Sand'] },
-        { task:'Catch any fish on the Fishing Platform', items:['Small fishing net'], quests:['Sea Slug'] },
-        { task:'Pickpocket the master farmer north of Ardougne', skills:{Thieving:38}, npc:'Master farmer' },
-        { task:'Collect some Nightshade from the Skavid Caves', quests:['Watchtower'] },
-        { task:'Kill a swordchick in the Tower of Life', monsters:['Swordchick'], items:['Raw chicken'], quests:['Tower of Life'] },
-        { task:"Equip Iban's upgraded staff or upgrade an Iban staff", items:["Iban's staff"], quests:['Underground Pass'] },
-        { task:"Visit the Island East of the Necromancer's Tower", quests:['Fairytale II - Cure a Queen'] },
-      ],
-    },
-    hard:{
-      skills:{Smithing:68, Runecrafting:65, Magic:68, Farming:68, Construction:50, Thieving:72, Hunter:59, Farming:70},
-      quests:["Legends' Quest","Mourning's End Part I",'Underground Pass','Biohazard'],
-      items:[],
-      monsters:[],
-      tasks:[
-        { task:'Recharge some Jewellery at the Totem in the Legends Guild', items:['Skills necklace','Combat bracelet'], quests:["Legends' Quest"] },
-        { task:'Enter the Magic Guild', skills:{Magic:66} },
-        { task:'Steal from a chest in Ardougne Castle', skills:{Thieving:72} },
-        { task:'Have a zookeeper put you in Ardougne Zoo\'s monkey cage', npc:'Zookeeper' },
-        { task:'Teleport to the Watchtower', skills:{Magic:58}, items:['Earth rune','Law rune'], quests:['Watchtower'] },
-        { task:'Catch a Red Salamander', skills:{Hunter:59}, items:['Rope','Small fishing net'] },
-        { task:'Check the health of a Palm tree near tree gnome village', skills:{Farming:68}, items:['Palm tree seed','Seed dibber','Rake','Spade'] },
-        { task:'Pick some Poison Ivy berries from the patch south of Ardougne', skills:{Farming:70}, items:['Poison ivy seed','Seed dibber','Rake','Spade'] },
-        { task:'Smith a Mithril platebody near Ardougne', skills:{Smithing:68}, items:['Mithril bar','Hammer'] },
-        { task:'Enter your POH from Yanille', skills:{Construction:50}, items:['Coins'] },
-        { task:'Smith a Dragon sq shield in West Ardougne', skills:{Smithing:60}, tools:['Dragon sq shield (l)','Dragon sq shield (r)'] },
-        { task:'Craft some Death runes from Essence', skills:{Runecrafting:65}, items:['Pure essence'] },
-      ],
-    },
-    elite:{
-      skills:{Fishing:81, Agility:87, Thieving:80, Herblore:70, Farming:85, Runecrafting:91, Magic:94},
-      quests:["Legends' Quest",'Song of the Elves'],
-      items:[],
-      monsters:[],
-      tasks:[
-        { task:'Catch a Manta ray in the Fishing Trawler and cook it in Port Khazard', skills:{Fishing:81, Cooking:91}, npc:'Murphy', items:['Swamp paste'] },
-        { task:"Picklock the door to the basement of Yanille Agility Dungeon", skills:{Thieving:82, Agility:87}, items:['Lockpick'] },
-        { task:'Pickpocket a Hero', skills:{Thieving:80}, npc:'Hero' },
-        { task:'Make a rune crossbow yourself from scratch within Witchaven or Yanille', skills:{Fletching:69, Smithing:91}, items:['Yew logs','Knife','Hammer','Crossbow string'], tools:['Runite bar'] },
-        { task:'Imbue a Salve amulet at Nightmare Zone, or equip a Salve amulet imbued there', items:['Salve amulet'] },
-        { task:'Pick some Torstol from the patch north of Ardougne', skills:{Farming:85}, items:['Torstol seed','Seed dibber','Rake','Spade'] },
-        { task:"Complete a lap of Ardougne's rooftop agility course", skills:{Agility:90} },
-        { task:'Cast Ice Barrage on another player within Castle Wars', skills:{Magic:94}, items:['Blood rune','Death rune','Water rune'], quests:['Desert Treasure I'] },
-      ],
-    },
-  },
-
-  { name:'Desert', rewardNpc:'Jarr',
-    easy:{
-      skills:{Hunter:5, Mining:20, Thieving:21},
-      quests:["Icthlarin's Little Helper"],
-      items:['Bird snare','Rope','Desert shirt','Desert robe','Desert boots','Waterskin','Knife','Coins'],
-      monsters:['Vulture'],
-      tasks:[
-        { task:'Catch a Golden Warbler', skills:{Hunter:5}, items:['Bird snare'] },
-        { task:'Mine 5 clay in the north-eastern desert', skills:{Mining:20}, tools:['any pickaxe'] },
-        { task:'Enter the Kalphite Hive', items:['Rope'] },
-        { task:'Enter the Desert with a set of Desert robes equipped', items:['Desert shirt','Desert robe','Desert boots','Waterskin'] },
-        { task:'Kill a Vulture', monsters:['Vulture'] },
-        { task:'Have the Nardah Herbalist clean a Herb for you', npc:'Zahur', items:['Coins'] },
-        { task:'Collect 5 Potato Cactus from the Kalphite Hive', items:['Rope'] },
-        { task:'Sell some artefacts to Simon Templeton', npc:'Simon Templeton', quests:["Icthlarin's Little Helper"] },
-        { task:'Open the Sarcophagus in the first room of Pyramid Plunder', skills:{Thieving:21}, quests:["Icthlarin's Little Helper"] },
-        { task:'Cut a desert cactus open to fill a waterskin', items:['Knife','Waterskin'] },
-        { task:'Travel from the Shantay Pass to Pollnivneach by Magic Carpet', items:['Coins'] },
-      ],
-    },
-    medium:{
-      skills:{Agility:30, Slayer:22, Hunter:47, Thieving:25, Herblore:36, Woodcutting:35},
-      quests:['The Feud',"Spirits of the Elid","Enakhra's Lament","Eagles' Peak",'The Golem'],
-      items:['Orange salamander'],
-      monsters:['Desert Lizard'],
-      tasks:[
-        { task:'Climb to the summit of the Agility Pyramid', skills:{Agility:30} },
-        { task:'Slay a desert lizard', skills:{Slayer:22}, monsters:['Desert Lizard'], items:['Ice cooler'] },
-        { task:'Catch an Orange Salamander', skills:{Hunter:47}, items:['Orange salamander','Rope','Small fishing net'] },
-        { task:'Steal a feather from the Desert Phoenix', skills:{Thieving:25} },
-        { task:'Travel to Uzer via Magic Carpet', quests:['The Golem'], items:['Coins'] },
-        { task:'Travel to the Desert via Eagle', quests:["Eagles' Peak"], items:['Rope'] },
-        { task:'Pray at the Elidinis statuette in Nardah', quests:["Spirits of the Elid"] },
-        { task:'Create a combat potion in the desert', skills:{Herblore:36}, items:['Harralander','Desert goat horn','Vial of water'] },
-        { task:"Teleport to Enakhra's Temple with the Camulet", quests:["Enakhra's Lament"], tools:['Camulet'] },
-        { task:'Visit the Genie', npc:'Genie', quests:["Spirits of the Elid"], items:['Rope'] },
-        { task:'Teleport to Pollnivneach with a redirected teleport to house tablet', items:['Scroll of redirection'] },
-        { task:'Chop some Teak Logs near Uzer', skills:{Woodcutting:35}, tools:['any axe'], quests:['The Golem'] },
-      ],
-    },
-    hard:{
-      skills:{Thieving:65, Mining:45, Magic:68, Slayer:65, Agility:70, Smithing:68, Firemaking:60},
-      quests:['The Feud','Desert Treasure I','Dream Mentor','Contact!'],
-      items:[],
-      monsters:['Kalphite Queen','Locust rider','Dust devil'],
-      tasks:[
-        { task:'Knock out and pickpocket a Menaphite Thug', skills:{Thieving:65}, npc:'Menaphite Thug', tools:['Blackjack'], quests:['The Feud'] },
-        { task:'Mine some Granite', skills:{Mining:45}, tools:['any pickaxe'] },
-        { task:'Refill your waterskins in the Desert using Lunar magic', skills:{Magic:68}, quests:['Dream Mentor'], items:['Astral rune','Fire rune','Water rune','Waterskin'] },
-        { task:'Kill the Kalphite Queen', monsters:['Kalphite Queen'], items:['Rope'] },
-        { task:'Complete a lap of the Pollnivneach agility course', skills:{Agility:70} },
-        { task:'Slay a Dust Devil in the desert cave with a Slayer helmet equipped', skills:{Slayer:65}, monsters:['Dust devil'], items:['Slayer helmet'], quests:['Desert Treasure I'] },
-        { task:'Activate Ancient Magicks at the altar in the Jaldraocht Pyramid', quests:['Desert Treasure I'] },
-        { task:'Defeat a Locust Rider with Keris', monsters:['Locust rider'], tools:['Keris'], quests:['Contact!'] },
-        { task:"Burn some yew logs on the Nardah Mayor's balcony", skills:{Firemaking:60}, items:['Yew logs','Tinderbox'] },
-        { task:'Create a Mithril Platebody in Nardah', skills:{Smithing:68}, items:['Mithril bar','Hammer'] },
-      ],
-    },
-    elite:{
-      skills:{Cooking:85, Magic:94, Fletching:95, Thieving:91, Construction:78},
-      quests:['Desert Treasure I',"Icthlarin's Little Helper",'Priest in Peril'],
-      items:[],
-      monsters:['Kalphite Queen'],
-      tasks:[
-        { task:'Bake a wild pie at the Nardah Clay Oven', skills:{Cooking:85}, items:['Pie dish','Pastry dough','Raw bear meat','Raw rabbit'], monsters:['Chompy bird'] },
-        { task:'Cast Ice Barrage against a foe in the Desert', skills:{Magic:94}, items:['Blood rune','Death rune','Water rune'], quests:['Desert Treasure I'] },
-        { task:'Fletch some Dragon darts at the Bedabin Camp', skills:{Fletching:95}, items:['Feather'], tools:['Dragon dart tip'] },
-        { task:'Speak to the KQ head in your POH', skills:{Construction:78}, monsters:['Kalphite Queen'], items:['Mahogany plank','Gold leaf','Saw','Hammer'], tools:['Kalphite Queen head'], npc:'Taxidermist', quests:['Priest in Peril'] },
-        { task:"Steal from the Grand Gold Chest in Pyramid Plunder's final room", skills:{Thieving:91}, quests:["Icthlarin's Little Helper"] },
-        { task:'Restore at least 85 Prayer points at the Altar in Sophanem', quests:["Icthlarin's Little Helper"] },
-      ],
-    },
-  },
-
-  { name:'Falador', rewardNpc:'Sir Rebral',
-    easy:{
-      skills:{Crafting:23, Smithing:13, Mining:30},
-      quests:["Black Knights' Fortress","The Knight's Sword"],
-      items:[],
-      monsters:['Duck'],
-      tasks:[
-        { task:'Find out what your family crest is from Sir Renitee', npc:'Sir Renitee' },
-        { task:'Climb over the western Falador wall', skills:{Agility:5} },
-        { task:"Browse Sarah's farm shop", npc:'Sarah' },
-        { task:'Get a Haircut or a Shave from the Falador Hairdresser', npc:'Hairdresser' },
-        { task:'Fill a bucket from the pump north of Falador west bank', items:['Bucket'] },
-        { task:'Kill a duck in Falador Park', monsters:['Duck'] },
-        { task:'Make a mind tiara', skills:{Crafting:23}, items:['Mind talisman','Silver bar'], tools:['Tiara mould'] },
-        { task:'Take the boat to Entrana' },
-        { task:'Repair a broken strut in the Motherlode Mine', skills:{Mining:30}, items:['Hammer'] },
-        { task:'Claim a security book from the Security guard at Port Sarim jail', npc:'Security guard' },
-        { task:"Smith some Blurite Limbs on Doric's anvil", skills:{Smithing:13}, items:['Blurite ore','Hammer'], quests:["Doric's Quest"] },
-      ],
-    },
-    medium:{
-      skills:{Agility:42, Magic:37, Thieving:40, Mining:40, Firemaking:49, Farming:23, Crafting:36, Construction:15},
-      quests:["Black Knights' Fortress",'Recruitment Drive','Wanted!','The Slug Menace'],
-      items:[],
-      monsters:['Mogre'],
-      tasks:[
-        { task:"Light a Bullseye lantern at the Chemist's in Rimmington", skills:{Firemaking:49}, items:['Bullseye lantern','Tinderbox'] },
-        { task:'Telegrab some Wine of Zamorak at the Chaos Temple', skills:{Magic:33}, items:['Air rune','Law rune'] },
-        { task:'Unlock the Crystal chest in Taverley', items:['Crystal key'] },
-        { task:'Place a Scarecrow in the Falador farm flower patch', skills:{Farming:23}, items:['Watermelon','Bronze spear','Hay sack'] },
-        { task:'Kill a Mogre at Mudskipper Point', skills:{Slayer:32}, monsters:['Mogre'], tools:['Fishing explosive'] },
-        { task:'Visit the Port Sarim Rat Pits' },
-        { task:'Grapple up and then jump off the north Falador wall', skills:{Agility:11, Ranged:19, Strength:37}, tools:['Mithril grapple','any crossbow'] },
-        { task:'Pickpocket a Falador guard', skills:{Thieving:40}, npc:'Guard' },
-        { task:'Pray at the Altar of Guthix in Taverley whilst wearing full Initiate', skills:{Prayer:10}, items:['Initiate sallet','Initiate hauberk','Initiate cuisse'], quests:['The Slug Menace'] },
-        { task:'Mine some Gold ore at the Crafting Guild', skills:{Mining:40}, tools:['any pickaxe'] },
-        { task:'Squeeze through the crevice in the Dwarven mines', skills:{Agility:42} },
-        { task:'Chop and burn some Willow logs in Taverley', skills:{Woodcutting:30, Firemaking:30}, tools:['any axe'], items:['Tinderbox'] },
-        { task:'Craft a fruit basket on the Falador Farm loom', skills:{Crafting:36}, items:['Willow branch'] },
-        { task:'Teleport to Falador', skills:{Magic:37}, items:['Air rune','Water rune','Law rune'] },
-      ],
-    },
-    hard:{
-      skills:{Runecrafting:56, Slayer:72, Agility:80, Mining:60, Thieving:50, Attack:65, Prayer:52},
-      quests:["Black Knights' Fortress",'Recruitment Drive','Wanted!','The Slug Menace',"Heroes' Quest"],
-      items:[],
-      monsters:['Skeletal Wyvern','Giant Mole','Blue dragon'],
-      tasks:[
-        { task:'Craft 140 Mind runes simultaneously from Essence', skills:{Runecrafting:56}, items:['Pure essence'] },
-        { task:'Change your family crest to the Saradomin symbol' },
-        { task:'Kill the Giant Mole beneath Falador Park', monsters:['Giant Mole'], items:['Spade'] },
-        { task:'Kill a Skeletal Wyvern in the Asgarnia Ice Dungeon', skills:{Slayer:72}, monsters:['Skeletal Wyvern'] },
-        { task:'Complete a lap of the Falador rooftop agility course', skills:{Agility:50} },
-        { task:'Enter the mining guild while wearing a Prospector helmet', skills:{Mining:60}, items:['Prospector helmet'] },
-        { task:"Kill the Blue Dragon under the Heroes' Guild", monsters:['Blue dragon'], quests:["Heroes' Quest"] },
-        { task:"Crack a wall safe within Rogues' Den", skills:{Thieving:50} },
-        { task:'Recharge your prayer in the Port Sarim church wearing Proselyte', items:['Proselyte sallet','Proselyte hauberk','Proselyte cuisse'], quests:['The Slug Menace'] },
-        { task:"Enter the Warriors' Guild", skills:{Attack:65} },
-        { task:'Equip a dwarven helmet within the dwarven mines' },
-      ],
-    },
-    elite:{
-      skills:{Runecrafting:88, Agility:82, Herblore:81, Farming:75},
-      quests:["Black Knights' Fortress",'Recruitment Drive','Wanted!','The Slug Menace','Grim Tales'],
-      items:[],
-      monsters:[],
-      tasks:[
-        { task:'Craft 252 Air Runes simultaneously from Essence', skills:{Runecrafting:88}, items:['Pure essence'] },
-        { task:'Purchase a White 2h Sword from Sir Vyvin', npc:'Sir Vyvin', quests:['Recruitment Drive'] },
-        { task:'Find at least 3 magic roots at once when digging up your magic tree', skills:{Farming:75}, items:['Spade'] },
-        { task:'Perform a skillcape or quest cape emote at the top of Falador Castle' },
-        { task:'Jump over the strange floor in Taverley dungeon', skills:{Agility:82} },
-        { task:"Mix a Saradomin brew in Falador east bank", skills:{Herblore:81}, items:['Toadflax','Bird nest','Vial of water'] },
-      ],
-    },
-  },
-
-  { name:'Fremennik', rewardNpc:'Thorvald the Warrior',
-    easy:{
-      skills:{Hunter:9, Crafting:23, Thieving:5, Woodcutting:15, Firemaking:15},
-      quests:['The Fremennik Trials'],
-      items:[],
-      monsters:['Rock Crab'],
-      tasks:[
-        { task:'Catch a Cerulean twitch', skills:{Hunter:9}, items:['Bird snare'] },
-        { task:"Change your boots at Yrsa's Shoe Store", npc:'Yrsa', items:['Coins'], quests:['The Fremennik Trials'] },
-        { task:'Kill 5 Rock crabs', monsters:['Rock Crab'], quests:['The Fremennik Trials'] },
-        { task:'Craft a tiara from scratch in Rellekka', skills:{Crafting:23}, items:['Silver bar'], tools:['Tiara mould'], quests:['The Fremennik Trials'] },
-        { task:'Browse the Stonemasons shop', npc:'Stonemason' },
-        { task:'Collect 5 Snape grass on Waterbirth Island', items:['Snape grass'], quests:['The Fremennik Trials'] },
-        { task:"Steal from the Keldagrim crafting or baker's stall", skills:{Thieving:5} },
-        { task:'Fill a bucket with water at the Rellekka well', items:['Bucket'], quests:['The Fremennik Trials'] },
-        { task:'Enter the Troll Stronghold', quests:['Troll Stronghold'] },
-        { task:'Chop and burn some oak logs in the Fremennik Province', skills:{Woodcutting:15, Firemaking:15}, tools:['any axe'], items:['Tinderbox'] },
-      ],
-    },
-    medium:{
-      skills:{Slayer:47, Mining:40, Thieving:42, Hunter:35},
-      quests:['The Fremennik Trials',"Eagles' Peak",'Fairytale II - Cure a Queen','Between a Rock...'],
-      items:[],
-      monsters:['Brine rat'],
-      tasks:[
-        { task:'Slay a Brine rat', skills:{Slayer:47}, monsters:['Brine rat'] },
-        { task:'Travel to the Snowy Hunter Area via Eagle', quests:["Eagles' Peak"], items:['Rope'] },
-        { task:'Mine some coal in Rellekka', skills:{Mining:30}, tools:['any pickaxe'] },
-        { task:'Steal from the Rellekka Fish stalls', skills:{Thieving:42} },
-        { task:'Travel to Miscellania by Fairy ring', quests:['Fairytale II - Cure a Queen'] },
-        { task:'Catch a Snowy knight', skills:{Hunter:35}, items:['Bird snare'] },
-        { task:'Pick up your Pet Rock from your POH Menagerie' },
-        { task:'Visit the Lighthouse from Waterbirth island' },
-        { task:'Mine some gold at the Arzinian mine', skills:{Mining:40}, tools:['any pickaxe'], quests:['Between a Rock...'] },
-      ],
-    },
-    hard:{
-      skills:{Magic:72, Hunter:55, Herblore:66, Thieving:75, Crafting:56, Mining:70, Smithing:60},
-      quests:['The Fremennik Trials','Lunar Diplomacy','The Fremennik Isles','Troll Stronghold','The Giant Dwarf'],
-      items:[],
-      monsters:[],
-      tasks:[
-        { task:'Teleport to Trollheim', skills:{Magic:61}, items:['Fire rune','Law rune'] },
-        { task:'Catch a Sabre-toothed Kyatt', skills:{Hunter:55} },
-        { task:'Mix a super defence potion in the Fremennik Province', skills:{Herblore:66}, items:['Cadantine','White berries','Vial of water'] },
-        { task:'Steal from the Keldagrim Gem Stall', skills:{Thieving:75} },
-        { task:'Craft a Neitiznot shield on Neitiznot', skills:{Crafting:56}, items:['Iron bar','Rope'], quests:['The Fremennik Isles'] },
-        { task:'Mine 5 Adamantite ores on Jatizso', skills:{Mining:70}, tools:['any pickaxe'], quests:['The Fremennik Isles'] },
-        { task:'Obtain 100% support from your kingdom subjects', quests:["Throne of Miscellania"] },
-        { task:'Teleport to Waterbirth Island', skills:{Magic:72}, items:['Water rune','Astral rune','Law rune'], quests:['Lunar Diplomacy'] },
-        { task:"Obtain the Blast Furnace Foreman's permission to use the Blast Furnace for free", skills:{Smithing:60}, quests:['The Giant Dwarf'] },
-      ],
-    },
-    elite:{
-      skills:{Runecrafting:82, Crafting:80, Agility:80, Slayer:83},
-      quests:['The Fremennik Trials','Lunar Diplomacy','The Fremennik Isles','Desert Treasure I'],
-      items:[],
-      monsters:['Dagannoth Prime','Dagannoth Rex','Dagannoth Supreme','Spiritual Mage',"Kree'arra",'General Graardor','Commander Zilyana',"K'ril Tsutsaroth"],
-      tasks:[
-        { task:'Kill each of the Dagannoth Kings', monsters:['Dagannoth Prime','Dagannoth Rex','Dagannoth Supreme'] },
-        { task:'Craft 56 astral runes simultaneously from Essence without Extracts', skills:{Runecrafting:82}, items:['Pure essence'], quests:['Lunar Diplomacy'] },
-        { task:'Create a dragonstone amulet in the Neitiznot furnace', skills:{Crafting:80}, items:['Dragonstone','Gold bar','Ball of wool'], quests:['The Fremennik Isles'] },
-        { task:'Complete a lap of the Rellekka agility course', skills:{Agility:80} },
-        { task:'Kill the generals of Armadyl, Bandos, Saradomin and Zamorak in the God Wars Dungeon', monsters:["Kree'arra",'General Graardor','Commander Zilyana',"K'ril Tsutsaroth"] },
-        { task:'Slay a Spiritual mage within the God Wars Dungeon', skills:{Slayer:83}, monsters:['Spiritual Mage'] },
-      ],
-    },
-  },
-
-  { name:'Karamja', rewardNpc:'Pirate Jackie the Fruit',
-    easy:{
-      skills:{Mining:40, Woodcutting:35},
-      quests:[],
-      items:[],
-      monsters:['Jogre'],
-      tasks:[
-        { task:'Pick 5 bananas from the plantation located east of the volcano', items:['Banana'] },
-        { task:'Use the rope swing to travel to the Moss Giant Island north-west of Karamja', skills:{Agility:10}, items:['Rope'] },
-        { task:'Mine some gold from the rocks on the north-west peninsula of Karamja', skills:{Mining:40}, tools:['any pickaxe'] },
-        { task:'Travel to Port Sarim via the dock, east of Musa Point', items:['Coins'] },
-        { task:'Travel to Ardougne via the port near Brimhaven', items:['Coins'] },
-        { task:'Explore Cairn Island to the west of Karamja' },
-        { task:'Use the Fishing spots north of the banana plantation', items:['Small fishing net'] },
-        { task:'Collect 5 seaweed from anywhere on Karamja', items:['Seaweed'] },
-        { task:'Attempt the TzHaar Fight Pits or Fight Cave' },
-        { task:'Kill a jogre in the Pothole dungeon', monsters:['Jogre'] },
-      ],
-    },
-    medium:{
-      skills:{Agility:15, Woodcutting:50, Fishing:65, Hunter:41, Mining:40, Farming:27},
-      quests:['Jungle Potion','Shilo Village','Tai Bwo Wannai Trio'],
-      items:[],
-      monsters:[],
-      tasks:[
-        { task:'Claim a ticket from the Agility Arena in Brimhaven', skills:{Agility:15} },
-        { task:'Discover hidden wall in the dungeon below the volcano' },
-        { task:'Visit the Isle of Crandor via the dungeon below the volcano' },
-        { task:"Use Vigroy and Hajedy's cart service", items:['Coins'] },
-        { task:'Earn 100% favour in the village of Tai Bwo Wannai', quests:['Tai Bwo Wannai Trio'] },
-        { task:'Cook a spider on a stick', skills:{Cooking:16}, items:['Spider carcass','Skewer stick'] },
-        { task:'Charter the Lady of the Waves from Cairn Isle to Port Khazard', items:['Coins'] },
-        { task:'Cut a log from a teak tree', skills:{Woodcutting:35}, tools:['any axe'] },
-        { task:'Cut a log from a mahogany tree', skills:{Woodcutting:50}, tools:['any axe'] },
-        { task:'Catch a karambwan', skills:{Fishing:65}, tools:['Karambwan vessel'], quests:['Tai Bwo Wannai Trio'] },
-        { task:'Exchange gems for a machete', items:['Coins'] },
-        { task:'Use the gnome glider to travel to Karamja' },
-        { task:'Grow a healthy fruit tree in the patch near Brimhaven', skills:{Farming:27}, items:['Apple tree seed','Seed dibber','Rake','Spade'] },
-        { task:'Trap a horned graahk', skills:{Hunter:41}, items:['Rope'] },
-        { task:'Chop the vines to gain deeper access to Brimhaven Dungeon', skills:{Woodcutting:10}, tools:['any axe'] },
-        { task:'Cross the lava using the stepping stones within Brimhaven Dungeon', skills:{Agility:12} },
-        { task:'Climb the stairs within Brimhaven Dungeon' },
-        { task:'Charter a ship from the shipyard in the far east of Karamja', items:['Coins'] },
-        { task:'Mine a red topaz from a gem rock', skills:{Mining:40}, tools:['any pickaxe'] },
-      ],
-    },
-    hard:{
-      skills:{Fishing:53, Slayer:65, Runecrafting:44, Cooking:30},
-      quests:['Jungle Potion','Shilo Village','Tai Bwo Wannai Trio',"Legends' Quest",'Nature Spirit'],
-      items:[],
-      monsters:['Ket-Zek'],
-      tasks:[
-        { task:'Become the Champion of the Fight Pits' },
-        { task:'Kill a Ket-Zek in the Fight Caves', monsters:['Ket-Zek'] },
-        { task:'Eat an oomlie wrap', skills:{Cooking:50}, items:['Raw oomlie'] },
-        { task:'Craft some nature runes from Essence', skills:{Runecrafting:44}, items:['Pure essence'] },
-        { task:'Cook a karambwan thoroughly', skills:{Cooking:30}, items:['Raw karambwan'], quests:['Tai Bwo Wannai Trio'] },
-        { task:'Kill a deathwing in the dungeon under the Kharazi Jungle', quests:["Legends' Quest"] },
-        { task:'Use the crossbow shortcut south of the volcano', skills:{Ranged:42, Agility:21, Strength:22}, tools:['Mithril grapple','any crossbow'] },
-        { task:'Collect 5 palm leaves' },
-        { task:'Be assigned a Slayer task by the Slayer Master in Shilo Village', npc:'Duradel', quests:['Shilo Village'] },
-        { task:'Kill a metal dragon in Brimhaven Dungeon' },
-      ],
-    },
-    elite:{
-      skills:{Runecrafting:73, Farming:72, Herblore:87},
-      quests:['Jungle Potion','Shilo Village','Tai Bwo Wannai Trio'],
-      items:[],
-      monsters:['TzTok-Jad'],
-      tasks:[
-        { task:'Craft 56 Nature runes simultaneously from Essence without Extracts', skills:{Runecrafting:73}, items:['Pure essence'] },
-        { task:'Equip a Fire Cape or Infernal Cape in Mor Ul Rek', monsters:['TzTok-Jad'] },
-        { task:'Check the health of a palm tree in Brimhaven', skills:{Farming:68}, items:['Spade'] },
-        { task:'Create an antivenom potion whilst standing in the horse shoe mine', skills:{Herblore:87}, items:['Antidote++','Zulrah\'s scales'] },
-        { task:'Check the health of your Calquat tree patch', skills:{Farming:72}, items:['Spade'] },
-      ],
-    },
-  },
-
-  { name:'Kandarin', rewardNpc:'Sherlock',
-    easy:{
-      skills:{Fishing:16, Farming:13},
-      quests:['Waterfall Quest','Elemental Workshop I'],
-      items:['Flax'],
-      monsters:[],
-      tasks:[
-        { task:'Catch a Mackerel at Catherby', skills:{Fishing:16}, items:['Big fishing net'] },
-        { task:'Buy a candle from the Chandler in Catherby', npc:'Candle maker', items:['Coins'] },
-        { task:"Collect five Flax from the Seers' flax fields", items:['Flax'] },
-        { task:"Play the Organ in Seers' church" },
-        { task:"Plant some Jute seeds in the patch north of McGrubor's Wood", skills:{Farming:13}, items:['Jute seed','Seed dibber','Rake','Spade'] },
-        { task:'Have Galahad make you a cup of tea', npc:'Galahad' },
-        { task:'Defeat one of each elemental in the workshop', quests:['Elemental Workshop I'] },
-        { task:'Get a pet fish from Harry in Catherby', npc:'Harry' },
-        { task:"Buy a Stew from the Seers' pub", items:['Coins'] },
-        { task:'Speak to Sherlock', npc:'Sherlock' },
-        { task:'Cross the Coal truck log shortcut' },
-      ],
-    },
-    medium:{
-      skills:{Agility:36, Herblore:48, Fishing:46, Cooking:43, Magic:45, Fletching:55, Farming:26, Smithing:26, Thieving:47, Mining:20},
-      quests:['Waterfall Quest','Sea Slug','Fishing Contest','Fairytale II - Cure a Queen','Elemental Workshop I'],
-      items:[],
-      monsters:['Fire giant','Penance Fighter','Penance Healer','Penance Ranger','Penance Runner'],
-      tasks:[
-        { task:'Complete a lap of the Barbarian agility course', skills:{Agility:35} },
-        { task:'Create a Super Antipoison potion from scratch in the Seers/Catherby Area', skills:{Herblore:48}, items:['Irit leaf',"Red spiders' eggs",'Vial of water'] },
-        { task:'Enter the Ranging guild', skills:{Ranged:40} },
-        { task:'Use the grapple shortcut to get from the water obelisk to Catherby shore', skills:{Agility:36, Ranged:39, Strength:22}, tools:['Mithril grapple','any crossbow'] },
-        { task:'Catch and cook a Bass in Catherby', skills:{Fishing:46, Cooking:43}, items:['Big fishing net'] },
-        { task:'Teleport to Camelot', skills:{Magic:45}, items:['Law rune','Air rune'] },
-        { task:"String a Maple shortbow in Seers' Village bank", skills:{Fletching:55}, items:['Maple shortbow'] },
-        { task:'Pick some Limpwurt root from the farming patch in Catherby', skills:{Farming:26}, items:['Limpwurt seed','Seed dibber','Rake','Spade'] },
-        { task:'Create a Mind helmet', skills:{Smithing:26}, items:['Steel bar','Hammer'], quests:['Elemental Workshop I'] },
-        { task:'Kill a Fire Giant inside Baxtorian Waterfall', monsters:['Fire giant'], quests:['Waterfall Quest'] },
-        { task:'Complete a wave of Barbarian Assault', monsters:['Penance Fighter','Penance Healer','Penance Ranger','Penance Runner'] },
-        { task:'Steal from the chest in Hemenster', skills:{Thieving:47} },
-        { task:"Travel to McGrubor's Wood by Fairy Ring", quests:['Fairytale II - Cure a Queen'] },
-        { task:'Mine some coal near the coal trucks', skills:{Mining:20}, tools:['any pickaxe'] },
-      ],
-    },
-    hard:{
-      skills:{Fishing:70, Agility:60, Fletching:70, Magic:56, Firemaking:45, Smithing:75, Prayer:70},
-      quests:['Waterfall Quest','Sea Slug','Fishing Contest','Barbarian Training','Enlightened Journey',"Legends' Quest","King's Ransom",'Desert Treasure I'],
-      items:[],
-      monsters:['Mithril dragon','Shadow Hound','Penance Fighter','Penance Healer','Penance Ranger','Penance Runner'],
-      tasks:[
-        { task:'Catch a Leaping Sturgeon', skills:{Fishing:70, Strength:45, Agility:45}, items:['Pearl barbarian rod','Feather'], quests:['Barbarian Training'] },
-        { task:"Complete a lap of the Seers' Village agility course", skills:{Agility:60} },
-        { task:"Create a Yew Longbow from scratch around Seers' Village", skills:{Fletching:70, Woodcutting:60}, tools:['any axe'] },
-        { task:"Enter the Seers' Village courthouse with piety turned on", skills:{Prayer:70}, quests:["King's Ransom"] },
-        { task:'Charge a Water Orb', skills:{Magic:56}, items:['Unpowered orb','Cosmic rune','Water rune'] },
-        { task:"Burn some Maple logs with a bow in Seers' Village", skills:{Firemaking:45}, items:['Maple logs'] },
-        { task:'Kill a Shadow Hound in the Shadow dungeon', monsters:['Shadow Hound'], quests:['Desert Treasure I'] },
-        { task:'Kill a Mithril Dragon', monsters:['Mithril dragon'], quests:['Barbarian Training'] },
-        { task:'Purchase and equip a granite body from Barbarian Assault', skills:{Defence:50, Strength:50}, items:['Granite body'], monsters:['Penance Fighter','Penance Healer','Penance Ranger','Penance Runner'] },
-        { task:"Have the Seers' estate agent decorate your house with Fancy Stone", skills:{Construction:50}, items:['Coins'] },
-        { task:"Smith an Adamant spear at Otto's Grotto", skills:{Smithing:75}, items:['Adamantite bar','Logs','Hammer'], quests:['Barbarian Training'] },
-      ],
-    },
-    elite:{
-      skills:{Fishing:76, Herblore:86, Cooking:80, Smithing:90, Firemaking:80, Crafting:80, Magic:87},
-      quests:['Waterfall Quest','Sea Slug','Fishing Contest','Barbarian Training','Enlightened Journey',"Legends' Quest",'Lunar Diplomacy','Family Crest'],
-      items:[],
-      monsters:['Penance Fighter','Penance Healer','Penance Ranger','Penance Runner','Penance Queen'],
-      tasks:[
-        { task:'Read the Blackboard at Barbarian Assault after reaching level 5 in every role', monsters:['Penance Fighter','Penance Healer','Penance Ranger','Penance Runner','Penance Queen'] },
-        { task:'Pick some Dwarf weed from the herb patch at Catherby', skills:{Farming:79}, items:['Spade'] },
-        { task:'Fish and Cook 5 Sharks in Catherby using the Cooking gauntlets', skills:{Fishing:76, Cooking:80}, items:['Harpoon'], quests:['Family Crest'] },
-        { task:"Mix a Stamina Mix on top of the Seers' Village bank", skills:{Herblore:86}, items:['Stamina potion','Caviar'], quests:['Barbarian Training'] },
-        { task:"Smith a Rune Hasta at Otto's Grotto", skills:{Smithing:90}, items:['Runite bar','Logs','Hammer'], quests:['Barbarian Training'] },
-        { task:'Construct a Pyre ship from Magic Logs', skills:{Firemaking:80, Crafting:80}, tools:['any axe'], items:['Magic logs','Rope','Tinderbox'], quests:['Barbarian Training'] },
-        { task:'Teleport to Catherby', skills:{Magic:87}, items:['Water rune','Astral rune','Law rune'], quests:['Lunar Diplomacy'] },
-      ],
-    },
-  },
-
-  { name:'Kourend & Kebos', rewardNpc:'Hosa',
-    easy:{
-      skills:{Mining:15, Fishing:20, Thieving:25, Herblore:12},
-      quests:['X Marks the Spot'],
-      items:[],
-      monsters:['Sand Crab'],
-      tasks:[
-        { task:'Mine some Iron at the Mount Karuulm mine', skills:{Mining:15}, tools:['any pickaxe'] },
-        { task:'Kill a Sandcrab', monsters:['Sand Crab'] },
-        { task:'Hand in a book at the Arceuus Library' },
-        { task:'Steal from a Hosidius Food Stall', skills:{Thieving:25} },
-        { task:'Browse the Warrens General Store' },
-        { task:"Take a boat to Land's End", items:['Coins'] },
-        { task:'Pray at the Altar in Kourend Castle' },
-        { task:'Dig up some Saltpetre', items:['Spade'] },
-        { task:'Enter your Player Owned House from Hosidius' },
-        { task:'Do a lap of either tier of the Shayzien Agility Course' },
-        { task:'Create a Strength potion in the Lovakengj Pub', skills:{Herblore:12}, items:['Tarromin','Limpwurt root','Vial of water'] },
-        { task:'Fish a Trout from the River Molch', skills:{Fishing:20}, items:['Fly fishing rod','Feather'] },
-      ],
-    },
-    medium:{
-      skills:{Mining:42, Farming:45, Fishing:43, Hunter:35, Woodcutting:50, Agility:49, Crafting:30, Firemaking:50},
-      quests:['X Marks the Spot','Client of Kourend','The Depths of Despair','Fairytale II - Cure a Queen'],
-      items:[],
-      monsters:['Lizardman'],
-      tasks:[
-        { task:'Travel to the Fairy Ring south of Mount Karuulm', quests:['Fairytale II - Cure a Queen'] },
-        { task:'Kill a Lizardman', monsters:['Lizardman'], quests:['Client of Kourend'] },
-        { task:"Use Kharedst's memoirs to teleport to all five cities in Great Kourend", quests:['Client of Kourend'] },
-        { task:'Mine some Volcanic Sulphur', skills:{Mining:42}, tools:['any pickaxe'] },
-        { task:'Enter the Farming Guild', skills:{Farming:45} },
-        { task:'Switch to the Necromancy Spellbook at Tyss' },
-        { task:'Repair a Piscarilius crane', skills:{Crafting:30}, items:['Swamp paste'] },
-        { task:'Deliver some intelligence to Captain Ginea', npc:'Captain Ginea' },
-        { task:'Catch a Bluegill on Molch Island', skills:{Fishing:43, Hunter:35} },
-        { task:'Use the boulder leap shortcut in the Arceuus essence mine', skills:{Agility:49} },
-        { task:'Subdue the Wintertodt', skills:{Firemaking:50}, items:['Tinderbox'] },
-        { task:'Catch a Chinchompa in the Kourend Woodland', skills:{Hunter:34}, items:['Box trap'] },
-        { task:'Chop some Mahogany logs north of the Farming Guild', skills:{Woodcutting:50}, tools:['any axe'] },
-      ],
-    },
-    hard:{
-      skills:{Woodcutting:60, Smithing:70, Slayer:62, Mining:65, Farming:74, Magic:66, Agility:60},
-      quests:['Client of Kourend','The Depths of Despair','Tale of the Righteous','The Forsaken Tower','The Ascent of Arceuus'],
-      items:[],
-      monsters:['Lizardman shaman','Wyrm'],
-      tasks:[
-        { task:'Enter the Woodcutting Guild', skills:{Woodcutting:60} },
-        { task:'Smelt an Adamantite bar in The Forsaken Tower', skills:{Smithing:70}, items:['Adamantite ore','Coal'], quests:['The Forsaken Tower'] },
-        { task:'Kill a Lizardman Shaman in the Lizardman Temple', monsters:['Lizardman shaman'] },
-        { task:'Mine some Lovakite', skills:{Mining:65}, tools:['any pickaxe'] },
-        { task:'Plant some Logavano seeds at the Tithe Farm', skills:{Farming:74} },
-        { task:'Kill a Zombie in the Shayzien Crypts' },
-        { task:"Teleport to Xeric's Heart using Xeric's Talisman", items:["Xeric's talisman"] },
-        { task:'Deliver an artefact to Captain Khaled', npc:'Captain Khaled' },
-        { task:'Kill a Wyrm in the Karuulm Slayer Dungeon', skills:{Slayer:62}, monsters:['Wyrm'], items:['Boots of stone'] },
-        { task:'Cast Monster Examine on a Troll south of Mount Quidamortem', skills:{Magic:66}, items:['Air rune','Mind rune','Body rune'] },
-      ],
-    },
-    elite:{
-      skills:{Runecrafting:77, Woodcutting:90, Slayer:95, Fishing:82, Cooking:84, Herblore:66, Farming:60, Crafting:66, Magic:64},
-      quests:['Client of Kourend','The Depths of Despair','Tale of the Righteous','The Forsaken Tower','The Ascent of Arceuus','A Kingdom Divided','Monkey Madness II'],
-      items:[],
-      monsters:['Alchemical Hydra','Skotizo'],
-      tasks:[
-        { task:'Craft one or more Blood runes from Dark essence', skills:{Runecrafting:77}, items:['Dark essence block'], tools:['Chisel'] },
-        { task:'Chop some Redwood logs', skills:{Woodcutting:90}, tools:['any axe'] },
-        { task:'Defeat Skotizo in the Catacombs of Kourend', monsters:['Skotizo'], items:['Dark totem'] },
-        { task:'Catch an Anglerfish and cook it whilst in Great Kourend', skills:{Fishing:82, Cooking:84}, items:['Fishing rod','Sandworms'] },
-        { task:'Kill a Hydra in the Karuulm Slayer Dungeon', skills:{Slayer:95}, monsters:['Alchemical Hydra'], items:['Boots of stone'] },
-        { task:'Create an Ape Atoll teleport tablet', skills:{Magic:64}, items:['Soft clay'], quests:['Monkey Madness II'] },
-        { task:'Complete a Raid in the Chambers of Xeric' },
-        { task:'Create your own Battlestaff from scratch within the Farming Guild', skills:{Herblore:66, Farming:60, Crafting:66}, items:['Hammer'] },
-      ],
-    },
-  },
-
-  { name:'Lumbridge & Draynor', rewardNpc:'Explorer Jack',
-    easy:{
-      skills:{Agility:10, Runecrafting:5, Woodcutting:15, Firemaking:15, Fishing:15, Mining:15, Slayer:7},
-      quests:['Rune Mysteries'],
-      items:[],
-      monsters:['Zombie'],
-      tasks:[
-        { task:'Complete a lap of the Draynor Village agility course', skills:{Agility:10} },
-        { task:'Slay a Cave bug beneath Lumbridge Swamp', skills:{Slayer:7} },
-        { task:'Have Sedridor teleport you to the Rune essence mine', npc:'Sedridor', quests:['Rune Mysteries'] },
-        { task:'Craft some water runes from Essence', skills:{Runecrafting:5}, items:['Pure essence'] },
-        { task:'Learn your age from Hans in Lumbridge', npc:'Hans' },
-        { task:'Pickpocket a man or woman in Lumbridge', skills:{Thieving:5} },
-        { task:'Chop and burn some oak logs in Lumbridge', skills:{Woodcutting:15, Firemaking:15}, tools:['any axe'], items:['Tinderbox'] },
-        { task:'Kill a Zombie in Draynor Sewers', monsters:['Zombie'] },
-        { task:'Catch some Anchovies in Al Kharid', skills:{Fishing:15}, items:['Small fishing net'] },
-        { task:'Bake some Bread on the Lumbridge kitchen range', skills:{Cooking:5}, items:['Pot of flour','Bucket of water'] },
-        { task:'Mine some Iron ore at the Al Kharid mine', skills:{Mining:15}, tools:['any pickaxe'] },
-        { task:'Enter the H.A.M. Hideout', skills:{Thieving:15} },
-      ],
-    },
-    medium:{
-      skills:{Agility:20, Magic:31, Fishing:30, Crafting:38, Woodcutting:30, Thieving:38, Hunter:17, Runecrafting:23},
-      quests:['Rune Mysteries','Lost City','Fairytale II - Cure a Queen','Animal Magnetism'],
-      items:[],
-      monsters:[],
-      tasks:[
-        { task:'Complete a lap of the Al Kharid agility course', skills:{Agility:20} },
-        { task:'Grapple across the River Lum', skills:{Agility:8, Ranged:19, Strength:19}, tools:['Mithril grapple','any crossbow'] },
-        { task:'Purchase an upgraded device from Ava', npc:'Ava', quests:['Animal Magnetism'] },
-        { task:"Travel to the Wizards' Tower by Fairy ring", quests:['Fairytale II - Cure a Queen'] },
-        { task:'Cast the Teleport to Lumbridge spell', skills:{Magic:31}, items:['Earth rune','Air rune','Law rune'] },
-        { task:'Catch some Salmon in Lumbridge', skills:{Fishing:30}, items:['Fly fishing rod','Feather'] },
-        { task:'Craft a coif in the Lumbridge cow pen', skills:{Crafting:38}, items:['Leather'] },
-        { task:'Chop some willow logs in Draynor Village', skills:{Woodcutting:30}, tools:['any axe'] },
-        { task:'Pickpocket Martin the Master Gardener', skills:{Thieving:38} },
-        { task:'Get a slayer task from Chaeldar', npc:'Chaeldar', quests:['Lost City'] },
-        { task:'Catch an Essence or Eclectic impling in Puro-Puro', skills:{Hunter:17} },
-        { task:'Craft some Lava runes at the fire altar in Al Kharid', skills:{Runecrafting:23}, items:['Pure essence','Earth rune'] },
-      ],
-    },
-    hard:{
-      skills:{Magic:60, Runecrafting:59, Agility:57, Woodcutting:57, Prayer:52, Farming:19, Firemaking:65, Crafting:70},
-      quests:['Rune Mysteries','Lost City','Tears of Guthix','Death to the Dorgeshuun','Another Slice of H.A.M.','Recipe for Disaster'],
-      items:[],
-      monsters:[],
-      tasks:[
-        { task:'Cast Bones to Peaches in Al Kharid palace', skills:{Magic:60}, items:['Air rune','Nature rune','Earth rune'] },
-        { task:'Squeeze past the jutting wall on your way to the cosmic altar', skills:{Agility:42} },
-        { task:'Craft 56 Cosmic runes simultaneously from Essence', skills:{Runecrafting:59}, items:['Pure essence'] },
-        { task:'Travel from Lumbridge to Edgeville on a Waka Canoe', skills:{Woodcutting:57}, tools:['any axe'] },
-        { task:'Collect at least 100 Tears of Guthix in one visit', quests:['Tears of Guthix'] },
-        { task:'Take the train from Dorgesh-Kaan to Keldagrim', quests:['Death to the Dorgeshuun'] },
-        { task:'Purchase some Barrows gloves from the Lumbridge bank chest', quests:['Recipe for Disaster'], items:['Coins'] },
-        { task:'Pick some Belladonna from the farming patch at Draynor Manor', skills:{Farming:19}, items:['Spade'] },
-        { task:'Light your mining helmet in the Lumbridge castle basement', skills:{Firemaking:65}, items:['Mining helmet','Tinderbox'] },
-        { task:"Recharge your prayer at Emir's Arena with Smite activated", skills:{Prayer:52} },
-        { task:'Craft, string and enchant an Amulet of Power in Lumbridge', skills:{Crafting:70, Magic:57}, items:['Sapphire','Gold bar','Ball of wool','Cosmic rune','Air rune'] },
-      ],
-    },
-    elite:{
-      skills:{Thieving:78, Agility:77, Woodcutting:75, Smithing:88, Runecrafting:85},
-      quests:['Rune Mysteries','Lost City','Tears of Guthix','Death to the Dorgeshuun','Recipe for Disaster'],
-      items:[],
-      monsters:[],
-      tasks:[
-        { task:'Steal from a Dorgesh-Kaan rich chest', skills:{Thieving:78}, quests:['Death to the Dorgeshuun'] },
-        { task:'Grapple across a pylon on the Dorgesh-Kaan Agility Course', skills:{Agility:77}, quests:['Death to the Dorgeshuun'], tools:['Mithril grapple','any crossbow'] },
-        { task:'Chop some magic logs at the Mage Training Arena', skills:{Woodcutting:75}, tools:['any axe'] },
-        { task:'Smith an Adamant platebody down Draynor sewer', skills:{Smithing:88}, items:['Adamantite bar','Hammer'] },
-        { task:'Craft 140 or more Water runes simultaneously from Essence', skills:{Runecrafting:85}, items:['Pure essence'] },
-        { task:"Perform the Quest cape emote in the Wise Old Man's house" },
-      ],
-    },
-  },
-
-  { name:'Morytania', rewardNpc:'Mazchna',
-    easy:{
-      skills:{Crafting:15, Cooking:12, Slayer:15, Farming:23},
-      quests:['Priest in Peril','Nature Spirit'],
-      items:[],
-      monsters:['Banshee','Ghoul'],
-      tasks:[
-        { task:'Craft any Snelm from scratch in Morytania', skills:{Crafting:15}, tools:['Chisel'] },
-        { task:'Cook a thin Snail on the Port Phasmatys range', skills:{Cooking:12}, items:['Thin snail'] },
-        { task:'Get a slayer task from the Slayer Master in Canifis', npc:'Mazchna' },
-        { task:'Kill a Banshee in the Slayer Tower', skills:{Slayer:15}, monsters:['Banshee'] },
-        { task:'Have Sbott in Canifis tan something for you', npc:'Sbott', items:['Cowhide','Coins'] },
-        { task:'Enter Mort Myre Swamp', quests:['Nature Spirit'] },
-        { task:'Kill a Ghoul', monsters:['Ghoul'] },
-        { task:'Place a Scarecrow in the Morytania flower patch', skills:{Farming:23}, items:['Watermelon','Bronze spear','Hay sack'] },
-        { task:'Offer some bonemeal at the Ectofuntus', items:['Bucket of slime'] },
-        { task:'Kill a werewolf in its human form using the Wolfbane Dagger', items:['Wolfbane'] },
-        { task:'Restore your prayer points at the nature altar', quests:['Nature Spirit'] },
-      ],
-    },
-    medium:{
-      skills:{Hunter:29, Agility:40, Woodcutting:45, Slayer:52, Smithing:35, Herblore:22},
-      quests:['Priest in Peril','In Search of the Myreque','Haunted Mine','Ghosts Ahoy','Cabin Fever','Rum Deal'],
-      items:[],
-      monsters:['Terror dog','Fever spider'],
-      tasks:[
-        { task:'Catch a swamp lizard', skills:{Hunter:29}, items:['Rope','Small fishing net'] },
-        { task:'Complete a lap of the Canifis agility course', skills:{Agility:40} },
-        { task:'Obtain some Bark from a Hollow tree', skills:{Woodcutting:45}, tools:['any axe'] },
-        { task:'Travel to Dragontooth Isle', quests:['Ghosts Ahoy'] },
-        { task:'Kill a Terror Dog', skills:{Slayer:52}, monsters:['Terror dog'], quests:['Haunted Mine'] },
-        { task:'Complete a game of trouble brewing', quests:['Cabin Fever'] },
-        { task:'Board the Swampy boat at the Hollows' },
-        { task:'Make a batch of cannonballs at the Port Phasmatys furnace', skills:{Smithing:35}, items:['Steel bar'], tools:['Cannonball mould'] },
-        { task:'Kill a Fever Spider on Braindeath Island', skills:{Slayer:42}, monsters:['Fever spider'], quests:['Rum Deal'] },
-        { task:'Use an ectophial to return to Port Phasmatys', quests:['Ghosts Ahoy'] },
-        { task:'Mix a Guthix Balance potion while in Morytania', skills:{Herblore:22}, items:['Restore potion','Garlic','Silver dust'] },
-      ],
-    },
-    hard:{
-      skills:{Construction:50, Agility:71, Farming:53, Woodcutting:50, Firemaking:50, Slayer:58, Prayer:70, Mining:55},
-      quests:['Priest in Peril','In Search of the Myreque','Haunted Mine','Darkness of Hallowvale','Lunar Diplomacy',"King's Ransom",'Cabin Fever','One Small Favour'],
-      items:[],
-      monsters:['Cave horror'],
-      tasks:[
-        { task:'Enter the Kharyrll Portal in your POH', skills:{Construction:50}, quests:['Desert Treasure I'] },
-        { task:'Climb up the advanced spike chain within Slayer Tower', skills:{Agility:71} },
-        { task:'Harvest some Watermelon from the Allotment patch on Harmony Island', skills:{Farming:47}, items:['Watermelon seed','Seed dibber','Rake','Spade','Compost'], quests:['One Small Favour'] },
-        { task:"Chop and burn some mahogany logs on Mos Le'Harmless", skills:{Woodcutting:50, Firemaking:50}, tools:['any axe'], items:['Tinderbox'], quests:['Cabin Fever'] },
-        { task:'Complete a temple trek with a hard companion', quests:['In Aid of the Myreque'] },
-        { task:'Kill a Cave Horror', skills:{Slayer:58}, monsters:['Cave horror'], items:['Witchwood icon'], quests:['Cabin Fever'] },
-        { task:'Harvest some Bittercap Mushrooms from the patch in Canifis', skills:{Farming:53}, items:['Mushroom spore','Spade'] },
-        { task:'Pray at the Altar of Nature with Piety activated', skills:{Prayer:70}, quests:["King's Ransom",'Nature Spirit'] },
-        { task:'Use the shortcut to get to the bridge over the Salve', skills:{Agility:65} },
-        { task:'Mine some Mithril ore in the Abandoned Mine', skills:{Mining:55}, tools:['any pickaxe'] },
-      ],
-    },
-    elite:{
-      skills:{Fishing:96, Firemaking:80, Herblore:83, Magic:83, Crafting:84, Slayer:85},
-      quests:['Priest in Peril','In Search of the Myreque','Haunted Mine','Darkness of Hallowvale','A Taste of Hope','Lunar Diplomacy'],
-      items:[],
-      monsters:['Abyssal demon'],
-      tasks:[
-        { task:'Catch a shark in Burgh de Rott with your bare hands', skills:{Fishing:96} },
-        { task:'Cremate any Shade remains on a Magic or Redwood pyre', skills:{Firemaking:80}, items:['Shade remains','Magic logs','Tinderbox'] },
-        { task:'Fertilize the Morytania herb patch using Lunar Magic', skills:{Herblore:83, Magic:83}, items:['Astral rune','Nature rune','Earth rune'], quests:['Lunar Diplomacy'] },
-        { task:'Craft a Black dragonhide body in Canifis bank', skills:{Crafting:84}, items:['Black dragonhide'] },
-        { task:'Kill an Abyssal demon in the Slayer Tower', skills:{Slayer:85}, monsters:['Abyssal demon'] },
-        { task:'Loot the Barrows chest while wearing any complete barrows set' },
-      ],
-    },
-  },
-
-  { name:'Varrock', rewardNpc:'Toby',
-    easy:{
-      skills:{Mining:15, Runecrafting:9, Fishing:20, Thieving:5, Crafting:8},
-      quests:['Romeo & Juliet','Rune Mysteries'],
-      items:[],
-      monsters:[],
-      tasks:[
-        { task:"Browse Thessalia's store", npc:'Thessalia' },
-        { task:'Have Aubury teleport you to the Essence mine', npc:'Aubury', quests:['Rune Mysteries'] },
-        { task:'Mine some Iron in the south-east mining patch near Varrock', skills:{Mining:15}, tools:['any pickaxe'] },
-        { task:'Make a normal plank at the Sawmill', npc:'Sawmill operator', items:['Logs','Coins'] },
-        { task:'Enter the second level of the Stronghold of Security' },
-        { task:'Jump over the fence south of Varrock', skills:{Agility:13} },
-        { task:'Chop down a dying tree in the Lumber Yard', tools:['any axe'] },
-        { task:'Buy a newspaper', npc:'Benny', items:['Coins'] },
-        { task:'Give a dog a bone', items:['Bones'] },
-        { task:'Spin a bowl on the pottery wheel and fire it in the oven in Barbarian Village', skills:{Crafting:8}, items:['Clay'] },
-        { task:'Speak to Haig Halen after obtaining at least 50 Kudos', npc:'Haig Halen' },
-        { task:'Craft some Earth runes from Essence', skills:{Runecrafting:9}, items:['Pure essence'] },
-        { task:'Catch some trout in the River Lum at Barbarian Village', skills:{Fishing:20}, items:['Fly fishing rod','Feather'] },
-        { task:'Steal from the Tea stall in Varrock', skills:{Thieving:5} },
-      ],
-    },
-    medium:{
-      skills:{Magic:25, Agility:30, Firemaking:40, Construction:15},
-      quests:['Romeo & Juliet','Priest in Peril',"A Soul's Bane",'Tree Gnome Village',"Gertrude's Cat",'Enlightened Journey'],
-      items:[],
-      monsters:[],
-      tasks:[
-        { task:'Have the Apothecary in Varrock make you a strength potion', npc:'Apothecary', items:['Limpwurt root','Redberries'] },
-        { task:"Enter the Champions' Guild" },
-        { task:'Select a colour for your kitten', quests:["Gertrude's Cat"] },
-        { task:'Use the spirit tree north of Varrock', quests:['Tree Gnome Village'] },
-        { task:'Perform the 4 emotes from the Stronghold of Security' },
-        { task:"Enter the Tolna dungeon after completing A Soul's Bane", quests:["A Soul's Bane"] },
-        { task:'Teleport to the digsite using a Digsite pendant', items:['Digsite pendant'] },
-        { task:'Cast the teleport to Varrock spell', skills:{Magic:25}, items:['Air rune','Fire rune','Law rune'] },
-        { task:'Get a Slayer task from Vannaka', npc:'Vannaka' },
-        { task:'Make 20 Mahogany Planks in one go', npc:'Sawmill operator', items:['Mahogany logs','Coins'] },
-        { task:'Pick a White tree fruit', quests:['Garden of Tranquillity'] },
-        { task:'Use the balloon to travel from Varrock', skills:{Firemaking:40}, items:['Willow logs','Tinderbox'], quests:['Enlightened Journey'] },
-        { task:'Complete a lap of the Varrock Agility course', skills:{Agility:30} },
-      ],
-    },
-    hard:{
-      skills:{Magic:54, Agility:57, Woodcutting:60, Firemaking:60, Farming:60, Prayer:52, Construction:50},
-      quests:['Romeo & Juliet','Priest in Peril','Dragon Slayer I','Family Crest','Desert Treasure I'],
-      items:[],
-      monsters:[],
-      tasks:[
-        { task:'Trade furs with the Fancy Dress Seller for a spottier cape and equip it', npc:'Fancy Dress Seller', items:['Spotted kebbit fur'] },
-        { task:'Speak to Orlando Smith when you have achieved 153 Kudos', npc:'Orlando Smith' },
-        { task:'Make a Waka canoe near Edgeville', skills:{Woodcutting:57}, tools:['any axe'] },
-        { task:'Teleport to Paddewwa', skills:{Magic:54}, items:['Air rune','Law rune'], quests:['Desert Treasure I'] },
-        { task:'Teleport to Barbarian Village with a skull sceptre', items:['Skull sceptre'] },
-        { task:'Chop some yew logs in Varrock and burn them at the top of the Varrock church', skills:{Woodcutting:60, Firemaking:60}, tools:['any axe'], items:['Tinderbox'] },
-        { task:'Have the Varrock estate agent decorate your house with Fancy Stone', skills:{Construction:50}, items:['Coins'] },
-        { task:'Collect at least 2 yew roots from the Tree patch in Varrock Palace', skills:{Farming:60}, items:['Spade'] },
-        { task:'Pray at the altar in Varrock palace with Smite active', skills:{Prayer:52} },
-        { task:'Squeeze through the obstacle pipe in Edgeville dungeon', skills:{Agility:21} },
-      ],
-    },
-    elite:{
-      skills:{Herblore:90, Magic:86, Cooking:95, Smithing:92, Runecrafting:91, Fletching:81},
-      quests:['Romeo & Juliet','Priest in Peril','Dragon Slayer I','Family Crest','Desert Treasure I','Lunar Diplomacy'],
-      items:[],
-      monsters:[],
-      tasks:[
-        { task:'Create a super combat potion in Varrock west bank', skills:{Herblore:90}, items:['Torstol','Super attack','Super strength','Super defence'] },
-        { task:'Use Lunar magic to make 20 mahogany planks at the Lumberyard', skills:{Magic:86}, items:['Mahogany logs','Astral rune','Earth rune','Nature rune'], quests:['Lunar Diplomacy'] },
-        { task:'Bake a summer pie in the Cooking Guild', skills:{Cooking:95}, items:['Pie dish','Pastry dough','Strawberry','Watermelon','Cooking apple'] },
-        { task:'Smith and fletch ten rune darts within Varrock', skills:{Smithing:92, Fletching:81}, items:['Runite bar','Feather','Hammer'] },
-        { task:'Craft 100 or more earth runes simultaneously from Essence without Extracts', skills:{Runecrafting:91}, items:['Pure essence'] },
-      ],
-    },
-  },
-
-  { name:'Western Provinces', rewardNpc:'Elder Gnome child',
-    easy:{
-      skills:{Hunter:9, Fletching:20, Mining:15},
-      quests:['Big Chompy Bird Hunting','Rune Mysteries'],
-      items:[],
-      monsters:['Terrorbird'],
-      tasks:[
-        { task:'Catch a Copper Longtail', skills:{Hunter:9}, items:['Bird snare'] },
-        { task:'Complete a novice game of Pest Control' },
-        { task:'Mine some Iron Ore near Piscatoris', skills:{Mining:15}, tools:['any pickaxe'] },
-        { task:'Complete a lap of the Gnome agility course' },
-        { task:'Score a goal in a Gnomeball match' },
-        { task:'Claim any Chompy bird hat from Rantz', npc:'Rantz', quests:['Big Chompy Bird Hunting'] },
-        { task:'Teleport to Pest Control using the Minigame Teleport' },
-        { task:'Collect a swamp toad at the Gnome Stronghold', items:['Swamp toad'] },
-        { task:'Have Brimstail teleport you to the Essence Mine', npc:'Brimstail', quests:['Rune Mysteries'] },
-        { task:'Fletch an Oak Shortbow in the Gnome Stronghold', skills:{Fletching:20}, items:['Oak logs'], tools:['Knife'] },
-        { task:'Kill a Terrorbird in the Terrorbird enclosure', monsters:['Terrorbird'] },
-      ],
-    },
-    medium:{
-      skills:{Agility:37, Hunter:53, Fishing:46, Woodcutting:35, Firemaking:35, Crafting:57, Mining:40, Cooking:50},
-      quests:['Big Chompy Bird Hunting','Monkey Madness I','Zogre Flesh Eaters','Tree Gnome Village',"Eagles' Peak"],
-      items:[],
-      monsters:[],
-      tasks:[
-        { task:"Take the agility shortcut from the Grand Tree to Otto's Grotto", skills:{Agility:37} },
-        { task:'Travel to the Gnome Stronghold by Spirit Tree', quests:['Tree Gnome Village'] },
-        { task:'Trap a Spined Larupia', skills:{Hunter:53} },
-        { task:'Fish some Bass on Ape Atoll', skills:{Fishing:46}, items:['Big fishing net'], quests:['Monkey Madness I'] },
-        { task:'Chop and burn some teak logs on Ape Atoll', skills:{Woodcutting:35, Firemaking:35}, tools:['any axe'], items:['Tinderbox'], quests:['Monkey Madness I'] },
-        { task:'Complete an intermediate game of Pest Control' },
-        { task:'Travel to the Feldip Hills by Gnome Glider' },
-        { task:'Claim a Chompy bird hat from Rantz after registering at least 125 kills', npc:'Rantz', quests:['Big Chompy Bird Hunting'] },
-        { task:"Travel from Eagles' Peak to the Feldip Hills by Eagle", quests:["Eagles' Peak"] },
-        { task:'Make a Chocolate Bomb at the Grand Tree', skills:{Cooking:42}, items:['Gianne dough','Gnomebowl mould','Chocolate bar','Equa leaves','Pot of cream','Chocolate dust'] },
-        { task:'Complete a delivery for the Gnome Restaurant', npc:'Gianne jnr.' },
-        { task:'Turn your small crystal seed into a Crystal saw', skills:{Crafting:57} },
-        { task:'Mine some Gold ore underneath the Grand Tree', skills:{Mining:40}, tools:['any pickaxe'] },
-      ],
-    },
-    hard:{
-      skills:{Hunter:69, Fishing:62, Cooking:62, Agility:48, Woodcutting:50, Firemaking:50, Farming:68, Thieving:75, Construction:65, Mining:70, Magic:64},
-      quests:['Big Chompy Bird Hunting','Monkey Madness I','Zogre Flesh Eaters','Regicide','Roving Elves','Swan Song','Monkey Madness II','Lunar Diplomacy'],
-      items:['Crystal bow'],
-      monsters:['Zulrah'],
-      tasks:[
-        { task:'Kill an Elf with a Crystal bow', items:['Crystal bow'], quests:['Regicide'] },
-        { task:'Catch and cook a Monkfish in Piscatoris', skills:{Fishing:62, Cooking:62}, items:['Small fishing net'], quests:['Swan Song'] },
-        { task:'Complete a Veteran game of Pest Control' },
-        { task:'Catch a Dashing Kebbit', skills:{Hunter:69} },
-        { task:'Complete a lap of the Ape Atoll agility course', skills:{Agility:48}, quests:['Monkey Madness I'] },
-        { task:'Chop and burn some Mahogany logs on Ape Atoll', skills:{Woodcutting:50, Firemaking:50}, tools:['any axe'], items:['Tinderbox'], quests:['Monkey Madness I'] },
-        { task:'Mine some Adamantite ore in Tirannwn', skills:{Mining:70}, tools:['any pickaxe'], quests:['Regicide'] },
-        { task:'Check the health of your Palm tree in Lletya', skills:{Farming:68}, items:['Spade'], quests:['Roving Elves'] },
-        { task:'Claim a Chompy bird hat from Rantz after registering at least 300 kills', npc:'Rantz', quests:['Big Chompy Bird Hunting'] },
-        { task:"Build an Isafdar painting in your POH Quest hall", skills:{Construction:65}, quests:['Regicide'] },
-        { task:'Kill Zulrah', monsters:['Zulrah'], quests:['Regicide'] },
-        { task:'Teleport to Ape Atoll', skills:{Magic:64}, quests:['Monkey Madness II','Lunar Diplomacy'] },
-        { task:'Pickpocket a Gnome', skills:{Thieving:75} },
-      ],
-    },
-    elite:{
-      skills:{Fletching:85, Woodcutting:75, Slayer:93, Farming:75, Thieving:85},
-      quests:['Big Chompy Bird Hunting','Monkey Madness I','Zogre Flesh Eaters','Regicide','Roving Elves','Recipe for Disaster'],
-      items:[],
-      monsters:['Thermonuclear smoke devil'],
-      tasks:[
-        { task:'Fletch a Magic Longbow in Tirannwn', skills:{Fletching:85, Woodcutting:75}, tools:['any axe'], items:['Magic logs'], quests:['Regicide'] },
-        { task:'Kill the Thermonuclear Smoke Devil', skills:{Slayer:93}, monsters:['Thermonuclear smoke devil'] },
-        { task:'Have Prissy Scilla protect your Magic tree', npc:'Prissy Scilla', skills:{Farming:75} },
-        { task:'Use the Elven overpass advanced cliffside shortcut', quests:['Regicide'] },
-        { task:'Equip any complete void set' },
-        { task:'Claim a Chompy bird hat from Rantz after registering at least 1,000 kills', npc:'Rantz', quests:['Big Chompy Bird Hunting'] },
-        { task:'Pickpocket an Elf', skills:{Thieving:85}, quests:['Regicide'] },
-      ],
-    },
-  },
-
-  { name:'Wilderness', rewardNpc:'Lesser Fanatic',
-    easy:{
-      skills:{Magic:21, Mining:15},
-      quests:[],
-      items:[],
-      monsters:['Mammoth','Earth warrior'],
-      tasks:[
-        { task:'Cast Low Alchemy at the Fountain of Rune', skills:{Magic:21}, items:['Fire rune','Nature rune'] },
-        { task:'Enter the Wilderness from the Ardougne or Edgeville lever' },
-        { task:'Pray at the Chaos Altar in the Western Wilderness' },
-        { task:'Enter the Chaos Runecrafting temple' },
-        { task:'Kill a Mammoth in the Wilderness', monsters:['Mammoth'] },
-        { task:'Kill an Earth Warrior in the Wilderness beneath Edgeville', monsters:['Earth warrior'] },
-        { task:'Restore some prayer points at the demonic ruins' },
-        { task:"Enter the King Black Dragon's lair" },
-        { task:"Collect 5 Red spiders' eggs from the Wilderness", items:["Red spiders' eggs"] },
-        { task:'Mine some Iron ore in the Wilderness', skills:{Mining:15}, tools:['any pickaxe'] },
-        { task:'Have the Mage of Zamorak teleport you to the Abyss', npc:'Mage of Zamorak' },
-        { task:'Equip any team cape in the Wilderness' },
-      ],
-    },
-    medium:{
-      skills:{Mining:55, Woodcutting:42, Magic:60, Smithing:50, Agility:52},
-      quests:[],
-      items:[],
-      monsters:['Green dragon','Ankou','Bloodveld'],
-      tasks:[
-        { task:'Mine some Mithril ore in the wilderness', skills:{Mining:55}, tools:['any pickaxe'] },
-        { task:'Chop some yew logs from a fallen Ent', skills:{Woodcutting:42}, tools:['any axe'] },
-        { task:'Enter the Wilderness Godwars Dungeon' },
-        { task:'Complete a lap of the Wilderness Agility course', skills:{Agility:52} },
-        { task:'Kill a Green Dragon', monsters:['Green dragon'] },
-        { task:'Kill an Ankou in the Wilderness', monsters:['Ankou'] },
-        { task:'Charge an Earth Orb', skills:{Magic:60}, items:['Unpowered orb','Cosmic rune','Earth rune'] },
-        { task:'Kill a Bloodveld in the Wilderness Godwars Dungeon', monsters:['Bloodveld'] },
-        { task:'Talk to the Emblem Trader in Edgeville about emblems', npc:'Emblem Trader' },
-        { task:'Smith a Golden helmet in the Resource Area', skills:{Smithing:50}, items:['Gold bar','Hammer','Coins'] },
-        { task:'Open the Muddy Chest in the lava maze', items:['Muddy key'] },
-      ],
-    },
-    hard:{
-      skills:{Magic:80, Agility:64, Smithing:75, Hunter:67, Slayer:68, Fishing:53},
-      quests:['Desert Treasure I'],
-      items:[],
-      monsters:['Chaos Elemental','Lava dragon','Chaos Fanatic','Crazy archaeologist','Scorpia'],
-      tasks:[
-        { task:'Cast any of the 3 God spells against another player in the Wilderness', skills:{Magic:80}, quests:['Desert Treasure I'] },
-        { task:'Charge an Air Orb', skills:{Magic:66}, items:['Unpowered orb','Cosmic rune','Air rune'] },
-        { task:'Catch a Black Salamander in the Wilderness', skills:{Hunter:67}, items:['Rope','Small fishing net'] },
-        { task:'Smith an Adamant scimitar in the Resource Area', skills:{Smithing:75}, items:['Adamantite bar','Hammer'] },
-        { task:'Kill a Lava Dragon', monsters:['Lava dragon'] },
-        { task:'Kill the Chaos Elemental', monsters:['Chaos Elemental'] },
-        { task:'Kill the Crazy Archaeologist, Chaos Fanatic & Scorpia', monsters:['Chaos Fanatic','Crazy archaeologist','Scorpia'] },
-        { task:'Take the agility shortcut from Trollheim into the Wilderness', skills:{Agility:64} },
-        { task:'Kill a Spiritual warrior in the Wilderness Godwars Dungeon', skills:{Slayer:68} },
-        { task:'Fish some Raw Lava Eel in the Wilderness', skills:{Fishing:53}, items:['Fishing rod','Fishing bait'] },
-      ],
-    },
-    elite:{
-      skills:{Magic:96, Smithing:90, Thieving:84, Woodcutting:75, Firemaking:75, Fishing:85, Cooking:85, Slayer:83},
-      quests:['Desert Treasure I'],
-      items:[],
-      monsters:['Callisto','Venenatis',"Vet'ion",'Spiritual Mage'],
-      tasks:[
-        { task:"Kill Callisto, Venenatis & Vet'ion", monsters:['Callisto','Venenatis',"Vet'ion"] },
-        { task:'Teleport to Ghorrock', skills:{Magic:96}, items:['Water rune','Law rune'], quests:['Desert Treasure I'] },
-        { task:'Fish and Cook a Dark Crab in the Resource Area', skills:{Fishing:85, Cooking:85}, items:['Fishing rod','Dark fishing bait','Coins'] },
-        { task:'Smith a rune scimitar from scratch in the Resource Area', skills:{Smithing:90}, items:['Runite bar','Hammer'] },
-        { task:"Steal from the Rogues' chest", skills:{Thieving:84} },
-        { task:'Slay a spiritual mage inside the wilderness Godwars Dungeon', skills:{Slayer:83}, monsters:['Spiritual Mage'] },
-        { task:'Cut and burn some magic logs in the Resource Area', skills:{Woodcutting:75, Firemaking:75}, tools:['any axe'], items:['Tinderbox'] },
-      ],
-    },
-  },
-];
+// Generated from the OSRS Wiki by scripts/generate_diaries.py → output/diaries.json
+// (loaded with the other data files). Per area: {name, rewardNpc, easy|medium|hard|elite:
+// {skills, quests, items, monsters (derived from tasks), rewards:[{text,sub}], tasks:[{n, task,
+// skills, notBoostable?, skillsAny?, combat?, quests, partialQuests?, ironmanSkills?,
+// ironmanQuests?, items, monsters, tools?, notes?}]}}
+let DIARY_DATA = [];
 
 // ── Reverse lookup: card → [{diaryName, tier, role, task?}] ────────────────
 // Each entry now carries the specific task text so card pages can show exactly
 // which task uses the card, not just the area+tier.
 var DIARY_BY_CARD = {};
-(function _buildDiaryByCard() {
+function _buildDiaryByCard() {
+  DIARY_BY_CARD = {};
   function _add(card, diaryName, tier, role, taskText) {
     if (!card) return;
     card = card.toLowerCase();  // keyed lowercase — look up with name.toLowerCase()
@@ -8693,10 +7856,14 @@ var DIARY_BY_CARD = {};
         for (const i of (taskObj.items    || [])) _add(i, area.name, tier, 'item',    taskText);
         for (const m of (taskObj.monsters || [])) _add(m, area.name, tier, 'monster', taskText);
         if (taskObj.npc) _add(taskObj.npc, area.name, tier, 'npc', taskText);
+        for (const n of (taskObj.npcs || [])) _add(n, area.name, tier, 'npc', taskText);
+        for (const g of (taskObj.itemsAny || [])) for (const c of g) _add(c, area.name, tier, 'item', taskText);
+        for (const g of (taskObj.monstersAny || [])) for (const c of g) _add(c, area.name, tier, 'monster', taskText);
+        for (const st of ((taskObj.setsAny || {}).sets || [])) for (const c of st.items) _add(c, area.name, tier, 'item', taskText);
       }
     }
   }
-})();
+}
 
 // ── Dev check: card/quest names in hand-written data ───────────────────────
 // Runs after data load. Warns (console only) for any name in SLAYER_TASKS,
@@ -8739,30 +7906,34 @@ function evaluateDiaryTier(area, tier) {
   const t = area[tier];
   if (!t) return null;
 
-  // Tier-wide quests (true blockers — can't start any task without these)
-  const tierQuestSet = new Set([
-    ...(AREA_QUESTS[area.name] || []),
-    ...(t.quests || []),
-  ]);
+  // Area-wide quests (true blockers — can't start any task without these, e.g. Priest in
+  // Peril for Morytania). The tier's own quest list is the union of its tasks' quests, so
+  // those are shown per task below rather than blocking the whole tier.
+  const tierQuestSet = new Set(AREA_QUESTS[area.name] || []);
   const blockers = [];
   for (const q of tierQuestSet) {
     if (!completedQuests.has(q)) blockers.push('Quest: ' + q);
   }
 
   // Collect all quests required by individual tasks (not already in tier quests)
-  const taskQuestMap = new Map(); // quest → [{taskText}]
+  const taskQuestMap = new Map(); // quest → {tasks:[taskText], partial}
   for (const taskObj of (t.tasks || [])) {
     if (typeof taskObj !== 'object') continue;
-    for (const q of (taskObj.quests || [])) {
-      if (tierQuestSet.has(q)) continue; // already shown as tier-blocker
-      if (!taskQuestMap.has(q)) taskQuestMap.set(q, []);
-      taskQuestMap.get(q).push(taskObj.task || '');
-    }
+    const add = (q, partial) => {
+      if (tierQuestSet.has(q)) return; // already shown as a blocker
+      if (!taskQuestMap.has(q)) taskQuestMap.set(q, { tasks: [], partial });
+      const e = taskQuestMap.get(q);
+      e.tasks.push(taskObj.task || '');
+      e.partial = e.partial && partial;  // full completion wins if any task needs it
+    };
+    for (const q of (taskObj.quests || [])) add(q, false);
+    for (const q of (taskObj.partialQuests || [])) add(q, true);
   }
-  const taskQuestGates = [...taskQuestMap.entries()].map(([quest, tasks]) => ({
+  const taskQuestGates = [...taskQuestMap.entries()].map(([quest, e]) => ({
     quest,
     done: completedQuests.has(quest),
-    tasks,
+    partial: e.partial,
+    tasks: e.tasks,
   }));
 
   // Skill gates (informational — shown amber, not hard blockers)
@@ -8773,13 +7944,26 @@ function evaluateDiaryTier(area, tier) {
     levelGates.push({ skill, have, req, ok: have >= req });
   }
 
-  // Item cards
+  // Item cards (plus "any one of" groups — a group with nothing owned counts as missing)
   const ownedItems   = (t.items || []).filter(i => isOwned(i));
   const missingItems = (t.items || []).filter(i => !isOwned(i));
+  for (const task of (t.tasks || [])) {
+    for (const g of (task.itemsAny || []))
+      if (!g.some(c => isOwned(c))) missingItems.push(g.join(' or '));
+    for (const g of (task.monstersAny || []))
+      if (!g.some(c => isOwned(c))) missingItems.push(g.join(' or '));
+    if (task.lightSource && !LIGHT_SOURCE_ITEMS.some(c => isOwned(c))) missingItems.push('any light source');
+    if (task.setsAny && !(task.setsAny.sets || []).some(st => st.items.every(c => isOwned(c)))) missingItems.push(task.setsAny.label);
+    for (const g of (task.anyOf || [])) {
+      const met = o => o.card ? isOwned(o.card) : o.skill ? getLevel(o.skill) >= o.level : completedQuests.has(o.quest);
+      if (!g.some(met)) missingItems.push(g.map(o => o.card || o.quest || `${o.skill} ${o.level}`).join(' or '));
+    }
+  }
 
-  // Monster cards
-  const ownedMonsters   = (t.monsters || []).filter(m => isOwned(m));
-  const missingMonsters = (t.monsters || []).filter(m => !isOwned(m));
+  // Monster + NPC cards (any NPC interaction needs its card), incl. the reward NPC
+  const _npcs = [...(t.monsters || []), ...(t.npcs || []), ...(area.rewardNpc && _isCard(area.rewardNpc) ? [area.rewardNpc] : [])];
+  const ownedMonsters   = [...new Set(_npcs)].filter(m => isOwned(m));
+  const missingMonsters = [...new Set(_npcs)].filter(m => !isOwned(m));
 
   let status;
   if (blockers.length > 0) status = 'locked';
@@ -8845,13 +8029,23 @@ function selectDiaryTier(dn, tier) {
 }
 
 // Wishlist all missing cards from a diary tier
+// Every card a diary tier needs: task items, monsters to kill, NPCs to interact with,
+// plus the reward NPC (to claim) and the cards its rewards involve (lamp, diary item…).
+function _diaryTierCards(area, tier) {
+  const t = area[tier];
+  if (!t) return [];
+  const cards = [...(t.items || []), ...(t.monsters || []), ...(t.npcs || [])];
+  if (area.rewardNpc) cards.push(area.rewardNpc);
+  for (const r of (t.rewards || [])) cards.push(...(r.items || []), ...(r.monsters || []), ...(r.npcs || []));
+  return [...new Set(cards)].filter(c => _isCard(c));
+}
+
 function wishlistDiaryTier(diaryName, tier) {
   const area = DIARY_DATA.find(a => a.name === diaryName);
   if (!area || !area[tier]) return;
-  const t = area[tier];
   const label = `${diaryName} ${tier.charAt(0).toUpperCase()+tier.slice(1)}`;
   let added = 0;
-  for (const card of [...(t.items||[]), ...(t.monsters||[])]) {
+  for (const card of _diaryTierCards(area, tier)) {
     if (!isOwned(card) && !wishlist.has(card)) {
       wishlist.set(card, { note: label });
       added++;
@@ -8922,7 +8116,7 @@ function showDiaryDetail(name) {
       return `<div style="font-size:11px;color:#555;margin-bottom:12px;display:flex;align-items:center;gap:6px">Collect rewards from:
         <span data-card="${escHtml(ci.exact)}" data-type="${ci.type}" onclick="showCard(this.dataset.card,this.dataset.type)"
           style="display:inline-flex;align-items:center;gap:3px;padding:2px 7px;border-radius:3px;background:${npcBg};border:1px solid ${npcBdr};color:${npcCol};cursor:pointer;font-size:11px"
-          title="${npcOwned?'Owned — click to view':'Not owned — click to view'}">${npcSym} ${escHtml(area.rewardNpc)}</span>
+          title="${npcOwned?'Owned — you can claim rewards. Click to view':'Card needed to claim rewards — click to view'}">${npcSym} ${escHtml(area.rewardNpc)}</span>
       </div>`;
     })() : '<div style="margin-bottom:12px"></div>'}
     <div style="display:flex;gap:8px;margin-bottom:20px">`;
@@ -8952,7 +8146,7 @@ function showDiaryDetail(name) {
   const t = area[tier];
   if (t) {
     const ev = evaluateDiaryTier(area, tier);
-    const hasMissingCards = [...(t.items||[]),...(t.monsters||[])].some(c => !isOwned(c));
+    const hasMissingCards = _diaryTierCards(area, tier).some(c => !isOwned(c));
 
     html += `<div style="background:#111;border-radius:6px;border:1px solid #222;padding:14px 16px">`;
 
@@ -8964,6 +8158,34 @@ function showDiaryDetail(name) {
         onclick="wishlistDiaryTier(this.dataset.dn,this.dataset.tier)"
         style="font-size:10px;background:none;border:1px solid #333;border-radius:3px;color:#666;padding:2px 8px;cursor:pointer">☆ Wishlist missing cards</button>` : ''}
     </div>`;
+
+    // ── Rewards (from the wiki's per-tier Rewards list) ───────────────────────
+    if ((t.rewards || []).length) {
+      const line = r => {
+        const head = r.text.replace(/:$/, '');
+        const ci = _cardInfo(head);
+        const headHtml = ci
+          ? `<span data-card="${escHtml(ci.exact)}" data-type="${ci.type}" onclick="showCard(this.dataset.card,this.dataset.type)"
+               style="color:${isOwned(ci.exact) ? '#76c442' : '#c8a060'};cursor:pointer;text-decoration:underline dotted"
+               title="${isOwned(ci.exact) ? 'Owned' : 'Not owned'} \u2014 click to view">${escHtml(head)}</span>`
+          : escHtml(r.text);
+        const subs = (r.sub || []).map(x => `<li style="margin:1px 0">${escHtml(x)}</li>`).join('');
+        // cards this reward needs (to use the item, kill the monster, talk to the NPC)
+        const need = [...(r.items || []), ...(r.monsters || []), ...(r.npcs || [])].filter(c => _isCard(c) && c !== (ci && ci.exact));
+        const chips = need.map(c => {
+          const own = isOwned(c), info = _cardInfo(c);
+          return `<span data-card="${escHtml(info.exact)}" data-type="${info.type}" onclick="showCard(this.dataset.card,this.dataset.type)"
+            style="display:inline-flex;align-items:center;padding:0 5px;margin-left:4px;border-radius:3px;font-size:9px;cursor:pointer;background:${own?'#0a180a':'#180808'};border:1px solid ${own?'#2a5a2a':'#5a2a2a'};color:${own?'#5a9a5a':'#c05050'}"
+            title="${own ? 'Owned' : 'Card needed'} \u2014 click to view">${own ? '\u2713' : '\u2717'} ${escHtml(c)}</span>`;
+        }).join('');
+        const ncChips = [...(r.npcsNoCard || []), ...(r.itemsNoCard || [])].map(x => `<span style="display:inline-flex;align-items:center;gap:2px;padding:1px 5px;border-radius:3px;font-size:9px;margin-left:4px;background:#101010;border:1px solid #2a2a2a;color:#666" title="No TCG card exists — no restriction">${escHtml(x)} <span style="font-size:8px;opacity:.6">no card</span></span>`).join('');
+        return `<li style="margin:3px 0">${headHtml}${chips}${ncChips}${subs ? `<ul style="margin:2px 0 0 14px;padding:0;color:#666">${subs}</ul>` : ''}</li>`;
+      };
+      html += `<details style="margin-bottom:14px;padding:8px 12px;background:#0d0c08;border-radius:4px;border:1px solid #2a2414">
+        <summary style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:#6a5a3a;cursor:pointer">Rewards</summary>
+        <ul style="margin:6px 0 0 14px;padding:0;font-size:11px;color:#999;line-height:1.45">${t.rewards.map(line).join('')}</ul>
+      </details>`;
+    }
 
     // ── Prerequisites (compact auto-detected section) ────────────────────────
     const hasPrereqs = ev.blockers.length || ev.levelGates.length || ev.taskQuestGates.length;
@@ -8996,12 +8218,12 @@ function showDiaryDetail(name) {
           html += `<div style="margin-top:6px;border-top:1px solid #1a1a1a"></div>`;
         }
         html += `<div style="font-size:9px;text-transform:uppercase;letter-spacing:1px;color:#2a2a2a;margin:5px 0 3px">Some tasks require</div>`;
-        for (const { quest, done, tasks } of ev.taskQuestGates) {
+        for (const { quest, done, partial, tasks } of ev.taskQuestGates) {
           const col  = done ? '#4a7a4a' : '#7a3a3a';
           const icon = done ? '\u2713' : '\u2717';
-          const tip  = tasks.join('; ');
+          const tip  = (partial ? 'Started / partial completion is enough. ' : '') + tasks.join('; ');
           html += `<div style="display:flex;align-items:center;gap:6px;padding:2px 0;font-size:11px;color:${col}" title="${escHtml(tip)}">
-            <span>${icon}</span><span>${escHtml(quest)}</span></div>`;
+            <span>${icon}</span><span>${escHtml(quest)}</span>${partial ? '<span style="font-size:9px;color:#555">partial</span>' : ''}</div>`;
         }
       }
 
@@ -9040,13 +8262,40 @@ function showDiaryDetail(name) {
           const ok   = have >= req;
           const col  = ok ? '#2a5a2a' : '#4a3a0a';
           const tcol = ok ? '#4a9a4a' : '#a08020';
-          reqHtml += `<span style="display:inline-flex;align-items:center;gap:2px;padding:1px 5px;border-radius:3px;background:${ok?'#0d1e0d':'#161000'};border:1px solid ${col};font-size:10px;color:${tcol}">${skillIcon(skill,10)}${escHtml(skill)} ${req}</span>`;
+          const nb   = (taskObj.notBoostable || []).includes(skill);
+          reqHtml += `<span style="display:inline-flex;align-items:center;gap:2px;padding:1px 5px;border-radius:3px;background:${ok?'#0d1e0d':'#161000'};border:1px solid ${col};font-size:10px;color:${tcol}"
+            title="${nb ? 'Not boostable \u2014 needs the real level' : 'Boostable'}">${skillIcon(skill,10)}${escHtml(skill)} ${req}${nb ? ' <span style="font-size:8px;opacity:.7">nb</span>' : ''}</span>`;
         }
         for (const q of reqQuests) {
           const done = completedQuests.has(q);
           reqHtml += `<span style="display:inline-flex;align-items:center;gap:2px;padding:1px 5px;border-radius:3px;background:${done?'#0a180a':'#180808'};border:1px solid ${done?'#2a5a2a':'#5a2a2a'};font-size:10px;color:${done?'#5a9a5a':'#c05050'}"
             title="${done?'Quest complete':'Quest required'}">${done?'\u2713':'\u2717'} ${escHtml(q)}</span>`;
         }
+        const _qChip = (q, label) => {
+          const done = completedQuests.has(q);
+          return `<span style="display:inline-flex;align-items:center;gap:2px;padding:1px 5px;border-radius:3px;font-size:10px;background:${done?'#0a180a':'#180808'};border:1px solid ${done?'#2a5a2a':'#5a2a2a'};color:${done?'#5a9a5a':'#c05050'}"
+            title="${done?'Quest complete':label}">${done?'\u2713':'\u2717'} ${escHtml(q)}${label.startsWith('Started') ? ' <span style="opacity:.6">(partial)</span>' : ''}</span>`;
+        };
+        for (const q of (taskObj.partialQuests || [])) reqHtml += _qChip(q, 'Started / partial completion is enough');
+        // "Agility 60 or Strength 60" — any one satisfies it
+        for (const group of (taskObj.skillsAny || [])) {
+          const opts = group.map(o => Object.entries(o)[0]);
+          const ok = opts.some(([sk, lv]) => getLevel(sk) >= lv);
+          reqHtml += `<span style="display:inline-flex;align-items:center;gap:2px;padding:1px 5px;border-radius:3px;font-size:10px;background:${ok?'#0d1e0d':'#161000'};border:1px solid ${ok?'#2a5a2a':'#4a3a0a'};color:${ok?'#4a9a4a':'#a08020'}"
+            title="Any one of these">${opts.map(([sk, lv]) => `${skillIcon(sk,11)}${lv}`).join(' <span style="opacity:.6">or</span> ')}</span>`;
+        }
+        if (taskObj.combat) {
+          const cb = typeof getCombatLevel === 'function' ? getCombatLevel() : null;
+          const ok = cb != null && cb >= taskObj.combat;
+          reqHtml += `<span style="display:inline-flex;align-items:center;gap:2px;padding:1px 5px;border-radius:3px;font-size:10px;background:#111418;border:1px solid ${ok?'#2a5a2a':'#252030'};color:${ok?'#4a9a4a':'#888'}" title="Combat level">\u2694 ${taskObj.combat}</span>`;
+        }
+        // Ironman-only requirements (from the wiki's ironman notes)
+        for (const [sk, lv] of Object.entries(taskObj.ironmanSkills || {})) {
+          const ok = getLevel(sk) >= lv;
+          reqHtml += `<span style="display:inline-flex;align-items:center;gap:2px;padding:1px 5px;border-radius:3px;font-size:10px;background:#101016;border:1px dashed ${ok?'#2a5a2a':'#3a3a5a'};color:${ok?'#4a9a4a':'#8a8ab0'}"
+            title="Ironman accounts only">${skillIcon(sk,11)}${lv} <span style="opacity:.6">iron</span></span>`;
+        }
+        for (const q of (taskObj.ironmanQuests || [])) reqHtml += _qChip(q, 'Ironman accounts only');
         // Helper: render a card chip — green ✓ if owned, red ✗ if not; grey if not a card
         function chipFor(displayName, fallbackType) {
           const ci = _cardInfo(displayName);
@@ -9072,9 +8321,63 @@ function showDiaryDetail(name) {
         if (reqNpc) {
           reqHtml += chipFor(reqNpc, 'monster');
         }
+        for (const npc of (taskObj.npcs || [])) {
+          if (npc !== reqNpc) reqHtml += chipFor(npc, 'monster');
+        }
+        // Considered but no TCG card exists → no restriction (shown so nothing looks unchecked)
+        for (const x of [...(taskObj.npcsNoCard || []), ...(taskObj.itemsNoCard || [])]) reqHtml += `<span style="display:inline-flex;align-items:center;gap:2px;padding:1px 5px;border-radius:3px;font-size:10px;background:#101010;border:1px solid #2a2a2a;color:#666" title="No TCG card exists — no restriction">${escHtml(x)} <span style="font-size:8px;opacity:.6">no card</span></span>`;
+        // "wear any complete Barrows set" — a set counts when all four pieces are owned
+        if (taskObj.setsAny) {
+          const sets = taskObj.setsAny.sets || [];
+          const done = sets.filter(st => st.items.every(c => isOwned(c)));
+          const ok = done.length > 0;
+          const rows = sets.map(st => ({ label: st.name, cards: [st.monster, ...st.items].filter(Boolean), need: st.items }));
+          reqHtml += `<span style="display:inline-flex;align-items:center;gap:2px;padding:1px 5px;border-radius:3px;font-size:10px;background:${ok?'#0a180a':'#180808'};border:1px dashed ${ok?'#2a5a2a':'#5a2a2a'};color:${ok?'#5a9a5a':'#c05050'}"
+            ${_cardRowsTipAttrs(rows, taskObj.setsAny.label + ' \u2014 brother, then helm / body / legs / weapon')}>${ok?'\u2713':'\u2717'} ${escHtml(taskObj.setsAny.label)}${ok ? ` <span style="opacity:.7">(${escHtml(done[0].name)})</span>` : ''}</span>`;
+        }
+        // "kill a chompy or a jubbly" — any one monster card satisfies it
+        for (const group of (taskObj.monstersAny || [])) {
+          const ok = group.some(c => isOwned(c));
+          reqHtml += `<span style="display:inline-flex;align-items:center;gap:2px;padding:1px 5px;border-radius:3px;font-size:10px;background:${ok?'#0a180a':'#180808'};border:1px dashed ${ok?'#2a5a2a':'#5a2a2a'};color:${ok?'#5a9a5a':'#c05050'}"
+            title="Kill any one of these">${ok?'\u2713':'\u2717'} \u2694 ${group.map(escHtml).join(' <span style="opacity:.6">or</span> ')}</span>`;
+        }
+        // "any light source" — uses the shared LIGHT_SOURCE_ITEMS list
+        if (taskObj.lightSource) {
+          const owned = LIGHT_SOURCE_ITEMS.filter(c => isOwned(c));
+          const ok = owned.length > 0;
+          reqHtml += `<span style="display:inline-flex;align-items:center;gap:2px;padding:1px 5px;border-radius:3px;font-size:10px;background:${ok?'#0a180a':'#180808'};border:1px dashed ${ok?'#2a5a2a':'#5a2a2a'};color:${ok?'#5a9a5a':'#c05050'}"
+            ${_cardGridTipAttrs(LIGHT_SOURCE_ITEMS, 'Any light source')}>${ok?'\u2713':'\u2717'} Any light source${ok ? ` <span style="opacity:.7">(${escHtml(owned[0])})</span>` : ''}</span>`;
+        }
+        // Mixed alternatives: "Dusty key or Agility 70", "Ecto-tokens or Coins"
+        for (const group of (taskObj.anyOf || [])) {
+          const met = o => o.card ? isOwned(o.card) : o.skill ? getLevel(o.skill) >= o.level : completedQuests.has(o.quest);
+          const ok = group.some(met);
+          const label = o => o.card ? escHtml(o.card) : o.skill ? `${skillIcon(o.skill,10)}${escHtml(o.skill)} ${o.level}` : `\u2691 ${escHtml(o.quest)}`;
+          reqHtml += `<span style="display:inline-flex;align-items:center;gap:2px;padding:1px 5px;border-radius:3px;font-size:10px;background:${ok?'#0a180a':'#180808'};border:1px dashed ${ok?'#2a5a2a':'#5a2a2a'};color:${ok?'#5a9a5a':'#c05050'}"
+            title="Any one of these">${ok?'\u2713':'\u2717'} ${group.map(label).join(' <span style="opacity:.6">or</span> ')}</span>`;
+        }
+        // "A or B" item alternatives — owning any one card satisfies it
+        (taskObj.itemsAny || []).forEach((group, gi) => {
+          const owned = group.filter(c => isOwned(c));
+          const ok = owned.length > 0;
+          const label = (taskObj.itemsAnyLabels || {})[gi];
+          if (label || group.length > 4) {   // big category groups: compact chip, full list on hover
+            reqHtml += `<span style="display:inline-flex;align-items:center;gap:2px;padding:1px 5px;border-radius:3px;font-size:10px;background:${ok?'#0a180a':'#180808'};border:1px dashed ${ok?'#2a5a2a':'#5a2a2a'};color:${ok?'#5a9a5a':'#c05050'}"
+              ${_cardGridTipAttrs(group, label || 'Any one of')}>${ok?'\u2713':'\u2717'} ${escHtml(label || `Any of ${group.length}`)}${ok ? ` <span style="opacity:.7">(${escHtml(owned[0])}${owned.length > 1 ? ' +' + (owned.length - 1) : ''})</span>` : ''}</span>`;
+            return;
+          }
+          reqHtml += `<span style="display:inline-flex;align-items:center;gap:2px;padding:1px 5px;border-radius:3px;font-size:10px;background:${ok?'#0a180a':'#180808'};border:1px dashed ${ok?'#2a5a2a':'#5a2a2a'};color:${ok?'#5a9a5a':'#c05050'}"
+            title="Any one of these${ok ? ' — you own ' + owned.join(', ') : ''}">${ok?'\u2713':'\u2717'} ${group.map(c => {
+              const ci = _cardInfo(c);
+              return ci ? `<span data-card="${escHtml(ci.exact)}" data-type="${ci.type}" onclick="showCard(this.dataset.card,this.dataset.type);event.stopPropagation()" style="cursor:pointer;text-decoration:underline dotted">${escHtml(c)}</span>` : escHtml(c);
+            }).join(' <span style="opacity:.6">or</span> ')}</span>`;
+        });
         for (const tool of reqTools) {
-          reqHtml += `<span style="display:inline-flex;align-items:center;gap:2px;padding:1px 5px;border-radius:3px;background:#111418;border:1px solid #252030;font-size:10px;color:#666"
-            title="Tool required">\u2692 ${escHtml(tool)}</span>`;
+          const tiers = TOOL_TIERS[tool];
+          const best  = tiers && tiers.find(tt => isOwned(tt.name));   // lowest owned tier — the most accessible one
+          const col   = !tiers ? '#666' : best ? '#5a9a5a' : '#c05050';
+          reqHtml += `<span style="display:inline-flex;align-items:center;gap:2px;padding:1px 5px;border-radius:3px;font-size:10px;background:#111418;border:1px solid ${!tiers ? '#252030' : best ? '#2a5a2a' : '#5a2a2a'};color:${col}"
+            ${tiers ? _cardGridTipAttrs(tiers.map(tt => tt.name), 'Any ' + tool.toLowerCase() + ' (any tier works)') : 'title="Tool required"'}>\u2692 ${tiers ? (best ? '\u2713 ' : '\u2717 ') : ''}${escHtml(tiers ? 'Any ' + tool.toLowerCase() : tool)}${best ? ` <span style="opacity:.7">(${escHtml(best.name)})</span>` : ''}</span>`;
         }
 
         html += `<div style="display:flex;align-items:flex-start;gap:10px;padding:7px 10px;border-radius:4px;border:1px solid ${rowBdr};background:${rowBg};margin-bottom:3px">
@@ -9087,6 +8390,7 @@ function showDiaryDetail(name) {
           <div style="flex:1;min-width:0">
             <div style="font-size:12px;color:${ticked?'#666':'#aaa'};line-height:1.4;${ticked?'text-decoration:line-through;':''}">${escHtml(taskText)}</div>
             ${reqHtml ? `<div style="display:flex;flex-wrap:wrap;gap:3px;margin-top:5px">${reqHtml}</div>` : ''}
+            ${(taskObj.notes || []).length ? `<div style="font-size:10px;color:#555;margin-top:4px;line-height:1.4">${taskObj.notes.map(escHtml).join(' \xb7 ')}</div>` : ''}
           </div>
         </div>`;
       });
@@ -9772,7 +9076,7 @@ function renderRulesTab() {
     <h3>Core Rules</h3>
     <table>
       <tr><th>Action</th><th>Card Required?</th></tr>
-      <tr><td>Talk to / interact with an NPC (if they have a TCG card)</td><td>Yes — need the NPC card</td></tr>
+      <tr><td>Talk to / interact with an NPC (if they have a TCG card)</td><td>Yes — need the NPC card, for <em>any</em> interaction (talking, trading, quests, slayer masters, diary rewards)</td></tr>
       <tr><td>Talk to / interact with an NPC (no TCG card exists)</td><td>No — always accessible</td></tr>
       <tr><td>Fight or kill an NPC</td><td>Yes — need the monster card</td></tr>
       <tr><td>Pickpocket an NPC</td><td>Yes — need the monster card</td></tr>
@@ -9797,7 +9101,16 @@ function renderRulesTab() {
     <p><strong>Example:</strong> You own the Iron ore card. You can smelt Iron bars even without the Iron bar card. But you can't then smith those bars into equipment — that requires the Iron bar card.</p>
 
     <h3>NPC Interactions</h3>
-    <p>If a TCG card exists for an NPC, you need that card to interact with them in any way — including talking to them to start or progress a quest. NPCs with no TCG card are always accessible.</p>
+    <p>If a TCG card exists for an NPC, you need that card to interact with them in any way — including talking to them to start or progress a quest, using a Slayer master, or claiming Achievement Diary rewards. NPCs with no TCG card are always accessible. (The Bronzeman plugin enforces most of this; the rule applies even where it doesn't — e.g. NPCs of quests you've already started.)</p>
+
+    <h3>Item versions</h3>
+    <p>One card covers every version of an item listed for it in the TCG catalog: all potion doses, noted items, poisoned weapons, charged/uncharged and damaged versions — and some raw forms, e.g. the <em>Ranarr weed</em> card covers Grimy ranarr weed and the <em>Diamond</em> card covers Uncut diamond. The planner matches drops, loot and requirements using these lists.</p>
+
+    <h3>Achievement Diaries</h3>
+    <p>Each task needs the cards for the items you use, the monsters you kill and the NPCs you interact with. Claiming the rewards needs the reward NPC's card, and using a reward (e.g. the antique lamp, or equipping the diary item) needs that item's card.</p>
+
+    <h3>Ironman</h3>
+    <p>This account is an Ironman, and those rules apply on top of the card rules: no trading and no Grand Exchange, no loot from monsters other players damaged, diary kill tasks can't be assisted, and shops sell only their base stock. Where the wiki gives an ironman-specific requirement (e.g. Hunter 69 for the spottier cape furs) the planner uses it.</p>
 
     <h3>Combat</h3>
     <p>You need the monster card to attack any NPC with a combat level.</p>
@@ -9819,13 +9132,18 @@ function renderRulesTab() {
     <p>Foil cards are cosmetically shiny but don't grant any extra unlocks. A foil Iron ore card unlocks exactly the same things as a regular Iron ore card.</p>
 
     <h3>No card exists</h3>
-    <p>If no TCG card exists for an NPC or item, there is no restriction — you can interact with it freely. The card set covers 1,227 monsters and 5,149 resource items; anything outside that set is unrestricted.</p>
+    <p>If no TCG card exists for an NPC or item, there is no restriction — you can interact with it freely. The v1.0 card set covers 1,391 NPCs and 3,809 items (5,200 cards); anything outside that set is unrestricted.</p>
 
     <h3>Tabs in this tool</h3>
     <ul>
-      <li><strong>Cards</strong> — Browse all 6,376 TCG cards. See monster drop rates, item sources, production recipes, and ingredient chains.</li>
+      <li><strong>Cards</strong> — Browse all 5,200 TCG cards. See monster drop rates, item sources, production recipes, ingredient chains, and which bosses, diaries and quests use each card.</li>
+      <li><strong>Wishlist</strong> — Cards, quests, slayer task groups and clue steps you're working towards, with pack suggestions.</li>
+      <li><strong>Equipment</strong> — Gear comparison filtered to cards you own.</li>
       <li><strong>Skilling</strong> — See which training methods are available for each skill based on your level, tools, and owned cards.</li>
       <li><strong>Questing</strong> — See all OSRS quests and check completability based on your collection and skill levels.</li>
+      <li><strong>Diaries</strong> — Every Achievement Diary task with wiki requirements, the cards each needs, and each tier's rewards.</li>
+      <li><strong>Bosses</strong> — Raids, wave content, minigames, skilling bosses and bosses with access requirements and loot (collection-log uniques marked ◆).</li>
+      <li><strong>Packs</strong> — Each pack's card pool, with how many you own and which are still missing.</li>
     </ul>
   </div>`;
 }

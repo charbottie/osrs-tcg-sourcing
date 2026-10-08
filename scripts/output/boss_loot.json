@@ -3316,6 +3316,11 @@
         "fraction": "1/16"
       },
       {
+        "card": "Strength potion",
+        "rarity": "Common",
+        "fraction": "5/118"
+      },
+      {
         "card": "Giant bones",
         "rarity": "Always",
         "fraction": "1/1"

@@ -82,6 +82,8 @@ All game data lives in `scripts/output/` and is pre-generated from the OSRS Wiki
 | `card_details.json` | Card metadata (tier, description) |
 | `boss_loot.json` | Loot for chest/reward-based bosses (raid chests, Barrows, Moons, Gauntlet, lair chests, Unsired…) |
 | `collection_log.json` | Each boss's collection-log items — used to mark uniques |
+| `diaries.json` | Achievement Diary tasks, requirements and rewards — generated from the wiki |
+| `spells.json` | Every spell's level and rune cost (all four spellbooks) |
 
 ### Regenerating data from the wiki
 
@@ -98,6 +100,10 @@ python scripts/generate_food.py
 
 # Rebuild boss chest loot + collection log (run after generate_sources)
 python scripts/generate_boss_loot.py --card-json research/card-catalog-v1.json
+
+# Rebuild spells, then diaries (diaries use spells + item_sources)
+python scripts/generate_spells.py
+python scripts/generate_diaries.py --card-json research/card-catalog-v1.json
 ```
 
 > **Careful:** some committed output files carry hand fixes (production sources, images, categories). Regenerate into a scratch directory with `--out-dir` and diff before replacing anything.
@@ -125,6 +131,8 @@ osrs_tcg/
 │   ├── decode_completed_quests.py
 │   ├── generate_sources.py       # Scrapes wiki → monster_drops + item_sources
 │   ├── generate_boss_loot.py     # Wiki chest pages + Collection log → boss_loot + collection_log
+│   ├── generate_spells.py        # Wiki spellbooks → spells (rune costs)
+│   ├── generate_diaries.py       # Wiki diary pages → diaries (tasks, requirements, rewards)
 │   ├── generate_quests.py        # Scrapes wiki → quests + quest_chains
 │   ├── generate_equipment.py
 │   ├── generate_food.py

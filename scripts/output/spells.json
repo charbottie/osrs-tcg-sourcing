@@ -1,0 +1,2097 @@
+{
+  "Wind Strike": {
+    "book": "Standard",
+    "level": 1,
+    "runes": {
+      "Air rune": 1,
+      "Mind rune": 1
+    },
+    "members": false
+  },
+  "Water Strike": {
+    "book": "Standard",
+    "level": 5,
+    "runes": {
+      "Air rune": 1,
+      "Water rune": 1,
+      "Mind rune": 1
+    },
+    "members": false
+  },
+  "Earth Strike": {
+    "book": "Standard",
+    "level": 9,
+    "runes": {
+      "Air rune": 1,
+      "Earth rune": 2,
+      "Mind rune": 1
+    },
+    "members": false
+  },
+  "Fire Strike": {
+    "book": "Standard",
+    "level": 13,
+    "runes": {
+      "Air rune": 2,
+      "Fire rune": 3,
+      "Mind rune": 1
+    },
+    "members": false
+  },
+  "Wind Bolt": {
+    "book": "Standard",
+    "level": 17,
+    "runes": {
+      "Chaos rune": 1,
+      "Air rune": 2
+    },
+    "members": false
+  },
+  "Water Bolt": {
+    "book": "Standard",
+    "level": 23,
+    "runes": {
+      "Chaos rune": 1,
+      "Air rune": 2,
+      "Water rune": 2
+    },
+    "members": false
+  },
+  "Earth Bolt": {
+    "book": "Standard",
+    "level": 29,
+    "runes": {
+      "Chaos rune": 1,
+      "Air rune": 2,
+      "Earth rune": 3
+    },
+    "members": false
+  },
+  "Fire Bolt": {
+    "book": "Standard",
+    "level": 35,
+    "runes": {
+      "Chaos rune": 1,
+      "Air rune": 3,
+      "Fire rune": 4
+    },
+    "members": false
+  },
+  "Crumble Undead": {
+    "book": "Standard",
+    "level": 39,
+    "runes": {
+      "Air rune": 2,
+      "Earth rune": 2,
+      "Chaos rune": 1
+    },
+    "members": false
+  },
+  "Wind Blast": {
+    "book": "Standard",
+    "level": 41,
+    "runes": {
+      "Death rune": 1,
+      "Air rune": 3
+    },
+    "members": false
+  },
+  "Water Blast": {
+    "book": "Standard",
+    "level": 47,
+    "runes": {
+      "Death rune": 1,
+      "Air rune": 3,
+      "Water rune": 3
+    },
+    "members": false
+  },
+  "Iban Blast": {
+    "book": "Standard",
+    "level": 50,
+    "runes": {
+      "Fire rune": 5,
+      "Death rune": 1
+    },
+    "members": true
+  },
+  "Magic Dart": {
+    "book": "Standard",
+    "level": 50,
+    "runes": {
+      "Mind rune": 4,
+      "Death rune": 1
+    },
+    "members": true
+  },
+  "Earth Blast": {
+    "book": "Standard",
+    "level": 53,
+    "runes": {
+      "Earth rune": 4,
+      "Air rune": 3,
+      "Death rune": 1
+    },
+    "members": false
+  },
+  "Fire Blast": {
+    "book": "Standard",
+    "level": 59,
+    "runes": {
+      "Fire rune": 5,
+      "Air rune": 4,
+      "Death rune": 1
+    },
+    "members": false
+  },
+  "Saradomin Strike": {
+    "book": "Standard",
+    "level": 35,
+    "runes": {
+      "Blood rune": 2,
+      "Fire rune": 2,
+      "Air rune": 4
+    },
+    "members": true
+  },
+  "Claws of Guthix": {
+    "book": "Standard",
+    "level": 35,
+    "runes": {
+      "Blood rune": 2,
+      "Fire rune": 1,
+      "Air rune": 4
+    },
+    "members": true
+  },
+  "Flames of Zamorak": {
+    "book": "Standard",
+    "level": 35,
+    "runes": {
+      "Blood rune": 2,
+      "Fire rune": 4,
+      "Air rune": 1
+    },
+    "members": true
+  },
+  "Wind Wave": {
+    "book": "Standard",
+    "level": 62,
+    "runes": {
+      "Air rune": 5,
+      "Blood rune": 1
+    },
+    "members": true
+  },
+  "Water Wave": {
+    "book": "Standard",
+    "level": 65,
+    "runes": {
+      "Water rune": 7,
+      "Air rune": 5,
+      "Blood rune": 1
+    },
+    "members": true
+  },
+  "Earth Wave": {
+    "book": "Standard",
+    "level": 70,
+    "runes": {
+      "Earth rune": 7,
+      "Air rune": 5,
+      "Blood rune": 1
+    },
+    "members": true
+  },
+  "Fire Wave": {
+    "book": "Standard",
+    "level": 75,
+    "runes": {
+      "Fire rune": 7,
+      "Air rune": 5,
+      "Blood rune": 1
+    },
+    "members": true
+  },
+  "Wind Surge": {
+    "book": "Standard",
+    "level": 81,
+    "runes": {
+      "Wrath rune": 1,
+      "Air rune": 7
+    },
+    "members": true
+  },
+  "Water Surge": {
+    "book": "Standard",
+    "level": 85,
+    "runes": {
+      "Wrath rune": 1,
+      "Air rune": 7,
+      "Water rune": 10
+    },
+    "members": true
+  },
+  "Earth Surge": {
+    "book": "Standard",
+    "level": 90,
+    "runes": {
+      "Wrath rune": 1,
+      "Air rune": 7,
+      "Earth rune": 10
+    },
+    "members": true
+  },
+  "Fire Surge": {
+    "book": "Standard",
+    "level": 95,
+    "runes": {
+      "Wrath rune": 1,
+      "Air rune": 7,
+      "Fire rune": 10
+    },
+    "members": true
+  },
+  "Charge": {
+    "book": "Standard",
+    "level": 80,
+    "runes": {
+      "Air rune": 3,
+      "Fire rune": 3,
+      "Blood rune": 3
+    },
+    "members": true
+  },
+  "Confuse": {
+    "book": "Standard",
+    "level": 3,
+    "runes": {
+      "Body rune": 1,
+      "Earth rune": 2,
+      "Water rune": 3
+    },
+    "members": false
+  },
+  "Weaken": {
+    "book": "Standard",
+    "level": 11,
+    "runes": {
+      "Body rune": 1,
+      "Earth rune": 2,
+      "Water rune": 3
+    },
+    "members": false
+  },
+  "Curse": {
+    "book": "Standard",
+    "level": 19,
+    "runes": {
+      "Body rune": 1,
+      "Earth rune": 3,
+      "Water rune": 2
+    },
+    "members": false
+  },
+  "Bind": {
+    "book": "Standard",
+    "level": 20,
+    "runes": {
+      "Nature rune": 2,
+      "Earth rune": 3,
+      "Water rune": 3
+    },
+    "members": false
+  },
+  "Snare": {
+    "book": "Standard",
+    "level": 50,
+    "runes": {
+      "Nature rune": 3,
+      "Earth rune": 4,
+      "Water rune": 4
+    },
+    "members": false
+  },
+  "Vulnerability": {
+    "book": "Standard",
+    "level": 66,
+    "runes": {
+      "Water rune": 5,
+      "Earth rune": 5,
+      "Soul rune": 1
+    },
+    "members": true
+  },
+  "Enfeeble": {
+    "book": "Standard",
+    "level": 73,
+    "runes": {
+      "Earth rune": 8,
+      "Water rune": 8,
+      "Soul rune": 1
+    },
+    "members": true
+  },
+  "Entangle": {
+    "book": "Standard",
+    "level": 79,
+    "runes": {
+      "Nature rune": 4,
+      "Earth rune": 5,
+      "Water rune": 5
+    },
+    "members": true
+  },
+  "Stun": {
+    "book": "Standard",
+    "level": 80,
+    "runes": {
+      "Earth rune": 12,
+      "Water rune": 12,
+      "Soul rune": 1
+    },
+    "members": true
+  },
+  "Tele Block": {
+    "book": "Standard",
+    "level": 85,
+    "runes": {
+      "Chaos rune": 1,
+      "Law rune": 1,
+      "Death rune": 1
+    },
+    "members": false
+  },
+  "Varrock Teleport": {
+    "book": "Standard",
+    "level": 25,
+    "runes": {
+      "Law rune": 1,
+      "Air rune": 3,
+      "Fire rune": 1
+    },
+    "members": false
+  },
+  "Lumbridge Teleport": {
+    "book": "Standard",
+    "level": 31,
+    "runes": {
+      "Law rune": 1,
+      "Air rune": 3,
+      "Earth rune": 1
+    },
+    "members": false
+  },
+  "Falador Teleport": {
+    "book": "Standard",
+    "level": 37,
+    "runes": {
+      "Law rune": 1,
+      "Air rune": 3,
+      "Water rune": 1
+    },
+    "members": false
+  },
+  "Teleport to House": {
+    "book": "Standard",
+    "level": 40,
+    "runes": {
+      "Law rune": 1,
+      "Air rune": 1,
+      "Earth rune": 1
+    },
+    "members": true
+  },
+  "Camelot Teleport": {
+    "book": "Standard",
+    "level": 45,
+    "runes": {
+      "Law rune": 1,
+      "Air rune": 5
+    },
+    "members": true
+  },
+  "Kourend Castle Teleport": {
+    "book": "Standard",
+    "level": 48,
+    "runes": {
+      "Law rune": 2,
+      "Fire rune": 1,
+      "Water rune": 1
+    },
+    "members": true
+  },
+  "Ardougne Teleport": {
+    "book": "Standard",
+    "level": 51,
+    "runes": {
+      "Law rune": 2,
+      "Water rune": 2
+    },
+    "members": true
+  },
+  "Civitas illa Fortis Teleport": {
+    "book": "Standard",
+    "level": 54,
+    "runes": {
+      "Law rune": 2,
+      "Earth rune": 1,
+      "Fire rune": 1
+    },
+    "members": true
+  },
+  "Watchtower Teleport": {
+    "book": "Standard",
+    "level": 58,
+    "runes": {
+      "Law rune": 2,
+      "Earth rune": 2
+    },
+    "members": true
+  },
+  "Trollheim Teleport": {
+    "book": "Standard",
+    "level": 61,
+    "runes": {
+      "Law rune": 2,
+      "Fire rune": 2
+    },
+    "members": true
+  },
+  "Ape Atoll Teleport (standard)": {
+    "book": "Standard",
+    "level": 64,
+    "runes": {
+      "Law rune": 2,
+      "Fire rune": 2,
+      "Water rune": 2
+    },
+    "members": true
+  },
+  "Teleport to Boat": {
+    "book": "Standard",
+    "level": 67,
+    "runes": {
+      "Law rune": 2,
+      "Earth rune": 2,
+      "Water rune": 2
+    },
+    "members": true
+  },
+  "Teleother Lumbridge": {
+    "book": "Standard",
+    "level": 74,
+    "runes": {
+      "Law rune": 1,
+      "Soul rune": 1,
+      "Earth rune": 1
+    },
+    "members": true
+  },
+  "Teleother Falador": {
+    "book": "Standard",
+    "level": 82,
+    "runes": {
+      "Law rune": 1,
+      "Soul rune": 1,
+      "Water rune": 1
+    },
+    "members": true
+  },
+  "Teleport to Target": {
+    "book": "Standard",
+    "level": 85,
+    "runes": {
+      "Law rune": 1,
+      "Death rune": 1,
+      "Chaos rune": 1
+    },
+    "members": true
+  },
+  "Teleother Camelot": {
+    "book": "Standard",
+    "level": 90,
+    "runes": {
+      "Law rune": 1,
+      "Soul rune": 2
+    },
+    "members": true
+  },
+  "Bones to Bananas": {
+    "book": "Standard",
+    "level": 15,
+    "runes": {
+      "Water rune": 2,
+      "Earth rune": 2,
+      "Nature rune": 1
+    },
+    "members": false
+  },
+  "Low Level Alchemy": {
+    "book": "Standard",
+    "level": 21,
+    "runes": {
+      "Nature rune": 1,
+      "Fire rune": 3
+    },
+    "members": false
+  },
+  "Superheat Item": {
+    "book": "Standard",
+    "level": 43,
+    "runes": {
+      "Fire rune": 4,
+      "Nature rune": 1
+    },
+    "members": false
+  },
+  "High Level Alchemy": {
+    "book": "Standard",
+    "level": 55,
+    "runes": {
+      "Fire rune": 5,
+      "Nature rune": 1
+    },
+    "members": false
+  },
+  "Bones to Peaches": {
+    "book": "Standard",
+    "level": 60,
+    "runes": {
+      "Water rune": 4,
+      "Earth rune": 2,
+      "Nature rune": 2
+    },
+    "members": true
+  },
+  "Lvl-1 Enchant": {
+    "book": "Standard",
+    "level": 7,
+    "runes": {
+      "Cosmic rune": 1,
+      "Water rune": 1
+    },
+    "members": false
+  },
+  "Lvl-2 Enchant": {
+    "book": "Standard",
+    "level": 27,
+    "runes": {
+      "Cosmic rune": 1,
+      "Air rune": 3
+    },
+    "members": false
+  },
+  "Lvl-3 Enchant": {
+    "book": "Standard",
+    "level": 49,
+    "runes": {
+      "Cosmic rune": 1,
+      "Fire rune": 5
+    },
+    "members": false
+  },
+  "Lvl-4 Enchant": {
+    "book": "Standard",
+    "level": 57,
+    "runes": {
+      "Cosmic rune": 1,
+      "Earth rune": 10
+    },
+    "members": false
+  },
+  "Lvl-5 Enchant": {
+    "book": "Standard",
+    "level": 68,
+    "runes": {
+      "Cosmic rune": 1,
+      "Earth rune": 15,
+      "Water rune": 15
+    },
+    "members": true
+  },
+  "Lvl-6 Enchant": {
+    "book": "Standard",
+    "level": 87,
+    "runes": {
+      "Cosmic rune": 1,
+      "Earth rune": 20,
+      "Fire rune": 20
+    },
+    "members": true
+  },
+  "Lvl-7 Enchant": {
+    "book": "Standard",
+    "level": 93,
+    "runes": {
+      "Soul rune": 20,
+      "Blood rune": 20,
+      "Cosmic rune": 1
+    },
+    "members": true
+  },
+  "Enchant Crossbow Bolt (Opal)": {
+    "book": "Standard",
+    "level": 4,
+    "runes": {
+      "Cosmic rune": 1,
+      "Air rune": 2
+    },
+    "members": true
+  },
+  "Enchant Crossbow Bolt (Sapphire)": {
+    "book": "Standard",
+    "level": 7,
+    "runes": {
+      "Cosmic rune": 1,
+      "Water rune": 1,
+      "Mind rune": 1
+    },
+    "members": true
+  },
+  "Enchant Crossbow Bolt (Jade)": {
+    "book": "Standard",
+    "level": 14,
+    "runes": {
+      "Cosmic rune": 1,
+      "Earth rune": 2
+    },
+    "members": true
+  },
+  "Enchant Crossbow Bolt (Pearl)": {
+    "book": "Standard",
+    "level": 24,
+    "runes": {
+      "Cosmic rune": 1,
+      "Water rune": 2
+    },
+    "members": true
+  },
+  "Enchant Crossbow Bolt (Emerald)": {
+    "book": "Standard",
+    "level": 27,
+    "runes": {
+      "Cosmic rune": 1,
+      "Air rune": 3,
+      "Nature rune": 1
+    },
+    "members": true
+  },
+  "Enchant Crossbow Bolt (Red Topaz)": {
+    "book": "Standard",
+    "level": 29,
+    "runes": {
+      "Cosmic rune": 1,
+      "Fire rune": 2
+    },
+    "members": true
+  },
+  "Enchant Crossbow Bolt (Ruby)": {
+    "book": "Standard",
+    "level": 49,
+    "runes": {
+      "Cosmic rune": 1,
+      "Fire rune": 5,
+      "Blood rune": 1
+    },
+    "members": true
+  },
+  "Enchant Crossbow Bolt (Diamond)": {
+    "book": "Standard",
+    "level": 57,
+    "runes": {
+      "Cosmic rune": 1,
+      "Earth rune": 10,
+      "Law rune": 2
+    },
+    "members": true
+  },
+  "Enchant Crossbow Bolt (Dragonstone)": {
+    "book": "Standard",
+    "level": 68,
+    "runes": {
+      "Cosmic rune": 1,
+      "Earth rune": 15,
+      "Soul rune": 1
+    },
+    "members": true
+  },
+  "Enchant Crossbow Bolt (Onyx)": {
+    "book": "Standard",
+    "level": 87,
+    "runes": {
+      "Cosmic rune": 1,
+      "Fire rune": 20,
+      "Death rune": 1
+    },
+    "members": true
+  },
+  "Charge Water Orb": {
+    "book": "Standard",
+    "level": 56,
+    "runes": {
+      "Cosmic rune": 3,
+      "Water rune": 30
+    },
+    "members": true
+  },
+  "Charge Earth Orb": {
+    "book": "Standard",
+    "level": 60,
+    "runes": {
+      "Cosmic rune": 3,
+      "Earth rune": 30
+    },
+    "members": true
+  },
+  "Charge Fire Orb": {
+    "book": "Standard",
+    "level": 63,
+    "runes": {
+      "Cosmic rune": 3,
+      "Fire rune": 30
+    },
+    "members": true
+  },
+  "Charge Air Orb": {
+    "book": "Standard",
+    "level": 66,
+    "runes": {
+      "Cosmic rune": 3,
+      "Air rune": 30
+    },
+    "members": true
+  },
+  "Telekinetic Grab": {
+    "book": "Standard",
+    "level": 33,
+    "runes": {
+      "Law rune": 1,
+      "Air rune": 1
+    },
+    "members": false
+  },
+  "Monster Inspect": {
+    "book": "Standard",
+    "level": 42,
+    "runes": {
+      "Body rune": 2,
+      "Mind rune": 2
+    },
+    "members": false
+  },
+  "Summon Boat": {
+    "book": "Standard",
+    "level": 56,
+    "runes": {
+      "Law rune": 2,
+      "Earth rune": 1,
+      "Water rune": 1
+    },
+    "members": true
+  },
+  "Smoke Rush": {
+    "book": "Ancient",
+    "level": 50,
+    "runes": {
+      "Air rune": 1,
+      "Fire rune": 1,
+      "Chaos rune": 2,
+      "Death rune": 2
+    },
+    "members": null
+  },
+  "Shadow Rush": {
+    "book": "Ancient",
+    "level": 52,
+    "runes": {
+      "Soul rune": 1,
+      "Death rune": 2,
+      "Chaos rune": 2,
+      "Air rune": 1
+    },
+    "members": null
+  },
+  "Blood Rush": {
+    "book": "Ancient",
+    "level": 56,
+    "runes": {
+      "Blood rune": 1,
+      "Death rune": 2,
+      "Chaos rune": 2
+    },
+    "members": null
+  },
+  "Ice Rush": {
+    "book": "Ancient",
+    "level": 58,
+    "runes": {
+      "Death rune": 2,
+      "Chaos rune": 2,
+      "Water rune": 2
+    },
+    "members": null
+  },
+  "Smoke Burst": {
+    "book": "Ancient",
+    "level": 62,
+    "runes": {
+      "Air rune": 2,
+      "Fire rune": 2,
+      "Chaos rune": 4,
+      "Death rune": 2
+    },
+    "members": null
+  },
+  "Shadow Burst": {
+    "book": "Ancient",
+    "level": 64,
+    "runes": {
+      "Soul rune": 2,
+      "Chaos rune": 4,
+      "Air rune": 1,
+      "Death rune": 2
+    },
+    "members": null
+  },
+  "Blood Burst": {
+    "book": "Ancient",
+    "level": 68,
+    "runes": {
+      "Death rune": 2,
+      "Blood rune": 2,
+      "Chaos rune": 4
+    },
+    "members": null
+  },
+  "Ice Burst": {
+    "book": "Ancient",
+    "level": 70,
+    "runes": {
+      "Death rune": 2,
+      "Chaos rune": 4,
+      "Water rune": 4
+    },
+    "members": null
+  },
+  "Smoke Blitz": {
+    "book": "Ancient",
+    "level": 74,
+    "runes": {
+      "Blood rune": 2,
+      "Air rune": 2,
+      "Death rune": 2,
+      "Fire rune": 2
+    },
+    "members": null
+  },
+  "Shadow Blitz": {
+    "book": "Ancient",
+    "level": 76,
+    "runes": {
+      "Soul rune": 2,
+      "Blood rune": 2,
+      "Air rune": 2,
+      "Death rune": 2
+    },
+    "members": null
+  },
+  "Blood Blitz": {
+    "book": "Ancient",
+    "level": 80,
+    "runes": {
+      "Death rune": 2,
+      "Blood rune": 4
+    },
+    "members": null
+  },
+  "Ice Blitz": {
+    "book": "Ancient",
+    "level": 82,
+    "runes": {
+      "Death rune": 2,
+      "Blood rune": 2,
+      "Water rune": 3
+    },
+    "members": null
+  },
+  "Smoke Barrage": {
+    "book": "Ancient",
+    "level": 86,
+    "runes": {
+      "Blood rune": 2,
+      "Air rune": 4,
+      "Death rune": 4,
+      "Fire rune": 4
+    },
+    "members": null
+  },
+  "Shadow Barrage": {
+    "book": "Ancient",
+    "level": 88,
+    "runes": {
+      "Air rune": 4,
+      "Soul rune": 3,
+      "Blood rune": 2,
+      "Death rune": 4
+    },
+    "members": null
+  },
+  "Blood Barrage": {
+    "book": "Ancient",
+    "level": 92,
+    "runes": {
+      "Death rune": 4,
+      "Blood rune": 4,
+      "Soul rune": 1
+    },
+    "members": null
+  },
+  "Ice Barrage": {
+    "book": "Ancient",
+    "level": 94,
+    "runes": {
+      "Death rune": 4,
+      "Blood rune": 2,
+      "Water rune": 6
+    },
+    "members": null
+  },
+  "Paddewwa Teleport": {
+    "book": "Ancient",
+    "level": 54,
+    "runes": {
+      "Law rune": 2,
+      "Air rune": 1,
+      "Fire rune": 1
+    },
+    "members": null
+  },
+  "Senntisten Teleport": {
+    "book": "Ancient",
+    "level": 60,
+    "runes": {
+      "Law rune": 2,
+      "Soul rune": 1
+    },
+    "members": null
+  },
+  "Kharyrll Teleport": {
+    "book": "Ancient",
+    "level": 66,
+    "runes": {
+      "Law rune": 2,
+      "Blood rune": 1
+    },
+    "members": null
+  },
+  "Lassar Teleport": {
+    "book": "Ancient",
+    "level": 72,
+    "runes": {
+      "Law rune": 2,
+      "Water rune": 4
+    },
+    "members": null
+  },
+  "Dareeyak Teleport": {
+    "book": "Ancient",
+    "level": 78,
+    "runes": {
+      "Law rune": 2,
+      "Air rune": 2,
+      "Fire rune": 3
+    },
+    "members": null
+  },
+  "Carrallanger Teleport": {
+    "book": "Ancient",
+    "level": 84,
+    "runes": {
+      "Law rune": 2,
+      "Soul rune": 2
+    },
+    "members": null
+  },
+  "Annakarl Teleport": {
+    "book": "Ancient",
+    "level": 90,
+    "runes": {
+      "Law rune": 2,
+      "Blood rune": 2
+    },
+    "members": null
+  },
+  "Ghorrock Teleport": {
+    "book": "Ancient",
+    "level": 96,
+    "runes": {
+      "Law rune": 2,
+      "Water rune": 8
+    },
+    "members": null
+  },
+  "Monster Examine": {
+    "book": "Lunar",
+    "level": 66,
+    "runes": {
+      "Astral rune": 1,
+      "Cosmic rune": 1,
+      "Mind rune": 1
+    },
+    "members": null
+  },
+  "Cure Other": {
+    "book": "Lunar",
+    "level": 68,
+    "runes": {
+      "Astral rune": 1,
+      "Law rune": 1,
+      "Earth rune": 10
+    },
+    "members": null
+  },
+  "Cure Me": {
+    "book": "Lunar",
+    "level": 71,
+    "runes": {
+      "Astral rune": 2,
+      "Law rune": 1,
+      "Cosmic rune": 2
+    },
+    "members": null
+  },
+  "Cure Group": {
+    "book": "Lunar",
+    "level": 74,
+    "runes": {
+      "Astral rune": 2,
+      "Law rune": 2,
+      "Cosmic rune": 2
+    },
+    "members": null
+  },
+  "Stat Spy": {
+    "book": "Lunar",
+    "level": 75,
+    "runes": {
+      "Astral rune": 2,
+      "Cosmic rune": 1,
+      "Body rune": 5
+    },
+    "members": null
+  },
+  "Dream": {
+    "book": "Lunar",
+    "level": 79,
+    "runes": {
+      "Astral rune": 2,
+      "Cosmic rune": 1,
+      "Body rune": 5
+    },
+    "members": null
+  },
+  "Stat Restore Pot Share": {
+    "book": "Lunar",
+    "level": 81,
+    "runes": {
+      "Astral rune": 2,
+      "Earth rune": 10,
+      "Water rune": 10
+    },
+    "members": null
+  },
+  "Boost Potion Share": {
+    "book": "Lunar",
+    "level": 84,
+    "runes": {
+      "Astral rune": 3,
+      "Earth rune": 12,
+      "Water rune": 10
+    },
+    "members": null
+  },
+  "Energy Transfer": {
+    "book": "Lunar",
+    "level": 91,
+    "runes": {
+      "Astral rune": 3,
+      "Law rune": 2,
+      "Nature rune": 1
+    },
+    "members": null
+  },
+  "Heal Other": {
+    "book": "Lunar",
+    "level": 92,
+    "runes": {
+      "Astral rune": 3,
+      "Law rune": 3,
+      "Blood rune": 1
+    },
+    "members": null
+  },
+  "Vengeance Other": {
+    "book": "Lunar",
+    "level": 93,
+    "runes": {
+      "Astral rune": 3,
+      "Earth rune": 10,
+      "Death rune": 2
+    },
+    "members": null
+  },
+  "Vengeance": {
+    "book": "Lunar",
+    "level": 94,
+    "runes": {
+      "Astral rune": 4,
+      "Earth rune": 10,
+      "Death rune": 2
+    },
+    "members": null
+  },
+  "Heal Group": {
+    "book": "Lunar",
+    "level": 95,
+    "runes": {
+      "Astral rune": 4,
+      "Law rune": 6,
+      "Blood rune": 3
+    },
+    "members": null
+  },
+  "Moonclan Teleport": {
+    "book": "Lunar",
+    "level": 69,
+    "runes": {
+      "Astral rune": 2,
+      "Law rune": 1,
+      "Earth rune": 2
+    },
+    "members": null
+  },
+  "Tele Group Moonclan": {
+    "book": "Lunar",
+    "level": 70,
+    "runes": {
+      "Astral rune": 2,
+      "Law rune": 1,
+      "Earth rune": 4
+    },
+    "members": null
+  },
+  "Ourania Teleport": {
+    "book": "Lunar",
+    "level": 71,
+    "runes": {
+      "Astral rune": 2,
+      "Law rune": 1,
+      "Earth rune": 6
+    },
+    "members": null
+  },
+  "Waterbirth Teleport": {
+    "book": "Lunar",
+    "level": 72,
+    "runes": {
+      "Astral rune": 2,
+      "Law rune": 1,
+      "Water rune": 1
+    },
+    "members": null
+  },
+  "Tele Group Waterbirth": {
+    "book": "Lunar",
+    "level": 73,
+    "runes": {
+      "Astral rune": 2,
+      "Law rune": 1,
+      "Water rune": 5
+    },
+    "members": null
+  },
+  "Barbarian Teleport": {
+    "book": "Lunar",
+    "level": 75,
+    "runes": {
+      "Astral rune": 2,
+      "Law rune": 2,
+      "Fire rune": 3
+    },
+    "members": null
+  },
+  "Tele Group Barbarian": {
+    "book": "Lunar",
+    "level": 76,
+    "runes": {
+      "Law rune": 2,
+      "Fire rune": 6,
+      "Astral rune": 2
+    },
+    "members": null
+  },
+  "Khazard Teleport": {
+    "book": "Lunar",
+    "level": 78,
+    "runes": {
+      "Astral rune": 2,
+      "Law rune": 2,
+      "Water rune": 4
+    },
+    "members": null
+  },
+  "Tele Group Khazard": {
+    "book": "Lunar",
+    "level": 79,
+    "runes": {
+      "Astral rune": 2,
+      "Law rune": 2,
+      "Water rune": 8
+    },
+    "members": null
+  },
+  "Fishing Guild Teleport": {
+    "book": "Lunar",
+    "level": 85,
+    "runes": {
+      "Astral rune": 3,
+      "Law rune": 3,
+      "Water rune": 10
+    },
+    "members": null
+  },
+  "Tele Group Fishing Guild": {
+    "book": "Lunar",
+    "level": 86,
+    "runes": {
+      "Astral rune": 3,
+      "Law rune": 3,
+      "Water rune": 14
+    },
+    "members": null
+  },
+  "Catherby Teleport": {
+    "book": "Lunar",
+    "level": 87,
+    "runes": {
+      "Astral rune": 3,
+      "Law rune": 3,
+      "Water rune": 10
+    },
+    "members": null
+  },
+  "Tele Group Catherby": {
+    "book": "Lunar",
+    "level": 88,
+    "runes": {
+      "Astral rune": 3,
+      "Law rune": 3,
+      "Water rune": 15
+    },
+    "members": null
+  },
+  "Ice Plateau Teleport": {
+    "book": "Lunar",
+    "level": 89,
+    "runes": {
+      "Astral rune": 3,
+      "Law rune": 3,
+      "Water rune": 8
+    },
+    "members": null
+  },
+  "Tele Group Ice Plateau": {
+    "book": "Lunar",
+    "level": 90,
+    "runes": {
+      "Astral rune": 3,
+      "Law rune": 3,
+      "Water rune": 16
+    },
+    "members": null
+  },
+  "Bake Pie": {
+    "book": "Lunar",
+    "level": 65,
+    "runes": {
+      "Astral rune": 1,
+      "Fire rune": 5,
+      "Water rune": 4
+    },
+    "members": null
+  },
+  "Geomancy": {
+    "book": "Lunar",
+    "level": 65,
+    "runes": {
+      "Nature rune": 3,
+      "Astral rune": 3,
+      "Earth rune": 8
+    },
+    "members": null
+  },
+  "Cure Plant": {
+    "book": "Lunar",
+    "level": 66,
+    "runes": {
+      "Astral rune": 1,
+      "Earth rune": 8
+    },
+    "members": null
+  },
+  "Astral Contact": {
+    "book": "Lunar",
+    "level": 67,
+    "runes": {
+      "Astral rune": 1,
+      "Cosmic rune": 1,
+      "Air rune": 2
+    },
+    "members": null
+  },
+  "Humidify": {
+    "book": "Lunar",
+    "level": 68,
+    "runes": {
+      "Astral rune": 1,
+      "Water rune": 3,
+      "Fire rune": 1
+    },
+    "members": null
+  },
+  "Hunter Kit (spell)": {
+    "book": "Lunar",
+    "level": 71,
+    "runes": {
+      "Astral rune": 2,
+      "Earth rune": 2
+    },
+    "members": null
+  },
+  "Spin Flax": {
+    "book": "Lunar",
+    "level": 76,
+    "runes": {
+      "Astral rune": 1,
+      "Nature rune": 2,
+      "Air rune": 5
+    },
+    "members": null
+  },
+  "Superglass Make": {
+    "book": "Lunar",
+    "level": 77,
+    "runes": {
+      "Astral rune": 2,
+      "Fire rune": 6,
+      "Air rune": 10
+    },
+    "members": null
+  },
+  "Tan Leather": {
+    "book": "Lunar",
+    "level": 78,
+    "runes": {
+      "Nature rune": 1,
+      "Fire rune": 5,
+      "Astral rune": 2
+    },
+    "members": null
+  },
+  "String Jewellery": {
+    "book": "Lunar",
+    "level": 80,
+    "runes": {
+      "Astral rune": 2,
+      "Earth rune": 10,
+      "Water rune": 5
+    },
+    "members": null
+  },
+  "Magic Imbue": {
+    "book": "Lunar",
+    "level": 82,
+    "runes": {
+      "Astral rune": 2,
+      "Fire rune": 7,
+      "Water rune": 7
+    },
+    "members": null
+  },
+  "Fertile Soil": {
+    "book": "Lunar",
+    "level": 83,
+    "runes": {
+      "Astral rune": 3,
+      "Earth rune": 15,
+      "Nature rune": 2
+    },
+    "members": null
+  },
+  "Plank Make": {
+    "book": "Lunar",
+    "level": 86,
+    "runes": {
+      "Astral rune": 2,
+      "Nature rune": 1,
+      "Earth rune": 15
+    },
+    "members": null
+  },
+  "Recharge Dragonstone": {
+    "book": "Lunar",
+    "level": 89,
+    "runes": {
+      "Soul rune": 1,
+      "Astral rune": 1,
+      "Water rune": 4
+    },
+    "members": null
+  },
+  "Spellbook Swap": {
+    "book": "Lunar",
+    "level": 96,
+    "runes": {
+      "Astral rune": 3,
+      "Cosmic rune": 2,
+      "Law rune": 1
+    },
+    "members": null
+  },
+  "Arceuus Library Teleport": {
+    "book": "Arceuus",
+    "level": 6,
+    "runes": {
+      "Law rune": 1,
+      "Earth rune": 2
+    },
+    "members": null
+  },
+  "Draynor Manor Teleport": {
+    "book": "Arceuus",
+    "level": 17,
+    "runes": {
+      "Law rune": 1,
+      "Earth rune": 1,
+      "Water rune": 1
+    },
+    "members": null
+  },
+  "Battlefront Teleport": {
+    "book": "Arceuus",
+    "level": 23,
+    "runes": {
+      "Law rune": 1,
+      "Earth rune": 1,
+      "Fire rune": 1
+    },
+    "members": null
+  },
+  "Mind Altar Teleport": {
+    "book": "Arceuus",
+    "level": 28,
+    "runes": {
+      "Law rune": 1,
+      "Mind rune": 2
+    },
+    "members": null
+  },
+  "Respawn Teleport": {
+    "book": "Arceuus",
+    "level": 34,
+    "runes": {
+      "Law rune": 1,
+      "Soul rune": 1
+    },
+    "members": null
+  },
+  "Salve Graveyard Teleport": {
+    "book": "Arceuus",
+    "level": 40,
+    "runes": {
+      "Law rune": 1,
+      "Soul rune": 2
+    },
+    "members": null
+  },
+  "Fenkenstrain's Castle Teleport": {
+    "book": "Arceuus",
+    "level": 48,
+    "runes": {
+      "Law rune": 1,
+      "Soul rune": 1,
+      "Earth rune": 1
+    },
+    "members": null
+  },
+  "West Ardougne Teleport": {
+    "book": "Arceuus",
+    "level": 61,
+    "runes": {
+      "Law rune": 2,
+      "Soul rune": 2
+    },
+    "members": null
+  },
+  "Harmony Island Teleport": {
+    "book": "Arceuus",
+    "level": 65,
+    "runes": {
+      "Law rune": 1,
+      "Soul rune": 1,
+      "Nature rune": 1
+    },
+    "members": null
+  },
+  "Cemetery Teleport": {
+    "book": "Arceuus",
+    "level": 71,
+    "runes": {
+      "Law rune": 1,
+      "Soul rune": 1,
+      "Blood rune": 1
+    },
+    "members": null
+  },
+  "Barrows Teleport": {
+    "book": "Arceuus",
+    "level": 83,
+    "runes": {
+      "Law rune": 2,
+      "Soul rune": 2,
+      "Blood rune": 1
+    },
+    "members": null
+  },
+  "Ape Atoll Teleport (Arceuus)": {
+    "book": "Arceuus",
+    "level": 90,
+    "runes": {
+      "Law rune": 2,
+      "Soul rune": 2,
+      "Blood rune": 2
+    },
+    "members": null
+  },
+  "Ghostly Grasp": {
+    "book": "Arceuus",
+    "level": 35,
+    "runes": {
+      "Air rune": 4,
+      "Chaos rune": 1
+    },
+    "members": null
+  },
+  "Skeletal Grasp": {
+    "book": "Arceuus",
+    "level": 56,
+    "runes": {
+      "Earth rune": 8,
+      "Death rune": 1
+    },
+    "members": null
+  },
+  "Undead Grasp": {
+    "book": "Arceuus",
+    "level": 79,
+    "runes": {
+      "Fire rune": 12,
+      "Blood rune": 1
+    },
+    "members": null
+  },
+  "Inferior Demonbane": {
+    "book": "Arceuus",
+    "level": 44,
+    "runes": {
+      "Fire rune": 3,
+      "Chaos rune": 1
+    },
+    "members": null
+  },
+  "Superior Demonbane": {
+    "book": "Arceuus",
+    "level": 62,
+    "runes": {
+      "Fire rune": 5,
+      "Soul rune": 1
+    },
+    "members": null
+  },
+  "Dark Demonbane": {
+    "book": "Arceuus",
+    "level": 82,
+    "runes": {
+      "Fire rune": 7,
+      "Soul rune": 2
+    },
+    "members": null
+  },
+  "Lesser Corruption": {
+    "book": "Arceuus",
+    "level": 64,
+    "runes": {
+      "Death rune": 1,
+      "Soul rune": 2
+    },
+    "members": null
+  },
+  "Greater Corruption": {
+    "book": "Arceuus",
+    "level": 85,
+    "runes": {
+      "Blood rune": 1,
+      "Soul rune": 3
+    },
+    "members": null
+  },
+  "Resurrect Lesser Ghost": {
+    "book": "Arceuus",
+    "level": 38,
+    "runes": {
+      "Air rune": 10,
+      "Mind rune": 5,
+      "Cosmic rune": 1
+    },
+    "members": null
+  },
+  "Resurrect Lesser Skeleton": {
+    "book": "Arceuus",
+    "level": 38,
+    "runes": {
+      "Air rune": 10,
+      "Mind rune": 5,
+      "Cosmic rune": 1
+    },
+    "members": null
+  },
+  "Resurrect Lesser Zombie": {
+    "book": "Arceuus",
+    "level": 38,
+    "runes": {
+      "Air rune": 10,
+      "Mind rune": 5,
+      "Cosmic rune": 1
+    },
+    "members": null
+  },
+  "Resurrect Superior Ghost": {
+    "book": "Arceuus",
+    "level": 57,
+    "runes": {
+      "Earth rune": 10,
+      "Death rune": 5,
+      "Cosmic rune": 1
+    },
+    "members": null
+  },
+  "Resurrect Superior Skeleton": {
+    "book": "Arceuus",
+    "level": 57,
+    "runes": {
+      "Earth rune": 10,
+      "Death rune": 5,
+      "Cosmic rune": 1
+    },
+    "members": null
+  },
+  "Resurrect Superior Zombie": {
+    "book": "Arceuus",
+    "level": 57,
+    "runes": {
+      "Earth rune": 10,
+      "Death rune": 5,
+      "Cosmic rune": 1
+    },
+    "members": null
+  },
+  "Resurrect Greater Ghost": {
+    "book": "Arceuus",
+    "level": 76,
+    "runes": {
+      "Fire rune": 10,
+      "Blood rune": 5,
+      "Cosmic rune": 1
+    },
+    "members": null
+  },
+  "Resurrect Greater Skeleton": {
+    "book": "Arceuus",
+    "level": 76,
+    "runes": {
+      "Fire rune": 10,
+      "Blood rune": 5,
+      "Cosmic rune": 1
+    },
+    "members": null
+  },
+  "Resurrect Greater Zombie": {
+    "book": "Arceuus",
+    "level": 76,
+    "runes": {
+      "Fire rune": 10,
+      "Blood rune": 5,
+      "Cosmic rune": 1
+    },
+    "members": null
+  },
+  "Dark Lure": {
+    "book": "Arceuus",
+    "level": 50,
+    "runes": {
+      "Nature rune": 1,
+      "Death rune": 1
+    },
+    "members": null
+  },
+  "Mark of Darkness": {
+    "book": "Arceuus",
+    "level": 59,
+    "runes": {
+      "Cosmic rune": 1,
+      "Soul rune": 1
+    },
+    "members": null
+  },
+  "Ward of Arceuus": {
+    "book": "Arceuus",
+    "level": 73,
+    "runes": {
+      "Cosmic rune": 1,
+      "Nature rune": 2,
+      "Soul rune": 4
+    },
+    "members": null
+  },
+  "Basic Reanimation": {
+    "book": "Arceuus",
+    "level": 16,
+    "runes": {
+      "Body rune": 4,
+      "Nature rune": 2
+    },
+    "members": null
+  },
+  "Adept Reanimation": {
+    "book": "Arceuus",
+    "level": 41,
+    "runes": {
+      "Body rune": 4,
+      "Nature rune": 3,
+      "Soul rune": 1
+    },
+    "members": null
+  },
+  "Expert Reanimation": {
+    "book": "Arceuus",
+    "level": 72,
+    "runes": {
+      "Nature rune": 3,
+      "Blood rune": 1,
+      "Soul rune": 2
+    },
+    "members": null
+  },
+  "Master Reanimation": {
+    "book": "Arceuus",
+    "level": 90,
+    "runes": {
+      "Nature rune": 4,
+      "Blood rune": 2,
+      "Soul rune": 4
+    },
+    "members": null
+  },
+  "Demonic Offering": {
+    "book": "Arceuus",
+    "level": 84,
+    "runes": {
+      "Soul rune": 1,
+      "Wrath rune": 1
+    },
+    "members": null
+  },
+  "Sinister Offering": {
+    "book": "Arceuus",
+    "level": 92,
+    "runes": {
+      "Blood rune": 1,
+      "Wrath rune": 1
+    },
+    "members": null
+  },
+  "Shadow Veil": {
+    "book": "Arceuus",
+    "level": 47,
+    "runes": {
+      "Earth rune": 5,
+      "Fire rune": 5,
+      "Cosmic rune": 5
+    },
+    "members": null
+  },
+  "Vile Vigour": {
+    "book": "Arceuus",
+    "level": 66,
+    "runes": {
+      "Air rune": 3,
+      "Soul rune": 1
+    },
+    "members": null
+  },
+  "Degrime": {
+    "book": "Arceuus",
+    "level": 70,
+    "runes": {
+      "Earth rune": 4,
+      "Nature rune": 2
+    },
+    "members": null
+  },
+  "Resurrect Crops": {
+    "book": "Arceuus",
+    "level": 78,
+    "runes": {
+      "Soul rune": 8,
+      "Nature rune": 12,
+      "Blood rune": 8,
+      "Earth rune": 25
+    },
+    "members": null
+  },
+  "Death Charge": {
+    "book": "Arceuus",
+    "level": 80,
+    "runes": {
+      "Death rune": 1,
+      "Blood rune": 1,
+      "Soul rune": 1
+    },
+    "members": null
+  },
+  "Reanimate Goblin": {
+    "book": "Arceuus",
+    "level": 3,
+    "runes": {
+      "Body rune": 2,
+      "Nature rune": 1
+    },
+    "members": null
+  },
+  "Lumbridge Graveyard Teleport": {
+    "book": "Arceuus",
+    "level": 6,
+    "runes": {
+      "Law rune": 1,
+      "Earth rune": 2
+    },
+    "members": null
+  },
+  "Reanimate Monkey": {
+    "book": "Arceuus",
+    "level": 7,
+    "runes": {
+      "Body rune": 3,
+      "Nature rune": 1
+    },
+    "members": null
+  },
+  "Reanimate Imp": {
+    "book": "Arceuus",
+    "level": 12,
+    "runes": {
+      "Body rune": 3,
+      "Nature rune": 2
+    },
+    "members": null
+  },
+  "Reanimate Minotaur": {
+    "book": "Arceuus",
+    "level": 16,
+    "runes": {
+      "Body rune": 4,
+      "Nature rune": 2
+    },
+    "members": null
+  },
+  "Reanimate Scorpion": {
+    "book": "Arceuus",
+    "level": 19,
+    "runes": {
+      "Soul rune": 1,
+      "Nature rune": 1
+    },
+    "members": null
+  },
+  "Reanimate Bear": {
+    "book": "Arceuus",
+    "level": 21,
+    "runes": {
+      "Soul rune": 1,
+      "Nature rune": 1,
+      "Body rune": 1
+    },
+    "members": null
+  },
+  "Reanimate Unicorn": {
+    "book": "Arceuus",
+    "level": 22,
+    "runes": {
+      "Soul rune": 1,
+      "Nature rune": 1,
+      "Body rune": 2
+    },
+    "members": null
+  },
+  "Reanimate Dog": {
+    "book": "Arceuus",
+    "level": 26,
+    "runes": {
+      "Soul rune": 1,
+      "Nature rune": 2,
+      "Body rune": 2
+    },
+    "members": null
+  },
+  "Reanimate Chaos Druid": {
+    "book": "Arceuus",
+    "level": 30,
+    "runes": {
+      "Soul rune": 1,
+      "Nature rune": 2,
+      "Body rune": 3
+    },
+    "members": null
+  },
+  "Reanimate Giant": {
+    "book": "Arceuus",
+    "level": 37,
+    "runes": {
+      "Soul rune": 1,
+      "Nature rune": 2,
+      "Body rune": 4
+    },
+    "members": null
+  },
+  "Reanimate Ogre": {
+    "book": "Arceuus",
+    "level": 40,
+    "runes": {
+      "Soul rune": 1,
+      "Nature rune": 3,
+      "Body rune": 4
+    },
+    "members": null
+  },
+  "Reanimate Elf": {
+    "book": "Arceuus",
+    "level": 43,
+    "runes": {
+      "Soul rune": 2,
+      "Nature rune": 2,
+      "Body rune": 2
+    },
+    "members": null
+  },
+  "Reanimate Troll": {
+    "book": "Arceuus",
+    "level": 46,
+    "runes": {
+      "Soul rune": 2,
+      "Nature rune": 2,
+      "Body rune": 3
+    },
+    "members": null
+  },
+  "Reanimate Horror": {
+    "book": "Arceuus",
+    "level": 52,
+    "runes": {
+      "Soul rune": 2,
+      "Nature rune": 2,
+      "Body rune": 4
+    },
+    "members": null
+  },
+  "Reanimate Kalphite": {
+    "book": "Arceuus",
+    "level": 57,
+    "runes": {
+      "Soul rune": 2,
+      "Nature rune": 3,
+      "Body rune": 4
+    },
+    "members": null
+  },
+  "Reanimate Dagannoth": {
+    "book": "Arceuus",
+    "level": 62,
+    "runes": {
+      "Soul rune": 3,
+      "Nature rune": 3,
+      "Body rune": 4
+    },
+    "members": null
+  },
+  "Reanimate Bloodveld": {
+    "book": "Arceuus",
+    "level": 65,
+    "runes": {
+      "Soul rune": 2,
+      "Nature rune": 2,
+      "Blood rune": 1
+    },
+    "members": null
+  },
+  "Reanimate TzHaar": {
+    "book": "Arceuus",
+    "level": 69,
+    "runes": {
+      "Soul rune": 2,
+      "Nature rune": 3,
+      "Blood rune": 1
+    },
+    "members": null
+  },
+  "Reanimate Demon": {
+    "book": "Arceuus",
+    "level": 72,
+    "runes": {
+      "Soul rune": 2,
+      "Nature rune": 4,
+      "Blood rune": 1
+    },
+    "members": null
+  },
+  "Reanimate Aviansie": {
+    "book": "Arceuus",
+    "level": 78,
+    "runes": {
+      "Soul rune": 3,
+      "Nature rune": 4,
+      "Blood rune": 1
+    },
+    "members": null
+  },
+  "Reanimate Abyssal Creature": {
+    "book": "Arceuus",
+    "level": 85,
+    "runes": {
+      "Soul rune": 4,
+      "Nature rune": 4,
+      "Blood rune": 1
+    },
+    "members": null
+  },
+  "Reanimate Dragon": {
+    "book": "Arceuus",
+    "level": 93,
+    "runes": {
+      "Soul rune": 4,
+      "Nature rune": 4,
+      "Blood rune": 2
+    },
+    "members": null
+  }
+}

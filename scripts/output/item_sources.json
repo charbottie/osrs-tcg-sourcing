@@ -89453,6 +89453,26 @@
         "card": "Desert Lizard",
         "rarity": "Common",
         "fraction": "13/128"
+      },
+      {
+        "card": "Kalphite Soldier",
+        "rarity": "Uncommon",
+        "fraction": "3/128"
+      },
+      {
+        "card": "Locust rider",
+        "rarity": "Rare",
+        "fraction": "1/128"
+      },
+      {
+        "card": "Kalphite Worker",
+        "rarity": "Common",
+        "fraction": "21/128"
+      },
+      {
+        "card": "Scarab Mage",
+        "rarity": "Rare",
+        "fraction": "1/128"
       }
     ],
     "rdtMonsters": [],
@@ -101374,7 +101394,13 @@
     "alwaysAvailable": false
   },
   "Attack potion": {
-    "monsters": [],
+    "monsters": [
+      {
+        "card": "Possessed Priest",
+        "rarity": "Always",
+        "fraction": ""
+      }
+    ],
     "rdtMonsters": [],
     "quests": [],
     "gathering": null,
@@ -101477,6 +101503,11 @@
       {
         "card": "Greater abyssal demon",
         "rarity": "Uncommon",
+        "fraction": ""
+      },
+      {
+        "card": "Possessed Priest",
+        "rarity": "Always",
         "fraction": ""
       }
     ],
@@ -107010,7 +107041,13 @@
     "alwaysAvailable": false
   },
   "Agility potion": {
-    "monsters": [],
+    "monsters": [
+      {
+        "card": "Possessed Priest",
+        "rarity": "Always",
+        "fraction": ""
+      }
+    ],
     "rdtMonsters": [],
     "quests": [],
     "gathering": null,
@@ -107055,6 +107092,11 @@
         "card": "Elite Black Knight",
         "rarity": "Uncommon",
         "fraction": "3/122"
+      },
+      {
+        "card": "Possessed Priest",
+        "rarity": "Always",
+        "fraction": ""
       }
     ],
     "rdtMonsters": [],
@@ -128471,7 +128513,13 @@
     "alwaysAvailable": false
   },
   "Strawberries": {
-    "monsters": [],
+    "monsters": [
+      {
+        "card": "Gourmet impling",
+        "rarity": "Rare",
+        "fraction": "1/100"
+      }
+    ],
     "rdtMonsters": [],
     "quests": [],
     "gathering": null,
@@ -130001,6 +130049,36 @@
         "card": "Araxxor",
         "rarity": "Uncommon",
         "fraction": ""
+      },
+      {
+        "card": "Corporeal Beast",
+        "rarity": "Uncommon",
+        "fraction": "10/512"
+      },
+      {
+        "card": "Cave kraken",
+        "rarity": "Uncommon",
+        "fraction": "6/200"
+      },
+      {
+        "card": "Kraken",
+        "rarity": "Uncommon",
+        "fraction": "2/128"
+      },
+      {
+        "card": "Zulrah",
+        "rarity": "Common",
+        "fraction": ""
+      },
+      {
+        "card": "Venenatis",
+        "rarity": "Uncommon",
+        "fraction": "3/126"
+      },
+      {
+        "card": "Spindel",
+        "rarity": "Uncommon",
+        "fraction": "3/128"
       }
     ],
     "rdtMonsters": [],

@@ -1670,6 +1670,12 @@
         "fromRdt": false
       },
       {
+        "card": "Waterskin",
+        "rarity": "Uncommon",
+        "fraction": "3/128",
+        "fromRdt": false
+      },
+      {
         "card": "Sapphire",
         "rarity": "Rare",
         "fraction": "1/128",
@@ -4324,6 +4330,12 @@
         "card": "Coins",
         "rarity": "Uncommon",
         "fraction": "12/512",
+        "fromRdt": false
+      },
+      {
+        "card": "Antidote++",
+        "rarity": "Uncommon",
+        "fraction": "10/512",
         "fromRdt": false
       },
       {
@@ -9553,6 +9565,12 @@
         "fromRdt": false
       },
       {
+        "card": "Antidote++",
+        "rarity": "Uncommon",
+        "fraction": "6/200",
+        "fromRdt": false
+      },
+      {
         "card": "Vial of water",
         "rarity": "Uncommon",
         "fraction": "4/200",
@@ -9839,6 +9857,12 @@
         "card": "Rusty sword",
         "rarity": "Uncommon",
         "fraction": "1.75/128",
+        "fromRdt": false
+      },
+      {
+        "card": "Antidote++",
+        "rarity": "Uncommon",
+        "fraction": "2/128",
         "fromRdt": false
       },
       {
@@ -13689,6 +13713,12 @@
         "fromRdt": false
       },
       {
+        "card": "Waterskin",
+        "rarity": "Rare",
+        "fraction": "1/128",
+        "fromRdt": false
+      },
+      {
         "card": "Bass",
         "rarity": "Uncommon",
         "fraction": "4/128",
@@ -14949,6 +14979,12 @@
         "card": "Coins",
         "rarity": "Common",
         "fraction": "34/128",
+        "fromRdt": false
+      },
+      {
+        "card": "Waterskin",
+        "rarity": "Common",
+        "fraction": "21/128",
         "fromRdt": false
       },
       {
@@ -21497,6 +21533,12 @@
         "fromRdt": false
       },
       {
+        "card": "Strawberries",
+        "rarity": "Rare",
+        "fraction": "1/100",
+        "fromRdt": false
+      },
+      {
         "card": "Cooked karambwan",
         "rarity": "Rare",
         "fraction": "1/100",
@@ -23116,6 +23158,12 @@
       {
         "card": "Manta ray",
         "rarity": "Uncommon",
+        "fraction": "",
+        "fromRdt": false
+      },
+      {
+        "card": "Antidote++",
+        "rarity": "Common",
         "fraction": "",
         "fromRdt": false
       },
@@ -51446,6 +51494,30 @@
         "fromRdt": false
       },
       {
+        "card": "Defence potion",
+        "rarity": "Always",
+        "fraction": "",
+        "fromRdt": false
+      },
+      {
+        "card": "Attack potion",
+        "rarity": "Always",
+        "fraction": "",
+        "fromRdt": false
+      },
+      {
+        "card": "Agility potion",
+        "rarity": "Always",
+        "fraction": "",
+        "fromRdt": false
+      },
+      {
+        "card": "Magic potion",
+        "rarity": "Always",
+        "fraction": "",
+        "fromRdt": false
+      },
+      {
         "card": "Coins",
         "rarity": "Uncommon",
         "fraction": "",
@@ -64066,6 +64138,12 @@
         "card": "Supercompost",
         "rarity": "Uncommon",
         "fraction": "4/126",
+        "fromRdt": false
+      },
+      {
+        "card": "Antidote++",
+        "rarity": "Uncommon",
+        "fraction": "3/126",
         "fromRdt": false
       },
       {
@@ -107303,6 +107381,12 @@
         "fromRdt": false
       },
       {
+        "card": "Waterskin",
+        "rarity": "Rare",
+        "fraction": "1/128",
+        "fromRdt": false
+      },
+      {
         "card": "Bass",
         "rarity": "Uncommon",
         "fraction": "4/128",
@@ -108707,6 +108791,12 @@
         "card": "Supercompost",
         "rarity": "Uncommon",
         "fraction": "4/128",
+        "fromRdt": false
+      },
+      {
+        "card": "Antidote++",
+        "rarity": "Uncommon",
+        "fraction": "3/128",
         "fromRdt": false
       },
       {

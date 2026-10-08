@@ -264,12 +264,24 @@ def _card_for_drop(item: str, item_names_lc: set[str]) -> str | None:
     card = _VARIANT_ALIASES.get(_alias_key(item))
     if card:
         return card
+    # Potion doses: the card's base item is the 4-dose version, so "Super attack(4)" /
+    # "Super attack (4)" isn't listed as a variant — any "(N)" dose of a card is that card.
+    dose = re.match(r"^(.*?)\s*\((\d)\)$", item)
+    if dose and dose.group(1).lower() in item_names_lc:
+        return dose.group(1)
     base = _WIKI_DISAMBIG_RE.sub("", item)
     if base == item:
         return None
     if item.lower().endswith("(item)") and base.lower() in item_names_lc:
         return base  # wiki's item-vs-NPC disambiguator, e.g. "Crawling hand (item)"
-    return _VARIANT_ALIASES.get(_SAME_NAME_MARK + _alias_key(base))
+    same = _VARIANT_ALIASES.get(_SAME_NAME_MARK + _alias_key(base))
+    if same:
+        return same
+    # base is itself a variant's name (not the card's own name): "Antique lamp (medium)" → Lamp.
+    # (A base equal to the card name, like "Bandana eyepatch (red)", stays unmatched above.)
+    if base.lower() not in item_names_lc:
+        return _VARIANT_ALIASES.get(_alias_key(base))
+    return None
 
 
 def _tcg_drops(raw_drops: list[dict], item_names_lc: set[str]) -> list[dict]:
