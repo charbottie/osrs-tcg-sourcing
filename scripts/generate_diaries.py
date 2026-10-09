@@ -1067,7 +1067,13 @@ _WIKITEXT_CACHE = _DIR / "cache" / "wikitext"
 def _fetch_wikitext(page: str, refresh: bool = False) -> str:
     """Raw wikitext for a page, cached in scripts/cache/wikitext/ (gitignored)."""
     import time, urllib.parse, urllib.request
-    cache = _WIKITEXT_CACHE / (page.replace(" ", "_").replace("/", "%2F") + ".txt")
+    name = page.replace(" ", "_").replace("/", "%2F")
+    # macOS file names are case-insensitive: "Black_Dragons" and "Black_dragons" would share
+    # one cache file, so mixed-case titles get a short hash of the exact title
+    if page[1:] != page[1:].lower():
+        import hashlib
+        name += "~" + hashlib.md5(page.encode()).hexdigest()[:6]
+    cache = _WIKITEXT_CACHE / (name + ".txt")
     if cache.exists() and not refresh:
         return cache.read_text(encoding="utf-8")
     time.sleep(1)  # be polite to the wiki

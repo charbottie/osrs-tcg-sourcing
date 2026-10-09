@@ -813,6 +813,7 @@
   <button class="tab-btn"        onclick="switchTab('questing')"  id="tab-questing">Questing</button>
   <button class="tab-btn"        onclick="switchTab('diaries')"   id="tab-diaries">Diaries</button>
   <button class="tab-btn"        onclick="switchTab('bosses')"    id="tab-bosses">Bosses</button>
+  <button class="tab-btn"        onclick="switchTab('slayer')"    id="tab-slayer">Slayer</button>
   <button class="tab-btn"        onclick="switchTab('packs')"     id="tab-packs">Packs</button>
   <button class="tab-btn"        onclick="switchTab('rules')"     id="tab-rules">Rules</button>
   <div style="flex:1"></div>
@@ -1274,13 +1275,8 @@ function toggleSlayerWishlistGroup(taskName) {
     }
   } else {
     const cards = [], seen = new Set();
-    for (const master of Object.values(SLAYER_TASKS)) {
-      for (const t of master.tasks) {
-        if (t.task === taskName) {
-          for (const c of t.cards) if (!seen.has(c)) { seen.add(c); cards.push(c); }
-        }
-      }
-    }
+    for (const m of ((SLAYER.tasks[taskName] || {}).monsters || []))
+      if (m.card && !seen.has(m.card)) { seen.add(m.card); cards.push(m.card); }
     wishlistGroups.push({name: taskName, cards});
     for (const c of cards) {
       if (!wishlist.has(c)) {
@@ -1494,6 +1490,7 @@ function switchCollection(rsn) {
   if (activeTab === 'packs')    { renderPackList(); if (selectedPack) showPackDetail(selectedPack, null, false); }
   if (activeTab === 'wishlist') renderWishlist();
   if (activeTab === 'bosses') renderBossing();
+  if (activeTab === 'slayer') { renderSlayerList(); _renderSlayerDetail(); }
   if (activeTab === 'equipment') { refreshEquipDoll(); updateEquipCount(); renderGearStats(); updateDpsOutput(); }
 }
 
@@ -1552,7 +1549,7 @@ function simulateRandom() {
 async function loadData() {
   try {
     const cb = `?v=${Date.now()}`;  // cache-bust so updated JSON files are always fresh
-    const [md, is, cc, cd, css, cs, crr, ii, qd, ed, fd, bmqc, cq, ac, cst, bl, clg, dd, cal, spl, rsrc, acc, cver, bdat] = await Promise.all([
+    const [md, is, cc, cd, css, cs, crr, ii, qd, ed, fd, bmqc, cq, ac, cst, bl, clg, dd, cal, spl, rsrc, acc, cver, bdat, sdat] = await Promise.all([
       fetch(`output/monster_drops.json${cb}`).then(r => r.json()).catch(() => ({})),
       fetch(`output/item_sources.json${cb}`).then(r => r.json()).catch(() => ({})),
       fetch(`output/card_categories.json${cb}`).then(r => r.json()).catch(() => ({})),
@@ -1577,6 +1574,7 @@ async function loadData() {
       fetch(`output/access_routes.json${cb}`).then(r => r.json()).catch(() => ({})),
       fetch(`output/card_versions.json${cb}`).then(r => r.json()).catch(() => ({})),
       fetch(`output/bosses.json${cb}`).then(r => r.json()).catch(() => []),
+      fetch(`output/slayer.json${cb}`).then(r => r.json()).catch(() => ({masters: [], tasks: {}, unlocks: []})),
     ]);
     monsterDrops = md; itemSources = is; cardCategories = cc; cardDetails = cd;
     _cardLcMap = null; // invalidate case-insensitive card lookup cache
@@ -1612,6 +1610,12 @@ async function loadData() {
     BOSS_DATA = Array.isArray(bdat) ? bdat : [];
     for (const b of BOSS_DATA) for (const r of [...(b.requirements || []), ...(b.lootRequirements || [])]) _expandReq(r, b.name);
     _buildBossByCard();
+    SLAYER = sdat && sdat.masters ? sdat : { masters: [], tasks: {}, unlocks: [] };
+    _slCardIndex = null;
+    for (const t of Object.values(SLAYER.tasks)) {
+      for (const r of (t.equipment || [])) _expandReq(r, 'slayer ' + (t.page || ''));
+      for (const m of (t.monsters || [])) for (const r of (m.equipment || [])) _expandReq(r, 'slayer ' + m.name);
+    }
     try { _validateDataNames(); } catch (e) { console.warn("[data check] failed", e); }
     // Only load completed_quests.json at startup if the file has a player tag
     // that matches the currently selected account. A file with no player tag
@@ -1851,7 +1855,7 @@ let navForward = [];
 
 function captureState() {
   return {tab: activeTab, name: selected, type: selectedType,
-          skill: selectedSkill, quest: selectedQuest, pack: selectedPack, boss: selectedBoss};
+          skill: selectedSkill, quest: selectedQuest, pack: selectedPack, boss: selectedBoss, slayer: selectedSlayer};
 }
 
 function pushHistoryEntry() {
@@ -1888,6 +1892,10 @@ function navigate(state) {
     if (selectedPack) showPackDetail(selectedPack, null, false);
   } else if (state.tab === 'wishlist') {
     renderWishlist();
+  } else if (state.tab === 'slayer') {
+    selectedSlayer = state.slayer || null;
+    renderSlayerList();
+    _renderSlayerDetail();
   } else if (state.tab === 'bosses') {
     selectedBoss = state.boss || null;
     _renderBossFilterBtns();
@@ -3050,14 +3058,7 @@ function _renderWishlistMain() {
         const chipStyle = own
           ? (blocked ? 'background:#1a1400;border-color:#5a4010;color:#c89020' : 'background:#0d2210;border-color:#2a5a2a;color:#76c442')
           : 'background:#111;border-color:#222;color:#555';
-        const _gateDesc = (() => {
-          if (!blocked) return '';
-          const g2 = _slayerGate(c);
-          return [
-            ...((g2.quests||[]).filter(q => !completedQuests.has(q)).map(q => 'Quest: '+q)),
-            ...(Object.entries(g2.skills||{}).filter(([s,l]) => getLevel(s)<l).map(([s,l]) => s+' '+l+' req')),
-          ].join('; ');
-        })();
+        const _gateDesc = blocked ? _slayerBlockReason(c) : '';
         const tip = blocked ? 'Owned — '+_gateDesc : own ? 'Owned' : 'Not owned';
         html += `<span style="${chipStyle};border:1px solid;border-radius:3px;padding:2px 7px;font-size:10px;cursor:pointer"
           title="${tip.replace(/&/g,'&amp;').replace(/"/g,'&quot;')}" data-card="${safe}" data-type="${type}" onclick="showCard(this.dataset.card,this.dataset.type)">${own?(blocked?'\u26a0 ':'✓ '):''}${c}</span>`;
@@ -3508,119 +3509,30 @@ function renderMonster(name, container) {
     html += `</div></div>`;
   }
 
-  // ── Slayer tasks (if this NPC is a Slayer master) ─────────────────────────
-  const slayerKey = SLAYER_MASTER_MAP[name];
-  if (slayerKey && SLAYER_TASKS[slayerKey]) {
-    const master = SLAYER_TASKS[slayerKey];
-    const tasks = master.tasks;
-    const totalWeight = tasks.reduce((s,t) => s + t.weight, 0);
-    const sorted2 = [...tasks].sort((a,b) => {
-      const ao = a.cards.some(_slayerCardFeasible), bo = b.cards.some(_slayerCardFeasible);
-      if (ao !== bo) return ao ? -1 : 1;
-      return b.weight - a.weight;
-    });
-    const availCount = tasks.filter(t => t.cards.some(_slayerCardFeasible)).length;
-    const alias = (name !== slayerKey) ? ` <span style="font-size:10px;color:#555;font-weight:normal">(same list as ${slayerKey})</span>` : '';
-
-    html += `<div class="section">
-      <div class="section-header">Slayer Tasks${alias} <span style="font-size:10px;color:#555;font-weight:normal">${availCount}/${tasks.length} available</span></div>
-      <div style="margin-top:8px">`;
-    for (const t of sorted2) {
-      const owned = t.cards.some(_slayerCardFeasible);
-      const wishlisted = wishlistGroups.some(g => g.name === t.task);
-      const pct = ((t.weight / totalWeight) * 100).toFixed(1);
-      const ownedCard = t.cards.find(_slayerCardFeasible) || t.cards.find(c => isOwned(c)) || t.cards[0];
-      const navCard = escHtml(t.cards[0]);
-      const starStyle = wishlisted
-        ? 'color:#c8a020;background:none;border:none;cursor:pointer;font-size:13px;padding:0 2px;flex-shrink:0;line-height:1;margin-left:auto'
-        : 'color:#555;background:none;border:none;cursor:pointer;font-size:13px;padding:0 2px;flex-shrink:0;line-height:1;margin-left:auto';
-      html += `<div class="method-row">
-        <div class="method-indicator ${owned ? 'available' : 'locked'}"></div>
-        <span class="method-name ${owned ? 'available' : 'locked'}" style="cursor:pointer"
-          data-nav="${navCard}" data-nav-type="monster" onclick="_navToCard(this)">${escHtml(t.task)}</span>
-        <span class="method-level" style="min-width:46px;text-align:right">${pct}%</span>
-        <span class="method-note">${owned ? escHtml(ownedCard) : 'no card'}</span>
-        <button style="${starStyle}" onclick="toggleSlayerWishlistGroup(${escHtml(JSON.stringify(t.task))})" title="${wishlisted?'Remove from wishlist':'Add to wishlist'}">${wishlisted?'★':'☆'}</button>
-      </div>
-      <div style="display:flex;flex-wrap:wrap;gap:3px;padding:2px 0 5px 20px">`;
-      for (const card of t.cards) {
-        const cardOwned = isOwned(card);
-        const _gate = _slayerGate(card);
-        let _gateMet = true, _gateDesc = '';
-        if (_gate) {
-          const _qFail = (_gate.quests || []).filter(q => !completedQuests.has(q));
-          const _sFail = Object.entries(_gate.skills || {}).filter(([s,l]) => getLevel(s) < l);
-          if (_qFail.length || _sFail.length) {
-            _gateMet = false;
-            _gateDesc = [
-              ..._qFail.map(q => 'Quest: '+q),
-              ..._sFail.map(([s,l]) => s+' '+l+' req'),
-            ].join('; ');
-          }
-        }
-        const _blocked = cardOwned && !_gateMet;
-        const col = !cardOwned ? '#555' : _blocked ? '#c89020' : '#76c442';
-        const bg  = !cardOwned ? '#111' : _blocked ? '#1a1400' : '#0d2210';
-        const bdr = !cardOwned ? '#222' : _blocked ? '#5a4010' : '#2a5a2a';
-        const pfx = !cardOwned ? '' : _blocked ? '\u26a0 ' : '\u2713 ';
-        const imgUrl = _cardImg(card) || '';
-        const img = imgUrl ? `<img src="${imgUrl}" style="width:12px;height:12px;object-fit:contain;image-rendering:pixelated;flex-shrink:0;opacity:${cardOwned?1:0.35}" onerror="this.style.display='none'">` : '';
-        const _tip = cardOwned ? (_blocked ? 'Owned — '+_gateDesc : 'Owned') : (_gateDesc ? 'Not owned — '+_gateDesc : 'Not owned');
-        html += `<span style="display:inline-flex;align-items:center;gap:3px;font-size:10px;color:${col};background:${bg};border:1px solid ${bdr};border-radius:3px;padding:1px 4px;cursor:pointer"
-          title="${escHtml(_tip)}" data-nav="${escHtml(card)}" data-nav-type="monster" onclick="_navToCard(this)">${img}${pfx}${escHtml(card)}</span>`;
-      }
-      html += `</div>`;
-    }
-    html += `</div></div>`;
+  // ── Slayer (output/slayer.json): this NPC as a master, or the tasks it counts for ──
+  for (const m of _slMastersForCard(name)) {
+    const sm = _slMasterSummary(m);
+    const top = sm.rows.filter(r => r.assignable).sort((a, b) => b.e.weight - a.e.weight).slice(0, 8);
+    html += `<div class="section"><div class="section-header">Slayer master: ${escHtml(m.name)}
+        <span style="font-size:10px;color:#555;font-weight:normal">${sm.st.ok ? `${_pct(sm.chance)} of tasks doable` : 'locked'}</span></div>
+      <div style="margin-top:8px;font-size:11px">${top.map(r => `<span style="margin-right:10px;color:${r.ts.doable ? '#7ab07a' : '#a05050'}">${r.ts.doable ? '✓' : '✗'} ${escHtml(r.e.task)} <span style="color:#555">${_pct(r.e.weight / (sm.assignW || 1))}</span></span>`).join('')}
+        <div style="margin-top:6px"><span style="cursor:pointer;color:#c8a060;text-decoration:underline dotted" data-n="${escHtml(m.name)}" onclick="showSlayer('master', this.dataset.n)">Open ${escHtml(m.name)} on the Slayer tab →</span></div></div></div>`;
   }
-
-  // ── Assigned by slayer masters ────────────────────────────────────────────
   {
-    const slayerAssignedBy = [];
-    for (const [masterKey, master] of Object.entries(SLAYER_TASKS)) {
-      const totalWeight = master.tasks.reduce((s,t) => s + t.weight, 0);
-      const matchingTasks = master.tasks.filter(t => t.cards.includes(name));
-      if (matchingTasks.length === 0) continue;
-      const combinedWeight = matchingTasks.reduce((s,t) => s + t.weight, 0);
-      const pct = ((combinedWeight / totalWeight) * 100).toFixed(1);
-      const taskLabel = [...new Set(matchingTasks.map(t => t.task))].join(' / ');
-      const _mCards = Object.entries(SLAYER_MASTER_MAP).filter(([,k]) => k === masterKey).map(([c]) => c);
-      const masterOwned = _mCards.length === 0 || _mCards.some(c => isOwned(c));
-      const masterCardName = _mCards.find(c => isOwned(c)) || _mCards[0] || masterKey;
-      const slayerOk = getLevel('Slayer') >= (master.slayerReq || 1);
-      slayerAssignedBy.push({masterKey, masterCardName, masterOwned, slayerOk, taskLabel, pct, slayerReq: master.slayerReq});
-    }
-    if (slayerAssignedBy.length > 0) {
-      // Sort: unlocked masters first, then by pct desc
-      slayerAssignedBy.sort((a,b) => {
-        const aOk = a.slayerOk && a.masterOwned, bOk = b.slayerOk && b.masterOwned;
-        if (aOk !== bOk) return aOk ? -1 : 1;
-        return parseFloat(b.pct) - parseFloat(a.pct);
-      });
-      html += `<div class="section">
-        <div class="section-header">Assigned by Slayer masters</div>
-        <div style="margin-top:8px">`;
-      for (const m of slayerAssignedBy) {
-        const safeMasterName = m.masterCardName.replace(/&/g,'&amp;').replace(/"/g,'&quot;');
-        const indCls2 = !m.slayerOk ? 'locked' : !m.masterOwned ? 'no-card' : 'available';
-        const mImgUrl2 = _cardImg(m.masterCardName) || '';
-        const mImgHtml2 = mImgUrl2
-          ? `<img src="${mImgUrl2}" style="width:16px;height:16px;object-fit:contain;image-rendering:pixelated;flex-shrink:0;margin-right:4px" onerror="this.style.display='none'">`
-          : '<span style="width:16px;flex-shrink:0;margin-right:4px"></span>';
-        const noteText2 = !m.slayerOk ? `Slayer ${m.slayerReq} req` : !m.masterOwned ? 'no master card' : m.taskLabel;
-        html += `<div class="method-row">
-          <div class="method-indicator ${indCls2}"></div>
-          ${mImgHtml2}
-          <span class="method-name ${indCls2}" style="cursor:pointer"
-            data-nav="${safeMasterName}" data-nav-type="monster" onclick="_navToCard(this)">${m.masterKey}</span>
-          <span class="method-level" style="min-width:46px;text-align:right">${m.pct}%</span>
-          <span class="method-note">${noteText2}</span>
-        </div>`;
+    const es = _slCardEntries(name);
+    if (es.length) {
+      html += `<div class="section"><div class="section-header">Slayer tasks <span style="font-size:10px;color:#555;font-weight:normal">(this card counts for)</span></div><div style="margin-top:8px">`;
+      for (const { task, mon } of es) {
+        const st = _slMonsterStatus(mon, null, SLAYER.tasks[task].boss);
+        const masters = SLAYER.masters.flatMap(m => (m.tasks || []).filter(e => e.task === task).map(e => `${m.name} ${e.weight}`));
+        html += `<div class="req-row"><span class="req-icon ${st.ok ? 'ok' : 'fail'}">${st.ok ? '✓' : '✗'}</span>
+          <span class="req-label" style="cursor:pointer;color:#c8a060" data-n="${escHtml(task)}" onclick="showSlayer('task', this.dataset.n)">${escHtml(task)}</span>
+          <span style="font-size:10px;color:#666;margin-left:8px">${escHtml(masters.join(' · '))}</span>
+          <span class="req-note">${st.ok ? 'can kill on task' : escHtml(st.reason || '')}</span></div>`;
       }
       html += `</div></div>`;
     }
   }
-
   // ── Required for quests ───────────────────────────────────────────────────
   html += requiredForQuestsHtml(name);
 
@@ -5533,7 +5445,7 @@ function switchTab(tab) {
 function _renderTab(tab, resetSelection = true) {
   activeTab = tab;
   // Update tab button styles
-  for (const t of ['cards','skilling','questing','packs','wishlist','equipment','bosses','diaries','rules'])
+  for (const t of ['cards','skilling','questing','packs','wishlist','equipment','bosses','slayer','diaries','rules'])
     document.getElementById(`tab-${t}`).classList.toggle('active', t === tab);
 
   const sidebar     = document.getElementById('sidebar');
@@ -5655,6 +5567,23 @@ function _renderTab(tab, resetSelection = true) {
       _renderBossFilterBtns();
       renderBossList();
       if (selectedBoss) showBossDetail(selectedBoss); else _renderBossHome();
+    } else if (tab === 'slayer') {
+      if (resetSelection) selectedSlayer = null;
+      sidebar.style.display     = 'none';
+      mainContent.style.display = 'flex';
+      mainContent.innerHTML = `<div id="boss-panel">
+        <div id="boss-list-pane">
+          <div id="boss-list-controls">
+            <input id="slayer-search" type="text" placeholder="Search masters & tasks\u2026" value="${escHtml(slayerSearch)}"
+              style="width:100%;box-sizing:border-box;background:#1a1a1a;border:1px solid #333;border-radius:3px;color:#ccc;padding:5px 8px;font-size:12px;outline:none"
+              oninput="slayerSearch=this.value.trim().toLowerCase();renderSlayerList()">
+          </div>
+          <div id="slayer-list-scroll" style="flex:1;overflow-y:auto"></div>
+        </div>
+        <div id="slayer-detail-pane" style="flex:1;overflow-y:auto"></div>
+      </div>`;
+      renderSlayerList();
+      _renderSlayerDetail();
     } else if (tab === 'diaries') {
       if (resetSelection) selectedDiary = null;
       sidebar.style.display     = 'none';
@@ -5722,329 +5651,7 @@ const AGILITY_COURSES = [
   {name:'Ardougne rooftop',          level:90, xp:793},
 ];
 
-// Per-card access gates: some monsters that count for a task require a quest or skill
-// to actually reach/kill, independent of card ownership.
-// quests: must be completed; skills: {SkillName: level} minimum.
-const SLAYER_CARD_GATES = {
-  // Morytania — Priest in Peril required to cross the River Salve
-  // Slayer Tower is in Morytania; all its monsters are gated
-  'Gargoyle':             {quests:['Priest in Peril']},
-  'Dawn':                 {quests:['Priest in Peril']},          // Grotesque Guardians rooftop
-  'Dusk':                 {quests:['Priest in Peril']},          // Grotesque Guardians rooftop
-  'Crawling Hand':        {quests:['Priest in Peril']},
-  'Infernal Mage':        {quests:['Priest in Peril']},
-  'Banshee':              {quests:['Priest in Peril']},          // Twisted/Screaming twisted have Catacombs alt
-  'Screaming banshee':    {quests:['Priest in Peril']},
-  'Ghoul':                {quests:['Priest in Peril']},
-  'Shade':                {quests:['Priest in Peril']},
-  'Loar Shade':           {quests:['Priest in Peril']},
-  'Phrin Shade':          {quests:['Priest in Peril']},
-  'Riyl Shade':           {quests:['Priest in Peril']},
-  'Asyn Shade':           {quests:['Priest in Peril']},
-  'Fiyr Shade':           {quests:['Priest in Peril']},
-  'Urium Shade':          {quests:['Priest in Peril']},
-  'Feral Vampyre':        {quests:['Priest in Peril']},
-  'Wall beast':           {quests:['Haunted Mine']},             // Haunted Mine quest (implies Priest in Peril)
-  // Mos Le'Harmless — Cabin Fever required
-  'Cave Horror':          {quests:['Cabin Fever']},
-  // Other quest-locked locations
-  'Death wing':           {quests:["Legends' Quest"]},           // Kharazi Jungle entry
-  'Vorkath':              {quests:['Dragon Slayer II']},          // unlocked after quest
-  'Monkey Zombie':        {quests:['Monkey Madness I']},          // Ape Atoll access
-  'Vyrewatch':            {quests:['In Aid of the Myreque']},     // Meiyerditch access
-  'Vyrewatch Sentinel':   {quests:['In Aid of the Myreque']},     // Meiyerditch access
-  // Slayer level gates
-  'Cerberus':             {skills:{Slayer:91}},
-};
-
-// Case-insensitive gate lookup (card names in data may differ in case from the catalog).
-const _SLAYER_GATES_LC = Object.fromEntries(Object.entries(SLAYER_CARD_GATES).map(([k,v]) => [k.toLowerCase(), v]));
-function _slayerGate(card) { return _SLAYER_GATES_LC[card.toLowerCase()] || null; }
-
-// Returns true if card is owned AND all access gates are met.
-// For cards with no entry in SLAYER_CARD_GATES, equivalent to isOwned(card).
-function _slayerCardFeasible(card) {
-  if (!isOwned(card)) return false;
-  const gate = _slayerGate(card);
-  if (!gate) return true;
-  if ((gate.quests || []).some(q => !completedQuests.has(q))) return false;
-  if (Object.entries(gate.skills || {}).some(([s,l]) => getLevel(s) < l)) return false;
-  return true;
-}
-
-// Full Slayer task data per master. weights from OSRS wiki.
-// cards: array of TCG card names that fulfil this task (any one owned = task available).
-const SLAYER_TASKS = {
-  'Turael': {
-    slayerReq:1, combatReq:3,
-    tasks:[
-      {task:'Banshees',        cards:['Banshee','Twisted Banshee','Screaming banshee','Screaming twisted banshee'],                                                        weight:8},
-      {task:'Bats',            cards:['Bat','Giant bat','Albino bat','Death wing'],                                                            weight:7},
-      {task:'Bears',           cards:['Black bear','Grizzly bear','Grizzly bear cub','Bear Cub','Artio','Callisto'],                                                           weight:7},
-      {task:'Birds',           cards:['Chicken','Seagull','Duck','Vulture','Penguin','Terrorbird','Chompy bird'],                                              weight:6},
-      {task:'Cave bugs',       cards:['Cave bug'],                                                       weight:8},
-      {task:'Cave crawlers',   cards:['Cave crawler'],                                                   weight:8},
-      {task:'Cave slime',      cards:['Cave slime'],                                                     weight:8},
-      {task:'Cows',            cards:['Cow','Cow calf','Buffalo','Undead cow'],                                                            weight:8},
-      {task:'Crawling Hands',  cards:['Crawling Hand'],                                                  weight:8},
-      {task:'Dogs',            cards:['Wild dog','Guard dog','Jackal'],                                                            weight:7},
-      {task:'Dwarves',         cards:['Dwarf','Chaos dwarf'],                                                          weight:7},
-      {task:'Ghosts',          cards:['Ghost','Tortured soul'],                                                          weight:7},
-      {task:'Goblins',         cards:['Goblin','Goblin guard','Angry goblin','Cave goblin','Cave goblin guard','Cave goblin miner'],                                                         weight:7},
-      {task:'Icefiends',       cards:['Icefiend'],                                                       weight:8},
-      {task:'Kalphite',        cards:['Kalphite Worker','Kalphite Soldier','Kalphite Guardian','Kalphite Queen'], weight:6},
-      {task:'Lizards',         cards:['Desert Lizard','Sulphur Lizard','Cave lizard','Grimy Lizard'],                                         weight:8},
-      {task:'Minotaurs',       cards:['Minotaur'],                                                       weight:7},
-      {task:'Monkeys',         cards:['Monkey','Maniacal monkey'],                                                         weight:6},
-      {task:'Rats',            cards:['Rat','Giant rat','Dungeon rat','Crypt rat','Giant crypt rat','Zombie rat','Brine rat','Scurrius'],                                                            weight:7},
-      {task:'Scorpions',       cards:['Scorpion','King Scorpion','Poison Scorpion','Pit Scorpion','Grave scorpion','Scorpia'],                                                       weight:7},
-      {task:'Skeletons',       cards:['Skeleton','Skeleton hero','Skeleton brute','Skeleton warlord','Skeleton heavy','Skeleton thug','Skeleton Mage','Skeleton fremennik','Giant skeleton','Skeleton Champion'],                                                       weight:7},
-      {task:'Spiders',         cards:['Spider','Giant spider','Jungle spider','Fever spider','Deadly red spider','Ice spider','Poison spider','Crypt spider','Giant crypt spider','Huge spider','Shadow spider'],                                                         weight:6},
-      {task:'Wolves',          cards:['Wolf','Big Wolf','White wolf','Ice wolf','Jungle Wolf','Desert Wolf','Dire Wolf'],                                                           weight:7},
-      {task:'Zombies',         cards:['Zombie','Zombie pirate','Zombie swab','Armoured zombie','Zombie rat','Monkey Zombie','Zogre','Vorkath'],                                                         weight:7},
-    ]
-  },
-  'Mazchna': {
-    slayerReq:1, combatReq:20,
-    tasks:[
-      {task:'Banshees',        cards:['Banshee','Twisted Banshee','Screaming banshee','Screaming twisted banshee'],                                                        weight:8},
-      {task:'Bats',            cards:['Bat','Giant bat','Albino bat','Death wing'],                                                            weight:7},
-      {task:'Bears',           cards:['Black bear','Grizzly bear','Grizzly bear cub','Bear Cub','Artio','Callisto'],                                                           weight:6},
-      {task:'Catablepon',      cards:['Catablepon'],                                                     weight:8},
-      {task:'Cave bugs',       cards:['Cave bug'],                                                       weight:8},
-      {task:'Cave crawlers',   cards:['Cave crawler'],                                                   weight:8},
-      {task:'Cave slime',      cards:['Cave slime'],                                                     weight:8},
-      {task:'Cockatrice',      cards:['Cockatrice'],                                                     weight:8},
-      {task:'Crabs',           cards:['Rock Crab','Sand Crab','Ammonite Crab','Swamp Crab'],             weight:8},
-      {task:'Crawling Hands',  cards:['Crawling Hand'],                                                  weight:8},
-      {task:'Dogs',            cards:['Wild dog','Guard dog','Jackal'],                                                            weight:7},
-      {task:'Flesh Crawlers',  cards:['Flesh Crawler'],                                                  weight:7},
-      {task:'Ghosts',          cards:['Ghost','Tortured soul'],                                                          weight:7},
-      {task:'Ghouls',          cards:['Ghoul'],                                                          weight:7},
-      {task:'Hill Giants',     cards:['Hill Giant'],                                                     weight:7},
-      {task:'Hobgoblins',      cards:['Hobgoblin','Hobgoblin Champion'],                                                      weight:7},
-      {task:'Ice warriors',    cards:['Ice warrior'],                                                    weight:7},
-      {task:'Kalphite',        cards:['Kalphite Worker','Kalphite Soldier','Kalphite Guardian','Kalphite Queen'], weight:6},
-      {task:'Killerwatts',     cards:['Killerwatt'],                                                     weight:6},
-      {task:'Lizards',         cards:['Desert Lizard','Sulphur Lizard','Cave lizard','Grimy Lizard'],                                         weight:8},
-      {task:'Mogres',          cards:['Mogre'],                                                          weight:8},
-      {task:'Pyrefiends',      cards:['Pyrefiend'],                                                      weight:8},
-      {task:'Rockslugs',       cards:['Rockslug'],                                                       weight:8},
-      {task:'Scorpions',       cards:['Scorpion','King Scorpion','Poison Scorpion','Pit Scorpion','Grave scorpion','Scorpia'],                                                       weight:7},
-      {task:'Shades',          cards:['Shade','Loar Shade','Phrin Shade','Riyl Shade','Asyn Shade','Fiyr Shade','Urium Shade'],                                                          weight:8},
-      {task:'Skeletons',       cards:['Skeleton','Skeleton hero','Skeleton brute','Skeleton warlord','Skeleton heavy','Skeleton thug','Skeleton Mage','Skeleton fremennik','Giant skeleton','Skeleton Champion'],                                                       weight:7},
-      {task:'Vampyres',        cards:['Feral Vampyre','Vampyre Juvinate','Vampyre Juvenile','Vyrewatch','Vyrewatch Sentinel'],                                                        weight:6},
-      {task:'Wall beasts',     cards:['Wall beast'],                                                     weight:7},
-      {task:'Wolves',          cards:['Wolf','Big Wolf','White wolf','Ice wolf','Jungle Wolf','Desert Wolf','Dire Wolf'],                                                           weight:7},
-      {task:'Zombies',         cards:['Zombie','Zombie pirate','Zombie swab','Armoured zombie','Zombie rat','Monkey Zombie','Zogre','Vorkath'],                                                         weight:7},
-    ]
-  },
-  'Vannaka': {
-    slayerReq:1, combatReq:40,
-    tasks:[
-      {task:'Aberrant spectres',   cards:['Aberrant spectre'],                                           weight:8},
-      {task:'Abyssal demons',      cards:['Abyssal demon'],                                              weight:8},
-      {task:'Ankou',               cards:['Ankou'],                                                      weight:8},
-      {task:'Banshees',            cards:['Banshee','Twisted Banshee','Screaming banshee','Screaming twisted banshee'],                                                    weight:8},
-      {task:'Basilisks',           cards:['Basilisk'],                                                   weight:8},
-      {task:'Bats',                cards:['Bat','Giant bat','Albino bat','Death wing'],                                                        weight:7},
-      {task:'Bears',               cards:['Black bear','Grizzly bear','Grizzly bear cub','Bear Cub','Artio','Callisto'],                                                       weight:7},
-      {task:'Bloodveld',           cards:['Bloodveld'],                                                  weight:8},
-      {task:'Blue dragons',        cards:['Baby blue dragon','Blue dragon'],                             weight:7},
-      {task:'Cave bugs',           cards:['Cave bug'],                                                   weight:8},
-      {task:'Cave crawlers',       cards:['Cave crawler'],                                               weight:8},
-      {task:'Cave slime',          cards:['Cave slime'],                                                 weight:8},
-      {task:'Cockatrice',          cards:['Cockatrice'],                                                 weight:8},
-      {task:'Crawling Hands',      cards:['Crawling Hand'],                                              weight:8},
-      {task:'Crocodiles',          cards:['Crocodile'],                                                  weight:8},
-      {task:'Dagannoth',           cards:['Dagannoth','Dagannoth Prime','Dagannoth Rex','Dagannoth Supreme','Dagannoth spawn','Dagannoth fledgeling','Dagannoth mother'], weight:7},
-      {task:'Dogs',                cards:['Wild dog','Guard dog','Jackal'],                                                        weight:7},
-      {task:'Dust devils',         cards:['Dust devil'],                                                 weight:8},
-      {task:'Dwarves',             cards:['Dwarf','Chaos dwarf'],                                                      weight:7},
-      {task:'Earth warriors',      cards:['Earth warrior'],                                              weight:8},
-      {task:'Elves',               cards:['Elf Warrior','Elf Archer','Iorwerth Warrior','Iorwerth Archer'],                                                        weight:8},
-      {task:'Fire giants',         cards:['Fire giant'],                                                 weight:8},
-      {task:'Flesh Crawlers',      cards:['Flesh Crawler'],                                              weight:7},
-      {task:'Gargoyles',           cards:['Gargoyle'],                                                   weight:5},
-      {task:'Ghosts',              cards:['Ghost','Tortured soul'],                                                      weight:7},
-      {task:'Ghouls',              cards:['Ghoul'],                                                      weight:7},
-      {task:'Green dragons',       cards:['Green dragon','Baby green dragon'],                           weight:7},
-      {task:'Gryphons',            cards:['Gryphon','Dire gryphon','Shellbane gryphon'],                                                    weight:10},
-      {task:'Guards',              cards:['Guard'],                                                      weight:7},
-      {task:'Hellhounds',          cards:['Hellhound','Skeleton Hellhound','Greater Skeleton Hellhound','Cerberus'],                                                  weight:8},
-      {task:'Hill giants',         cards:['Hill Giant'],                                                 weight:7},
-      {task:'Hobgoblins',          cards:['Hobgoblin','Hobgoblin Champion'],                                                  weight:7},
-      {task:'Ice giants',          cards:['Ice giant'],                                                  weight:7},
-      {task:'Ice warriors',        cards:['Ice warrior'],                                                weight:7},
-      {task:'Infernal Mages',      cards:['Infernal Mage'],                                             weight:8},
-      {task:'Jellies',             cards:['Jelly'],                                                      weight:8},
-      {task:'Kalphite',            cards:['Kalphite Worker','Kalphite Soldier','Kalphite Guardian','Kalphite Queen'], weight:7},
-      {task:'Killerwatts',         cards:['Killerwatt'],                                                 weight:7},
-      {task:'Kurask',              cards:['Kurask'],                                                     weight:8},
-      {task:'Lizards',             cards:['Desert Lizard','Sulphur Lizard','Cave lizard','Grimy Lizard'],                                     weight:8},
-      {task:'Mogres',              cards:['Mogre'],                                                      weight:8},
-      {task:'Molanisks',           cards:['Molanisk'],                                                   weight:8},
-      {task:'Nechryael',           cards:['Nechryael'],                                                  weight:8},
-      {task:'Otherworldly beings', cards:['Otherworldly being'],                                         weight:8},
-      {task:'Pyrefiends',          cards:['Pyrefiend'],                                                  weight:8},
-      {task:'Rockslugs',           cards:['Rockslug'],                                                   weight:8},
-      {task:'Scorpions',           cards:['Scorpion','King Scorpion','Poison Scorpion','Pit Scorpion','Grave scorpion','Scorpia'],                                                   weight:7},
-      {task:'Shades',              cards:['Shade','Loar Shade','Phrin Shade','Riyl Shade','Asyn Shade','Fiyr Shade','Urium Shade'],                                                      weight:7},
-      {task:'Skeletal wyverns',    cards:['Skeletal Wyvern'],                                            weight:5},
-      {task:'Skeletons',           cards:['Skeleton','Skeleton hero','Skeleton brute','Skeleton warlord','Skeleton heavy','Skeleton thug','Skeleton Mage','Skeleton fremennik','Giant skeleton','Skeleton Champion'],                                                   weight:7},
-      {task:'Spiders',             cards:['Spider','Giant spider','Jungle spider','Fever spider','Deadly red spider','Ice spider','Poison spider','Crypt spider','Giant crypt spider','Huge spider','Shadow spider'],                                                     weight:7},
-      {task:'Trolls',              cards:['Troll'],                                                      weight:7},
-      {task:'Turoth',              cards:['Turoth'],                                                     weight:8},
-      {task:'Vampyres',            cards:['Feral Vampyre','Vampyre Juvinate','Vampyre Juvenile','Vyrewatch','Vyrewatch Sentinel'],                                                    weight:7},
-      {task:'Wall beasts',         cards:['Wall beast'],                                                 weight:7},
-      {task:'Wolves',              cards:['Wolf','Big Wolf','White wolf','Ice wolf','Jungle Wolf','Desert Wolf','Dire Wolf'],                                                       weight:7},
-      {task:'Zombies',             cards:['Zombie','Zombie pirate','Zombie swab','Armoured zombie','Zombie rat','Monkey Zombie','Zogre','Vorkath'],                                                     weight:7},
-    ]
-  },
-  'Chaeldar': {
-    slayerReq:75, combatReq:0,
-    tasks:[
-      {task:'Aberrant spectres',   cards:['Aberrant spectre'],                                           weight:8},
-      {task:'Abyssal demons',      cards:['Abyssal demon'],                                              weight:12},
-      {task:'Aviansie',            cards:['Aviansie'],                                                   weight:9},
-      {task:'Banshees',            cards:['Banshee','Twisted Banshee','Screaming banshee','Screaming twisted banshee'],                                                    weight:8},
-      {task:'Black demons',        cards:['Black demon'],                                                weight:10},
-      {task:'Black dragons',       cards:['Black dragon','Baby black dragon'],                           weight:8},
-      {task:'Bloodveld',           cards:['Bloodveld'],                                                  weight:10},
-      {task:'Blue dragons',        cards:['Baby blue dragon','Blue dragon'],                             weight:8},
-      {task:'Cave horrors',        cards:['Cave horror'],                                                weight:10},
-      {task:'Cave kraken',         cards:['Cave kraken'],                                               weight:12},
-      {task:'Dagannoth',           cards:['Dagannoth','Dagannoth Prime','Dagannoth Rex','Dagannoth Supreme','Dagannoth spawn','Dagannoth fledgeling','Dagannoth mother'], weight:11},
-      {task:'Dark beasts',         cards:['Dark beast'],                                                 weight:10},
-      {task:'Dust devils',         cards:['Dust devil'],                                                 weight:12},
-      {task:'Elves',               cards:['Elf Warrior','Elf Archer','Iorwerth Warrior','Iorwerth Archer'],                                                        weight:10},
-      {task:'Fire giants',         cards:['Fire giant'],                                                 weight:12},
-      {task:'Gargoyles',           cards:['Gargoyle'],                                                   weight:11},
-      {task:'Grotesque Guardians', cards:['Dusk','Dawn'],                                                weight:5},
-      {task:'Hellhounds',          cards:['Hellhound','Skeleton Hellhound','Greater Skeleton Hellhound','Cerberus'],                                                  weight:12},
-      {task:'Hydra',               cards:['Hydra'],                                                      weight:15},
-      {task:'Jellies',             cards:['Jelly'],                                                      weight:12},
-      {task:'Kurask',              cards:['Kurask'],                                                     weight:12},
-      {task:'Lizardmen',           cards:['Lizardman','Lizardman brute','Lizardman shaman'],             weight:10},
-      {task:'Nechryael',           cards:['Nechryael'],                                                  weight:12},
-      {task:'Smoke devils',        cards:['Smoke devil'],                                                weight:12},
-      {task:'Spiritual creatures', cards:['Spiritual Warrior','Spiritual Ranger','Spiritual Mage'],      weight:12},
-      {task:'Turoth',              cards:['Turoth'],                                                     weight:12},
-      {task:'Waterfiends',         cards:['Waterfiend'],                                                 weight:9},
-    ]
-  },
-  'Konar': {
-    slayerReq:1, combatReq:75,
-    tasks:[
-      {task:'Abyssal demons',      cards:['Abyssal demon'],                                              weight:9},
-      {task:'Adamant dragons',     cards:['Adamant dragon'],                                             weight:5},
-      {task:'Ankou',               cards:['Ankou'],                                                      weight:5},
-      {task:'Basilisks',           cards:['Basilisk'],                                                   weight:7},
-      {task:'Black demons',        cards:['Black demon'],                                                weight:9},
-      {task:'Black dragons',       cards:['Black dragon','Baby black dragon'],                           weight:9},
-      {task:'Blue dragons',        cards:['Baby blue dragon','Blue dragon'],                             weight:9},
-      {task:'Cave horrors',        cards:['Cave horror'],                                                weight:5},
-      {task:'Cave kraken',         cards:['Cave kraken'],                                               weight:9},
-      {task:'Dagannoth',           cards:['Dagannoth','Dagannoth Prime','Dagannoth Rex','Dagannoth Supreme','Dagannoth spawn','Dagannoth fledgeling','Dagannoth mother'], weight:9},
-      {task:'Dark beasts',         cards:['Dark beast'],                                                 weight:9},
-      {task:'Drake',               cards:['Drake'],                                                      weight:10},
-      {task:'Dust devils',         cards:['Dust devil'],                                                 weight:9},
-      {task:'Elves',               cards:['Elf Warrior','Elf Archer','Iorwerth Warrior','Iorwerth Archer'],                                                        weight:5},
-      {task:'Fire giants',         cards:['Fire giant'],                                                 weight:9},
-      {task:'Fossil Island wyverns',cards:['Ancient Wyvern','Long-tailed Wyvern','Spitting Wyvern','Taloned Wyvern'], weight:5},
-      {task:'Gargoyles',           cards:['Gargoyle'],                                                   weight:7},
-      {task:'Greater demons',      cards:['Greater demon'],                                              weight:9},
-      {task:'Hellhounds',          cards:['Hellhound','Skeleton Hellhound','Greater Skeleton Hellhound','Cerberus'],                                                  weight:9},
-      {task:'Hydras',              cards:['Hydra'],                                                      weight:10},
-      {task:'Iron dragons',        cards:['Iron dragon'],                                                weight:9},
-      {task:'Jellies',             cards:['Jelly'],                                                      weight:5},
-      {task:'Kurask',              cards:['Kurask'],                                                     weight:5},
-      {task:'Lizardmen',           cards:['Lizardman','Lizardman brute','Lizardman shaman'],             weight:10},
-      {task:'Metal dragons',       cards:['Iron dragon','Steel dragon','Mithril dragon','Adamant dragon','Rune dragon'], weight:15},
-      {task:'Nechryael',           cards:['Nechryael'],                                                  weight:9},
-      {task:'Rune dragons',        cards:['Rune dragon'],                                                weight:5},
-      {task:'Skeletal wyverns',    cards:['Skeletal Wyvern'],                                            weight:5},
-      {task:'Smoke devils',        cards:['Smoke devil'],                                                weight:9},
-      {task:'Steel dragons',       cards:['Steel dragon'],                                               weight:9},
-      {task:'Sulphur lizards',     cards:['Sulphur Lizard'],                                             weight:5},
-      {task:'Wyrms',               cards:['Wyrm'],                                                       weight:10},
-    ]
-  },
-  'Nieve': {
-    slayerReq:85, combatReq:0,
-    tasks:[
-      {task:'Abyssal demons',      cards:['Abyssal demon'],                                              weight:9},
-      {task:'Ankou',               cards:['Ankou'],                                                      weight:5},
-      {task:'Aviansie',            cards:['Aviansie'],                                                   weight:8},
-      {task:'Black demons',        cards:['Black demon'],                                                weight:9},
-      {task:'Bloodveld',           cards:['Bloodveld'],                                                  weight:9},
-      {task:'Blue dragons',        cards:['Baby blue dragon','Blue dragon'],                             weight:4},
-      {task:'Cave horrors',        cards:['Cave horror'],                                                weight:5},
-      {task:'Cave kraken',         cards:['Cave kraken'],                                               weight:9},
-      {task:'Dagannoth',           cards:['Dagannoth','Dagannoth Prime','Dagannoth Rex','Dagannoth Supreme','Dagannoth spawn','Dagannoth fledgeling','Dagannoth mother'], weight:9},
-      {task:'Dark beasts',         cards:['Dark beast'],                                                 weight:9},
-      {task:'Dust devils',         cards:['Dust devil'],                                                 weight:9},
-      {task:'Elves',               cards:['Elf Warrior','Elf Archer','Iorwerth Warrior','Iorwerth Archer'],                                                        weight:9},
-      {task:'Fire giants',         cards:['Fire giant'],                                                 weight:9},
-      {task:'Fossil Island wyverns',cards:['Ancient Wyvern','Long-tailed Wyvern','Spitting Wyvern','Taloned Wyvern'], weight:5},
-      {task:'Gargoyles',           cards:['Gargoyle'],                                                   weight:8},
-      {task:'Greater demons',      cards:['Greater demon'],                                              weight:9},
-      {task:'Hellhounds',          cards:['Hellhound','Skeleton Hellhound','Greater Skeleton Hellhound','Cerberus'],                                                  weight:8},
-      {task:'Iron dragons',        cards:['Iron dragon'],                                                weight:5},
-      {task:'Kalphite',            cards:['Kalphite Worker','Kalphite Soldier','Kalphite Guardian','Kalphite Queen'], weight:9},
-      {task:'Kurask',              cards:['Kurask'],                                                     weight:4},
-      {task:'Lizardmen',           cards:['Lizardman','Lizardman brute','Lizardman shaman'],             weight:9},
-      {task:'Metal dragons',       cards:['Iron dragon','Steel dragon','Mithril dragon','Adamant dragon'], weight:12},
-      {task:'Nechryael',           cards:['Nechryael'],                                                  weight:9},
-      {task:'Skeletal wyverns',    cards:['Skeletal Wyvern'],                                            weight:5},
-      {task:'Smoke devils',        cards:['Smoke devil'],                                                weight:9},
-      {task:'Spiritual creatures', cards:['Spiritual Warrior','Spiritual Ranger','Spiritual Mage'],      weight:9},
-      {task:'Steel dragons',       cards:['Steel dragon'],                                               weight:5},
-      {task:'TzHaar',              cards:['TzHaar-Ket','TzHaar-Xil','TzHaar-Mej','TzHaar-Hur','TzTok-Jad','TzKal-Zuk'],                     weight:10},
-      {task:'Waterfiends',         cards:['Waterfiend'],                                                 weight:5},
-    ]
-  },
-  'Duradel': {
-    slayerReq:50, combatReq:100,
-    tasks:[
-      {task:'Abyssal demons',      cards:['Abyssal demon'],                                              weight:12},
-      {task:'Adamant dragons',     cards:['Adamant dragon'],                                             weight:6},
-      {task:'Ankou',               cards:['Ankou'],                                                      weight:5},
-      {task:'Araxytes',            cards:['Araxxor','Araxyte'],                                          weight:10},
-      {task:'Aviansie',            cards:['Aviansie'],                                                   weight:8},
-      {task:'Black demons',        cards:['Black demon'],                                                weight:12},
-      {task:'Black dragons',       cards:['Black dragon','Baby black dragon'],                           weight:9},
-      {task:'Bloodveld',           cards:['Bloodveld'],                                                  weight:10},
-      {task:'Blue dragons',        cards:['Baby blue dragon','Blue dragon'],                             weight:4},
-      {task:'Cave horrors',        cards:['Cave horror'],                                                weight:5},
-      {task:'Cave kraken',         cards:['Cave kraken'],                                               weight:10},
-      {task:'Dagannoth',           cards:['Dagannoth','Dagannoth Prime','Dagannoth Rex','Dagannoth Supreme','Dagannoth spawn','Dagannoth fledgeling','Dagannoth mother'], weight:12},
-      {task:'Dark beasts',         cards:['Dark beast'],                                                 weight:11},
-      {task:'Dust devils',         cards:['Dust devil'],                                                 weight:8},
-      {task:'Elves',               cards:['Elf Warrior','Elf Archer','Iorwerth Warrior','Iorwerth Archer'],                                                        weight:8},
-      {task:'Fire giants',         cards:['Fire giant'],                                                 weight:8},
-      {task:'Fossil Island wyverns',cards:['Ancient Wyvern','Long-tailed Wyvern','Spitting Wyvern','Taloned Wyvern'], weight:5},
-      {task:'Gargoyles',           cards:['Gargoyle'],                                                   weight:10},
-      {task:'Greater demons',      cards:['Greater demon'],                                              weight:9},
-      {task:'Hellhounds',          cards:['Hellhound','Skeleton Hellhound','Greater Skeleton Hellhound','Cerberus'],                                                  weight:10},
-      {task:'Hydras',              cards:['Hydra'],                                                      weight:10},
-      {task:'Iron dragons',        cards:['Iron dragon'],                                                weight:5},
-      {task:'Kalphite',            cards:['Kalphite Worker','Kalphite Soldier','Kalphite Guardian','Kalphite Queen'], weight:8},
-      {task:'Kurask',              cards:['Kurask'],                                                     weight:4},
-      {task:'Lizardmen',           cards:['Lizardman','Lizardman brute','Lizardman shaman'],             weight:10},
-      {task:'Metal dragons',       cards:['Iron dragon','Steel dragon','Mithril dragon','Adamant dragon','Rune dragon'], weight:14},
-      {task:'Mutated zygomites',   cards:['Zygomite'],                                          weight:2},
-      {task:'Nechryael',           cards:['Nechryael'],                                                  weight:12},
-      {task:'Rune dragons',        cards:['Rune dragon'],                                                weight:6},
-      {task:'Skeletal wyverns',    cards:['Skeletal Wyvern'],                                            weight:5},
-      {task:'Smoke devils',        cards:['Smoke devil'],                                                weight:10},
-      {task:'Spiritual creatures', cards:['Spiritual Warrior','Spiritual Ranger','Spiritual Mage'],      weight:8},
-      {task:'Steel dragons',       cards:['Steel dragon'],                                               weight:5},
-      {task:'TzHaar',              cards:['TzHaar-Ket','TzHaar-Xil','TzHaar-Mej','TzHaar-Hur','TzTok-Jad','TzKal-Zuk'],                     weight:10},
-      {task:'Waterfiends',         cards:['Waterfiend'],                                                 weight:5},
-    ]
-  },
-};
+// Slayer data lives in output/slayer.json (generate_slayer.py) — see the Slayer tab section.
 
 // ── Boss definitions ───────────────────────────────────────────────────────
 // Generated by scripts/generate_bosses.py (wiki Boss page + scripts/boss_curated.json)
@@ -6331,22 +5938,6 @@ const CARD_AREA_EXTRAS = {
   'Verac the Defiled':   ['Spade'],
 };
 
-// Maps NPC card names → SLAYER_TASKS key (for master cards that share a task list)
-const SLAYER_MASTER_MAP = {
-  'Turael':          'Turael',
-  'Spria':           'Turael',   // replaces Turael after A Porcine of Interest
-  'Mazchna':         'Mazchna',
-  'Vannaka':         'Vannaka',
-  'Chaeldar':        'Chaeldar',
-  'Konar quo Maten': 'Konar',
-  'Nieve':           'Nieve',
-  'Steve':           'Nieve',    // replaces Nieve after Monkey Madness II
-  'Duradel':         'Duradel',
-};
-// Reverse map: SLAYER_TASKS key → canonical card name for image/card lookups
-const SLAYER_KEY_TO_CARD = Object.fromEntries(
-  Object.entries(SLAYER_MASTER_MAP).map(([card, key]) => [key, card])
-);
 
 // Lazy reverse index: card name → [quest names that require it via bm_quest_cards.json]
 let _questCardIndex = null;
@@ -6963,18 +6554,15 @@ function getTrainingMethods(skillName) {
         cardOwned:true, note:`${c.xp} xp/lap`, type:'agility'});
     }
   } else if (skillName === 'Slayer') {
-    for (const [masterName, master] of Object.entries(SLAYER_TASKS)) {
-      const levelOk = myLevel >= (master.slayerReq || 1);
-      const mCards = Object.entries(SLAYER_MASTER_MAP).filter(([,k]) => k === masterName).map(([c]) => c);
-      const masterCardOk = mCards.length === 0 || mCards.some(c => isOwned(c));
-      const masterCardName = mCards.find(c => isOwned(c)) || mCards[0] || masterName;
-      const availTasks = master.tasks.filter(t => t.cards.some(_slayerCardFeasible)).length;
-      const totalTasks = master.tasks.length;
-      const reqStr = master.slayerReq > 1 ? `Sl ${master.slayerReq}` : master.combatReq > 3 ? `Cb ${master.combatReq}` : '';
-      const status = !levelOk || !masterCardOk ? 'locked' : availTasks > 0 ? 'available' : 'no-card';
-      results.push({name:masterName, level:master.slayerReq||0,
-        status, cardOwned:availTasks > 0, note:`${availTasks}/${totalTasks} tasks`,
-        type:'slayer', masterCardName, availTasks, totalTasks, reqStr});
+    // Masters from output/slayer.json — the Slayer tab has the full detail
+    for (const m of SLAYER.masters) {
+      const sm = _slMasterSummary(m), req = m.requirements || {};
+      const availTasks = sm.rows.filter(r => r.assignable && r.ts.doable).length;
+      const totalTasks = sm.rows.filter(r => r.assignable).length;
+      const reqStr = req.slayer ? `Sl ${req.slayer}` : req.combat ? `Cb ${req.combat}` : '';
+      const status = !sm.st.ok ? 'locked' : availTasks > 0 ? 'available' : 'no-card';
+      results.push({name: m.name, level: req.slayer || 0, status, cardOwned: availTasks > 0,
+        note: `${availTasks}/${totalTasks} tasks`, type: 'slayer', masterCardName: sm.st.card, availTasks, totalTasks, reqStr});
     }
   }
 
@@ -7066,7 +6654,7 @@ function showSkillDetail(skillName, push = true) {
   } else if (skillName === 'Agility') {
     intro = `<p style="color:#666;font-size:11px;margin-bottom:12px">Agility courses need no card — level only.</p>`;
   } else if (skillName === 'Slayer') {
-    intro = `<p style="color:#666;font-size:11px;margin-bottom:12px">Click a master to see their task list and available monsters. Star (☆) a task to add it to your Wishlist as a group.</p>`;
+    intro = `<p style="color:#666;font-size:11px;margin-bottom:12px">Slayer has its own tab: click a master for their tasks, or <span style="cursor:pointer;color:#c8a060;text-decoration:underline dotted" onclick="switchTab('slayer')">open the Slayer tab</span>.</p>`;
   }
 
   let rows = '';
@@ -7079,7 +6667,7 @@ function showSkillDetail(skillName, push = true) {
       const img = imgUrl
         ? `<img src="${imgUrl}" style="width:18px;height:18px;object-fit:contain;image-rendering:pixelated;flex-shrink:0" onerror="this.style.display='none'">`
         : '<span style="width:18px;flex-shrink:0"></span>';
-      rows += `<div class="method-row" style="cursor:pointer" data-nav="${escHtml(m.masterCardName)}" data-nav-type="monster" onclick="_navToCard(this)">
+      rows += `<div class="method-row" style="cursor:pointer" data-n="${escHtml(m.name)}" onclick="showSlayer('master', this.dataset.n)">
         <div class="method-indicator ${indCls}"></div>
         ${img}
         <span class="method-name ${indCls}">${m.name}</span>
@@ -7270,7 +6858,7 @@ function renderBossList() {
     return html;
   }
 
-  let html = '';
+  let html = `<div class="boss-item${!selectedBoss ? ' selected' : ''}" onclick="showBossOverview()"><span style="flex:1;font-size:12px;color:#e8c97a">Overview</span></div>`;
   for (const { key, label, subs } of cats) {
     const bosses = BOSS_DATA.filter(b => b.category === key &&
       (!bossSearch || b.name.toLowerCase().includes(bossSearch)));
@@ -7459,6 +7047,278 @@ function _missingLink(r, bossName) {
     ${opts.length > 1 ? _cardGridTipAttrs(opts, r.label + ' — any one') : `title="${escHtml(r.label)}"`}>${escHtml(r.label)}</span>`;
 }
 
+// ─── Slayer tab ─────────────────────────────────────────────────────────────
+// Data: output/slayer.json (generate_slayer.py). A task from a master is
+//   assignable — you meet its unlock (Slayer/Combat level, quests, reward unlock ticked);
+//   doable      — assignable, and you own at least one monster card that counts and can
+//                 reach one of its locations, plus any required Slayer equipment.
+// Doable chance = doable weight / assignable weight (masters only assign what you qualify for).
+let SLAYER = { masters: [], tasks: {}, unlocks: [] };
+let selectedSlayer = null;   // {kind:'master'|'task', name}
+let slayerSearch = '';
+function _slayerUnlocks() {
+  try { return new Set(JSON.parse(localStorage.getItem('tcg_slayer_unlocks') || '[]')); } catch { return new Set(); }
+}
+function toggleSlayerUnlock(name) {
+  const u = _slayerUnlocks();
+  u.has(name) ? u.delete(name) : u.add(name);
+  try { localStorage.setItem('tcg_slayer_unlocks', JSON.stringify([...u])); } catch {}
+  renderSlayerList(); _renderSlayerDetail();
+}
+// card (lowercase) → [{task, mon}] for every Slayer task monster with that card
+let _slCardIndex = null;
+function _slCardEntries(card) {
+  if (!_slCardIndex) {
+    _slCardIndex = {};
+    for (const [task, t] of Object.entries(SLAYER.tasks))
+      for (const mon of (t.monsters || [])) if (mon.card) (_slCardIndex[mon.card.toLowerCase()] ||= []).push({ task, mon });
+  }
+  return _slCardIndex[(card || '').toLowerCase()] || [];
+}
+// Owned, and killable for Slayer somewhere (reachable location, Slayer level, equipment)
+function _slayerCardFeasible(card) {
+  if (!isOwned(card)) return false;
+  const es = _slCardEntries(card);
+  return !es.length || es.some(({ task, mon }) => _slMonsterStatus(mon, null, SLAYER.tasks[task].boss).ok);
+}
+// Why an owned card can't be used for Slayer ('' if it can)
+function _slayerBlockReason(card) {
+  const es = _slCardEntries(card);
+  if (!es.length || _slayerCardFeasible(card)) return '';
+  return [...new Set(es.map(({ task, mon }) => _slMonsterStatus(mon, null, SLAYER.tasks[task].boss).reason).filter(Boolean))].join('; ');
+}
+// Master records whose card (or replacement's card) is this one
+function _slMastersForCard(card) {
+  const k = (card || '').toLowerCase();
+  return SLAYER.masters.filter(m => (m.cards || []).some(c => c.toLowerCase() === k) || (m.replacedBy && m.replacedBy.card.toLowerCase() === k));
+}
+
+function _slMasterCard(m) {
+  return m.replacedBy && completedQuests.has(m.replacedBy.quest) ? m.replacedBy.card : (m.cards || [m.name])[0];
+}
+function _slMasterStatus(m) {
+  const req = m.requirements || {}, why = [];
+  const card = _slMasterCard(m);
+  if (_isCard(card) && !isOwned(card)) why.push({ label: `${card} card`, card });
+  if (req.combat && getCombatLevel() < req.combat) why.push({ label: `Combat ${req.combat} (you: ${getCombatLevel()})` });
+  if (req.slayer && getLevel('Slayer') < req.slayer) why.push({ label: `Slayer ${req.slayer} (you: ${getLevel('Slayer')})` });
+  for (const q of (req.quests || [])) if (!completedQuests.has(q)) why.push({ label: q, quest: q });
+  if (m.access && !_accessMet(m.access)) why.push({ label: `Reach ${accessRoutes[m.access]?.label || m.access}` });
+  return { ok: !why.length, why, card };
+}
+function _slAssignable(entry) {
+  const u = entry.unlock || {};
+  if (u.slayer && getLevel('Slayer') < u.slayer) return false;
+  if (u.combat && getCombatLevel() < u.combat) return false;
+  if ((u.quests || []).some(q => !completedQuests.has(q))) return false;
+  if (u.ability && !_slayerUnlocks().has(u.ability)) return false;
+  return true;
+}
+// Can you reach this location? Its area access (access_routes.json key; 'excluded' = kills
+// there don't count) plus any location gate (quests done, one of the cards, skill levels).
+function _slLocOk(access, gate) {
+  if (access === 'excluded') return false;
+  if (access != null && !_accessMet(access)) return false;
+  if (!gate) return true;
+  if ((gate.quests || []).some(q => !completedQuests.has(q))) return false;
+  if ((gate.cards || []).length && !gate.cards.some(_cardUsable)) return false;
+  if (Object.entries(gate.skills || {}).some(([sk, l]) => getLevel(sk) < l)) return false;
+  if (gate.access && !_accessMet(gate.access)) return false;
+  return true;
+}
+// A boss on a Boss task: judged by that boss's own status on the Bosses tab
+const _SL_BOSS_ALIAS = { 'barrows brothers': 'Barrows', 'dagannoth kings': 'Dagannoth Kings', 'grotesque guardians': 'Grotesque Guardians' };
+function _slBossEncounter(name) {
+  const k = name.toLowerCase();
+  return BOSS_DATA.find(b => b.name.toLowerCase() === (_SL_BOSS_ALIAS[k] || name).toLowerCase())
+    || BOSS_DATA.find(b => (b.wikiBosses || []).some(w => w.toLowerCase() === k));
+}
+function _slMonsterStatus(mon, entry, isBoss) {
+  if (isBoss) {
+    const enc = _slBossEncounter(mon.name);
+    if (mon.slayer && getLevel('Slayer') < mon.slayer) return { ok: false, card: mon.card, reason: `Slayer ${mon.slayer}`, boss: enc };
+    if (!enc) return { ok: !!mon.card && isOwned(mon.card), card: mon.card, reason: mon.card ? (isOwned(mon.card) ? '' : 'need card') : 'no boss data' };
+    const st = evaluateBoss(enc).status;
+    return { ok: st === 'available', card: mon.card, boss: enc, reason: st === 'available' ? '' : `boss ${st}` };
+  }
+  const card = mon.card;
+  if (!card) return { ok: false, noCard: true, reason: 'no TCG card' };
+  if (!isOwned(card)) return { ok: false, card, reason: 'need card' };
+  if (mon.slayer && getLevel('Slayer') < mon.slayer) return { ok: false, card, reason: `Slayer ${mon.slayer} (you: ${getLevel('Slayer')})` };
+  // Konar sends you to one of her locations; Krystilia's tasks only count in the Wilderness
+  let la = (entry && entry.locationAccess) || mon.locationAccess || {};
+  if (entry && entry.wildernessOnly) la = Object.fromEntries((mon.wilderness || []).map(l => [l, (mon.locationAccess || {})[l] ?? null]));
+  const gates = { ...(mon.locationGates || {}), ...((entry && entry.locationGates) || {}) };
+  const locs = Object.keys(la);
+  if (entry && entry.wildernessOnly && !locs.length) return { ok: false, card, reason: 'not in the Wilderness' };
+  if (locs.length && !locs.some(l => _slLocOk(la[l], gates[l]))) return { ok: false, card, reason: 'can’t reach any location' };
+  const eq = (mon.equipment || []).filter(r => !r.optional && !_reqMet(r));
+  if (eq.length) return { ok: false, card, reason: 'missing ' + eq.map(r => r.label).join(', ') };
+  return { ok: true, card };
+}
+function _slTaskStatus(taskName, entry) {
+  const t = SLAYER.tasks[taskName] || { monsters: [] };
+  const mons = [...(t.monsters || [])];
+  for (const a of ((entry && entry.alternatives) || []))
+    if (!mons.some(m => m.name === a)) mons.push({ name: a, card: _cardInfo(a)?.exact || null, locations: [] });
+  const opts = mons.map(m => ({ mon: m, ...(_slMonsterStatus(m, entry, t.boss)) }));
+  const equipMissing = (t.equipment || []).filter(r => !r.optional && !_reqMet(r));
+  const doable = opts.some(o => o.ok) && !equipMissing.length;
+  return { opts, equipMissing, doable, t };
+}
+function _slMasterSummary(m) {
+  const st = _slMasterStatus(m);
+  let assignW = 0, doW = 0, totalW = 0;
+  const rows = (m.tasks || []).map(e => {
+    totalW += e.weight;
+    const assignable = _slAssignable(e);
+    const ts = assignable ? _slTaskStatus(e.task, e) : null;
+    if (assignable) { assignW += e.weight; if (ts.doable) doW += e.weight; }
+    return { e, assignable, ts };
+  });
+  return { m, st, rows, assignW, doW, totalW, chance: assignW ? doW / assignW : 0 };
+}
+const _pct = x => `${Math.round(x * 100)}%`;
+function renderSlayerList() {
+  const el = document.getElementById('slayer-list-scroll');
+  if (!el) return;
+  _accessCache = new Map();
+  const q = slayerSearch;
+  const sel = (k, n) => selectedSlayer && selectedSlayer.kind === k && selectedSlayer.name === n;
+  let html = `<div class="boss-item${!selectedSlayer ? ' selected' : ''}" onclick="selectSlayer(null)"><span style="flex:1;font-size:12px;color:#e8c97a">Overview</span></div>`;
+  html += `<div class="boss-section-header">Masters</div>`;
+  for (const m of SLAYER.masters) {
+    if (q && !m.name.toLowerCase().includes(q)) continue;
+    const s = _slMasterSummary(m);
+    const dot = !s.st.ok ? '#6a2a2a' : s.chance >= 0.5 ? '#76c442' : '#c8a020';
+    html += `<div class="boss-item${sel('master', m.name) ? ' selected' : ''}" data-n="${escHtml(m.name)}" onclick="selectSlayer('master', this.dataset.n)">
+      <span class="boss-status-dot" style="background:${dot}"></span>
+      <span style="flex:1;font-size:12px;color:#ccc">${escHtml(m.name)}${_slMasterCard(m) !== m.name && m.replacedBy ? ` <span style="color:#666;font-size:10px">(${escHtml(_slMasterCard(m))})</span>` : ''}</span>
+      <span style="font-size:10px;color:#555" title="Chance a task you're given is doable">${s.st.ok ? _pct(s.chance) : 'locked'}</span></div>`;
+  }
+  html += `<div class="boss-section-header">Tasks</div>`;
+  for (const name of Object.keys(SLAYER.tasks).sort()) {
+    if (q && !name.toLowerCase().includes(q)) continue;
+    const ts = _slTaskStatus(name);
+    html += `<div class="boss-item${sel('task', name) ? ' selected' : ''}" data-n="${escHtml(name)}" onclick="selectSlayer('task', this.dataset.n)">
+      <span class="boss-status-dot" style="background:${ts.doable ? '#76c442' : ts.opts.some(o => o.ok) ? '#c8a020' : '#6a2a2a'}"></span>
+      <span style="flex:1;font-size:12px;color:#ccc">${escHtml(name)}</span>
+      <span style="font-size:10px;color:#555">${ts.opts.filter(o => o.ok).length}/${ts.opts.length}</span></div>`;
+  }
+  el.innerHTML = html;
+  _accessCache = null;
+}
+function selectSlayer(kind, name) {
+  pushHistoryEntry();
+  selectedSlayer = kind ? { kind, name } : null;
+  renderSlayerList(); _renderSlayerDetail();
+}
+function showSlayer(kind, name) {
+  if (activeTab !== 'slayer') { pushHistoryEntry(); selectedSlayer = { kind, name }; _renderTab('slayer', false); }
+  else selectSlayer(kind, name);
+}
+function _slLink(kind, name, label) {
+  return `<span style="cursor:pointer;color:#c8a060;text-decoration:underline dotted" data-n="${escHtml(name)}" onclick="selectSlayer('${kind}', this.dataset.n)">${escHtml(label || name)}</span>`;
+}
+function _slWhyHtml(why) {
+  return why.map(w => w.quest ? `<span style="cursor:pointer;color:#c08040;text-decoration:underline dotted" data-quest="${escHtml(w.quest)}" onclick="_navToQuest(this)">${escHtml(w.label)}</span>`
+    : w.card ? `<span style="cursor:pointer;color:#c08040;text-decoration:underline dotted" data-nav="${escHtml(w.card)}" data-nav-type="monster" onclick="_navToCard(this)">${escHtml(w.label)}</span>`
+    : `<span style="color:#c08040">${escHtml(w.label)}</span>`).join(' · ');
+}
+function _renderSlayerDetail() {
+  const pane = document.getElementById('slayer-detail-pane');
+  if (!pane) return;
+  _accessCache = new Map();
+  try { _renderSlayerDetailInner(pane); } finally { _accessCache = null; }
+}
+function _renderSlayerDetailInner(pane) {
+  const box = (title, sub, inner) => `<div style="background:#111;border:1px solid #222;border-radius:4px;padding:12px 14px;margin-bottom:14px">
+    <div style="color:#c8a830;font-weight:700;font-size:12px;margin-bottom:2px">${title}</div>${sub ? `<div style="color:#666;font-size:10px;margin-bottom:8px">${sub}</div>` : ''}${inner}</div>`;
+  if (!selectedSlayer) {   // ── Overview ──
+    const sums = SLAYER.masters.map(_slMasterSummary);
+    const usable = sums.filter(s => s.st.ok).sort((a, b) => b.chance - a.chance);
+    const masterRows = sums.map(s => `<div style="display:flex;align-items:center;gap:8px;padding:4px 0;font-size:11px">
+      <span style="width:150px;flex-shrink:0">${_slLink('master', s.m.name, s.m.name + (s.st.card !== s.m.name ? ` (${s.st.card})` : ''))}</span>
+      ${s.st.ok ? `<div style="width:140px;height:6px;background:#1a1a1a;border-radius:3px;overflow:hidden;flex-shrink:0"><div style="width:${Math.round(100 * s.chance)}%;height:100%;background:${s.chance >= 0.5 ? '#5a9a5a' : '#c8a830'}"></div></div>
+        <span style="width:150px;flex-shrink:0;color:#aaa;font-variant-numeric:tabular-nums">${_pct(s.chance)} of tasks doable</span>
+        <span style="color:#666">${s.rows.filter(r => r.assignable && r.ts.doable).length}/${s.rows.filter(r => r.assignable).length} tasks</span>`
+        : `<span style="color:#c85040">locked: </span><span>${_slWhyHtml(s.st.why)}</span>`}</div>`).join('');
+    const unl = _slayerUnlocks();
+    const unlockHtml = SLAYER.unlocks.map(u => `<label style="display:inline-flex;align-items:center;gap:5px;margin:2px 12px 2px 0;font-size:11px;color:#bbb;cursor:pointer">
+      <input type="checkbox" ${unl.has(u) ? 'checked' : ''} data-u="${escHtml(u)}" onchange="toggleSlayerUnlock(this.dataset.u)"> ${escHtml(u)}</label>`).join('');
+    pane.innerHTML = `<div style="padding:20px 24px;max-width:860px">
+      <h1 style="font-size:18px;color:#e8c97a;margin:0 0 4px">Slayer</h1>
+      <div style="color:#666;font-size:11px;margin-bottom:12px">Slayer ${getLevel('Slayer')} · Combat ${getCombatLevel()}${usable.length ? ` · best master for you: ${_slLink('master', usable[0].m.name)} (${_pct(usable[0].chance)} of tasks doable)` : ''}</div>
+      ${box('Masters', 'Chance a task they give you is doable (you own a monster card that counts, can reach it, and have the equipment)', masterRows)}
+      ${box('Slayer reward unlocks', 'Tick the unlocks you have bought; tasks that need one are only counted once ticked', unlockHtml || '<span style="color:#555">None found</span>')}
+    </div>`;
+    return;
+  }
+  if (selectedSlayer.kind === 'master') {   // ── Master ──
+    const m = SLAYER.masters.find(x => x.name === selectedSlayer.name);
+    if (!m) return;
+    const s = _slMasterSummary(m);
+    const totalAssign = s.assignW || 1;
+    const rows = [...s.rows].sort((a, b) => (b.assignable - a.assignable) || (b.e.weight - a.e.weight));
+    const rowHtml = rows.map(r => {
+      const st = !r.assignable ? ['#555', '—', 'not assigned yet'] : r.ts.doable ? ['#76c442', '✓', 'doable'] : ['#c85040', '✗', r.ts.equipMissing.length && r.ts.opts.some(o => o.ok) ? 'missing equipment' : 'no monster you can kill'];
+      const u = r.e.unlock || {};
+      const lock = !r.assignable ? [u.slayer && `Slayer ${u.slayer}`, u.combat && `Combat ${u.combat}`, ...(u.quests || []), u.ability && `unlock: ${u.ability}`].filter(Boolean).join(', ') : '';
+      return `<tr style="border-top:1px solid #1a1a1a">
+        <td style="padding:4px 6px;color:${st[0]}">${st[1]}</td>
+        <td style="padding:4px 6px">${_slLink('task', r.e.task)}</td>
+        <td style="padding:4px 6px;color:#888;font-variant-numeric:tabular-nums">${r.e.weight}</td>
+        <td style="padding:4px 6px;color:#888;font-variant-numeric:tabular-nums">${r.assignable ? _pct(r.e.weight / totalAssign) : ''}</td>
+        <td style="padding:4px 6px;color:#666">${escHtml(r.e.amount || '')}</td>
+        <td style="padding:4px 6px;color:${st[0]};font-size:10px">${escHtml(st[2])}${lock ? ` <span style="color:#666">(${escHtml(lock)})</span>` : ''}</td></tr>`;
+    }).join('');
+    const req = m.requirements || {};
+    pane.innerHTML = `<div style="padding:20px 24px;max-width:860px">
+      <h1 style="font-size:18px;color:#e8c97a;margin:0 0 4px">${escHtml(m.name)} ${wikiLink(m.name)}</h1>
+      <div style="color:#666;font-size:11px;margin-bottom:8px">${[req.combat && `Combat ${req.combat}`, req.slayer && `Slayer ${req.slayer}`, ...(req.quests || [])].filter(Boolean).join(' · ') || 'No requirements'}${m.replacedBy ? ` · replaced by ${escHtml(m.replacedBy.card)} after ${escHtml(m.replacedBy.quest)}` : ''}${m.wilderness ? ' · all tasks in the Wilderness' : ''}</div>
+      ${s.st.ok ? '' : `<div style="color:#c85040;font-size:11px;margin-bottom:8px">Locked: ${_slWhyHtml(s.st.why)}</div>`}
+      <div style="margin-bottom:10px">${_progressBar('Doable task weight', { done: s.doW, total: s.assignW }, '#c8a830', 'Weight of doable tasks out of tasks this master can give you')}</div>
+      ${m.notes ? `<div style="color:#888;font-size:11px;line-height:1.5;margin:4px 0 10px;padding:6px 10px;border-left:2px solid #3a3010;background:#12100a">${escHtml(m.notes)}</div>` : ''}
+      <table style="border-collapse:collapse;width:100%;font-size:11px">
+        <tr style="color:#666;text-align:left"><th></th><th style="padding:4px 6px">Task</th><th style="padding:4px 6px">Weight</th><th style="padding:4px 6px">Chance</th><th style="padding:4px 6px">Amount</th><th style="padding:4px 6px">Status</th></tr>
+        ${rowHtml}</table>
+    </div>`;
+    return;
+  }
+  // ── Task ──
+  const name = selectedSlayer.name, ts = _slTaskStatus(name), t = ts.t;
+  const monRows = ts.opts.map(o => {
+    const img = o.card ? _cardImg(o.card) : '';
+    const locs = Object.entries(o.mon.locationAccess || {});
+    const locHtml = locs.map(([l, a]) => { const g = (o.mon.locationGates || {})[l]; const ok = _slLocOk(a, g);
+      const need = [a && (a === 'excluded' ? 'kills here don’t count' : 'reach ' + (accessRoutes[a]?.label || a)), ...((g && g.quests) || []), g && g.cards && 'one of: ' + g.cards.join(', '),
+        ...Object.entries((g && g.skills) || {}).map(([sk, lv]) => sk + ' ' + lv), g && g.note].filter(Boolean).join(' · ');
+      return `<span style="color:${ok ? '#7ab07a' : '#a05050'};${g ? 'border-bottom:1px dotted #555' : ''}" title="${escHtml(need || 'No access requirement')}">${escHtml(l)}</span>`; }).join('<span style="color:#444"> · </span>');
+    const monEq = (o.mon.equipment || []).map(r => `<span style="color:${_reqMet(r) ? '#7ab07a' : '#a05050'}">${_reqMet(r) ? '✓' : '✗'} ${escHtml(r.label)}</span>`).join(' · ');
+    const lvl = o.mon.slayer ? ` <span style="font-size:10px;color:${getLevel('Slayer') >= o.mon.slayer ? '#7ab07a' : '#a05050'}">Slayer ${o.mon.slayer}</span>` : '';
+    return `<div class="req-row" style="align-items:flex-start"><span class="req-icon ${o.ok ? 'ok' : 'fail'}">${o.ok ? '✓' : '✗'}</span>
+      ${img ? `<img src="${img}" style="width:16px;height:16px;object-fit:contain;image-rendering:pixelated;flex-shrink:0" onerror="this.style.display='none'">` : ''}
+      <div style="flex:1"><span class="req-label" ${o.card ? `style="cursor:pointer" data-nav="${escHtml(o.card)}" data-nav-type="monster" onclick="_navToCard(this)"` : ''}>${escHtml(o.card || o.mon.name)}</span>
+${lvl}
+        ${locHtml ? `<div style="font-size:10px;margin-top:2px">${locHtml}</div>` : ''}${monEq ? `<div style="font-size:10px;margin-top:2px">needs: ${monEq}</div>` : ''}
+        ${o.boss ? `<div style="font-size:10px;margin-top:2px"><span style="cursor:pointer;color:#c8a060;text-decoration:underline dotted" data-boss="${escHtml(o.boss.name)}" onclick="showBoss(this.dataset.boss)">open ${escHtml(o.boss.name)} on the Bosses tab</span></div>` : ''}</div>
+      <span class="req-note">${o.ok ? 'can kill' : o.reason}</span>${o.card ? _rowWishStar(o.card, isOwned(o.card)) : ''}</div>`;
+  }).join('');
+  const eqRows = (t.equipment || []).map(r => _questReqRow(r).html).join('');
+  const assigned = SLAYER.masters.flatMap(m => (m.tasks || []).filter(e => e.task === name).map(e => ({ m, e })));
+  const masterRows = assigned.map(({ m, e }) => `<div style="display:flex;gap:10px;padding:3px 0;font-size:11px">
+    <span style="width:120px">${_slLink('master', m.name)}</span><span style="width:70px;color:#888">weight ${e.weight}</span>
+    <span style="width:110px;color:#888">${escHtml(e.amount || '')}</span><span style="color:${_slAssignable(e) ? '#7ab07a' : '#666'}">${_slAssignable(e) ? 'can be assigned' : 'not yet: ' + escHtml([e.unlock?.slayer && `Slayer ${e.unlock.slayer}`, e.unlock?.combat && `Combat ${e.unlock.combat}`, ...(e.unlock?.quests || []), e.unlock?.ability && `unlock ${e.unlock.ability}`].filter(Boolean).join(', '))}</span></div>`).join('');
+  pane.innerHTML = `<div style="padding:20px 24px;max-width:860px">
+    <h1 style="font-size:18px;color:#e8c97a;margin:0 0 4px">${escHtml(name)} ${t.page ? wikiLink(t.page) : ''}</h1>
+    <div style="font-size:11px;margin-bottom:10px;color:${ts.doable ? '#76c442' : '#c85040'}">${ts.doable ? '✓ Doable' : '✗ Not doable yet'}${t.slayer ? ` · <span style="color:#888">Slayer ${t.slayer}</span>` : ''}${t.combat ? ` · <span style="color:#888">Combat ${t.combat} to be assigned</span>` : ''}</div>
+
+    <div class="section"><div class="section-header">Monsters that count <span style="font-size:10px;color:#555;font-weight:normal">(any one)</span></div><div style="margin-top:8px">${monRows || '<span style="color:#555">None listed</span>'}</div></div>
+    ${eqRows ? `<div class="section"><div class="section-header">Slayer equipment</div><div style="margin-top:8px">${eqRows}</div></div>` : ''}
+    <div class="section"><div class="section-header">Assigned by</div><div style="margin-top:8px">${masterRows}</div></div>
+  </div>`;
+}
+
 // Bosses home panel (no boss selected): status counts, closest bosses, top blockers, most-needed cards
 function _renderBossHome() {
   const pane = document.getElementById('boss-detail-pane');
@@ -7520,6 +7380,13 @@ function showBoss(name) {
 
 // renderBossing kept as alias for refresh callers (e.g. switchCollection)
 // Refreshes the boss list (and detail pane if a boss is selected) when the bosses tab is active.
+function showBossOverview() {
+  pushHistoryEntry();
+  selectedBoss = null;
+  renderBossList();
+  _renderBossHome();
+}
+
 function renderBossing() {
   if (!document.getElementById('boss-list-scroll')) return; // not on bosses tab — nothing to refresh
   renderBossList();
@@ -7605,8 +7472,8 @@ function _buildDiaryByCard() {
 }
 
 // ── Dev check: card/quest names in hand-written data ───────────────────────
-// Runs after data load. Warns (console only) for any name in SLAYER_TASKS,
-// SLAYER_CARD_GATES, BOSS_DATA or DIARY_DATA that isn't a TCG card, and any
+// Runs after data load. Warns (console only) for any name in slayer.json,
+// bosses.json or DIARY_DATA that isn't a TCG card, and any
 // quest name missing from quests.json (would never match completedQuests).
 // Diary `npc` fields are skipped — many task NPCs intentionally aren't cards.
 function _validateDataNames() {
@@ -7614,12 +7481,9 @@ function _validateDataNames() {
   const bad = [];
   const card = (n, where) => { if (!_cardInfo(n)) bad.push(`card "${n}" (${where})`); };
   const quest = (q, where) => { if (!(q in questsData)) bad.push(`quest "${q}" (${where})`); };
-  for (const [c, g] of Object.entries(SLAYER_CARD_GATES)) {
-    card(c, 'SLAYER_CARD_GATES');
-    (g.quests || []).forEach(q => quest(q, 'SLAYER_CARD_GATES ' + c));
-  }
-  for (const [m, v] of Object.entries(SLAYER_TASKS))
-    for (const t of v.tasks) t.cards.forEach(c => card(c, `SLAYER_TASKS ${m}/${t.task}`));
+  for (const m of SLAYER.masters) (m.requirements?.quests || []).forEach(q => quest(q, `slayer.json master ${m.name}`));
+  for (const [tn, t] of Object.entries(SLAYER.tasks))
+    for (const r of (t.equipment || [])) (r.cards || []).forEach(c => card(c, `slayer.json ${tn} equipment`));
   for (const b of BOSS_DATA) {
     [...(b.requirements || []), ...(b.lootRequirements || [])].filter(r => !r.group && !r.tool)  // shared lists are checked where defined
       .forEach(r => (r.cards || []).forEach(c => card(c, `bosses.json ${b.name}`)));
@@ -7722,7 +7586,7 @@ function renderDiaryList() {
   const q = diarySearch.toLowerCase();
   const filtered = DIARY_DATA.filter(a => !q || a.name.toLowerCase().includes(q));
 
-  let html = '';
+  let html = `<div class="diary-item${!selectedDiary ? ' selected' : ''}" onclick="showDiaryOverview()"><div style="font-size:12px;color:#e8c97a">Overview</div></div>`;
   for (const area of filtered) {
     const isSel = area.name === selectedDiary;
 
@@ -7747,7 +7611,7 @@ function renderDiaryList() {
     </div>`;
   }
 
-  if (!html) html = `<div style="padding:16px;color:#444;font-size:12px">No diaries match.</div>`;
+  if (!filtered.length) html += `<div style="padding:16px;color:#444;font-size:12px">No diaries match.</div>`;
   listEl.innerHTML = html;
 }
 
@@ -8328,6 +8192,13 @@ function showDiaryDetail(name) {
   pane.innerHTML = html;
 }
 
+function showDiaryOverview() {
+  pushHistoryEntry();
+  selectedDiary = null;
+  renderDiaryList();
+  _renderDiaryHome();
+}
+
 function showDiary(name) {
   if (activeTab !== 'diaries') {
     pushHistoryEntry();
@@ -8564,8 +8435,8 @@ function _questReqRow(req) {
         ...Object.entries(rt.skills || {}).map(([sk, l]) => `<span style="color:${getLevel(sk) >= l ? '#7ab07a' : '#a05050'}">${escHtml(sk)} ${l}</span>`),
         ...(rt.areas || []).map(a => { const ok = _accessMet(a); return `<span style="color:${ok ? '#7ab07a' : '#a05050'}" title="Needs access to ${escHtml(accessRoutes[a]?.label || a)}">${ok ? '✓' : '✗'} ${escHtml(accessRoutes[a]?.label || a)}</span>`; })]
         .join('<span style="color:#444"> + </span>');
-      return `<div style="font-size:11px;line-height:1.6;display:flex;gap:6px;align-items:baseline">${sym}
-        <span style="color:${met ? '#9ac09a' : '#888'};white-space:nowrap">${escHtml(rt.label)}${lowMagic}${rt.manual ? ' <span style="color:#555">(not tracked)</span>' : ''}</span>
+      return `<div style="font-size:11px;line-height:1.6;display:flex;flex-wrap:wrap;gap:0 6px;align-items:baseline">${sym}
+        <span style="color:${met ? '#9ac09a' : '#888'};${(rt.label || '').length > 45 ? 'flex-basis:calc(100% - 20px)' : 'white-space:nowrap'}">${escHtml(rt.label)}${lowMagic}${rt.manual ? ' <span style="color:#555">(not tracked)</span>' : ''}</span>
         ${rt.slots.length ? `<span>${slots}</span>` : ''}${conds ? `<span>${rt.slots.length ? '<span style="color:#444"> + </span>' : ''}${conds}</span>` : ''}</div>`;
     }).join('');
   }
@@ -8622,16 +8493,33 @@ function _expandReq(r, questName) {
   r._cards = [...new Set([...(r.cards || []), ...routes.flatMap(rt => rt.slots.map(sl => sl[0]))])];
 }
 function _reqCards(r) { return r._cards || r.cards || []; }
+// Cards an ironman has to craft from other cards: owning the card alone doesn't count,
+// the crafting route (access_routes.json) must be met too — e.g. the Slayer helmet.
+const CRAFTED_CARD_ROUTES = { 'slayer helmet': 'slayer_helmet' };
+function _cardUsable(c) {
+  const route = CRAFTED_CARD_ROUTES[(c || '').toLowerCase()];
+  return route ? _accessMet(route) : isOwned(c);
+}
 // An access area (access_routes.json key) is reachable if any of its routes is met
+// _accessCache: set to a Map during a render pass (Slayer pages check thousands of
+// locations); null = no caching (results always fresh).
+let _accessCache = null;
 function _accessMet(key, seen = new Set()) {
+  if (_accessCache && _accessCache.has(key)) return _accessCache.get(key);
   if (seen.has(key)) return false;
   seen.add(key);
-  return (accessRoutes[key]?.routes || []).some(rt => _routeMet(_expandRoute(rt), seen));
+  const ok = (accessRoutes[key]?.routes || []).some(rt => _routeMet(_expandRoute(rt), seen));
+  if (_accessCache) _accessCache.set(key, ok);
+  return ok;
 }
+const _routeExpandCache = new WeakMap();   // routes never change: expand each once
 function _expandRoute(rt) {
+  if (_routeExpandCache.has(rt)) return _routeExpandCache.get(rt);
   const tmp = { routes: [rt] };
   _expandReq(tmp, 'access');
-  return tmp._routes[0] || { slots: [], manual: true };
+  const out = tmp._routes[0] || { slots: [], manual: true };
+  _routeExpandCache.set(rt, out);
+  return out;
 }
 function _routeMet(rt, seen) {
   // A route with nothing to check (e.g. "walk into the Wilderness") is always open; manual ones never count
@@ -8652,7 +8540,7 @@ const REQ_GROUPS = {
 };
 function _reqMet(r) {
   const cards = r.cards || [];
-  if (cards.length && (r.mode === 'all' ? cards.every(c => isOwned(c)) : cards.some(c => isOwned(c)))) return true;
+  if (cards.length && (r.mode === 'all' ? cards.every(_cardUsable) : cards.some(_cardUsable))) return true;
   if ((r._routes || []).some(_routeMet)) return true;
   return !!r.skillAlt && getLevel(r.skillAlt.skill) >= r.skillAlt.level;
 }
@@ -8825,7 +8713,14 @@ function renderQuestList() {
     for (const [name, data] of miniquests) html += questItemHtml(name, data, completable);
   }
   if (!html) html = `<div style="padding:12px;color:#444;font-size:12px">No quests match this filter.</div>`;
+  html = `<div class="quest-item${!selectedQuest ? ' selected' : ''}" onclick="showQuestOverview()"><span class="quest-name" style="color:#e8c97a">Overview</span></div>` + html;
   scroll.innerHTML = html;
+}
+
+function showQuestOverview() {
+  pushHistoryEntry();
+  selectedQuest = null;
+  _renderTab('questing');
 }
 
 function showQuestDetail(questName, push = true) {
@@ -9130,6 +9025,15 @@ function renderRulesTab() {
       <li>NPCs you must talk to, plus entry items, keys and tools</li>
     </ul>
     <p>Things only needed to <em>collect the loot</em> (e.g. a fishing net for the Tempoross reward pool) are shown in the loot section with their own progress bar. Area access (Morytania, Kourend, the desert…) uses the same shared routes as quests.</p>
+
+    <h3>Slayer</h3>
+    <p>Slayer data comes from the OSRS Wiki: each master's task list (weights, amounts, unlock requirements) and each task's monster variants and locations, checked against the wiki. A master needs their card, their requirements, and you need to be able to reach them. A task from a master is:</p>
+    <ul>
+      <li><em>Assignable</em> once you meet its Slayer and Combat levels, its quests, and any Slayer reward unlock (tick your unlocks on the Slayer tab)</li>
+      <li><em>Doable</em> if you own at least one monster card that counts for it (every variant counts, including boss variants), have that monster's Slayer level, can reach one of its locations (area access plus quest, item and skill gates), and own the required Slayer equipment (e.g. earmuffs, nose peg, rock hammer)</li>
+      <li>Konar's tasks must be done at her location; Krystilia's only count in the Wilderness. On a Boss task, a boss counts when its own Bosses-tab status is Ready</li>
+    </ul>
+    <p>A master's percentage is the share of the tasks they can give you (by weight) that are doable.</p>
 
     <h3>Foils</h3>
     <p>Foil cards are cosmetically shiny but don't grant any extra unlocks. A foil Iron ore card unlocks exactly the same things as a regular Iron ore card.</p>

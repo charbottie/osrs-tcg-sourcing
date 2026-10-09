@@ -1,0 +1,4562 @@
+{
+ "_comment": "Curated Slayer data for generate_slayer.py: master pages, cards and replacements; required equipment per task (filled in by the verification pass); location → access_routes.json key. locationAccess values: an access_routes.json key, 'sailing' (boat-only islands, untracked), or 'excluded' (kills there don't count, e.g. Nightmare Zone).",
+ "masters": [
+  {
+   "name": "Turael",
+   "page": "Turael",
+   "cards": [
+    "Turael"
+   ],
+   "replacedBy": {
+    "card": "Aya",
+    "quest": "While Guthix Sleeps",
+    "note": "Aya replaces him 'during and after the events of While Guthix Sleeps'. Same task list, shared block list."
+   },
+   "access": null,
+   "notes": "No requirements. Tasks give 0 points and can reset another master's task (which also resets your streak)."
+  },
+  {
+   "name": "Spria",
+   "page": "Spria",
+   "cards": [
+    "Spria"
+   ],
+   "requirements": {
+    "quests": [
+     "A Porcine of Interest"
+    ]
+   },
+   "access": null,
+   "notes": "Turael's task list plus sourhogs. 0 points. Block list shared with Turael/Aya. She can't swap tasks like Turael can."
+  },
+  {
+   "name": "Krystilia",
+   "page": "Krystilia",
+   "cards": [
+    "Krystilia"
+   ],
+   "wilderness": true,
+   "access": "wilderness",
+   "notes": "She stands in Edgeville (no gate), but 'tasks assigned by her must be done within the Wilderness'. Hence access=wilderness for her tasks. She ignores combat level, keeps a separate streak counter, gives 25 points per task and drops Larran's keys. F2P NPC (members=No)."
+  },
+  {
+   "name": "Mazchna",
+   "page": "Mazchna",
+   "cards": [
+    "Mazchna"
+   ],
+   "requirements": {
+    "combat": 20,
+    "quests": [
+     "Priest in Peril"
+    ]
+   },
+   "access": "morytania",
+   "notes": "Also needs Priest in Peril to reach Canifis. 6 points per task."
+  },
+  {
+   "name": "Vannaka",
+   "page": "Vannaka",
+   "cards": [
+    "Vannaka"
+   ],
+   "requirements": {
+    "combat": 40
+   },
+   "access": null,
+   "notes": "The Edgeville Dungeon entrance west of the Cooks' Guild needs a brass key; the main trapdoor doesn't. 8 points."
+  },
+  {
+   "name": "Chaeldar",
+   "page": "Chaeldar",
+   "cards": [
+    "Chaeldar"
+   ],
+   "requirements": {
+    "combat": 70,
+    "quests": [
+     "Lost City"
+    ]
+   },
+   "access": "zanaris",
+   "notes": "'The only ways to reach her are to use any fairy ring to go to Zanaris, or entering the shed in the Lumbridge Swamp whilst wielding a Dramen staff or Lunar staff.' 10 points."
+  },
+  {
+   "name": "Konar",
+   "page": "Konar quo Maten",
+   "cards": [
+    "Konar quo Maten"
+   ],
+   "requirements": {
+    "combat": 75
+   },
+   "access": "kourend",
+   "notes": "'Monsters must be killed in specified locations.' She also assigns one location per task (see konarLocations per task) and never sends you into the Wilderness except for boss tasks. Drops brimstone keys. 18 points (20 with the elite Kourend & Kebos Diary)."
+  },
+  {
+   "name": "Nieve",
+   "page": "Nieve",
+   "cards": [
+    "Nieve"
+   ],
+   "replacedBy": {
+    "card": "Steve",
+    "quest": "Monkey Madness II",
+    "note": "'After the events of Monkey Madness II, Steve replaces Nieve as the Slayer Master in the Tree Gnome Stronghold.' Same spot and task list. Before MM2 Steve is a Slayer guardian in the Asgarnian Ice Dungeon, not a master."
+   },
+   "requirements": {
+    "combat": 85
+   },
+   "access": null,
+   "notes": "12 points (15 with the elite Western Provinces Diary)."
+  },
+  {
+   "name": "Duradel",
+   "page": "Duradel",
+   "cards": [
+    "Duradel"
+   ],
+   "replacedBy": {
+    "card": "Kuradal",
+    "quest": "While Guthix Sleeps",
+    "note": "Kuradal (his daughter) replaces him after WGS, with the same requirements."
+   },
+   "requirements": {
+    "combat": 100,
+    "slayer": 50,
+    "quests": [
+     "Shilo Village"
+    ]
+   },
+   "access": null,
+   "notes": "There's no access_routes key for Shilo Village. The Shilo Village quest is the gate ('to be able to enter Shilo Village ... players must have completed the Shilo Village quest'). Reach him via the ladder in the fishing shop south of the river. 15 points."
+  },
+  {
+   "name": "Mortimer",
+   "page": "Mortimer",
+   "cards": [
+    "Mortimer"
+   ],
+   "requirements": {
+    "combat": 100,
+    "slayer": 70,
+    "quests": [
+     "Fallen From Grace"
+    ],
+    "skills": {
+     "Sailing": 62
+    }
+   },
+   "access": "sailing",
+   "notes": "Fallen From Grace only needs to be partially done (to enter Wyrmscraig Cavern). Wyrmscraig 'requires 62 Sailing to access', and Fallen From Grace itself needs 62 Sailing, 60 Crafting, 47 Runecraft, 53 Mining and Pandemonium. He was added 29 July 2026 and only assigns tasks that have superior variants. You pick from 2 tasks (3 after 50 tasks). He gives 0 points unless you take the points 'Mortifier'. Only 2 block slots, skips cost 100 points, and Turael can't skip his tasks. With 99 Slayer the cape bypasses the combat requirement (as it does for every master)."
+  }
+ ],
+ "equipment": {},
+ "locationAccess": {
+  "Ape Atoll": "ape_atoll",
+  "Ape Atoll Dungeon": "ape_atoll",
+  "Kruk's Dungeon": "ape_atoll",
+  "Fossil Island": "fossil_island",
+  "Wyvern Cave": "fossil_island",
+  "Prifddinas": "prifddinas",
+  "Iorwerth Dungeon": "prifddinas",
+  "Mos Le'Harmless": "mos_le_harmless",
+  "Mos Le'Harmless Cave": "mos_le_harmless",
+  "Waterbirth Island": "waterbirth",
+  "Waterbirth Island Dungeon": "waterbirth",
+  "Sophanem": "sophanem",
+  "Zanaris": "zanaris",
+  "Abyssal Area": "abyss",
+  "Abyssal Nexus": "abyss",
+  "Dark Altar": "kourend",
+  "Charred Dungeon": "sailing",
+  "Buccaneers' Laboratory": "sailing",
+  "The Great Conch": "sailing",
+  "Wyrmscraig Cavern": "sailing",
+  "Wyrmscraig": "sailing",
+  "Deepfin Mine": "sailing",
+  "Laguna Aurorae": "sailing",
+  "Mudskipper Sound": "sailing",
+  "Sunbleak Island": "sailing",
+  "Kharazi Strait": "sailing",
+  "Strait of Khazard": "sailing",
+  "Nightmare Zone": "excluded"
+ },
+ "taskOverrides": {
+  "aberrant spectre": {
+   "equipment": [
+    {
+     "label": "Nose peg or Slayer helmet",
+     "type": "item",
+     "cards": [
+      "Nose peg"
+     ],
+     "note": "Also needed for deviant/repugnant spectres",
+     "access": "slayer_helmet"
+    }
+   ],
+   "notes": "Monster list matches the wiki Monster Variants table (aberrant, abhorrent, deviant, repugnant). Konar only sends players to Catacombs/Slayer Tower/Stronghold per her location rules.",
+   "confidence": "high",
+   "wiki": "'A nose peg or Slayer helmet is required when fighting aberrant spectres.' 'Deviant and Repugnant spectres share the requirement of a nose peg or Slayer helmet'",
+   "task": "Aberrant spectres"
+  },
+  "abyssal demon": {
+   "locationGates": [
+    {
+     "location": "Abyssal Area",
+     "quests": [
+      "Fairytale II - Cure a Queen"
+     ],
+     "note": "Reached by fairy ring ALR (the wiki tags it {{Fairycode|alr}}), which needs partial Fairytale II."
+    },
+    {
+     "location": "Abyssal Nexus",
+     "quests": [
+      "Enter the Abyss"
+     ],
+     "note": "Abyssal Sire is in the Abyssal Nexus, reached through the Abyss (Enter the Abyss miniquest). Check that the 'abyss' access key already covers this."
+    },
+    {
+     "location": "Slayer Tower",
+     "quests": [
+      "Priest in Peril"
+     ],
+     "note": "The basement demons are task-only."
+    }
+   ],
+   "notes": "The monster list matches the wiki variant table (Abyssal demon, Catacombs version, Greater abyssal demon superior, Abyssal Sire boss). Duradel's alternative 'Reanimated abyssal' doesn't count under Lottie's rules and isn't in the wiki variant table. No Slayer equipment is required. The teleport anchoring scroll is only recommended.",
+   "confidence": "high",
+   "wiki": "'Players on abyssal demon tasks may also opt to kill the Abyssal Sire boss instead'; variant table: Abyssal demon / Abyssal demon (Catacombs) / Greater abyssal demon / Abyssal Sire.",
+   "task": "Abyssal demons"
+  },
+  "ankou": {
+   "locationGates": [
+    {
+     "location": "Deepfin Mine",
+     "quests": [],
+     "note": "Sailing island (already mapped 'sailing')."
+    }
+   ],
+   "notes": "Monster list matches the wiki Monster variants table (Ankou + Dark Ankou). Dark Ankou only spawn during the Skotizo fight (Catacombs, needs a Dark totem); auto-dying ones after Skotizo dies don't count. Krystilia tasks must be done in the Wilderness; only the Wilderness locations count for her. For Krystilia: Wilderness Slayer Cave, The Forgotten Cemetery. 'Sepulchre of Death' is the bottom floor of the Stronghold of Security, so the two entries are the same place.",
+   "confidence": "high",
+   "wiki": "Monster variants: Ankou (Catacombs, Stronghold of Security: Sepulchre of Death, Stronghold Slayer Cave, Forgotten Cemetery, Wilderness Slayer Cave, Deepfin Mine); Dark Ankou: 'Only summoned during the Skotizo boss fight.'",
+   "task": "Ankou"
+  },
+  "aquanite": {
+   "monstersAdd": [
+    {
+     "name": "Aquanite",
+     "card": "Aquanite",
+     "locations": [
+      "Ynysdail Cavern"
+     ]
+    },
+    {
+     "name": "Elder aquanite",
+     "card": "Elder aquanite",
+     "locations": [
+      "Ynysdail Cavern"
+     ]
+    }
+   ],
+   "locationGates": [
+    {
+     "location": "Ynysdail Cavern",
+     "quests": [],
+     "access": "sailing",
+     "skills": {
+      "Sailing": 73
+     },
+     "note": "Ynysdail 'requires 73 Sailing' and a boat with an adamant keel or better; the rowboat from Gwenith also needs Song of the Elves."
+    }
+   ],
+   "notes": "Generated monster list was empty. Elder aquanite is the superior (Bigger and Badder). Task also needs 73 Sailing (wiki infobox otherreq). Nieve/Duradel need the Lured In unlock (80 pts); Mortimer assigns by default.",
+   "confidence": "high",
+   "wiki": "'Aquanites are Slayer monsters found in the Ynysdail Cavern beneath Ynysdail. They require level 78 Slayer to fight, and Ynysdail requires level 73 Sailing to access.'",
+   "task": "Aquanites"
+  },
+  "araxyte": {
+   "notes": "Monster list matches the wiki (2x Araxyte levels 96/146, Dreadborn Araxyte, Araxxor). Araxxor's minions (Mirrorback/Ruptura/Acidic Araxyte) do NOT count; correctly absent. No required equipment (anti-venom only recommended). Wiki infobox also lists Turael/Spria, but only indirectly via a Spiders task.",
+   "confidence": "high",
+   "wiki": "'Araxxor's minions also spawn here; killing these awards experience but does not count towards the kill count on the slayer task'",
+   "task": "Araxytes"
+  },
+  "aviansie": {
+   "locationGates": [
+    {
+     "location": "God Wars Dungeon",
+     "quests": [
+      "Troll Stronghold"
+     ],
+     "note": "The God Wars Dungeon page says entry 'requires partial completion of Troll Stronghold (defeating Dad) or full completion of the Easy Combat Achievements'. The task infobox says only 'Death Plateau', so otherReq may understate it. A rope is also needed for the first entry."
+    },
+    {
+     "location": "God Wars Dungeon (Armadyl's Eyrie)",
+     "quests": [],
+     "note": "Kree'arra, Flight Kilisa, Wingman Skree and Flockleader Geerin: '70 Ranged, a crossbow and mith grapple required to access' (cards: Crossbow, Mith grapple)."
+    }
+   ],
+   "notes": "The monster list matches the wiki. Aviansie can 'only be harmed with ranged and magic' (or salamanders/halberds), which is a combat-style limit, not a Slayer item. Spiritual warriors/rangers/mages don't count. 'Reanimated aviansie' (Nieve/Duradel alternatives) is excluded. Unlock: 'Watch the birdie' (80 points, needs 60 Agility or 60 Strength).",
+   "confidence": "high",
+   "wiki": "'Kree'arra and his bodyguards can be killed as alternatives for an aviansie task, but not the Armadylean-aligned spiritual warriors...'",
+   "task": "Aviansie"
+  },
+  "bandit": {
+   "notes": "All five counting NPCs already listed (Bandit, Guard Bandit, Speedy Keith, Donny the lad, Black Heather). Krystilia only. All locations are in the Wilderness. No equipment.",
+   "confidence": "high",
+   "wiki": "'Along with Bandits and Guard Bandit, Speedy Keith, Donny the lad, and Black Heather can be killed to satisfy the task.'",
+   "task": "Bandits"
+  },
+  "banshee": {
+   "equipment": [
+    {
+     "label": "Earmuffs or Slayer helmet",
+     "type": "item",
+     "cards": [
+      "Earmuffs"
+     ],
+     "access": "slayer_helmet"
+    }
+   ],
+   "notes": "Monster list matches the wiki variants table. 'Bloodthirsty' banshee variants are Trailblazer Reloaded League only; don't add. Slayer Tower = morytania (Priest in Peril).",
+   "confidence": "high",
+   "wiki": "'Players must wear earmuffs or a Slayer helm when fighting banshees.'",
+   "task": "Banshees"
+  },
+  "basilisk": {
+   "monstersRemove": [
+    "The Jormungand"
+   ],
+   "equipment": [
+    {
+     "label": "Mirror shield or V's shield",
+     "type": "item",
+     "cards": [
+      "Mirror shield"
+     ],
+     "note": "V's shield also works but has no TCG card",
+     "routes": [
+      {
+       "label": "V's shield — no card; made during The Fremennik Exiles (needs Slayer 60, Defence 40 to wield)",
+       "quests": [
+        "The Fremennik Exiles"
+       ],
+       "skills": {
+        "Slayer": 60,
+        "Defence": 40
+       }
+      }
+     ]
+    }
+   ],
+   "locationGates": [
+    {
+     "location": "Jormungand's Prison",
+     "quests": [
+      "The Fremennik Exiles"
+     ],
+     "note": "Eastern basilisk rooms and the basilisk knight rooms are only accessible after The Fremennik Exiles."
+    }
+   ],
+   "notes": "The Jormungand is listed on the wiki but 'Fought during The Fremennik Exiles, can only be fought once', so it should not make the task doable (remove, or keep but never count). Wiki also notes a 20 Defence requirement for the task.",
+   "confidence": "high",
+   "wiki": "'When fighting any basilisk, the player must equip a mirror shield or V's shield'; Jormungand's Prison rooms: 'Only accessible after completion of The Fremennik Exiles.'",
+   "task": "Basilisks"
+  },
+  "bat": {
+   "locationGates": [
+    {
+     "location": "Mos Le'Harmless Cave",
+     "quests": [
+      "Cabin Fever"
+     ],
+     "note": "Also needs a light source (unless the fire of eternal light is built) and a Witchwood icon (card 'Witchwood icon') to protect from cave horrors."
+    },
+    {
+     "location": "Shaman Caves",
+     "quests": [
+      "Legends' Quest"
+     ],
+     "note": "'Requires a certain amount of progress in Legends' Quest.'"
+    },
+    {
+     "location": "Legends' Guild",
+     "quests": [
+      "Legends' Quest"
+     ]
+    },
+    {
+     "location": "Heroes' Guild",
+     "quests": [
+      "Heroes' Quest"
+     ]
+    },
+    {
+     "location": "Slayer Tower",
+     "quests": [
+      "Priest in Peril"
+     ]
+    },
+    {
+     "location": "Haunted Woods",
+     "quests": [
+      "Priest in Peril"
+     ]
+    }
+   ],
+   "notes": "The monster list matches the wiki (Bat, Giant bat, Albino bat, Death wing). Dire bats in Vampyrium do NOT count. No Slayer equipment.",
+   "confidence": "high",
+   "wiki": "'Although they are called bats, dire bats in Vampyrium do not count towards this Slayer task.'",
+   "task": "Bats"
+  },
+  "bear": {
+   "monstersRemove": [
+    "Grizzly bear"
+   ],
+   "monstersAdd": [
+    {
+     "name": "Grizzly bear",
+     "card": "Grizzly bear",
+     "locations": [
+      "Kebos Lowlands",
+      "Aldarin",
+      "Rellekka",
+      "Land's End",
+      "Tree Gnome Village (location)",
+      "Tree Gnome Stronghold",
+      "Ardougne Zoo",
+      "Ardougne",
+      "Isafdar",
+      "Varrock Sewers",
+      "Ferox Enclave",
+      "Dark Warriors' Fortress",
+      "Gloomthorn Trail",
+      "Custodia Pass",
+      "Custodia Mountains"
+     ]
+    }
+   ],
+   "locationGates": [
+    {
+     "location": "Callisto's Den",
+     "quests": [],
+     "note": "Medium Wilderness Diary (or a Callisto boss task) + 50k lair fee."
+    },
+    {
+     "location": "Hunter's End",
+     "quests": [],
+     "note": "Hard Wilderness Diary (or a Callisto boss task; a bear task doesn't bypass it) + 50k lair fee."
+    },
+    {
+     "location": "Escape Caves",
+     "quests": [],
+     "note": "50k Wilderness boss-lair fee (shared)."
+    },
+    {
+     "location": "Isafdar",
+     "quests": [
+      "Regicide"
+     ],
+     "note": "Grizzly bear cubs need partial Regicide."
+    },
+    {
+     "location": "Tyras Camp",
+     "quests": [
+      "Regicide"
+     ],
+     "note": "Partial Regicide."
+    }
+   ],
+   "notes": "The 'Grizzly bear' entry has a bogus location ('Grizzly bear', from 'See Grizzly bear#Locations'); replace it with the Grizzly bear page's locations (Aldarin, Gloomthorn Trail and Custodia are Varlamore; Kebos/Land's End are Kourend; Ferox and Dark Warriors' Fortress are Wilderness). Don't count: Reanimated bear (listed by Spria; the brief excludes reanimated), Angry bear (Tolna's rift), Headless Beast, Crystalline/Corrupted Bear. 'Song of the Elves' is a generated location from the 'West of Lletya (during Song of the Elves)' line, not a place. Krystilia tasks must be done in the Wilderness; only the Wilderness locations count for her. For Krystilia that means Callisto, Artio, Escape Caves grizzlies, and the grizzlies NW of Ferox Enclave / NW of Dark Warriors' Fortress.",
+   "confidence": "high",
+   "wiki": "'Black bears, bear cubs, grizzly bears, grizzly bear cubs, reanimated bears, Artio, and Callisto can all be killed... Angry bears..., the Headless Beast..., and the Crystalline and Corrupted Bear... do not count.' 'Accessing Artio requires completion of the Hard Wilderness Diary, while Callisto only requires the Medium Wilderness Diary.'",
+   "task": "Bears"
+  },
+  "bird": {
+   "monstersAdd": [
+    {
+     "name": "Duckling",
+     "card": "Duckling",
+     "locations": [
+      "Lumbridge",
+      "Farming Guild"
+     ]
+    },
+    {
+     "name": "Evil Chicken",
+     "card": "Evil Chicken",
+     "locations": [
+      "Champions' Guild"
+     ]
+    }
+   ],
+   "monstersRemove": [
+    "Baby Roc"
+   ],
+   "cardFixes": {
+    "Mounted terrorbird": "Mounted terrorbird gnome"
+   },
+   "notes": "Mounted terrorbird's wiki page and card are 'Mounted terrorbird gnome' (ids 2067/2068 match the card). Duckling and Evil Chicken carry the Birds slayer category (Spria's table also lists Duckling). Baby Roc and Giant Roc are one-time My Arm's Big Adventure fights ('can only be fought once'), so drop Baby Roc. Large chicken (Scrambled! quest), the Icyene Graveyard seagull (Sins of the Father) and the NMZ versions are quest-only or NMZ, so leave them out. Per-monster caveats: Chompy birds need Big Chompy Bird Hunting and 'can only be damaged by ogre bow or ogre comp bow with ogre arrows or brutal arrows' (card: 'Comp ogre bow'; there are no cards for ogre bow, ogre arrows or brutal arrows). Vultures 'cannot be harmed by melee while flying' and need desert heat protection. Oomlie birds need partial Legends' Quest (Kharazi Jungle). Crash Island and Ape Atoll birds need Monkey Madness I progress. 'Birds introduced with the Sailing skill do not reward Slayer experience and thus do not count.'",
+   "confidence": "high",
+   "wiki": "Variants table; Sailing birds 'do not count towards task completion'.",
+   "task": "Birds"
+  },
+  "black demon": {
+   "monstersRemove": [
+    "Kolodion"
+   ],
+   "locationGates": [
+    {
+     "location": "Crash Site Cavern",
+     "quests": [
+      "Monkey Madness II"
+     ],
+     "note": "Demonic gorillas; not valid for Krystilia or Konar tasks."
+    },
+    {
+     "location": "God Wars Dungeon",
+     "quests": [
+      "Troll Stronghold"
+     ],
+     "note": "Partial completion of Troll Stronghold plus 60 Strength or 60 Agility; a Rope is needed on the first visit. GWD-related Slayer assignments need Death Plateau. Balfrug Kreeyath is in K'ril's room: 70 Hitpoints for the Zamorak bridge and 40 Zamorak killcount."
+    },
+    {
+     "location": "Mage Arena II",
+     "quests": [
+      "Mage Arena II"
+     ],
+     "note": "Porazdir only appears during the Mage Arena II miniquest or when re-obtaining the imbued Zamorak cape (needs Mage Arena I first)."
+    },
+    {
+     "location": "Charred Dungeon",
+     "quests": [],
+     "note": "Requires 60 Sailing."
+    },
+    {
+     "location": "Catacombs of Kourend",
+     "monster": "Skotizo",
+     "quests": [],
+     "note": "Skotizo's lair needs a Dark totem (card 'Dark totem')."
+    }
+   ],
+   "monsterEquipment": {
+    "Skotizo": [
+     {
+      "label": "Dark totem",
+      "type": "item",
+      "cards": [
+       "Dark totem"
+      ],
+      "note": "Consumed to enter Skotizo's lair"
+     }
+    ]
+   },
+   "notes": "Kolodion (final form) is only fought during the one-time Mage Arena I miniquest, so it should not make the task doable. Rest of the list matches the wiki. Taverley Dungeon black demons need a dusty key or 70 Agility.",
+   "confidence": "medium",
+   "wiki": "Demonic gorilla: 'Requires completion of Monkey Madness II'; Kolodion: 'During Mage Arena I'; Skotizo: 'whose lair requires the use of a dark totem to enter'",
+   "task": "Black demons"
+  },
+  "black dragon": {
+   "locationGates": [
+    {
+     "location": "Evil Chicken's Lair",
+     "quests": [
+      "Recipe for Disaster/Freeing Sir Amik Varze",
+      "Lost City"
+     ],
+     "note": "Partial Freeing Sir Amik Varze, plus a raw chicken offered at the Chicken Shrine in Zanaris (needs Lost City). Babies need a rope too. Cards: Raw chicken, Rope."
+    },
+    {
+     "location": "Corsair Cove Cave",
+     "quests": [
+      "Dragon Slayer II"
+     ]
+    },
+    {
+     "location": "Corsair Cove Dungeon",
+     "quests": [
+      "Dragon Slayer II"
+     ]
+    },
+    {
+     "location": "Mynydd",
+     "quests": [
+      "Song of the Elves"
+     ]
+    },
+    {
+     "location": "Taverley Dungeon",
+     "quests": [],
+     "note": "Dusty key (card 'Dusty key') or 70 Agility for the dragon area. The baby area is task-only."
+    },
+    {
+     "location": "Catacombs of Kourend",
+     "quests": [],
+     "note": "Brutal black dragons need 77 Slayer."
+    }
+   ],
+   "notes": "The monster list matches the wiki (baby, adult, Wilderness Slayer Cave level 247, King Black Dragon, brutal). Dragonfire protection isn't added as required equipment: babies don't breathe fire, and for chromatic dragons Protect from Magic counts as protection. Konar's list mentions the Myths' Guild Dungeon, which isn't in the wiki variant table.",
+   "confidence": "high",
+   "wiki": "'Players can additionally kill baby black dragons, brutal black dragons, or the King Black Dragon as alternatives'; 'Mynydd requires completion of Song of the Elves'; 'The Corsair Cove Cave requires completion of Dragon Slayer II'.",
+   "task": "Black dragons"
+  },
+  "black knight": {
+   "monstersRemove": [
+    "Black Knight"
+   ],
+   "monstersAdd": [
+    {
+     "name": "Black Knight",
+     "card": "Black Knight",
+     "locations": [
+      "Lava Maze",
+      "Bone Yard",
+      "Silk Chasm",
+      "Black Knights' Fortress (location)",
+      "Taverley Dungeon",
+      "Varrock",
+      "Draynor Village",
+      "Jolly Boar Inn"
+     ]
+    }
+   ],
+   "notes": "No task page. Only assigned by Krystilia, so only Wilderness black knights count: Lava Maze and NE of the Bone Yard (Krystilia's table says 'South of Silk Chasm, Lava Maze'). The others (Black Knights' Fortress, Taverley Dungeon, N of Varrock, S of Draynor bank, Jolly Boar Inn) are listed for completeness but are outside the Wilderness. Planner should keep only the Wilderness ones (Lava Maze, Bone Yard/Silk Chasm area).",
+   "confidence": "medium",
+   "wiki": "Black Knight locations: North of Varrock; NE of Bone Yard (Wilderness); South of Draynor Village Bank; Black Knights' Fortress; Jolly Boar Inn; Lava Maze (Wilderness); Taverley Dungeon. Krystilia: 'South of Silk Chasm, Lava Maze'.",
+   "task": "Black knights"
+  },
+  "bloodveld": {
+   "locationGates": [
+    {
+     "location": "Meiyerditch Laboratories",
+     "quests": [
+      "Sins of the Father"
+     ],
+     "note": "Wiki: 'Access to the complete laboratory is granted after the player kills the mutated bloodveld that appears during the Sins of the Father quest' (partial completion)."
+    },
+    {
+     "location": "God Wars Dungeon",
+     "quests": [
+      "Troll Stronghold"
+     ],
+     "note": "Wiki GWD: 'Accessing it requires partial completion of Troll Stronghold (defeating Dad)'; entering the main dungeon also needs 60 Strength (boulder) or 60 Agility (crack); a rope the first time."
+    },
+    {
+     "location": "Wilderness God Wars Dungeon",
+     "quests": [],
+     "access": "wilderness",
+     "note": "In the Wilderness (level 28-32)."
+    },
+    {
+     "location": "Buccaneers' Laboratory",
+     "quests": [],
+     "access": "sailing",
+     "skills": {
+      "Sailing": 76
+     },
+     "note": "'76 Sailing is required to access this area.'"
+    },
+    {
+     "location": "Iorwerth Dungeon",
+     "quests": [
+      "Song of the Elves"
+     ],
+     "access": "prifddinas",
+     "note": "'This location can only be accessed after completion of Song of the Elves.'"
+    }
+   ],
+   "notes": "Monsters match the variants table. The wiki says reanimated bloodveld DO count ('Reanimated bloodveld count towards the task'), which contradicts the brief's assumption. Keep it with card null; it would need Arceuus Expert Reanimation plus an 'Ensouled bloodveld head' card. Insatiable superiors can't spawn from the GWD bloodveld. Krystilia: only the Wilderness GWD counts. Konar's alternatives in the generated data look like locations rather than monsters. Her real list is in konarLocations; she sends you to Mutated Bloodveld at Catacombs, Iorwerth and Meiyerditch. Mortimer assigns Bloodveld (wiki Mortimer task table, 120-180), but the generated assignedBy leaves him out.",
+   "confidence": "high",
+   "wiki": "Meiyerditch: 'only accessible with partial completion of Sins of the Father'; 'reanimated bloodveld count towards the task'.",
+   "task": "Bloodveld",
+   "konarLocations": [
+    "Catacombs of Kourend",
+    "God Wars Dungeon",
+    "Iorwerth Dungeon",
+    "Meiyerditch Laboratories",
+    "Slayer Tower",
+    "Stronghold Slayer Cave"
+   ]
+  },
+  "blue dragon": {
+   "locationGates": [
+    {
+     "location": "Taverley Dungeon",
+     "quests": [],
+     "note": "'requires a dusty key or level 70 Agility' (card 'Dusty key')."
+    },
+    {
+     "location": "Heroes' Guild",
+     "quests": [
+      "Heroes' Quest"
+     ]
+    },
+    {
+     "location": "Ogre Enclave",
+     "quests": [
+      "Watchtower"
+     ]
+    },
+    {
+     "location": "Corsair Cove Dungeon",
+     "quests": [
+      "Dragon Slayer II"
+     ]
+    },
+    {
+     "location": "Ruins of Tapoyauik",
+     "quests": [
+      "The Heart of Darkness"
+     ]
+    },
+    {
+     "location": "Dragon Nest",
+     "quests": [
+      "Children of the Sun"
+     ],
+     "note": "From the Dragon Nest page: 'Completion of Children of the Sun is required to access the Rainforest, but the Nest has no other requirements.'"
+    },
+    {
+     "location": "Ungael",
+     "quests": [
+      "Dragon Slayer II"
+     ],
+     "note": "Vorkath."
+    }
+   ],
+   "notes": "The monster list matches the wiki (baby, adult, brutal, Vorkath). Babies don't breathe fire, so dragonfire protection isn't marked as required. Isle of Souls Dungeon has no quest gate.",
+   "confidence": "high",
+   "wiki": "'The Heroes' Guild requires completion of Heroes' Quest'; 'The Ogre Enclave requires completion of Watchtower'; 'The Corsair Cove Dungeon requires completion of Dragon Slayer II'; 'The Ruins of Tapoyauik requires completion of The Heart of Darkness'.",
+   "task": "Blue dragons"
+  },
+  "bos": {
+   "notes": "Boss tasks pick a specific boss; the generated record has no monsters. Doability should come from the boss list (BOSS_DATA / boss task table on 'Boss task'), not from this record. Not verified per boss in this batch.",
+   "confidence": "low",
+   "task": "Boss"
+  },
+  "brine rat": {
+   "monstersAdd": [],
+   "locationsAdd": {
+    "Brine rat": [
+     "Brine Rat Cavern"
+    ]
+   },
+   "locationGates": [
+    {
+     "location": "Brine Rat Cavern",
+     "quests": [
+      "Olaf's Quest"
+     ],
+     "cards": [
+      "Spade"
+     ],
+     "note": "'Players can enter the dungeon by digging with a spade' near the windswept tree; 'accessible during and after Olaf's Quest'."
+    }
+   ],
+   "notes": "There's no task page. The only monster is the Brine rat (Brine Rat Cavern, east of Rellekka). Assignment needs 47 Slayer, 45 combat and Olaf's Quest.",
+   "confidence": "high",
+   "wiki": "Brine rat: 'They are only assigned to players who have completed Olaf's Quest.'",
+   "task": "Brine rats"
+  },
+  "catablepon": {
+   "monstersAdd": [
+    {
+     "name": "Catablepon",
+     "card": "Catablepon",
+     "locations": [
+      "Stronghold of Security"
+     ]
+    }
+   ],
+   "notes": "No task page. Catablepon (levels 49/64/68) are only in the Stronghold of Security, Pit of Pestilence (3rd level). This entry supplies locations for the existing empty-location monster. No alternatives in Mazchna's table, and no required equipment.",
+   "confidence": "high",
+   "wiki": "'They are found on the third level of the Stronghold of Security.'",
+   "task": "Catablepon"
+  },
+  "cave bug": {
+   "monstersAdd": [
+    {
+     "name": "Cave bug",
+     "card": "Cave bug",
+     "locations": [
+      "Lumbridge Swamp Caves",
+      "Dorgesh-Kaan South Dungeon"
+     ]
+    }
+   ],
+   "equipment": [
+    {
+     "label": "Light source",
+     "type": "item",
+     "cards": [
+      "Candle",
+      "Candle lantern",
+      "Oil lamp",
+      "Oil lantern",
+      "Bullseye lantern",
+      "Mining helmet",
+      "Torch",
+      "Kandarin headgear",
+      "Bruma torch",
+      "Abyssal lantern",
+      "Light orb"
+     ],
+     "note": "Both cave bug dungeons are dark. Candle covers lit candle and Torch covers lit torch (via aliases). Black candle, sapphire lantern and the Firemaking cape have no card."
+    }
+   ],
+   "locationGates": [
+    {
+     "location": "Lumbridge Swamp Caves",
+     "quests": [],
+     "note": "A rope is needed the first time you enter from the swamp (card 'Rope'), or start The Lost Tribe and use a pickaxe for the castle-cellar route. A spiny helmet or Slayer helmet is recommended against wall beasts."
+    },
+    {
+     "location": "Dorgesh-Kaan South Dungeon",
+     "quests": [
+      "Death to the Dorgeshuun"
+     ],
+     "note": "Level 6 and level 96 bugs. Fairy ring AJQ."
+    }
+   ],
+   "notes": "There's no task page. This is the full list from the monster page: one monster (levels 6 and 96), and monstersAdd replaces the generated entry, which had empty locations. Needs 7 Slayer.",
+   "confidence": "high",
+   "wiki": "'They are found in the Lumbridge Swamp Caves, requiring a light source and a rope to enter, and stronger variants can be located in the Dorgesh-Kaan South Dungeon... only be accessed after the completion of the Death to the Dorgeshuun quest'; 'A light source is required for these dungeons'.",
+   "task": "Cave bugs"
+  },
+  "cave crawler": {
+   "locationGates": [
+    {
+     "location": "Ruins of Tapoyauik",
+     "quests": [
+      "The Heart of Darkness"
+     ],
+     "note": "Ruins are only reachable after completing the quest."
+    },
+    {
+     "location": "Dorgesh-Kaan South Dungeon",
+     "quests": [
+      "Death to the Dorgeshuun"
+     ],
+     "note": "Dark: needs a light source (cards: Candle, Torch, Oil lamp, Candle lantern, Oil lantern, Bullseye lantern, Mining helmet, Kandarin headgear, Bruma torch, Abyssal lantern) and a tinderbox to light most of them."
+    },
+    {
+     "location": "Lumbridge Swamp Caves",
+     "quests": [],
+     "note": "Dark: needs a light source (cards: Candle, Torch, Oil lamp, Candle lantern, Oil lantern, Bullseye lantern, Mining helmet, Kandarin headgear, Bruma torch, Abyssal lantern; plus Tinderbox) and a Rope the first time. Open flames can explode, so a lantern is safer."
+    }
+   ],
+   "notes": "Monster list correct (Cave crawler + superior Chasm Crawler). Fremennik Slayer Dungeon has no quest or item gate, so the task itself needs no equipment.",
+   "confidence": "high",
+   "wiki": "Ruins of Tapoyauik cave crawlers: 'Requires completion of The Heart of Darkness in order to access.' Lumbridge Swamp Caves: 'The caves require a light source.' Dorgesh-Kaan South Dungeon: 'Entry to the dungeon requires completion of the Death to the Dorgeshuun quest. The dungeon is dark.'",
+   "task": "Cave crawlers"
+  },
+  "cave horror": {
+   "notes": "Monsters match (Cave horror + Cave abomination superior). No hard equipment gate. The wiki says 'You must wear a witchwood icon to fight cave horrors at melee distance', but the special attack 'can be completely mitigated by using Protect from Melee, or using a safespot'. A light source is needed 'to fight them without taking additional damage, unless a fire of eternal light is lit'. If you want a soft gate: {label:'Witchwood icon or Slayer helmet', cards:['Witchwood icon','Slayer helmet']}. Light source cards: Candle lantern, Oil lantern, Bullseye lantern, Oil lamp, Torch, Mining helmet. Mos Le'Harmless = mos_le_harmless (Cabin Fever).",
+   "confidence": "high",
+   "wiki": "'Cave horrors are found exclusively in the Mos Le'Harmless Cave, requiring completion of Cabin Fever.'",
+   "task": "Cave horrors"
+  },
+  "cave kraken": {
+   "locationGates": [
+    {
+     "location": "Kraken Cove",
+     "quests": [],
+     "note": "No quest; task-only area."
+    }
+   ],
+   "notes": "List matches the wiki (Cave kraken, Kraken). No required equipment (fishing explosives only recommended). Wiki infobox also lists 50 Magic as a skill requirement for the task.",
+   "confidence": "high",
+   "wiki": "skillreq = Slayer 87, Magic 50; 'Fishing explosives are recommended to initiate the fight quickly'",
+   "task": "Cave kraken"
+  },
+  "cave slime": {
+   "monstersAdd": [
+    {
+     "name": "Cave slime",
+     "card": "Cave slime",
+     "locations": [
+      "Lumbridge Swamp Caves",
+      "Dorgesh-Kaan South Dungeon"
+     ]
+    }
+   ],
+   "equipment": [
+    {
+     "label": "Light source",
+     "type": "item",
+     "cards": [
+      "Candle",
+      "Candle lantern",
+      "Oil lamp",
+      "Oil lantern",
+      "Bullseye lantern",
+      "Mining helmet",
+      "Torch",
+      "Kandarin headgear",
+      "Bruma torch",
+      "Abyssal lantern",
+      "Light orb"
+     ],
+     "note": "Exposed flames (candle, torch) can explode in the northern swamp-cave room, so a covered lantern is safer. Candle covers lit candle and Torch covers lit torch via aliases."
+    }
+   ],
+   "locationGates": [
+    {
+     "location": "Lumbridge Swamp Caves",
+     "quests": [],
+     "note": "A rope is needed the first time you enter (card 'Rope')."
+    },
+    {
+     "location": "Dorgesh-Kaan South Dungeon",
+     "quests": [
+      "Death to the Dorgeshuun"
+     ],
+     "note": "Dark dungeon: 'requires the player to have a light source'."
+    }
+   ],
+   "notes": "There's no task page. Full list: Cave slime (level 23) only, and monstersAdd replaces the generated entry, which had empty locations. Needs 17 Slayer. Poison protection is advised but not required.",
+   "confidence": "high",
+   "wiki": "'Cave slimes are found in two rooms of the Lumbridge Swamp Caves. A rope is needed if you have not entered the dungeon before. A light source is also required'; LocLine: Dorgesh-Kaan South Dungeon (AJQ).",
+   "task": "Cave slime"
+  },
+  "chaos druid": {
+   "monstersRemove": [
+    "Chaos druid"
+   ],
+   "monstersAdd": [
+    {
+     "name": "Chaos druid",
+     "card": "Chaos druid",
+     "locations": [
+      "Edgeville Dungeon",
+      "Taverley Dungeon",
+      "Chaos Druid Tower",
+      "Yanille Agility Dungeon",
+      "Slepe"
+     ]
+    },
+    {
+     "name": "Elder Chaos druid",
+     "card": "Elder Chaos druid",
+     "locations": [
+      "Chaos Temple (Wilderness)"
+     ]
+    }
+   ],
+   "notes": "No task page. Krystilia only, so only Wilderness spots count: Edgeville Dungeon (Wilderness part) and the Chaos Temple (Wilderness), where Elder Chaos druids count (Krystilia's table lists them under Chaos druids). Taverley Dungeon, Chaos Druid Tower (46 Thieving), Yanille Agility Dungeon (57 Agility or 82 Thieving) and Slepe church are outside the Wilderness.",
+   "confidence": "medium",
+   "wiki": "Krystilia table: 'Chaos druids | Edgeville Dungeon, Chaos Temple (Elder Chaos druids)'. Chaos druid locations: Top of Slepe Church; Chaos Druid Tower; Edgeville Dungeon (Wilderness); Taverley Dungeon; Yanille Agility Dungeon.",
+   "task": "Chaos druids"
+  },
+  "cockatrice": {
+   "monstersAdd": [
+    {
+     "name": "Cockathrice",
+     "card": "Cockathrice",
+     "locations": [
+      "Fremennik Slayer Cave"
+     ]
+    }
+   ],
+   "locationsAdd": {
+    "Cockatrice": [
+     "Fremennik Slayer Cave"
+    ],
+    "Moonlight Cockatrice": [
+     "Neypotzli"
+    ]
+   },
+   "equipment": [
+    {
+     "label": "Mirror shield or V's shield",
+     "type": "item",
+     "cards": [
+      "Mirror shield"
+     ],
+     "note": "V's shield has no card.",
+     "routes": [
+      {
+       "label": "V's shield — no card; made during The Fremennik Exiles (needs Slayer 60, Defence 40 to wield)",
+       "quests": [
+        "The Fremennik Exiles"
+       ],
+       "skills": {
+        "Slayer": 60,
+        "Defence": 40
+       }
+      }
+     ]
+    }
+   ],
+   "locationGates": [
+    {
+     "location": "Neypotzli",
+     "quests": [
+      "Perilous Moons"
+     ],
+     "access": "varlamore",
+     "note": "Wiki Neypotzli: 'Accessing Neypotzli requires having gained access during the Perilous Moons quest' (partial)."
+    }
+   ],
+   "notes": "There's no task page. Cockatrice and its superior Cockathrice are in the Fremennik Slayer Cave; Moonlight Cockatrice is in Neypotzli (partial Perilous Moons). The Bloodthirsty Cockathrice is league-only. Cockatrice tasks also need 20 Defence to wield a mirror shield.",
+   "confidence": "high",
+   "wiki": "'A mirror shield or V's shield is required to defend against their piercing gaze ... players who do not meet this requirement will not be assigned them as a task.'",
+   "task": "Cockatrice"
+  },
+  "cow": {
+   "locationGates": [
+    {
+     "location": "Lumbridge cow field",
+     "monster": "Brutus",
+     "quests": [
+      "The Ides of Milk"
+     ],
+     "note": "Gate applies to Brutus only, not the cows."
+    }
+   ],
+   "notes": "List matches the wiki (Cow, Cow calf, Brutus, Buffalo, Undead cow). Undead cow is at Alice's farm (Priest in Peril / Morytania).",
+   "confidence": "high",
+   "wiki": "Brutus: 'Boss variant. Requires completion of The Ides of Milk.'",
+   "task": "Cows"
+  },
+  "crab": {
+   "locationGates": [
+    {
+     "location": "Mogre Camp",
+     "quests": [
+      "Recipe for Disaster/Freeing Pirate Pete"
+     ],
+     "note": "Partial completion."
+    },
+    {
+     "location": "Fossil Island",
+     "quests": [
+      "Bone Voyage"
+     ]
+    },
+    {
+     "location": "Ruins of Tapoyauik",
+     "quests": [
+      "The Heart of Darkness"
+     ],
+     "note": "Partial completion."
+    },
+    {
+     "location": "Haunted Woods",
+     "quests": [
+      "Priest in Peril"
+     ]
+    },
+    {
+     "location": "Slepe",
+     "quests": [
+      "Priest in Peril"
+     ]
+    }
+   ],
+   "notes": "The monster list matches the wiki variant table. The Gemstone Crab and hermit crabs do NOT count. No Slayer equipment.",
+   "confidence": "high",
+   "wiki": "'The Gemstone Crab and hermit crabs do not count for a Slayer task.' Crab: 'Requires partial completion of Recipe for Disaster/Freeing Pirate Pete'; Ammonite Crab: 'Requires completion of Bone Voyage'.",
+   "task": "Crabs"
+  },
+  "crawling hand": {
+   "locationGates": [
+    {
+     "location": "Meiyerditch Laboratories",
+     "quests": [
+      "Sins of the Father"
+     ],
+     "note": "Full lab access after killing the mutated bloodveld during Sins of the Father (first visited in Darkness of Hallowvale)."
+    }
+   ],
+   "notes": "Monster list correct (Crawling Hand + superior Crushing hand). Slayer Tower needs Priest in Peril, which the 'morytania' mapping already covers.",
+   "confidence": "high",
+   "wiki": "Meiyerditch Laboratories: 'Access to the complete laboratory is granted after the player kills the mutated bloodveld that appears during the Sins of the Father quest.'",
+   "task": "Crawling hands"
+  },
+  "crocodile": {
+   "locationsAdd": {
+    "Crocodile": [
+     "Kharidian Desert (River Elid)",
+     "Ruins of Unkah",
+     "Ruins of Ullek",
+     "Sophanem"
+    ]
+   },
+   "locationGates": [
+    {
+     "location": "Kharidian Desert",
+     "quests": [],
+     "access": "desert",
+     "note": "Desert heat: 'Bring waterskins to avoid dying of thirst' (not needed in the grassy area by the river near Ruins of Ullek). The Sophanem spot needs Icthlarin's Little Helper."
+    }
+   ],
+   "notes": "There's no task page. Vannaka only (combat 50). The Tombs of Amascut crocodile is a separate raid NPC and doesn't count.",
+   "confidence": "high",
+   "wiki": "'Crocodiles are found in the Kharidian Desert south of Pollnivneach on either side of the River Elid.'",
+   "task": "Crocodiles"
+  },
+  "custodian stalker": {
+   "notes": "A task page does exist, at the singular title 'Slayer task/Custodian stalker' (the generator probably looked up the plural). The generated monster 'Slayer task/Custodian stalker' is a parsing artifact, so remove it. Slayer levels: juvenile 54, mature 67, elder 76. Ancient Custodian is the superior, spawned only by elders. 'Strange creature' is the quest-only variant and doesn't count. Masters: the wiki infobox lists Chaeldar (70-130), Nieve (110-170) and Mortimer, but the generated assignedBy has only Mortimer. Check Chaeldar and Nieve.",
+   "monsterSlayer": {
+    "Mature custodian stalker": 67,
+    "Elder custodian stalker": 76
+   },
+   "confidence": "high",
+   "wiki": "Infobox: skillreq Slayer 54, otherreq Shadows of Custodia, chaeldar = 70-130, nieve = 110-170, mortimer = 80-120. Variants: Juvenile / Mature / Elder custodian stalker.",
+   "task": "Custodian stalkers",
+   "monstersRemove": [
+    "Slayer task/Custodian stalker"
+   ],
+   "monstersAdd": [
+    {
+     "name": "Juvenile custodian stalker",
+     "card": "Juvenile custodian stalker",
+     "locations": [
+      "Stalker Den"
+     ]
+    },
+    {
+     "name": "Mature custodian stalker",
+     "card": "Mature custodian stalker",
+     "locations": [
+      "Stalker Den"
+     ]
+    },
+    {
+     "name": "Elder custodian stalker",
+     "card": "Elder custodian stalker",
+     "locations": [
+      "Stalker Den"
+     ]
+    },
+    {
+     "name": "Ancient Custodian",
+     "card": "Ancient Custodian",
+     "locations": [
+      "Stalker Den"
+     ]
+    }
+   ],
+   "locationGates": [
+    {
+     "location": "Stalker Den",
+     "quests": [
+      "Shadows of Custodia"
+     ],
+     "note": "'full access to the area and monsters requires its full completion'."
+    }
+   ]
+  },
+  "dagannoth": {
+   "monstersRemove": [
+    "Reanimated Dagannoth",
+    "Dagannoth mother (Nightmare Zone)"
+   ],
+   "monstersAdd": [
+    {
+     "name": "Dagannoth Rex",
+     "card": "Dagannoth Rex",
+     "locations": [
+      "Waterbirth Island Dungeon"
+     ]
+    },
+    {
+     "name": "Dagannoth Supreme",
+     "card": "Dagannoth Supreme",
+     "locations": [
+      "Waterbirth Island Dungeon"
+     ]
+    }
+   ],
+   "locationGates": [
+    {
+     "location": "Jormungand's Prison",
+     "quests": [
+      "The Fremennik Exiles"
+     ],
+     "note": "Dagannoth are there after the quest."
+    },
+    {
+     "location": "Lighthouse",
+     "quests": [
+      "Horror from the Deep"
+     ],
+     "note": "Already a task requirement."
+    }
+   ],
+   "notes": "The wiki's Dagannoth Kings row lists Prime, Rex and Supreme; only Prime was generated. Remove Nightmare Zone and Reanimated versions. Dagannoth fledgelings only spawn in Bardur's room and give no XP, but they do count (Konar).",
+   "confidence": "high",
+   "wiki": "Monster variants row: '[[Dagannoth Prime]] [[Dagannoth Rex]] [[Dagannoth Supreme]] | Deep within the Waterbirth Island Dungeon'. Jormungand's Prison: 'After the quest, it contains dagannoth, basilisk, and basilisk knights.'",
+   "task": "Dagannoth"
+  },
+  "dark beast": {
+   "monstersAdd": [
+    {
+     "name": "Dark beast",
+     "card": "Dark beast",
+     "locations": [
+      "Iorwerth Dungeon",
+      "Mourner Tunnels"
+     ]
+    },
+    {
+     "name": "Night beast",
+     "card": "Night beast",
+     "locations": [
+      "Iorwerth Dungeon",
+      "Mourner Tunnels"
+     ]
+    }
+   ],
+   "locationGates": [
+    {
+     "location": "Iorwerth Dungeon",
+     "quests": [
+      "Song of the Elves"
+     ],
+     "access": "prifddinas"
+    },
+    {
+     "location": "Mourner Tunnels",
+     "quests": [
+      "Mourning's End Part II"
+     ],
+     "note": "Entered from the Mourner HQ basement in West Ardougne with the new key from MEP2 (started); full mourner gear is needed until MEP2 or SotE is complete. After MEP2 a Slayer ring can teleport you in."
+    }
+   ],
+   "konarLocations": [
+    "Mourner Tunnels",
+    "Iorwerth Dungeon"
+   ],
+   "notes": "The generated monster list was empty; the page is 'Slayer task/Dark beast'. Night beast is the superior. The Deadman versions don't count.",
+   "confidence": "high",
+   "wiki": "Locations: Iorwerth Dungeon, Mourner Tunnels; otherreq 'Started Mourning's End Part II'.",
+   "task": "Dark beasts"
+  },
+  "dark warrior": {
+   "monstersAdd": [
+    {
+     "name": "Dark warrior",
+     "card": "Dark warrior",
+     "locations": [
+      "Dark Warriors' Fortress"
+     ]
+    }
+   ],
+   "notes": "No task page. Only Krystilia assigns this task, so only the Wilderness Dark Warriors' Fortress counts (levels 8 and 145). The Great Kourend dark warriors (south of Shayzien, Lovakengj/Arceuus woods) are not in the Wilderness. This entry supplies locations for the existing empty entry. No equipment needed.",
+   "confidence": "high",
+   "wiki": "'Dark warriors are mainly found in the Dark Warriors' Fortress, a castle in level 12 to 16 Wilderness'",
+   "task": "Dark warriors"
+  },
+  "dog": {
+   "monstersRemove": [
+    "Temple guardian",
+    "Reanimated dog"
+   ],
+   "locationGates": [
+    {
+     "location": "Shadow Dungeon",
+     "quests": [
+      "Desert Treasure I"
+     ],
+     "note": "Needs a Ring of visibility, which has NO card, so this location is effectively locked under Bronzeman."
+    },
+    {
+     "location": "Brimhaven",
+     "quests": [
+      "Heroes' Quest"
+     ],
+     "note": "Only the Black Arm Gang hideout part is gated (partial Heroes' Quest). The other Brimhaven guard dogs are open."
+    },
+    {
+     "location": "Brimhaven Dungeon",
+     "quests": [],
+     "note": "Needs an axe and 875 coins (or a one-time payment)."
+    },
+    {
+     "location": "Kharidian Desert",
+     "quests": [],
+     "note": "Desert heat: bring a waterskin (card 'Waterskin') or desert robes. Recommended, not strictly required."
+    }
+   ],
+   "notes": "Temple guardian: 'Fought during Priest in Peril, can only be fought once', so it can't be farmed for a task. Reanimated dog: excluded under Lottie's rules (no card anyway). Exceptions: hellhounds (incl. Skeleton Hellhound (Vet'ion)), terror dogs and Venators do NOT count. Card names: 'Temple Guardian' and 'Shadow Hound' are correct as already mapped.",
+   "confidence": "high",
+   "wiki": "'Hellhounds of any variety do not count'; 'Terror dogs also do not count'; Shadow hound: 'Requires Ring of visibility and partial completion of Desert Treasure I to access.'",
+   "task": "Dogs"
+  },
+  "drake": {
+   "monstersAdd": [
+    {
+     "name": "Drake",
+     "card": "Drake",
+     "locations": [
+      "Karuulm Slayer Dungeon"
+     ]
+    },
+    {
+     "name": "Guardian Drake",
+     "card": "Guardian Drake",
+     "locations": [
+      "Karuulm Slayer Dungeon"
+     ]
+    }
+   ],
+   "equipment": [
+    {
+     "label": "Boots of stone, Boots of brimstone or Granite boots",
+     "type": "item",
+     "cards": [
+      "Boots of stone",
+      "Boots of brimstone",
+      "Granite boots"
+     ],
+     "note": "Needed in Karuulm Slayer Dungeon, or you take 4 damage per tick. Not needed after the Elite Kourend & Kebos Diary."
+    }
+   ],
+   "locationGates": [
+    {
+     "location": "Karuulm Slayer Dungeon",
+     "quests": [],
+     "note": "Under Mount Karuulm (Kebos, 'kourend' region). Heat protection as in equipment."
+    }
+   ],
+   "notes": "Generated monsters list was empty. Drakes are only in the Karuulm Slayer Dungeon; Guardian Drake is the superior. Dragonfire protection reduces the fireball damage but isn't required (you can step off the tile).",
+   "confidence": "high",
+   "wiki": "'Prior to completion of the elite Kourend & Kebos diary, boots of stone, boots of brimstone or granite boots must be worn within the dungeon to avoid taking constant damage.' 'A superior version of the drake, the guardian drake'.",
+   "task": "Drakes"
+  },
+  "dust devil": {
+   "equipment": [
+    {
+     "label": "Facemask or Slayer helmet",
+     "type": "item",
+     "cards": [
+      "Facemask"
+     ],
+     "access": "slayer_helmet"
+    }
+   ],
+   "locationGates": [
+    {
+     "location": "Smoke Dungeon",
+     "quests": [
+      "Desert Treasure I"
+     ],
+     "access": "desert",
+     "note": "'must have progressed until beginning the search for the four diamonds to enter'"
+    },
+    {
+     "location": "Wilderness Slayer Cave",
+     "quests": [],
+     "access": "wilderness",
+     "note": "Level 25-28 Wilderness. On-task only."
+    }
+   ],
+   "konarLocations": [
+    "Catacombs of Kourend",
+    "Smoke Dungeon"
+   ],
+   "notes": "Monsters match (Dust devil + Choke devil). Krystilia: Wilderness Slayer Cave only. The Bloodthirsty choke devil is league-only.",
+   "confidence": "high",
+   "wiki": "'A facemask (or a Slayer helmet/Slayer helmet (i)) must be equipped to fight dust devils effectively.'",
+   "task": "Dust devils"
+  },
+  "dwarve": {
+   "locationGates": [
+    {
+     "location": "Keldagrim",
+     "quests": [
+      "The Giant Dwarf"
+     ],
+     "note": "Keldagrim (and the White Wolf Mountain tunnels route) needs The Giant Dwarf started. Black Guard (48) and Black Guard Berserker are only here."
+    },
+    {
+     "location": "Falador",
+     "quests": [],
+     "note": "Mining Guild 1st-floor dwarves need 60 Mining; the dwarves near the ladders don't."
+    }
+   ],
+   "notes": "List matches the wiki: Dwarf (several levels), Guard (dwarf), Black Guard, Dwarf gang member, Chaos dwarf, Black Guard Berserker. 'Guard (dwarf)' -> card 'Guard' is correct: the Guard card's variant IDs include 5185-5189, the dwarf guard IDs. The Keldagrim gate is from general game knowledge, not this page (medium).",
+   "confidence": "medium",
+   "wiki": "'Along with standard dwarves, Black Guards, dwarf gang members, chaos dwarves, and Black Guard Berserkers can also be killed for dwarf tasks.'",
+   "task": "Dwarves"
+  },
+  "earth warrior": {
+   "locationGates": [
+    {
+     "location": "Edgeville Dungeon",
+     "quests": [],
+     "note": "The Wilderness part of Edgeville Dungeon. 15 Agility for the monkey bars (task skillreq)."
+    }
+   ],
+   "notes": "Only Earth warrior counts. The Earth Warrior Champion doesn't count.",
+   "confidence": "high",
+   "wiki": "'The Earth Warrior Champion does not count as an Earth Warrior for the purpose of a Slayer task.'",
+   "task": "Earth warriors"
+  },
+  "elve": {
+   "monstersRemove": [
+    "Reanimated elf"
+   ],
+   "locationGates": [
+    {
+     "location": "Lletya",
+     "quests": [
+      "Mourning's End Part I"
+     ],
+     "note": "Needs Mourning's End Part I started / partly done."
+    },
+    {
+     "location": "Mourner Headquarters",
+     "quests": [
+      "Mourning's End Part I"
+     ],
+     "note": "Only the level 108 mourners in the basement count. Available during/after Mourning's End Part I but NOT after Song of the Elves. Full mourner gear needed to avoid being attacked (not strictly required)."
+    },
+    {
+     "location": "Iorwerth Dungeon",
+     "quests": [
+      "Song of the Elves"
+     ],
+     "note": "'prifddinas' mapping covers this."
+    },
+    {
+     "location": "Prifddinas",
+     "quests": [
+      "Song of the Elves"
+     ],
+     "note": "'prifddinas' mapping covers this."
+    }
+   ],
+   "notes": "Monster list otherwise matches the wiki. Mourners at any level except 108 don't count, and neither do the elven traitor, Essyllt or other Song of the Elves quest elves. 'Guard (Prifddinas)' -> card 'Guard' is a generic name; check it's the right card version. Mourner Headquarters' locationAccess is null and should be gated.",
+   "confidence": "high",
+   "wiki": "'Once enough progress is made in Mourning's End Part I, players can kill elves in both Lletya and Mourner Headquarters... only the level 108 mourners downstairs will count'; Mourners: 'only available during and after Mourning's End Part I, but not after Song of the Elves.'",
+   "task": "Elves"
+  },
+  "ent": {
+   "locationsAdd": {
+    "Ent": [
+     "Chaos Temple (Wilderness) - north and east",
+     "Woodcutting Guild (Ent dungeon)"
+    ]
+   },
+   "locationGates": [
+    {
+     "location": "Chaos Temple (Wilderness)",
+     "quests": [],
+     "access": "wilderness"
+    }
+   ],
+   "notes": "There's no task page, and only Krystilia assigns it, so only the Wilderness ents (forests north and east of the Chaos Temple) count. The Woodcutting Guild dungeon ents are outside the Wilderness and don't count for her.",
+   "confidence": "high",
+   "wiki": "'Ents are monsters found in the dungeon beneath the Woodcutting Guild and in the forests north and east of the Chaos Temple.'",
+   "task": "Ents"
+  },
+  "fever spider": {
+   "monstersAdd": [
+    {
+     "name": "Fever spider",
+     "card": "Fever spider",
+     "locations": [
+      "Braindeath Island"
+     ]
+    }
+   ],
+   "equipment": [
+    {
+     "label": "Slayer gloves",
+     "type": "item",
+     "cards": [
+      "Slayer gloves"
+     ],
+     "note": "Strictly only needed while being hit; ranged/magic safespotting can avoid it"
+    }
+   ],
+   "locationGates": [
+    {
+     "location": "Braindeath Island",
+     "quests": [
+      "Rum Deal"
+     ],
+     "note": "Rum Deal must be started."
+    }
+   ],
+   "notes": "No task page. Fever spiders are only in the brewery basement on Braindeath Island. This entry supplies locations for the existing empty entry. Slayer level 42.",
+   "confidence": "high",
+   "wiki": "'found only on Braindeath Island ... players must also have started the Rum Deal quest ... Players must wear slayer gloves while fighting them'",
+   "task": "Fever spiders"
+  },
+  "fire giant": {
+   "monstersAdd": [
+    {
+     "name": "Fire giant",
+     "card": "Fire giant",
+     "locations": [
+      "Brimhaven Dungeon",
+      "Charred Dungeon",
+      "Stronghold Slayer Dungeon",
+      "Deep Wilderness Dungeon",
+      "Karuulm Slayer Dungeon",
+      "Smoke Dungeon",
+      "Waterfall Dungeon",
+      "Isle of Souls Dungeon"
+     ]
+    },
+    {
+     "name": "Fire giant (Catacombs)",
+     "card": "Fire giant",
+     "locations": [
+      "Catacombs of Kourend",
+      "Giants' Den"
+     ]
+    },
+    {
+     "name": "Branda the Fire Queen",
+     "card": "Branda the Fire Queen",
+     "locations": [
+      "Asgarnian Ice Dungeon"
+     ]
+    }
+   ],
+   "locationGates": [
+    {
+     "location": "Waterfall Dungeon",
+     "quests": [
+      "Waterfall Quest"
+     ],
+     "note": "Also needs a rope (card 'Rope')."
+    },
+    {
+     "location": "Smoke Dungeon",
+     "quests": [],
+     "note": "'Requires wearing a Facemask, Slayer Helmet, or Gas mask to avoid taking damage from the dungeon's smoke effect.' Cards: Facemask or Slayer helmet (Gas mask has no card)."
+    },
+    {
+     "location": "Karuulm Slayer Dungeon",
+     "quests": [],
+     "note": "Needs Boots of stone, boots of brimstone or granite boots, unless the Elite Kourend & Kebos Diary is done."
+    },
+    {
+     "location": "Brimhaven Dungeon",
+     "quests": [],
+     "note": "Needs an axe and 875 coins."
+    },
+    {
+     "location": "Charred Dungeon",
+     "quests": [],
+     "note": "'Requires level 60 Sailing to access'. A rope is needed the first time."
+    },
+    {
+     "location": "Stronghold Slayer Dungeon",
+     "quests": [],
+     "note": "Task-only."
+    }
+   ],
+   "notes": "The generated data has NO monsters for this task. The page has no variant table, only location comparisons, so the list above is built from those and the monster page (levels 86 / 104 / 109; the 104/109 versions are in the Catacombs and Giants' Den). Branda the Fire Queen (Royal Titans) counts for every master except Konar and Krystilia, matching the assignedBy alternatives. Krystilia only uses the Deep Wilderness Dungeon. The Crandor and Karamja Dungeon spawn is listed as 'Unreachable', so it's left out. No Slayer equipment for the task as a whole.",
+   "confidence": "high",
+   "wiki": "'Players who are not assigned fire giants from Konar or Krystilia can also choose to kill Branda the Fire Queen, who is one of the two bosses making up the Royal Titans encounter.' Locations: Brimhaven Dungeon, Charred Dungeon, Stronghold Slayer Cave, Deep Wilderness Dungeon, Catacombs of Kourend, Giants' Den, Karuulm Slayer Dungeon, Smoke Dungeon, Waterfall Dungeon, Isle of Souls Dungeon.",
+   "task": "Fire giants"
+  },
+  "flesh crawler": {
+   "monstersRemove": [
+    "Flesh Crawler"
+   ],
+   "monstersAdd": [
+    {
+     "name": "Flesh Crawler",
+     "card": "Flesh Crawler",
+     "locations": [
+      "Stronghold of Security"
+     ]
+    }
+   ],
+   "notes": "No task page. Flesh Crawlers are only in the Stronghold of Security (Catacomb of Famine, level 2). Mazchna only. No equipment.",
+   "confidence": "high",
+   "wiki": "Flesh Crawler location: 'Stronghold of Security: Catacomb of Famine'.",
+   "task": "Flesh crawlers"
+  },
+  "fossil island wyvern": {
+   "monstersRemove": [
+    "Fossil Island Wyvern"
+   ],
+   "locationsAdd": {
+    "Spitting Wyvern": [
+     "Wyvern Cave"
+    ],
+    "Taloned Wyvern": [
+     "Wyvern Cave"
+    ],
+    "Long-tailed Wyvern": [
+     "Wyvern Cave"
+    ],
+    "Ancient Wyvern": [
+     "Wyvern Cave"
+    ]
+   },
+   "equipment": [
+    {
+     "label": "Icy-breath shield (elemental, mind, dragonfire shield/ward or ancient wyvern shield)",
+     "type": "item",
+     "cards": [
+      "Elemental shield",
+      "Mind shield",
+      "Dragonfire shield",
+      "Dragonfire ward",
+      "Ancient wyvern shield"
+     ],
+     "note": "The anti-dragon shield does NOT work. The wiki says the shield 'provides significant protection' rather than 'required', but the task itself is gated on Elemental Workshop I for this reason."
+    }
+   ],
+   "locationGates": [
+    {
+     "location": "Wyvern Cave",
+     "quests": [
+      "Bone Voyage"
+     ],
+     "access": "fossil_island",
+     "note": "The northern cave is task-only (Weve)."
+    }
+   ],
+   "konarLocations": [
+    "Wyvern Cave"
+   ],
+   "notes": "'Fossil Island Wyvern' is the category/location page, not an NPC, so remove it. Ancient Wyvern needs 82 Slayer; the others need 66.",
+   "confidence": "medium",
+   "wiki": "'an elemental, mind, dragonfire ward, dragonfire, or ancient wyvern shield (not including Anti-dragon Shield) provides significant protection against their icy breath.'",
+   "task": "Fossil island wyverns"
+  },
+  "frost dragon": {
+   "monstersAdd": [
+    {
+     "name": "Frost dragon",
+     "card": "Frost dragon",
+     "locations": [
+      "Grimstone Dungeon"
+     ]
+    }
+   ],
+   "locationGates": [
+    {
+     "location": "Grimstone Dungeon",
+     "quests": [],
+     "note": "87 Sailing to reach Grimstone; afterwards also fairy ring DLP. Assigning the task also needs the Sailing requirement."
+    }
+   ],
+   "notes": "No task page. Only frost dragons count: they 'do not count as blue dragons or metal dragons ... and instead have their own task'. Dragonfire protection is recommended (antifire / anti-dragon shield) but the wiki does not call it mandatory, so it isn't added as required equipment. Supplies locations for the existing empty entry.",
+   "confidence": "high",
+   "wiki": "'located in the dungeon on the island of Grimstone, requiring 87 Sailing to access'",
+   "task": "Frost dragons"
+  },
+  "gargoyle": {
+   "equipment": [
+    {
+     "label": "Rock hammer (or rock thrownhammer / granite hammer)",
+     "type": "item",
+     "cards": [
+      "Rock hammer",
+      "Rock thrownhammer",
+      "Granite hammer"
+     ],
+     "note": "Needed to finish a gargoyle at 9 HP or lower. The Gargoyle Smasher perk automates it but still needs the hammer in the inventory. Grotesque Guardians need a brittle key, which drops from gargoyles on task, so the hammer is effectively needed even for the boss route."
+    }
+   ],
+   "locationGates": [
+    {
+     "location": "Slayer Tower",
+     "quests": [
+      "Priest in Peril"
+     ],
+     "note": "Basement gargoyles are task-only. Dusk and Dawn are on the rooftop and need a Brittle key (card 'Brittle key')."
+    }
+   ],
+   "notes": "The monster list matches the wiki (Gargoyle, Marble gargoyle superior, Dawn, Dusk).",
+   "confidence": "high",
+   "wiki": "'To kill a gargoyle, a rock hammer, a rock thrownhammer, or a granite hammer must be used when they reach 9 or lower Hitpoints.'",
+   "task": "Gargoyles"
+  },
+  "ghost": {
+   "monstersRemove": [
+    "Revenants"
+   ],
+   "monstersAdd": [
+    {
+     "name": "Revenant imp",
+     "card": "Revenant imp",
+     "locations": [
+      "Revenant Caves"
+     ]
+    },
+    {
+     "name": "Revenant goblin",
+     "card": "Revenant goblin",
+     "locations": [
+      "Revenant Caves"
+     ]
+    },
+    {
+     "name": "Revenant pyrefiend",
+     "card": "Revenant pyrefiend",
+     "locations": [
+      "Revenant Caves"
+     ]
+    },
+    {
+     "name": "Revenant hobgoblin",
+     "card": "Revenant hobgoblin",
+     "locations": [
+      "Revenant Caves"
+     ]
+    },
+    {
+     "name": "Revenant cyclops",
+     "card": "Revenant cyclops",
+     "locations": [
+      "Revenant Caves"
+     ]
+    },
+    {
+     "name": "Revenant hellhound",
+     "card": "Revenant hellhound",
+     "locations": [
+      "Revenant Caves"
+     ]
+    },
+    {
+     "name": "Revenant demon",
+     "card": "Revenant demon",
+     "locations": [
+      "Revenant Caves"
+     ]
+    },
+    {
+     "name": "Revenant ork",
+     "card": "Revenant ork",
+     "locations": [
+      "Revenant Caves"
+     ]
+    },
+    {
+     "name": "Revenant dark beast",
+     "card": "Revenant dark beast",
+     "locations": [
+      "Revenant Caves"
+     ]
+    },
+    {
+     "name": "Revenant knight",
+     "card": "Revenant knight",
+     "locations": [
+      "Revenant Caves"
+     ]
+    },
+    {
+     "name": "Revenant dragon",
+     "card": "Revenant dragon",
+     "locations": [
+      "Revenant Caves"
+     ]
+    },
+    {
+     "name": "Revenant maledictus",
+     "card": "Revenant maledictus",
+     "locations": [
+      "Revenant Caves"
+     ]
+    }
+   ],
+   "locationGates": [
+    {
+     "location": "Shaman Caves",
+     "quests": [
+      "Legends' Quest"
+     ],
+     "note": "Must be started to enter. Death wings need 50 Agility for the mossy rock, plus lockpick, machete, axe and pickaxe."
+    },
+    {
+     "location": "Death Altar",
+     "quests": [
+      "Mourning's End Part II"
+     ],
+     "note": "Needs a crystal trinket via the Temple of Light, or partial MEP2 via the Underground Pass."
+    },
+    {
+     "location": "Melzar's Maze",
+     "quests": [
+      "Dragon Slayer I"
+     ],
+     "note": "The Maze key comes from the Champions' Guild guildmaster during Dragon Slayer I."
+    },
+    {
+     "location": "Abandoned Mine",
+     "quests": [],
+     "note": "Dark (light source needed). The ghosts are 'Ghost (Abandoned mine)', which start as Haze. Not checked whether they count. Haunted Mine area."
+    },
+    {
+     "location": "Ectofuntus",
+     "quests": [],
+     "note": "Port Phasmatys entry needs Ghosts Ahoy or ectotokens; outside the Ectofuntus is fine with Priest in Peril."
+    },
+    {
+     "location": "Crumbling Tower",
+     "quests": [],
+     "note": "Island off the Isle of Souls (fairy ring BJP, so fairy-ring access helps; also reachable by walking from Isle of Souls)."
+    }
+   ],
+   "notes": "'Revenants' is a group name with no card; replace it with the 12 revenant types, which all have cards. Only Ghost, Forgotten Soul, Tortured soul, Death wing and revenants count; spectres, ghasts, banshees and shades do not. Revenant maledictus is a rare spawn and I assumed it counts (medium). Revenant Caves are in the Wilderness, with a fee/entry but no quest.",
+   "confidence": "high",
+   "wiki": "'Only regular ghosts, forgotten souls, tortured souls, death wings and Revenants can be killed to satisfy the task. Spectres, ghasts, banshees and shades will not count.' Death wings: 'Can only be found in the Shaman Caves, which is unlocked during the Legends' Quest.'",
+   "task": "Ghosts"
+  },
+  "ghoul": {
+   "locationsAdd": {
+    "Ghoul": [
+     "North of Mort Myre Swamp",
+     "South of the Slayer Tower"
+    ]
+   },
+   "locationGates": [
+    {
+     "location": "Mort Myre Swamp / Slayer Tower area",
+     "quests": [
+      "Priest in Peril"
+     ],
+     "access": "morytania"
+    }
+   ],
+   "notes": "There's no task page. The only monster is the Ghoul. Mazchna and Vannaka assign it (combat 25, Priest in Peril).",
+   "confidence": "high",
+   "wiki": "Ghoul locations: 'North of Mort Myre Swamp', 'South of the Slayer Tower'.",
+   "task": "Ghouls"
+  },
+  "goblin": {
+   "monstersAdd": [
+    {
+     "name": "Sergeant Steelwill",
+     "card": "Sergeant Steelwill",
+     "locations": [
+      "God Wars Dungeon"
+     ]
+    },
+    {
+     "name": "Sergeant Grimspike",
+     "card": "Sergeant Grimspike",
+     "locations": [
+      "God Wars Dungeon"
+     ]
+    }
+   ],
+   "locationGates": [
+    {
+     "location": "Dorgeshuun Mines",
+     "quests": [
+      "The Lost Tribe"
+     ],
+     "note": "Requires starting The Lost Tribe (cave goblin miners/guards)."
+    },
+    {
+     "location": "God Wars Dungeon",
+     "quests": [
+      "Troll Stronghold"
+     ],
+     "note": "Partial completion of Troll Stronghold plus 60 Strength or 60 Agility; a Rope is needed on the first visit. GWD-related Slayer assignments need Death Plateau. Sergeants are in General Graardor's room: 40 Bandos killcount, plus 70 Strength and a hammer for the door."
+    },
+    {
+     "location": "Lumbridge Swamp Caves",
+     "quests": [],
+     "note": "A light source is needed."
+    }
+   ],
+   "notes": "Wiki: Sergeant Strongstack, Steelwill and Grimspike all count. Only Strongstack was listed. The other cards were checked and exist. Goblin (Vault of War) -> 'Goblin' and Cave goblin (monster) -> 'Cave goblin' are correct.",
+   "confidence": "high",
+   "wiki": "'Sergeant Strongstack, Sergeant Grimspike, and Sergeant Steelwill count'; Cave goblin miner/guard: 'Requires starting The Lost Tribe'",
+   "task": "Goblins"
+  },
+  "greater demon": {
+   "locationGates": [
+    {
+     "location": "Entrana Dungeon",
+     "quests": [
+      "Lost City"
+     ],
+     "note": "No weapons or armour are allowed on Entrana."
+    },
+    {
+     "location": "Ogre Enclave",
+     "quests": [
+      "Watchtower"
+     ]
+    },
+    {
+     "location": "Ancient Guthix Temple",
+     "quests": [
+      "While Guthix Sleeps"
+     ],
+     "note": "Tormented Demon. 'Requires two combat styles in order to be killed'."
+    },
+    {
+     "location": "Karuulm Slayer Dungeon",
+     "quests": [],
+     "note": "Boots of stone, boots of brimstone or granite boots, unless the Elite Kourend & Kebos Diary is done."
+    },
+    {
+     "location": "Brimhaven Dungeon",
+     "quests": [],
+     "note": "Needs an axe and 875 coins."
+    },
+    {
+     "location": "God Wars Dungeon",
+     "quests": [
+      "Troll Stronghold"
+     ],
+     "note": "Tstanon Karlak and K'ril Tsutsaroth: 'Requires an ecumenical key or 40 Zamorakian follower kill count' (card 'Ecumenical key' is optional). GWD entry needs partial Troll Stronghold."
+    },
+    {
+     "location": "Catacombs of Kourend",
+     "quests": [],
+     "note": "Skotizo needs 1 Dark totem per attempt (card 'Dark totem')."
+    }
+   ],
+   "notes": "The monster list matches the wiki variant table. The generated data has 5 'Greater Demon' rows (one per wiki row), which is fine. The location 'Chasm of Fire ' has a trailing space that should be trimmed. The infobox lists no Slayer requirement and no Slayer items.",
+   "confidence": "high",
+   "wiki": "Skotizo: 'Counts towards kills while on a Greater Demon Slayer Task'; Tormented Demon: 'Requires completion of While Guthix Sleeps to access'.",
+   "task": "Greater demons"
+  },
+  "green dragon": {
+   "notes": "Krystilia only; only Wilderness green dragons count (Corsair Cove ones don't). Both entries are correct (standard + level 88 Wilderness Slayer Cave). Dragonfire protection is strongly advised but I didn't list it as required: the wiki says 'some protection against it should be considered'. If the planner wants it: Anti-dragon shield / Dragonfire shield / Dragonfire ward / Ancient wyvern shield / Antifire potion / Extended antifire / Super antifire potion / Extended super antifire (all valid cards).",
+   "confidence": "high",
+   "wiki": "'As Krystilia is the only Slayer master to assign green dragons, they must be fought in the Wilderness, and other variants outside the Wilderness do not count.'",
+   "task": "Green dragons"
+  },
+  "gryphon": {
+   "equipment": [
+    {
+     "label": "Tortugan shield (Dire gryphon / Shellbane gryphon only)",
+     "type": "item",
+     "cards": [
+      "Tortugan shield"
+     ],
+     "appliesTo": [
+      "Dire gryphon",
+      "Shellbane gryphon"
+     ]
+    }
+   ],
+   "locationGates": [
+    {
+     "location": "The Great Conch",
+     "quests": [
+      "Troubled Tortugans"
+     ],
+     "access": "sailing",
+     "skills": {
+      "Sailing": 45
+     },
+     "note": "Docking needs 45 Sailing and partial Troubled Tortugans."
+    }
+   ],
+   "notes": "Monsters match. The quest gryphon (Troubled Tortugans) doesn't count. Shellbane gryphon is on-task only. Nieve and Duradel also list 45 Sailing in their requirements. You need at least 30 kg worn weight (40 kg for the boss) to avoid knockback damage.",
+   "confidence": "high",
+   "wiki": "'Bringing the tortugan shield is not necessary for normal gryphons, but those who are fighting their superior, the dire gryphon, or the boss are required to use it.'",
+   "task": "Gryphons"
+  },
+  "harpie bug swarm": {
+   "monstersAdd": [
+    {
+     "name": "Harpie Bug Swarm",
+     "card": "Harpie Bug Swarm",
+     "locations": [
+      "Tai Bwo Wannai",
+      "Colossal Wyrm Remains"
+     ]
+    }
+   ],
+   "equipment": [
+    {
+     "label": "Lit bug lantern (equipped)",
+     "type": "item",
+     "cards": [
+      "Unlit bug lantern"
+     ],
+     "note": "'Lit bug lantern' is a version of the 'Unlit bug lantern' card. Lighting it needs 33 Firemaking, and without 33 Firemaking the task isn't assigned."
+    }
+   ],
+   "notes": "No task page. Two spawns: north-east of Tai Bwo Wannai (Karamja) and east of the Colossal Wyrm Remains (Varlamore). Supplies locations for the existing empty entry. Slayer 33.",
+   "confidence": "high",
+   "wiki": "'A lit bug lantern ... is required to damage these monsters (the lantern must be lit and equipped). If you do not have 33 Firemaking, you cannot be assigned harpie bug swarms'",
+   "task": "Harpie bug swarms"
+  },
+  "hellhound": {
+   "locationGates": [
+    {
+     "location": "Cerberus' Lair",
+     "quests": [],
+     "note": "Cerberus 'requires 91 Slayer to be fought' (and a hellhound task)."
+    },
+    {
+     "location": "Karuulm Slayer Dungeon",
+     "quests": [],
+     "note": "Boots of stone, boots of brimstone or granite boots, unless the Elite Kourend & Kebos Diary is done."
+    },
+    {
+     "location": "Buccaneers' Laboratory",
+     "quests": [],
+     "note": "'requiring 76 Sailing to access'."
+    },
+    {
+     "location": "Deserted Keep",
+     "quests": [],
+     "note": "A web blocks the entrance. You need a knife (card 'Knife') or a slash weapon."
+    },
+    {
+     "location": "God Wars Dungeon",
+     "quests": [
+      "Troll Stronghold"
+     ]
+    },
+    {
+     "location": "Stronghold Slayer Dungeon",
+     "quests": [],
+     "note": "Task-only."
+    }
+   ],
+   "notes": "The monster list matches the wiki. Card mapping: Skeleton Hellhound (Vet'ion) and (Calvar'ion) map to card 'Skeleton Hellhound', whose variants include ids 6613 and 12107. Both Greater Skeleton Hellhounds map to 'Greater Skeleton Hellhound'. Exceptions that do NOT count: revenant hellhounds (Revenant task only), Nightmare Zone Skeleton Hellhound and Bouncer, and Bouncer's ghost. The quest versions only count during their quest, so don't add them. No Slayer equipment.",
+   "confidence": "high",
+   "wiki": "'Revenant hellhounds cannot be slain for a Hellhound Slayer task'; Cerberus: 'Boss variant, requires 91 Slayer to be fought.'",
+   "task": "Hellhounds"
+  },
+  "hill giant": {
+   "monstersRemove": [
+    "Reanimated giant"
+   ],
+   "locationGates": [
+    {
+     "location": "Warriors' Guild",
+     "quests": [],
+     "note": "Needs 130 combined Attack+Strength (or 99 in one) and Warrior guild tokens (card 'Warrior guild token'). Basement cyclopes also need a rune defender shown."
+    },
+    {
+     "location": "God Wars Dungeon",
+     "quests": [
+      "Troll Stronghold"
+     ],
+     "note": "Bandos' Stronghold cyclopes: 70 Strength, hammer, rope the first time. Trollheim access via Death Plateau/Troll Stronghold."
+    },
+    {
+     "location": "Edgeville Dungeon",
+     "quests": [],
+     "note": "Obor: needs a Giant key (card 'Giant key') to open his lair the first time."
+    }
+   ],
+   "notes": "Monster list matches the wiki (Hill Giant variants, Cyclops variants, Obor). Two 'Cyclops' entries are both Warriors' Guild/Catacombs, so they could be merged. Krystilia tasks must be done in the Wilderness; only the Wilderness locations count for her. For Krystilia: near the Bone Yard Hunter area and the Deep Wilderness Dungeon.",
+   "confidence": "high",
+   "wiki": "'Cyclopes also count as hill giants for tasks.' Obor: 'Requires a giant key to unlock access to his lair for the first time.' Warriors' Guild: 'combined Strength and Attack level of 130 or 99... Warrior guild tokens are also required'.",
+   "task": "Hill giants"
+  },
+  "hobgoblin": {
+   "locationsAdd": {
+    "Hobgoblin": [
+     "Outpost",
+     "Hosidius (The Dibber)",
+     "Hobgoblin Peninsula",
+     "North of Rellekka",
+     "Waterbirth Island",
+     "South of Tai Bwo Wannai",
+     "Crandor",
+     "Bandit Camp mine (Wilderness)",
+     "Clock Tower Dungeon",
+     "Witchaven Dungeon",
+     "Asgarnian Ice Dungeon",
+     "God Wars Dungeon",
+     "Edgeville Dungeon",
+     "The Hollows",
+     "Tree Gnome Village dungeon"
+    ]
+   },
+   "locationGates": [
+    {
+     "location": "God Wars Dungeon",
+     "quests": [
+      "Troll Stronghold"
+     ],
+     "note": "Wiki GWD: 'Accessing it requires partial completion of Troll Stronghold (defeating Dad)'; entering the main dungeon also needs 60 Strength (boulder) or 60 Agility (crack); a rope the first time."
+    },
+    {
+     "location": "Bandit Camp Mine",
+     "quests": [],
+     "access": "wilderness"
+    },
+    {
+     "location": "Waterbirth Island",
+     "quests": [],
+     "access": "waterbirth"
+    },
+    {
+     "location": "The Hollows",
+     "quests": [],
+     "access": "morytania"
+    }
+   ],
+   "notes": "The Slug Menace hobgoblin is quest-only, so leave it out. The full location list comes from the Hobgoblin page LocLines.",
+   "confidence": "high",
+   "wiki": "Variants table: Bandit Camp Mine, Asgarnian Ice Dungeon, Hosidius vinery peninsula, Crafting Guild peninsula; Outpost, Edgeville Dungeon, The Hollows, north of Rellekka; God Wars Dungeon.",
+   "task": "Hobgoblins"
+  },
+  "hydra": {
+   "equipment": [
+    {
+     "label": "Boots of stone, boots of brimstone or granite boots",
+     "type": "item",
+     "cards": [
+      "Boots of stone",
+      "Boots of brimstone",
+      "Granite boots"
+     ],
+     "note": "Not needed after the Elite Kourend & Kebos Diary"
+    }
+   ],
+   "notes": "List matches the wiki (Hydra, Colossal Hydra, Alchemical Hydra; Karuulm Slayer Dungeon only). Mortimer's hydra task needs partial completion of Fallen From Grace.",
+   "confidence": "high",
+   "wiki": "'The dungeon requires the player to wear boots of stone, boots of brimstone or granite boots ... unless the player has completed the Elite Kourend & Kebos Diary.'",
+   "task": "Hydras"
+  },
+  "ice giant": {
+   "locationGates": [
+    {
+     "location": "Ruins of Tapoyauik",
+     "quests": [
+      "The Heart of Darkness"
+     ]
+    },
+    {
+     "location": "White Wolf Mountain",
+     "quests": [],
+     "note": "The ground-level giants need 50 Mining to clear a boulder."
+    }
+   ],
+   "notes": "The monster list matches the wiki (Ice giant, the stronger Wilderness Slayer Cave version, Eldric the Ice King). The wiki says Eldric counts 'if assigned by Vannaka', which matches assignedBy. Krystilia uses the Wilderness Slayer Cave only. No Slayer equipment.",
+   "confidence": "high",
+   "wiki": "'Eldric the Ice King, part of a duo that makes up the Royal Titans encounter, can be killed in place of normal ice giants if assigned by Vannaka.'",
+   "task": "Ice giants"
+  },
+  "ice warrior": {
+   "monstersRemove": [
+    "Ice warrior",
+    "Icelord"
+   ],
+   "monstersAdd": [
+    {
+     "name": "Ice warrior",
+     "card": "Ice warrior",
+     "locations": [
+      "Asgarnian Ice Dungeon",
+      "Frozen Waste Plateau",
+      "Ice Queen's Lair",
+      "White Wolf Mountain",
+      "Ruins of Tapoyauik"
+     ]
+    },
+    {
+     "name": "Icelord",
+     "card": "Icelord",
+     "locations": [
+      "Iceberg"
+     ]
+    }
+   ],
+   "locationGates": [
+    {
+     "location": "Iceberg",
+     "quests": [
+      "Cold War"
+     ],
+     "note": "Reached by talking to Larry NE of Rellekka after the quest."
+    },
+    {
+     "location": "Ruins of Tapoyauik",
+     "quests": [
+      "The Heart of Darkness"
+     ],
+     "note": ""
+    }
+   ],
+   "notes": "No task page. Icelords count for ice warrior tasks. Krystilia's version is Wilderness-only (Frozen Waste Plateau).",
+   "confidence": "high",
+   "wiki": "Icelord: 'Icelords can be slain in place of ice warriors for the purposes of completing a Slayer task.' 'Players can travel back to the iceberg after the quest is completed by talking to Larry.'",
+   "task": "Ice warriors"
+  },
+  "icefiend": {
+   "locationGates": [
+    {
+     "location": "Ruins of Tapoyauik",
+     "quests": [
+      "The Heart of Darkness"
+     ],
+     "access": "varlamore",
+     "note": "'Ruins of Tapoyauik icefiends require completion of The Heart of Darkness in order to access.'"
+    },
+    {
+     "location": "God Wars Dungeon",
+     "quests": [
+      "Troll Stronghold"
+     ],
+     "note": "Wiki GWD: 'Accessing it requires partial completion of Troll Stronghold (defeating Dad)'; entering the main dungeon also needs 60 Strength (boulder) or 60 Agility (crack); a rope the first time."
+    },
+    {
+     "location": "Wilderness God Wars Dungeon",
+     "quests": [],
+     "access": "wilderness",
+     "note": "In the Wilderness (level 28-32)."
+    }
+   ],
+   "notes": "Monsters match (Icefiend lv13 + God Wars Icefiend lv18). Ice Mountain has no gate.",
+   "confidence": "high",
+   "wiki": "Variants table quoted above.",
+   "task": "Icefiends"
+  },
+  "infernal mage": {
+   "monstersAdd": [
+    {
+     "name": "Infernal Mage",
+     "card": "Infernal Mage",
+     "locations": [
+      "Slayer Tower"
+     ]
+    }
+   ],
+   "notes": "No task page. Only in the Slayer Tower 1st floor (Morytania, Priest in Peril). Supplies locations for the existing empty entry. Earmuffs are only recommended (for banshees en route), and 18 Agility opens a shortcut. Slayer 45.",
+   "confidence": "high",
+   "wiki": "'To reach the Infernal Mage area in the first floor of the Slayer Tower ... wearing Earmuffs or a Slayer helmet is recommended'",
+   "task": "Infernal mages"
+  },
+  "jellie": {
+   "locationGates": [
+    {
+     "location": "Ruins of Tapoyauik",
+     "quests": [
+      "The Heart of Darkness"
+     ]
+    },
+    {
+     "location": "Grimstone Dungeon",
+     "quests": [],
+     "note": "Chilled jellies 'require completion of The Heart of Darkness or level 87 Sailing'. Grimstone is the Sailing route."
+    }
+   ],
+   "notes": "The monster list matches the wiki (Jelly, Vitreous Jelly, Warped jelly, Vitreous Warped Jelly, Chilled jelly, Vitreous Chilled Jelly). All the card names check out ('Warped Jelly', 'Vitreous warped Jelly'). No Slayer equipment.",
+   "confidence": "high",
+   "wiki": "'Chilled jellies are in a single combat area and require completion of The Heart of Darkness or level 87 Sailing'.",
+   "task": "Jellies"
+  },
+  "jungle horror": {
+   "monstersRemove": [
+    "Jungle horror",
+    "Reanimated horror"
+   ],
+   "monstersAdd": [
+    {
+     "name": "Jungle horror",
+     "card": "Jungle horror",
+     "locations": [
+      "Mos Le'Harmless"
+     ]
+    }
+   ],
+   "locationGates": [
+    {
+     "location": "Mos Le'Harmless",
+     "quests": [
+      "Cabin Fever"
+     ],
+     "note": "Already a task unlock requirement."
+    }
+   ],
+   "notes": "No task page. Jungle horrors are only on Mos Le'Harmless (Cabin Fever). Reanimated horror removed per brief (no card anyway).",
+   "confidence": "high",
+   "wiki": "Jungle horror location: Mos Le'Harmless; 'Mos Le'Harmless ... can be visited after completion of the Cabin Fever quest.'",
+   "task": "Jungle horrors"
+  },
+  "kalphite": {
+   "locationGates": [
+    {
+     "location": "Kalphite Lair",
+     "quests": [],
+     "access": "desert",
+     "cards": [
+      "Rope"
+     ],
+     "note": "'A rope needs to be used to access the lair if the player has not completed the Hard Desert Diary. A second rope is needed to access the Queen's lair.'"
+    },
+    {
+     "location": "Kalphite Cave",
+     "quests": [],
+     "access": "desert",
+     "note": "Task-only cave east of Shantay Pass; 'a rope is not required'."
+    }
+   ],
+   "notes": "Remove the junk entries (task page link, location names, lowercase duplicates); the real monsters are Kalphite Worker, Soldier, Guardian, Queen and Reanimated kalphite (Duradel alternative; card null). The Kalphite Queen Echo, PvM Arena versions and Kalphite larvae don't count. Spria assigns Kalphite (wiki Spria table, 15-30), but the generated assignedBy leaves her out.",
+   "confidence": "high",
+   "wiki": "'They can be found in the Kalphite Lair ... as well as in a Slayer task-exclusive area, the Kalphite Cave'.",
+   "task": "Kalphite",
+   "monstersRemove": [
+    "Slayer task/Kalphites",
+    "Kalphite Cave",
+    "Kalphite Lair",
+    "Kalphite guardian",
+    "Kalphite soldier",
+    "Kalphite worker"
+   ],
+   "locationsAdd": {
+    "Kalphite Worker": [
+     "Kalphite Lair",
+     "Kalphite Cave"
+    ],
+    "Kalphite Soldier": [
+     "Kalphite Lair",
+     "Kalphite Cave"
+    ],
+    "Kalphite Guardian": [
+     "Kalphite Lair",
+     "Kalphite Cave"
+    ],
+    "Kalphite Queen": [
+     "Kalphite Lair"
+    ],
+    "Reanimated kalphite": [
+     "Dark Altar"
+    ]
+   },
+   "konarLocations": [
+    "Kalphite Lair",
+    "Kalphite Cave"
+   ]
+  },
+  "killerwatt": {
+   "monstersAdd": [
+    {
+     "name": "Killerwatt",
+     "card": "Killerwatt",
+     "locations": [
+      "Killerwatt plane"
+     ]
+    }
+   ],
+   "locationGates": [
+    {
+     "location": "Killerwatt plane",
+     "quests": [
+      "Ernest the Chicken"
+     ],
+     "note": "Through the portal at the top of Draynor Manor."
+    }
+   ],
+   "notes": "There's no task page. Full list: Killerwatt only, and monstersAdd replaces the generated entry, which had empty locations. Needs 37 Slayer. Insulated boots are NOT required: without them their max hit is higher, but they can still be killed. Card 'Insulated boots' exists if you want it as a recommendation.",
+   "confidence": "high",
+   "wiki": "'Killerwatts are Slayer monsters located in the Killerwatt plane, accessible through a portal at the top floor of Draynor Manor after completion of Ernest the Chicken'; 'If a player is not wearing a pair of insulated boots... attacks will have a much higher maximum hit.'",
+   "task": "Killerwatts"
+  },
+  "kurask": {
+   "equipment": [
+    {
+     "label": "Leaf-bladed weapon, broad ammo or Magic Dart",
+     "type": "item",
+     "cards": [
+      "Leaf-bladed sword",
+      "Leaf-bladed spear",
+      "Leaf-bladed battleaxe",
+      "Broad arrows",
+      "Broad bolts",
+      "Amethyst broad bolts",
+      "Slayer's staff",
+      "Staff of the dead",
+      "Staff of light",
+      "Staff of balance"
+     ],
+     "note": "Kurask can only be damaged by leaf-bladed weapons, broad-tipped ammo or Magic Dart (Magic Dart needs a Slayer's staff / Staff of the dead / Toxic staff (alias -> Staff of the dead) / Staff of light / Staff of balance). Broad ammo also needs a bow/crossbow card."
+    }
+   ],
+   "locationGates": [
+    {
+     "location": "Kurask Lair",
+     "quests": [],
+     "note": "Laguna Aurorae, needs 58 Sailing (locationAccess is null, should be 'sailing')."
+    },
+    {
+     "location": "Iorwerth Dungeon",
+     "quests": [
+      "Song of the Elves"
+     ],
+     "note": "'prifddinas' mapping covers this."
+    }
+   ],
+   "notes": "Monster list correct (Kurask + superior King kurask). Konar's unlock shows quests:['Song of the Elves']: probably mis-parsed from location text, since the infobox only needs 70 Slayer / 65 combat.",
+   "confidence": "high",
+   "wiki": "'kurask have the leafy attribute, meaning they can only be damaged with leaf-bladed weapons (the leaf-bladed sword, battleaxe, and spear), broad-tipped ammunition (broad bolts and arrows), or the spell Magic Dart.' 'Kurask Lair on Laguna Aurorae with 58 Sailing'.",
+   "task": "Kurask"
+  },
+  "lava dragon": {
+   "locationsAdd": {
+    "Lava dragon": [
+     "Lava Dragon Isle"
+    ]
+   },
+   "equipment": [
+    {
+     "label": "Dragonfire protection",
+     "type": "item",
+     "cards": [
+      "Anti-dragon shield",
+      "Dragonfire shield",
+      "Dragonfire ward",
+      "Ancient wyvern shield",
+      "Antifire potion",
+      "Extended antifire",
+      "Super antifire potion",
+      "Extended super antifire"
+     ],
+     "note": "Dragonfire hits up to 50. The wiki doesn't say 'required', so this is practical only; drop it if you keep only explicit wiki requirements."
+    }
+   ],
+   "locationGates": [
+    {
+     "location": "Lava Dragon Isle",
+     "quests": [],
+     "access": "wilderness"
+    }
+   ],
+   "notes": "There's no task page. Krystilia only; Lava Dragon Isle is in the Wilderness. Lava dragons 'do not count as black dragons'.",
+   "confidence": "medium",
+   "wiki": "'They reside in the Lava Dragon Isle in the Wilderness'; max hit '50 (Dragonfire)'.",
+   "task": "Lava dragons"
+  },
+  "lesser demon": {
+   "locationGates": [
+    {
+     "location": "Temple of Ikov (dungeon)",
+     "quests": [
+      "Temple of Ikov"
+     ],
+     "note": "Partial completion plus a shiny key (no card)."
+    },
+    {
+     "location": "Viyeldi caves",
+     "quests": [
+      "Legends' Quest"
+     ],
+     "note": "Partial completion plus pickaxe, lockpick, unpowered orb, enchant runes, axe and machete, or 96 Agility for the shortcut."
+    },
+    {
+     "location": "Crandor",
+     "quests": [
+      "Dragon Slayer I"
+     ],
+     "note": "Crandor is only reachable via Dragon Slayer I. This is game knowledge; the task page doesn't state it."
+    },
+    {
+     "location": "Kourend Castle",
+     "quests": [],
+     "note": "Caged demon: Ranged, Magic or a halberd is required."
+    },
+    {
+     "location": "Lava Maze",
+     "quests": [],
+     "note": "Slash weapon or knife needed for webs; Wilderness 40-45."
+    },
+    {
+     "location": "Charred Dungeon",
+     "quests": [],
+     "note": "Requires 60 Sailing."
+    },
+    {
+     "location": "God Wars Dungeon",
+     "quests": [
+      "Troll Stronghold"
+     ],
+     "note": "Partial completion of Troll Stronghold plus 60 Strength or 60 Agility; a Rope is needed on the first visit. GWD-related Slayer assignments need Death Plateau. Zakl'n Gritch is in K'ril's room: 70 Hitpoints and 40 Zamorak killcount."
+    }
+   ],
+   "notes": "List matches the wiki. GENERATOR ISSUE: Krystilia assigns lesser demons (80-120; Wilderness: KBD lair entrance cage, south of the Demonic Ruins, Wilderness Slayer Cave, Muddy chest) but is missing from assignedBy. Wiki Charred Dungeon is in the location table but not in the generated locations.",
+   "confidence": "medium",
+   "wiki": "Temple of Ikov: 'Requires shiny key and partial completion of Temple of Ikov'; Viyeldi: '...partial completion of Legends' Quest'; Krystilia page row 'Lesser demons | 80-120'",
+   "task": "Lesser demons"
+  },
+  "lesser nagua": {
+   "locationGates": [
+    {
+     "location": "Neypotzli",
+     "quests": [
+      "Perilous Moons"
+     ]
+    },
+    {
+     "location": "Ruins of Tapoyauik",
+     "quests": [
+      "The Heart of Darkness"
+     ]
+    },
+    {
+     "location": "Crypt of Tonali",
+     "quests": [
+      "The Final Dawn"
+     ]
+    }
+   ],
+   "notes": "The monster list matches the wiki (Sulphur, Frost and Earthen Nagua, and Amoxliatl). Amoxliatl counts as the 'Boss variant of frost Nagua'. No Slayer equipment.",
+   "confidence": "high",
+   "wiki": "'Players who have completed The Heart of Darkness can be assigned to kill Nagua at the Ruins of Tapoyauik'; 'Players who have completed The Final Dawn can also be assigned to kill Nagua at the Crypt of Tonali'.",
+   "task": "Lesser nagua"
+  },
+  "lizard": {
+   "cardFixes": {
+    "Small Lizard": "Desert Lizard",
+    "Lizard": "Desert Lizard"
+   },
+   "locationsAdd": {
+    "Grimy Lizard": [
+     "Tonali Cavern"
+    ]
+   },
+   "equipment": [
+    {
+     "label": "Ice cooler (desert lizards)",
+     "type": "item",
+     "cards": [
+      "Ice cooler"
+     ],
+     "appliesTo": [
+      "Small Lizard",
+      "Desert Lizard",
+      "Lizard"
+     ]
+    },
+    {
+     "label": "Heat boots (sulphur lizards)",
+     "type": "item",
+     "cards": [
+      "Boots of stone",
+      "Boots of brimstone",
+      "Granite boots"
+     ],
+     "appliesTo": [
+      "Sulphur Lizard"
+     ],
+     "note": "Not needed after the elite Kourend & Kebos Diary."
+    }
+   ],
+   "locationGates": [
+    {
+     "location": "Neypotzli",
+     "quests": [
+      "Perilous Moons"
+     ],
+     "access": "varlamore",
+     "note": "Wiki Neypotzli: 'Accessing Neypotzli requires having gained access during the Perilous Moons quest' (partial)."
+    },
+    {
+     "location": "Karuulm Slayer Dungeon",
+     "quests": [],
+     "access": "kourend",
+     "cards": [
+      "Boots of stone",
+      "Boots of brimstone",
+      "Granite boots"
+     ],
+     "note": "Wiki: beyond the entrance chamber players 'must wear the boots of stone, boots of brimstone or granite boots to protect themselves from the extreme heat' (not needed after the elite Kourend & Kebos Diary)."
+    }
+   ],
+   "notes": "Small Lizard (ids 462/463/12004) and Lizard (id 458) are versions on the 'Desert Lizard' card. Sulphur and grimy lizards need 44 Slayer, and grimy lizards also need Perilous Moons.",
+   "confidence": "high",
+   "wiki": "Desert lizards: 'Ice coolers required'; Sulphur: 'Players must wear boots of stone, boots of brimstone, or granite boots'.",
+   "task": "Lizards"
+  },
+  "lizardmen": {
+   "notes": "Monster list correct (Lizardman, Lizardman brute, Lizardman shaman). 'Slayer task' in the shaman locations is a parse artefact from 'Lizardman Caves (Slayer task only)', so remove it. Lizardman shamans: the wiki says they 'require the use of Shayzien armour' (tier 5 blocks the 30-damage poison spit). That applies to shamans only, so it's not a task-wide requirement. Brutes/normal lizardmen need nothing. Shayzien armour cards exist under generic names (Shayzien helm/body/greaves/boots/gloves). Lizard tasks don't count lizardmen.",
+   "confidence": "high",
+   "wiki": "'Lizardmen shamans require the use of Shayzien armour in order to kill them, as they have a unique poison spit... fully blocked while wearing a full set of tier 5 shayzien armour.' Shaman: 'Lizardman Caves, underneath Lizardman Settlement (Slayer task only)'.",
+   "task": "Lizardmen"
+  },
+  "mammoth": {
+   "monstersAdd": [
+    {
+     "name": "Mammoth",
+     "card": "Mammoth",
+     "locations": [
+      "Wilderness"
+     ]
+    }
+   ],
+   "notes": "No task page. Mammoths live only south-east of the Ferox Enclave (Wilderness), which fits Krystilia. Supplies locations for the existing empty entry. No equipment.",
+   "confidence": "high",
+   "wiki": "'Mammoths are a species of elephant-like creatures that inhabit the area south-east of the Ferox Enclave.'",
+   "task": "Mammoths"
+  },
+  "metal dragon": {
+   "equipment": [
+    {
+     "label": "Dragonfire protection (anti-dragon shield or super antifire)",
+     "type": "item",
+     "cards": [
+      "Anti-dragon shield",
+      "Dragonfire shield",
+      "Dragonfire ward",
+      "Ancient wyvern shield",
+      "Super antifire potion",
+      "Extended super antifire"
+     ],
+     "note": "Metallic dragonfire is not reduced by Protect from Magic. Unprotected max hit is 50; an anti-dragon shield alone cuts it to 5, a super antifire alone to 0. Plain antifire alone still lets 35 through, so it doesn't count on its own."
+    }
+   ],
+   "locationGates": [
+    {
+     "location": "Ancient Cavern",
+     "quests": [
+      "Barbarian Training"
+     ],
+     "note": "'Requires completion of the first part of Barbarian Firemaking'."
+    },
+    {
+     "location": "Lithkren Vault",
+     "quests": [
+      "Dragon Slayer II"
+     ]
+    },
+    {
+     "location": "Brimhaven Dungeon",
+     "quests": [],
+     "note": "Needs an axe and 875 coins."
+    }
+   ],
+   "notes": "The monster list matches the wiki. Nieve and Duradel list TzKal-Zuk as an alternative (that's what assignedBy has, presumably a data quirk from the master tables). TzKal-Zuk isn't a metal dragon, so check it against the master pages. Rune dragons: insulated boots reduce the lightning damage but aren't required.",
+   "confidence": "high",
+   "wiki": "'metal dragons aren't affected by it [Protect from Magic], thus making an anti-dragon shield mandatory if not using a super antifire potion'.",
+   "task": "Metal dragons"
+  },
+  "minotaur": {
+   "monstersRemove": [
+    "Minotaur"
+   ],
+   "monstersAdd": [
+    {
+     "name": "Minotaur",
+     "card": "Minotaur",
+     "locations": [
+      "Stronghold of Security"
+     ]
+    }
+   ],
+   "notes": "No task page. Minotaurs are only in the Stronghold of Security, Vault of War (level 1). No equipment.",
+   "confidence": "high",
+   "wiki": "Minotaur location: 'Stronghold of Security: Vault of War'.",
+   "task": "Minotaurs"
+  },
+  "mogre": {
+   "monstersAdd": [
+    {
+     "name": "Mogre (sea)",
+     "card": "Mogre",
+     "locations": [
+      "Ardent Ocean"
+     ]
+    }
+   ],
+   "locationsAdd": {
+    "Mogre": [
+     "Mudskipper Point"
+    ]
+   },
+   "equipment": [
+    {
+     "label": "Fishing explosive (to lure land mogres)",
+     "type": "item",
+     "cards": [
+      "Fishing explosive"
+     ],
+     "appliesTo": [
+      "Mogre"
+     ]
+    }
+   ],
+   "notes": "There's no task page. Land mogres at Mudskipper Point appear only when you use a fishing explosive on an Ominous Fishing Spot (Skippy and the Mogres miniquest is the assignment requirement). Sea mogres (id 15230-15233, on the 'Mogre' card) in the Ardent Ocean have slayer category 'Mogres, Ogres' and can be cannoned from a boat (sailing), but still need 32 Slayer.",
+   "confidence": "medium",
+   "wiki": "'Mogres appear when disturbed by the player, who must lure them using Fishing explosives on an Ominous Fishing Spot.'",
+   "task": "Mogres"
+  },
+  "molanisk": {
+   "equipment": [
+    {
+     "label": "Slayer bell",
+     "type": "item",
+     "cards": [
+      "Slayer bell"
+     ],
+     "note": "A light source is also needed (underground)"
+    }
+   ],
+   "locationGates": [
+    {
+     "location": "Dorgesh-Kaan South Dungeon",
+     "quests": [
+      "Death to the Dorgeshuun"
+     ]
+    }
+   ],
+   "notes": "List matches the wiki (Molanisk only).",
+   "confidence": "high",
+   "wiki": "'A Slayer bell is necessary to fight them.' 'Entry to the dungeon requires completion of the Death to the Dorgeshuun quest.'",
+   "task": "Molanisks"
+  },
+  "monkey": {
+   "locationGates": [
+    {
+     "location": "Marim",
+     "quests": [
+      "Monkey Madness I"
+     ],
+     "note": "Partial."
+    },
+    {
+     "location": "Temple of Marimbo",
+     "quests": [
+      "Monkey Madness I"
+     ],
+     "note": "Partial."
+    },
+    {
+     "location": "Ape Atoll Dungeon",
+     "quests": [
+      "Monkey Madness I"
+     ],
+     "note": "Partial."
+    },
+    {
+     "location": "Temple of Marimbo Dungeon",
+     "quests": [
+      "Monkey Madness I"
+     ],
+     "note": "Partial."
+    },
+    {
+     "location": "Kruk's Dungeon",
+     "quests": [
+      "Monkey Madness II"
+     ],
+     "note": "Partial. The lower floor is dark, so bring a light source."
+    },
+    {
+     "location": "Crash Site Cavern",
+     "quests": [
+      "Monkey Madness II"
+     ]
+    },
+    {
+     "location": "Mos Le'Harmless",
+     "quests": [
+      "Cabin Fever"
+     ]
+    }
+   ],
+   "notes": "The monster list matches the wiki variant table. Ba-Ba and her baboon troops do NOT count. The generated Monkey locations repeat 'Karamja' and 'Shilo Village (location)' (harmless). No Slayer equipment.",
+   "confidence": "high",
+   "wiki": "'Ba-Ba and all her baboon troops do not count towards the task.'",
+   "task": "Monkeys"
+  },
+  "moss giant": {
+   "locationGates": [
+    {
+     "location": "Pirates' Cove",
+     "quests": [
+      "Lunar Diplomacy"
+     ],
+     "note": "Partial completion (Lokar Searunner also needs The Fremennik Trials)."
+    },
+    {
+     "location": "Crandor",
+     "quests": [
+      "Dragon Slayer I"
+     ],
+     "note": "Reached during DS1, then via the hidden wall in the Crandor and Karamja Dungeon."
+    },
+    {
+     "location": "Iorwerth Dungeon",
+     "quests": [
+      "Song of the Elves"
+     ],
+     "note": "Covered by 'prifddinas'."
+    },
+    {
+     "location": "Varrock Sewers",
+     "quests": [],
+     "note": "Bryophyta: needs a Mossy key (card 'Mossy key') for the first lair entry."
+    },
+    {
+     "location": "Moss Giant Island",
+     "quests": [],
+     "note": "10 Agility."
+    }
+   ],
+   "notes": "Monster list matches the wiki. 'Agility' and 'canoe' in locations are parse artefacts ('10 Agility required', 'reachable using a canoe'), so drop them. Krystilia tasks must be done in the Wilderness; only the Wilderness locations count for her. For Krystilia: south-east of the Lava Maze (canoe pond).",
+   "confidence": "high",
+   "wiki": "Pirates' Cove moss giants: 'Requires partial completion of Lunar Diplomacy.' Bryophyta: 'Requires a mossy key to unlock access to her lair for the first time.'",
+   "task": "Moss giants"
+  },
+  "mutated zygomite": {
+   "monstersRemove": [
+    "Bone Voyage",
+    "Fossil Island"
+   ],
+   "cardFixes": {
+    "Mutated zygomite": "Zygomite",
+    "Ancient Zygomite": "Zygomite"
+   },
+   "locationsAdd": {
+    "Mutated zygomite": [
+     "Zanaris"
+    ],
+    "Ancient Zygomite": [
+     "Fossil Island (Mushroom Forest)",
+     "Stalker Den"
+    ]
+   },
+   "equipment": [
+    {
+     "label": "Fungicide spray",
+     "type": "item",
+     "cards": [
+      "Fungicide spray"
+     ]
+    }
+   ],
+   "locationGates": [
+    {
+     "location": "Zanaris",
+     "quests": [
+      "Lost City"
+     ],
+     "access": "zanaris"
+    },
+    {
+     "location": "Fossil Island",
+     "quests": [
+      "Bone Voyage"
+     ],
+     "access": "fossil_island"
+    },
+    {
+     "location": "Stalker Den",
+     "quests": [
+      "Shadows of Custodia"
+     ],
+     "access": "varlamore",
+     "note": "'full access to the area and monsters requires its full completion.'"
+    }
+   ],
+   "konarLocations": [
+    "Fossil Island",
+    "Zanaris"
+   ],
+   "notes": "The task page is 'Slayer task/Zygomites'. The wiki monster page for Mutated zygomite is the 'Zygomite' card (ids 533/535/537/538/637/1024), and Ancient Zygomite ids 7797/8690/8691 are also versions on the 'Zygomite' card. Nieve and Duradel both assign this task (their assignment tables), but the generated assignedBy has only Chaeldar and Konar.",
+   "confidence": "high",
+   "wiki": "'Zygomites cannot be killed unless a fungicide spray has been used to deliver the final blow.'",
+   "task": "Mutated zygomites"
+  },
+  "nechryael": {
+   "locationGates": [
+    {
+     "location": "Iorwerth Dungeon",
+     "quests": [
+      "Song of the Elves"
+     ]
+    },
+    {
+     "location": "Charred Dungeon",
+     "quests": [],
+     "note": "Requires 60 Sailing."
+    }
+   ],
+   "notes": "List matches the wiki (Nechryael, Greater Nechryael, Nechryarch); no required equipment. GENERATOR ISSUE: Nieve (weight 7) and Duradel (weight 9) both assign Nechryael per Nieve/Slayer assignments and Duradel/Slayer assignments (alternative: Greater Nechryael) but are missing from assignedBy. Krystilia: Wilderness Slayer Cave only, needs Priest in Peril and 80 Slayer.",
+   "confidence": "high",
+   "wiki": "Nieve/Slayer assignments: '[[Nechryael]] | 110-170 | ... | [[Greater Nechryael]] | weight 7'; Iorwerth: 'Requires completion of Song of the Elves.'",
+   "task": "Nechryael"
+  },
+  "ogre": {
+   "locationGates": [
+    {
+     "location": "Mudskipper Point",
+     "quests": [
+      "Skippy and the Mogres"
+     ],
+     "note": "Land mogres must be lured with Fishing explosives (card 'Fishing explosive') used on an Ominous Fishing Spot. The page says the miniquest was 'previously' required."
+    },
+    {
+     "location": "Mudskipper Sound",
+     "quests": [],
+     "note": "Sea mogres are killed with your boat's cannons, so this needs Sailing. Fishing explosives aren't needed."
+    },
+    {
+     "location": "Corsair Cove Dungeon",
+     "quests": [
+      "The Corsair Curse"
+     ],
+     "note": "'Requires partial completion of The Corsair Curse or level 10 Agility.'"
+    },
+    {
+     "location": "Jiggig",
+     "quests": [
+      "Zogre Flesh Eaters"
+     ],
+     "note": "Zogres need it started; skogres need it partly done."
+    },
+    {
+     "location": "Jiggig Dungeon",
+     "quests": [
+      "Zogre Flesh Eaters"
+     ]
+    },
+    {
+     "location": "God Wars Dungeon",
+     "quests": [
+      "Troll Stronghold"
+     ]
+    }
+   ],
+   "notes": "The monster list matches the wiki. Jogres do NOT count. Reanimated ogres aren't in the variant table and are excluded anyway. Mogres need 32 Slayer. 'Mogre (sea)' maps to card 'Mogre'.",
+   "confidence": "high",
+   "wiki": "'Along with ogres and ogress warriors and shamans, mogres, zogres, and skogres can be killed to satisfy the task. Jogres do not count'; Mogre page: 'who must lure them using Fishing explosives on an Ominous Fishing Spot'.",
+   "task": "Ogres"
+  },
+  "otherworldly being": {
+   "monstersRemove": [
+    "Otherworldly being"
+   ],
+   "monstersAdd": [
+    {
+     "name": "Otherworldly being",
+     "card": "Otherworldly being",
+     "locations": [
+      "Zanaris"
+     ]
+    }
+   ],
+   "equipment": [
+    {
+     "label": "Dramen staff or Lunar staff",
+     "type": "item",
+     "cards": [
+      "Dramen staff",
+      "Lunar staff"
+     ],
+     "note": "Must be wielded to enter Zanaris through the Lumbridge Swamp shed (or to use fairy rings)."
+    }
+   ],
+   "locationGates": [
+    {
+     "location": "Zanaris",
+     "quests": [
+      "Lost City"
+     ],
+     "note": "Already a task requirement."
+    }
+   ],
+   "notes": "No task page. Otherworldly beings are only in Zanaris (south of the bank). The Dramen/Lunar staff is an access requirement for Zanaris, not a combat item.",
+   "confidence": "high",
+   "wiki": "'Otherworldly beings are unusual Zanarian monsters... found south of the bank in Zanaris.'",
+   "task": "Otherworldly beings"
+  },
+  "pirate": {
+   "locationGates": [
+    {
+     "location": "Pirates' Hideout",
+     "quests": [],
+     "access": "wilderness",
+     "cards": [
+      "Lockpick"
+     ],
+     "skills": {
+      "Thieving": 39
+     },
+     "note": "'A lockpick and 39 Thieving are required to pick the door lock and gain entry.' Applies to Pirate only."
+    },
+    {
+     "location": "Chaos Temple (Wilderness)",
+     "quests": [],
+     "access": "wilderness"
+    }
+   ],
+   "notes": "Krystilia only, so only Wilderness kills count: pirates in the Pirates' Hideout (level 55 Wilderness) or zombie pirates at the Chaos Temple. Pirates elsewhere (Brimhaven, Port Sarim jail, etc.) are outside the Wilderness. The task's 'skillreq Thieving 39' is the lockpick door.",
+   "confidence": "high",
+   "wiki": "'Pirates can be found at level 55 Wilderness in the Pirates' Hideout. A lockpick is required to enter.'",
+   "task": "Pirates"
+  },
+  "pyrefiend": {
+   "locationGates": [
+    {
+     "location": "God Wars Dungeon",
+     "quests": [
+      "Troll Stronghold"
+     ],
+     "note": "Partial completion of Troll Stronghold plus 60 Strength or 60 Agility; a Rope is needed on the first visit. GWD-related Slayer assignments need Death Plateau."
+    },
+    {
+     "location": "Wilderness God Wars Dungeon",
+     "quests": [],
+     "note": "60 Strength or 60 Agility to enter; Wilderness."
+    },
+    {
+     "location": "Smoke Dungeon",
+     "quests": [
+      "Desert Treasure I"
+     ],
+     "note": "Must have started DT1. Must wear a Facemask, Slayer helmet or gas mask (gas mask has no card).",
+     "cards": [
+      "Facemask",
+      "Slayer helmet"
+     ]
+    }
+   ],
+   "notes": "List matches the wiki (Pyrefiend, Flaming pyrelord, Pyrelord, Infernal pyrelord). No task-wide required equipment.",
+   "confidence": "high",
+   "wiki": "GWD: 'Requires partial completion of Troll Stronghold.' Smoke Dungeon: 'Must have started Desert Treasure I. Players must wear a facemask, Slayer helmet, Slayer helmet (i) or Gas mask'",
+   "task": "Pyrefiends"
+  },
+  "rat": {
+   "locationGates": [
+    {
+     "location": "Melzar's Maze",
+     "quests": [
+      "Dragon Slayer I"
+     ],
+     "note": "Needs DS1 started."
+    },
+    {
+     "location": "Brine Rat Cavern",
+     "quests": [
+      "Olaf's Quest"
+     ],
+     "note": "Needs Olaf's Quest started."
+    },
+    {
+     "location": "Evil Dave",
+     "quests": [
+      "Recipe for Disaster/Freeing Evil Dave"
+     ],
+     "note": "Hell-rat behemoths are in Evil Dave's basement. There's no card for Hell-rat behemoth, so its null is correct."
+    },
+    {
+     "location": "Clock Tower Dungeon",
+     "quests": [
+      "Clock Tower"
+     ],
+     "note": "Dungeon rats need Clock Tower partly done."
+    },
+    {
+     "location": "Barrows crypt",
+     "quests": [
+      "Priest in Peril"
+     ]
+    },
+    {
+     "location": "Barrows",
+     "quests": [
+      "Priest in Peril"
+     ]
+    }
+   ],
+   "notes": "The monster list matches the wiki. 'Giant rat (Scurrius)' maps to card 'Giant rat' (OK). Data bug: the Giant rat locations include 'Giant rat' (should be a place; the wiki says 'Various other locations'). The generated location for Hell-rat behemoth is 'Evil Dave', which should be Evil Dave's basement in Edgeville. No Slayer equipment.",
+   "confidence": "high",
+   "wiki": "Hell-rat behemoth: 'Requires completion of Freeing Evil Dave to access'; Brine rat: 'Requires Olaf's Quest to be started'; Zombie rat: 'Requires starting Dragon Slayer I'.",
+   "task": "Rats"
+  },
+  "red dragon": {
+   "locationGates": [
+    {
+     "location": "Corsair Cove Dungeon",
+     "quests": [
+      "Dragon Slayer II"
+     ],
+     "note": "The red dragons are in the western side (Myths' Guild basement), which needs Dragon Slayer II."
+    },
+    {
+     "location": "Myths' Guild",
+     "quests": [
+      "Dragon Slayer II"
+     ],
+     "note": ""
+    },
+    {
+     "location": "Brimhaven Dungeon",
+     "quests": [],
+     "note": "Red dragons need 30 Agility (also an entry fee or Karamja gloves, and an axe for vines)."
+    },
+    {
+     "location": "Charred Dungeon",
+     "quests": [],
+     "note": "Sailing (already mapped)."
+    }
+   ],
+   "notes": "Monster list correct (Red Dragon, Baby red dragon, Brutal red dragon). Konar only, at her assigned location. Dragonfire protection isn't strictly required: the wiki says 'Alternatively, using Protect from Magic will suffice', so I didn't add it as equipment.",
+   "confidence": "high",
+   "wiki": "'Once Dragon Slayer II is completed, a group of three dragons can be found in the Corsair Cove Dungeon.' 'Brimhaven Dungeon requires at least 30 Agility.' 'The western side of the dungeon, which is the Myths' Guild basement, is only accessible to members who have completed Dragon Slayer II.'",
+   "task": "Red dragons"
+  },
+  "revenant": {
+   "monstersRemove": [
+    "Revenant"
+   ],
+   "monstersAdd": [
+    {
+     "name": "Revenant imp",
+     "card": "Revenant imp",
+     "locations": [
+      "Revenant Caves"
+     ]
+    },
+    {
+     "name": "Revenant goblin",
+     "card": "Revenant goblin",
+     "locations": [
+      "Revenant Caves"
+     ]
+    },
+    {
+     "name": "Revenant pyrefiend",
+     "card": "Revenant pyrefiend",
+     "locations": [
+      "Revenant Caves"
+     ]
+    },
+    {
+     "name": "Revenant hobgoblin",
+     "card": "Revenant hobgoblin",
+     "locations": [
+      "Revenant Caves"
+     ]
+    },
+    {
+     "name": "Revenant cyclops",
+     "card": "Revenant cyclops",
+     "locations": [
+      "Revenant Caves"
+     ]
+    },
+    {
+     "name": "Revenant hellhound",
+     "card": "Revenant hellhound",
+     "locations": [
+      "Revenant Caves"
+     ]
+    },
+    {
+     "name": "Revenant demon",
+     "card": "Revenant demon",
+     "locations": [
+      "Revenant Caves"
+     ]
+    },
+    {
+     "name": "Revenant ork",
+     "card": "Revenant ork",
+     "locations": [
+      "Revenant Caves"
+     ]
+    },
+    {
+     "name": "Revenant dark beast",
+     "card": "Revenant dark beast",
+     "locations": [
+      "Revenant Caves"
+     ]
+    },
+    {
+     "name": "Revenant knight",
+     "card": "Revenant knight",
+     "locations": [
+      "Revenant Caves"
+     ]
+    },
+    {
+     "name": "Revenant dragon",
+     "card": "Revenant dragon",
+     "locations": [
+      "Revenant Caves"
+     ]
+    },
+    {
+     "name": "Revenant maledictus",
+     "card": "Revenant maledictus",
+     "locations": [
+      "Revenant Caves"
+     ]
+    }
+   ],
+   "locationGates": [
+    {
+     "location": "Revenant Caves",
+     "quests": [],
+     "access": "wilderness",
+     "note": "Wilderness levels 19-40; PvP death rules apply."
+    }
+   ],
+   "notes": "'Revenant' is a group page, so replace it with the 12 individual revenants (all have slayer category Revenants; the maledictus is categorised 'Revenants, Ghosts'). There's no task page.",
+   "confidence": "high",
+   "wiki": "'Revenants are the ghostly versions of creatures ... found in the Revenant Caves within the Wilderness in levels 19 to 40.'",
+   "task": "Revenants"
+  },
+  "rockslug": {
+   "monstersAdd": [
+    {
+     "name": "Rockslug",
+     "card": "Rockslug",
+     "locations": [
+      "Dorgesh-Kaan South Dungeon",
+      "Fremennik Slayer Dungeon",
+      "Lumbridge Swamp Caves",
+      "Tonali Cavern",
+      "Ynysdail Cavern"
+     ]
+    }
+   ],
+   "equipment": [
+    {
+     "label": "Bag of salt or Brine sabre",
+     "type": "item",
+     "cards": [
+      "Bag of salt",
+      "Brine sabre"
+     ]
+    }
+   ],
+   "locationGates": [
+    {
+     "location": "Dorgesh-Kaan South Dungeon",
+     "quests": [
+      "Death to the Dorgeshuun"
+     ]
+    },
+    {
+     "location": "Tonali Cavern",
+     "quests": [
+      "The Final Dawn"
+     ]
+    },
+    {
+     "location": "Ynysdail Cavern",
+     "quests": [],
+     "note": "Under Ynysdail, an ocean island (Sailing)."
+    },
+    {
+     "location": "Lumbridge Swamp Caves",
+     "quests": [],
+     "note": "A light source is needed."
+    }
+   ],
+   "notes": "No task page. Full list from the Rockslug page. Supplies locations for the existing empty entry. Slayer 20.",
+   "confidence": "high",
+   "wiki": "'A bag of salt must be used on it when it has 4 or less Hitpoints to finish it off ... Alternatively, a brine sabre can be used'; Tonali Cavern: 'Accessing it requires completion of the The Final Dawn quest.'",
+   "task": "Rockslugs"
+  },
+  "rogue": {
+   "monstersAdd": [
+    {
+     "name": "Rogue",
+     "card": "Rogue",
+     "locations": [
+      "Rogues' Castle",
+      "Wilderness"
+     ]
+    }
+   ],
+   "notes": "There's no task page. Full list: Rogue only (levels 15 and 135), and monstersAdd replaces the generated entry, which had empty locations. They're in Rogues' Castle (every floor) and south-west of the Mage Arena, both deep Wilderness. Krystilia only. No Slayer equipment or quest.",
+   "confidence": "high",
+   "wiki": "LocLines: Rogues' Castle (floors 0-3), 'South-west of Mage Arena'; 'It is the only pickpocketing target found exclusively in the Wilderness.'",
+   "task": "Rogues"
+  },
+  "scorpion": {
+   "monstersRemove": [
+    "Giant lobster (Ghosts Ahoy)",
+    "Giant lobster",
+    "Reanimated scorpion"
+   ],
+   "cardFixes": {
+    "Scorpia's offspring (monster": "Scorpia's offspring"
+   },
+   "locationGates": [
+    {
+     "location": "Sunbleak Island",
+     "quests": [],
+     "note": "72 Sailing (unboostable) and an Adamant helm."
+    },
+    {
+     "location": "The Great Conch",
+     "quests": [
+      "Troubled Tortugans"
+     ],
+     "note": "Partial completion."
+    },
+    {
+     "location": "Kruk's Dungeon",
+     "quests": [
+      "Monkey Madness II"
+     ],
+     "note": "Partial completion."
+    },
+    {
+     "location": "Legends' Guild",
+     "quests": [
+      "Legends' Quest"
+     ],
+     "note": "Pit scorpions are in the Legends' Guild dungeon, which needs the quest completed."
+    },
+    {
+     "location": "Kharazi Jungle",
+     "quests": [
+      "Legends' Quest"
+     ],
+     "note": "Started (Radimus notes), plus a machete and an axe."
+    },
+    {
+     "location": "Crandor",
+     "quests": [
+      "Dragon Slayer I"
+     ],
+     "note": "King Scorpions."
+    },
+    {
+     "location": "Underwater",
+     "quests": [
+      "Bone Voyage"
+     ],
+     "note": "Lobstrosity: Fossil Island underwater needs diving gear (Fishbowl helmet + Diving apparatus) and only certain weapons work (trident, brine sabre, magic secateurs, magic)."
+    },
+    {
+     "location": "Pit of Pestilence",
+     "quests": [],
+     "note": "Stronghold of Security level 3 (needs levels 1-2 progress)."
+    }
+   ],
+   "notes": "Fix the truncated name: 'Scorpia's offspring (monster' should be card 'Scorpia's offspring'. Remove the Giant lobster (Ghosts Ahoy), which is quest-only and fought once, and the Giant lobster (Witchaven Dungeon), which can only be fought during Slug Menace, not after. Lobstrosity counts. 'Pit of Pestilence' Scorpion appears twice, so the entries could be merged. Scorpia, her guardians and her offspring count, per Krystilia.",
+   "confidence": "high",
+   "wiki": "Giant lobster (Ghosts Ahoy): 'Fought during Ghosts Ahoy, can only be fought once.' Giant lobster (Witchaven): 'Can only be fought during Slug Menace, but not after.' Sunbleak: 'requires 72 Sailing and an adamant helm'. Lobstrosity: 'Requires completion of Bone Voyage.'",
+   "task": "Scorpions"
+  },
+  "sea snake": {
+   "locationsAdd": {
+    "Sea snake hatchling": [
+     "Miscellania and Etceteria Dungeon"
+    ],
+    "Sea snake young": [
+     "Miscellania and Etceteria Dungeon"
+    ]
+   },
+   "locationGates": [
+    {
+     "location": "Miscellania and Etceteria Dungeon",
+     "quests": [
+      "Royal Trouble"
+     ],
+     "note": "'can be entered during and after the quest'. The route has an overhanging rock you swing across with a rope."
+    }
+   ],
+   "notes": "The cards already resolve (Sea Snake Hatchling / Sea Snake Young). Giant Sea Snake is the Royal Trouble quest boss (its chamber closes after the fight), so leave it out.",
+   "confidence": "high",
+   "wiki": "'They are found in the Miscellania and Etceteria Dungeon, which can be entered during and after the quest.'",
+   "task": "Sea snakes"
+  },
+  "shade": {
+   "locationGates": [
+    {
+     "location": "Shade Catacombs",
+     "quests": [
+      "Shades of Mort'ton"
+     ],
+     "note": "Needs Shades of Mort'ton completed plus a bronze shade key or better (from burning Loar remains; deeper shades need higher keys). Shade keys have no TCG card."
+    }
+   ],
+   "notes": "List matches the wiki (Shade x2, Loar, Phrin, Riyl, Asyn, Fiyr, Urium). Mort'ton needs Priest in Peril.",
+   "confidence": "high",
+   "wiki": "Shade Catacombs: 'To access it you need to have completed Shades of Mort'ton and have a bronze shade key or better.'",
+   "task": "Shades"
+  },
+  "shadow warrior": {
+   "monstersAdd": [
+    {
+     "name": "Shadow warrior",
+     "card": "Shadow warrior",
+     "locations": [
+      "Legends' Guild"
+     ]
+    }
+   ],
+   "locationGates": [
+    {
+     "location": "Legends' Guild",
+     "quests": [
+      "Legends' Quest"
+     ],
+     "note": "The dungeon beneath the Legends' Guild."
+    }
+   ],
+   "notes": "There's no task page. Full list: Shadow warrior only, and monstersAdd replaces the generated entry, which had empty locations. Assigned by Chaeldar and Vannaka after Legends' Quest. No Slayer equipment.",
+   "confidence": "high",
+   "wiki": "'Shadow warriors are monsters that can be found in the dungeon beneath the Legends' Guild... After completion of Legends' Quest, shadow warriors are a possible Slayer task from Chaeldar and Vannaka.'",
+   "task": "Shadow warriors"
+  },
+  "skeletal wyvern": {
+   "monstersRemove": [
+    "Skeletal Wyvern"
+   ],
+   "monstersAdd": [
+    {
+     "name": "Skeletal Wyvern",
+     "card": "Skeletal Wyvern",
+     "locations": [
+      "Asgarnian Ice Dungeon"
+     ]
+    }
+   ],
+   "equipment": [
+    {
+     "label": "Elemental, mind, dragonfire shield/ward or ancient wyvern shield",
+     "type": "item",
+     "cards": [
+      "Elemental shield",
+      "Mind shield",
+      "Dragonfire shield",
+      "Dragonfire ward",
+      "Ancient wyvern shield"
+     ],
+     "note": "Survival item against the icy breath. The wiki says it is 'not required to be slain', but Jagex only assigns the task after Elemental Workshop I for this reason. Leave it out if the planner treats only hard requirements as required."
+    }
+   ],
+   "notes": "No task page. Only found at the end of the Asgarnian Ice Dungeon (82 Agility shortcut optional). Needs 72 Slayer to harm.",
+   "confidence": "medium",
+   "wiki": "'they require an elemental shield, mind shield, dragonfire shield, dragonfire ward, or ancient wyvern shield to reduce damage from their icy breath; however, it is not required to be slain.' 'Because an elemental shield or better is required to defend against their icy breath, they will only assign them if the player has completed the Elemental Workshop I quest.'",
+   "task": "Skeletal wyverns"
+  },
+  "skeleton": {
+   "monstersAdd": [
+    {
+     "name": "Skeleton (Catacombs of Kourend)",
+     "card": "Skeleton",
+     "locations": [
+      "Catacombs of Kourend"
+     ]
+    },
+    {
+     "name": "Skeleton (Stronghold of Security)",
+     "card": "Skeleton",
+     "locations": [
+      "Stronghold of Security"
+     ]
+    },
+    {
+     "name": "Skeleton (Forthos Ruin)",
+     "card": "Skeleton",
+     "locations": [
+      "Forthos Ruin"
+     ]
+    },
+    {
+     "name": "Skeleton (Lucien's camp)",
+     "card": "Skeleton",
+     "locations": [
+      "Lucien's camp"
+     ]
+    },
+    {
+     "name": "Skeleton (Wilderness Agility Course)",
+     "card": "Skeleton",
+     "locations": [
+      "Wilderness Agility Course"
+     ]
+    },
+    {
+     "name": "Skeletal miner",
+     "card": "Skeletal miner",
+     "locations": [
+      "Abandoned Mine"
+     ]
+    },
+    {
+     "name": "Giant skeleton (Tarn's Lair)",
+     "card": "Giant skeleton",
+     "locations": [
+      "Tarn's Lair"
+     ]
+    },
+    {
+     "name": "Giant skeleton (Shadow Dungeon)",
+     "card": "Giant skeleton",
+     "locations": [
+      "Shadow Dungeon"
+     ]
+    },
+    {
+     "name": "Skeleton fremennik",
+     "card": "Skeleton fremennik",
+     "locations": [
+      "Brine Rat Cavern"
+     ]
+    },
+    {
+     "name": "Skeleton brute",
+     "card": "Skeleton brute",
+     "locations": [
+      "Ancient Cavern"
+     ]
+    },
+    {
+     "name": "Skeleton thug",
+     "card": "Skeleton thug",
+     "locations": [
+      "Ancient Cavern"
+     ]
+    },
+    {
+     "name": "Skeleton warlord",
+     "card": "Skeleton warlord",
+     "locations": [
+      "Ancient Cavern"
+     ]
+    },
+    {
+     "name": "Skeleton heavy",
+     "card": "Skeleton heavy",
+     "locations": [
+      "Ancient Cavern"
+     ]
+    },
+    {
+     "name": "Skeleton hero",
+     "card": "Skeleton hero",
+     "locations": [
+      "Ancient Cavern"
+     ]
+    },
+    {
+     "name": "Skeleton Hellhound (Vet'ion)",
+     "card": "Skeleton Hellhound",
+     "locations": [
+      "Vet'ion's Rest"
+     ]
+    },
+    {
+     "name": "Greater Skeleton Hellhound (Vet'ion)",
+     "card": "Greater Skeleton Hellhound",
+     "locations": [
+      "Vet'ion's Rest"
+     ]
+    },
+    {
+     "name": "Skeleton Hellhound (Calvar'ion)",
+     "card": "Skeleton Hellhound",
+     "locations": [
+      "Skeletal Tomb"
+     ]
+    },
+    {
+     "name": "Greater Skeleton Hellhound (Calvar'ion)",
+     "card": "Greater Skeleton Hellhound",
+     "locations": [
+      "Skeletal Tomb"
+     ]
+    }
+   ],
+   "locationGates": [
+    {
+     "location": "Ancient Cavern",
+     "quests": [],
+     "skills": {
+      "Firemaking": 35
+     },
+     "note": "'can only be accessed after the player has completed the first part of Barbarian Firemaking, requiring level 35 Firemaking'."
+    },
+    {
+     "location": "Shadow Dungeon",
+     "quests": [
+      "Desert Treasure I"
+     ],
+     "access": "desert",
+     "note": "Needs a ring of visibility (no card)."
+    },
+    {
+     "location": "Jiggig",
+     "quests": [
+      "Zogre Flesh Eaters"
+     ],
+     "note": "Skogres: 'Requires partial completion of Zogre Flesh Eaters. Takes reduced damage (-75%) without using Brutal arrows' (no card)."
+    },
+    {
+     "location": "Waterfall Dungeon",
+     "quests": [
+      "Waterfall Quest"
+     ],
+     "note": "Skeleton Mage: Swan Song (Piscatoris), partial Waterfall Quest, or 60 Sailing (Charred Dungeon)."
+    },
+    {
+     "location": "Skeletal Tomb",
+     "quests": [],
+     "access": "wilderness",
+     "note": "Calvar'ion: Hard Wilderness Diary + one-time 50,000 coins."
+    },
+    {
+     "location": "Lava Dragon Isle",
+     "quests": [],
+     "access": "wilderness",
+     "note": "Vet'ion: Medium Wilderness Diary + one-time 50,000 coins."
+    },
+    {
+     "location": "Brine Rat Cavern",
+     "quests": [
+      "Olaf's Quest"
+     ],
+     "cards": [
+      "Spade"
+     ]
+    },
+    {
+     "location": "Tarn's Lair",
+     "quests": [],
+     "access": "morytania"
+    },
+    {
+     "location": "Ape Atoll Dungeon",
+     "quests": [
+      "Monkey Madness I"
+     ],
+     "access": "ape_atoll"
+    }
+   ],
+   "notes": "All the 'Skeleton (X)' versions resolve to the 'Skeleton' card by NPC id (checked: Tarn's Lair, mage, Barrows, Shayzien Crypts, Melzar's, Ape Atoll, Draynor Manor, Catacombs, SoS, Forthos, Lucien's camp, Wildy Agility Course), so the generated cards are right. The extra monsters all have slayer category Skeletons. The wiki: 'the skeletal hellhounds they summon also count towards the task'. Quest-only skeletons to leave out: Snothead/Snailfeet/Mosschin/Redeyes/Strongbones/Skoblin (Land of the Goblins), Ulfric (Olaf's Quest), Nazastarool and Undead one (Shilo Village), and Skeleton (The Restless Ghost). Skeletal Mystic (Chambers of Xeric, card 'Skeletal Mystics') is categorised Skeletons but is raid-only; I left it out (low confidence). Krystilia: only Wilderness skeletons count (Edgeville Dungeon's Wilderness part, Wilderness Agility Course, Vet'ion and Calvar'ion with their hellhounds).",
+   "confidence": "medium",
+   "wiki": "'Note that the skeletal hellhounds they summon also count towards the task, so every kill at the boss is equal to five skeletons per spawn.'",
+   "task": "Skeletons"
+  },
+  "smoke devil": {
+   "equipment": [
+    {
+     "label": "Facemask or Slayer helmet",
+     "type": "item",
+     "cards": [
+      "Facemask"
+     ],
+     "access": "slayer_helmet"
+    }
+   ],
+   "notes": "List matches the wiki (Smoke devil, Nuclear smoke devil, Thermonuclear smoke devil; Smoke Devil Dungeon only, task-only). GENERATOR ISSUE: Nieve (weight 7) and Duradel (weight 9) assign smoke devils per their Slayer assignments subpages (alternative: Thermonuclear smoke devil) but are missing from assignedBy.",
+   "confidence": "high",
+   "wiki": "'players must wear a facemask or slayer helm when fighting smoke devils, or their attacks will always deal moderate damage that also drains stats'",
+   "task": "Smoke devils"
+  },
+  "sourhog": {
+   "monstersAdd": [
+    {
+     "name": "Sourhog",
+     "card": "Sourhog",
+     "locations": [
+      "Sourhog Cave"
+     ]
+    }
+   ],
+   "equipment": [
+    {
+     "label": "Reinforced goggles (no card) or a slayer helmet",
+     "type": "item",
+     "cards": [],
+     "note": "The wiki says you need reinforced goggles to kill them, or a Slayer helmet after the quest. Reinforced goggles have NO card, so only the Slayer helmet works under Bronzeman. Without eye protection their spit drains Attack/Defence by 90% and hits 20-30.",
+     "access": "slayer_helmet",
+     "routes": [
+      {
+       "label": "Reinforced goggles — no card; free from A Porcine of Interest (more from any Slayer master)",
+       "quests": [
+        "A Porcine of Interest"
+       ]
+      }
+     ]
+    }
+   ],
+   "locationGates": [
+    {
+     "location": "Sourhog Cave",
+     "quests": [
+      "A Porcine of Interest"
+     ],
+     "note": "Just east of Draynor Manor. Sourhogs come from this quest."
+    }
+   ],
+   "notes": "There's no task page. Full list: Sourhog only, and monstersAdd replaces the generated entry, which had empty locations. 'Sourhogs are now only assigned by Spria' (since May 2024).",
+   "confidence": "medium",
+   "wiki": "'A sourhog is a boar-like monster introduced in A Porcine of Interest. It requires reinforced goggles to kill, or a Slayer helmet after the quest.'",
+   "task": "Sourhogs"
+  },
+  "spider": {
+   "monstersRemove": [
+    "Araxxor"
+   ],
+   "monstersAdd": [
+    {
+     "name": "Araxxor",
+     "card": "Araxxor",
+     "locations": [
+      "Morytania Spider Cave"
+     ]
+    }
+   ],
+   "locationGates": [
+    {
+     "location": "Morytania Spider Cave",
+     "quests": [],
+     "note": "Araxytes, Dreadborn Araxyte and Araxxor need 92 Slayer (monster-level requirement). The cave no longer needs A Night at the Theatre."
+    },
+    {
+     "location": "Dragonkin laboratory",
+     "quests": [
+      "Dragon Slayer II"
+     ],
+     "note": "Spider (Ungael) is in the Ungael laboratory (behind Vorkath's arena), not the Lithkren Vault. Location name should be 'Ungael laboratory'."
+    },
+    {
+     "location": "Underground Pass (dungeon)",
+     "quests": [
+      "Underground Pass"
+     ],
+     "note": "Blessed spiders in Kalrag's pit; the pass is quest content (some access after Regicide)."
+    },
+    {
+     "location": "Kalrag",
+     "quests": [
+      "Underground Pass"
+     ],
+     "note": "'Kalrag' is the boss name, not a location; it means Kalrag's lair in the Underground Pass."
+    },
+    {
+     "location": "Braindeath Island",
+     "quests": [
+      "Rum Deal"
+     ],
+     "note": "Fever spiders: need Rum Deal started and 42 Slayer. Slayer gloves (card 'Slayer gloves') must be worn when they're hitting you, or you take 12.5% HP hits and get diseased."
+    },
+    {
+     "location": "Myreque Hideout",
+     "quests": [
+      "In Search of the Myreque"
+     ],
+     "note": "Canifis hideout/caves (during or after)."
+    },
+    {
+     "location": "The Hollows",
+     "quests": [
+      "Priest in Peril"
+     ],
+     "note": "Walkable after Priest in Peril. The cave route needs In Search of the Myreque / In Aid of the Myreque."
+    },
+    {
+     "location": "Sisterhood Sanctuary",
+     "quests": [
+      "Sins of the Father"
+     ],
+     "note": "Slepe/Darkmeyer area. Unsure: general access may only need Priest in Peril."
+    },
+    {
+     "location": "Ogre Enclave",
+     "quests": [
+      "Watchtower"
+     ],
+     "note": "Visited during the Watchtower Quest. After it you can sneak past the guards."
+    },
+    {
+     "location": "Kharazi Jungle",
+     "quests": [
+      "Legends' Quest"
+     ],
+     "note": "Started."
+    },
+    {
+     "location": "Waterfall Dungeon",
+     "quests": [
+      "Waterfall Quest"
+     ],
+     "note": "During/after the quest; a rope is needed unless you have the medium Kandarin Diary."
+    },
+    {
+     "location": "Crandor and Karamja Dungeon",
+     "quests": [],
+     "note": "Karamja side is open. Crandor side needs Dragon Slayer I progress."
+    },
+    {
+     "location": "Wyvern Cave",
+     "quests": [
+      "Bone Voyage"
+     ],
+     "note": "Ice spiders in the southern cave (Fossil Island)."
+    },
+    {
+     "location": "Web Chasm",
+     "quests": [],
+     "note": "Spindel: Hard Wilderness Diary (a spider task doesn't bypass it) + 50k fee."
+    },
+    {
+     "location": "Bone Yard",
+     "quests": [],
+     "note": "Venenatis (Silk Chasm): Medium Wilderness Diary + 50k fee."
+    }
+   ],
+   "notes": "Araxxor's location 'araxyte' is a parse artefact; it's in the Morytania Spider Cave. Araxyte minions spawned in the Araxxor fight don't count. 'Grand Exchange', 'Graveyard of Heroes', 'Wilderness Bandit Camp', 'West Ruins', 'Lumbridge' and 'Falador' etc. are 'near X' location texts for Giant spiders, which is fine. Spider (Ungael) card 'Spider' is a generic card, so check the version. Krystilia: Wilderness only (spider hill ~lvl 46, Venenatis, Spindel, deadly red spiders north of the Lava Maze, etc.).",
+   "confidence": "high",
+   "wiki": "'Araxytes can be killed in place of a spider task, though this option requires 92 Slayer.' Fever spiders: 'Players must wear slayer gloves while fighting them, or face being damaged for 12.5% of their Hitpoints level and becoming diseased.' Ungael laboratory: 'There are also spiders inside'.",
+   "task": "Spiders"
+  },
+  "spiritual creature": {
+   "locationGates": [
+    {
+     "location": "God Wars Dungeon",
+     "quests": [
+      "Troll Stronghold"
+     ],
+     "note": "Wiki GWD: 'Accessing it requires partial completion of Troll Stronghold (defeating Dad)'; entering the main dungeon also needs 60 Strength (boulder) or 60 Agility (crack); a rope the first time."
+    },
+    {
+     "location": "Wilderness God Wars Dungeon",
+     "quests": [],
+     "access": "wilderness",
+     "note": "In the Wilderness (level 28-32)."
+    }
+   ],
+   "notes": "Monster cards are right (Spiritual Ranger/Warrior/Mage). Slayer level per type: ranger 63, warrior 68, mage 83. Every master table says combat 60 (the task infobox's 80 looks stale). Assignment also needs 60 Strength or Agility. Each god area adds its own needs: Armadyl 70 Ranged plus a crossbow and mithril grapple (no card); Bandos 70 Strength plus a hammer; Zamorak 70 Hitpoints. A god-aligned item is 'essentially required' for tolerance. Nieve and Duradel assign this task (their assignment tables), but the generated assignedBy leaves them out.",
+   "confidence": "high",
+   "wiki": "'These creatures are only found in the God Wars Dungeon and the Wilderness God Wars Dungeon.'",
+   "task": "Spiritual creatures"
+  },
+  "terror dog": {
+   "monstersAdd": [
+    {
+     "name": "Terror dog",
+     "card": "Terror dog",
+     "locations": [
+      "Tarn's Lair"
+     ]
+    }
+   ],
+   "locationGates": [
+    {
+     "location": "Tarn's Lair",
+     "quests": [
+      "Haunted Mine",
+      "Lair of Tarn Razorlor"
+     ],
+     "note": "Haunted Mine is required to enter Tarn's Lair. More terror dogs appear after the Lair of Tarn Razorlor miniquest (40 Slayer, not boostable)."
+    }
+   ],
+   "notes": "No task page. Only in Tarn's Lair. Terror dogs don't count for a Dogs task (their own task). Supplies locations for the existing empty entry.",
+   "confidence": "high",
+   "wiki": "'The Haunted Mine quest is required to access Tarn's Lair.' 'Upon completion of the miniquest, more terror dogs can be found in the room.'",
+   "task": "Terror dogs"
+  },
+  "troll": {
+   "monstersRemove": [
+    "Dad",
+    "Arrg",
+    "Ice Troll King"
+   ],
+   "cardFixes": {
+    "Ice troll runt": "Ice troll",
+    "Ice troll male": "Ice troll",
+    "Ice troll female": "Ice troll",
+    "Ice troll grunt": "Ice troll"
+   },
+   "locationGates": [
+    {
+     "location": "Fremennik Isles",
+     "quests": [
+      "The Fremennik Isles"
+     ],
+     "note": "Ice troll runt/male/female/grunt. The wiki says a Neitiznot shield is needed to cut damage from ice troll females (recommended, not a kill requirement)."
+    },
+    {
+     "location": "Ice Troll Caves",
+     "quests": [
+      "The Fremennik Isles"
+     ],
+     "note": "'players need to have completed parts of The Fremennik Isles quest'."
+    },
+    {
+     "location": "Jatizso mine",
+     "quests": [
+      "The Fremennik Isles"
+     ]
+    },
+    {
+     "location": "Trollweiss Dungeon",
+     "quests": [
+      "Troll Romance"
+     ]
+    },
+    {
+     "location": "Ice Path",
+     "quests": [
+      "Desert Treasure I"
+     ],
+     "note": "'Players are required to wear spiked boots to use the ice ledge'. Spiked boots are part of the DT1 ice route. Not worth doing."
+    },
+    {
+     "location": "Troll Stronghold (location)",
+     "quests": [
+      "Troll Stronghold"
+     ]
+    },
+    {
+     "location": "Troll Arena",
+     "quests": [
+      "Troll Stronghold"
+     ],
+     "note": "'Players can enter the area during and after the Troll Stronghold quest.'"
+    },
+    {
+     "location": "Troll arena",
+     "quests": [
+      "Troll Stronghold"
+     ]
+    },
+    {
+     "location": "Trollheim",
+     "quests": [
+      "Troll Stronghold"
+     ],
+     "note": "Probably needs Death Plateau/Troll Stronghold progress to reach (medium confidence)."
+    },
+    {
+     "location": "Enchanted Valley",
+     "quests": [],
+     "note": "River trolls spawn while fishing here. You need a small fishing net and fairy ring access (BKQ). Low XP."
+    }
+   ],
+   "notes": "Fix the card mapping: the Fremennik Isles ice trolls (runt/male/female/grunt) belong to card 'Ice troll', whose variants include those names. Removed: Dad, Arrg and Ice Troll King are one-off quest bosses (Troll Stronghold, Troll Romance, The Fremennik Isles). The wiki says quest trolls count, but they can't be refought outside the Nightmare Zone, and NZ doesn't count. Also drop the 'Nightmare Zone' location. Troll spectators can be attacked ('exactly the same as mountain trolls'). Twig and Berry have HasTask Trolls. Sea trolls do NOT count. No Slayer equipment.",
+   "confidence": "medium",
+   "wiki": "'Trolls fought in quests all count towards the Slayer task, with the exception of sea trolls. The bosses can be fought again in the Nightmare Zone.'; Troll spectators 'may be battled though, and are exactly the same as mountain trolls'.",
+   "task": "Trolls"
+  },
+  "turoth": {
+   "equipment": [
+    {
+     "label": "Leaf-bladed weapon, broad ammo or Magic Dart",
+     "type": "item",
+     "cards": [
+      "Leaf-bladed sword",
+      "Leaf-bladed spear",
+      "Leaf-bladed battleaxe",
+      "Broad arrows",
+      "Broad bolts",
+      "Amethyst broad bolts",
+      "Slayer's staff",
+      "Staff of the dead",
+      "Staff of light",
+      "Staff of balance"
+     ],
+     "note": "Turoth can only be damaged by leaf-bladed weapons, broad arrows/bolts or Magic Dart (needs a Slayer's staff / Staff of the dead / Toxic staff (alias) / Staff of light / Staff of balance). Broad ammo also needs a bow/crossbow."
+    }
+   ],
+   "notes": "Monster list correct (Turoth + superior Spiked Turoth). Only in the Fremennik Slayer Dungeon, which has no quest gate.",
+   "confidence": "high",
+   "wiki": "'Turoth can only be damaged with leaf-bladed weapons, broad arrows and bolts, or the Magic Dart spell. Attacking with any other weapons or spells will always deal 0 damage.'",
+   "task": "Turoth"
+  },
+  "tzhaar": {
+   "cardFixes": {
+    "TzHaar-Mej (monster)": "TzHaar-Mej"
+   },
+   "monstersAdd": [
+    {
+     "name": "Reanimated TzHaar",
+     "card": null,
+     "locations": [
+      "Dark Altar"
+     ]
+    }
+   ],
+   "notes": "The wiki NPC 'TzHaar-Mej (monster)' is the 'TzHaar-Mej' card (ids 2154-2160). Jad and Zuk are optional choices when the task is offered: 'all monsters in the challenge will grant Slayer experience ... though only the final bosses count for task completion'. So the Jal-/Tz-/Yt- wave monsters don't count; leave them out. Zuk is only offered after one prior Zuk kill. Level 221 TzHaar-Ket in the inner city need a one-time Fire cape shown to the guard. Reanimated TzHaar is categorised TzHaar on the wiki (card null). Hot Stuff makes Duradel, Nieve and Chaeldar assign it, so the generated assignedBy is missing Nieve and Duradel.",
+   "confidence": "high",
+   "wiki": "Slayer Rewards: 'Duradel, Nieve, and Chaeldar will be able to assign TzHaar as your task.'",
+   "task": "Tzhaar"
+  },
+  "vampyre": {
+   "monstersRemove": [
+    "Vampyre Juvenile"
+   ],
+   "monsterEquipment": {
+    "Vampyre Juvinate": [
+     {
+      "label": "Silver weapon (or Efaritay's aid)",
+      "type": "item",
+      "cards": [
+       "Silver sickle",
+       "Silver bolts",
+       "Darklight",
+       "Arclight",
+       "Emberlight",
+       "Wolfbane",
+       "Blisterwood flail",
+       "Sunspear",
+       "Topaz ring"
+      ],
+      "note": "Tier 2. Efaritay's aid is a version of the 'Topaz ring' card. Blessed axe, Rod of Ivandis, Silverlight, Ivandis flail and Hallowed flail have no card. Silver bolts also need a crossbow."
+     }
+    ],
+    "Vyrewatch": [
+     {
+      "label": "Tier 3 weapon",
+      "type": "item",
+      "cards": [
+       "Blisterwood flail",
+       "Sunspear"
+      ],
+      "note": "Blisterwood sickle is a version of the Blisterwood flail card; Ivandis flail and Hallowed flail have no card"
+     }
+    ],
+    "Vyrewatch Sentinel": [
+     {
+      "label": "Tier 3 weapon",
+      "type": "item",
+      "cards": [
+       "Blisterwood flail",
+       "Sunspear"
+      ]
+     }
+    ],
+    "Venator": [
+     {
+      "label": "Tier 3 weapon",
+      "type": "item",
+      "cards": [
+       "Blisterwood flail",
+       "Sunspear"
+      ]
+     }
+    ]
+   },
+   "locationGates": [
+    {
+     "location": "Burgh de Rott",
+     "quests": [
+      "In Aid of the Myreque"
+     ]
+    },
+    {
+     "location": "Darkmeyer",
+     "quests": [
+      "Sins of the Father"
+     ],
+     "note": "Started for access; Vyrewatch Sentinels need it completed."
+    },
+    {
+     "location": "Darkmeyer",
+     "monster": "Vyrewatch Sentinel",
+     "quests": [
+      "Sins of the Father"
+     ],
+     "note": "Completion required."
+    },
+    {
+     "location": "Meiyerditch",
+     "quests": [
+      "Darkness of Hallowvale"
+     ],
+     "note": "Started."
+    },
+    {
+     "location": "Apsul Hunting Ground",
+     "quests": [
+      "The Blood Moon Rises"
+     ],
+     "note": "Vampyrium; completion required (Venators)."
+    },
+    {
+     "location": "Virer Hunting Ground",
+     "quests": [
+      "The Blood Moon Rises"
+     ],
+     "note": "Vampyrium; completion required (Venators)."
+    },
+    {
+     "location": "God Wars Dungeon",
+     "quests": [
+      "Troll Stronghold"
+     ],
+     "note": "Partial completion of Troll Stronghold plus 60 Strength or 60 Agility; a Rope is needed on the first visit. GWD-related Slayer assignments need Death Plateau."
+    },
+    {
+     "location": "Wilderness God Wars Dungeon",
+     "quests": [],
+     "note": "60 Strength or 60 Agility to enter; Wilderness."
+    }
+   ],
+   "notes": "Equipment differs by vampyre tier, so it is given per monster (monsterEquipment) and not task-wide. Feral vampyres take any weapon. Vampyre Juvenile only counts if it is held with the rod of Ivandis/Ivandis flail special and killed with a Guthix balance (neither rod nor flail has a card), so it is recommended for removal. Without Actual Vampyre Slayer only Mazchna/Vannaka assign it.",
+   "confidence": "medium",
+   "wiki": "'Tier 2 vampyres ... must be harmed with silver weapons at minimum ... Tier 3 vampyres ... require the Ivandis flail as a minimum'; Juvenile: 'Does not give Slayer experience nor count for task progression unless...'",
+   "task": "Vampyres"
+  },
+  "venator": {
+   "monstersAdd": [
+    {
+     "name": "Blood-starved venator",
+     "card": "Blood-starved venator",
+     "locations": [
+      "Apsul Hunting Ground",
+      "Virer Hunting Ground"
+     ]
+    }
+   ],
+   "equipment": [
+    {
+     "label": "Vampyre-tier-3 weapon (blisterwood / sunspear / flails)",
+     "type": "item",
+     "cards": [
+      "Blisterwood stake",
+      "Sunspear",
+      "Blisterwood flail"
+     ],
+     "note": "The Ivandis flail and hallowed flail also work but have no card."
+    }
+   ],
+   "notes": "Add the superior 'blood-starved venator'. Vampyrium is reached during The Blood Moon Rises. Venators also count on a Vampyre task with the 'Actual Vampyre Slayer' unlock, which is outside this task. Efaritay's aid is only recommended.",
+   "confidence": "high",
+   "wiki": "'Can only be damaged by one of the following: Blisterwood stakes, the Sunspear, the Ivandis flail, the blisterwood flail, or the hallowed flail'; 'Has a superior variant, the blood-starved venator'.",
+   "task": "Venators"
+  },
+  "wall beast": {
+   "monstersAdd": [
+    {
+     "name": "Wall beast",
+     "card": "Wall beast",
+     "locations": [
+      "Lumbridge Swamp Caves"
+     ]
+    }
+   ],
+   "equipment": [
+    {
+     "label": "Spiny helmet or Slayer helmet",
+     "type": "item",
+     "cards": [
+      "Spiny helmet"
+     ],
+     "note": "Needed to block the initial grab. Without one you're grabbed and hurt without a chance to retaliate.",
+     "access": "slayer_helmet"
+    },
+    {
+     "label": "Light source",
+     "type": "item",
+     "cards": [
+      "Candle",
+      "Torch",
+      "Oil lamp",
+      "Candle lantern",
+      "Oil lantern",
+      "Bullseye lantern",
+      "Mining helmet",
+      "Kandarin headgear",
+      "Bruma torch",
+      "Abyssal lantern"
+     ],
+     "note": "Lumbridge Swamp Caves (the only location) are dark. A Tinderbox is needed to light most of these; a lantern is safest because of gas explosions."
+    }
+   ],
+   "notes": "Generated monsters list was empty. Wall beasts are only in the Lumbridge Swamp Caves (Mazchna only). The light source is a location requirement, but since it's the only location it effectively gates the task. A Rope is needed the first time you enter. The infobox combat req is 5 Defence (to wear the spiny helmet), not 30 combat.",
+   "confidence": "high",
+   "wiki": "'A spiny helmet or Slayer helmet is required to start fighting one; without these helmets, a player will be grabbed and hurt without a chance to retaliate.' Lumbridge Swamp Caves: 'The caves require a light source.'",
+   "task": "Wall beasts"
+  },
+  "warped creature": {
+   "locationGates": [
+    {
+     "location": "Poison Waste Dungeon",
+     "quests": [
+      "The Path of Glouphrie"
+     ],
+     "note": "Reached by spirit tree to the Poison Waste; 'Partial completion of The Path of Glouphrie is required'."
+    }
+   ],
+   "notes": "Monsters match (Warped Tortoise/Terrorbird + Mutated superiors). Required item: 'Players must have the crystal chime in their inventory to fight them, otherwise they will be invulnerable.' The crystal chime has NO card in the catalog, so I didn't add an equipment object. Add one with cards:[] only if the planner treats card-less items as a gate. Earmuffs or a Slayer helmet are only recommended (they halve the terrorbirds' max hit).",
+   "confidence": "high",
+   "wiki": "'Players must have the crystal chime in their inventory to fight them, otherwise they will be invulnerable.'",
+   "task": "Warped creatures"
+  },
+  "waterfiend": {
+   "locationGates": [
+    {
+     "location": "Ancient Cavern",
+     "quests": [
+      "Barbarian Training"
+     ],
+     "note": "Needs the first part of Barbarian Firemaking (35 Firemaking), then asking Otto about pyre ships. Access is also needed for the task to be assigned at all."
+    },
+    {
+     "location": "Iorwerth Dungeon",
+     "quests": [
+      "Song of the Elves"
+     ]
+    }
+   ],
+   "notes": "List matches the wiki (Waterfiend: Ancient Cavern, Kraken Cove, Iorwerth Dungeon). No required equipment.",
+   "confidence": "high",
+   "wiki": "Ancient Cavern: 'can only be accessed after the player has completed the first part of Barbarian Firemaking, requiring level 35 Firemaking'",
+   "task": "Waterfiends"
+  },
+  "werewolve": {
+   "monstersAdd": [
+    {
+     "name": "Werewolf",
+     "card": "Werewolf",
+     "locations": [
+      "Canifis",
+      "God Wars Dungeon",
+      "Wilderness God Wars Dungeon"
+     ]
+    }
+   ],
+   "locationGates": [
+    {
+     "location": "Canifis",
+     "quests": [
+      "Priest in Peril"
+     ]
+    },
+    {
+     "location": "God Wars Dungeon",
+     "quests": [
+      "Troll Stronghold"
+     ],
+     "note": "GWD werewolves are aggressive unless you wear a Zamorak item."
+    }
+   ],
+   "notes": "There's no task page. Full list: Werewolf only, and monstersAdd replaces the generated entry, which had empty locations. Canifis werewolves count only if killed after they transform (a Wolfbane kill in human form doesn't count). Bronzeman catch: in Canifis you click attack on the human NPC (Boris, Eduard, Galina, etc.; all 20 have their own cards), so Bronzeman may check that human card rather than 'Werewolf'. The GWD werewolves avoid this. Werewolves do NOT count for wolf tasks.",
+   "confidence": "medium",
+   "wiki": "'They appear as level 24 humans wandering the village until they are attacked, causing them to transform into level 88 werewolves'; 'they will only count towards a werewolf Slayer task if killed after transforming'; 'Werewolves can also be found in the God Wars Dungeon (and Wilderness version).'",
+   "task": "Werewolves"
+  },
+  "wolve": {
+   "cardFixes": {
+    "Wolves": "Wolf",
+    "White wolves": "White wolf"
+   },
+   "locationGates": [
+    {
+     "location": "Wolf Den",
+     "quests": [
+      "Meat and Greet"
+     ],
+     "note": "Dire wolves inside the den only after Meat and Greet. The ones at the entrance north of Ralos' Rise mine need nothing."
+    },
+    {
+     "location": "Trollweiss Mountain",
+     "quests": [
+      "Troll Romance"
+     ],
+     "note": "Ice wolves at the top; also needs a sled."
+    },
+    {
+     "location": "Ice Path",
+     "quests": [
+      "Desert Treasure I"
+     ],
+     "note": "Ice Path needs spiked boots (no card found)."
+    },
+    {
+     "location": "God Wars Dungeon",
+     "quests": [
+      "Troll Stronghold"
+     ],
+     "note": "Ice wolves outside the GWD entrance; Trollheim access."
+    },
+    {
+     "location": "Kharazi Jungle",
+     "quests": [
+      "Legends' Quest"
+     ],
+     "note": "Jungle wolves; Legends' Quest started."
+    },
+    {
+     "location": "Weiss",
+     "quests": [
+      "Making Friends with My Arm"
+     ],
+     "note": "The ice wolves at Weiss are non-attackable, so drop this location."
+    }
+   ],
+   "notes": "The generic 'Wolves' entry should use card 'Wolf', and 'White wolves' should use 'White wolf' (both exist). 'saltpetre' is a parse artefact ('near the saltpetre mines', south of Forthos Dungeon), so drop it.",
+   "confidence": "high",
+   "wiki": "Ice wolf locations include 'Weiss (non-attackable)'. Trollweiss Mountain: 'The Troll Romance quest must be completed, and players must have a sled'. Dire Wolf: 'Wolf Den (after completing Meat and Greet)'.",
+   "task": "Wolves"
+  },
+  "wyrm": {
+   "locationGates": [
+    {
+     "location": "Karuulm Slayer Dungeon",
+     "quests": [],
+     "access": "kourend",
+     "cards": [
+      "Boots of stone",
+      "Boots of brimstone",
+      "Granite boots"
+     ],
+     "note": "Wiki: beyond the entrance chamber players 'must wear the boots of stone, boots of brimstone or granite boots to protect themselves from the extreme heat' (not needed after the elite Kourend & Kebos Diary)."
+    },
+    {
+     "location": "Wyrmscraig Cavern",
+     "quests": [
+      "Fallen From Grace"
+     ],
+     "access": "sailing",
+     "note": "Wiki: 'accessible after partial completion of Fallen From Grace'; Wyrmscraig island needs 62 Sailing."
+    },
+    {
+     "location": "Neypotzli",
+     "quests": [
+      "Perilous Moons"
+     ],
+     "access": "varlamore",
+     "note": "Wiki Neypotzli: 'Accessing Neypotzli requires having gained access during the Perilous Moons quest' (partial)."
+    },
+    {
+     "location": "Charred Dungeon",
+     "quests": [],
+     "access": "sailing",
+     "skills": {
+      "Sailing": 60
+     },
+     "note": "A rope is required on first entry."
+    },
+    {
+     "location": "Wyrmscraig",
+     "quests": [],
+     "access": "sailing",
+     "skills": {
+      "Sailing": 62
+     }
+    }
+   ],
+   "konarLocations": [
+    "Karuulm Slayer Dungeon",
+    "Neypotzli",
+    "Charred Dungeon",
+    "Wyrmscraig Cavern"
+   ],
+   "notes": "Monsters match. Earthbound Cavern is part of Neypotzli (Perilous Moons). Boots of stone/brimstone/granite only apply in the Karuulm Slayer Dungeon. Konar: Neypotzli gives Wyrmlings, Charred Dungeon gives Lava Strykewyrms, Wyrmscraig Cavern gives both. The Bloodthirsty Shadow Wyrm is league-only.",
+   "confidence": "high",
+   "wiki": "Karuulm: players 'must wear the boots of stone, boots of brimstone or granite boots'.",
+   "task": "Wyrms"
+  },
+  "zombie": {
+   "locationGates": [
+    {
+     "location": "Ape Atoll Dungeon",
+     "quests": [
+      "Monkey Madness I"
+     ],
+     "note": "Partial."
+    },
+    {
+     "location": "Temple of Marimbo Dungeon",
+     "quests": [
+      "Monkey Madness I"
+     ],
+     "note": "Partial."
+    },
+    {
+     "location": "Shade Catacombs",
+     "quests": [
+      "Shades of Mort'ton"
+     ],
+     "note": "Undead Zealot; also needs a shade key."
+    },
+    {
+     "location": "Ungael",
+     "quests": [
+      "Dragon Slayer II"
+     ],
+     "note": "Vorkath; partial."
+    },
+    {
+     "location": "Braindeath Island",
+     "quests": [
+      "Rum Deal"
+     ],
+     "note": "Partial."
+    },
+    {
+     "location": "Harmony Island",
+     "quests": [
+      "Rum Deal",
+      "The Great Brain Robbery"
+     ],
+     "note": "The variant table says Rum Deal, the location table says The Great Brain Robbery (partial). Medium confidence on which one."
+    },
+    {
+     "location": "Melzar's Maze",
+     "quests": [
+      "Dragon Slayer I"
+     ],
+     "note": "Zombie rats; partial."
+    },
+    {
+     "location": "Jiggig",
+     "quests": [
+      "Zogre Flesh Eaters"
+     ],
+     "note": "Partial."
+    },
+    {
+     "location": "Jiggig Dungeon",
+     "quests": [
+      "Zogre Flesh Eaters"
+     ],
+     "note": "Partial."
+    },
+    {
+     "location": "Zemouregal's Base",
+     "quests": [
+      "Defender of Varrock"
+     ],
+     "note": "Partial."
+    },
+    {
+     "location": "Zemouregal's Fort",
+     "quests": [
+      "The Curse of Arrav"
+     ],
+     "note": "Completion."
+    },
+    {
+     "location": "Shilo Village (location)",
+     "quests": [
+      "Shilo Village"
+     ],
+     "note": "Completion. Temple of Ah Za Rhoon / Rashiliyia's Tomb only during the quest."
+    },
+    {
+     "location": "Glarial's Tomb",
+     "quests": [
+      "Waterfall Quest"
+     ],
+     "note": "Partial; no weapons, armour or runes allowed."
+    },
+    {
+     "location": "West Ardougne",
+     "quests": [
+      "Plague City"
+     ],
+     "note": "Partial."
+    },
+    {
+     "location": "Wizards' Guild",
+     "quests": [],
+     "note": "66 Magic to enter; zombies there can't be meleed."
+    }
+   ],
+   "notes": "List matches the wiki variant table (Zombie pirate (Harmony Island) is covered by the 'Zombie pirate' card, whose wiki page is that one). 'Zombies Champion does not count' is correctly absent. Undead Lumberjack counts but gives 0 XP. Krystilia's zombies: Wilderness only (Graveyard of Shadows, eastern Ruins, Chaos Temple zombie pirates).",
+   "confidence": "high",
+   "wiki": "'The Zombies Champion does not count towards the task.' Per-variant 'Requires partial completion of ...' notes quoted in the gates",
+   "task": "Zombies"
+  }
+ },
+ "unlockInfo": {
+  "Actual Vampyre Slayer": {
+   "cost": 80,
+   "enables": "Vampyres",
+   "masters": [
+    "Konar",
+    "Duradel",
+    "Nieve",
+    "Chaeldar"
+   ],
+   "notes": "The wiki notes a bug: the in-game menu lists Mortimer but the unlock doesn't affect him."
+  },
+  "Basilocked": {
+   "cost": 80,
+   "enables": "Basilisks",
+   "masters": [
+    "Konar",
+    "Duradel",
+    "Nieve"
+   ]
+  },
+  "Hot stuff": {
+   "cost": 100,
+   "enables": "TzHaar",
+   "masters": [
+    "Duradel",
+    "Nieve",
+    "Chaeldar"
+   ],
+   "notes": "'You will be offered a chance to slay TzTok-Jad' (and TzKal-Zuk after 1 Zuk kill)."
+  },
+  "Like a boss": {
+   "cost": 200,
+   "enables": "Bosses (boss slayer tasks)",
+   "masters": [
+    "Konar",
+    "Duradel",
+    "Krystilia",
+    "Nieve"
+   ]
+  },
+  "Lured In": {
+   "cost": 80,
+   "enables": "Aquanites",
+   "masters": [
+    "Nieve",
+    "Duradel"
+   ],
+   "notes": "Mortimer assigns aquanites without it."
+  },
+  "Reptile got ripped": {
+   "cost": 75,
+   "enables": "Lizardmen",
+   "masters": [
+    "Konar",
+    "Duradel",
+    "Nieve",
+    "Chaeldar"
+   ]
+  },
+  "Seeing red": {
+   "cost": 50,
+   "enables": "Red dragons",
+   "masters": [
+    "Konar",
+    "Duradel",
+    "Nieve"
+   ]
+  },
+  "Warped Reality": {
+   "cost": 60,
+   "enables": "Warped creatures",
+   "masters": [
+    "Konar",
+    "Duradel",
+    "Nieve",
+    "Chaeldar"
+   ],
+   "notes": "Only after The Path of Glouphrie. Mortimer assigns them without it."
+  },
+  "Watch the birdie": {
+   "cost": 80,
+   "enables": "Aviansie",
+   "masters": [
+    "Konar",
+    "Duradel",
+    "Nieve",
+    "Chaeldar",
+    "Krystilia"
+   ],
+   "notes": "'Requires level 60 Agility or 60 Strength to unlock.'"
+  },
+  "Wings Spread": {
+   "cost": 80,
+   "enables": "Gryphons",
+   "masters": [
+    "Nieve",
+    "Duradel"
+   ],
+   "notes": "Only after Troubled Tortugans. Vannaka, Chaeldar and Mortimer assign gryphons without it."
+  }
+ }
+}

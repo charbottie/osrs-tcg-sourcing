@@ -57,7 +57,8 @@ _PLINK_RE = re.compile(r"\{\{[Pp]link\|([^}|]+)")
 
 def _clean(text: str) -> str:
     text = re.sub(r"\{\{efn[^}]*\}\}", "", text)
-    text = re.sub(r"<ref[^>]*>.*?</ref>|<ref[^/]*/>", "", text, flags=re.S)
+    text = re.sub(r"<ref[^>]*/>", "", text)  # self-closing refs first, or the paired pattern swallows rows
+    text = re.sub(r"<ref[^>]*>.*?</ref>", "", text, flags=re.S)
     return text
 
 

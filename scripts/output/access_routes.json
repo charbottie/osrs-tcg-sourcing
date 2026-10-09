@@ -765,5 +765,37 @@
       "https://oldschool.runescape.wiki/w/Mage_of_Zamorak",
       "https://oldschool.runescape.wiki/w/Enter_the_Abyss"
     ]
+  },
+  "sailing": {
+    "label": "Sailing islands",
+    "routes": [
+      {
+        "label": "Sail there with your own boat (Sailing) — not tracked yet",
+        "manual": true
+      }
+    ]
+  },
+  "slayer_helmet": {
+    "label": "Slayer helmet",
+    "routes": [
+      {
+        "label": "Slayer helmet — as an ironman you craft it, so every component card is needed (Crafting 55 + the Malevolent masquerade unlock)",
+        "cards": [
+          "Slayer helmet",
+          "Nose peg",
+          "Facemask",
+          "Earmuffs",
+          "Spiny helmet",
+          "Enchanted gem",
+          "Black mask"
+        ],
+        "skills": {
+          "Crafting": 55
+        }
+      }
+    ],
+    "sources": [
+      "Slayer helmet"
+    ]
   }
 }
