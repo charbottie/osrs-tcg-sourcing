@@ -519,16 +519,23 @@ class Handler(http.server.SimpleHTTPRequestHandler):
         if path in self._pack_img_cache:
             data = self._pack_img_cache[path]
         else:
-            try:
-                req = urllib.request.Request(
-                    f"https://osrs-tcg.net{path}",
-                    headers={"User-Agent": "osrs-tcg-preview/1.0"},
-                )
-                with urllib.request.urlopen(req, timeout=10) as r:
-                    data = r.read()
-                Handler._pack_img_cache[path] = data
-            except Exception:
-                self.send_error(502)
+            data = None
+            for attempt in range(3):  # the TCG site occasionally times out — retry before failing
+                try:
+                    req = urllib.request.Request(
+                        f"https://osrs-tcg.net{path}",
+                        headers={"User-Agent": "osrs-tcg-preview/1.0"},
+                    )
+                    with urllib.request.urlopen(req, timeout=10) as r:
+                        data = r.read()
+                    Handler._pack_img_cache[path] = data
+                    break
+                except Exception:
+                    time.sleep(0.5 * (attempt + 1))
+            if data is None:
+                self.send_response(502)
+                self.send_header("Cache-Control", "no-store")  # never let a failure stick in the browser cache
+                self.end_headers()
                 return
         self.send_response(200)
         self.send_header("Content-Type", "image/png")

@@ -1,0 +1,4130 @@
+{
+ "_comment": "Curated boss encounters for generate_bosses.py. Requirements use the quest model (cards = any one, mode:'all', optional, routes, access, spells, tool, group). wikiBosses = rows of the wiki Boss page that make up this encounter. Quests/levels here are merged with the wiki's.",
+ "encounters": [
+  {
+   "name": "Fight Caves",
+   "category": "wave",
+   "note": "Solo wave content — all spawn cards required",
+   "wikiBosses": [
+    "TzTok-Jad"
+   ],
+   "requirements": [
+    {
+     "label": "Tz-Kih",
+     "cards": [
+      "Tz-Kih"
+     ],
+     "type": "enemy"
+    },
+    {
+     "label": "Tz-Kek",
+     "cards": [
+      "Tz-Kek"
+     ],
+     "type": "enemy"
+    },
+    {
+     "label": "Tok-Xil",
+     "cards": [
+      "Tok-Xil"
+     ],
+     "type": "enemy"
+    },
+    {
+     "label": "Yt-MejKot",
+     "cards": [
+      "Yt-MejKot"
+     ],
+     "type": "enemy"
+    },
+    {
+     "label": "Ket-Zek",
+     "cards": [
+      "Ket-Zek"
+     ],
+     "type": "enemy"
+    },
+    {
+     "label": "Yt-HurKot",
+     "cards": [
+      "Yt-HurKot"
+     ],
+     "type": "enemy"
+    },
+    {
+     "label": "TzTok-Jad",
+     "cards": [
+      "TzTok-Jad"
+     ],
+     "type": "enemy"
+    }
+   ],
+   "consideredNotRequired": [
+    "TzHaar-Mej-Jal (fire cape gamble only; entering the cave is via the cave entrance object)"
+   ]
+  },
+  {
+   "name": "Inferno",
+   "category": "wave",
+   "note": "Fire cape is handed to TzHaar-Ket-Keh (no card) on first entry, a one-time cost. Ironman: the cape comes from the TzHaar Fight Cave (TzTok-Jad). Ancestral Glyph (Zuk's shield) has no card.",
+   "wikiBosses": [
+    "TzKal-Zuk"
+   ],
+   "requirements": [
+    {
+     "label": "Jal-Nib",
+     "cards": [
+      "Jal-Nib"
+     ],
+     "type": "enemy"
+    },
+    {
+     "label": "Jal-MejRah",
+     "cards": [
+      "Jal-MejRah"
+     ],
+     "type": "enemy"
+    },
+    {
+     "label": "Jal-Ak",
+     "cards": [
+      "Jal-Ak"
+     ],
+     "type": "enemy"
+    },
+    {
+     "label": "Jal-ImKot",
+     "cards": [
+      "Jal-ImKot"
+     ],
+     "type": "enemy"
+    },
+    {
+     "label": "Jal-Xil",
+     "cards": [
+      "Jal-Xil"
+     ],
+     "type": "enemy"
+    },
+    {
+     "label": "Jal-Zek",
+     "cards": [
+      "Jal-Zek"
+     ],
+     "type": "enemy"
+    },
+    {
+     "label": "JalTok-Jad",
+     "cards": [
+      "JalTok-Jad"
+     ],
+     "type": "enemy"
+    },
+    {
+     "label": "Jal-MejJak",
+     "cards": [
+      "Jal-MejJak"
+     ],
+     "type": "enemy"
+    },
+    {
+     "label": "Jal-AkRek-Mej",
+     "cards": [
+      "Jal-AkRek-Mej"
+     ],
+     "type": "enemy"
+    },
+    {
+     "label": "Jal-AkRek-Ket",
+     "cards": [
+      "Jal-AkRek-Ket"
+     ],
+     "type": "enemy"
+    },
+    {
+     "label": "Jal-AkRek-Xil",
+     "cards": [
+      "Jal-AkRek-Xil"
+     ],
+     "type": "enemy"
+    },
+    {
+     "label": "TzKal-Zuk",
+     "cards": [
+      "TzKal-Zuk"
+     ],
+     "type": "enemy"
+    },
+    {
+     "label": "Yt-HurKot",
+     "cards": [
+      "Yt-HurKot"
+     ],
+     "type": "enemy"
+    },
+    {
+     "label": "Fire cape",
+     "cards": [
+      "Fire cape"
+     ],
+     "type": "item"
+    },
+    {
+     "label": "TzHaar-Ket (show fire cape at the inner-city gate)",
+     "type": "npc",
+     "cards": [
+      "TzHaar-Ket"
+     ],
+     "note": "Showing a fire cape to the TzHaar-Ket guards opens inner Mor Ul Rek, where the Inferno entrance is. Not certain this counts as talking to the guard."
+    }
+   ],
+   "consideredNoCard": [
+    "Ancestral Glyph",
+    "TzHaar-Ket-Keh"
+   ]
+  },
+  {
+   "name": "Fortis Colosseum",
+   "category": "wave",
+   "area": "Varlamore",
+   "note": "Children of the Sun required (Varlamore). Talk to Minimus to start. Solo wave content: 11 waves of regular enemies, then Sol Heredit on wave 12. You can end a run between waves and keep the loot so far. The Bees! and Totemic modifiers add a Bee Swarm / healing totem, but modifiers are your choice.",
+   "quests": [
+    "Children of the Sun"
+   ],
+   "wikiBosses": [
+    "Sol Heredit"
+   ],
+   "requirements": [
+    {
+     "label": "Fremennik warband archer",
+     "cards": [
+      "Fremennik warband archer"
+     ],
+     "type": "enemy"
+    },
+    {
+     "label": "Fremennik warband berserker",
+     "cards": [
+      "Fremennik warband berserker"
+     ],
+     "type": "enemy"
+    },
+    {
+     "label": "Fremennik warband seer",
+     "cards": [
+      "Fremennik warband seer"
+     ],
+     "type": "enemy"
+    },
+    {
+     "label": "Jaguar warrior",
+     "cards": [
+      "Jaguar warrior"
+     ],
+     "type": "enemy"
+    },
+    {
+     "label": "Javelin Colossus",
+     "cards": [
+      "Javelin Colossus"
+     ],
+     "type": "enemy"
+    },
+    {
+     "label": "Manticore",
+     "cards": [
+      "Manticore"
+     ],
+     "type": "enemy"
+    },
+    {
+     "label": "Minotaur",
+     "cards": [
+      "Minotaur"
+     ],
+     "type": "enemy"
+    },
+    {
+     "label": "Serpent shaman",
+     "cards": [
+      "Serpent shaman"
+     ],
+     "type": "enemy"
+    },
+    {
+     "label": "Shockwave Colossus",
+     "cards": [
+      "Shockwave Colossus"
+     ],
+     "type": "enemy"
+    },
+    {
+     "label": "Sol Heredit",
+     "cards": [
+      "Sol Heredit"
+     ],
+     "type": "enemy"
+    },
+    {
+     "label": "Minimus (Colosseum Master)",
+     "type": "npc",
+     "cards": [
+      "Minimus"
+     ]
+    }
+   ],
+   "consideredNotRequired": [
+    "Bee Swarm (only with the Bees! modifier, which you choose; one-hit kill, but you don't have to kill it)",
+    "Gladiators / guards in the lobby (scenery NPCs)",
+    "Gloria, Ueman, Seia (lobby NPCs, optional)"
+   ],
+   "consideredNoCard": [
+    "Healing totem (Totemic modifier)",
+    "Minotaur (Fortis Colosseum): covered by the 'Minotaur' card (variant 12813)"
+   ]
+  },
+  {
+   "name": "Chambers of Xeric",
+   "category": "raid",
+   "area": "Kourend",
+   "note": "Room monsters vary each raid. Every combat room (Tekton, Vespula, Vasa, Vanguards [no card], Mystics, Shamans, Muttadiles, Guardians) and puzzle room (Crabs, Tightrope, Ice demon, Thieving) can appear, so all their requirements apply: a pickaxe for the Guardians, an axe and kindling (plus the tinderbox spawn) for the Ice demon braziers, and cavern grubs for the corrupted scavenger. Herbs, mushrooms and ingredients gathered inside make the CoX potions, and you need their cards to pick them up.",
+   "relatedCards": [
+    "Overload",
+    "Xeric's aid",
+    "Prayer enhance",
+    "Stinkhorn mushroom",
+    "Cicely",
+    "Endarkened juice",
+    "Kindling",
+    "Mallignum root plank"
+   ],
+   "wikiBosses": [
+    "Muttadile",
+    "Tekton",
+    "Vasa Nistirio",
+    "Vespula",
+    "Great Olm",
+    "Vanguard"
+   ],
+   "requirements": [
+    {
+     "label": "Ice demon",
+     "cards": [
+      "Ice demon"
+     ],
+     "type": "enemy"
+    },
+    {
+     "label": "Muttadile",
+     "cards": [
+      "Muttadile"
+     ],
+     "type": "enemy"
+    },
+    {
+     "label": "Skeletal Mystics",
+     "cards": [
+      "Skeletal Mystics"
+     ],
+     "type": "enemy"
+    },
+    {
+     "label": "Tekton",
+     "cards": [
+      "Tekton"
+     ],
+     "type": "enemy"
+    },
+    {
+     "label": "Vasa Nistirio",
+     "cards": [
+      "Vasa Nistirio"
+     ],
+     "type": "enemy"
+    },
+    {
+     "label": "Vespula",
+     "cards": [
+      "Vespula"
+     ],
+     "type": "enemy"
+    },
+    {
+     "label": "Scavenger beast",
+     "type": "enemy",
+     "cards": [
+      "Scavenger beast"
+     ],
+     "optional": true,
+     "note": "Scavenger rooms are corridors. The beasts drop optional supplies (planks, nets, rods, etc.)."
+    },
+    {
+     "label": "Lizardman shaman",
+     "cards": [
+      "Lizardman shaman"
+     ],
+     "type": "enemy"
+    },
+    {
+     "label": "Great Olm",
+     "cards": [
+      "Great Olm"
+     ],
+     "type": "enemy"
+    },
+    {
+     "label": "Guardian",
+     "type": "enemy",
+     "cards": [
+      "Guardian"
+     ]
+    },
+    {
+     "label": "Any pickaxe (Guardians)",
+     "type": "item",
+     "tool": "Pickaxe",
+     "note": "Only pickaxe damage hurts the Guardians. An iron pickaxe spawns next to them, but you still need a pickaxe card to use it."
+    },
+    {
+     "label": "Kindling (Ice demon braziers)",
+     "type": "item",
+     "cards": [
+      "Kindling"
+     ],
+     "note": "Card 'Kindling' is item 20799, the CoX kindling. You must put it in the braziers to thaw the Ice demon."
+    },
+    {
+     "label": "Any axe (saplings for kindling)",
+     "type": "item",
+     "tool": "Axe",
+     "note": "A bronze axe spawns in the Ice demon room. Using it still needs an axe card."
+    },
+    {
+     "label": "Cavern grubs (Thieving room)",
+     "type": "item",
+     "cards": [
+      "Cavern grubs"
+     ],
+     "note": "You put the grubs in the trough to feed the corrupted scavenger. The scavenger has no card."
+    },
+    {
+     "label": "Tinderbox (light braziers)",
+     "type": "item",
+     "cards": [
+      "Tinderbox"
+     ],
+     "note": "The room has a tinderbox spawn."
+    }
+   ],
+   "consideredNotRequired": [
+    "Butterfly net / Fishing rod (optional food gathering)",
+    "Deathly mage (Tightrope room; killing them is only recommended and the keystone kills survivors: 'Some advanced strategies exist where none of the monsters need to be killed')",
+    "Hammer (Crab room stun aid; optional, and a hammer spawns in the room)",
+    "Lovakengj minecart (20 coins, optional; walking or the BLS fairy ring both work)",
+    "Meat tree (Muttadile room; chopping it is only for points)",
+    "Mountain Guide / Captain Rimor (optional transport and raid scaling)",
+    "Spawn (Lizardman shaman spawns explode; you avoid them, you don't kill them)"
+   ],
+   "consideredNoCard": [
+    "Abyssal portal (Vespula room; must be destroyed but has no card)",
+    "Corrupted scavenger",
+    "Deathly ranger",
+    "Glowing crystal (Vasa)",
+    "Icefiend",
+    "Jewelled Crab",
+    "Keystone crystal",
+    "Lux grub",
+    "Psykk bat",
+    "Vanguard (all 3 styles)",
+    "Vespine soldier"
+   ]
+  },
+  {
+   "name": "Theatre of Blood",
+   "category": "raid",
+   "area": "Morytania",
+   "note": "All Theatre monsters must be owned",
+   "wikiBosses": [
+    "The Maiden of Sugadinti",
+    "Pestilent Bloat",
+    "Nylocas Vasilias",
+    "Sotetseg",
+    "Xarpus",
+    "Verzik Vitur"
+   ],
+   "requirements": [
+    {
+     "label": "The Maiden of Sugadinti",
+     "cards": [
+      "The Maiden of Sugadinti"
+     ],
+     "type": "enemy"
+    },
+    {
+     "label": "Pestilent Bloat",
+     "cards": [
+      "Pestilent Bloat"
+     ],
+     "type": "enemy"
+    },
+    {
+     "label": "Nylocas Vasilias",
+     "cards": [
+      "Nylocas Vasilias"
+     ],
+     "type": "enemy"
+    },
+    {
+     "label": "Nylocas Hagios",
+     "cards": [
+      "Nylocas Hagios"
+     ],
+     "type": "enemy"
+    },
+    {
+     "label": "Nylocas Ischyros",
+     "cards": [
+      "Nylocas Ischyros"
+     ],
+     "type": "enemy"
+    },
+    {
+     "label": "Nylocas Toxobolos",
+     "cards": [
+      "Nylocas Toxobolos"
+     ],
+     "type": "enemy"
+    },
+    {
+     "label": "Nylocas Matomenos",
+     "cards": [
+      "Nylocas Matomenos"
+     ],
+     "type": "enemy"
+    },
+    {
+     "label": "Nylocas Athanatos",
+     "cards": [
+      "Nylocas Athanatos"
+     ],
+     "type": "enemy"
+    },
+    {
+     "label": "Nylocas Prinkipas",
+     "type": "enemy",
+     "cards": [
+      "Nylocas Prinkipas"
+     ],
+     "optional": true,
+     "note": "Hard Mode only"
+    },
+    {
+     "label": "Sotetseg",
+     "cards": [
+      "Sotetseg"
+     ],
+     "type": "enemy"
+    },
+    {
+     "label": "Xarpus",
+     "cards": [
+      "Xarpus"
+     ],
+     "type": "enemy"
+    },
+    {
+     "label": "Blood spawn",
+     "cards": [
+      "Blood spawn"
+     ],
+     "type": "enemy"
+    },
+    {
+     "label": "Verzik Vitur",
+     "cards": [
+      "Verzik Vitur"
+     ],
+     "type": "enemy"
+    },
+    {
+     "label": "Dawnbringer",
+     "type": "item",
+     "cards": [
+      "Dawnbringer"
+     ],
+     "note": "Verzik P1: team takes turns using its special attack; other weapons are damage-capped (3 ranged/mage, 10 melee). In a team, another player can wield it."
+    }
+   ],
+   "quests": [
+    "Priest in Peril"
+   ],
+   "consideredNotRequired": [
+    "Blood spawn (passive, avoidable)",
+    "Mysterious Stranger (sells escape crystals / shrouds; optional)"
+   ],
+   "consideredNoCard": [
+    "Mysterious Stranger"
+   ]
+  },
+  {
+   "name": "Tombs of Amascut",
+   "category": "raid",
+   "area": "Desert",
+   "note": "Beneath Cursed Sands required. Consumable supplies come from the Helpful Spirit (no card). They're optional: drinking or using one needs its card (see relatedCards). Final phase: Akkha's/Kephri's or Zebak's/Ba-Ba's phantoms, the obelisk, the core and energy siphons have no cards. Baboons that Ba-Ba summons can be ignored.",
+   "quests": [
+    "Beneath Cursed Sands"
+   ],
+   "relatedCards": [
+    "Honey locust",
+    "Ambrosia",
+    "Silk dressing",
+    "Nectar",
+    "Blessed crystal scarab",
+    "Smelling salts",
+    "Liquid adrenaline",
+    "Tears of elidinis"
+   ],
+   "wikiBosses": [
+    "Akkha",
+    "Ba-Ba",
+    "Kephri",
+    "Zebak",
+    "Tumeken's Warden",
+    "Elidinis' Warden"
+   ],
+   "requirements": [
+    {
+     "label": "Akkha",
+     "cards": [
+      "Akkha"
+     ],
+     "type": "enemy"
+    },
+    {
+     "label": "Ba-Ba",
+     "cards": [
+      "Ba-Ba"
+     ],
+     "type": "enemy"
+    },
+    {
+     "label": "Kephri",
+     "cards": [
+      "Kephri"
+     ],
+     "type": "enemy"
+    },
+    {
+     "label": "Zebak",
+     "cards": [
+      "Zebak"
+     ],
+     "type": "enemy"
+    },
+    {
+     "label": "The Wardens (Elidinis' / Tumeken's Warden)",
+     "type": "enemy",
+     "cards": [
+      "The Wardens"
+     ]
+    },
+    {
+     "label": "Baboon Brawler",
+     "cards": [
+      "Baboon Brawler"
+     ],
+     "type": "enemy"
+    },
+    {
+     "label": "Baboon Mage",
+     "cards": [
+      "Baboon Mage"
+     ],
+     "type": "enemy"
+    },
+    {
+     "label": "Baboon Thrower",
+     "cards": [
+      "Baboon Thrower"
+     ],
+     "type": "enemy"
+    },
+    {
+     "label": "Baboon Thrall",
+     "cards": [
+      "Baboon Thrall"
+     ],
+     "type": "enemy"
+    },
+    {
+     "label": "Baboon Shaman",
+     "cards": [
+      "Baboon Shaman"
+     ],
+     "type": "enemy"
+    },
+    {
+     "label": "Cursed Baboon",
+     "cards": [
+      "Cursed Baboon"
+     ],
+     "type": "enemy"
+    },
+    {
+     "label": "Volatile Baboon",
+     "cards": [
+      "Volatile Baboon"
+     ],
+     "type": "enemy"
+    },
+    {
+     "label": "Agile Scarab",
+     "cards": [
+      "Agile Scarab"
+     ],
+     "type": "enemy"
+    },
+    {
+     "label": "Arcane Scarab",
+     "cards": [
+      "Arcane Scarab"
+     ],
+     "type": "enemy"
+    },
+    {
+     "label": "Soldier Scarab",
+     "cards": [
+      "Soldier Scarab"
+     ],
+     "type": "enemy"
+    },
+    {
+     "label": "Spitting Scarab",
+     "cards": [
+      "Spitting Scarab"
+     ],
+     "type": "enemy"
+    },
+    {
+     "label": "Scarab",
+     "cards": [
+      "Scarab"
+     ],
+     "type": "enemy",
+     "optional": true
+    },
+    {
+     "label": "Scarab Swarm",
+     "cards": [
+      "Scarab Swarm"
+     ],
+     "type": "enemy"
+    },
+    {
+     "label": "Crocodile",
+     "cards": [
+      "Crocodile"
+     ],
+     "type": "enemy",
+     "optional": true
+    },
+    {
+     "label": "Osmumten (speak to him before the Wardens)",
+     "type": "npc",
+     "cards": [
+      "Osmumten"
+     ]
+    },
+    {
+     "label": "Any pickaxe (Path of Het: mine Het's Seal)",
+     "type": "item",
+     "tool": "Pickaxe",
+     "note": "The statues hold a bronze pickaxe by default. Using it still counts as using a pickaxe, and you can store a better one there instead."
+    },
+    {
+     "label": "Neutralising potion (Path of Apmeken: vents and corruption)",
+     "type": "item",
+     "cards": [
+      "Neutralising potion"
+     ],
+     "optional": true
+    },
+    {
+     "label": "Hammer (Path of Apmeken: repair roof supports)",
+     "type": "item",
+     "cards": [
+      "Hammer"
+     ],
+     "optional": true,
+     "note": "Hammers come from crates in the room. If a repair is missed, everyone takes damage, but the room can still be cleared."
+    }
+   ],
+   "consideredNotRequired": [
+    "Baboon (summoned by Ba-Ba, attacks sarcophagi)",
+    "Crocodile (Path of Crondis)",
+    "Scarab (Path of Scabaras puzzles)"
+   ],
+   "consideredNoCard": [
+    "Akkha's Phantom",
+    "Akkha's Shadow",
+    "Ba-Ba's Phantom",
+    "Bomber scarab",
+    "Boulder (Tombs of Amascut)",
+    "Core",
+    "Energy Siphon",
+    "Helpful Spirit (Akila)",
+    "Het's Seal",
+    "Kephri's Phantom",
+    "Obelisk (Tombs of Amascut)",
+    "Palm of Resourcefulness",
+    "Unstable Orb",
+    "Water container (Tombs of Amascut)",
+    "Zebak's Phantom"
+   ]
+  },
+  {
+   "name": "The Gauntlet",
+   "category": "minigame",
+   "area": "Prifddinas",
+   "note": "Song of the Elves required. No items brought in. You start with a crystal sceptre and crystal tools. Kill crystalline monsters for weapon frames (at least 2 weapon types needed vs Hunllef's protection prayers), gather resources for armour, paddlefish (food) and Egniol potions, then fight the Crystalline Hunllef. Demi-bosses (bear/dragon/dark beast) are optional and give tier-3 weapon parts.",
+   "quests": [
+    "Song of the Elves"
+   ],
+   "relatedCards": [
+    "Egniol potion"
+   ],
+   "wikiBosses": [
+    "Crystalline Hunllef"
+   ],
+   "requirements": [
+    {
+     "label": "Crystalline Hunllef",
+     "cards": [
+      "Crystalline Hunllef"
+     ],
+     "type": "enemy"
+    },
+    {
+     "label": "Crystalline Bear (T3 halberd spike)",
+     "type": "enemy",
+     "cards": [
+      "Crystalline Bear"
+     ],
+     "optional": true
+    },
+    {
+     "label": "Crystalline Dragon (T3 staff orb)",
+     "type": "enemy",
+     "cards": [
+      "Crystalline Dragon"
+     ],
+     "optional": true
+    },
+    {
+     "label": "Crystalline Dark Beast (T3 bow string)",
+     "type": "enemy",
+     "cards": [
+      "Crystalline Dark Beast"
+     ],
+     "optional": true
+    },
+    {
+     "label": "Crystal bow (Gauntlet)",
+     "type": "item",
+     "cards": [
+      "Crystal bow"
+     ],
+     "optional": true,
+     "note": "The Gauntlet's Crystal bow (basic) is the Crystal bow card's base ID (23901). The halberd (23895) and staff have no card, so a halberd + staff pair works without any weapon card."
+    },
+    {
+     "label": "Crystalline monsters for weapon frames (any)",
+     "type": "enemy",
+     "cards": [
+      "Crystalline Spider",
+      "Crystalline Rat",
+      "Crystalline Bat",
+      "Crystalline Unicorn",
+      "Crystalline Scorpion",
+      "Crystalline Wolf"
+     ],
+     "note": "Hunllef uses protection prayers, so you need at least 2 weapon types, which means 2 weapon frames. Frames drop from any crystalline monster. A weak-monster room is always next to the boss room."
+    },
+    {
+     "label": "Crystal axe (for crystal bark)",
+     "cards": [
+      "Crystal axe"
+     ],
+     "type": "item",
+     "optional": true,
+     "note": "Given on entry; using it needs its card (a version of the crystal tool card)"
+    },
+    {
+     "label": "Crystal pickaxe (for crystal ore)",
+     "cards": [
+      "Crystal pickaxe"
+     ],
+     "type": "item",
+     "optional": true,
+     "note": "Given on entry; using it needs its card (a version of the crystal tool card)"
+    },
+    {
+     "label": "Crystal harpoon (for paddlefish)",
+     "cards": [
+      "Crystal harpoon"
+     ],
+     "type": "item",
+     "optional": true,
+     "note": "Given on entry; using it needs its card (a version of the crystal tool card)"
+    },
+    {
+     "label": "Crystal armour (Gauntlet basic/attuned/perfected)",
+     "type": "item",
+     "cards": [
+      "Crystal helm",
+      "Crystal body",
+      "Crystal legs"
+     ],
+     "optional": true,
+     "note": "Gauntlet armour IDs 23886-23894 are variants of the Crystal helm/body/legs cards."
+    },
+    {
+     "label": "Egniol potion / Pestle and mortar / Vial",
+     "type": "item",
+     "cards": [
+      "Egniol potion",
+      "Pestle and mortar",
+      "Vial",
+      "Water-filled vial"
+     ],
+     "mode": "all",
+     "optional": true,
+     "note": "Gauntlet IDs: pestle 23865, vial 23879, water-filled vial 23880 and Egniol potion 23882-23885 map to these cards. Only needed if you make potions."
+    }
+   ],
+   "consideredNotRequired": [
+    "Corrupted Hunllef (separate Corrupted Gauntlet encounter)",
+    "Crystalline Bear/Dragon/Dark Beast (demi-bosses, optional)"
+   ],
+   "consideredNoCard": [
+    "Crystal halberd (basic) (23895)",
+    "Crystal orb",
+    "Crystal sceptre (23861)",
+    "Crystal shards (The Gauntlet)",
+    "Crystal spike",
+    "Crystal staff (basic)",
+    "Crystalline bowstring",
+    "Grym leaf",
+    "Raw paddlefish / Paddlefish",
+    "Teleport crystal (The Gauntlet)",
+    "Tornado (The Gauntlet)",
+    "Weapon frame (23871)"
+   ]
+  },
+  {
+   "name": "Corrupted Gauntlet",
+   "category": "minigame",
+   "area": "Prifddinas",
+   "note": "Requires one normal Gauntlet completion first. No items can be brought in. The corrupted tools and gear made inside have no cards, so they are unrestricted. You need at least one corrupted creature kill for a weapon frame, plus the Corrupted Hunllef.",
+   "quests": [
+    "Song of the Elves"
+   ],
+   "wikiBosses": [
+    "Corrupted Hunllef"
+   ],
+   "requirements": [
+    {
+     "label": "Corrupted Hunllef",
+     "cards": [
+      "Corrupted Hunllef"
+     ],
+     "type": "enemy"
+    },
+    {
+     "label": "Corrupted creature (any one, for a weapon frame)",
+     "type": "enemy",
+     "cards": [
+      "Corrupted Bat",
+      "Corrupted Bear",
+      "Corrupted Dark Beast",
+      "Corrupted Dragon",
+      "Corrupted Rat",
+      "Corrupted Scorpion",
+      "Corrupted Spider",
+      "Corrupted Unicorn",
+      "Corrupted Wolf"
+     ],
+     "note": "You need at least one weapon frame to make a halberd, bow or staff, and any Gauntlet monster can drop one. The demi-bosses (Bear/Dragon/Dark Beast) guarantee a frame plus the tier-3 weapon part. More creatures make better gear, but none is individually required."
+    },
+    {
+     "label": "Complete The Gauntlet once (Crystalline Hunllef)",
+     "type": "enemy",
+     "cards": [
+      "Crystalline Hunllef"
+     ],
+     "note": "Corrupted mode unlocks after one normal Gauntlet completion, so all of The Gauntlet encounter's requirements apply too."
+    },
+    {
+     "label": "Egniol potion",
+     "type": "item",
+     "cards": [
+      "Egniol potion"
+     ],
+     "optional": true,
+     "note": "The only prayer/run restore inside. You make it yourself from grym leaf; drinking it needs the card."
+    }
+   ],
+   "consideredNotRequired": [
+    "Bryn (lore NPC, no interaction needed)",
+    "Individual corrupted creatures beyond one (see above)"
+   ],
+   "consideredNoCard": [
+    "Corrupted halberd/bow/staff and corrupted armour (no cards)",
+    "Corrupted sceptre / corrupted axe / corrupted pickaxe / corrupted harpoon (no catalog card; only the normal-Gauntlet crystal variants 23862-23865 exist, under Crystal axe/pickaxe/harpoon/Pestle and mortar)",
+    "Corrupted shards",
+    "Grym leaf (corrupted)",
+    "Tornado (Corrupted Gauntlet)",
+    "Weapon frame (corrupted)"
+   ]
+  },
+  {
+   "name": "Barbarian Assault",
+   "category": "minigame",
+   "area": "Kandarin",
+   "note": "Team minigame (5 players), 10 waves; Penance Queen in wave 10 can only be damaged by omega eggs fired from the egg launcher. All Penance fighters/rangers/healers/runners must be killed before the queen can be attacked. Role items (horns, poisoned food, eggs, BA arrows/runes, healing vial) have no TCG cards. Defender may use Hammer/Logs to repair traps/barricades (optional). Tutorial from Captain Cain and rewards from Commander Connad (no cards).",
+   "relatedCards": [
+    "Fighter hat",
+    "Ranger hat",
+    "Healer hat",
+    "Runner hat",
+    "Penance gloves",
+    "Penance skirt",
+    "Granite body",
+    "Pet penance queen"
+   ],
+   "wikiBosses": [],
+   "requirements": [
+    {
+     "label": "Penance Fighter",
+     "cards": [
+      "Penance Fighter"
+     ],
+     "type": "enemy"
+    },
+    {
+     "label": "Penance Healer",
+     "cards": [
+      "Penance Healer"
+     ],
+     "type": "enemy"
+    },
+    {
+     "label": "Penance Ranger",
+     "cards": [
+      "Penance Ranger"
+     ],
+     "type": "enemy"
+    },
+    {
+     "label": "Penance Runner",
+     "cards": [
+      "Penance Runner"
+     ],
+     "type": "enemy"
+    },
+    {
+     "label": "Penance Queen",
+     "cards": [
+      "Penance Queen"
+     ],
+     "type": "enemy"
+    },
+    {
+     "label": "Queen spawn",
+     "type": "enemy",
+     "cards": [
+      "Queen spawn"
+     ],
+     "optional": true,
+     "note": "Spawned in wave 10; aggressive but not required to kill"
+    }
+   ],
+   "consideredNotRequired": [
+    "Captain Cain (tutorial optional; 'Players can complete the tutorial by talking to Captain Cain')",
+    "Hammer / Logs (defender trap/barricade repair, optional)",
+    "Queen spawn (can be ignored)"
+   ],
+   "consideredNoCard": [
+    "Attacker/Defender/Collector/Healer horn",
+    "BA elemental runes",
+    "Blunt/Field/Barbed/Bullet arrow",
+    "Captain Cain",
+    "Commander Connad",
+    "Healing vial",
+    "Poisoned worms/tofu/meat",
+    "Red/Green/Blue/Yellow/Omega egg",
+    "Worms/Tofu/Crackers"
+   ]
+  },
+  {
+   "name": "Wintertodt",
+   "category": "skilling",
+   "note": "Firemaking 50. Axe to chop bruma roots, and Tinderbox or Bruma torch to light braziers (crates inside give a bronze axe, knife, hammer and tinderbox, but using them still needs the cards). Burning bruma roots is enough; kindling (Knife) is optional. Hammer repairs braziers (optional). Rejuvenation potion = unf potion from the crate + Bruma herb (Druidic Ritual, or Brew'ma mixes it). Four warm items give the maximum cold reduction.",
+   "levels": {
+    "Firemaking": 50
+   },
+   "wikiBosses": [
+    "Wintertodt"
+   ],
+   "requirements": [
+    {
+     "label": "Tinderbox or Bruma torch (light braziers)",
+     "type": "item",
+     "cards": [
+      "Tinderbox",
+      "Bruma torch"
+     ]
+    },
+    {
+     "label": "Bruma root",
+     "cards": [
+      "Bruma root"
+     ],
+     "type": "item"
+    },
+    {
+     "label": "Any axe",
+     "tool": "Axe",
+     "type": "item"
+    },
+    {
+     "label": "Bruma kindling",
+     "cards": [
+      "Bruma kindling"
+     ],
+     "type": "item",
+     "optional": true
+    },
+    {
+     "label": "Hammer",
+     "cards": [
+      "Hammer"
+     ],
+     "type": "item",
+     "optional": true
+    },
+    {
+     "label": "Knife",
+     "cards": [
+      "Knife"
+     ],
+     "type": "item",
+     "optional": true
+    },
+    {
+     "label": "Bruma herb",
+     "cards": [
+      "Bruma herb"
+     ],
+     "type": "item",
+     "optional": true
+    },
+    {
+     "label": "Warm clothing (any; more pieces = less cold damage)",
+     "cards": [
+      "Pyromancer hood",
+      "Pyromancer garb",
+      "Pyromancer robe",
+      "Pyromancer boots",
+      "Larupia hat",
+      "Larupia top",
+      "Larupia legs",
+      "Clue hunter gloves",
+      "Clue hunter trousers",
+      "Clue hunter cloak",
+      "Clue hunter boots",
+      "Graceful hood",
+      "Graceful top",
+      "Graceful legs",
+      "Graceful gloves",
+      "Graceful boots",
+      "Graceful cape",
+      "Cap and goggles",
+      "Wolf mask",
+      "Earmuffs"
+     ],
+     "type": "item",
+     "optional": true
+    },
+    {
+     "label": "Rejuvenation potion (unf + bruma herb; heals pyromancers / warmth)",
+     "type": "item",
+     "cards": [
+      "Rejuvenation potion"
+     ],
+     "optional": true,
+     "note": "Rejuvenation potion (unf) is an alias of this card. You need Druidic Ritual to mix it yourself; otherwise Brew'ma (no card) mixes it for you. Food also restores warmth."
+    }
+   ],
+   "area": "Kourend",
+   "consideredNotRequired": [
+    "Druidic Ritual (optional; Brew'ma mixes potions for you)",
+    "Pyromancer (healing them is optional)"
+   ],
+   "consideredNoCard": [
+    "Brew'ma",
+    "Doors of Dinh",
+    "Incapacitated Pyromancer",
+    "Pyromancer",
+    "Wintertodt"
+   ]
+  },
+  {
+   "name": "Tempoross",
+   "category": "skilling",
+   "note": "Skilling boss (Fishing 35). Board the boat at the Ruins of Unkah (southern desert). Bring or take from crates: rope (or full spirit angler outfit) to tether, bucket for water to douse fires, hammer (or Imcando hammer) to repair masts/totems, a harpoon (or barehanded fishing). Catch harpoonfish and load them into the cannon ammo crates, then fish the spirit pool. A small or big fishing net is only needed to collect rewards from the reward pool. You never attack Tempoross directly.",
+   "levels": {
+    "Fishing": 35
+   },
+   "wikiBosses": [
+    "Tempoross"
+   ],
+   "requirements": [
+    {
+     "label": "Tempoross",
+     "cards": [
+      "Tempoross"
+     ],
+     "type": "enemy"
+    },
+    {
+     "label": "Rope (or full spirit angler outfit)",
+     "type": "item",
+     "cards": [
+      "Rope"
+     ],
+     "routes": [
+      {
+       "label": "Full spirit angler's outfit",
+       "cards": [
+        "Spirit angler headband",
+        "Spirit angler top",
+        "Spirit angler waders",
+        "Spirit angler boots"
+       ]
+      }
+     ]
+    },
+    {
+     "label": "Bucket",
+     "cards": [
+      "Bucket"
+     ],
+     "type": "item"
+    },
+    {
+     "label": "Hammer",
+     "type": "item",
+     "cards": [
+      "Hammer",
+      "Imcando hammer"
+     ]
+    },
+    {
+     "label": "Harpoonfish",
+     "cards": [
+      "Harpoonfish"
+     ],
+     "type": "item"
+    },
+    {
+     "label": "Any harpoon (or barehanded fishing)",
+     "type": "item",
+     "tool": "Harpoon",
+     "routes": [
+      {
+       "label": "Barehanded fishing (Barbarian Training)",
+       "cards": [],
+       "skills": {
+        "Fishing": 55,
+        "Strength": 35
+       },
+       "manual": true
+      }
+     ],
+     "note": "Barb-tail harpoon also counts. Barehanded fishing needs the Barbarian Training unlock."
+    }
+   ],
+   "consideredNotRequired": [
+    "Bucket of water (made inside from a bucket; dousing fires is helpful, not strictly required)",
+    "Ferryman Sathwood (transport option only)",
+    "Spirit Angler NPC (gives a net, optional)",
+    "Tempoross 'enemy' card: the boss is never attacked directly (cannons + spirit pool). Kept as the encounter's own card; Lottie to decide whether Bronzeman needs it."
+   ],
+   "consideredNoCard": [
+    "Ferryman Sathwood",
+    "Raw harpoonfish / Crystallised harpoonfish (alias -> Harpoonfish, already covered)"
+   ],
+   "lootRequirements": [
+    {
+     "label": "Small or big fishing net (to search the reward pool)",
+     "cards": [
+      "Small fishing net",
+      "Big fishing net"
+     ],
+     "type": "item",
+     "note": "No net? Take one from the Spirit Angler beside the reward pool (talking to him needs the Spirit Angler card)"
+    }
+   ],
+   "area": "Desert"
+  },
+  {
+   "name": "Zalcano",
+   "category": "skilling",
+   "area": "Prifddinas",
+   "note": "Mine tephra from the cavern walls, refine it at the furnace, imbue it at the altar, then throw the imbued tephra (card needed) to break Zalcano's armour. Then mine her with a pickaxe. 70 Mining and Smithing. Song of the Elves required (Prifddinas).",
+   "levels": {
+    "Mining": 70,
+    "Smithing": 70
+   },
+   "wikiBosses": [
+    "Zalcano"
+   ],
+   "requirements": [
+    {
+     "label": "Zalcano",
+     "cards": [
+      "Zalcano"
+     ],
+     "type": "enemy"
+    },
+    {
+     "label": "Any pickaxe",
+     "tool": "Pickaxe",
+     "type": "item"
+    },
+    {
+     "label": "Imbued tephra",
+     "type": "item",
+     "cards": [
+      "Imbued tephra"
+     ],
+     "note": "You mine tephra, refine it at the furnace and imbue it at the altar (none of that needs a card). Then you throw imbued tephra at Zalcano to break her armour, which counts as using the item."
+    }
+   ],
+   "quests": [
+    "Song of the Elves"
+   ],
+   "consideredNotRequired": [
+    "Golem (Zalcano) (optional to attack; it restores her armour if it reaches her)"
+   ],
+   "consideredNoCard": [
+    "Golem (Zalcano)",
+    "Refined tephra",
+    "Tephra"
+   ]
+  },
+  {
+   "name": "Hespori",
+   "category": "skilling",
+   "note": "Clear the cave patch with a rake, plant the seed with a seed dibber, wait ~22 hours for growth, then use a spade to awaken the boss.",
+   "levels": {
+    "Farming": 65
+   },
+   "wikiBosses": [
+    "Hespori"
+   ],
+   "requirements": [
+    {
+     "label": "Hespori",
+     "cards": [
+      "Hespori"
+     ],
+     "type": "enemy"
+    },
+    {
+     "label": "Hespori seed",
+     "cards": [
+      "Hespori seed"
+     ],
+     "type": "item"
+    },
+    {
+     "label": "Rake",
+     "cards": [
+      "Rake"
+     ],
+     "type": "item"
+    },
+    {
+     "label": "Seed dibber",
+     "type": "item",
+     "cards": [
+      "Seed dibber"
+     ],
+     "note": "Not needed if the Farming portion of Barbarian Training is completed"
+    },
+    {
+     "label": "Spade",
+     "cards": [
+      "Spade"
+     ],
+     "type": "item"
+    }
+   ],
+   "area": "Kourend",
+   "consideredNoCard": [
+    "Flower (Hespori's flower buds - must be killed to make Hespori vulnerable, no TCG card)"
+   ]
+  },
+  {
+   "name": "Amoxliatl",
+   "category": "boss",
+   "sub": "low",
+   "area": "Varlamore",
+   "note": "The Heart of Darkness quest required to access the boss. Frost Nagua in the Ruins of Tapoyauik — uses crush attacks, protect from magic recommended.",
+   "quests": [
+    "The Heart of Darkness"
+   ],
+   "levels": {
+    "Slayer": 48
+   },
+   "wikiBosses": [
+    "Amoxliatl"
+   ],
+   "requirements": [
+    {
+     "label": "Amoxliatl",
+     "cards": [
+      "Amoxliatl"
+     ],
+     "type": "enemy"
+    }
+   ],
+   "consideredNotRequired": [
+    "Slayer 48 is the infobox slaylvl, which the quest already requires (The Heart of Darkness needs Slayer 48). Keep it; it is redundant but harmless.",
+    "Unstable ice blocks (destroy or move away from them)"
+   ],
+   "consideredNoCard": [
+    "Ancient tablet (Amoxliatl)",
+    "Lift platform"
+   ]
+  },
+  {
+   "name": "Barrows",
+   "category": "boss",
+   "sub": "mid",
+   "area": "Morytania",
+   "note": "Morytania (Priest in Peril). Talk to the Strange Old Man first (His Faithful Servants) to unlock digging, then dig into the mounds with a spade. Killing a brother is what makes his equipment possible from the chest. The chest can be looted without killing any brother, but you can't get equipment from a brother you didn't kill. Tunnel monsters (crypt rats/spiders, bloodworms, giant variants, skeletons) only add reward potential.",
+   "wikiBosses": [
+    "Ahrim the Blighted",
+    "Dharok the Wretched",
+    "Guthan the Infested",
+    "Karil the Tainted",
+    "Torag the Corrupted",
+    "Verac the Defiled"
+   ],
+   "requirements": [
+    {
+     "label": "Ahrim the Blighted",
+     "cards": [
+      "Ahrim the Blighted"
+     ],
+     "type": "enemy"
+    },
+    {
+     "label": "Dharok the Wretched",
+     "cards": [
+      "Dharok the Wretched"
+     ],
+     "type": "enemy"
+    },
+    {
+     "label": "Guthan the Infested",
+     "cards": [
+      "Guthan the Infested"
+     ],
+     "type": "enemy"
+    },
+    {
+     "label": "Karil the Tainted",
+     "cards": [
+      "Karil the Tainted"
+     ],
+     "type": "enemy"
+    },
+    {
+     "label": "Torag the Corrupted",
+     "cards": [
+      "Torag the Corrupted"
+     ],
+     "type": "enemy"
+    },
+    {
+     "label": "Verac the Defiled",
+     "cards": [
+      "Verac the Defiled"
+     ],
+     "type": "enemy"
+    },
+    {
+     "label": "Spade",
+     "cards": [
+      "Spade"
+     ],
+     "type": "item"
+    },
+    {
+     "label": "Strange Old Man (start His Faithful Servants)",
+     "type": "npc",
+     "cards": [
+      "Strange Old Man"
+     ]
+    }
+   ],
+   "quests": [
+    "Priest in Peril"
+   ],
+   "consideredNotRequired": [
+    "Bloodworm",
+    "Crypt rat",
+    "Crypt spider",
+    "Giant crypt rat",
+    "Giant crypt spider",
+    "Skeleton (Barrows), covered by the Skeleton card (1685-1688)",
+    "Strange old lockpick (optional shortcut item)"
+   ]
+  },
+  {
+   "name": "Obor",
+   "category": "boss",
+   "sub": "low",
+   "note": "Giant key dropped by Hill Giants — required to enter the lair in Edgeville Dungeon.",
+   "wikiBosses": [
+    "Obor"
+   ],
+   "requirements": [
+    {
+     "label": "Obor",
+     "cards": [
+      "Obor"
+     ],
+     "type": "enemy"
+    },
+    {
+     "label": "Kill count: any of these",
+     "cards": [
+      "Hill Giant"
+     ],
+     "type": "enemy"
+    },
+    {
+     "label": "Giant key",
+     "type": "item",
+     "cards": [
+      "Giant key"
+     ],
+     "note": "Unlocks the gate the first time (not consumed). Later it's also used up to open the loot chest, which is needed for KC and chest loot."
+    }
+   ],
+   "consideredNotRequired": [
+    "Brass key (optional shortcut shed west of Cooks' Guild)"
+   ]
+  },
+  {
+   "name": "Bryophyta",
+   "category": "boss",
+   "sub": "low",
+   "note": "Mossy key dropped by Moss Giants — required to enter the lair. Growthlings spawn during the fight; Bryophyta is immune while they live, and they can only be effectively killed with Magic Secateurs.",
+   "wikiBosses": [
+    "Bryophyta"
+   ],
+   "requirements": [
+    {
+     "label": "Bryophyta",
+     "cards": [
+      "Bryophyta"
+     ],
+     "type": "enemy"
+    },
+    {
+     "label": "Growthling",
+     "cards": [
+      "Growthling"
+     ],
+     "type": "enemy"
+    },
+    {
+     "label": "Mossy key source",
+     "type": "enemy",
+     "cards": [
+      "Moss Giant"
+     ]
+    },
+    {
+     "label": "Mossy key",
+     "cards": [
+      "Mossy key"
+     ],
+     "type": "item"
+    },
+    {
+     "label": "Axe or Magic secateurs (Growthlings)",
+     "type": "item",
+     "cards": [
+      "Magic secateurs",
+      "Bronze axe",
+      "Iron axe",
+      "Steel axe",
+      "Black axe",
+      "Mithril axe",
+      "Adamant axe",
+      "Rune axe",
+      "Dragon axe",
+      "Crystal axe",
+      "3rd age axe"
+     ],
+     "note": "Any item with the 'Axe' attack type; a bronze axe can be taken from the log pile in the lair (still needs the Bronze axe card to use). Battleaxes/zombie axe/blessed axe do not work."
+    },
+    {
+     "label": "Web: knife or any slash weapon",
+     "type": "item",
+     "cards": [],
+     "skillAlt": {
+      "skill": "Agility",
+      "level": 51
+     },
+     "note": "Any slash weapon also works; Agility 51 shortcut from Edgeville Dungeon bypasses the web; a charged Giantsoul amulet teleports outside the lair",
+     "group": "slash_weapon"
+    }
+   ],
+   "consideredNotRequired": [
+    "Giantsoul amulet (optional teleport)"
+   ]
+  },
+  {
+   "name": "Giant Mole",
+   "category": "boss",
+   "sub": "low",
+   "note": "Spade to dig into the mole hills in Falador Park. A light source stops tunnel damage. Candles, torches and oil lamps can be blown out, so a Tinderbox relights them (not needed for a self-lit source). After Making Friends with My Arm, the Fire of Eternal Light removes the need for any light source. The optional instance costs coins (25k, or 12.5k for ironmen) via the spade at the north-west hill.",
+   "wikiBosses": [
+    "Giant Mole"
+   ],
+   "requirements": [
+    {
+     "label": "Giant Mole",
+     "cards": [
+      "Giant Mole"
+     ],
+     "type": "enemy"
+    },
+    {
+     "label": "Spade",
+     "cards": [
+      "Spade"
+     ],
+     "type": "item"
+    },
+    {
+     "label": "Any light source",
+     "group": "light_source",
+     "type": "item",
+     "note": "Without one you take damage in the tunnels (a soft requirement). You don't need it after building the Fire of Eternal Light (Making Friends with My Arm).",
+     "optional": true
+    },
+    {
+     "label": "Tinderbox",
+     "cards": [
+      "Tinderbox"
+     ],
+     "type": "item",
+     "optional": true
+    }
+   ],
+   "consideredNotRequired": [
+    "Baby Mole (NPC)",
+    "Coins (instance is optional)"
+   ],
+   "consideredNoCard": [
+    "Fire of Eternal Light"
+   ]
+  },
+  {
+   "name": "Kalphite Queen",
+   "category": "boss",
+   "sub": "mid",
+   "note": "Kalphite Lair, Kharidian Desert. Two ropes: one to enter the lair (needed every visit), one to reach the Queen's level. The Hard Desert Diary makes them permanent once placed after completing it. The Dorgesh-Kaan South Dungeon tunnel skips the first rope (bring a light source). Kalphite workers, soldiers and guardians in the lair can be avoided.",
+   "wikiBosses": [
+    "Kalphite Queen"
+   ],
+   "requirements": [
+    {
+     "label": "Kalphite Queen",
+     "cards": [
+      "Kalphite Queen"
+     ],
+     "type": "enemy"
+    },
+    {
+     "label": "Rope",
+     "cards": [
+      "Rope"
+     ],
+     "type": "item"
+    }
+   ],
+   "consideredNotRequired": [
+    "Kalphite Guardian",
+    "Kalphite Soldier",
+    "Kalphite Worker",
+    "Kalphite larva"
+   ],
+   "area": "Desert"
+  },
+  {
+   "name": "King Black Dragon",
+   "category": "boss",
+   "sub": "wilderness",
+   "note": "Lair is reached from the deep Wilderness (Lava Maze ladder, then a lever surrounded by poisonous spiders). The lair itself is not in the Wilderness. Dragonfire protection: an anti-dragon shield with antifire blocks normal dragonfire, and super antifire works on its own. Private instance costs 50,000 coins (optional).",
+   "wikiBosses": [
+    "King Black Dragon"
+   ],
+   "requirements": [
+    {
+     "label": "King Black Dragon",
+     "cards": [
+      "King Black Dragon"
+     ],
+     "type": "enemy"
+    },
+    {
+     "label": "Dragonfire protection",
+     "group": "dragonfire",
+     "type": "item"
+    }
+   ],
+   "consideredNotRequired": [
+    "Coins (private instance only)",
+    "Lesser demon / Poisonous spider (around the entrance; avoidable)"
+   ]
+  },
+  {
+   "name": "Sarachnis",
+   "category": "boss",
+   "sub": "mid",
+   "area": "Kourend",
+   "note": "Forthos Dungeon, Great Kourend. A slash weapon or knife is needed to cut webs blocking the entrance (Aranea Boots bypass this).",
+   "wikiBosses": [
+    "Sarachnis"
+   ],
+   "requirements": [
+    {
+     "label": "Sarachnis",
+     "cards": [
+      "Sarachnis"
+     ],
+     "type": "enemy"
+    },
+    {
+     "label": "Spawn of Sarachnis",
+     "type": "enemy",
+     "cards": [
+      "Spawn of Sarachnis"
+     ],
+     "optional": true,
+     "note": "Can be ignored with high magic defence; die when Sarachnis dies"
+    },
+    {
+     "label": "Webs: knife, slash weapon or Aranea boots",
+     "type": "item",
+     "cards": [
+      "Knife",
+      "Aranea boots"
+     ],
+     "note": "Any slash weapon also cuts the webs"
+    },
+    {
+     "label": "Instance fee",
+     "type": "item",
+     "cards": [
+      "Coins"
+     ],
+     "optional": true,
+     "note": "25,000 coins (12,500 after hard CA) for a private instance"
+    }
+   ],
+   "consideredNotRequired": [
+    "Spawn of Sarachnis (ignorable)"
+   ]
+  },
+  {
+   "name": "Dagannoth Kings",
+   "category": "boss",
+   "sub": "mid",
+   "area": "Waterbirth Island",
+   "note": "Waterbirth Island, sublevel 6 of the dungeon, with all three kings. The tunnel monsters (dagannoth, wallasalki, giant rock crabs, rock lobsters) can be run past. Solo door bypass: pet rock + rune thrownaxe, or Agility 85 shortcut, or a partner. An Agility 81 one-way crevice skips later chambers. The kings' Slayer-only lair needs a dagannoth task.",
+   "lootFrom": [
+    "Dagannoth Rex",
+    "Dagannoth Prime",
+    "Dagannoth Supreme"
+   ],
+   "relatedCards": [
+    "Dagannoth",
+    "Dagannoth spawn",
+    "Dagannoth fledgeling",
+    "Giant Rock Crab",
+    "Rock lobster"
+   ],
+   "wikiBosses": [
+    "Dagannoth Rex",
+    "Dagannoth Prime",
+    "Dagannoth Supreme"
+   ],
+   "requirements": [
+    {
+     "label": "Dagannoth Rex",
+     "cards": [
+      "Dagannoth Rex"
+     ],
+     "type": "enemy"
+    },
+    {
+     "label": "Dagannoth Prime",
+     "cards": [
+      "Dagannoth Prime"
+     ],
+     "type": "enemy"
+    },
+    {
+     "label": "Dagannoth Supreme",
+     "cards": [
+      "Dagannoth Supreme"
+     ],
+     "type": "enemy"
+    },
+    {
+     "label": "Solo door bypass: Pet rock + Rune thrownaxe",
+     "type": "item",
+     "cards": [
+      "Pet rock",
+      "Rune thrownaxe"
+     ],
+     "mode": "all",
+     "skillAlt": {
+      "skill": "Agility",
+      "level": 85
+     },
+     "note": "The pet rock holds the second door pad, and the rune thrownaxe special knocks down all three door props. Neither is needed with a partner. The Agility 85 (boostable) climbing rocks south of Jarvald go straight to the ladder room. The rune thrownaxe needs 40 Ranged to wield."
+    }
+   ],
+   "consideredNotRequired": [
+    "Askeladden",
+    "Dagannoth (Waterbirth Island)",
+    "Dagannoth fledgeling",
+    "Dagannoth spawn",
+    "Giant Rock Crab",
+    "Rock lobster",
+    "Wallasalki"
+   ],
+   "consideredNoCard": [
+    "Jarvald (covered by the Waterbirth Island access gate)"
+   ]
+  },
+  {
+   "name": "Corporeal Beast",
+   "category": "boss",
+   "sub": "high",
+   "note": "Lair entrance is in level 21 Wilderness, north-east of Ferox Enclave. A games necklace teleports directly into the safe room. The dark energy core may spawn during the fight and heals Corp. It's usually killed or poisoned.",
+   "wikiBosses": [
+    "Corporeal Beast"
+   ],
+   "requirements": [
+    {
+     "label": "Corporeal Beast",
+     "cards": [
+      "Corporeal Beast"
+     ],
+     "type": "enemy"
+    },
+    {
+     "label": "Dark energy core",
+     "type": "enemy",
+     "cards": [
+      "Dark energy core"
+     ],
+     "optional": true,
+     "note": "It spawns at random (1/8 per qualifying hit) and leeches HP to heal Corp. You can poison, stun (emerald bolts) or run it instead of killing it."
+    }
+   ]
+  },
+  {
+   "name": "General Graardor",
+   "category": "boss",
+   "sub": "gwd",
+   "note": "God Wars Dungeon: reaching it needs partial Troll Stronghold (defeat Dad) OR the Easy Combat Achievements teleport (Ghommal's hilt 1, which has no card), plus 60 Strength or 60 Agility (boulder/crack). A rope is needed the first time. Bandos' Stronghold needs 70 Strength (can't be boosted) and a hammer, Dragon warhammer or Elder maul. Then 40 Bandos KC or an Ecumenical key.",
+   "levels": {
+    "Strength": 70
+   },
+   "wikiBosses": [
+    "General Graardor"
+   ],
+   "requirements": [
+    {
+     "label": "General Graardor",
+     "cards": [
+      "General Graardor"
+     ],
+     "type": "enemy"
+    },
+    {
+     "label": "Sergeant Strongstack",
+     "cards": [
+      "Sergeant Strongstack"
+     ],
+     "type": "enemy"
+    },
+    {
+     "label": "Sergeant Steelwill",
+     "cards": [
+      "Sergeant Steelwill"
+     ],
+     "type": "enemy"
+    },
+    {
+     "label": "Sergeant Grimspike",
+     "cards": [
+      "Sergeant Grimspike"
+     ],
+     "type": "enemy"
+    },
+    {
+     "label": "Kill count or Ecumenical key",
+     "type": "enemy",
+     "cards": [
+      "Goblin",
+      "Hobgoblin",
+      "Ogre",
+      "Jogre",
+      "Cyclops",
+      "Ork",
+      "Spiritual Mage",
+      "Spiritual Ranger",
+      "Spiritual Warrior"
+     ],
+     "routes": [
+      {
+       "label": "40 Bandos kill count",
+       "cards": [
+        [
+         "Goblin",
+         "Hobgoblin",
+         "Ogre",
+         "Jogre",
+         "Cyclops",
+         "Ork",
+         "Spiritual Mage",
+         "Spiritual Ranger",
+         "Spiritual Warrior"
+        ]
+       ]
+      },
+      {
+       "label": "Ecumenical key",
+       "cards": [
+        "Ecumenical key"
+       ]
+      }
+     ]
+    },
+    {
+     "label": "Hammer (bang the Bandos door)",
+     "type": "item",
+     "cards": [
+      "Hammer",
+      "Dragon warhammer",
+      "Elder maul"
+     ]
+    },
+    {
+     "label": "Rope (GWD entrance, first time)",
+     "type": "item",
+     "cards": [
+      "Rope"
+     ]
+    }
+   ],
+   "consideredNotRequired": [
+    "Dad (Troll Stronghold) – only one of two access routes; the other route (Ghommal's hilt 1) has no card",
+    "Dying knight (optional lore)"
+   ],
+   "consideredNoCard": [
+    "Dying knight",
+    "Ghommal's hilt 1"
+   ]
+  },
+  {
+   "name": "Kree'arra",
+   "category": "boss",
+   "sub": "gwd",
+   "note": "40 Armadyl essence (KC) to enter boss room (lowered by Combat Achievements; Ecumenical key skips it). 70 Ranged + crossbow + mith grapple to cross into Armadyl's Eyrie. GWD needs Troll Stronghold (to Dad) or Easy CA; rope on first entry.",
+   "levels": {
+    "Ranged": 70
+   },
+   "wikiBosses": [
+    "Kree'arra"
+   ],
+   "requirements": [
+    {
+     "label": "Kree'arra",
+     "cards": [
+      "Kree'arra"
+     ],
+     "type": "enemy"
+    },
+    {
+     "label": "Flight Kilisa",
+     "cards": [
+      "Flight Kilisa"
+     ],
+     "type": "enemy"
+    },
+    {
+     "label": "Flockleader Geerin",
+     "cards": [
+      "Flockleader Geerin"
+     ],
+     "type": "enemy"
+    },
+    {
+     "label": "Wingman Skree",
+     "cards": [
+      "Wingman Skree"
+     ],
+     "type": "enemy"
+    },
+    {
+     "label": "Kill count: any of these",
+     "cards": [
+      "Aviansie",
+      "Spiritual Mage",
+      "Spiritual Ranger",
+      "Spiritual Warrior"
+     ],
+     "type": "enemy"
+    },
+    {
+     "label": "Mith grapple",
+     "type": "item",
+     "cards": [
+      "Mith grapple"
+     ],
+     "note": "A spare is in the crate inside the Eyrie, but using it still needs the card"
+    },
+    {
+     "label": "Crossbow",
+     "type": "item",
+     "cards": [
+      "Bronze crossbow",
+      "Blurite crossbow",
+      "Iron crossbow",
+      "Steel crossbow",
+      "Mithril crossbow",
+      "Adamant crossbow",
+      "Rune crossbow",
+      "Dragon crossbow",
+      "Armadyl crossbow",
+      "Dragon hunter crossbow",
+      "Zaryte crossbow",
+      "Karil's crossbow",
+      "Dorgeshuun crossbow",
+      "Crossbow",
+      "Hunters' crossbow",
+      "Hunters' sunlight crossbow"
+     ],
+     "note": "Any crossbow; a bronze crossbow is in the Eyrie crate"
+    },
+    {
+     "label": "Rope (first GWD entry)",
+     "type": "item",
+     "cards": [
+      "Rope"
+     ]
+    },
+    {
+     "label": "Route to Trollheim",
+     "type": "item",
+     "cards": [
+      "Climbing boots"
+     ],
+     "note": "Burthorpe route needs climbing boots (and rope); alternative is Trollheim Teleport (Eadgar's Ruse + 61 Magic) or Ghommal's hilt (Easy CA)",
+     "routes": [
+      {
+       "label": "Trollheim Teleport / Ghommal's hilt",
+       "cards": []
+      }
+     ]
+    }
+   ],
+   "consideredNotRequired": [
+    "Bodyguards (Flight Kilisa, Flockleader Geerin, Wingman Skree) are not strictly required to kill, but kept as they attack throughout and count toward KC — left unchanged",
+    "Ecumenical key (optional KC skip)"
+   ],
+   "consideredNoCard": [
+    "Ghommal's hilt 1",
+    "Trollheim teleport (tablet)"
+   ],
+   "quests": [
+    "Troll Stronghold"
+   ]
+  },
+  {
+   "name": "K'ril Tsutsaroth",
+   "category": "boss",
+   "sub": "gwd",
+   "note": "40 Zamorak KC (fewer with Combat Achievement tiers) or an ecumenical key to enter the boss room. Hitpoints 70 to cross the river into the fortress. GWD entry: Troll Stronghold (Dad), Strength 60 or Agility 60, and a rope on the first visit. You must speak to the Dying knight (no card) once before your first entry.",
+   "wikiBosses": [
+    "K'ril Tsutsaroth"
+   ],
+   "requirements": [
+    {
+     "label": "K'ril Tsutsaroth",
+     "cards": [
+      "K'ril Tsutsaroth"
+     ],
+     "type": "enemy"
+    },
+    {
+     "label": "Tstanon Karlak",
+     "cards": [
+      "Tstanon Karlak"
+     ],
+     "type": "enemy"
+    },
+    {
+     "label": "Balfrug Kreeyath",
+     "cards": [
+      "Balfrug Kreeyath"
+     ],
+     "type": "enemy"
+    },
+    {
+     "label": "Zakl'n Gritch",
+     "cards": [
+      "Zakl'n Gritch"
+     ],
+     "type": "enemy"
+    },
+    {
+     "label": "Kill count: any of these",
+     "type": "enemy",
+     "cards": [
+      "Imp",
+      "Icefiend",
+      "Pyrefiend",
+      "Feral Vampyre",
+      "Bloodveld",
+      "Werewolf",
+      "Hellhound",
+      "Gorak",
+      "Spiritual Mage",
+      "Spiritual Ranger",
+      "Spiritual Warrior"
+     ],
+     "routes": [
+      {
+       "label": "Ecumenical key (skip kill count)",
+       "cards": [
+        "Ecumenical key"
+       ]
+      }
+     ]
+    },
+    {
+     "label": "Rope (tie at the GWD entrance, first visit only)",
+     "type": "item",
+     "cards": [
+      "Rope"
+     ]
+    },
+    {
+     "label": "GWD entrance: boulder (Strength 60) or crack (Agility 60)",
+     "type": "item",
+     "cards": [],
+     "routes": [
+      {
+       "label": "Push the boulder (Strength 60)",
+       "cards": [],
+       "skills": {
+        "Strength": 60
+       }
+      },
+      {
+       "label": "Squeeze through the crack (Agility 60)",
+       "cards": [],
+       "skills": {
+        "Agility": 60
+       }
+      }
+     ]
+    }
+   ],
+   "levels": {
+    "Hitpoints": 70
+   },
+   "consideredNotRequired": [
+    "Bodyguards (Tstanon Karlak, Balfrug Kreeyath, Zakl'n Gritch) are left in place, but the wiki does not say they must be killed (you can kill K'ril alone)"
+   ],
+   "consideredNoCard": [
+    "Dying knight",
+    "Knight's notes"
+   ],
+   "quests": [
+    "Troll Stronghold"
+   ]
+  },
+  {
+   "name": "Commander Zilyana",
+   "category": "boss",
+   "sub": "gwd",
+   "note": "Saradomin's Encampment, God Wars Dungeon. Agility 70 (not boostable) is a hard entry requirement, not a shortcut. GWD entry: Troll Stronghold up to defeating Dad (or Easy Combat Achievements + Ghommal's hilt), 60 Strength or 60 Agility for the boulder/crack, and climbing boots each trip unless you use Trollheim Teleport. Ropes: 1 to enter GWD the first time, plus 2 for the Saradomin Encampment first time (3 total). Talk to the Dying knight before your first entry. 40 Saradomin KC (fewer with Combat Achievement tiers) or an ecumenical key to open the boss door.",
+   "levels": {
+    "Agility": 70
+   },
+   "wikiBosses": [
+    "Commander Zilyana"
+   ],
+   "requirements": [
+    {
+     "label": "Commander Zilyana",
+     "cards": [
+      "Commander Zilyana"
+     ],
+     "type": "enemy"
+    },
+    {
+     "label": "Starlight",
+     "type": "enemy",
+     "cards": [
+      "Starlight"
+     ],
+     "optional": true
+    },
+    {
+     "label": "Bree",
+     "type": "enemy",
+     "cards": [
+      "Bree"
+     ],
+     "optional": true
+    },
+    {
+     "label": "Growler",
+     "type": "enemy",
+     "cards": [
+      "Growler"
+     ],
+     "optional": true
+    },
+    {
+     "label": "Kill count: any of these (40 Saradomin followers)",
+     "type": "enemy",
+     "cards": [
+      "Knight of Saradomin",
+      "Saradomin priest",
+      "Spiritual Mage",
+      "Spiritual Ranger",
+      "Spiritual Warrior"
+     ],
+     "routes": [
+      {
+       "label": "Ecumenical key (skips kill count)",
+       "cards": [
+        "Ecumenical key"
+       ]
+      }
+     ]
+    },
+    {
+     "label": "Rope (x3 first time: GWD entrance + 2 for the Encampment)",
+     "type": "item",
+     "cards": [
+      "Rope"
+     ]
+    },
+    {
+     "label": "Climbing boots (or Trollheim Teleport)",
+     "type": "item",
+     "cards": [
+      "Climbing boots"
+     ],
+     "spells": [
+      "Trollheim Teleport"
+     ],
+     "note": "Trollheim Teleport needs Eadgar's Ruse (61 Magic). Without it you need climbing boots each trip."
+    }
+   ],
+   "consideredNotRequired": [
+    "Dad (Troll Stronghold): killed during the quest, so covered by quest requirements",
+    "Ice wolves, thrower trolls (avoidable on the route)",
+    "Stony basalt (alternative Troll Stronghold teleport, optional)",
+    "Zamorak minions in the Encampment (werewolves, vampyres, icefiend, gorak) don't count for Saradomin KC"
+   ],
+   "consideredNoCard": [
+    "Dying knight (must speak to before first entry)",
+    "Ghommal's hilt"
+   ],
+   "quests": [
+    "Troll Stronghold"
+   ]
+  },
+  {
+   "name": "Nex",
+   "category": "boss",
+   "sub": "gwd",
+   "note": "The Frozen Door (requires Desert Treasure I and kills of the GWD generals or bodyguards) opens the Ancient Prison. 70 base HP, Ranged, Strength and Agility. Rope needed the first time into GWD. 40 Zarosian essence (Spiritual mage/ranger/warrior or Blood Reaver) or an Ecumenical key. Fumus, Umbra, Cruor and Glacies must each be killed to move Nex to her next phase.",
+   "wikiBosses": [
+    "Nex"
+   ],
+   "requirements": [
+    {
+     "label": "Nex",
+     "cards": [
+      "Nex"
+     ],
+     "type": "enemy"
+    },
+    {
+     "label": "Fumus",
+     "cards": [
+      "Fumus"
+     ],
+     "type": "enemy"
+    },
+    {
+     "label": "Umbra",
+     "cards": [
+      "Umbra"
+     ],
+     "type": "enemy"
+    },
+    {
+     "label": "Cruor",
+     "cards": [
+      "Cruor"
+     ],
+     "type": "enemy"
+    },
+    {
+     "label": "Glacies",
+     "cards": [
+      "Glacies"
+     ],
+     "type": "enemy"
+    },
+    {
+     "label": "Kill count or Ecumenical key",
+     "type": "enemy",
+     "cards": [
+      "Spiritual Mage",
+      "Spiritual Ranger",
+      "Spiritual Warrior",
+      "Blood Reaver"
+     ],
+     "routes": [
+      {
+       "label": "40 Zarosian essence",
+       "cards": [
+        [
+         "Spiritual Mage",
+         "Spiritual Ranger",
+         "Spiritual Warrior",
+         "Blood Reaver"
+        ]
+       ]
+      },
+      {
+       "label": "Ecumenical key",
+       "cards": [
+        "Ecumenical key"
+       ]
+      }
+     ]
+    },
+    {
+     "label": "Rope (GWD entrance, first time)",
+     "type": "item",
+     "cards": [
+      "Rope"
+     ]
+    }
+   ],
+   "quests": [
+    "The Frozen Door"
+   ],
+   "levels": {
+    "Hitpoints": 70,
+    "Ranged": 70,
+    "Strength": 70,
+    "Agility": 70
+   },
+   "consideredNotRequired": [
+    "Ashuelot Reis (lore NPC)"
+   ],
+   "consideredNoCard": [
+    "Frozen key (The Frozen Door)"
+   ]
+  },
+  {
+   "name": "Zulrah",
+   "category": "boss",
+   "sub": "high",
+   "note": "Regicide (to reaching Port Tyras), then speak to High Priestess Zul-Harcinqa to offer yourself as sacrifice; board the sacrificial boat at Zul-Andra. Priestess Zul-Gwenwynig holds items on death (talk = card).",
+   "quests": [
+    "Regicide"
+   ],
+   "wikiBosses": [
+    "Zulrah"
+   ],
+   "requirements": [
+    {
+     "label": "Zulrah",
+     "cards": [
+      "Zulrah"
+     ],
+     "type": "enemy"
+    },
+    {
+     "label": "Priestess Zul-Gwenwynig",
+     "type": "npc",
+     "cards": [
+      "Priestess Zul-Gwenwynig"
+     ],
+     "optional": true,
+     "note": "Item retrieval after death"
+    }
+   ],
+   "consideredNotRequired": [
+    "Snakeling (avoidable)"
+   ],
+   "consideredNoCard": [
+    "High Priestess Zul-Harcinqa (must talk to once; no card)"
+   ],
+   "area": "Tirannwn"
+  },
+  {
+   "name": "Vorkath",
+   "category": "boss",
+   "sub": "high",
+   "note": "Dragon Slayer II required — Ungael island. Dragonfire protection required. Zombified Spawn erupts periodically; Vorkath is immune until the spawn is killed.",
+   "quests": [
+    "Dragon Slayer II"
+   ],
+   "wikiBosses": [
+    "Vorkath"
+   ],
+   "requirements": [
+    {
+     "label": "Vorkath",
+     "cards": [
+      "Vorkath"
+     ],
+     "type": "enemy"
+    },
+    {
+     "label": "Zombified Spawn",
+     "cards": [
+      "Zombified Spawn"
+     ],
+     "type": "enemy"
+    },
+    {
+     "label": "Dragonfire protection",
+     "group": "dragonfire",
+     "type": "item"
+    },
+    {
+     "label": "Torfinn (boat from Rellekka to Ungael)",
+     "type": "npc",
+     "cards": [
+      "Torfinn"
+     ]
+    }
+   ],
+   "consideredNoCard": [
+    "Ice chunks (Vorkath)"
+   ]
+  },
+  {
+   "name": "The Nightmare",
+   "category": "boss",
+   "sub": "high",
+   "area": "Morytania",
+   "note": "Sisterhood Sanctuary under Slepe, Morytania. Multi-team boss. Husks freeze players until killed, parasites heal her until killed, and sleepwalkers must be killed or her power blast hits hard. Break her shield, then charge the four totems (no card). Dying means reclaiming items from Shura for 60k coins.",
+   "wikiBosses": [
+    "The Nightmare"
+   ],
+   "requirements": [
+    {
+     "label": "The Nightmare",
+     "cards": [
+      "The Nightmare"
+     ],
+     "type": "enemy"
+    },
+    {
+     "label": "Husk",
+     "cards": [
+      "Husk"
+     ],
+     "type": "enemy"
+    },
+    {
+     "label": "Parasite",
+     "cards": [
+      "Parasite"
+     ],
+     "type": "enemy"
+    },
+    {
+     "label": "Sleepwalker",
+     "cards": [
+      "Sleepwalker"
+     ],
+     "type": "enemy"
+    }
+   ],
+   "quests": [
+    "Priest in Peril"
+   ],
+   "consideredNotRequired": [
+    "Andras boat (one transport option)"
+   ],
+   "consideredNoCard": [
+    "Andras",
+    "Shura",
+    "Totem (The Nightmare)"
+   ]
+  },
+  {
+   "name": "Phosani's Nightmare",
+   "category": "boss",
+   "sub": "high",
+   "area": "Morytania",
+   "note": "Solo version of Nightmare. Same mechanics — Husks, Parasites and Sleepwalkers spawn during the fight.",
+   "wikiBosses": [
+    "Phosani's Nightmare"
+   ],
+   "requirements": [
+    {
+     "label": "Phosani's Nightmare",
+     "cards": [
+      "Phosani's Nightmare"
+     ],
+     "type": "enemy"
+    },
+    {
+     "label": "Husk",
+     "cards": [
+      "Husk"
+     ],
+     "type": "enemy"
+    },
+    {
+     "label": "Parasite",
+     "cards": [
+      "Parasite"
+     ],
+     "type": "enemy"
+    },
+    {
+     "label": "Sleepwalker",
+     "cards": [
+      "Sleepwalker"
+     ],
+     "type": "enemy"
+    }
+   ],
+   "quests": [
+    "Priest in Peril"
+   ],
+   "consideredNotRequired": [
+    "Sanfew serum (optional parasite cure)",
+    "Sister Senga (only for reclaiming items)",
+    "The Nightmare (a prior regular kill is only advised: 'they may ignore it and proceed to the boss fight')"
+   ],
+   "consideredNoCard": [
+    "Pool of Nightmares (object)",
+    "Sister Senga",
+    "Totem (The Nightmare) – must be charged with magic but has no card"
+   ]
+  },
+  {
+   "name": "Phantom Muspah",
+   "category": "boss",
+   "sub": "high",
+   "note": "Secrets of the North required. Lair via crevice in Ghorrock Dungeon, reached through Weiss's Salt Mine (icy basalt teleport or 80 Sailing boat).",
+   "quests": [
+    "Secrets of the North"
+   ],
+   "wikiBosses": [
+    "Phantom Muspah"
+   ],
+   "requirements": [
+    {
+     "label": "Phantom Muspah",
+     "cards": [
+      "Phantom Muspah"
+     ],
+     "type": "enemy"
+    }
+   ],
+   "consideredNotRequired": [
+    "Spikes (scenery hazard, not NPCs to kill)"
+   ]
+  },
+  {
+   "name": "Abyssal Sire",
+   "category": "boss",
+   "sub": "slayer",
+   "note": "Slayer 85, on an abyssal demon (or boss) task, in the Abyssal Nexus. Phase 1: disorient the Sire to disable the tentacles, then kill the 4 respiratory systems (no card). Turn auto-retaliate off to avoid spawns; spawns and scions die with the Sire. You must have visited the Abyss once (Enter the Abyss via the Mage of Zamorak, or fairy ring DIP).",
+   "levels": {
+    "Slayer": 85
+   },
+   "wikiBosses": [
+    "Abyssal Sire"
+   ],
+   "requirements": [
+    {
+     "label": "Abyssal Sire",
+     "cards": [
+      "Abyssal Sire"
+     ],
+     "type": "enemy"
+    },
+    {
+     "label": "Spawn",
+     "cards": [
+      "Spawn"
+     ],
+     "type": "enemy",
+     "optional": true
+    },
+    {
+     "label": "Scion",
+     "cards": [
+      "Scion"
+     ],
+     "type": "enemy",
+     "optional": true
+    },
+    {
+     "label": "Abyss visited once (Abyssal Nexus access)",
+     "type": "npc",
+     "access": "abyss",
+     "note": "You must have entered the Abyss once, either via the Mage of Zamorak (Enter the Abyss miniquest) or via fairy ring DIP (needs partial Fairytale II)."
+    },
+    {
+     "label": "Slayer task: abyssal demons (or boss task)",
+     "type": "npc",
+     "cards": [
+      "Vannaka",
+      "Chaeldar",
+      "Konar quo Maten",
+      "Nieve",
+      "Steve",
+      "Duradel",
+      "Kuradal",
+      "Mortimer"
+     ],
+     "note": "Slayer bosses can only be fought on task. The masters come from the infobox assignedby list, plus Steve and Kuradal, who replace Nieve and Duradel."
+    }
+   ],
+   "consideredNotRequired": [
+    "Abyssal demon (only for the task, not killed)",
+    "Scion",
+    "Spawn",
+    "Tentacle (disabled, not attacked)"
+   ],
+   "consideredNoCard": [
+    "Eye (Abyssal Nexus)",
+    "Mage of Zamorak",
+    "Respiratory system"
+   ]
+  },
+  {
+   "name": "Kraken",
+   "category": "boss",
+   "sub": "slayer",
+   "note": "Slayer 87 plus a Cave kraken or Kraken task (task needs 50 Magic). Kraken Cove, Piscatoris. Either disturb the four whirlpools (tentacles) or use a fishing explosive on the big whirlpool to wake the Kraken. Magic only (immune to melee, ranged does 1/7 damage). A private instance costs 25,000 coins (can come from the bank).",
+   "levels": {
+    "Slayer": 87,
+    "Magic": 50
+   },
+   "wikiBosses": [
+    "Kraken"
+   ],
+   "requirements": [
+    {
+     "label": "Kraken",
+     "type": "enemy",
+     "cards": [
+      "Kraken"
+     ],
+     "access": "magic_combat"
+    },
+    {
+     "label": "Enormous Tentacle (disturb the 4 whirlpools)",
+     "type": "enemy",
+     "cards": [
+      "Enormous Tentacle"
+     ],
+     "routes": [
+      {
+       "label": "Fishing explosive on the big whirlpool",
+       "cards": [
+        "Fishing explosive"
+       ]
+      }
+     ]
+    }
+   ],
+   "consideredNotRequired": [
+    "Cave kraken / Waterfiend (other cove monsters)",
+    "Coins: private instance (25,000) is optional; the public arena is free"
+   ],
+   "consideredNoCard": [
+    "Lieve McCracken"
+   ]
+  },
+  {
+   "name": "Grotesque Guardians",
+   "category": "boss",
+   "sub": "slayer",
+   "note": "75 Slayer, on a Gargoyle (or Grotesque Guardians boss) task. A Brittle key from task Gargoyles unlocks the rooftop gate once (permanent). Ring the Cloister Bell to start. A rock hammer, rock thrownhammer or granite hammer is required to finish Dusk and Dawn. Dusk is immune to ranged and magic. Dawn flies, so you need ranged, magic or a halberd.",
+   "levels": {
+    "Slayer": 75
+   },
+   "wikiBosses": [
+    "Grotesque Guardians"
+   ],
+   "requirements": [
+    {
+     "label": "Dusk",
+     "cards": [
+      "Dusk"
+     ],
+     "type": "enemy"
+    },
+    {
+     "label": "Dawn",
+     "cards": [
+      "Dawn"
+     ],
+     "type": "enemy"
+    },
+    {
+     "label": "Kill count: any of these",
+     "cards": [
+      "Gargoyle"
+     ],
+     "type": "enemy"
+    },
+    {
+     "label": "Brittle key",
+     "cards": [
+      "Brittle key"
+     ],
+     "type": "item"
+    },
+    {
+     "label": "Rock hammer (finish gargoyles)",
+     "type": "item",
+     "cards": [
+      "Rock hammer",
+      "Rock thrownhammer",
+      "Granite hammer"
+     ],
+     "note": "Also needed to kill the Gargoyles for the Brittle key. Gargoyle finishing items are needed on the task anyway."
+    }
+   ],
+   "quests": [
+    "Priest in Peril"
+   ],
+   "area": "Morytania",
+   "consideredNotRequired": [
+    "Magical Chest (death reclaim only)"
+   ],
+   "consideredNoCard": [
+    "The Cloister Bell (object)"
+   ]
+  },
+  {
+   "name": "Thermonuclear Smoke Devil",
+   "category": "boss",
+   "sub": "slayer",
+   "note": "Slayer 93 — Smoke Devil task needed. Facemask (or Slayer helmet) required to block smoke attacks; without it every hit deals unavoidable damage.",
+   "levels": {
+    "Slayer": 93
+   },
+   "wikiBosses": [
+    "Thermonuclear smoke devil"
+   ],
+   "requirements": [
+    {
+     "label": "Thermonuclear smoke devil",
+     "cards": [
+      "Thermonuclear smoke devil"
+     ],
+     "type": "enemy"
+    },
+    {
+     "label": "Facemask or Slayer helmet",
+     "type": "item",
+     "cards": [
+      "Facemask",
+      "Slayer helmet"
+     ]
+    },
+    {
+     "label": "Slayer master (smoke devil / boss task)",
+     "type": "npc",
+     "cards": [
+      "Nieve",
+      "Steve",
+      "Duradel",
+      "Konar quo Maten",
+      "Mortimer"
+     ]
+    }
+   ],
+   "consideredNotRequired": [
+    "Breive (only stops you attacking off-task)",
+    "Smoke devil (in lair, avoidable)"
+   ],
+   "consideredNoCard": [
+    "Breive",
+    "Gas mask"
+   ]
+  },
+  {
+   "name": "Alchemical Hydra",
+   "category": "boss",
+   "sub": "slayer",
+   "area": "Kourend",
+   "note": "Slayer 95, hydra task only (Konar or Mortimer), in Karuulm Slayer Dungeon. Boots of stone, brimstone or granite are needed for the hot floor unless the Elite Kourend & Kebos Diary is done. The Agility 88 mysterious pipe shortcut is optional. Orrvor quo Maten (no card) offers an optional paid instance.",
+   "levels": {
+    "Slayer": 95
+   },
+   "wikiBosses": [
+    "Alchemical Hydra"
+   ],
+   "requirements": [
+    {
+     "label": "Alchemical Hydra",
+     "cards": [
+      "Alchemical Hydra"
+     ],
+     "type": "enemy"
+    },
+    {
+     "label": "Heat-proof boots (Karuulm floor)",
+     "type": "item",
+     "cards": [
+      "Boots of stone",
+      "Boots of brimstone",
+      "Granite boots"
+     ],
+     "note": "Not needed after the Elite Kourend & Kebos Diary."
+    },
+    {
+     "label": "Slayer task: hydras (Konar or Mortimer)",
+     "type": "npc",
+     "cards": [
+      "Konar quo Maten",
+      "Mortimer"
+     ]
+    }
+   ],
+   "consideredNotRequired": [
+    "Drake",
+    "Greater demon",
+    "Hydra (only needed for the task, avoidable in the dungeon)",
+    "Sulphur Lizard",
+    "Wyrm"
+   ],
+   "consideredNoCard": [
+    "Orrvor quo Maten",
+    "Tasakaal (no card check needed, not required)"
+   ]
+  },
+  {
+   "name": "Cerberus",
+   "category": "boss",
+   "sub": "slayer",
+   "note": "Slayer 91 plus a Hellhound or Cerberus task. Lair is through the cave in the hellhound area of Taverley Dungeon (past the poisonous spiders). Key master teleports go straight there. Enter through the Key Master's iron winches. Summoned Souls attack, but you don't kill them.",
+   "levels": {
+    "Slayer": 91
+   },
+   "wikiBosses": [
+    "Cerberus"
+   ],
+   "requirements": [
+    {
+     "label": "Cerberus",
+     "cards": [
+      "Cerberus"
+     ],
+     "type": "enemy"
+    }
+   ],
+   "consideredNotRequired": [
+    "Hellhound (only the task type, not a kill needed)",
+    "Summoned Soul (spawned special attack, not killed)"
+   ],
+   "consideredNoCard": [
+    "Key Master",
+    "Summoned Soul"
+   ]
+  },
+  {
+   "name": "Vardorvis",
+   "category": "boss",
+   "sub": "high",
+   "area": "DT2",
+   "note": "Desert Treasure II boss. Severed heads and tendrils are fight mechanics, not cards.",
+   "quests": [
+    "Desert Treasure II - The Fallen Empire"
+   ],
+   "wikiBosses": [
+    "Vardorvis"
+   ],
+   "requirements": [
+    {
+     "label": "Vardorvis",
+     "cards": [
+      "Vardorvis"
+     ],
+     "type": "enemy"
+    }
+   ],
+   "consideredNotRequired": [
+    "Ancient Tablet (Vardorvis) (scoreboard)",
+    "Strangled / Strangled Boar / Strangled Bear (Stranglewood mobs; avoidable on the way)"
+   ],
+   "consideredNoCard": [
+    "Rocks (Vardorvis) (scenery)",
+    "Vardorvis' Head (separate NPC that shoots the prayer-disable projectile; not attacked)"
+   ]
+  },
+  {
+   "name": "Duke Sucellus",
+   "category": "boss",
+   "sub": "high",
+   "area": "DT2",
+   "note": "Desert Treasure II boss. Fought in the Ghorrock Prison asylum, reached via Ghorrock Dungeon (Weiss Salt Mine). Must be fed 40 arder/musca powder or 2 arder-musca poisons to wake (needs pestle and mortar).",
+   "quests": [
+    "Desert Treasure II - The Fallen Empire"
+   ],
+   "wikiBosses": [
+    "Duke Sucellus"
+   ],
+   "requirements": [
+    {
+     "label": "Duke Sucellus",
+     "cards": [
+      "Duke Sucellus"
+     ],
+     "type": "enemy"
+    },
+    {
+     "label": "Pestle and mortar",
+     "type": "item",
+     "cards": [
+      "Pestle and mortar"
+     ],
+     "note": "One hangs on the asylum wall, but using it still needs the card. Mushrooms can no longer be fed directly; arder/musca powder (40 total) or 2 arder-musca poisons (also needs salax salt mined with a pickaxe) wake him. Mushrooms, powders, salt and poison have no TCG cards."
+    },
+    {
+     "label": "Any pickaxe (salax salt, poison route)",
+     "type": "item",
+     "tool": "Pickaxe",
+     "optional": true,
+     "note": "Only for the faster arder-musca poison route; an iron pickaxe hangs on the asylum wall. Powder-only route skips this."
+    }
+   ],
+   "consideredNotRequired": [
+    "Extremity (hazard, not killed)"
+   ],
+   "consideredNoCard": [
+    "Arder mushroom",
+    "Arder powder",
+    "Arder-musca poison",
+    "Musca mushroom",
+    "Musca powder",
+    "Salax salt"
+   ]
+  },
+  {
+   "name": "The Leviathan",
+   "category": "boss",
+   "sub": "high",
+   "area": "DT2",
+   "note": "Desert Treasure II boss in the Scar. Reach the Scar by talking to the Catalytic Guardian (no card), then take the rowboat from Wizard Persten's camp (no card). Melee can't reach it. Shadow spells stun it (optional). The abyssal pathfinder in the enrage phase is a mechanic with no card. The Awakener's orb is only for the awakened version.",
+   "quests": [
+    "Desert Treasure II - The Fallen Empire"
+   ],
+   "wikiBosses": [
+    "The Leviathan"
+   ],
+   "requirements": [
+    {
+     "label": "The Leviathan",
+     "cards": [
+      "The Leviathan"
+     ],
+     "type": "enemy"
+    },
+    {
+     "label": "Ranged or magic attack (melee can't reach)",
+     "type": "item",
+     "access": [
+      "ranged",
+      "magic_combat"
+     ]
+    }
+   ],
+   "consideredNotRequired": [
+    "Awakener's orb (awakened mode only)"
+   ],
+   "consideredNoCard": [
+    "Abyssal pathfinder",
+    "Catalytic Guardian",
+    "Wizard Persten"
+   ]
+  },
+  {
+   "name": "The Whisperer",
+   "category": "boss",
+   "sub": "high",
+   "area": "DT2",
+   "note": "Desert Treasure II boss in the sunken cathedral of the Lassar Undercity (sinkhole north-west of the Ruins of Camdozaal, under Ice Mountain). You must carry the blackstone fragment (no card) to start. Disturb the Odd Figure to begin. An awakener's orb starts the awakened version.",
+   "quests": [
+    "Desert Treasure II - The Fallen Empire"
+   ],
+   "wikiBosses": [
+    "The Whisperer"
+   ],
+   "requirements": [
+    {
+     "label": "The Whisperer",
+     "cards": [
+      "The Whisperer"
+     ],
+     "type": "enemy"
+    },
+    {
+     "label": "Awakener's orb (awakened variant)",
+     "type": "item",
+     "cards": [
+      "Awakener's orb"
+     ],
+     "optional": true
+    }
+   ],
+   "consideredNotRequired": [
+    "Tentacle (The Whisperer): a hazard, not attacked"
+   ],
+   "consideredNoCard": [
+    "Blackstone fragment",
+    "Odd Figure"
+   ]
+  },
+  {
+   "name": "Araxxor",
+   "category": "boss",
+   "sub": "slayer",
+   "note": "92 Slayer, on a spider or araxyte Slayer task (or a Konar Araxxor boss task). Morytania Spider Cave, NE of Darkmeyer. Nine eggs (3 red/Ruptura, 3 white/Mirrorback, 3 green/Acidic) hatch in a fixed clockwise order during the fight. Mirrorbacks and Rupturas should be killed. Acidics can be ignored.",
+   "levels": {
+    "Slayer": 92
+   },
+   "wikiBosses": [
+    "Araxxor"
+   ],
+   "requirements": [
+    {
+     "label": "Araxxor",
+     "cards": [
+      "Araxxor"
+     ],
+     "type": "enemy"
+    },
+    {
+     "label": "Acidic Araxyte",
+     "type": "enemy",
+     "cards": [
+      "Acidic Araxyte"
+     ],
+     "optional": true
+    },
+    {
+     "label": "Mirrorback Araxyte",
+     "cards": [
+      "Mirrorback Araxyte"
+     ],
+     "type": "enemy"
+    },
+    {
+     "label": "Ruptura Araxyte",
+     "cards": [
+      "Ruptura Araxyte"
+     ],
+     "type": "enemy"
+    }
+   ],
+   "quests": [
+    "Priest in Peril"
+   ],
+   "area": "Morytania",
+   "consideredNotRequired": [
+    "Araxyte (cave mobs; avoidable to reach the web tunnel)",
+    "Dreadborn Araxyte (Amulet of rancour (s) sequence, not this fight)"
+   ],
+   "consideredNoCard": [
+    "Eggs (Araxxor)"
+   ]
+  },
+  {
+   "name": "The Hueycoatl",
+   "category": "boss",
+   "sub": "mid",
+   "area": "Varlamore",
+   "note": "Children of the Sun required. Varlamore — combat serpent boss.",
+   "quests": [
+    "Children of the Sun"
+   ],
+   "wikiBosses": [
+    "The Hueycoatl"
+   ],
+   "requirements": [
+    {
+     "label": "The Hueycoatl",
+     "cards": [
+      "The Hueycoatl"
+     ],
+     "type": "enemy"
+    }
+   ],
+   "consideredNotRequired": [
+    "Seer (The Darkfrost) — lights braziers, optional"
+   ]
+  },
+  {
+   "name": "Skotizo",
+   "category": "boss",
+   "sub": "mid",
+   "area": "Kourend",
+   "note": "Use a dark totem on the altar in the centre of the Catacombs of Kourend (the totem is consumed). Pieces drop from Catacombs/Giants' Den monsters. Reanimated demon spawns and the Dark Ankou can be ignored. Awakened Altars (no card) are disabled by attacking them.",
+   "wikiBosses": [
+    "Skotizo"
+   ],
+   "requirements": [
+    {
+     "label": "Skotizo",
+     "cards": [
+      "Skotizo"
+     ],
+     "type": "enemy"
+    },
+    {
+     "label": "Dark totem",
+     "cards": [
+      "Dark totem"
+     ],
+     "type": "item"
+    },
+    {
+     "label": "Dark totem pieces (assemble the totem)",
+     "type": "item",
+     "cards": [
+      "Dark totem base",
+      "Dark totem middle",
+      "Dark totem top"
+     ],
+     "mode": "all",
+     "note": "Ironman: combine the three pieces yourself. They drop from any non-ghost monster in the Catacombs of Kourend or the Giants' Den. Skotizo rarely drops a ready-made totem, but you need one for the first kill."
+    }
+   ],
+   "consideredNotRequired": [
+    "Dark Ankou",
+    "Reanimated demon spawn"
+   ],
+   "consideredNoCard": [
+    "Altar (Catacombs of Kourend)",
+    "Awakened Altar"
+   ]
+  },
+  {
+   "name": "Scurrius",
+   "category": "boss",
+   "sub": "low",
+   "note": "Varrock Sewers (manhole east of Varrock Palace). Scurrius heals by eating from Food Piles between phases, and can summon six giant rats, which are optional to kill.",
+   "wikiBosses": [
+    "Scurrius"
+   ],
+   "requirements": [
+    {
+     "label": "Scurrius",
+     "cards": [
+      "Scurrius"
+     ],
+     "type": "enemy"
+    },
+    {
+     "label": "Giant rat (Scurrius minions)",
+     "type": "enemy",
+     "cards": [
+      "Giant rat"
+     ],
+     "optional": true
+    }
+   ],
+   "consideredNotRequired": [
+    "Giant rat (optional minions)"
+   ],
+   "consideredNoCard": [
+    "Food Pile (object)"
+   ]
+  },
+  {
+   "name": "The Mimic",
+   "category": "boss",
+   "sub": "mid",
+   "note": "Turn on Mimic encounters at the strange casket in Watson's house (Hosidius). Elite (1/35) and master (1/15) reward caskets can then be mimics. Present the mimic casket to the strange casket to fight. You need to be able to complete elite or master clues. Ignore the Third Age minions.",
+   "wikiBosses": [
+    "The Mimic"
+   ],
+   "requirements": [
+    {
+     "label": "The Mimic",
+     "cards": [
+      "The Mimic"
+     ],
+     "type": "enemy"
+    }
+   ],
+   "area": "Kourend",
+   "consideredNotRequired": [
+    "Third Age Warrior / Mage / Ranger (spawned minions, explicitly ignorable)",
+    "Watson (no interaction needed; the strange casket is an object)"
+   ],
+   "consideredNoCard": [
+    "Mimic (casket item)",
+    "Strange casket (object)"
+   ]
+  },
+  {
+   "name": "Deranged Archaeologist",
+   "category": "boss",
+   "sub": "low",
+   "area": "Fossil Island",
+   "note": "Fossil Island — requires Bone Voyage quest to access the island.",
+   "wikiBosses": [
+    "Deranged Archaeologist"
+   ],
+   "requirements": [
+    {
+     "label": "Deranged archaeologist",
+     "cards": [
+      "Deranged archaeologist"
+     ],
+     "type": "enemy"
+    },
+    {
+     "label": "Axe (swamp vine)",
+     "type": "item",
+     "tool": "Axe",
+     "cards": [
+      "Bronze axe",
+      "Iron axe",
+      "Steel axe",
+      "Black axe",
+      "Mithril axe",
+      "Adamant axe",
+      "Rune axe",
+      "Dragon axe",
+      "Crystal axe",
+      "3rd age axe"
+     ]
+    },
+    {
+     "label": "Rake (only if walking the whole swamp)",
+     "type": "item",
+     "cards": [
+      "Rake"
+     ],
+     "optional": true
+    }
+   ],
+   "quests": [
+    "Bone Voyage"
+   ],
+   "consideredNotRequired": [
+    "Spine mushroom (hazard)"
+   ]
+  },
+  {
+   "name": "Blood Moon",
+   "category": "boss",
+   "sub": "mid",
+   "note": "Perilous Moons required. Neypotzli, under Cam Torum (Varlamore). During the Blood Jaguar special, run to Eyatlalli's glyph and attack the jaguar. Rewards come from the Lunar Chest (receiving them needs no card).",
+   "quests": [
+    "Perilous Moons"
+   ],
+   "wikiBosses": [
+    "Blood Moon"
+   ],
+   "requirements": [
+    {
+     "label": "Blood Moon",
+     "cards": [
+      "Blood Moon"
+     ],
+     "type": "enemy"
+    },
+    {
+     "label": "Blood jaguar",
+     "cards": [
+      "Blood jaguar"
+     ],
+     "type": "enemy"
+    }
+   ],
+   "area": "Varlamore",
+   "consideredNotRequired": [
+    "Eyatlalli (bonus trades only)"
+   ],
+   "consideredNoCard": [
+    "Lunar Chest"
+   ]
+  },
+  {
+   "name": "Blue Moon",
+   "category": "boss",
+   "sub": "mid",
+   "note": "Perilous Moons required (needed to open the Lunar Chest). Blue Moon chamber, Neypotzli under Cam Torum (Varlamore). Weapon Freeze: punch your frozen weapon free. Frost Storm: relight the two braziers.",
+   "quests": [
+    "Perilous Moons"
+   ],
+   "relatedCards": [
+    "Blue crab"
+   ],
+   "wikiBosses": [
+    "Blue Moon"
+   ],
+   "requirements": [
+    {
+     "label": "Blue Moon",
+     "cards": [
+      "Blue Moon"
+     ],
+     "type": "enemy"
+    }
+   ],
+   "consideredNotRequired": [
+    "Blood Moon / Eclipse Moon (separate encounters)",
+    "Eyatlalli (optional: weapon reclaim / sacrifice exchanges)"
+   ],
+   "consideredNoCard": [
+    "Frozen weapons (ice block)"
+   ],
+   "area": "Varlamore"
+  },
+  {
+   "name": "Eclipse Moon",
+   "category": "boss",
+   "sub": "mid",
+   "note": "Perilous Moons quest required.",
+   "quests": [
+    "Perilous Moons"
+   ],
+   "wikiBosses": [
+    "Eclipse Moon"
+   ],
+   "requirements": [
+    {
+     "label": "Eclipse Moon",
+     "cards": [
+      "Eclipse Moon"
+     ],
+     "type": "enemy"
+    }
+   ],
+   "area": "Varlamore",
+   "consideredNotRequired": [
+    "Eclipse Moon clones (special-attack visuals; you parry them, you don't kill them)"
+   ],
+   "consideredNoCard": [
+    "Moon shield (object)"
+   ]
+  },
+  {
+   "name": "Royal Titans",
+   "category": "boss",
+   "sub": "mid",
+   "note": "Asgarnian Ice Dungeon (fairy ring AIQ; Agility 60 shortcut optional; Giantsoul amulet teleport). Both titans must be subdued. Elementals self-destruct if ignored.",
+   "lootFrom": [
+    "Branda the Fire Queen",
+    "Eldric the Ice King"
+   ],
+   "wikiBosses": [
+    "Royal Titans"
+   ],
+   "requirements": [
+    {
+     "label": "Branda the Fire Queen",
+     "cards": [
+      "Branda the Fire Queen"
+     ],
+     "type": "enemy"
+    },
+    {
+     "label": "Eldric the Ice King",
+     "cards": [
+      "Eldric the Ice King"
+     ],
+     "type": "enemy"
+    },
+    {
+     "label": "Fire elemental",
+     "type": "enemy",
+     "cards": [
+      "Fire elemental"
+     ],
+     "optional": true,
+     "note": "Self-destruct if not killed; killing recommended"
+    },
+    {
+     "label": "Ice elemental",
+     "type": "enemy",
+     "cards": [
+      "Ice elemental"
+     ],
+     "optional": true,
+     "note": "Self-destruct if not killed; killing recommended"
+    }
+   ],
+   "consideredNotRequired": [
+    "Fire/Ice elemental (optional)"
+   ]
+  },
+  {
+   "name": "Yama",
+   "category": "boss",
+   "sub": "high",
+   "area": "Kourend",
+   "note": "A Kingdom Divided required. Speak to the Voice of Yama (no card) at the bottom of the Chasm of Fire, then use 'Challenge' on Yama. Judges of Yama appear in intermissions (magic essentially required). Void flares spawn and explode if left. Agility 73/83 shortcuts are optional.",
+   "quests": [
+    "A Kingdom Divided"
+   ],
+   "wikiBosses": [
+    "Yama"
+   ],
+   "requirements": [
+    {
+     "label": "Yama",
+     "cards": [
+      "Yama"
+     ],
+     "type": "enemy"
+    },
+    {
+     "label": "Judge of Yama",
+     "cards": [
+      "Judge of Yama"
+     ],
+     "type": "enemy"
+    },
+    {
+     "label": "Void Flare",
+     "cards": [
+      "Void Flare"
+     ],
+     "type": "enemy"
+    },
+    {
+     "label": "Magic attack (Judge of Yama prays against two styles)",
+     "type": "item",
+     "access": "magic_combat"
+    }
+   ],
+   "consideredNotRequired": [
+    "Imp (Yama) (scoreboard flavour)"
+   ],
+   "consideredNoCard": [
+    "Chasm teleport scroll",
+    "Disciple of Yama",
+    "Voice of Yama"
+   ]
+  },
+  {
+   "name": "Gemstone Crab",
+   "category": "boss",
+   "area": "Varlamore",
+   "note": "Children of the Sun required (Varlamore). A combat world boss that moves between three Tlati Rainforest mines about every 10 minutes. It has effectively infinite HP, so it's used for combat training. When it burrows, the top 16 damage dealers can mine its shell for uncut gems, so a pickaxe is needed for the reward.",
+   "quests": [
+    "Children of the Sun"
+   ],
+   "wikiBosses": [
+    "Gemstone Crab"
+   ],
+   "requirements": [
+    {
+     "label": "Gemstone Crab",
+     "cards": [
+      "Gemstone Crab"
+     ],
+     "type": "enemy"
+    },
+    {
+     "label": "Any pickaxe",
+     "tool": "Pickaxe",
+     "type": "item"
+    }
+   ],
+   "consideredNoCard": [
+    "Cave (Gemstone Crab)",
+    "Gemstone Crab shell (mined object)"
+   ],
+   "sub": "low"
+  },
+  {
+   "name": "Maggot King",
+   "category": "boss",
+   "sub": "high",
+   "note": "The Blood Moon Rises required. The lair is in Vampyrium, east of Sangvesti. You need ranged or magic, then melee from 65% HP. Ur-maggot larvae spawn and should be shot down.",
+   "quests": [
+    "The Blood Moon Rises"
+   ],
+   "wikiBosses": [
+    "Maggot King"
+   ],
+   "requirements": [
+    {
+     "label": "Maggot King",
+     "cards": [
+      "Maggot King"
+     ],
+     "type": "enemy"
+    },
+    {
+     "label": "Ur-maggot larvae",
+     "type": "enemy",
+     "cards": [
+      "Ur-maggot larvae"
+     ]
+    },
+    {
+     "label": "Ranged or Magic attack (opening phase)",
+     "type": "item",
+     "access": "ranged",
+     "note": "Magic also works. The model can't express ranged OR magic, so the curator should pick or extend it. He can't be meleed until about 65% HP."
+    }
+   ],
+   "consideredNotRequired": [
+    "Bank chest (optional; needs 70 Construction plus materials)",
+    "Sanguidae / Aranei scout (optional fast-travel unlock)"
+   ],
+   "consideredNoCard": [
+    "Aranei scout",
+    "Carrion",
+    "Drakan's medallion (optional teleport; no card)"
+   ],
+   "area": "Morytania"
+  },
+  {
+   "name": "Brutus",
+   "category": "boss",
+   "sub": "low",
+   "note": "Combat boss.",
+   "wikiBosses": [
+    "Brutus"
+   ],
+   "requirements": [
+    {
+     "label": "Brutus",
+     "cards": [
+      "Brutus"
+     ],
+     "type": "enemy"
+    }
+   ],
+   "quests": [
+    "The Ides of Milk"
+   ]
+  },
+  {
+   "name": "Mad Angel",
+   "category": "boss",
+   "sub": "mid",
+   "note": "Fallen From Grace required. Ardeaglais cathedral on Wyrmscraig (Sailing island). Reach it via necklace of passage, slayer ring (Wyrmscraig Cavern), or the Ardeaglais teleport. The front door has a combination puzzle (no card). Agility 54 rocks are an optional shortcut, otherwise use the boat via the cavern. Proposed new area: Wyrmscraig.",
+   "wikiBosses": [
+    "Mad Angel"
+   ],
+   "requirements": [
+    {
+     "label": "Mad Angel",
+     "cards": [
+      "Mad Angel"
+     ],
+     "type": "enemy"
+    }
+   ],
+   "quests": [
+    "Fallen From Grace"
+   ],
+   "consideredNoCard": [
+    "Ardeaglais door lock"
+   ]
+  },
+  {
+   "name": "Callisto",
+   "category": "boss",
+   "sub": "wilderness",
+   "note": "Callisto's Den, level 40 Wilderness. Needs the medium Wilderness Diary or a Callisto boss Slayer task (a bear task doesn't count), plus a 50,000 coin lair fee (shared across the Wilderness boss lairs). Artio (Hunter's End) is the weaker variant and needs the hard diary.",
+   "wikiBosses": [
+    "Callisto"
+   ],
+   "requirements": [
+    {
+     "label": "Callisto",
+     "cards": [
+      "Callisto"
+     ],
+     "type": "enemy"
+    },
+    {
+     "label": "Lair fee (50,000 coins)",
+     "type": "item",
+     "cards": [
+      "Coins"
+     ]
+    }
+   ],
+   "consideredNotRequired": [
+    "Artio (separate weaker variant at Hunter's End)"
+   ]
+  },
+  {
+   "name": "Artio",
+   "category": "boss",
+   "sub": "wilderness",
+   "note": "Hunter's End, level 21 Wilderness (singles-plus). Entry needs the HARD Wilderness Diary OR a Callisto boss Slayer task. 50k coin lair fee. The old note's 'Wilderness Slayer Cave' is wrong. Suggest a diary gate field (e.g. diaries:['Wilderness Hard'] with a slayer-task alternative) if the planner supports one.",
+   "wikiBosses": [
+    "Artio"
+   ],
+   "requirements": [
+    {
+     "label": "Artio",
+     "cards": [
+      "Artio"
+     ],
+     "type": "enemy"
+    },
+    {
+     "label": "Coins (50,000 lair entry fee)",
+     "type": "item",
+     "cards": [
+      "Coins"
+     ],
+     "note": "Paid once, from the bank, and shared across the Wilderness boss lairs. It goes down by 10k for each lesser-boss kill."
+    }
+   ]
+  },
+  {
+   "name": "Venenatis",
+   "category": "boss",
+   "sub": "wilderness",
+   "note": "Silk Chasm, level 35 Wilderness. Entry needs the Wilderness Diary (medium) OR a Venenatis boss Slayer task, plus a 50,000 coin fee. Spiderlings spawn and reduce prayer effectiveness (killed in standard play).",
+   "wikiBosses": [
+    "Venenatis"
+   ],
+   "requirements": [
+    {
+     "label": "Venenatis",
+     "cards": [
+      "Venenatis"
+     ],
+     "type": "enemy"
+    },
+    {
+     "label": "Venenatis' Spiderling",
+     "cards": [
+      "Venenatis' Spiderling"
+     ],
+     "type": "enemy"
+    },
+    {
+     "label": "Silk Chasm entry fee",
+     "type": "item",
+     "cards": [
+      "Coins"
+     ],
+     "note": "50,000 coins, taken from bank"
+    }
+   ]
+  },
+  {
+   "name": "Spindel",
+   "category": "boss",
+   "sub": "wilderness",
+   "note": "Web Chasm, level 29 Wilderness (singles-plus). Needs the Hard Wilderness Diary or a Venenatis boss task. Kill Spindel's spiderlings as they spawn.",
+   "wikiBosses": [
+    "Spindel"
+   ],
+   "requirements": [
+    {
+     "label": "Spindel",
+     "cards": [
+      "Spindel"
+     ],
+     "type": "enemy"
+    },
+    {
+     "label": "Spindel's Spiderling",
+     "cards": [
+      "Spindel's Spiderling"
+     ],
+     "type": "enemy"
+    },
+    {
+     "label": "Hard Wilderness Diary (or a Venenatis boss task)",
+     "type": "npc",
+     "cards": [],
+     "routes": [
+      {
+       "label": "Hard Wilderness Diary complete",
+       "cards": [],
+       "manual": true
+      },
+      {
+       "label": "Venenatis boss Slayer task (Konar, Nieve/Steve, Duradel/Kuradal, Krystilia)",
+       "cards": [
+        [
+         "Konar quo Maten",
+         "Nieve",
+         "Steve",
+         "Duradel",
+         "Kuradal",
+         "Krystilia"
+        ]
+       ],
+       "manual": true
+      }
+     ],
+     "note": "A plain spider task does not bypass the diary."
+    }
+   ]
+  },
+  {
+   "name": "Vet'ion",
+   "category": "boss",
+   "sub": "wilderness",
+   "note": "Vet'ion's Rest, level 35 Wilderness (south of Lava Dragon Isle). Needs the medium Wilderness Diary or a Vet'ion boss Slayer task, plus the 50,000 coin lair fee. At half HP in each form he summons 2 skeleton hellhounds, then 2 greater skeleton hellhounds. They must be killed because he is immune while they live. Calvar'ion (Skeletal Tomb) is the weaker variant and needs the hard diary.",
+   "wikiBosses": [
+    "Vet'ion"
+   ],
+   "requirements": [
+    {
+     "label": "Vet'ion",
+     "cards": [
+      "Vet'ion"
+     ],
+     "type": "enemy"
+    },
+    {
+     "label": "Skeleton Hellhound",
+     "cards": [
+      "Skeleton Hellhound"
+     ],
+     "type": "enemy"
+    },
+    {
+     "label": "Greater Skeleton Hellhound",
+     "cards": [
+      "Greater Skeleton Hellhound"
+     ],
+     "type": "enemy"
+    },
+    {
+     "label": "Lair fee (50,000 coins)",
+     "type": "item",
+     "cards": [
+      "Coins"
+     ]
+    }
+   ],
+   "consideredNotRequired": [
+    "Calvar'ion (separate weaker variant)"
+   ]
+  },
+  {
+   "name": "Calvar'ion",
+   "category": "boss",
+   "sub": "wilderness",
+   "note": "Skeletal Tomb, level 21 Wilderness (singles-plus). Entry needs the HARD Wilderness Diary OR a Vet'ion boss Slayer task. 50k coin lair fee. The old note's 'Wilderness Slayer Cave' is wrong. Suggest a diary gate field (e.g. diaries:['Wilderness Hard'] with a slayer-task alternative) if the planner supports one.",
+   "wikiBosses": [
+    "Calvar'ion"
+   ],
+   "requirements": [
+    {
+     "label": "Calvar'ion",
+     "cards": [
+      "Calvar'ion"
+     ],
+     "type": "enemy"
+    },
+    {
+     "label": "Skeleton Hellhound",
+     "type": "enemy",
+     "cards": [
+      "Skeleton Hellhound"
+     ]
+    },
+    {
+     "label": "Coins (50,000 lair entry fee)",
+     "type": "item",
+     "cards": [
+      "Coins"
+     ],
+     "note": "Paid once, from the bank, and shared across the Wilderness boss lairs. It goes down by 10k for each lesser-boss kill."
+    }
+   ]
+  },
+  {
+   "name": "Scorpia",
+   "category": "boss",
+   "sub": "wilderness",
+   "note": "Scorpion Pit — offspring fill the arena",
+   "wikiBosses": [
+    "Scorpia"
+   ],
+   "requirements": [
+    {
+     "label": "Scorpia",
+     "cards": [
+      "Scorpia"
+     ],
+     "type": "enemy"
+    },
+    {
+     "label": "Scorpia's offspring",
+     "type": "enemy",
+     "cards": [
+      "Scorpia's offspring"
+     ],
+     "optional": true,
+     "note": "Fill the pit and attack, but need not be killed"
+    },
+    {
+     "label": "Scorpia's guardian",
+     "type": "enemy",
+     "cards": [
+      "Scorpia's guardian"
+     ],
+     "optional": true,
+     "note": "Spawn below 50% and heal her; kill them or freeze/lure Scorpia away"
+    }
+   ],
+   "consideredNotRequired": [
+    "Scorpion (level 14, surface of the pit)"
+   ]
+  },
+  {
+   "name": "Chaos Elemental",
+   "category": "boss",
+   "sub": "wilderness",
+   "note": "Deep Wilderness (around level 50, just west of the Rogues' Castle, multi-combat). Reach it via the deep Wilderness lever in Ardougne or Edgeville, or a Wilderness obelisk. No entry requirement.",
+   "wikiBosses": [
+    "Chaos Elemental"
+   ],
+   "requirements": [
+    {
+     "label": "Chaos Elemental",
+     "cards": [
+      "Chaos Elemental"
+     ],
+     "type": "enemy"
+    }
+   ]
+  },
+  {
+   "name": "Chaos Fanatic",
+   "category": "boss",
+   "sub": "wilderness",
+   "note": "Level 42 Wilderness, west of the Lava Maze. No entry requirements. Single-way combat.",
+   "wikiBosses": [
+    "Chaos Fanatic"
+   ],
+   "requirements": [
+    {
+     "label": "Chaos Fanatic",
+     "cards": [
+      "Chaos Fanatic"
+     ],
+     "type": "enemy"
+    }
+   ],
+   "consideredNotRequired": [
+    "Miniature chaotic clouds (unattackable scenery)"
+   ]
+  },
+  {
+   "name": "Crazy Archaeologist",
+   "category": "boss",
+   "sub": "wilderness",
+   "note": "Ruins north of Graveyard of Shadows",
+   "wikiBosses": [
+    "Crazy archaeologist"
+   ],
+   "requirements": [
+    {
+     "label": "Crazy archaeologist",
+     "cards": [
+      "Crazy archaeologist"
+     ],
+     "type": "enemy"
+    }
+   ]
+  },
+  {
+   "name": "Revenant Maledictus",
+   "category": "boss",
+   "sub": "wilderness",
+   "note": "Wilderness — rare revenant boss encounter.",
+   "wikiBosses": [
+    "Revenant maledictus"
+   ],
+   "requirements": [
+    {
+     "label": "Revenant maledictus",
+     "cards": [
+      "Revenant maledictus"
+     ],
+     "type": "enemy"
+    },
+    {
+     "label": "Revenant Caves entry fee",
+     "type": "item",
+     "cards": [
+      "Coins"
+     ],
+     "note": "100,000 coins from bank; repaid after dying"
+    },
+    {
+     "label": "Spawn trigger: kill any revenant",
+     "type": "enemy",
+     "cards": [
+      "Revenant imp",
+      "Revenant goblin",
+      "Revenant pyrefiend",
+      "Revenant hobgoblin",
+      "Revenant cyclops",
+      "Revenant hellhound",
+      "Revenant demon",
+      "Revenant ork",
+      "Revenant dark beast",
+      "Revenant knight",
+      "Revenant dragon"
+     ],
+     "note": "Spawn chance accumulates from revenant kills by everyone on the world, so others' kills also count"
+    }
+   ],
+   "consideredNotRequired": [
+    "Amulet of avarice (only for Forinthry Surge buff)"
+   ]
+  },
+  {
+   "name": "Shellbane Gryphon",
+   "category": "boss",
+   "sub": "slayer",
+   "note": "Troubled Tortugans required. Slayer 51, gryphon task only (or once with the elite clue step). Cave in the centre of the Great Conch, north of fairy ring CJQ. The Tortugan shield negates its devastating melee. The main page calls it required; the strategy page calls it recommended and shows swapping to it. Elder Nama (no card) enforces the rules.",
+   "quests": [
+    "Troubled Tortugans"
+   ],
+   "levels": {
+    "Slayer": 51
+   },
+   "wikiBosses": [
+    "Shellbane gryphon"
+   ],
+   "requirements": [
+    {
+     "label": "Shellbane gryphon",
+     "cards": [
+      "Shellbane gryphon"
+     ],
+     "type": "enemy"
+    },
+    {
+     "label": "Slayer task: gryphons",
+     "type": "npc",
+     "cards": [
+      "Vannaka",
+      "Chaeldar",
+      "Konar quo Maten",
+      "Nieve",
+      "Steve",
+      "Duradel",
+      "Kuradal",
+      "Mortimer"
+     ],
+     "note": "Or the elite clue step 'Their bane awaits' (one kill). Nieve/Duradel need the 'Wings Spread' unlock for normal gryphon tasks."
+    },
+    {
+     "label": "Tortugan shield",
+     "type": "item",
+     "cards": [
+      "Tortugan shield"
+     ],
+     "optional": true,
+     "note": "The main page says 'required'; the strategy page says 'recommended'. Without it you take heavy melee damage through Protect from Melee."
+    }
+   ],
+   "consideredNotRequired": [
+    "Whirlwind (mechanic)"
+   ],
+   "consideredNoCard": [
+    "Elder Nama"
+   ]
+  },
+  {
+   "name": "Doom of Mokhaiotl",
+   "category": "boss",
+   "sub": "high",
+   "area": "Varlamore",
+   "quests": [
+    "The Final Dawn"
+   ],
+   "levels": {},
+   "wikiBosses": [
+    "Doom of Mokhaiotl"
+   ],
+   "requirements": [
+    {
+     "label": "Doom of Mokhaiotl",
+     "type": "enemy",
+     "cards": [
+      "Doom of Mokhaiotl"
+     ]
+    },
+    {
+     "label": "Demonic larva",
+     "type": "enemy",
+     "cards": [
+      "Demonic larva"
+     ],
+     "optional": true,
+     "note": "Larvae heal the Doom if they reach it. Killing them is strongly advised but not strictly required. They are one-shot only by demonbane or multi-hit weapons."
+    },
+    {
+     "label": "Mokhaiotl waystone",
+     "type": "item",
+     "cards": [
+      "Mokhaiotl waystone"
+     ],
+     "optional": true,
+     "note": "Optional single-use teleport into the ruins."
+    }
+   ],
+   "note": "Delve boss in the Ruins of Mokhaiotl under the Tlati Rainforest (via the Tonali Cavern lift). Unlocked by The Final Dawn. Each defeat goes one delve deeper, and the difficulty caps at delve 8. Demonbane weapons are the only way to damage the shield phase, but letting the charge finish also ends it, so demonbane is recommended, not required. Volatile earth (attack it for an earthen shield) has no card. 75 Agility shortcut in the ruins is optional.",
+   "consideredNotRequired": [
+    "Ancient teleporter (optional travel aid)",
+    "Demonbane weapon (recommended; 'Letting the boss fully charge will result in the shield phase instantly ending')",
+    "Infected roots (80 Woodcutting, optional)"
+   ],
+   "consideredNoCard": [
+    "Ancient teleporter",
+    "Burrow hole (object)",
+    "Earthen shield",
+    "Volatile earth"
+   ]
+  },
+  {
+   "name": "Demonic Brutus",
+   "category": "boss",
+   "sub": "mid",
+   "quests": [
+    "The Ides of Milk",
+    "Desert Treasure II - The Fallen Empire"
+   ],
+   "levels": {},
+   "wikiBosses": [
+    "Demonic Brutus"
+   ],
+   "requirements": [
+    {
+     "label": "Demonic Brutus",
+     "type": "enemy",
+     "cards": [
+      "Brutus"
+     ],
+     "note": "The same 'Brutus' card covers it: card variants 15628/15629 are named 'Demonic Brutus'."
+    },
+    {
+     "label": "Abyssal potato",
+     "type": "item",
+     "cards": [
+      "Abyssal potato"
+     ],
+     "note": "Fed to Brutus to start each hard-mode attempt (one potato per attempt). Picked from the Growth in The Scar, which needs DT2."
+    }
+   ],
+   "note": "Hard-mode Brutus in the Lumbridge cow field. Have an abyssal potato in your inventory and feed it to Brutus to start. The potato comes from the Growth in The Scar (DT2). Drops only Brutus slippers plus beef (1/400). Not on a cow Slayer task.",
+   "consideredNotRequired": [
+    "Cow (other cows in the field)"
+   ],
+   "consideredNoCard": [
+    "Growth (The Scar) (object)"
+   ]
+  },
+  {
+   "name": "Guardians of the Rift",
+   "category": "skilling",
+   "quests": [
+    "Temple of the Eye"
+   ],
+   "levels": {
+    "Runecraft": 27
+   },
+   "wikiBosses": [],
+   "requirements": [
+    {
+     "label": "Any pickaxe (mine guardian fragments)",
+     "tool": "Pickaxe",
+     "type": "item"
+    },
+    {
+     "label": "Chisel (craft guardian essence from fragments)",
+     "cards": [
+      "Chisel"
+     ],
+     "type": "item"
+    }
+   ],
+   "lootRequirements": [
+    {
+     "label": "Search the Rewards Guardian (spends an elemental + catalytic point per search)",
+     "cards": [
+      "Rewards Guardian"
+     ],
+     "type": "npc"
+    }
+   ],
+   "consideredNoCard": [
+    "The Great Guardian",
+    "Apprentice Cordelia"
+   ],
+   "note": "Team Runecraft minigame inside the Temple of the Eye (portal in the Wizards' Tower basement). Not a wiki \"boss\", but it plays like a skilling boss: points from a game convert into reward searches, and it has a collection log."
+  }
+ ]
+}

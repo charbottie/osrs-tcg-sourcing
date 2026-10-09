@@ -1231,7 +1231,9 @@ let monsterDrops = {}, itemSources = {}, cardCategories = {}, cardDetails = {}, 
 let bossLoot = {};   // boss name → {source, page, drops} for chest/reward-based bosses (boss_loot.json)
 let spellsData   = {};  // spell name → {book, level, runes}, from spells.json (wiki spellbooks)
 let runeSources  = {};  // elemental rune → staves / combination runes that supply it (rune_sources.json)
-let accessRoutes = {};  // shared access routes, e.g. desert (access_routes.json)
+let accessRoutes = {};
+let cardVersions = {};  // card → [{name, page, recipe?}] item versions it covers (card_versions.json)
+let selectedVersion = null;  // a version name the user opened (shown on its card's page)  // shared access routes, e.g. desert (access_routes.json)
 let cardAliases = {};  // item version name (lowercase) → card, from the catalog's tcg.variants (card_aliases.json)
 let collectionLog = {};  // boss name → {log, items} — collection-log items = the boss's uniques
 let packCatalog  = null;   // {catalogVersion, packSize, packs:[...]} from /api/packs
@@ -1382,6 +1384,22 @@ function _cardInfo(name) {
   return card ? (_cardLcMap[card.toLowerCase()] || null) : null;
 }
 function _isCard(name) { return !!_cardInfo(name); }
+// Retry a failed image once with a cache-buster (e.g. a pack thumbnail the proxy couldn't fetch in time)
+function _imgRetry(img, fallback) {
+  if (!img.dataset.retried) { img.dataset.retried = '1'; img.src = img.src + (img.src.includes('?') ? '&' : '?') + 'r=' + Date.now(); }
+  else if (fallback) fallback();
+}
+// Card image URL for a card or any version of one (the version's own wiki image, else its card's art)
+function _cardImg(name) {
+  if (!name) return '';
+  const d = cardDetails[name];
+  if (d && d.imageUrl) return d.imageUrl;
+  const info = _cardInfo(name);
+  // A version with its own wiki image (card_versions.json), else its card's art
+  const v = info && (cardVersions[info.exact] || []).find(x => x.name.toLowerCase() === name.toLowerCase());
+  if (v && (v.detail || v.icon)) return v.detail || v.icon;
+  return (info && (cardDetails[info.exact] || {}).imageUrl) || '';
+}
 
 // Normalise wiki spawn location text: "1 st floor 2 nd floor" → "1st floor"
 // The wiki shows both UK (1st floor) and US (2nd floor) names; keep the first only.
@@ -1534,7 +1552,7 @@ function simulateRandom() {
 async function loadData() {
   try {
     const cb = `?v=${Date.now()}`;  // cache-bust so updated JSON files are always fresh
-    const [md, is, cc, cd, css, cs, crr, ii, qd, ed, fd, bmqc, cq, ac, cst, bl, clg, dd, cal, spl, rsrc, acc] = await Promise.all([
+    const [md, is, cc, cd, css, cs, crr, ii, qd, ed, fd, bmqc, cq, ac, cst, bl, clg, dd, cal, spl, rsrc, acc, cver, bdat] = await Promise.all([
       fetch(`output/monster_drops.json${cb}`).then(r => r.json()).catch(() => ({})),
       fetch(`output/item_sources.json${cb}`).then(r => r.json()).catch(() => ({})),
       fetch(`output/card_categories.json${cb}`).then(r => r.json()).catch(() => ({})),
@@ -1557,6 +1575,8 @@ async function loadData() {
       fetch(`output/spells.json${cb}`).then(r => r.json()).catch(() => ({})),
       fetch(`output/rune_sources.json${cb}`).then(r => r.json()).catch(() => ({})),
       fetch(`output/access_routes.json${cb}`).then(r => r.json()).catch(() => ({})),
+      fetch(`output/card_versions.json${cb}`).then(r => r.json()).catch(() => ({})),
+      fetch(`output/bosses.json${cb}`).then(r => r.json()).catch(() => []),
     ]);
     monsterDrops = md; itemSources = is; cardCategories = cc; cardDetails = cd;
     _cardLcMap = null; // invalidate case-insensitive card lookup cache
@@ -1573,10 +1593,10 @@ async function loadData() {
     spellsData         = spl || {};
     runeSources        = rsrc || {};
     accessRoutes       = acc || {};
+    cardVersions       = cver || {};
     DIARY_DATA         = Array.isArray(dd) ? dd : [];
     _buildDiaryByCard();
     _bossLootByItem    = null;  // invalidate reverse index
-    try { _validateDataNames(); } catch (e) { console.warn("[data check] failed", e); }
     // Build quest name → BM card requirement map; track miniquests separately
     bmQuestCards = {};
     for (const q of (bmqc.quests || [])) {
@@ -1589,6 +1609,10 @@ async function loadData() {
       }
       for (const sec of (q.sections || [])) for (const r of (sec.requirements || [])) _expandReq(r, q.name);
     }
+    BOSS_DATA = Array.isArray(bdat) ? bdat : [];
+    for (const b of BOSS_DATA) for (const r of [...(b.requirements || []), ...(b.lootRequirements || [])]) _expandReq(r, b.name);
+    _buildBossByCard();
+    try { _validateDataNames(); } catch (e) { console.warn("[data check] failed", e); }
     // Only load completed_quests.json at startup if the file has a player tag
     // that matches the currently selected account. A file with no player tag
     // is ambiguous — don't apply it to any specific account (syncQuestsFromScreenshots
@@ -1797,7 +1821,7 @@ function renderList(cards, sortBy = 'name') {
       } else {
         catTag = `<span class="card-type">${card.type}</span>`;
       }
-      const imgUrl = (cardDetails[card.name] || {}).imageUrl || '';
+      const imgUrl = _cardImg(card.name) || '';
       const imgHtml = imgUrl
         ? `<img src="${imgUrl}" style="width:20px;height:20px;object-fit:contain;image-rendering:pixelated;flex-shrink:0;margin-right:5px" onerror="this.style.display='none'">`
         : '<span style="width:20px;flex-shrink:0;margin-right:5px"></span>';
@@ -1894,6 +1918,10 @@ function navigateForward() {
 // ─── Card display ──────────────────────────────────────────────────────────
 function showCard(name, type, push = true) {
   if (push) pushHistoryEntry();
+  // A version (Infernal harpoon) opens its card's page (Dragon harpoon) with a version banner
+  const info = _cardInfo(name);
+  if (info && info.exact !== name && !cardDetails[name]) { selectedVersion = name; name = info.exact; type = info.type; }
+  else selectedVersion = null;
   selected = name; selectedType = type;
   if (activeTab !== 'cards') _renderTab('cards', false);
   filterCards();
@@ -2203,7 +2231,7 @@ function _showCardGridTip(el) {
   }
   const owned = cards.filter(c => isOwned(c)), missing = cards.filter(c => !isOwned(c));
   const cell = (c, own) => {
-    const img = (cardDetails[c] || {}).imageUrl;
+    const img = _cardImg(c);
     const inner = img
       ? `<img src="${img}" style="width:28px;height:28px;object-fit:contain;image-rendering:pixelated" onerror="this.style.display='none'">`
       : `<span style="font-size:8px;color:#666;padding:2px;text-align:center;line-height:1.1">${escHtml(c.slice(0, 8))}</span>`;
@@ -2259,7 +2287,7 @@ function _showPackTip(event, el) {
   }
 
   const chipHtml = (c, dim) => {
-    const img = (cardDetails[c] || {}).imageUrl;
+    const img = _cardImg(c);
     const style = `display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;border-radius:3px;overflow:hidden;background:#111;border:1px solid ${dim?'#222':'#4a3800'};opacity:${dim?'0.3':'1'}`;
     const inner = img
       ? `<img src="${img}" style="width:28px;height:28px;object-fit:contain;image-rendering:pixelated" title="${c.replace(/"/g,'&quot;')}" onerror="this.style.display='none'">`
@@ -2513,7 +2541,7 @@ function _wlSearchInput(q) {
     const wled = wishlist.has(c.name);
     const own  = isOwned(c.name);
     const safe = c.name.replace(/&/g,'&amp;').replace(/"/g,'&quot;');
-    const imgUrl = (cardDetails[c.name] || {}).imageUrl || '';
+    const imgUrl = _cardImg(c.name) || '';
     const ctype = c.type || 'item';
     return `<div style="display:flex;align-items:center;gap:7px;padding:5px 10px;cursor:pointer;border-bottom:1px solid #0f0f0f"
       data-card="${safe}" onclick="_wlSearchToggle(this.dataset.card)"
@@ -2939,7 +2967,7 @@ function _renderWishlistMain() {
         onmouseover="_showPackTip(event,this)" onmouseout="_hidePackTip(this)"
         data-pack="${r.id}" onclick="_navToPack(this)">
         ${r.thumbnail
-          ? `<img src="${r.thumbnail}" style="width:80px;height:80px;object-fit:cover;display:block;pointer-events:none" onerror="this.style.background='#1a1a1a'">`
+          ? `<img src="${r.thumbnail}" style="width:80px;height:80px;object-fit:cover;display:block;pointer-events:none" onerror="_imgRetry(this, () => this.style.background='#1a1a1a')">`
           : `<div style="width:80px;height:80px;background:#1a1a1a;display:flex;align-items:center;justify-content:center;color:#333;font-size:11px;pointer-events:none">?</div>`}
         <div style="padding:5px 6px 6px;border-top:1px solid #1e1e1e;pointer-events:none">
           <div style="font-size:10px;color:#888;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-bottom:3px">${r.name}</div>
@@ -3063,7 +3091,7 @@ function _renderWishlistMain() {
       const meta = wishlist.get(name) || {note:''};
       const safe = name.replace(/&/g,'&amp;').replace(/"/g,'&quot;');
       const type = _cardType(name);
-      const imgUrl = (cardDetails[name] || {}).imageUrl || '';
+      const imgUrl = _cardImg(name) || '';
       const hasNote = meta.note && meta.note.trim();
       const noteTags = hasNote ? meta.note.split(',').map(t => t.trim()).filter(Boolean) : [];
       const noteChips = noteTags.map(tag => {
@@ -3241,7 +3269,7 @@ function showPackDetail(packId, filter, push = true) {
   // Use local proxy so the image is served from localhost (avoids CDN blocking)
   const packImgUrl = pack.thumbnail ? pack.thumbnail : '';
   const packImgHtml = packImgUrl
-    ? `<img src="${packImgUrl}" style="float:right;width:48px;height:48px;border-radius:3px;margin:0 0 12px 16px;box-shadow:0 2px 6px #000" onerror="this.style.display='none'">`
+    ? `<img src="${packImgUrl}" style="float:right;width:48px;height:48px;border-radius:3px;margin:0 0 12px 16px;box-shadow:0 2px 6px #000" onerror="_imgRetry(this, () => this.style.display='none')">`
     : '';
 
   let html = `<h1>${pack.name}${packImgHtml}</h1>
@@ -3535,7 +3563,7 @@ function renderMonster(name, container) {
         const bg  = !cardOwned ? '#111' : _blocked ? '#1a1400' : '#0d2210';
         const bdr = !cardOwned ? '#222' : _blocked ? '#5a4010' : '#2a5a2a';
         const pfx = !cardOwned ? '' : _blocked ? '\u26a0 ' : '\u2713 ';
-        const imgUrl = (cardDetails[card] || {}).imageUrl || '';
+        const imgUrl = _cardImg(card) || '';
         const img = imgUrl ? `<img src="${imgUrl}" style="width:12px;height:12px;object-fit:contain;image-rendering:pixelated;flex-shrink:0;opacity:${cardOwned?1:0.35}" onerror="this.style.display='none'">` : '';
         const _tip = cardOwned ? (_blocked ? 'Owned — '+_gateDesc : 'Owned') : (_gateDesc ? 'Not owned — '+_gateDesc : 'Not owned');
         html += `<span style="display:inline-flex;align-items:center;gap:3px;font-size:10px;color:${col};background:${bg};border:1px solid ${bdr};border-radius:3px;padding:1px 4px;cursor:pointer"
@@ -3575,7 +3603,7 @@ function renderMonster(name, container) {
       for (const m of slayerAssignedBy) {
         const safeMasterName = m.masterCardName.replace(/&/g,'&amp;').replace(/"/g,'&quot;');
         const indCls2 = !m.slayerOk ? 'locked' : !m.masterOwned ? 'no-card' : 'available';
-        const mImgUrl2 = (cardDetails[m.masterCardName] || {}).imageUrl || '';
+        const mImgUrl2 = _cardImg(m.masterCardName) || '';
         const mImgHtml2 = mImgUrl2
           ? `<img src="${mImgUrl2}" style="width:16px;height:16px;object-fit:contain;image-rendering:pixelated;flex-shrink:0;margin-right:4px" onerror="this.style.display='none'">`
           : '<span style="width:16px;flex-shrink:0;margin-right:4px"></span>';
@@ -4600,6 +4628,47 @@ function renderClueScroll(tier, container) {
 }
 
 // ─── Item view ─────────────────────────────────────────────────────────────
+// ── Card versions (card_versions.json) ──────────────────────────────────────
+// "Fishing 75 · Cooking 85 · Dragon harpoon + Smouldering stone"
+function _recipeHtml(rec) {
+  const skills = Object.entries(rec.skills || {}).map(([sk, l]) => {
+    const ok = getLevel(sk) >= l;
+    return `<span style="color:${ok ? '#7ab07a' : '#c08040'}">${skillIcon(sk, 10)}${escHtml(sk)} ${l}</span>`;
+  });
+  const mats = (rec.materials || []).map(([m, q]) => {
+    const info = _cardInfo(m), own = info && isOwned(info.exact);
+    const label = `${q && q !== '1' ? escHtml(q) + ' × ' : ''}${escHtml(m)}`;
+    return info ? `<span style="cursor:pointer;color:${own ? '#7ab07a' : '#c8a060'}" data-nav="${escHtml(m)}" data-nav-type="${info.type}" onclick="_navToCard(this)" title="${own ? 'Card owned' : 'Card not owned'}">${label}</span>`
+      : `<span style="color:#888" title="No TCG card">${label}</span>`;
+  });
+  const tools = (rec.tools || []).map(t => `<span style="color:#888">⚒ ${escHtml(t)}</span>`);
+  const fac = rec.facilities ? [`<span style="color:#777">at ${escHtml(rec.facilities)}</span>`] : [];
+  return [...skills, mats.join(' + '), ...tools, ...fac].filter(Boolean).join('<span style="color:#444"> · </span>');
+}
+function _cardVersionsHtml(card, part) {
+  const vs = cardVersions[card] || [];
+  let html = '';
+  if (part !== 'list' && selectedVersion && vs.some(v => v.name === selectedVersion)) {
+    const v = vs.find(x => x.name === selectedVersion);
+    html += `<div style="display:flex;gap:12px;align-items:center;background:#14110a;border:1px solid #3a3010;border-radius:4px;padding:10px 12px;margin:10px 0">
+      ${v.detail || v.icon ? `<img src="${v.detail || v.icon}" style="max-width:56px;max-height:56px;image-rendering:pixelated" onerror="this.style.display='none'">` : ''}
+      <div style="font-size:12px;line-height:1.6">
+        <div><strong style="color:#e8c97a">${escHtml(v.name)}</strong> ${wikiLink(v.page || v.name)} <span style="color:#888">is a version of the <strong>${escHtml(card)}</strong> card — owning ${escHtml(card)} covers it.</span></div>
+        ${v.recipe ? `<div style="font-size:11px">Made with: ${_recipeHtml(v.recipe)}</div>` : '<div style="font-size:11px;color:#666">No creation recipe on the wiki (e.g. a charge state or drop-only version).</div>'}
+      </div></div>`;
+  }
+  if (part === 'banner') return html;
+  if (vs.length) {
+    html += `<div class="section"><div class="section-header">Versions <span style="font-size:10px;color:#555;font-weight:normal">(${vs.length} · all covered by this card)</span></div><div style="margin-top:6px">
+      ${vs.map(v => `<div style="display:flex;align-items:center;gap:8px;padding:3px 0;font-size:11px${v.name === selectedVersion ? ';background:#1a1608' : ''}">
+        ${v.icon ? `<img src="${v.icon}" style="width:20px;height:20px;object-fit:contain;image-rendering:pixelated;flex-shrink:0" onerror="this.style.visibility='hidden'">` : '<span style="width:20px;flex-shrink:0"></span>'}
+        <span style="width:200px;flex-shrink:0;color:#ccc">${escHtml(v.name)}</span>
+        <span style="color:#888">${v.recipe ? _recipeHtml(v.recipe) : '<span style="color:#555">—</span>'}</span></div>`).join('')}
+    </div></div>`;
+  }
+  return html;
+}
+
 function renderItem(name, container) {
   const data        = itemSources[name] || {};
   const monsters    = data.monsters    || [];
@@ -4648,6 +4717,7 @@ function renderItem(name, container) {
       <span style="color:#555;font-size:10px;margin-left:8px;cursor:pointer" data-nav="${escHtml(name)}" onclick="toggleOwned(this.dataset.nav)">(toggle)</span>${itemWishHtml}${itemPulledHtml}
       ${examHtml}
     </div>`;
+  html += _cardVersionsHtml(name, 'banner');
 
   const allMonsterSources = dedupeMonsters(monsters);
   const monstersOwnedStat = allMonsterSources.filter(m => isOwned(m.card)).length;
@@ -4873,6 +4943,19 @@ function renderItem(name, container) {
   }
 
   // Quests
+  // ── Boss rewards (raid chests, Barrows, Moons, Gauntlet…) ──────────────────
+  const _iBossRewards = _bossRewardsFor(name);
+  if (_iBossRewards.length) {
+    html += `<div class="section"><div class="section-header">Boss Rewards <span style="font-size:10px;color:#555;font-weight:normal">(this card drops from — not a requirement)</span></div><div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:4px">`;
+    for (const { bossName, source, drop } of _iBossRewards) {
+      const rarity = drop.rarity, tip = [source, _lootTip(drop)].filter(Boolean).join('\n');
+      html += `<span data-boss="${escHtml(bossName)}" onclick="showBoss(this.dataset.boss);event.stopPropagation()"
+        style="display:inline-flex;align-items:center;gap:5px;font-size:11px;color:#aaa;background:#161616;border:1px solid #2a2a2a;border-radius:3px;padding:3px 9px;cursor:pointer;white-space:nowrap"
+        title="${escHtml(tip)}">${escHtml(bossName)} <span class="rarity-badge ${rarityClass(rarity)}" style="font-size:9px">${escHtml(rarity)}${rarity === 'Unique' && drop.fraction ? ' ' + escHtml(drop.fraction) : ''}</span></span>`;
+    }
+    html += `</div></div>`;
+  }
+
   html += `<div class="section"><div class="section-header">Quests</div>`;
   if (quests.length === 0) {
     html += `<div class="empty-note">No quest association.</div>`;
@@ -4892,25 +4975,12 @@ function renderItem(name, container) {
   // ── Boss Encounters cross-link ─────────────────────────────────────────────
   const _iBossEncs = (typeof BOSS_BY_CARD !== 'undefined') ? (BOSS_BY_CARD[name.toLowerCase()] || []) : [];
   if (_iBossEncs.length) {
-    const ROLE_LABEL = {monster:'Boss Room',kc:'Kill Count',item:'Required Item',tool:'Tool',optional:'Optional',related:'Related',warm:'Warm Clothing',light:'Light Source',dragonfire:'Dragonfire Protection'};
+    const ROLE_LABEL = {monster:'Boss Room',kc:'Kill Count',npc:'NPC',item:'Required Item',tool:'Tool',optional:'Optional',related:'Related',loot:'To collect loot',light:'Light Source',dragonfire:'Dragonfire Protection'};
     html += `<div class="section"><div class="section-header">Boss Encounters</div><div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:4px">`;
     for (const { bossName, role } of _iBossEncs) {
       html += `<span data-boss="${escHtml(bossName)}" onclick="showBoss(this.dataset.boss);event.stopPropagation()"
         style="display:inline-flex;align-items:center;gap:5px;font-size:11px;color:#aaa;background:#161616;border:1px solid #2a2a2a;border-radius:3px;padding:3px 9px;cursor:pointer;white-space:nowrap"
         title="${ROLE_LABEL[role]||role}">${escHtml(bossName)} <span style="font-size:9px;color:#555">${ROLE_LABEL[role]||role}</span></span>`;
-    }
-    html += `</div></div>`;
-  }
-
-  // ── Boss rewards (raid chests, Barrows, Moons, Gauntlet…) ──────────────────
-  const _iBossRewards = _bossRewardsFor(name);
-  if (_iBossRewards.length) {
-    html += `<div class="section"><div class="section-header">Boss Rewards <span style="font-size:10px;color:#555;font-weight:normal">(this card drops from — not a requirement)</span></div><div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:4px">`;
-    for (const { bossName, source, drop } of _iBossRewards) {
-      const rarity = drop.rarity, tip = [source, _lootTip(drop)].filter(Boolean).join('\n');
-      html += `<span data-boss="${escHtml(bossName)}" onclick="showBoss(this.dataset.boss);event.stopPropagation()"
-        style="display:inline-flex;align-items:center;gap:5px;font-size:11px;color:#aaa;background:#161616;border:1px solid #2a2a2a;border-radius:3px;padding:3px 9px;cursor:pointer;white-space:nowrap"
-        title="${escHtml(tip)}">${escHtml(bossName)} <span class="rarity-badge ${rarityClass(rarity)}" style="font-size:9px">${escHtml(rarity)}${rarity === 'Unique' && drop.fraction ? ' ' + escHtml(drop.fraction) : ''}</span></span>`;
     }
     html += `</div></div>`;
   }
@@ -4932,6 +5002,7 @@ function renderItem(name, container) {
     html += `</div></div>`;
   }
 
+  html += _cardVersionsHtml(name, 'list');  // versions this card covers, at the end
   container.innerHTML = html;
 }
 
@@ -5579,11 +5650,11 @@ function _renderTab(tab, resetSelection = true) {
           </div>
           <div id="boss-list-scroll"></div>
         </div>
-        <div id="boss-detail-pane"><div style="padding:40px 24px;color:#333;font-size:13px">Select a boss to view details</div></div>
+        <div id="boss-detail-pane"></div>
       </div>`;
       _renderBossFilterBtns();
       renderBossList();
-      if (selectedBoss) showBossDetail(selectedBoss);
+      if (selectedBoss) showBossDetail(selectedBoss); else _renderBossHome();
     } else if (tab === 'diaries') {
       if (resetSelection) selectedDiary = null;
       sidebar.style.display     = 'none';
@@ -5597,10 +5668,10 @@ function _renderTab(tab, resetSelection = true) {
           </div>
           <div id="diary-list-scroll"></div>
         </div>
-        <div id="diary-detail-pane"><div style="padding:40px 24px;color:#333;font-size:13px">Select a diary to view tasks</div></div>
+        <div id="diary-detail-pane"></div>
       </div>`;
       renderDiaryList();
-      if (selectedDiary) showDiaryDetail(selectedDiary);
+      if (selectedDiary) showDiaryDetail(selectedDiary); else _renderDiaryHome();
     } else if (tab === 'rules') {
       mainContent.innerHTML = renderRulesTab();
     }
@@ -5976,259 +6047,11 @@ const SLAYER_TASKS = {
 };
 
 // ── Boss definitions ───────────────────────────────────────────────────────
-// monsters: card names that must be owned (all required unless cardsMode:'any1')
-// items: item card names required (e.g. Spade)
-// quests: quest names that must be completed
-// levels: {SkillName: level} hard gates
-// area: key into AREA_GATES
-// cardsMode: 'all' (default) or 'any1' (just need one)
-const BOSS_DATA = [
-  // ── Wave content (Fight Caves, Inferno, Colosseum) — category:'wave' ──────
-  { name:'Fight Caves',           category:'wave',
-    monsters:['Tz-Kih','Tz-Kek','Tok-Xil','Yt-MejKot','Ket-Zek','Yt-HurKot','TzTok-Jad'],
-    note:'Solo wave content — all spawn cards required' },
-  { name:'Inferno',               category:'wave',
-    items:['Fire cape'],
-    monsters:['Jal-Nib','Jal-MejRah','Jal-Ak','Jal-ImKot','Jal-Xil','Jal-Zek','JalTok-Jad','Jal-MejJak','Jal-AkRek-Mej','Jal-AkRek-Ket','Jal-AkRek-Xil','TzKal-Zuk','Yt-HurKot'],
-    note:'Fire Cape consumed on entry — one-time cost to unlock access to TzHaar-Ket-Keh.' },
-  { name:'Fortis Colosseum',      category:'wave', area:'Varlamore', quests:['Children of the Sun'],
-    monsters:['Fremennik warband archer','Fremennik warband berserker','Fremennik warband seer','Jaguar warrior','Javelin Colossus','Manticore','Minotaur','Serpent shaman','Shockwave Colossus','Sol Heredit'],
-    note:'Children of the Sun required. Solo wave content — all 11 waves before Sol Heredit.' },
-  // ── Raids (CoX, ToB, ToA) — category:'raid' ─────────────────────────────
-  { name:'Chambers of Xeric',     category:'raid', area:'Kourend',
-    monsters:['Ice demon','Muttadile','Skeletal Mystics','Tekton','Vasa Nistirio','Vespula','Scavenger beast','Lizardman shaman','Great Olm'],
-    relatedCards:['Overload',"Xeric's aid",'Prayer enhance','Stinkhorn mushroom','Cicely','Endarkened juice','Kindling','Mallignum root plank'],
-    note:'Room monsters vary each raid. Herbs, mushrooms and ingredients gathered inside are used to make CoX potions — you need the cards to pick them up.' },
-  { name:'Theatre of Blood',      category:'raid', area:'Morytania',
-    monsters:['The Maiden of Sugadinti','Pestilent Bloat','Nylocas Vasilias','Nylocas Hagios','Nylocas Ischyros','Nylocas Toxobolos','Nylocas Matomenos','Nylocas Athanatos','Nylocas Prinkipas','Sotetseg','Xarpus','Blood spawn','Verzik Vitur'],
-    note:'All Theatre monsters must be owned' },
-  { name:'Tombs of Amascut',      category:'raid', area:'Desert', quests:['Beneath Cursed Sands'],
-    monsters:['Akkha','Ba-Ba','Kephri','Zebak','The Wardens','Baboon Brawler','Baboon Mage','Baboon Thrower','Baboon Thrall','Baboon Shaman','Cursed Baboon','Volatile Baboon','Agile Scarab','Arcane Scarab','Soldier Scarab','Spitting Scarab','Scarab','Scarab Swarm','Crocodile'],
-    relatedCards:['Honey locust','Ambrosia','Silk dressing','Nectar','Blessed crystal scarab','Smelling salts','Liquid adrenaline'],
-    note:'Beneath Cursed Sands required to access. The Helpful Spirit provides supplies mid-raid — need the cards to pick them up.' },
-  // ── Minigames / instances (Gauntlet, BA) — category:'minigame' ──────────
-  { name:'The Gauntlet',          category:'minigame', area:'Prifddinas', quests:['Song of the Elves'],
-    monsters:['Crystalline Hunllef','Crystalline Spider','Crystalline Rat','Crystalline Bat','Crystalline Unicorn','Crystalline Scorpion','Crystalline Wolf','Crystalline Bear','Crystalline Dragon','Crystalline Dark Beast'],
-    relatedCards:['Egniol potion'],
-    note:'No items brought in — all equipment gathered inside. Kill crystalline creatures to gather resources and craft equipment before facing the Hunllef. Egniol potion (from Grym leaf inside) is the only healing available.' },
-  { name:'Corrupted Gauntlet',    category:'minigame', area:'Prifddinas', quests:['Song of the Elves'],
-    monsters:['Corrupted Hunllef','Corrupted Bat','Corrupted Bear','Corrupted Dark Beast','Corrupted Dragon','Corrupted Rat','Corrupted Scorpion','Corrupted Spider','Corrupted Unicorn','Corrupted Wolf'],
-    note:'All corrupted creature cards required' },
-  { name:'Barbarian Assault',     category:'minigame', area:'Kandarin',
-    monsters:['Penance Fighter','Penance Healer','Penance Ranger','Penance Runner','Penance Queen'],
-    relatedCards:['Fighter hat','Ranger hat','Healer hat','Runner hat','Penance gloves','Penance skirt','Granite body','Pet penance queen'],
-    note:'Team minigame — 10 waves. Penance Queen appears in wave 10. Honour point rewards require killing all Penance types.' },
-
-  // ── Skilling bosses ─────────────────────────────────────────────────────
-  { name:'Wintertodt',            category:'skilling',
-    levels:{Firemaking:50},
-    items:['Tinderbox','Bruma root'], tools:['Axe'],
-    optionalItems:['Bruma kindling','Hammer','Knife','Bruma herb','Pestle and mortar','Vial of water'],
-    warmClothing:['Pyromancer hood','Pyromancer garb','Pyromancer robe','Pyromancer boots',
-                  'Larupia hat','Larupia top','Larupia legs',
-                  'Clue hunter gloves','Clue hunter trousers','Clue hunter cloak','Clue hunter boots',
-                  'Graceful hood','Graceful top','Graceful legs','Graceful gloves','Graceful boots','Graceful cape',
-                  'Cap and goggles','Wolf mask','Earmuffs'],
-    note:'Axe to chop bruma roots (spawn inside). Bruma root added to brazier = primary damage; Bruma kindling (fletched from root with Knife) is optional — it gives more points, but burning roots alone works. Hammer repairs broken braziers. Optional herblore: grind Bruma herb with Pestle and mortar, add to Vial of water to make a rejuvenation potion. Need 4 warm clothing items to cap cold damage reduction.' },
-  { name:'Tempoross',             category:'skilling',
-    levels:{Fishing:35},
-    monsters:['Tempoross'],
-    items:['Rope','Bucket','Hammer','Harpoonfish','Small fishing net'], tools:['Harpoon'],
-    note:'Rope to secure to structures; Bucket to carry water and douse fires; Hammer to repair the mast, cannon, and tethering posts. Fish harpoonfish inside then launch them at Tempoross — they are the ammo. Small fishing net to receive the reward casket.' },
-  { name:'Zalcano',               category:'skilling', area:'Prifddinas',
-    levels:{Mining:70, Smithing:70},
-    monsters:['Zalcano'], tools:['Pickaxe'],
-    note:'Mine tephra from the cavern walls with a pickaxe to damage Zalcano\'s armour and the golem. Song of the Elves required via Prifddinas access.' },
-  { name:'Hespori',               category:'skilling',
-    levels:{Farming:65},
-    monsters:['Hespori'],
-    items:['Hespori seed','Rake','Seed dibber','Spade'],
-    note:'Clear the cave patch with a rake, plant the seed with a seed dibber, wait ~22 hours for growth, then use a spade to awaken the boss.' },
-  { name:'Amoxliatl',             category:'boss', sub:'low', area:'Varlamore',
-    levels:{Slayer:48},
-    monsters:['Amoxliatl'],
-    quests:['The Heart of Darkness'],
-    note:'The Heart of Darkness quest required to access the boss. Frost Nagua in the Ruins of Tapoyauik — uses crush attacks, protect from magic recommended.' },
-
-  // ── Regular bosses ──────────────────────────────────────────────────────
-  { name:'Barrows',               category:'boss', sub:'mid', area:'Morytania',
-    monsters:['Ahrim the Blighted','Dharok the Wretched','Guthan the Infested','Karil the Tainted','Torag the Corrupted','Verac the Defiled','Crypt rat','Crypt spider','Bloodworm','Giant crypt rat','Giant crypt spider'],
-    items:['Spade'],
-    note:'All 6 brothers for full chest rewards. Crypt tunnels also contain Crypt spiders, Bloodworms, and Giant variants.' },
-  { name:'Obor',                  category:'boss', sub:'low',
-    kcMonsters:['Hill Giant'],
-    monsters:['Obor'],
-    items:['Giant key'],
-    note:'Giant key dropped by Hill Giants — required to enter the lair in Edgeville Dungeon.' },
-  { name:'Bryophyta',             category:'boss', sub:'low',
-    kcMonsters:['Moss Giant'],
-    monsters:['Bryophyta','Growthling'],
-    items:['Mossy key','Magic secateurs'],
-    note:'Mossy key dropped by Moss Giants — required to enter the lair. Growthlings spawn during the fight; Bryophyta is immune while they live, and they can only be effectively killed with Magic Secateurs.' },
-  { name:'Giant Mole',            category:'boss', sub:'low',
-    monsters:['Giant Mole'], items:['Spade'], optionalItems:['Tinderbox'],
-    lightSource:true,
-    note:'Spade to dig up mole hills. A light source is required to navigate the dark tunnels — Tinderbox needed unless your light source is self-illuminating (Mining helmet, Firemaking cape).' },
-  { name:'Kalphite Queen',        category:'boss', sub:'mid',
-    monsters:['Kalphite Queen'],
-    items:['Rope'],
-    note:'Two ropes required on first visit to enter the lair (become permanent after Hard Desert Diary).' },
-  { name:'King Black Dragon',     category:'boss', sub:'mid',
-    monsters:['King Black Dragon'],
-    dragonfire: true,
-    note:'Edgeville Dungeon — dragonfire protection required. Super antifire works standalone; regular antifire needs a shield for full protection.' },
-  { name:'Sarachnis',             category:'boss', sub:'mid', area:'Kourend',
-    monsters:['Sarachnis','Spawn of Sarachnis'],
-    note:'Forthos Dungeon, Great Kourend. A slash weapon or knife is needed to cut webs blocking the entrance (Aranea Boots bypass this).' },
-  { name:'Dagannoth Kings',       category:'boss', sub:'mid', area:'Waterbirth Island',
-    lootFrom:['Dagannoth Rex','Dagannoth Prime','Dagannoth Supreme'],
-    monsters:['Dagannoth Rex','Dagannoth Prime','Dagannoth Supreme'],
-    optionalItems:['Thrownaxe'],
-    relatedCards:['Dagannoth','Dagannoth spawn','Dagannoth fledgeling','Giant Rock Crab','Rock lobster'],
-    note:'Waterbirth Island — all three kings. Thrownaxe needed to operate door switches in the dungeon solo (optional with a companion). Tunnel monsters shown for reference — cards needed to fight through.' },
-  { name:'Corporeal Beast',       category:'boss', sub:'high',
-    monsters:['Corporeal Beast','Dark energy core'],
-    note:'Dark energy core spawns during the fight and leeches HP to heal Corp — must be killed.' },
-  { name:'General Graardor',      category:'boss', sub:'gwd',
-    levels:{Strength:70},
-    kcMonsters:['Goblin','Hobgoblin','Ogre','Jogre','Cyclops','Ork','Spiritual Mage','Spiritual Ranger','Spiritual Warrior'],
-    monsters:['General Graardor','Sergeant Strongstack','Sergeant Steelwill','Sergeant Grimspike'],
-    note:'40 Bandos KC to enter boss room. 70 Strength to enter God Wars Dungeon.' },
-  { name:"Kree'arra",             category:'boss', sub:'gwd',
-    levels:{Ranged:70},
-    kcMonsters:['Aviansie','Spiritual Mage','Spiritual Ranger','Spiritual Warrior'],
-    monsters:["Kree'arra",'Flight Kilisa','Flockleader Geerin','Wingman Skree'],
-    note:'40 Armadyl KC to enter boss room. 70 Ranged to enter God Wars Dungeon via Armadyl corridor.' },
-  { name:"K'ril Tsutsaroth",      category:'boss', sub:'gwd',
-    kcMonsters:['Imp','Icefiend','Pyrefiend','Feral Vampyre','Bloodveld','Werewolf','Hellhound','Gorak','Spiritual Mage','Spiritual Ranger','Spiritual Warrior'],
-    monsters:["K'ril Tsutsaroth",'Tstanon Karlak','Balfrug Kreeyath',"Zakl'n Gritch"],
-    note:'40 Zamorak KC to enter boss room. Imp (lv7) is the lowest-level option.' },
-  { name:'Commander Zilyana',     category:'boss', sub:'gwd',
-    levels:{Agility:70},
-    kcMonsters:['Knight of Saradomin','Saradomin priest','Spiritual Mage','Spiritual Ranger','Spiritual Warrior'],
-    monsters:['Commander Zilyana','Starlight','Bree','Growler'],
-    items:['Rope'],
-    note:'40 Saradomin KC to enter boss room. 70 Agility for stepping stones shortcut. Rope required on first visit to cross the bridge.' },
-  { name:'Nex',                   category:'boss', sub:'gwd',
-    kcMonsters:['Spiritual Mage','Spiritual Ranger','Spiritual Warrior','Blood Reaver'],
-    monsters:['Nex','Fumus','Umbra','Cruor','Glacies'],
-    items:['Ecumenical key'],
-    note:'40 Zarosian KC in the Ancient Prison (Spiritual Mage/Ranger/Warrior or Blood Reaver), or use an Ecumenical key to bypass. Fumus, Umbra, Cruor and Glacies spawn sequentially during the fight.' },
-  { name:'Zulrah',                category:'boss', sub:'high', quests:['Regicide'],
-    monsters:['Zulrah','Snakeling'],
-    note:'Zul-Andra via Regicide. Snakelings spawn during the fight.' },
-  { name:'Vorkath',               category:'boss', sub:'high', quests:['Dragon Slayer II'],
-    monsters:['Vorkath','Zombified Spawn'],
-    dragonfire: true,
-    note:'Dragon Slayer II required — Ungael island. Dragonfire protection required. Zombified Spawn erupts periodically; Vorkath is immune until the spawn is killed.' },
-  { name:'The Nightmare',         category:'boss', sub:'high', area:'Morytania',
-    monsters:['The Nightmare','Husk','Parasite','Sleepwalker'],
-    note:'Slepe in Morytania — multi-team boss. Husks, Parasites and Sleepwalkers spawn during the fight.' },
-  { name:"Phosani's Nightmare",   category:'boss', sub:'high', area:'Morytania',
-    monsters:["Phosani's Nightmare",'Husk','Parasite','Sleepwalker'],
-    note:'Solo version of Nightmare. Same mechanics — Husks, Parasites and Sleepwalkers spawn during the fight.' },
-  { name:'Phantom Muspah',        category:'boss', sub:'high', quests:['Secrets of the North'],
-    monsters:['Phantom Muspah'],
-    note:'Secrets of the North required' },
-  { name:'Abyssal Sire',          category:'boss', sub:'slayer', levels:{Slayer:85},
-    monsters:['Abyssal Sire','Tentacle','Spawn','Scion'],
-    note:'Slayer 85 — Abyssal Nexus. Phase 1: destroy all 4 Respiratory systems (protected by Tentacles) to stun the Sire. Spawns are launched during the fight; if left alive they mature into Scions.' },
-  { name:'Kraken',                category:'boss', sub:'slayer', levels:{Slayer:87},
-    monsters:['Kraken','Enormous Tentacle'],
-    note:'Slayer 87 — Cave Kraken task needed. Four Enormous Tentacles surround the whirlpool and must all be hit to awaken the Kraken.' },
-  { name:'Grotesque Guardians',   category:'boss', sub:'slayer', levels:{Slayer:75},
-    kcMonsters:['Gargoyle'],
-    monsters:['Dusk','Dawn'],
-    items:['Brittle key'],
-    note:'Slayer 75 on a Gargoyle task. Brittle key dropped by Gargoyles — required to unlock the rooftop arena.' },
-  { name:'Thermonuclear Smoke Devil', category:'boss', sub:'slayer', levels:{Slayer:93},
-    monsters:['Thermonuclear smoke devil','Nuclear smoke devil'],
-    items:['Facemask'],
-    note:'Slayer 93 — Smoke Devil task needed. Facemask (or Slayer helmet) required to block smoke attacks; without it every hit deals unavoidable damage.' },
-  { name:'Alchemical Hydra',      category:'boss', sub:'slayer', area:'Kourend', levels:{Slayer:95},
-    monsters:['Alchemical Hydra'],
-    items:['Boots of stone'],
-    note:'Slayer 95 — Karuulm Slayer Dungeon. Boots of stone (or equivalent) required to walk on the hot dungeon floor without taking damage.' },
-  { name:'Cerberus',              category:'boss', sub:'slayer', levels:{Slayer:91},
-    monsters:['Cerberus'],
-    note:'Slayer 91 — Hellhound task required' },
-  { name:'Vardorvis',             category:'boss', sub:'high', area:'DT2', quests:['Desert Treasure II - The Fallen Empire'],
-    monsters:['Vardorvis'],
-    note:'Desert Treasure II boss. Severed heads and tendrils are fight mechanics, not cards.' },
-  { name:'Duke Sucellus',         category:'boss', sub:'high', area:'DT2', quests:['Desert Treasure II - The Fallen Empire'],
-    monsters:['Duke Sucellus'],
-    note:'Desert Treasure II boss.' },
-  { name:'The Leviathan',         category:'boss', sub:'high', area:'DT2', quests:['Desert Treasure II - The Fallen Empire'],
-    monsters:['The Leviathan'],
-    note:'Desert Treasure II boss. The Abyssal pathfinder in the enrage phase is a fight mechanic, not a card.' },
-  { name:'The Whisperer',         category:'boss', sub:'high', area:'DT2', quests:['Desert Treasure II - The Fallen Empire'],
-    monsters:['The Whisperer'],
-    note:'Desert Treasure II boss.' },
-  { name:'Araxxor',               category:'boss', sub:'slayer', levels:{Slayer:92},
-    monsters:['Araxxor','Acidic Araxyte','Mirrorback Araxyte','Ruptura Araxyte'],
-    note:'Slayer 92 — Araxyte Lair. Eggs hatch into three araxyte types during the fight depending on the path chosen.' },
-  { name:'The Hueycoatl',         category:'boss', sub:'mid', area:'Varlamore', quests:['Children of the Sun'],
-    monsters:['The Hueycoatl'],
-    note:'Children of the Sun required. Varlamore — combat serpent boss.' },
-  { name:'Skotizo',               category:'boss', sub:'mid', area:'Kourend',
-    monsters:['Skotizo','Dark Ankou'],
-    items:['Dark totem'],
-    note:'Dark Totem required to summon — assembled from 3 pieces dropped by Catacombs monsters. Dark Ankou can be summoned during the fight.' },
-  { name:'Scurrius',              category:'boss', sub:'low',
-    monsters:['Scurrius','Giant rat'],
-    note:'Varrock Sewers — Giant Rats spawn during the fight and feed Scurrius, healing it.' },
-  { name:'The Mimic',            category:'boss', sub:'mid',
-    monsters:['The Mimic','Third Age Warrior','Third Age Mage','Third Age Ranger'],
-    note:'Triggered by Elite or Master clue scroll casket. Third Age warriors, mages and rangers spawn inside.' },
-  { name:'Deranged Archaeologist', category:'boss', sub:'low', area:'Fossil Island',
-    monsters:['Deranged archaeologist'],
-    note:'Fossil Island — requires Bone Voyage quest to access the island.' },
-  { name:'Blood Moon',           category:'boss', sub:'mid', quests:['Perilous Moons'],
-    monsters:['Blood Moon','Blood jaguar'],
-    note:'Perilous Moons quest required. Blood Jaguars spawn during the fight.' },
-  { name:'Blue Moon',            category:'boss', sub:'mid', quests:['Perilous Moons'],
-    monsters:['Blue Moon'], relatedCards:['Blue crab'],
-    note:'Perilous Moons quest required.' },
-  { name:'Eclipse Moon',         category:'boss', sub:'mid', quests:['Perilous Moons'],
-    monsters:['Eclipse Moon'],
-    note:'Perilous Moons quest required.' },
-  { name:'Royal Titans',         category:'boss', sub:'mid',
-    lootFrom:['Branda the Fire Queen','Eldric the Ice King'],
-    monsters:['Branda the Fire Queen','Eldric the Ice King','Fire elemental','Ice elemental'],
-    note:'Fire and Ice elementals spawn during the fight. Both titans must be defeated.' },
-  { name:'Yama',                 category:'boss', sub:'high', area:'Varlamore', quests:['A Kingdom Divided'],
-    monsters:['Yama','Judge of Yama','Void Flare'],
-    note:'A Kingdom Divided quest required. Judges of Yama and Void Flares spawn during the encounter.' },
-  { name:'Gemstone Crab',        category:'skilling', area:'Varlamore', quests:['Children of the Sun'],
-    tools:['Pickaxe'],
-    monsters:['Gemstone Crab'],
-    note:'Children of the Sun required. Mining boss — a pickaxe is needed to expose its gem-encrusted shell.' },
-  { name:'Maggot King',          category:'boss', sub:'high', quests:['The Blood Moon Rises'],
-    monsters:['Maggot King'],
-    note:'The Blood Moon Rises quest required.' },
-  { name:'Brutus',               category:'boss', sub:'low',
-    monsters:['Brutus'],
-    note:'Combat boss.' },
-  { name:'Mad Angel',            category:'boss', sub:'mid',
-    monsters:['Mad Angel'],
-    note:'Combat boss.' },
-
-  // ── Wilderness bosses ───────────────────────────────────────────────────
-  { name:'Callisto',              category:'boss', sub:'wilderness', monsters:['Callisto'],    note:'Deep wilderness' },
-  { name:'Artio',                 category:'boss', sub:'wilderness', monsters:['Artio'],       note:'Safer alternative — Wilderness Slayer Cave' },
-  { name:'Venenatis',             category:'boss', sub:'wilderness', monsters:['Venenatis',"Venenatis' Spiderling"],   note:"Deep wilderness. Venenatis' Spiderlings spawn during the fight." },
-  { name:'Spindel',               category:'boss', sub:'wilderness', monsters:['Spindel',"Spindel's Spiderling"],     note:"Safer alternative — Wilderness Slayer Cave. Spindel's Spiderlings spawn during the fight." },
-  { name:"Vet'ion",               category:'boss', sub:'wilderness', monsters:["Vet'ion",'Skeleton Hellhound','Greater Skeleton Hellhound'],     note:"Deep wilderness. Skeleton Hellhounds and Greater Skeleton Hellhounds spawn; Vet'ion is immune to damage while they live." },
-  { name:"Calvar'ion",            category:'boss', sub:'wilderness', monsters:["Calvar'ion",'Skeleton Hellhound'],    note:"Safer alternative — Wilderness Slayer Cave. Skeleton Hellhounds spawn during the fight." },
-  { name:'Scorpia',               category:'boss', sub:'wilderness', monsters:['Scorpia',"Scorpia's offspring"], note:'Scorpion Pit — offspring fill the arena' },
-  { name:'Chaos Elemental',       category:'boss', sub:'wilderness', monsters:['Chaos Elemental'], note:'Deep wilderness' },
-  { name:'Chaos Fanatic',         category:'boss', sub:'wilderness', monsters:['Chaos Fanatic'],   note:'West of lava maze' },
-  { name:'Crazy Archaeologist',   category:'boss', sub:'wilderness', monsters:['Crazy archaeologist'], note:'Ruins north of Graveyard of Shadows' },
-  { name:'Revenant Maledictus',  category:'boss', sub:'wilderness', monsters:['Revenant maledictus'], note:'Wilderness — rare revenant boss encounter.' },
-  { name:'Shellbane Gryphon',    category:'boss', sub:'wilderness', levels:{Slayer:51}, quests:['Troubled Tortugans'],
-    monsters:['Shellbane gryphon'],
-    note:'Troubled Tortugans quest required. Slayer 51 — Wilderness Slayer Cave.' },
-];
+// Generated by scripts/generate_bosses.py (wiki Boss page + scripts/boss_curated.json)
+// → output/bosses.json, loaded at startup. Requirements use the quest model (_expandReq):
+// requirements[] (incl. a "Reach <area>" access requirement), lootRequirements[] (only to
+// collect rewards), quests[], levels{}, consideredNotRequired[], consideredNoCard[].
+let BOSS_DATA = [];
 
 // ── Boss loot ───────────────────────────────────────────────────────────────
 // Chest/reward-based bosses (raids, Barrows, Moons, Gauntlet…) come from
@@ -6251,7 +6074,8 @@ function _bossLoot(boss) {
                                      uniqueRoll: chest.uniqueRoll, basis: chest.basis };
   // Otherwise: the boss monster's drop table, plus any wiki-stated extras
   // (chest.extra — e.g. Yama's dossier-only Rite of vile transference).
-  const mons = boss.monsters || [];
+  // The boss monster's own table: its enemy requirements (the encounter's name first)
+  const mons = (boss.requirements || []).filter(r => r.type === 'enemy' && !r.optional).flatMap(r => r.cards || []);
   const from = boss.lootFrom ||
     [mons.find(m => m.toLowerCase() === boss.name.toLowerCase()) || mons[0]].filter(Boolean);
   const seen = new Map();
@@ -6283,31 +6107,25 @@ function _bossRewardsFor(itemName) {
 // ── Boss ↔ card reverse lookup ─────────────────────────────────────────────
 // Maps card name → [{bossName, role}] for "Boss Encounters" cross-links.
 var BOSS_BY_CARD = {};
-(function _buildBossByCard() {
+function _buildBossByCard() {
+  BOSS_BY_CARD = {};
   function _add(card, bossName, role) {
     if (!card) return;
     card = card.toLowerCase();  // keyed lowercase — look up with name.toLowerCase()
     if (!BOSS_BY_CARD[card]) BOSS_BY_CARD[card] = [];
-    BOSS_BY_CARD[card].push({ bossName, role });
+    if (!BOSS_BY_CARD[card].some(x => x.bossName === bossName && x.role === role)) BOSS_BY_CARD[card].push({ bossName, role });
   }
   for (const boss of BOSS_DATA) {
-    for (const m of (boss.monsters || []))      _add(m, boss.name, 'monster');
-    for (const m of (boss.kcMonsters || []))    _add(m, boss.name, 'kc');
-    for (const i of (boss.items || []))         _add(i, boss.name, 'item');
-    for (const t of (boss.tools || [])) {
-      for (const tier of (TOOL_TIERS[t] || [])) _add(tier.name, boss.name, 'tool');
+    for (const r of (boss.requirements || [])) {
+      if (r.access) continue;  // area routes aren't this boss's own cards
+      const role = r.optional ? 'optional' : r.tool ? 'tool' : r.group === 'light_source' ? 'light' : r.group === 'dragonfire' ? 'dragonfire'
+        : /^kill count/i.test(r.label || '') ? 'kc' : r.type === 'enemy' ? 'monster' : r.type === 'npc' ? 'npc' : 'item';
+      for (const c of _reqCards(r)) _add(c, boss.name, role);
     }
-    for (const i of (boss.optionalItems || [])) _add(i, boss.name, 'optional');
-    for (const c of (boss.relatedCards || []))  _add(c, boss.name, 'related');
-    for (const c of (boss.warmClothing || []))  _add(c, boss.name, 'warm');
-    if (boss.lightSource) {
-      for (const c of LIGHT_SOURCE_ITEMS)       _add(c, boss.name, 'light');
-    }
-    if (boss.dragonfire) {
-      for (const c of DRAGONFIRE_ITEMS)        _add(c, boss.name, 'dragonfire');
-    }
+    for (const r of (boss.lootRequirements || [])) for (const c of _reqCards(r)) _add(c, boss.name, 'loot');
+    for (const c of (boss.relatedCards || [])) _add(c, boss.name, 'related');
   }
-})();
+}
 
 // ── Area access requirements ───────────────────────────────────────────────
 // Each area gate defines what a player needs before they can even reach a location.
@@ -7257,7 +7075,7 @@ function showSkillDetail(skillName, push = true) {
     rows += `<div class="section"><div class="section-header">Slayer masters</div><div style="margin-top:8px">`;
     for (const m of methods) {
       const indCls = m.status === 'available' ? 'available' : m.status === 'no-card' ? 'no-card' : 'locked';
-      const imgUrl = (cardDetails[m.masterCardName] || {}).imageUrl || '';
+      const imgUrl = _cardImg(m.masterCardName) || '';
       const img = imgUrl
         ? `<img src="${imgUrl}" style="width:18px;height:18px;object-fit:contain;image-rendering:pixelated;flex-shrink:0" onerror="this.style.display='none'">`
         : '<span style="width:18px;flex-shrink:0"></span>';
@@ -7323,7 +7141,7 @@ function showSkillDetail(skillName, push = true) {
         : '';
 
       const _mImgName = m.type === 'ranged-setup' ? m.weapon : (m.displayNav || m.name);
-      const _mImgUrl  = (cardDetails[_mImgName] || {}).imageUrl || '';
+      const _mImgUrl  = _cardImg(_mImgName) || '';
       const _mImg = _mImgUrl
         ? `<img src="${_mImgUrl}" style="width:18px;height:18px;object-fit:contain;image-rendering:pixelated;flex-shrink:0" onerror="this.style.display='none'">`
         : '<span style="width:18px;flex-shrink:0"></span>';
@@ -7350,84 +7168,30 @@ function showSkillDetail(skillName, push = true) {
 
 // ─── Bosses tab ────────────────────────────────────────────────────────────
 
+// Boss progress: required = quests + skill levels + required requirements (an "any of"
+// group or route set counts once); recommended = optional ones; loot = lootRequirements.
+function _bossProgress(boss) {
+  const req = { done: 0, total: 0 }, rec = { done: 0, total: 0 }, loot = { done: 0, total: 0 };
+  const tally = (p, ok) => { p.total++; if (ok) p.done++; };
+  for (const q of (boss.quests || [])) tally(req, completedQuests.has(q));
+  for (const [sk, l] of Object.entries(boss.levels || {})) tally(req, getLevel(sk) >= l);
+  for (const r of (boss.requirements || [])) {
+    if (!_reqCards(r).length && !(r._routes || []).length) continue;
+    tally(r.optional ? rec : req, _reqMet(r));
+  }
+  for (const r of (boss.lootRequirements || [])) tally(loot, _reqMet(r));
+  return { req, rec, loot };
+}
 function evaluateBoss(boss) {
-  const blockers = [];    // hard gates: quest / area / card — make boss 'locked'
-  const levelGates = [];  // skill level gates — unmet ones lock the boss, same as quests
-
-  // Area gate
-  if (boss.area && AREA_GATES[boss.area]) {
-    const gate = AREA_GATES[boss.area];
-    if (gate.questRequired && !completedQuests.has(gate.questRequired)) {
-      blockers.push('Quest: ' + gate.questRequired);
-    }
-    if (gate.npcRequired && !isOwned(gate.npcRequired)) {
-      blockers.push('Card: ' + gate.npcRequired);
-    }
-    if (gate.itemsRequired) {
-      for (const it of gate.itemsRequired) {
-        if (itemSources[it] && !isOwned(it)) blockers.push('Card: ' + it);
-      }
-    }
-  }
-
-  // Quest requirements (skip if already added via area gate to avoid duplicates)
-  for (const q of (boss.quests || [])) {
-    if (!completedQuests.has(q) && !blockers.includes('Quest: ' + q)) blockers.push('Quest: ' + q);
-  }
-
-  // Skill level requirements — hard access gates (Slayer bosses, GWD doors, Wintertodt…)
-  for (const [skill, req] of Object.entries(boss.levels || {})) {
-    const have = getLevel(skill);
-    levelGates.push({ skill, have, req, ok: have >= req });
-  }
-
-  // Tool requirements — check TOOL_TIERS (any tier owned is sufficient)
-  const missingTools = [];
-  const ownedToolName = {};
-  for (const toolKey of (boss.tools || [])) {
-    const tiers = TOOL_TIERS[toolKey];
-    if (!tiers) continue;
-    const best = tiers.find(t => isOwned(t.name));   // lowest owned tier — the most accessible one
-    if (best) ownedToolName[toolKey] = best.name;
-    else missingTools.push(toolKey);
-  }
-
-  // Item card requirements
-  const missingItems = [];
-  for (const item of (boss.items || [])) {
-    if (itemSources[item] && !isOwned(item)) missingItems.push(item);
-  }
-
-  // Monster card requirements
-  const ownedMonsters   = (boss.monsters || []).filter(m => isOwned(m));
-  const missingMonsters = (boss.monsters || []).filter(m => !isOwned(m));
-
-  // KC monsters — needed to unlock boss room; tracked separately for rendering
-  const ownedKcMonsters   = (boss.kcMonsters || []).filter(m => isOwned(m));
-  const missingKcMonsters = (boss.kcMonsters || []).filter(m => !isOwned(m));
-
-  // Optional items — informational only, don't affect status
-  const optionalOwned   = (boss.optionalItems || []).filter(i => isOwned(i));
-  const optionalMissing = (boss.optionalItems || []).filter(i => !isOwned(i));
-
-  // Warm clothing — informational count, don't affect status
-  const warmOwned   = (boss.warmClothing || []).filter(i => isOwned(i));
-  const warmMissing = (boss.warmClothing || []).filter(i => !isOwned(i));
-
-  // Light source — need at least 1; affects status
-  const lightOwned   = boss.lightSource    ? LIGHT_SOURCE_ITEMS.filter(i => isOwned(i)) : [];
-  const lightMissing = boss.lightSource    ? LIGHT_SOURCE_ITEMS.filter(i => !isOwned(i)) : [];
-  const dfOwned      = boss.dragonfire ? DRAGONFIRE_ITEMS.filter(i => isOwned(i)) : [];
-  const dfMissing    = boss.dragonfire ? DRAGONFIRE_ITEMS.filter(i => !isOwned(i)) : [];
-
-  let status;
-  if (blockers.length > 0 || levelGates.some(g => !g.ok)) status = 'locked';
-  else if (missingMonsters.length > 0 || missingKcMonsters.length > 0 || missingItems.length > 0 || missingTools.length > 0
-        || (boss.lightSource    && lightOwned.length === 0)
-        || (boss.dragonfire && dfOwned.length === 0)) status = 'partial';
-  else status = 'available';
-
-  return { status, ownedMonsters, missingMonsters, ownedKcMonsters, missingKcMonsters, blockers, levelGates, missingItems, missingTools, ownedToolName, optionalOwned, optionalMissing, warmOwned, warmMissing, lightOwned, lightMissing, dfOwned, dfMissing };
+  const questsMissing = (boss.quests || []).filter(q => !completedQuests.has(q));
+  const levelGates = Object.entries(boss.levels || {}).map(([skill, req]) => ({ skill, req, have: getLevel(skill), ok: getLevel(skill) >= req }));
+  const reqs = (boss.requirements || []).filter(r => !r.optional && (_reqCards(r).length || (r._routes || []).length));
+  const accessMissing = reqs.filter(r => r.access && !_reqMet(r));
+  const missing = reqs.filter(r => !_reqMet(r));
+  const progress = _bossProgress(boss);
+  const status = (questsMissing.length || levelGates.some(g => !g.ok) || accessMissing.length) ? 'locked'
+    : missing.length ? 'partial' : 'available';
+  return { status, questsMissing, levelGates, accessMissing, missing, progress };
 }
 
 // ─── Boss two-pane functions ───────────────────────────────────────────────
@@ -7484,22 +7248,17 @@ function renderBossList() {
     evaluated.sort((a, b) => {
       const so = ({available:0,partial:1,locked:2}[a.status]||0) - ({available:0,partial:1,locked:2}[b.status]||0);
       if (so !== 0) return so;
-      const aT = (a.boss.monsters||[]).length + (a.boss.kcMonsters||[]).length;
-      const bT = (b.boss.monsters||[]).length + (b.boss.kcMonsters||[]).length;
-      const aP = aT ? (a.ownedMonsters.length + a.ownedKcMonsters.length) / aT : 1;
-      const bP = bT ? (b.ownedMonsters.length + b.ownedKcMonsters.length) / bT : 1;
-      return bP - aP;
+      const frac = p => p.req.total ? p.req.done / p.req.total : 1;
+      return frac(b.progress) - frac(a.progress);
     });
     return evaluated;
   }
   const _counts = ev => `${ev.filter(e => e.status === 'available').length} ready \xb7 ${ev.filter(e => e.status === 'partial').length} partial`;
   function _itemsHtml(evaluated) {
     let html = '';
-    for (const { boss, status, ownedMonsters, ownedKcMonsters } of evaluated) {
+    for (const { boss, status, progress } of evaluated) {
       const dot = status==='available' ? '#76c442' : status==='partial' ? '#c8a020' : '#6a2a2a';
-      const total = (boss.monsters||[]).length + (boss.kcMonsters||[]).length;
-      const owned = ownedMonsters.length + ownedKcMonsters.length;
-      const countStr = total > 0 ? `${owned}/${total}` : '';
+      const countStr = progress.req.total ? `${progress.req.done}/${progress.req.total}` : '';
       const isSel = selectedBoss === boss.name;
       html += `<div class="boss-item${isSel?' selected':''}"
         data-boss="${escHtml(boss.name)}" onclick="showBossDetail(this.dataset.boss)">
@@ -7549,9 +7308,7 @@ function showBossDetail(name) {
   if (!boss) return;
 
   const ev = evaluateBoss(boss);
-  const { status, ownedMonsters, ownedKcMonsters,
-          blockers, levelGates, optionalOwned, optionalMissing,
-          warmOwned, lightOwned, dfOwned, ownedToolName } = ev;
+  const { status, levelGates } = ev;
 
   const statusCol   = status==='available' ? '#76c442' : status==='partial' ? '#c8a020' : '#c85040';
   const statusLabel = status==='available' ? 'Ready'   : status==='partial' ? 'Partial' : 'Locked';
@@ -7565,7 +7322,7 @@ function showBossDetail(name) {
   // Helper — clickable card chip with image
   function cardChip(cardName, opts) {
     const { type='item', owned=isOwned(cardName), required=true, dashed=false } = opts || {};
-    const img = (cardDetails[cardName] || {}).imageUrl;
+    const img = _cardImg(cardName);
     const imgHtml = img
       ? `<img src="${img}" style="width:16px;height:16px;object-fit:contain;image-rendering:pixelated;flex-shrink:0" onerror="this.style.display='none'">`
       : '';
@@ -7584,131 +7341,47 @@ function showBossDetail(name) {
     return `<div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:#555;margin:14px 0 6px;padding-bottom:4px;border-bottom:1px solid #222">${title}${count!=null?` <span style="font-weight:400;color:#444">${count}</span>`:''}</div>`;
   }
 
-  // Blockers & level gates
+  // Requirements — the same rows as the Questing tab (any-of groups, routes, optional…)
+  const section = (title, rows, sub) => rows.length
+    ? `<div class="section"><div class="section-header">${title}${sub ? ` <span style="font-size:10px;color:#555;font-weight:normal">${sub}</span>` : ''}</div><div style="margin-top:8px">${_questRowOrder(rows).map(r => r.html).join('')}</div></div>` : '';
+  const buckets = { access: [], enemy: [], npc: [], item: [], rec: [] };
+  for (const r of (boss.requirements || [])) {
+    if (!_reqCards(r).length && !(r._routes || []).length && !r.info) continue;
+    const row = _questReqRow(r);
+    (r.optional ? buckets.rec : r.access ? buckets.access : buckets[r.type === 'enemy' ? 'enemy' : r.type === 'npc' ? 'npc' : 'item']).push(row);
+  }
   let reqHtml = '';
-  for (const b of blockers)
-    reqHtml += `<div style="display:flex;align-items:center;gap:6px;padding:3px 0;font-size:12px"><span style="color:#c85040">\u2717</span><span style="color:#888">${escHtml(b)}</span></div>`;
-  for (const { skill, have, req, ok } of (levelGates||[]))
-    reqHtml += `<div style="display:flex;align-items:center;gap:6px;padding:3px 0;font-size:12px">
-      <span style="color:${ok?'#76c442':'#c85040'}">${ok?'\u2713':'\u2717'}</span>
-      <span style="color:${ok?'#aaa':'#888'}">${skill} ${req}</span>
-      <span style="color:${ok?'#555':'#c85040'};font-size:10px">(you: ${have})</span></div>`;
-
-  // Boss room monsters
-  let monsHtml = '';
-  if ((boss.monsters||[]).length) {
-    const tot = boss.monsters.length, own = ownedMonsters.length;
-    monsHtml = sHead('Boss Room', `${own}/${tot}`);
-    monsHtml += `<div style="display:flex;flex-wrap:wrap;gap:4px">`;
-    for (const m of boss.monsters)
-      monsHtml += cardChip(m, {type:_cardType(m)||'monster', owned:isOwned(m), required:true});
-    monsHtml += `</div>`;
-  }
-
-  // KC monsters
-  let kcHtml = '';
-  if ((boss.kcMonsters||[]).length) {
-    const tot = boss.kcMonsters.length, own = ownedKcMonsters.length;
-    kcHtml = sHead('Kill Count', `${own}/${tot}`);
-    kcHtml += `<div style="display:flex;flex-wrap:wrap;gap:4px">`;
-    for (const m of boss.kcMonsters)
-      kcHtml += cardChip(m, {type:_cardType(m)||'monster', owned:isOwned(m), required:true});
-    kcHtml += `</div>`;
-  }
-
-  // Required items (only those with TCG cards)
-  let itemsHtml = '';
-  const reqItems = (boss.items||[]).filter(i => itemSources[i]);
-  if (reqItems.length) {
-    itemsHtml = sHead('Required Items');
-    itemsHtml += `<div style="display:flex;flex-wrap:wrap;gap:4px">`;
-    for (const i of reqItems)
-      itemsHtml += cardChip(i, {type:'item', owned:isOwned(i), required:true});
-    itemsHtml += `</div>`;
-  }
-
-  // Tools — show every tier as a chip; highlight best-owned tier
-  let toolsHtml = '';
-  if ((boss.tools||[]).length) {
-    toolsHtml = sHead('Tools');
-    toolsHtml += `<div style="display:flex;flex-wrap:wrap;gap:4px">`;
-    for (const toolKey of boss.tools) {
-      const bestOwned = ownedToolName[toolKey];
-      for (const tier of (TOOL_TIERS[toolKey]||[])) {
-        const own = isOwned(tier.name);
-        const isBest = bestOwned === tier.name;
-        const img = (cardDetails[tier.name]||{}).imageUrl;
-        const imgHtml = img
-          ? `<img src="${img}" style="width:14px;height:14px;object-fit:contain;image-rendering:pixelated;flex-shrink:0" onerror="this.style.display='none'">`
-          : '';
-        toolsHtml += `<span style="display:inline-flex;align-items:center;gap:3px;font-size:10px;color:${own?'#76c442':'#333'};background:${own?'#0d2210':'#0e0e0e'};border:1px solid ${own?'#2a5a2a':'#1e1e1e'};border-radius:3px;padding:2px 6px;cursor:pointer;white-space:nowrap${isBest?';box-shadow:0 0 0 1px #4a8a4a':''}"
-          data-card="${escHtml(tier.name)}" onclick="showCard(this.dataset.card,'item')" title="${escHtml(tier.name)}">${imgHtml}${escHtml(tier.name)}</span>`;
-      }
-    }
-    toolsHtml += `</div><div style="font-size:10px;color:#444;margin-top:4px">Any tier satisfies the requirement${Object.keys(ownedToolName).length?' \u2014 lowest owned highlighted':''}</div>`;
-  }
-
-  // Optional items
-  let optHtml = '';
-  if ((boss.optionalItems||[]).length) {
-    optHtml = sHead('Optional');
-    optHtml += `<div style="display:flex;flex-wrap:wrap;gap:4px">`;
-    for (const item of [...optionalOwned, ...optionalMissing])
-      optHtml += cardChip(item, {type:'item', owned:isOwned(item), required:false});
-    optHtml += `</div>`;
-  }
-
-  // Related cards
-  let relHtml = '';
-  if ((boss.relatedCards||[]).length) {
-    relHtml = sHead('Related Cards');
-    relHtml += `<div style="display:flex;flex-wrap:wrap;gap:4px">`;
-    for (const c of boss.relatedCards)
-      relHtml += cardChip(c, {type:_cardType(c)||'item', owned:isOwned(c), required:false, dashed:true});
-    relHtml += `</div>`;
-  }
-
-  // Warm clothing
-  let warmHtml = '';
-  if (boss.warmClothing) {
-    const wOwned = warmOwned.length, wTotal = boss.warmClothing.length;
-    const wCapped = wOwned >= 4;
-    warmHtml = sHead('Warm Clothing', `${wOwned}/${wTotal} owned \u00b7 ${wCapped?'capped':'need 4'}`);
-    warmHtml += `<div style="display:flex;flex-wrap:wrap;gap:4px">`;
-    for (const item of boss.warmClothing)
-      warmHtml += cardChip(item, {type:'item', owned:isOwned(item), required:!wCapped});
-    warmHtml += `</div>`;
-  }
-
-  // Light source
-  let lightHtml = '';
-  if (boss.lightSource) {
-    const lOwned = lightOwned.length, lTotal = LIGHT_SOURCE_ITEMS.length;
-    const lOk = lOwned > 0;
-    lightHtml = sHead('Light Source', `${lOwned}/${lTotal} owned \u00b7 need 1`);
-    lightHtml += `<div style="display:flex;flex-wrap:wrap;gap:4px">`;
-    for (const item of LIGHT_SOURCE_ITEMS)
-      lightHtml += cardChip(item, {type:'item', owned:isOwned(item), required:!lOk});
-    lightHtml += `</div>`;
-  }
-
-  // Dragonfire protection
-  let dfHtml = '';
-  if (boss.dragonfire) {
-    const dOwned = dfOwned.length, dTotal = DRAGONFIRE_ITEMS.length;
-    const dOk = dOwned > 0;
-    dfHtml = sHead('Dragonfire Protection', `${dOwned}/${dTotal} owned \u00b7 need 1`);
-    dfHtml += `<div style="display:flex;flex-wrap:wrap;gap:4px">`;
-    for (const item of DRAGONFIRE_ITEMS)
-      dfHtml += cardChip(item, {type:'item', owned:isOwned(item), required:!dOk});
-    dfHtml += `</div>`;
-    dfHtml += `<div style="font-size:10px;color:#444;margin-top:4px">Super/Extended super antifire work standalone. Regular antifire needs a shield for full protection.</div>`;
-  }
+  const preRows = [
+    ...(boss.quests || []).map(q => { const d = completedQuests.has(q);
+      return `<div class="req-row"><span class="req-icon ${d ? 'ok' : 'fail'}">${d ? '✓' : '✗'}</span>
+        <span class="req-label" style="cursor:pointer" data-quest="${escHtml(q)}" onclick="_navToQuest(this)">Quest: ${escHtml(q)}</span>
+        <span class="req-note">${d ? 'complete' : 'not done'}</span></div>`; }),
+    ...levelGates.map(({ skill, have, req, ok }) => `<div class="req-row"><span class="req-icon ${ok ? 'ok' : 'fail'}">${ok ? '✓' : '✗'}</span>
+        <span class="req-label">${skillIcon(skill, 12)} ${escHtml(skill)} ${req}</span><span class="req-note">you: ${have}</span></div>`)];
+  const nQ = (boss.quests || []).length;
+  if (nQ) reqHtml += `<div class="section"><div class="section-header">Quest prerequisites</div><div style="margin-top:8px">${preRows.slice(0, nQ).join('')}</div></div>`;
+  if (preRows.length > nQ) reqHtml += `<div class="section"><div class="section-header">Skill requirements</div><div style="margin-top:8px">${preRows.slice(nQ).join('')}</div></div>`;
+  reqHtml += section('Access', buckets.access, '(any one route)');
+  reqHtml += section('NPC interactions', buckets.npc);
+  reqHtml += section('Enemies to defeat', buckets.enemy);
+  reqHtml += section('Items &amp; tools', buckets.item);
+  reqHtml += section('Optional &amp; recommended', buckets.rec, '(never blocks)');
+  const lootReqRows = (boss.lootRequirements || []).map(_questReqRow);
+  const relHtml = (boss.relatedCards || []).length
+    ? sHead('Related Cards') + `<div style="display:flex;flex-wrap:wrap;gap:4px">${boss.relatedCards.map(c => cardChip(c, {type:_cardType(c)||'item', owned:isOwned(c), required:false, dashed:true})).join('')}</div>` : '';
+  const checkedHtml = _checkedListsHtml([...(boss.consideredNotRequired || []), ...(boss.consideredNoCard || [])]);
+  const p = ev.progress;
+  const progressHtml = `<div style="margin:6px 0 4px">
+    ${_progressBar('Required', p.req, '#c8a830', 'Quests, skill levels, access and card requirements met (an "any of" group counts once)')}
+    ${p.rec.total ? _progressBar('Recommended', p.rec, '#6a7a9a', 'Optional / recommended requirements met') : ''}
+    ${p.loot.total ? _progressBar('To collect loot', p.loot, '#8a7a4a', 'Needed only to claim rewards') : ''}</div>`;
 
   // Loot — one list grouped by rarity, rarest first. Collection-log items (the boss's
   // uniques) lead each rarity row with a gold border + ◆. Chips green when owned.
   let lootHtml = '';
   const loot = _bossLoot(boss);
+  if (!loot.drops.length && lootReqRows.length)
+    lootHtml = sHead('Loot') + `<div style="font-size:10px;color:#8a7a4a;margin-bottom:2px">To collect the rewards:</div>${lootReqRows.map(r => r.html).join('')}`;
   if (loot.drops.length) {
     const ownedN = loot.drops.filter(d => isOwned(d.card)).length;
     const srcHtml = loot.page
@@ -7717,6 +7390,7 @@ function showBossDetail(name) {
     const logSet = new Set(((collectionLog[boss.name] || {}).items || []).map(c => c.toLowerCase()));
     const isUnique = d => logSet.has(d.card.toLowerCase());
     lootHtml = sHead('Loot', `${ownedN}/${loot.drops.length} owned`);
+    if (lootReqRows.length) lootHtml += `<div style="margin:0 0 8px"><div style="font-size:10px;color:#8a7a4a;margin-bottom:2px">To collect the rewards:</div>${lootReqRows.map(r => r.html).join('')}</div>`;
     lootHtml += `<div style="font-size:10px;color:#444;margin:-2px 0 6px">From ${srcHtml}`
       + (loot.drops.some(isUnique) ? ` \xb7 <span style="color:#b08a3a">\u25c6</span> collection log unique` : '') + `</div>`;
     for (const line of [loot.uniqueRoll && 'Unique roll: ' + loot.uniqueRoll, loot.basis].filter(Boolean))
@@ -7745,8 +7419,8 @@ function showBossDetail(name) {
   }
 
   // Boss image — try boss card first, then first monster card
-  const bossImg = (cardDetails[boss.name]||{}).imageUrl ||
-    (boss.monsters && boss.monsters[0] && (cardDetails[boss.monsters[0]]||{}).imageUrl) || '';
+  const bossImg = _cardImg(boss.name) ||
+    _cardImg(((boss.requirements || []).find(r => r.type === 'enemy' && (r.cards || []).length) || {}).cards?.[0]) || '';
   const bossImgHtml = bossImg
     ? `<img src="${bossImg}" style="float:right;max-width:72px;max-height:72px;image-rendering:pixelated;margin-left:12px;margin-bottom:4px" onerror="this.style.display='none'">`
     : '';
@@ -7759,23 +7433,76 @@ function showBossDetail(name) {
       <h1 style="font-size:18px;color:#e8c97a;margin:0 0 4px">${escHtml(boss.name)}
         <a href="${wikiHref}" target="_blank" style="font-size:11px;color:#4a6a8a;margin-left:8px;text-decoration:none" title="OSRS Wiki">\u2197 wiki</a>
       </h1>
-      <div style="display:flex;align-items:center;gap:8px;margin-bottom:${reqHtml?'12px':'4px'}">
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px">
         <span style="font-size:11px;color:#666">${catLabel}</span>
         <span style="font-size:11px;color:${statusCol};background:${statusBg};padding:1px 8px;border-radius:10px;border:1px solid ${statusBdr}">${statusLabel}</span>
       </div>
-      ${reqHtml ? `<div style="margin-bottom:12px">${reqHtml}</div>` : ''}
-      ${monsHtml}
-      ${kcHtml}
-      ${itemsHtml}
-      ${toolsHtml}
-      ${optHtml}
+      ${progressHtml}
+      ${boss.note ? `<div style="color:#888;font-size:11px;line-height:1.5;margin:4px 0 8px;padding:6px 10px;border-left:2px solid #3a3010;background:#12100a">${escHtml(boss.note)}</div>` : ''}
+      ${reqHtml}
       ${relHtml}
-      ${warmHtml}
-      ${lightHtml}
-      ${dfHtml}
+      ${checkedHtml}
       ${lootHtml}
-      ${boss.note ? `<div style="margin-top:14px;font-size:11px;color:#555;line-height:1.5;border-top:1px solid #1e1e1e;padding-top:10px">${escHtml(boss.note)}</div>` : ''}
     </div>`;
+}
+
+// A missing requirement as a link: one card → its card page; an "any of" group or routes →
+// the boss page, with a hover grid of the options.
+function _missingLink(r, bossName) {
+  const cards = r.cards || [];
+  if (cards.length === 1 && !(r._routes || []).length) {
+    const info = _cardInfo(cards[0]);
+    if (info) return `<span style="cursor:pointer;color:#c8a060;text-decoration:underline dotted" data-nav="${escHtml(info.exact)}" data-nav-type="${info.type}" onclick="_navToCard(this)" title="${escHtml(r.label)}">${escHtml(info.exact)}</span>`;
+  }
+  const opts = _reqCards(r);
+  return `<span style="cursor:pointer;color:#c8a060;text-decoration:underline dotted" data-boss="${escHtml(bossName)}" onclick="showBossDetail(this.dataset.boss)"
+    ${opts.length > 1 ? _cardGridTipAttrs(opts, r.label + ' — any one') : `title="${escHtml(r.label)}"`}>${escHtml(r.label)}</span>`;
+}
+
+// Bosses home panel (no boss selected): status counts, closest bosses, top blockers, most-needed cards
+function _renderBossHome() {
+  const pane = document.getElementById('boss-detail-pane');
+  if (!pane) return;
+  const ev = BOSS_DATA.map(b => ({ boss: b, ...evaluateBoss(b) }));
+  const n = st => ev.filter(e => e.status === st).length;
+  const tot = ev.reduce((a, e) => ({ done: a.done + e.progress.req.done, total: a.total + e.progress.req.total }), { done: 0, total: 0 });
+  const tile = (label, v, col) => `<div style="flex:1;min-width:110px;background:#111;border:1px solid #222;border-radius:4px;padding:10px 12px">
+    <div style="font-size:20px;font-weight:700;color:${col};font-variant-numeric:tabular-nums">${v}</div><div style="font-size:10px;color:#666;text-transform:uppercase;letter-spacing:.05em">${label}</div></div>`;
+  // Closest: not-ready bosses with no quest/level/access gate, fewest missing requirements
+  const closest = ev.filter(e => e.status === 'partial').sort((a, b) => a.missing.length - b.missing.length || a.boss.name.localeCompare(b.boss.name)).slice(0, 10);
+  const closestHtml = closest.map(e => `<div style="display:flex;gap:8px;align-items:baseline;padding:3px 0;font-size:11px">
+      <span style="width:170px;flex-shrink:0;color:#ccc;cursor:pointer" data-boss="${escHtml(e.boss.name)}" onclick="showBossDetail(this.dataset.boss)">${escHtml(e.boss.name)}</span>
+      <span style="width:50px;flex-shrink:0;color:#c8a830;font-variant-numeric:tabular-nums">${e.progress.req.done}/${e.progress.req.total}</span>
+      <span style="color:#888">missing: ${e.missing.slice(0, 4).map(r => _missingLink(r, e.boss.name)).join(' · ')}${e.missing.length > 4 ? ` +${e.missing.length - 4}` : ''}</span></div>`).join('');
+  // Gates blocking the most bosses (quests, skill levels, areas)
+  const gates = new Map();
+  const gate = (key, label, bossName, quest) => { if (!gates.has(key)) gates.set(key, { label, quest, bosses: [] }); gates.get(key).bosses.push(bossName); };
+  for (const e of ev) {
+    for (const q of e.questsMissing) gate('q:' + q, `Quest: ${q}`, e.boss.name, q);
+    for (const g of e.levelGates.filter(g => !g.ok)) gate(`s:${g.skill}:${g.req}`, `${g.skill} ${g.req} (you: ${g.have})`, e.boss.name);
+    for (const r of e.accessMissing) gate('a:' + r.label, r.label, e.boss.name);
+  }
+  const gateRows = [...gates.values()].sort((a, b) => b.bosses.length - a.bosses.length).slice(0, 12);
+  const gatesHtml = gateRows.map(g => `<div style="display:flex;gap:8px;padding:3px 0;font-size:11px">
+      <span style="width:260px;flex-shrink:0;color:#ccc;cursor:pointer;text-decoration:underline dotted"
+        ${g.quest ? `data-quest="${escHtml(g.quest)}" onclick="_navToQuest(this)" title="Open the quest"`
+          : `data-boss="${escHtml(g.bosses[0])}" onclick="showBossDetail(this.dataset.boss)" title="Open ${escHtml(g.bosses[0])} to see the routes"`}>${escHtml(g.label)}</span>
+      <span style="color:#c85040;font-variant-numeric:tabular-nums;flex-shrink:0">blocks ${g.bosses.length}:</span>
+      <span style="color:#888">${g.bosses.map(b => `<span style="cursor:pointer;text-decoration:underline dotted" data-boss="${escHtml(b)}" onclick="showBossDetail(this.dataset.boss)">${escHtml(b)}</span>`).join(' · ')}</span></div>`).join('');
+  const box = (title, sub, inner) => inner ? `<div style="background:#111;border:1px solid #222;border-radius:4px;padding:12px 14px;margin-bottom:14px">
+    <div style="color:#c8a830;font-weight:700;font-size:12px;margin-bottom:2px">${title}</div><div style="color:#666;font-size:10px;margin-bottom:8px">${sub}</div>${inner}</div>` : '';
+  const demand = _cardDemand(ev.filter(e => e.status !== 'available').map(e => ({ name: e.boss.name, reqs: e.boss.requirements || [] })));
+  pane.innerHTML = `<div style="padding:20px 24px;max-width:820px">
+    <h1 style="font-size:18px;color:#e8c97a;margin:0 0 12px">Bosses</h1>
+    <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px">
+      ${tile('Ready', n('available'), '#76c442')}${tile('Partial', n('partial'), '#c8a020')}${tile('Locked', n('locked'), '#c85040')}${tile('Encounters', ev.length, '#aaa')}
+    </div>
+    <div style="margin-bottom:14px">${_progressBar('All requirements', tot, '#c8a830', 'Required requirements met across every boss (an "any of" group counts once)')}</div>
+    ${box('Closest to ready', 'Partial bosses (no quest, skill or access gate left), fewest missing requirements first', closestHtml)}
+    ${box('Biggest blockers', 'Quests, skill levels and area access that lock the most bosses', gatesHtml)}
+    ${_demandTableHtml(demand, "Most-needed cards for bosses", 'boss', 'Most-needed for bosses')}
+    <div style="color:#555;font-size:11px">Select a boss on the left for its full requirements and loot.</div>
+  </div>`;
 }
 
 function showBoss(name) {
@@ -7796,6 +7523,8 @@ function showBoss(name) {
 function renderBossing() {
   if (!document.getElementById('boss-list-scroll')) return; // not on bosses tab — nothing to refresh
   renderBossList();
+  // the home summary is built from the same data: redraw it when the collection or data loads late
+  if (selectedBoss) showBossDetail(selectedBoss); else _renderBossHome();
 }
 
 // ═══════════════════════════════════════════════════════════════════════════
@@ -7892,8 +7621,10 @@ function _validateDataNames() {
   for (const [m, v] of Object.entries(SLAYER_TASKS))
     for (const t of v.tasks) t.cards.forEach(c => card(c, `SLAYER_TASKS ${m}/${t.task}`));
   for (const b of BOSS_DATA) {
-    ['monsters','kcMonsters','items','relatedCards'].forEach(k => (b[k] || []).forEach(c => card(c, `BOSS_DATA ${b.name}`)));
-    (b.quests || []).forEach(q => quest(q, `BOSS_DATA ${b.name}`));
+    [...(b.requirements || []), ...(b.lootRequirements || [])].filter(r => !r.group && !r.tool)  // shared lists are checked where defined
+      .forEach(r => (r.cards || []).forEach(c => card(c, `bosses.json ${b.name}`)));
+    (b.relatedCards || []).forEach(c => card(c, `bosses.json ${b.name}`));
+    (b.quests || []).forEach(q => quest(q, `bosses.json ${b.name}`));
   }
   for (const qs of Object.values(AREA_QUESTS)) qs.forEach(q => quest(q, 'AREA_QUESTS'));
   for (const area of DIARY_DATA) for (const tier of DIARY_TIERS) {
@@ -8033,6 +7764,129 @@ function toggleDiaryTick(dn, tier, type, task) {
   else localStorage.setItem(k, '1');
   showDiaryDetail(dn);
 }
+// A task's unmet requirements, each one unit (same units as _diaryTaskUnits):
+// {label, cards:[options], quest?, skill?}. Area-wide quests count too.
+function _diaryTaskMissing(area, task) {
+  const miss = [], seen = new Set();
+  const push = (key, m) => { if (!seen.has(key)) { seen.add(key); miss.push(m); } };
+  for (const q of (AREA_QUESTS[area.name] || [])) if (!completedQuests.has(q)) push('q:' + q, { label: q, quest: q, cards: [] });
+  if (typeof task !== 'object') return miss;
+  for (const [sk, l] of Object.entries(task.skills || {}))
+    if (typeof l === 'number' && l > 1 && getLevel(sk) < l) push('s:' + sk, { label: `${sk} ${l}`, skill: sk, level: l, cards: [] });
+  for (const q of [...(task.quests || []), ...(task.partialQuests || [])]) if (!completedQuests.has(q)) push('q:' + q, { label: q, quest: q, cards: [] });
+  for (const c of [...(task.items || []), ...(task.monsters || []), ...(task.npcs || [])])
+    if (_isCard(c) && !isOwned(c)) push('c:' + c.toLowerCase(), { label: _cardInfo(c).exact, cards: [_cardInfo(c).exact] });
+  for (const g of [...(task.itemsAny || []), ...(task.monstersAny || [])])
+    if (!g.some(c => isOwned(c))) push('g:' + g.join('|'), { label: 'Any of: ' + g.slice(0, 3).join(', ') + (g.length > 3 ? '…' : ''), cards: g.filter(_isCard) });
+  for (const g of (task.skillsAny || []))
+    if (!g.some(o => Object.entries(o).every(([sk, l]) => getLevel(sk) >= l)))
+      push('sa:' + JSON.stringify(g), { label: g.map(o => Object.entries(o)[0].join(' ')).join(' or '), cards: [] });
+  for (const g of (task.anyOf || []))
+    if (!g.some(o => o.card ? isOwned(o.card) : o.skill ? getLevel(o.skill) >= o.level : completedQuests.has(o.quest)))
+      push('a:' + JSON.stringify(g), { label: g.map(o => o.card || o.quest || `${o.skill} ${o.level}`).join(' or '), cards: g.filter(o => o.card).map(o => o.card) });
+  for (const tool of (task.tools || [])) {
+    const tiers = TOOL_TIERS[tool];
+    if (tiers && !tiers.some(tt => isOwned(tt.name))) push('t:' + tool, { label: 'Any ' + tool.toLowerCase(), cards: tiers.map(t => t.name) });
+  }
+  if (task.lightSource && !LIGHT_SOURCE_ITEMS.some(c => isOwned(c))) push('light', { label: 'Any light source', cards: LIGHT_SOURCE_ITEMS.filter(_isCard) });
+  if (task.setsAny && !(task.setsAny.sets || []).some(st => st.items.every(c => isOwned(c)))) push('set', { label: task.setsAny.label, cards: [] });
+  return miss;
+}
+// A missing diary unit as a link: quest → quest page; one card → card page; group → hover grid
+function _diaryMissingLink(m, area, tier) {
+  const style = 'cursor:pointer;color:#c8a060;text-decoration:underline dotted';
+  if (m.quest) return `<span style="${style}" data-quest="${escHtml(m.quest)}" onclick="_navToQuest(this)">${escHtml(m.label)}</span>`;
+  if (m.cards.length === 1) { const i = _cardInfo(m.cards[0]); return `<span style="${style}" data-nav="${escHtml(i.exact)}" data-nav-type="${i.type}" onclick="_navToCard(this)">${escHtml(i.exact)}</span>`; }
+  return `<span style="${style}" data-dn="${escHtml(area.name)}" data-tier="${tier}" onclick="showDiary(this.dataset.dn);selectDiaryTier(this.dataset.dn,this.dataset.tier)"
+    ${m.cards.length > 1 ? _cardGridTipAttrs(m.cards, m.label) : ''}>${escHtml(m.label)}</span>`;
+}
+// Diaries home panel (no diary selected)
+function _renderDiaryHome() {
+  const pane = document.getElementById('diary-detail-pane');
+  if (!pane) return;
+  const tiers = [];   // {area, tier, tasks:[{task, i, done, missing}]}
+  for (const area of DIARY_DATA)
+    for (const tier of DIARY_TIERS) {
+      if (!area[tier]) continue;
+      const tasks = (area[tier].tasks || []).map((task, i) => {
+        const done = isDiaryTicked(area.name, tier, 'task', String(i));
+        return { task, i, done, missing: done ? [] : _diaryTaskMissing(area, task) };
+      });
+      tiers.push({ area, tier, tasks });
+    }
+  const allTasks = tiers.flatMap(t => t.tasks);
+  const elig = t => t.done || !t.missing.length;
+  const tierDone = tiers.filter(t => t.tasks.every(x => x.done)).length;
+  const tierElig = tiers.filter(t => t.tasks.every(elig)).length;
+  const tile = (label, v, col) => `<div style="flex:1;min-width:110px;background:#111;border:1px solid #222;border-radius:4px;padding:10px 12px">
+    <div style="font-size:20px;font-weight:700;color:${col};font-variant-numeric:tabular-nums">${v}</div><div style="font-size:10px;color:#666;text-transform:uppercase;letter-spacing:.05em">${label}</div></div>`;
+  // Area × tier grid of eligible tasks
+  const grid = `<div style="overflow-x:auto"><table style="border-collapse:collapse;font-size:11px;width:100%">
+    <tr><th style="text-align:left;color:#666;font-weight:normal;padding:3px 6px">Area</th>${DIARY_TIERS.map(t => `<th style="color:${DIARY_TIER_COLOR[t]};font-weight:600;padding:3px 6px;text-align:left">${DIARY_TIER_LABEL[t]}</th>`).join('')}</tr>
+    ${DIARY_DATA.map(area => `<tr><td style="padding:3px 6px;color:#ccc;cursor:pointer" data-dn="${escHtml(area.name)}" onclick="showDiary(this.dataset.dn)">${escHtml(area.name)}</td>${DIARY_TIERS.map(tier => {
+      const t = tiers.find(x => x.area === area && x.tier === tier);
+      if (!t) return '<td></td>';
+      const e = t.tasks.filter(elig).length, n = t.tasks.length, d = t.tasks.every(x => x.done);
+      const pct = n ? Math.round(100 * e / n) : 0, col = d ? '#76c442' : e === n ? '#5a9a5a' : '#c8a830';
+      return `<td style="padding:3px 6px;cursor:pointer" data-dn="${escHtml(area.name)}" data-tier="${tier}" onclick="showDiary(this.dataset.dn);selectDiaryTier(this.dataset.dn,this.dataset.tier)" title="${e}/${n} tasks eligible${d ? ' · done' : ''}">
+        <div style="display:flex;align-items:center;gap:6px"><div style="width:60px;height:5px;background:#1a1a1a;border-radius:3px;overflow:hidden"><div style="width:${pct}%;height:100%;background:${col}"></div></div>
+        <span style="color:${col};font-variant-numeric:tabular-nums">${d ? '✓' : `${e}/${n}`}</span></div></td>`;
+    }).join('')}</tr>`).join('')}</table></div>`;
+  // Closest tiers: not done, fewest tasks still blocked
+  const closest = tiers.filter(t => !t.tasks.every(x => x.done))
+    .map(t => { const blocked = t.tasks.filter(x => !elig(x));
+      return { ...t, blocked, distinct: new Set(blocked.flatMap(x => x.missing.map(m => m.label))).size }; })
+    // closest = fewest distinct things still missing (then fewest blocked tasks)
+    .sort((a, b) => a.distinct - b.distinct || a.blocked.length - b.blocked.length || a.area.name.localeCompare(b.area.name)).slice(0, 10);
+  const closestHtml = closest.map(t => {
+    const miss = new Map();
+    for (const x of t.blocked) for (const m of x.missing) if (!miss.has(m.label)) miss.set(m.label, m);
+    const ms = [...miss.values()];
+    return `<div style="display:flex;gap:8px;align-items:baseline;padding:3px 0;font-size:11px">
+      <span style="width:190px;flex-shrink:0;color:#ccc;cursor:pointer" data-dn="${escHtml(t.area.name)}" data-tier="${t.tier}" onclick="showDiary(this.dataset.dn);selectDiaryTier(this.dataset.dn,this.dataset.tier)">${escHtml(t.area.name)} <span style="color:${DIARY_TIER_COLOR[t.tier]}">${DIARY_TIER_LABEL[t.tier]}</span></span>
+      <span style="width:80px;flex-shrink:0;color:#c8a830;font-variant-numeric:tabular-nums">${t.blocked.length ? `${t.blocked.length} blocked` : 'all eligible'}</span>
+      <span style="color:#888">${ms.length ? 'missing: ' + ms.slice(0, 5).map(m => _diaryMissingLink(m, t.area, t.tier)).join(' · ') + (ms.length > 5 ? ` +${ms.length - 5}` : '') : 'tick the remaining tasks'}</span></div>`;
+  }).join('');
+  // Blockers: quests and skill levels locking the most tasks
+  const gates = new Map();
+  for (const t of tiers) for (const x of t.tasks) for (const m of x.missing) {
+    if (!m.quest && !m.skill) continue;
+    const key = m.quest ? 'q:' + m.quest : 's:' + m.skill + m.level;
+    if (!gates.has(key)) gates.set(key, { m, n: 0, first: t });
+    gates.get(key).n++;
+  }
+  const gateHtml = [...gates.values()].sort((a, b) => b.n - a.n).slice(0, 12).map(g => `<div style="display:flex;gap:8px;padding:3px 0;font-size:11px">
+      <span style="width:260px;flex-shrink:0">${g.m.quest ? _diaryMissingLink(g.m, g.first.area, g.first.tier)
+        : `<span style="cursor:pointer;color:#ccc;text-decoration:underline dotted" data-dn="${escHtml(g.first.area.name)}" data-tier="${g.first.tier}" onclick="showDiary(this.dataset.dn);selectDiaryTier(this.dataset.dn,this.dataset.tier)">${escHtml(g.m.label)} <span style="color:#666">(you: ${getLevel(g.m.skill)})</span></span>`}</span>
+      <span style="color:#c85040;font-variant-numeric:tabular-nums">blocks ${g.n} task${g.n === 1 ? '' : 's'}</span></div>`).join('');
+  // Most-needed cards, counted per task (not done, not eligible)
+  const demand = new Map();
+  for (const t of tiers) for (const x of t.tasks) {
+    if (x.done || !x.missing.length) continue;
+    const id = `${t.area.name} ${DIARY_TIER_LABEL[t.tier]} #${x.i + 1}`;
+    for (const m of x.missing) for (const c of m.cards) {
+      if (isOwned(c)) continue;
+      if (!demand.has(c)) demand.set(c, { quests: new Set(), last: new Set() });
+      demand.get(c).quests.add(id);
+      if (x.missing.length === 1) demand.get(c).last.add(id);
+    }
+  }
+  const box = (title, sub, inner) => inner ? `<div style="background:#111;border:1px solid #222;border-radius:4px;padding:12px 14px;margin-bottom:14px">
+    <div style="color:#c8a830;font-weight:700;font-size:12px;margin-bottom:2px">${title}</div><div style="color:#666;font-size:10px;margin-bottom:8px">${sub}</div>${inner}</div>` : '';
+  pane.innerHTML = `<div style="padding:20px 24px;max-width:860px">
+    <h1 style="font-size:18px;color:#e8c97a;margin:0 0 12px">Achievement Diaries</h1>
+    <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px">
+      ${tile('Tiers done', `${tierDone}/${tiers.length}`, '#76c442')}${tile('Tiers fully eligible', `${tierElig}/${tiers.length}`, '#5a9a5a')}
+      ${tile('Tasks eligible', `${allTasks.filter(elig).length}/${allTasks.length}`, '#c8a830')}${tile('Tasks done', `${allTasks.filter(x => x.done).length}/${allTasks.length}`, '#aaa')}
+    </div>
+    <div style="margin-bottom:14px">${_progressBar('Tasks eligible', { done: allTasks.filter(elig).length, total: allTasks.length }, '#c8a830', 'Tasks you can do now (every requirement met) or have ticked done')}</div>
+    ${box('Eligible tasks by diary', 'Click an area or tier to open it', grid)}
+    ${box('Closest tiers', 'Unfinished tiers with the fewest distinct requirements still missing', closestHtml)}
+    ${box('Biggest blockers', 'Quests and skill levels that block the most tasks', gateHtml)}
+    ${_demandTableHtml(demand, 'Most-needed cards for diaries', 'task', 'Most-needed for diaries')}
+  </div>`;
+}
+
 function selectDiaryTier(dn, tier) {
   selectedDiaryTier = tier;
   showDiaryDetail(dn);
@@ -8229,34 +8083,6 @@ function showDiaryDetail(name) {
           + _progressBar(`${DIARY_TIER_LABEL[tier]} requirements`, _diaryTierProgress(area, tier), '#c8a830', 'Distinct requirements across this tier\'s tasks: skills, quests, cards, tools (an "any of" group counts once)')
           + _progressBar('All tiers requirements', sum(_diaryTierProgress), '#888', 'Sum over every tier of this diary'); })()}
     </div>`;
-
-    // ── Rewards (from the wiki's per-tier Rewards list) ───────────────────────
-    if ((t.rewards || []).length) {
-      const line = r => {
-        const head = r.text.replace(/:$/, '');
-        const ci = _cardInfo(head);
-        const headHtml = ci
-          ? `<span data-card="${escHtml(ci.exact)}" data-type="${ci.type}" onclick="showCard(this.dataset.card,this.dataset.type)"
-               style="color:${isOwned(ci.exact) ? '#76c442' : '#c8a060'};cursor:pointer;text-decoration:underline dotted"
-               title="${isOwned(ci.exact) ? 'Owned' : 'Not owned'} \u2014 click to view">${escHtml(head)}</span>`
-          : escHtml(r.text);
-        const subs = (r.sub || []).map(x => `<li style="margin:1px 0">${escHtml(x)}</li>`).join('');
-        // cards this reward needs (to use the item, kill the monster, talk to the NPC)
-        const need = [...(r.items || []), ...(r.monsters || []), ...(r.npcs || [])].filter(c => _isCard(c) && c !== (ci && ci.exact));
-        const chips = need.map(c => {
-          const own = isOwned(c), info = _cardInfo(c);
-          return `<span data-card="${escHtml(info.exact)}" data-type="${info.type}" onclick="showCard(this.dataset.card,this.dataset.type)"
-            style="display:inline-flex;align-items:center;padding:0 5px;margin-left:4px;border-radius:3px;font-size:9px;cursor:pointer;background:${own?'#0a180a':'#180808'};border:1px solid ${own?'#2a5a2a':'#5a2a2a'};color:${own?'#5a9a5a':'#c05050'}"
-            title="${own ? 'Owned' : 'Card needed'} \u2014 click to view">${own ? '\u2713' : '\u2717'} ${escHtml(c)}</span>`;
-        }).join('');
-        const ncChips = [...(r.npcsNoCard || []), ...(r.itemsNoCard || [])].map(x => `<span style="display:inline-flex;align-items:center;gap:2px;padding:1px 5px;border-radius:3px;font-size:9px;margin-left:4px;background:#101010;border:1px solid #2a2a2a;color:#666" title="No TCG card exists — no restriction">${escHtml(x)} <span style="font-size:8px;opacity:.6">no card</span></span>`).join('');
-        return `<li style="margin:3px 0">${headHtml}${chips}${ncChips}${subs ? `<ul style="margin:2px 0 0 14px;padding:0;color:#666">${subs}</ul>` : ''}</li>`;
-      };
-      html += `<details style="margin-bottom:14px;padding:8px 12px;background:#0d0c08;border-radius:4px;border:1px solid #2a2414">
-        <summary style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:#6a5a3a;cursor:pointer">Rewards</summary>
-        <ul style="margin:6px 0 0 14px;padding:0;font-size:11px;color:#999;line-height:1.45">${t.rewards.map(line).join('')}</ul>
-      </details>`;
-    }
 
     // ── Prerequisites (compact auto-detected section) ────────────────────────
     const hasPrereqs = ev.blockers.length || ev.levelGates.length || ev.taskQuestGates.length;
@@ -8467,6 +8293,34 @@ function showDiaryDetail(name) {
       });
     }
 
+
+    // ── Rewards (from the wiki's per-tier Rewards list) ───────────────────────
+    if ((t.rewards || []).length) {
+      const line = r => {
+        const head = r.text.replace(/:$/, '');
+        const ci = _cardInfo(head);
+        const headHtml = ci
+          ? `<span data-card="${escHtml(ci.exact)}" data-type="${ci.type}" onclick="showCard(this.dataset.card,this.dataset.type)"
+               style="color:${isOwned(ci.exact) ? '#76c442' : '#c8a060'};cursor:pointer;text-decoration:underline dotted"
+               title="${isOwned(ci.exact) ? 'Owned' : 'Not owned'} \u2014 click to view">${escHtml(head)}</span>`
+          : escHtml(r.text);
+        const subs = (r.sub || []).map(x => `<li style="margin:1px 0">${escHtml(x)}</li>`).join('');
+        // cards this reward needs (to use the item, kill the monster, talk to the NPC)
+        const need = [...(r.items || []), ...(r.monsters || []), ...(r.npcs || [])].filter(c => _isCard(c) && c !== (ci && ci.exact));
+        const chips = need.map(c => {
+          const own = isOwned(c), info = _cardInfo(c);
+          return `<span data-card="${escHtml(info.exact)}" data-type="${info.type}" onclick="showCard(this.dataset.card,this.dataset.type)"
+            style="display:inline-flex;align-items:center;padding:0 5px;margin-left:4px;border-radius:3px;font-size:9px;cursor:pointer;background:${own?'#0a180a':'#180808'};border:1px solid ${own?'#2a5a2a':'#5a2a2a'};color:${own?'#5a9a5a':'#c05050'}"
+            title="${own ? 'Owned' : 'Card needed'} \u2014 click to view">${own ? '\u2713' : '\u2717'} ${escHtml(c)}</span>`;
+        }).join('');
+        const ncChips = [...(r.npcsNoCard || []), ...(r.itemsNoCard || [])].map(x => `<span style="display:inline-flex;align-items:center;gap:2px;padding:1px 5px;border-radius:3px;font-size:9px;margin-left:4px;background:#101010;border:1px solid #2a2a2a;color:#666" title="No TCG card exists — no restriction">${escHtml(x)} <span style="font-size:8px;opacity:.6">no card</span></span>`).join('');
+        return `<li style="margin:3px 0">${headHtml}${chips}${ncChips}${subs ? `<ul style="margin:2px 0 0 14px;padding:0;color:#666">${subs}</ul>` : ''}</li>`;
+      };
+      html += `<details style="margin-bottom:14px;padding:8px 12px;background:#0d0c08;border-radius:4px;border:1px solid #2a2414">
+        <summary style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:#6a5a3a;cursor:pointer">Rewards</summary>
+        <ul style="margin:6px 0 0 14px;padding:0;font-size:11px;color:#999;line-height:1.45">${t.rewards.map(line).join('')}</ul>
+      </details>`;
+    }
     html += `</div>`;
   }
 
@@ -8485,167 +8339,6 @@ function showDiary(name) {
   }
 }
 
-// ─── Old single-pane boss render (kept for reference, no longer used) ───────
-function _renderBossingLegacy() {
-  const el = document.getElementById('bosses-content');
-  if (!el) return;
-
-  const CATEGORIES = [
-    { key:'raid',      label:'Raids & Instanced Content' },
-    { key:'skilling',  label:'Skilling Bosses' },
-    { key:'boss',      label:'Regular Bosses' },
-    { key:'wilderness',label:'Wilderness Bosses' },
-  ];
-
-  const STATUS_ORDER = { available:0, partial:1, locked:2 };
-
-  let html = '';
-  for (const { key, label } of CATEGORIES) {
-    const bosses = BOSS_DATA.filter(b => b.category === key);
-    const evaluated = bosses.map(b => ({ boss:b, ...evaluateBoss(b) }));
-    evaluated.sort((a,b) => {
-      const so = STATUS_ORDER[a.status] - STATUS_ORDER[b.status];
-      if (so !== 0) return so;
-      // Within same status, sort by card completion % desc (boss room + KC combined)
-      const aTotal = (a.boss.monsters || []).length + (a.boss.kcMonsters || []).length;
-      const bTotal = (b.boss.monsters || []).length + (b.boss.kcMonsters || []).length;
-      const aPct = aTotal ? (a.ownedMonsters.length + a.ownedKcMonsters.length) / aTotal : 1;
-      const bPct = bTotal ? (b.ownedMonsters.length + b.ownedKcMonsters.length) / bTotal : 1;
-      return bPct - aPct;
-    });
-
-    const avail = evaluated.filter(e => e.status === 'available').length;
-    const partial = evaluated.filter(e => e.status === 'partial').length;
-
-    html += `<div class="section" style="margin-bottom:20px">
-      <div class="section-header">${label}
-        <span style="font-size:10px;font-weight:400;color:#555;margin-left:8px">${avail} ready · ${partial} partial</span>
-      </div>
-      <div style="margin-top:10px;display:flex;flex-direction:column;gap:6px">`;
-
-    for (const { boss, status, ownedMonsters, missingMonsters, ownedKcMonsters, missingKcMonsters, blockers, levelGates, missingItems, missingTools, ownedToolName, optionalOwned, optionalMissing, warmOwned, warmMissing, lightOwned, lightMissing } of evaluated) {
-      const total = (boss.monsters || []).length;
-      const owned = ownedMonsters.length;
-      const indCol = status === 'available' ? '#76c442' : status === 'partial' ? '#c8a020' : '#6a2a2a';
-      const indBg  = status === 'available' ? '#0d2210' : status === 'partial' ? '#1a1400' : '#1a0808';
-      const indBorder = status === 'available' ? '#2a5a2a' : status === 'partial' ? '#3a2a00' : '#4a1a1a';
-
-      // KC chips — shown as a labelled sub-section if present
-      let kcHtml = '';
-      if ((boss.kcMonsters || []).length > 0) {
-        const kcTotal = boss.kcMonsters.length;
-        const kcOwned = ownedKcMonsters.length;
-        const kcCol = kcOwned === kcTotal ? '#76c442' : kcOwned > 0 ? '#c8a020' : '#555';
-        let kcChips = '';
-        for (const m of boss.kcMonsters) {
-          const own = isOwned(m); const safe = escHtml(m);
-          const type = _cardType(m) || 'monster';
-          kcChips += `<span style="display:inline-flex;align-items:center;gap:2px;font-size:10px;color:${own?'#76c442':'#555'};background:${own?'#0d2210':'#111'};border:1px solid ${own?'#2a5a2a':'#222'};border-radius:3px;padding:1px 5px;cursor:pointer;white-space:nowrap"
-            data-card="${safe}" data-type="${type}" onclick="showCard(this.dataset.card,this.dataset.type)">${own?'✓ ':''}${safe}</span>`;
-        }
-        kcHtml = `<div style="margin-bottom:4px"><span style="font-size:9px;color:${kcCol};letter-spacing:0.04em;margin-right:5px;text-transform:uppercase">KC ${kcOwned}/${kcTotal}</span><span style="display:inline-flex;flex-wrap:wrap;gap:3px">${kcChips}</span></div>`;
-      }
-
-      // Build card chips — boss room monsters
-      let chipsHtml = '';
-      for (const m of (boss.monsters || [])) {
-        const own = isOwned(m);
-        const safe = escHtml(m);
-        const type = _cardType(m) || 'monster';
-        chipsHtml += `<span style="display:inline-flex;align-items:center;gap:2px;font-size:10px;color:${own?'#76c442':'#555'};background:${own?'#0d2210':'#111'};border:1px solid ${own?'#2a5a2a':'#222'};border-radius:3px;padding:1px 5px;cursor:pointer;white-space:nowrap"
-          data-card="${safe}" data-type="${type}" onclick="showCard(this.dataset.card,this.dataset.type)">${own?'✓ ':''}${safe}</span>`;
-      }
-      // Item chips — required
-      for (const item of (boss.items || [])) {
-        if (!itemSources[item]) continue;
-        const own = isOwned(item);
-        const safe = escHtml(item);
-        chipsHtml += `<span style="display:inline-flex;align-items:center;gap:2px;font-size:10px;color:${own?'#76c442':'#e8a030'};background:${own?'#0d2210':'#1a0f00'};border:1px solid ${own?'#2a5a2a':'#4a2800'};border-radius:3px;padding:1px 5px;cursor:pointer;white-space:nowrap"
-          data-card="${safe}" data-type="item" onclick="showCard(this.dataset.card,'item')">${own?'✓ ':'⚑ '}${safe}</span>`;
-      }
-      // Tool chips — always "Axe (any)" style; tooltip shows best owned tier
-      for (const toolKey of (boss.tools || [])) {
-        const ownedName = ownedToolName[toolKey];
-        const label = escHtml(toolKey) + ' (any)';
-        const col = ownedName ? '#76c442' : '#e8a030';
-        const bg  = ownedName ? '#0d2210' : '#1a0f00';
-        const bdr = ownedName ? '#2a5a2a' : '#4a2800';
-        const tip = ownedName ? `title="Best owned: ${ownedName}"` : `title="No ${toolKey} owned"`;
-        chipsHtml += `<span ${tip} style="display:inline-flex;align-items:center;gap:2px;font-size:10px;color:${col};background:${bg};border:1px solid ${bdr};border-radius:3px;padding:1px 5px;white-space:nowrap">${ownedName?'✓ ':'⚑ '}${label}</span>`;
-      }
-      // Optional item chips — grey with "optional" marker
-      for (const item of [...(optionalOwned||[]), ...(optionalMissing||[])]) {
-        const own = isOwned(item);
-        const safe = escHtml(item);
-        chipsHtml += `<span style="display:inline-flex;align-items:center;gap:2px;font-size:10px;color:${own?'#76c442':'#444'};background:#111;border:1px solid #222;border-radius:3px;padding:1px 5px;cursor:pointer;white-space:nowrap;opacity:0.75"
-          data-card="${safe}" data-type="item" onclick="showCard(this.dataset.card,'item')" title="Optional">${own?'✓ ':''}${safe} <span style="color:#333;font-size:9px">opt</span></span>`;
-      }
-      // Related cards — purely informational (grey)
-      for (const card of (boss.relatedCards || [])) {
-        const own = isOwned(card);
-        const safe = escHtml(card);
-        const type = _cardType(card) || 'item';
-        chipsHtml += `<span style="display:inline-flex;align-items:center;gap:2px;font-size:10px;color:${own?'#76c442':'#444'};background:#111;border:1px dashed ${own?'#2a5a2a':'#333'};border-radius:3px;padding:1px 5px;cursor:pointer;white-space:nowrap;opacity:0.7"
-          data-card="${safe}" data-type="${type}" onclick="showCard(this.dataset.card,this.dataset.type)" title="Related">${own?'✓ ':''}${safe}</span>`;
-      }
-
-      // Blocker badges
-      let blockersHtml = '';
-      for (const b of blockers) {
-        blockersHtml += `<span style="font-size:10px;color:#c85040;background:#1a0808;border:1px solid #4a1a1a;border-radius:3px;padding:1px 6px;white-space:nowrap">✗ ${escHtml(b)}</span>`;
-      }
-
-      // Level gate badges — amber informational (from evaluateBoss levelGates)
-      let lvlHtml = '';
-      for (const { skill, have, req, ok } of (levelGates || [])) {
-        const col = ok ? '#76c442' : '#c8a020';
-        const bg  = ok ? '#0d2210' : '#1a1400';
-        const bdr = ok ? '#2a5a2a' : '#3a2a00';
-        lvlHtml += `<span style="font-size:10px;color:${col};background:${bg};border:1px solid ${bdr};border-radius:3px;padding:1px 6px;white-space:nowrap">${skill} ${have}/${req}</span>`;
-      }
-
-      const kcTotal = (boss.kcMonsters || []).length;
-      const progressStr = (total + kcTotal) > 0 ? `${owned + ownedKcMonsters.length}/${total + kcTotal} cards` : '';
-
-      html += `<div style="background:${indBg};border:1px solid ${indBorder};border-radius:4px;padding:8px 10px">
-        <div style="display:flex;align-items:baseline;gap:8px;margin-bottom:${(chipsHtml||blockersHtml||lvlHtml)?'6px':'0'}">
-          <span style="font-size:12px;font-weight:600;color:${indCol};flex:1">${escHtml(boss.name)}</span>
-          ${progressStr ? `<span style="font-size:10px;color:${status==='available'?'#76c442':status==='partial'?'#c8a020':'#666'};flex-shrink:0">${progressStr}</span>` : ''}
-        </div>
-        ${lvlHtml || blockersHtml ? `<div style="display:flex;flex-wrap:wrap;gap:4px;margin-bottom:${(kcHtml||chipsHtml)?'5px':'0'}">${lvlHtml}${blockersHtml}</div>` : ''}
-        ${chipsHtml ? `<div>${boss.kcMonsters && boss.kcMonsters.length ? `<span style="font-size:9px;color:#555;letter-spacing:0.04em;text-transform:uppercase;margin-right:5px">Boss room</span>` : ''}<span style="display:inline-flex;flex-wrap:wrap;gap:3px">${chipsHtml}</span></div>` : ''}
-        ${kcHtml}
-        ${boss.warmClothing ? (() => {
-          const wTotal = boss.warmClothing.length;
-          const wOwned = warmOwned.length;
-          const wCapped = wOwned >= 4;
-          const wCol = wCapped ? '#76c442' : wOwned > 0 ? '#c8a020' : '#555';
-          const wChips = boss.warmClothing.map(item => {
-            const own = isOwned(item); const safe = escHtml(item);
-            return `<span style="display:inline-flex;align-items:center;gap:2px;font-size:10px;color:${own?'#76c442':'#444'};background:#111;border:1px solid ${own?'#2a5a2a':'#222'};border-radius:3px;padding:1px 5px;cursor:pointer;white-space:nowrap"
-              data-card="${safe}" data-type="item" onclick="showCard(this.dataset.card,'item')">${own?'✓ ':''}${safe}</span>`;
-          }).join('');
-          return `<div style="margin-top:5px"><span style="font-size:10px;color:${wCol};margin-right:6px">Warm clothing ${wOwned}/${wTotal} owned${wCapped?' (capped)':wOwned>=4?' (capped)':''}</span><div style="display:flex;flex-wrap:wrap;gap:3px;margin-top:3px">${wChips}</div></div>`;
-        })() : ''}
-        ${boss.lightSource ? (() => {
-          const lOwned = lightOwned.length;
-          const lTotal = LIGHT_SOURCE_ITEMS.length;
-          const lCol = lOwned > 0 ? '#76c442' : '#e8a030';
-          const lChips = LIGHT_SOURCE_ITEMS.map(item => {
-            const own = isOwned(item); const safe = escHtml(item);
-            return `<span style="display:inline-flex;align-items:center;gap:2px;font-size:10px;color:${own?'#76c442':'#444'};background:#111;border:1px solid ${own?'#2a5a2a':'#222'};border-radius:3px;padding:1px 5px;cursor:pointer;white-space:nowrap"
-              data-card="${safe}" data-type="item" onclick="showCard(this.dataset.card,'item')">${own?'✓ ':''}${safe}</span>`;
-          }).join('');
-          return `<div style="margin-top:5px"><span style="font-size:10px;color:${lCol};margin-right:6px">Light source — ${lOwned}/${lTotal} owned (need 1)</span><div style="display:flex;flex-wrap:wrap;gap:3px;margin-top:3px">${lChips}</div></div>`;
-        })() : ''}
-        ${boss.note ? `<div style="font-size:10px;color:#444;margin-top:4px">${escHtml(boss.note)}</div>` : ''}
-      </div>`;
-    }
-    html += `</div></div>`;
-  }
-  el.innerHTML = html;
-}
-
 // ─── Questing tab ──────────────────────────────────────────────────────────
 
 /**
@@ -8658,23 +8351,21 @@ function _renderBossingLegacy() {
 // cards that would satisfy it: any option of an "any of" group (counted once per quest),
 // or the missing pieces of a route (each slot's first choice, so staffs don't swamp it).
 // "Last card" = owning this one card would complete every card requirement of that quest.
-function _questCardDemand() {
-  const demand = new Map();  // card → {quests:Set, last:Set}
+// Unowned cards that would meet a still-unmet *required* requirement, per target (quest or
+// boss): any option of an "any of" group counts, and each missing slot's first choice of a
+// route. "last" = owning this one card completes every card requirement of that target.
+// entries: [{name, reqs}]
+function _cardDemand(entries) {
+  const demand = new Map();  // card → {quests:Set, last:Set}  (quests = targets helped)
   const credit = (card, qn) => {
     if (!demand.has(card)) demand.set(card, { quests: new Set(), last: new Set() });
     demand.get(card).quests.add(qn);
   };
-  for (const [qn, bm] of Object.entries(bmQuestCards)) {
-    if (completedQuests.has(qn)) continue;
-    const unmet = [];
-    for (const s of (bm.sections || []))
-      for (const r of (s.requirements || []))
-        if (!r.optional && _reqCards(r).length && !_reqMet(r)) unmet.push(r);
+  for (const { name: qn, reqs } of entries) {
+    const unmet = reqs.filter(r => !r.optional && (_reqCards(r).length || (r._routes || []).length) && !_reqMet(r));
     const perReq = unmet.map(r => {
       const cands = new Set();
-      const cards = r.cards || [];
-      if (r.mode === 'all') cards.filter(c => !isOwned(c)).forEach(c => cands.add(c));
-      else cards.forEach(c => { if (!isOwned(c)) cands.add(c); });
+      for (const c of (r.cards || [])) if (!isOwned(c)) cands.add(c);
       for (const rt of (r._routes || [])) {
         if (rt.manual) continue;
         for (const sl of rt.slots) if (!sl.some(c => isOwned(c))) cands.add(sl[0]);
@@ -8682,48 +8373,52 @@ function _questCardDemand() {
       return cands;
     });
     for (const cands of perReq) for (const c of cands) credit(c, qn);
-    // The quest's last missing card: one unmet requirement that a single card satisfies
     if (unmet.length === 1) {
       const r = unmet[0];
-      const single = (r.mode === 'all') ? (r.cards || []).filter(c => !isOwned(c)) : null;
-      const opts = single ? (single.length === 1 ? single : []) : [...perReq[0]].filter(c => {
-        const routeOk = (r._routes || []).some(rt => !rt.manual && (!rt.magic || getLevel('Magic') >= rt.magic) &&
-          rt.slots.every(sl => sl.some(x => isOwned(x)) || sl[0] === c));
-        return (r.cards || []).includes(c) || routeOk;
-      });
+      const opts = r.mode === 'all'
+        ? ((r.cards || []).filter(c => !isOwned(c)).length === 1 ? (r.cards || []).filter(c => !isOwned(c)) : [])
+        : [...perReq[0]].filter(c => (r.cards || []).includes(c) || (r._routes || []).some(rt => !rt.manual
+            && (!rt.magic || getLevel('Magic') >= rt.magic) && (rt.quests || []).every(q => completedQuests.has(q))
+            && rt.slots.every(sl => sl.some(x => isOwned(x)) || sl[0] === c)));
       for (const c of opts) demand.get(c)?.last.add(qn);
     }
   }
   return demand;
 }
-function _renderQuestCardSummary() {
-  const el = document.getElementById('quest-card-summary');
-  if (!el) return;
-  const rows = [..._questCardDemand().entries()]
-    .filter(([c]) => _isCard(c))
+function _questCardDemand() {
+  return _cardDemand(Object.entries(bmQuestCards).filter(([qn]) => !completedQuests.has(qn))
+    .map(([name, bm]) => ({ name, reqs: (bm.sections || []).flatMap(s => s.requirements || []) })));
+}
+// Shared table for the Questing and Bosses home panels
+function _demandTableHtml(demand, title, unit, wishNote) {
+  const rows = [...demand.entries()].filter(([c]) => _isCard(c))
     .sort((a, b) => b[1].quests.size - a[1].quests.size || b[1].last.size - a[1].last.size || a[0].localeCompare(b[0]))
     .slice(0, 30);
-  if (!rows.length) { el.innerHTML = ''; return; }
+  if (!rows.length) return '';
   const max = rows[0][1].quests.size;
-  el.innerHTML = `<div style="background:#111;border:1px solid #222;border-radius:4px;padding:12px 14px">
-    <div style="color:#c8a830;font-weight:700;font-size:12px;margin-bottom:2px">Most-needed cards you don't own</div>
-    <div style="color:#666;font-size:10px;margin-bottom:10px">Unowned cards that would meet a required card requirement, counted per quest not yet done.
-      An "any of" option counts for that quest even if another option would do. <span style="color:#7ab07a">Last card</span> = owning it completes every card requirement of that quest.</div>
+  return `<div style="background:#111;border:1px solid #222;border-radius:4px;padding:12px 14px;margin-bottom:14px">
+    <div style="color:#c8a830;font-weight:700;font-size:12px;margin-bottom:2px">${title}</div>
+    <div style="color:#666;font-size:10px;margin-bottom:10px">Unowned cards that would meet a required card requirement, counted per ${unit} not yet ready.
+      An "any of" option counts for that ${unit} even if another option would do. <span style="color:#7ab07a">Last card</span> = owning it completes every card requirement of that ${unit}.</div>
     ${rows.map(([c, d]) => {
-      const info = _cardInfo(c), img = (cardDetails[info.exact] || {}).imageUrl;
+      const info = _cardInfo(c), img = _cardImg(info.exact);
       const qs = [...d.quests].sort();
-      const pct = Math.round(100 * d.quests.size / max);
       return `<div style="display:flex;align-items:center;gap:8px;padding:3px 0;font-size:11px">
         ${img ? `<img src="${img}" style="width:18px;height:18px;object-fit:contain;image-rendering:pixelated;flex-shrink:0" onerror="this.style.display='none'">` : '<span style="width:18px;flex-shrink:0"></span>'}
         <span style="width:170px;flex-shrink:0;color:#ccc;cursor:pointer;overflow:hidden;text-overflow:ellipsis;white-space:nowrap"
           data-nav="${escHtml(info.exact)}" data-nav-type="${info.type}" onclick="_navToCard(this)">${escHtml(info.exact)}</span>
-        <div style="flex:1;min-width:60px;height:6px;background:#1a1a1a;border-radius:3px;overflow:hidden"><div style="width:${pct}%;height:100%;background:#c8a830"></div></div>
-        <span style="width:70px;flex-shrink:0;color:#c8a830;font-variant-numeric:tabular-nums;cursor:help" title="${escHtml(qs.join('\n'))}">${d.quests.size} quest${d.quests.size === 1 ? '' : 's'}</span>
+        <div style="flex:1;min-width:60px;height:6px;background:#1a1a1a;border-radius:3px;overflow:hidden"><div style="width:${Math.round(100 * d.quests.size / max)}%;height:100%;background:#c8a830"></div></div>
+        <span style="width:74px;flex-shrink:0;color:#c8a830;font-variant-numeric:tabular-nums;cursor:help" title="${escHtml(qs.join('\n'))}">${d.quests.size} ${unit}${d.quests.size === 1 ? '' : (unit === 'boss' ? 'es' : 's')}</span>
         <span style="width:74px;flex-shrink:0;color:#7ab07a;font-size:10px;cursor:help" title="${escHtml([...d.last].sort().join('\n'))}">${d.last.size ? `last card ×${d.last.size}` : ''}</span>
-        ${_rowWishStar(info.exact, false, 'Most-needed for quests')}
+        ${_rowWishStar(info.exact, false, wishNote)}
       </div>`;
     }).join('')}
   </div>`;
+}
+function _renderQuestCardSummary() {
+  const el = document.getElementById('quest-card-summary');
+  if (!el) return;
+  el.innerHTML = _demandTableHtml(_questCardDemand(), "Most-needed cards you don't own", 'quest', 'Most-needed for quests');
 }
 
 // ─── Progress bars (quests + diaries) ──────────────────────────────────────
@@ -8763,6 +8458,27 @@ function _questProgressHtml(questName) {
   </div>`;
 }
 
+// "Checked" entries (quests + bosses): some have no card at all; others have a card but
+// aren't needed (recommended only, avoidable, rewards…) — those still show ownership.
+function _checkedListsHtml(entries) {
+  const _ncCard = x => _cardInfo(String(x).replace(/\s*\([^)]*\)\s*/g, ' ').replace(/\s+[—–-]\s.*$/, '').trim());
+  const has = entries.filter(x => _ncCard(x)), none = entries.filter(x => !_ncCard(x));
+  const chip = (x, extra, title) => `<span style="display:inline-flex;align-items:center;gap:3px;padding:1px 6px;border-radius:3px;font-size:11px;background:#101010;border:1px solid #2a2a2a;color:#777" title="${title}">${extra}${escHtml(x)}</span>`;
+  let html = '';
+  if (has.length) {
+    html += `<div class="section"><div class="section-header">Checked \u2014 not required <span style="font-size:10px;color:#555;font-weight:normal">(has a card · ✓ owned, ✗ not owned)</span></div>
+      <div style="display:flex;flex-wrap:wrap;gap:4px;margin-top:8px">${has.map(x => {
+        const info = _ncCard(x), own = isOwned(info.exact);
+        return `<span style="cursor:pointer" data-nav="${escHtml(info.exact)}" data-nav-type="${info.type}" onclick="_navToCard(this)">${chip(x, `<span style="color:${own ? '#5a9a5a' : '#a05050'}">${own ? '✓' : '✗'}</span>`, `${escHtml(info.exact)} card ${own ? 'owned' : 'not owned'} — not needed here`)}</span>`;
+      }).join('')}</div></div>`;
+  }
+  if (none.length) {
+    html += `<div class="section"><div class="section-header">Checked \u2014 no card <span style="font-size:10px;color:#555;font-weight:normal">(no restriction)</span></div>
+      <div style="display:flex;flex-wrap:wrap;gap:4px;margin-top:8px">${none.map(x => chip(x, '', 'No TCG card exists \u2014 no restriction')).join('')}</div></div>`;
+  }
+  return html;
+}
+
 // Quest detail rows: required missing → required met → optional
 function _questRowOrder(rows) {
   const req = rows.filter(r => !r.optional);
@@ -8776,8 +8492,8 @@ function _questReqRow(req) {
   const isMon = req.type === 'npc' || req.type === 'enemy';
   const navType = c => (monsterDrops[c] ? 'monster' : itemSources[c] ? 'item' : null);
   const navAttrs = c => navType(c) ? `style="cursor:pointer" data-nav="${escHtml(c)}" data-nav-type="${navType(c)}" onclick="_navToCard(this)"` : '';
-  const img = c => (cardDetails[c] || {}).imageUrl
-    ? `<img src="${(cardDetails[c] || {}).imageUrl}" style="width:16px;height:16px;object-fit:contain;image-rendering:pixelated;flex-shrink:0" onerror="this.style.display='none'">` : '';
+  const img = c => _cardImg(c)
+    ? `<img src="${_cardImg(c)}" style="width:16px;height:16px;object-fit:contain;image-rendering:pixelated;flex-shrink:0" onerror="this.style.display='none'">` : '';
   const chip = c => {
     const own = isOwned(c), get = !own && !isMon && canGetItem(c);
     return `<span ${navAttrs(c)}><span style="color:${own ? '#7ab07a' : get ? '#c8a830' : '#666'}">${escHtml(c)}</span></span>`;
@@ -8805,10 +8521,12 @@ function _questReqRow(req) {
     const c = cards[0];
     const own = isOwned(c);
     const isCard = !!navType(c);
-    const disp = label !== c ? `${escHtml(label)} <span style="font-size:10px;color:#666">(${escHtml(c)})</span>` : escHtml(c);
+    // The card is always the main (clickable) text; a custom label becomes a grey note under it
+    const disp = escHtml(c);
+    const labelNote = label && label.toLowerCase() !== c.toLowerCase() ? `<div style="font-size:10px;color:#777;margin-top:1px">${escHtml(label)}</div>` : '';
     const nt = altOk ? `${req.skillAlt.skill} ${req.skillAlt.level} ✓` : own ? (isMon ? 'card owned' : 'owned') : (isCard ? 'need card' : 'no TCG card');
     return { ok, optional: opt, html: `<div class="req-row"${wrapStyle}>${icon}${img(c)}
-      <div style="flex:1"><span class="req-label" ${navAttrs(c)}>${disp}</span>${altTag}${optTag}${noteHtml}</div>
+      <div style="flex:1"><span class="req-label" ${navAttrs(c)}>${disp}</span>${altTag}${optTag}${labelNote}${noteHtml}</div>
       <span class="req-note">${nt}</span>${isCard ? _rowWishStar(c, own) : ''}</div>` };
   }
 
@@ -8819,7 +8537,11 @@ function _questReqRow(req) {
     const sorted = isMon ? [...cards] : sortCardsByLevel(cards);
     const tiered = [...sorted.filter(c => isOwned(c)), ...sorted.filter(c => !isOwned(c))];
     const head = routes.length ? (all ? 'All of:' : 'Any of:') : (all ? 'Need all:' : '');
-    body += `<div style="font-size:11px;line-height:1.6">${head ? `<span style="color:#666">${head} </span>` : ''}${tiered.map(chip).join('<span style="color:#444"> · </span>')}</div>`;
+    // Long lists (any slash weapon, any light source…): show up to 4 owned options and a hover grid for the rest
+    const shown = tiered.length > 10 ? tiered.filter(c => isOwned(c)).slice(0, 4) : tiered;
+    const more = tiered.length - shown.length;
+    const moreHtml = more > 0 ? `<span style="cursor:help;color:#888;border-bottom:1px dotted #444" ${_cardGridTipAttrs(tiered, label)}>${shown.length ? '+' : ''}${more} ${shown.length ? 'more' : 'options'}</span>` : '';
+    body += `<div style="font-size:11px;line-height:1.6">${head ? `<span style="color:#666">${head} </span>` : ''}${[...shown.map(chip), moreHtml].filter(Boolean).join('<span style="color:#444"> · </span>')}</div>`;
   }
   // Routes: one line each; a slot with alternatives (staff for a rune, Dramen/Lunar…) gets a hover grid
   if (routes.length) {
@@ -8837,9 +8559,14 @@ function _questReqRow(req) {
       }).join('<span style="color:#444"> + </span>');
       const sym = rt.manual ? '<span style="color:#555">•</span>' : met ? '<span style="color:#7ab07a">✓</span>' : '<span style="color:#7a4a4a">✗</span>';
       const lowMagic = rt.magic && getLevel('Magic') < rt.magic ? ` <span style="color:#a05050">(you: ${getLevel('Magic')})</span>` : '';
+      const conds = [...(rt.quests || []).map(q => { const d = completedQuests.has(q);
+          return `<span style="cursor:pointer;color:${d ? '#7ab07a' : '#a05050'}" data-quest="${escHtml(q)}" onclick="_navToQuest(this)">${d ? '✓' : '✗'} ${escHtml(q)}</span>`; }),
+        ...Object.entries(rt.skills || {}).map(([sk, l]) => `<span style="color:${getLevel(sk) >= l ? '#7ab07a' : '#a05050'}">${escHtml(sk)} ${l}</span>`),
+        ...(rt.areas || []).map(a => { const ok = _accessMet(a); return `<span style="color:${ok ? '#7ab07a' : '#a05050'}" title="Needs access to ${escHtml(accessRoutes[a]?.label || a)}">${ok ? '✓' : '✗'} ${escHtml(accessRoutes[a]?.label || a)}</span>`; })]
+        .join('<span style="color:#444"> + </span>');
       return `<div style="font-size:11px;line-height:1.6;display:flex;gap:6px;align-items:baseline">${sym}
         <span style="color:${met ? '#9ac09a' : '#888'};white-space:nowrap">${escHtml(rt.label)}${lowMagic}${rt.manual ? ' <span style="color:#555">(not tracked)</span>' : ''}</span>
-        ${rt.slots.length ? `<span>${slots}</span>` : ''}</div>`;
+        ${rt.slots.length ? `<span>${slots}</span>` : ''}${conds ? `<span>${rt.slots.length ? '<span style="color:#444"> + </span>' : ''}${conds}</span>` : ''}</div>`;
     }).join('');
   }
   const head = cards.length && !routes.length && req.mode !== 'all' && !/^an?y?\s/i.test(label) ? `Any: ${label}` : label;
@@ -8872,8 +8599,13 @@ function _expandReq(r, questName) {
   };
   const addRoute = (rt, extra) => {
     const out = rt.spell ? spellRoute(rt.spell)
-      : { label: rt.label, slots: (rt.cards || []).map(slotOf), manual: !!rt.manual };
-    if (out) routes.push(Object.assign(out, extra));
+      : { label: rt.label, slots: [], manual: !!rt.manual };
+    if (!out) return;
+    if (rt.spell && rt.label) out.label = rt.label;
+    // Extra cards (e.g. a banana for Ape Atoll Teleport), quests, skills, other areas
+    out.slots = [...out.slots, ...(rt.cards || []).map(slotOf)];
+    out.quests = rt.quests || []; out.skills = rt.skills || {}; out.areas = rt.areas || [];
+    routes.push(Object.assign(out, extra));
   };
   for (const rt of (r.routes || [])) addRoute(rt);
   for (const key of [].concat(r.access || [])) {
@@ -8882,14 +8614,42 @@ function _expandReq(r, questName) {
     for (const rt of a.routes) addRoute(rt, { access: key });
   }
   for (const sp of [].concat(r.spells || [])) addRoute({ spell: sp });
+  // tool: any tier of a TOOL_TIERS tool (e.g. "Pickaxe"); group: a shared card list
+  if (r.tool && !r.cards?.length) r.cards = (TOOL_TIERS[r.tool] || []).map(t => t.name);
+  if (r.group && !r.cards?.length) r.cards = [...(REQ_GROUPS[r.group] || [])];
+  if ((r.tool && !TOOL_TIERS[r.tool]) || (r.group && !REQ_GROUPS[r.group])) console.warn(`[quest data] ${questName}: unknown tool/group`, r.tool || r.group);
   r._routes = routes;
   r._cards = [...new Set([...(r.cards || []), ...routes.flatMap(rt => rt.slots.map(sl => sl[0]))])];
 }
 function _reqCards(r) { return r._cards || r.cards || []; }
-function _routeMet(rt) {
-  return !rt.manual && rt.slots.length > 0 && (!rt.magic || getLevel('Magic') >= rt.magic)
+// An access area (access_routes.json key) is reachable if any of its routes is met
+function _accessMet(key, seen = new Set()) {
+  if (seen.has(key)) return false;
+  seen.add(key);
+  return (accessRoutes[key]?.routes || []).some(rt => _routeMet(_expandRoute(rt), seen));
+}
+function _expandRoute(rt) {
+  const tmp = { routes: [rt] };
+  _expandReq(tmp, 'access');
+  return tmp._routes[0] || { slots: [], manual: true };
+}
+function _routeMet(rt, seen) {
+  // A route with nothing to check (e.g. "walk into the Wilderness") is always open; manual ones never count
+  return !rt.manual
+    && (rt.areas || []).every(a => _accessMet(a, seen))
+    && (!rt.magic || getLevel('Magic') >= rt.magic)
+    && (rt.quests || []).every(q => completedQuests.has(q))
+    && Object.entries(rt.skills || {}).every(([sk, l]) => getLevel(sk) >= l)
     && rt.slots.every(sl => sl.some(c => isOwned(c)));
 }
+// Shared card lists a requirement can reference with `group`
+// Cuts webs / vines: a knife or any slash weapon (cards that exist in the catalog)
+const SLASH_WEAPONS = ["Knife", "Bronze scimitar", "Iron scimitar", "Steel scimitar", "Black scimitar", "Mithril scimitar", "Adamant scimitar", "Rune scimitar", "Dragon scimitar", "Bronze longsword", "Iron longsword", "Steel longsword", "Black longsword", "White longsword", "Mithril longsword", "Adamant longsword", "Rune longsword", "Dragon longsword", "Bronze sword", "Iron sword", "Steel sword", "Black sword", "White sword", "Mithril sword", "Adamant sword", "Rune sword", "Dragon sword", "Bronze battleaxe", "Iron battleaxe", "Steel battleaxe", "Black battleaxe", "White battleaxe", "Mithril battleaxe", "Adamant battleaxe", "Rune battleaxe", "Dragon battleaxe", "Bronze 2h sword", "Iron 2h sword", "Steel 2h sword", "Black 2h sword", "White 2h sword", "Mithril 2h sword", "Adamant 2h sword", "Rune 2h sword", "Dragon 2h sword", "Abyssal whip", "Dragon claws", "Granite longsword", "Saradomin sword", "Abyssal tentacle", "Brine sabre", "Leaf-bladed sword", "Wilderness sword", "Darklight", "Arclight", "Emberlight"];
+const REQ_GROUPS = {
+  slash_weapon: SLASH_WEAPONS,
+  get light_source() { return LIGHT_SOURCE_ITEMS; },
+  get dragonfire()   { return DRAGONFIRE_ITEMS; },
+};
 function _reqMet(r) {
   const cards = r.cards || [];
   if (cards.length && (r.mode === 'all' ? cards.every(c => isOwned(c)) : cards.some(c => isOwned(c)))) return true;
@@ -9123,7 +8883,8 @@ function showQuestDetail(questName, push = true) {
     <span style="font-size:12px;color:${isDone?'#b07a30':statusColor};font-weight:normal;margin-left:8px">${isDone?'Done':statusLabel}</span>
   </h1>
   <div class="subtitle">${typeStr}${qpStr} ${doneBtn}${wishQuestBtn}</div>
-  ${_questProgressHtml(questName)}`;
+  ${_questProgressHtml(questName)}
+  ${bmQuestCards[questName]?.note ? `<div style="color:#888;font-size:11px;line-height:1.5;margin:4px 0 8px;padding:6px 10px;border-left:2px solid #3a3010;background:#12100a">${escHtml(bmQuestCards[questName].note)}</div>` : ''}`;
 
   if (mini) {
     html += `<div style="background:#150e1a;border:1px solid #3a2850;border-radius:4px;padding:8px 12px;margin:10px 0;font-size:11px;color:#8a6aaa;line-height:1.6">
@@ -9145,7 +8906,7 @@ function showQuestDetail(questName, push = true) {
 
   // Prerequisites
   if (q.prerequisites?.length) {
-    html += `<div class="section"><div class="section-header">Prerequisites</div><div style="margin-top:8px">`;
+    html += `<div class="section"><div class="section-header">Quest prerequisites</div><div style="margin-top:8px">`;
     for (const prereq of q.prerequisites) {
       const st    = questStatus(prereq, completable);
       const pass  = st === 'done' || st === 'ok';
@@ -9171,7 +8932,7 @@ function showQuestDetail(questName, push = true) {
     'Attack', 'Strength', 'Defence', 'Hitpoints', 'Ranged', 'Slayer',
   ]);
   if (q.skillRequirements?.length) {
-    html += `<div class="section"><div class="section-header">Skill Requirements</div><div style="margin-top:8px">`;
+    html += `<div class="section"><div class="section-header">Skill requirements</div><div style="margin-top:8px">`;
     for (const r of q.skillRequirements) {
       const myLvl     = getLevel(r.skill);
       const ok        = myLvl >= r.level;
@@ -9191,36 +8952,41 @@ function showQuestDetail(questName, push = true) {
   // Card requirements — BM data (schema 2: sections → requirements → {label, cards, type})
   const bm = bmQuestCards[questName];
   if (bm) {
-    const itemRows = [], monsterRows = [], npcRows = [], recRows = [];
+    const itemRows = [], monsterRows = [], npcRows = [], recRows = [], accessRows = [];
 
     for (const section of (bm.sections || [])) {
       for (const req of (section.requirements || [])) {
         if (!_reqCards(req).length && !req.info) continue;
         const bucket = req.type === 'npc' ? npcRows : req.type === 'enemy' ? monsterRows : itemRows;
         const row = _questReqRow(req);
-        (req.optional ? recRows : bucket).push(row);
+        (req.optional ? recRows : req.access ? accessRows : bucket).push(row);
       }
     }
 
-    const totalRows = itemRows.length + monsterRows.length + npcRows.length + recRows.length;
+    const totalRows = itemRows.length + monsterRows.length + npcRows.length + recRows.length + accessRows.length;
     if (totalRows > 0) {
-      if (npcRows.length > 0) {
-        html += `<div class="section"><div class="section-header">NPC Interactions</div><div style="margin-top:8px">`;
-        for (const r of _questRowOrder(npcRows)) html += r.html;
+      if (accessRows.length > 0) {
+        html += `<div class="section"><div class="section-header">Access <span style="font-size:10px;color:#555;font-weight:normal">(any one route)</span></div><div style="margin-top:8px">`;
+        for (const r of _questRowOrder(accessRows)) html += r.html;
         html += `</div></div>`;
       }
-      if (itemRows.length > 0) {
-        html += `<div class="section"><div class="section-header">Items &amp; Cards Required</div><div style="margin-top:8px">`;
-        for (const r of _questRowOrder(itemRows)) html += r.html;
+      if (npcRows.length > 0) {
+        html += `<div class="section"><div class="section-header">NPC interactions</div><div style="margin-top:8px">`;
+        for (const r of _questRowOrder(npcRows)) html += r.html;
         html += `</div></div>`;
       }
       if (monsterRows.length > 0) {
         const optionalCount = monsterRows.filter(r => r.optional).length;
         const hdr = optionalCount
-          ? `Enemies to Defeat <span style="font-size:10px;color:#555;font-weight:normal">(${optionalCount} optional)</span>`
-          : 'Enemies to Defeat';
+          ? `Enemies to defeat <span style="font-size:10px;color:#555;font-weight:normal">(${optionalCount} optional)</span>`
+          : 'Enemies to defeat';
         html += `<div class="section"><div class="section-header">${hdr}</div><div style="margin-top:8px">`;
         for (const r of _questRowOrder(monsterRows)) html += r.html;
+        html += `</div></div>`;
+      }
+      if (itemRows.length > 0) {
+        html += `<div class="section"><div class="section-header">Items &amp; tools</div><div style="margin-top:8px">`;
+        for (const r of _questRowOrder(itemRows)) html += r.html;
         html += `</div></div>`;
       }
       if (recRows.length > 0) {
@@ -9232,24 +8998,7 @@ function showQuestDetail(questName, push = true) {
       html += `<div style="color:#555;font-size:12px;margin-top:4px">No card requirements tracked. Check the wiki for full details.</div>`;
     }
     // NPCs and items checked against the wiki that have no TCG card — no restriction
-    // Checked entries: some have no card at all; others have a card but aren't needed
-    // (recommended only, avoidable, rewards…) — those still show whether you own it.
-    const _nc = bm.consideredNoCard || [];
-    const _ncCard = x => _cardInfo(x.replace(/\s*\([^)]*\)\s*/g, ' ').trim());
-    const _ncHas = _nc.filter(x => _ncCard(x)), _ncNone = _nc.filter(x => !_ncCard(x));
-    const _chip = (x, extra, title) => `<span style="display:inline-flex;align-items:center;gap:3px;padding:1px 6px;border-radius:3px;font-size:11px;background:#101010;border:1px solid #2a2a2a;color:#777" title="${title}">${extra}${escHtml(x)}</span>`;
-    if (_ncHas.length) {
-      html += `<div class="section"><div class="section-header">Checked \u2014 not required <span style="font-size:10px;color:#555;font-weight:normal">(has a card · ✓ owned, ✗ not owned)</span></div>
-        <div style="display:flex;flex-wrap:wrap;gap:4px;margin-top:8px">${_ncHas.map(x => {
-          const info = _ncCard(x), own = isOwned(info.exact);
-          return `<span style="cursor:pointer" data-nav="${escHtml(info.exact)}" data-nav-type="${info.type}" onclick="_navToCard(this)">${_chip(x, `<span style="color:${own ? '#5a9a5a' : '#a05050'}">${own ? '✓' : '✗'}</span>`, `${escHtml(info.exact)} card ${own ? 'owned' : 'not owned'} — not needed for this quest`)}</span>`;
-        }).join('')}</div></div>`;
-    }
-    if (_ncNone.length) {
-      html += `<div class="section"><div class="section-header">Checked \u2014 no card <span style="font-size:10px;color:#555;font-weight:normal">(no restriction)</span></div>
-        <div style="display:flex;flex-wrap:wrap;gap:4px;margin-top:8px">${_ncNone.map(x => _chip(x, '', 'No TCG card exists \u2014 no restriction')).join('')}</div></div>`;
-    }
-    if (bm.note) html += `<div style="color:#666;font-size:11px;margin-top:6px">${escHtml(bm.note)}</div>`;
+    html += _checkedListsHtml(bm.consideredNoCard || []);
   } else {
     // Fallback: wiki infobox data (may include non-card items)
     if (q.itemsRequired?.length) {
@@ -9372,6 +9121,15 @@ function renderRulesTab() {
       <li><strong>Progress bars</strong> (quests and diaries): Required x/y counts prerequisite quests done, skill levels, and card requirements met. An "any of" group or a set of routes counts as one, met when you own any option, so long lists don't inflate the total. Quests also show Recommended and All; diaries show <em>eligible tasks</em> (tasks whose every requirement is met, or that you've ticked done) and <em>requirements met</em>, each for the selected tier and for all tiers, plus a small bar on each tier card</li>
       <li><strong>Wishlist</strong>: a quest can be wishlisted with its required cards only, or required + recommended. The Wishlist tab shows which mode each quest uses</li>
     </ul>
+
+    <h3>Bosses</h3>
+    <p>Boss requirements are generated from the OSRS Wiki Boss page plus a checked list of what each fight needs, and use the same rows as quests. A boss is <em>Locked</em> until its quests, skill levels and area access are met, and <em>Partial</em> while a required card is missing. Required cards are:</p>
+    <ul>
+      <li>Every boss that can appear in the encounter, including all of CoX's random rooms</li>
+      <li>Every monster you can't avoid (kill count, adds you must kill). Avoidable ones are listed under "Checked — not required"</li>
+      <li>NPCs you must talk to, plus entry items, keys and tools</li>
+    </ul>
+    <p>Things only needed to <em>collect the loot</em> (e.g. a fishing net for the Tempoross reward pool) are shown in the loot section with their own progress bar. Area access (Morytania, Kourend, the desert…) uses the same shared routes as quests.</p>
 
     <h3>Foils</h3>
     <p>Foil cards are cosmetically shiny but don't grant any extra unlocks. A foil Iron ore card unlocks exactly the same things as a regular Iron ore card.</p>
@@ -9832,7 +9590,7 @@ function refreshEquipDoll() {
 
       let inner;
       if (eq && !shieldBlocked) {
-        const imgUrl = (cardDetails[eq] || {}).imageUrl || '';
+        const imgUrl = _cardImg(eq) || '';
         inner = imgUrl
           ? `<img src="${imgUrl}" class="doll-item-img" onerror="this.style.display='none'">`
           : `<div class="doll-slot-item owned">${eq.length > 10 ? eq.slice(0,9)+'…' : eq}</div>`;
@@ -10097,7 +9855,7 @@ function renderEquipSlotDetail(slot) {
         ? `<button class="equip-set-btn" onclick="event.stopPropagation();setEquipped('${slot}','')">Clear</button>`
         : '';
 
-      const _eImgUrl = (cardDetails[item.name] || {}).imageUrl || '';
+      const _eImgUrl = _cardImg(item.name) || '';
       const _eImg = _eImgUrl
         ? `<img src="${_eImgUrl}" style="width:20px;height:20px;object-fit:contain;image-rendering:pixelated;flex-shrink:0" onerror="this.style.display='none'">`
         : '<span style="width:20px;flex-shrink:0"></span>';

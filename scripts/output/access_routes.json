@@ -1,5 +1,5 @@
 {
-  "_comment": "Hand-curated shared requirement routes, used by quests (later diaries/bosses) via \"access\": \"<key>\". A requirement is met when every card of any one route is owned; a route item that is a list = any one of those cards; a route with \"spell\" = that spell's full rune cost from spells.json (elemental runes also met by a staff / combination rune, rune_sources.json). Routes marked manual have no card to check (shown for information, never auto-met). Desert sources: OSRS Wiki Shantay Pass, Fairy rings (BIQ/DLQ/AKP), Necklace of passage, Pharaoh's sceptre, Desert amulet, Kharidian Desert (Lumbridge Swamp shortcut). Ranged lists: standard metal tiers from the card catalog.",
+  "_comment": "Hand-curated shared requirement routes, used by quests (later diaries/bosses) via \"access\": \"<key>\". A requirement is met when every card of any one route is owned; a route item that is a list = any one of those cards; a route with \"spell\" = that spell's full rune cost from spells.json (elemental runes also met by a staff / combination rune, rune_sources.json). Routes marked manual have no card to check (shown for information, never auto-met). Desert sources: OSRS Wiki Shantay Pass, Fairy rings (BIQ/DLQ/AKP), Necklace of passage, Pharaoh's sceptre, Desert amulet, Kharidian Desert (Lumbridge Swamp shortcut). Ranged lists: standard metal tiers from the card catalog. Area routes (morytania, kourend, varlamore, …) researched from the wiki 2026-10-09; a route may also require quests, skills, or other areas (\"areas\": [key]).",
   "desert": {
     "label": "Kharidian Desert access",
     "routes": [
@@ -12,12 +12,15 @@
         ]
       },
       {
-        "label": "Fairy ring BIQ / DLQ / AKP (Fairytale II started)",
+        "label": "Fairy ring BIQ / DLQ / AKP (Fairytale I done, Fairytale II started)",
         "cards": [
           [
             "Dramen staff",
             "Lunar staff"
           ]
+        ],
+        "quests": [
+          "Fairytale I - Growing Pains"
         ]
       },
       {
@@ -177,6 +180,590 @@
         "label": "Other combat spells need these runes plus more — the Wind spell is the cheapest of each tier",
         "manual": true
       }
+    ]
+  },
+  "morytania": {
+    "label": "Morytania access (beyond the Salve)",
+    "routes": [
+      {
+        "label": "Walk east through Paterdomus Temple (Priest in Peril complete)",
+        "cards": [],
+        "quests": [
+          "Priest in Peril"
+        ],
+        "wiki": "Morytania: \"Players must complete the Priest in Peril quest to enter.\""
+      },
+      {
+        "label": "Fairy ring CKS (Canifis) / ALQ (Haunted Woods) / BKR (Mort Myre)",
+        "cards": [
+          [
+            "Dramen staff",
+            "Lunar staff"
+          ]
+        ],
+        "quests": [
+          "Priest in Peril",
+          "Fairytale I - Growing Pains"
+        ],
+        "wiki": "Fairy ring: \"cks ... after completion of Priest in Peril\"; rings need a dramen or lunar staff."
+      },
+      {
+        "label": "Kharyrll Teleport (Ancient spellbook, Magic 66) to Canifis",
+        "spell": "Kharyrll Teleport",
+        "cards": [],
+        "quests": [
+          "Priest in Peril",
+          "Desert Treasure I"
+        ],
+        "skills": {
+          "Magic": 66
+        },
+        "wiki": "Morytania transport table: Kharyrll Teleport — Canifis — Desert Treasure I."
+      },
+      {
+        "label": "Ectophial to Port Phasmatys (no card)",
+        "cards": [],
+        "quests": [
+          "Priest in Peril",
+          "Ghosts Ahoy"
+        ],
+        "wiki": "Morytania transport table: Ectophial — Port Phasmatys — Ghosts Ahoy."
+      },
+      {
+        "label": "Charter ship to Port Phasmatys (pay coins; Trader crewmember has no card)",
+        "cards": [
+          "Coins"
+        ],
+        "quests": [
+          "Priest in Peril"
+        ],
+        "wiki": "Charter ship: \"Port Phasmatys, desc: Requires Priest in Peril\"."
+      },
+      {
+        "label": "Slayer ring teleport to the Slayer Tower",
+        "cards": [
+          "Slayer ring"
+        ],
+        "quests": [
+          "Priest in Peril"
+        ],
+        "wiki": "Morytania transport table: Slayer ring — Slayer Tower, Mort Ridge mines."
+      },
+      {
+        "label": "Salve Graveyard / Barrows / Fenkenstrain's castle teleport tablets (no card; need Drezel's warning)",
+        "manual": true,
+        "quests": [
+          "Priest in Peril"
+        ],
+        "wiki": "Morytania transport table: \"Priest in Peril, heard Drezel's warning\"."
+      }
+    ],
+    "sources": [
+      "https://oldschool.runescape.wiki/w/Morytania",
+      "https://oldschool.runescape.wiki/w/Paterdomus",
+      "https://oldschool.runescape.wiki/w/Fairy_ring",
+      "https://oldschool.runescape.wiki/w/Charter_ship"
+    ]
+  },
+  "kourend": {
+    "label": "Great Kourend (Zeah) access",
+    "routes": [
+      {
+        "label": "Veos's ship at Port Sarim to Port Piscarilius or Land's End (free)",
+        "cards": [
+          "Veos"
+        ],
+        "wiki": "Great Kourend: \"Players can travel to Great Kourend by speaking to Veos by his ship ... in Port Sarim\"."
+      },
+      {
+        "label": "Fairy rings, charter ships, Sailing docks, games/skills necklaces — all need a first visit (via Veos) before they work",
+        "manual": true,
+        "wiki": "Fairy ring CIS: \"The player must have visited Great Kourend at least once\"; charter Port Piscarilius/Land's End: \"Requires visiting Great Kourend\"."
+      }
+    ],
+    "sources": [
+      "https://oldschool.runescape.wiki/w/Great_Kourend",
+      "https://oldschool.runescape.wiki/w/Veos",
+      "https://oldschool.runescape.wiki/w/Fairy_ring",
+      "https://oldschool.runescape.wiki/w/Charter_ship",
+      "https://oldschool.runescape.wiki/w/Port_Piscarilius"
+    ]
+  },
+  "varlamore": {
+    "label": "Varlamore access",
+    "routes": [
+      {
+        "label": "Regulus Cento's quetzal outside Varrock east gate (Children of the Sun complete; Regulus has no card)",
+        "cards": [],
+        "quests": [
+          "Children of the Sun"
+        ],
+        "wiki": "Varlamore: \"all require the player to first travel via Regulus Cento ... after completing Children of the Sun before other transportation methods become usable.\""
+      }
+    ],
+    "sources": [
+      "https://oldschool.runescape.wiki/w/Varlamore",
+      "https://oldschool.runescape.wiki/w/Regulus_Cento",
+      "https://oldschool.runescape.wiki/w/Fairy_ring",
+      "https://oldschool.runescape.wiki/w/Charter_ship"
+    ]
+  },
+  "fossil_island": {
+    "label": "Fossil Island access",
+    "routes": [
+      {
+        "label": "Barge from the Digsite (talk to the barge guard; no card)",
+        "cards": [],
+        "quests": [
+          "Bone Voyage"
+        ],
+        "wiki": "Fossil Island: \"In order to reach the island, players must have completed the Bone Voyage quest.\" ... \"reached via the barge from the Digsite\"."
+      },
+      {
+        "label": "Digsite pendant to the barge, then talk to the barge guard",
+        "cards": [
+          "Digsite pendant"
+        ],
+        "quests": [
+          "Bone Voyage"
+        ],
+        "wiki": "Fossil Island: \"teleport the player near the barge at the Digsite, where they can fast travel to the Museum Camp by speaking to the barge guard.\""
+      }
+    ],
+    "sources": [
+      "https://oldschool.runescape.wiki/w/Fossil_Island",
+      "https://oldschool.runescape.wiki/w/Barge_guard"
+    ]
+  },
+  "ape_atoll": {
+    "label": "Ape Atoll access",
+    "routes": [
+      {
+        "label": "Daero (Grand Tree) → Waydar's glider → Lumdo's boat from Crash Island (none have cards)",
+        "cards": [],
+        "quests": [
+          "Monkey Madness I"
+        ],
+        "wiki": "Ape Atoll: \"Initial access ... requires the player to first travel via Lumdo on Crash Island during Monkey Madness I.\" (partial MM1 modelled as complete)"
+      },
+      {
+        "label": "Fairy ring CLR — needs Agility 48 + ninja/kruk greegree to leave the agility course",
+        "cards": [
+          [
+            "Dramen staff",
+            "Lunar staff"
+          ],
+          "Monkey greegree"
+        ],
+        "quests": [
+          "Monkey Madness I",
+          "Fairytale I - Growing Pains"
+        ],
+        "skills": {
+          "Agility": 48
+        },
+        "wiki": "Fairy ring CLR: \"Requires completion of the Monkey Madness I quest. In addition, 48 Agility and a Ninja monkey greegree or Kruk monkey greegree are required\"."
+      },
+      {
+        "label": "Ape Atoll Teleport (standard spellbook, Magic 64; needs a banana)",
+        "spell": "Ape Atoll Teleport (standard)",
+        "cards": [
+          "Banana"
+        ],
+        "quests": [
+          "Monkey Madness I",
+          "Recipe for Disaster/Freeing King Awowogei"
+        ],
+        "skills": {
+          "Magic": 64
+        },
+        "wiki": "Ape Atoll: \"The level 64 Ape Atoll Teleport is available ... after Freeing King Awowogei\"; cost Law 2, Fire 2, Water 2, Banana 1."
+      },
+      {
+        "label": "Gnome glider to Ookookolly Undri (no card)",
+        "cards": [],
+        "quests": [
+          "Monkey Madness I",
+          "Monkey Madness II"
+        ],
+        "wiki": "Ape Atoll: \"The Gnome glider network can take players to the north-west of the island after completion of Monkey Madness II\"."
+      }
+    ],
+    "sources": [
+      "https://oldschool.runescape.wiki/w/Ape_Atoll",
+      "https://oldschool.runescape.wiki/w/Fairy_ring",
+      "https://oldschool.runescape.wiki/w/Ape_Atoll_Teleport_(standard)"
+    ]
+  },
+  "prifddinas": {
+    "label": "Prifddinas access",
+    "routes": [
+      {
+        "label": "Walk over Arandar (or from Iorwerth camp) into the city",
+        "cards": [],
+        "quests": [
+          "Song of the Elves"
+        ],
+        "wiki": "Prifddinas: \"All methods of entering the city require completion of Song of the Elves\" ... \"walk west over the mountain pass of Arandar\"."
+      },
+      {
+        "label": "Necklace of passage → Jorral's outpost, then Arandar (Jade necklace card)",
+        "cards": [
+          "Jade necklace"
+        ],
+        "quests": [
+          "Song of the Elves"
+        ],
+        "wiki": "Prifddinas: \"Necklace of passage to Jorral's outpost and then walk west over the mountain pass of Arandar\"."
+      },
+      {
+        "label": "Charter ship to Prifddinas",
+        "cards": [
+          "Coins"
+        ],
+        "quests": [
+          "Song of the Elves"
+        ],
+        "wiki": "Charter ship: \"Prifddinas, desc: Requires Song of the Elves\"."
+      },
+      {
+        "label": "Eternal teleport crystal",
+        "cards": [
+          "Eternal teleport crystal"
+        ],
+        "quests": [
+          "Song of the Elves"
+        ],
+        "wiki": "Prifddinas: \"Teleport crystal or eternal teleport crystal to get to the centre of Prifddinas\"."
+      },
+      {
+        "label": "Sailing 70 to the west mooring point (needs adamant keel+; boat not checkable)",
+        "manual": true,
+        "quests": [
+          "Song of the Elves"
+        ],
+        "skills": {
+          "Sailing": 70
+        },
+        "wiki": "Prifddinas: \"At 70 Sailing, docking at the mooring point west of the city (requires an adamant keel or better)\"."
+      }
+    ],
+    "sources": [
+      "https://oldschool.runescape.wiki/w/Prifddinas",
+      "https://oldschool.runescape.wiki/w/Charter_ship"
+    ]
+  },
+  "tirannwn": {
+    "label": "Tirannwn access (Isafdar / Lletya area)",
+    "notes": "Lletya itself also needs Mourning's End Part I started (Eluned, who has a card, brings you the first time).",
+    "routes": [
+      {
+        "label": "Arandar mountain pass (Regicide complete)",
+        "cards": [],
+        "quests": [
+          "Regicide"
+        ],
+        "wiki": "Tirannwn: \"All of the following require completion of the Regicide quest: ... Travelling through Arandar\"."
+      },
+      {
+        "label": "Necklace of passage → Outpost, then Arandar (Jade necklace card)",
+        "cards": [
+          "Jade necklace"
+        ],
+        "quests": [
+          "Regicide"
+        ],
+        "wiki": "Lletya: \"Necklace of passage to the Outpost, passing Arandar, and navigating the forest.\""
+      },
+      {
+        "label": "Charter ship to Port Tyras",
+        "cards": [
+          "Coins"
+        ],
+        "quests": [
+          "Regicide"
+        ],
+        "wiki": "Tirannwn: \"Boarding a charter ship to Port Tyras\" (requires Regicide)."
+      },
+      {
+        "label": "Fairy ring BJS (Zul-Andra island) — Agility 76 to jump off",
+        "cards": [
+          [
+            "Dramen staff",
+            "Lunar staff"
+          ]
+        ],
+        "quests": [
+          "Regicide",
+          "Fairytale I - Growing Pains"
+        ],
+        "skills": {
+          "Agility": 76
+        },
+        "wiki": "Fairy ring BJS: \"Requires completion of the Regicide quest. 76 Agility is needed to jump off the island.\""
+      },
+      {
+        "label": "Underground Pass after starting Regicide (planner can't check a started quest)",
+        "manual": true,
+        "quests": [
+          "Underground Pass"
+        ],
+        "wiki": "Tirannwn: \"It can initially only be accessed via the Underground Pass after starting Regicide.\""
+      }
+    ],
+    "sources": [
+      "https://oldschool.runescape.wiki/w/Tirannwn",
+      "https://oldschool.runescape.wiki/w/Isafdar",
+      "https://oldschool.runescape.wiki/w/Lletya",
+      "https://oldschool.runescape.wiki/w/Fairy_ring"
+    ]
+  },
+  "mos_le_harmless": {
+    "label": "Mos Le'Harmless access",
+    "notes": "Talking to the islanders needs the Book o' piracy (no card) in the inventory.",
+    "routes": [
+      {
+        "label": "Bill Teach's boat at Port Phasmatys (no card)",
+        "cards": [],
+        "quests": [
+          "Cabin Fever"
+        ],
+        "wiki": "Mos Le'Harmless: \"You must complete Cabin Fever to access the island. Talk to Bill Teach on the eastern boat in Port Phasmatys.\""
+      },
+      {
+        "label": "Charter ship to Mos Le'Harmless",
+        "cards": [
+          "Coins"
+        ],
+        "quests": [
+          "Cabin Fever"
+        ],
+        "wiki": "Charter ship: \"Mos Le'Harmless, desc: Requires Cabin Fever\"."
+      },
+      {
+        "label": "Minigame Teleport to Trouble Brewing (Cooking 40)",
+        "cards": [],
+        "quests": [
+          "Cabin Fever"
+        ],
+        "skills": {
+          "Cooking": 40
+        },
+        "wiki": "Mos Le'Harmless: \"Use the Minigame Teleport to Trouble Brewing (requires completion of the quest and 40 Cooking).\""
+      },
+      {
+        "label": "Harmony Island → Brother Tranquility (no card)",
+        "cards": [],
+        "quests": [
+          "Cabin Fever",
+          "The Great Brain Robbery"
+        ],
+        "wiki": "Mos Le'Harmless: \"Teleport to Harmony Island and talk to Brother Tranquility.\"; Harmony Island Teleport needs The Great Brain Robbery."
+      }
+    ],
+    "sources": [
+      "https://oldschool.runescape.wiki/w/Mos_Le'Harmless",
+      "https://oldschool.runescape.wiki/w/Charter_ship",
+      "https://oldschool.runescape.wiki/w/Morytania"
+    ]
+  },
+  "waterbirth": {
+    "label": "Waterbirth Island access",
+    "routes": [
+      {
+        "label": "Jarvald's boat from Rellekka — 1,000 coins (Jarvald has no card)",
+        "cards": [
+          "Coins"
+        ],
+        "wiki": "Jarvald: \"If the player has not completed The Fremennik Trials quest, they must pay 1,000 coins per trip\"."
+      },
+      {
+        "label": "Jarvald's boat free after The Fremennik Trials",
+        "cards": [],
+        "quests": [
+          "The Fremennik Trials"
+        ],
+        "wiki": "Jarvald: \"after the quest, Jarvald will transport players for free.\""
+      },
+      {
+        "label": "Waterbirth Teleport (Lunar spellbook, Magic 72)",
+        "spell": "Waterbirth Teleport",
+        "cards": [],
+        "quests": [
+          "Lunar Diplomacy"
+        ],
+        "skills": {
+          "Magic": 72
+        },
+        "wiki": "Waterbirth Island: \"Cast Waterbirth Teleport (requires access to the Lunar spellbook and level 72 Magic)\"."
+      },
+      {
+        "label": "Enchanted lyre — needs the Fremennik hard diary",
+        "manual": true,
+        "cards": [
+          "Enchanted lyre"
+        ],
+        "wiki": "Waterbirth Island: \"Use an enchanted lyre (with completion of the hard tier of the Fremennik Diary)\"."
+      },
+      {
+        "label": "Waterbirth teleport tablet (no card), or Sailing 74 mooring point (boat not checkable)",
+        "manual": true,
+        "wiki": "Waterbirth Island: \"Use a Waterbirth teleport tablet\"; \"Through a mooring point with 74 Sailing.\""
+      }
+    ],
+    "sources": [
+      "https://oldschool.runescape.wiki/w/Waterbirth_Island",
+      "https://oldschool.runescape.wiki/w/Jarvald"
+    ]
+  },
+  "sophanem": {
+    "label": "Sophanem access",
+    "routes": [
+      {
+        "label": "Magic carpet from Pollnivneach (pay the rug merchant; no card) — needs desert access",
+        "cards": [
+          "Coins"
+        ],
+        "areas": [
+          "desert"
+        ],
+        "quests": [
+          "Icthlarin's Little Helper"
+        ],
+        "wiki": "Sophanem: \"The magic carpet system can also be used to travel to Sophanem from southern Pollnivneach after starting Icthlarin's Little Helper.\" (started modelled as complete)"
+      },
+      {
+        "label": "Fairy ring AKP (Necropolis) — Agility 62, Beneath Cursed Sands",
+        "cards": [
+          [
+            "Dramen staff",
+            "Lunar staff"
+          ]
+        ],
+        "quests": [
+          "Icthlarin's Little Helper",
+          "Beneath Cursed Sands",
+          "Fairytale I - Growing Pains"
+        ],
+        "skills": {
+          "Agility": 62
+        },
+        "wiki": "Sophanem: \"Fairy ring AKP — Necropolis island. Requires 62 Agility and completion of Beneath Cursed Sands.\""
+      },
+      {
+        "label": "Pharaoh's sceptre teleport to Jalsavrah (Pyramid Plunder)",
+        "cards": [
+          "Pharaoh's sceptre"
+        ],
+        "quests": [
+          "Icthlarin's Little Helper"
+        ],
+        "wiki": "Sophanem: \"Pharaoh's sceptre — Pyramid Plunder minigame (Jalsavrah).\""
+      }
+    ],
+    "sources": [
+      "https://oldschool.runescape.wiki/w/Sophanem",
+      "https://oldschool.runescape.wiki/w/Fairy_ring"
+    ]
+  },
+  "wilderness": {
+    "label": "Wilderness access",
+    "routes": [
+      {
+        "label": "Cross the Wilderness ditch — no requirement",
+        "cards": [],
+        "wiki": "Wilderness: \"starting at level 1 at the Wilderness ditch\" — no quest or item gate."
+      }
+    ],
+    "sources": [
+      "https://oldschool.runescape.wiki/w/Wilderness"
+    ]
+  },
+  "zanaris": {
+    "label": "Zanaris access",
+    "routes": [
+      {
+        "label": "Lumbridge Swamp shed wielding a Dramen or Lunar staff (Lost City complete)",
+        "cards": [
+          [
+            "Dramen staff",
+            "Lunar staff"
+          ]
+        ],
+        "quests": [
+          "Lost City"
+        ],
+        "wiki": "Zanaris: \"Zanaris can also be accessed by wielding a dramen staff or lunar staff and entering the small hut in the middle of Lumbridge Swamp\"."
+      },
+      {
+        "label": "Fairy ring BKS",
+        "cards": [
+          [
+            "Dramen staff",
+            "Lunar staff"
+          ]
+        ],
+        "quests": [
+          "Lost City",
+          "Fairytale I - Growing Pains"
+        ],
+        "wiki": "Zanaris: \"The fairy ring code for the main portal in Zanaris is BKS.\""
+      },
+      {
+        "label": "Fairy ring BKS with no staff — Lumbridge & Draynor elite diary",
+        "manual": true,
+        "quests": [
+          "Fairytale I - Growing Pains"
+        ],
+        "wiki": "Lumbridge & Draynor Diary elite reward: \"Ability to use fairy rings without the need of a Dramen or Lunar staff\"."
+      },
+      {
+        "label": "Abyss rift to the Cosmic Altar (in Zanaris) — Mage of Zamorak has no card",
+        "cards": [],
+        "quests": [
+          "Enter the Abyss"
+        ],
+        "wiki": "Zanaris: \"Players can also gain access via The Abyss to the Cosmic Altar.\""
+      }
+    ],
+    "sources": [
+      "https://oldschool.runescape.wiki/w/Zanaris",
+      "https://oldschool.runescape.wiki/w/Lost_City",
+      "https://oldschool.runescape.wiki/w/Fairy_ring",
+      "https://oldschool.runescape.wiki/w/Lumbridge_%26_Draynor_Diary"
+    ]
+  },
+  "abyss": {
+    "label": "Abyss / Abyssal Nexus access (Abyssal Sire)",
+    "routes": [
+      {
+        "label": "Mage of Zamorak in level 5 Wilderness teleports you in (no card); Nexus entrance is in the outer ring — skulls you unless wearing an abyssal bracelet",
+        "cards": [],
+        "quests": [
+          "Enter the Abyss"
+        ],
+        "wiki": "Abyss: \"Accessing this area of the Abyss requires completion of the miniquest Enter the Abyss.\" Abyssal Nexus: \"accessed via a one-way entrance in the southern part of the outer ring of the Abyss\"."
+      },
+      {
+        "label": "Fairy ring DIP straight to the Abyssal Nexus (no skull)",
+        "cards": [
+          [
+            "Dramen staff",
+            "Lunar staff"
+          ]
+        ],
+        "quests": [
+          "Fairytale I - Growing Pains"
+        ],
+        "wiki": "Abyssal Nexus: \"players who have partially completed Fairytale II - Cure a Queen can safely reach the Nexus using the code DIP\"."
+      }
+    ],
+    "sources": [
+      "https://oldschool.runescape.wiki/w/Abyss",
+      "https://oldschool.runescape.wiki/w/Abyssal_Nexus",
+      "https://oldschool.runescape.wiki/w/Abyssal_Sire",
+      "https://oldschool.runescape.wiki/w/Mage_of_Zamorak",
+      "https://oldschool.runescape.wiki/w/Enter_the_Abyss"
     ]
   }
 }

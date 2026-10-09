@@ -4128,5 +4128,304 @@
         ]
       }
     ]
+  },
+  "Guardians of the Rift": {
+    "source": "Rewards Guardian",
+    "page": "Rewards_Guardian",
+    "drops": [
+      {
+        "card": "Catalytic tiara",
+        "rarity": "Rare",
+        "fraction": "1/200"
+      },
+      {
+        "card": "Abyssal needle",
+        "rarity": "Rare",
+        "fraction": "1/300",
+        "notes": [
+          "Only rolled if the player hasn't received one before."
+        ]
+      },
+      {
+        "card": "Abyssal lantern",
+        "rarity": "Rare",
+        "fraction": "1/700"
+      },
+      {
+        "card": "Abyssal red dye",
+        "rarity": "Very Rare",
+        "fraction": "1/1,200",
+        "notes": [
+          "There is a 1/400 chance of receiving a dye, and each can be exchanged for other colours by speaking to Apprentice Felix ."
+        ]
+      },
+      {
+        "card": "Abyssal green dye",
+        "rarity": "Very Rare",
+        "fraction": "1/1,200",
+        "notes": [
+          "There is a 1/400 chance of receiving a dye, and each can be exchanged for other colours by speaking to Apprentice Felix ."
+        ]
+      },
+      {
+        "card": "Abyssal blue dye",
+        "rarity": "Very Rare",
+        "fraction": "1/1,200",
+        "notes": [
+          "There is a 1/400 chance of receiving a dye, and each can be exchanged for other colours by speaking to Apprentice Felix ."
+        ]
+      },
+      {
+        "card": "Small pouch",
+        "rarity": "Common",
+        "fraction": "15/140"
+      },
+      {
+        "card": "Medium pouch",
+        "rarity": "Common",
+        "fraction": "15/140"
+      },
+      {
+        "card": "Large pouch",
+        "rarity": "Common",
+        "fraction": "15/140"
+      },
+      {
+        "card": "Giant pouch",
+        "rarity": "Common",
+        "fraction": "15/140"
+      },
+      {
+        "card": "Air rune",
+        "rarity": "Uncommon",
+        "fraction": "4/140 ; 4/125",
+        "notes": [
+          "The drop rates are increased if players own all essence pouches or a colossal pouch ."
+        ]
+      },
+      {
+        "card": "Water rune",
+        "rarity": "Uncommon",
+        "fraction": "4/140 ; 4/125",
+        "notes": [
+          "The drop rates are increased if players own all essence pouches or a colossal pouch ."
+        ]
+      },
+      {
+        "card": "Earth rune",
+        "rarity": "Uncommon",
+        "fraction": "4/140 ; 4/125",
+        "notes": [
+          "The drop rates are increased if players own all essence pouches or a colossal pouch ."
+        ]
+      },
+      {
+        "card": "Fire rune",
+        "rarity": "Uncommon",
+        "fraction": "4/140 ; 4/125",
+        "notes": [
+          "The drop rates are increased if players own all essence pouches or a colossal pouch ."
+        ]
+      },
+      {
+        "card": "Mind rune",
+        "rarity": "Uncommon",
+        "fraction": "4/140 ; 4/125",
+        "notes": [
+          "The drop rates are increased if players own all essence pouches or a colossal pouch ."
+        ]
+      },
+      {
+        "card": "Body rune",
+        "rarity": "Uncommon",
+        "fraction": "4/140 ; 4/125",
+        "notes": [
+          "The drop rates are increased if players own all essence pouches or a colossal pouch ."
+        ]
+      },
+      {
+        "card": "Chaos rune",
+        "rarity": "Common",
+        "fraction": "10/140 ; 10/125",
+        "notes": [
+          "The drop rates are increased if players own all essence pouches or a colossal pouch ."
+        ]
+      },
+      {
+        "card": "Cosmic rune",
+        "rarity": "Common",
+        "fraction": "10/140 ; 10/125",
+        "notes": [
+          "The drop rates are increased if players own all essence pouches or a colossal pouch ."
+        ]
+      },
+      {
+        "card": "Nature rune",
+        "rarity": "Common",
+        "fraction": "10/140 ; 10/125",
+        "notes": [
+          "The drop rates are increased if players own all essence pouches or a colossal pouch ."
+        ]
+      },
+      {
+        "card": "Law rune",
+        "rarity": "Common",
+        "fraction": "10/140 ; 10/125",
+        "notes": [
+          "The drop rates are increased if players own all essence pouches or a colossal pouch ."
+        ]
+      },
+      {
+        "card": "Death rune",
+        "rarity": "Common",
+        "fraction": "10/140 ; 10/125",
+        "notes": [
+          "The drop rates are increased if players own all essence pouches or a colossal pouch ."
+        ]
+      },
+      {
+        "card": "Blood rune",
+        "rarity": "Common",
+        "fraction": "10/140 ; 10/125",
+        "notes": [
+          "The drop rates are increased if players own all essence pouches or a colossal pouch ."
+        ]
+      },
+      {
+        "card": "Air talisman",
+        "rarity": "Rare",
+        "fraction": "48/4,900 ; 48/4,375",
+        "notes": [
+          "The drop rates are increased if players own all essence pouches or a colossal pouch ."
+        ]
+      },
+      {
+        "card": "Water talisman",
+        "rarity": "Rare",
+        "fraction": "48/4,900 ; 48/4,375",
+        "notes": [
+          "The drop rates are increased if players own all essence pouches or a colossal pouch ."
+        ]
+      },
+      {
+        "card": "Earth talisman",
+        "rarity": "Rare",
+        "fraction": "48/4,900 ; 48/4,375",
+        "notes": [
+          "The drop rates are increased if players own all essence pouches or a colossal pouch ."
+        ]
+      },
+      {
+        "card": "Fire talisman",
+        "rarity": "Rare",
+        "fraction": "48/4,900 ; 48/4,375",
+        "notes": [
+          "The drop rates are increased if players own all essence pouches or a colossal pouch ."
+        ]
+      },
+      {
+        "card": "Mind talisman",
+        "rarity": "Uncommon",
+        "fraction": "64/4,900 ; 64/4,375",
+        "notes": [
+          "The drop rates are increased if players own all essence pouches or a colossal pouch ."
+        ]
+      },
+      {
+        "card": "Body talisman",
+        "rarity": "Uncommon",
+        "fraction": "64/4,900 ; 64/4,375",
+        "notes": [
+          "The drop rates are increased if players own all essence pouches or a colossal pouch ."
+        ]
+      },
+      {
+        "card": "Chaos talisman",
+        "rarity": "Uncommon",
+        "fraction": "64/4,900 ; 64/4,375",
+        "notes": [
+          "The drop rates are increased if players own all essence pouches or a colossal pouch ."
+        ]
+      },
+      {
+        "card": "Cosmic talisman",
+        "rarity": "Uncommon",
+        "fraction": "64/4,900 ; 64/4,375",
+        "notes": [
+          "The drop rates are increased if players own all essence pouches or a colossal pouch ."
+        ]
+      },
+      {
+        "card": "Nature talisman",
+        "rarity": "Uncommon",
+        "fraction": "64/4,900 ; 64/4,375",
+        "notes": [
+          "The drop rates are increased if players own all essence pouches or a colossal pouch ."
+        ]
+      },
+      {
+        "card": "Elemental talisman",
+        "rarity": "Rare",
+        "fraction": "16/4,900 ; 16/4,375",
+        "notes": [
+          "The drop rates are increased if players own all essence pouches or a colossal pouch ."
+        ]
+      },
+      {
+        "card": "Law talisman",
+        "rarity": "Rare",
+        "fraction": "16/4,900 ; 16/4,375",
+        "notes": [
+          "The drop rates are increased if players own all essence pouches or a colossal pouch .",
+          "If the player has not completed Troll Stronghold , this drop will be replaced with an air talisman ."
+        ]
+      },
+      {
+        "card": "Death talisman",
+        "rarity": "Rare",
+        "fraction": "16/4,900 ; 16/4,375",
+        "notes": [
+          "The drop rates are increased if players own all essence pouches or a colossal pouch .",
+          "If the player has not completed Mourning's End Part II , this drop will be replaced with an air talisman ."
+        ]
+      },
+      {
+        "card": "Abyssal pearls",
+        "rarity": "Common",
+        "fraction": "18/140 ; 18/125",
+        "notes": [
+          "The drop rates are increased if players own all essence pouches or a colossal pouch ."
+        ]
+      },
+      {
+        "card": "Intricate pouch",
+        "rarity": "Uncommon",
+        "fraction": "5/140 ; 5/125",
+        "notes": [
+          "The drop rates are increased if players own all essence pouches or a colossal pouch ."
+        ]
+      },
+      {
+        "card": "Abyssal ashes",
+        "rarity": "Rare",
+        "fraction": "1/140 ; 1/125",
+        "notes": [
+          "The drop rates are increased if players own all essence pouches or a colossal pouch ."
+        ]
+      },
+      {
+        "card": "Needle",
+        "rarity": "Rare",
+        "fraction": "1/140 ; 1/125",
+        "notes": [
+          "The drop rates are increased if players own all essence pouches or a colossal pouch ."
+        ]
+      },
+      {
+        "card": "Abyssal protector",
+        "rarity": "Very Rare",
+        "fraction": "1/4,000"
+      }
+    ]
   }
 }

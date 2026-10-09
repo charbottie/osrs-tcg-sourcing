@@ -793,5 +793,37 @@
       "Belle's folly",
       "Gryphon feather"
     ]
+  },
+  "Doom of Mokhaiotl": {
+    "log": "Doom of Mokhaiotl",
+    "items": [
+      "Dom",
+      "Avernic treads",
+      "Eye of ayak",
+      "Confliction gauntlets",
+      "Mokhaiotl waystone",
+      "Demon tear"
+    ]
+  },
+  "Guardians of the Rift": {
+    "log": "Guardians of the Rift",
+    "items": [
+      "Abyssal protector",
+      "Abyssal pearls",
+      "Catalytic tiara",
+      "Abyssal needle",
+      "Abyssal green dye",
+      "Abyssal blue dye",
+      "Abyssal red dye",
+      "Hat of the eye",
+      "Robe top of the eye",
+      "Robe bottoms of the eye",
+      "Boots of the eye",
+      "Ring of the elements",
+      "Abyssal lantern",
+      "Intricate pouch",
+      "Lost bag",
+      "Tarnished locket"
+    ]
   }
 }

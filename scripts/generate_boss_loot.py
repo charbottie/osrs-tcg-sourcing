@@ -89,6 +89,7 @@ BOSS_LOOT: dict[str, dict] = {
                       basis="Chest opened with a Mossy key after the kill, plus Bryophyta's own drops."),
     "Wintertodt": dict(page="Reward cart"),
     "Tempoross":  dict(page="Reward pool"),
+    "Guardians of the Rift": dict(page="Rewards Guardian"),
 }
 
 # Fixed rewards with no wiki drop table (completion rewards / points shops),
@@ -371,12 +372,8 @@ def build_collection_log(boss_names: list[str], item_canon: dict[str, str]) -> d
 
 
 def _boss_names_from_preview() -> list[str]:
-    """BOSS_DATA names, read from preview.html so the two never drift."""
-    src = (Path(__file__).resolve().parent / "preview.html").read_text(encoding="utf-8")
-    start = src.index("const BOSS_DATA = [")
-    end = src.index("\n];", start)
-    names = re.findall(r"\{ name:(?:'((?:[^'\\]|\\.)*)'|\"([^\"]*)\")", src[start:end])
-    return [(a or b).replace("\\'", "'") for a, b in names]
+    """Boss encounter names, from output/bosses.json (generate_bosses.py) so the two never drift."""
+    return [b["name"] for b in json.loads((_OUT_DIR / "bosses.json").read_text(encoding="utf-8"))]
 
 
 def main() -> int:
