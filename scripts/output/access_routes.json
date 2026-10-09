@@ -1,0 +1,182 @@
+{
+  "_comment": "Hand-curated shared requirement routes, used by quests (later diaries/bosses) via \"access\": \"<key>\". A requirement is met when every card of any one route is owned; a route item that is a list = any one of those cards; a route with \"spell\" = that spell's full rune cost from spells.json (elemental runes also met by a staff / combination rune, rune_sources.json). Routes marked manual have no card to check (shown for information, never auto-met). Desert sources: OSRS Wiki Shantay Pass, Fairy rings (BIQ/DLQ/AKP), Necklace of passage, Pharaoh's sceptre, Desert amulet, Kharidian Desert (Lumbridge Swamp shortcut). Ranged lists: standard metal tiers from the card catalog.",
+  "desert": {
+    "label": "Kharidian Desert access",
+    "routes": [
+      {
+        "label": "Shantay Pass (buy a pass from Shantay for 5 coins)",
+        "cards": [
+          "Shantay",
+          "Coins",
+          "Shantay pass"
+        ]
+      },
+      {
+        "label": "Fairy ring BIQ / DLQ / AKP (Fairytale II started)",
+        "cards": [
+          [
+            "Dramen staff",
+            "Lunar staff"
+          ]
+        ]
+      },
+      {
+        "label": "Pharaoh's sceptre teleport (pyramids)",
+        "cards": [
+          "Pharaoh's sceptre"
+        ]
+      },
+      {
+        "label": "Desert amulet 2+ teleport (Nardah)",
+        "cards": [
+          "Desert amulet"
+        ]
+      },
+      {
+        "label": "Necklace of passage → Eagles' Eyrie (Jade necklace card)",
+        "cards": [
+          "Jade necklace"
+        ]
+      },
+      {
+        "label": "Desert Elite diary done — free passage through the Shantay Pass",
+        "manual": true
+      },
+      {
+        "label": "Lumbridge Swamp shortcut — Agility 66 + Lumbridge & Draynor hard diary",
+        "manual": true
+      },
+      {
+        "label": "Nardah / Pollnivneach teleport scroll, or Camulet (no card)",
+        "manual": true
+      }
+    ]
+  },
+  "ranged": {
+    "label": "Any ranged attack",
+    "routes": [
+      {
+        "label": "Bow + arrows",
+        "cards": [
+          [
+            "Shortbow",
+            "Longbow",
+            "Oak shortbow",
+            "Oak longbow",
+            "Willow shortbow",
+            "Willow longbow",
+            "Maple shortbow",
+            "Maple longbow",
+            "Yew shortbow",
+            "Yew longbow",
+            "Magic shortbow",
+            "Magic longbow"
+          ],
+          [
+            "Bronze arrow",
+            "Iron arrow",
+            "Steel arrow",
+            "Mithril arrow",
+            "Adamant arrow",
+            "Rune arrow",
+            "Amethyst arrow",
+            "Dragon arrow"
+          ]
+        ]
+      },
+      {
+        "label": "Crossbow + bolts",
+        "cards": [
+          [
+            "Crossbow",
+            "Bronze crossbow",
+            "Iron crossbow",
+            "Steel crossbow",
+            "Mithril crossbow",
+            "Adamant crossbow",
+            "Rune crossbow",
+            "Dragon crossbow"
+          ],
+          [
+            "Bronze bolts",
+            "Iron bolts",
+            "Steel bolts",
+            "Mithril bolts",
+            "Adamant bolts",
+            "Runite bolts",
+            "Dragon bolts"
+          ]
+        ]
+      },
+      {
+        "label": "Darts",
+        "cards": [
+          [
+            "Bronze dart",
+            "Iron dart",
+            "Steel dart",
+            "Black dart",
+            "Mithril dart",
+            "Adamant dart",
+            "Rune dart",
+            "Amethyst dart",
+            "Dragon dart"
+          ]
+        ]
+      },
+      {
+        "label": "Throwing knives",
+        "cards": [
+          [
+            "Bronze knife",
+            "Iron knife",
+            "Steel knife",
+            "Black knife",
+            "Mithril knife",
+            "Adamant knife",
+            "Rune knife",
+            "Dragon knife"
+          ]
+        ]
+      },
+      {
+        "label": "Thrownaxes",
+        "cards": [
+          [
+            "Bronze thrownaxe",
+            "Iron thrownaxe",
+            "Steel thrownaxe",
+            "Mithril thrownaxe",
+            "Adamant thrownaxe",
+            "Rune thrownaxe",
+            "Dragon thrownaxe"
+          ]
+        ]
+      }
+    ]
+  },
+  "magic_combat": {
+    "label": "Any combat spell",
+    "routes": [
+      {
+        "spell": "Wind Strike"
+      },
+      {
+        "spell": "Wind Bolt"
+      },
+      {
+        "spell": "Wind Blast"
+      },
+      {
+        "spell": "Wind Wave"
+      },
+      {
+        "spell": "Wind Surge"
+      },
+      {
+        "label": "Other combat spells need these runes plus more — the Wind spell is the cheapest of each tier",
+        "manual": true
+      }
+    ]
+  }
+}

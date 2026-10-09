@@ -1037,8 +1037,8 @@ const FEATHER_CARDS = [
 const TOOL_PART_ALIASES = {
   bait:                 'Fishing bait',
   sandworms:            'Sandworms',
-  'silver sickle (b)':  'Silver sickle',
-};
+  snare:                'Bird snare',
+};   // item versions (e.g. "Silver sickle (b)") resolve through cardAliases instead
 
 // Hides that can be tanned into leather at a tanner NPC (no skill req, just Coins).
 // The game never makes you pick up the leather from the ground — it converts in your
@@ -1072,7 +1072,9 @@ function resolveToolParts(toolStr) {
           : 'any feather card — Feather, Red, Yellow, Orange, Blue, Stripy or Wimpy',
       };
     }
-    const name = TOOL_PART_ALIASES[key] || part;
+    const name = TOOL_PART_ALIASES[key] || (_cardInfo(part) || {}).exact || part;
+    // A tool with no TCG card has no restriction (e.g. Falconer's glove)
+    if (!_isCard(name)) return { label: name, owned: true, noCard: true, note: null };
     return { label: name, owned: isOwned(name), note: null };
   });
 }
@@ -1227,6 +1229,10 @@ function canGetItem(itemName, visited = new Set()) {
 // ─── State ─────────────────────────────────────────────────────────────────
 let monsterDrops = {}, itemSources = {}, cardCategories = {}, cardDetails = {}, foodData = {};
 let bossLoot = {};   // boss name → {source, page, drops} for chest/reward-based bosses (boss_loot.json)
+let spellsData   = {};  // spell name → {book, level, runes}, from spells.json (wiki spellbooks)
+let runeSources  = {};  // elemental rune → staves / combination runes that supply it (rune_sources.json)
+let accessRoutes = {};  // shared access routes, e.g. desert (access_routes.json)
+let cardAliases = {};  // item version name (lowercase) → card, from the catalog's tcg.variants (card_aliases.json)
 let collectionLog = {};  // boss name → {log, items} — collection-log items = the boss's uniques
 let packCatalog  = null;   // {catalogVersion, packSize, packs:[...]} from /api/packs
 let packPools    = null;   // {packId: {tierLabel: count}} precomputed at load time
@@ -1335,6 +1341,7 @@ let selectedDiaryTier = null;   // which tier is expanded in the diary detail pa
 let diarySearch       = '';     // search string for diary list
 let wishlist = new Map();          // card name → {note:string}  (starred cards)
 let wishlistedQuests = new Set();  // quest names bulk-added via quest button
+let wishlistQuestRec = new Set();  // …of those, quests wishlisted with their optional/recommended cards too
 let wishlistGroups = [];           // [{name, cards}] — "any one of these" groups
 let wishlistedClueSteps = [];      // [{type, tier, text, items}] — starred clue steps
 let _wishlistTipCards = [];        // sorted unowned targets, kept fresh by renderWishlist for pack tooltips
@@ -1352,7 +1359,12 @@ let skills = {
 // Owned cards — randomised on load (no localStorage persistence for simulation)
 let owned = new Set();
 
-function isOwned(name) { return owned.has(name.toLowerCase()); }
+function isOwned(name) {
+  const k = name.toLowerCase();
+  if (owned.has(k)) return true;
+  const card = cardAliases[k];             // an item version counts for its card ("Silver sickle (b)")
+  return !!card && owned.has(card.toLowerCase());
+}
 
 // Case-insensitive card lookup — returns {exact, type} or null
 // 'exact' is the canonical card name as used in monsterDrops/itemSources
@@ -1364,7 +1376,10 @@ function _cardInfo(name) {
     for (const k of Object.keys(monsterDrops)) _cardLcMap[k.toLowerCase()] = { exact: k, type: 'monster' };
     for (const k of Object.keys(itemSources))  _cardLcMap[k.toLowerCase()] = { exact: k, type: 'item' };
   }
-  return _cardLcMap[name.toLowerCase()] || null;
+  const k = name.toLowerCase();
+  if (_cardLcMap[k]) return _cardLcMap[k];
+  const card = cardAliases[k];             // version → its card
+  return card ? (_cardLcMap[card.toLowerCase()] || null) : null;
 }
 function _isCard(name) { return !!_cardInfo(name); }
 
@@ -1519,7 +1534,7 @@ function simulateRandom() {
 async function loadData() {
   try {
     const cb = `?v=${Date.now()}`;  // cache-bust so updated JSON files are always fresh
-    const [md, is, cc, cd, css, cs, crr, ii, qd, ed, fd, bmqc, cq, ac, cst, bl, clg, dd] = await Promise.all([
+    const [md, is, cc, cd, css, cs, crr, ii, qd, ed, fd, bmqc, cq, ac, cst, bl, clg, dd, cal, spl, rsrc, acc] = await Promise.all([
       fetch(`output/monster_drops.json${cb}`).then(r => r.json()).catch(() => ({})),
       fetch(`output/item_sources.json${cb}`).then(r => r.json()).catch(() => ({})),
       fetch(`output/card_categories.json${cb}`).then(r => r.json()).catch(() => ({})),
@@ -1538,6 +1553,10 @@ async function loadData() {
       fetch(`output/boss_loot.json${cb}`).then(r => r.json()).catch(() => ({})),
       fetch(`output/collection_log.json${cb}`).then(r => r.json()).catch(() => ({})),
       fetch(`output/diaries.json${cb}`).then(r => r.json()).catch(() => []),
+      fetch(`output/card_aliases.json${cb}`).then(r => r.json()).catch(() => ({})),
+      fetch(`output/spells.json${cb}`).then(r => r.json()).catch(() => ({})),
+      fetch(`output/rune_sources.json${cb}`).then(r => r.json()).catch(() => ({})),
+      fetch(`output/access_routes.json${cb}`).then(r => r.json()).catch(() => ({})),
     ]);
     monsterDrops = md; itemSources = is; cardCategories = cc; cardDetails = cd;
     _cardLcMap = null; // invalidate case-insensitive card lookup cache
@@ -1550,6 +1569,10 @@ async function loadData() {
     clueSteps          = cst;
     bossLoot           = bl || {};
     collectionLog      = clg || {};
+    cardAliases        = cal || {};
+    spellsData         = spl || {};
+    runeSources        = rsrc || {};
+    accessRoutes       = acc || {};
     DIARY_DATA         = Array.isArray(dd) ? dd : [];
     _buildDiaryByCard();
     _bossLootByItem    = null;  // invalidate reverse index
@@ -1564,6 +1587,7 @@ async function loadData() {
       } else {
         bmQuestCards[q.name] = q;
       }
+      for (const sec of (q.sections || [])) for (const r of (sec.requirements || [])) _expandReq(r, q.name);
     }
     // Only load completed_quests.json at startup if the file has a player tag
     // that matches the currently selected account. A file with no player tag
@@ -2087,16 +2111,21 @@ function packAcquisitionHtml(name) {
 
 // ─── Wishlist ──────────────────────────────────────────────────────────────
 
+// Cards a wishlisted quest contributes: required requirements only, or also the
+// optional / recommended ones (wishlistQuestRec). Unique, in requirement order.
+function _questWishCards(qn, includeRec = wishlistQuestRec.has(qn)) {
+  const out = [];
+  for (const s of (bmQuestCards[qn]?.sections || []))
+    for (const r of (s.requirements || []))
+      if (includeRec || !r.optional) out.push(..._reqCards(r));
+  return [...new Set(out)];
+}
+
 // All wishlisted card names across all sources (owned or not).
 function _wishlistedCardSet() {
   const s = new Set(wishlist.keys());
-  for (const qn of wishlistedQuests) {
-    const bm = bmQuestCards[qn];
-    if (!bm) continue;
-    for (const sec of (bm.sections || []))
-      for (const r of (sec.requirements || []))
-        for (const c of (r.cards || [])) s.add(c);
-  }
+  for (const qn of wishlistedQuests)
+    for (const c of _questWishCards(qn)) s.add(c);
   for (const g of wishlistGroups)
     for (const c of g.cards) s.add(c);
   return s;
@@ -2110,14 +2139,9 @@ function _wishlistUnownedTargets() {
     if (!isOwned(name)) targets.add(name);
   }
   // Quest-wishlisted cards (all requirement cards in every section)
-  for (const qn of wishlistedQuests) {
-    const bm = bmQuestCards[qn];
-    if (!bm) continue;
-    for (const s of (bm.sections || []))
-      for (const r of (s.requirements || []))
-        for (const c of (r.cards || []))
-          if (!isOwned(c)) targets.add(c);
-  }
+  for (const qn of wishlistedQuests)
+    for (const c of _questWishCards(qn))
+      if (!isOwned(c)) targets.add(c);
   // Groups: only include cards from unsatisfied groups
   for (const g of wishlistGroups) {
     if (g.cards.some(_slayerCardFeasible)) continue; // already satisfied (owned + accessible)
@@ -2273,6 +2297,7 @@ function _loadWishlist() {
     if (d.v === 2) {
       wishlist = new Map(Object.entries(d.items || {}));
       wishlistedQuests = new Set(d.quests || []);
+      wishlistQuestRec = new Set(d.questsRec || d.quests || []);
       wishlistGroups = d.groups || [];
       wishlistedClueSteps = d.clueSteps || [];
     } else {
@@ -2292,6 +2317,7 @@ function _saveWishlist() {
     v: 2,
     items,
     quests: [...wishlistedQuests].sort(),
+    questsRec: [...wishlistQuestRec].filter(q => wishlistedQuests.has(q)).sort(),
     groups: wishlistGroups,
     clueSteps: wishlistedClueSteps,
   }));
@@ -2444,9 +2470,7 @@ function toggleWishlist(name, note) {
 function _buildAutoNote(name) {
   const tags = [];
   for (const qn of wishlistedQuests) {
-    const cards = (bmQuestCards[qn]?.sections || [])
-      .flatMap(s => s.requirements || []).flatMap(r => r.cards || []);
-    if (cards.includes(name)) tags.push(qn);
+    if (_questWishCards(qn).includes(name)) tags.push(qn);
   }
   for (const g of wishlistGroups) {
     if (g.cards.includes(name)) tags.push(g.name);
@@ -2565,9 +2589,7 @@ function removeWishlistTag(name, tag) {
 
 function removeQuestFromWishlist(questName) {
   // Smart cleanup: strip quest name from auto-added card notes
-  const questCards = (bmQuestCards[questName]?.sections || [])
-    .flatMap(s => s.requirements || []).flatMap(r => r.cards || [])
-    .filter((c, i, a) => a.indexOf(c) === i);
+  const questCards = _questWishCards(questName, true);
   for (const card of questCards) {
     if (!wishlist.has(card)) continue;
     const entry   = wishlist.get(card);
@@ -2575,6 +2597,7 @@ function removeQuestFromWishlist(questName) {
     if (!cleaned) wishlist.delete(card); else entry.note = cleaned;
   }
   wishlistedQuests.delete(questName);
+  wishlistQuestRec.delete(questName);
   _saveWishlist();
   if (activeTab === 'wishlist') renderWishlist();
 }
@@ -2813,15 +2836,15 @@ function removeGroup(gi) {
   if (activeTab === 'wishlist') renderWishlist();
 }
 
-function wishlistQuest(questName) {
-  if (wishlistedQuests.has(questName)) return 0;
+// includeRec: also wishlist the optional / recommended cards. Calling again with
+// includeRec on an already-wishlisted quest upgrades it (adds the extra cards).
+function wishlistQuest(questName, includeRec = false) {
+  if (wishlistedQuests.has(questName) && (!includeRec || wishlistQuestRec.has(questName))) return 0;
   wishlistedQuests.add(questName);
+  if (includeRec) wishlistQuestRec.add(questName);
 
   // Add unowned BM quest cards to the individual wishlist with the quest name as the note
-  const questCards = (bmQuestCards[questName]?.sections || [])
-    .flatMap(s => s.requirements || [])
-    .flatMap(r => r.cards || [])
-    .filter((c, i, a) => a.indexOf(c) === i);
+  const questCards = _questWishCards(questName);
   for (const card of questCards) {
     if (isOwned(card)) continue;  // already have it — no need to wishlist
     if (wishlist.has(card)) {
@@ -2885,11 +2908,7 @@ function _renderWishlistMain() {
   // Stats
   const allItems  = [...wishlist.keys()];
   const obtained  = allItems.filter(n => isOwned(n)).length;
-  const questCards = [...wishlistedQuests].flatMap(qn => {
-    const bm = bmQuestCards[qn];
-    if (!bm) return [];
-    return (bm.sections || []).flatMap(s => (s.requirements || []).flatMap(r => r.cards || []));
-  });
+  const questCards = [...wishlistedQuests].flatMap(qn => _questWishCards(qn));
   const uniqueQuestCards = [...new Set(questCards)];
   const questObtained = uniqueQuestCards.filter(n => isOwned(n)).length;
   const groupsSatisfied = wishlistGroups.filter(g => g.cards.some(_slayerCardFeasible)).length;
@@ -2938,8 +2957,7 @@ function _renderWishlistMain() {
     questHtml += `<div class="section"><div class="section-header">Wishlisted Quests</div>`;
     for (const qn of [...wishlistedQuests].sort()) {
       const bm = bmQuestCards[qn];
-      const cards = bm ? (bm.sections || []).flatMap(s => (s.requirements || []).flatMap(r => r.cards || [])) : [];
-      const unique = [...new Set(cards)];
+      const unique = bm ? _questWishCards(qn) : [];
       const got = unique.filter(n => isOwned(n)).length;
       const qSafe = qn.replace(/&/g,'&amp;').replace(/"/g,'&quot;');
       questHtml += `<div style="margin:10px 0;background:#161616;border:1px solid #2a2a2a;border-radius:4px;padding:10px 12px">
@@ -2948,6 +2966,7 @@ function _renderWishlistMain() {
             data-quest="${qSafe}" onclick="_navToQuest(this)"
             title="Open quest page">${qn}</span>
           <span style="font-size:10px;color:${got===unique.length&&unique.length?'#00c853':'#888'}">${got}/${unique.length} obtained</span>
+          <span style="font-size:9px;color:#666;border:1px solid #2a2a2a;border-radius:3px;padding:0 4px">${wishlistQuestRec.has(qn) ? 'required + recommended' : 'required only'}</span>
           <button data-quest="${qSafe}" onclick="removeQuestFromWishlist(this.dataset.quest)"
             style="margin-left:auto;background:none;border:none;color:#444;cursor:pointer;font-size:12px" title="Remove quest">×</button>
         </div>
@@ -4711,9 +4730,10 @@ function renderItem(name, container) {
       toolHtml = `<strong>${gathering.tool}</strong>`;   // "None"
     } else {
       toolHtml = toolParts.map((p, i) => {
-        const col      = p.owned ? '#76c442' : '#c84a00';
-        const sym      = p.owned ? '✓' : '✗';
-        const noteHtml = p.note ? ` <span style="color:#888;font-size:10px">(${p.note})</span>` : '';
+        const col      = p.noCard ? '#888' : p.owned ? '#76c442' : '#c84a00';
+        const sym      = p.noCard ? '' : p.owned ? '✓' : '✗';
+        const noteHtml = p.noCard ? ` <span style="color:#666;font-size:10px" title="No TCG card exists — no restriction">(no card)</span>`
+                       : p.note ? ` <span style="color:#888;font-size:10px">(${p.note})</span>` : '';
         const sep      = i > 0 ? ' <span style="color:#555"> + </span>' : '';
         const isCard   = itemSources[p.label] !== undefined;
         const inner    = `<strong style="color:${col}">${p.label} ${sym}</strong>${noteHtml}`;
@@ -4885,7 +4905,7 @@ function renderItem(name, container) {
   // ── Boss rewards (raid chests, Barrows, Moons, Gauntlet…) ──────────────────
   const _iBossRewards = _bossRewardsFor(name);
   if (_iBossRewards.length) {
-    html += `<div class="section"><div class="section-header">Boss Rewards</div><div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:4px">`;
+    html += `<div class="section"><div class="section-header">Boss Rewards <span style="font-size:10px;color:#555;font-weight:normal">(this card drops from — not a requirement)</span></div><div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:4px">`;
     for (const { bossName, source, drop } of _iBossRewards) {
       const rarity = drop.rarity, tip = [source, _lootTip(drop)].filter(Boolean).join('\n');
       html += `<span data-boss="${escHtml(bossName)}" onclick="showBoss(this.dataset.boss);event.stopPropagation()"
@@ -5497,34 +5517,24 @@ function _renderTab(tab, resetSelection = true) {
           <div id="quest-list-scroll"></div>
         </div>
         <div id="quest-detail-pane">
-          <div id="quest-welcome" style="max-width:500px;padding:8px 4px">
+          <div id="quest-welcome" style="max-width:640px;padding:8px 4px">
             <h2 style="color:#e8c97a;font-size:15px;margin-bottom:12px">Quest completability</h2>
             <p style="color:#888;font-size:12px;line-height:1.7;margin-bottom:14px">
               Select a quest from the list to see which cards you need and whether you can complete it.
               The list is sorted by status: ✓ completable first, ~ almost ready, ✗ locked.
             </p>
-            <div style="background:#1a1608;border:1px solid #3a3010;border-radius:4px;padding:12px;font-size:11px;line-height:1.7;color:#999;margin-bottom:12px">
-              <div style="color:#c8a830;font-weight:700;margin-bottom:6px">About the data sources</div>
-              <div style="margin-bottom:6px">
-                <span style="color:#7ab07a">Quests (180)</span> — requirements come from the
-                <strong style="color:#bbb">Bronzeman TCG plugin</strong>, which was manually curated
-                to use exact card names and includes mid-quest items (things handed to you during the
-                quest that you must use or hand over). This is the most accurate source.
-              </div>
-              <div>
-                <span style="color:#9070b0">Miniquests (30)</span> — requirements come from the
-                <strong style="color:#bbb">OSRS wiki infobox</strong> only. Card names may not match
-                exactly, and mid-quest item requirements are not captured. Treat these as a rough guide.
-              </div>
+            <div id="quest-card-summary"></div>
+            <div style="background:#1a1608;border:1px solid #3a3010;border-radius:4px;padding:12px;font-size:11px;line-height:1.7;color:#999;margin:14px 0 12px">
+              <div style="color:#c8a830;font-weight:700;margin-bottom:6px">About the data</div>
+              Requirements start from the Bronzeman TCG plugin's quest list and were checked against the OSRS Wiki
+              (exact card names, mid-quest items, NPCs, cutscene NPCs, ironman production chains).
+              Desert access, spell rune costs and ranged/magic options come from shared data files.
             </div>
-            <p style="color:#555;font-size:11px;line-height:1.6">
-              If a main quest shows requirements that seem wrong, the bronzeman plugin data is the authoritative source —
-              raise it with Felmeme to get the quest entry updated.
-            </p>
           </div>
         </div>
       </div>`;
       renderQuestList();
+      _renderQuestCardSummary();
     } else if (tab === 'packs') {
       if (resetSelection) selectedPack = null;
       mainContent.innerHTML = `<div id="pack-panel">
@@ -6528,7 +6538,7 @@ function getQuestCardIndex() {
   for (const [questName, q] of Object.entries(bmQuestCards)) {
     for (const section of (q.sections || [])) {
       for (const req of (section.requirements || [])) {
-        for (const card of (req.cards || [])) {
+        for (const card of _reqCards(req)) {
           (_questCardIndex[card] = _questCardIndex[card] || []).push(questName);
         }
         for (const child of (req.children || [])) {
@@ -8058,6 +8068,56 @@ function wishlistDiaryTier(diaryName, tier) {
 }
 
 // ── Right-pane detail ───────────────────────────────────────────────────────
+// Diary requirement units: one per distinct requirement (skill, quest, card, tool, and each
+// "any of" group counted once, met if any option is owned). `add(key, ok)` dedupes by key.
+function _diaryTaskUnits(task, add) {
+  if (typeof task !== 'object') return;
+  for (const [skill, lvl] of Object.entries(task.skills || {}))
+    if (typeof lvl === 'number' && lvl > 1) add('s:' + skill + ':' + lvl, getLevel(skill) >= lvl);
+  for (const q of [...(task.quests || []), ...(task.partialQuests || [])]) add('q:' + q, completedQuests.has(q));
+  for (const c of [...(task.items || []), ...(task.monsters || []), ...(task.npcs || [])])
+    if (_isCard(c)) add('c:' + c.toLowerCase(), isOwned(c));
+  for (const g of [...(task.itemsAny || []), ...(task.monstersAny || [])])
+    add('g:' + [...g].sort().join('|'), g.some(c => isOwned(c)));
+  for (const g of (task.skillsAny || []))
+    add('sa:' + JSON.stringify(g), g.some(o => Object.entries(o).every(([sk, l]) => getLevel(sk) >= l)));
+  for (const g of (task.anyOf || []))
+    add('a:' + JSON.stringify(g), g.some(o => o.card ? isOwned(o.card) : o.skill ? getLevel(o.skill) >= o.level : completedQuests.has(o.quest)));
+  for (const tool of (task.tools || [])) {
+    const tiers = TOOL_TIERS[tool];
+    if (tiers) add('t:' + tool, tiers.some(tt => isOwned(tt.name)));
+    else if (_isCard(tool)) add('c:' + tool.toLowerCase(), isOwned(tool));
+  }
+  if (task.lightSource) add('light', LIGHT_SOURCE_ITEMS.some(c => isOwned(c)));
+  if (task.setsAny) add('set:' + task.setsAny.label, (task.setsAny.sets || []).some(st => st.items.every(c => isOwned(c))));
+}
+// Tier requirements met / total: the tier's distinct units (skills at the tier's max level),
+// plus area-wide quests and the reward NPC.
+function _diaryTierProgress(area, tier) {
+  const t = area[tier];
+  if (!t) return { done: 0, total: 0 };
+  const units = new Map();
+  const add = (key, ok) => { if (!units.has(key)) units.set(key, ok); };
+  for (const q of (AREA_QUESTS[area.name] || [])) add('q:' + q, completedQuests.has(q));
+  if (area.rewardNpc && _isCard(area.rewardNpc)) add('c:' + area.rewardNpc.toLowerCase(), isOwned(area.rewardNpc));
+  for (const [skill, lvl] of Object.entries(t.skills || {})) if (lvl > 1) add('s:' + skill, getLevel(skill) >= lvl);
+  for (const task of (t.tasks || [])) _diaryTaskUnits({ ...task, skills: {} }, add);  // tier max levels above
+  const vals = [...units.values()];
+  return { done: vals.filter(Boolean).length, total: vals.length };
+}
+// Eligible tasks / total: a task is eligible when it's ticked done, or every one of its
+// requirements (plus the area-wide quests) is met.
+function _diaryTaskEligible(area, task) {
+  let ok = (AREA_QUESTS[area.name] || []).every(q => completedQuests.has(q));
+  if (ok) _diaryTaskUnits(task, (_, met) => { if (!met) ok = false; });
+  return ok;
+}
+function _diaryEligibleTasks(area, tier) {
+  const tasks = area[tier]?.tasks || [];
+  const done = tasks.filter((task, i) => isDiaryTicked(area.name, tier, 'task', String(i)) || _diaryTaskEligible(area, task)).length;
+  return { done, total: tasks.length };
+}
+
 function showDiaryDetail(name) {
   selectedDiary = name;
   renderDiaryList();
@@ -8137,6 +8197,9 @@ function showDiaryDetail(name) {
       <div style="font-size:12px;font-weight:700;color:${DIARY_TIER_COLOR[tier]};margin-bottom:3px">${DIARY_TIER_LABEL[tier]}</div>
       <div style="font-size:11px;color:${stCol};margin-bottom:3px">${stLbl}</div>
       <div style="font-size:10px;color:#555">${c.done}/${c.total} tasks</div>
+      ${(() => { const p = _diaryTierProgress(area, tier), pct = p.total ? Math.round(100 * p.done / p.total) : 100;
+        return `<div style="margin-top:5px;height:4px;background:#1a1a1a;border-radius:2px;overflow:hidden" title="Requirements met: ${p.done}/${p.total}"><div style="width:${pct}%;height:100%;background:${p.done === p.total ? '#5a9a5a' : '#c8a830'}"></div></div>
+          <div style="font-size:9px;color:#555;margin-top:2px">${p.done}/${p.total} reqs · ${_diaryEligibleTasks(area, tier).done}/${c.total} eligible</div>`; })()}
     </div>`;
   }
   html += `</div>`;
@@ -8157,6 +8220,14 @@ function showDiaryDetail(name) {
         data-dn="${escHtml(name)}" data-tier="${tier}"
         onclick="wishlistDiaryTier(this.dataset.dn,this.dataset.tier)"
         style="font-size:10px;background:none;border:1px solid #333;border-radius:3px;color:#666;padding:2px 8px;cursor:pointer">☆ Wishlist missing cards</button>` : ''}
+    </div>
+    <div style="margin:-6px 0 12px">
+      ${(() => { const sum = f => { const all = DIARY_TIERS.filter(x => area[x]).map(x => f(area, x));
+          return { done: all.reduce((n, p) => n + p.done, 0), total: all.reduce((n, p) => n + p.total, 0) }; };
+        return _progressBar(`${DIARY_TIER_LABEL[tier]} eligible tasks`, _diaryEligibleTasks(area, tier), '#6a9a6a', 'Tasks you can do now (every requirement met) or have ticked done')
+          + _progressBar('All tiers eligible', sum(_diaryEligibleTasks), '#888', 'Eligible tasks across every tier of this diary')
+          + _progressBar(`${DIARY_TIER_LABEL[tier]} requirements`, _diaryTierProgress(area, tier), '#c8a830', 'Distinct requirements across this tier\'s tasks: skills, quests, cards, tools (an "any of" group counts once)')
+          + _progressBar('All tiers requirements', sum(_diaryTierProgress), '#888', 'Sum over every tier of this diary'); })()}
     </div>`;
 
     // ── Rewards (from the wiki's per-tier Rewards list) ───────────────────────
@@ -8582,6 +8653,250 @@ function _renderBossingLegacy() {
  * Returns {cardsOk, missingCount} where cardsOk=true means all groups have ≥1 owned card.
  * Falls back to quests.json itemsRequired + killsRequired if no BM data.
  */
+// ─── Most-needed missing cards (Questing tab welcome panel) ─────────────────
+// For every quest not marked done, each unmet *required* requirement credits the unowned
+// cards that would satisfy it: any option of an "any of" group (counted once per quest),
+// or the missing pieces of a route (each slot's first choice, so staffs don't swamp it).
+// "Last card" = owning this one card would complete every card requirement of that quest.
+function _questCardDemand() {
+  const demand = new Map();  // card → {quests:Set, last:Set}
+  const credit = (card, qn) => {
+    if (!demand.has(card)) demand.set(card, { quests: new Set(), last: new Set() });
+    demand.get(card).quests.add(qn);
+  };
+  for (const [qn, bm] of Object.entries(bmQuestCards)) {
+    if (completedQuests.has(qn)) continue;
+    const unmet = [];
+    for (const s of (bm.sections || []))
+      for (const r of (s.requirements || []))
+        if (!r.optional && _reqCards(r).length && !_reqMet(r)) unmet.push(r);
+    const perReq = unmet.map(r => {
+      const cands = new Set();
+      const cards = r.cards || [];
+      if (r.mode === 'all') cards.filter(c => !isOwned(c)).forEach(c => cands.add(c));
+      else cards.forEach(c => { if (!isOwned(c)) cands.add(c); });
+      for (const rt of (r._routes || [])) {
+        if (rt.manual) continue;
+        for (const sl of rt.slots) if (!sl.some(c => isOwned(c))) cands.add(sl[0]);
+      }
+      return cands;
+    });
+    for (const cands of perReq) for (const c of cands) credit(c, qn);
+    // The quest's last missing card: one unmet requirement that a single card satisfies
+    if (unmet.length === 1) {
+      const r = unmet[0];
+      const single = (r.mode === 'all') ? (r.cards || []).filter(c => !isOwned(c)) : null;
+      const opts = single ? (single.length === 1 ? single : []) : [...perReq[0]].filter(c => {
+        const routeOk = (r._routes || []).some(rt => !rt.manual && (!rt.magic || getLevel('Magic') >= rt.magic) &&
+          rt.slots.every(sl => sl.some(x => isOwned(x)) || sl[0] === c));
+        return (r.cards || []).includes(c) || routeOk;
+      });
+      for (const c of opts) demand.get(c)?.last.add(qn);
+    }
+  }
+  return demand;
+}
+function _renderQuestCardSummary() {
+  const el = document.getElementById('quest-card-summary');
+  if (!el) return;
+  const rows = [..._questCardDemand().entries()]
+    .filter(([c]) => _isCard(c))
+    .sort((a, b) => b[1].quests.size - a[1].quests.size || b[1].last.size - a[1].last.size || a[0].localeCompare(b[0]))
+    .slice(0, 30);
+  if (!rows.length) { el.innerHTML = ''; return; }
+  const max = rows[0][1].quests.size;
+  el.innerHTML = `<div style="background:#111;border:1px solid #222;border-radius:4px;padding:12px 14px">
+    <div style="color:#c8a830;font-weight:700;font-size:12px;margin-bottom:2px">Most-needed cards you don't own</div>
+    <div style="color:#666;font-size:10px;margin-bottom:10px">Unowned cards that would meet a required card requirement, counted per quest not yet done.
+      An "any of" option counts for that quest even if another option would do. <span style="color:#7ab07a">Last card</span> = owning it completes every card requirement of that quest.</div>
+    ${rows.map(([c, d]) => {
+      const info = _cardInfo(c), img = (cardDetails[info.exact] || {}).imageUrl;
+      const qs = [...d.quests].sort();
+      const pct = Math.round(100 * d.quests.size / max);
+      return `<div style="display:flex;align-items:center;gap:8px;padding:3px 0;font-size:11px">
+        ${img ? `<img src="${img}" style="width:18px;height:18px;object-fit:contain;image-rendering:pixelated;flex-shrink:0" onerror="this.style.display='none'">` : '<span style="width:18px;flex-shrink:0"></span>'}
+        <span style="width:170px;flex-shrink:0;color:#ccc;cursor:pointer;overflow:hidden;text-overflow:ellipsis;white-space:nowrap"
+          data-nav="${escHtml(info.exact)}" data-nav-type="${info.type}" onclick="_navToCard(this)">${escHtml(info.exact)}</span>
+        <div style="flex:1;min-width:60px;height:6px;background:#1a1a1a;border-radius:3px;overflow:hidden"><div style="width:${pct}%;height:100%;background:#c8a830"></div></div>
+        <span style="width:70px;flex-shrink:0;color:#c8a830;font-variant-numeric:tabular-nums;cursor:help" title="${escHtml(qs.join('\n'))}">${d.quests.size} quest${d.quests.size === 1 ? '' : 's'}</span>
+        <span style="width:74px;flex-shrink:0;color:#7ab07a;font-size:10px;cursor:help" title="${escHtml([...d.last].sort().join('\n'))}">${d.last.size ? `last card ×${d.last.size}` : ''}</span>
+        ${_rowWishStar(info.exact, false, 'Most-needed for quests')}
+      </div>`;
+    }).join('')}
+  </div>`;
+}
+
+// ─── Progress bars (quests + diaries) ──────────────────────────────────────
+// One unit per requirement: an "any of" group or a set of routes counts once, met when
+// any option is owned — so long alternative lists don't inflate the totals.
+function _progressBar(label, p, color, title) {
+  const pct = p.total ? Math.round(100 * p.done / p.total) : 100;
+  const col = p.total && p.done === p.total ? '#5a9a5a' : color;
+  return `<div style="display:flex;align-items:center;gap:8px;font-size:10px;color:#888;margin:3px 0" title="${escHtml(title || '')}">
+    <span style="width:118px;flex-shrink:0">${escHtml(label)}</span>
+    <div style="flex:1;max-width:260px;height:6px;background:#1a1a1a;border:1px solid #262626;border-radius:3px;overflow:hidden">
+      <div style="width:${pct}%;height:100%;background:${col}"></div></div>
+    <span style="font-variant-numeric:tabular-nums;color:${col};min-width:44px">${p.done}/${p.total}</span></div>`;
+}
+// Quest: required = prerequisite quests done + skill levels + required card requirements;
+// recommended = optional requirements.
+function _questProgress(questName) {
+  const q = questsData[questName] || {};
+  const req = { done: 0, total: 0 }, rec = { done: 0, total: 0 };
+  const tally = (p, ok) => { p.total++; if (ok) p.done++; };
+  for (const pq of (q.prerequisites || [])) if (questsData[pq]) tally(req, completedQuests.has(pq));
+  for (const r of (q.skillRequirements || [])) tally(req, getLevel(r.skill) >= r.level);
+  for (const s of (bmQuestCards[questName]?.sections || []))
+    for (const r of (s.requirements || [])) {
+      if (!_reqCards(r).length) continue;
+      tally(r.optional ? rec : req, _reqMet(r));
+    }
+  return { req, rec, all: { done: req.done + rec.done, total: req.total + rec.total } };
+}
+function _questProgressHtml(questName) {
+  const p = _questProgress(questName);
+  if (!p.all.total) return '';
+  return `<div style="margin:8px 0 4px">
+    ${_progressBar('Required', p.req, '#c8a830', 'Prerequisite quests done, skill levels, and card requirements met (an "any of" group counts once)')}
+    ${p.rec.total ? _progressBar('Recommended', p.rec, '#6a7a9a', 'Optional / recommended requirements met') : ''}
+    ${p.rec.total ? _progressBar('All', p.all, '#888', 'Required + recommended') : ''}
+  </div>`;
+}
+
+// Quest detail rows: required missing → required met → optional
+function _questRowOrder(rows) {
+  const req = rows.filter(r => !r.optional);
+  return [...req.filter(r => !r.ok), ...req.filter(r => r.ok), ...rows.filter(r => r.optional)];
+}
+// One quest requirement → {ok, optional, html}. Handles single cards, any-of groups,
+// mode:"all", routes (access / spells / explicit), skillAlt and optional.
+function _questReqRow(req) {
+  const cards = req.cards || [];
+  const routes = req._routes || [];
+  const isMon = req.type === 'npc' || req.type === 'enemy';
+  const navType = c => (monsterDrops[c] ? 'monster' : itemSources[c] ? 'item' : null);
+  const navAttrs = c => navType(c) ? `style="cursor:pointer" data-nav="${escHtml(c)}" data-nav-type="${navType(c)}" onclick="_navToCard(this)"` : '';
+  const img = c => (cardDetails[c] || {}).imageUrl
+    ? `<img src="${(cardDetails[c] || {}).imageUrl}" style="width:16px;height:16px;object-fit:contain;image-rendering:pixelated;flex-shrink:0" onerror="this.style.display='none'">` : '';
+  const chip = c => {
+    const own = isOwned(c), get = !own && !isMon && canGetItem(c);
+    return `<span ${navAttrs(c)}><span style="color:${own ? '#7ab07a' : get ? '#c8a830' : '#666'}">${escHtml(c)}</span></span>`;
+  };
+  const ok = _reqMet(req);
+  const opt = !!req.optional;
+  const label = req.label || cards[0] || '';
+  const altOk = req.skillAlt && getLevel(req.skillAlt.skill) >= req.skillAlt.level;
+  const altTag = req.skillAlt ? ` <span style="font-size:10px;color:${altOk ? '#7ab07a' : '#666'}">OR ${req.skillAlt.skill} ${req.skillAlt.level}</span>` : '';
+  const optTag = opt ? ` <span style="font-size:10px;color:#777;border:1px solid #333;border-radius:3px;padding:0 4px">optional</span>` : '';
+  const noteHtml = req.note ? `<div style="font-size:10px;color:#666;margin-top:2px">${escHtml(req.note)}</div>` : '';
+  // Optional/recommended rows use the same ✓/✗ as required ones (they never block; the optional tag says so)
+  const icon = `<span class="req-icon ${ok ? 'ok' : 'fail'}"${opt ? ` title="${ok ? 'Met' : 'Not met'} — optional, never blocks"` : ''}>${ok ? '✓' : '✗'}</span>`;
+  const wrapStyle = ' style="align-items:flex-start"';
+
+  // Information only (info:true) — something to bring that has no single card to check
+  if (!cards.length && !routes.length) {
+    return { ok: true, optional: true, html: `<div class="req-row" style="align-items:flex-start">
+      <span class="req-icon" style="color:#777">•</span>
+      <div style="flex:1"><span class="req-label" style="color:#aaa">${escHtml(label)}</span>${noteHtml}</div>
+      <span class="req-note">not tracked</span></div>` };
+  }
+  // Simple single card, no alternatives
+  if (cards.length === 1 && !routes.length) {
+    const c = cards[0];
+    const own = isOwned(c);
+    const isCard = !!navType(c);
+    const disp = label !== c ? `${escHtml(label)} <span style="font-size:10px;color:#666">(${escHtml(c)})</span>` : escHtml(c);
+    const nt = altOk ? `${req.skillAlt.skill} ${req.skillAlt.level} ✓` : own ? (isMon ? 'card owned' : 'owned') : (isCard ? 'need card' : 'no TCG card');
+    return { ok, optional: opt, html: `<div class="req-row"${wrapStyle}>${icon}${img(c)}
+      <div style="flex:1"><span class="req-label" ${navAttrs(c)}>${disp}</span>${altTag}${optTag}${noteHtml}</div>
+      <span class="req-note">${nt}</span>${isCard ? _rowWishStar(c, own) : ''}</div>` };
+  }
+
+  // Card group: any one (default) or every card (mode:"all")
+  let body = '';
+  if (cards.length) {
+    const all = req.mode === 'all';
+    const sorted = isMon ? [...cards] : sortCardsByLevel(cards);
+    const tiered = [...sorted.filter(c => isOwned(c)), ...sorted.filter(c => !isOwned(c))];
+    const head = routes.length ? (all ? 'All of:' : 'Any of:') : (all ? 'Need all:' : '');
+    body += `<div style="font-size:11px;line-height:1.6">${head ? `<span style="color:#666">${head} </span>` : ''}${tiered.map(chip).join('<span style="color:#444"> · </span>')}</div>`;
+  }
+  // Routes: one line each; a slot with alternatives (staff for a rune, Dramen/Lunar…) gets a hover grid
+  if (routes.length) {
+    if (cards.length) body += `<div style="font-size:10px;color:#555;margin:2px 0">or</div>`;
+    body += routes.map(rt => {
+      const met = _routeMet(rt);
+      const slots = rt.slots.map(sl => {
+        const own = sl.filter(c => isOwned(c));
+        const shown = own[0] || sl[0];
+        const col = own.length ? '#7ab07a' : '#666';
+        const more = sl.length > 1 ? `<span style="font-size:9px;color:#555"> +${sl.length - 1}</span>` : '';
+        return sl.length > 1
+          ? `<span style="cursor:help;border-bottom:1px dotted #444" ${_cardGridTipAttrs(sl, 'Any one of')}><span style="color:${col}">${escHtml(shown)}</span>${more}</span>`
+          : chip(sl[0]);
+      }).join('<span style="color:#444"> + </span>');
+      const sym = rt.manual ? '<span style="color:#555">•</span>' : met ? '<span style="color:#7ab07a">✓</span>' : '<span style="color:#7a4a4a">✗</span>';
+      const lowMagic = rt.magic && getLevel('Magic') < rt.magic ? ` <span style="color:#a05050">(you: ${getLevel('Magic')})</span>` : '';
+      return `<div style="font-size:11px;line-height:1.6;display:flex;gap:6px;align-items:baseline">${sym}
+        <span style="color:${met ? '#9ac09a' : '#888'};white-space:nowrap">${escHtml(rt.label)}${lowMagic}${rt.manual ? ' <span style="color:#555">(not tracked)</span>' : ''}</span>
+        ${rt.slots.length ? `<span>${slots}</span>` : ''}</div>`;
+    }).join('');
+  }
+  const head = cards.length && !routes.length && req.mode !== 'all' && !/^an?y?\s/i.test(label) ? `Any: ${label}` : label;
+  return { ok, optional: opt, html: `<div class="req-row"${wrapStyle}>${icon}
+    <div style="flex:1;min-width:0">
+      <div class="req-label" style="color:#aaa;font-size:11px;margin-bottom:3px">${escHtml(head)}${altTag}${optTag}</div>
+      ${body}${noteHtml}
+    </div></div>` };
+}
+
+// ─── Quest requirement model ────────────────────────────────────────────────
+// A requirement {label, type, cards, mode?, optional?, routes?, access?, spells?, note?}:
+//   cards         any one owned card satisfies it (mode:"all" = every card needed)
+//   routes        [{label, cards:[card | [any-of cards]], manual?}] — met when every slot of one route is owned
+//   access        key(s) into access_routes.json ("desert", "ranged", "magic_combat"), expanded into routes
+//   spells        spell names from spells.json; each becomes a route of its full rune cost,
+//                 where an elemental rune can also come from a staff / combination rune
+//   optional      shown, never blocks
+//   info          no cards: a note-only row (e.g. "needs a ranged or magic attack"), never blocks
+// _expandReq resolves access/spells once at load into r._routes; r._cards lists the
+// cards worth collecting (each slot's first choice — not every staff).
+function _expandReq(r, questName) {
+  const routes = [];
+  const slotOf = s => Array.isArray(s) ? s : [s];
+  const spellRoute = sp => {
+    const s = spellsData[sp];
+    if (!s) { console.warn(`[quest data] ${questName}: unknown spell "${sp}"`); return null; }
+    return { label: `${sp} (Magic ${s.level})`, spell: sp, magic: s.level,
+      slots: Object.keys(s.runes).map(rune => [rune, ...(runeSources[rune] || [])]) };
+  };
+  const addRoute = (rt, extra) => {
+    const out = rt.spell ? spellRoute(rt.spell)
+      : { label: rt.label, slots: (rt.cards || []).map(slotOf), manual: !!rt.manual };
+    if (out) routes.push(Object.assign(out, extra));
+  };
+  for (const rt of (r.routes || [])) addRoute(rt);
+  for (const key of [].concat(r.access || [])) {
+    const a = accessRoutes[key];
+    if (!a) { console.warn(`[quest data] ${questName}: unknown access "${key}"`); continue; }
+    for (const rt of a.routes) addRoute(rt, { access: key });
+  }
+  for (const sp of [].concat(r.spells || [])) addRoute({ spell: sp });
+  r._routes = routes;
+  r._cards = [...new Set([...(r.cards || []), ...routes.flatMap(rt => rt.slots.map(sl => sl[0]))])];
+}
+function _reqCards(r) { return r._cards || r.cards || []; }
+function _routeMet(rt) {
+  return !rt.manual && rt.slots.length > 0 && (!rt.magic || getLevel('Magic') >= rt.magic)
+    && rt.slots.every(sl => sl.some(c => isOwned(c)));
+}
+function _reqMet(r) {
+  const cards = r.cards || [];
+  if (cards.length && (r.mode === 'all' ? cards.every(c => isOwned(c)) : cards.some(c => isOwned(c)))) return true;
+  if ((r._routes || []).some(_routeMet)) return true;
+  return !!r.skillAlt && getLevel(r.skillAlt.skill) >= r.skillAlt.level;
+}
+
 function checkQuestCards(name, q) {
   const bm = bmQuestCards[name];
   if (bm) {
@@ -8589,21 +8904,9 @@ function checkQuestCards(name, q) {
     // Schema 2: sections → requirements → {cards, type}
     for (const section of (bm.sections || [])) {
       for (const req of (section.requirements || [])) {
-        const cards = req.cards || [];
-        if (!cards.length) continue;
+        if (!_reqCards(req).length) continue;
         if (req.optional) continue;  // avoidable — not counted as blocking
-        // skillAlt: requirement satisfied if player has the skill level alternative
-        const altOk = req.skillAlt
-          ? getLevel(req.skillAlt.skill) >= req.skillAlt.level
-          : false;
-        if (altOk) continue;
-        if (req.type === 'enemy' || req.type === 'npc') {
-          // Each card must be owned individually
-          for (const card of cards) { if (!isOwned(card)) missing++; }
-        } else {
-          // Item: any-of group — at least one owned satisfies the requirement
-          if (!cards.some(card => isOwned(card))) missing++;
-        }
+        if (!_reqMet(req)) missing++;
       }
     }
     return { cardsOk: missing === 0, missingCount: missing };
@@ -8802,23 +9105,25 @@ function showQuestDetail(questName, push = true) {
     ${isDone ? '✓ Completed — mark undone' : 'Mark as completed'}
   </button>`;
 
-  const _bmWishCards = (bmQuestCards[questName]?.sections || [])
-    .flatMap(s => s.requirements || [])
-    .flatMap(r => r.cards || [])
-    .filter((c, i, a) => a.indexOf(c) === i); // dedupe
-  const _bmMissing = _bmWishCards.filter(c => !isOwned(c) && !wishlist.has(c));
+  // Two ways to wishlist: required cards only, or required + optional/recommended
   const _qnSafe = questName.replace(/&/g,'&amp;').replace(/"/g,'&quot;');
-  const wishQuestBtn = _bmWishCards.length
-    ? `<button data-quest="${_qnSafe}" onclick="const n=wishlistQuest(this.dataset.quest);this.textContent=n?'★ Wishlisted!':'★ Already wishlisted';this.disabled=true;this.style.color='#888'"
-        style="margin-left:8px;background:none;border:1px solid #3a3a1a;color:#9a9a3a;padding:3px 9px;border-radius:3px;font-size:10px;cursor:pointer">
-        ☆ Wishlist quest cards${_bmMissing.length ? ' ('+_bmMissing.length+' missing)' : ''}
-      </button>`
-    : '';
+  const _wishReq = _questWishCards(questName, false), _wishAll = _questWishCards(questName, true);
+  const _miss = cards => cards.filter(c => !isOwned(c) && !wishlist.has(c)).length;
+  const _wlState = !wishlistedQuests.has(questName) ? 0 : wishlistQuestRec.has(questName) ? 2 : 1;
+  const _wishBtn = (rec, text, n, done) => `<button data-quest="${_qnSafe}" ${done ? 'disabled' : ''}
+      onclick="wishlistQuest(this.dataset.quest, ${rec});showQuestDetail(this.dataset.quest, false)"
+      style="margin-left:8px;background:none;border:1px solid ${done ? '#2a2a2a' : '#3a3a1a'};color:${done ? '#666' : '#9a9a3a'};padding:3px 9px;border-radius:3px;font-size:10px;cursor:${done ? 'default' : 'pointer'}">
+      ${done ? '★' : '☆'} ${text}${!done && n ? ` (${n} missing)` : ''}</button>`;
+  const wishQuestBtn = !_wishReq.length && !_wishAll.length ? '' :
+    _wishBtn(false, _wlState ? 'Required cards wishlisted' : 'Wishlist required', _miss(_wishReq), _wlState >= 1)
+    + (_wishAll.length > _wishReq.length
+      ? _wishBtn(true, _wlState === 2 ? 'Recommended wishlisted' : 'Wishlist required + recommended', _miss(_wishAll), _wlState === 2) : '');
 
   let html = `<h1>${questName} ${wikiLink(questName)}
     <span style="font-size:12px;color:${isDone?'#b07a30':statusColor};font-weight:normal;margin-left:8px">${isDone?'Done':statusLabel}</span>
   </h1>
-  <div class="subtitle">${typeStr}${qpStr} ${doneBtn}${wishQuestBtn}</div>`;
+  <div class="subtitle">${typeStr}${qpStr} ${doneBtn}${wishQuestBtn}</div>
+  ${_questProgressHtml(questName)}`;
 
   if (mini) {
     html += `<div style="background:#150e1a;border:1px solid #3a2850;border-radius:4px;padding:8px 12px;margin:10px 0;font-size:11px;color:#8a6aaa;line-height:1.6">
@@ -8886,120 +9191,27 @@ function showQuestDetail(questName, push = true) {
   // Card requirements — BM data (schema 2: sections → requirements → {label, cards, type})
   const bm = bmQuestCards[questName];
   if (bm) {
-    const itemRows = [], monsterRows = [], npcRows = [];
+    const itemRows = [], monsterRows = [], npcRows = [], recRows = [];
 
     for (const section of (bm.sections || [])) {
       for (const req of (section.requirements || [])) {
-        const cards = req.cards || [];
-        if (!cards.length) continue;
-        const label = req.label || cards[0] || '';
-
-        if (req.type === 'npc') {
-          // NPC interaction — must own the NPC card to talk to / interact with this NPC
-          for (const card of cards) {
-            const ok = isOwned(card);
-            const isCard = !!monsterDrops[card];
-            const nav = isCard
-              ? `style="cursor:pointer" data-nav="${escHtml(card)}" data-nav-type="monster" onclick="_navToCard(this)"`
-              : '';
-            const _npcImg = (cardDetails[card]||{}).imageUrl ? `<img src="${(cardDetails[card]||{}).imageUrl}" style="width:16px;height:16px;object-fit:contain;image-rendering:pixelated;flex-shrink:0" onerror="this.style.display='none'">` : '';
-            npcRows.push({ ok, html: `<div class="req-row">
-              <span class="req-icon ${ok?'ok':'fail'}">${ok?'✓':'✗'}</span>
-              ${_npcImg}
-              <span class="req-label" ${nav}>${label}</span>
-              <span class="req-note">${ok ? 'card owned' : (isCard ? 'need card' : 'no TCG card')}</span>
-              ${isCard ? _rowWishStar(card, ok) : ''}
-            </div>` });
-          }
-        } else if (req.type === 'enemy') {
-          // Each enemy card is a separate requirement
-          for (const card of cards) {
-            const ok = isOwned(card);
-            const isCard = !!monsterDrops[card];
-            const nav = isCard
-              ? `style="cursor:pointer" data-nav="${escHtml(card)}" data-nav-type="monster" onclick="_navToCard(this)"`
-              : '';
-            const _monImg = (cardDetails[card]||{}).imageUrl ? `<img src="${(cardDetails[card]||{}).imageUrl}" style="width:16px;height:16px;object-fit:contain;image-rendering:pixelated;flex-shrink:0" onerror="this.style.display='none'">` : '';
-            if (req.optional) {
-              monsterRows.push({ ok: true, optional: true, html: `<div class="req-row" style="opacity:0.5">
-                <span class="req-icon" style="color:#666">~</span>
-                ${_monImg}
-                <span class="req-label" ${nav} style="color:#666">${card}</span>
-                <span class="req-note" style="color:#555">${ok ? 'card owned' : (isCard ? 'no card' : 'no TCG card')} · can be avoided</span>
-              </div>` });
-            } else {
-              monsterRows.push({ ok, html: `<div class="req-row">
-                <span class="req-icon ${ok?'ok':'fail'}">${ok?'✓':'✗'}</span>
-                ${_monImg}
-                <span class="req-label" ${nav}>${card}</span>
-                <span class="req-note">${ok ? 'card owned' : (isCard ? 'need card' : 'no TCG card')}</span>
-                ${isCard ? _rowWishStar(card, ok) : ''}
-              </div>` });
-            }
-          }
-        } else if (cards.length === 1) {
-          // Single item card
-          const card = cards[0];
-          const altOk  = req.skillAlt ? getLevel(req.skillAlt.skill) >= req.skillAlt.level : false;
-          const altTag = req.skillAlt ? ` <span style="font-size:10px;color:#666">OR ${req.skillAlt.skill} ${req.skillAlt.level}</span>` : '';
-          const ok = isOwned(card) || altOk;
-          const isItemCard = !!itemSources[card];
-          const nav = isItemCard
-            ? `style="cursor:pointer" data-nav="${escHtml(card)}" data-nav-type="item" onclick="_navToCard(this)"`
-            : '';
-          const displayLabel = (label !== card) ? `${label} <span style="font-size:10px;color:#666">(${card})</span>` : `${card}${altTag}`;
-          const noteText = altOk ? `${req.skillAlt.skill} ${req.skillAlt.level} ✓` : ok ? 'owned' : 'need card';
-          const _itemImg = (cardDetails[card]||{}).imageUrl ? `<img src="${(cardDetails[card]||{}).imageUrl}" style="width:16px;height:16px;object-fit:contain;image-rendering:pixelated;flex-shrink:0" onerror="this.style.display='none'">` : '';
-          itemRows.push({ ok, html: `<div class="req-row">
-            <span class="req-icon ${ok?'ok':'fail'}">${ok?'✓':'✗'}</span>
-            ${_itemImg}
-            <span class="req-label" ${nav}>${displayLabel}</span>
-            <span class="req-note">${noteText}</span>
-            ${isItemCard ? _rowWishStar(card, ok) : ''}
-          </div>` });
-        } else {
-          // Any-of group — tier owned → obtainable → locked
-          const groupOk = cards.some(c => isOwned(c));
-          const levelSorted = sortCardsByLevel(cards);
-          const owned_  = levelSorted.filter(c => isOwned(c));
-          const getable = levelSorted.filter(c => !isOwned(c) && canGetItem(c));
-          const locked_ = levelSorted.filter(c => !isOwned(c) && !canGetItem(c));
-          const tiered  = [...owned_, ...getable, ...locked_];
-
-          const optHtml = tiered.map((c, i) => {
-            const cardOwned   = isOwned(c);
-            const cardGetable = !cardOwned && canGetItem(c);
-            const color       = cardOwned ? '#7ab07a' : cardGetable ? '#c8a830' : '#555';
-            const prevLocked  = i > 0 && locked_.includes(tiered[i-1]);
-            const sepColor    = (locked_.includes(c) || prevLocked) ? '#333' : '#444';
-            const sep   = i > 0 ? `<span style="color:${sepColor}"> · </span>` : '';
-            const inner = `<span style="color:${color}">${c}</span>`;
-            return sep + (itemSources[c]
-              ? `<span style="cursor:pointer" data-nav="${escHtml(c)}" data-nav-type="item" onclick="_navToCard(this)">${inner}</span>`
-              : inner);
-          }).join('');
-
-          itemRows.push({ ok: groupOk, html: `<div class="req-row" style="align-items:flex-start">
-            <span class="req-icon ${groupOk?'ok':'fail'}" style="margin-top:2px">${groupOk?'✓':'✗'}</span>
-            <div style="flex:1">
-              <div class="req-label" style="color:#888;font-size:11px;margin-bottom:3px">${/^an?y?\s/i.test(label) ? label : `Any: ${label}`}</div>
-              <div style="font-size:11px;line-height:1.6">${optHtml}</div>
-            </div>
-          </div>` });
-        }
+        if (!_reqCards(req).length && !req.info) continue;
+        const bucket = req.type === 'npc' ? npcRows : req.type === 'enemy' ? monsterRows : itemRows;
+        const row = _questReqRow(req);
+        (req.optional ? recRows : bucket).push(row);
       }
     }
 
-    const totalRows = itemRows.length + monsterRows.length + npcRows.length;
+    const totalRows = itemRows.length + monsterRows.length + npcRows.length + recRows.length;
     if (totalRows > 0) {
       if (npcRows.length > 0) {
         html += `<div class="section"><div class="section-header">NPC Interactions</div><div style="margin-top:8px">`;
-        for (const r of [...npcRows.filter(r=>!r.ok), ...npcRows.filter(r=>r.ok)]) html += r.html;
+        for (const r of _questRowOrder(npcRows)) html += r.html;
         html += `</div></div>`;
       }
       if (itemRows.length > 0) {
         html += `<div class="section"><div class="section-header">Items &amp; Cards Required</div><div style="margin-top:8px">`;
-        for (const r of [...itemRows.filter(r=>!r.ok), ...itemRows.filter(r=>r.ok)]) html += r.html;
+        for (const r of _questRowOrder(itemRows)) html += r.html;
         html += `</div></div>`;
       }
       if (monsterRows.length > 0) {
@@ -9008,15 +9220,36 @@ function showQuestDetail(questName, push = true) {
           ? `Enemies to Defeat <span style="font-size:10px;color:#555;font-weight:normal">(${optionalCount} optional)</span>`
           : 'Enemies to Defeat';
         html += `<div class="section"><div class="section-header">${hdr}</div><div style="margin-top:8px">`;
-        // required missing → required owned → optional
-        const required = monsterRows.filter(r => !r.optional);
-        const optional = monsterRows.filter(r => r.optional);
-        for (const r of [...required.filter(r=>!r.ok), ...required.filter(r=>r.ok), ...optional]) html += r.html;
+        for (const r of _questRowOrder(monsterRows)) html += r.html;
+        html += `</div></div>`;
+      }
+      if (recRows.length > 0) {
+        html += `<div class="section"><div class="section-header">Optional &amp; recommended <span style="font-size:10px;color:#555;font-weight:normal">(never blocks)</span></div><div style="margin-top:8px">`;
+        for (const r of [...recRows.filter(r => r.ok), ...recRows.filter(r => !r.ok)]) html += r.html;
         html += `</div></div>`;
       }
     } else {
       html += `<div style="color:#555;font-size:12px;margin-top:4px">No card requirements tracked. Check the wiki for full details.</div>`;
     }
+    // NPCs and items checked against the wiki that have no TCG card — no restriction
+    // Checked entries: some have no card at all; others have a card but aren't needed
+    // (recommended only, avoidable, rewards…) — those still show whether you own it.
+    const _nc = bm.consideredNoCard || [];
+    const _ncCard = x => _cardInfo(x.replace(/\s*\([^)]*\)\s*/g, ' ').trim());
+    const _ncHas = _nc.filter(x => _ncCard(x)), _ncNone = _nc.filter(x => !_ncCard(x));
+    const _chip = (x, extra, title) => `<span style="display:inline-flex;align-items:center;gap:3px;padding:1px 6px;border-radius:3px;font-size:11px;background:#101010;border:1px solid #2a2a2a;color:#777" title="${title}">${extra}${escHtml(x)}</span>`;
+    if (_ncHas.length) {
+      html += `<div class="section"><div class="section-header">Checked \u2014 not required <span style="font-size:10px;color:#555;font-weight:normal">(has a card · ✓ owned, ✗ not owned)</span></div>
+        <div style="display:flex;flex-wrap:wrap;gap:4px;margin-top:8px">${_ncHas.map(x => {
+          const info = _ncCard(x), own = isOwned(info.exact);
+          return `<span style="cursor:pointer" data-nav="${escHtml(info.exact)}" data-nav-type="${info.type}" onclick="_navToCard(this)">${_chip(x, `<span style="color:${own ? '#5a9a5a' : '#a05050'}">${own ? '✓' : '✗'}</span>`, `${escHtml(info.exact)} card ${own ? 'owned' : 'not owned'} — not needed for this quest`)}</span>`;
+        }).join('')}</div></div>`;
+    }
+    if (_ncNone.length) {
+      html += `<div class="section"><div class="section-header">Checked \u2014 no card <span style="font-size:10px;color:#555;font-weight:normal">(no restriction)</span></div>
+        <div style="display:flex;flex-wrap:wrap;gap:4px;margin-top:8px">${_ncNone.map(x => _chip(x, '', 'No TCG card exists \u2014 no restriction')).join('')}</div></div>`;
+    }
+    if (bm.note) html += `<div style="color:#666;font-size:11px;margin-top:6px">${escHtml(bm.note)}</div>`;
   } else {
     // Fallback: wiki infobox data (may include non-card items)
     if (q.itemsRequired?.length) {
@@ -9076,7 +9309,7 @@ function renderRulesTab() {
     <h3>Core Rules</h3>
     <table>
       <tr><th>Action</th><th>Card Required?</th></tr>
-      <tr><td>Talk to / interact with an NPC (if they have a TCG card)</td><td>Yes — need the NPC card, for <em>any</em> interaction (talking, trading, quests, slayer masters, diary rewards)</td></tr>
+      <tr><td>Talk to / interact with an NPC (if they have a TCG card)</td><td>Yes — need the NPC card, for <em>any</em> interaction (talking, trading, quests, slayer masters, diary rewards) — including NPCs who speak in a quest cutscene</td></tr>
       <tr><td>Talk to / interact with an NPC (no TCG card exists)</td><td>No — always accessible</td></tr>
       <tr><td>Fight or kill an NPC</td><td>Yes — need the monster card</td></tr>
       <tr><td>Pickpocket an NPC</td><td>Yes — need the monster card</td></tr>
@@ -9101,7 +9334,7 @@ function renderRulesTab() {
     <p><strong>Example:</strong> You own the Iron ore card. You can smelt Iron bars even without the Iron bar card. But you can't then smith those bars into equipment — that requires the Iron bar card.</p>
 
     <h3>NPC Interactions</h3>
-    <p>If a TCG card exists for an NPC, you need that card to interact with them in any way — including talking to them to start or progress a quest, using a Slayer master, or claiming Achievement Diary rewards. NPCs with no TCG card are always accessible. (The Bronzeman plugin enforces most of this; the rule applies even where it doesn't — e.g. NPCs of quests you've already started.)</p>
+    <p>If a TCG card exists for an NPC, you need that card to interact with them in any way — including talking to them to start or progress a quest, using a Slayer master, or claiming Achievement Diary rewards. NPCs with no TCG card are always accessible. (The Bronzeman plugin enforces most of this; the rule applies even where it doesn't — e.g. NPCs of quests you've already started.) NPCs who speak during a cutscene count too: the planner lists them as quest requirements.</p>
 
     <h3>Item versions</h3>
     <p>One card covers every version of an item listed for it in the TCG catalog: all potion doses, noted items, poisoned weapons, charged/uncharged and damaged versions — and some raw forms, e.g. the <em>Ranarr weed</em> card covers Grimy ranarr weed and the <em>Diamond</em> card covers Uncut diamond. The planner matches drops, loot and requirements using these lists.</p>
@@ -9126,6 +9359,18 @@ function renderRulesTab() {
       <li>NPC card for the quest's start NPC (if a TCG card exists for them)</li>
       <li>Monster cards for any required kills</li>
       <li>Cards for any items you must use or hand over during the quest — even if the game hands you that item mid-quest</li>
+      <li>Cards for every NPC you talk to, including NPCs who speak in a cutscene</li>
+      <li>As an Ironman, cards for the full production chain of anything you have to make yourself (e.g. ogre arrows: logs, knife, feathers, wolf bones, chisel)</li>
+    </ul>
+    <p>How the Questing tab reads a requirement:</p>
+    <ul>
+      <li><strong>Any of</strong>: one owned card from the list is enough (e.g. any pickaxe, Turael or Aya). "Need all" means every card listed</li>
+      <li><strong>Routes</strong>: different ways to do the same step, one per line. A route counts when you own every card on it. A chip marked +N also accepts any of N alternatives; hover it to see them</li>
+      <li><strong>Spells</strong>: a spell route needs its full rune cost (from the wiki spellbooks) and the Magic level. An elemental rune can also come from an elemental staff, battlestaff, mystic staff or combination rune</li>
+      <li><strong>Desert access</strong> is one shared set of routes, used by every desert quest: the Shantay Pass (Shantay + Coins + Shantay pass), a fairy ring (Dramen or Lunar staff), Pharaoh's sceptre, Desert amulet 2+ or Necklace of passage. Routes with no card to check (Desert elite diary, the Lumbridge Swamp shortcut) are listed but not tracked</li>
+      <li><strong>Optional &amp; recommended</strong> requirements have their own section. They never block a quest, but show ✓ / ✗ like required ones, with an "optional" tag. Things that were checked and have a card but aren't needed (e.g. an avoidable enemy) are listed the same way under "Checked — not required"</li>
+      <li><strong>Progress bars</strong> (quests and diaries): Required x/y counts prerequisite quests done, skill levels, and card requirements met. An "any of" group or a set of routes counts as one, met when you own any option, so long lists don't inflate the total. Quests also show Recommended and All; diaries show <em>eligible tasks</em> (tasks whose every requirement is met, or that you've ticked done) and <em>requirements met</em>, each for the selected tier and for all tiers, plus a small bar on each tier card</li>
+      <li><strong>Wishlist</strong>: a quest can be wishlisted with its required cards only, or required + recommended. The Wishlist tab shows which mode each quest uses</li>
     </ul>
 
     <h3>Foils</h3>

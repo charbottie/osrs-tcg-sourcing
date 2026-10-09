@@ -6,6 +6,11 @@ Central source for anything that needs to know what a spell costs: diary
 
 Output: scripts/output/spells.json
   { "<Spell name>": { book, level, runes: {"Law rune": 1, ...}, members } }
+Also: scripts/output/rune_sources.json
+  { "<Elemental rune>": ["<combination rune or staff that supplies it>", ...] }
+  From the wiki's Elemental staff and Combination rune tables, plus the
+  few other unlimited sources in EXTRA_SOURCES. Lets a spell's rune cost be
+  met by "the rune, or anything that supplies it".
 
 Usage:
   python3 scripts/generate_spells.py
@@ -20,6 +25,15 @@ from pathlib import Path
 from generate_diaries import _fetch_wikitext
 
 _OUT = Path(__file__).resolve().parent / "output" / "spells.json"
+_SOURCES_OUT = _OUT.with_name("rune_sources.json")
+
+ELEMENTS = ("Air rune", "Water rune", "Earth rune", "Fire rune")
+# Unlimited rune sources the two wiki tables don't list (wiki item pages).
+# Tomes are left out: they only supply runes while charged with pages.
+EXTRA_SOURCES = {
+    "Kodai wand": ["Water rune"],
+    "Twinflame staff": ["Fire rune", "Water rune"],
+}
 
 BOOKS = {
     "Standard": "Standard spellbook",
@@ -59,6 +73,43 @@ def parse_book(book: str, wikitext: str) -> dict[str, dict]:
     return spells
 
 
+_PLINK_RE = re.compile(r"\{\{plink[tp]?\|([^}|]+)")
+
+
+def rune_sources() -> dict[str, list[str]]:
+    """Elemental rune -> the combination runes and staves that also supply it."""
+    sources: dict[str, list[str]] = {r: [] for r in ELEMENTS}
+
+    def add(rune: str, item: str) -> None:
+        if item != rune and item not in sources[rune]:
+            sources[rune].append(item)
+
+    # Combination rune table: "| {{plinkt|Mist rune|...}} | {{plinkp|Air rune}} {{plinkp|Water rune}} ... | {{plinkt|Mist battlestaff}}"
+    combo_of: dict[str, list[str]] = {}
+    for row in _ROW_SPLIT.split(_fetch_wikitext("Combination rune")):
+        names = [n.strip() for n in _PLINK_RE.findall(row)]
+        parts = [n for n in names if n in ELEMENTS]
+        if names and names[0].endswith(" rune") and len(parts) == 2:
+            combo_of[names[0]] = parts
+    # Elemental staff price table: first plink is the rune, the rest are staves supplying it
+    text = _fetch_wikitext("Elemental staff")
+    for row in _ROW_SPLIT.split(text[text.find("==Price=="):]):
+        names = [n.strip() for n in _PLINK_RE.findall(row)]
+        if len(names) < 2:
+            continue
+        rune = names[0] if names[0].endswith(" rune") else names[1]
+        staves = [n for n in names if n != rune and not n.endswith(" rune")]
+        for element in ([rune] if rune in ELEMENTS else combo_of.get(rune, [])):
+            if rune not in ELEMENTS:
+                add(element, rune)
+            for staff in staves:
+                add(element, staff)
+    for item, runes in EXTRA_SOURCES.items():
+        for rune in runes:
+            add(rune, item)
+    return sources
+
+
 def main() -> int:
     spells: dict[str, dict] = {}
     for book, page in BOOKS.items():
@@ -68,6 +119,9 @@ def main() -> int:
             spells.setdefault(k, v)
     _OUT.write_text(json.dumps(spells, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
     print(f"Wrote {_OUT} ({len(spells)} spells)")
+    sources = rune_sources()
+    _SOURCES_OUT.write_text(json.dumps(sources, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+    print(f"Wrote {_SOURCES_OUT} ({sum(map(len, sources.values()))} sources)")
     return 0
 
 
