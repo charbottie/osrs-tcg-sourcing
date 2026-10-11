@@ -465,7 +465,7 @@
       "Skills necklace"
      ],
      "locationAccess": {
-      "Al Kharid Mine": "desert",
+      "Al Kharid Mine": null,
       "Dwarven Mine": null,
       "Mining Guild": null,
       "Skills necklace": null
@@ -14715,7 +14715,7 @@
      "locationAccess": {
       "Sunbleak Island": "sailing",
       "The Great Conch": "sailing",
-      "Al Kharid Mine": "desert",
+      "Al Kharid Mine": null,
       "Ardougne Zoo": null,
       "Cairn Isle": null,
       "Dwarven Mine": null,

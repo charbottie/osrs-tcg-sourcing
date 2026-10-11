@@ -2098,7 +2098,7 @@
       "skill": "Farming",
       "level": 61,
       "method": "Harvest Snape grass allotment",
-      "tool": "Snape grass seed + Rake + Seed dibber",
+      "tool": "Snape grass seed + Rake + Seed dibber + Spade",
       "xp": 82
     },
     "production": null,
@@ -4090,8 +4090,9 @@
       "skill": "Farming",
       "level": 9,
       "method": "Harvest Guam herb patch",
-      "tool": "Guam seed + Rake + Seed dibber",
-      "xp": 11.5
+      "tool": "Guam seed + Rake + Seed dibber + Spade",
+      "xp": 12.5,
+      "plant_xp": 11.0
     },
     "production": {
       "skill": "Herblore",
@@ -5298,8 +5299,9 @@
       "skill": "Farming",
       "level": 14,
       "method": "Harvest Marrentill herb patch",
-      "tool": "Marrentill seed + Rake + Seed dibber",
-      "xp": 13.5
+      "tool": "Marrentill seed + Rake + Seed dibber + Spade",
+      "xp": 15.0,
+      "plant_xp": 13.5
     },
     "production": {
       "skill": "Herblore",
@@ -6511,7 +6513,7 @@
       "skill": "Farming",
       "level": 19,
       "method": "Harvest Tarromin herb patch",
-      "tool": "Tarromin seed + Rake + Seed dibber",
+      "tool": "Tarromin seed + Rake + Seed dibber + Spade",
       "xp": 18
     },
     "production": {
@@ -7709,8 +7711,9 @@
       "skill": "Farming",
       "level": 26,
       "method": "Harvest Harralander herb patch",
-      "tool": "Harralander seed + Rake + Seed dibber",
-      "xp": 21.5
+      "tool": "Harralander seed + Rake + Seed dibber + Spade",
+      "xp": 24.0,
+      "plant_xp": 21.5
     },
     "production": {
       "skill": "Herblore",
@@ -9057,7 +9060,7 @@
       "skill": "Farming",
       "level": 32,
       "method": "Harvest Ranarr herb patch",
-      "tool": "Ranarr seed + Rake + Seed dibber",
+      "tool": "Ranarr seed + Rake + Seed dibber + Spade",
       "xp": 30.5
     },
     "production": {
@@ -10253,8 +10256,9 @@
       "skill": "Farming",
       "level": 44,
       "method": "Harvest Irit herb patch",
-      "tool": "Irit seed + Rake + Seed dibber",
-      "xp": 43
+      "tool": "Irit seed + Rake + Seed dibber + Spade",
+      "xp": 48.5,
+      "plant_xp": 43.0
     },
     "production": {
       "skill": "Herblore",
@@ -11506,8 +11510,9 @@
       "skill": "Farming",
       "level": 50,
       "method": "Harvest Avantoe herb patch",
-      "tool": "Avantoe seed + Rake + Seed dibber",
-      "xp": 54.5
+      "tool": "Avantoe seed + Rake + Seed dibber + Spade",
+      "xp": 61.5,
+      "plant_xp": 54.5
     },
     "production": {
       "skill": "Herblore",
@@ -12799,8 +12804,9 @@
       "skill": "Farming",
       "level": 56,
       "method": "Harvest Kwuarm herb patch",
-      "tool": "Kwuarm seed + Rake + Seed dibber",
-      "xp": 69
+      "tool": "Kwuarm seed + Rake + Seed dibber + Spade",
+      "xp": 78.0,
+      "plant_xp": 69.0
     },
     "production": {
       "skill": "Herblore",
@@ -14072,8 +14078,9 @@
       "skill": "Farming",
       "level": 67,
       "method": "Harvest Cadantine herb patch",
-      "tool": "Cadantine seed + Rake + Seed dibber",
-      "xp": 106.5
+      "tool": "Cadantine seed + Rake + Seed dibber + Spade",
+      "xp": 120.0,
+      "plant_xp": 106.5
     },
     "production": {
       "skill": "Herblore",
@@ -15370,8 +15377,9 @@
       "skill": "Farming",
       "level": 79,
       "method": "Harvest Dwarf weed herb patch",
-      "tool": "Dwarf weed seed + Rake + Seed dibber",
-      "xp": 170.5
+      "tool": "Dwarf weed seed + Rake + Seed dibber + Spade",
+      "xp": 192.0,
+      "plant_xp": 170.5
     },
     "production": {
       "skill": "Herblore",
@@ -15553,7 +15561,7 @@
       "skill": "Farming",
       "level": 85,
       "method": "Harvest Torstol herb patch",
-      "tool": "Torstol seed + Rake + Seed dibber",
+      "tool": "Torstol seed + Rake + Seed dibber + Spade",
       "xp": 224.5
     },
     "production": {
@@ -19696,9 +19704,9 @@
     "gathering": {
       "skill": "Fishing",
       "level": 81,
-      "method": "Big Net (Manta ray spot)",
-      "tool": "Big fishing net",
-      "xp": 46
+      "method": "Fishing Trawler reward (also drift net fishing at 90, Tempoross reward pool)",
+      "tool": "None",
+      "xp": 69
     },
     "production": null,
     "spawns": [],
@@ -19938,9 +19946,9 @@
     "gathering": {
       "skill": "Fishing",
       "level": 79,
-      "method": "Big Net (Sea turtle spot)",
-      "tool": "Big fishing net",
-      "xp": 38
+      "method": "Fishing Trawler reward (also drift net fishing at 80, Tempoross reward pool)",
+      "tool": "None",
+      "xp": 57
     },
     "production": null,
     "spawns": [],
@@ -20754,7 +20762,8 @@
       "level": 1,
       "method": "Mine Copper rock",
       "tool": "Pickaxe",
-      "xp": 3.5
+      "xp": 17.5,
+      "note": ""
     },
     "production": null,
     "spawns": [],
@@ -20994,7 +21003,8 @@
       "level": 1,
       "method": "Mine Tin rock",
       "tool": "Pickaxe",
-      "xp": 3.5
+      "xp": 17.5,
+      "note": ""
     },
     "production": null,
     "spawns": [],
@@ -80127,7 +80137,10 @@
       "level": 40,
       "method": "Mine Gem rock",
       "tool": "Pickaxe",
-      "xp": 7.5
+      "xp": 65,
+      "quests": [
+        "Shilo Village"
+      ]
     },
     "production": {
       "skill": "Crafting",
@@ -81969,7 +81982,10 @@
       "level": 40,
       "method": "Mine Gem rock",
       "tool": "Pickaxe",
-      "xp": 7.5
+      "xp": 65,
+      "quests": [
+        "Shilo Village"
+      ]
     },
     "production": {
       "skill": "Crafting",
@@ -83758,10 +83774,13 @@
     "quests": [],
     "gathering": {
       "skill": "Mining",
-      "level": 30,
+      "level": 40,
       "method": "Mine Gem rock",
       "tool": "Pickaxe",
-      "xp": 7.5
+      "xp": 65,
+      "quests": [
+        "Shilo Village"
+      ]
     },
     "production": {
       "skill": "Crafting",
@@ -85550,10 +85569,13 @@
     "quests": [],
     "gathering": {
       "skill": "Mining",
-      "level": 20,
+      "level": 40,
       "method": "Mine Gem rock",
       "tool": "Pickaxe",
-      "xp": 7.5
+      "xp": 65,
+      "quests": [
+        "Shilo Village"
+      ]
     },
     "production": {
       "skill": "Crafting",
@@ -85680,10 +85702,13 @@
     "quests": [],
     "gathering": {
       "skill": "Mining",
-      "level": 10,
+      "level": 40,
       "method": "Mine Gem rock",
       "tool": "Pickaxe",
-      "xp": 7.5
+      "xp": 65,
+      "quests": [
+        "Shilo Village"
+      ]
     },
     "production": {
       "skill": "Crafting",
@@ -85756,10 +85781,13 @@
     "quests": [],
     "gathering": {
       "skill": "Mining",
-      "level": 13,
+      "level": 40,
       "method": "Mine Gem rock",
       "tool": "Pickaxe",
-      "xp": 7.5
+      "xp": 65,
+      "quests": [
+        "Shilo Village"
+      ]
     },
     "production": {
       "skill": "Crafting",
@@ -85822,10 +85850,13 @@
     "quests": [],
     "gathering": {
       "skill": "Mining",
-      "level": 16,
+      "level": 40,
       "method": "Mine Gem rock",
       "tool": "Pickaxe",
-      "xp": 7.5
+      "xp": 65,
+      "quests": [
+        "Shilo Village"
+      ]
     },
     "production": {
       "skill": "Crafting",
@@ -89215,9 +89246,10 @@
     "gathering": {
       "skill": "Farming",
       "level": 1,
-      "method": "Pick Flax field",
+      "method": "Picking flax gives no XP; Farming route: Flax seed ×3 in a hops patch, level 18, 16 plant / 17.5 per flax",
       "tool": "None",
-      "xp": 1
+      "xp": 1,
+      "noXp": true
     },
     "production": null,
     "spawns": [],
@@ -93291,7 +93323,7 @@
       "skill": "Farming",
       "level": 1,
       "method": "Harvest Potato allotment",
-      "tool": "Potato seed + Rake + Seed dibber",
+      "tool": "Potato seed + Rake + Seed dibber + Spade",
       "xp": 9
     },
     "production": null,
@@ -93770,7 +93802,7 @@
       "skill": "Farming",
       "level": 5,
       "method": "Harvest Onion allotment",
-      "tool": "Onion seed + Rake + Seed dibber",
+      "tool": "Onion seed + Rake + Seed dibber + Spade",
       "xp": 10.5
     },
     "production": null,
@@ -94091,8 +94123,9 @@
       "skill": "Farming",
       "level": 7,
       "method": "Harvest Cabbage allotment",
-      "tool": "Cabbage seed + Rake + Seed dibber",
-      "xp": 10
+      "tool": "Cabbage seed + Rake + Seed dibber + Spade",
+      "xp": 11.5,
+      "plant_xp": 10.0
     },
     "production": null,
     "spawns": [
@@ -94689,8 +94722,9 @@
       "skill": "Farming",
       "level": 12,
       "method": "Harvest Tomato allotment",
-      "tool": "Tomato seed + Rake + Seed dibber",
-      "xp": 12.5
+      "tool": "Tomato seed + Rake + Seed dibber + Spade",
+      "xp": 14.0,
+      "plant_xp": 12.5
     },
     "production": null,
     "spawns": [
@@ -103766,7 +103800,7 @@
       "skill": "Farming",
       "level": 73,
       "method": "Harvest Lantadyme herb patch",
-      "tool": "Lantadyme seed + Rake + Seed dibber",
+      "tool": "Lantadyme seed + Rake + Seed dibber + Spade",
       "xp": 151.5
     },
     "production": {
@@ -106267,8 +106301,12 @@
       "level": 1,
       "method": "Cast Bloom in Mort Myre",
       "tool": "Silver sickle (b)",
-      "xp": 1,
-      "questRequired": "Nature Spirit"
+      "xp": null,
+      "quests": [
+        "Nature Spirit"
+      ],
+      "note": "Casting Bloom costs Prayer and gives no Farming XP (unconfirmed)",
+      "noXp": true
     },
     "production": null,
     "spawns": [],
@@ -106450,8 +106488,9 @@
       "skill": "Farming",
       "level": 38,
       "method": "Harvest Toadflax herb patch",
-      "tool": "Toadflax seed + Rake + Seed dibber",
-      "xp": 34.5
+      "tool": "Toadflax seed + Rake + Seed dibber + Spade",
+      "xp": 38.5,
+      "plant_xp": 34.0
     },
     "production": {
       "skill": "Herblore",
@@ -106671,7 +106710,7 @@
       "skill": "Farming",
       "level": 62,
       "method": "Harvest Snapdragon herb patch",
-      "tool": "Snapdragon seed + Rake + Seed dibber",
+      "tool": "Snapdragon seed + Rake + Seed dibber + Spade",
       "xp": 98.5
     },
     "production": {
@@ -107751,7 +107790,11 @@
       "level": 65,
       "method": "Pot (Karambwan spot)",
       "tool": "Karambwan vessel + bait",
-      "xp": 105
+      "xp": 50,
+      "quests": [
+        "Tai Bwo Wannai Trio"
+      ],
+      "note": ""
     },
     "production": null,
     "spawns": [],
@@ -113832,7 +113875,7 @@
     "gathering": {
       "skill": "Fishing",
       "level": 38,
-      "method": "Bait (Cave eel spot, Swamp Caves/Mos Le'Harmless)",
+      "method": "Bait (frog spawn/eel spot, Lumbridge Swamp Caves / Dorgesh-Kaan South Dungeon)",
       "tool": "Fishing rod + bait",
       "xp": 80
     },
@@ -128777,8 +128820,9 @@
       "skill": "Farming",
       "level": 31,
       "method": "Harvest Strawberry allotment",
-      "tool": "Strawberry seed + Rake + Seed dibber",
-      "xp": 26
+      "tool": "Strawberry seed + Rake + Seed dibber + Spade",
+      "xp": 29.0,
+      "plant_xp": 26.0
     },
     "production": null,
     "spawns": [
@@ -130354,8 +130398,9 @@
       "skill": "Farming",
       "level": 47,
       "method": "Harvest Watermelon allotment",
-      "tool": "Watermelon seed + Rake + Seed dibber",
-      "xp": 55.5
+      "tool": "Watermelon seed + Rake + Seed dibber + Spade",
+      "xp": 54.5,
+      "plant_xp": 48.5
     },
     "production": null,
     "spawns": [],
@@ -130445,7 +130490,7 @@
       "skill": "Farming",
       "level": 20,
       "method": "Harvest Sweetcorn allotment",
-      "tool": "Sweetcorn seed + Rake + Seed dibber",
+      "tool": "Sweetcorn seed + Rake + Seed dibber + Spade",
       "xp": 19
     },
     "production": null,
@@ -136659,7 +136704,9 @@
       "level": 35,
       "method": "Mine Sandstone",
       "tool": "Pickaxe",
-      "xp": 30
+      "xp": 30.0,
+      "access": "desert",
+      "note": "xp 30-60 (by size)"
     },
     "production": null,
     "spawns": [],
@@ -136677,7 +136724,9 @@
       "level": 45,
       "method": "Mine Granite rock",
       "tool": "Pickaxe",
-      "xp": 50
+      "xp": 50.0,
+      "access": "desert",
+      "note": "xp 50-75 (by size: 50 / 60 / 75)"
     },
     "production": null,
     "spawns": [],
@@ -140222,7 +140271,10 @@
       "level": 30,
       "method": "Mine Rune essence mine",
       "tool": "Pickaxe",
-      "xp": 5
+      "xp": 5,
+      "quests": [
+        "Rune Mysteries"
+      ]
     },
     "production": {
       "skill": "Mining",
@@ -140321,7 +140373,10 @@
       "level": 62,
       "method": "Small Net (Monkfish spot)",
       "tool": "Small fishing net",
-      "xp": 120
+      "xp": 120,
+      "quests": [
+        "Swan Song"
+      ]
     },
     "production": null,
     "spawns": [],
@@ -142606,7 +142661,7 @@
     "quests": [],
     "gathering": {
       "skill": "Mining",
-      "level": 47,
+      "level": 10,
       "method": "Rock (Asgarnian Ice Dungeon)",
       "tool": "Pickaxe",
       "xp": 17.5
@@ -149120,10 +149175,11 @@
     "quests": [],
     "gathering": {
       "skill": "Woodcutting",
-      "level": 42,
+      "level": 54,
       "method": "Chop Arctic pine tree",
       "tool": "Axe",
-      "xp": 40
+      "xp": 40,
+      "quests": []
     },
     "production": {
       "skill": "Firemaking",
@@ -154337,8 +154393,9 @@
       "skill": "Fishing",
       "level": 85,
       "method": "Cage (Dark Crab spot)",
-      "tool": "Dark fishing bait",
-      "xp": 130
+      "tool": "Dark fishing bait + Spade",
+      "xp": 130,
+      "access": "wilderness"
     },
     "production": null,
     "spawns": [],
@@ -160980,7 +161037,8 @@
       "level": 82,
       "method": "Bait (Anglerfish spot)",
       "tool": "Fishing rod + sandworms",
-      "xp": 120
+      "xp": 120,
+      "access": "kourend"
     },
     "production": null,
     "spawns": [],
@@ -162915,7 +162973,8 @@
       "level": 90,
       "method": "Chop Redwood tree",
       "tool": "Axe",
-      "xp": 380
+      "xp": 380,
+      "access": "kourend"
     },
     "production": null,
     "spawns": [],
@@ -179846,10 +179905,15 @@
     "quests": [],
     "gathering": {
       "skill": "Mining",
-      "level": 15,
+      "level": 60,
       "method": "Mine Darkmeyer essence vein",
       "tool": "Pickaxe",
-      "xp": 3.5
+      "xp": 5,
+      "quests": [
+        "Sins of the Father"
+      ],
+      "note": "",
+      "access": "morytania"
     },
     "production": null,
     "spawns": [],
@@ -192172,32 +192236,23 @@
     "rdtMonsters": [],
     "quests": [],
     "gathering": null,
-    "production": {
-      "skill": "Construction",
-      "level": 1,
-      "xp": 1.0,
-      "facilities": "Totem site",
-      "tools": [
-        "Knife"
-      ],
-      "quests": null,
-      "ingredients": [
-        {
-          "item": "Oak logs",
-          "quantity": 1
-        },
-        {
-          "item": "Oak shortbow (u)",
-          "quantity": 4
-        }
-      ],
-      "outputQuantity": 20
-    },
     "spawns": [],
     "shopBought": false,
     "shops": [],
     "clueTiers": [],
-    "alwaysAvailable": false
+    "alwaysAvailable": false,
+    "activity": {
+      "name": "Vale Totems",
+      "quests": [
+        "Vale Totems"
+      ],
+      "levels": {
+        "Fletching": 20
+      },
+      "access": "varlamore",
+      "note": "Claimed from offerings at the totem sites in Auburn Valley",
+      "wiki": "\"obtained from claiming offerings during the Vale Totems minigame\"; minigame requires \"Completion of the Vale Totems miniquest\" (which needs Children of the Sun) and \"Level 20 Fletching\""
+    }
   },
   "Antler guard": {
     "monsters": [

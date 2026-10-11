@@ -770,10 +770,13 @@
     "label": "Sailing islands",
     "routes": [
       {
-        "label": "Sail there with your own boat (Sailing) — not tracked yet",
-        "manual": true
+        "label": "Sail there in your own boat (from Pandemonium)",
+        "quests": [
+          "Pandemonium"
+        ]
       }
-    ]
+    ],
+    "note": "Ports with a Sailing level to dock check that level in the method itself"
   },
   "slayer_helmet": {
     "label": "Slayer helmet",
@@ -797,5 +800,23 @@
     "sources": [
       "Slayer helmet"
     ]
+  },
+  "house": {
+    "label": "Player-owned house",
+    "routes": [
+      {
+        "label": "Buy one from an estate agent (1,000 coins)",
+        "cards": [
+          "Coins"
+        ]
+      },
+      {
+        "label": "Daddy's Home (free house)",
+        "quests": [
+          "Daddy's Home"
+        ]
+      }
+    ],
+    "note": "Estate agents have no card. OSRS Wiki: \"Players may either pay 1,000 coins or complete the quest Daddy's Home to get their first house\""
   }
 }

@@ -48,7 +48,7 @@
   /* ── Skilling tab ── */
   #skill-panel { flex: 1; display: flex; overflow: hidden; }
   #skill-list-pane {
-    width: 280px; min-width: 280px;
+    width: var(--side-w); min-width: var(--side-w); box-sizing: border-box;
     background: #141414;
     border-right: 1px solid #333;
     overflow-y: auto;
@@ -95,8 +95,9 @@
 
   /* ── Questing tab ── */
   #quest-panel { flex: 1; display: flex; overflow: hidden; }
+  :root { --side-w: 280px; }   /* every tab's left panel uses this width */
   #quest-list-pane {
-    width: 320px; min-width: 320px;
+    width: var(--side-w); min-width: var(--side-w);
     background: #141414;
     border-right: 1px solid #333;
     display: flex; flex-direction: column;
@@ -171,7 +172,7 @@
   /* ── Bosses tab ── */
   #boss-panel { flex: 1; display: flex; overflow: hidden; }
   #boss-list-pane {
-    width: 280px; min-width: 280px;
+    width: var(--side-w); min-width: var(--side-w);
     background: #141414;
     border-right: 1px solid #333;
     display: flex; flex-direction: column;
@@ -210,7 +211,7 @@
   /* ── Diaries tab ── */
   #diary-panel { flex:1; display:flex; overflow:hidden; }
   #diary-list-pane {
-    width:260px; min-width:260px;
+    width: var(--side-w); min-width: var(--side-w);
     background:#141414;
     border-right:1px solid #333;
     display:flex; flex-direction:column;
@@ -235,7 +236,17 @@
   }
 
   /* ── Rules tab ── */
-  #rules-panel { flex: 1; overflow-y: auto; padding: 32px 40px; max-width: 720px; }
+  #rules-panel { flex: 1; overflow-y: auto; padding: 0 40px 48px; }
+  #rules-panel .rules-inner { max-width: 860px; margin: 0 auto; padding-top: 28px; }
+  #rules-wrap { flex: 1; display: flex; overflow: hidden; }
+  #rules-side { width: var(--side-w); min-width: var(--side-w); background: #141414; border-right: 1px solid #333; overflow-y: auto; padding: 8px 0; }
+  #rules-side .rules-side-head { padding: 6px 14px 8px; font-size: 10px; text-transform: uppercase; letter-spacing: 1px; color: #555; }
+  #rules-side a { display: block; padding: 6px 14px; font-size: 12px; color: #bbb; cursor: pointer; border-left: 2px solid transparent; }
+  #rules-side a:hover { background: #1c1c1c; }
+  #rules-side a.active { background: #2a2000; border-left-color: #b07a30; color: #e8c97a; }
+  #rules-panel h3 { scroll-margin-top: 16px; }
+  #rules-panel td.r-yes:last-child { color: #d0a050; }
+  #rules-panel td.r-no:last-child { color: #5a9a5a; }
   #rules-panel h2 { color: #e8c97a; font-size: 16px; margin-bottom: 16px; }
   #rules-panel h3 { color: #c8b060; font-size: 13px; margin: 20px 0 8px; text-transform: uppercase; letter-spacing: 1px; }
   #rules-panel p, #rules-panel li { color: #999; line-height: 1.6; margin-bottom: 8px; font-size: 13px; }
@@ -244,12 +255,12 @@
   #rules-panel th { text-align: left; padding: 6px 10px; font-size: 11px; color: #888; border-bottom: 1px solid #333; text-transform: uppercase; letter-spacing: 0.5px; }
   #rules-panel td { padding: 6px 10px; font-size: 12px; border-bottom: 1px solid #222; }
   #rules-panel td:first-child { color: #c8c8c8; }
-  #rules-panel td:last-child { color: #5a9a5a; }
+  #rules-panel td:last-child { color: #aaa; }
 
   /* ── Left: card list ── */
   #sidebar {
-    width: 260px;
-    min-width: 260px;
+    width: var(--side-w);
+    min-width: var(--side-w);
     background: #141414;
     border-right: 1px solid #333;
     display: flex;
@@ -595,7 +606,7 @@
   /* ── Packs tab ── */
   #pack-panel { flex: 1; display: flex; overflow: hidden; }
   #pack-list-pane {
-    width: 240px; min-width: 240px;
+    width: var(--side-w); min-width: var(--side-w); box-sizing: border-box;
     background: #141414;
     border-right: 1px solid #333;
     overflow-y: auto;
@@ -664,13 +675,14 @@
   .wish-star:hover { color: #e8c97a !important; background: rgba(232,201,122,0.1); }
 
   /* ── Equipment tab ── */
-  #equip-panel { flex: 1; display: flex; flex-direction: column; overflow: hidden; }
+  #equip-panel { flex: 1; display: flex; flex-direction: row; overflow: hidden; }
   #equip-style-bar {
-    display: flex; gap: 6px; padding: 10px 16px;
-    border-bottom: 1px solid #333; flex-shrink: 0; background: #141414;
+    display: flex; flex-wrap: wrap; gap: 6px; padding: 0 0 10px; margin-bottom: 8px;
+    border-bottom: 1px solid #333; flex-shrink: 0;
   }
+  #equip-doll { display: flex; flex-direction: column; gap: 6px; }
   .equip-style-btn {
-    padding: 5px 18px; font-size: 11px; border-radius: 3px; cursor: pointer;
+    flex: 1; padding: 5px 4px; font-size: 11px; border-radius: 3px; cursor: pointer; white-space: nowrap;
     border: 1px solid #444; background: #1e1e1e; color: #888;
     text-transform: uppercase; letter-spacing: 0.5px;
   }
@@ -678,7 +690,7 @@
   .equip-style-btn.active { color: #e8c97a; border-color: #b07a30; background: #1e1800; }
   #equip-body { flex: 1; display: flex; overflow: hidden; }
   #equip-doll-pane {
-    width: 230px; min-width: 230px; padding: 20px 16px;
+    width: var(--side-w); min-width: var(--side-w); box-sizing: border-box; padding: 12px 16px 20px;
     background: #141414; border-right: 1px solid #333;
     display: flex; flex-direction: column; gap: 6px; overflow-y: auto;
   }
@@ -1106,6 +1118,11 @@ function spawnSkillReq(loc) {
 
 let _canGetCache = {};
 
+// item_sources "activity" source: {name, quests, levels, access, note}
+function _activityMet(a) {
+  return (a.quests || []).every(_questOk) && Object.entries(a.levels || {}).every(([sk, l]) => getLevel(sk) >= l)
+    && (!a.access || _accessMet(a.access));
+}
 function canGetItem(itemName, visited = new Set()) {
   if (visited.has(itemName)) return false;           // cycle guard
   if (itemName in _canGetCache) return _canGetCache[itemName];
@@ -1125,7 +1142,7 @@ function canGetItem(itemName, visited = new Set()) {
   {
     const hasSrc = src.shopBought || (src.spawns && src.spawns.length) ||
                    src.gathering || (src.monsters && src.monsters.length) ||
-                   src.production || src.alwaysAvailable || (src.clueTiers && src.clueTiers.length);
+                   src.production || src.alwaysAvailable || src.activity || (src.clueTiers && src.clueTiers.length);
     if (!hasSrc) { _canGetCache[itemName] = true; return true; }
   }
 
@@ -1153,10 +1170,13 @@ function canGetItem(itemName, visited = new Set()) {
     if (specialOwned) { _canGetCache[itemName] = true; return true; }
   }
 
+  // Minigame / activity reward (e.g. Vale offerings from Vale Totems): its quests, levels and area
+  if (src.activity && _activityMet(src.activity)) { _canGetCache[itemName] = true; return true; }
+
   // Gathering: level + tool (no card needed for the resource itself)
   if (src.gathering) {
     const g = src.gathering;
-    if (getLevel(g.skill) >= (g.level || 1)) {
+    if (getLevel(g.skill) >= (g.level || 1) && (g.quests || []).every(_questOk) && (!g.access || _accessMet(g.access)) && _skillUnlocked(g.skill)) {
       let toolOk = !g.tool || g.tool === 'None';
       if (!toolOk && TOOL_TIERS[g.tool]) {
         toolOk = TOOL_TIERS[g.tool].some(t => isOwned(t.name) && getLevel(g.skill) >= t.skillReq);
@@ -1192,7 +1212,7 @@ function canGetItem(itemName, visited = new Set()) {
     const ings = p.ingredients || [];
     // Skip self-referential recipes (item lists itself as an ingredient)
     const isSelfRef = ings.some(i => i.item === itemName);
-    if (!isSelfRef && (!p.skill || getLevel(p.skill) >= (p.level || 1))) {
+    if (!isSelfRef && (!p.skill || getLevel(p.skill) >= (p.level || 1)) && (p.quests || []).every(_questOk) && (!p.skill || _skillUnlocked(p.skill))) {
       const prodTools = getImplicitTools(p.skill, ings, p.tools || [], p.facilities);
       const toolsOk   = prodTools.every(t => !itemSources[t] || isOwned(t));
       if (toolsOk) {
@@ -1233,7 +1253,8 @@ let bossLoot = {};   // boss name → {source, page, drops} for chest/reward-bas
 let spellsData   = {};  // spell name → {book, level, runes}, from spells.json (wiki spellbooks)
 let runeSources  = {};  // elemental rune → staves / combination runes that supply it (rune_sources.json)
 let accessRoutes = {};
-let cardVersions = {};  // card → [{name, page, recipe?}] item versions it covers (card_versions.json)
+let cardVersions = {};
+let monsterLocations = {};  // NPC card → {location: access key | null} (monster_locations.json)  // card → [{name, page, recipe?}] item versions it covers (card_versions.json)
 let selectedVersion = null;  // a version name the user opened (shown on its card's page)  // shared access routes, e.g. desert (access_routes.json)
 let cardAliases = {};  // item version name (lowercase) → card, from the catalog's tcg.variants (card_aliases.json)
 let collectionLog = {};  // boss name → {log, items} — collection-log items = the boss's uniques
@@ -1478,7 +1499,7 @@ function switchCollection(rsn) {
   cardTimestamps = profile.cardTimestamps || {};
   cardFirstTimestamps = profile.cardFirstTimestamps || {};
   _updateSortVisibility();
-  _canGetCache = {};
+  _canGetCache = {}; _completableCache = null;
   document.getElementById('sim-summary').textContent =
     `${profile.cardCount} cards owned · ${key}`;
   document.getElementById('sim-btn').style.display = 'none';
@@ -1549,7 +1570,7 @@ function simulateRandom() {
 async function loadData() {
   try {
     const cb = `?v=${Date.now()}`;  // cache-bust so updated JSON files are always fresh
-    const [md, is, cc, cd, css, cs, crr, ii, qd, ed, fd, bmqc, cq, ac, cst, bl, clg, dd, cal, spl, rsrc, acc, cver, bdat, sdat] = await Promise.all([
+    const [md, is, cc, cd, css, cs, crr, ii, qd, ed, fd, bmqc, cq, ac, cst, bl, clg, dd, cal, spl, rsrc, acc, cver, bdat, sdat, mloc, skl, rcp, micn] = await Promise.all([
       fetch(`output/monster_drops.json${cb}`).then(r => r.json()).catch(() => ({})),
       fetch(`output/item_sources.json${cb}`).then(r => r.json()).catch(() => ({})),
       fetch(`output/card_categories.json${cb}`).then(r => r.json()).catch(() => ({})),
@@ -1575,6 +1596,10 @@ async function loadData() {
       fetch(`output/card_versions.json${cb}`).then(r => r.json()).catch(() => ({})),
       fetch(`output/bosses.json${cb}`).then(r => r.json()).catch(() => []),
       fetch(`output/slayer.json${cb}`).then(r => r.json()).catch(() => ({masters: [], tasks: {}, unlocks: []})),
+      fetch(`output/monster_locations.json${cb}`).then(r => r.json()).catch(() => ({})),
+      fetch(`output/skilling.json${cb}`).then(r => r.json()).catch(() => []),
+      fetch(`output/recipes.json${cb}`).then(r => r.json()).catch(() => []),
+      fetch(`output/method_icons.json${cb}`).then(r => r.json()).catch(() => ({})),
     ]);
     monsterDrops = md; itemSources = is; cardCategories = cc; cardDetails = cd;
     _cardLcMap = null; // invalidate case-insensitive card lookup cache
@@ -1592,6 +1617,12 @@ async function loadData() {
     runeSources        = rsrc || {};
     accessRoutes       = acc || {};
     cardVersions       = cver || {};
+    monsterLocations   = mloc || {};
+    SKILLING           = Array.isArray(skl) ? skl : [];
+    RECIPES            = Array.isArray(rcp) ? rcp : [];
+    _recIdx = null;
+    METHOD_ICONS       = micn || {};
+    for (const m of SKILLING) for (const r of (m.requirements || [])) _expandReq(r, m.name);
     DIARY_DATA         = Array.isArray(dd) ? dd : [];
     _buildDiaryByCard();
     _bossLootByItem    = null;  // invalidate reverse index
@@ -1881,7 +1912,7 @@ function navigate(state) {
   if (state.tab === 'skilling') {
     selectedSkill = null;
     if (state.skill) showSkillDetail(state.skill, false);
-    else renderSkillGrid();
+    else { renderSkillGrid(); _renderSkillHome(); }
   } else if (state.tab === 'questing') {
     selectedQuest = null;
     if (state.quest) showQuestDetail(state.quest, false);
@@ -3447,66 +3478,26 @@ function renderMonster(name, container) {
     html += `</div>`;
   }
 
-  // ── Area access requirements ──────────────────────────────────────────────
-  const areaKey = CARD_AREAS[name];
-  if (areaKey && AREA_GATES[areaKey]) {
-    const gate = AREA_GATES[areaKey];
-    const completable = computeCompletableQuests();
-    html += `<div class="section">
-      <div class="section-header">Location: ${gate.label} <span style="font-size:10px;color:#555;font-weight:normal">${gate.note}</span></div>
-      <div style="margin-top:8px">`;
-    if (gate.questRequired) {
-      const qDone = completedQuests.has(gate.questRequired);
-      const qOk   = qDone || completable.has(gate.questRequired);
-      const sym   = qDone ? '✓' : qOk ? '~' : '✗';
-      const cls   = qDone ? 'ok' : qOk ? 'close' : 'fail';
-      const note  = qDone ? 'complete' : qOk ? 'completable' : 'locked';
-      const safeQ = gate.questRequired.replace(/&/g,'&amp;').replace(/"/g,'&quot;');
-      html += `<div class="req-row">
-        <span class="req-icon ${cls}">${sym}</span>
-        <span class="req-label" style="cursor:pointer"
-          data-quest="${safeQ}" onclick="_navToQuest(this)">Quest: ${gate.questRequired}</span>
-        <span class="req-note">${note}</span>
-      </div>`;
+  // ── Where it's found (output/monster_locations.json): each location and the area access it needs ──
+  {
+    const locs = Object.entries(monsterLocations[name] || {});
+    if (locs.length) {
+      _accessCache = new Map();
+      const G = monsterLocations._gates || {};   // extra needs at a place (quests / cards / skills)
+      const reach = locs.filter(([l, a]) => _slLocOk(a, G[l]));
+      const chips = locs.map(([l, a]) => { const g = G[l]; const ok = _slLocOk(a, g);
+        const need = [a && (accessRoutes[a]?.label || a), ...((g && g.quests) || []), g && g.cards && 'one of: ' + g.cards.join(', '),
+          ...Object.entries((g && g.skills) || {}).map(([sk, lv]) => sk + ' ' + lv)].filter(Boolean).join(' · ');
+        return `<span style="display:inline-flex;align-items:center;gap:3px;font-size:11px;padding:1px 7px;border-radius:3px;background:${ok ? '#0d2210' : '#180808'};border:1px solid ${ok ? '#2a5a2a' : '#5a2a2a'};color:${ok ? '#7ab07a' : '#c06060'}"
+          title="${escHtml(need ? (ok ? 'Reachable · needs ' : 'Needs: ') + need : 'No access requirement')}">${ok ? '✓' : '✗'} ${escHtml(l)}</span>`; }).join(' ');
+      // If nowhere is reachable yet, show the routes into the first gated area
+      const gate = !reach.length ? locs.map(([, a]) => a).find(a => a && a !== 'excluded') : null;
+      let routeHtml = '';
+      if (gate) { const r = { label: `Reach ${accessRoutes[gate]?.label || gate}`, access: gate, type: 'item' }; _expandReq(r, name); routeHtml = _questReqRow(r).html; }
+      html += `<div class="section"><div class="section-header">Found at <span style="font-size:10px;color:#555;font-weight:normal">${reach.length}/${locs.length} reachable</span></div>
+        <div style="display:flex;flex-wrap:wrap;gap:4px;margin-top:8px">${chips}</div>${routeHtml ? `<div style="margin-top:8px">${routeHtml}</div>` : ''}</div>`;
+      _accessCache = null;
     }
-    if (gate.npcRequired) {
-      const nOk = isOwned(gate.npcRequired);
-      const sym  = nOk ? '✓' : '✗';
-      const cls  = nOk ? 'ok' : 'fail';
-      const safeN = gate.npcRequired.replace(/&/g,'&amp;').replace(/"/g,'&quot;');
-      html += `<div class="req-row">
-        <span class="req-icon ${cls}">${sym}</span>
-        <span class="req-label" style="cursor:pointer"
-          data-nav="${safeN}" data-nav-type="monster" onclick="_navToCard(this)">NPC card: ${gate.npcRequired}</span>
-        <span class="req-note">${nOk ? 'card owned' : 'need card'}</span>
-      </div>`;
-    }
-    for (const item of (gate.itemsRequired || [])) {
-      const iOk = isOwned(item);
-      const sym  = iOk ? '✓' : '✗';
-      const cls  = iOk ? 'ok' : 'fail';
-      const safeI = item.replace(/&/g,'&amp;').replace(/"/g,'&quot;');
-      html += `<div class="req-row">
-        <span class="req-icon ${cls}">${sym}</span>
-        <span class="req-label" style="cursor:pointer"
-          data-nav="${safeI}" data-nav-type="item" onclick="_navToCard(this)">Item: ${item}</span>
-        <span class="req-note">${iOk ? 'owned' : 'need card'}</span>
-      </div>`;
-    }
-    const extras = CARD_AREA_EXTRAS[name] || [];
-    for (const item of extras) {
-      const iOk = isOwned(item);
-      const sym  = iOk ? '✓' : '✗';
-      const cls  = iOk ? 'ok' : 'fail';
-      const safeI = item.replace(/&/g,'&amp;').replace(/"/g,'&quot;');
-      html += `<div class="req-row">
-        <span class="req-icon ${cls}">${sym}</span>
-        <span class="req-label" style="cursor:pointer"
-          data-nav="${safeI}" data-nav-type="item" onclick="_navToCard(this)">${item}</span>
-        <span class="req-note">${iOk ? 'owned' : 'need card'}</span>
-      </div>`;
-    }
-    html += `</div></div>`;
   }
 
   // ── Slayer (output/slayer.json): this NPC as a master, or the tasks it counts for ──
@@ -3804,28 +3795,69 @@ function renderIngredient(name, container) {
     html += `<div class="section"><div class="section-header">Also obtained from</div>${srcRows}</div>`;
   }
 
-  // "Used to make" — TCG cards that use this as an ingredient
-  const usedBy = Object.entries(itemSources).filter(([, data]) => {
-    const ings = data.production?.ingredients || [];
-    return ings.some(i => i.item === name);
-  }).map(([itemName]) => itemName);
-
-  if (usedBy.length) {
-    const usedRows = usedBy.map(cardName => {
-      const cardOwned = isOwned(cardName);
-      const cls = cardOwned ? 'owned' : 'locked';
-      const sym = cardOwned ? '✓' : '✗';
-      return `<div class="drop-row ${cls}" style="cursor:pointer"
-        data-nav="${escHtml(cardName)}" data-nav-type="item"
-        onclick="showCard(this.dataset.nav,this.dataset.navType)">
-        <div class="drop-indicator ${cls}">${sym}</div>
-        <span class="drop-name ${cls}">${cardName}</span>
-      </div>`;
-    }).join('');
-    html += `<div class="section"><div class="section-header">Used to make</div>${usedRows}</div>`;
-  }
+  // "Used to make" + training methods — from recipes.json / skilling.json
+  html += _cardSkillingHtml(name, { madeBy: false });
 
   container.innerHTML = html;
+}
+
+
+// ── Card-page skilling links (recipes.json + skilling.json), built once per load ──
+// Keys are lowercase names; each recipe/method is filed under the raw name AND the card it's a
+// version of, so a card page also finds recipes for its versions (Oak shortbow ← Oak shortbow (u)).
+let _recIdx = null;
+function _recipeIndex() {
+  if (_recIdx) return _recIdx;
+  const byOut = {}, byIng = {}, bySkill = {};
+  const keys = n => { const ci = _cardInfo(n); return [...new Set([n.toLowerCase(), ci ? ci.exact.toLowerCase() : null].filter(Boolean))]; };
+  for (const r of _productionRecipes()) {
+    for (const k of keys(r.output)) (byOut[k] ||= []).push(r);
+    for (const i of r.ingredients || []) for (const n of (i.alts || [i.item])) for (const k of keys(n)) (byIng[k] ||= new Set()).add(r);
+  }
+  for (const r of _productionRecipes()) for (const t of r.tools || []) for (const k of keys(t)) (byIng['tool:' + k] ||= new Set()).add(r);
+  for (const m of SKILLING) for (const rq of m.requirements || []) for (const c of (rq.cards || []).flat())
+    for (const k of keys(c)) (bySkill[k] ||= new Set()).add(m);
+  return (_recIdx = { byOut, byIng, bySkill });
+}
+function _goSkill(sk) { switchTab('skilling'); showSkillDetail(sk); }
+// "Made by" / "Used to make" / "Training methods" sections for an item or ingredient page
+function _cardSkillingHtml(name, { madeBy = true } = {}) {
+  const idx = _recipeIndex(), k = name.toLowerCase();
+  let html = '';
+  const made = madeBy ? (idx.byOut[k] || []).filter(r => !(r.ingredients || []).some(i => i.item === name)) : [];
+  for (const r of made.slice(0, 6)) {
+    const prod = { ...r, ingredients: (r.ingredients || []).map(i => i.alts ? { ...i, item: _bestAlt(i.alts) } : i) };
+    if (r.output.toLowerCase() !== k) html += `<div style="font-size:10px;color:#777;margin:10px 0 -6px">Version: ${escHtml(r.output)}</div>`;
+    html += renderProduction(prod);
+  }
+  if (made.length > 6) html += `<div style="font-size:10px;color:#666;margin-top:4px">+${made.length - 6} more recipes</div>`;
+  const used = [...(idx.byIng[k] || [])].sort((a, b) => a.skill.localeCompare(b.skill) || a.level - b.level);
+  if (used.length) {
+    const rows = used.slice(0, 60).map(r => {
+      const oc = _cardInfo(r.output), ok = getLevel(r.skill) >= r.level;
+      const nav = oc && oc.type === 'item' ? `data-nav="${escHtml(oc.exact)}" data-nav-type="item" onclick="showCard(this.dataset.nav,this.dataset.navType)" style="cursor:pointer"`
+                : ingredientInfo[r.output] ? `data-nav="${escHtml(r.output)}" data-nav-type="ingredient" onclick="showCard(this.dataset.nav,this.dataset.navType)" style="cursor:pointer"` : '';
+      return `<div class="drop-row ${ok ? 'owned' : 'locked'}" ${nav}><div class="drop-indicator ${ok ? 'owned' : 'locked'}">${ok ? '✓' : '✗'}</div>
+        <span class="drop-name ${ok ? 'owned' : 'locked'}">${escHtml(r.output)} <span style="font-size:10px;color:#666">${skillIcon(r.skill, 10)} ${r.level} ${r.skill}${r.access === 'house' ? ' · in your house' : ''}</span></span></div>`;
+    }).join('');
+    html += `<div class="section"><div class="section-header">Used to make <span style="font-size:10px;color:#555;font-weight:normal">(${used.length} recipe${used.length !== 1 ? 's' : ''}; ✓ = level met)</span></div>${rows}
+      ${used.length > 60 ? `<div style="font-size:10px;color:#666;margin-top:4px">+${used.length - 60} more</div>` : ''}</div>`;
+  }
+  const asTool = [...(idx.byIng['tool:' + k] || [])];
+  if (asTool.length) {
+    const per = {};
+    for (const r of asTool) per[r.skill] = (per[r.skill] || 0) + 1;
+    html += `<div class="section"><div class="section-header">Tool for ${asTool.length} recipe${asTool.length !== 1 ? 's' : ''}</div>
+      <div style="margin-top:8px;font-size:11px">${Object.entries(per).sort((a, b) => b[1] - a[1]).map(([sk, n]) =>
+        `<span style="cursor:pointer;margin-right:12px;color:#c8a060" data-sk="${sk}" onclick="_goSkill(this.dataset.sk)">${skillIcon(sk, 11)} ${sk} ${n}</span>`).join('')}</div></div>`;
+  }
+  const train = [...(idx.bySkill[k] || [])].sort((a, b) => a.skill.localeCompare(b.skill) || (a.level || 0) - (b.level || 0));
+  if (train.length) {
+    html += `<div class="section"><div class="section-header">Training methods that use this card</div><div style="margin-top:8px">${train.map(m =>
+      `<div class="req-row" style="cursor:pointer" data-sk="${escHtml(m.skill)}" onclick="_goSkill(this.dataset.sk)">${skillIcon(m.skill, 11)}
+        <span class="req-label" style="color:#c8a060">${escHtml(m.name)}</span><span class="req-note">${m.skill} ${m.level || 1}</span></div>`).join('')}</div></div>`;
+  }
+  return html;
 }
 
 function renderProduction(prod) {
@@ -4684,6 +4716,20 @@ function renderItem(name, container) {
   html += packAcquisitionHtml(name);
 
   // Gathering
+  if (data.activity) {
+    const a = data.activity, ok = _activityMet(a);
+    const tick = (good, inner) => `<span style="margin-right:12px;color:${good ? '#7ab07a' : '#a05050'}">${good ? '✓' : '✗'} ${inner}</span>`;
+    const parts = [
+      ...(a.quests || []).map(q => tick(_questOk(q), `<span style="cursor:pointer;text-decoration:underline dotted" data-quest="${escHtml(q)}" onclick="_navToQuest(this)">${escHtml(q)}</span>`)),
+      ...Object.entries(a.levels || {}).map(([sk, l]) => tick(getLevel(sk) >= l, `${skillIcon(sk, 11)} ${l} ${sk}`)),
+      ...(a.access ? [tick(_accessMet(a.access), escHtml(accessRoutes[a.access]?.label || a.access))] : []),
+    ];
+    html += `<div class="section"><div class="section-header">Reward from ${escHtml(a.name)}
+        <span style="font-size:10px;color:${ok ? '#7ab07a' : '#a05050'};font-weight:normal">${ok ? 'you can take part' : 'locked'}</span></div>
+      <div style="margin-top:8px;font-size:11px">${parts.join('')}</div>
+      ${a.note ? `<div style="margin-top:6px;font-size:10px;color:#666">${escHtml(a.note)}</div>` : ''}</div>`;
+  }
+
   if (gathering) {
     const playerLevel = getLevel(gathering.skill);
     const canGather   = playerLevel >= gathering.level;
@@ -4744,9 +4790,10 @@ function renderItem(name, container) {
 
   // Production (crafting/cooking/smithing/fletching/etc.)
   // Skip if any ingredient is the item itself (poisoned weapon recipes, upgrade kits, etc.)
-  if (productionValid) {
-    html += renderProduction(production);
-  }
+  // Made by (every wiki recipe for this card and its versions; item data if there's none) + used to make + training
+  const _madeBy = (_recipeIndex().byOut[name.toLowerCase()] || []).length > 0;
+  if (!_madeBy && productionValid) html += renderProduction(production);
+  html += _cardSkillingHtml(name, { madeBy: _madeBy });
 
   // Ground spawns
   if (spawns.length) {
@@ -5300,7 +5347,7 @@ async function refreshCollection() {
     cardTimestamps = data.cardTimestamps || {};
     cardFirstTimestamps = data.cardFirstTimestamps || {};
     _updateSortVisibility();
-    _canGetCache = {};
+    _canGetCache = {}; _completableCache = null;
     // Also update allCollections so subsequent client-side switches are fresh
     if (rsn && data.ownedCards) {
       const acKey = Object.keys(allCollections).find(k => k.toLowerCase() === rsn.toLowerCase()) || rsn;
@@ -5357,7 +5404,7 @@ async function lookupLevels(rsn) {
     for (const [skill, lvl] of Object.entries(data.levels)) {
       if (skill in skills) skills[skill] = lvl;
     }
-    _canGetCache = {};
+    _canGetCache = {}; _completableCache = null;
     refreshDetail();
     if (activeTab === 'skilling') renderSkillGrid();
     if (activeTab === 'questing') renderQuestList();
@@ -5468,14 +5515,14 @@ function _renderTab(tab, resetSelection = true) {
       if (resetSelection) selectedSkill = null;
       mainContent.innerHTML = `<div id="skill-panel">
         <div id="skill-list-pane">
+          <div id="skill-overview-item" class="boss-item${selectedSkill ? '' : ' selected'}" style="margin:-4px -12px 10px;padding-left:12px" onclick="showSkillOverview()"><span style="flex:1;font-size:12px;color:#e8c97a">Overview</span></div>
           <div style="font-size:10px;color:#666;text-transform:uppercase;letter-spacing:1px;margin-bottom:10px">Skills</div>
           <div class="skill-grid" id="skill-grid"></div>
         </div>
-        <div id="skill-detail-pane">
-          <div class="placeholder" style="margin-top:60px;color:#444">← Select a skill</div>
-        </div>
+        <div id="skill-detail-pane"></div>
       </div>`;
       renderSkillGrid();
+      if (selectedSkill) showSkillDetail(selectedSkill, false); else _renderSkillHome();
     } else if (tab === 'questing') {
       if (resetSelection) selectedQuest = null;
       mainContent.innerHTML = `<div id="quest-panel">
@@ -5531,7 +5578,7 @@ function _renderTab(tab, resetSelection = true) {
     } else if (tab === 'wishlist') {
       mainContent.innerHTML = `
         <div style="display:flex;height:100%;overflow:hidden">
-          <div style="width:260px;min-width:260px;display:flex;flex-direction:column;border-right:1px solid #1a1a1a;background:#0d0d0d">
+          <div style="width:var(--side-w);min-width:var(--side-w);display:flex;flex-direction:column;border-right:1px solid #333;background:#141414">
             <div style="padding:10px 12px;border-bottom:1px solid #1a1a1a;flex-shrink:0">
               <div style="position:relative">
                 <input id="wl-search" placeholder="Search to add…" autocomplete="off"
@@ -5603,6 +5650,7 @@ function _renderTab(tab, resetSelection = true) {
       if (selectedDiary) showDiaryDetail(selectedDiary); else _renderDiaryHome();
     } else if (tab === 'rules') {
       mainContent.innerHTML = renderRulesTab();
+      _rulesScrollSpy();
     }
   }
 }
@@ -5633,23 +5681,6 @@ function skillIcon(skill, size=16) {
 }
 
 // Static data for skills without card-based training
-const AGILITY_COURSES = [
-  {name:'Gnome Stronghold',          level:1,  xp:86.5},
-  {name:'Draynor Village rooftop',   level:10, xp:120},
-  {name:'Al Kharid rooftop',         level:20, xp:180},
-  {name:'Varrock rooftop',           level:30, xp:238},
-  {name:'Barbarian Outpost',         level:35, xp:152.5},
-  {name:'Canifis rooftop',           level:40, xp:240},
-  {name:'Ape Atoll agility course',  level:48, xp:580},
-  {name:'Hallowed Sepulchre (F1)',    level:52, xp:550},
-  {name:'Wilderness Agility Course', level:52, xp:571.4},
-  {name:'Falador rooftop',           level:50, xp:570},
-  {name:"Seers' Village rooftop",    level:60, xp:570},
-  {name:'Pollnivneach rooftop',      level:70, xp:890},
-  {name:'Prifddinas agility course', level:75, xp:1275},
-  {name:'Rellekka rooftop',          level:80, xp:780},
-  {name:'Ardougne rooftop',          level:90, xp:793},
-];
 
 // Slayer data lives in output/slayer.json (generate_slayer.py) — see the Slayer tab section.
 
@@ -5734,210 +5765,8 @@ function _buildBossByCard() {
   }
 }
 
-// ── Area access requirements ───────────────────────────────────────────────
-// Each area gate defines what a player needs before they can even reach a location.
-// questRequired: must be in completedQuests (or completable) to pass.
-// npcRequired:   NPC card that must be owned (e.g. to board a boat).
-// itemsRequired: extra item cards needed at the location itself.
-const AREA_GATES = {
-  'Morytania': {
-    label: 'Morytania',
-    note: 'East of the River Salve',
-    questRequired: 'Priest in Peril',
-  },
-  'Kourend': {
-    label: 'Great Kourend (Zeah)',
-    note: 'Boat from Port Sarim',
-    npcRequired: 'Veos',
-  },
-  'Varlamore': {
-    label: 'Varlamore',
-    note: 'Boat from Port Sarim or Kebos',
-    npcRequired: 'Veos',
-  },
-  'Fossil Island': {
-    label: 'Fossil Island',
-    note: 'Museum Camp expedition',
-    questRequired: 'Bone Voyage',
-  },
-  'Ape Atoll': {
-    label: 'Ape Atoll',
-    note: 'Requires Monkey Madness I',
-    questRequired: 'Monkey Madness I',
-  },
-  'Prifddinas': {
-    label: 'Prifddinas',
-    note: 'Elven Crystal City',
-    questRequired: 'Song of the Elves',
-  },
-  'Tirannwn': {
-    label: 'Tirannwn',
-    note: 'Elven lands west of Kandarin — traverse the Underground Pass',
-    questRequired: 'Underground Pass',
-  },
-  'Mos Le Harmless': {
-    label: "Mos Le'Harmless",
-    note: 'Pirate island south of Karamja',
-    questRequired: 'Cabin Fever',
-  },
-  'Waterbirth Island': {
-    label: 'Waterbirth Island',
-    note: 'Fremennik province — solo access requires quest',
-    questRequired: 'The Fremennik Trials',
-  },
-  'Desert': {
-    label: 'Kharidian Desert',
-    note: 'Shantay Pass east of Al Kharid — fairy rings need partial Fairytale II',
-    itemsRequired: ['Shantay', 'Coins'],
-  },
-  'Sophanem': {
-    label: 'Sophanem',
-    note: 'Plague city in the deep desert — requires quest access',
-    questRequired: "Icthlarin's Little Helper",
-  },
-  'DT2': {
-    label: 'Desert Treasure II',
-    note: 'Desert access required too (Shantay + Coins or fairy rings)',
-    questRequired: 'Desert Treasure II - The Fallen Empire',
-  },
-};
-
-// Card name → area key.  Only include cards exclusive to (or primarily found in) that area.
-const CARD_AREAS = {
-  // ── Morytania ──────────────────────────────────────────────────────────────
-  'Ahrim the Blighted':  'Morytania',
-  'Dharok the Wretched': 'Morytania',
-  'Guthan the Infested': 'Morytania',
-  'Karil the Tainted':   'Morytania',
-  'Torag the Corrupted': 'Morytania',
-  'Verac the Defiled':   'Morytania',
-  'Vyrewatch':           'Morytania',
-  'Vyrewatch Sentinel':  'Morytania',
-  'Vampyre Juvinate':    'Morytania',
-  'Ancient feral vyre':  'Morytania',
-  'Feral Vampyre':       'Morytania',
-  'Mutant Toad':         'Morytania',
-  'Loar Shade':          'Morytania',
-  'Phrin Shade':         'Morytania',
-  'Riyl Shade':          'Morytania',
-  'Asyn Shade':          'Morytania',
-  'Fiyr Shade':          'Morytania',
-  'Urium Shade':         'Morytania',
-  'Crawling Hand':       'Morytania',
-  'Infernal Mage':       'Morytania',
-  'Gargoyle':            'Morytania',
-  'Dawn':                'Morytania',
-  'Dusk':                'Morytania',
-  'Ghast':               'Morytania',
-  'Werewolf':            'Morytania',
-  'The Nightmare':       'Morytania',
-  "Phosani's Nightmare": 'Morytania',
-
-  // ── Great Kourend ──────────────────────────────────────────────────────────
-  'Lizardman':           'Kourend',
-  'Lizardman brute':     'Kourend',
-  'Lizardman shaman':    'Kourend',
-  'Corrupt Lizardman':   'Kourend',
-  'Sulphur Lizard':      'Kourend',
-  'Swamp Crab':          'Kourend',
-  'Sand Snake':          'Kourend',
-  'Lobstrosity':         'Kourend',
-  'Sulphur Nagua':       'Kourend',
-  'Greater Nechryael':   'Kourend',
-  'Twisted Banshee':     'Kourend',
-  'Brutal black dragon': 'Kourend',
-  'Brutal blue dragon':  'Kourend',
-  'Brutal green dragon': 'Kourend',
-  'Brutal red dragon':   'Kourend',
-  'Dark Ankou':          'Kourend',
-  'Warped Jelly':        'Kourend',
-  'Warped Terrorbird':   'Kourend',
-  'Warped Tortoise':     'Kourend',
-  'Skotizo':             'Kourend',
-
-  // ── Varlamore ──────────────────────────────────────────────────────────────
-  'Buffalo':             'Varlamore',
-  'Amoxliatl':           'Varlamore',
-  'The Hueycoatl':       'Varlamore',
-  'Earthen Nagua':       'Varlamore',
-  'Frost Nagua':         'Varlamore',
-  'Emissary Acolyte':    'Varlamore',
-  'Emissary Archer':     'Varlamore',
-  'Emissary Ascended':   'Varlamore',
-  'Emissary Brawler':    'Varlamore',
-  'Emissary Chosen':     'Varlamore',
-  'Emissary Conjurer':   'Varlamore',
-  'Emissary Enforcer':   'Varlamore',
-  'Prince Itzla Arkan':          'Varlamore',
-  'Queen Zyanyi Arkan':          'Varlamore',
-  'Juvenile custodian stalker':  'Varlamore',
-  'Mature custodian stalker':    'Varlamore',
-  'Elder custodian stalker':     'Varlamore',
-  'Ancient Custodian':           'Varlamore',
-
-  // ── Fossil Island ──────────────────────────────────────────────────────────
-  'Ammonite Crab':       'Fossil Island',
-  'Ancient Wyvern':      'Fossil Island',
-  'Long-tailed Wyvern':  'Fossil Island',
-  'Spitting Wyvern':     'Fossil Island',
-  'Taloned Wyvern':      'Fossil Island',
-
-  // ── Ape Atoll ──────────────────────────────────────────────────────────────
-  'Maniacal monkey':     'Ape Atoll',
-  'Tortured gorilla':    'Ape Atoll',
-  'Demonic gorilla':     'Ape Atoll',
-
-  // ── Tirannwn (Underground Pass) ────────────────────────────────────────────
-  'Elf Archer':          'Tirannwn',
-  'Elf Warrior':         'Tirannwn',
-  'Mourner':             'Tirannwn',
-  'Tyras guard':         'Tirannwn',
-
-  // ── Prifddinas (Song of the Elves) ─────────────────────────────────────────
-  'Corrupted Hunllef':   'Prifddinas',
-
-  // ── Waterbirth Island ──────────────────────────────────────────────────────
-  'Dagannoth Rex':       'Waterbirth Island',
-  'Dagannoth Prime':     'Waterbirth Island',
-  'Dagannoth Supreme':   'Waterbirth Island',
-  'Rock lobster':        'Waterbirth Island',
-
-  // ── Mos Le'Harmless ────────────────────────────────────────────────────────
-  'Cave horror':         'Mos Le Harmless',
-
-  // ── Kharidian Desert ───────────────────────────────────────────────────────
-  'Kalphite Queen':      'Desert',
-  'Kalphite Guardian':   'Desert',
-  'Kalphite Soldier':    'Desert',
-  'Kalphite Worker':     'Desert',
-  'Desert Lizard':       'Desert',
-  'Desert Wolf':         'Desert',
-  'Menaphite Thug':            'Desert',
-  'Bandit champion':           'Desert',
-  'Crocodile':                 'Desert',
-  'Smoke devil':               'Desert',
-  'Thermonuclear smoke devil': 'Desert',
-
-  // ── Sophanem ───────────────────────────────────────────────────────────────
-  'Scarab Mage':         'Sophanem',
-
-  // ── Desert Treasure II ─────────────────────────────────────────────────────
-  'Duke Sucellus':       'DT2',
-  'The Whisperer':       'DT2',
-  'The Leviathan':       'DT2',
-  'Vardorvis':           'DT2',
-};
-
-// Extra item cards needed at the location on top of the area gate (e.g. Barrows needs Spade).
-const CARD_AREA_EXTRAS = {
-  'Ahrim the Blighted':  ['Spade'],
-  'Dharok the Wretched': ['Spade'],
-  'Guthan the Infested': ['Spade'],
-  'Karil the Tainted':   ['Spade'],
-  'Torag the Corrupted': ['Spade'],
-  'Verac the Defiled':   ['Spade'],
-};
-
+// Area access lives in output/access_routes.json (routes per area) and
+// output/monster_locations.json (where each NPC card is found).
 
 // Lazy reverse index: card name → [quest names that require it via bm_quest_cards.json]
 let _questCardIndex = null;
@@ -5985,203 +5814,103 @@ function requiredForQuestsHtml(cardName) {
   return html;
 }
 
-// Standard spellbook combat + utility spells with rune requirements
-const MAGIC_SPELLS = [
-  {name:'Wind Strike',        level:1,  runes:{'Air rune':2,'Mind rune':1}},
-  {name:'Water Strike',       level:5,  runes:{'Air rune':1,'Water rune':1,'Mind rune':1}},
-  {name:'Earth Strike',       level:9,  runes:{'Air rune':2,'Earth rune':1,'Mind rune':1}},
-  {name:'Fire Strike',        level:13, runes:{'Air rune':3,'Fire rune':1,'Mind rune':1}},
-  {name:'Wind Bolt',          level:17, runes:{'Air rune':2,'Chaos rune':1}},
-  {name:'Water Bolt',         level:23, runes:{'Air rune':2,'Water rune':2,'Chaos rune':1}},
-  {name:'Earth Bolt',         level:29, runes:{'Air rune':3,'Earth rune':3,'Chaos rune':1}},
-  {name:'Fire Bolt',          level:35, runes:{'Air rune':4,'Fire rune':4,'Chaos rune':1}},
-  {name:'Wind Blast',         level:41, runes:{'Air rune':3,'Death rune':1}},
-  {name:'Water Blast',        level:47, runes:{'Air rune':3,'Water rune':3,'Death rune':1}},
-  {name:'Earth Blast',        level:53, runes:{'Air rune':4,'Earth rune':4,'Death rune':1}},
-  {name:'Fire Blast',         level:59, runes:{'Air rune':5,'Fire rune':5,'Death rune':1}},
-  {name:'Wind Wave',          level:62, runes:{'Air rune':5,'Blood rune':1}},
-  {name:'Water Wave',         level:65, runes:{'Air rune':5,'Water rune':7,'Blood rune':1}},
-  {name:'Earth Wave',         level:70, runes:{'Air rune':7,'Earth rune':7,'Blood rune':1}},
-  {name:'Fire Wave',          level:75, runes:{'Air rune':7,'Fire rune':7,'Blood rune':1}},
-  {name:'Low Level Alchemy',  level:21, runes:{'Fire rune':3,'Nature rune':1}},
-  {name:'High Level Alchemy', level:55, runes:{'Fire rune':5,'Nature rune':1}},
-  {name:'Superheat Item',     level:43, runes:{'Fire rune':4,'Nature rune':1}},
-];
-// Bow → max arrows it can fire; crossbow → max bolts; all can use lower tiers too
-const ARROWS = ['Bronze arrow','Iron arrow','Steel arrow','Mithril arrow','Adamant arrow','Rune arrow'];
-const BOLTS  = ['Bronze bolts','Iron bolts','Steel bolts','Mithril bolts','Adamant bolts','Rune bolts'];
-const BOW_COMPAT = {
-  'Training bow':   {ammo:['Training arrows'], level:1},
-  // Standard bows: can fire any arrow tier (all arrows are compatible with all bows)
-  'Shortbow':       {ammo:ARROWS, level:1},
-  'Longbow':        {ammo:ARROWS, level:1},
-  'Oak shortbow':   {ammo:ARROWS, level:5},
-  'Oak longbow':    {ammo:ARROWS, level:5},
-  'Willow shortbow':{ammo:ARROWS, level:20},
-  'Willow longbow': {ammo:ARROWS, level:20},
-  'Maple shortbow': {ammo:ARROWS, level:30},
-  'Maple longbow':  {ammo:ARROWS, level:30},
-  'Yew shortbow':   {ammo:ARROWS, level:40},
-  'Yew longbow':    {ammo:ARROWS, level:40},
-  'Magic shortbow': {ammo:ARROWS, level:50},
-  'Magic longbow':  {ammo:ARROWS, level:50},
-  // Crossbows: can only fire bolts up to their tier
-  'Crossbow':         {ammo:BOLTS.slice(0,1), level:1},
-  'Iron crossbow':    {ammo:BOLTS.slice(0,2), level:10},
-  'Steel crossbow':   {ammo:BOLTS.slice(0,3), level:20},
-  'Mithril crossbow': {ammo:BOLTS.slice(0,4), level:30},
-  'Adamant crossbow': {ammo:BOLTS.slice(0,5), level:40},
+// Spellbook unlocks (Magic training): the quest or area each non-standard book needs
+const SPELLBOOK_GATES = {
+  Ancient: { quest: 'Desert Treasure I', label: 'Desert Treasure I' },
+  Lunar:   { quest: 'Lunar Diplomacy', label: 'Lunar Diplomacy' },
+  Arceuus: { access: 'kourend', label: 'reach Kourend (Arceuus library)' },
 };
-const STANDALONE_THROWN = [
-  {name:'Bronze dart',  level:1},  {name:'Iron dart',    level:1},
-  {name:'Steel dart',   level:5},  {name:'Mithril dart', level:20},
-  {name:'Adamant dart', level:30}, {name:'Rune dart',    level:40},
-  {name:'Chinchompa',   level:30}, {name:'Red chinchompa',level:55},
-];
+// Spells that need a specific staff / weapon to cast (from the wiki spell pages)
+const SPELL_ITEM_REQS = {
+  'Iban Blast':         ["Iban's staff"],
+  'Saradomin Strike':   ['Saradomin staff', 'Staff of light'],
+  'Claws of Guthix':    ['Guthix staff', 'Void knight mace', 'Staff of balance'],
+  'Flames of Zamorak':  ['Zamorak staff', 'Staff of the dead', 'Toxic staff of the dead'],
+  'Magic Dart':         ["Slayer's staff", 'Staff of the dead', 'Toxic staff of the dead', 'Staff of light', 'Staff of balance'],
+};
+// Bow → max arrows it can fire; crossbow → max bolts; all can use lower tiers too
 // Pickpocketable NPCs with their Thieving level and XP.
 // Card column: exact name in monsterDrops (null = no TCG card → no Bronzeman restriction).
-const PICKPOCKET_NPCS = [
-  {name:'Man',                       card:'Man',                 level:1,  xp:8.0},
-  {name:'Woman',                     card:'Woman',               level:1,  xp:8.0},
-  {name:"'The Guns'",                card:null,                  level:1,  xp:8.0},   // Tower of Life, no card
-  {name:'Farmer',                    card:'Farmer',              level:10, xp:14.5},
-  {name:'H.A.M. Member',             card:null,                  level:15, xp:18.5},
-  {name:'Warrior Woman',             card:null,                  level:15, xp:18.5},
-  {name:'Warrior',                   card:null,                  level:25, xp:26.0},
-  {name:'Digsite Workman',           card:null,                  level:25, xp:25.0},
-  {name:'Villager',                  card:null,                  level:30, xp:29.3},  // Sophanem/Pollnivneach
-  {name:'Rogue',                     card:'Rogue',               level:32, xp:35.5},
-  {name:'Cave Goblin',               card:null,                  level:36, xp:40.0},
-  {name:'Master Farmer',             card:null,                  level:38, xp:43.0},
-  {name:'Guard',                     card:'Guard',               level:40, xp:46.8},
-  {name:'Fremennik Citizen',         card:null,                  level:45, xp:65.0},
-  {name:'Bearded Pollnivnian Bandit',card:null,                  level:45, xp:65.0},
-  {name:'Wealthy Citizen',           card:null,                  level:50, xp:96.0},
-  {name:'Desert Bandit',             card:null,                  level:53, xp:79.4},
-  {name:'Knight of Ardougne',        card:'Knight of Ardougne',  level:55, xp:84.3},
-  {name:'Pollnivnian Bandit',        card:null,                  level:55, xp:84.3},
-  {name:'Pirate',                    card:'Pirate',              level:60, xp:72.0},
-  {name:'Yanille Watchman',          card:null,                  level:65, xp:137.5},
-  {name:'Menaphite Thug',            card:'Menaphite Thug',      level:65, xp:137.5},
-  {name:'Paladin',                   card:'Paladin',             level:70, xp:151.7},
-  {name:'Gnome',                     card:'Gnome',               level:75, xp:198.3},
-  {name:'Hero',                      card:'Hero',                level:80, xp:273.3},
-  {name:'Vyre',                      card:null,                  level:82, xp:306.9},
-  {name:'Elf',                       card:null,                  level:85, xp:353.3},
-  {name:'TzHaar-Hur',                card:'TzHaar-Hur',          level:90, xp:103.4},
-];
 // Thieving stalls — no card required (stolen items go directly to inventory, not picked up)
 // XP values from https://oldschool.runescape.wiki/w/Thieving/Experience_table
-const THIEVING_STALLS = [
-  {name:"Vegetable stall",  level:2,  xp:10},
-  {name:"Baker's stall",    level:5,  xp:16},
-  {name:"Tea stall",        level:5,  xp:16},
-  {name:"Crafting stall",   level:5,  xp:20},
-  {name:"General stall",    level:5,  xp:25},
-  {name:"Silk stall",       level:20, xp:24},
-  {name:"Wine stall",       level:22, xp:27},
-  {name:"Fruit stall",      level:25, xp:28.5},
-  {name:"Seed stall",       level:27, xp:10},
-  {name:"Fur stall",        level:35, xp:45},
-  {name:"Fish stall",       level:42, xp:42},
-  {name:"Crossbow stall",   level:49, xp:52},
-  {name:"Silver stall",     level:50, xp:205},
-  {name:"Scimitar stall",   level:65, xp:210},
-  {name:"Magic stall",      level:65, xp:90},
-  {name:"Spice stall",      level:65, xp:92},
-  {name:"Gem stall",        level:75, xp:408},
-];
 // Hunter creatures — level + tool only (gathering rule: no card needed to hunt)
 // tool: null → tool check skipped (falconer's glove rented for coins, herbiboar needs no item)
 // Sources: https://oldschool.runescape.wiki/w/Hunter/Experience_table
-const HUNTER_CREATURES = [
-  // Bird snare (shopBought)
-  {name:'Crimson swift',          level:1,  tool:'Bird snare',               xp:34},
-  {name:'Copper longtail',        level:9,  tool:'Bird snare',               xp:61.2},
-  {name:'Cerulean twitch',        level:11, tool:'Bird snare',               xp:64.5},
-  {name:'Tropical wagtail',       level:19, tool:'Bird snare',               xp:95.2},
-  // Noose wand (shopBought)
-  {name:'Polar kebbit',           level:1,  tool:'Noose wand',               xp:30},
-  {name:'Common kebbit',          level:3,  tool:'Noose wand',               xp:36},
-  {name:'Desert devil',           level:13, tool:'Noose wand',               xp:66},
-  {name:'Razor-backed kebbit',    level:49, tool:'Noose wand',               xp:348.5},
-  // Butterfly net + jar (both shopBought)
-  {name:'Ruby harvest',           level:15, tool:'Butterfly net',            xp:24},
-  {name:'Baby impling',           level:17, tool:'Butterfly net',            xp:18},
-  {name:'Young impling',          level:22, tool:'Butterfly net',            xp:20},
-  {name:'Sapphire glacialis',     level:25, tool:'Butterfly net',            xp:34},
-  {name:'Snowy knight',           level:35, tool:'Butterfly net',            xp:44},
-  {name:'Earth impling',          level:36, tool:'Butterfly net',            xp:25},
-  {name:'Essence impling',        level:42, tool:'Butterfly net',            xp:27},
-  {name:'Black warlock',          level:45, tool:'Butterfly net',            xp:54},
-  {name:'Eclectic impling',       level:50, tool:'Butterfly net',            xp:30},
-  {name:'Nature impling',         level:58, tool:'Butterfly net',            xp:34},
-  {name:'Sunlight moth',          level:65, tool:'Butterfly net',            xp:74},
-  {name:'Magpie impling',         level:65, tool:'Butterfly net',            xp:44},
-  {name:'Ninja impling',          level:74, tool:'Butterfly net',            xp:50},
-  {name:'Moonlight moth',         level:75, tool:'Butterfly net',            xp:84},
-  {name:'Dragon impling',         level:83, tool:'Butterfly net',            xp:65},
-  {name:'Lucky impling',          level:89, tool:'Butterfly net',            xp:80},
-  // Box trap (shopBought)
-  {name:'Ferret',                 level:27, tool:'Box trap',                 xp:115.2},
-  {name:'Embertailed jerboa',     level:39, tool:'Box trap',                 xp:137},
-  {name:'Chinchompa',             level:53, tool:'Box trap',                 xp:198.4},
-  {name:'Maniacal monkey',        level:60, tool:'Box trap',                 xp:1000},
-  {name:'Carnivorous chinchompa', level:63, tool:'Box trap',                 xp:265},
-  {name:'Black chinchompa',       level:73, tool:'Box trap',                 xp:315},
-  {name:'Grenwall',               level:77, tool:'Box trap',                 xp:100},
-  // Rabbit snare (shopBought)
-  {name:'White rabbit',           level:27, tool:'Rabbit snare',             xp:144},
-  // Net trap + rope (both shopBought)
-  {name:'Swamp lizard',           level:29, tool:'Small fishing net + Rope', xp:152},
-  {name:'Orange salamander',      level:47, tool:'Small fishing net + Rope', xp:224},
-  {name:'Red salamander',         level:59, tool:'Small fishing net + Rope', xp:272},
-  {name:'Black salamander',       level:67, tool:'Small fishing net + Rope', xp:319.2},
-  // Deadfall — logs are gatherable, no card needed
-  {name:'Wild kebbit',            level:23, tool:'Logs',                     xp:128},
-  {name:'Barb-tailed kebbit',     level:33, tool:'Logs',                     xp:168},
-  {name:'Prickly kebbit',         level:37, tool:'Logs',                     xp:204},
-  {name:'Sabre-toothed kebbit',   level:51, tool:'Logs',                     xp:200},
-  // Spiked pit — teasing stick (shopBought) + logs
-  {name:'Spined larupia',         level:31, tool:'Teasing stick + Logs',     xp:180},
-  {name:'Horned graahk',          level:41, tool:'Teasing stick + Logs',     xp:240},
-  {name:'Sabre-toothed kyatt',    level:55, tool:'Teasing stick + Logs',     xp:300},
-  {name:'Sunlight antelope',      level:72, tool:'Teasing stick + Logs',     xp:380},
-  {name:'Moonlight antelope',     level:91, tool:'Teasing stick + Logs',     xp:450},
-  // Falconry — glove rented for coins, no item to own → tool:null skips card check
-  {name:'Spotted kebbit',         level:43, tool:null,                       xp:104},
-  {name:'Dark kebbit',            level:57, tool:null,                       xp:132},
-  {name:'Dashing kebbit',         level:69, tool:null,                       xp:156},
-  // Herbiboar — requires 31 Herblore + 36 Firemaking; no trap item needed
-  {name:'Herbiboar',              level:80, tool:null,                       xp:1950},
-];
 // Firemaking level per log type
-const FIREMAKING_LEVELS = {
-  'Logs':1,'Oak logs':15,'Willow logs':30,'Teak logs':35,'Arctic pine logs':42,
-  'Maple logs':45,'Mahogany logs':50,'Yew logs':60,'Blisterwood logs':62,
-  'Magic logs':75,'Redwood logs':90,
-};
 // Prayer bones/ashes and their xp (burial only)
 // If a bone isn't in itemSources the guard in getTrainingMethods skips it automatically
-const PRAYER_BONES = [
-  {name:'Bones',xp:4.5},{name:'Burnt bones',xp:4.5},{name:'Bat bones',xp:4.5},
-  {name:'Big bones',xp:15},{name:'Jogre bones',xp:15},
-  {name:'Zogre bones',xp:22.5},
-  {name:'Babydragon bones',xp:30},
-  {name:'Wyrm bones',xp:50},
-  {name:'Wyvern bones',xp:72},{name:'Dragon bones',xp:72},
-  {name:'Lava dragon bones',xp:85},
-  {name:'Drake bones',xp:80},
-  {name:'Fayrg bones',xp:84},{name:'Raurg bones',xp:96},
-  {name:'Dagannoth bones',xp:125},
-  {name:'Hydra bones',xp:110},
-  {name:'Manticore bones',xp:120},
-  {name:'Ourg bones',xp:140},{name:'Superior dragon bones',xp:150},
-  {name:'Fiendish ashes',xp:10},{name:'Ashes',xp:22.5},
-  {name:'Abyssal ashes',xp:85},{name:'Infernal ashes',xp:110},
-];
 
+// ─── Generated skilling methods (output/skilling.json) ─────────────────────
+// {skill, name, level, xp, type, requirements:[quest-model rows], quests, levels, access, note, page}
+let SKILLING = [];
+// Every XP-giving production recipe from the wiki (output/recipes.json, generate_recipes.py),
+// including outputs with no card (unstrung bows, POH furniture…)
+let RECIPES = [];
+// Icons for Skilling rows with no card art (output/method_icons.json, generate_icons.py)
+let METHOD_ICONS = {};
+function _methodIcon(m) {
+  if (m.type === 'generated' && m.method) return METHOD_ICONS[`method|${m.method.skill}|${m.method.name}`] || _cardImg(m.navCard) || '';
+  if (m.type === 'magic-spell') return METHOD_ICONS['spell|' + m.name] || '';
+  if (m.type === 'ranged-setup') return _cardImg(m.weapon);
+  return _cardImg(m.displayNav || m.name) || METHOD_ICONS['recipe|' + (m.name || '').toLowerCase()] || '';
+}
+// Of interchangeable ingredients, the first one you can use (card owned + obtainable), else the first
+function _bestAlt(alts) {
+  const ok = n => { const ci = _cardInfo(n); const c = ci && ci.type === 'item' ? ci.exact : null;
+    return c ? isOwned(c) && canGetItem(itemSources[n] || ingredientInfo[n] ? n : c) : canGetItem(n); };
+  return alts.find(ok) || alts[0];
+}
+// Label that tells apart recipes with the same output: the last ingredient that differs from the others
+function _recipeTag(p, recs) {
+  const others = recs.filter(r => r !== p && r.output === p.output);
+  const nm = i => i.alts ? i.alts[0] : i.item;
+  const diff = (p.ingredients || []).filter(i => others.some(o => !(o.ingredients || []).some(j => nm(j) === nm(i))));
+  const pick = diff[diff.length - 1] || (p.ingredients || [])[0];
+  return pick ? nm(pick) + (pick.alts && pick.alts.length > 1 ? ' or similar' : '') : `Lv ${p.level}`;
+}
+// Production recipe list: recipes.json, or the older card-only item_sources data if it's missing
+function _productionRecipes() {
+  if (RECIPES.length) return RECIPES;
+  return Object.entries(itemSources).filter(([, d]) => d && d.production && d.production.skill)
+    .map(([n, d]) => ({ ...d.production, output: n }));
+}
+const GENERATED_SKILLS = new Set(['Agility', 'Thieving', 'Hunter', 'Prayer', 'Firemaking', 'Ranged', 'Sailing']);
+function _skillingMethods(skillName) {
+  const myLevel = getLevel(skillName);
+  return SKILLING.filter(m => m.skill === skillName).map(m => {
+    const reqs = m.requirements || [];
+    const qMiss = (m.quests || []).filter(q => !_questOk(q));
+    const lMiss = Object.entries(m.levels || {}).filter(([sk, l]) => getLevel(sk) < l);
+    const accOk = !m.access || _accessMet(m.access);
+    const miss = reqs.filter(r => !r.optional && (_reqCards(r).length || (r._routes || []).length) && !_reqMet(r));
+    let status, note;
+    if (myLevel < (m.level || 1)) { status = 'locked-level'; note = ''; }
+    else if (qMiss.length || lMiss.length || !accOk) {
+      status = 'locked';
+      note = [...qMiss, ...lMiss.map(([sk, l]) => `${sk} ${l}`), !accOk && `reach ${accessRoutes[m.access]?.label || m.access}`].filter(Boolean).join(', ');
+    } else if (miss.length) {
+      status = 'no-card';
+      note = 'need: ' + miss.map(r => _reqCards(r).length === 1 && !r.access ? _reqCards(r)[0] : r.label).slice(0, 3).join(', ');
+    } else { status = 'available'; note = m.xp ? `${m.xp} xp` : ''; }
+    const first = reqs.find(r => (r.cards || []).length === 1);
+    return { name: m.name, level: m.level || 0, status, cardOwned: !miss.length, note, type: 'generated',
+      navCard: first ? first.cards[0] : null, quests: qMiss, method: m };
+  });
+}
+
+// Skills that can't be trained at all until a quest is done (OSRS Wiki):
+//   Herblore — "requires completion of the Druidic Ritual quest"; Runecraft — essence mining needs
+//   Rune Mysteries; Sailing — starts with Pandemonium.
+const SKILL_UNLOCK_QUESTS = { Herblore: 'Druidic Ritual', Runecrafting: 'Rune Mysteries', Sailing: 'Pandemonium' };
+function _skillUnlocked(skill) { const q = SKILL_UNLOCK_QUESTS[skill]; return !q || _questOk(q); }
 function getTrainingMethods(skillName) {
+  const results = _getTrainingMethodsRaw(skillName);
+  if (_skillUnlocked(skillName)) return results;
+  const q = SKILL_UNLOCK_QUESTS[skillName];
+  return results.map(m => m.status === 'available' || m.status === 'no-card' || m.status === 'no-source'
+    ? { ...m, status: 'locked', note: `needs: ${q}`, quests: [q], skillLock: q } : m);
+}
+function _getTrainingMethodsRaw(skillName) {
   /**
    * Return an array of training method objects for a given skill.
    * Each object: {name, level, status, cardOwned, note, type}
@@ -6190,34 +5919,23 @@ function getTrainingMethods(skillName) {
   const myLevel = getLevel(skillName);
   const results = [];
 
+  // Skills whose methods come from output/skilling.json (wiki-built, shared requirement model)
+  if (GENERATED_SKILLS.has(skillName) && SKILLING.some(m => m.skill === skillName)) {
+    results.push(..._skillingMethods(skillName));
+    const order = {available:0,'no-source':1,'no-card':2,'locked-tool':3,'locked-level':4,'locked':5};
+    return results.sort((a, b) => (order[a.status] - order[b.status]) || ((a.level || 0) - (b.level || 0)) || a.name.localeCompare(b.name));
+  }
+
   const GATHERING_SKILLS = new Set(['Mining','Woodcutting','Fishing','Farming']);
   const PRODUCTION_SKILLS = new Set(['Fletching','Smithing','Crafting','Cooking','Herblore','Construction','Runecrafting']);
   const MELEE_SKILLS = new Set(['Attack','Strength','Defence','Hitpoints']);
 
-  if (skillName === 'Hunter') {
-    // Hardcoded creature list — level + tool only (gathering rule, no card needed)
-    for (const c of HUNTER_CREATURES) {
-      const parts = resolveToolParts(c.tool);
-      const missingCardParts = parts.filter(p => itemSources[p.label] && (!p.owned || !canGetItem(p.label)));
-      let status, note;
-      if (myLevel < c.level) {
-        status = 'locked-level';
-        note = missingCardParts.length ? 'need: ' + missingCardParts.map(p => p.label).join(', ') : '';
-      } else if (missingCardParts.length > 0) {
-        status = 'locked-tool';
-        note = 'need: ' + missingCardParts.map(p => p.label).join(', ');
-      } else {
-        status = 'available';
-        note = c.tool !== 'None' ? c.tool : '';
-      }
-      results.push({name:c.name, level:c.level, status, cardOwned:true, note, xp:c.xp, type:'hunter'});
-    }
-
-  } else if (GATHERING_SKILLS.has(skillName)) {
+  if (GATHERING_SKILLS.has(skillName)) {
     for (const [cardName, data] of Object.entries(itemSources)) {
       if (!data) continue;
       const g = data.gathering;
       if (!g || g.skill !== skillName) continue;
+      if (g.noXp) continue;  // e.g. picking flax: a source of the item, not training
       const level = g.level;
       const cardOwned = isOwned(cardName);
 
@@ -6260,13 +5978,9 @@ function getTrainingMethods(skillName) {
 
       // Quest/area gate — some gathering spots require quest completion to access
       let questLocked = false, questNote = '';
-      if (g.questRequired) {
-        const completable = computeCompletableQuests();
-        if (!completedQuests.has(g.questRequired) && !completable.has(g.questRequired)) {
-          questLocked = true;
-          questNote = `needs: ${g.questRequired}`;
-        }
-      }
+      const gqMiss = (g.quests || []).filter(q => !_questOk(q));
+      if (gqMiss.length) { questLocked = true; questNote = `needs: ${gqMiss.join(', ')}`; }
+      else if (g.access && !_accessMet(g.access)) { questLocked = true; questNote = `reach ${accessRoutes[g.access]?.label || g.access}`; }
 
       // If there's a tool requirement, gathering is level+tool gated (card not needed to gather).
       // If there's NO tool (e.g. Flax), the card itself is the gate.
@@ -6288,159 +6002,54 @@ function getTrainingMethods(skillName) {
       results.push({name:cardName, level, status, cardOwned, note:gatherNote, xp:g.xp, method:g.method, type:'gathering'});
     }
 
-  } else if (skillName === 'Firemaking') {
-    // Burning logs requires: log card + tinderbox card (physical) + Firemaking level
-    const hasTinderboxCard  = isOwned('Tinderbox');
-    const canGetTinderbox   = canGetItem('Tinderbox');
-    for (const [logName, fireLevel] of Object.entries(FIREMAKING_LEVELS)) {
-      if (!itemSources[logName]) continue;
-      const cardOwned = isOwned(logName);
-      const canGetLog = canGetItem(logName);
-      let status, note;
-      if (!hasTinderboxCard) {
-        status = 'locked-tool';
-        note = 'no Tinderbox';
-      } else if (!canGetTinderbox) {
-        status = 'no-source';
-        note = 'no Tinderbox source';
-      } else if (myLevel < fireLevel) {
-        status = 'locked-level';
-        note = '';
-      } else if (!cardOwned) {
-        status = 'no-card';
-        note = '';
-      } else if (!canGetLog) {
-        status = 'no-source';
-        note = '';
-      } else {
-        status = 'available';
-        note = '';
-      }
-      results.push({name:logName, level:fireLevel, status, cardOwned, note, type:'firemaking'});
-    }
-    // Wintertodt — minigame requiring only Tinderbox, no log cards
-    {
-      const hasTinderbox  = isOwned('Tinderbox');
-      const canGetTinderbox = canGetItem('Tinderbox');
-      let wStatus, wNote;
-      if (myLevel < 50)          { wStatus = 'locked-level'; wNote = ''; }
-      else if (!hasTinderbox)    { wStatus = 'locked-tool';  wNote = 'no Tinderbox'; }
-      else if (!canGetTinderbox) { wStatus = 'no-source';    wNote = 'no Tinderbox source'; }
-      else                       { wStatus = 'available';    wNote = 'Tinderbox'; }
-      results.push({name:'Wintertodt', level:50, status:wStatus, cardOwned:hasTinderbox, note:wNote, type:'firemaking'});
-    }
-
-  } else if (skillName === 'Thieving') {
-    // ── Stalls: hardcoded list (stolen items go to inventory, no card gate) ──
-    for (const stall of THIEVING_STALLS) {
-      const status = myLevel < stall.level ? 'locked-level' : 'available';
-      results.push({name:stall.name, level:stall.level, status, cardOwned:true,
-        note: `${stall.xp} xp`, xp:stall.xp, isPickpocket:false, npcCardRequired:false, type:'thieving'});
-    }
-    // ── Pickpockets: hardcoded NPC list (wiki scraper doesn't capture all NPCs) ─
-    for (const npc of PICKPOCKET_NPCS) {
-      const cardOwned = npc.card ? isOwned(npc.card) : true; // no card → no restriction
-      const npcCardRequired = !!npc.card;
-      let status;
-      if (myLevel < npc.level) {
-        status = 'locked-level';
-      } else if (npcCardRequired && !cardOwned) {
-        status = 'no-card';
-      } else {
-        status = 'available';
-      }
-      results.push({name:`Pickpocket ${npc.name}`, level:npc.level, status, cardOwned,
-        note:`${npc.xp} xp`, xp:npc.xp, isPickpocket:true, npcCardRequired, type:'thieving'});
-    }
-
-  } else if (skillName === 'Prayer') {
-    // Burying bones/ashes: need the card to use the item (Bronzeman rule)
-    // Also check if the item is actually gettable (e.g. own Ourg bones card but no Ourg monster card)
-    for (const bone of PRAYER_BONES) {
-      if (!itemSources[bone.name]) continue;
-      const cardOwned = isOwned(bone.name);
-      const gettable = canGetItem(bone.name);
-      let status;
-      if (!cardOwned)      status = 'no-card';
-      else if (!gettable)  status = 'no-source';
-      else                 status = 'available';
-      results.push({name:bone.name, level:1, status,
-        cardOwned, note:`${bone.xp} xp`, xp:bone.xp, type:'prayer'});
-    }
-
   } else if (skillName === 'Magic') {
-    // Show actual castable spells based on rune card ownership + level
-    for (const spell of MAGIC_SPELLS) {
-      const missingCards      = Object.keys(spell.runes).filter(r => !isOwned(r));
-      const unobtainableRunes = Object.keys(spell.runes).filter(r => isOwned(r) && !canGetItem(r));
-      const levelOk = myLevel >= spell.level;
+    // Every spell from spells.json (wiki spellbooks). A rune counts if you own it, or a staff /
+    // combination rune that supplies it (rune_sources.json). Other spellbooks need their unlock.
+    for (const [name, sp] of Object.entries(spellsData)) {
+      const book = SPELLBOOK_GATES[sp.book] || {};
+      const runeSlots = Object.keys(sp.runes || {}).map(r => [r, ...(runeSources[r] || [])]);
+      const missing = runeSlots.filter(sl => !sl.some(_cardUsable)).map(sl => sl[0]);
+      const unobtainable = runeSlots.filter(sl => sl.some(_cardUsable) && !sl.some(c => _cardUsable(c) && (c !== sl[0] || canGetItem(c)))).map(sl => sl[0]);
+      const items = SPELL_ITEM_REQS[name] || [];
+      const itemMissing = items.length && !items.some(_cardUsable);
+      const gateMissing = (book.quest && !completedQuests.has(book.quest)) || (book.access && !_accessMet(book.access));
       let status, note;
-      if (!levelOk) {
-        status = 'locked-level';
-        note = missingCards.length ? 'need: ' + missingCards.slice(0,2).join(', ') : '';
-      } else if (missingCards.length > 0) {
-        status = 'no-card'; note = 'need: ' + missingCards.slice(0,3).join(', ');
-      } else if (unobtainableRunes.length > 0) {
-        status = 'no-source'; note = 'no source: ' + unobtainableRunes.slice(0,2).join(', ');
-      } else {
-        status = 'available'; note = Object.keys(spell.runes).join(', ');
-      }
-      results.push({name:spell.name, level:spell.level, status,
-        cardOwned:missingCards.length===0, note, type:'magic-spell'});
+      if (gateMissing)                 { status = 'locked';       note = `${sp.book} spellbook: ${book.label}`; }
+      else if (myLevel < sp.level)     { status = 'locked-level'; note = missing.length ? 'need: ' + missing.slice(0, 2).join(', ') : ''; }
+      else if (itemMissing)            { status = 'locked-tool';  note = 'needs ' + items.join(' / '); }
+      else if (missing.length)         { status = 'no-card';      note = 'need: ' + missing.slice(0, 3).join(', '); }
+      else if (unobtainable.length)    { status = 'no-source';    note = 'no source: ' + unobtainable.slice(0, 2).join(', '); }
+      else                             { status = 'available';    note = `${sp.book !== 'Standard' ? sp.book + ' · ' : ''}${Object.keys(sp.runes).join(', ')}`; }
+      results.push({ name, level: sp.level, status, cardOwned: !missing.length, note, type: 'magic-spell' });
     }
-
-  } else if (skillName === 'Ranged') {
-    // Bow + arrow / crossbow + bolt combos, and standalone thrown
-    for (const [bow, cfg] of Object.entries(BOW_COMPAT)) {
-      if (!itemSources[bow]) continue;
-      const bowOwned = isOwned(bow);
-      const levelOk = myLevel >= cfg.level;
-      const ownedAmmo = cfg.ammo.filter(a => isOwned(a));
-      const canGetBow = canGetItem(bow);
-      if (bowOwned && ownedAmmo.length) {
-        for (const ammo of ownedAmmo) {
-          const canGetAmmo = canGetItem(ammo);
-          const status = !canGetBow ? 'no-source' : !canGetAmmo ? 'no-source'
-                       : !levelOk   ? 'locked-level' : 'available';
-          const note   = !canGetBow ? 'no bow source' : !canGetAmmo ? 'no ammo source' : '';
-          results.push({name:`${bow} + ${ammo}`, level:cfg.level,
-            status, cardOwned:true, note, weapon:bow, ammo, type:'ranged-setup'});
-        }
-      } else if (bowOwned && canGetBow) {
-        results.push({name:bow, level:cfg.level, status:'no-card', cardOwned:false,
-          note:`no ammo`, weapon:bow, ammo:null, type:'ranged-setup'});
-      } else if (ownedAmmo.length && canGetBow) {
-        results.push({name:bow, level:cfg.level, status:'no-card', cardOwned:false,
-          note:`no bow`, weapon:bow, ammo:null, type:'ranged-setup'});
-      }
-      // If neither bow nor any ammo owned, or bow not obtainable — skip
-    }
-    for (const t of STANDALONE_THROWN) {
-      if (!itemSources[t.name]) continue;
-      const owned = isOwned(t.name);
-      const levelOk = myLevel >= t.level;
-      const canGet = canGetItem(t.name);
-      if (!owned && !canGet) continue; // not obtainable — skip
-      const tStatus = !canGet ? 'no-source' : !owned ? 'no-card' : !levelOk ? 'locked-level' : 'available';
-      results.push({name:t.name, level:t.level,
-        status: tStatus, cardOwned:owned, note: !canGet ? 'no source' : '',
-        weapon:t.name, ammo:null, type:'ranged-setup'});
-    }
-
   } else if (MELEE_SKILLS.has(skillName)) {
     // Melee combat: need monster card to fight — NPCs with no combat level cannot be trained on
     const mySlayer = getLevel('Slayer');
+    const G = monsterLocations._gates || {};
+    _accessCache = new Map();
     for (const mName of Object.keys(monsterDrops)) {
       if (!isOwned(mName)) continue;
       const cbLv = monsterDrops[mName].combatLevel;
       if (!cbLv) continue;   // NPC card — no combat level, can't train on
       const slayerReq = monsterDrops[mName].slayerLevel || 0;
       const slayerLocked = slayerReq > mySlayer;
-      const status = slayerLocked ? 'locked-level' : 'available';
+      // Reachable? Any of its locations (monster_locations.json); a boss also needs its own gates
+      const locs = Object.entries(monsterLocations[mName] || {});
+      const reachable = !locs.length || locs.some(([l, a]) => _slLocOk(a, G[l]));
+      const bossEnc = (BOSS_BY_CARD[mName.toLowerCase()] || []).find(b => b.role === 'monster');
+      const bossLocked = bossEnc && evaluateBoss(BOSS_DATA.find(b => b.name === bossEnc.bossName) || {}).status === 'locked';
+      let status = 'available', note = '';
+      if (slayerLocked) { status = 'locked-level'; note = `Slayer ${slayerReq}`; }
+      else if (bossLocked) { status = 'locked'; note = `${bossEnc.bossName}: locked`; }
+      else if (!reachable) {
+        status = 'locked';
+        const a = locs.map(([, x]) => x).find(x => x && x !== 'excluded');
+        note = a ? `reach ${accessRoutes[a]?.label || a}` : 'can’t reach any location';
+      }
       results.push({name:mName, level:cbLv, status,
-        cardOwned:true, note: slayerLocked ? `Slayer ${slayerReq}` : '',
-        combatLevel:cbLv, slayerReq, type:'combat'});
+        cardOwned:true, note, combatLevel:cbLv, slayerReq, type:'combat'});
     }
+    _accessCache = null;
     results.sort((a,b) => {
       // Available monsters first (by combat level), locked monsters second (by combat level)
       const aAvail = a.status === 'available' ? 0 : 1;
@@ -6451,10 +6060,11 @@ function getTrainingMethods(skillName) {
     return results;
 
   } else if (PRODUCTION_SKILLS.has(skillName)) {
-    for (const [cardName, data] of Object.entries(itemSources)) {
-      if (!data) continue;
-      const p = data.production;
-      if (!p || p.skill !== skillName) continue;
+    const recs = _productionRecipes().filter(r => r.skill === skillName);
+    const nByOut = {};
+    for (const r of recs) nByOut[r.output] = (nByOut[r.output] || 0) + 1;
+    for (const p of recs) {
+      const cardName = p.output;
       // Skip methods that grant 0 XP — not training methods
       if (!p.xp || p.xp <= 0) continue;
       // For Cooking: skip burnt items (failed cooks, not intentional training)
@@ -6474,11 +6084,18 @@ function getTrainingMethods(skillName) {
       // Ingredient assessment: unowned cards → no-card; owned but unobtainable → no-source
       const blockedBy = [];    // owned-card or non-card ingredients that can't be obtained
       const missingCards = []; // card ingredients not yet owned
-      for (const ing of ings) {
-        const isCard = !!itemSources[ing.item];
-        if (isCard && !isOwned(ing.item)) {
-          missingCards.push(ing.item);       // don't own the card → no-card
-        } else if (isCard && !canGetItem(ing.item)) {
+      for (const ing0 of ings) {
+        // "alts": any one of these will do (feather colours, the bow offered at a totem…) — use the best one
+        const ing = ing0.alts ? ({ ...ing0, item: _bestAlt(ing0.alts) }) : ing0;
+        // A version (dose, unstrung bow…) needs its card: _cardInfo maps "Agility potion(2)" → Agility potion
+        const ci = _cardInfo(ing.item);
+        const card = ci && ci.type === 'item' ? ci.exact : null;
+        const isCard = !!card;
+        const srcName = itemSources[ing.item] || ingredientInfo[ing.item] ? ing.item : (card || ing.item);
+        if (isCard && !isOwned(card)) {
+          // a version names its card, e.g. "Headless arrow (for Arrow shaft)"
+          missingCards.push(card.toLowerCase() === ing.item.toLowerCase() ? card : `${card} (for ${ing.item})`);
+        } else if (isCard && !canGetItem(srcName)) {
           blockedBy.push(ing.item);          // own card but can't obtain → no-source
         } else if (!isCard && !canGetItem(ing.item)) {
           blockedBy.push(ing.item);          // non-card ingredient unreachable → no-source
@@ -6486,16 +6103,22 @@ function getTrainingMethods(skillName) {
       }
       // Quest requirement check
       const prodQuestLocked = (p.quests && p.quests.length > 0) && (() => {
-        const completable = computeCompletableQuests();
-        const locked = p.quests.filter(q => !completedQuests.has(q) && !completable.has(q));
+        const locked = p.quests.filter(q => !_questOk(q));
         return locked.length > 0 ? locked : null;
       })();
+
+      const lvMiss = Object.entries(p.levels || {}).filter(([sk, l]) => getLevel(sk) < l);
+      const accLocked = p.access && !_accessMet(p.access);
 
       let status, note;
       if (myLevel < level) {
         status = 'locked-level'; note = '';
       } else if (prodQuestLocked) {
         status = 'locked'; note = 'needs: ' + prodQuestLocked.join(', ');
+      } else if (lvMiss.length) {
+        status = 'locked'; note = 'needs: ' + lvMiss.map(([sk, l]) => `${sk} ${l}`).join(', ');
+      } else if (accLocked) {
+        status = 'locked'; note = 'needs: ' + (accessRoutes[p.access]?.label || p.access);
       } else if (missingTools.length > 0) {
         status = 'locked-tool'; note = 'need: ' + missingTools.slice(0,2).join(', ');
       } else if (blockedBy.length > 0) {
@@ -6533,7 +6156,12 @@ function getTrainingMethods(skillName) {
       // Don't apply to multi-ingredient recipes — they'd collapse to a shared ingredient (e.g. Equa leaves).
       const cardIngs = ings.filter(i => !!itemSources[i.item]).map(i => i.item);
       const singleIng = skillName === 'Cooking' && ings.length === 1 && cardIngs.length === 1 ? cardIngs[0] : null;
-      results.push({name:cardName, displayName:singleIng||cardName, displayNav:singleIng||cardName, level, status, cardOwned:isOwned(cardName), note, xp:p.xp, type:'production', quests:p.quests||null});
+      // Same output from several recipes (e.g. 1 or 2 dose mixes): name the first ingredient
+      const dispName = singleIng || (nByOut[cardName] > 1 ? `${cardName} (${_recipeTag(p, recs)})` : cardName);
+      // Click → the output's card (or the card it's a version of), else its ingredient page if there is one
+      const oc = _cardInfo(cardName);
+      const nav = singleIng || (oc && oc.type === 'item' ? oc.exact : ingredientInfo[cardName] ? cardName : null);
+      results.push({name:cardName, displayName:dispName, displayNav:nav, level, status, cardOwned:!!(oc && isOwned(oc.exact)), note, xp:p.xp, type:'production', quests:p.quests && p.quests.length ? p.quests : null});
     }
     // ── Smithing: activity methods requiring only a tool, no ingredient cards ─
     if (skillName === 'Smithing') {
@@ -6547,12 +6175,6 @@ function getTrainingMethods(skillName) {
       results.push({name:'Motherlode Mine (wheel repair)', level:30, status:mStatus, cardOwned:hasHammer, note:mNote, type:'production'});
     }
 
-  } else if (skillName === 'Agility') {
-    for (const c of AGILITY_COURSES) {
-      results.push({name:c.name, level:c.level,
-        status: myLevel >= c.level ? 'available' : 'locked-level',
-        cardOwned:true, note:`${c.xp} xp/lap`, type:'agility'});
-    }
   } else if (skillName === 'Slayer') {
     // Masters from output/slayer.json — the Slayer tab has the full detail
     for (const m of SLAYER.masters) {
@@ -6566,9 +6188,12 @@ function getTrainingMethods(skillName) {
     }
   }
 
+  // Wiki-built methods for skills that otherwise come from item data (e.g. Construction minigames)
+  results.push(..._skillingMethods(skillName));
+
   // Sort: available first, then by level asc
   results.sort((a,b) => {
-    const order = {available:0,'no-source':1,'no-card':2,'locked-tool':3,'locked-level':4};
+    const order = {available:0,'no-source':1,'no-card':2,'locked-tool':3,'locked-level':4,'locked':5};
     if (order[a.status] !== order[b.status]) return order[a.status] - order[b.status];
     return (a.level||0) - (b.level||0);
   });
@@ -6576,16 +6201,6 @@ function getTrainingMethods(skillName) {
 }
 
 function countAvailableMethods(skillName) {
-  if (['Attack','Strength','Defence','Hitpoints'].includes(skillName))
-    return getTrainingMethods(skillName).filter(m => m.status === 'available').length;
-  if (skillName === 'Magic')
-    return getTrainingMethods('Magic').filter(m => m.status === 'available').length;
-  if (skillName === 'Ranged')
-    return getTrainingMethods('Ranged').filter(m => m.status === 'available').length;
-  if (skillName === 'Prayer')
-    return PRAYER_BONES.filter(b => itemSources[b.name] && isOwned(b.name) && canGetItem(b.name)).length;
-  if (skillName === 'Agility') return AGILITY_COURSES.filter(c => getLevel('Agility') >= c.level).length;
-  if (skillName === 'Slayer')  return getTrainingMethods('Slayer').filter(m => m.status === 'available').length;
   return getTrainingMethods(skillName).filter(m => m.status === 'available').length;
 }
 
@@ -6607,9 +6222,70 @@ function renderSkillGrid() {
   grid.innerHTML = html;
 }
 
+function showSkillOverview() {
+  pushHistoryEntry();
+  selectedSkill = null;
+  renderSkillGrid();
+  _renderSkillHome();
+}
+// Skilling home panel: per-skill level, available methods, best method now, next unlock;
+// the quests/areas locking the most methods; most-needed cards for the wiki-built skills
+function _renderSkillHome() {
+  const pane = document.getElementById('skill-detail-pane');
+  if (!pane) return;
+  document.getElementById('skill-overview-item')?.classList.add('selected');
+  const rows = [], gates = new Map(), demand = new Map();
+  for (const sk of SKILL_ORDER) {
+    const ms = getTrainingMethods(sk);
+    const avail = ms.filter(m => m.status === 'available');
+    const best = [...avail].sort((a, b) => (b.level || 0) - (a.level || 0))[0];
+    const next = ms.filter(m => m.status === 'locked-level').sort((a, b) => (a.level || 0) - (b.level || 0))[0];
+    // Melee methods are monsters, so their "level" is the monster's combat level
+    rows.push({ sk, lvl: getLevel(sk), n: ms.length, a: avail.length, best, next, lv: ['Attack','Strength','Defence','Hitpoints'].includes(sk) ? 'Cb' : 'Lv' });
+    for (const m of ms) {
+      if (m.status === 'locked') {
+        const qs = m.quests && m.quests.length ? m.quests : [];
+        for (const q of qs) { const k = 'q:' + q; if (!gates.has(k)) gates.set(k, { label: q, quest: q, n: 0, skills: new Set() }); gates.get(k).n++; gates.get(k).skills.add(sk); }
+        if (!qs.length && m.note) { const k = 'n:' + m.note; if (!gates.has(k)) gates.set(k, { label: m.note, n: 0, skills: new Set() }); gates.get(k).n++; gates.get(k).skills.add(sk); }
+      }
+      if (m.status === 'no-card' && m.method) {   // wiki-built methods: which cards would unlock it
+        const miss = (m.method.requirements || []).filter(r => !r.optional && _reqCards(r).length && !_reqMet(r));
+        for (const r of miss) for (const c of _reqCards(r)) if (!isOwned(c)) {
+          if (!demand.has(c)) demand.set(c, { quests: new Set(), last: new Set() });
+          demand.get(c).quests.add(`${sk}: ${m.name}`);
+          if (miss.length === 1 && _reqCards(r).length === 1) demand.get(c).last.add(`${sk}: ${m.name}`);
+        }
+      }
+    }
+  }
+  const table = `<div style="overflow-x:auto"><table style="border-collapse:collapse;width:100%;font-size:11px">
+    <tr style="color:#666;text-align:left"><th style="padding:4px 6px">Skill</th><th style="padding:4px 6px">Level</th><th style="padding:4px 6px">Methods</th><th style="padding:4px 6px">Best you can do now</th><th style="padding:4px 6px">Next unlock</th></tr>
+    ${rows.map(r => `<tr style="border-top:1px solid #1a1a1a;cursor:pointer" onclick="showSkillDetail('${r.sk}')">
+      <td style="padding:4px 6px;color:#ccc;white-space:nowrap">${skillIcon(r.sk, 12)} ${r.sk}</td>
+      <td style="padding:4px 6px;color:#aaa;font-variant-numeric:tabular-nums">${r.lvl}</td>
+      <td style="padding:4px 6px;color:${r.a ? '#7ab07a' : '#a05050'};font-variant-numeric:tabular-nums">${r.a}/${r.n}</td>
+      <td style="padding:4px 6px;color:#bbb">${r.best ? escHtml(r.best.name) + (r.best.level ? ` <span style="color:#666">${r.lv} ${r.best.level}</span>` : '') : '<span style="color:#555">—</span>'}</td>
+      <td style="padding:4px 6px;color:#888">${!_skillUnlocked(r.sk) ? `<span style="color:#c85040">needs ${escHtml(SKILL_UNLOCK_QUESTS[r.sk])}</span>` : r.next ? `${r.lv} ${r.next.level}: ${escHtml(r.next.name)}` : '<span style="color:#555">—</span>'}</td></tr>`).join('')}</table></div>`;
+  const gateRows = [...gates.values()].sort((a, b) => b.n - a.n).slice(0, 12).map(g => `<div style="display:flex;gap:8px;padding:3px 0;font-size:11px">
+    <span style="width:300px;flex-shrink:0">${g.quest ? `<span style="cursor:pointer;color:#c8a060;text-decoration:underline dotted" data-quest="${escHtml(g.quest)}" onclick="_navToQuest(this)">${escHtml(g.label)}</span>` : `<span style="color:#ccc">${escHtml(g.label)}</span>`}</span>
+    <span style="color:#c85040;font-variant-numeric:tabular-nums;flex-shrink:0">locks ${g.n}</span>
+    <span style="color:#666">${[...g.skills].join(', ')}</span></div>`).join('');
+  const box = (title, sub, inner) => inner ? `<div style="background:#111;border:1px solid #222;border-radius:4px;padding:12px 14px;margin-bottom:14px">
+    <div style="color:#c8a830;font-weight:700;font-size:12px;margin-bottom:2px">${title}</div><div style="color:#666;font-size:10px;margin-bottom:8px">${sub}</div>${inner}</div>` : '';
+  const total = rows.reduce((a, r) => ({ done: a.done + r.a, total: a.total + r.n }), { done: 0, total: 0 });
+  pane.innerHTML = `<div style="max-width:900px">
+    <h1 style="font-size:18px;color:#e8c97a;margin:0 0 12px">Skilling</h1>
+    <div style="margin-bottom:14px">${_progressBar('Methods available', total, '#c8a830', 'Training methods you can do now, across every skill')}</div>
+    ${box('Skills', 'Click a skill for every method and what each needs', table)}
+    ${box('Biggest blockers', 'Quests and areas that lock the most training methods', gateRows)}
+    ${_demandTableHtml(demand, 'Most-needed cards for skilling', 'method', 'Most-needed for skilling')}
+  </div>`;
+}
+
 function showSkillDetail(skillName, push = true) {
   if (push) pushHistoryEntry();
   selectedSkill = skillName;
+  document.getElementById('skill-overview-item')?.classList.remove('selected');
   // Update grid selection
   renderSkillGrid();
   const pane = document.getElementById('skill-detail-pane');
@@ -6649,12 +6325,18 @@ function showSkillDetail(skillName, push = true) {
     intro = `<p style="color:#666;font-size:11px;margin-bottom:12px">You need the monster card to fight. Grey = Slayer level required. Sorted by combat level.</p>`;
   } else if (PRODUCTION_SKILLS.has(skillName)) {
     let prodNote = 'Ingredient cards required. Orange = have the card but no way to obtain the item right now. Output card not required to produce.';
-    if (skillName === 'Construction') prodNote += ' <b>Note: POH furniture data not yet scraped — only ship construction items shown. Your house costs 1,000 coins from an Estate Agent (no card needed for the NPC, but coins required).</b>';
+    if (skillName === 'Construction') prodNote += ' Shipwright workbench parts give xp without a house; Wintertodt, Vale Totems, Fishing Trawler, Mahogany Homes and Barlak only give Construction xp if you own a house (1,000 coins from an estate agent — no NPC card needed — or Daddy\'s Home). POH furniture is built in your house, so it needs one too.';
     intro = `<p style="color:#666;font-size:11px;margin-bottom:12px">${prodNote}</p>`;
   } else if (skillName === 'Agility') {
     intro = `<p style="color:#666;font-size:11px;margin-bottom:12px">Agility courses need no card — level only.</p>`;
   } else if (skillName === 'Slayer') {
     intro = `<p style="color:#666;font-size:11px;margin-bottom:12px">Slayer has its own tab: click a master for their tasks, or <span style="cursor:pointer;color:#c8a060;text-decoration:underline dotted" onclick="switchTab('slayer')">open the Slayer tab</span>.</p>`;
+  }
+
+  if (!_skillUnlocked(skillName)) {
+    const q = SKILL_UNLOCK_QUESTS[skillName];
+    intro = `<div style="background:#2a1414;border:1px solid #5a2a2a;border-radius:4px;padding:8px 12px;margin-bottom:12px;font-size:11px;color:#d0a0a0">
+      ${escHtml(skillName)} can't be trained until you complete <span style="cursor:pointer;color:#c8a060;text-decoration:underline dotted" data-quest="${escHtml(q)}" onclick="_navToQuest(this)">${escHtml(q)}</span> — every method below is locked.</div>` + intro;
   }
 
   let rows = '';
@@ -6694,10 +6376,12 @@ function showSkillDetail(skillName, push = true) {
       // Name HTML — clickable for items, monsters
       let nameHtml;
       if (m.type === 'gathering' || m.type === 'production' || m.type === 'prayer' || m.type === 'firemaking') {
-        const navName = m.displayNav || m.name;
+        const navName = m.type === 'production' ? m.displayNav : (m.displayNav || m.name);
         const dispName = m.displayName || m.name;
         const navType = itemSources[navName] ? 'item' : 'ingredient';
-        nameHtml = `<span class="method-name ${nameCls}" style="cursor:pointer" data-nav="${escHtml(navName)}" data-nav-type="${navType}" onclick="_navToCard(this)">${dispName}</span>`;
+        nameHtml = navName
+          ? `<span class="method-name ${nameCls}" style="cursor:pointer" data-nav="${escHtml(navName)}" data-nav-type="${navType}" onclick="_navToCard(this)">${escHtml(dispName)}</span>`
+          : `<span class="method-name ${nameCls}">${escHtml(dispName)}</span>`;
       } else if (m.type === 'hunter' && itemSources[m.name]) {
         nameHtml = `<span class="method-name ${nameCls}" style="cursor:pointer" data-nav="${escHtml(m.name)}" data-nav-type="item" onclick="_navToCard(this)">${m.name}</span>`;
       } else if (m.type === 'combat') {
@@ -6711,6 +6395,11 @@ function showSkillDetail(skillName, push = true) {
           ? ` + <span style="cursor:pointer" data-nav="${escHtml(m.ammo)}" data-nav-type="item" onclick="_navToCard(this)">${m.ammo}</span>`
           : '';
         nameHtml = `<span class="method-name ${nameCls}">${weaponLink}${ammoLink}</span>`;
+      } else if (m.type === 'generated') {
+        const info = m.navCard ? _cardInfo(m.navCard) : null;
+        nameHtml = info
+          ? `<span class="method-name ${nameCls}" style="cursor:pointer" data-nav="${escHtml(info.exact)}" data-nav-type="${info.type}" onclick="_navToCard(this)" title="${escHtml(m.method?.note || '')}">${escHtml(m.name)}</span>`
+          : `<span class="method-name ${nameCls}" title="${escHtml(m.method?.note || '')}">${escHtml(m.name)}</span>`;
       } else if (m.type === 'magic-spell') {
         nameHtml = `<span class="method-name ${nameCls}">${m.name}</span>`;
       } else if (m.type === 'thieving' && m.npcName && m.npcCardRequired) {
@@ -6728,10 +6417,11 @@ function showSkillDetail(skillName, push = true) {
         ? `<span class="method-note" style="color:#a06800" title="Quest required">🗺 ${m.quests[0]}</span>`
         : '';
 
-      const _mImgName = m.type === 'ranged-setup' ? m.weapon : (m.displayNav || m.name);
-      const _mImgUrl  = _cardImg(_mImgName) || '';
+      const _mImgName = m.type === 'ranged-setup' ? m.weapon : m.type === 'generated' ? (m.navCard || m.name) : (m.displayNav || m.name);
+      const _mImgUrl  = _methodIcon(m) || _cardImg(_mImgName) || '';
       const _mImg = _mImgUrl
-        ? `<img src="${_mImgUrl}" style="width:18px;height:18px;object-fit:contain;image-rendering:pixelated;flex-shrink:0" onerror="this.style.display='none'">`
+        ? `<img src="${_mImgUrl}" style="width:18px;height:18px;object-fit:contain;image-rendering:pixelated;flex-shrink:0" onerror="this.style.visibility='hidden'">`
+        : !_mImgUrl && skillName ? `<span style="width:18px;flex-shrink:0;opacity:.5">${skillIcon(skillName, 14)}</span>`
         : '<span style="width:18px;flex-shrink:0"></span>';
       rows += `<div class="method-row">
         <div class="method-indicator ${indCls}"></div>
@@ -8566,6 +8256,20 @@ function checkQuestCards(name, q) {
   return { cardsOk: missing === 0, missingCount: missing };
 }
 
+// Quest met for planning = done, or completable now. Cached until quests / cards / levels change;
+// the guard stops recursion (quest card checks can reach canGetItem).
+let _completableCache = null, _completableSig = '', _completableBusy = false;
+function _questOk(q) {
+  if (completedQuests.has(q)) return true;
+  const sig = completedQuests.size + '|' + owned.size + '|' + Object.values(skills).join(',');
+  if (sig !== _completableSig) { _completableCache = null; _completableSig = sig; }
+  if (!_completableCache && !_completableBusy) {
+    _completableBusy = true;
+    try { _completableCache = computeCompletableQuests(); } finally { _completableBusy = false; }
+  }
+  return !!(_completableCache && _completableCache.has(q));
+}
+
 function computeCompletableQuests() {
   /**
    * Iteratively propagate completability. A quest is completable if:
@@ -8945,7 +8649,32 @@ function showQuestDetail(questName, push = true) {
 
 // ─── Rules tab ─────────────────────────────────────────────────────────────
 function renderRulesTab() {
-  return `<div id="rules-panel">
+  // Contents strip from the section headings; answers coloured Yes (card needed) / No
+  let html = _rulesTabHtml();
+  const toc = [];
+  html = html.replace(/<h3>([^<]+)<\/h3>/g, (_, t) => {
+    const id = 'rules-' + t.toLowerCase().replace(/[^a-z0-9]+/g, '-');
+    toc.push(`<a data-sec="${id}" onclick="document.getElementById('${id}').scrollIntoView({behavior:'smooth'})">${t}</a>`);
+    return `<h3 id="${id}">${t}</h3>`;
+  });
+  html = html.replace(/<td>(Yes|No)\b/g, (_, a) => `<td class="${a === 'Yes' ? 'r-yes' : 'r-no'}">${a}`)
+             .replace(/<td>You lose access/g, '<td class="r-yes">You lose access');
+  return `<div id="rules-wrap">
+    <nav id="rules-side"><div class="rules-side-head">Contents</div>${toc.join('')}</nav>
+    <div id="rules-panel" onscroll="_rulesScrollSpy()"><div class="rules-inner">${html}</div></div></div>`;
+}
+// Highlight the contents entry for the section being read
+function _rulesScrollSpy() {
+  const panel = document.getElementById('rules-panel');
+  if (!panel) return;
+  const top = panel.getBoundingClientRect().top + 40;
+  let cur = null;
+  for (const h of panel.querySelectorAll('h3[id]')) if (h.getBoundingClientRect().top <= top) cur = h.id;
+  cur = cur || panel.querySelector('h3[id]')?.id;
+  document.querySelectorAll('#rules-side a').forEach(a => a.classList.toggle('active', a.dataset.sec === cur));
+}
+function _rulesTabHtml() {
+  return `<div>
     <h2>Bronzeman TCG — Rules Reference</h2>
     <p>This tool helps you figure out what you can do based on your OSRS TCG card collection.
     The Bronzeman TCG mod enforces the following restrictions:</p>
@@ -9035,6 +8764,14 @@ function renderRulesTab() {
     </ul>
     <p>A master's percentage is the share of the tasks they can give you (by weight) that are doable.</p>
 
+    <h3>Skilling</h3>
+    <p>Agility, Thieving, Hunter, Prayer, Firemaking, Ranged and Sailing methods are built from the OSRS Wiki in the same requirement model as quests (cards, tools, quests, levels, areas). Production (Fletching, Smithing, Crafting, Cooking, Herblore, Construction, Runecraft) lists every XP-giving recipe in the wiki's recipe data, including outputs with no card (e.g. unstrung bows, POH furniture): you need the card for each ingredient you use (a dose or version needs its parent card, e.g. Agility potion(2) → Agility potion) and for card tools. Gathering comes from the item data; Magic from the spellbooks.</p>
+    <p>Some skills can't be trained at all until a quest is done, and every method shows as locked until then:</p>
+    <table><tr><th>Skill</th><th>Unlocked by</th></tr>
+      ${Object.entries(SKILL_UNLOCK_QUESTS).map(([sk, q]) => `<tr><td>${sk}</td><td>${escHtml(q)}</td></tr>`).join('')}</table>
+    <p>Single methods can also be quest-locked, e.g. box traps and rabbit snares (Eagles' Peak), pure essence (Rune Mysteries), Daeyalt essence (Sins of the Father), karambwan (Tai Bwo Wannai Trio), monkfish (Swan Song), arctic pine (The Fremennik Trials), dragon smithing (Dragon Slayer II), cannonballs (Dwarf Cannon). Construction xp from Wintertodt, Vale Totems, Fishing Trawler, Mahogany Homes and Barlak needs a player-owned house: 1,000 coins from an estate agent (no card needed for the agent, but you need Coins) or Daddy's Home. A quest counts as met when it's done <em>or</em> completable with what you have now. Melee methods are monsters, so their level column is the monster's combat level (Cb).</p>
+    <p>Sailing: islands only reachable by boat count as reachable once Pandemonium is done (your first boat); each port's Sailing level to dock is checked by the method. Boat facilities a method needs (salvaging hook, trawling net, cargo hold, cannon) need their material cards, since building one uses them as ingredients.</p>
+
     <h3>Foils</h3>
     <p>Foil cards are cosmetically shiny but don't grant any extra unlocks. A foil Iron ore card unlocks exactly the same things as a regular Iron ore card.</p>
 
@@ -9050,7 +8787,9 @@ function renderRulesTab() {
       <li><strong>Questing</strong> — See all OSRS quests and check completability based on your collection and skill levels.</li>
       <li><strong>Diaries</strong> — Every Achievement Diary task with wiki requirements, the cards each needs, and each tier's rewards.</li>
       <li><strong>Bosses</strong> — Raids, wave content, minigames, skilling bosses and bosses with access requirements and loot (collection-log uniques marked ◆).</li>
+      <li><strong>Slayer</strong> — Every Slayer master and task: which tasks you can do, every monster that counts, equipment, locations and reward unlocks.</li>
       <li><strong>Packs</strong> — Each pack's card pool, with how many you own and which are still missing.</li>
+      <li><strong>Overview</strong> — Questing, Bosses, Diaries and Slayer each open on a summary page (the Overview entry at the top of their list): what's ready, what's closest, the biggest blockers and the most-needed cards.</li>
     </ul>
   </div>`;
 }
@@ -9407,15 +9146,17 @@ function slotHasUpgrade(slot) {
 
 function renderEquipmentTab() {
   return `<div id="equip-panel">
+    <div id="equip-doll-pane">
     <div id="equip-style-bar">
-      <span style="font-size:11px;color:#555;margin-right:4px;align-self:center">Style:</span>
+      <span style="width:100%;font-size:10px;color:#555;text-transform:uppercase;letter-spacing:1px">Combat style</span>
       <button class="equip-style-btn ${activeEquipStyle==='melee'?'active':''}" onclick="switchEquipStyle('melee')">⚔ Melee</button>
       <button class="equip-style-btn ${activeEquipStyle==='ranged'?'active':''}" onclick="switchEquipStyle('ranged')">🏹 Ranged</button>
       <button class="equip-style-btn ${activeEquipStyle==='magic'?'active':''}" onclick="switchEquipStyle('magic')">🔮 Magic</button>
-      <span id="equip-owned-count" style="margin-left:auto;font-size:11px;color:#555;align-self:center"></span>
+      <span id="equip-owned-count" style="width:100%;font-size:11px;color:#555"></span>
+    </div>
+    <div id="equip-doll"></div>
     </div>
     <div id="equip-body">
-      <div id="equip-doll-pane"></div>
       <div id="equip-right-pane">
         <div id="equip-stats-panel"><div style="color:#333;font-size:11px;padding:4px">No gear equipped yet</div></div>
         <div id="equip-detail-pane"><div class="placeholder" style="margin-top:60px;color:#444">← Click a slot to see available items</div></div>
@@ -9466,7 +9207,7 @@ function updateEquipCount() {
 }
 
 function refreshEquipDoll() {
-  const pane = document.getElementById('equip-doll-pane');
+  const pane = document.getElementById('equip-doll');
   if (!pane) return;
   // Determine if a 2H weapon is currently equipped (blocks shield slot)
   const _wpnName = getEquipped('weapon');

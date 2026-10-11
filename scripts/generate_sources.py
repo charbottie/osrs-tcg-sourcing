@@ -713,6 +713,21 @@ def main() -> int:
     else:
         print("\nPass 5: Skipped (clue_sources.json not found)")
 
+    # --- Pass 6: hand-checked overrides (item_sources_overrides.json) ---
+    _ov_path = Path(__file__).parent / "item_sources_overrides.json"
+    if _ov_path.exists():
+        overrides = json.loads(_ov_path.read_text(encoding="utf-8"))
+        for item_name, fields in overrides.items():
+            if item_name.startswith("_") or item_name not in item_sources:
+                continue
+            for k, v in fields.items():
+                if v is None:
+                    item_sources[item_name].pop(k, None)
+                else:
+                    item_sources[item_name][k] = v
+        print(f"\nPass 6: applied overrides to {sum(1 for k in overrides if not k.startswith('_'))} items")
+        write_json(out_dir / "item_sources.json", item_sources, "item sources (with overrides)")
+
     # --- Pass 6: Card metadata (categories + details) ---
     print("\nPass 6: Writing card metadata...")
     _write_card_metadata(cards, out_dir)

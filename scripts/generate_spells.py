@@ -116,6 +116,10 @@ def main() -> int:
         found = parse_book(book, _fetch_wikitext(page))
         print(f"  {book:<9} {len(found):>3} spells")
         for k, v in found.items():
+            # The per-creature "Reanimate X" spells were removed on 28 April 2021 (replaced by
+            # Basic/Adept/Expert/Master Reanimation) but some spellbook tables still list them
+            if re.match(r"Reanimate [A-Z]", k):
+                continue
             spells.setdefault(k, v)
     _OUT.write_text(json.dumps(spells, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
     print(f"Wrote {_OUT} ({len(spells)} spells)")

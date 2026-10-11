@@ -6477,7 +6477,9 @@
     "wikiPage": "His_Faithful_Servants"
   },
   "Vale Totems": {
-    "prerequisites": [],
+    "prerequisites": [
+      "Children of the Sun"
+    ],
     "skillRequirements": [
       {
         "skill": "Fletching",

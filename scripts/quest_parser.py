@@ -134,7 +134,7 @@ def _extract_prerequisites(cell: Tag | None) -> list[str]:
     for li in cell.find_all("li"):
         text = li.get_text(strip=True).lower()
 
-        if text.startswith(("completion of", "completed")):
+        if text.startswith(("completion of", "completions of", "completed")):
             nested_ul = li.find("ul")
             if nested_ul:
                 # Pattern 1: nested list of multiple prereqs

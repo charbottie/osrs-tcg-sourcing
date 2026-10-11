@@ -1,5 +1,5 @@
 {
- "_comment": "Curated Slayer data for generate_slayer.py: master pages, cards and replacements; required equipment per task (filled in by the verification pass); location → access_routes.json key. locationAccess values: an access_routes.json key, 'sailing' (boat-only islands, untracked), or 'excluded' (kills there don't count, e.g. Nightmare Zone).",
+ "_comment": "Curated Slayer data for generate_slayer.py: master pages, cards and replacements; required equipment per task (filled in by the verification pass); location → access_routes.json key. locationAccess values: an access_routes.json key, 'sailing' (boat-only islands, untracked), or 'excluded' (kills there don't count, e.g. Nightmare Zone). A null locationAccess = open even though the wiki region is gated (e.g. Al Kharid is in the 'Desert' region but before the Shantay Pass).",
  "masters": [
   {
    "name": "Turael",
@@ -180,7 +180,16 @@
   "Sunbleak Island": "sailing",
   "Kharazi Strait": "sailing",
   "Strait of Khazard": "sailing",
-  "Nightmare Zone": "excluded"
+  "Nightmare Zone": "excluded",
+  "Al Kharid": null,
+  "Al Kharid Mine": null,
+  "Al Kharid mine": null,
+  "Al Kharid Palace": null,
+  "Emir's Arena": null,
+  "Fire Altar": null,
+  "Mage Training Arena": null,
+  "Shantay Pass": null,
+  "Temple of the Eye (location)": null
  },
  "taskOverrides": {
   "aberrant spectre": {
