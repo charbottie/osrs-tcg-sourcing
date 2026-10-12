@@ -2180,6 +2180,9 @@
       "Dying knight",
       "Ghommal's hilt 1"
     ],
+    "partialQuests": [
+      "Troll Stronghold"
+    ],
     "location": [
       "God Wars Dungeon"
     ],
@@ -2299,7 +2302,8 @@
       "Ghommal's hilt 1",
       "Trollheim teleport (tablet)"
     ],
-    "quests": [
+    "quests": [],
+    "partialQuests": [
       "Troll Stronghold"
     ],
     "location": [
@@ -2410,7 +2414,8 @@
       "Dying knight",
       "Knight's notes"
     ],
-    "quests": [
+    "quests": [],
+    "partialQuests": [
       "Troll Stronghold"
     ],
     "location": [
@@ -2509,7 +2514,8 @@
       "Dying knight (must speak to before first entry)",
       "Ghommal's hilt"
     ],
-    "quests": [
+    "quests": [],
+    "partialQuests": [
       "Troll Stronghold"
     ],
     "location": [

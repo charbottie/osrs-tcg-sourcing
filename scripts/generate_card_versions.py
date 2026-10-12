@@ -20,6 +20,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import wiki_api
 import re
 import time
 import urllib.parse
@@ -46,9 +47,7 @@ def fetch_image_urls(names: list[str]) -> dict[str, dict]:
         batch = todo[i:i + 50]
         url = ("https://oldschool.runescape.wiki/api.php?action=query&format=json&prop=imageinfo"
                "&iiprop=url&iiurlwidth=130&titles=" + urllib.parse.quote("|".join(batch)))
-        req = urllib.request.Request(url, headers={"User-Agent": "osrs-tcg-planner (charbottie)"})
-        with urllib.request.urlopen(req, timeout=60) as r:
-            q = json.loads(r.read())["query"]
+        q = wiki_api.get_json(url)["query"]
         norm = {n["to"]: n["from"] for n in q.get("normalized", [])}
         for pg in q.get("pages", {}).values():
             info = (pg.get("imageinfo") or [{}])[0]
@@ -73,9 +72,7 @@ def fetch_pages(titles: list[str]) -> dict[str, dict]:
         batch = todo[i:i + 50]
         url = ("https://oldschool.runescape.wiki/api.php?action=query&format=json&redirects=1"
                "&prop=revisions&rvprop=content&rvslots=main&titles=" + urllib.parse.quote("|".join(batch)))
-        req = urllib.request.Request(url, headers={"User-Agent": "osrs-tcg-planner (charbottie)"})
-        with urllib.request.urlopen(req, timeout=60) as r:
-            q = json.loads(r.read())["query"]
+        q = wiki_api.get_json(url)["query"]
         norm = {n["from"]: n["to"] for n in q.get("normalized", [])}
         redir = {n["from"]: n["to"] for n in q.get("redirects", [])}
         pages = {p["title"]: p for p in q.get("pages", {}).values()}

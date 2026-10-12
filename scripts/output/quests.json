@@ -6498,5 +6498,42 @@
     "questPoints": 0,
     "members": false,
     "wikiPage": "Vale_Totems_(miniquest)"
+  },
+  "Fallen From Grace": {
+    "prerequisites": [
+      "Pandemonium"
+    ],
+    "skillRequirements": [
+      {
+        "skill": "Sailing",
+        "level": 62,
+        "boostable": false
+      },
+      {
+        "skill": "Crafting",
+        "level": 60,
+        "boostable": false
+      },
+      {
+        "skill": "Mining",
+        "level": 53,
+        "boostable": false
+      }
+    ],
+    "itemsRequired": [
+      "raft",
+      "pickaxe",
+      "chisel",
+      "Mad Angel"
+    ],
+    "killsRequired": [
+      "mountain trolls",
+      "Mad Angel"
+    ],
+    "rewardItems": [],
+    "questNpc": "Cormac",
+    "questPoints": 2,
+    "members": true,
+    "wikiPage": "Fallen_From_Grace"
   }
 }

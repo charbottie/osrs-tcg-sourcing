@@ -21,10 +21,13 @@
 ],
 "facilities": null,
 "members": true,
-"levels": {},
+"levels": {
+"Sailing": 1
+},
 "quests": [],
 "page": "Basic cargo hold",
-"access": "house"
+"access": "sailing",
+"oneOff": "boat upgrade"
 },
 {
 "output": "Bed (Daddy's Home)",
@@ -51,7 +54,8 @@
 "levels": {},
 "quests": [],
 "page": "Bed (Daddy's Home)",
-"access": "house"
+"access": "house",
+"internal": "Daddy's Home"
 },
 {
 "output": "Bronze helm",
@@ -72,10 +76,13 @@
 "tools": [],
 "facilities": "Boat schematics",
 "members": true,
-"levels": {},
+"levels": {
+"Sailing": 1
+},
 "quests": [],
 "page": "Bronze helm",
-"access": "sailing"
+"access": "sailing",
+"oneOff": "boat upgrade"
 },
 {
 "output": "Bronze helm",
@@ -101,7 +108,8 @@
 },
 "quests": [],
 "page": "Bronze helm",
-"access": "sailing"
+"access": "sailing",
+"oneOff": "boat upgrade"
 },
 {
 "output": "Bronze helm",
@@ -127,7 +135,8 @@
 },
 "quests": [],
 "page": "Bronze helm",
-"access": "sailing"
+"access": "sailing",
+"oneOff": "boat upgrade"
 },
 {
 "output": "Bronze keel",
@@ -149,7 +158,8 @@
 },
 "quests": [],
 "page": "Bronze keel",
-"access": "sailing"
+"access": "sailing",
+"oneOff": "boat upgrade"
 },
 {
 "output": "Bronze keel",
@@ -171,7 +181,8 @@
 },
 "quests": [],
 "page": "Bronze keel",
-"access": "sailing"
+"access": "sailing",
+"oneOff": "boat upgrade"
 },
 {
 "output": "Bronze salvaging hook",
@@ -208,7 +219,8 @@
 },
 "quests": [],
 "page": "Bronze salvaging hook",
-"access": "house"
+"access": "sailing",
+"oneOff": "boat upgrade"
 },
 {
 "output": "Carpet (Daddy's Home)",
@@ -231,7 +243,8 @@
 "levels": {},
 "quests": [],
 "page": "Carpet (Daddy's Home)",
-"access": "house"
+"access": "house",
+"internal": "Daddy's Home"
 },
 {
 "output": "Chair (Daddy's Home)",
@@ -258,7 +271,8 @@
 "levels": {},
 "quests": [],
 "page": "Chair (Daddy's Home)",
-"access": "house"
+"access": "house",
+"internal": "Daddy's Home"
 },
 {
 "output": "Crude wooden chair",
@@ -525,7 +539,8 @@
 "levels": {},
 "quests": [],
 "page": "Stool (Daddy's Home)",
-"access": "house"
+"access": "house",
+"internal": "Daddy's Home"
 },
 {
 "output": "Table (Daddy's Home)",
@@ -552,7 +567,8 @@
 "levels": {},
 "quests": [],
 "page": "Table (Daddy's Home)",
-"access": "house"
+"access": "house",
+"internal": "Daddy's Home"
 },
 {
 "output": "Wooden bed (Mahogany Homes)",
@@ -575,7 +591,8 @@
 "levels": {},
 "quests": [],
 "page": "Wooden bed (Mahogany Homes)",
-"access": "house"
+"access": "house",
+"internal": "Mahogany Homes"
 },
 {
 "output": "Wooden bed (small, Mahogany Homes)",
@@ -598,7 +615,8 @@
 "levels": {},
 "quests": [],
 "page": "Wooden bed (small, Mahogany Homes)",
-"access": "house"
+"access": "house",
+"internal": "Mahogany Homes"
 },
 {
 "output": "Wooden bookcase (Mahogany Homes)",
@@ -621,7 +639,8 @@
 "levels": {},
 "quests": [],
 "page": "Wooden bookcase (Mahogany Homes)",
-"access": "house"
+"access": "house",
+"internal": "Mahogany Homes"
 },
 {
 "output": "Wooden cabinet",
@@ -667,7 +686,8 @@
 "levels": {},
 "quests": [],
 "page": "Wooden chair (Mahogany Homes)",
-"access": "house"
+"access": "house",
+"internal": "Mahogany Homes"
 },
 {
 "output": "Wooden cupboard",
@@ -713,7 +733,8 @@
 "levels": {},
 "quests": [],
 "page": "Wooden drawers (Mahogany Homes)",
-"access": "house"
+"access": "house",
+"internal": "Mahogany Homes"
 },
 {
 "output": "Wooden dresser (Mahogany Homes)",
@@ -736,7 +757,8 @@
 "levels": {},
 "quests": [],
 "page": "Wooden dresser (Mahogany Homes)",
-"access": "house"
+"access": "house",
+"internal": "Mahogany Homes"
 },
 {
 "output": "Wooden hull",
@@ -761,10 +783,13 @@
 "tools": [],
 "facilities": "Boat schematics",
 "members": true,
-"levels": {},
+"levels": {
+"Sailing": 1
+},
 "quests": [],
 "page": "Wooden hull",
-"access": "sailing"
+"access": "sailing",
+"oneOff": "boat upgrade"
 },
 {
 "output": "Wooden hull",
@@ -794,7 +819,8 @@
 },
 "quests": [],
 "page": "Wooden hull",
-"access": "sailing"
+"access": "sailing",
+"oneOff": "boat upgrade"
 },
 {
 "output": "Wooden hull",
@@ -824,7 +850,8 @@
 },
 "quests": [],
 "page": "Wooden hull",
-"access": "sailing"
+"access": "sailing",
+"oneOff": "boat upgrade"
 },
 {
 "output": "Wooden hull parts",
@@ -871,10 +898,13 @@
 "tools": [],
 "facilities": "Boat schematics",
 "members": true,
-"levels": {},
+"levels": {
+"Sailing": 1
+},
 "quests": [],
 "page": "Wooden mast and linen sails",
-"access": "sailing"
+"access": "sailing",
+"oneOff": "boat upgrade"
 },
 {
 "output": "Wooden mast and linen sails",
@@ -904,7 +934,8 @@
 },
 "quests": [],
 "page": "Wooden mast and linen sails",
-"access": "sailing"
+"access": "sailing",
+"oneOff": "boat upgrade"
 },
 {
 "output": "Wooden mast and linen sails",
@@ -934,7 +965,8 @@
 },
 "quests": [],
 "page": "Wooden mast and linen sails",
-"access": "sailing"
+"access": "sailing",
+"oneOff": "boat upgrade"
 },
 {
 "output": "Wooden shelves (Mahogany Homes)",
@@ -957,7 +989,8 @@
 "levels": {},
 "quests": [],
 "page": "Wooden shelves (Mahogany Homes)",
-"access": "house"
+"access": "house",
+"internal": "Mahogany Homes"
 },
 {
 "output": "Wooden table (large, Mahogany Homes)",
@@ -980,7 +1013,8 @@
 "levels": {},
 "quests": [],
 "page": "Wooden table (large, Mahogany Homes)",
-"access": "house"
+"access": "house",
+"internal": "Mahogany Homes"
 },
 {
 "output": "Wooden table (medium, Mahogany Homes)",
@@ -1003,7 +1037,8 @@
 "levels": {},
 "quests": [],
 "page": "Wooden table (medium, Mahogany Homes)",
-"access": "house"
+"access": "house",
+"internal": "Mahogany Homes"
 },
 {
 "output": "Wooden table (small, Mahogany Homes)",
@@ -1026,7 +1061,8 @@
 "levels": {},
 "quests": [],
 "page": "Wooden table (small, Mahogany Homes)",
-"access": "house"
+"access": "house",
+"internal": "Mahogany Homes"
 },
 {
 "output": "Wooden wardrobe (Mahogany Homes)",
@@ -1049,7 +1085,8 @@
 "levels": {},
 "quests": [],
 "page": "Wooden wardrobe (Mahogany Homes)",
-"access": "house"
+"access": "house",
+"internal": "Mahogany Homes"
 },
 {
 "output": "Brown rug",
@@ -1385,7 +1422,8 @@
 },
 "quests": [],
 "page": "Range (facility)",
-"access": "house"
+"access": "sailing",
+"oneOff": "boat upgrade"
 },
 {
 "output": "Small fern",
@@ -1560,7 +1598,8 @@
 },
 "quests": [],
 "page": "Oak hull",
-"access": "sailing"
+"access": "sailing",
+"oneOff": "boat upgrade"
 },
 {
 "output": "Oak hull",
@@ -1590,7 +1629,8 @@
 },
 "quests": [],
 "page": "Oak hull",
-"access": "sailing"
+"access": "sailing",
+"oneOff": "boat upgrade"
 },
 {
 "output": "Oak hull",
@@ -1620,7 +1660,8 @@
 },
 "quests": [],
 "page": "Oak hull",
-"access": "sailing"
+"access": "sailing",
+"oneOff": "boat upgrade"
 },
 {
 "output": "Oak hull parts",
@@ -1706,7 +1747,8 @@
 },
 "quests": [],
 "page": "Iron salvaging hook",
-"access": "house"
+"access": "sailing",
+"oneOff": "boat upgrade"
 },
 {
 "output": "Wooden larder",
@@ -1918,7 +1960,8 @@
 },
 "quests": [],
 "page": "Oak cargo hold",
-"access": "house"
+"access": "sailing",
+"oneOff": "boat upgrade"
 },
 {
 "output": "Oak mast and linen sails",
@@ -1948,7 +1991,8 @@
 },
 "quests": [],
 "page": "Oak mast and linen sails",
-"access": "sailing"
+"access": "sailing",
+"oneOff": "boat upgrade"
 },
 {
 "output": "Oak mast and linen sails",
@@ -1978,7 +2022,8 @@
 },
 "quests": [],
 "page": "Oak mast and linen sails",
-"access": "sailing"
+"access": "sailing",
+"oneOff": "boat upgrade"
 },
 {
 "output": "Oak mast and linen sails",
@@ -2008,7 +2053,8 @@
 },
 "quests": [],
 "page": "Oak mast and linen sails",
-"access": "sailing"
+"access": "sailing",
+"oneOff": "boat upgrade"
 },
 {
 "output": "Cider barrel",
@@ -2263,7 +2309,8 @@
 },
 "quests": [],
 "page": "Iron helm",
-"access": "sailing"
+"access": "sailing",
+"oneOff": "boat upgrade"
 },
 {
 "output": "Iron helm",
@@ -2289,7 +2336,8 @@
 },
 "quests": [],
 "page": "Iron helm",
-"access": "sailing"
+"access": "sailing",
+"oneOff": "boat upgrade"
 },
 {
 "output": "Iron helm",
@@ -2315,7 +2363,8 @@
 },
 "quests": [],
 "page": "Iron helm",
-"access": "sailing"
+"access": "sailing",
+"oneOff": "boat upgrade"
 },
 {
 "output": "Rocking chair",
@@ -2555,7 +2604,8 @@
 },
 "quests": [],
 "page": "Iron keel",
-"access": "sailing"
+"access": "sailing",
+"oneOff": "boat upgrade"
 },
 {
 "output": "Iron keel",
@@ -2577,7 +2627,8 @@
 },
 "quests": [],
 "page": "Iron keel",
-"access": "sailing"
+"access": "sailing",
+"oneOff": "boat upgrade"
 },
 {
 "output": "Water pump (amenity)",
@@ -2728,7 +2779,8 @@
 },
 "quests": [],
 "page": "Steel salvaging hook",
-"access": "house"
+"access": "sailing",
+"oneOff": "boat upgrade"
 },
 {
 "output": "Cat basket",
@@ -2861,7 +2913,8 @@
 },
 "quests": [],
 "page": "Angler's trim",
-"access": "sailing"
+"access": "sailing",
+"oneOff": "boat upgrade"
 },
 {
 "output": "Angler's trim",
@@ -2883,7 +2936,8 @@
 },
 "quests": [],
 "page": "Angler's trim",
-"access": "sailing"
+"access": "sailing",
+"oneOff": "boat upgrade"
 },
 {
 "output": "Armadylean trim",
@@ -2905,7 +2959,8 @@
 },
 "quests": [],
 "page": "Armadylean trim",
-"access": "sailing"
+"access": "sailing",
+"oneOff": "boat upgrade"
 },
 {
 "output": "Armadylean trim",
@@ -2927,7 +2982,8 @@
 },
 "quests": [],
 "page": "Armadylean trim",
-"access": "sailing"
+"access": "sailing",
+"oneOff": "boat upgrade"
 },
 {
 "output": "Barracuda trim",
@@ -2949,7 +3005,8 @@
 },
 "quests": [],
 "page": "Barracuda trim",
-"access": "sailing"
+"access": "sailing",
+"oneOff": "boat upgrade"
 },
 {
 "output": "Barracuda trim",
@@ -2971,7 +3028,8 @@
 },
 "quests": [],
 "page": "Barracuda trim",
-"access": "sailing"
+"access": "sailing",
+"oneOff": "boat upgrade"
 },
 {
 "output": "Crystal glider's flag",
@@ -3001,7 +3059,8 @@
 },
 "quests": [],
 "page": "Crystal glider's flag",
-"access": "sailing"
+"access": "sailing",
+"oneOff": "boat upgrade"
 },
 {
 "output": "Guthixian trim",
@@ -3023,7 +3082,8 @@
 },
 "quests": [],
 "page": "Guthixian trim",
-"access": "sailing"
+"access": "sailing",
+"oneOff": "boat upgrade"
 },
 {
 "output": "Guthixian trim",
@@ -3045,7 +3105,8 @@
 },
 "quests": [],
 "page": "Guthixian trim",
-"access": "sailing"
+"access": "sailing",
+"oneOff": "boat upgrade"
 },
 {
 "output": "Inky trim",
@@ -3067,7 +3128,8 @@
 },
 "quests": [],
 "page": "Inky trim",
-"access": "sailing"
+"access": "sailing",
+"oneOff": "boat upgrade"
 },
 {
 "output": "Inky trim",
@@ -3089,7 +3151,8 @@
 },
 "quests": [],
 "page": "Inky trim",
-"access": "sailing"
+"access": "sailing",
+"oneOff": "boat upgrade"
 },
 {
 "output": "Merchant's trim",
@@ -3111,7 +3174,8 @@
 },
 "quests": [],
 "page": "Merchant's trim",
-"access": "sailing"
+"access": "sailing",
+"oneOff": "boat upgrade"
 },
 {
 "output": "Merchant's trim",
@@ -3133,7 +3197,8 @@
 },
 "quests": [],
 "page": "Merchant's trim",
-"access": "sailing"
+"access": "sailing",
+"oneOff": "boat upgrade"
 },
 {
 "output": "Oak bed (Mahogany Homes)",
@@ -3156,7 +3221,8 @@
 "levels": {},
 "quests": [],
 "page": "Oak bed (Mahogany Homes)",
-"access": "house"
+"access": "house",
+"internal": "Mahogany Homes"
 },
 {
 "output": "Oak bed (small, Mahogany Homes)",
@@ -3179,7 +3245,8 @@
 "levels": {},
 "quests": [],
 "page": "Oak bed (small, Mahogany Homes)",
-"access": "house"
+"access": "house",
+"internal": "Mahogany Homes"
 },
 {
 "output": "Oak bookcase (Mahogany Homes)",
@@ -3202,7 +3269,8 @@
 "levels": {},
 "quests": [],
 "page": "Oak bookcase (Mahogany Homes)",
-"access": "house"
+"access": "house",
+"internal": "Mahogany Homes"
 },
 {
 "output": "Oak cabinet",
@@ -3248,7 +3316,8 @@
 "levels": {},
 "quests": [],
 "page": "Oak chair (Mahogany Homes)",
-"access": "house"
+"access": "house",
+"internal": "Mahogany Homes"
 },
 {
 "output": "Oak cupboard",
@@ -3294,7 +3363,8 @@
 "levels": {},
 "quests": [],
 "page": "Oak drawers (Mahogany Homes)",
-"access": "house"
+"access": "house",
+"internal": "Mahogany Homes"
 },
 {
 "output": "Oak dresser (Mahogany Homes)",
@@ -3317,7 +3387,8 @@
 "levels": {},
 "quests": [],
 "page": "Oak dresser (Mahogany Homes)",
-"access": "house"
+"access": "house",
+"internal": "Mahogany Homes"
 },
 {
 "output": "Oak shelves (Mahogany Homes)",
@@ -3340,7 +3411,8 @@
 "levels": {},
 "quests": [],
 "page": "Oak shelves (Mahogany Homes)",
-"access": "house"
+"access": "house",
+"internal": "Mahogany Homes"
 },
 {
 "output": "Oak table (large, Mahogany Homes)",
@@ -3363,7 +3435,8 @@
 "levels": {},
 "quests": [],
 "page": "Oak table (large, Mahogany Homes)",
-"access": "house"
+"access": "house",
+"internal": "Mahogany Homes"
 },
 {
 "output": "Oak table (medium, Mahogany Homes)",
@@ -3386,7 +3459,8 @@
 "levels": {},
 "quests": [],
 "page": "Oak table (medium, Mahogany Homes)",
-"access": "house"
+"access": "house",
+"internal": "Mahogany Homes"
 },
 {
 "output": "Oak table (small, Mahogany Homes)",
@@ -3409,7 +3483,8 @@
 "levels": {},
 "quests": [],
 "page": "Oak table (small, Mahogany Homes)",
-"access": "house"
+"access": "house",
+"internal": "Mahogany Homes"
 },
 {
 "output": "Oak wardrobe (Mahogany Homes)",
@@ -3432,7 +3507,8 @@
 "levels": {},
 "quests": [],
 "page": "Oak wardrobe (Mahogany Homes)",
-"access": "house"
+"access": "house",
+"internal": "Mahogany Homes"
 },
 {
 "output": "Salvor's trim",
@@ -3454,7 +3530,8 @@
 },
 "quests": [],
 "page": "Salvor's trim",
-"access": "sailing"
+"access": "sailing",
+"oneOff": "boat upgrade"
 },
 {
 "output": "Salvor's trim",
@@ -3476,7 +3553,8 @@
 },
 "quests": [],
 "page": "Salvor's trim",
-"access": "sailing"
+"access": "sailing",
+"oneOff": "boat upgrade"
 },
 {
 "output": "Sandy trim",
@@ -3498,7 +3576,8 @@
 },
 "quests": [],
 "page": "Sandy trim",
-"access": "sailing"
+"access": "sailing",
+"oneOff": "boat upgrade"
 },
 {
 "output": "Sandy trim",
@@ -3520,7 +3599,8 @@
 },
 "quests": [],
 "page": "Sandy trim",
-"access": "sailing"
+"access": "sailing",
+"oneOff": "boat upgrade"
 },
 {
 "output": "Saradominist trim",
@@ -3542,7 +3622,8 @@
 },
 "quests": [],
 "page": "Saradominist trim",
-"access": "sailing"
+"access": "sailing",
+"oneOff": "boat upgrade"
 },
 {
 "output": "Saradominist trim",
@@ -3564,7 +3645,8 @@
 },
 "quests": [],
 "page": "Saradominist trim",
-"access": "sailing"
+"access": "sailing",
+"oneOff": "boat upgrade"
 },
 {
 "output": "Shark trim",
@@ -3586,7 +3668,8 @@
 },
 "quests": [],
 "page": "Shark trim",
-"access": "sailing"
+"access": "sailing",
+"oneOff": "boat upgrade"
 },
 {
 "output": "Shark trim",
@@ -3608,7 +3691,8 @@
 },
 "quests": [],
 "page": "Shark trim",
-"access": "sailing"
+"access": "sailing",
+"oneOff": "boat upgrade"
 },
 {
 "output": "Shoe box",
@@ -3665,7 +3749,8 @@
 },
 "quests": [],
 "page": "Storm chaser's flag",
-"access": "sailing"
+"access": "sailing",
+"oneOff": "boat upgrade"
 },
 {
 "output": "Swamp cruiser's flag",
@@ -3695,7 +3780,8 @@
 },
 "quests": [],
 "page": "Swamp cruiser's flag",
-"access": "sailing"
+"access": "sailing",
+"oneOff": "boat upgrade"
 },
 {
 "output": "Wooden bed",
@@ -3748,7 +3834,8 @@
 },
 "quests": [],
 "page": "Zamorakian trim",
-"access": "sailing"
+"access": "sailing",
+"oneOff": "boat upgrade"
 },
 {
 "output": "Zamorakian trim",
@@ -3770,7 +3857,8 @@
 },
 "quests": [],
 "page": "Zamorakian trim",
-"access": "sailing"
+"access": "sailing",
+"oneOff": "boat upgrade"
 },
 {
 "output": "Bank chest#Museum Camp",
@@ -3800,7 +3888,7 @@
 "levels": {},
 "quests": [],
 "page": "Chest pieces (Fossil Island)",
-"access": "house"
+"oneOff": "one-time camp build"
 },
 {
 "output": "Bronze cannon",
@@ -3833,7 +3921,8 @@
 },
 "quests": [],
 "page": "Bronze cannon",
-"access": "house"
+"access": "sailing",
+"oneOff": "boat upgrade"
 },
 {
 "output": "Shaving stand",
@@ -3897,7 +3986,8 @@
 },
 "quests": [],
 "page": "Teak cargo hold",
-"access": "house"
+"access": "sailing",
+"oneOff": "boat upgrade"
 },
 {
 "output": "Oak bench",
@@ -3977,7 +4067,7 @@
 "levels": {},
 "quests": [],
 "page": "Ring of Stones",
-"access": "house"
+"oneOff": "one-time camp build"
 },
 {
 "output": "Large teak hull parts",
@@ -4033,7 +4123,8 @@
 },
 "quests": [],
 "page": "Teak hull",
-"access": "sailing"
+"access": "sailing",
+"oneOff": "boat upgrade"
 },
 {
 "output": "Teak hull",
@@ -4067,7 +4158,8 @@
 },
 "quests": [],
 "page": "Teak hull",
-"access": "sailing"
+"access": "sailing",
+"oneOff": "boat upgrade"
 },
 {
 "output": "Teak hull",
@@ -4101,7 +4193,8 @@
 },
 "quests": [],
 "page": "Teak hull",
-"access": "sailing"
+"access": "sailing",
+"oneOff": "boat upgrade"
 },
 {
 "output": "Teak hull parts",
@@ -4185,7 +4278,7 @@
 "levels": {},
 "quests": [],
 "page": "Fire pit (Museum Camp)",
-"access": "house"
+"oneOff": "one-time camp build"
 },
 {
 "output": "Potter's wheel (amenity)",
@@ -4354,7 +4447,8 @@
 },
 "quests": [],
 "page": "Keg (facility)",
-"access": "house"
+"access": "sailing",
+"oneOff": "boat upgrade"
 },
 {
 "output": "Oak clock",
@@ -4540,7 +4634,8 @@
 },
 "quests": [],
 "page": "Teak mast and canvas sails",
-"access": "sailing"
+"access": "sailing",
+"oneOff": "boat upgrade"
 },
 {
 "output": "Teak mast and canvas sails",
@@ -4570,7 +4665,8 @@
 },
 "quests": [],
 "page": "Teak mast and canvas sails",
-"access": "sailing"
+"access": "sailing",
+"oneOff": "boat upgrade"
 },
 {
 "output": "Teak mast and canvas sails",
@@ -4600,7 +4696,8 @@
 },
 "quests": [],
 "page": "Teak mast and canvas sails",
-"access": "sailing"
+"access": "sailing",
+"oneOff": "boat upgrade"
 },
 {
 "output": "Black sail",
@@ -4626,7 +4723,8 @@
 },
 "quests": [],
 "page": "Black sail",
-"access": "sailing"
+"access": "sailing",
+"oneOff": "boat upgrade"
 },
 {
 "output": "Blue sail",
@@ -4652,7 +4750,8 @@
 },
 "quests": [],
 "page": "Blue sail",
-"access": "sailing"
+"access": "sailing",
+"oneOff": "boat upgrade"
 },
 {
 "output": "Green sail",
@@ -4678,7 +4777,8 @@
 },
 "quests": [],
 "page": "Green sail",
-"access": "sailing"
+"access": "sailing",
+"oneOff": "boat upgrade"
 },
 {
 "output": "Oak drawers",
@@ -4754,7 +4854,8 @@
 },
 "quests": [],
 "page": "Pink sail",
-"access": "sailing"
+"access": "sailing",
+"oneOff": "boat upgrade"
 },
 {
 "output": "Pump and tub",
@@ -4803,7 +4904,8 @@
 },
 "quests": [],
 "page": "Purple sail",
-"access": "sailing"
+"access": "sailing",
+"oneOff": "boat upgrade"
 },
 {
 "output": "Red sail",
@@ -4829,7 +4931,8 @@
 },
 "quests": [],
 "page": "Red sail",
-"access": "sailing"
+"access": "sailing",
+"oneOff": "boat upgrade"
 },
 {
 "output": "Yellow sail",
@@ -4855,7 +4958,8 @@
 },
 "quests": [],
 "page": "Yellow sail",
-"access": "sailing"
+"access": "sailing",
+"oneOff": "boat upgrade"
 },
 {
 "output": "Adamantite armour (Construction)",
@@ -5057,7 +5161,8 @@
 },
 "quests": [],
 "page": "Iron cannon",
-"access": "house"
+"access": "sailing",
+"oneOff": "boat upgrade"
 },
 {
 "output": "Mithril armour (Construction)",
@@ -5157,7 +5262,7 @@
 "levels": {},
 "quests": [],
 "page": "Broken Spinning Wheel (Fossil Island)",
-"access": "house"
+"oneOff": "one-time camp build"
 },
 {
 "output": "Trailblazer rug (Construction)",
@@ -5217,7 +5322,8 @@
 },
 "quests": [],
 "page": "Anchor (facility)",
-"access": "house"
+"access": "sailing",
+"oneOff": "boat upgrade"
 },
 {
 "output": "Large oven",
@@ -5270,7 +5376,7 @@
 "levels": {},
 "quests": [],
 "page": "Half-built Loom",
-"access": "house"
+"oneOff": "one-time camp build"
 },
 {
 "output": "Oak bookcase",
@@ -5407,7 +5513,8 @@
 },
 "quests": [],
 "page": "Mithril salvaging hook",
-"access": "house"
+"access": "sailing",
+"oneOff": "boat upgrade"
 },
 {
 "output": "Oak bed",
@@ -5482,7 +5589,8 @@
 },
 "quests": [],
 "page": "Steel helm",
-"access": "sailing"
+"access": "sailing",
+"oneOff": "boat upgrade"
 },
 {
 "output": "Steel helm",
@@ -5508,7 +5616,8 @@
 },
 "quests": [],
 "page": "Steel helm",
-"access": "sailing"
+"access": "sailing",
+"oneOff": "boat upgrade"
 },
 {
 "output": "Steel helm",
@@ -5534,7 +5643,8 @@
 },
 "quests": [],
 "page": "Steel helm",
-"access": "sailing"
+"access": "sailing",
+"oneOff": "boat upgrade"
 },
 {
 "output": "Teak repair kit",
@@ -5816,7 +5926,8 @@
 },
 "quests": [],
 "page": "Steel keel",
-"access": "sailing"
+"access": "sailing",
+"oneOff": "boat upgrade"
 },
 {
 "output": "Steel keel",
@@ -5842,7 +5953,8 @@
 },
 "quests": [],
 "page": "Steel keel",
-"access": "sailing"
+"access": "sailing",
+"oneOff": "boat upgrade"
 },
 {
 "output": "Trailblazer globe (Construction)",
@@ -6152,7 +6264,8 @@
 },
 "quests": [],
 "page": "Salvaging station (facility)",
-"access": "house"
+"access": "sailing",
+"oneOff": "boat upgrade"
 },
 {
 "output": "Steel range",
@@ -6630,7 +6743,8 @@
 },
 "quests": [],
 "page": "Innoculation station",
-"access": "house"
+"access": "sailing",
+"oneOff": "boat upgrade"
 },
 {
 "output": "Lesser magical balance",
@@ -7156,7 +7270,8 @@
 },
 "quests": [],
 "page": "Steel cannon",
-"access": "house"
+"access": "sailing",
+"oneOff": "boat upgrade"
 },
 {
 "output": "Mahogany bookcase",
@@ -7423,7 +7538,8 @@
 },
 "quests": [],
 "page": "Mahogany cargo hold",
-"access": "house"
+"access": "sailing",
+"oneOff": "boat upgrade"
 },
 {
 "output": "Mahogany hull",
@@ -7457,7 +7573,8 @@
 },
 "quests": [],
 "page": "Mahogany hull",
-"access": "sailing"
+"access": "sailing",
+"oneOff": "boat upgrade"
 },
 {
 "output": "Mahogany hull",
@@ -7491,7 +7608,8 @@
 },
 "quests": [],
 "page": "Mahogany hull",
-"access": "sailing"
+"access": "sailing",
+"oneOff": "boat upgrade"
 },
 {
 "output": "Mahogany hull",
@@ -7525,7 +7643,8 @@
 },
 "quests": [],
 "page": "Mahogany hull",
-"access": "sailing"
+"access": "sailing",
+"oneOff": "boat upgrade"
 },
 {
 "output": "Mahogany hull parts",
@@ -8058,7 +8177,8 @@
 },
 "quests": [],
 "page": "Ballistic attractor",
-"access": "house"
+"access": "sailing",
+"oneOff": "boat upgrade"
 },
 {
 "output": "Carved teak bench",
@@ -8380,7 +8500,8 @@
 },
 "quests": [],
 "page": "Chum station",
-"access": "house"
+"access": "sailing",
+"oneOff": "boat upgrade"
 },
 {
 "output": "Gnome child icon (Construction)",
@@ -8491,7 +8612,8 @@
 },
 "quests": [],
 "page": "Mahogany mast and canvas sails",
-"access": "sailing"
+"access": "sailing",
+"oneOff": "boat upgrade"
 },
 {
 "output": "Mahogany mast and canvas sails",
@@ -8521,7 +8643,8 @@
 },
 "quests": [],
 "page": "Mahogany mast and canvas sails",
-"access": "sailing"
+"access": "sailing",
+"oneOff": "boat upgrade"
 },
 {
 "output": "Mahogany mast and canvas sails",
@@ -8551,7 +8674,8 @@
 },
 "quests": [],
 "page": "Mahogany mast and canvas sails",
-"access": "sailing"
+"access": "sailing",
+"oneOff": "boat upgrade"
 },
 {
 "output": "Maple tree (Construction)",
@@ -8660,7 +8784,8 @@
 },
 "quests": [],
 "page": "Rope trawling net",
-"access": "house"
+"access": "sailing",
+"oneOff": "boat upgrade"
 },
 {
 "output": "Steel torches",
@@ -9000,7 +9125,8 @@
 },
 "quests": [],
 "page": "Mithril helm",
-"access": "sailing"
+"access": "sailing",
+"oneOff": "boat upgrade"
 },
 {
 "output": "Mithril helm",
@@ -9026,7 +9152,8 @@
 },
 "quests": [],
 "page": "Mithril helm",
-"access": "sailing"
+"access": "sailing",
+"oneOff": "boat upgrade"
 },
 {
 "output": "Mithril helm",
@@ -9052,7 +9179,8 @@
 },
 "quests": [],
 "page": "Mithril helm",
-"access": "sailing"
+"access": "sailing",
+"oneOff": "boat upgrade"
 },
 {
 "output": "Mythical cape (mounted)",
@@ -9144,7 +9272,8 @@
 },
 "quests": [],
 "page": "Wind catcher",
-"access": "house"
+"access": "sailing",
+"oneOff": "boat upgrade"
 },
 {
 "output": "Bank chest#Wyrmscraig",
@@ -9179,7 +9308,7 @@
 "levels": {},
 "quests": [],
 "page": "Chest pieces (Wyrmscraig)",
-"access": "house"
+"oneOff": "one-time camp build"
 },
 {
 "output": "Chef's delight (barrel)",
@@ -9588,7 +9717,8 @@
 },
 "quests": [],
 "page": "Teleportation focus (facility)",
-"access": "house"
+"access": "sailing",
+"oneOff": "boat upgrade"
 },
 {
 "output": "Treasure hunt",
@@ -9770,7 +9900,8 @@
 },
 "quests": [],
 "page": "Mithril cannon",
-"access": "house"
+"access": "sailing",
+"oneOff": "boat upgrade"
 },
 {
 "output": "Mithril keel",
@@ -9796,7 +9927,8 @@
 },
 "quests": [],
 "page": "Mithril keel",
-"access": "sailing"
+"access": "sailing",
+"oneOff": "boat upgrade"
 },
 {
 "output": "Mithril keel",
@@ -9822,7 +9954,8 @@
 },
 "quests": [],
 "page": "Mithril keel",
-"access": "sailing"
+"access": "sailing",
+"oneOff": "boat upgrade"
 },
 {
 "output": "Oak toy box",
@@ -9941,7 +10074,8 @@
 "levels": {},
 "quests": [],
 "page": "Teak bed (Mahogany Homes)",
-"access": "house"
+"access": "house",
+"internal": "Mahogany Homes"
 },
 {
 "output": "Teak bed (small, Mahogany Homes)",
@@ -9964,7 +10098,8 @@
 "levels": {},
 "quests": [],
 "page": "Teak bed (small, Mahogany Homes)",
-"access": "house"
+"access": "house",
+"internal": "Mahogany Homes"
 },
 {
 "output": "Teak bookcase (Mahogany Homes)",
@@ -9987,7 +10122,8 @@
 "levels": {},
 "quests": [],
 "page": "Teak bookcase (Mahogany Homes)",
-"access": "house"
+"access": "house",
+"internal": "Mahogany Homes"
 },
 {
 "output": "Teak cabinet",
@@ -10033,7 +10169,8 @@
 "levels": {},
 "quests": [],
 "page": "Teak chair (Mahogany Homes)",
-"access": "house"
+"access": "house",
+"internal": "Mahogany Homes"
 },
 {
 "output": "Teak cupboard",
@@ -10079,7 +10216,8 @@
 "levels": {},
 "quests": [],
 "page": "Teak drawers (Mahogany Homes)",
-"access": "house"
+"access": "house",
+"internal": "Mahogany Homes"
 },
 {
 "output": "Teak dresser (Mahogany Homes)",
@@ -10102,7 +10240,8 @@
 "levels": {},
 "quests": [],
 "page": "Teak dresser (Mahogany Homes)",
-"access": "house"
+"access": "house",
+"internal": "Mahogany Homes"
 },
 {
 "output": "Teak portal",
@@ -10148,7 +10287,8 @@
 "levels": {},
 "quests": [],
 "page": "Teak shelves (Mahogany Homes)",
-"access": "house"
+"access": "house",
+"internal": "Mahogany Homes"
 },
 {
 "output": "Teak table (large, Mahogany Homes)",
@@ -10171,7 +10311,8 @@
 "levels": {},
 "quests": [],
 "page": "Teak table (large, Mahogany Homes)",
-"access": "house"
+"access": "house",
+"internal": "Mahogany Homes"
 },
 {
 "output": "Teak table (medium, Mahogany Homes)",
@@ -10194,7 +10335,8 @@
 "levels": {},
 "quests": [],
 "page": "Teak table (medium, Mahogany Homes)",
-"access": "house"
+"access": "house",
+"internal": "Mahogany Homes"
 },
 {
 "output": "Teak table (small, Mahogany Homes)",
@@ -10217,7 +10359,8 @@
 "levels": {},
 "quests": [],
 "page": "Teak table (small, Mahogany Homes)",
-"access": "house"
+"access": "house",
+"internal": "Mahogany Homes"
 },
 {
 "output": "Teak wardrobe (Mahogany Homes)",
@@ -10240,7 +10383,8 @@
 "levels": {},
 "quests": [],
 "page": "Teak wardrobe (Mahogany Homes)",
-"access": "house"
+"access": "house",
+"internal": "Mahogany Homes"
 },
 {
 "output": "Teleport focus",
@@ -10404,7 +10548,8 @@
 },
 "quests": [],
 "page": "Adamant salvaging hook",
-"access": "house"
+"access": "sailing",
+"oneOff": "boat upgrade"
 },
 {
 "output": "Mahogany bench",
@@ -10533,7 +10678,8 @@
 },
 "quests": [],
 "page": "Camphor cargo hold",
-"access": "house"
+"access": "sailing",
+"oneOff": "boat upgrade"
 },
 {
 "output": "Camphor hull parts",
@@ -10707,7 +10853,8 @@
 },
 "quests": [],
 "page": "Bosun's workbench",
-"access": "house"
+"access": "sailing",
+"oneOff": "boat upgrade"
 },
 {
 "output": "Dartboard",
@@ -11725,7 +11872,8 @@
 },
 "quests": [],
 "page": "Adamant helm",
-"access": "sailing"
+"access": "sailing",
+"oneOff": "boat upgrade"
 },
 {
 "output": "Adamant helm",
@@ -11751,7 +11899,8 @@
 },
 "quests": [],
 "page": "Adamant helm",
-"access": "sailing"
+"access": "sailing",
+"oneOff": "boat upgrade"
 },
 {
 "output": "Adamant helm",
@@ -11777,7 +11926,8 @@
 },
 "quests": [],
 "page": "Adamant helm",
-"access": "sailing"
+"access": "sailing",
+"oneOff": "boat upgrade"
 },
 {
 "output": "Camphor hull",
@@ -11811,7 +11961,8 @@
 },
 "quests": [],
 "page": "Camphor hull",
-"access": "sailing"
+"access": "sailing",
+"oneOff": "boat upgrade"
 },
 {
 "output": "Camphor hull",
@@ -11845,7 +11996,8 @@
 },
 "quests": [],
 "page": "Camphor hull",
-"access": "sailing"
+"access": "sailing",
+"oneOff": "boat upgrade"
 },
 {
 "output": "Camphor hull",
@@ -11879,7 +12031,8 @@
 },
 "quests": [],
 "page": "Camphor hull",
-"access": "sailing"
+"access": "sailing",
+"oneOff": "boat upgrade"
 },
 {
 "output": "Guthix icon",
@@ -12210,7 +12363,8 @@
 },
 "quests": [],
 "page": "Camphor mast and canvas sails",
-"access": "sailing"
+"access": "sailing",
+"oneOff": "boat upgrade"
 },
 {
 "output": "Camphor mast and canvas sails",
@@ -12240,7 +12394,8 @@
 },
 "quests": [],
 "page": "Camphor mast and canvas sails",
-"access": "sailing"
+"access": "sailing",
+"oneOff": "boat upgrade"
 },
 {
 "output": "Camphor mast and canvas sails",
@@ -12270,7 +12425,8 @@
 },
 "quests": [],
 "page": "Camphor mast and canvas sails",
-"access": "sailing"
+"access": "sailing",
+"oneOff": "boat upgrade"
 },
 {
 "output": "Fire of Unseasonal Warmth",
@@ -12649,7 +12805,8 @@
 },
 "quests": [],
 "page": "Adamant cannon",
-"access": "house"
+"access": "sailing",
+"oneOff": "boat upgrade"
 },
 {
 "output": "Advanced chum station",
@@ -12690,7 +12847,8 @@
 },
 "quests": [],
 "page": "Advanced chum station",
-"access": "house"
+"access": "sailing",
+"oneOff": "boat upgrade"
 },
 {
 "output": "Floor decoration",
@@ -12781,7 +12939,8 @@
 },
 "quests": [],
 "page": "Linen trawling net",
-"access": "house"
+"access": "sailing",
+"oneOff": "boat upgrade"
 },
 {
 "output": "Oak incense burners",
@@ -12834,7 +12993,8 @@
 },
 "quests": [],
 "page": "Adamant keel",
-"access": "sailing"
+"access": "sailing",
+"oneOff": "boat upgrade"
 },
 {
 "output": "Adamant keel",
@@ -12860,7 +13020,8 @@
 },
 "quests": [],
 "page": "Adamant keel",
-"access": "sailing"
+"access": "sailing",
+"oneOff": "boat upgrade"
 },
 {
 "output": "Bench with vice",
@@ -12955,7 +13116,8 @@
 },
 "quests": [],
 "page": "Fathom stone",
-"access": "house"
+"access": "sailing",
+"oneOff": "boat upgrade"
 },
 {
 "output": "Teak fancy dress box",
@@ -13503,7 +13665,8 @@
 },
 "quests": [],
 "page": "Hemp trawling net",
-"access": "house"
+"access": "sailing",
+"oneOff": "boat upgrade"
 },
 {
 "output": "Isafdar (painting)",
@@ -14037,7 +14200,8 @@
 },
 "quests": [],
 "page": "Rune salvaging hook",
-"access": "house"
+"access": "sailing",
+"oneOff": "boat upgrade"
 },
 {
 "output": "Sunflower",
@@ -14170,7 +14334,8 @@
 },
 "quests": [],
 "page": "Crystal extractor",
-"access": "house"
+"access": "sailing",
+"oneOff": "boat upgrade"
 },
 {
 "output": "Iron railings",
@@ -14703,7 +14868,8 @@
 },
 "quests": [],
 "page": "Greater teleportation focus (facility)",
-"access": "house"
+"access": "sailing",
+"oneOff": "boat upgrade"
 },
 {
 "output": "Marble incense burners",
@@ -14950,7 +15116,8 @@
 },
 "quests": [],
 "page": "Gale catcher",
-"access": "house"
+"access": "sailing",
+"oneOff": "boat upgrade"
 },
 {
 "output": "Mahogany bed (Mahogany Homes)",
@@ -14973,7 +15140,8 @@
 "levels": {},
 "quests": [],
 "page": "Mahogany bed (Mahogany Homes)",
-"access": "house"
+"access": "house",
+"internal": "Mahogany Homes"
 },
 {
 "output": "Mahogany bed (small, Mahogany Homes)",
@@ -14996,7 +15164,8 @@
 "levels": {},
 "quests": [],
 "page": "Mahogany bed (small, Mahogany Homes)",
-"access": "house"
+"access": "house",
+"internal": "Mahogany Homes"
 },
 {
 "output": "Mahogany bookcase (Mahogany Homes)",
@@ -15019,7 +15188,8 @@
 "levels": {},
 "quests": [],
 "page": "Mahogany bookcase (Mahogany Homes)",
-"access": "house"
+"access": "house",
+"internal": "Mahogany Homes"
 },
 {
 "output": "Mahogany cabinet",
@@ -15065,7 +15235,8 @@
 "levels": {},
 "quests": [],
 "page": "Mahogany chair (Mahogany Homes)",
-"access": "house"
+"access": "house",
+"internal": "Mahogany Homes"
 },
 {
 "output": "Mahogany cupboard",
@@ -15111,7 +15282,8 @@
 "levels": {},
 "quests": [],
 "page": "Mahogany drawers (Mahogany Homes)",
-"access": "house"
+"access": "house",
+"internal": "Mahogany Homes"
 },
 {
 "output": "Mahogany dresser (Mahogany Homes)",
@@ -15134,7 +15306,8 @@
 "levels": {},
 "quests": [],
 "page": "Mahogany dresser (Mahogany Homes)",
-"access": "house"
+"access": "house",
+"internal": "Mahogany Homes"
 },
 {
 "output": "Mahogany shelves (Mahogany Homes)",
@@ -15157,7 +15330,8 @@
 "levels": {},
 "quests": [],
 "page": "Mahogany shelves (Mahogany Homes)",
-"access": "house"
+"access": "house",
+"internal": "Mahogany Homes"
 },
 {
 "output": "Mahogany table (large, Mahogany Homes)",
@@ -15180,7 +15354,8 @@
 "levels": {},
 "quests": [],
 "page": "Mahogany table (large, Mahogany Homes)",
-"access": "house"
+"access": "house",
+"internal": "Mahogany Homes"
 },
 {
 "output": "Mahogany table (medium, Mahogany Homes)",
@@ -15203,7 +15378,8 @@
 "levels": {},
 "quests": [],
 "page": "Mahogany table (medium, Mahogany Homes)",
-"access": "house"
+"access": "house",
+"internal": "Mahogany Homes"
 },
 {
 "output": "Mahogany table (small, Mahogany Homes)",
@@ -15226,7 +15402,8 @@
 "levels": {},
 "quests": [],
 "page": "Mahogany table (small, Mahogany Homes)",
-"access": "house"
+"access": "house",
+"internal": "Mahogany Homes"
 },
 {
 "output": "Mahogany wardrobe (Mahogany Homes)",
@@ -15249,7 +15426,8 @@
 "levels": {},
 "quests": [],
 "page": "Mahogany wardrobe (Mahogany Homes)",
-"access": "house"
+"access": "house",
+"internal": "Mahogany Homes"
 },
 {
 "output": "Marble altar",
@@ -15656,7 +15834,8 @@
 },
 "quests": [],
 "page": "Eternal brazier",
-"access": "sailing"
+"access": "sailing",
+"oneOff": "boat upgrade"
 },
 {
 "output": "Fancy hedge",
@@ -15925,7 +16104,8 @@
 },
 "quests": [],
 "page": "Cotton trawling net",
-"access": "house"
+"access": "sailing",
+"oneOff": "boat upgrade"
 },
 {
 "output": "Raging echoes rug (Construction)",
@@ -15993,7 +16173,8 @@
 },
 "quests": [],
 "page": "Chum spreader",
-"access": "house"
+"access": "sailing",
+"oneOff": "boat upgrade"
 },
 {
 "output": "Gilded dresser",
@@ -16286,7 +16467,8 @@
 },
 "quests": [],
 "page": "Ironwood hull",
-"access": "sailing"
+"access": "sailing",
+"oneOff": "boat upgrade"
 },
 {
 "output": "Ironwood hull",
@@ -16320,7 +16502,8 @@
 },
 "quests": [],
 "page": "Ironwood hull",
-"access": "sailing"
+"access": "sailing",
+"oneOff": "boat upgrade"
 },
 {
 "output": "Ironwood hull",
@@ -16354,7 +16537,8 @@
 },
 "quests": [],
 "page": "Ironwood hull",
-"access": "sailing"
+"access": "sailing",
+"oneOff": "boat upgrade"
 },
 {
 "output": "Ironwood hull parts",
@@ -16903,7 +17087,8 @@
 },
 "quests": [],
 "page": "Rune cannon",
-"access": "house"
+"access": "sailing",
+"oneOff": "boat upgrade"
 },
 {
 "output": "Square shield (Construction)",
@@ -17155,7 +17340,8 @@
 },
 "quests": [],
 "page": "Ironwood cargo hold",
-"access": "house"
+"access": "sailing",
+"oneOff": "boat upgrade"
 },
 {
 "output": "Ironwood mast and cotton sails",
@@ -17185,7 +17371,8 @@
 },
 "quests": [],
 "page": "Ironwood mast and cotton sails",
-"access": "sailing"
+"access": "sailing",
+"oneOff": "boat upgrade"
 },
 {
 "output": "Ironwood mast and cotton sails",
@@ -17215,7 +17402,8 @@
 },
 "quests": [],
 "page": "Ironwood mast and cotton sails",
-"access": "sailing"
+"access": "sailing",
+"oneOff": "boat upgrade"
 },
 {
 "output": "Ironwood mast and cotton sails",
@@ -17245,7 +17433,8 @@
 },
 "quests": [],
 "page": "Ironwood mast and cotton sails",
-"access": "sailing"
+"access": "sailing",
+"oneOff": "boat upgrade"
 },
 {
 "output": "Marble lectern",
@@ -17500,7 +17689,8 @@
 },
 "quests": [],
 "page": "Dragon salvaging hook",
-"access": "house"
+"access": "sailing",
+"oneOff": "boat upgrade"
 },
 {
 "output": "Gilded display",
@@ -17789,7 +17979,8 @@
 },
 "quests": [],
 "page": "Rune keel",
-"access": "sailing"
+"access": "sailing",
+"oneOff": "boat upgrade"
 },
 {
 "output": "Rune keel",
@@ -17815,7 +18006,8 @@
 },
 "quests": [],
 "page": "Rune keel",
-"access": "sailing"
+"access": "sailing",
+"oneOff": "boat upgrade"
 },
 {
 "output": "Teak ladder",
@@ -18827,7 +19019,8 @@
 },
 "quests": [],
 "page": "Rune helm",
-"access": "sailing"
+"access": "sailing",
+"oneOff": "boat upgrade"
 },
 {
 "output": "Rune helm",
@@ -18853,7 +19046,8 @@
 },
 "quests": [],
 "page": "Rune helm",
-"access": "sailing"
+"access": "sailing",
+"oneOff": "boat upgrade"
 },
 {
 "output": "Rune helm",
@@ -18879,7 +19073,8 @@
 },
 "quests": [],
 "page": "Rune helm",
-"access": "sailing"
+"access": "sailing",
+"oneOff": "boat upgrade"
 },
 {
 "output": "Baby red dragon (POH)",
@@ -19186,7 +19381,8 @@
 },
 "quests": [],
 "page": "Fathom pearl",
-"access": "house"
+"access": "sailing",
+"oneOff": "boat upgrade"
 },
 {
 "output": "Glorious arena",
@@ -19386,7 +19582,8 @@
 },
 "quests": [],
 "page": "Dragon cannon",
-"access": "house"
+"access": "sailing",
+"oneOff": "boat upgrade"
 },
 {
 "output": "Large rosewood hull parts",
@@ -19546,7 +19743,8 @@
 },
 "quests": [],
 "page": "Rosewood cargo hold",
-"access": "house"
+"access": "sailing",
+"oneOff": "boat upgrade"
 },
 {
 "output": "Rosewood hull",
@@ -19580,7 +19778,8 @@
 },
 "quests": [],
 "page": "Rosewood hull",
-"access": "sailing"
+"access": "sailing",
+"oneOff": "boat upgrade"
 },
 {
 "output": "Rosewood hull",
@@ -19614,7 +19813,8 @@
 },
 "quests": [],
 "page": "Rosewood hull",
-"access": "sailing"
+"access": "sailing",
+"oneOff": "boat upgrade"
 },
 {
 "output": "Rosewood hull",
@@ -19648,7 +19848,8 @@
 },
 "quests": [],
 "page": "Rosewood hull",
-"access": "sailing"
+"access": "sailing",
+"oneOff": "boat upgrade"
 },
 {
 "output": "Rosewood hull parts",
@@ -19920,7 +20121,8 @@
 },
 "quests": [],
 "page": "Rosewood mast and cotton sails",
-"access": "sailing"
+"access": "sailing",
+"oneOff": "boat upgrade"
 },
 {
 "output": "Rosewood mast and cotton sails",
@@ -19950,7 +20152,8 @@
 },
 "quests": [],
 "page": "Rosewood mast and cotton sails",
-"access": "sailing"
+"access": "sailing",
+"oneOff": "boat upgrade"
 },
 {
 "output": "Rosewood mast and cotton sails",
@@ -19980,7 +20183,8 @@
 },
 "quests": [],
 "page": "Rosewood mast and cotton sails",
-"access": "sailing"
+"access": "sailing",
+"oneOff": "boat upgrade"
 },
 {
 "output": "Tok-Xil (Construction)",
@@ -20060,7 +20264,8 @@
 },
 "quests": [],
 "page": "Dragon helm",
-"access": "sailing"
+"access": "sailing",
+"oneOff": "boat upgrade"
 },
 {
 "output": "Dragon helm",
@@ -20086,7 +20291,8 @@
 },
 "quests": [],
 "page": "Dragon helm",
-"access": "sailing"
+"access": "sailing",
+"oneOff": "boat upgrade"
 },
 {
 "output": "Dragon helm",
@@ -20112,7 +20318,8 @@
 },
 "quests": [],
 "page": "Dragon helm",
-"access": "sailing"
+"access": "sailing",
+"oneOff": "boat upgrade"
 },
 {
 "output": "Fancy jewellery box",
@@ -20323,7 +20530,8 @@
 },
 "quests": [],
 "page": "Dragon keel",
-"access": "sailing"
+"access": "sailing",
+"oneOff": "boat upgrade"
 },
 {
 "output": "Dragon keel",
@@ -20349,7 +20557,8 @@
 },
 "quests": [],
 "page": "Dragon keel",
-"access": "sailing"
+"access": "sailing",
+"oneOff": "boat upgrade"
 },
 {
 "output": "Gilded magic wardrobe",
@@ -22421,7 +22630,8 @@
 "members": true,
 "levels": {},
 "quests": [],
-"page": "Guanic bat (0)"
+"page": "Guanic bat (0)",
+"internal": "Chambers of Xeric"
 },
 {
 "output": "Haddock eye",
@@ -22516,9 +22726,12 @@
 "tools": [],
 "facilities": "Shrine (Tempoross Cove)",
 "members": true,
-"levels": {},
+"levels": {
+"Fishing": 35
+},
 "quests": [],
-"page": "Harpoonfish"
+"page": "Harpoonfish",
+"internal": "Tempoross Cove"
 },
 {
 "output": "Karambwanji",
@@ -22576,8 +22789,12 @@
 "facilities": "Cooking range",
 "members": true,
 "levels": {},
-"quests": [],
-"page": "Paddlefish"
+"quests": [
+"Song of the Elves"
+],
+"page": "Paddlefish",
+"internal": "The Gauntlet",
+"access": "prifddinas"
 },
 {
 "output": "Poison karambwan",
@@ -22615,7 +22832,8 @@
 "members": true,
 "levels": {},
 "quests": [],
-"page": "Pysk fish (0)"
+"page": "Pysk fish (0)",
+"internal": "Chambers of Xeric"
 },
 {
 "output": "Roe",
@@ -23608,7 +23826,8 @@
 "members": true,
 "levels": {},
 "quests": [],
-"page": "Prael bat (1)"
+"page": "Prael bat (1)",
+"internal": "Chambers of Xeric"
 },
 {
 "output": "Suphi fish (1)",
@@ -23627,7 +23846,8 @@
 "members": true,
 "levels": {},
 "quests": [],
-"page": "Suphi fish (1)"
+"page": "Suphi fish (1)",
+"internal": "Chambers of Xeric"
 },
 {
 "output": "Trout",
@@ -24257,7 +24477,8 @@
 "members": true,
 "levels": {},
 "quests": [],
-"page": "Cooked giant crab meat"
+"page": "Cooked giant crab meat",
+"internal": "Recipe for Disaster"
 },
 {
 "output": "Pot of cream",
@@ -24389,7 +24610,8 @@
 "members": true,
 "levels": {},
 "quests": [],
-"page": "Kelda stout"
+"page": "Kelda stout",
+"internal": "Forgettable Tale..."
 },
 {
 "output": "Cooked wild kebbit",
@@ -25140,7 +25362,8 @@
 "members": true,
 "levels": {},
 "quests": [],
-"page": "Giral bat (2)"
+"page": "Giral bat (2)",
+"internal": "Chambers of Xeric"
 },
 {
 "output": "Half made bowl (worm hole)",
@@ -25188,7 +25411,8 @@
 "members": true,
 "levels": {},
 "quests": [],
-"page": "Leckish fish (2)"
+"page": "Leckish fish (2)",
+"internal": "Chambers of Xeric"
 },
 {
 "output": "Tuna",
@@ -25226,7 +25450,8 @@
 "members": true,
 "levels": {},
 "quests": [],
-"page": "Cooked fishcake"
+"page": "Cooked fishcake",
+"internal": "Recipe for Disaster"
 },
 {
 "output": "Cooked larupia",
@@ -26032,7 +26257,8 @@
 "members": true,
 "levels": {},
 "quests": [],
-"page": "Cake of Guidance"
+"page": "Cake of Guidance",
+"internal": "Recipe for Disaster"
 },
 {
 "output": "Half made bowl (tangled toad's legs)",
@@ -26168,7 +26394,8 @@
 "members": true,
 "levels": {},
 "quests": [],
-"page": "Cooked jubbly"
+"page": "Cooked jubbly",
+"internal": "Recipe for Disaster"
 },
 {
 "output": "Fried onions",
@@ -26392,7 +26619,8 @@
 "members": true,
 "levels": {},
 "quests": [],
-"page": "Brawk fish (3)"
+"page": "Brawk fish (3)",
+"internal": "Chambers of Xeric"
 },
 {
 "output": "Meat pizza",
@@ -26438,7 +26666,8 @@
 "members": true,
 "levels": {},
 "quests": [],
-"page": "Phluxia bat (3)"
+"page": "Phluxia bat (3)",
+"internal": "Chambers of Xeric"
 },
 {
 "output": "Swordfish",
@@ -26849,7 +27078,8 @@
 "members": true,
 "levels": {},
 "quests": [],
-"page": "Wrapped oomlie"
+"page": "Wrapped oomlie",
+"internal": "Legends' Quest"
 },
 {
 "output": "Cooked kyatt",
@@ -26929,7 +27159,8 @@
 "members": true,
 "levels": {},
 "quests": [],
-"page": "Lava eel"
+"page": "Lava eel",
+"internal": "Heroes' Quest"
 },
 {
 "output": "Chef's delight",
@@ -27327,7 +27558,8 @@
 "members": true,
 "levels": {},
 "quests": [],
-"page": "Kryket bat (4)"
+"page": "Kryket bat (4)",
+"internal": "Chambers of Xeric"
 },
 {
 "output": "Mushroom pie",
@@ -27365,7 +27597,8 @@
 "members": true,
 "levels": {},
 "quests": [],
-"page": "Mycil fish (4)"
+"page": "Mycil fish (4)",
+"internal": "Chambers of Xeric"
 },
 {
 "output": "Fresh monkfish (cooked)",
@@ -27384,7 +27617,8 @@
 "members": true,
 "levels": {},
 "quests": [],
-"page": "Fresh monkfish"
+"page": "Fresh monkfish",
+"internal": "Swan Song"
 },
 {
 "output": "Monkfish",
@@ -27636,7 +27870,8 @@
 "members": true,
 "levels": {},
 "quests": [],
-"page": "Stuffed snake"
+"page": "Stuffed snake",
+"internal": "Recipe for Disaster"
 },
 {
 "output": "Jumbo squid",
@@ -27712,7 +27947,8 @@
 "members": true,
 "levels": {},
 "quests": [],
-"page": "Murng bat (5)"
+"page": "Murng bat (5)",
+"internal": "Chambers of Xeric"
 },
 {
 "output": "Roqed fish (5)",
@@ -27731,7 +27967,8 @@
 "members": true,
 "levels": {},
 "quests": [],
-"page": "Roqed fish (5)"
+"page": "Roqed fish (5)",
+"internal": "Chambers of Xeric"
 },
 {
 "output": "Rainbow crab meat",
@@ -27986,7 +28223,8 @@
 "members": true,
 "levels": {},
 "quests": [],
-"page": "Kyren fish (6)"
+"page": "Kyren fish (6)",
+"internal": "Chambers of Xeric"
 },
 {
 "output": "Psykk bat (6)",
@@ -28005,7 +28243,8 @@
 "members": true,
 "levels": {},
 "quests": [],
-"page": "Psykk bat (6)"
+"page": "Psykk bat (6)",
+"internal": "Chambers of Xeric"
 },
 {
 "output": "Manta ray",
@@ -28382,8 +28621,12 @@
 "facilities": "Workbench (Trouble Brewing)",
 "members": true,
 "levels": {},
-"quests": [],
-"page": "Bridge section"
+"quests": [
+"Cabin Fever"
+],
+"page": "Bridge section",
+"internal": "Trouble Brewing",
+"access": "mos_le_harmless"
 },
 {
 "output": "Bronze key (Prince Ali Rescue)",
@@ -28406,7 +28649,8 @@
 "members": false,
 "levels": {},
 "quests": [],
-"page": "Bronze key (Prince Ali Rescue)"
+"page": "Bronze key (Prince Ali Rescue)",
+"internal": "Prince Ali Rescue"
 },
 {
 "output": "Corrupted body (attuned)",
@@ -28440,8 +28684,12 @@
 "facilities": "Singing Bowl (The Corrupted Gauntlet)",
 "members": true,
 "levels": {},
-"quests": [],
-"page": "Corrupted body (attuned)"
+"quests": [
+"Song of the Elves"
+],
+"page": "Corrupted body (attuned)",
+"internal": "The Corrupted Gauntlet",
+"access": "prifddinas"
 },
 {
 "output": "Corrupted body (basic)",
@@ -28471,8 +28719,12 @@
 "facilities": "Singing Bowl (The Corrupted Gauntlet)",
 "members": true,
 "levels": {},
-"quests": [],
-"page": "Corrupted body (basic)"
+"quests": [
+"Song of the Elves"
+],
+"page": "Corrupted body (basic)",
+"internal": "The Corrupted Gauntlet",
+"access": "prifddinas"
 },
 {
 "output": "Corrupted body (perfected)",
@@ -28506,8 +28758,12 @@
 "facilities": "Singing Bowl (The Corrupted Gauntlet)",
 "members": true,
 "levels": {},
-"quests": [],
-"page": "Corrupted body (perfected)"
+"quests": [
+"Song of the Elves"
+],
+"page": "Corrupted body (perfected)",
+"internal": "The Corrupted Gauntlet",
+"access": "prifddinas"
 },
 {
 "output": "Corrupted bow (attuned)",
@@ -28529,8 +28785,12 @@
 "facilities": "Singing Bowl (The Corrupted Gauntlet)",
 "members": true,
 "levels": {},
-"quests": [],
-"page": "Corrupted bow (attuned)"
+"quests": [
+"Song of the Elves"
+],
+"page": "Corrupted bow (attuned)",
+"internal": "The Corrupted Gauntlet",
+"access": "prifddinas"
 },
 {
 "output": "Corrupted bow (basic)",
@@ -28548,8 +28808,12 @@
 "facilities": "Singing Bowl (The Corrupted Gauntlet)",
 "members": true,
 "levels": {},
-"quests": [],
-"page": "Corrupted bow (basic)"
+"quests": [
+"Song of the Elves"
+],
+"page": "Corrupted bow (basic)",
+"internal": "The Corrupted Gauntlet",
+"access": "prifddinas"
 },
 {
 "output": "Corrupted escape crystal",
@@ -28567,8 +28831,12 @@
 "facilities": "Singing Bowl (The Corrupted Gauntlet)",
 "members": true,
 "levels": {},
-"quests": [],
-"page": "Corrupted escape crystal"
+"quests": [
+"Song of the Elves"
+],
+"page": "Corrupted escape crystal",
+"internal": "The Corrupted Gauntlet",
+"access": "prifddinas"
 },
 {
 "output": "Corrupted halberd (attuned)",
@@ -28590,8 +28858,12 @@
 "facilities": "Singing Bowl (The Corrupted Gauntlet)",
 "members": true,
 "levels": {},
-"quests": [],
-"page": "Corrupted halberd (attuned)"
+"quests": [
+"Song of the Elves"
+],
+"page": "Corrupted halberd (attuned)",
+"internal": "The Corrupted Gauntlet",
+"access": "prifddinas"
 },
 {
 "output": "Corrupted halberd (basic)",
@@ -28609,8 +28881,12 @@
 "facilities": "Singing Bowl (The Corrupted Gauntlet)",
 "members": true,
 "levels": {},
-"quests": [],
-"page": "Corrupted halberd (basic)"
+"quests": [
+"Song of the Elves"
+],
+"page": "Corrupted halberd (basic)",
+"internal": "The Corrupted Gauntlet",
+"access": "prifddinas"
 },
 {
 "output": "Corrupted helm (attuned)",
@@ -28644,8 +28920,12 @@
 "facilities": "Singing Bowl (The Corrupted Gauntlet)",
 "members": true,
 "levels": {},
-"quests": [],
-"page": "Corrupted helm (attuned)"
+"quests": [
+"Song of the Elves"
+],
+"page": "Corrupted helm (attuned)",
+"internal": "The Corrupted Gauntlet",
+"access": "prifddinas"
 },
 {
 "output": "Corrupted helm (basic)",
@@ -28675,8 +28955,12 @@
 "facilities": "Singing Bowl (The Corrupted Gauntlet)",
 "members": true,
 "levels": {},
-"quests": [],
-"page": "Corrupted helm (basic)"
+"quests": [
+"Song of the Elves"
+],
+"page": "Corrupted helm (basic)",
+"internal": "The Corrupted Gauntlet",
+"access": "prifddinas"
 },
 {
 "output": "Corrupted helm (perfected)",
@@ -28710,8 +28994,12 @@
 "facilities": "Singing Bowl (The Corrupted Gauntlet)",
 "members": true,
 "levels": {},
-"quests": [],
-"page": "Corrupted helm (perfected)"
+"quests": [
+"Song of the Elves"
+],
+"page": "Corrupted helm (perfected)",
+"internal": "The Corrupted Gauntlet",
+"access": "prifddinas"
 },
 {
 "output": "Corrupted legs (attuned)",
@@ -28745,8 +29033,12 @@
 "facilities": "Singing Bowl (The Corrupted Gauntlet)",
 "members": true,
 "levels": {},
-"quests": [],
-"page": "Corrupted legs (attuned)"
+"quests": [
+"Song of the Elves"
+],
+"page": "Corrupted legs (attuned)",
+"internal": "The Corrupted Gauntlet",
+"access": "prifddinas"
 },
 {
 "output": "Corrupted legs (basic)",
@@ -28776,8 +29068,12 @@
 "facilities": "Singing Bowl (The Corrupted Gauntlet)",
 "members": true,
 "levels": {},
-"quests": [],
-"page": "Corrupted legs (basic)"
+"quests": [
+"Song of the Elves"
+],
+"page": "Corrupted legs (basic)",
+"internal": "The Corrupted Gauntlet",
+"access": "prifddinas"
 },
 {
 "output": "Corrupted legs (perfected)",
@@ -28811,8 +29107,12 @@
 "facilities": "Singing Bowl (The Corrupted Gauntlet)",
 "members": true,
 "levels": {},
-"quests": [],
-"page": "Corrupted legs (perfected)"
+"quests": [
+"Song of the Elves"
+],
+"page": "Corrupted legs (perfected)",
+"internal": "The Corrupted Gauntlet",
+"access": "prifddinas"
 },
 {
 "output": "Corrupted paddlefish",
@@ -28834,8 +29134,12 @@
 "facilities": "Singing Bowl (The Corrupted Gauntlet)",
 "members": true,
 "levels": {},
-"quests": [],
-"page": "Corrupted paddlefish"
+"quests": [
+"Song of the Elves"
+],
+"page": "Corrupted paddlefish",
+"internal": "The Corrupted Gauntlet",
+"access": "prifddinas"
 },
 {
 "output": "Corrupted staff (attuned)",
@@ -28857,8 +29161,12 @@
 "facilities": "Singing Bowl (The Corrupted Gauntlet)",
 "members": true,
 "levels": {},
-"quests": [],
-"page": "Corrupted staff (attuned)"
+"quests": [
+"Song of the Elves"
+],
+"page": "Corrupted staff (attuned)",
+"internal": "The Corrupted Gauntlet",
+"access": "prifddinas"
 },
 {
 "output": "Corrupted staff (basic)",
@@ -28876,8 +29184,12 @@
 "facilities": "Singing Bowl (The Corrupted Gauntlet)",
 "members": true,
 "levels": {},
-"quests": [],
-"page": "Corrupted staff (basic)"
+"quests": [
+"Song of the Elves"
+],
+"page": "Corrupted staff (basic)",
+"internal": "The Corrupted Gauntlet",
+"access": "prifddinas"
 },
 {
 "output": "Corrupted teleport crystal",
@@ -28895,8 +29207,12 @@
 "facilities": "Singing Bowl (The Corrupted Gauntlet)",
 "members": true,
 "levels": {},
-"quests": [],
-"page": "Corrupted teleport crystal"
+"quests": [
+"Song of the Elves"
+],
+"page": "Corrupted teleport crystal",
+"internal": "The Corrupted Gauntlet",
+"access": "prifddinas"
 },
 {
 "output": "Crushed gem",
@@ -28951,8 +29267,12 @@
 "facilities": "Singing Bowl (The Gauntlet)",
 "members": true,
 "levels": {},
-"quests": [],
-"page": "Crystal body (attuned)"
+"quests": [
+"Song of the Elves"
+],
+"page": "Crystal body (attuned)",
+"internal": "The Gauntlet",
+"access": "prifddinas"
 },
 {
 "output": "Crystal body (basic)",
@@ -28982,8 +29302,12 @@
 "facilities": "Singing Bowl (The Gauntlet)",
 "members": true,
 "levels": {},
-"quests": [],
-"page": "Crystal body (basic)"
+"quests": [
+"Song of the Elves"
+],
+"page": "Crystal body (basic)",
+"internal": "The Gauntlet",
+"access": "prifddinas"
 },
 {
 "output": "Crystal body (perfected)",
@@ -29017,8 +29341,12 @@
 "facilities": "Singing Bowl (The Gauntlet)",
 "members": true,
 "levels": {},
-"quests": [],
-"page": "Crystal body (perfected)"
+"quests": [
+"Song of the Elves"
+],
+"page": "Crystal body (perfected)",
+"internal": "The Gauntlet",
+"access": "prifddinas"
 },
 {
 "output": "Crystal bow (attuned)",
@@ -29040,8 +29368,12 @@
 "facilities": "Singing Bowl (The Gauntlet)",
 "members": true,
 "levels": {},
-"quests": [],
-"page": "Crystal bow (attuned)"
+"quests": [
+"Song of the Elves"
+],
+"page": "Crystal bow (attuned)",
+"internal": "The Gauntlet",
+"access": "prifddinas"
 },
 {
 "output": "Crystal bow (basic)",
@@ -29059,8 +29391,12 @@
 "facilities": "Singing Bowl (The Gauntlet)",
 "members": true,
 "levels": {},
-"quests": [],
-"page": "Crystal bow (basic)"
+"quests": [
+"Song of the Elves"
+],
+"page": "Crystal bow (basic)",
+"internal": "The Gauntlet",
+"access": "prifddinas"
 },
 {
 "output": "Crystal halberd (attuned)",
@@ -29082,8 +29418,12 @@
 "facilities": "Singing Bowl (The Gauntlet)",
 "members": true,
 "levels": {},
-"quests": [],
-"page": "Crystal halberd (attuned)"
+"quests": [
+"Song of the Elves"
+],
+"page": "Crystal halberd (attuned)",
+"internal": "The Gauntlet",
+"access": "prifddinas"
 },
 {
 "output": "Crystal halberd (basic)",
@@ -29101,8 +29441,12 @@
 "facilities": "Singing Bowl (The Gauntlet)",
 "members": true,
 "levels": {},
-"quests": [],
-"page": "Crystal halberd (basic)"
+"quests": [
+"Song of the Elves"
+],
+"page": "Crystal halberd (basic)",
+"internal": "The Gauntlet",
+"access": "prifddinas"
 },
 {
 "output": "Crystal helm (attuned)",
@@ -29136,8 +29480,12 @@
 "facilities": "Singing Bowl (The Gauntlet)",
 "members": true,
 "levels": {},
-"quests": [],
-"page": "Crystal helm (attuned)"
+"quests": [
+"Song of the Elves"
+],
+"page": "Crystal helm (attuned)",
+"internal": "The Gauntlet",
+"access": "prifddinas"
 },
 {
 "output": "Crystal helm (basic)",
@@ -29167,8 +29515,12 @@
 "facilities": "Singing Bowl (The Gauntlet)",
 "members": true,
 "levels": {},
-"quests": [],
-"page": "Crystal helm (basic)"
+"quests": [
+"Song of the Elves"
+],
+"page": "Crystal helm (basic)",
+"internal": "The Gauntlet",
+"access": "prifddinas"
 },
 {
 "output": "Crystal helm (perfected)",
@@ -29202,8 +29554,12 @@
 "facilities": "Singing Bowl (The Gauntlet)",
 "members": true,
 "levels": {},
-"quests": [],
-"page": "Crystal helm (perfected)"
+"quests": [
+"Song of the Elves"
+],
+"page": "Crystal helm (perfected)",
+"internal": "The Gauntlet",
+"access": "prifddinas"
 },
 {
 "output": "Crystal legs (attuned)",
@@ -29237,8 +29593,12 @@
 "facilities": "Singing Bowl (The Gauntlet)",
 "members": true,
 "levels": {},
-"quests": [],
-"page": "Crystal legs (attuned)"
+"quests": [
+"Song of the Elves"
+],
+"page": "Crystal legs (attuned)",
+"internal": "The Gauntlet",
+"access": "prifddinas"
 },
 {
 "output": "Crystal legs (basic)",
@@ -29268,8 +29628,12 @@
 "facilities": "Singing Bowl (The Gauntlet)",
 "members": true,
 "levels": {},
-"quests": [],
-"page": "Crystal legs (basic)"
+"quests": [
+"Song of the Elves"
+],
+"page": "Crystal legs (basic)",
+"internal": "The Gauntlet",
+"access": "prifddinas"
 },
 {
 "output": "Crystal legs (perfected)",
@@ -29303,8 +29667,12 @@
 "facilities": "Singing Bowl (The Gauntlet)",
 "members": true,
 "levels": {},
-"quests": [],
-"page": "Crystal legs (perfected)"
+"quests": [
+"Song of the Elves"
+],
+"page": "Crystal legs (perfected)",
+"internal": "The Gauntlet",
+"access": "prifddinas"
 },
 {
 "output": "Crystal paddlefish",
@@ -29326,8 +29694,12 @@
 "facilities": "Singing Bowl (The Gauntlet)",
 "members": true,
 "levels": {},
-"quests": [],
-"page": "Crystal paddlefish"
+"quests": [
+"Song of the Elves"
+],
+"page": "Crystal paddlefish",
+"internal": "The Gauntlet",
+"access": "prifddinas"
 },
 {
 "output": "Crystal staff (attuned)",
@@ -29349,8 +29721,12 @@
 "facilities": "Singing Bowl (The Gauntlet)",
 "members": true,
 "levels": {},
-"quests": [],
-"page": "Crystal staff (attuned)"
+"quests": [
+"Song of the Elves"
+],
+"page": "Crystal staff (attuned)",
+"internal": "The Gauntlet",
+"access": "prifddinas"
 },
 {
 "output": "Crystal staff (basic)",
@@ -29368,8 +29744,12 @@
 "facilities": "Singing Bowl (The Gauntlet)",
 "members": true,
 "levels": {},
-"quests": [],
-"page": "Crystal staff (basic)"
+"quests": [
+"Song of the Elves"
+],
+"page": "Crystal staff (basic)",
+"internal": "The Gauntlet",
+"access": "prifddinas"
 },
 {
 "output": "Diamond amulet",
@@ -29599,8 +29979,12 @@
 "facilities": "Singing Bowl (The Gauntlet)",
 "members": true,
 "levels": {},
-"quests": [],
-"page": "Escape crystal (The Gauntlet)"
+"quests": [
+"Song of the Elves"
+],
+"page": "Escape crystal (The Gauntlet)",
+"internal": "The Gauntlet",
+"access": "prifddinas"
 },
 {
 "output": "Gold amulet",
@@ -29677,7 +30061,8 @@
 "members": true,
 "levels": {},
 "quests": [],
-"page": "Golden wool"
+"page": "Golden wool",
+"internal": "The Fremennik Trials"
 },
 {
 "output": "Green cape",
@@ -29831,8 +30216,12 @@
 "facilities": "Workbench (Trouble Brewing)",
 "members": true,
 "levels": {},
-"quests": [],
-"page": "Lumber patch"
+"quests": [
+"Cabin Fever"
+],
+"page": "Lumber patch",
+"internal": "Trouble Brewing",
+"access": "mos_le_harmless"
 },
 {
 "output": "M'speak amulet",
@@ -29910,8 +30299,12 @@
 "facilities": "Wall of flame",
 "members": true,
 "levels": {},
-"quests": [],
-"page": "M'speak amulet (unstrung)"
+"quests": [
+"Monkey Madness I"
+],
+"page": "M'speak amulet (unstrung)",
+"access": "ape_atoll",
+"internal": "Monkey Madness I"
 },
 {
 "output": "Medallion of the Deep",
@@ -30279,8 +30672,12 @@
 "facilities": "Workbench (Trouble Brewing)",
 "members": true,
 "levels": {},
-"quests": [],
-"page": "Pipe section"
+"quests": [
+"Cabin Fever"
+],
+"page": "Pipe section",
+"internal": "Trouble Brewing",
+"access": "mos_le_harmless"
 },
 {
 "output": "Pot",
@@ -30600,8 +30997,12 @@
 "facilities": "Singing Bowl (The Gauntlet)",
 "members": true,
 "levels": {},
-"quests": [],
-"page": "Teleport crystal (The Gauntlet)"
+"quests": [
+"Song of the Elves"
+],
+"page": "Teleport crystal (The Gauntlet)",
+"internal": "The Gauntlet",
+"access": "prifddinas"
 },
 {
 "output": "Token (Varlamore)",
@@ -30833,8 +31234,12 @@
 "facilities": "Singing Bowl (The Gauntlet)",
 "members": true,
 "levels": {},
-"quests": [],
-"page": "Vial (The Gauntlet)"
+"quests": [
+"Song of the Elves"
+],
+"page": "Vial (The Gauntlet)",
+"internal": "The Gauntlet",
+"access": "prifddinas"
 },
 {
 "output": "Vial (The Gauntlet)",
@@ -30852,8 +31257,12 @@
 "facilities": "Singing Bowl (The Corrupted Gauntlet)",
 "members": true,
 "levels": {},
-"quests": [],
-"page": "Vial (The Gauntlet)"
+"quests": [
+"Song of the Elves"
+],
+"page": "Vial (The Gauntlet)",
+"internal": "The Corrupted Gauntlet",
+"access": "prifddinas"
 },
 {
 "output": "Wizard hat",
@@ -31192,7 +31601,8 @@
 "members": true,
 "levels": {},
 "quests": [],
-"page": "Polished buttons"
+"page": "Polished buttons",
+"internal": "Animal Magnetism"
 },
 {
 "output": "Unfired cup",
@@ -32622,7 +33032,8 @@
 "members": true,
 "levels": {},
 "quests": [],
-"page": "A container"
+"page": "A container",
+"internal": "Animal Magnetism"
 },
 {
 "output": "Magic string",
@@ -32683,7 +33094,8 @@
 "members": true,
 "levels": {},
 "quests": [],
-"page": "Beads of the Dead"
+"page": "Beads of the Dead",
+"internal": "Shilo Village"
 },
 {
 "output": "Bone beads",
@@ -32702,7 +33114,8 @@
 "members": true,
 "levels": {},
 "quests": [],
-"page": "Bone beads"
+"page": "Bone beads",
+"internal": "Shilo Village"
 },
 {
 "output": "Bone key (Shilo Village)",
@@ -32721,7 +33134,8 @@
 "members": true,
 "levels": {},
 "quests": [],
-"page": "Bone key (Shilo Village)"
+"page": "Bone key (Shilo Village)",
+"internal": "Shilo Village"
 },
 {
 "output": "Conductor",
@@ -35646,7 +36060,8 @@
 "members": true,
 "levels": {},
 "quests": [],
-"page": "'perfect' necklace"
+"page": "'perfect' necklace",
+"internal": "Family Crest"
 },
 {
 "output": "'perfect' ring",
@@ -35671,7 +36086,8 @@
 "members": true,
 "levels": {},
 "quests": [],
-"page": "'perfect' ring"
+"page": "'perfect' ring",
+"internal": "Family Crest"
 },
 {
 "output": "Ruby necklace",
@@ -35717,7 +36133,8 @@
 "members": true,
 "levels": {},
 "quests": [],
-"page": "Unstrung lyre"
+"page": "Unstrung lyre",
+"internal": "The Fremennik Trials"
 },
 {
 "output": "Hard leather shield",
@@ -39616,8 +40033,11 @@
 "facilities": "Wall of flame",
 "members": true,
 "levels": {},
-"quests": [],
-"page": "Uncut zenyte"
+"quests": [
+"Monkey Madness I"
+],
+"page": "Uncut zenyte",
+"access": "ape_atoll"
 },
 {
 "output": "Blue d'hide body",
@@ -40044,7 +40464,8 @@
 "Smithing": 55
 },
 "quests": [],
-"page": "Purging staff"
+"page": "Purging staff",
+"oneOff": "first time only"
 },
 {
 "output": "Magic bird house",
@@ -42961,7 +43382,8 @@
 "members": true,
 "levels": {},
 "quests": [],
-"page": "Lyre"
+"page": "Lyre",
+"internal": "The Fremennik Trials"
 },
 {
 "output": "Oak longbow",
@@ -44257,7 +44679,8 @@
 "members": true,
 "levels": {},
 "quests": [],
-"page": "Root kindling"
+"page": "Root kindling",
+"internal": "The Final Dawn"
 },
 {
 "output": "Seeking broad arrows",
@@ -45673,7 +46096,8 @@
 "members": true,
 "levels": {},
 "quests": [],
-"page": "Scorching bow"
+"page": "Scorching bow",
+"oneOff": "first time only"
 },
 {
 "output": "Arrow shaft",
@@ -46760,9 +47184,13 @@
 "tools": [],
 "facilities": "Refiner",
 "members": true,
-"levels": {},
+"levels": {
+"Herblore": 60
+},
 "quests": [],
-"page": "Aga paste"
+"page": "Aga paste",
+"internal": "Mastering Mixology",
+"access": "varlamore"
 },
 {
 "output": "Arder-musca poison",
@@ -46789,7 +47217,8 @@
 "members": true,
 "levels": {},
 "quests": [],
-"page": "Arder-musca poison"
+"page": "Arder-musca poison",
+"internal": "Desert Treasure II - The Fallen Empire"
 },
 {
 "output": "Egniol potion (3)",
@@ -46845,9 +47274,13 @@
 "tools": [],
 "facilities": "Refiner",
 "members": true,
-"levels": {},
+"levels": {
+"Herblore": 60
+},
 "quests": [],
-"page": "Lye paste"
+"page": "Lye paste",
+"internal": "Mastering Mixology",
+"access": "varlamore"
 },
 {
 "output": "Mox paste",
@@ -46874,9 +47307,13 @@
 "tools": [],
 "facilities": "Refiner",
 "members": true,
-"levels": {},
+"levels": {
+"Herblore": 60
+},
 "quests": [],
-"page": "Mox paste"
+"page": "Mox paste",
+"internal": "Mastering Mixology",
+"access": "varlamore"
 },
 {
 "output": "Ardrigal",
@@ -46895,7 +47332,8 @@
 "members": true,
 "levels": {},
 "quests": [],
-"page": "Ardrigal"
+"page": "Ardrigal",
+"internal": "Jungle Potion"
 },
 {
 "output": "Attack potion(3)",
@@ -47025,7 +47463,8 @@
 "members": true,
 "levels": {},
 "quests": [],
-"page": "Rogue's purse"
+"page": "Rogue's purse",
+"internal": "Jungle Potion"
 },
 {
 "output": "Sito foil",
@@ -47044,7 +47483,8 @@
 "members": true,
 "levels": {},
 "quests": [],
-"page": "Sito foil"
+"page": "Sito foil",
+"internal": "Jungle Potion"
 },
 {
 "output": "Snake weed",
@@ -47063,7 +47503,8 @@
 "members": true,
 "levels": {},
 "quests": [],
-"page": "Snake weed"
+"page": "Snake weed",
+"internal": "Jungle Potion"
 },
 {
 "output": "Volencia moss",
@@ -47082,7 +47523,8 @@
 "members": true,
 "levels": {},
 "quests": [],
-"page": "Volencia moss"
+"page": "Volencia moss",
+"internal": "Jungle Potion"
 },
 {
 "output": "Attack mix(2)",
@@ -47153,7 +47595,8 @@
 "members": true,
 "levels": {},
 "quests": [],
-"page": "Dream vial"
+"page": "Dream vial",
+"internal": "Dream Mentor"
 },
 {
 "output": "Guam vial",
@@ -47176,7 +47619,8 @@
 "members": true,
 "levels": {},
 "quests": [],
-"page": "Guam vial"
+"page": "Guam vial",
+"internal": "Lunar Diplomacy"
 },
 {
 "output": "Guam-marr vial",
@@ -47199,7 +47643,8 @@
 "members": true,
 "levels": {},
 "quests": [],
-"page": "Guam-marr vial"
+"page": "Guam-marr vial",
+"internal": "Lunar Diplomacy"
 },
 {
 "output": "Guam-marr vial",
@@ -47222,7 +47667,8 @@
 "members": true,
 "levels": {},
 "quests": [],
-"page": "Guam-marr vial"
+"page": "Guam-marr vial",
+"internal": "Lunar Diplomacy"
 },
 {
 "output": "Marr vial",
@@ -47245,7 +47691,8 @@
 "members": true,
 "levels": {},
 "quests": [],
-"page": "Marr vial"
+"page": "Marr vial",
+"internal": "Lunar Diplomacy"
 },
 {
 "output": "Marrentill",
@@ -47341,7 +47788,8 @@
 "members": true,
 "levels": {},
 "quests": [],
-"page": "Mixed chemicals"
+"page": "Mixed chemicals",
+"internal": "The Dig Site"
 },
 {
 "output": "Mixed chemicals (Step 2)",
@@ -47364,7 +47812,8 @@
 "members": true,
 "levels": {},
 "quests": [],
-"page": "Mixed chemicals"
+"page": "Mixed chemicals",
+"internal": "The Dig Site"
 },
 {
 "output": "Relicym's balm(3)",
@@ -47493,7 +47942,8 @@
 "members": true,
 "levels": {},
 "quests": [],
-"page": "Chemical compound"
+"page": "Chemical compound",
+"internal": "The Dig Site"
 },
 {
 "output": "Chemical compound",
@@ -47516,7 +47966,8 @@
 "members": true,
 "levels": {},
 "quests": [],
-"page": "Chemical compound"
+"page": "Chemical compound",
+"internal": "The Dig Site"
 },
 {
 "output": "Tarromin",
@@ -47610,7 +48061,8 @@
 "members": true,
 "levels": {},
 "quests": [],
-"page": "Potion (Watchtower)"
+"page": "Potion (Watchtower)",
+"internal": "Watchtower"
 },
 {
 "output": "Strength mix(2)",
@@ -48763,7 +49215,8 @@
 "members": true,
 "levels": {},
 "quests": [],
-"page": "Dream potion"
+"page": "Dream potion",
+"internal": "Dream Mentor"
 },
 {
 "output": "Marrentill tar",
@@ -48811,7 +49264,8 @@
 "members": true,
 "levels": {},
 "quests": [],
-"page": "Troll potion"
+"page": "Troll potion",
+"internal": "Eadgar's Ruse"
 },
 {
 "output": "Defence mix(2)",
@@ -49128,7 +49582,8 @@
 "members": true,
 "levels": {},
 "quests": [],
-"page": "Elder (-)"
+"page": "Elder (-)",
+"internal": "Chambers of Xeric"
 },
 {
 "output": "Goblin potion(3)",
@@ -49151,7 +49606,8 @@
 "members": true,
 "levels": {},
 "quests": [],
-"page": "Goblin potion"
+"page": "Goblin potion",
+"internal": "Land of the Goblins"
 },
 {
 "output": "Golpar",
@@ -49170,7 +49626,8 @@
 "members": true,
 "levels": {},
 "quests": [],
-"page": "Golpar"
+"page": "Golpar",
+"internal": "Chambers of Xeric"
 },
 {
 "output": "Kodai (-)(4)",
@@ -49197,7 +49654,8 @@
 "members": true,
 "levels": {},
 "quests": [],
-"page": "Kodai (-)"
+"page": "Kodai (-)",
+"internal": "Chambers of Xeric"
 },
 {
 "output": "Superattack mix(2)",
@@ -49249,7 +49707,8 @@
 "members": true,
 "levels": {},
 "quests": [],
-"page": "Twisted (-)"
+"page": "Twisted (-)",
+"internal": "Chambers of Xeric"
 },
 {
 "output": "Avantoe",
@@ -49410,7 +49869,8 @@
 "members": true,
 "levels": {},
 "quests": [],
-"page": "Buchu leaf"
+"page": "Buchu leaf",
+"internal": "Chambers of Xeric"
 },
 {
 "output": "Prayer enhance (-)(4)",
@@ -49437,7 +49897,8 @@
 "members": true,
 "levels": {},
 "quests": [],
-"page": "Prayer enhance (-)"
+"page": "Prayer enhance (-)",
+"internal": "Chambers of Xeric"
 },
 {
 "output": "Revitalisation (-)(4)",
@@ -49464,7 +49925,8 @@
 "members": true,
 "levels": {},
 "quests": [],
-"page": "Revitalisation (-)"
+"page": "Revitalisation (-)",
+"internal": "Chambers of Xeric"
 },
 {
 "output": "Shrink-me-quick",
@@ -49487,7 +49949,8 @@
 "members": true,
 "levels": {},
 "quests": [],
-"page": "Shrink-me-quick"
+"page": "Shrink-me-quick",
+"internal": "Grim Tales"
 },
 {
 "output": "Super energy(3)",
@@ -49537,7 +50000,8 @@
 "members": true,
 "levels": {},
 "quests": [],
-"page": "Xeric's aid (-)"
+"page": "Xeric's aid (-)",
+"internal": "Chambers of Xeric"
 },
 {
 "output": "Fishing mix(2)",
@@ -49798,7 +50262,8 @@
 "members": true,
 "levels": {},
 "quests": [],
-"page": "Magic essence"
+"page": "Magic essence",
+"internal": "Fairytale II - Cure a Queen"
 },
 {
 "output": "Huasca",
@@ -49921,7 +50386,8 @@
 "members": true,
 "levels": {},
 "quests": [],
-"page": "Elder potion"
+"page": "Elder potion",
+"internal": "Chambers of Xeric"
 },
 {
 "output": "Kodai potion (4)",
@@ -49948,7 +50414,8 @@
 "members": true,
 "levels": {},
 "quests": [],
-"page": "Kodai potion"
+"page": "Kodai potion",
+"internal": "Chambers of Xeric"
 },
 {
 "output": "Snapdragon",
@@ -50048,7 +50515,8 @@
 "members": true,
 "levels": {},
 "quests": [],
-"page": "Twisted potion"
+"page": "Twisted potion",
+"internal": "Chambers of Xeric"
 },
 {
 "output": "Aga paste",
@@ -50072,9 +50540,13 @@
 "tools": [],
 "facilities": "Refiner",
 "members": true,
-"levels": {},
+"levels": {
+"Herblore": 60
+},
 "quests": [],
-"page": "Aga paste"
+"page": "Aga paste",
+"internal": "Mastering Mixology",
+"access": "varlamore"
 },
 {
 "output": "Aga resin",
@@ -50091,9 +50563,13 @@
 "tools": [],
 "facilities": "Conveyor belt (Mastering Mixology)",
 "members": true,
-"levels": {},
+"levels": {
+"Herblore": 60
+},
 "quests": [],
-"page": "Aga resin"
+"page": "Aga resin",
+"internal": "Mastering Mixology",
+"access": "varlamore"
 },
 {
 "output": "Alco-augmentator",
@@ -50110,9 +50586,13 @@
 "tools": [],
 "facilities": "Mixing vessel",
 "members": true,
-"levels": {},
+"levels": {
+"Herblore": 60
+},
 "quests": [],
-"page": "Alco-augmentator"
+"page": "Alco-augmentator",
+"internal": "Mastering Mixology",
+"access": "varlamore"
 },
 {
 "output": "Antipoison (-)(4)",
@@ -50139,7 +50619,8 @@
 "members": true,
 "levels": {},
 "quests": [],
-"page": "Antipoison (-)"
+"page": "Antipoison (-)",
+"internal": "Chambers of Xeric"
 },
 {
 "output": "Liplack liquor",
@@ -50156,9 +50637,13 @@
 "tools": [],
 "facilities": "Mixing vessel",
 "members": true,
-"levels": {},
+"levels": {
+"Herblore": 60
+},
 "quests": [],
-"page": "Liplack liquor"
+"page": "Liplack liquor",
+"internal": "Mastering Mixology",
+"access": "varlamore"
 },
 {
 "output": "Lye resin",
@@ -50175,9 +50660,13 @@
 "tools": [],
 "facilities": "Conveyor belt (Mastering Mixology)",
 "members": true,
-"levels": {},
+"levels": {
+"Herblore": 60
+},
 "quests": [],
-"page": "Lye resin"
+"page": "Lye resin",
+"internal": "Mastering Mixology",
+"access": "varlamore"
 },
 {
 "output": "Mammoth-might mix",
@@ -50194,9 +50683,13 @@
 "tools": [],
 "facilities": "Mixing vessel",
 "members": true,
-"levels": {},
+"levels": {
+"Herblore": 60
+},
 "quests": [],
-"page": "Mammoth-might mix"
+"page": "Mammoth-might mix",
+"internal": "Mastering Mixology",
+"access": "varlamore"
 },
 {
 "output": "Mox resin",
@@ -50213,9 +50706,13 @@
 "tools": [],
 "facilities": "Conveyor belt (Mastering Mixology)",
 "members": true,
-"levels": {},
+"levels": {
+"Herblore": 60
+},
 "quests": [],
-"page": "Mox resin"
+"page": "Mox resin",
+"internal": "Mastering Mixology",
+"access": "varlamore"
 },
 {
 "output": "Noxifer",
@@ -50234,7 +50731,8 @@
 "members": true,
 "levels": {},
 "quests": [],
-"page": "Noxifer"
+"page": "Noxifer",
+"internal": "Chambers of Xeric"
 },
 {
 "output": "Overload (-)(4)",
@@ -50353,9 +50851,13 @@
 "tools": [],
 "facilities": "Conveyor belt (Mastering Mixology)",
 "members": true,
-"levels": {},
+"levels": {
+"Herblore": 60
+},
 "quests": [],
-"page": "Aga resin"
+"page": "Aga resin",
+"internal": "Mastering Mixology",
+"access": "varlamore"
 },
 {
 "output": "Mox resin",
@@ -50372,9 +50874,13 @@
 "tools": [],
 "facilities": "Conveyor belt (Mastering Mixology)",
 "members": true,
-"levels": {},
+"levels": {
+"Herblore": 60
+},
 "quests": [],
-"page": "Mox resin"
+"page": "Mox resin",
+"internal": "Mastering Mixology",
+"access": "varlamore"
 },
 {
 "output": "Mystic mana amalgam",
@@ -50395,9 +50901,13 @@
 "tools": [],
 "facilities": "Mixing vessel",
 "members": true,
-"levels": {},
+"levels": {
+"Herblore": 60
+},
 "quests": [],
-"page": "Mystic mana amalgam"
+"page": "Mystic mana amalgam",
+"internal": "Mastering Mixology",
+"access": "varlamore"
 },
 {
 "output": "Super restore(3)",
@@ -50679,7 +51189,8 @@
 "members": true,
 "levels": {},
 "quests": [],
-"page": "Prayer enhance"
+"page": "Prayer enhance",
+"internal": "Chambers of Xeric"
 },
 {
 "output": "Revitalisation potion (4)",
@@ -50706,7 +51217,8 @@
 "members": true,
 "levels": {},
 "quests": [],
-"page": "Revitalisation potion"
+"page": "Revitalisation potion",
+"internal": "Chambers of Xeric"
 },
 {
 "output": "Sanfew serum(1)",
@@ -50949,7 +51461,8 @@
 "members": true,
 "levels": {},
 "quests": [],
-"page": "Xeric's aid"
+"page": "Xeric's aid",
+"internal": "Chambers of Xeric"
 },
 {
 "output": "Extreme energy potion(1)",
@@ -51058,9 +51571,13 @@
 "tools": [],
 "facilities": "Conveyor belt (Mastering Mixology)",
 "members": true,
-"levels": {},
+"levels": {
+"Herblore": 60
+},
 "quests": [],
-"page": "Lye resin"
+"page": "Lye resin",
+"internal": "Mastering Mixology",
+"access": "varlamore"
 },
 {
 "output": "Marley's moonlight",
@@ -51081,9 +51598,13 @@
 "tools": [],
 "facilities": "Mixing vessel",
 "members": true,
-"levels": {},
+"levels": {
+"Herblore": 60
+},
 "quests": [],
-"page": "Marley's moonlight"
+"page": "Marley's moonlight",
+"internal": "Mastering Mixology",
+"access": "varlamore"
 },
 {
 "output": "Mox resin",
@@ -51100,9 +51621,13 @@
 "tools": [],
 "facilities": "Conveyor belt (Mastering Mixology)",
 "members": true,
-"levels": {},
+"levels": {
+"Herblore": 60
+},
 "quests": [],
-"page": "Mox resin"
+"page": "Mox resin",
+"internal": "Mastering Mixology",
+"access": "varlamore"
 },
 {
 "output": "Super defence(3)",
@@ -51261,9 +51786,13 @@
 "tools": [],
 "facilities": "Conveyor belt (Mastering Mixology)",
 "members": true,
-"levels": {},
+"levels": {
+"Herblore": 60
+},
 "quests": [],
-"page": "Aga resin"
+"page": "Aga resin",
+"internal": "Mastering Mixology",
+"access": "varlamore"
 },
 {
 "output": "Antifire potion(3)",
@@ -51307,9 +51836,13 @@
 "tools": [],
 "facilities": "Mixing vessel",
 "members": true,
-"levels": {},
+"levels": {
+"Herblore": 60
+},
 "quests": [],
-"page": "Azure aura mix"
+"page": "Azure aura mix",
+"internal": "Mastering Mixology",
+"access": "varlamore"
 },
 {
 "output": "Mox resin",
@@ -51326,9 +51859,13 @@
 "tools": [],
 "facilities": "Conveyor belt (Mastering Mixology)",
 "members": true,
-"levels": {},
+"levels": {
+"Herblore": 60
+},
 "quests": [],
-"page": "Mox resin"
+"page": "Mox resin",
+"internal": "Mastering Mixology",
+"access": "varlamore"
 },
 {
 "output": "Divine super attack potion(1)",
@@ -51679,7 +52216,8 @@
 "members": true,
 "levels": {},
 "quests": [],
-"page": "Elder (+)"
+"page": "Elder (+)",
+"internal": "Chambers of Xeric"
 },
 {
 "output": "Inversion potion",
@@ -51702,7 +52240,8 @@
 "members": true,
 "levels": {},
 "quests": [],
-"page": "Inversion potion"
+"page": "Inversion potion",
+"internal": "Song of the Elves"
 },
 {
 "output": "Kodai (+)(4)",
@@ -51729,7 +52268,8 @@
 "members": true,
 "levels": {},
 "quests": [],
-"page": "Kodai (+)"
+"page": "Kodai (+)",
+"internal": "Chambers of Xeric"
 },
 {
 "output": "Twisted (+)(4)",
@@ -51756,7 +52296,8 @@
 "members": true,
 "levels": {},
 "quests": [],
-"page": "Twisted (+)"
+"page": "Twisted (+)",
+"internal": "Chambers of Xeric"
 },
 {
 "output": "Super def. mix(2)",
@@ -51798,9 +52339,13 @@
 "tools": [],
 "facilities": "Conveyor belt (Mastering Mixology)",
 "members": true,
-"levels": {},
+"levels": {
+"Herblore": 60
+},
 "quests": [],
-"page": "Aga resin"
+"page": "Aga resin",
+"internal": "Mastering Mixology",
+"access": "varlamore"
 },
 {
 "output": "Aqualux amalgam",
@@ -51821,9 +52366,13 @@
 "tools": [],
 "facilities": "Mixing vessel",
 "members": true,
-"levels": {},
+"levels": {
+"Herblore": 60
+},
 "quests": [],
-"page": "Aqualux amalgam"
+"page": "Aqualux amalgam",
+"internal": "Mastering Mixology",
+"access": "varlamore"
 },
 {
 "output": "Lye resin",
@@ -51840,9 +52389,13 @@
 "tools": [],
 "facilities": "Conveyor belt (Mastering Mixology)",
 "members": true,
-"levels": {},
+"levels": {
+"Herblore": 60
+},
 "quests": [],
-"page": "Lye resin"
+"page": "Lye resin",
+"internal": "Mastering Mixology",
+"access": "varlamore"
 },
 {
 "output": "Ranging potion(3)",
@@ -52057,7 +52610,8 @@
 "members": true,
 "levels": {},
 "quests": [],
-"page": "Antipoison potion"
+"page": "Antipoison potion",
+"internal": "Chambers of Xeric"
 },
 {
 "output": "Lye resin",
@@ -52074,9 +52628,13 @@
 "tools": [],
 "facilities": "Conveyor belt (Mastering Mixology)",
 "members": true,
-"levels": {},
+"levels": {
+"Herblore": 60
+},
 "quests": [],
-"page": "Lye resin"
+"page": "Lye resin",
+"internal": "Mastering Mixology",
+"access": "varlamore"
 },
 {
 "output": "Megalite liquid",
@@ -52097,9 +52655,13 @@
 "tools": [],
 "facilities": "Mixing vessel",
 "members": true,
-"levels": {},
+"levels": {
+"Herblore": 60
+},
 "quests": [],
-"page": "Megalite liquid"
+"page": "Megalite liquid",
+"internal": "Mastering Mixology",
+"access": "varlamore"
 },
 {
 "output": "Mox resin",
@@ -52116,9 +52678,13 @@
 "tools": [],
 "facilities": "Conveyor belt (Mastering Mixology)",
 "members": true,
-"levels": {},
+"levels": {
+"Herblore": 60
+},
 "quests": [],
-"page": "Mox resin"
+"page": "Mox resin",
+"internal": "Mastering Mixology",
+"access": "varlamore"
 },
 {
 "output": "Overload (Chambers of Xeric)",
@@ -52149,7 +52715,8 @@
 "members": true,
 "levels": {},
 "quests": [],
-"page": "Overload (Chambers of Xeric)"
+"page": "Overload (Chambers of Xeric)",
+"internal": "Chambers of Xeric"
 },
 {
 "output": "Torstol",
@@ -52329,9 +52896,13 @@
 "tools": [],
 "facilities": "Conveyor belt (Mastering Mixology)",
 "members": true,
-"levels": {},
+"levels": {
+"Herblore": 60
+},
 "quests": [],
-"page": "Aga resin"
+"page": "Aga resin",
+"internal": "Mastering Mixology",
+"access": "varlamore"
 },
 {
 "output": "Anti-leech lotion",
@@ -52352,9 +52923,13 @@
 "tools": [],
 "facilities": "Mixing vessel",
 "members": true,
-"levels": {},
+"levels": {
+"Herblore": 60
+},
 "quests": [],
-"page": "Anti-leech lotion"
+"page": "Anti-leech lotion",
+"internal": "Mastering Mixology",
+"access": "varlamore"
 },
 {
 "output": "Divine magic potion(1)",
@@ -52463,9 +53038,13 @@
 "tools": [],
 "facilities": "Conveyor belt (Mastering Mixology)",
 "members": true,
-"levels": {},
+"levels": {
+"Herblore": 60
+},
 "quests": [],
-"page": "Lye resin"
+"page": "Lye resin",
+"internal": "Mastering Mixology",
+"access": "varlamore"
 },
 {
 "output": "Prayer enhance (+)(4)",
@@ -52492,7 +53071,8 @@
 "members": true,
 "levels": {},
 "quests": [],
-"page": "Prayer enhance (+)"
+"page": "Prayer enhance (+)",
+"internal": "Chambers of Xeric"
 },
 {
 "output": "Revitalisation (+)(4)",
@@ -52519,7 +53099,8 @@
 "members": true,
 "levels": {},
 "quests": [],
-"page": "Revitalisation (+)"
+"page": "Revitalisation (+)",
+"internal": "Chambers of Xeric"
 },
 {
 "output": "Xeric's aid (+)(4)",
@@ -52546,7 +53127,8 @@
 "members": true,
 "levels": {},
 "quests": [],
-"page": "Xeric's aid (+)"
+"page": "Xeric's aid (+)",
+"internal": "Chambers of Xeric"
 },
 {
 "output": "Zamorak brew(3)",
@@ -52680,9 +53262,13 @@
 "tools": [],
 "facilities": "Conveyor belt (Mastering Mixology)",
 "members": true,
-"levels": {},
+"levels": {
+"Herblore": 60
+},
 "quests": [],
-"page": "Aga resin"
+"page": "Aga resin",
+"internal": "Mastering Mixology",
+"access": "varlamore"
 },
 {
 "output": "Lye resin",
@@ -52699,9 +53285,13 @@
 "tools": [],
 "facilities": "Conveyor belt (Mastering Mixology)",
 "members": true,
-"levels": {},
+"levels": {
+"Herblore": 60
+},
 "quests": [],
-"page": "Lye resin"
+"page": "Lye resin",
+"internal": "Mastering Mixology",
+"access": "varlamore"
 },
 {
 "output": "Mixalot",
@@ -52726,9 +53316,13 @@
 "tools": [],
 "facilities": "Mixing vessel",
 "members": true,
-"levels": {},
+"levels": {
+"Herblore": 60
+},
 "quests": [],
-"page": "Mixalot"
+"page": "Mixalot",
+"internal": "Mastering Mixology",
+"access": "varlamore"
 },
 {
 "output": "Mox resin",
@@ -52745,9 +53339,13 @@
 "tools": [],
 "facilities": "Conveyor belt (Mastering Mixology)",
 "members": true,
-"levels": {},
+"levels": {
+"Herblore": 60
+},
 "quests": [],
-"page": "Mox resin"
+"page": "Mox resin",
+"internal": "Mastering Mixology",
+"access": "varlamore"
 },
 {
 "output": "Saradomin brew(3)",
@@ -53478,7 +54076,8 @@
 "members": true,
 "levels": {},
 "quests": [],
-"page": "Antipoison (+)"
+"page": "Antipoison (+)",
+"internal": "Chambers of Xeric"
 },
 {
 "output": "Overload (+)(4)",
@@ -54225,7 +54824,8 @@
 "members": true,
 "levels": {},
 "quests": [],
-"page": "Catalytic tiara"
+"page": "Catalytic tiara",
+"internal": "Guardians of the Rift"
 },
 {
 "output": "Chaos tiara",
@@ -54378,7 +54978,8 @@
 "members": true,
 "levels": {},
 "quests": [],
-"page": "Elemental tiara"
+"page": "Elemental tiara",
+"internal": "Guardians of the Rift"
 },
 {
 "output": "Fire tiara",
@@ -54419,8 +55020,12 @@
 "facilities": "Altar (Zalcano)",
 "members": true,
 "levels": {},
-"quests": [],
-"page": "Imbued tephra"
+"quests": [
+"Song of the Elves"
+],
+"page": "Imbued tephra",
+"internal": "Zalcano",
+"access": "prifddinas"
 },
 {
 "output": "Law tiara",
@@ -55734,7 +56339,8 @@
 "members": true,
 "levels": {},
 "quests": [],
-"page": "Air rune"
+"page": "Air rune",
+"internal": "Guardians of the Rift"
 },
 {
 "output": "Body rune",
@@ -55753,7 +56359,8 @@
 "members": true,
 "levels": {},
 "quests": [],
-"page": "Body rune"
+"page": "Body rune",
+"internal": "Guardians of the Rift"
 },
 {
 "output": "Cosmic rune",
@@ -55816,7 +56423,8 @@
 "members": true,
 "levels": {},
 "quests": [],
-"page": "Cosmic rune"
+"page": "Cosmic rune",
+"internal": "Guardians of the Rift"
 },
 {
 "output": "Dust rune",
@@ -55846,7 +56454,8 @@
 "members": true,
 "levels": {},
 "quests": [],
-"page": "Dust rune"
+"page": "Dust rune",
+"internal": "Guardians of the Rift"
 },
 {
 "output": "Dust rune",
@@ -55876,7 +56485,8 @@
 "members": true,
 "levels": {},
 "quests": [],
-"page": "Dust rune"
+"page": "Dust rune",
+"internal": "Guardians of the Rift"
 },
 {
 "output": "Earth rune",
@@ -55895,7 +56505,8 @@
 "members": true,
 "levels": {},
 "quests": [],
-"page": "Earth rune"
+"page": "Earth rune",
+"internal": "Guardians of the Rift"
 },
 {
 "output": "Fire rune",
@@ -55914,7 +56525,8 @@
 "members": true,
 "levels": {},
 "quests": [],
-"page": "Fire rune"
+"page": "Fire rune",
+"internal": "Guardians of the Rift"
 },
 {
 "output": "Lava rune",
@@ -55944,7 +56556,8 @@
 "members": true,
 "levels": {},
 "quests": [],
-"page": "Lava rune"
+"page": "Lava rune",
+"internal": "Guardians of the Rift"
 },
 {
 "output": "Lava rune",
@@ -55974,7 +56587,8 @@
 "members": true,
 "levels": {},
 "quests": [],
-"page": "Lava rune"
+"page": "Lava rune",
+"internal": "Guardians of the Rift"
 },
 {
 "output": "Medium cell",
@@ -55993,7 +56607,8 @@
 "members": true,
 "levels": {},
 "quests": [],
-"page": "Medium cell"
+"page": "Medium cell",
+"internal": "Guardians of the Rift"
 },
 {
 "output": "Medium cell",
@@ -56012,7 +56627,8 @@
 "members": true,
 "levels": {},
 "quests": [],
-"page": "Medium cell"
+"page": "Medium cell",
+"internal": "Guardians of the Rift"
 },
 {
 "output": "Mind rune",
@@ -56031,7 +56647,8 @@
 "members": true,
 "levels": {},
 "quests": [],
-"page": "Mind rune"
+"page": "Mind rune",
+"internal": "Guardians of the Rift"
 },
 {
 "output": "Mist rune",
@@ -56061,7 +56678,8 @@
 "members": true,
 "levels": {},
 "quests": [],
-"page": "Mist rune"
+"page": "Mist rune",
+"internal": "Guardians of the Rift"
 },
 {
 "output": "Mist rune",
@@ -56091,7 +56709,8 @@
 "members": true,
 "levels": {},
 "quests": [],
-"page": "Mist rune"
+"page": "Mist rune",
+"internal": "Guardians of the Rift"
 },
 {
 "output": "Mud rune",
@@ -56121,7 +56740,8 @@
 "members": true,
 "levels": {},
 "quests": [],
-"page": "Mud rune"
+"page": "Mud rune",
+"internal": "Guardians of the Rift"
 },
 {
 "output": "Mud rune",
@@ -56151,7 +56771,8 @@
 "members": true,
 "levels": {},
 "quests": [],
-"page": "Mud rune"
+"page": "Mud rune",
+"internal": "Guardians of the Rift"
 },
 {
 "output": "Overcharged cell",
@@ -56170,7 +56791,8 @@
 "members": true,
 "levels": {},
 "quests": [],
-"page": "Overcharged cell"
+"page": "Overcharged cell",
+"internal": "Guardians of the Rift"
 },
 {
 "output": "Smoke rune",
@@ -56200,7 +56822,8 @@
 "members": true,
 "levels": {},
 "quests": [],
-"page": "Smoke rune"
+"page": "Smoke rune",
+"internal": "Guardians of the Rift"
 },
 {
 "output": "Smoke rune",
@@ -56230,7 +56853,8 @@
 "members": true,
 "levels": {},
 "quests": [],
-"page": "Smoke rune"
+"page": "Smoke rune",
+"internal": "Guardians of the Rift"
 },
 {
 "output": "Steam rune",
@@ -56260,7 +56884,8 @@
 "members": true,
 "levels": {},
 "quests": [],
-"page": "Steam rune"
+"page": "Steam rune",
+"internal": "Guardians of the Rift"
 },
 {
 "output": "Steam rune",
@@ -56290,7 +56915,8 @@
 "members": true,
 "levels": {},
 "quests": [],
-"page": "Steam rune"
+"page": "Steam rune",
+"internal": "Guardians of the Rift"
 },
 {
 "output": "Strong cell",
@@ -56309,7 +56935,8 @@
 "members": true,
 "levels": {},
 "quests": [],
-"page": "Strong cell"
+"page": "Strong cell",
+"internal": "Guardians of the Rift"
 },
 {
 "output": "Water rune",
@@ -56328,7 +56955,8 @@
 "members": true,
 "levels": {},
 "quests": [],
-"page": "Water rune"
+"page": "Water rune",
+"internal": "Guardians of the Rift"
 },
 {
 "output": "Weak cell",
@@ -56347,7 +56975,8 @@
 "members": true,
 "levels": {},
 "quests": [],
-"page": "Weak cell"
+"page": "Weak cell",
+"internal": "Guardians of the Rift"
 },
 {
 "output": "Weak cell",
@@ -56366,7 +56995,8 @@
 "members": true,
 "levels": {},
 "quests": [],
-"page": "Weak cell"
+"page": "Weak cell",
+"internal": "Guardians of the Rift"
 },
 {
 "output": "Weak cell",
@@ -56385,7 +57015,8 @@
 "members": true,
 "levels": {},
 "quests": [],
-"page": "Weak cell"
+"page": "Weak cell",
+"internal": "Guardians of the Rift"
 },
 {
 "output": "Air rune (The Slug Menace)",
@@ -56407,7 +57038,8 @@
 "members": true,
 "levels": {},
 "quests": [],
-"page": "Air rune (The Slug Menace)"
+"page": "Air rune (The Slug Menace)",
+"internal": "The Slug Menace"
 },
 {
 "output": "Earth rune (The Slug Menace)",
@@ -56429,7 +57061,8 @@
 "members": true,
 "levels": {},
 "quests": [],
-"page": "Earth rune (The Slug Menace)"
+"page": "Earth rune (The Slug Menace)",
+"internal": "The Slug Menace"
 },
 {
 "output": "Elemental amulet",
@@ -56498,7 +57131,8 @@
 "members": true,
 "levels": {},
 "quests": [],
-"page": "Fire rune (The Slug Menace)"
+"page": "Fire rune (The Slug Menace)",
+"internal": "The Slug Menace"
 },
 {
 "output": "Mind rune (The Slug Menace)",
@@ -56520,7 +57154,8 @@
 "members": true,
 "levels": {},
 "quests": [],
-"page": "Mind rune (The Slug Menace)"
+"page": "Mind rune (The Slug Menace)",
+"internal": "The Slug Menace"
 },
 {
 "output": "Water rune (The Slug Menace)",
@@ -56542,7 +57177,8 @@
 "members": true,
 "levels": {},
 "quests": [],
-"page": "Water rune (The Slug Menace)"
+"page": "Water rune (The Slug Menace)",
+"internal": "The Slug Menace"
 },
 {
 "output": "Sunfire rune",
@@ -56659,7 +57295,8 @@
 "members": true,
 "levels": {},
 "quests": [],
-"page": "Chaos rune"
+"page": "Chaos rune",
+"internal": "Guardians of the Rift"
 },
 {
 "output": "Chaos rune",
@@ -56700,7 +57337,8 @@
 "members": true,
 "levels": {},
 "quests": [],
-"page": "Medium cell"
+"page": "Medium cell",
+"internal": "Guardians of the Rift"
 },
 {
 "output": "Astral rune",
@@ -56847,7 +57485,8 @@
 "members": true,
 "levels": {},
 "quests": [],
-"page": "Nature rune"
+"page": "Nature rune",
+"internal": "Guardians of the Rift"
 },
 {
 "output": "Rune case",
@@ -56910,7 +57549,8 @@
 "members": true,
 "levels": {},
 "quests": [],
-"page": "Strong cell"
+"page": "Strong cell",
+"internal": "Guardians of the Rift"
 },
 {
 "output": "Swampbark helm",
@@ -57099,7 +57739,8 @@
 "members": true,
 "levels": {},
 "quests": [],
-"page": "Law rune"
+"page": "Law rune",
+"internal": "Guardians of the Rift"
 },
 {
 "output": "Strong cell",
@@ -57118,7 +57759,8 @@
 "members": true,
 "levels": {},
 "quests": [],
-"page": "Strong cell"
+"page": "Strong cell",
+"internal": "Guardians of the Rift"
 },
 {
 "output": "Air rune",
@@ -58338,7 +58980,8 @@
 "members": true,
 "levels": {},
 "quests": [],
-"page": "Death rune"
+"page": "Death rune",
+"internal": "Guardians of the Rift"
 },
 {
 "output": "Death rune",
@@ -58383,7 +59026,8 @@
 "members": true,
 "levels": {},
 "quests": [],
-"page": "Overcharged cell"
+"page": "Overcharged cell",
+"internal": "Guardians of the Rift"
 },
 {
 "output": "Blood rune",
@@ -58452,7 +59096,8 @@
 "quests": [
 "Sins of the Father"
 ],
-"page": "Blood rune"
+"page": "Blood rune",
+"internal": "Guardians of the Rift"
 },
 {
 "output": "Blood rune",
@@ -58591,7 +59236,8 @@
 "members": true,
 "levels": {},
 "quests": [],
-"page": "Overcharged cell"
+"page": "Overcharged cell",
+"internal": "Guardians of the Rift"
 },
 {
 "output": "Bloodbark helm",
@@ -58752,7 +59398,8 @@
 "members": true,
 "levels": {},
 "quests": [],
-"page": "Aether rune"
+"page": "Aether rune",
+"internal": "Guardians of the Rift"
 },
 {
 "output": "Aether rune",
@@ -59123,8 +59770,12 @@
 "facilities": "Singing Bowl (The Corrupted Gauntlet)",
 "members": true,
 "levels": {},
-"quests": [],
-"page": "Corrupted body (attuned)"
+"quests": [
+"Song of the Elves"
+],
+"page": "Corrupted body (attuned)",
+"internal": "The Corrupted Gauntlet",
+"access": "prifddinas"
 },
 {
 "output": "Corrupted body (basic)",
@@ -59154,8 +59805,12 @@
 "facilities": "Singing Bowl (The Corrupted Gauntlet)",
 "members": true,
 "levels": {},
-"quests": [],
-"page": "Corrupted body (basic)"
+"quests": [
+"Song of the Elves"
+],
+"page": "Corrupted body (basic)",
+"internal": "The Corrupted Gauntlet",
+"access": "prifddinas"
 },
 {
 "output": "Corrupted body (perfected)",
@@ -59189,8 +59844,12 @@
 "facilities": "Singing Bowl (The Corrupted Gauntlet)",
 "members": true,
 "levels": {},
-"quests": [],
-"page": "Corrupted body (perfected)"
+"quests": [
+"Song of the Elves"
+],
+"page": "Corrupted body (perfected)",
+"internal": "The Corrupted Gauntlet",
+"access": "prifddinas"
 },
 {
 "output": "Corrupted bow (attuned)",
@@ -59212,8 +59871,12 @@
 "facilities": "Singing Bowl (The Corrupted Gauntlet)",
 "members": true,
 "levels": {},
-"quests": [],
-"page": "Corrupted bow (attuned)"
+"quests": [
+"Song of the Elves"
+],
+"page": "Corrupted bow (attuned)",
+"internal": "The Corrupted Gauntlet",
+"access": "prifddinas"
 },
 {
 "output": "Corrupted bow (basic)",
@@ -59231,8 +59894,12 @@
 "facilities": "Singing Bowl (The Corrupted Gauntlet)",
 "members": true,
 "levels": {},
-"quests": [],
-"page": "Corrupted bow (basic)"
+"quests": [
+"Song of the Elves"
+],
+"page": "Corrupted bow (basic)",
+"internal": "The Corrupted Gauntlet",
+"access": "prifddinas"
 },
 {
 "output": "Corrupted escape crystal",
@@ -59250,8 +59917,12 @@
 "facilities": "Singing Bowl (The Corrupted Gauntlet)",
 "members": true,
 "levels": {},
-"quests": [],
-"page": "Corrupted escape crystal"
+"quests": [
+"Song of the Elves"
+],
+"page": "Corrupted escape crystal",
+"internal": "The Corrupted Gauntlet",
+"access": "prifddinas"
 },
 {
 "output": "Corrupted halberd (attuned)",
@@ -59273,8 +59944,12 @@
 "facilities": "Singing Bowl (The Corrupted Gauntlet)",
 "members": true,
 "levels": {},
-"quests": [],
-"page": "Corrupted halberd (attuned)"
+"quests": [
+"Song of the Elves"
+],
+"page": "Corrupted halberd (attuned)",
+"internal": "The Corrupted Gauntlet",
+"access": "prifddinas"
 },
 {
 "output": "Corrupted halberd (basic)",
@@ -59292,8 +59967,12 @@
 "facilities": "Singing Bowl (The Corrupted Gauntlet)",
 "members": true,
 "levels": {},
-"quests": [],
-"page": "Corrupted halberd (basic)"
+"quests": [
+"Song of the Elves"
+],
+"page": "Corrupted halberd (basic)",
+"internal": "The Corrupted Gauntlet",
+"access": "prifddinas"
 },
 {
 "output": "Corrupted helm (attuned)",
@@ -59327,8 +60006,12 @@
 "facilities": "Singing Bowl (The Corrupted Gauntlet)",
 "members": true,
 "levels": {},
-"quests": [],
-"page": "Corrupted helm (attuned)"
+"quests": [
+"Song of the Elves"
+],
+"page": "Corrupted helm (attuned)",
+"internal": "The Corrupted Gauntlet",
+"access": "prifddinas"
 },
 {
 "output": "Corrupted helm (basic)",
@@ -59358,8 +60041,12 @@
 "facilities": "Singing Bowl (The Corrupted Gauntlet)",
 "members": true,
 "levels": {},
-"quests": [],
-"page": "Corrupted helm (basic)"
+"quests": [
+"Song of the Elves"
+],
+"page": "Corrupted helm (basic)",
+"internal": "The Corrupted Gauntlet",
+"access": "prifddinas"
 },
 {
 "output": "Corrupted helm (perfected)",
@@ -59393,8 +60080,12 @@
 "facilities": "Singing Bowl (The Corrupted Gauntlet)",
 "members": true,
 "levels": {},
-"quests": [],
-"page": "Corrupted helm (perfected)"
+"quests": [
+"Song of the Elves"
+],
+"page": "Corrupted helm (perfected)",
+"internal": "The Corrupted Gauntlet",
+"access": "prifddinas"
 },
 {
 "output": "Corrupted legs (attuned)",
@@ -59428,8 +60119,12 @@
 "facilities": "Singing Bowl (The Corrupted Gauntlet)",
 "members": true,
 "levels": {},
-"quests": [],
-"page": "Corrupted legs (attuned)"
+"quests": [
+"Song of the Elves"
+],
+"page": "Corrupted legs (attuned)",
+"internal": "The Corrupted Gauntlet",
+"access": "prifddinas"
 },
 {
 "output": "Corrupted legs (basic)",
@@ -59459,8 +60154,12 @@
 "facilities": "Singing Bowl (The Corrupted Gauntlet)",
 "members": true,
 "levels": {},
-"quests": [],
-"page": "Corrupted legs (basic)"
+"quests": [
+"Song of the Elves"
+],
+"page": "Corrupted legs (basic)",
+"internal": "The Corrupted Gauntlet",
+"access": "prifddinas"
 },
 {
 "output": "Corrupted legs (perfected)",
@@ -59494,8 +60193,12 @@
 "facilities": "Singing Bowl (The Corrupted Gauntlet)",
 "members": true,
 "levels": {},
-"quests": [],
-"page": "Corrupted legs (perfected)"
+"quests": [
+"Song of the Elves"
+],
+"page": "Corrupted legs (perfected)",
+"internal": "The Corrupted Gauntlet",
+"access": "prifddinas"
 },
 {
 "output": "Corrupted paddlefish",
@@ -59517,8 +60220,12 @@
 "facilities": "Singing Bowl (The Corrupted Gauntlet)",
 "members": true,
 "levels": {},
-"quests": [],
-"page": "Corrupted paddlefish"
+"quests": [
+"Song of the Elves"
+],
+"page": "Corrupted paddlefish",
+"internal": "The Corrupted Gauntlet",
+"access": "prifddinas"
 },
 {
 "output": "Corrupted staff (attuned)",
@@ -59540,8 +60247,12 @@
 "facilities": "Singing Bowl (The Corrupted Gauntlet)",
 "members": true,
 "levels": {},
-"quests": [],
-"page": "Corrupted staff (attuned)"
+"quests": [
+"Song of the Elves"
+],
+"page": "Corrupted staff (attuned)",
+"internal": "The Corrupted Gauntlet",
+"access": "prifddinas"
 },
 {
 "output": "Corrupted staff (basic)",
@@ -59559,8 +60270,12 @@
 "facilities": "Singing Bowl (The Corrupted Gauntlet)",
 "members": true,
 "levels": {},
-"quests": [],
-"page": "Corrupted staff (basic)"
+"quests": [
+"Song of the Elves"
+],
+"page": "Corrupted staff (basic)",
+"internal": "The Corrupted Gauntlet",
+"access": "prifddinas"
 },
 {
 "output": "Corrupted teleport crystal",
@@ -59578,8 +60293,12 @@
 "facilities": "Singing Bowl (The Corrupted Gauntlet)",
 "members": true,
 "levels": {},
-"quests": [],
-"page": "Corrupted teleport crystal"
+"quests": [
+"Song of the Elves"
+],
+"page": "Corrupted teleport crystal",
+"internal": "The Corrupted Gauntlet",
+"access": "prifddinas"
 },
 {
 "output": "Crystal body (attuned)",
@@ -59613,8 +60332,12 @@
 "facilities": "Singing Bowl (The Gauntlet)",
 "members": true,
 "levels": {},
-"quests": [],
-"page": "Crystal body (attuned)"
+"quests": [
+"Song of the Elves"
+],
+"page": "Crystal body (attuned)",
+"internal": "The Gauntlet",
+"access": "prifddinas"
 },
 {
 "output": "Crystal body (basic)",
@@ -59644,8 +60367,12 @@
 "facilities": "Singing Bowl (The Gauntlet)",
 "members": true,
 "levels": {},
-"quests": [],
-"page": "Crystal body (basic)"
+"quests": [
+"Song of the Elves"
+],
+"page": "Crystal body (basic)",
+"internal": "The Gauntlet",
+"access": "prifddinas"
 },
 {
 "output": "Crystal body (perfected)",
@@ -59679,8 +60406,12 @@
 "facilities": "Singing Bowl (The Gauntlet)",
 "members": true,
 "levels": {},
-"quests": [],
-"page": "Crystal body (perfected)"
+"quests": [
+"Song of the Elves"
+],
+"page": "Crystal body (perfected)",
+"internal": "The Gauntlet",
+"access": "prifddinas"
 },
 {
 "output": "Crystal bow (attuned)",
@@ -59702,8 +60433,12 @@
 "facilities": "Singing Bowl (The Gauntlet)",
 "members": true,
 "levels": {},
-"quests": [],
-"page": "Crystal bow (attuned)"
+"quests": [
+"Song of the Elves"
+],
+"page": "Crystal bow (attuned)",
+"internal": "The Gauntlet",
+"access": "prifddinas"
 },
 {
 "output": "Crystal bow (basic)",
@@ -59721,8 +60456,12 @@
 "facilities": "Singing Bowl (The Gauntlet)",
 "members": true,
 "levels": {},
-"quests": [],
-"page": "Crystal bow (basic)"
+"quests": [
+"Song of the Elves"
+],
+"page": "Crystal bow (basic)",
+"internal": "The Gauntlet",
+"access": "prifddinas"
 },
 {
 "output": "Crystal halberd (attuned)",
@@ -59744,8 +60483,12 @@
 "facilities": "Singing Bowl (The Gauntlet)",
 "members": true,
 "levels": {},
-"quests": [],
-"page": "Crystal halberd (attuned)"
+"quests": [
+"Song of the Elves"
+],
+"page": "Crystal halberd (attuned)",
+"internal": "The Gauntlet",
+"access": "prifddinas"
 },
 {
 "output": "Crystal halberd (basic)",
@@ -59763,8 +60506,12 @@
 "facilities": "Singing Bowl (The Gauntlet)",
 "members": true,
 "levels": {},
-"quests": [],
-"page": "Crystal halberd (basic)"
+"quests": [
+"Song of the Elves"
+],
+"page": "Crystal halberd (basic)",
+"internal": "The Gauntlet",
+"access": "prifddinas"
 },
 {
 "output": "Crystal helm (attuned)",
@@ -59798,8 +60545,12 @@
 "facilities": "Singing Bowl (The Gauntlet)",
 "members": true,
 "levels": {},
-"quests": [],
-"page": "Crystal helm (attuned)"
+"quests": [
+"Song of the Elves"
+],
+"page": "Crystal helm (attuned)",
+"internal": "The Gauntlet",
+"access": "prifddinas"
 },
 {
 "output": "Crystal helm (basic)",
@@ -59829,8 +60580,12 @@
 "facilities": "Singing Bowl (The Gauntlet)",
 "members": true,
 "levels": {},
-"quests": [],
-"page": "Crystal helm (basic)"
+"quests": [
+"Song of the Elves"
+],
+"page": "Crystal helm (basic)",
+"internal": "The Gauntlet",
+"access": "prifddinas"
 },
 {
 "output": "Crystal helm (perfected)",
@@ -59864,8 +60619,12 @@
 "facilities": "Singing Bowl (The Gauntlet)",
 "members": true,
 "levels": {},
-"quests": [],
-"page": "Crystal helm (perfected)"
+"quests": [
+"Song of the Elves"
+],
+"page": "Crystal helm (perfected)",
+"internal": "The Gauntlet",
+"access": "prifddinas"
 },
 {
 "output": "Crystal legs (attuned)",
@@ -59899,8 +60658,12 @@
 "facilities": "Singing Bowl (The Gauntlet)",
 "members": true,
 "levels": {},
-"quests": [],
-"page": "Crystal legs (attuned)"
+"quests": [
+"Song of the Elves"
+],
+"page": "Crystal legs (attuned)",
+"internal": "The Gauntlet",
+"access": "prifddinas"
 },
 {
 "output": "Crystal legs (basic)",
@@ -59930,8 +60693,12 @@
 "facilities": "Singing Bowl (The Gauntlet)",
 "members": true,
 "levels": {},
-"quests": [],
-"page": "Crystal legs (basic)"
+"quests": [
+"Song of the Elves"
+],
+"page": "Crystal legs (basic)",
+"internal": "The Gauntlet",
+"access": "prifddinas"
 },
 {
 "output": "Crystal legs (perfected)",
@@ -59965,8 +60732,12 @@
 "facilities": "Singing Bowl (The Gauntlet)",
 "members": true,
 "levels": {},
-"quests": [],
-"page": "Crystal legs (perfected)"
+"quests": [
+"Song of the Elves"
+],
+"page": "Crystal legs (perfected)",
+"internal": "The Gauntlet",
+"access": "prifddinas"
 },
 {
 "output": "Crystal paddlefish",
@@ -59988,8 +60759,12 @@
 "facilities": "Singing Bowl (The Gauntlet)",
 "members": true,
 "levels": {},
-"quests": [],
-"page": "Crystal paddlefish"
+"quests": [
+"Song of the Elves"
+],
+"page": "Crystal paddlefish",
+"internal": "The Gauntlet",
+"access": "prifddinas"
 },
 {
 "output": "Crystal staff (attuned)",
@@ -60011,8 +60786,12 @@
 "facilities": "Singing Bowl (The Gauntlet)",
 "members": true,
 "levels": {},
-"quests": [],
-"page": "Crystal staff (attuned)"
+"quests": [
+"Song of the Elves"
+],
+"page": "Crystal staff (attuned)",
+"internal": "The Gauntlet",
+"access": "prifddinas"
 },
 {
 "output": "Crystal staff (basic)",
@@ -60030,8 +60809,12 @@
 "facilities": "Singing Bowl (The Gauntlet)",
 "members": true,
 "levels": {},
-"quests": [],
-"page": "Crystal staff (basic)"
+"quests": [
+"Song of the Elves"
+],
+"page": "Crystal staff (basic)",
+"internal": "The Gauntlet",
+"access": "prifddinas"
 },
 {
 "output": "Escape crystal (The Gauntlet)",
@@ -60049,8 +60832,12 @@
 "facilities": "Singing Bowl (The Gauntlet)",
 "members": true,
 "levels": {},
-"quests": [],
-"page": "Escape crystal (The Gauntlet)"
+"quests": [
+"Song of the Elves"
+],
+"page": "Escape crystal (The Gauntlet)",
+"internal": "The Gauntlet",
+"access": "prifddinas"
 },
 {
 "output": "Iron felling axe",
@@ -60094,7 +60881,8 @@
 "members": true,
 "levels": {},
 "quests": [],
-"page": "Lunar bar"
+"page": "Lunar bar",
+"internal": "Lunar Diplomacy"
 },
 {
 "output": "Lunar bar",
@@ -60123,7 +60911,8 @@
 "Magic": 43
 },
 "quests": [],
-"page": "Lunar bar"
+"page": "Lunar bar",
+"internal": "Lunar Diplomacy"
 },
 {
 "output": "Lunar helm",
@@ -60164,8 +60953,12 @@
 "facilities": "Furnace (Zalcano)",
 "members": true,
 "levels": {},
-"quests": [],
-"page": "Refined tephra"
+"quests": [
+"Song of the Elves"
+],
+"page": "Refined tephra",
+"internal": "Zalcano",
+"access": "prifddinas"
 },
 {
 "output": "Teleport crystal (The Gauntlet)",
@@ -60183,8 +60976,12 @@
 "facilities": "Singing Bowl (The Gauntlet)",
 "members": true,
 "levels": {},
-"quests": [],
-"page": "Teleport crystal (The Gauntlet)"
+"quests": [
+"Song of the Elves"
+],
+"page": "Teleport crystal (The Gauntlet)",
+"internal": "The Gauntlet",
+"access": "prifddinas"
 },
 {
 "output": "Vial (The Gauntlet)",
@@ -60202,8 +60999,12 @@
 "facilities": "Singing Bowl (The Gauntlet)",
 "members": true,
 "levels": {},
-"quests": [],
-"page": "Vial (The Gauntlet)"
+"quests": [
+"Song of the Elves"
+],
+"page": "Vial (The Gauntlet)",
+"internal": "The Gauntlet",
+"access": "prifddinas"
 },
 {
 "output": "Vial (The Gauntlet)",
@@ -60221,8 +61022,12 @@
 "facilities": "Singing Bowl (The Corrupted Gauntlet)",
 "members": true,
 "levels": {},
-"quests": [],
-"page": "Vial (The Gauntlet)"
+"quests": [
+"Song of the Elves"
+],
+"page": "Vial (The Gauntlet)",
+"internal": "The Corrupted Gauntlet",
+"access": "prifddinas"
 },
 {
 "output": "Bronze mace",
@@ -61341,7 +62146,8 @@
 "members": true,
 "levels": {},
 "quests": [],
-"page": "Crane claw"
+"page": "Crane claw",
+"internal": "Elemental Workshop I"
 },
 {
 "output": "Elemental helmet",
@@ -61363,7 +62169,8 @@
 "members": true,
 "levels": {},
 "quests": [],
-"page": "Elemental helmet"
+"page": "Elemental helmet",
+"internal": "Elemental Workshop II"
 },
 {
 "output": "Elemental metal",
@@ -61386,7 +62193,8 @@
 "members": true,
 "levels": {},
 "quests": [],
-"page": "Elemental metal"
+"page": "Elemental metal",
+"internal": "Elemental Workshop I"
 },
 {
 "output": "Elemental metal",
@@ -61413,7 +62221,8 @@
 "members": true,
 "levels": {},
 "quests": [],
-"page": "Elemental metal"
+"page": "Elemental metal",
+"internal": "Elemental Workshop I"
 },
 {
 "output": "Elemental shield",
@@ -62584,7 +63393,8 @@
 "members": true,
 "levels": {},
 "quests": [],
-"page": "Cannon ball (Between a Rock...)"
+"page": "Cannon ball (Between a Rock...)",
+"internal": "Between a Rock..."
 },
 {
 "output": "Steel arrowtips",
@@ -63009,7 +63819,8 @@
 "members": true,
 "levels": {},
 "quests": [],
-"page": "'perfect' gold bar"
+"page": "'perfect' gold bar",
+"internal": "Family Crest"
 },
 {
 "output": "Gold bar",
@@ -64039,7 +64850,8 @@
 "Crafting": 74
 },
 "quests": [],
-"page": "Purging staff"
+"page": "Purging staff",
+"oneOff": "first time only"
 },
 {
 "output": "Shayzien gloves (2)",
@@ -64408,7 +65220,8 @@
 "members": true,
 "levels": {},
 "quests": [],
-"page": "V sigil"
+"page": "V sigil",
+"internal": "Lunar Diplomacy"
 },
 {
 "output": "3rd Age felling axe",
@@ -65470,7 +66283,8 @@
 "members": true,
 "levels": {},
 "quests": [],
-"page": "Emberlight"
+"page": "Emberlight",
+"oneOff": "first time only"
 },
 {
 "output": "Large adamant keel parts",
@@ -66784,7 +67598,8 @@
 "members": true,
 "levels": {},
 "quests": [],
-"page": "Chromium ingot"
+"page": "Chromium ingot",
+"oneOff": "first time only"
 },
 {
 "output": "Elysian spirit shield",
@@ -68187,5 +69002,1977 @@
 },
 "quests": [],
 "page": "Runite armour (Construction)"
+},
+{
+"output": "Alan's blessed bones",
+"outputQuantity": 1.0,
+"skill": null,
+"level": 1,
+"xp": 0,
+"ingredients": [
+{
+"item": "Alan's bones",
+"quantity": 1.0
+}
+],
+"tools": [],
+"facilities": "Exposed altar",
+"members": true,
+"levels": {},
+"quests": [],
+"page": "Alan's blessed bones",
+"noXp": true
+},
+{
+"output": "Arder powder",
+"outputQuantity": 6.0,
+"skill": null,
+"level": 1,
+"xp": 0,
+"ingredients": [
+{
+"item": "Arder mushroom",
+"quantity": 1.0
+}
+],
+"tools": [
+"Pestle and mortar"
+],
+"facilities": null,
+"members": true,
+"levels": {},
+"quests": [],
+"page": "Arder powder",
+"noXp": true,
+"internal": "Desert Treasure II - The Fallen Empire"
+},
+{
+"output": "Astral rune shards",
+"outputQuantity": 1.0,
+"skill": null,
+"level": 1,
+"xp": 0,
+"ingredients": [
+{
+"item": "Astral rune",
+"quantity": 1.0
+}
+],
+"tools": [
+"Hammer"
+],
+"facilities": null,
+"members": true,
+"levels": {},
+"quests": [],
+"page": "Astral rune shards",
+"noXp": true
+},
+{
+"output": "Bandosian components",
+"outputQuantity": 3.0,
+"skill": null,
+"level": 1,
+"xp": 0,
+"ingredients": [
+{
+"item": "Bandos chestplate",
+"quantity": 1.0
+}
+],
+"tools": [
+"Hammer"
+],
+"facilities": "Ancient Forge",
+"members": true,
+"levels": {},
+"quests": [],
+"page": "Bandosian components",
+"noXp": true
+},
+{
+"output": "Bandosian components",
+"outputQuantity": 2.0,
+"skill": null,
+"level": 1,
+"xp": 0,
+"ingredients": [
+{
+"item": "Bandos tassets",
+"quantity": 1.0
+}
+],
+"tools": [
+"Hammer"
+],
+"facilities": "Ancient Forge",
+"members": true,
+"levels": {},
+"quests": [],
+"page": "Bandosian components",
+"noXp": true
+},
+{
+"output": "Blamish snail slime",
+"outputQuantity": 1.0,
+"skill": null,
+"level": 1,
+"xp": 0,
+"ingredients": [
+{
+"item": "Sample bottle",
+"quantity": 1.0
+},
+{
+"item": "Thin snail",
+"quantity": 1.0
+}
+],
+"tools": [
+"Pestle and mortar"
+],
+"facilities": null,
+"members": true,
+"levels": {},
+"quests": [],
+"page": "Blamish snail slime",
+"noXp": true
+},
+{
+"output": "Blamish snail slime",
+"outputQuantity": 1.0,
+"skill": null,
+"level": 1,
+"xp": 0,
+"ingredients": [
+{
+"item": "Sample bottle",
+"quantity": 1.0
+},
+{
+"item": "Lean snail",
+"quantity": 1.0
+}
+],
+"tools": [
+"Pestle and mortar"
+],
+"facilities": null,
+"members": true,
+"levels": {},
+"quests": [],
+"page": "Blamish snail slime",
+"noXp": true
+},
+{
+"output": "Blamish snail slime",
+"outputQuantity": 1.0,
+"skill": null,
+"level": 1,
+"xp": 0,
+"ingredients": [
+{
+"item": "Sample bottle",
+"quantity": 1.0
+},
+{
+"item": "Fat snail",
+"quantity": 1.0
+}
+],
+"tools": [
+"Pestle and mortar"
+],
+"facilities": null,
+"members": true,
+"levels": {},
+"quests": [],
+"page": "Blamish snail slime",
+"noXp": true
+},
+{
+"output": "Breadcrumbs",
+"outputQuantity": 1.0,
+"skill": null,
+"level": 1,
+"xp": 0,
+"ingredients": [
+{
+"item": "Bread",
+"quantity": 1.0
+}
+],
+"tools": [
+"Knife"
+],
+"facilities": null,
+"members": true,
+"levels": {},
+"quests": [],
+"page": "Breadcrumbs",
+"noXp": true
+},
+{
+"output": "Carved oak magic wardrobe",
+"outputQuantity": 1.0,
+"skill": null,
+"level": 1,
+"xp": 0,
+"ingredients": [
+{
+"item": "Oak magic wardrobe",
+"quantity": 1.0
+},
+{
+"item": "Carved oak magic wardrobe (flatpack)",
+"quantity": 1.0
+}
+],
+"tools": [
+"Hammer"
+],
+"facilities": null,
+"members": true,
+"levels": {},
+"quests": [],
+"page": "Carved oak magic wardrobe",
+"noXp": true
+},
+{
+"output": "Carved teak magic wardrobe",
+"outputQuantity": 1.0,
+"skill": null,
+"level": 1,
+"xp": 0,
+"ingredients": [
+{
+"item": "Teak magic wardrobe",
+"quantity": 1.0
+},
+{
+"item": "Carved teak magic wardrobe (flatpack)",
+"quantity": 1.0
+}
+],
+"tools": [
+"Hammer"
+],
+"facilities": null,
+"members": true,
+"levels": {},
+"quests": [],
+"page": "Carved teak magic wardrobe",
+"noXp": true
+},
+{
+"output": "Clothes pouch blueprint",
+"outputQuantity": 1.0,
+"skill": null,
+"level": 1,
+"xp": 0,
+"ingredients": [
+{
+"item": "Anima-infused bark",
+"quantity": 10000.0
+},
+{
+"item": "Willow logs",
+"quantity": 300.0
+},
+{
+"item": "Maple logs",
+"quantity": 300.0
+}
+],
+"tools": [],
+"facilities": "Forestry Shop",
+"members": true,
+"levels": {},
+"quests": [],
+"page": "Clothes pouch blueprint",
+"noXp": true
+},
+{
+"output": "Corrupted dust",
+"outputQuantity": 10.0,
+"skill": null,
+"level": 1,
+"xp": 0,
+"ingredients": [
+{
+"item": "Corrupted shards",
+"quantity": 10.0
+}
+],
+"tools": [
+"Pestle and mortar (The Gauntlet)"
+],
+"facilities": null,
+"members": true,
+"levels": {},
+"quests": [],
+"page": "Corrupted dust",
+"noXp": true
+},
+{
+"output": "Corrupted shards",
+"outputQuantity": 80.0,
+"skill": null,
+"level": 1,
+"xp": 0,
+"ingredients": [
+{
+"item": "Corrupted spike",
+"quantity": 1.0
+}
+],
+"tools": [],
+"facilities": null,
+"members": true,
+"levels": {},
+"quests": [],
+"page": "Corrupted shards",
+"noXp": true
+},
+{
+"output": "Corrupted shards",
+"outputQuantity": 80.0,
+"skill": null,
+"level": 1,
+"xp": 0,
+"ingredients": [
+{
+"item": "Corrupted bowstring",
+"quantity": 1.0
+}
+],
+"tools": [],
+"facilities": null,
+"members": true,
+"levels": {},
+"quests": [],
+"page": "Corrupted shards",
+"noXp": true
+},
+{
+"output": "Corrupted shards",
+"outputQuantity": 80.0,
+"skill": null,
+"level": 1,
+"xp": 0,
+"ingredients": [
+{
+"item": "Corrupted orb",
+"quantity": 1.0
+}
+],
+"tools": [],
+"facilities": null,
+"members": true,
+"levels": {},
+"quests": [],
+"page": "Corrupted shards",
+"noXp": true
+},
+{
+"output": "Crushed infernal shale",
+"outputQuantity": 1.0,
+"skill": null,
+"level": 1,
+"xp": 0,
+"ingredients": [
+{
+"item": "Infernal shale",
+"quantity": 1.0
+}
+],
+"tools": [
+"Hammer",
+"Chisel"
+],
+"facilities": null,
+"members": true,
+"levels": {},
+"quests": [],
+"page": "Crushed infernal shale",
+"noXp": true
+},
+{
+"output": "Crystal dust (Song of the Elves)",
+"outputQuantity": 1.0,
+"skill": null,
+"level": 1,
+"xp": 0,
+"ingredients": [
+{
+"item": "Crystal (Song of the Elves)",
+"quantity": 1.0
+}
+],
+"tools": [
+"Pestle and mortar"
+],
+"facilities": null,
+"members": true,
+"levels": {},
+"quests": [],
+"page": "Crystal dust (Song of the Elves)",
+"noXp": true,
+"internal": "Song of the Elves"
+},
+{
+"output": "Curator's medallion",
+"outputQuantity": 1.0,
+"skill": null,
+"level": 1,
+"xp": 0,
+"ingredients": [
+{
+"item": "Digsite pendant",
+"quantity": 1.0
+},
+{
+"item": "Ruby",
+"quantity": 250.0
+},
+{
+"item": "Fire rune",
+"quantity": 500.0
+},
+{
+"item": "Cosmic rune",
+"quantity": 100.0
+}
+],
+"tools": [],
+"facilities": "Curator Haig Halen",
+"members": true,
+"levels": {},
+"quests": [],
+"page": "Curator's medallion",
+"noXp": true
+},
+{
+"output": "Dagannoth bones (blessed)",
+"outputQuantity": 1.0,
+"skill": null,
+"level": 1,
+"xp": 0,
+"ingredients": [
+{
+"item": "Dagannoth bones",
+"quantity": 1.0
+}
+],
+"tools": [],
+"facilities": "Exposed altar",
+"members": true,
+"levels": {},
+"quests": [],
+"page": "Dagannoth bones (blessed)",
+"noXp": true
+},
+{
+"output": "Dried thistle",
+"outputQuantity": 1.0,
+"skill": null,
+"level": 1,
+"xp": 0,
+"ingredients": [
+{
+"item": "Troll thistle",
+"quantity": 1.0
+}
+],
+"tools": [],
+"facilities": "Fire",
+"members": true,
+"levels": {},
+"quests": [],
+"page": "Dried thistle",
+"noXp": true,
+"internal": "Eadgar's Ruse"
+},
+{
+"output": "Enchanted bar",
+"outputQuantity": 1.0,
+"skill": null,
+"level": 1,
+"xp": 0,
+"ingredients": [
+{
+"item": "Gold bar",
+"quantity": 1.0
+},
+{
+"item": "Monkey dentures",
+"quantity": 1.0
+}
+],
+"tools": [
+"M'amulet mould"
+],
+"facilities": "Zooknock",
+"members": true,
+"levels": {},
+"quests": [],
+"page": "Enchanted bar",
+"noXp": true,
+"internal": "Monkey Madness I"
+},
+{
+"output": "Felling axe handle",
+"outputQuantity": 1.0,
+"skill": null,
+"level": 1,
+"xp": 0,
+"ingredients": [
+{
+"item": "Anima-infused bark",
+"quantity": 10000.0
+},
+{
+"item": "Oak logs",
+"quantity": 500.0
+}
+],
+"tools": [],
+"facilities": "Forestry Shop",
+"members": false,
+"levels": {},
+"quests": [],
+"page": "Felling axe handle",
+"noXp": true
+},
+{
+"output": "Gilded cape rack",
+"outputQuantity": 1.0,
+"skill": null,
+"level": 1,
+"xp": 0,
+"ingredients": [
+{
+"item": "Mahogany cape rack",
+"quantity": 1.0
+},
+{
+"item": "Gilded cape rack (flatpack)",
+"quantity": 1.0
+}
+],
+"tools": [
+"Hammer"
+],
+"facilities": null,
+"members": true,
+"levels": {},
+"quests": [],
+"page": "Gilded cape rack",
+"noXp": true
+},
+{
+"output": "Gilded magic wardrobe",
+"outputQuantity": 1.0,
+"skill": null,
+"level": 1,
+"xp": 0,
+"ingredients": [
+{
+"item": "Mahogany magic wardrobe",
+"quantity": 1.0
+},
+{
+"item": "Gilded magic wardrobe (flatpack)",
+"quantity": 1.0
+}
+],
+"tools": [
+"Hammer"
+],
+"facilities": null,
+"members": true,
+"levels": {},
+"quests": [],
+"page": "Gilded magic wardrobe",
+"noXp": true
+},
+{
+"output": "Gorak claw powder",
+"outputQuantity": 1.0,
+"skill": null,
+"level": 1,
+"xp": 0,
+"ingredients": [
+{
+"item": "Gorak claws",
+"quantity": 1.0
+}
+],
+"tools": [
+"Pestle and mortar"
+],
+"facilities": null,
+"members": true,
+"levels": {},
+"quests": [],
+"page": "Gorak claw powder",
+"noXp": true,
+"internal": "Fairytale II - Cure a Queen"
+},
+{
+"output": "Ground astral rune",
+"outputQuantity": 1.0,
+"skill": null,
+"level": 1,
+"xp": 0,
+"ingredients": [
+{
+"item": "Astral rune shards",
+"quantity": 1.0
+}
+],
+"tools": [
+"Pestle and mortar"
+],
+"facilities": null,
+"members": true,
+"levels": {},
+"quests": [],
+"page": "Ground astral rune",
+"noXp": true
+},
+{
+"output": "Ground bat bones",
+"outputQuantity": 1.0,
+"skill": null,
+"level": 1,
+"xp": 0,
+"ingredients": [
+{
+"item": "Bat bones",
+"quantity": 1.0
+}
+],
+"tools": [
+"Pestle and mortar"
+],
+"facilities": null,
+"members": true,
+"levels": {},
+"quests": [],
+"page": "Ground bat bones",
+"noXp": true
+},
+{
+"output": "Ground charcoal",
+"outputQuantity": 1.0,
+"skill": null,
+"level": 1,
+"xp": 0,
+"ingredients": [
+{
+"item": "Charcoal",
+"quantity": 1.0
+}
+],
+"tools": [
+"Pestle and mortar"
+],
+"facilities": null,
+"members": true,
+"levels": {},
+"quests": [],
+"page": "Ground charcoal",
+"noXp": true,
+"internal": "The Dig Site"
+},
+{
+"output": "Ground cod",
+"outputQuantity": 1.0,
+"skill": null,
+"level": 1,
+"xp": 0,
+"ingredients": [
+{
+"item": "Raw cod",
+"quantity": 1.0
+}
+],
+"tools": [
+"Pestle and mortar"
+],
+"facilities": null,
+"members": true,
+"levels": {},
+"quests": [],
+"page": "Ground cod",
+"noXp": true
+},
+{
+"output": "Ground giant crab meat",
+"outputQuantity": 1.0,
+"skill": null,
+"level": 1,
+"xp": 0,
+"ingredients": [
+{
+"item": "Giant crab meat",
+"quantity": 1.0
+}
+],
+"tools": [
+"Pestle and mortar"
+],
+"facilities": null,
+"members": true,
+"levels": {},
+"quests": [],
+"page": "Ground giant crab meat",
+"noXp": true,
+"internal": "Recipe for Disaster"
+},
+{
+"output": "Ground guam",
+"outputQuantity": 1.0,
+"skill": null,
+"level": 1,
+"xp": 0,
+"ingredients": [
+{
+"item": "Guam leaf",
+"quantity": 1.0
+}
+],
+"tools": [
+"Pestle and mortar"
+],
+"facilities": null,
+"members": true,
+"levels": {},
+"quests": [],
+"page": "Ground guam",
+"noXp": true
+},
+{
+"output": "Ground kelp",
+"outputQuantity": 1.0,
+"skill": null,
+"level": 1,
+"xp": 0,
+"ingredients": [
+{
+"item": "Kelp",
+"quantity": 1.0
+}
+],
+"tools": [
+"Pestle and mortar"
+],
+"facilities": null,
+"members": true,
+"levels": {},
+"quests": [],
+"page": "Ground kelp",
+"noXp": true,
+"internal": "Freeing Pirate Pete"
+},
+{
+"output": "Ground thistle",
+"outputQuantity": 1.0,
+"skill": null,
+"level": 1,
+"xp": 0,
+"ingredients": [
+{
+"item": "Dried thistle",
+"quantity": 1.0
+}
+],
+"tools": [
+"Pestle and mortar"
+],
+"facilities": null,
+"members": true,
+"levels": {},
+"quests": [],
+"page": "Ground thistle",
+"noXp": true,
+"internal": "Eadgar's Ruse"
+},
+{
+"output": "Key print",
+"outputQuantity": 1.0,
+"skill": null,
+"level": 1,
+"xp": 0,
+"ingredients": [
+{
+"item": "Soft clay",
+"quantity": 1.0
+}
+],
+"tools": [],
+"facilities": "Lady Keli",
+"members": false,
+"levels": {},
+"quests": [],
+"page": "Key print",
+"noXp": true
+},
+{
+"output": "Mahogany cape rack",
+"outputQuantity": 1.0,
+"skill": null,
+"level": 1,
+"xp": 0,
+"ingredients": [
+{
+"item": "Teak cape rack",
+"quantity": 1.0
+},
+{
+"item": "Mahogany cape rack (flatpack)",
+"quantity": 1.0
+}
+],
+"tools": [
+"Hammer"
+],
+"facilities": null,
+"members": true,
+"levels": {},
+"quests": [],
+"page": "Mahogany cape rack",
+"noXp": true
+},
+{
+"output": "Mahogany magic wardrobe",
+"outputQuantity": 1.0,
+"skill": null,
+"level": 1,
+"xp": 0,
+"ingredients": [
+{
+"item": "Carved teak magic wardrobe",
+"quantity": 1.0
+},
+{
+"item": "Mahogany magic wardrobe (flatpack)",
+"quantity": 1.0
+}
+],
+"tools": [
+"Hammer"
+],
+"facilities": null,
+"members": true,
+"levels": {},
+"quests": [],
+"page": "Mahogany magic wardrobe",
+"noXp": true
+},
+{
+"output": "Marble cape rack",
+"outputQuantity": 1.0,
+"skill": null,
+"level": 1,
+"xp": 0,
+"ingredients": [
+{
+"item": "Gilded cape rack",
+"quantity": 1.0
+},
+{
+"item": "Marble cape rack (flatpack)",
+"quantity": 1.0
+}
+],
+"tools": [
+"Hammer"
+],
+"facilities": null,
+"members": true,
+"levels": {},
+"quests": [],
+"page": "Marble cape rack",
+"noXp": true
+},
+{
+"output": "Musca powder",
+"outputQuantity": 6.0,
+"skill": null,
+"level": 1,
+"xp": 0,
+"ingredients": [
+{
+"item": "Musca mushroom",
+"quantity": 1.0
+}
+],
+"tools": [
+"Pestle and mortar"
+],
+"facilities": null,
+"members": true,
+"levels": {},
+"quests": [],
+"page": "Musca powder",
+"noXp": true,
+"internal": "Desert Treasure II - The Fallen Empire"
+},
+{
+"output": "Oathplate shards",
+"outputQuantity": 50.0,
+"skill": null,
+"level": 1,
+"xp": 0,
+"ingredients": [
+{
+"item": "Oathplate helm",
+"quantity": 1.0
+}
+],
+"tools": [
+"Hammer"
+],
+"facilities": "Ancient Forge",
+"members": true,
+"levels": {},
+"quests": [],
+"page": "Oathplate shards",
+"noXp": true
+},
+{
+"output": "Oathplate shards",
+"outputQuantity": 50.0,
+"skill": null,
+"level": 1,
+"xp": 0,
+"ingredients": [
+{
+"item": "Oathplate chest",
+"quantity": 1.0
+}
+],
+"tools": [
+"Hammer"
+],
+"facilities": "Ancient Forge",
+"members": true,
+"levels": {},
+"quests": [],
+"page": "Oathplate shards",
+"noXp": true
+},
+{
+"output": "Oathplate shards",
+"outputQuantity": 50.0,
+"skill": null,
+"level": 1,
+"xp": 0,
+"ingredients": [
+{
+"item": "Oathplate legs",
+"quantity": 1.0
+}
+],
+"tools": [
+"Hammer"
+],
+"facilities": "Ancient Forge",
+"members": true,
+"levels": {},
+"quests": [],
+"page": "Oathplate shards",
+"noXp": true
+},
+{
+"output": "Raw batta",
+"outputQuantity": 1.0,
+"skill": null,
+"level": 1,
+"xp": 0,
+"ingredients": [
+{
+"item": "Batta tin",
+"quantity": 1.0
+},
+{
+"item": "Gianne dough",
+"quantity": 1.0
+}
+],
+"tools": [
+"Batta tin"
+],
+"facilities": null,
+"members": true,
+"levels": {},
+"quests": [],
+"page": "Raw batta",
+"noXp": true
+},
+{
+"output": "Raw stuffed snake",
+"outputQuantity": 1.0,
+"skill": null,
+"level": 1,
+"xp": 0,
+"ingredients": [
+{
+"item": "Snake corpse",
+"quantity": 1.0
+},
+{
+"item": "Sliced red banana",
+"quantity": 1.0
+},
+{
+"item": "Tchiki nut paste",
+"quantity": 1.0
+}
+],
+"tools": [],
+"facilities": null,
+"members": true,
+"levels": {},
+"quests": [],
+"page": "Raw stuffed snake",
+"noXp": true,
+"internal": "Recipe for Disaster"
+},
+{
+"output": "Servery pastry dough",
+"outputQuantity": 1.0,
+"skill": null,
+"level": 1,
+"xp": 0,
+"ingredients": [
+{
+"item": "Servery flour",
+"quantity": 1.0
+},
+{
+"item": "Bowl of water",
+"quantity": 1.0
+}
+],
+"tools": [],
+"facilities": null,
+"members": true,
+"levels": {},
+"quests": [],
+"page": "Servery pastry dough",
+"noXp": true
+},
+{
+"output": "Servery pie shell",
+"outputQuantity": 1.0,
+"skill": null,
+"level": 1,
+"xp": 0,
+"ingredients": [
+{
+"item": "Servery dish",
+"quantity": 1.0
+},
+{
+"item": "Servery pastry dough",
+"quantity": 1.0
+}
+],
+"tools": [],
+"facilities": null,
+"members": true,
+"levels": {},
+"quests": [],
+"page": "Servery pie shell",
+"noXp": true
+},
+{
+"output": "Servery pineapple chunks",
+"outputQuantity": 1.0,
+"skill": null,
+"level": 1,
+"xp": 0,
+"ingredients": [
+{
+"item": "Servery pineapple",
+"quantity": 1.0
+}
+],
+"tools": [
+"Knife"
+],
+"facilities": null,
+"members": true,
+"levels": {},
+"quests": [],
+"page": "Servery pineapple chunks",
+"noXp": true
+},
+{
+"output": "Sliced red banana",
+"outputQuantity": 1.0,
+"skill": null,
+"level": 1,
+"xp": 0,
+"ingredients": [
+{
+"item": "Red banana",
+"quantity": 1.0
+}
+],
+"tools": [
+"Knife"
+],
+"facilities": null,
+"members": true,
+"levels": {},
+"quests": [],
+"page": "Sliced red banana",
+"noXp": true,
+"internal": "Recipe for Disaster"
+},
+{
+"output": "Stuffed hydra heads",
+"outputQuantity": 1.0,
+"skill": null,
+"level": 1,
+"xp": 0,
+"ingredients": [
+{
+"item": "Alchemical hydra heads",
+"quantity": 1.0
+},
+{
+"item": "Coins",
+"quantity": 50000.0
+}
+],
+"tools": [],
+"facilities": "Taxidermist",
+"members": true,
+"levels": {},
+"quests": [],
+"page": "Stuffed hydra heads",
+"noXp": true
+},
+{
+"output": "Suqah leather",
+"outputQuantity": 1.0,
+"skill": null,
+"level": 1,
+"xp": 0,
+"ingredients": [
+{
+"item": "Suqah hide",
+"quantity": 1.0
+},
+{
+"item": "Coins",
+"quantity": 100.0
+}
+],
+"tools": [],
+"facilities": "Rimae Sirsalis",
+"members": true,
+"levels": {},
+"quests": [],
+"page": "Suqah leather",
+"noXp": true,
+"internal": "Lunar Diplomacy"
+},
+{
+"output": "Tchiki nut paste",
+"outputQuantity": 1.0,
+"skill": null,
+"level": 1,
+"xp": 0,
+"ingredients": [
+{
+"item": "Tchiki monkey nuts",
+"quantity": 1.0
+}
+],
+"tools": [
+"Pestle and mortar"
+],
+"facilities": null,
+"members": true,
+"levels": {},
+"quests": [],
+"page": "Tchiki nut paste",
+"noXp": true,
+"internal": "Recipe for Disaster"
+},
+{
+"output": "Teak armour case",
+"outputQuantity": 1.0,
+"skill": null,
+"level": 1,
+"xp": 0,
+"ingredients": [
+{
+"item": "Oak armour case",
+"quantity": 1.0
+},
+{
+"item": "Teak armour case (flatpack)",
+"quantity": 1.0
+}
+],
+"tools": [
+"Hammer"
+],
+"facilities": null,
+"members": true,
+"levels": {},
+"quests": [],
+"page": "Teak armour case",
+"noXp": true
+},
+{
+"output": "Teak cape rack",
+"outputQuantity": 1.0,
+"skill": null,
+"level": 1,
+"xp": 0,
+"ingredients": [
+{
+"item": "Oak cape rack",
+"quantity": 1.0
+},
+{
+"item": "Teak cape rack (flatpack)",
+"quantity": 1.0
+}
+],
+"tools": [
+"Hammer"
+],
+"facilities": null,
+"members": true,
+"levels": {},
+"quests": [],
+"page": "Teak cape rack",
+"noXp": true
+},
+{
+"output": "Teak fancy dress box",
+"outputQuantity": 1.0,
+"skill": null,
+"level": 1,
+"xp": 0,
+"ingredients": [
+{
+"item": "Oak fancy dress box",
+"quantity": 1.0
+},
+{
+"item": "Teak fancy dress box (flatpack)",
+"quantity": 1.0
+}
+],
+"tools": [
+"Hammer"
+],
+"facilities": null,
+"members": true,
+"levels": {},
+"quests": [],
+"page": "Teak fancy dress box",
+"noXp": true
+},
+{
+"output": "Teak magic wardrobe",
+"outputQuantity": 1.0,
+"skill": null,
+"level": 1,
+"xp": 0,
+"ingredients": [
+{
+"item": "Carved oak magic wardrobe",
+"quantity": 1.0
+},
+{
+"item": "Teak magic wardrobe (flatpack)",
+"quantity": 1.0
+}
+],
+"tools": [
+"Hammer"
+],
+"facilities": null,
+"members": true,
+"levels": {},
+"quests": [],
+"page": "Teak magic wardrobe",
+"noXp": true
+},
+{
+"output": "Teak treasure chest",
+"outputQuantity": 1.0,
+"skill": null,
+"level": 1,
+"xp": 0,
+"ingredients": [
+{
+"item": "Oak treasure chest",
+"quantity": 1.0
+},
+{
+"item": "Teak treasure chest (flatpack)",
+"quantity": 1.0
+}
+],
+"tools": [
+"Hammer"
+],
+"facilities": null,
+"members": true,
+"levels": {},
+"quests": [],
+"page": "Teak treasure chest",
+"noXp": true
+},
+{
+"output": "Waxwood plank",
+"outputQuantity": 1.0,
+"skill": null,
+"level": 1,
+"xp": 0,
+"ingredients": [
+{
+"item": "Waxwood log",
+"quantity": 1.0
+}
+],
+"tools": [],
+"facilities": "Sawmill",
+"members": true,
+"levels": {},
+"quests": [],
+"page": "Waxwood plank",
+"noXp": true,
+"internal": "Daddy's Home"
+},
+{
+"output": "Uncooked easter bun",
+"outputQuantity": 3.0,
+"skill": "Cooking",
+"level": 1,
+"xp": 0,
+"ingredients": [
+{
+"item": "Easter spices",
+"quantity": 1.0
+},
+{
+"item": "Raisins",
+"quantity": 1.0
+},
+{
+"item": "Special egg",
+"quantity": 1.0
+},
+{
+"item": "Yeastier dough",
+"quantity": 1.0
+}
+],
+"tools": [],
+"facilities": null,
+"members": false,
+"levels": {},
+"quests": [],
+"page": "Uncooked easter bun",
+"noXp": true
+},
+{
+"output": "Nettle-water",
+"outputQuantity": 1.0,
+"skill": "Cooking",
+"level": 20,
+"xp": 0,
+"ingredients": [
+{
+"item": "Nettles",
+"quantity": 1.0
+},
+{
+"item": "Bowl of water",
+"quantity": 1.0
+}
+],
+"tools": [],
+"facilities": null,
+"members": true,
+"levels": {},
+"quests": [],
+"page": "Nettle-water",
+"noXp": true,
+"internal": "Ghosts Ahoy"
+},
+{
+"output": "Servery uncooked pie",
+"outputQuantity": 1.0,
+"skill": "Cooking",
+"level": 20,
+"xp": 0,
+"ingredients": [
+{
+"item": "Servery pie shell",
+"quantity": 1.0
+},
+{
+"item": "Servery cooked meat",
+"quantity": 1.0
+}
+],
+"tools": [],
+"facilities": null,
+"members": true,
+"levels": {},
+"quests": [],
+"page": "Servery uncooked pie",
+"noXp": true
+},
+{
+"output": "Teapot with leaves#Clay",
+"outputQuantity": 1.0,
+"skill": "Cooking",
+"level": 20,
+"xp": 0,
+"ingredients": [
+{
+"item": "Teapot#Clay",
+"quantity": 1.0
+},
+{
+"item": "Tea leaves",
+"quantity": 1.0
+}
+],
+"tools": [],
+"facilities": null,
+"members": true,
+"levels": {},
+"quests": [],
+"page": "Teapot with leaves",
+"noXp": true
+},
+{
+"output": "Teapot with leaves#Porcelain",
+"outputQuantity": 1.0,
+"skill": "Cooking",
+"level": 20,
+"xp": 0,
+"ingredients": [
+{
+"item": "Teapot#Porcelain",
+"quantity": 1.0
+},
+{
+"item": "Tea leaves",
+"quantity": 1.0
+}
+],
+"tools": [],
+"facilities": null,
+"members": true,
+"levels": {},
+"quests": [],
+"page": "Teapot with leaves",
+"noXp": true
+},
+{
+"output": "Teapot with leaves#Trimmed",
+"outputQuantity": 1.0,
+"skill": "Cooking",
+"level": 20,
+"xp": 0,
+"ingredients": [
+{
+"item": "Teapot#Trimmed",
+"quantity": 1.0
+},
+{
+"item": "Tea leaves",
+"quantity": 1.0
+}
+],
+"tools": [],
+"facilities": null,
+"members": true,
+"levels": {},
+"quests": [],
+"page": "Teapot with leaves",
+"noXp": true
+},
+{
+"output": "Servery incomplete stew#Meat",
+"outputQuantity": 1.0,
+"skill": "Cooking",
+"level": 25,
+"xp": 0,
+"ingredients": [
+{
+"item": "Servery cooked meat",
+"quantity": 1.0
+},
+{
+"item": "Bowl of water",
+"quantity": 1.0
+}
+],
+"tools": [],
+"facilities": null,
+"members": true,
+"levels": {},
+"quests": [],
+"page": "Servery incomplete stew",
+"noXp": true
+},
+{
+"output": "Servery uncooked stew",
+"outputQuantity": 1.0,
+"skill": "Cooking",
+"level": 25,
+"xp": 0,
+"ingredients": [
+{
+"item": "Servery incomplete stew#Potato",
+"quantity": 1.0
+},
+{
+"item": "Servery cooked meat",
+"quantity": 1.0
+}
+],
+"tools": [],
+"facilities": null,
+"members": true,
+"levels": {},
+"quests": [],
+"page": "Servery uncooked stew",
+"noXp": true
+},
+{
+"output": "Servery uncooked stew",
+"outputQuantity": 1.0,
+"skill": "Cooking",
+"level": 25,
+"xp": 0,
+"ingredients": [
+{
+"item": "Servery incomplete stew#Meat",
+"quantity": 1.0
+},
+{
+"item": "Servery potato",
+"quantity": 1.0
+}
+],
+"tools": [],
+"facilities": null,
+"members": true,
+"levels": {},
+"quests": [],
+"page": "Servery uncooked stew",
+"noXp": true
+},
+{
+"output": "Raw fishcake",
+"outputQuantity": 1.0,
+"skill": "Cooking",
+"level": 31,
+"xp": 0,
+"ingredients": [
+{
+"item": "Breadcrumbs",
+"quantity": 1.0
+},
+{
+"item": "Ground cod",
+"quantity": 1.0
+},
+{
+"item": "Ground kelp",
+"quantity": 1.0
+},
+{
+"item": "Ground giant crab meat",
+"quantity": 1.0
+}
+],
+"tools": [],
+"facilities": null,
+"members": true,
+"levels": {},
+"quests": [],
+"page": "Raw fishcake",
+"noXp": true,
+"internal": "Recipe for Disaster"
+},
+{
+"output": "Damiana water",
+"outputQuantity": 1.0,
+"skill": "Cooking",
+"level": 36,
+"xp": 0,
+"ingredients": [
+{
+"item": "Damiana leaves",
+"quantity": 1.0
+},
+{
+"item": "Bowl of water",
+"quantity": 1.0
+}
+],
+"tools": [],
+"facilities": null,
+"members": true,
+"levels": {},
+"quests": [],
+"page": "Damiana water",
+"noXp": true,
+"internal": "Scrambled!"
+},
+{
+"output": "Raw guide cake",
+"outputQuantity": 1.0,
+"skill": "Cooking",
+"level": 40,
+"xp": 0,
+"ingredients": [
+{
+"item": "Cake tin",
+"quantity": 1.0
+},
+{
+"item": "Enchanted egg",
+"quantity": 1.0
+},
+{
+"item": "Enchanted flour",
+"quantity": 1.0
+},
+{
+"item": "Enchanted milk",
+"quantity": 1.0
+}
+],
+"tools": [],
+"facilities": null,
+"members": true,
+"levels": {},
+"quests": [],
+"page": "Raw guide cake",
+"noXp": true,
+"internal": "Recipe for Disaster"
+},
+{
+"output": "Servery incomplete pizza",
+"outputQuantity": 1.0,
+"skill": "Cooking",
+"level": 65,
+"xp": 0,
+"ingredients": [
+{
+"item": "Servery pizza base",
+"quantity": 1.0
+},
+{
+"item": "Servery tomato",
+"quantity": 1.0
+}
+],
+"tools": [],
+"facilities": null,
+"members": true,
+"levels": {},
+"quests": [],
+"page": "Servery incomplete pizza",
+"noXp": true
+},
+{
+"output": "Servery pizza base",
+"outputQuantity": 1.0,
+"skill": "Cooking",
+"level": 65,
+"xp": 0,
+"ingredients": [
+{
+"item": "Servery flour",
+"quantity": 1.0
+},
+{
+"item": "Bowl of water",
+"quantity": 1.0
+}
+],
+"tools": [],
+"facilities": null,
+"members": true,
+"levels": {},
+"quests": [],
+"page": "Servery pizza base",
+"noXp": true
+},
+{
+"output": "Servery uncooked pizza",
+"outputQuantity": 1.0,
+"skill": "Cooking",
+"level": 65,
+"xp": 0,
+"ingredients": [
+{
+"item": "Servery incomplete pizza",
+"quantity": 1.0
+},
+{
+"item": "Servery cheese",
+"quantity": 1.0
+}
+],
+"tools": [],
+"facilities": "Clay oven",
+"members": true,
+"levels": {},
+"quests": [],
+"page": "Servery uncooked pizza",
+"noXp": true
+},
+{
+"output": "Balloon structure",
+"outputQuantity": 1.0,
+"skill": "Crafting",
+"level": 36,
+"xp": 0,
+"ingredients": [
+{
+"item": "Papyrus",
+"quantity": 1.0
+},
+{
+"item": "Ball of wool",
+"quantity": 1.0
+}
+],
+"tools": [],
+"facilities": null,
+"members": true,
+"levels": {},
+"quests": [],
+"page": "Balloon structure",
+"noXp": true
+},
+{
+"output": "Spirit sapling",
+"outputQuantity": 1.0,
+"skill": "Farming",
+"level": 83,
+"xp": 0,
+"ingredients": [
+{
+"item": "Spirit seedling (w)",
+"quantity": 1.0
+}
+],
+"tools": [],
+"facilities": null,
+"members": true,
+"levels": {},
+"quests": [],
+"page": "Spirit sapling",
+"noXp": true
+},
+{
+"output": "Vial of water (Lunar Diplomacy)",
+"outputQuantity": 1.0,
+"skill": "Herblore",
+"level": 5,
+"xp": 0,
+"ingredients": [
+{
+"item": "Empty vial",
+"quantity": 1.0
+}
+],
+"tools": [],
+"facilities": "Water",
+"members": true,
+"levels": {},
+"quests": [],
+"page": "Vial of water (Lunar Diplomacy)",
+"noXp": true,
+"internal": "Lunar Diplomacy"
+},
+{
+"output": "Snakeweed mixture",
+"outputQuantity": 1.0,
+"skill": "Herblore",
+"level": 8,
+"xp": 0,
+"ingredients": [
+{
+"item": "Snake weed",
+"quantity": 1.0
+},
+{
+"item": "Vial of water",
+"quantity": 1.0
+}
+],
+"tools": [],
+"facilities": null,
+"members": true,
+"levels": {},
+"quests": [],
+"page": "Snakeweed mixture",
+"noXp": true
+},
+{
+"output": "Unfinished potion (Rogue's Purse)",
+"outputQuantity": 1.0,
+"skill": "Herblore",
+"level": 8,
+"xp": 0,
+"ingredients": [
+{
+"item": "Rogue's purse",
+"quantity": 1.0
+},
+{
+"item": "Vial of water",
+"quantity": 1.0
+}
+],
+"tools": [],
+"facilities": null,
+"members": true,
+"levels": {},
+"quests": [],
+"page": "Unfinished potion (Rogue's Purse)",
+"noXp": true
+},
+{
+"output": "Unfinished potion",
+"outputQuantity": 1.0,
+"skill": "Herblore",
+"level": 15,
+"xp": 0,
+"ingredients": [
+{
+"item": "Ashes",
+"quantity": 1.0
+},
+{
+"item": "Vial of water",
+"quantity": 1.0
+}
+],
+"tools": [],
+"facilities": null,
+"members": true,
+"levels": {},
+"quests": [],
+"page": "Unfinished potion",
+"noXp": true
+},
+{
+"output": "Magic essence (unf)",
+"outputQuantity": 1.0,
+"skill": "Herblore",
+"level": 57,
+"xp": 0,
+"ingredients": [
+{
+"item": "Vial of water",
+"quantity": 1.0
+},
+{
+"item": "Star flower",
+"quantity": 1.0
+}
+],
+"tools": [],
+"facilities": null,
+"members": true,
+"levels": {},
+"quests": [],
+"page": "Magic essence (unf)",
+"noXp": true,
+"internal": "Fairytale II - Cure a Queen"
+},
+{
+"output": "Elder cadantine potion (unf)",
+"outputQuantity": 1.0,
+"skill": "Herblore",
+"level": 70,
+"xp": 0,
+"ingredients": [
+{
+"item": "Vial of water",
+"quantity": 1.0
+},
+{
+"item": "Elder cadantine",
+"quantity": 1.0
+}
+],
+"tools": [],
+"facilities": null,
+"members": true,
+"levels": {},
+"quests": [],
+"page": "Elder cadantine potion (unf)",
+"noXp": true,
+"internal": "Song of the Elves"
+},
+{
+"output": "Prototype dart tip",
+"outputQuantity": 1.0,
+"skill": "Smithing",
+"level": 20,
+"xp": 0,
+"ingredients": [
+{
+"item": "Bronze bar",
+"quantity": 1.0
+}
+],
+"tools": [
+"Hammer",
+"Technical plans"
+],
+"facilities": "An experimental anvil",
+"members": true,
+"levels": {},
+"quests": [],
+"page": "Prototype dart tip",
+"noXp": true
+},
+{
+"output": "Slender blade",
+"outputQuantity": 1.0,
+"skill": "Smithing",
+"level": 65,
+"xp": 0,
+"ingredients": [
+{
+"item": "Mithril 2h sword",
+"quantity": 1.0
+}
+],
+"tools": [],
+"facilities": "Doric's Whetstone",
+"members": true,
+"levels": {},
+"quests": [],
+"page": "Slender blade",
+"noXp": true
 }
 ]

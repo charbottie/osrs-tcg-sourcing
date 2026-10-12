@@ -189,7 +189,9 @@
   "Fire Altar": null,
   "Mage Training Arena": null,
   "Shantay Pass": null,
-  "Temple of the Eye (location)": null
+  "Temple of the Eye (location)": null,
+  "Underground Pass (dungeon)": null,
+  "The Stranglewood": "kourend"
  },
  "taskOverrides": {
   "aberrant spectre": {
@@ -213,10 +215,11 @@
    "locationGates": [
     {
      "location": "Abyssal Area",
-     "quests": [
+     "quests": [],
+     "note": "Reached by fairy ring ALR (the wiki tags it {{Fairycode|alr}}), which needs partial Fairytale II.",
+     "partialQuests": [
       "Fairytale II - Cure a Queen"
-     ],
-     "note": "Reached by fairy ring ALR (the wiki tags it {{Fairycode|alr}}), which needs partial Fairytale II."
+     ]
     },
     {
      "location": "Abyssal Nexus",
@@ -294,10 +297,11 @@
    "locationGates": [
     {
      "location": "God Wars Dungeon",
-     "quests": [
+     "quests": [],
+     "note": "The God Wars Dungeon page says entry 'requires partial completion of Troll Stronghold (defeating Dad) or full completion of the Easy Combat Achievements'. The task infobox says only 'Death Plateau', so otherReq may understate it. A rope is also needed for the first entry.",
+     "partialQuests": [
       "Troll Stronghold"
-     ],
-     "note": "The God Wars Dungeon page says entry 'requires partial completion of Troll Stronghold (defeating Dad) or full completion of the Easy Combat Achievements'. The task infobox says only 'Death Plateau', so otherReq may understate it. A rope is also needed for the first entry."
+     ]
     },
     {
      "location": "God Wars Dungeon (Armadyl's Eyrie)",
@@ -383,10 +387,11 @@
     },
     {
      "location": "Shaman Caves",
-     "quests": [
+     "quests": [],
+     "note": "'Requires a certain amount of progress in Legends' Quest.'",
+     "partialQuests": [
       "Legends' Quest"
-     ],
-     "note": "'Requires a certain amount of progress in Legends' Quest.'"
+     ]
     },
     {
      "location": "Legends' Guild",
@@ -449,12 +454,18 @@
     {
      "location": "Callisto's Den",
      "quests": [],
-     "note": "Medium Wilderness Diary (or a Callisto boss task) + 50k lair fee."
+     "note": "Medium Wilderness Diary (or a Callisto boss task) + 50k lair fee.",
+     "diaries": [
+      "Wilderness Medium"
+     ]
     },
     {
      "location": "Hunter's End",
      "quests": [],
-     "note": "Hard Wilderness Diary (or a Callisto boss task; a bear task doesn't bypass it) + 50k lair fee."
+     "note": "Hard Wilderness Diary (or a Callisto boss task; a bear task doesn't bypass it) + 50k lair fee.",
+     "diaries": [
+      "Wilderness Hard"
+     ]
     },
     {
      "location": "Escape Caves",
@@ -463,17 +474,19 @@
     },
     {
      "location": "Isafdar",
-     "quests": [
+     "quests": [],
+     "note": "Grizzly bear cubs need partial Regicide.",
+     "partialQuests": [
       "Regicide"
-     ],
-     "note": "Grizzly bear cubs need partial Regicide."
+     ]
     },
     {
      "location": "Tyras Camp",
-     "quests": [
+     "quests": [],
+     "note": "Partial Regicide.",
+     "partialQuests": [
       "Regicide"
-     ],
-     "note": "Partial Regicide."
+     ]
     }
    ],
    "notes": "The 'Grizzly bear' entry has a bogus location ('Grizzly bear', from 'See Grizzly bear#Locations'); replace it with the Grizzly bear page's locations (Aldarin, Gloomthorn Trail and Custodia are Varlamore; Kebos/Land's End are Kourend; Ferox and Dark Warriors' Fortress are Wilderness). Don't count: Reanimated bear (listed by Spria; the brief excludes reanimated), Angry bear (Tolna's rift), Headless Beast, Crystalline/Corrupted Bear. 'Song of the Elves' is a generated location from the 'West of Lletya (during Song of the Elves)' line, not a place. Krystilia tasks must be done in the Wilderness; only the Wilderness locations count for her. For Krystilia that means Callisto, Artio, Escape Caves grizzlies, and the grizzlies NW of Ferox Enclave / NW of Dark Warriors' Fortress.",
@@ -517,17 +530,19 @@
    "locationGates": [
     {
      "location": "Crash Site Cavern",
-     "quests": [
+     "quests": [],
+     "note": "Demonic gorillas; not valid for Krystilia or Konar tasks.",
+     "partialQuests": [
       "Monkey Madness II"
-     ],
-     "note": "Demonic gorillas; not valid for Krystilia or Konar tasks."
+     ]
     },
     {
      "location": "God Wars Dungeon",
-     "quests": [
+     "quests": [],
+     "note": "Partial completion of Troll Stronghold plus 60 Strength or 60 Agility; a Rope is needed on the first visit. GWD-related Slayer assignments need Death Plateau. Balfrug Kreeyath is in K'ril's room: 70 Hitpoints for the Zamorak bridge and 40 Zamorak killcount.",
+     "partialQuests": [
       "Troll Stronghold"
-     ],
-     "note": "Partial completion of Troll Stronghold plus 60 Strength or 60 Agility; a Rope is needed on the first visit. GWD-related Slayer assignments need Death Plateau. Balfrug Kreeyath is in K'ril's room: 70 Hitpoints for the Zamorak bridge and 40 Zamorak killcount."
+     ]
     },
     {
      "location": "Mage Arena II",
@@ -570,10 +585,12 @@
     {
      "location": "Evil Chicken's Lair",
      "quests": [
-      "Recipe for Disaster/Freeing Sir Amik Varze",
       "Lost City"
      ],
-     "note": "Partial Freeing Sir Amik Varze, plus a raw chicken offered at the Chicken Shrine in Zanaris (needs Lost City). Babies need a rope too. Cards: Raw chicken, Rope."
+     "note": "Partial Freeing Sir Amik Varze, plus a raw chicken offered at the Chicken Shrine in Zanaris (needs Lost City). Babies need a rope too. Cards: Raw chicken, Rope.",
+     "partialQuests": [
+      "Recipe for Disaster/Freeing Sir Amik Varze"
+     ]
     },
     {
      "location": "Corsair Cove Cave",
@@ -638,17 +655,19 @@
    "locationGates": [
     {
      "location": "Meiyerditch Laboratories",
-     "quests": [
+     "quests": [],
+     "note": "Wiki: 'Access to the complete laboratory is granted after the player kills the mutated bloodveld that appears during the Sins of the Father quest' (partial completion).",
+     "partialQuests": [
       "Sins of the Father"
-     ],
-     "note": "Wiki: 'Access to the complete laboratory is granted after the player kills the mutated bloodveld that appears during the Sins of the Father quest' (partial completion)."
+     ]
     },
     {
      "location": "God Wars Dungeon",
-     "quests": [
+     "quests": [],
+     "note": "Wiki GWD: 'Accessing it requires partial completion of Troll Stronghold (defeating Dad)'; entering the main dungeon also needs 60 Strength (boulder) or 60 Agility (crack); a rope the first time.",
+     "partialQuests": [
       "Troll Stronghold"
-     ],
-     "note": "Wiki GWD: 'Accessing it requires partial completion of Troll Stronghold (defeating Dad)'; entering the main dungeon also needs 60 Strength (boulder) or 60 Agility (crack); a rope the first time."
+     ]
     },
     {
      "location": "Wilderness God Wars Dungeon",
@@ -753,13 +772,14 @@
    "locationGates": [
     {
      "location": "Brine Rat Cavern",
-     "quests": [
-      "Olaf's Quest"
-     ],
+     "quests": [],
      "cards": [
       "Spade"
      ],
-     "note": "'Players can enter the dungeon by digging with a spade' near the windswept tree; 'accessible during and after Olaf's Quest'."
+     "note": "'Players can enter the dungeon by digging with a spade' near the windswept tree; 'accessible during and after Olaf's Quest'.",
+     "partialQuests": [
+      "Olaf's Quest"
+     ]
     }
    ],
    "notes": "There's no task page. The only monster is the Brine rat (Brine Rat Cavern, east of Rellekka). Assignment needs 47 Slayer, 45 combat and Olaf's Quest.",
@@ -1000,11 +1020,12 @@
    "locationGates": [
     {
      "location": "Neypotzli",
-     "quests": [
-      "Perilous Moons"
-     ],
+     "quests": [],
      "access": "varlamore",
-     "note": "Wiki Neypotzli: 'Accessing Neypotzli requires having gained access during the Perilous Moons quest' (partial)."
+     "note": "Wiki Neypotzli: 'Accessing Neypotzli requires having gained access during the Perilous Moons quest' (partial).",
+     "partialQuests": [
+      "Perilous Moons"
+     ]
     }
    ],
    "notes": "There's no task page. Cockatrice and its superior Cockathrice are in the Fremennik Slayer Cave; Moonlight Cockatrice is in Neypotzli (partial Perilous Moons). The Bloodthirsty Cockathrice is league-only. Cockatrice tasks also need 20 Defence to wield a mirror shield.",
@@ -1032,10 +1053,11 @@
    "locationGates": [
     {
      "location": "Mogre Camp",
-     "quests": [
+     "quests": [],
+     "note": "Partial completion.",
+     "partialQuests": [
       "Recipe for Disaster/Freeing Pirate Pete"
-     ],
-     "note": "Partial completion."
+     ]
     },
     {
      "location": "Fossil Island",
@@ -1072,10 +1094,11 @@
    "locationGates": [
     {
      "location": "Meiyerditch Laboratories",
-     "quests": [
+     "quests": [],
+     "note": "Full lab access after killing the mutated bloodveld during Sins of the Father (first visited in Darkness of Hallowvale).",
+     "partialQuests": [
       "Sins of the Father"
-     ],
-     "note": "Full lab access after killing the mutated bloodveld during Sins of the Father (first visited in Darkness of Hallowvale)."
+     ]
     }
    ],
    "notes": "Monster list correct (Crawling Hand + superior Crushing hand). Slayer Tower needs Priest in Peril, which the 'morytania' mapping already covers.",
@@ -1228,10 +1251,11 @@
     },
     {
      "location": "Mourner Tunnels",
-     "quests": [
+     "quests": [],
+     "note": "Entered from the Mourner HQ basement in West Ardougne with the new key from MEP2 (started); full mourner gear is needed until MEP2 or SotE is complete. After MEP2 a Slayer ring can teleport you in.",
+     "partialQuests": [
       "Mourning's End Part II"
-     ],
-     "note": "Entered from the Mourner HQ basement in West Ardougne with the new key from MEP2 (started); full mourner gear is needed until MEP2 or SotE is complete. After MEP2 a Slayer ring can teleport you in."
+     ]
     }
    ],
    "konarLocations": [
@@ -1266,17 +1290,19 @@
    "locationGates": [
     {
      "location": "Shadow Dungeon",
-     "quests": [
+     "quests": [],
+     "note": "Needs a Ring of visibility, which has NO card, so this location is effectively locked under Bronzeman.",
+     "partialQuests": [
       "Desert Treasure I"
-     ],
-     "note": "Needs a Ring of visibility, which has NO card, so this location is effectively locked under Bronzeman."
+     ]
     },
     {
      "location": "Brimhaven",
-     "quests": [
+     "quests": [],
+     "note": "Only the Black Arm Gang hideout part is gated (partial Heroes' Quest). The other Brimhaven guard dogs are open.",
+     "partialQuests": [
       "Heroes' Quest"
-     ],
-     "note": "Only the Black Arm Gang hideout part is gated (partial Heroes' Quest). The other Brimhaven guard dogs are open."
+     ]
     },
     {
      "location": "Brimhaven Dungeon",
@@ -1349,11 +1375,12 @@
    "locationGates": [
     {
      "location": "Smoke Dungeon",
-     "quests": [
-      "Desert Treasure I"
-     ],
+     "quests": [],
      "access": "desert",
-     "note": "'must have progressed until beginning the search for the four diamonds to enter'"
+     "note": "'must have progressed until beginning the search for the four diamonds to enter'",
+     "partialQuests": [
+      "Desert Treasure I"
+     ]
     },
     {
      "location": "Wilderness Slayer Cave",
@@ -1375,10 +1402,11 @@
    "locationGates": [
     {
      "location": "Keldagrim",
-     "quests": [
+     "quests": [],
+     "note": "Keldagrim (and the White Wolf Mountain tunnels route) needs The Giant Dwarf started. Black Guard (48) and Black Guard Berserker are only here.",
+     "partialQuests": [
       "The Giant Dwarf"
-     ],
-     "note": "Keldagrim (and the White Wolf Mountain tunnels route) needs The Giant Dwarf started. Black Guard (48) and Black Guard Berserker are only here."
+     ]
     },
     {
      "location": "Falador",
@@ -1411,17 +1439,19 @@
    "locationGates": [
     {
      "location": "Lletya",
-     "quests": [
+     "quests": [],
+     "note": "Needs Mourning's End Part I started / partly done.",
+     "partialQuests": [
       "Mourning's End Part I"
-     ],
-     "note": "Needs Mourning's End Part I started / partly done."
+     ]
     },
     {
      "location": "Mourner Headquarters",
-     "quests": [
+     "quests": [],
+     "note": "Only the level 108 mourners in the basement count. Available during/after Mourning's End Part I but NOT after Song of the Elves. Full mourner gear needed to avoid being attacked (not strictly required).",
+     "partialQuests": [
       "Mourning's End Part I"
-     ],
-     "note": "Only the level 108 mourners in the basement count. Available during/after Mourning's End Part I but NOT after Song of the Elves. Full mourner gear needed to avoid being attacked (not strictly required)."
+     ]
     },
     {
      "location": "Iorwerth Dungeon",
@@ -1485,10 +1515,11 @@
    "locationGates": [
     {
      "location": "Braindeath Island",
-     "quests": [
+     "quests": [],
+     "note": "Rum Deal must be started.",
+     "partialQuests": [
       "Rum Deal"
-     ],
-     "note": "Rum Deal must be started."
+     ]
     }
    ],
    "notes": "No task page. Fever spiders are only in the brewery basement on Braindeath Island. This entry supplies locations for the existing empty entry. Slayer level 42.",
@@ -1777,10 +1808,11 @@
    "locationGates": [
     {
      "location": "Shaman Caves",
-     "quests": [
+     "quests": [],
+     "note": "Must be started to enter. Death wings need 50 Agility for the mossy rock, plus lockpick, machete, axe and pickaxe.",
+     "partialQuests": [
       "Legends' Quest"
-     ],
-     "note": "Must be started to enter. Death wings need 50 Agility for the mossy rock, plus lockpick, machete, axe and pickaxe."
+     ]
     },
     {
      "location": "Death Altar",
@@ -1791,10 +1823,11 @@
     },
     {
      "location": "Melzar's Maze",
-     "quests": [
+     "quests": [],
+     "note": "The Maze key comes from the Champions' Guild guildmaster during Dragon Slayer I.",
+     "partialQuests": [
       "Dragon Slayer I"
-     ],
-     "note": "The Maze key comes from the Champions' Guild guildmaster during Dragon Slayer I."
+     ]
     },
     {
      "location": "Abandoned Mine",
@@ -1858,17 +1891,19 @@
    "locationGates": [
     {
      "location": "Dorgeshuun Mines",
-     "quests": [
+     "quests": [],
+     "note": "Requires starting The Lost Tribe (cave goblin miners/guards).",
+     "partialQuests": [
       "The Lost Tribe"
-     ],
-     "note": "Requires starting The Lost Tribe (cave goblin miners/guards)."
+     ]
     },
     {
      "location": "God Wars Dungeon",
-     "quests": [
+     "quests": [],
+     "note": "Partial completion of Troll Stronghold plus 60 Strength or 60 Agility; a Rope is needed on the first visit. GWD-related Slayer assignments need Death Plateau. Sergeants are in General Graardor's room: 40 Bandos killcount, plus 70 Strength and a hammer for the door.",
+     "partialQuests": [
       "Troll Stronghold"
-     ],
-     "note": "Partial completion of Troll Stronghold plus 60 Strength or 60 Agility; a Rope is needed on the first visit. GWD-related Slayer assignments need Death Plateau. Sergeants are in General Graardor's room: 40 Bandos killcount, plus 70 Strength and a hammer for the door."
+     ]
     },
     {
      "location": "Lumbridge Swamp Caves",
@@ -1915,10 +1950,11 @@
     },
     {
      "location": "God Wars Dungeon",
-     "quests": [
+     "quests": [],
+     "note": "Tstanon Karlak and K'ril Tsutsaroth: 'Requires an ecumenical key or 40 Zamorakian follower kill count' (card 'Ecumenical key' is optional). GWD entry needs partial Troll Stronghold.",
+     "partialQuests": [
       "Troll Stronghold"
-     ],
-     "note": "Tstanon Karlak and K'ril Tsutsaroth: 'Requires an ecumenical key or 40 Zamorakian follower kill count' (card 'Ecumenical key' is optional). GWD entry needs partial Troll Stronghold."
+     ]
     },
     {
      "location": "Catacombs of Kourend",
@@ -1954,14 +1990,15 @@
    "locationGates": [
     {
      "location": "The Great Conch",
-     "quests": [
-      "Troubled Tortugans"
-     ],
+     "quests": [],
      "access": "sailing",
      "skills": {
       "Sailing": 45
      },
-     "note": "Docking needs 45 Sailing and partial Troubled Tortugans."
+     "note": "Docking needs 45 Sailing and partial Troubled Tortugans.",
+     "partialQuests": [
+      "Troubled Tortugans"
+     ]
     }
    ],
    "notes": "Monsters match. The quest gryphon (Troubled Tortugans) doesn't count. Shellbane gryphon is on-task only. Nieve and Duradel also list 45 Sailing in their requirements. You need at least 30 kg worn weight (40 kg for the boss) to avoid knockback damage.",
@@ -2019,7 +2056,8 @@
     },
     {
      "location": "God Wars Dungeon",
-     "quests": [
+     "quests": [],
+     "partialQuests": [
       "Troll Stronghold"
      ]
     },
@@ -2027,6 +2065,26 @@
      "location": "Stronghold Slayer Dungeon",
      "quests": [],
      "note": "Task-only."
+    },
+    {
+     "location": "Vet'ion's Rest",
+     "diaries": [
+      "Wilderness Medium"
+     ],
+     "cards": [
+      "Coins"
+     ],
+     "note": "Wiki: \"Entering the boss lair requires completion of the medium Wilderness diary OR a Vet'ion boss Slayer task, and pay a fee of 50,000 coins\" — a Skeletons/Hellhounds task isn't a boss task"
+    },
+    {
+     "location": "Vet'ion",
+     "diaries": [
+      "Wilderness Medium"
+     ],
+     "cards": [
+      "Coins"
+     ],
+     "note": "Wiki: \"Entering the boss lair requires completion of the medium Wilderness diary OR a Vet'ion boss Slayer task, and pay a fee of 50,000 coins\" — a Skeletons/Hellhounds task isn't a boss task"
     }
    ],
    "notes": "The monster list matches the wiki. Card mapping: Skeleton Hellhound (Vet'ion) and (Calvar'ion) map to card 'Skeleton Hellhound', whose variants include ids 6613 and 12107. Both Greater Skeleton Hellhounds map to 'Greater Skeleton Hellhound'. Exceptions that do NOT count: revenant hellhounds (Revenant task only), Nightmare Zone Skeleton Hellhound and Bouncer, and Bouncer's ghost. The quest versions only count during their quest, so don't add them. No Slayer equipment.",
@@ -2046,10 +2104,11 @@
     },
     {
      "location": "God Wars Dungeon",
-     "quests": [
+     "quests": [],
+     "note": "Bandos' Stronghold cyclopes: 70 Strength, hammer, rope the first time. Trollheim access via Death Plateau/Troll Stronghold.",
+     "partialQuests": [
       "Troll Stronghold"
-     ],
-     "note": "Bandos' Stronghold cyclopes: 70 Strength, hammer, rope the first time. Trollheim access via Death Plateau/Troll Stronghold."
+     ]
     },
     {
      "location": "Edgeville Dungeon",
@@ -2085,10 +2144,11 @@
    "locationGates": [
     {
      "location": "God Wars Dungeon",
-     "quests": [
+     "quests": [],
+     "note": "Wiki GWD: 'Accessing it requires partial completion of Troll Stronghold (defeating Dad)'; entering the main dungeon also needs 60 Strength (boulder) or 60 Agility (crack); a rope the first time.",
+     "partialQuests": [
       "Troll Stronghold"
-     ],
-     "note": "Wiki GWD: 'Accessing it requires partial completion of Troll Stronghold (defeating Dad)'; entering the main dungeon also needs 60 Strength (boulder) or 60 Agility (crack); a rope the first time."
+     ]
     },
     {
      "location": "Bandit Camp Mine",
@@ -2176,10 +2236,11 @@
    "locationGates": [
     {
      "location": "Iceberg",
-     "quests": [
+     "quests": [],
+     "note": "Reached by talking to Larry NE of Rellekka after the quest.",
+     "partialQuests": [
       "Cold War"
-     ],
-     "note": "Reached by talking to Larry NE of Rellekka after the quest."
+     ]
     },
     {
      "location": "Ruins of Tapoyauik",
@@ -2206,10 +2267,11 @@
     },
     {
      "location": "God Wars Dungeon",
-     "quests": [
+     "quests": [],
+     "note": "Wiki GWD: 'Accessing it requires partial completion of Troll Stronghold (defeating Dad)'; entering the main dungeon also needs 60 Strength (boulder) or 60 Agility (crack); a rope the first time.",
+     "partialQuests": [
       "Troll Stronghold"
-     ],
-     "note": "Wiki GWD: 'Accessing it requires partial completion of Troll Stronghold (defeating Dad)'; entering the main dungeon also needs 60 Strength (boulder) or 60 Agility (crack); a rope the first time."
+     ]
     },
     {
      "location": "Wilderness God Wars Dungeon",
@@ -2449,17 +2511,19 @@
     },
     {
      "location": "Viyeldi caves",
-     "quests": [
+     "quests": [],
+     "note": "Partial completion plus pickaxe, lockpick, unpowered orb, enchant runes, axe and machete, or 96 Agility for the shortcut.",
+     "partialQuests": [
       "Legends' Quest"
-     ],
-     "note": "Partial completion plus pickaxe, lockpick, unpowered orb, enchant runes, axe and machete, or 96 Agility for the shortcut."
+     ]
     },
     {
      "location": "Crandor",
-     "quests": [
+     "quests": [],
+     "note": "Crandor is only reachable via Dragon Slayer I. This is game knowledge; the task page doesn't state it.",
+     "partialQuests": [
       "Dragon Slayer I"
-     ],
-     "note": "Crandor is only reachable via Dragon Slayer I. This is game knowledge; the task page doesn't state it."
+     ]
     },
     {
      "location": "Kourend Castle",
@@ -2478,10 +2542,11 @@
     },
     {
      "location": "God Wars Dungeon",
-     "quests": [
+     "quests": [],
+     "note": "Partial completion of Troll Stronghold plus 60 Strength or 60 Agility; a Rope is needed on the first visit. GWD-related Slayer assignments need Death Plateau. Zakl'n Gritch is in K'ril's room: 70 Hitpoints and 40 Zamorak killcount.",
+     "partialQuests": [
       "Troll Stronghold"
-     ],
-     "note": "Partial completion of Troll Stronghold plus 60 Strength or 60 Agility; a Rope is needed on the first visit. GWD-related Slayer assignments need Death Plateau. Zakl'n Gritch is in K'ril's room: 70 Hitpoints and 40 Zamorak killcount."
+     ]
     }
    ],
    "notes": "List matches the wiki. GENERATOR ISSUE: Krystilia assigns lesser demons (80-120; Wilderness: KBD lair entrance cage, south of the Demonic Ruins, Wilderness Slayer Cave, Muddy chest) but is missing from assignedBy. Wiki Charred Dungeon is in the location table but not in the generated locations.",
@@ -2618,10 +2683,11 @@
    "locationGates": [
     {
      "location": "Ancient Cavern",
-     "quests": [
+     "quests": [],
+     "note": "'Requires completion of the first part of Barbarian Firemaking'.",
+     "partialQuests": [
       "Barbarian Training"
-     ],
-     "note": "'Requires completion of the first part of Barbarian Firemaking'."
+     ]
     },
     {
      "location": "Lithkren Vault",
@@ -2718,42 +2784,48 @@
    "locationGates": [
     {
      "location": "Marim",
-     "quests": [
+     "quests": [],
+     "note": "Partial.",
+     "partialQuests": [
       "Monkey Madness I"
-     ],
-     "note": "Partial."
+     ]
     },
     {
      "location": "Temple of Marimbo",
-     "quests": [
+     "quests": [],
+     "note": "Partial.",
+     "partialQuests": [
       "Monkey Madness I"
-     ],
-     "note": "Partial."
+     ]
     },
     {
      "location": "Ape Atoll Dungeon",
-     "quests": [
+     "quests": [],
+     "note": "Partial.",
+     "partialQuests": [
       "Monkey Madness I"
-     ],
-     "note": "Partial."
+     ]
     },
     {
      "location": "Temple of Marimbo Dungeon",
-     "quests": [
+     "quests": [],
+     "note": "Partial.",
+     "partialQuests": [
       "Monkey Madness I"
-     ],
-     "note": "Partial."
+     ]
     },
     {
      "location": "Kruk's Dungeon",
-     "quests": [
+     "quests": [],
+     "note": "Partial. The lower floor is dark, so bring a light source.",
+     "partialQuests": [
       "Monkey Madness II"
-     ],
-     "note": "Partial. The lower floor is dark, so bring a light source."
+     ]
     },
     {
      "location": "Crash Site Cavern",
-     "quests": [
+     "quests": [],
+     "partialQuests": [
       "Monkey Madness II"
      ]
     },
@@ -2773,17 +2845,19 @@
    "locationGates": [
     {
      "location": "Pirates' Cove",
-     "quests": [
+     "quests": [],
+     "note": "Partial completion (Lokar Searunner also needs The Fremennik Trials).",
+     "partialQuests": [
       "Lunar Diplomacy"
-     ],
-     "note": "Partial completion (Lokar Searunner also needs The Fremennik Trials)."
+     ]
     },
     {
      "location": "Crandor",
-     "quests": [
+     "quests": [],
+     "note": "Reached during DS1, then via the hidden wall in the Crandor and Karamja Dungeon.",
+     "partialQuests": [
       "Dragon Slayer I"
-     ],
-     "note": "Reached during DS1, then via the hidden wall in the Crandor and Karamja Dungeon."
+     ]
     },
     {
      "location": "Iorwerth Dungeon",
@@ -2910,20 +2984,23 @@
     },
     {
      "location": "Jiggig",
-     "quests": [
+     "quests": [],
+     "note": "Zogres need it started; skogres need it partly done.",
+     "partialQuests": [
       "Zogre Flesh Eaters"
-     ],
-     "note": "Zogres need it started; skogres need it partly done."
+     ]
     },
     {
      "location": "Jiggig Dungeon",
-     "quests": [
+     "quests": [],
+     "partialQuests": [
       "Zogre Flesh Eaters"
      ]
     },
     {
      "location": "God Wars Dungeon",
-     "quests": [
+     "quests": [],
+     "partialQuests": [
       "Troll Stronghold"
      ]
     }
@@ -3000,10 +3077,11 @@
    "locationGates": [
     {
      "location": "God Wars Dungeon",
-     "quests": [
+     "quests": [],
+     "note": "Partial completion of Troll Stronghold plus 60 Strength or 60 Agility; a Rope is needed on the first visit. GWD-related Slayer assignments need Death Plateau.",
+     "partialQuests": [
       "Troll Stronghold"
-     ],
-     "note": "Partial completion of Troll Stronghold plus 60 Strength or 60 Agility; a Rope is needed on the first visit. GWD-related Slayer assignments need Death Plateau."
+     ]
     },
     {
      "location": "Wilderness God Wars Dungeon",
@@ -3012,13 +3090,14 @@
     },
     {
      "location": "Smoke Dungeon",
-     "quests": [
-      "Desert Treasure I"
-     ],
+     "quests": [],
      "note": "Must have started DT1. Must wear a Facemask, Slayer helmet or gas mask (gas mask has no card).",
      "cards": [
       "Facemask",
       "Slayer helmet"
+     ],
+     "partialQuests": [
+      "Desert Treasure I"
      ]
     }
    ],
@@ -3031,17 +3110,19 @@
    "locationGates": [
     {
      "location": "Melzar's Maze",
-     "quests": [
+     "quests": [],
+     "note": "Needs DS1 started.",
+     "partialQuests": [
       "Dragon Slayer I"
-     ],
-     "note": "Needs DS1 started."
+     ]
     },
     {
      "location": "Brine Rat Cavern",
-     "quests": [
+     "quests": [],
+     "note": "Needs Olaf's Quest started.",
+     "partialQuests": [
       "Olaf's Quest"
-     ],
-     "note": "Needs Olaf's Quest started."
+     ]
     },
     {
      "location": "Evil Dave",
@@ -3052,10 +3133,11 @@
     },
     {
      "location": "Clock Tower Dungeon",
-     "quests": [
+     "quests": [],
+     "note": "Dungeon rats need Clock Tower partly done.",
+     "partialQuests": [
       "Clock Tower"
-     ],
-     "note": "Dungeon rats need Clock Tower partly done."
+     ]
     },
     {
      "location": "Barrows crypt",
@@ -3296,17 +3378,19 @@
     },
     {
      "location": "The Great Conch",
-     "quests": [
+     "quests": [],
+     "note": "Partial completion.",
+     "partialQuests": [
       "Troubled Tortugans"
-     ],
-     "note": "Partial completion."
+     ]
     },
     {
      "location": "Kruk's Dungeon",
-     "quests": [
+     "quests": [],
+     "note": "Partial completion.",
+     "partialQuests": [
       "Monkey Madness II"
-     ],
-     "note": "Partial completion."
+     ]
     },
     {
      "location": "Legends' Guild",
@@ -3317,17 +3401,19 @@
     },
     {
      "location": "Kharazi Jungle",
-     "quests": [
+     "quests": [],
+     "note": "Started (Radimus notes), plus a machete and an axe.",
+     "partialQuests": [
       "Legends' Quest"
-     ],
-     "note": "Started (Radimus notes), plus a machete and an axe."
+     ]
     },
     {
      "location": "Crandor",
-     "quests": [
+     "quests": [],
+     "note": "King Scorpions.",
+     "partialQuests": [
       "Dragon Slayer I"
-     ],
-     "note": "King Scorpions."
+     ]
     },
     {
      "location": "Underwater",
@@ -3359,10 +3445,11 @@
    "locationGates": [
     {
      "location": "Miscellania and Etceteria Dungeon",
-     "quests": [
+     "quests": [],
+     "note": "'can be entered during and after the quest'. The route has an overhanging rock you swing across with a rope.",
+     "partialQuests": [
       "Royal Trouble"
-     ],
-     "note": "'can be entered during and after the quest'. The route has an overhanging rock you swing across with a rope."
+     ]
     }
    ],
    "notes": "The cards already resolve (Sea Snake Hatchling / Sea Snake Young). Giant Sea Snake is the Royal Trouble quest boss (its chamber closes after the fight), so leave it out.",
@@ -3577,49 +3664,62 @@
      "skills": {
       "Firemaking": 35
      },
-     "note": "'can only be accessed after the player has completed the first part of Barbarian Firemaking, requiring level 35 Firemaking'."
+     "note": "'can only be accessed after the player has completed the first part of Barbarian Firemaking, requiring level 35 Firemaking'.",
+     "partialQuests": [
+      "Barbarian Training"
+     ]
     },
     {
      "location": "Shadow Dungeon",
-     "quests": [
-      "Desert Treasure I"
-     ],
+     "quests": [],
      "access": "desert",
-     "note": "Needs a ring of visibility (no card)."
+     "note": "Needs a ring of visibility (no card).",
+     "partialQuests": [
+      "Desert Treasure I"
+     ]
     },
     {
      "location": "Jiggig",
-     "quests": [
+     "quests": [],
+     "note": "Skogres: 'Requires partial completion of Zogre Flesh Eaters. Takes reduced damage (-75%) without using Brutal arrows' (no card).",
+     "partialQuests": [
       "Zogre Flesh Eaters"
-     ],
-     "note": "Skogres: 'Requires partial completion of Zogre Flesh Eaters. Takes reduced damage (-75%) without using Brutal arrows' (no card)."
+     ]
     },
     {
      "location": "Waterfall Dungeon",
-     "quests": [
+     "quests": [],
+     "note": "Skeleton Mage: Swan Song (Piscatoris), partial Waterfall Quest, or 60 Sailing (Charred Dungeon).",
+     "partialQuests": [
       "Waterfall Quest"
-     ],
-     "note": "Skeleton Mage: Swan Song (Piscatoris), partial Waterfall Quest, or 60 Sailing (Charred Dungeon)."
+     ]
     },
     {
      "location": "Skeletal Tomb",
      "quests": [],
      "access": "wilderness",
-     "note": "Calvar'ion: Hard Wilderness Diary + one-time 50,000 coins."
+     "note": "Calvar'ion: Hard Wilderness Diary + one-time 50,000 coins.",
+     "diaries": [
+      "Wilderness Hard"
+     ]
     },
     {
      "location": "Lava Dragon Isle",
      "quests": [],
      "access": "wilderness",
-     "note": "Vet'ion: Medium Wilderness Diary + one-time 50,000 coins."
+     "note": "Vet'ion: Medium Wilderness Diary + one-time 50,000 coins.",
+     "diaries": [
+      "Wilderness Medium"
+     ]
     },
     {
      "location": "Brine Rat Cavern",
-     "quests": [
-      "Olaf's Quest"
-     ],
+     "quests": [],
      "cards": [
       "Spade"
+     ],
+     "partialQuests": [
+      "Olaf's Quest"
      ]
     },
     {
@@ -3629,10 +3729,21 @@
     },
     {
      "location": "Ape Atoll Dungeon",
-     "quests": [
+     "quests": [],
+     "access": "ape_atoll",
+     "partialQuests": [
       "Monkey Madness I"
+     ]
+    },
+    {
+     "location": "Vet'ion's Rest",
+     "diaries": [
+      "Wilderness Medium"
      ],
-     "access": "ape_atoll"
+     "cards": [
+      "Coins"
+     ],
+     "note": "Wiki: \"Entering the boss lair requires completion of the medium Wilderness diary OR a Vet'ion boss Slayer task, and pay a fee of 50,000 coins\" — a Skeletons/Hellhounds task isn't a boss task"
     }
    ],
    "notes": "All the 'Skeleton (X)' versions resolve to the 'Skeleton' card by NPC id (checked: Tarn's Lair, mage, Barrows, Shayzien Crypts, Melzar's, Ape Atoll, Draynor Manor, Catacombs, SoS, Forthos, Lucien's camp, Wildy Agility Course), so the generated cards are right. The extra monsters all have slayer category Skeletons. The wiki: 'the skeletal hellhounds they summon also count towards the task'. Quest-only skeletons to leave out: Snothead/Snailfeet/Mosschin/Redeyes/Strongbones/Skoblin (Land of the Goblins), Ulfric (Olaf's Quest), Nazastarool and Undead one (Shilo Village), and Skeleton (The Restless Ghost). Skeletal Mystic (Chambers of Xeric, card 'Skeletal Mystics') is categorised Skeletons but is raid-only; I left it out (low confidence). Krystilia: only Wilderness skeletons count (Edgeville Dungeon's Wilderness part, Wilderness Agility Course, Vet'ion and Calvar'ion with their hellhounds).",
@@ -3739,17 +3850,19 @@
     },
     {
      "location": "Braindeath Island",
-     "quests": [
+     "quests": [],
+     "note": "Fever spiders: need Rum Deal started and 42 Slayer. Slayer gloves (card 'Slayer gloves') must be worn when they're hitting you, or you take 12.5% HP hits and get diseased.",
+     "partialQuests": [
       "Rum Deal"
-     ],
-     "note": "Fever spiders: need Rum Deal started and 42 Slayer. Slayer gloves (card 'Slayer gloves') must be worn when they're hitting you, or you take 12.5% HP hits and get diseased."
+     ]
     },
     {
      "location": "Myreque Hideout",
-     "quests": [
+     "quests": [],
+     "note": "Canifis hideout/caves (during or after).",
+     "partialQuests": [
       "In Search of the Myreque"
-     ],
-     "note": "Canifis hideout/caves (during or after)."
+     ]
     },
     {
      "location": "The Hollows",
@@ -3774,17 +3887,19 @@
     },
     {
      "location": "Kharazi Jungle",
-     "quests": [
+     "quests": [],
+     "note": "Started.",
+     "partialQuests": [
       "Legends' Quest"
-     ],
-     "note": "Started."
+     ]
     },
     {
      "location": "Waterfall Dungeon",
-     "quests": [
+     "quests": [],
+     "note": "During/after the quest; a rope is needed unless you have the medium Kandarin Diary.",
+     "partialQuests": [
       "Waterfall Quest"
-     ],
-     "note": "During/after the quest; a rope is needed unless you have the medium Kandarin Diary."
+     ]
     },
     {
      "location": "Crandor and Karamja Dungeon",
@@ -3801,12 +3916,18 @@
     {
      "location": "Web Chasm",
      "quests": [],
-     "note": "Spindel: Hard Wilderness Diary (a spider task doesn't bypass it) + 50k fee."
+     "note": "Spindel: Hard Wilderness Diary (a spider task doesn't bypass it) + 50k fee.",
+     "diaries": [
+      "Wilderness Hard"
+     ]
     },
     {
      "location": "Bone Yard",
      "quests": [],
-     "note": "Venenatis (Silk Chasm): Medium Wilderness Diary + 50k fee."
+     "note": "Venenatis (Silk Chasm): Medium Wilderness Diary + 50k fee.",
+     "diaries": [
+      "Wilderness Medium"
+     ]
     }
    ],
    "notes": "Araxxor's location 'araxyte' is a parse artefact; it's in the Morytania Spider Cave. Araxyte minions spawned in the Araxxor fight don't count. 'Grand Exchange', 'Graveyard of Heroes', 'Wilderness Bandit Camp', 'West Ruins', 'Lumbridge' and 'Falador' etc. are 'near X' location texts for Giant spiders, which is fine. Spider (Ungael) card 'Spider' is a generic card, so check the version. Krystilia: Wilderness only (spider hill ~lvl 46, Venenatis, Spindel, deadly red spiders north of the Lava Maze, etc.).",
@@ -3818,10 +3939,11 @@
    "locationGates": [
     {
      "location": "God Wars Dungeon",
-     "quests": [
+     "quests": [],
+     "note": "Wiki GWD: 'Accessing it requires partial completion of Troll Stronghold (defeating Dad)'; entering the main dungeon also needs 60 Strength (boulder) or 60 Agility (crack); a rope the first time.",
+     "partialQuests": [
       "Troll Stronghold"
-     ],
-     "note": "Wiki GWD: 'Accessing it requires partial completion of Troll Stronghold (defeating Dad)'; entering the main dungeon also needs 60 Strength (boulder) or 60 Agility (crack); a rope the first time."
+     ]
     },
     {
      "location": "Wilderness God Wars Dungeon",
@@ -3875,21 +3997,24 @@
    "locationGates": [
     {
      "location": "Fremennik Isles",
-     "quests": [
+     "quests": [],
+     "note": "Ice troll runt/male/female/grunt. The wiki says a Neitiznot shield is needed to cut damage from ice troll females (recommended, not a kill requirement).",
+     "partialQuests": [
       "The Fremennik Isles"
-     ],
-     "note": "Ice troll runt/male/female/grunt. The wiki says a Neitiznot shield is needed to cut damage from ice troll females (recommended, not a kill requirement)."
+     ]
     },
     {
      "location": "Ice Troll Caves",
-     "quests": [
+     "quests": [],
+     "note": "'players need to have completed parts of The Fremennik Isles quest'.",
+     "partialQuests": [
       "The Fremennik Isles"
-     ],
-     "note": "'players need to have completed parts of The Fremennik Isles quest'."
+     ]
     },
     {
      "location": "Jatizso mine",
-     "quests": [
+     "quests": [],
+     "partialQuests": [
       "The Fremennik Isles"
      ]
     },
@@ -3901,36 +4026,41 @@
     },
     {
      "location": "Ice Path",
-     "quests": [
+     "quests": [],
+     "note": "'Players are required to wear spiked boots to use the ice ledge'. Spiked boots are part of the DT1 ice route. Not worth doing.",
+     "partialQuests": [
       "Desert Treasure I"
-     ],
-     "note": "'Players are required to wear spiked boots to use the ice ledge'. Spiked boots are part of the DT1 ice route. Not worth doing."
+     ]
     },
     {
      "location": "Troll Stronghold (location)",
-     "quests": [
+     "quests": [],
+     "partialQuests": [
       "Troll Stronghold"
      ]
     },
     {
      "location": "Troll Arena",
-     "quests": [
+     "quests": [],
+     "note": "'Players can enter the area during and after the Troll Stronghold quest.'",
+     "partialQuests": [
       "Troll Stronghold"
-     ],
-     "note": "'Players can enter the area during and after the Troll Stronghold quest.'"
+     ]
     },
     {
      "location": "Troll arena",
-     "quests": [
+     "quests": [],
+     "partialQuests": [
       "Troll Stronghold"
      ]
     },
     {
      "location": "Trollheim",
-     "quests": [
+     "quests": [],
+     "note": "Probably needs Death Plateau/Troll Stronghold progress to reach (medium confidence).",
+     "partialQuests": [
       "Troll Stronghold"
-     ],
-     "note": "Probably needs Death Plateau/Troll Stronghold progress to reach (medium confidence)."
+     ]
     },
     {
      "location": "Enchanted Valley",
@@ -4044,31 +4174,35 @@
    "locationGates": [
     {
      "location": "Burgh de Rott",
-     "quests": [
+     "quests": [],
+     "partialQuests": [
       "In Aid of the Myreque"
      ]
     },
     {
      "location": "Darkmeyer",
-     "quests": [
+     "quests": [],
+     "note": "Started for access; Vyrewatch Sentinels need it completed.",
+     "partialQuests": [
       "Sins of the Father"
-     ],
-     "note": "Started for access; Vyrewatch Sentinels need it completed."
+     ]
     },
     {
      "location": "Darkmeyer",
      "monster": "Vyrewatch Sentinel",
-     "quests": [
+     "quests": [],
+     "note": "Completion required.",
+     "partialQuests": [
       "Sins of the Father"
-     ],
-     "note": "Completion required."
+     ]
     },
     {
      "location": "Meiyerditch",
-     "quests": [
+     "quests": [],
+     "note": "Started.",
+     "partialQuests": [
       "Darkness of Hallowvale"
-     ],
-     "note": "Started."
+     ]
     },
     {
      "location": "Apsul Hunting Ground",
@@ -4086,10 +4220,11 @@
     },
     {
      "location": "God Wars Dungeon",
-     "quests": [
+     "quests": [],
+     "note": "Partial completion of Troll Stronghold plus 60 Strength or 60 Agility; a Rope is needed on the first visit. GWD-related Slayer assignments need Death Plateau.",
+     "partialQuests": [
       "Troll Stronghold"
-     ],
-     "note": "Partial completion of Troll Stronghold plus 60 Strength or 60 Agility; a Rope is needed on the first visit. GWD-related Slayer assignments need Death Plateau."
+     ]
     },
     {
      "location": "Wilderness God Wars Dungeon",
@@ -4192,10 +4327,11 @@
    "locationGates": [
     {
      "location": "Ancient Cavern",
-     "quests": [
+     "quests": [],
+     "note": "Needs the first part of Barbarian Firemaking (35 Firemaking), then asking Otto about pyre ships. Access is also needed for the task to be assigned at all.",
+     "partialQuests": [
       "Barbarian Training"
-     ],
-     "note": "Needs the first part of Barbarian Firemaking (35 Firemaking), then asking Otto about pyre ships. Access is also needed for the task to be assigned at all."
+     ]
     },
     {
      "location": "Iorwerth Dungeon",
@@ -4230,10 +4366,11 @@
     },
     {
      "location": "God Wars Dungeon",
-     "quests": [
+     "quests": [],
+     "note": "GWD werewolves are aggressive unless you wear a Zamorak item.",
+     "partialQuests": [
       "Troll Stronghold"
-     ],
-     "note": "GWD werewolves are aggressive unless you wear a Zamorak item."
+     ]
     }
    ],
    "notes": "There's no task page. Full list: Werewolf only, and monstersAdd replaces the generated entry, which had empty locations. Canifis werewolves count only if killed after they transform (a Wolfbane kill in human form doesn't count). Bronzeman catch: in Canifis you click attack on the human NPC (Boris, Eduard, Galina, etc.; all 20 have their own cards), so Bronzeman may check that human card rather than 'Werewolf'. The GWD werewolves avoid this. Werewolves do NOT count for wolf tasks.",
@@ -4256,31 +4393,35 @@
     },
     {
      "location": "Trollweiss Mountain",
-     "quests": [
+     "quests": [],
+     "note": "Ice wolves at the top; also needs a sled.",
+     "partialQuests": [
       "Troll Romance"
-     ],
-     "note": "Ice wolves at the top; also needs a sled."
+     ]
     },
     {
      "location": "Ice Path",
-     "quests": [
+     "quests": [],
+     "note": "Ice Path needs spiked boots (no card found).",
+     "partialQuests": [
       "Desert Treasure I"
-     ],
-     "note": "Ice Path needs spiked boots (no card found)."
+     ]
     },
     {
      "location": "God Wars Dungeon",
-     "quests": [
+     "quests": [],
+     "note": "Ice wolves outside the GWD entrance; Trollheim access.",
+     "partialQuests": [
       "Troll Stronghold"
-     ],
-     "note": "Ice wolves outside the GWD entrance; Trollheim access."
+     ]
     },
     {
      "location": "Kharazi Jungle",
-     "quests": [
+     "quests": [],
+     "note": "Jungle wolves; Legends' Quest started.",
+     "partialQuests": [
       "Legends' Quest"
-     ],
-     "note": "Jungle wolves; Legends' Quest started."
+     ]
     },
     {
      "location": "Weiss",
@@ -4310,19 +4451,21 @@
     },
     {
      "location": "Wyrmscraig Cavern",
-     "quests": [
-      "Fallen From Grace"
-     ],
+     "quests": [],
      "access": "sailing",
-     "note": "Wiki: 'accessible after partial completion of Fallen From Grace'; Wyrmscraig island needs 62 Sailing."
+     "note": "Wiki: 'accessible after partial completion of Fallen From Grace'; Wyrmscraig island needs 62 Sailing.",
+     "partialQuests": [
+      "Fallen From Grace"
+     ]
     },
     {
      "location": "Neypotzli",
-     "quests": [
-      "Perilous Moons"
-     ],
+     "quests": [],
      "access": "varlamore",
-     "note": "Wiki Neypotzli: 'Accessing Neypotzli requires having gained access during the Perilous Moons quest' (partial)."
+     "note": "Wiki Neypotzli: 'Accessing Neypotzli requires having gained access during the Perilous Moons quest' (partial).",
+     "partialQuests": [
+      "Perilous Moons"
+     ]
     },
     {
      "location": "Charred Dungeon",
@@ -4357,17 +4500,19 @@
    "locationGates": [
     {
      "location": "Ape Atoll Dungeon",
-     "quests": [
+     "quests": [],
+     "note": "Partial.",
+     "partialQuests": [
       "Monkey Madness I"
-     ],
-     "note": "Partial."
+     ]
     },
     {
      "location": "Temple of Marimbo Dungeon",
-     "quests": [
+     "quests": [],
+     "note": "Partial.",
+     "partialQuests": [
       "Monkey Madness I"
-     ],
-     "note": "Partial."
+     ]
     },
     {
      "location": "Shade Catacombs",
@@ -4378,53 +4523,59 @@
     },
     {
      "location": "Ungael",
-     "quests": [
+     "quests": [],
+     "note": "Vorkath; partial.",
+     "partialQuests": [
       "Dragon Slayer II"
-     ],
-     "note": "Vorkath; partial."
+     ]
     },
     {
      "location": "Braindeath Island",
-     "quests": [
+     "quests": [],
+     "note": "Partial.",
+     "partialQuests": [
       "Rum Deal"
-     ],
-     "note": "Partial."
+     ]
     },
     {
      "location": "Harmony Island",
-     "quests": [
-      "Rum Deal",
+     "quests": [],
+     "note": "Wiki (Harmony Island): \"can only be accessed after starting The Great Brain Robbery\" (Rum Deal is Braindeath Island)",
+     "partialQuests": [
       "The Great Brain Robbery"
-     ],
-     "note": "The variant table says Rum Deal, the location table says The Great Brain Robbery (partial). Medium confidence on which one."
+     ]
     },
     {
      "location": "Melzar's Maze",
-     "quests": [
+     "quests": [],
+     "note": "Zombie rats; partial.",
+     "partialQuests": [
       "Dragon Slayer I"
-     ],
-     "note": "Zombie rats; partial."
+     ]
     },
     {
      "location": "Jiggig",
-     "quests": [
+     "quests": [],
+     "note": "Partial.",
+     "partialQuests": [
       "Zogre Flesh Eaters"
-     ],
-     "note": "Partial."
+     ]
     },
     {
      "location": "Jiggig Dungeon",
-     "quests": [
+     "quests": [],
+     "note": "Partial.",
+     "partialQuests": [
       "Zogre Flesh Eaters"
-     ],
-     "note": "Partial."
+     ]
     },
     {
      "location": "Zemouregal's Base",
-     "quests": [
+     "quests": [],
+     "note": "Partial.",
+     "partialQuests": [
       "Defender of Varrock"
-     ],
-     "note": "Partial."
+     ]
     },
     {
      "location": "Zemouregal's Fort",
@@ -4442,17 +4593,19 @@
     },
     {
      "location": "Glarial's Tomb",
-     "quests": [
+     "quests": [],
+     "note": "Partial; no weapons, armour or runes allowed.",
+     "partialQuests": [
       "Waterfall Quest"
-     ],
-     "note": "Partial; no weapons, armour or runes allowed."
+     ]
     },
     {
      "location": "West Ardougne",
-     "quests": [
+     "quests": [],
+     "note": "Partial.",
+     "partialQuests": [
       "Plague City"
-     ],
-     "note": "Partial."
+     ]
     },
     {
      "location": "Wizards' Guild",

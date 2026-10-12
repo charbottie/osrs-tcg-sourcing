@@ -339,12 +339,13 @@
     "label": "Ape Atoll access",
     "routes": [
       {
-        "label": "Daero (Grand Tree) → Waydar's glider → Lumdo's boat from Crash Island (none have cards)",
+        "label": "Daero (Grand Tree) → Waydar's glider → Lumdo's boat from Crash Island (none have cards) — open during Monkey Madness I",
         "cards": [],
-        "quests": [
+        "quests": [],
+        "wiki": "Ape Atoll: \"Initial access ... requires the player to first travel via Lumdo on Crash Island during Monkey Madness I.\" (partial MM1 modelled as complete)",
+        "partialQuests": [
           "Monkey Madness I"
-        ],
-        "wiki": "Ape Atoll: \"Initial access ... requires the player to first travel via Lumdo on Crash Island during Monkey Madness I.\" (partial MM1 modelled as complete)"
+        ]
       },
       {
         "label": "Fairy ring CLR — needs Agility 48 + ninja/kruk greegree to leave the agility course",
@@ -393,7 +394,8 @@
       "https://oldschool.runescape.wiki/w/Ape_Atoll",
       "https://oldschool.runescape.wiki/w/Fairy_ring",
       "https://oldschool.runescape.wiki/w/Ape_Atoll_Teleport_(standard)"
-    ]
+    ],
+    "note": "Wiki (Ape Atoll): \"only accessible to players who have partially or fully completed the Monkey Madness I quest\"; other routes need it complete"
   },
   "prifddinas": {
     "label": "Prifddinas access",
@@ -503,12 +505,15 @@
         "wiki": "Fairy ring BJS: \"Requires completion of the Regicide quest. 76 Agility is needed to jump off the island.\""
       },
       {
-        "label": "Underground Pass after starting Regicide (planner can't check a started quest)",
+        "label": "Underground Pass after starting Regicide",
         "manual": true,
         "quests": [
           "Underground Pass"
         ],
-        "wiki": "Tirannwn: \"It can initially only be accessed via the Underground Pass after starting Regicide.\""
+        "wiki": "Tirannwn: \"It can initially only be accessed via the Underground Pass after starting Regicide.\"",
+        "partialQuests": [
+          "Regicide"
+        ]
       }
     ],
     "sources": [
@@ -516,7 +521,8 @@
       "https://oldschool.runescape.wiki/w/Isafdar",
       "https://oldschool.runescape.wiki/w/Lletya",
       "https://oldschool.runescape.wiki/w/Fairy_ring"
-    ]
+    ],
+    "note": "Wiki (Tirannwn): \"initially only be accessed via the Underground Pass after starting Regicide. Other ways of entry are all only available after completion of Regicide\""
   },
   "mos_le_harmless": {
     "label": "Mos Le'Harmless access",
@@ -627,10 +633,11 @@
         "areas": [
           "desert"
         ],
-        "quests": [
+        "quests": [],
+        "wiki": "Sophanem: \"The magic carpet system can also be used to travel to Sophanem from southern Pollnivneach after starting Icthlarin's Little Helper.\" (started modelled as complete)",
+        "partialQuests": [
           "Icthlarin's Little Helper"
-        ],
-        "wiki": "Sophanem: \"The magic carpet system can also be used to travel to Sophanem from southern Pollnivneach after starting Icthlarin's Little Helper.\" (started modelled as complete)"
+        ]
       },
       {
         "label": "Fairy ring AKP (Necropolis) — Agility 62, Beneath Cursed Sands",
@@ -641,30 +648,34 @@
           ]
         ],
         "quests": [
-          "Icthlarin's Little Helper",
           "Beneath Cursed Sands",
           "Fairytale I - Growing Pains"
         ],
         "skills": {
           "Agility": 62
         },
-        "wiki": "Sophanem: \"Fairy ring AKP — Necropolis island. Requires 62 Agility and completion of Beneath Cursed Sands.\""
+        "wiki": "Sophanem: \"Fairy ring AKP — Necropolis island. Requires 62 Agility and completion of Beneath Cursed Sands.\"",
+        "partialQuests": [
+          "Icthlarin's Little Helper"
+        ]
       },
       {
         "label": "Pharaoh's sceptre teleport to Jalsavrah (Pyramid Plunder)",
         "cards": [
           "Pharaoh's sceptre"
         ],
-        "quests": [
+        "quests": [],
+        "wiki": "Sophanem: \"Pharaoh's sceptre — Pyramid Plunder minigame (Jalsavrah).\"",
+        "partialQuests": [
           "Icthlarin's Little Helper"
-        ],
-        "wiki": "Sophanem: \"Pharaoh's sceptre — Pyramid Plunder minigame (Jalsavrah).\""
+        ]
       }
     ],
     "sources": [
       "https://oldschool.runescape.wiki/w/Sophanem",
       "https://oldschool.runescape.wiki/w/Fairy_ring"
-    ]
+    ],
+    "note": "Wiki (Sophanem): \"players need to partially progress through Icthlarin's Little Helper\""
   },
   "wilderness": {
     "label": "Wilderness access",

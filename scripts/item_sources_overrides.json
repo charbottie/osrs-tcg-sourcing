@@ -1,5 +1,7 @@
 {
  "_comment": "Hand-checked fixes applied on top of generate_sources.py output (whole field replaced; null = remove the field). Gathering levels/xp/quests/access checked against the OSRS Wiki 2026-10-11; Vale offerings is a Vale Totems reward (activity source), not a Construction recipe.",
+ "_comment_shops": "Lost Property shop (Perdu/Chris) is an item retrieval service, not a source: wiki 'Players are able to retrieve certain items that might have been lost for a fee' (the item must have been obtained first). Sellers ending 'Demonic Pacts League' are Leagues-only stock (the wiki marks them with the league name). Both removed from 'shops' (shopBought false when nothing is left), 2026-10-11 pack-vs-source pass. Better fixed in generate_sources.py / item_scraper.py so these rows never enter 'shops'; then these overrides can go.",
+ "_comment_spawns": "Spawn rows the wiki marks '(unobtainable)' removed from 'spawns' (2026-10-11).",
  "Arctic pine logs": {
   "gathering": {
    "skill": "Woodcutting",
@@ -502,5 +504,685 @@
    "xp": 54.5,
    "plant_xp": 48.5
   }
+ },
+ "Boots of lightness": {
+  "shops": [],
+  "shopBought": false
+ },
+ "Pestle and mortar": {
+  "shops": [
+   {
+    "seller": "The Lighthouse Store",
+    "price": 4,
+    "currency": "Coins"
+   },
+   {
+    "seller": "Frincos' Fabulous Herb Store.",
+    "price": 4,
+    "currency": "Coins"
+   },
+   {
+    "seller": "Grud's Herblore Stall.",
+    "price": 5,
+    "currency": "Coins"
+   },
+   {
+    "seller": "Jatix's Herblore Shop.",
+    "price": 4,
+    "currency": "Coins"
+   },
+   {
+    "seller": "Obli's General Store.",
+    "price": 6,
+    "currency": "Coins"
+   },
+   {
+    "seller": "Obli's General Store.(Karamja gloves)",
+    "price": 5,
+    "currency": "Coins"
+   },
+   {
+    "seller": "Jiminua's Jungle Store.",
+    "price": 6,
+    "currency": "Coins"
+   },
+   {
+    "seller": "Jiminua's Jungle Store.(Karamja gloves 3+)",
+    "price": 5,
+    "currency": "Coins"
+   },
+   {
+    "seller": "Sigmund the Merchant (shop)",
+    "price": 5,
+    "currency": "Coins"
+   },
+   {
+    "seller": "Gunslik's Assorted Items",
+    "price": 5,
+    "currency": "Coins"
+   },
+   {
+    "seller": "Myths' Guild Herbalist",
+    "price": 4,
+    "currency": "Coins"
+   },
+   {
+    "seller": "Prifddinas Herbal Supplies",
+    "price": 4,
+    "currency": "Coins"
+   },
+   {
+    "seller": "Sunset Coast General Store",
+    "price": 5,
+    "currency": "Coins"
+   },
+   {
+    "seller": "Huito's Herbal Supplies",
+    "price": 4,
+    "currency": "Coins"
+   },
+   {
+    "seller": "Cam Torum General Store",
+    "price": 5,
+    "currency": "Coins"
+   },
+   {
+    "seller": "Quetzacalli Gorge General Store",
+    "price": 5,
+    "currency": "Coins"
+   },
+   {
+    "seller": "Auburnvale General Store",
+    "price": 5,
+    "currency": "Coins"
+   },
+   {
+    "seller": "Tal Teklan General Store",
+    "price": 5,
+    "currency": "Coins"
+   },
+   {
+    "seller": "Elder Raley's Herblore Stall",
+    "price": 4,
+    "currency": "Coins"
+   },
+   {
+    "seller": "Port Roberts General Store",
+    "price": 5,
+    "currency": "Coins"
+   }
+  ],
+  "shopBought": true
+ },
+ "Bones": {
+  "spawns": [
+   "Wilderness Agility Course",
+   "Wilderness - Bone Yard",
+   "Wilderness - by Larran's small chest",
+   "Wilderness - Chaos Temple",
+   "Wilderness",
+   "Wilderness - The Forgotten Cemetery",
+   "Wilderness - Scorpion Pit",
+   "Wilderness - Deep Wilderness Dungeon",
+   "Kebos Lowlands",
+   "Shayzien - Giants' Den entrance",
+   "Shayzien - Giant Pit",
+   "Shayzien",
+   "Land's End",
+   "Inside Gu'Tanoth",
+   "Kandarin - island north of Gu'Tanoth",
+   "Kandarin",
+   "Feldip Hills",
+   "Giants' Plateau",
+   "Isle of Souls - Crumbling Tower (basement)",
+   "Rellekka - near the rock crabs",
+   "Ourania Cave entrance",
+   "Digsite",
+   "Melzar's Maze , ( 2 nd floor 3 rd floor )",
+   "Slepe - Crombwick Manor",
+   "Chaos Druid Tower dungeon",
+   "Brimhaven Dungeon (task-only area)",
+   "Crandor and Karamja Dungeon",
+   "Kruk's Dungeon - hunter area",
+   "Desert Mining Camp - underground mine",
+   "Digsite Dungeon",
+   "Weiss - Salt Mines",
+   "Edgeville Dungeon",
+   "Edgeville Dungeon - Wilderness",
+   "Edgeville Dungeon - Obor's lair",
+   "Varrock Sewers",
+   "Slayer Tower basement",
+   "Observatory Dungeon",
+   "Ogre Enclave",
+   "Skavid Caves",
+   "Taverley Dungeon",
+   "Entrana Dungeon",
+   "Temple of Ikov",
+   "Tutorial Island Dungeon",
+   "Ruins of Ullek",
+   "South",
+   "North of the Fortis Colosseum",
+   "Civitas illa Fortis",
+   "Lovakengj",
+   "Shipwreck Cove",
+   "Ruins of Tapoyauik",
+   "East of Mistrock",
+   "Colossal Wyrm (2 require telegrab)",
+   "Base of Trollweiss Mountain",
+   "Pandemonium Cave",
+   "Isle of Bones",
+   "Hallowed Sepulchre - floor 1 (1 requires telegrab)",
+   "Hallowed Sepulchre - floor 2"
+  ]
+ },
+ "Iron knife": {
+  "shops": [
+   {
+    "seller": "Martin Thwait's Lost and Found.",
+    "price": 3,
+    "currency": "Coins"
+   }
+  ],
+  "shopBought": true
+ },
+ "Bronze knife": {
+  "shops": [
+   {
+    "seller": "Martin Thwait's Lost and Found.",
+    "price": 1,
+    "currency": "Coins"
+   }
+  ],
+  "shopBought": true
+ },
+ "Steel knife": {
+  "shops": [
+   {
+    "seller": "Martin Thwait's Lost and Found.",
+    "price": 11,
+    "currency": "Coins"
+   }
+  ],
+  "shopBought": true
+ },
+ "Papyrus": {
+  "spawns": [
+   "Civitas illa Fortis - Sunrise Palace ( 1 st floor 2 nd floor )",
+   "Hosidius",
+   "Hosidius - Jonathan 's house ( 1 st floor 2 nd floor )",
+   "Legends' Guild",
+   "Kebos Lowlands - General Vir 's tent in the Battlefront",
+   "Desert Mining Camp - Captain Siad 's office ( 1 st floor 2 nd floor )",
+   "Slepe",
+   "The Teomat"
+  ]
+ },
+ "Cape of legends": {
+  "shops": [
+   {
+    "seller": "Legends Guild Shop of Useful Items.",
+    "price": 675,
+    "currency": "Coins"
+   }
+  ],
+  "shopBought": true
+ },
+ "Iron dagger": {
+  "shops": [
+   {
+    "seller": "Varrock Swordshop",
+    "price": 35,
+    "currency": "Coins"
+   },
+   {
+    "seller": "Blades by Urbi.",
+    "price": 52,
+    "currency": "Coins"
+   },
+   {
+    "seller": "Warrior Guild Armoury",
+    "price": 42,
+    "currency": "Coins"
+   },
+   {
+    "seller": "Briget's Weapons",
+    "price": 35,
+    "currency": "Coins"
+   },
+   {
+    "seller": "Cam Torum Blacksmith",
+    "price": 35,
+    "currency": "Coins"
+   }
+  ],
+  "shopBought": true
+ },
+ "Bronze dagger": {
+  "shops": [
+   {
+    "seller": "Varrock Swordshop",
+    "price": 10,
+    "currency": "Coins"
+   },
+   {
+    "seller": "Blades by Urbi.",
+    "price": 15,
+    "currency": "Coins"
+   },
+   {
+    "seller": "Warrior Guild Armoury",
+    "price": 12,
+    "currency": "Coins"
+   },
+   {
+    "seller": "Briget's Weapons",
+    "price": 10,
+    "currency": "Coins"
+   },
+   {
+    "seller": "Cam Torum Blacksmith",
+    "price": 10,
+    "currency": "Coins"
+   }
+  ],
+  "shopBought": true
+ },
+ "Steel dagger": {
+  "shops": [
+   {
+    "seller": "Varrock Swordshop",
+    "price": 125,
+    "currency": "Coins"
+   },
+   {
+    "seller": "Blades by Urbi.",
+    "price": 187,
+    "currency": "Coins"
+   },
+   {
+    "seller": "Warrior Guild Armoury",
+    "price": 150,
+    "currency": "Coins"
+   },
+   {
+    "seller": "Briget's Weapons",
+    "price": 125,
+    "currency": "Coins"
+   },
+   {
+    "seller": "Cam Torum Blacksmith",
+    "price": 125,
+    "currency": "Coins"
+   }
+  ],
+  "shopBought": true
+ },
+ "Blood talisman": {
+  "shops": [
+   {
+    "seller": "Temple Supplies",
+    "price": 100,
+    "currency": "Abyssal pearls"
+   }
+  ],
+  "shopBought": true
+ },
+ "Gold ring": {
+  "spawns": [
+   "King Black Dragon Lair",
+   "Scabaras Dungeon",
+   "Hallowed Sepulchre - floor 2",
+   "Hallowed Sepulchre - floor 3",
+   "Hallowed Sepulchre - floor 4",
+   "Hallowed Sepulchre - floor 5"
+  ]
+ },
+ "Bowl of water": {
+  "spawns": [
+   "Hallowed Sepulchre - floor 4",
+   "Hosidius - Watson's house",
+   "Darkmeyer - middle tier",
+   "Desert Mining Camp",
+   "Slepe",
+   "Civitas illa Fortis"
+  ]
+ },
+ "Saradomin cape": {
+  "shops": [],
+  "shopBought": false
+ },
+ "Guthix cape": {
+  "shops": [],
+  "shopBought": false
+ },
+ "Zamorak cape": {
+  "shops": [],
+  "shopBought": false
+ },
+ "Bronze halberd": {
+  "shops": [
+   {
+    "seller": "Quartermaster's Stores",
+    "price": 104,
+    "currency": "Coins"
+   }
+  ],
+  "shopBought": true
+ },
+ "Iron halberd": {
+  "shops": [
+   {
+    "seller": "Quartermaster's Stores",
+    "price": 364,
+    "currency": "Coins"
+   }
+  ],
+  "shopBought": true
+ },
+ "Steel halberd": {
+  "shops": [
+   {
+    "seller": "Quartermaster's Stores",
+    "price": 1300,
+    "currency": "Coins"
+   }
+  ],
+  "shopBought": true
+ },
+ "Bearhead": {
+  "shops": [],
+  "shopBought": false
+ },
+ "Ghostly boots": {
+  "shops": [],
+  "shopBought": false
+ },
+ "Ghostly gloves": {
+  "shops": [],
+  "shopBought": false
+ },
+ "Ghostly cloak": {
+  "shops": [],
+  "shopBought": false
+ },
+ "Lunar staff": {
+  "shops": [
+   {
+    "seller": "Oneiromancer",
+    "price": 30000,
+    "currency": "Coins"
+   }
+  ],
+  "shopBought": true
+ },
+ "Lunar helm": {
+  "shops": [
+   {
+    "seller": "Oneiromancer",
+    "price": 15000,
+    "currency": "Coins"
+   }
+  ],
+  "shopBought": true
+ },
+ "Lunar torso": {
+  "shops": [
+   {
+    "seller": "Oneiromancer",
+    "price": 120000,
+    "currency": "Coins"
+   }
+  ],
+  "shopBought": true
+ },
+ "Lunar legs": {
+  "shops": [
+   {
+    "seller": "Oneiromancer",
+    "price": 80000,
+    "currency": "Coins"
+   }
+  ],
+  "shopBought": true
+ },
+ "Lunar gloves": {
+  "shops": [
+   {
+    "seller": "Oneiromancer",
+    "price": 10000,
+    "currency": "Coins"
+   }
+  ],
+  "shopBought": true
+ },
+ "Lunar boots": {
+  "shops": [
+   {
+    "seller": "Oneiromancer",
+    "price": 10000,
+    "currency": "Coins"
+   }
+  ],
+  "shopBought": true
+ },
+ "Lunar cape": {
+  "shops": [
+   {
+    "seller": "Oneiromancer",
+    "price": 12000,
+    "currency": "Coins"
+   }
+  ],
+  "shopBought": true
+ },
+ "Lunar amulet": {
+  "shops": [
+   {
+    "seller": "Oneiromancer",
+    "price": 4000,
+    "currency": "Coins"
+   }
+  ],
+  "shopBought": true
+ },
+ "Lunar ring": {
+  "shops": [
+   {
+    "seller": "Oneiromancer",
+    "price": 2000,
+    "currency": "Coins"
+   }
+  ],
+  "shopBought": true
+ },
+ "Bird snare": {
+  "shops": [
+   {
+    "seller": "Nardah Hunter Shop.",
+    "price": 6,
+    "currency": "Coins"
+   },
+   {
+    "seller": "Aleck's Hunter Emporium.",
+    "price": 6,
+    "currency": "Coins"
+   },
+   {
+    "seller": "Imia's Supplies",
+    "price": 6,
+    "currency": "Coins"
+   },
+   {
+    "seller": "Elder Strom's Hunting Stall",
+    "price": 6,
+    "currency": "Coins"
+   }
+  ],
+  "shopBought": true
+ },
+ "Box trap": {
+  "shops": [
+   {
+    "seller": "Nardah Hunter Shop.",
+    "price": 38,
+    "currency": "Coins"
+   },
+   {
+    "seller": "Aleck's Hunter Emporium.",
+    "price": 38,
+    "currency": "Coins"
+   },
+   {
+    "seller": "Imia's Supplies",
+    "price": 41,
+    "currency": "Coins"
+   },
+   {
+    "seller": "Elder Strom's Hunting Stall",
+    "price": 38,
+    "currency": "Coins"
+   }
+  ],
+  "shopBought": true
+ },
+ "Hunters' crossbow": {
+  "shops": [
+   {
+    "seller": "Leon's Prototype Crossbow.",
+    "price": 1300,
+    "currency": "Coins"
+   }
+  ],
+  "shopBought": true
+ },
+ "Ava's attractor": {
+  "shops": [
+   {
+    "seller": "Ava",
+    "price": 999,
+    "currency": "Coins"
+   }
+  ],
+  "shopBought": true
+ },
+ "Helm of Neitiznot": {
+  "shops": [
+   {
+    "seller": "Mawnis Burowgar",
+    "price": 50000,
+    "currency": "Coins"
+   }
+  ],
+  "shopBought": true
+ },
+ "Barrelchest anchor": {
+  "shops": [],
+  "shopBought": false
+ },
+ "Dwarven helmet": {
+  "shops": [
+   {
+    "seller": "Rupert the Beard",
+    "price": 60000,
+    "currency": "Coins"
+   }
+  ],
+  "shopBought": true
+ },
+ "Karamja gloves": {
+  "shops": [],
+  "shopBought": false
+ },
+ "Varrock armour": {
+  "shops": [],
+  "shopBought": false
+ },
+ "Wilderness sword": {
+  "shops": [],
+  "shopBought": false
+ },
+ "Morytania legs": {
+  "shops": [],
+  "shopBought": false
+ },
+ "Falador shield": {
+  "shops": [],
+  "shopBought": false
+ },
+ "Ardougne cloak": {
+  "shops": [],
+  "shopBought": false
+ },
+ "Explorer's ring": {
+  "shops": [],
+  "shopBought": false
+ },
+ "Fremennik sea boots": {
+  "shops": [],
+  "shopBought": false
+ },
+ "Desert amulet": {
+  "shops": [],
+  "shopBought": false
+ },
+ "Kandarin headgear": {
+  "shops": [],
+  "shopBought": false
+ },
+ "Western banner": {
+  "shops": [],
+  "shopBought": false
+ },
+ "Chronicle": {
+  "shops": [
+   {
+    "seller": "Diango's Toy Store",
+    "price": 300,
+    "currency": "Coins"
+   }
+  ],
+  "shopBought": true
+ },
+ "Imbued saradomin cape": {
+  "shops": [],
+  "shopBought": false
+ },
+ "Imbued guthix cape": {
+  "shops": [],
+  "shopBought": false
+ },
+ "Imbued zamorak cape": {
+  "shops": [],
+  "shopBought": false
+ },
+ "Ava's assembler": {
+  "shops": [],
+  "shopBought": false
+ },
+ "Wrath talisman": {
+  "shops": [],
+  "shopBought": false
+ },
+ "Rada's blessing": {
+  "shops": [],
+  "shopBought": false
+ },
+ "Book of the dead": {
+  "shops": [],
+  "shopBought": false
+ },
+ "Colossal blade": {
+  "shops": [
+   {
+    "seller": "Giants' Foundry Reward Shop",
+    "price": 5000,
+    "currency": "Foundry reputation"
+   }
+  ],
+  "shopBought": true
+ },
+ "Thread of elidinis": {
+  "shops": [],
+  "shopBought": false
  }
 }

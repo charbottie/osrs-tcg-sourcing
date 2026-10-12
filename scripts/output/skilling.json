@@ -267,14 +267,15 @@
     ]
    }
   ],
-  "quests": [
-   "Cold War"
-  ],
+  "quests": [],
   "levels": {},
   "access": null,
   "note": "Needs a clockwork suit in inventory to transform (no TCG card for Clockwork suit). Iceberg access via Cold War (partial).",
   "wiki": "\"rewards 540 Agility experience per completed lap\" ... \"transform into a penguin, which can be done by talking to Larry with a clockwork suit\"",
-  "page": "Penguin Agility Course"
+  "page": "Penguin Agility Course",
+  "partialQuests": [
+   "Cold War"
+  ]
  },
  {
   "skill": "Agility",
@@ -333,14 +334,15 @@
     "note": "Small/medium ninja or Kruk greegree (versions of Monkey greegree card)"
    }
   ],
-  "quests": [
-   "Monkey Madness I"
-  ],
+  "quests": [],
   "levels": {},
   "access": "ape_atoll",
   "note": "Level 48 cannot be boosted. Only Chapter 2 of Monkey Madness I is needed (modelled as the quest).",
   "wiki": "\"available to players with level 48 Agility (cannot be boosted). Access to this course requires partial completion of Monkey Madness I\" ... \"has to wear either the small or medium-sized ninja monkey greegree or the Kruk monkey greegree\" ... \"rewards 580 Agility experience per completed lap\"",
-  "page": "Ape Atoll Agility Course"
+  "page": "Ape Atoll Agility Course",
+  "partialQuests": [
+   "Monkey Madness I"
+  ]
  },
  {
   "skill": "Agility",
@@ -546,7 +548,9 @@
   "access": null,
   "note": "Obtained after Scrambled!. No TCG card exists for this item, so it is unrestricted.",
   "wiki": "Prayer info: level = 1, xp = 3, type = bone; options: Bury",
-  "page": "Alan's bones"
+  "page": "Alan's bones",
+  "recommend": false,
+  "recNote": "no card and no modelled source for the bones/ashes"
  },
  {
   "skill": "Prayer",
@@ -560,7 +564,9 @@
   "access": null,
   "note": "Skeletal gorilla bones; crumble to ashes if carried out of the Ape Atoll Dungeon. No TCG card exists for this item, so it is unrestricted.",
   "wiki": "Prayer info: level = 1, xp = 3, type = bone; options: Bury",
-  "page": "Bones (Ape Atoll)"
+  "page": "Bones (Ape Atoll)",
+  "recommend": false,
+  "recNote": "no card and no modelled source for the bones/ashes"
  },
  {
   "skill": "Prayer",
@@ -853,7 +859,9 @@
   "access": null,
   "note": "No TCG card exists for this item, so it is unrestricted.",
   "wiki": "Prayer info: level = 1, xp = 16, type = bone; options: Bury",
-  "page": "Small ninja monkey bones"
+  "page": "Small ninja monkey bones",
+  "recommend": false,
+  "recNote": "no card and no modelled source for the bones/ashes"
  },
  {
   "skill": "Prayer",
@@ -867,7 +875,9 @@
   "access": null,
   "note": "18 xp for the burnt variant. No TCG card exists for this item, so it is unrestricted.",
   "wiki": "Prayer info: level = 1, xp = 17, type = bone; options: Bury",
-  "page": "Marinated j' bones"
+  "page": "Marinated j' bones",
+  "recommend": false,
+  "recNote": "no card and no modelled source for the bones/ashes"
  },
  {
   "skill": "Prayer",
@@ -903,7 +913,9 @@
   "access": null,
   "note": "No TCG card exists for this item, so it is unrestricted.",
   "wiki": "Prayer info: level = 1, xp = 18, type = bone; options: Bury",
-  "page": "Medium ninja monkey bones"
+  "page": "Medium ninja monkey bones",
+  "recommend": false,
+  "recNote": "no card and no modelled source for the bones/ashes"
  },
  {
   "skill": "Prayer",
@@ -1023,7 +1035,9 @@
   "access": null,
   "note": "No TCG card exists for this item, so it is unrestricted.",
   "wiki": "Prayer info: level = 1, xp = 35, type = bone; options: Bury",
-  "page": "Monodon bones"
+  "page": "Monodon bones",
+  "recommend": false,
+  "recNote": "no card and no modelled source for the bones/ashes"
  },
  {
   "skill": "Prayer",
@@ -3399,14 +3413,15 @@
     ]
    }
   ],
-  "quests": [
-   "Zogre Flesh Eaters"
-  ],
+  "quests": [],
   "levels": {},
   "access": null,
   "note": "Fires ogre arrows and brutal arrows only, none of which have cards (ammo unrestricted). Needs a talk with Grish part-way through Zogre Flesh Eaters (before the final battle), not full completion.",
   "wiki": "It requires 30 Ranged to wield. In order to equip this bow, players must first speak with Grish after reaching a certain point in the Zogre Flesh Eaters",
-  "page": "Comp ogre bow"
+  "page": "Comp ogre bow",
+  "partialQuests": [
+   "Zogre Flesh Eaters"
+  ]
  },
  {
   "skill": "Ranged",
@@ -6998,14 +7013,15 @@
     ]
    }
   ],
-  "quests": [
-   "While Guthix Sleeps"
-  ],
+  "quests": [],
   "levels": {},
   "access": null,
   "note": "Quest-only creature (partial While Guthix Sleeps), caught in a special pitfall in the Feldip Hunter area and trained into the broav pet. It isn't a training method. The wiki gives no knife/logs/teasing requirement for this trap.",
   "wiki": "\"caught during the quest While Guthix Sleeps in the Feldip Hills, using a special pitfall trap and a Mort Myre fungus as bait\"",
-  "page": "Wild broav"
+  "page": "Wild broav",
+  "partialQuests": [
+   "While Guthix Sleeps"
+  ]
  },
  {
   "skill": "Hunter",
@@ -7022,14 +7038,15 @@
     ]
    }
   ],
-  "quests": [
-   "Eagles' Peak"
-  ],
+  "quests": [],
   "levels": {},
   "access": null,
   "note": "Piscatoris Hunter area. Trapped passively, so the creature's card isn't needed.",
   "wiki": "\"Using a box trap requires the specific Hunter level needed for the prey, as well as partial completion of the Eagles' Peak quest.\"",
-  "page": "Box trap"
+  "page": "Box trap",
+  "partialQuests": [
+   "Eagles' Peak"
+  ]
  },
  {
   "skill": "Hunter",
@@ -7046,14 +7063,15 @@
     ]
    }
   ],
-  "quests": [
-   "Eagles' Peak"
-  ],
+  "quests": [],
   "levels": {},
   "access": "varlamore",
   "note": "Locus Oasis and west of the Hunter Guild. Trapped passively, so the creature's card isn't needed. (The Embertailed jerboa NPC has a card, but the box trap catches it with no interaction.)",
   "wiki": "\"Using a box trap requires the specific Hunter level needed for the prey, as well as partial completion of the Eagles' Peak quest.\"",
-  "page": "Box trap"
+  "page": "Box trap",
+  "partialQuests": [
+   "Eagles' Peak"
+  ]
  },
  {
   "skill": "Hunter",
@@ -7078,14 +7096,15 @@
     "optional": true
    }
   ],
-  "quests": [
-   "Eagles' Peak"
-  ],
+  "quests": [],
   "levels": {},
   "access": null,
   "note": "Piscatoris Hunter area (also Isle of Souls, Kourend Woodland). Trapped passively, so the creature's card isn't needed.",
   "wiki": "\"Using a box trap requires the specific Hunter level needed for the prey, as well as partial completion of the Eagles' Peak quest.\"",
-  "page": "Box trap"
+  "page": "Box trap",
+  "partialQuests": [
+   "Eagles' Peak"
+  ]
  },
  {
   "skill": "Hunter",
@@ -7110,14 +7129,15 @@
     "optional": true
    }
   ],
-  "quests": [
-   "Eagles' Peak"
-  ],
+  "quests": [],
   "levels": {},
   "access": null,
   "note": "Feldip Hunter area (also Gwenith Hunter area [Song of the Elves], red chinchompa hunting ground [hard Western Provinces Diary], Tlati Rainforest, The Great Conch). Trapped passively, so the creature's card isn't needed.",
   "wiki": "\"Using a box trap requires the specific Hunter level needed for the prey, as well as partial completion of the Eagles' Peak quest.\"",
-  "page": "Box trap"
+  "page": "Box trap",
+  "partialQuests": [
+   "Eagles' Peak"
+  ]
  },
  {
   "skill": "Hunter",
@@ -7142,14 +7162,15 @@
     "optional": true
    }
   ],
-  "quests": [
-   "Eagles' Peak"
-  ],
+  "quests": [],
   "levels": {},
   "access": "wilderness",
   "note": "Wilderness Hunter area (lvl 32-36 Wilderness); one extra trap allowed. Trapped passively, so the creature's card isn't needed.",
   "wiki": "\"Using a box trap requires the specific Hunter level needed for the prey, as well as partial completion of the Eagles' Peak quest.\"",
-  "page": "Box trap"
+  "page": "Box trap",
+  "partialQuests": [
+   "Eagles' Peak"
+  ]
  },
  {
   "skill": "Hunter",
@@ -7167,14 +7188,16 @@
    }
   ],
   "quests": [
-   "Eagles' Peak",
    "The Blood Moon Rises"
   ],
   "levels": {},
   "access": null,
   "note": "Apsul / Virer Hunting Grounds, Vampyrium. Trapped passively, so the creature's card isn't needed.",
   "wiki": "\"Using a box trap requires the specific Hunter level needed for the prey, as well as partial completion of the Eagles' Peak quest.\"",
-  "page": "Box trap"
+  "page": "Box trap",
+  "partialQuests": [
+   "Eagles' Peak"
+  ]
  },
  {
   "skill": "Hunter",
@@ -8435,9 +8458,7 @@
     ]
    }
   ],
-  "quests": [
-   "Pandemonium"
-  ],
+  "quests": [],
   "levels": {
    "Sailing": 1,
    "Construction": 10
@@ -8445,7 +8466,10 @@
   "access": "sailing",
   "note": "The Pandemonium (Sailing island). Quest gate is partial completion. Traps can't fail.",
   "wiki": "\"Red crabs can be caught on The Pandemonium, blue crabs on The Great Conch, and rainbow crabs on The Crown Jewel.\"",
-  "page": "Crab trapping"
+  "page": "Crab trapping",
+  "partialQuests": [
+   "Pandemonium"
+  ]
  },
  {
   "skill": "Hunter",
@@ -8488,9 +8512,7 @@
     ]
    }
   ],
-  "quests": [
-   "Troubled Tortugans"
-  ],
+  "quests": [],
   "levels": {
    "Sailing": 45,
    "Construction": 10
@@ -8498,7 +8520,10 @@
   "access": "sailing",
   "note": "The Great Conch (Sailing island). Quest gate is partial completion. Traps can't fail.",
   "wiki": "\"Red crabs can be caught on The Pandemonium, blue crabs on The Great Conch, and rainbow crabs on The Crown Jewel.\"",
-  "page": "Crab trapping"
+  "page": "Crab trapping",
+  "partialQuests": [
+   "Troubled Tortugans"
+  ]
  },
  {
   "skill": "Hunter",
@@ -9141,7 +9166,10 @@
   "access": "tirannwn",
   "note": "None of the pickpocketable elves (Arvel, Goreu, Kelyn, Mawrth) has a TCG card, so no card gate. Lletya also needs Mourning's End Part I started.",
   "wiki": "Elf |85 || 353.3 ... Partial completion of Mourning's End Part I to access Lletya.",
-  "page": "Thieving"
+  "page": "Thieving",
+  "partialQuests": [
+   "Mourning's End Part I"
+  ]
  },
  {
   "skill": "Thieving",
@@ -9221,7 +9249,10 @@
   "access": "desert",
   "note": "Villagers have no TCG card, so only the blackjack is gated. The 8 xp is per knock-out; after The Feud, pickpocketing villagers gives no xp. Needs The Feud progressed to the blackjacking section (not full completion; the planner can't track partial progress).",
   "wiki": "After the quest, they can only be pickpocketed using the blackjack method. A successful knockout on a villager grants 8 Thieving experience.",
-  "page": "Villager"
+  "page": "Villager",
+  "partialQuests": [
+   "The Feud"
+  ]
  },
  {
   "skill": "Thieving",
@@ -9253,7 +9284,10 @@
   "access": "desert",
   "note": "Needs The Feud progressed to the blackjacking section (not full completion; the planner can't track partial progress). XP is per pickpocket; each knock-out also gives XP.",
   "wiki": "Blackjacking requires level 45 Thieving, partial completion of The Feud, and a blackjack of any kind.",
-  "page": "Thieving training"
+  "page": "Thieving training",
+  "partialQuests": [
+   "The Feud"
+  ]
  },
  {
   "skill": "Thieving",
@@ -9285,7 +9319,10 @@
   "access": "desert",
   "note": "Needs The Feud progressed to the blackjacking section (not full completion; the planner can't track partial progress). XP is per pickpocket; each knock-out also gives XP.",
   "wiki": "the level 56 bandits have no beard ... and grant 84.3 experience and 50 coins per pickpocket.",
-  "page": "Bandit (Pollnivneach)"
+  "page": "Bandit (Pollnivneach)",
+  "partialQuests": [
+   "The Feud"
+  ]
  },
  {
   "skill": "Thieving",
@@ -9419,7 +9456,10 @@
   "access": null,
   "note": "Needs The Giant Dwarf started to enter Keldagrim (partial quest, not tracked)",
   "wiki": "Carefree Crafting Stall in Keldagrim (requires partial completion of The Giant Dwarf to access the city)",
-  "page": "Crafting stall"
+  "page": "Crafting stall",
+  "partialQuests": [
+   "The Giant Dwarf"
+  ]
  },
  {
   "skill": "Thieving",
@@ -9447,7 +9487,10 @@
   "access": null,
   "note": "Needs the Watchtower quest partly done (not tracked). Loot: rock cakes.",
   "wiki": "At level 15 Thieving, and after partial completion of the Watchtower quest, players may steal rock cakes from it.",
-  "page": "Counter (Gu'Tanoth)"
+  "page": "Counter (Gu'Tanoth)",
+  "partialQuests": [
+   "Watchtower"
+  ]
  },
  {
   "skill": "Thieving",
@@ -9607,7 +9650,10 @@
   "access": null,
   "note": "Needs The Giant Dwarf started to enter Keldagrim (partial quest, not tracked)",
   "wiki": "The only stall that can be stolen from is the one located in Keldagrim, requiring the partial completion of The Giant Dwarf to gain access to the city.",
-  "page": "Crossbow stall"
+  "page": "Crossbow stall",
+  "partialQuests": [
+   "The Giant Dwarf"
+  ]
  },
  {
   "skill": "Thieving",
@@ -10129,7 +10175,10 @@
   "access": null,
   "note": "Only during or after Cold War (partial quest, not tracked). The cows can't be attacked.",
   "wiki": "Steal cowbells from dairy cows | 15 | 16 | Cowbells",
-  "page": "Thieving"
+  "page": "Thieving",
+  "partialQuests": [
+   "Cold War"
+  ]
  },
  {
   "skill": "Thieving",
@@ -10735,7 +10784,10 @@
   "access": null,
   "note": "Requires PARTIAL completion of Recipe for Disaster/Freeing Pirate Pete (not listed in quests because only partial). Mermaid guide NPC has no card.",
   "wiki": "Sea charting tools: \"38 | Fishbowl helmet / Diving apparatus | Diving | 175 | Gather sea depth data after assisting a mermaid guide. It requires partial completion of the Freeing Pirate Pete subquest\"",
-  "page": "Sea charting"
+  "page": "Sea charting",
+  "partialQuests": [
+   "Recipe for Disaster/Freeing Pirate Pete"
+  ]
  },
  {
   "skill": "Sailing",
@@ -13642,7 +13694,10 @@
   "access": "morytania",
   "note": "Partial quest: Darkness of Hallowvale must be started (Meiyerditch). You are sent to the mine by a Vyrewatch; must mine 15 ore to leave unless The Blood Moon Rises is done or wearing vyre noble clothing.",
   "wiki": "\"A player with 20 Mining can mine ore from daeyalt rocks during and after the Darkness of Hallowvale quest, granting 17.5 experience for each ore mined.\"",
-  "page": "Daeyalt rocks"
+  "page": "Daeyalt rocks",
+  "partialQuests": [
+   "Darkness of Hallowvale"
+  ]
  },
  {
   "skill": "Mining",
@@ -14157,7 +14212,10 @@
   "access": null,
   "note": "Partial quest: Desert Treasure II (visit the Scar). Entered via the Catalytic Guardian in the Temple of the Eye. Hagus has no card.",
   "wiki": "\"It becomes accessible after partial completion of Desert Treasure II, up to the point where players visit the Scar and disturb all three passages. Players with level 64 Mining can speak to Hagus to receive permission to use the mine.\" Amalgamation infobox: \"xp = 6\"",
-  "page": "Scar essence mine"
+  "page": "Scar essence mine",
+  "partialQuests": [
+   "Desert Treasure II - The Fallen Empire"
+  ]
  },
  {
   "skill": "Mining",
@@ -14983,7 +15041,10 @@
   "access": null,
   "note": "Partial quest: Barbarian Training started (heavy rod section). Also gives 5 Strength and Agility xp per fish.",
   "wiki": "Fishing methods: \"Leaping trout | Fishing 48 | Agility 15, Strength 15, Barbarian Training\". \"It can be caught at Otto's Grotto or Mount Quidamortem with a barbarian rod and suitable bait after starting the Barbarian Training miniquest.\"",
-  "page": "Leaping trout"
+  "page": "Leaping trout",
+  "partialQuests": [
+   "Barbarian Training"
+  ]
  },
  {
   "skill": "Fishing",
@@ -15033,7 +15094,10 @@
   "access": null,
   "note": "Partial quest: Barbarian Training started (heavy rod section). Also gives 6 Strength and Agility xp per fish.",
   "wiki": "Fishing methods: \"Leaping salmon | Fishing 58 | Agility 30, Strength 30, Barbarian Training\". \"It can be caught at Otto's Grotto or Mount Quidamortem with a barbarian rod and suitable bait after starting the Barbarian Training miniquest.\"",
-  "page": "Leaping salmon"
+  "page": "Leaping salmon",
+  "partialQuests": [
+   "Barbarian Training"
+  ]
  },
  {
   "skill": "Fishing",
@@ -15083,7 +15147,10 @@
   "access": null,
   "note": "Partial quest: Barbarian Training started (heavy rod section). Also gives 7 Strength and Agility xp per fish.",
   "wiki": "Fishing methods: \"Leaping sturgeon | Fishing 70 | Agility 45, Strength 45, Barbarian Training\". \"It can be caught at Otto's Grotto or Mount Quidamortem with a barbarian rod and suitable bait after starting the Barbarian Training miniquest.\"",
-  "page": "Leaping sturgeon"
+  "page": "Leaping sturgeon",
+  "partialQuests": [
+   "Barbarian Training"
+  ]
  },
  {
   "skill": "Fishing",
@@ -15107,7 +15174,10 @@
   "access": null,
   "note": "Partial quest: Barbarian Training barehanded section (needs 55 Fishing / 35 Strength to learn). No harpoon needed; +8 Strength xp per fish. Harpoon/cage spots (Catherby, Fishing Guild, Karamja...).",
   "wiki": "Barehanded Fishing table: \"Raw tuna | 55 | 35 | 80 | 8\" — \"Using this method requires a higher Fishing level as well as a Strength level equivalent to the Fishing level needed to catch the fish normally.\"",
-  "page": "Fishing"
+  "page": "Fishing",
+  "partialQuests": [
+   "Barbarian Training"
+  ]
  },
  {
   "skill": "Fishing",
@@ -15131,7 +15201,10 @@
   "access": null,
   "note": "Partial quest: Barbarian Training barehanded section (needs 55 Fishing / 35 Strength to learn). No harpoon needed; +10 Strength xp per fish. Harpoon/cage spots (Catherby, Fishing Guild, Karamja...).",
   "wiki": "Barehanded Fishing table: \"Raw swordfish | 70 | 50 | 100 | 10\" — \"Using this method requires a higher Fishing level as well as a Strength level equivalent to the Fishing level needed to catch the fish normally.\"",
-  "page": "Fishing"
+  "page": "Fishing",
+  "partialQuests": [
+   "Barbarian Training"
+  ]
  },
  {
   "skill": "Fishing",
@@ -15155,7 +15228,10 @@
   "access": null,
   "note": "Partial quest: Barbarian Training barehanded section (needs 55 Fishing / 35 Strength to learn). No harpoon needed; +11 Strength xp per fish. Harpoon/cage spots (Catherby, Fishing Guild, Karamja...).",
   "wiki": "Barehanded Fishing table: \"Raw shark | 96 | 76 | 110 | 11\" — \"Using this method requires a higher Fishing level as well as a Strength level equivalent to the Fishing level needed to catch the fish normally.\"",
-  "page": "Fishing"
+  "page": "Fishing",
+  "partialQuests": [
+   "Barbarian Training"
+  ]
  },
  {
   "skill": "Fishing",
@@ -15205,7 +15281,10 @@
   "access": "varlamore",
   "note": "Partial quest: Neypotzli access is gained during Perilous Moons. XP scales with Fishing level (3-35). Raw bream has no card.",
   "wiki": "\"Raw bream are a type of fish caught from fishing spots within the Streambound Cavern in Neypotzli, requiring level 20 Fishing and a big net\" \"awarding Fishing level × 35/99 experience\" (river spot: \"Catching a single fish produces 3 Fishing XP\")",
-  "page": "Raw bream"
+  "page": "Raw bream",
+  "partialQuests": [
+   "Perilous Moons"
+  ]
  },
  {
   "skill": "Fishing",
@@ -15614,7 +15693,10 @@
   "access": null,
   "note": "Partial quest: Regicide (reach Tyras Camp). Speak to High Priestess Zul-Harcinqa first (no card).",
   "wiki": "\"Sacred eels ... can be caught at Zul-Andra with a fishing rod and fishing bait, requiring at least level 87 Fishing and granting 105 Fishing experience per eel caught. The village may only be accessed once players reach the Tyras Camp during Regicide.\"",
-  "page": "Sacred eel"
+  "page": "Sacred eel",
+  "partialQuests": [
+   "Regicide"
+  ]
  },
  {
   "skill": "Fishing",
@@ -19486,7 +19568,10 @@
   "access": null,
   "note": "1 Agility xp per game tick while pedalling (only useful on non-Blast-Furnace worlds; ~6k xp/h max). Keldagrim needs The Giant Dwarf started (not completed). Manual operation needs 30 Agility, Crafting, Firemaking and Strength.",
   "wiki": "\"Pedal the conveyor belt | 1 xp/tick\" ... \"Manually operating the Blast Furnace requires 30 Agility, Crafting, Firemaking, and Strength.\"",
-  "page": "Blast Furnace"
+  "page": "Blast Furnace",
+  "partialQuests": [
+   "The Giant Dwarf"
+  ]
  },
  {
   "skill": "Agility",
@@ -19695,7 +19780,8 @@
   "access": null,
   "note": "One-time reward (1,000 Hunter and 1,000 Slayer xp) in the Varrock Museum basement; takes Hunter from 1 to 9.",
   "wiki": "\"Completing the Natural History Quiz in Varrock Museum grants the player 1,000 experience, which will get the player from level 1 to 9. To start the quiz, speak to Orlando Smith\"",
-  "page": "Hunter training"
+  "page": "Hunter training",
+  "oneOff": true
  },
  {
   "skill": "Prayer",
@@ -21375,7 +21461,9 @@
   "access": "fossil_island",
   "note": "Enriched bones are made in the mycelium pool from a fossil plus pyrophosphite and calcite, then placed in the eastern Strange Machine in the House on the Hill.",
   "wiki": "\"Small enriched bones ... yield 500 Prayer XP\"; \"The enriched bones can be created in the mycelium pool by combining fossils with pyrophosphite and calcite.\"",
-  "page": "Strange Machine"
+  "page": "Strange Machine",
+  "repeatable": false,
+  "recNote": "enriched bones come from fossils; a handful per account"
  },
  {
   "skill": "Prayer",
@@ -21409,7 +21497,9 @@
   "access": "fossil_island",
   "note": "Enriched bones are made in the mycelium pool from a fossil plus pyrophosphite and calcite, then placed in the eastern Strange Machine in the House on the Hill.",
   "wiki": "\"Medium enriched bones ... yield 1000 Prayer XP\"; \"The enriched bones can be created in the mycelium pool by combining fossils with pyrophosphite and calcite.\"",
-  "page": "Strange Machine"
+  "page": "Strange Machine",
+  "repeatable": false,
+  "recNote": "enriched bones come from fossils; a handful per account"
  },
  {
   "skill": "Prayer",
@@ -21443,7 +21533,9 @@
   "access": "fossil_island",
   "note": "Enriched bones are made in the mycelium pool from a fossil plus pyrophosphite and calcite, then placed in the eastern Strange Machine in the House on the Hill.",
   "wiki": "\"Large enriched bones ... yield 1500 Prayer XP\"; \"The enriched bones can be created in the mycelium pool by combining fossils with pyrophosphite and calcite.\"",
-  "page": "Strange Machine"
+  "page": "Strange Machine",
+  "repeatable": false,
+  "recNote": "enriched bones come from fossils; a handful per account"
  },
  {
   "skill": "Prayer",
@@ -21477,7 +21569,9 @@
   "access": "fossil_island",
   "note": "Enriched bones are made in the mycelium pool from a fossil plus pyrophosphite and calcite, then placed in the eastern Strange Machine in the House on the Hill.",
   "wiki": "\"Rare enriched bones ... yield 2500 Prayer XP\"; \"The enriched bones can be created in the mycelium pool by combining fossils with pyrophosphite and calcite.\"",
-  "page": "Strange Machine"
+  "page": "Strange Machine",
+  "repeatable": false,
+  "recNote": "enriched bones come from fossils; a handful per account"
  },
  {
   "skill": "Prayer",
@@ -21508,7 +21602,9 @@
   "access": "kourend",
   "note": "One-off per head drop: 2,500 Prayer xp (Vorkath's head 1,000). Dark Altar north of Arceuus.",
   "wiki": "\"the head can be sacrificed to the Dark Altar north of Arceuus, granting 2,500 Prayer experience\"",
-  "page": "Kbd heads"
+  "page": "Kbd heads",
+  "repeatable": false,
+  "recNote": "one head per sacrifice; heads are rare drops"
  },
  {
   "skill": "Firemaking",
@@ -21964,7 +22060,10 @@
   "access": null,
   "note": "Also 10 Crafting xp. Bones come only from the Ancient Cavern (mithril dragons drop chewed bones), reached after the Barbarian Firemaking bow stage (partial Barbarian Training, not tracked). Chewed bones give a next-bury Prayer bonus; mangled bones spawn a ferocious barbarian spirit to kill.",
   "wiki": "Barbarian funeral pyre recipe: Logs | Firemaking 11 / 40 xp | Crafting 11 / 10 xp; \"Constructing a pyre ship requires an axe, logs, a tinderbox or bow, and either mangled or chewed bones.\"",
-  "page": "Pyre ship"
+  "page": "Pyre ship",
+  "partialQuests": [
+   "Barbarian Training"
+  ]
  },
  {
   "skill": "Firemaking",
@@ -22017,7 +22116,10 @@
   "access": null,
   "note": "Also 10 Crafting xp. Bones come only from the Ancient Cavern (mithril dragons drop chewed bones), reached after the Barbarian Firemaking bow stage (partial Barbarian Training, not tracked). Chewed bones give a next-bury Prayer bonus; mangled bones spawn a ferocious barbarian spirit to kill.",
   "wiki": "Barbarian funeral pyre recipe: Achey tree logs | Firemaking 11 / 40 xp | Crafting 11 / 10 xp; \"Constructing a pyre ship requires an axe, logs, a tinderbox or bow, and either mangled or chewed bones.\"",
-  "page": "Pyre ship"
+  "page": "Pyre ship",
+  "partialQuests": [
+   "Barbarian Training"
+  ]
  },
  {
   "skill": "Firemaking",
@@ -22070,7 +22172,10 @@
   "access": null,
   "note": "Also 15 Crafting xp. Bones come only from the Ancient Cavern (mithril dragons drop chewed bones), reached after the Barbarian Firemaking bow stage (partial Barbarian Training, not tracked). Chewed bones give a next-bury Prayer bonus; mangled bones spawn a ferocious barbarian spirit to kill.",
   "wiki": "Barbarian funeral pyre recipe: Oak logs | Firemaking 25 / 60 xp | Crafting 25 / 15 xp; \"Constructing a pyre ship requires an axe, logs, a tinderbox or bow, and either mangled or chewed bones.\"",
-  "page": "Pyre ship"
+  "page": "Pyre ship",
+  "partialQuests": [
+   "Barbarian Training"
+  ]
  },
  {
   "skill": "Firemaking",
@@ -22123,7 +22228,10 @@
   "access": null,
   "note": "Also 22.5 Crafting xp. Bones come only from the Ancient Cavern (mithril dragons drop chewed bones), reached after the Barbarian Firemaking bow stage (partial Barbarian Training, not tracked). Chewed bones give a next-bury Prayer bonus; mangled bones spawn a ferocious barbarian spirit to kill.",
   "wiki": "Barbarian funeral pyre recipe: Willow logs | Firemaking 40 / 90 xp | Crafting 40 / 22.5 xp; \"Constructing a pyre ship requires an axe, logs, a tinderbox or bow, and either mangled or chewed bones.\"",
-  "page": "Pyre ship"
+  "page": "Pyre ship",
+  "partialQuests": [
+   "Barbarian Training"
+  ]
  },
  {
   "skill": "Firemaking",
@@ -22176,7 +22284,10 @@
   "access": null,
   "note": "Also 26.2 Crafting xp. Bones come only from the Ancient Cavern (mithril dragons drop chewed bones), reached after the Barbarian Firemaking bow stage (partial Barbarian Training, not tracked). Chewed bones give a next-bury Prayer bonus; mangled bones spawn a ferocious barbarian spirit to kill.",
   "wiki": "Barbarian funeral pyre recipe: Teak logs | Firemaking 45 / 105 xp | Crafting 45 / 26.2 xp; \"Constructing a pyre ship requires an axe, logs, a tinderbox or bow, and either mangled or chewed bones.\"",
-  "page": "Pyre ship"
+  "page": "Pyre ship",
+  "partialQuests": [
+   "Barbarian Training"
+  ]
  },
  {
   "skill": "Firemaking",
@@ -22229,7 +22340,10 @@
   "access": null,
   "note": "Also 31.2 Crafting xp. Bones come only from the Ancient Cavern (mithril dragons drop chewed bones), reached after the Barbarian Firemaking bow stage (partial Barbarian Training, not tracked). Chewed bones give a next-bury Prayer bonus; mangled bones spawn a ferocious barbarian spirit to kill.",
   "wiki": "Barbarian funeral pyre recipe: Arctic pine logs | Firemaking 52 / 125 xp | Crafting 52 / 31.2 xp; \"Constructing a pyre ship requires an axe, logs, a tinderbox or bow, and either mangled or chewed bones.\"",
-  "page": "Pyre ship"
+  "page": "Pyre ship",
+  "partialQuests": [
+   "Barbarian Training"
+  ]
  },
  {
   "skill": "Firemaking",
@@ -22282,7 +22396,10 @@
   "access": null,
   "note": "Also 33.7 Crafting xp. Bones come only from the Ancient Cavern (mithril dragons drop chewed bones), reached after the Barbarian Firemaking bow stage (partial Barbarian Training, not tracked). Chewed bones give a next-bury Prayer bonus; mangled bones spawn a ferocious barbarian spirit to kill.",
   "wiki": "Barbarian funeral pyre recipe: Maple logs | Firemaking 55 / 135 xp | Crafting 55 / 33.7 xp; \"Constructing a pyre ship requires an axe, logs, a tinderbox or bow, and either mangled or chewed bones.\"",
-  "page": "Pyre ship"
+  "page": "Pyre ship",
+  "partialQuests": [
+   "Barbarian Training"
+  ]
  },
  {
   "skill": "Firemaking",
@@ -22335,7 +22452,10 @@
   "access": null,
   "note": "Also 39.3 Crafting xp. Bones come only from the Ancient Cavern (mithril dragons drop chewed bones), reached after the Barbarian Firemaking bow stage (partial Barbarian Training, not tracked). Chewed bones give a next-bury Prayer bonus; mangled bones spawn a ferocious barbarian spirit to kill.",
   "wiki": "Barbarian funeral pyre recipe: Mahogany logs | Firemaking 60 / 157.5 xp | Crafting 60 / 39.3 xp; \"Constructing a pyre ship requires an axe, logs, a tinderbox or bow, and either mangled or chewed bones.\"",
-  "page": "Pyre ship"
+  "page": "Pyre ship",
+  "partialQuests": [
+   "Barbarian Training"
+  ]
  },
  {
   "skill": "Firemaking",
@@ -22388,7 +22508,10 @@
   "access": null,
   "note": "Also 50.6 Crafting xp. Bones come only from the Ancient Cavern (mithril dragons drop chewed bones), reached after the Barbarian Firemaking bow stage (partial Barbarian Training, not tracked). Chewed bones give a next-bury Prayer bonus; mangled bones spawn a ferocious barbarian spirit to kill.",
   "wiki": "Barbarian funeral pyre recipe: Yew logs | Firemaking 70 / 202.5 xp | Crafting 70 / 50.6 xp; \"Constructing a pyre ship requires an axe, logs, a tinderbox or bow, and either mangled or chewed bones.\"",
-  "page": "Pyre ship"
+  "page": "Pyre ship",
+  "partialQuests": [
+   "Barbarian Training"
+  ]
  },
  {
   "skill": "Firemaking",
@@ -22441,7 +22564,10 @@
   "access": null,
   "note": "Also 61.2 Crafting xp. Bones come only from the Ancient Cavern (mithril dragons drop chewed bones), reached after the Barbarian Firemaking bow stage (partial Barbarian Training, not tracked). Chewed bones give a next-bury Prayer bonus; mangled bones spawn a ferocious barbarian spirit to kill. Camphor/ironwood/rosewood give more than intended (wiki bug note).",
   "wiki": "Barbarian funeral pyre recipe: Camphor logs | Firemaking 76 / 245 xp | Crafting 76 / 61.2 xp; \"Constructing a pyre ship requires an axe, logs, a tinderbox or bow, and either mangled or chewed bones.\"",
-  "page": "Pyre ship"
+  "page": "Pyre ship",
+  "partialQuests": [
+   "Barbarian Training"
+  ]
  },
  {
   "skill": "Firemaking",
@@ -22494,7 +22620,10 @@
   "access": null,
   "note": "Also 75.9 Crafting xp. Bones come only from the Ancient Cavern (mithril dragons drop chewed bones), reached after the Barbarian Firemaking bow stage (partial Barbarian Training, not tracked). Chewed bones give a next-bury Prayer bonus; mangled bones spawn a ferocious barbarian spirit to kill.",
   "wiki": "Barbarian funeral pyre recipe: Magic logs | Firemaking 85 / 303.8 xp | Crafting 85 / 75.9 xp; \"Constructing a pyre ship requires an axe, logs, a tinderbox or bow, and either mangled or chewed bones.\"",
-  "page": "Pyre ship"
+  "page": "Pyre ship",
+  "partialQuests": [
+   "Barbarian Training"
+  ]
  },
  {
   "skill": "Firemaking",
@@ -22547,7 +22676,10 @@
   "access": null,
   "note": "Also 80 Crafting xp. Bones come only from the Ancient Cavern (mithril dragons drop chewed bones), reached after the Barbarian Firemaking bow stage (partial Barbarian Training, not tracked). Chewed bones give a next-bury Prayer bonus; mangled bones spawn a ferocious barbarian spirit to kill. Camphor/ironwood/rosewood give more than intended (wiki bug note).",
   "wiki": "Barbarian funeral pyre recipe: Ironwood logs | Firemaking 90 / 320 xp | Crafting 90 / 80 xp; \"Constructing a pyre ship requires an axe, logs, a tinderbox or bow, and either mangled or chewed bones.\"",
-  "page": "Pyre ship"
+  "page": "Pyre ship",
+  "partialQuests": [
+   "Barbarian Training"
+  ]
  },
  {
   "skill": "Firemaking",
@@ -22600,7 +22732,10 @@
   "access": null,
   "note": "Also 87 Crafting xp. Bones come only from the Ancient Cavern (mithril dragons drop chewed bones), reached after the Barbarian Firemaking bow stage (partial Barbarian Training, not tracked). Chewed bones give a next-bury Prayer bonus; mangled bones spawn a ferocious barbarian spirit to kill.",
   "wiki": "Barbarian funeral pyre recipe: Redwood logs | Firemaking 95 / 350 xp | Crafting 95 / 87 xp; \"Constructing a pyre ship requires an axe, logs, a tinderbox or bow, and either mangled or chewed bones.\"",
-  "page": "Pyre ship"
+  "page": "Pyre ship",
+  "partialQuests": [
+   "Barbarian Training"
+  ]
  },
  {
   "skill": "Firemaking",
@@ -22653,7 +22788,10 @@
   "access": null,
   "note": "Also 105 Crafting xp. Bones come only from the Ancient Cavern (mithril dragons drop chewed bones), reached after the Barbarian Firemaking bow stage (partial Barbarian Training, not tracked). Chewed bones give a next-bury Prayer bonus; mangled bones spawn a ferocious barbarian spirit to kill. Camphor/ironwood/rosewood give more than intended (wiki bug note).",
   "wiki": "Barbarian funeral pyre recipe: Rosewood logs | Firemaking 97 / 420 xp | Crafting 97 / 105 xp; \"Constructing a pyre ship requires an axe, logs, a tinderbox or bow, and either mangled or chewed bones.\"",
-  "page": "Pyre ship"
+  "page": "Pyre ship",
+  "partialQuests": [
+   "Barbarian Training"
+  ]
  },
  {
   "skill": "Firemaking",
@@ -22746,7 +22884,10 @@
   "access": null,
   "note": "5 xp per load of coke shovelled into the stove; trivial xp, only on non-Blast-Furnace worlds. Keldagrim needs The Giant Dwarf started (not completed).",
   "wiki": "\"Shovel coke into the stove | 5 xp/load\" ... \"Manually operating the Blast Furnace requires 30 Agility, Crafting, Firemaking, and Strength.\"",
-  "page": "Blast Furnace"
+  "page": "Blast Furnace",
+  "partialQuests": [
+   "The Giant Dwarf"
+  ]
  },
  {
   "skill": "Firemaking",
@@ -22773,14 +22914,15 @@
     "mode": "all"
    }
   ],
-  "quests": [
-   "Enlightened Journey"
-  ],
+  "quests": [],
   "levels": {},
   "access": null,
   "note": "Needs Enlightened Journey progressed to the balloon-making step (not full completion). Making the balloon also gives 35 Crafting xp.",
   "wiki": "\"The finished origami balloon can be flown by using it with a tinderbox, providing 20 Firemaking experience.\"",
-  "page": "Origami balloon"
+  "page": "Origami balloon",
+  "partialQuests": [
+   "Enlightened Journey"
+  ]
  },
  {
   "skill": "Ranged",
@@ -22935,7 +23077,9 @@
   "access": null,
   "note": "1,250 Ranged + 108 Agility + 108 Strength xp per lap when taking the grapple route both ways. Turgall has no card.",
   "wiki": "Grapple route total \"Agility 108 / Ranged 1,250 / Strength 108\"; \"Optionally, level 70 Strength and Ranged (in addition to 70 Agility), are required to traverse the grapple route\"",
-  "page": "Dorgesh-Kaan Agility Course"
+  "page": "Dorgesh-Kaan Agility Course",
+  "recommend": false,
+  "recNote": "an Agility course; the Ranged xp is a side effect"
  },
  {
   "skill": "Ranged",
@@ -23081,7 +23225,9 @@
   "access": null,
   "note": "Opened with a dark key (no card), which is used up; the key comes from the Isle of Souls Dungeon chest. Deals up to 10 damage. Crumbling Tower basement.",
   "wiki": "\"It can be opened with a dark key for 1,500 Thieving experience, which uses up the key.\" (Thieving info: level 28, xp 1500)",
-  "page": "Dark Chest"
+  "page": "Dark Chest",
+  "repeatable": false,
+  "recNote": "each open uses a dark key"
  },
  {
   "skill": "Thieving",
@@ -23105,7 +23251,10 @@
   "access": null,
   "note": "Needs Zogre Flesh Eaters started (partial; not tracked). Failing gives 0.5 xp and lowers Thieving temporarily.",
   "wiki": "\"Accessing Ogre coffins requires partial completion of the quest Zogre Flesh Eaters ... Picking the lock requires level 20 Thieving, yielding 27 experience.\"",
-  "page": "Ogre Coffin"
+  "page": "Ogre Coffin",
+  "partialQuests": [
+   "Zogre Flesh Eaters"
+  ]
  },
  {
   "skill": "Thieving",
@@ -23264,14 +23413,15 @@
     ]
    }
   ],
-  "quests": [
-   "Perilous Moons"
-  ],
+  "quests": [],
   "levels": {},
   "access": "varlamore",
   "note": "xp = 90% of Hunter level, max 90 (18 shown at level 20). Earthbound Cavern in Neypotzli; access is gained during Perilous Moons (partial). Raw moss lizards are Moons of Peril food.",
   "wiki": "Hunter info: Moss Lizard | level 20 | xp \"90% of Hunter level up to 90xp\" | trap Rope",
-  "page": "Moss Lizard"
+  "page": "Moss Lizard",
+  "partialQuests": [
+   "Perilous Moons"
+  ]
  },
  {
   "skill": "Hunter",
@@ -23345,7 +23495,10 @@
   "access": "morytania",
   "note": "Needs the hard Morytania Diary (diary not modelled). Half bury xp (2.25 shown = normal bones), full with the elite diary. Claimed from a ghost disciple (no card).",
   "wiki": "\"The bonecrusher is a reward from the hard Morytania Diary ... This grants the player half the Prayer experience they would have received from burying the bones themselves\"",
-  "page": "Bonecrusher"
+  "page": "Bonecrusher",
+  "diaries": [
+   "Morytania Hard"
+  ]
  },
  {
   "skill": "Prayer",
@@ -23374,7 +23527,10 @@
   "access": "kourend",
   "note": "Needs the hard Kourend & Kebos Diary (diary not modelled). Half scatter xp (5 shown = fiendish ashes), full with the elite diary. Claimed from Tyss (no card).",
   "wiki": "\"The ash sanctifier is a reward from completing the Hard Kourend & Kebos Diary ... granting the player half the Prayer experience they would have received from scattering the ashes\"",
-  "page": "Ash sanctifier"
+  "page": "Ash sanctifier",
+  "diaries": [
+   "Kourend & Kebos Hard"
+  ]
  },
  {
   "skill": "Prayer",

@@ -29,6 +29,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import wiki_api
 import re
 from pathlib import Path
 
@@ -980,9 +981,7 @@ def _page_types(titles: list[str]) -> dict[str, str]:
         batch = todo[i:i + 50]
         url = ("https://oldschool.runescape.wiki/api.php?action=query&prop=revisions&rvprop=content"
                "&rvslots=main&format=json&redirects=1&titles=" + urllib.parse.quote("|".join(batch)))
-        req = urllib.request.Request(url, headers={"User-Agent": "osrs-tcg-planner (charbottie)"})
-        with urllib.request.urlopen(req, timeout=60) as r:
-            q = json.loads(r.read()).get("query", {})
+        q = wiki_api.get_json(url).get("query", {})
         alias = {x["from"]: x["to"] for x in q.get("normalized", []) + q.get("redirects", [])}
         types = {}
         for page in q.get("pages", {}).values():
@@ -1076,12 +1075,7 @@ def _fetch_wikitext(page: str, refresh: bool = False) -> str:
     cache = _WIKITEXT_CACHE / (name + ".txt")
     if cache.exists() and not refresh:
         return cache.read_text(encoding="utf-8")
-    time.sleep(1)  # be polite to the wiki
-    url = ("https://oldschool.runescape.wiki/api.php?action=parse&prop=wikitext&format=json&page="
-           + urllib.parse.quote(page.replace(" ", "_")))
-    req = urllib.request.Request(url, headers={"User-Agent": "osrs-tcg-planner (charbottie)"})
-    with urllib.request.urlopen(req, timeout=30) as r:
-        text = json.loads(r.read())["parse"]["wikitext"]["*"]
+    text = wiki_api.raw(page)  # plain page URL ?action=raw (never api.php?action=parse)
     cache.parent.mkdir(parents=True, exist_ok=True)
     cache.write_text(text, encoding="utf-8")
     return text

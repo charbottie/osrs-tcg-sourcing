@@ -500,14 +500,8 @@
     "spawns": [
       "Temple of Ikov basement"
     ],
-    "shopBought": true,
-    "shops": [
-      {
-        "seller": "Lost Property shop",
-        "price": 9800,
-        "currency": "Coins"
-      }
-    ],
+    "shopBought": false,
+    "shops": [],
     "clueTiers": [],
     "alwaysAvailable": false
   },
@@ -2186,17 +2180,7 @@
         "currency": "Coins"
       },
       {
-        "seller": "Fortis General StoreDemonic Pacts League",
-        "price": 5,
-        "currency": "Coins"
-      },
-      {
         "seller": "Sunset Coast General Store",
-        "price": 5,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Outer Fortis General StoreDemonic Pacts League",
         "price": 5,
         "currency": "Coins"
       },
@@ -25695,9 +25679,7 @@
       "Pandemonium Cave",
       "Isle of Bones",
       "Hallowed Sepulchre - floor 1 (1 requires telegrab)",
-      "Hallowed Sepulchre - floor 2",
-      "Hallowed Sepulchre - floor 2 (unobtainable)",
-      "Hallowed Sepulchre - floor 3 (unobtainable)"
+      "Hallowed Sepulchre - floor 2"
     ],
     "shopBought": false,
     "shops": [],
@@ -44195,11 +44177,6 @@
         "seller": "Martin Thwait's Lost and Found.",
         "price": 3,
         "currency": "Coins"
-      },
-      {
-        "seller": "Arcuani's Archery SuppliesDemonic Pacts League",
-        "price": 3,
-        "currency": "Coins"
       }
     ],
     "clueTiers": [],
@@ -44232,11 +44209,6 @@
     "shops": [
       {
         "seller": "Martin Thwait's Lost and Found.",
-        "price": 1,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Arcuani's Archery SuppliesDemonic Pacts League",
         "price": 1,
         "currency": "Coins"
       }
@@ -44319,11 +44291,6 @@
     "shops": [
       {
         "seller": "Martin Thwait's Lost and Found.",
-        "price": 11,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Arcuani's Archery SuppliesDemonic Pacts League",
         "price": 11,
         "currency": "Coins"
       }
@@ -48408,7 +48375,6 @@
       "Legends' Guild",
       "Kebos Lowlands - General Vir 's tent in the Battlefront",
       "Desert Mining Camp - Captain Siad 's office ( 1 st floor 2 nd floor )",
-      "Shayzien - Amelia 's house (Unobtainable)",
       "Slepe",
       "The Teomat"
     ],
@@ -52640,11 +52606,6 @@
       {
         "seller": "Legends Guild Shop of Useful Items.",
         "price": 675,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Lost Property shop",
-        "price": 1900,
         "currency": "Coins"
       }
     ],
@@ -60764,11 +60725,6 @@
         "currency": "Coins"
       },
       {
-        "seller": "Fortis BlacksmithDemonic Pacts League",
-        "price": 35,
-        "currency": "Coins"
-      },
-      {
         "seller": "Cam Torum Blacksmith",
         "price": 35,
         "currency": "Coins"
@@ -60850,11 +60806,6 @@
       },
       {
         "seller": "Briget's Weapons",
-        "price": 10,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Fortis BlacksmithDemonic Pacts League",
         "price": 10,
         "currency": "Coins"
       },
@@ -60963,11 +60914,6 @@
       },
       {
         "seller": "Briget's Weapons",
-        "price": 125,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Fortis BlacksmithDemonic Pacts League",
         "price": 125,
         "currency": "Coins"
       },
@@ -75212,11 +75158,6 @@
     "shopBought": true,
     "shops": [
       {
-        "seller": "General Store (Canifis)Demonic Pacts League",
-        "price": 8,
-        "currency": "Coins"
-      },
-      {
         "seller": "Temple Supplies",
         "price": 100,
         "currency": "Abyssal pearls"
@@ -86421,7 +86362,6 @@
       "outputQuantity": 1
     },
     "spawns": [
-      "Corsair Cove Dungeon (unobtainable)",
       "King Black Dragon Lair",
       "Scabaras Dungeon",
       "Hallowed Sepulchre - floor 2",
@@ -91084,7 +91024,6 @@
       "outputQuantity": 1
     },
     "spawns": [
-      "Hallowed Sepulchre - floor 2 (unobtainable)",
       "Hallowed Sepulchre - floor 4",
       "Hosidius - Watson's house",
       "Darkmeyer - middle tier",
@@ -101326,14 +101265,8 @@
     "gathering": null,
     "production": null,
     "spawns": [],
-    "shopBought": true,
-    "shops": [
-      {
-        "seller": "Lost Property shop",
-        "price": 23000,
-        "currency": "Coins"
-      }
-    ],
+    "shopBought": false,
+    "shops": [],
     "clueTiers": [],
     "alwaysAvailable": false
   },
@@ -101344,14 +101277,8 @@
     "gathering": null,
     "production": null,
     "spawns": [],
-    "shopBought": true,
-    "shops": [
-      {
-        "seller": "Lost Property shop",
-        "price": 23000,
-        "currency": "Coins"
-      }
-    ],
+    "shopBought": false,
+    "shops": [],
     "clueTiers": [],
     "alwaysAvailable": false
   },
@@ -101362,14 +101289,8 @@
     "gathering": null,
     "production": null,
     "spawns": [],
-    "shopBought": true,
-    "shops": [
-      {
-        "seller": "Lost Property shop",
-        "price": 23000,
-        "currency": "Coins"
-      }
-    ],
+    "shopBought": false,
+    "shops": [],
     "clueTiers": [],
     "alwaysAvailable": false
   },
@@ -108213,11 +108134,6 @@
         "seller": "Quartermaster's Stores",
         "price": 104,
         "currency": "Coins"
-      },
-      {
-        "seller": "Fortis BlacksmithDemonic Pacts League",
-        "price": 80,
-        "currency": "Coins"
       }
     ],
     "clueTiers": [],
@@ -108242,11 +108158,6 @@
         "seller": "Quartermaster's Stores",
         "price": 364,
         "currency": "Coins"
-      },
-      {
-        "seller": "Fortis BlacksmithDemonic Pacts League",
-        "price": 280,
-        "currency": "Coins"
       }
     ],
     "clueTiers": [],
@@ -108264,11 +108175,6 @@
       {
         "seller": "Quartermaster's Stores",
         "price": 1300,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Fortis BlacksmithDemonic Pacts League",
-        "price": 1000,
         "currency": "Coins"
       }
     ],
@@ -112136,14 +112042,8 @@
     "gathering": null,
     "production": null,
     "spawns": [],
-    "shopBought": true,
-    "shops": [
-      {
-        "seller": "Lost Property shop",
-        "price": 10000,
-        "currency": "Coins"
-      }
-    ],
+    "shopBought": false,
+    "shops": [],
     "clueTiers": [],
     "alwaysAvailable": false
   },
@@ -132027,14 +131927,8 @@
     "gathering": null,
     "production": null,
     "spawns": [],
-    "shopBought": true,
-    "shops": [
-      {
-        "seller": "Lost Property shop",
-        "price": 13500,
-        "currency": "Coins"
-      }
-    ],
+    "shopBought": false,
+    "shops": [],
     "clueTiers": [],
     "alwaysAvailable": false
   },
@@ -132045,14 +131939,8 @@
     "gathering": null,
     "production": null,
     "spawns": [],
-    "shopBought": true,
-    "shops": [
-      {
-        "seller": "Lost Property shop",
-        "price": 13500,
-        "currency": "Coins"
-      }
-    ],
+    "shopBought": false,
+    "shops": [],
     "clueTiers": [],
     "alwaysAvailable": false
   },
@@ -132063,14 +131951,8 @@
     "gathering": null,
     "production": null,
     "spawns": [],
-    "shopBought": true,
-    "shops": [
-      {
-        "seller": "Lost Property shop",
-        "price": 15000,
-        "currency": "Coins"
-      }
-    ],
+    "shopBought": false,
+    "shops": [],
     "clueTiers": [],
     "alwaysAvailable": false
   },
@@ -142355,11 +142237,6 @@
         "seller": "Oneiromancer",
         "price": 30000,
         "currency": "Coins"
-      },
-      {
-        "seller": "Lost Property shop",
-        "price": 60000,
-        "currency": "Coins"
       }
     ],
     "clueTiers": [],
@@ -142395,11 +142272,6 @@
       {
         "seller": "Oneiromancer",
         "price": 15000,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Lost Property shop",
-        "price": 22000,
         "currency": "Coins"
       }
     ],
@@ -142441,11 +142313,6 @@
         "seller": "Oneiromancer",
         "price": 120000,
         "currency": "Coins"
-      },
-      {
-        "seller": "Lost Property shop",
-        "price": 140000,
-        "currency": "Coins"
       }
     ],
     "clueTiers": [],
@@ -142485,11 +142352,6 @@
       {
         "seller": "Oneiromancer",
         "price": 80000,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Lost Property shop",
-        "price": 95000,
         "currency": "Coins"
       }
     ],
@@ -142531,11 +142393,6 @@
         "seller": "Oneiromancer",
         "price": 10000,
         "currency": "Coins"
-      },
-      {
-        "seller": "Lost Property shop",
-        "price": 15000,
-        "currency": "Coins"
       }
     ],
     "clueTiers": [],
@@ -142576,11 +142433,6 @@
         "seller": "Oneiromancer",
         "price": 10000,
         "currency": "Coins"
-      },
-      {
-        "seller": "Lost Property shop",
-        "price": 15000,
-        "currency": "Coins"
       }
     ],
     "clueTiers": [],
@@ -142598,11 +142450,6 @@
       {
         "seller": "Oneiromancer",
         "price": 12000,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Lost Property shop",
-        "price": 18000,
         "currency": "Coins"
       }
     ],
@@ -142622,11 +142469,6 @@
         "seller": "Oneiromancer",
         "price": 4000,
         "currency": "Coins"
-      },
-      {
-        "seller": "Lost Property shop",
-        "price": 9000,
-        "currency": "Coins"
       }
     ],
     "clueTiers": [],
@@ -142644,11 +142486,6 @@
       {
         "seller": "Oneiromancer",
         "price": 2000,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Lost Property shop",
-        "price": 8000,
         "currency": "Coins"
       }
     ],
@@ -145443,17 +145280,7 @@
         "currency": "Coins"
       },
       {
-        "seller": "Fortis General StoreDemonic Pacts League",
-        "price": 6,
-        "currency": "Coins"
-      },
-      {
         "seller": "Imia's Supplies",
-        "price": 6,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Outer Fortis General StoreDemonic Pacts League",
         "price": 6,
         "currency": "Coins"
       },
@@ -145489,17 +145316,7 @@
         "currency": "Coins"
       },
       {
-        "seller": "Fortis General StoreDemonic Pacts League",
-        "price": 41,
-        "currency": "Coins"
-      },
-      {
         "seller": "Imia's Supplies",
-        "price": 41,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Outer Fortis General StoreDemonic Pacts League",
         "price": 41,
         "currency": "Coins"
       },
@@ -147533,11 +147350,6 @@
     "shopBought": true,
     "shops": [
       {
-        "seller": "Trader Stan's Trading PostDemonic Pacts League",
-        "price": 3250,
-        "currency": "Coins"
-      },
-      {
         "seller": "Leon's Prototype Crossbow.",
         "price": 1300,
         "currency": "Coins"
@@ -149007,11 +148819,6 @@
         "seller": "Ava",
         "price": 999,
         "currency": "Coins"
-      },
-      {
-        "seller": "Lost Property shop",
-        "price": 7000,
-        "currency": "Coins"
       }
     ],
     "clueTiers": [],
@@ -149399,11 +149206,6 @@
         "seller": "Mawnis Burowgar",
         "price": 50000,
         "currency": "Coins"
-      },
-      {
-        "seller": "Lost Property shop",
-        "price": 95000,
-        "currency": "Coins"
       }
     ],
     "clueTiers": [],
@@ -149761,14 +149563,8 @@
       "outputQuantity": 1
     },
     "spawns": [],
-    "shopBought": true,
-    "shops": [
-      {
-        "seller": "Lost Property shop",
-        "price": 290000,
-        "currency": "Coins"
-      }
-    ],
+    "shopBought": false,
+    "shops": [],
     "clueTiers": [],
     "alwaysAvailable": false
   },
@@ -151833,11 +151629,6 @@
       {
         "seller": "Rupert the Beard",
         "price": 60000,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Lost Property shop",
-        "price": 115000,
         "currency": "Coins"
       }
     ],
@@ -159702,14 +159493,8 @@
     "gathering": null,
     "production": null,
     "spawns": [],
-    "shopBought": true,
-    "shops": [
-      {
-        "seller": "Lost Property shop",
-        "price": 200,
-        "currency": "Coins"
-      }
-    ],
+    "shopBought": false,
+    "shops": [],
     "clueTiers": [],
     "alwaysAvailable": false
   },
@@ -159720,14 +159505,8 @@
     "gathering": null,
     "production": null,
     "spawns": [],
-    "shopBought": true,
-    "shops": [
-      {
-        "seller": "Lost Property shop",
-        "price": 200,
-        "currency": "Coins"
-      }
-    ],
+    "shopBought": false,
+    "shops": [],
     "clueTiers": [],
     "alwaysAvailable": false
   },
@@ -159738,14 +159517,8 @@
     "gathering": null,
     "production": null,
     "spawns": [],
-    "shopBought": true,
-    "shops": [
-      {
-        "seller": "Lost Property shop",
-        "price": 200,
-        "currency": "Coins"
-      }
-    ],
+    "shopBought": false,
+    "shops": [],
     "clueTiers": [],
     "alwaysAvailable": false
   },
@@ -159756,14 +159529,8 @@
     "gathering": null,
     "production": null,
     "spawns": [],
-    "shopBought": true,
-    "shops": [
-      {
-        "seller": "Lost Property shop",
-        "price": 200,
-        "currency": "Coins"
-      }
-    ],
+    "shopBought": false,
+    "shops": [],
     "clueTiers": [],
     "alwaysAvailable": false
   },
@@ -159786,14 +159553,8 @@
     "gathering": null,
     "production": null,
     "spawns": [],
-    "shopBought": true,
-    "shops": [
-      {
-        "seller": "Lost Property shop",
-        "price": 200,
-        "currency": "Coins"
-      }
-    ],
+    "shopBought": false,
+    "shops": [],
     "clueTiers": [],
     "alwaysAvailable": false
   },
@@ -159804,14 +159565,8 @@
     "gathering": null,
     "production": null,
     "spawns": [],
-    "shopBought": true,
-    "shops": [
-      {
-        "seller": "Lost Property shop",
-        "price": 200,
-        "currency": "Coins"
-      }
-    ],
+    "shopBought": false,
+    "shops": [],
     "clueTiers": [],
     "alwaysAvailable": false
   },
@@ -159822,14 +159577,8 @@
     "gathering": null,
     "production": null,
     "spawns": [],
-    "shopBought": true,
-    "shops": [
-      {
-        "seller": "Lost Property shop",
-        "price": 200,
-        "currency": "Coins"
-      }
-    ],
+    "shopBought": false,
+    "shops": [],
     "clueTiers": [],
     "alwaysAvailable": false
   },
@@ -159840,14 +159589,8 @@
     "gathering": null,
     "production": null,
     "spawns": [],
-    "shopBought": true,
-    "shops": [
-      {
-        "seller": "Lost Property shop",
-        "price": 200,
-        "currency": "Coins"
-      }
-    ],
+    "shopBought": false,
+    "shops": [],
     "clueTiers": [],
     "alwaysAvailable": false
   },
@@ -159858,14 +159601,8 @@
     "gathering": null,
     "production": null,
     "spawns": [],
-    "shopBought": true,
-    "shops": [
-      {
-        "seller": "Lost Property shop",
-        "price": 200,
-        "currency": "Coins"
-      }
-    ],
+    "shopBought": false,
+    "shops": [],
     "clueTiers": [],
     "alwaysAvailable": false
   },
@@ -159876,14 +159613,8 @@
     "gathering": null,
     "production": null,
     "spawns": [],
-    "shopBought": true,
-    "shops": [
-      {
-        "seller": "Lost Property shop",
-        "price": 200,
-        "currency": "Coins"
-      }
-    ],
+    "shopBought": false,
+    "shops": [],
     "clueTiers": [],
     "alwaysAvailable": false
   },
@@ -159894,14 +159625,8 @@
     "gathering": null,
     "production": null,
     "spawns": [],
-    "shopBought": true,
-    "shops": [
-      {
-        "seller": "Lost Property shop",
-        "price": 200,
-        "currency": "Coins"
-      }
-    ],
+    "shopBought": false,
+    "shops": [],
     "clueTiers": [],
     "alwaysAvailable": false
   },
@@ -162311,11 +162036,6 @@
       {
         "seller": "Diango's Toy Store",
         "price": 300,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Lost Property shop",
-        "price": 500,
         "currency": "Coins"
       }
     ],
@@ -170611,14 +170331,8 @@
     "gathering": null,
     "production": null,
     "spawns": [],
-    "shopBought": true,
-    "shops": [
-      {
-        "seller": "Lost Property shop",
-        "price": 250000,
-        "currency": "Coins"
-      }
-    ],
+    "shopBought": false,
+    "shops": [],
     "clueTiers": [],
     "alwaysAvailable": false
   },
@@ -170629,14 +170343,8 @@
     "gathering": null,
     "production": null,
     "spawns": [],
-    "shopBought": true,
-    "shops": [
-      {
-        "seller": "Lost Property shop",
-        "price": 250000,
-        "currency": "Coins"
-      }
-    ],
+    "shopBought": false,
+    "shops": [],
     "clueTiers": [],
     "alwaysAvailable": false
   },
@@ -170647,14 +170355,8 @@
     "gathering": null,
     "production": null,
     "spawns": [],
-    "shopBought": true,
-    "shops": [
-      {
-        "seller": "Lost Property shop",
-        "price": 250000,
-        "currency": "Coins"
-      }
-    ],
+    "shopBought": false,
+    "shops": [],
     "clueTiers": [],
     "alwaysAvailable": false
   },
@@ -171811,14 +171513,8 @@
       "outputQuantity": 1
     },
     "spawns": [],
-    "shopBought": true,
-    "shops": [
-      {
-        "seller": "Lost Property shop",
-        "price": 7000,
-        "currency": "Coins"
-      }
-    ],
+    "shopBought": false,
+    "shops": [],
     "clueTiers": [],
     "alwaysAvailable": false
   },
@@ -171881,14 +171577,8 @@
     "gathering": null,
     "production": null,
     "spawns": [],
-    "shopBought": true,
-    "shops": [
-      {
-        "seller": "Aemad's Adventuring Supplies.Demonic Pacts League",
-        "price": 130,
-        "currency": "Coins"
-      }
-    ],
+    "shopBought": false,
+    "shops": [],
     "clueTiers": [],
     "alwaysAvailable": false
   },
@@ -175561,14 +175251,8 @@
     "gathering": null,
     "production": null,
     "spawns": [],
-    "shopBought": true,
-    "shops": [
-      {
-        "seller": "Lost Property shop",
-        "price": 200,
-        "currency": "Coins"
-      }
-    ],
+    "shopBought": false,
+    "shops": [],
     "clueTiers": [],
     "alwaysAvailable": false
   },
@@ -182500,14 +182184,8 @@
     "gathering": null,
     "production": null,
     "spawns": [],
-    "shopBought": true,
-    "shops": [
-      {
-        "seller": "Lost Property shop",
-        "price": 9500,
-        "currency": "Coins"
-      }
-    ],
+    "shopBought": false,
+    "shops": [],
     "clueTiers": [],
     "alwaysAvailable": false
   },
@@ -184004,11 +183682,6 @@
     "shopBought": true,
     "shops": [
       {
-        "seller": "Lost Property shop",
-        "price": 300000,
-        "currency": "Coins"
-      },
-      {
         "seller": "Giants' Foundry Reward Shop",
         "price": 5000,
         "currency": "Foundry reputation"
@@ -184274,14 +183947,8 @@
     "gathering": null,
     "production": null,
     "spawns": [],
-    "shopBought": true,
-    "shops": [
-      {
-        "seller": "Lost Property shop",
-        "price": 350000,
-        "currency": "Coins"
-      }
-    ],
+    "shopBought": false,
+    "shops": [],
     "clueTiers": [],
     "alwaysAvailable": false
   },

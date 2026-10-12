@@ -11,6 +11,7 @@ Usage:
 from __future__ import annotations
 
 import json
+import wiki_api
 import os
 import re
 import sys
@@ -21,16 +22,13 @@ OUT_JSON  = os.path.join(os.path.dirname(__file__), 'output', 'food_data.json')
 
 UA = 'OSRS-TCG-enrichment/1.0 (github.com/Azderi/osrs-tcg)'
 
-WIKI_API = ('https://oldschool.runescape.wiki/api.php'
-            '?action=parse&page=Food/All_food&prop=wikitext&format=json')
+# Fetched with wiki_api.raw (plain page URL), never api.php?action=parse
 
 
 def fetch_wiki_food() -> dict[str, int]:
     """Parse Food/All_food wikitext and return {name: total_hp}."""
     print('Fetching OSRS wiki Food/All_food ...')
-    req = urllib.request.Request(WIKI_API, headers={'User-Agent': UA})
-    data = json.loads(urllib.request.urlopen(req, timeout=30).read())
-    wikitext = data['parse']['wikitext']['*']
+    wikitext = wiki_api.raw('Food/All_food')  # plain page URL ?action=raw
 
     food: dict[str, int] = {}
     for row in wikitext.split('|-'):

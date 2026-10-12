@@ -1,7 +1,7 @@
 {
 "_gates": {
 "Ancient Cavern": {
-"quests": [
+"partialQuests": [
 "Barbarian Training"
 ],
 "skills": {
@@ -31,18 +31,23 @@
 "Priest in Peril"
 ]
 },
+"Bone Yard": {
+"diaries": [
+"Wilderness Medium"
+]
+},
 "Braindeath Island": {
-"quests": [
+"partialQuests": [
 "Rum Deal"
 ]
 },
 "Brimhaven": {
-"quests": [
+"partialQuests": [
 "Heroes' Quest"
 ]
 },
 "Brine Rat Cavern": {
-"quests": [
+"partialQuests": [
 "Olaf's Quest"
 ],
 "cards": [
@@ -50,8 +55,13 @@
 ]
 },
 "Burgh de Rott": {
-"quests": [
+"partialQuests": [
 "In Aid of the Myreque"
+]
+},
+"Callisto's Den": {
+"diaries": [
+"Wilderness Medium"
 ]
 },
 "Canifis": {
@@ -63,7 +73,7 @@
 "access": "wilderness"
 },
 "Clock Tower Dungeon": {
-"quests": [
+"partialQuests": [
 "Clock Tower"
 ]
 },
@@ -79,12 +89,12 @@
 ]
 },
 "Crandor": {
-"quests": [
+"partialQuests": [
 "Dragon Slayer I"
 ]
 },
 "Crash Site Cavern": {
-"quests": [
+"partialQuests": [
 "Monkey Madness II"
 ]
 },
@@ -94,7 +104,7 @@
 ]
 },
 "Darkmeyer": {
-"quests": [
+"partialQuests": [
 "Sins of the Father"
 ]
 },
@@ -109,7 +119,7 @@
 ]
 },
 "Dorgeshuun Mines": {
-"quests": [
+"partialQuests": [
 "The Lost Tribe"
 ]
 },
@@ -130,7 +140,9 @@
 },
 "Evil Chicken's Lair": {
 "quests": [
-"Lost City",
+"Lost City"
+],
+"partialQuests": [
 "Recipe for Disaster/Freeing Sir Amik Varze"
 ]
 },
@@ -140,23 +152,22 @@
 ]
 },
 "Fremennik Isles": {
-"quests": [
+"partialQuests": [
 "The Fremennik Isles"
 ]
 },
 "Glarial's Tomb": {
-"quests": [
+"partialQuests": [
 "Waterfall Quest"
 ]
 },
 "God Wars Dungeon": {
-"quests": [
+"partialQuests": [
 "Troll Stronghold"
 ]
 },
 "Harmony Island": {
-"quests": [
-"Rum Deal",
+"partialQuests": [
 "The Great Brain Robbery"
 ]
 },
@@ -170,38 +181,43 @@
 "Heroes' Quest"
 ]
 },
+"Hunter's End": {
+"diaries": [
+"Wilderness Hard"
+]
+},
 "Ice Path": {
-"quests": [
+"partialQuests": [
 "Desert Treasure I"
 ]
 },
 "Ice Troll Caves": {
-"quests": [
+"partialQuests": [
 "The Fremennik Isles"
 ]
 },
 "Iceberg": {
-"quests": [
+"partialQuests": [
 "Cold War"
 ]
 },
 "Isafdar": {
-"quests": [
+"partialQuests": [
 "Regicide"
 ]
 },
 "Jatizso mine": {
-"quests": [
+"partialQuests": [
 "The Fremennik Isles"
 ]
 },
 "Jiggig": {
-"quests": [
+"partialQuests": [
 "Zogre Flesh Eaters"
 ]
 },
 "Jiggig Dungeon": {
-"quests": [
+"partialQuests": [
 "Zogre Flesh Eaters"
 ]
 },
@@ -233,12 +249,12 @@
 "access": "kourend"
 },
 "Keldagrim": {
-"quests": [
+"partialQuests": [
 "The Giant Dwarf"
 ]
 },
 "Kharazi Jungle": {
-"quests": [
+"partialQuests": [
 "Legends' Quest"
 ]
 },
@@ -251,7 +267,10 @@
 ]
 },
 "Lava Dragon Isle": {
-"access": "wilderness"
+"access": "wilderness",
+"diaries": [
+"Wilderness Medium"
+]
 },
 "Legends' Guild": {
 "quests": [
@@ -269,7 +288,7 @@
 ]
 },
 "Lletya": {
-"quests": [
+"partialQuests": [
 "Mourning's End Part I"
 ]
 },
@@ -279,32 +298,32 @@
 ]
 },
 "Marim": {
-"quests": [
+"partialQuests": [
 "Monkey Madness I"
 ]
 },
 "Meiyerditch": {
-"quests": [
+"partialQuests": [
 "Darkness of Hallowvale"
 ]
 },
 "Meiyerditch Laboratories": {
-"quests": [
+"partialQuests": [
 "Sins of the Father"
 ]
 },
 "Melzar's Maze": {
-"quests": [
+"partialQuests": [
 "Dragon Slayer I"
 ]
 },
 "Miscellania and Etceteria Dungeon": {
-"quests": [
+"partialQuests": [
 "Royal Trouble"
 ]
 },
 "Mogre Camp": {
-"quests": [
+"partialQuests": [
 "Recipe for Disaster/Freeing Pirate Pete"
 ]
 },
@@ -315,12 +334,12 @@
 "access": "morytania"
 },
 "Mourner Headquarters": {
-"quests": [
+"partialQuests": [
 "Mourning's End Part I"
 ]
 },
 "Mourner Tunnels": {
-"quests": [
+"partialQuests": [
 "Mourning's End Part II"
 ]
 },
@@ -335,7 +354,7 @@
 ]
 },
 "Myreque Hideout": {
-"quests": [
+"partialQuests": [
 "In Search of the Myreque"
 ]
 },
@@ -345,10 +364,13 @@
 ]
 },
 "Neypotzli": {
-"quests": [
+"partialQuests": [
 "Perilous Moons"
 ],
-"access": "varlamore"
+"access": "varlamore",
+"quests": [
+"Perilous Moons"
+]
 },
 "Ogre Enclave": {
 "quests": [
@@ -356,7 +378,7 @@
 ]
 },
 "Pirates' Cove": {
-"quests": [
+"partialQuests": [
 "Lunar Diplomacy"
 ]
 },
@@ -389,13 +411,13 @@
 ]
 },
 "Shadow Dungeon": {
-"quests": [
+"partialQuests": [
 "Desert Treasure I"
 ],
 "access": "desert"
 },
 "Shaman Caves": {
-"quests": [
+"partialQuests": [
 "Legends' Quest"
 ]
 },
@@ -410,6 +432,9 @@
 ]
 },
 "Skeletal Tomb": {
+"diaries": [
+"Wilderness Hard"
+],
 "access": "wilderness"
 },
 "Slayer Tower": {
@@ -423,7 +448,7 @@
 ]
 },
 "Smoke Dungeon": {
-"quests": [
+"partialQuests": [
 "Desert Treasure I"
 ],
 "access": "desert",
@@ -456,12 +481,12 @@
 ]
 },
 "Temple of Marimbo": {
-"quests": [
+"partialQuests": [
 "Monkey Madness I"
 ]
 },
 "Temple of Marimbo Dungeon": {
-"quests": [
+"partialQuests": [
 "Monkey Madness I"
 ]
 },
@@ -477,22 +502,22 @@
 ]
 },
 "Troll Arena": {
-"quests": [
+"partialQuests": [
 "Troll Stronghold"
 ]
 },
 "Troll Stronghold (location)": {
-"quests": [
+"partialQuests": [
 "Troll Stronghold"
 ]
 },
 "Troll arena": {
-"quests": [
+"partialQuests": [
 "Troll Stronghold"
 ]
 },
 "Trollheim": {
-"quests": [
+"partialQuests": [
 "Troll Stronghold"
 ]
 },
@@ -502,18 +527,13 @@
 ]
 },
 "Trollweiss Mountain": {
-"quests": [
+"partialQuests": [
 "Troll Romance"
 ]
 },
 "Tyras Camp": {
-"quests": [
+"partialQuests": [
 "Regicide"
-]
-},
-"Underground Pass (dungeon)": {
-"quests": [
-"Underground Pass"
 ]
 },
 "Underwater": {
@@ -524,6 +544,25 @@
 "Ungael": {
 "quests": [
 "Dragon Slayer II"
+],
+"partialQuests": [
+"Dragon Slayer II"
+]
+},
+"Vet'ion": {
+"diaries": [
+"Wilderness Medium"
+],
+"cards": [
+"Coins"
+]
+},
+"Vet'ion's Rest": {
+"diaries": [
+"Wilderness Medium"
+],
+"cards": [
+"Coins"
 ]
 },
 "Virer Hunting Ground": {
@@ -532,13 +571,21 @@
 ]
 },
 "Viyeldi caves": {
-"quests": [
+"partialQuests": [
 "Legends' Quest"
 ]
 },
 "Waterfall Dungeon": {
 "quests": [
 "Waterfall Quest"
+],
+"partialQuests": [
+"Waterfall Quest"
+]
+},
+"Web Chasm": {
+"diaries": [
+"Wilderness Hard"
 ]
 },
 "Weiss": {
@@ -547,7 +594,7 @@
 ]
 },
 "West Ardougne": {
-"quests": [
+"partialQuests": [
 "Plague City"
 ]
 },
@@ -569,7 +616,7 @@
 "access": "sailing"
 },
 "Zemouregal's Base": {
-"quests": [
+"partialQuests": [
 "Defender of Varrock"
 ]
 },
@@ -598,10 +645,19 @@
 },
 "Abyssal guardian": {
 "Abyss": null,
-"Abyssal Area": "abyss"
+"Abyssal Area": "abyss",
+"Temple of the Eye (location)": null
 },
 "Abyssal leech": {
-"The Scar": "desert"
+"The Scar": "desert",
+"Abyss": null,
+"Abyssal Area": "abyss",
+"Temple of the Eye (location)": null
+},
+"Abyssal walker": {
+"Abyss": null,
+"Abyssal Area": "abyss",
+"Temple of the Eye (location)": null
 },
 "Acidic Araxyte": {
 "Morytania Spider Cave": "morytania"
@@ -610,8 +666,7 @@
 "Villa Lucens": "varlamore"
 },
 "Adamant dragon": {
-"Lithkren Vault": null,
-"Dragon Slayer II": null
+"Lithkren Vault": null
 },
 "Aeonisig Raispher": {
 "Varrock Palace": null
@@ -620,7 +675,7 @@
 "Mort'ton": "morytania"
 },
 "Ahrim the Blighted": {
-"Ancient Vault": "desert"
+"Barrows": "morytania"
 },
 "Air elemental": {
 "Elemental Workshop (location)": null
@@ -691,7 +746,6 @@
 "Jaltevas Pyramid": "desert"
 },
 "Ammonite Crab": {
-"Fossil Island": "fossil_island",
 "Mushroom Forest": null,
 "Fossil Island Volcano": null,
 "Wyvern Cave": "fossil_island"
@@ -728,7 +782,6 @@
 "Tarn's Lair": "morytania"
 },
 "Anja": {
-"Hetty": null,
 "Rimmington": null
 },
 "Ankou": {
@@ -750,10 +803,15 @@
 "Morytania Spider Cave": "morytania"
 },
 "Archer": {
-"Burthorpe Castle": null
+"Burthorpe Castle": null,
+"Ardougne Castle": null,
+"Lumbridge Swamp": null
 },
 "Archmage Sedridor": {
 "Wizards' Tower": null
+},
+"Arianwyn": {
+"Lletya": "tirannwn"
 },
 "Armour salesman": {
 "Ranging Guild": null
@@ -771,7 +829,9 @@
 "Etceteria": null
 },
 "Armoured zombie": {
-"Zemouregal's Fort": null
+"Zemouregal's Fort": null,
+"Varrock Palace": null,
+"Zemouregal's Base": null
 },
 "Arrav": {
 "Zemouregal's Base": null
@@ -813,14 +873,14 @@
 "Twilight Temple": "varlamore"
 },
 "Ava": {
-"Draynor Manor": null
+"Draynor Manor": null,
+"Civitas illa Fortis": "varlamore"
 },
 "Aviansie": {
 "God Wars Dungeon": null,
 "Wilderness God Wars Dungeon": null
 },
 "Awowogei": {
-"Ape Atoll": "ape_atoll",
 "Lumbridge Castle": null
 },
 "Aya": {
@@ -833,29 +893,22 @@
 "Charred Dungeon": "sailing",
 "Corsair Cove Dungeon": null,
 "Myths' Guild": null,
-"Dragon Slayer II": null,
 "Evil Chicken's Lair": null,
-"rope": null,
-"Recipe for Disaster: Sir Amik Varze": null,
 "Taverley Dungeon": null,
 "Slayer task": null
 },
 "Baby blue dragon": {
 "Corsair Cove Dungeon": null,
 "Myths' Guild": null,
-"Dragon Slayer II": null,
 "Isle of Souls Dungeon": null,
 "Taverley Dungeon": null,
-"dusty key": null,
 "Ruins of Tapoyauik": "varlamore",
-"Heart of Darkness": "varlamore",
 "Dragon Nest": "varlamore"
 },
 "Baby green dragon": {
 "Brimhaven Dungeon": null,
 "Corsair Cove Dungeon": null,
-"Myths' Guild": null,
-"Dragon Slayer II": null
+"Myths' Guild": null
 },
 "Baby impling": {
 "Puro Puro": null
@@ -864,7 +917,6 @@
 "Brimhaven Dungeon": null,
 "Corsair Cove Dungeon": null,
 "Myths' Guild": null,
-"Dragon Slayer II": null,
 "Forthos Dungeon": "kourend",
 "Dragon Nest": "varlamore"
 },
@@ -876,7 +928,16 @@
 },
 "Bandit": {
 "Bandit Camp (Wilderness)": null,
-"Wilderness Slayer Cave": null
+"Wilderness Slayer Cave": null,
+"Kharidian Desert Bandit Camp": "desert",
+"Varrock": null,
+"Pollnivneach": "desert",
+"Shayzia Ruin": "kourend",
+"The Big Heist Lodge": "desert",
+"Mons Gratia": "varlamore",
+"Quetzacalli Gorge": "varlamore",
+"Ralos' Rise": "varlamore",
+"Darkmoon Ravine": "varlamore"
 },
 "Banshee": {
 "Slayer Tower": "morytania"
@@ -884,7 +945,8 @@
 "Barbarian": {
 "Barbarian Outpost": null,
 "Barbarian Village": null,
-"Blue Moon Inn": null
+"Blue Moon Inn": null,
+"Kourend Woodland": "kourend"
 },
 "Bark Blamish Snail": {
 "Mort Myre Swamp": "morytania"
@@ -906,7 +968,8 @@
 "Abandoned Mine": "morytania",
 "Shadow Dungeon": null,
 "Custodia Mountains": "varlamore",
-"Wyrmscraig Cavern": "sailing"
+"Wyrmscraig Cavern": "sailing",
+"Hallowed Sepulchre": "morytania"
 },
 "Battle mage": {
 "Mage Arena": null
@@ -919,16 +982,25 @@
 "Land's End": "kourend",
 "Rellekka": null,
 "Kebos Lowlands": "kourend",
-"Gordon": "kourend",
 "Mount Quidamortem": "kourend",
 "Custodia Pass": "varlamore",
-"Custodia Mountains": "varlamore"
+"Custodia Mountains": "varlamore",
+"Prifddinas": "prifddinas",
+"Dorgesh-Kaan": null,
+"Dorgesh-Kaan Agility Course": null
 },
 "Bedabin Nomad Fighter": {
 "Bedabin Camp": "desert"
 },
+"Bee Swarm": {
+"Fortis Colosseum": "varlamore"
+},
+"Bee keeper": {
+"Forestry events": null
+},
 "Berry": {
-"Troll Stronghold (location)": null
+"Troll Stronghold (location)": null,
+"Hosidius": "kourend"
 },
 "Berserk barbarian spirit": {
 "Ancient Cavern": null
@@ -985,7 +1057,8 @@
 "Jolly Boar Inn": null,
 "Black Knights' Fortress (location)": null,
 "Lava Maze": null,
-"Taverley Dungeon": null
+"Taverley Dungeon": null,
+"Port Sarim": null
 },
 "Black Knight Titan": {
 "Fisher Realm": null
@@ -1013,16 +1086,16 @@
 "Charred Dungeon": "sailing",
 "Corsair Cove Dungeon": null,
 "Myths' Guild": null,
-"Dragon Slayer II": null,
 "Evil Chicken's Lair": null,
-"Recipe for Disaster: Sir Amik Varze": null,
 "Lava Maze Dungeon": null,
 "Mynydd": "tirannwn",
-"Song of the Elves": "tirannwn",
 "Taverley Dungeon": null,
-"dusty key": null,
 "Slayer task": null,
 "Wilderness Slayer Cave": null
+},
+"Black jaguar": {
+"Ralos' Rise": "varlamore",
+"Tlati Rainforest": "varlamore"
 },
 "Black unicorn": {
 "Graveyard of Shadows": null,
@@ -1033,11 +1106,10 @@
 "Rellekka": null
 },
 "Blessed giant rat": {
-"Underground Pass (dungeon)": "tirannwn"
+"Underground Pass (dungeon)": null
 },
 "Blessed spider": {
-"Underground Pass (dungeon)": "tirannwn",
-"Song of the Elves": "tirannwn"
+"Underground Pass (dungeon)": null
 },
 "Blood Blamish Snail": {
 "Mort Myre Swamp": "morytania",
@@ -1065,17 +1137,12 @@
 "Blue dragon": {
 "Corsair Cove Dungeon": null,
 "Myths' Guild": null,
-"Dragon Slayer II": null,
 "Heroes' Guild": null,
-"Heroes' Quest": null,
 "Isle of Souls Dungeon": null,
 "Ogre Enclave": null,
-"Watchtower": null,
 "Taverley Dungeon": null,
 "Slayer task": null,
-"dusty key": null,
 "Ruins of Tapoyauik": "varlamore",
-"Heart of Darkness": "varlamore",
 "Dragon Nest": "varlamore"
 },
 "Blurberry": {
@@ -1088,7 +1155,11 @@
 },
 "Bob": {
 "Asgarnia": null,
-"Burthorpe": null
+"Burthorpe": null,
+"Lumbridge": null,
+"Entrana": null,
+"Varrock": null,
+"Sinclair Mansion": null
 },
 "Body Golem": {
 "Ruins of Camdozaal": null
@@ -1139,8 +1210,7 @@
 },
 "Brutal blue dragon": {
 "Catacombs of Kourend": "kourend",
-"Ruins of Tapoyauik": "varlamore",
-"Heart of Darkness": "varlamore"
+"Ruins of Tapoyauik": "varlamore"
 },
 "Brutal green dragon": {
 "Ancient Cavern": null
@@ -1155,7 +1225,14 @@
 "Varrock Sewers": null
 },
 "Buffalo": {
-"Ortus Farm": "varlamore"
+"Ortus Farm": "varlamore",
+"Varlamore": "varlamore",
+"Outer Fortis": "varlamore",
+"Ralos' Rise": "varlamore",
+"Cam Torum": "varlamore",
+"The Lost Pickaxe": "varlamore",
+"The Proudspire": "varlamore",
+"Nemus Retreat": "varlamore"
 },
 "Bull shark": {
 "Crandor": null,
@@ -1188,7 +1265,12 @@
 },
 "Cabin Boy Jenkins": {
 "Port Sarim": null,
-"Lady Lumbridge": null
+"Lady Lumbridge": null,
+"Crandor": null,
+"The Pandemonium": null
+},
+"Callisto": {
+"Callisto's Den": null
 },
 "Camp dweller": {
 "Mountain Camp": null
@@ -1222,7 +1304,9 @@
 "Ruins of Tapoyauik": "varlamore"
 },
 "Cave goblin": {
-"Lumbridge Swamp Caves": null
+"Lumbridge Swamp Caves": null,
+"Dorgesh-Kaan": null,
+"Dorgesh-Kaan–Keldagrim train system": null
 },
 "Cave goblin guard": {
 "Dorgeshuun Mines": null
@@ -1249,6 +1333,9 @@
 "Ceolburg": {
 "Burthorpe": null
 },
+"Cerberus": {
+"Cerberus' Lair": null
+},
 "Chaeldar": {
 "Zanaris": "zanaris"
 },
@@ -1264,12 +1351,10 @@
 "Chaos druid": {
 "Chaos Druid Tower": null,
 "East Ardougne": null,
-"Thieving": null,
 "Slepe": "morytania",
 "Edgeville Dungeon": null,
 "Taverley Dungeon": null,
-"Yanille Agility Dungeon": null,
-"Agility": null
+"Yanille Agility Dungeon": null
 },
 "Chaos druid warrior": {
 "Slepe": "morytania",
@@ -1285,7 +1370,37 @@
 "Varrock": null
 },
 "Chicken": {
-"Tutorial Island": null
+"Tutorial Island": null,
+"Etceteria": null,
+"Warriors' Guild": null,
+"Ardougne": null,
+"Witchaven": null,
+"Miscellania": null,
+"Tyras Camp": "tirannwn",
+"Rellekka": null,
+"Gordon and Mary's farm": "kourend",
+"Tai Bwo Wannai": null,
+"Lumbridge": null,
+"Ranging Guild": null,
+"Entrana": null,
+"Land's End": "kourend",
+"Kourend Castle": "kourend",
+"White Knights Castle": null,
+"South Falador Farm": null,
+"Sinclair Mansion": null,
+"Barbarian Agility Course": null,
+"Champions' Guild": null,
+"Prifddinas": "prifddinas",
+"Wizards' Tower": null,
+"Isle of Souls": null,
+"Outer Fortis": "varlamore",
+"Aldarin": "varlamore",
+"Tal Teklan": "varlamore",
+"Goblin Cave": null,
+"Boxes (Goblin Cave)": null,
+"Crate (Goblin Cave)": null,
+"Wyrmscraig": "sailing",
+"Draynor Manor": null
 },
 "Chilled jelly": {
 "Ruins of Tapoyauik": "varlamore",
@@ -1321,22 +1436,18 @@
 "Confused barbarian": {
 "Ancient Cavern": null
 },
-"Confusion beast": {
-"A Soul's Bane": null
-},
 "Corporeal Beast": {
 "Corporeal Beast's Lair": null,
 "Graveyard of Shadows": null,
-"games necklace": null,
 "Ironman Mode": null
 },
 "Count Check": {
-"Lumbridge": null
+"Lumbridge": null,
+"Random event": null
 },
 "Cow": {
 "Ardougne": null,
 "Kebos Lowlands": "kourend",
-"Gordon": "kourend",
 "Lumbridge cow field (north)": null,
 "Lumbridge cow field": null,
 "Fred's farm": null,
@@ -1344,13 +1455,12 @@
 "Nightmare Zone": "excluded",
 "Prifddinas": "prifddinas",
 "Gwenith": "tirannwn",
-"Song of the Elves": "tirannwn",
 "Hosidius": "kourend",
 "Crafting Guild": null,
 "South Falador Farm": null,
-"Keith": "kourend",
 "Zanaris": "zanaris",
-"Isle of Souls": null
+"Isle of Souls": null,
+"Champions' Guild": null
 },
 "Cow calf": {
 "Lumbridge cow field": null,
@@ -1360,19 +1470,23 @@
 "Crafting Guild": null,
 "Hosidius": "kourend",
 "Kebos Lowlands": "kourend",
-"Keith": "kourend",
-"Gordon": "kourend",
 "Isle of Souls": null
 },
 "Cow31337Killer": {
 "Port Phasmatys": "morytania"
 },
 "Crab": {
-"Mogre Camp": null
+"Mogre Camp": null,
+"Fossil Island": "fossil_island",
+"Mos Le'Harmless": "mos_le_harmless",
+"Prifddinas General Store": "tirannwn",
+"Tempoross Cove": "desert"
 },
 "Crawling Hand": {
 "Meiyerditch Laboratories": "morytania",
-"Slayer Tower": "morytania"
+"Slayer Tower": "morytania",
+"Lassar Undercity": null,
+"Shadow Realm": null
 },
 "Crazy archaeologist": {
 "Ruins (west)": null
@@ -1391,14 +1505,14 @@
 "Cuffs": {
 "Falador": null
 },
-"Culinaromancer": {
-"Recipe for Disaster": null
-},
 "Cuthbert": {
 "Locus Oasis": "varlamore"
 },
 "Cyclops": {
-"Warriors' Guild": null
+"Warriors' Guild": null,
+"Ardougne Zoo": null,
+"Catacombs of Kourend": "kourend",
+"God Wars Dungeon": null
 },
 "Cyrisus": {
 "Lunar Isle Mine": null,
@@ -1408,6 +1522,22 @@
 },
 "Dad": {
 "Troll Arena": null
+},
+"Dagannoth": {
+"Jormungand's Prison": null,
+"Catacombs of Kourend": "kourend",
+"Lighthouse": null,
+"Waterbirth Island Dungeon": "waterbirth",
+"Dagannoth Kings": null
+},
+"Dagannoth Prime": {
+"Waterbirth Island Dungeon": "waterbirth"
+},
+"Dagannoth Rex": {
+"Waterbirth Island Dungeon": "waterbirth"
+},
+"Dagannoth Supreme": {
+"Waterbirth Island Dungeon": "waterbirth"
 },
 "Dagannoth fledgeling": {
 "Waterbirth Island Dungeon": "waterbirth"
@@ -1435,7 +1565,9 @@
 "bank": null,
 "Varrock": null,
 "Dark Wizards' Tower": null,
-"Kourend Castle": "kourend"
+"Kourend Castle": "kourend",
+"Port Piscarilius": "kourend",
+"Arceuus": "kourend"
 },
 "Deadly red spider": {
 "Lava Maze": null,
@@ -1444,27 +1576,20 @@
 "Varrock Sewers": null,
 "Edgeville Dungeon": null,
 "Arandar": "tirannwn",
-"Song of the Elves": "tirannwn",
 "Myreque Hideout": "morytania",
 "Pandemonium Cave": null
 },
 "Death": {
 "Death's Office": null,
-"Death's mansion": null,
-"Lumbridge": null,
-"Blue Moon Inn": null,
-"Edgeville Monastery": null,
-"Deadman: Reborn": null,
-"Deadman Arenas": null,
-"Deadman: All Stars": null,
-"1v1 Arena": null
+"Halloween event": null
 },
 "Death wing": {
 "Shaman Caves": null
 },
 "Demon butler": {
 "Player-owned house": null,
-"Servants' Guild": null
+"Servants' Guild": null,
+"Yama's Lair": null
 },
 "Demonic gorilla": {
 "Crash Site Cavern": null
@@ -1480,9 +1605,16 @@
 "Fossil Island": "fossil_island",
 "Tar Swamp": null
 },
+"Derwen": {
+"Prifddinas": "prifddinas"
+},
 "Desert Lizard": {
 "Shantay Pass": null,
-"Ruins of Ullek": "desert"
+"Ruins of Ullek": "desert",
+"Kharidian Desert": "desert",
+"Crypt of Tonali": "varlamore",
+"Quidamortem Cave": "kourend",
+"Nardah": "desert"
 },
 "Desert Phoenix": {
 "Ruins of Uzer": "desert"
@@ -1495,7 +1627,7 @@
 "Catacombs of Kourend": "kourend"
 },
 "Dharok the Wretched": {
-"Ancient Vault": "desert"
+"Barrows": "morytania"
 },
 "Diango": {
 "Draynor Village": null
@@ -1503,22 +1635,19 @@
 "Dire Wolf": {
 "Wolf Den": "varlamore",
 "Ralos' Rise mine": "varlamore",
-"Meat and Greet": "varlamore",
 "Mynydd": "tirannwn",
 "Lletya": "tirannwn",
 "Arandar": "tirannwn",
 "Isafdar mine": "tirannwn"
 },
 "Dire Wolf Alpha": {
-"Wolf Den": "varlamore",
-"Meat and Greet": "varlamore"
+"Wolf Den": "varlamore"
 },
 "Dire bat": {
 "Sangvesti": null
 },
 "Disciple of Iban": {
-"Underground Pass (dungeon)": "tirannwn",
-"Underground Pass": null
+"Underground Pass (dungeon)": null
 },
 "Dolphin": {
 "Anglerfish's Light": null,
@@ -1548,7 +1677,7 @@
 "Wilderness Bandit Camp": null
 },
 "Doomion": {
-"Underground Pass (dungeon)": "tirannwn"
+"Underground Pass (dungeon)": null
 },
 "Doomsayer": {
 "Lumbridge": null
@@ -1560,15 +1689,22 @@
 "Gielinor": null
 },
 "Drake": {
-"Karuulm Slayer Dungeon": "kourend"
+"Karuulm Slayer Dungeon": "kourend",
+"Falador Park": null,
+"Mill Lane Mill": null
 },
 "Drezel": {
 "Paterdomus": null
 },
 "Druid": {
-"Stone_circle": null,
+"Stone circle": null,
 "Taverley": null,
-"Jatix's Herblore Shop": null
+"Jatix's Herblore Shop": null,
+"White Knights' Castle": null
+},
+"Drunken Dwarf": {
+"Keldagrim": null,
+"Boat": null
 },
 "Drunken man": {
 "Rising Sun Inn": null
@@ -1587,14 +1723,20 @@
 "Farming guild": "kourend",
 "Woodcutting Guild": "kourend",
 "Fisher Realm": null,
-"Limbo": null
+"Limbo": null,
+"Buccaneers' Haven": null,
+"Mill Lane Mill": null,
+"Farming Guild": "kourend",
+"Kourend Woodland": "kourend",
+"Soul Wars Lobby": null
 },
 "Duckling": {
 "Lumbridge": null,
 "Farming Guild": "kourend"
 },
 "Duke": {
-"Ape Atoll": "ape_atoll"
+"Ape Atoll": "ape_atoll",
+"Varrock": null
 },
 "Duke Horacio": {
 "Lumbridge Castle": null
@@ -1632,8 +1774,12 @@
 "Dwarven Mine": null,
 "Keldagrim": null,
 "Black Knights' Base": null,
-"jail key": null,
-"White Wolf Mountain": null
+"White Wolf Mountain": null,
+"Lumbridge": null,
+"Groats' Farm": null,
+"Deepfin Point": null,
+"Motherlode Mine": null,
+"Dorgesh-Kaan–Keldagrim train system": null
 },
 "Dwarf gang member": {
 "Dwarven Mine": null
@@ -1693,7 +1839,8 @@
 "Miscellania": null
 },
 "Elder Chaos druid": {
-"Chaos Temple (Wilderness)": null
+"Chaos Temple (Wilderness)": null,
+"Chaos Temple (church)": null
 },
 "Elder custodian stalker": {
 "Stalker Den": "varlamore"
@@ -1705,23 +1852,19 @@
 "East Ardougne": null,
 "West Ardougne": null,
 "Lletya": "tirannwn",
-"Underground Pass": null,
 "Prifddinas": "prifddinas"
 },
 "Elf Archer": {
-"Lletya": "tirannwn",
-"Song of the Elves": "tirannwn"
+"Lletya": "tirannwn"
 },
 "Elf Warrior": {
-"Lletya": "tirannwn",
-"Song of the Elves": "tirannwn"
+"Lletya": "tirannwn"
 },
 "Elias White": {
 "Jolly Boar Inn": null
 },
 "Elite Black Knight": {
-"Black Knight Catacombs": null,
-"Dark Squall": null
+"Black Knight Catacombs": null
 },
 "Elite Dark Mage": {
 "Black Knight Catacombs": null
@@ -1730,8 +1873,7 @@
 "Black Knight Catacombs": null
 },
 "Elite Dark Warrior": {
-"Black Knight Catacombs": null,
-"Dark Squall": null
+"Black Knight Catacombs": null
 },
 "Elite Khazard Guard": {
 "Movario's base": null
@@ -1762,17 +1904,19 @@
 "Ennius Tullus": {
 "Civitas illa Fortis": "varlamore"
 },
+"Enormous Tentacle": {
+"Fishing Trawler": null
+},
 "Enraged Boar": {
 "The Node": null
 },
 "Enraged barbarian spirit": {
-"Ancient Cavern": null,
-"Dragon Slayer II": null
+"Ancient Cavern": null
 },
 "Ent": {
+"Chaos Temple (Wilderness)": null,
 "Woodcutting Guild": "kourend",
-"Wilderness": null,
-"Chaos Temple (Wilderness)": null
+"Auburnvale": "varlamore"
 },
 "Entrana firebird": {
 "Entrana": null
@@ -1790,20 +1934,23 @@
 "Evil Bob": {
 "ScapeRune": null
 },
+"Evil Chicken": {
+"Champions' Guild": null
+},
 "Evil Dave": {
 "Edgeville": null,
 "Ruins of Uzer": "desert",
 "Lumbridge": null
 },
 "Ex-Captain Siad": {
-"Desert Mining Camp": "desert"
+"Desert Mining Camp": "desert",
+"The Pandemonium": null
 },
 "Experiment": {
 "Experiment cave": "morytania"
 },
 "Experiment No.2": {
-"Witch's house (location)": null,
-"Grim Tales": null
+"Witch's house (location)": null
 },
 "Eyatlalli": {
 "Neypotzli": "varlamore"
@@ -1820,7 +1967,17 @@
 "South Varrock farm": null,
 "Groats' farm": null,
 "Lumbridge": null,
-"Watson's house": "kourend"
+"Watson's house": "kourend",
+"Hosidius": "kourend",
+"Kastori": "varlamore",
+"Draynor farm": null,
+"Shayzien": "kourend",
+"The Cloak and Stagger": "kourend",
+"Tal Teklan": "varlamore",
+"The Golden Field": "kourend",
+"Outer Fortis": "varlamore",
+"Ortus Farm": "varlamore",
+"Aldarin": "varlamore"
 },
 "Farmer Gricoller": {
 "Tithe Farm": "kourend"
@@ -1832,13 +1989,18 @@
 "Haunted Woods": "morytania",
 "Burgh De Rott": "morytania",
 "God Wars Dungeon": null,
-"Wilderness God Wars Dungeon": null
+"Wilderness God Wars Dungeon": null,
+"Morytania": "morytania"
 },
 "Ferox": {
 "Ferox Enclave": null
 },
 "Fever spider": {
 "Braindeath Island": "morytania"
+},
+"Fire elemental": {
+"Elemental Workshop (location)": null,
+"Smoke Dungeon": "desert"
 },
 "Fire giant": {
 "Brimhaven Dungeon": null,
@@ -1886,7 +2048,12 @@
 "Karamja": null
 },
 "Forester": {
-"Woodcutting Guild": "kourend"
+"Woodcutting Guild": "kourend",
+"McGrubor's Wood": null,
+"Paterdomus": null
+},
+"Forgotten Soul": {
+"Crumbling Tower": null
 },
 "Fortress Guard": {
 "Black Knights' Fortress (location)": null
@@ -1901,15 +2068,22 @@
 "Rellekka": null,
 "Hosidius Kitchen": "kourend",
 "Auburn Valley": "varlamore",
-"Drumstick Isle": null
+"Drumstick Isle": null,
+"Forestry": null
 },
 "Fragment of Seren": {
 "Memoriam device": null
+},
+"Freaky Forester": {
+"Forestry events": null
 },
 "Fred the Farmer": {
 "Lumbridge": null
 },
 "Freidir": {
+"Rellekka": null
+},
+"Fremennik warrior": {
 "Rellekka": null
 },
 "Frigatebird": {
@@ -1931,10 +2105,18 @@
 "Lumbridge Swamp": null,
 "The Great Conch": "sailing",
 "Tlati Rainforest": "varlamore",
-"Limbo": null
+"Limbo": null,
+"Kiss the frog": null,
+"Falador": null,
+"Mount Quidamortem": "kourend",
+"Neypotzli": "varlamore",
+"Ruins of Camdozaal": null,
+"Locus Oasis": "varlamore",
+"Zanaris": "zanaris"
 },
 "Frost Crab": {
-"Ruins of Tapoyauik": "varlamore"
+"Ruins of Tapoyauik": "varlamore",
+"Ice Path": null
 },
 "Frost Nagua": {
 "Ruins of Tapoyauik": "varlamore"
@@ -1967,7 +2149,8 @@
 "Fremennik Province": null
 },
 "Genie": {
-"Random event": null
+"Random event": null,
+"Nardah": "desert"
 },
 "Georgy": {
 "Canifis": "morytania"
@@ -1982,6 +2165,32 @@
 "Ghommal": {
 "Warriors' Guild": null
 },
+"Ghost": {
+"Mynydd": "tirannwn",
+"The Forgotten Cemetery": null,
+"West Ardougne": null,
+"dense essence mine": "kourend",
+"Chaos Temple (Wilderness)": null,
+"Ferox Enclave": null,
+"Draynor Manor": null,
+"Varrock Sewers": null,
+"Stronghold of Security": null,
+"Sepulchre of Death": null,
+"Taverley Dungeon": null,
+"Catacombs of Kourend": "kourend",
+"Death Altar": "tirannwn",
+"Ruins of Uzer": "desert",
+"Port Phasmatys": "morytania",
+"Auburn Valley": "varlamore",
+"Grave of Scorpius": null,
+"Goblin Cave": null,
+"Port Sarim": null,
+"Melzar's Maze": null,
+"Ruins of Camdozaal": null,
+"Soul Wars": null,
+"Tombs of Amascut": "desert",
+"Abandoned Mine": "morytania"
+},
 "Ghoul": {
 "Mort Myre Swamp": "morytania",
 "Slayer Tower": "morytania"
@@ -1992,7 +2201,6 @@
 },
 "Giant Rock Crab": {
 "Waterbirth Island Dungeon": "waterbirth",
-"pet rock": null,
 "Tonali Cavern": "varlamore",
 "Isle of Serpents": null
 },
@@ -2022,13 +2230,14 @@
 "Ogre Enclave": null,
 "Temple of Ikov (dungeon)": null,
 "Tree Gnome Village dungeon": null,
-"Waterfall Quest": null,
-"Underground Pass (dungeon)": "tirannwn",
+"Underground Pass (dungeon)": null,
 "Shadow Dungeon": null,
 "Custodia Mountains": "varlamore",
 "Gloomthorn Trail": "varlamore",
 "Sunbleak Cave": null,
-"Castle Drakan": "morytania"
+"Castle Drakan": "morytania",
+"Brimhaven Agility Arena": null,
+"Brine Rat Cavern": null
 },
 "Giant crypt rat": {
 "Barrows": "morytania"
@@ -2041,6 +2250,10 @@
 "Lumbridge Swamp Caves": null,
 "Dorgesh-Kaan South Dungeon": null,
 "The Great Conch": "sailing"
+},
+"Giant lobster": {
+"Fishing Platform": null,
+"Witchaven Dungeon": null
 },
 "Giant mosquito": {
 "Mos Le'Harmless": "mos_le_harmless",
@@ -2066,10 +2279,12 @@
 "Shadow Dungeon": null,
 "Mistrock": "varlamore",
 "Pandemonium Cave": null,
-"Stronghold of Security": null
+"Stronghold of Security": null,
+"Tutorial Island mine": null
 },
 "Giant skeleton": {
-"Tarn's Lair": "morytania"
+"Tarn's Lair": "morytania",
+"Shadow Dungeon": null
 },
 "Giant spider": {
 "Gu'Tanoth": null,
@@ -2109,22 +2324,20 @@
 "Outpost": null,
 "Tree Gnome Stronghold": null,
 "Grand Tree": null,
-"Monkey Madness II": null
+"West Ardougne": null
 },
 "Gnome child": {
 "Grand Tree": null
 },
 "Gnome guard": {
 "Tree Gnome Stronghold": null,
-"Grand Tree": null,
-"Monkey Madness II": null
+"Grand Tree": null
 },
 "Gnome troop": {
 "Battlefield": null,
 "Tree Gnome Village (location)": null,
 "Tree Gnome Stronghold": null,
-"Grand Tree": null,
-"Monkey Madness II": null
+"Grand Tree": null
 },
 "Gnome woman": {
 "Tree Gnome Stronghold": null,
@@ -2137,13 +2350,41 @@
 "Uzer Oasis": "desert",
 "Kalphite Lair": "desert",
 "Nardah": "desert",
-"Ruins of Unkah": "desert"
+"Ruins of Unkah": "desert",
+"Twilight Temple": "varlamore"
+},
+"Goblin": {
+"Lumbridge": null,
+"Varrock": null,
+"Digsite": null,
+"Port Sarim": null,
+"Draynor Village": null,
+"Draynor Manor": null,
+"Lumbridge Swamp": null,
+"Goblin Cave": null,
+"Fishing Guild": null,
+"Tree Gnome Village (location)": null,
+"Clock Tower Dungeon": null,
+"Hosidius": "kourend",
+"Kebos Lowlands": "kourend",
+"Arandar": "tirannwn",
+"The Hollows": "morytania",
+"Observatory Dungeon": null,
+"Underground Pass (dungeon)": null,
+"Battle of Atarisundri": null,
+"Goblin Village": null,
+"God Wars Dungeon": null,
+"Wilderness God Wars Dungeon": null,
+"Scrubfoot's cave": null,
+"Surprise Exam": null
 },
 "Goblin Generals": {
-"Goblin Village": null
+"Goblin Village": null,
+"Lumbridge": null
 },
 "Goblin guard": {
-"Observatory Dungeon": null
+"Observatory Dungeon": null,
+"Goblin Cave": null
 },
 "Golem (sunstone)": {
 "Wyrmscraig": "sailing"
@@ -2208,8 +2449,7 @@
 "Lava Maze": null,
 "Wilderness Slayer Cave": null,
 "Corsair Cove Dungeon": null,
-"Myths' Guild": null,
-"Dragon Slayer II": null
+"Myths' Guild": null
 },
 "Grimy Lizard": {
 "Neypotzli": "varlamore",
@@ -2222,7 +2462,6 @@
 "Grizzly bear": {
 "Kebos Lowlands": "kourend",
 "Mount Quidamortem": "kourend",
-"Gordon": "kourend",
 "Aldarin": "varlamore",
 "Rellekka": null,
 "Land's End": "kourend",
@@ -2237,7 +2476,8 @@
 "Dark Warriors' Fortress": null,
 "Gloomthorn Trail": "varlamore",
 "Custodia Pass": "varlamore",
-"Custodia Mountains": "varlamore"
+"Custodia Mountains": "varlamore",
+"Escape Caves": null
 },
 "Grizzly bear cub": {
 "Isafdar": "tirannwn"
@@ -2253,25 +2493,78 @@
 "Falador": null,
 "Varrock": null,
 "Varrock Castle": null,
-"Edgeville": null
+"Edgeville": null,
+"Aldarin": "varlamore",
+"Auburnvale": "varlamore",
+"Varrock Palace": null,
+"Burthorpe Castle": null,
+"Cam Torum": "varlamore",
+"East Ardougne": null,
+"Dorgesh-Kaan": null,
+"Combat Training Camp": null,
+"H.A.M. Storerooms": null,
+"Desert Mining Camp": "desert",
+"Doric's hut": null,
+"Etceteria": null,
+"Fortis Colosseum entrance": "varlamore",
+"Goblin Cave": null,
+"Troll Stronghold (location)": null,
+"H.A.M. Store room": null,
+"Hosidius": "kourend",
+"Jatizso": null,
+"Keep Le Faye": null,
+"Miscellania": null,
+"Mistrock": "varlamore",
+"Motherlode Mine": null,
+"Mountain Camp": null,
+"Neitiznot": null,
+"Port Roberts": null,
+"Port Sarim jail": null,
+"Prifddinas": "prifddinas",
+"Ranging Guild": null,
+"Ratcatchers Mansion": null,
+"Rellekka Longhall Bar": null,
+"Shayzien Prison": "kourend",
+"Woodcutting Guild": "kourend",
+"The Legless Faun": "kourend",
+"Port Piscarilius": "kourend",
+"Kourend Castle": "kourend",
+"Kingstown": "kourend",
+"Arceuus": "kourend",
+"Shayzien": "kourend",
+"Shayzien Administration": "kourend",
+"Shayzien's Wall": "kourend",
+"Sinclair Mansion": null,
+"Darkfrost": "varlamore",
+"Kastori": "varlamore",
+"Tal Teklan": "varlamore",
+"The Teomat": "varlamore",
+"Civitas illa Fortis": "varlamore",
+"Kualti Headquarters": "varlamore",
+"Quetzacalli Gorge": "varlamore",
+"Sunrise Palace": "varlamore",
+"Seers' Village Courthouse": null,
+"Dwarven Mine": null,
+"Coal Trucks": null,
+"The Darkfrost": "varlamore"
 },
 "Guard Bandit": {
 "Bandit Camp (Wilderness)": null
 },
 "Guard dog": {
 "Brimhaven": null,
-"Black Arm Gang": null,
-"Heroes' Quest": null,
 "Handelmort Mansion": null,
 "Hosidius": "kourend",
 "Kourend Castle": "kourend",
-"McGrubor's Wood": null
+"McGrubor's Wood": null,
+"Civitas illa Fortis": "varlamore"
 },
 "Guardian mummy": {
 "Pyramid Plunder": "desert"
 },
 "Guardian of Armadyl": {
-"Temple of Ikov (dungeon)": null
+"Temple of Ikov (dungeon)": null,
+"McGrubor's Wood": null
 },
 "Guildmaster Apatura": {
 "Hunter Guild": "varlamore"
@@ -2286,16 +2579,18 @@
 "Barbarian Village": null
 },
 "Guthan the Infested": {
-"Ancient Vault": "desert"
+"Barrows": "morytania"
 },
 "H.A.M. Guard": {
 "H.A.M. Hideout": null
 },
 "H.A.M. Member": {
-"H.A.M. Hideout": null
+"H.A.M. Hideout": null,
+"Lumbridge": null
 },
 "Halla": {
-"Miscellania": null
+"Miscellania": null,
+"Miscellania Expansion": null
 },
 "Hammerhead shark": {
 "Arrow Passage": null,
@@ -2328,6 +2623,9 @@
 "Hazelmere": {
 "Yanille Chain": null
 },
+"Head": {
+"Mort Myre Swamp": "morytania"
+},
 "Head Guard": {
 "Shayzien Prison": "kourend",
 "Woodcutting Guild": "kourend",
@@ -2337,13 +2635,18 @@
 "Kourend Castle": "kourend",
 "Kingstown": "kourend",
 "Arceuus": "kourend",
-"Shayzien": "kourend"
+"Shayzien": "kourend",
+"Fight Arena (location)": null
 },
 "Head Thief": {
 "Clock Tower (building)": null
 },
 "Head chef": {
 "Cooks' Guild": null
+},
+"Headless Beast": {
+"Headless Beast's Lair": "kourend",
+"Kebos Swamp": "kourend"
 },
 "Hellhound": {
 "Wilderness": null,
@@ -2360,7 +2663,6 @@
 "Wilderness Slayer Cave": null
 },
 "Hengel": {
-"Hetty": null,
 "Rimmington": null
 },
 "Herbiboar": {
@@ -2418,7 +2720,7 @@
 "Tree Gnome Village dungeon": null
 },
 "Holthion": {
-"Underground Pass (dungeon)": "tirannwn"
+"Underground Pass (dungeon)": null
 },
 "Homunculus": {
 "Tower of Life (building)": null,
@@ -2437,7 +2739,8 @@
 "Tal Teok": "varlamore"
 },
 "Hunting expert": {
-"Rellekka Hunter area": null
+"Rellekka Hunter area": null,
+"Feldip Hunter area": null
 },
 "Hydra": {
 "Karuulm Slayer Dungeon": "kourend"
@@ -2467,7 +2770,11 @@
 },
 "Ice troll": {
 "Ice Path": null,
-"Trollweiss Dungeon": null
+"Trollweiss Dungeon": null,
+"Ice Troll Caves": null,
+"Trollheim": null,
+"Fremennik Isles": null,
+"Jatizso mine": null
 },
 "Ice warrior": {
 "Frozen Waste Plateau": null,
@@ -2536,7 +2843,9 @@
 "Outer Fortis": "varlamore",
 "Fortis Aqueduct": "varlamore",
 "Gloomthorn Trail": "varlamore",
-"Citlalli": "varlamore"
+"Castle Wars": null,
+"Yama's Lair": null,
+"Yama's Domain": "kourend"
 },
 "Impaler deer": {
 "Sotfa Forest": null,
@@ -2552,12 +2861,10 @@
 "Necromancer's Tower": null
 },
 "Iorwerth Archer": {
-"Iorwerth Camp": "tirannwn",
-"Song of the Elves": "tirannwn"
+"Iorwerth Camp": "tirannwn"
 },
 "Iorwerth Warrior": {
 "Iorwerth Camp": "tirannwn",
-"Song of the Elves": "tirannwn",
 "Iorwerth Dungeon": "prifddinas"
 },
 "Irina": {
@@ -2569,7 +2876,8 @@
 "Isle of Souls Dungeon": null
 },
 "Ironman tutor": {
-"Lumbridge": null
+"Lumbridge": null,
+"Tutorial Island": null
 },
 "Irvig Senay": {
 "Viyeldi caves": null
@@ -2581,7 +2889,9 @@
 "Taverley": null
 },
 "Jack": {
-"Myths' Guild": null
+"Myths' Guild": null,
+"Musa Point": null,
+"Karamja": null
 },
 "Jackal": {
 "Ancient Pyramid": "desert",
@@ -2599,7 +2909,8 @@
 "Tlati Rainforest": "varlamore"
 },
 "Jail guard": {
-"Draynor Village": null
+"Draynor Village": null,
+"Port Roberts": null
 },
 "Jailer": {
 "Taverley Dungeon": null
@@ -2614,7 +2925,9 @@
 "Taverley": null
 },
 "Jeff": {
-"Falador": null
+"Falador": null,
+"Varrock": null,
+"Musa Point": null
 },
 "Jelly": {
 "Fremennik Slayer Dungeon": null,
@@ -2631,7 +2944,8 @@
 "Ardougne": null
 },
 "Jobless Jim": {
-"Rusty Anchor Inn": null
+"Rusty Anchor Inn": null,
+"The Pandemonium": null
 },
 "Jogre": {
 "Ship Yard": null,
@@ -2642,7 +2956,8 @@
 "Pothole Dungeon": null
 },
 "Jolly Jim": {
-"Brimhaven": null
+"Brimhaven": null,
+"The Pandemonium": null
 },
 "Jonny the Beard": {
 "Blue Moon Inn": null,
@@ -2652,7 +2967,11 @@
 "Canifis": "morytania"
 },
 "Jubbly bird": {
-"Feldip Hills": null
+"Feldip Hills": null,
+"Backwater": null
+},
+"Judge of Yama": {
+"Yama's Lair": null
 },
 "Juliet": {
 "Leptoc mansion": null,
@@ -2672,7 +2991,8 @@
 "Kharazi Jungle": null,
 "Yanille Chain": null,
 "Tai Bwo Wannai": null,
-"Brimhaven": null
+"Brimhaven": null,
+"Ape Atoll": "ape_atoll"
 },
 "Juvenile custodian stalker": {
 "Stalker Den": "varlamore"
@@ -2687,22 +3007,26 @@
 "Kalphite Queen": {
 "Kalphite Lair": "desert"
 },
+"Kalphite Soldier": {
+"Kalphite Lair": "desert",
+"Kalphite Cave": "desert"
+},
 "Kalphite Worker": {
 "Kalphite Lair": "desert",
 "Kalphite Cave": "desert"
 },
 "Kalrag": {
-"Underground Pass (dungeon)": "tirannwn"
+"Underground Pass (dungeon)": null
 },
 "Kaqemeex": {
 "Druid's circle": null,
 "Taverley": null
 },
 "Karil the Tainted": {
-"Ancient Vault": "desert"
+"Barrows": "morytania"
 },
 "Kasonde": {
-"The Stranglewood": "varlamore"
+"The Stranglewood": "kourend"
 },
 "Keef": {
 "Gu'Tanoth": null
@@ -2714,27 +3038,30 @@
 "Fight Arena (location)": null
 },
 "Khazard Ogre": {
-"Fight Arena (location)": null,
-"Fight Arena": null
+"Fight Arena (location)": null
 },
 "Khazard Scorpion": {
-"Fight Arena (location)": null,
-"Fight Arena": null
+"Fight Arena (location)": null
 },
 "Khazard commander": {
 "Battlefield": null
 },
 "Khazard trooper": {
 "Battlefield": null,
-"West Ardougne": null,
-"Khazard warlord": null
+"West Ardougne": null
+},
+"Khazard warlord": {
+"Battlefield": null,
+"West Ardougne": null
 },
 "Killerwatt": {
-"Killerwatt plane": null,
-"Ernest the Chicken": null
+"Killerwatt plane": null
 },
 "King Arthur": {
 "Camelot": null
+},
+"King Black Dragon": {
+"King Black Dragon Lair": null
 },
 "King Bolren": {
 "Tree Gnome Village (location)": null
@@ -2771,9 +3098,20 @@
 "King Vargas": {
 "Miscellania": null
 },
+"Knight of Ardougne": {
+"East Ardougne": null,
+"West Ardougne": null,
+"Mourner Tunnels": "tirannwn"
+},
 "Knight of Saradomin": {
 "God Wars Dungeon": null,
 "Wilderness God Wars Dungeon": null
+},
+"Knight of Varlamore": {
+"Kualti Headquarters": "varlamore",
+"Sunrise Palace": "varlamore",
+"Varrock Square": null,
+"Kourend Castle": "kourend"
 },
 "Kob": {
 "Troll Stronghold (location)": null
@@ -2785,7 +3123,6 @@
 "Mount Karuulm": "kourend"
 },
 "Kovac": {
-"Giants' Plateau": "desert",
 "Giants' Foundry": "desert"
 },
 "Kraka": {
@@ -2831,7 +3168,10 @@
 "Ardougne Zoo": null,
 "Lumbridge": null,
 "Rellekka": null,
-"Iceberg": null
+"Iceberg": null,
+"Entrana": null,
+"Falador": null,
+"Wilderness": null
 },
 "Lava Strykewyrm": {
 "Charred Dungeon": "sailing",
@@ -2845,7 +3185,8 @@
 "Laguna Aurorae": "sailing"
 },
 "Lensa": {
-"Rellekka": null
+"Rellekka": null,
+"Jatizso": null
 },
 "Lesser Fanatic": {
 "Edgeville": null
@@ -2855,7 +3196,6 @@
 "Kourend Castle": "kourend",
 "Wizards' Tower": null,
 "Kingstown": "kourend",
-"Councillor Hughes": "kourend",
 "Crandor and Karamja Dungeon": null,
 "Charred Dungeon": "sailing",
 "Sisterhood Sanctuary": "morytania",
@@ -2870,7 +3210,8 @@
 "Catacombs of Kourend": "kourend",
 "Temple of Ikov (dungeon)": null,
 "Viyeldi caves": null,
-"Isle of Souls Dungeon": null
+"Isle of Souls Dungeon": null,
+"Melzar's Maze": null
 },
 "Lev": {
 "Canifis": "morytania"
@@ -2943,6 +3284,7 @@
 "Lucien": {
 "East Ardougne": null,
 "Wilderness": null,
+"Ancient Guthixian Temple": null,
 "Ardougne": null,
 "Edgeville": null
 },
@@ -2952,7 +3294,8 @@
 "Lynx": {
 "Secluded Chapel": "kourend",
 "Custodia Pass": "varlamore",
-"Shipwreck Cove": "varlamore"
+"Shipwreck Cove": "varlamore",
+"Shayzien Encampment": "kourend"
 },
 "Lynx Tamer": {
 "Shayzien Encampment": "kourend"
@@ -2968,7 +3311,6 @@
 },
 "Magic axe": {
 "Magic axe hut": null,
-"lockpick": null,
 "Taverley Dungeon": null,
 "Catacombs of Kourend": "kourend"
 },
@@ -3006,7 +3348,16 @@
 "Blue Moon Inn": null,
 "Jolly Boar Inn": null,
 "Shayzien Styles": "kourend",
-"Port Roberts": null
+"Port Roberts": null,
+"Al Kharid mine": null,
+"Villa Lucens": "varlamore",
+"Catacombs of Kourend": "kourend",
+"East Ardougne": null,
+"vinery": "kourend",
+"Morytania Spider Cave": "morytania",
+"Ardougne": null,
+"The Warrens": "kourend",
+"West Ardougne": null
 },
 "Maniacal monkey": {
 "Kruk's Dungeon": "ape_atoll"
@@ -3019,7 +3370,9 @@
 "Sunbleak Island": "sailing"
 },
 "Market Guard": {
-"Rellekka": null
+"Rellekka": null,
+"Draynor Village": null,
+"Port Roberts": null
 },
 "Martin Holt": {
 "Kingstown": "kourend"
@@ -3061,7 +3414,10 @@
 "Pollnivneach": "desert"
 },
 "Mercenary": {
-"Desert Mining Camp": "desert"
+"Desert Mining Camp": "desert",
+"Ferox Enclave": null,
+"Port Roberts": null,
+"Ver Sinhaza": "morytania"
 },
 "Mercenary Captain": {
 "Desert Mining Camp": "desert"
@@ -3085,6 +3441,11 @@
 "Minimus": {
 "Fortis Colosseum entrance": "varlamore"
 },
+"Minotaur": {
+"Stronghold of Security": null,
+"Vault of War": null,
+"Minotaurs' Rest": null
+},
 "Mirrorback Araxyte": {
 "Morytania Spider Cave": "morytania"
 },
@@ -3092,7 +3453,13 @@
 "Ancient Cavern": null
 },
 "Mogre": {
-"Mudskipper Point": null
+"Mudskipper Point": null,
+"Kharazi Strait": "sailing",
+"Kharazi Jungle": null,
+"Mudskipper Sound": "sailing",
+"Musa Point": null,
+"Strait of Khazard": "sailing",
+"Port Khazard": null
 },
 "Molanisk": {
 "Dorgesh-Kaan South Dungeon": null
@@ -3105,7 +3472,10 @@
 "Ardougne Monastery": null,
 "Monk camp": "kourend",
 "Hosidius": "kourend",
-"Entrana": null
+"Entrana": null,
+"Paterdomus Temple": null,
+"Harmony Island windmill": "morytania",
+"Lumbridge Swamp": null
 },
 "Monk of Entrana": {
 "Port Sarim": null,
@@ -3116,7 +3486,9 @@
 "Varrock Castle": null,
 "Ourania Cave": null,
 "Taverley Dungeon": null,
-"Deep Wilderness Dungeon": null
+"Deep Wilderness Dungeon": null,
+"Varrock Palace": null,
+"Paterdomus Temple": null
 },
 "Monkey": {
 "Mos Le'Harmless": "mos_le_harmless",
@@ -3124,10 +3496,21 @@
 "Karamja": null,
 "Shilo Village (location)": null,
 "Brimhaven": null,
-"Tai Bwo Wannai": null
+"Tai Bwo Wannai": null,
+"Warriors' Guild": null,
+"Trouble Brewing": "morytania",
+"Magic carpet": null,
+"Shantay Pass": null,
+"Pollnivneach": "desert",
+"Bedabin Camp": "desert",
+"Nardah": "desert",
+"Sophanem": "sophanem",
+"Menaphos": "desert",
+"Ruins of Uzer": "desert"
 },
 "Monkey Archer": {
-"Marim": null
+"Marim": null,
+"Tree Gnome Stronghold": null
 },
 "Monkey Guard": {
 "Temple of Marimbo": null
@@ -3147,7 +3530,23 @@
 "Prifddinas": "prifddinas"
 },
 "Moss Giant": {
-"Iorwerth Dungeon": "prifddinas"
+"Iorwerth Dungeon": "prifddinas",
+"Kourend Woodland": "kourend",
+"Moss Giant Island": null,
+"Brimhaven": null,
+"Wilderness Pond": null,
+"Crandor": null,
+"Pirates' Cove": null,
+"Fishing Guild": null,
+"Brimhaven Dungeon": null,
+"Varrock Sewers": null,
+"Catacombs of Kourend": "kourend",
+"Giants' Den": "kourend",
+"Isle of Souls": null,
+"Prifddinas": "prifddinas",
+"Ralos' Rise": "varlamore",
+"Laguna Aurorae": "sailing",
+"Tonali Cavern": "varlamore"
 },
 "Moss Guardian": {
 "Glarial's Tomb": null
@@ -3170,10 +3569,14 @@
 },
 "Mourner": {
 "Arandar": "tirannwn",
-"Mourner Tunnels": "tirannwn"
+"Mourner Tunnels": "tirannwn",
+"West Ardougne": null,
+"Mourner Headquarters": null,
+"East Ardougne": null
 },
 "Mouse": {
-"Mouse hole": null
+"Mouse hole": null,
+"Witch's house (location)": null
 },
 "Movario": {
 "Dorgesh-Kaan South Dungeon": null
@@ -3187,14 +3590,16 @@
 "Lumbridge Castle": null,
 "Lumbridge Swamp": null,
 "Asgarnian Ice Dungeon": null,
-"Phoenix Gang": null,
 "Varrock": null,
 "Vinery": "kourend",
 "Port Piscarilius": "kourend",
-"Outer Fortis": "varlamore"
+"Outer Fortis": "varlamore",
+"Shayzien Prison": "kourend"
 },
 "Mummy": {
-"Ancient Pyramid": "desert"
+"Ancient Pyramid": "desert",
+"Klenter's Pyramid": "desert",
+"Surprise Exam": null
 },
 "Mutated Bloodveld": {
 "Buccaneers' Laboratory": "sailing",
@@ -3212,7 +3617,8 @@
 "Mort'ton": "morytania"
 },
 "Mysterious Figure": {
-"Ancient Vault": "desert"
+"Ancient Vault": "desert",
+"Enchanted Valley": null
 },
 "Mysterious Old Man": {
 "Falador": null,
@@ -3245,17 +3651,15 @@
 "Necromancer": {
 "Shayzien": "kourend",
 "Lovakengj": "kourend",
-"Arceuus": "kourend"
+"Arceuus": "kourend",
+"Necromancer's Tower": null
 },
 "Necrovarus": {
 "Ectofuntus": "morytania",
 "Port Phasmatys": "morytania"
 },
 "Ned": {
-"Draynor Village": null,
-"Port Sarim": null,
-"Crandor": null,
-"Lady Lumbridge": null
+"Draynor Village": null
 },
 "Neite": {
 "Sophanem": "sophanem",
@@ -3283,6 +3687,12 @@
 "Not Bob": {
 "Dream World": null
 },
+"Nylocas Ischyros": {
+"Ver Sinhaza": "morytania"
+},
+"Nylocas Toxobolos": {
+"Ver Sinhaza": "morytania"
+},
 "Obor": {
 "Edgeville Dungeon": null
 },
@@ -3304,22 +3714,22 @@
 "Ogre": {
 "Feldip Hills": null,
 "Gu'Tanoth": null,
-"Watchtower": null,
 "Gnome Maze": null,
 "Yanille": null,
 "Combat Training Camp": null,
-"Biohazard": null,
 "Witchaven Dungeon": null,
 "Clock Tower Dungeon": null,
 "Chaos Druid Tower Dungeon": null,
-"Thieving": null,
 "God Wars Dungeon": null,
-"Underground Pass (dungeon)": "tirannwn",
+"Underground Pass (dungeon)": null,
 "Wilderness God Wars Dungeon": null
 },
 "Ogre chieftain": {
 "Feldip Hills": null,
 "Gu'Tanoth": null,
+"Ogre Enclave": null
+},
+"Ogre shaman": {
 "Ogre Enclave": null
 },
 "Ogress Shaman": {
@@ -3355,7 +3765,8 @@
 },
 "Ork": {
 "God Wars Dungeon": null,
-"Wilderness God Wars Dungeon": null
+"Wilderness God Wars Dungeon": null,
+"Zanaris": "zanaris"
 },
 "Orlando Smith": {
 "Varrock Museum": null
@@ -3391,7 +3802,7 @@
 "Tutorial Island": null
 },
 "Othainian": {
-"Underground Pass (dungeon)": "tirannwn"
+"Underground Pass (dungeon)": null
 },
 "Otherworldly being": {
 "Zanaris": "zanaris"
@@ -3411,6 +3822,12 @@
 },
 "Padulah": {
 "Ape Atoll": "ape_atoll"
+},
+"Paladin": {
+"East Ardougne": null,
+"West Ardougne": null,
+"Mourner Tunnels": "tirannwn",
+"Northern Ocean": null
 },
 "Palmer": {
 "Pirates' Cove": null
@@ -3441,7 +3858,9 @@
 },
 "Penguin": {
 "Ardougne Zoo": null,
-"Miscellania": null
+"Miscellania": null,
+"penguin": null,
+"Iceberg": null
 },
 "Perdu": {
 "Lumbridge": null,
@@ -3475,11 +3894,18 @@
 "Pirate": {
 "Asgarnian Ice Dungeon": null,
 "Brimhaven": null,
-"Cabin Fever": "morytania",
 "Pirates' Cove": null,
 "Pirates' Hideout": null,
 "Port Sarim jail": null,
-"Port Piscarilius": "kourend"
+"Port Piscarilius": "kourend",
+"Catacombs of Kourend": "kourend",
+"Great Sound": null,
+"Mos Le'Harmless": "mos_le_harmless",
+"Arrow Passage": null,
+"Ardent Ocean": null,
+"The Onyx Crest": null,
+"Laguna Aurorae": "sailing",
+"Buccaneers' Haven": null
 },
 "Pirate Guard": {
 "Brimhaven": null,
@@ -3509,7 +3935,8 @@
 "Yanille Agility dungeon": null,
 "The Hollows": "morytania",
 "King Black Dragon Lair": null,
-"Observatory Dungeon": null
+"Observatory Dungeon": null,
+"Escape Caves": null
 },
 "Poltenip": {
 "Nardah": "desert"
@@ -3602,7 +4029,6 @@
 "Enchanted Valley": null,
 "Kourend Castle": "kourend",
 "Tithe Farm": "kourend",
-"saltpetre": null,
 "Hosidius": "kourend",
 "Hosidius Kitchen": "kourend",
 "Kebos Lowlands": "kourend",
@@ -3612,7 +4038,10 @@
 "Civitas illa Fortis": "varlamore",
 "Hailstorm Mountains": "varlamore",
 "Drumstick Isle": null,
-"Anglers' Retreat": null
+"Anglers' Retreat": null,
+"Castle Wars": null,
+"Farming Guild": "kourend",
+"Elven rabbit cave": "tirannwn"
 },
 "Radat": {
 "Nardah": "desert"
@@ -3621,7 +4050,8 @@
 "Legends' Guild": null
 },
 "Ragnar": {
-"Miscellania": null
+"Miscellania": null,
+"Mountain Camp": null
 },
 "Ragnvald": {
 "Miscellania": null
@@ -3631,7 +4061,6 @@
 "Fisher Realm": null,
 "Lletya": "tirannwn",
 "Lumbridge": null,
-"Makeover Mage": null,
 "East Ardougne": null,
 "Edgeville Monastery": null,
 "Varrock": null
@@ -3668,7 +4097,6 @@
 "Farming Guild": "kourend",
 "Arceuus": "kourend",
 "Chaos Temple (Wilderness)": null,
-"Gertrude": null,
 "Fire Altar": null,
 "Port Phasmatys": "morytania",
 "Kourend Castle": "kourend",
@@ -3713,11 +4141,9 @@
 "Rashiliyia's Tomb": null,
 "Shadow Dungeon": null,
 "Skavid Caves": null,
-"Underground Pass (dungeon)": "tirannwn",
+"Underground Pass (dungeon)": null,
 "Waterfall Dungeon": null,
-"Cabin Fever": "morytania",
 "Isle of Souls": null,
-"Black Knights' Fortress": null,
 "Wilderness Slayer Cave": null,
 "Aldarin": "varlamore",
 "Mistrock": "varlamore",
@@ -3731,14 +4157,15 @@
 "Port Roberts": null,
 "Buccaneers' Haven": null,
 "Sunbleak Island": "sailing",
-"The Onyx Crest": null
+"The Onyx Crest": null,
+"Zul-Egil": null,
+"Backwater": null
 },
 "Red dragon": {
 "Brimhaven Dungeon": null,
 "Charred Dungeon": "sailing",
 "Corsair Cove Dungeon": null,
 "Myths' Guild": null,
-"Dragon Slayer II": null,
 "Dragon Nest": "varlamore",
 "Forthos Dungeon": "kourend"
 },
@@ -3746,8 +4173,7 @@
 "Varrock Palace Library": null
 },
 "Renegade knight": {
-"Keep Le Faye": null,
-"King's Ransom": null
+"Keep Le Faye": null
 },
 "Renu": {
 "Varlamore": "varlamore"
@@ -3824,12 +4250,15 @@
 },
 "Rooster": {
 "Rellekka": null,
-"Tenzing": null,
 "Miscellania": null,
-"Etceteria": null
+"Etceteria": null,
+"South Falador Farm": null
 },
 "Rowdy slave": {
 "Desert Mining Camp": "desert"
+},
+"Rune dragon": {
+"Lithkren Vault": null
 },
 "Runite Golem": {
 "Resource Area": null
@@ -3880,11 +4309,11 @@
 "Scabaras Dungeon": "desert",
 "Sophanem Dungeon": "desert"
 },
+"Scavenger beast": {
+"Chambers of Xeric": "kourend"
+},
 "Scorpia": {
 "Scorpion Pit": null
-},
-"Scorpia's offspring": {
-"Scorpia": null
 },
 "Scorpion": {
 "Al Kharid mine": null,
@@ -3907,7 +4336,11 @@
 "Stonecutter Outpost": "varlamore",
 "Sunbleak Island": "sailing",
 "Abalone Cliffs": null,
-"The Great Conch": "sailing"
+"The Great Conch": "sailing",
+"Varlamore": "varlamore"
+},
+"Scurrius": {
+"Varrock Sewers": null
 },
 "Sea Snake Hatchling": {
 "Miscellania and Etceteria dungeon": null
@@ -3926,16 +4359,22 @@
 "Vatrachos Island": null,
 "The Pandemonium": null,
 "Wyrmscraig": "sailing",
-"Red Rock": null
+"Red Rock": null,
+"Icyene Graveyard": "morytania"
 },
 "Seer": {
-"Seers' Village": null
+"Seers' Village": null,
+"Cam Torum": "varlamore",
+"The Darkfrost": "varlamore"
 },
 "Sergeant": {
 "Lizardman Canyon": "kourend",
 "Shayzien Encampment": "kourend",
 "Giant Pit": "kourend",
-"Shayziens' Wall": "kourend"
+"Shayziens' Wall": "kourend",
+"Burthorpe": null,
+"Chasm of Fire": "kourend",
+"Kebos Lowlands": "kourend"
 },
 "Sergeant Damien": {
 "Drill Demon": null
@@ -3950,7 +4389,8 @@
 "God Wars Dungeon": null
 },
 "Servant": {
-"Burthorpe": null
+"Burthorpe": null,
+"ScapeRune": null
 },
 "Shade": {
 "Sepulchre of Death": null,
@@ -3958,7 +4398,8 @@
 "Catacombs of Kourend": "kourend"
 },
 "Shadow": {
-"Temple of Light": "tirannwn"
+"Temple of Light": "tirannwn",
+"Shooting Stars": null
 },
 "Shadow Hound": {
 "Shadow Dungeon": null
@@ -3969,7 +4410,7 @@
 "Buccaneers' Laboratory": "sailing"
 },
 "Shadow warrior": {
-"Legends'_Guild": null
+"Legends' Guild": null
 },
 "Shaeded Beast": {
 "Forthos Dungeon": "kourend"
@@ -3978,17 +4419,29 @@
 "Shantay Pass": null
 },
 "Shantay Guard": {
-"Shantay Pass": null
+"Shantay Pass": null,
+"Ruins of Unkah": "desert"
 },
 "Sheep": {
-"Lumbridge": null
+"Lumbridge": null,
+"Varrock": null,
+"Zanaris": "zanaris",
+"Watson's house": "kourend",
+"Ardougne farm": null,
+"Fisher Realm": null,
+"Lletya": "tirannwn",
+"Edgeville Monastery": null,
+"Crafting Guild": null,
+"Hosidius": "kourend",
+"Castle Wars": null
 },
 "Sherlock": {
 "Sorcerer's Tower": null
 },
 "Shipyard worker": {
 "Ship Yard": null,
-"Shipyard (Karamja)": null
+"Shipyard (Karamja)": null,
+"Shipyard": null
 },
 "Sigmund": {
 "Lumbridge Castle": null,
@@ -4005,38 +4458,28 @@
 "Falador": null
 },
 "Sir Bedivere": {
-"Camelot": null,
-"Camelot Castle": null,
-"Keep Le Faye": null
+"Camelot": null
 },
 "Sir Carl": {
-"Underground Pass (dungeon)": "tirannwn"
+"Underground Pass (dungeon)": null
 },
 "Sir Gawain": {
-"Camelot": null,
-"Camelot Castle": null,
-"Keep Le Faye": null
+"Camelot": null
 },
 "Sir Harry": {
-"Underground Pass (dungeon)": "tirannwn"
+"Underground Pass (dungeon)": null
 },
 "Sir Jerro": {
-"Underground Pass (dungeon)": "tirannwn"
+"Underground Pass (dungeon)": null
 },
 "Sir Kay": {
-"Camelot": null,
-"Camelot Castle": null,
-"Keep Le Faye": null
+"Camelot": null
 },
 "Sir Lancelot": {
-"Camelot": null,
-"Camelot Castle": null,
-"Keep Le Faye": null
+"Camelot": null
 },
 "Sir Lucan": {
-"Camelot": null,
-"Camelot Castle": null,
-"Keep Le Faye": null
+"Camelot": null
 },
 "Sir Mordred": {
 "Keep Le Faye": null
@@ -4045,9 +4488,7 @@
 "Camelot": null
 },
 "Sir Pelleas": {
-"Camelot": null,
-"Camelot Castle": null,
-"Keep Le Faye": null
+"Camelot": null
 },
 "Sir Renitee": {
 "White Knights' Castle": null,
@@ -4059,9 +4500,7 @@
 "Kourend Castle": "kourend"
 },
 "Sir Tristram": {
-"Camelot": null,
-"Camelot Castle": null,
-"Keep Le Faye": null
+"Camelot": null
 },
 "Sir Vyvin": {
 "White Knights' Castle": null,
@@ -4083,11 +4522,10 @@
 "Taverley Dungeon": null,
 "Yanille Dungeon": null,
 "Digsite Dungeon": null,
-"The Dig Site": null,
 "Glarial's Tomb": null,
 "Ogre Enclave": null,
 "Temple of Ikov (dungeon)": null,
-"Underground Pass (dungeon)": "tirannwn",
+"Underground Pass (dungeon)": null,
 "Waterfall Dungeon": null,
 "The Forgotten Cemetery": null,
 "South-west Wilderness mine": null,
@@ -4102,12 +4540,29 @@
 "Tonali Cavern": "varlamore",
 "Isle of Bones": null,
 "Sunbleak Cave": null,
-"Buccaneers' Laboratory": "sailing"
+"Buccaneers' Laboratory": "sailing",
+"Ape Atoll Dungeon": "ape_atoll",
+"Barrows": "morytania",
+"Catacombs of Kourend": "kourend",
+"Draynor Manor": null,
+"Enakhra's Temple": "desert",
+"Forthos Ruin": "kourend",
+"Lucien's camp": null,
+"Port Sarim": null,
+"Melzar's Maze": null,
+"Shayzien Crypts": "kourend",
+"Stronghold of Security": null,
+"Tarn's Lair": "morytania",
+"Abandoned Mine": "morytania",
+"Ruins of Ullek": "desert",
+"Wilderness Agility Course": null,
+"Wrath Altar": null
 },
 "Skeleton Mage": {
 "Charred Dungeon": "sailing",
 "Piscatoris Fishing Colony": null,
-"Waterfall Dungeon": null
+"Waterfall Dungeon": null,
+"Port Sarim": null
 },
 "Skeleton brute": {
 "Ancient Cavern": null
@@ -4129,10 +4584,14 @@
 "Catacombs of Kourend": "kourend"
 },
 "Skraeling": {
-"Etceteria": null
+"Etceteria": null,
+"Miscellania": null
 },
 "Slagilith": {
 "Goblin Cave": null
+},
+"Sleepwalker": {
+"Morytania": "morytania"
 },
 "Sloane": {
 "Warriors' Guild": null
@@ -4147,7 +4606,21 @@
 "Smoke Devil Dungeon": null
 },
 "Snake": {
-"Mos Le'Harmless": "mos_le_harmless"
+"Mos Le'Harmless": "mos_le_harmless",
+"Ardougne Zoo": null,
+"Corsair Cove": null,
+"Karamja": null,
+"Musa Point": null,
+"Kruk's Dungeon": "ape_atoll",
+"Avium Savannah": "varlamore",
+"The Great Conch": "sailing",
+"Isle of Serpents": null,
+"Ape Atoll": "ape_atoll",
+"Crash Island": null,
+"Pollnivneach": "desert",
+"Nardah": "desert",
+"Smoke Dungeon": "desert",
+"Uzer Oasis": "desert"
 },
 "Sofiya": {
 "Canifis": "morytania"
@@ -4157,13 +4630,26 @@
 },
 "Soldier": {
 "Combat Ring (Shayzien)": "kourend",
-"Shayzien Encampment": "kourend"
+"Shayzien Encampment": "kourend",
+"Battlefront": "kourend",
+"Burthorpe": null,
+"Chasm of Fire": "kourend",
+"Death Plateau (location)": null,
+"Northern Ocean": null,
+"Kebos Lowlands": "kourend",
+"Shayzien": "kourend",
+"Lizardman Canyon": "kourend",
+"Mess": "kourend",
+"Giant Pit": "kourend",
+"Shayziens' Wall": "kourend",
+"The Cloak and Stagger": "kourend",
+"Yanille": null
 },
 "Sorebones": {
 "Harmony Island": "morytania"
 },
 "Soulless": {
-"Underground Pass (dungeon)": "tirannwn"
+"Underground Pass (dungeon)": null
 },
 "Soulwars Avatars": {
 "Soul Wars Arena": null
@@ -4171,11 +4657,53 @@
 "Sourhog": {
 "Sourhog Cave": null
 },
+"Spawn": {
+"Lizardman Canyon": "kourend",
+"Lizardman Caves": "kourend",
+"Lizardman Temple": "kourend"
+},
 "Speedy Keith": {
 "Wilderness Bandit Camp": null
 },
 "Spider": {
-"Ungael laboratory": null
+"Ungael laboratory": null,
+"Hosidius": "kourend",
+"Lovakengj": "kourend",
+"Arceuus": "kourend",
+"Tower of Magic": "kourend",
+"Port Piscarilius": "kourend",
+"Varrock": null,
+"Al Kharid": null,
+"Lumbridge": null,
+"Draynor Village": null,
+"Yanille": null,
+"Ruins (west)": null,
+"Wilderness": null,
+"Gnome Maze": null,
+"Melzar's Maze": null,
+"Lumbridge Castle": null,
+"Varrock Sewers": null,
+"Draynor Manor": null,
+"Sisterhood Sanctuary": "morytania",
+"Stronghold of Security": null,
+"Taverley Dungeon": null,
+"Ogre Enclave": null,
+"Underground Pass (dungeon)": null,
+"Rashiliyia's Tomb": null,
+"Isle of Souls": null,
+"Crumbling Tower": null,
+"Twilight Temple": "varlamore",
+"Pandemonium Cave": null,
+"Buccaneers' Laboratory": "sailing",
+"Sunbleak Cave": null,
+"The Great Conch": "sailing",
+"Ape Atoll": "ape_atoll",
+"Ape Atoll Dungeon": "ape_atoll",
+"Banana plantation (Ape Atoll)": null,
+"Temple of Marimbo Dungeon": null,
+"Hallowed Sepulchre": "morytania",
+"Haunted Woods": "morytania",
+"Darkmeyer": "morytania"
 },
 "Spined kraken": {
 "Calidum Reach": null,
@@ -4216,7 +4744,15 @@
 "Draynor Village": null
 },
 "Squire": {
-"White Knights' Castle": null
+"White Knights' Castle": null,
+"Camelot": null,
+"Civitas illa Fortis": "varlamore",
+"Kualti Headquarters": "varlamore",
+"Sunrise Palace": "varlamore",
+"Crypt (White Knights' Castle)": null,
+"Void Knight Outpost": null,
+"Void Knights' Outpost": null,
+"Port Sarim": null
 },
 "Stag": {
 "Enchanted Valley": null,
@@ -4256,20 +4792,26 @@
 "Strange Old Man": {
 "Barrows": "morytania"
 },
+"Stranger": {
+"Hair of the Dog": "morytania"
+},
 "Strangled": {
-"The Stranglewood": "varlamore"
+"The Stranglewood": "kourend"
 },
 "Strangled Bear": {
-"The Stranglewood": "varlamore"
+"The Stranglewood": "kourend"
 },
 "Strangled Boar": {
-"The Stranglewood": "varlamore"
+"The Stranglewood": "kourend"
 },
 "Strangled Lynx": {
-"The Stranglewood": "varlamore"
+"The Stranglewood": "kourend"
 },
 "Sulphur Lizard": {
 "Karuulm Slayer Dungeon": "kourend"
+},
+"Sulphur Nagua": {
+"Neypotzli": "varlamore"
 },
 "Suqah": {
 "Lunar Isle": null,
@@ -4298,20 +4840,25 @@
 "Tar Swamp": null
 },
 "Tarik": {
-"Nardah": "desert"
+"Nardah": "desert",
+"Sophanem": "sophanem"
 },
 "Tarn": {
 "Tarn's Lair": "morytania"
 },
 "Temple Guardian": {
-"Paterdomus": null,
-"Priest in Peril": "varlamore"
+"Paterdomus": null
 },
 "Temple Spider": {
 "Forthos Dungeon": "kourend"
 },
 "Tempoross": {
 "Tempoross Cove": "desert"
+},
+"Tentacle": {
+"Mort Myre Swamp": "morytania",
+"Abyssal Nexus": "abyss",
+"Lassar Undercity": null
 },
 "Tern": {
 "Bay of Sarim": null,
@@ -4342,9 +4889,6 @@
 "The Illusive": {
 "Dream World": null
 },
-"The Inadequacy": {
-"Dream Mentor": null
-},
 "The Jormungand": {
 "Jormungand's Prison": null
 },
@@ -4367,29 +4911,38 @@
 "The Whisperer": {
 "Lassar Undercity": null
 },
+"Thermonuclear smoke devil": {
+"Smoke Devil Dungeon": null
+},
 "Thessalia": {
 "Varrock": null
 },
 "Thief": {
 "Brimhaven": null,
 "Varrock": null,
-"Black Arm Gang": null,
 "Phoenix Gang Hideout": null,
 "Jolly Boar Inn": null,
 "Port Sarim": null,
 "Port Sarim jail": null,
 "Clock Tower Dungeon": null,
 "The Warrens": "kourend",
-"Port Piscarilius": "kourend"
+"Port Piscarilius": "kourend",
+"Grand Museum": "varlamore",
+"Outer Fortis": "varlamore",
+"Civitas illa Fortis": "varlamore",
+"Kualti Headquarters": "varlamore",
+"Fortis Cothon": "varlamore"
 },
 "Thora": {
-"Miscellania": null
+"Miscellania": null,
+"Miscellania Expansion": null
 },
 "Thorhild": {
 "Miscellania Castle": null
 },
 "Thrower troll": {
-"Trollheim": null
+"Trollheim": null,
+"Death Plateau (location)": null
 },
 "Thug": {
 "Wilderness": null,
@@ -4449,7 +5002,6 @@
 "Draynor Manor": null,
 "Lumbridge": null,
 "Al Kharid": null,
-"Seth Groats": null,
 "Champions' Guild": null,
 "Varrock": null,
 "Canifis": "morytania",
@@ -4463,10 +5015,11 @@
 "Aldarin": "varlamore",
 "Nemus Retreat": "varlamore",
 "Auburnvale": "varlamore",
-"Kastori": "varlamore"
+"Kastori": "varlamore",
+"Troll Stronghold (location)": null
 },
 "Torag the Corrupted": {
-"Ancient Vault": "desert"
+"Barrows": "morytania"
 },
 "Torfinn": {
 "Rellekka": null
@@ -4479,7 +5032,8 @@
 },
 "Tortoise": {
 "Tree Gnome Stronghold": null,
-"Battlefield of Khazard": null
+"Battlefield of Khazard": null,
+"Sunbleak Island": "sailing"
 },
 "Tortured gorilla": {
 "Crash Site Cavern": null
@@ -4516,6 +5070,9 @@
 "Tribeswoman": {
 "Shilo Village (location)": null,
 "Brimhaven Dungeon": null
+},
+"Troll": {
+"Keldagrim": null
 },
 "Troll general": {
 "Troll Stronghold (location)": null
@@ -4601,7 +5158,8 @@
 "Woodcutting Guild": "kourend",
 "Isle of Souls": null,
 "Aldarin": "varlamore",
-"Lledrith Island": null
+"Lledrith Island": null,
+"Underground Pass (dungeon)": null
 },
 "Unicorn Foal": {
 "Hosidius": "kourend",
@@ -4621,12 +5179,16 @@
 "Burgh de Rott": "morytania",
 "Crombwick Manor": "morytania",
 "Meiyerditch": "morytania",
-"Darkmeyer": "morytania"
+"Darkmeyer": "morytania",
+"Ver Sinhaza": "morytania"
 },
 "Vampyre Juvinate": {
 "Ver Sinhaza": "morytania",
 "Burgh de Rott": "morytania",
-"Darkmeyer": "morytania"
+"Darkmeyer": "morytania",
+"Tutorial Island": null,
+"Daeyalt essence mine": "morytania",
+"Meiyerditch mine": "morytania"
 },
 "Vampyre kraken": {
 "Everwinter Sea": null,
@@ -4639,15 +5201,14 @@
 "Castle Drakan": "morytania"
 },
 "Vannaka": {
-"Edgeville Dungeon": null,
-"Tutorial Island": null
+"Edgeville Dungeon": null
 },
 "Vanstrom Klause": {
 "Hair of the Dog": "morytania",
 "Meiyerditch": "morytania"
 },
 "Vardorvis": {
-"The Stranglewood": "varlamore"
+"The Stranglewood": "kourend"
 },
 "Veiled kraken": {
 "Rainbow's End": null,
@@ -4664,6 +5225,9 @@
 "Apsul Hunting Ground": null,
 "Virer Hunting Ground": null
 },
+"Venenatis": {
+"Silk Chasm": null
+},
 "Veos": {
 "Port Sarim": null,
 "Port Piscarilius": "kourend",
@@ -4674,7 +5238,7 @@
 "Canifis": "morytania"
 },
 "Verac the Defiled": {
-"Ancient Vault": "desert"
+"Barrows": "morytania"
 },
 "Vertida Sefalatis": {
 "Meiyerditch": "morytania"
@@ -4695,7 +5259,8 @@
 "Vyrewatch": {
 "Meiyerditch": "morytania",
 "Slepe": "morytania",
-"Darkmeyer": "morytania"
+"Darkmeyer": "morytania",
+"Ver Sinhaza bank": "morytania"
 },
 "Vyrewatch Sentinel": {
 "Darkmeyer": "morytania"
@@ -4717,7 +5282,13 @@
 "Poison Waste Dungeon": null
 },
 "Warrior": {
-"Rellekka": null
+"Rellekka": null,
+"Grand Exchange": null,
+"Lumbridge Swamp": null,
+"Varrock Palace": null,
+"East Ardougne": null,
+"Ardougne Castle": null,
+"Fishing Guild": null
 },
 "Watchman": {
 "Watchtower (building)": null
@@ -4730,7 +5301,6 @@
 },
 "Waterfiend": {
 "Ancient Cavern": null,
-"Dragon Slayer II": null,
 "Kraken Cove": null,
 "Iorwerth Dungeon": "prifddinas"
 },
@@ -4742,10 +5312,13 @@
 },
 "Werewolf": {
 "God Wars Dungeon": null,
-"Wilderness God Wars Dungeon": null
+"Wilderness God Wars Dungeon": null,
+"Darkmeyer": "morytania",
+"Haunted Woods": "morytania"
 },
 "White Knight": {
-"White Knights' Castle": null
+"White Knights' Castle": null,
+"Heroes' Guild": null
 },
 "White jaguar": {
 "Mons Gratia": "varlamore",
@@ -4770,12 +5343,22 @@
 },
 "Wise Old Man": {
 "Draynor Village": null,
-"Northern Ocean": null
+"Northern Ocean": null,
+"Eastern Lands": null
+},
+"Witch": {
+"Draynor Manor": null,
+"Black Knights' Fortress (location)": null
 },
 "Wizard": {
 "Wizards' Tower": null,
 "Wizards' Guild": null,
-"Underground Pass (dungeon)": "tirannwn"
+"Underground Pass (dungeon)": null,
+"Arceuus": "kourend",
+"Ferox Enclave": null,
+"Last Man Standing": null,
+"Lumbridge Swamp": null,
+"Watchtower (building)": null
 },
 "Wizard Grayzag": {
 "Wizards' Tower": null
@@ -4800,7 +5383,6 @@
 "Gnome maze": null,
 "White Wolf Mountain": null,
 "Forthos Dungeon": "kourend",
-"saltpetre": null,
 "Stronghold of Security": null,
 "Gloomthorn Trail": "varlamore"
 },
@@ -4818,7 +5400,12 @@
 "Lumbridge": null,
 "Draynor Village": null,
 "Shayzien": "kourend",
-"Port Roberts": null
+"Port Roberts": null,
+"East Ardougne": null,
+"Ardougne": null,
+"The Warrens": "kourend",
+"Dorgeshuun Mines": null,
+"West Ardougne": null
 },
 "Woodsman tutor": {
 "Lumbridge": null
@@ -4855,6 +5442,9 @@
 },
 "Young impling": {
 "Puro Puro": null
+},
+"Yrsa": {
+"Rellekka": null
 },
 "Yuri": {
 "Canifis": "morytania"
@@ -4903,11 +5493,37 @@
 "Rufus's Meat Emporium": "morytania"
 },
 "Zombie": {
-"Stronghold of Security": null
+"Stronghold of Security": null,
+"West Ardougne": null,
+"Ardougne Sewers": null,
+"Edgeville Dungeon": null,
+"Edgeville Dungeon mine": null,
+"Draynor Sewers": null,
+"Varrock Sewers": null,
+"Wizards' Guild": null,
+"Underground Pass (dungeon)": null,
+"Glarial's Tomb": null,
+"Tree Gnome Village dungeon": null,
+"Entrana Dungeon": null,
+"Shayzien": "kourend",
+"Lovakengj": "kourend",
+"Arceuus": "kourend",
+"Port Sarim": null,
+"Melzar's Maze": null,
+"Shayzien Crypts": "kourend",
+"Surprise Exam": null,
+"Tarn's Lair": "morytania",
+"Temple Trekking": "morytania",
+"Ruins (east)": null,
+"Wilderness": null,
+"Graveyard of Shadows": null
 },
 "Zombie pirate": {
 "Harmony Island": "morytania",
-"Underwater Tunnel": "morytania"
+"Underwater Tunnel": "morytania",
+"Chaos Temple (Wilderness)": null,
+"Braindeath Island": "morytania",
+"Pyre Cove": null
 },
 "Zombie rat": {
 "Melzar's Maze": null
@@ -4919,6 +5535,8 @@
 "Lithkren": null
 },
 "Zygomite": {
-"Zanaris": "zanaris"
+"Zanaris": "zanaris",
+"Fossil Island": "fossil_island",
+"Stalker Den": "varlamore"
 }
 }

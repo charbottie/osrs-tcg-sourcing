@@ -1,0 +1,67 @@
+{
+  "_doc": "Hand fixes to monster_locations.json, applied by generate_monster_locations.py after the wiki pass. Per NPC card: 'drop' = locations to remove, 'add' = locations to add (wiki page titles), with the reason and a wiki quote. Prefer fixing the generator; only put cases here the wiki infobox data can't express.",
+  "_locationAccess": {
+    "Underground Pass (dungeon)": {
+      "access": null,
+      "reason": "The wiki's leagueRegion is Tirannwn, but the pass is entered from West Ardougne and IS the first way into Tirannwn, so it can't need Tirannwn access; its quest gate (Underground Pass) is already in _gates. Belongs in slayer_curated.json locationAccess too.",
+      "wiki": "Underground Pass (dungeon): \"Underground Pass is one of the pathways to reach [[Tirannwn]]\"; Tirannwn: \"It can initially only be accessed via the Underground Pass after starting Regicide.\""
+    },
+    "The Stranglewood": {
+      "access": "kourend",
+      "reason": "The wiki's leagueRegion is Varlamore, but the forest sits south of Mount Quidamortem (Kebos, Kourend) and is first visited in Desert Treasure II, which doesn't need Children of the Sun (the Varlamore access route). The TCG packs agree: every Stranglewood card is in the Kourend pack.",
+      "wiki": "The Stranglewood: \"a dangerous forest located south of [[Mount Quidamortem]], first visited during [[Desert Treasure II]].\""
+    }
+  },
+  "_packRegionNotes": {
+    "God Wars Dungeon": "Wiki leagueRegion Asgarnia; the TCG packs some GWD-only NPCs (Blood Reaver: Fremennik, Sergeant Strongstack: Kandarin) elsewhere. Trollheim sits on the Asgarnia/Fremennik border; location is right.",
+    "Ancient Cavern": "Wiki leagueRegion Kandarin (entered from the Baxtorian Falls whirlpool); the TCG packs its NPCs (Brutal green dragon, Confused barbarian, Skeleton thug) as Fremennik. Location is right.",
+    "Paterdomus": "Wiki leagueRegion Misthalin (\"the temple marking Misthalin's eastern border ... gateway into Morytania\"); the TCG packs Drezel and the Temple Guardian as Morytania.",
+    "Edgeville": "Wiki leagueRegion Misthalin; Krystilia and the Lesser Fanatic (Wilderness-themed NPCs standing in Edgeville) are in the Wilderness pack.",
+    "Edgeville Dungeon": "Wiki leagueRegion Misthalin; the Earth warriors are in its Wilderness section, hence the Wilderness pack.",
+    "Mogre Camp": "Wiki leagueRegion Kandarin (dived to from Port Khazard); Mudskippers are packed as Asgarnia (Mudskipper Point).",
+    "Underground Pass (dungeon)": "Wiki leagueRegion Tirannwn; the TCG packs its NPCs as Kandarin (entered from West Ardougne). Access fixed in _locationAccess.",
+    "The Stranglewood": "Wiki leagueRegion Varlamore; the TCG packs every Stranglewood NPC as Kourend. Access fixed in _locationAccess."
+  },
+  "Ahrim the Blighted": {
+    "add": [
+      "Barrows"
+    ],
+    "reason": "The Barrows version of the infobox has no location field (the brother's crypt is only described in the article text); the generator already drops the Desert Treasure II quest copy in the Ancient Vault.",
+    "wiki": "His crypt is found in the centre of the [[Barrows]]."
+  },
+  "Dharok the Wretched": {
+    "add": [
+      "Barrows"
+    ],
+    "reason": "The Barrows version of the infobox has no location field (the brother's crypt is only described in the article text); the generator already drops the Desert Treasure II quest copy in the Ancient Vault.",
+    "wiki": "Dharok's crypt is located in the north-east of the [[Barrows]] area."
+  },
+  "Guthan the Infested": {
+    "add": [
+      "Barrows"
+    ],
+    "reason": "The Barrows version of the infobox has no location field (the brother's crypt is only described in the article text); the generator already drops the Desert Treasure II quest copy in the Ancient Vault.",
+    "wiki": "Guthan's crypt is located at the south-east of the [[Barrows]] area."
+  },
+  "Karil the Tainted": {
+    "add": [
+      "Barrows"
+    ],
+    "reason": "The Barrows version of the infobox has no location field (the brother's crypt is only described in the article text); the generator already drops the Desert Treasure II quest copy in the Ancient Vault.",
+    "wiki": "Karil's crypt is located to the south of the [[Barrows]] area."
+  },
+  "Torag the Corrupted": {
+    "add": [
+      "Barrows"
+    ],
+    "reason": "The Barrows version of the infobox has no location field (the brother's crypt is only described in the article text); the generator already drops the Desert Treasure II quest copy in the Ancient Vault.",
+    "wiki": "Torag's crypt is located to the south-west of the [[Barrows]] area."
+  },
+  "Verac the Defiled": {
+    "add": [
+      "Barrows"
+    ],
+    "reason": "The Barrows version of the infobox has no location field (the brother's crypt is only described in the article text); the generator already drops the Desert Treasure II quest copy in the Ancient Vault.",
+    "wiki": "Verac's crypt is located to the north-west of the [[Barrows]] area."
+  }
+}

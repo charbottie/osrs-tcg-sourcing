@@ -1,745 +1,239 @@
 {
-  "Mole slippers": [
-    "beginner"
+  "3rd age amulet": [
+    "hard",
+    "elite",
+    "master"
   ],
-  "Frog slippers": [
-    "beginner"
+  "3rd age axe": [
+    "master"
   ],
-  "Bear feet": [
-    "beginner"
+  "3rd age bow": [
+    "elite",
+    "master"
   ],
-  "Demon feet": [
-    "beginner"
+  "3rd age cloak": [
+    "elite",
+    "master"
   ],
-  "Jester cape": [
-    "beginner"
+  "3rd age druidic cloak": [
+    "master"
   ],
-  "Shoulder parrot": [
-    "beginner"
+  "3rd age druidic robe bottoms": [
+    "master"
   ],
-  "Monk's robe top (t)": [
-    "beginner"
+  "3rd age druidic robe top": [
+    "master"
   ],
-  "Monk's robe (t)": [
-    "beginner"
+  "3rd age druidic staff": [
+    "master"
   ],
-  "Amulet of defence (t)": [
-    "beginner"
+  "3rd age full helmet": [
+    "hard",
+    "elite",
+    "master"
   ],
-  "Sandwich lady hat": [
-    "beginner"
+  "3rd age kiteshield": [
+    "hard",
+    "elite",
+    "master"
   ],
-  "Sandwich lady top": [
-    "beginner"
+  "3rd age longsword": [
+    "elite",
+    "master"
   ],
-  "Sandwich lady bottom": [
-    "beginner"
+  "3rd age mage hat": [
+    "hard",
+    "elite",
+    "master"
   ],
-  "Black 2h sword": [
-    "beginner"
+  "3rd age pickaxe": [
+    "master"
   ],
-  "Black axe": [
-    "beginner",
+  "3rd age platebody": [
+    "hard",
+    "elite",
+    "master"
+  ],
+  "3rd age platelegs": [
+    "hard",
+    "elite",
+    "master"
+  ],
+  "3rd age plateskirt": [
+    "hard",
+    "elite",
+    "master"
+  ],
+  "3rd age range coif": [
+    "hard",
+    "elite",
+    "master"
+  ],
+  "3rd age range legs": [
+    "hard",
+    "elite",
+    "master"
+  ],
+  "3rd age range top": [
+    "hard",
+    "elite",
+    "master"
+  ],
+  "3rd age robe": [
+    "hard",
+    "elite",
+    "master"
+  ],
+  "3rd age robe top": [
+    "hard",
+    "elite",
+    "master"
+  ],
+  "3rd age vambraces": [
+    "hard",
+    "elite",
+    "master"
+  ],
+  "3rd age wand": [
+    "elite",
+    "master"
+  ],
+  "A powdered wig": [
     "easy"
   ],
-  "Black battleaxe": [
-    "beginner",
-    "easy"
+  "Adamant axe": [
+    "medium"
   ],
-  "Black chainbody": [
-    "beginner"
+  "Adamant battleaxe": [
+    "medium"
   ],
-  "Black dagger": [
-    "beginner",
-    "easy"
+  "Adamant cane": [
+    "medium"
   ],
-  "Black full helm": [
-    "beginner",
-    "easy"
+  "Adamant dagger": [
+    "medium"
   ],
-  "Black kiteshield": [
-    "beginner"
+  "Adamant dragon mask": [
+    "elite"
   ],
-  "Black longsword": [
-    "beginner",
-    "easy"
+  "Adamant full helm": [
+    "medium"
   ],
-  "Black mace": [
-    "beginner"
+  "Adamant full helm (g)": [
+    "medium"
   ],
-  "Black med helm": [
-    "beginner"
+  "Adamant full helm (t)": [
+    "medium"
   ],
-  "Black pickaxe": [
-    "beginner",
-    "easy"
+  "Adamant helm (h1)": [
+    "medium"
   ],
-  "Black platebody": [
-    "beginner",
-    "easy"
+  "Adamant helm (h2)": [
+    "medium"
   ],
-  "Black plateskirt": [
-    "beginner"
+  "Adamant helm (h3)": [
+    "medium"
   ],
-  "Black platelegs": [
-    "beginner",
-    "easy"
+  "Adamant helm (h4)": [
+    "medium"
   ],
-  "Black sq shield": [
-    "beginner"
+  "Adamant helm (h5)": [
+    "medium"
   ],
-  "Black scimitar": [
-    "beginner"
+  "Adamant kiteshield (g)": [
+    "medium"
   ],
-  "Black sword": [
-    "beginner"
+  "Adamant kiteshield (t)": [
+    "medium"
   ],
-  "Black warhammer": [
-    "beginner"
+  "Adamant longsword": [
+    "medium"
   ],
-  "Shortbow": [
-    "beginner"
+  "Adamant pickaxe": [
+    "medium"
   ],
-  "Longbow": [
-    "beginner"
+  "Adamant platebody": [
+    "medium"
   ],
-  "Oak shortbow": [
-    "beginner"
+  "Adamant platebody (g)": [
+    "medium"
   ],
-  "Oak longbow": [
-    "beginner"
+  "Adamant platebody (h1)": [
+    "medium"
   ],
-  "Iron pickaxe": [
-    "beginner"
+  "Adamant platebody (h2)": [
+    "medium"
   ],
-  "Staff of air": [
-    "beginner",
-    "easy"
+  "Adamant platebody (h3)": [
+    "medium"
   ],
-  "Staff of water": [
-    "beginner"
+  "Adamant platebody (h4)": [
+    "medium"
   ],
-  "Staff of earth": [
-    "beginner"
+  "Adamant platebody (h5)": [
+    "medium"
   ],
-  "Staff of fire": [
-    "beginner"
+  "Adamant platebody (t)": [
+    "medium"
   ],
-  "Steel full helm": [
-    "beginner"
+  "Adamant platelegs": [
+    "medium"
   ],
-  "Steel platebody": [
-    "beginner"
+  "Adamant platelegs (g)": [
+    "medium"
   ],
-  "Steel platelegs": [
-    "beginner"
+  "Adamant platelegs (t)": [
+    "medium"
   ],
-  "Steel plateskirt": [
-    "beginner"
+  "Adamant plateskirt (g)": [
+    "medium"
   ],
-  "Steel longsword": [
-    "beginner"
+  "Adamant plateskirt (t)": [
+    "medium"
   ],
-  "Steel dagger": [
-    "beginner"
+  "Adamant shield (h1)": [
+    "medium"
   ],
-  "Steel axe": [
-    "beginner"
+  "Adamant shield (h2)": [
+    "medium"
   ],
-  "Steel battleaxe": [
-    "beginner"
+  "Adamant shield (h3)": [
+    "medium"
   ],
-  "Leather cowl": [
-    "beginner"
+  "Adamant shield (h4)": [
+    "medium"
   ],
-  "Leather body": [
-    "beginner"
+  "Adamant shield (h5)": [
+    "medium"
   ],
-  "Leather chaps": [
-    "beginner"
-  ],
-  "Leather vambraces": [
-    "beginner"
-  ],
-  "Hardleather body": [
-    "beginner"
-  ],
-  "Blue wizard hat": [
-    "beginner"
-  ],
-  "Blue wizard robe": [
-    "beginner"
-  ],
-  "Wizard hat": [
-    "beginner"
-  ],
-  "Black robe": [
-    "beginner"
+  "Afro": [
+    "elite"
   ],
   "Air rune": [
     "beginner",
     "easy",
     "medium"
   ],
-  "Mind rune": [
-    "beginner",
-    "easy",
-    "medium"
-  ],
-  "Water rune": [
-    "beginner",
-    "easy",
-    "medium"
-  ],
-  "Earth rune": [
-    "beginner",
-    "easy",
-    "medium"
-  ],
-  "Fire rune": [
-    "beginner",
-    "easy",
-    "medium"
-  ],
-  "Body rune": [
-    "beginner",
-    "easy"
-  ],
-  "Chaos rune": [
-    "beginner",
-    "easy",
-    "medium"
-  ],
-  "Nature rune": [
-    "beginner",
-    "easy",
-    "medium",
-    "hard",
+  "Ale of the gods": [
     "master"
   ],
-  "Law rune": [
-    "beginner",
-    "easy",
-    "medium",
-    "hard",
-    "elite"
-  ],
-  "Bronze arrow": [
+  "Amulet of defence (t)": [
     "beginner"
   ],
-  "Iron arrow": [
-    "beginner"
+  "Amulet of glory (t)": [
+    "hard"
   ],
-  "Cabbage": [
-    "beginner",
-    "master"
-  ],
-  "Shrimps": [
-    "beginner"
-  ],
-  "Sardine": [
-    "beginner"
-  ],
-  "Herring": [
-    "beginner"
-  ],
-  "Willow comp bow": [
+  "Amulet of magic": [
     "easy"
   ],
   "Amulet of magic (t)": [
     "easy"
   ],
-  "Team cape zero": [
-    "easy"
-  ],
-  "Team cape i": [
-    "easy"
-  ],
-  "Team cape x": [
-    "easy"
-  ],
-  "Cape of skulls": [
-    "easy"
-  ],
-  "Golden chef's hat": [
-    "easy"
-  ],
-  "Golden apron": [
-    "easy"
-  ],
-  "Wooden shield (g)": [
-    "easy"
-  ],
-  "Black full helm (t)": [
-    "easy"
-  ],
-  "Black platebody (t)": [
-    "easy"
-  ],
-  "Black platelegs (t)": [
-    "easy"
-  ],
-  "Black plateskirt (t)": [
-    "easy"
-  ],
-  "Black kiteshield (t)": [
-    "easy"
-  ],
-  "Black full helm (g)": [
-    "easy"
-  ],
-  "Black platebody (g)": [
-    "easy"
-  ],
-  "Black platelegs (g)": [
-    "easy"
-  ],
-  "Black plateskirt (g)": [
-    "easy"
-  ],
-  "Black kiteshield (g)": [
-    "easy"
-  ],
-  "Black shield (h1)": [
-    "easy"
-  ],
-  "Black shield (h2)": [
-    "easy"
-  ],
-  "Black shield (h3)": [
-    "easy"
-  ],
-  "Black shield (h4)": [
-    "easy"
-  ],
-  "Black shield (h5)": [
-    "easy"
-  ],
-  "Black helm (h1)": [
-    "easy"
-  ],
-  "Black helm (h2)": [
-    "easy"
-  ],
-  "Black helm (h3)": [
-    "easy"
-  ],
-  "Black helm (h4)": [
-    "easy"
-  ],
-  "Black helm (h5)": [
-    "easy"
-  ],
-  "Black platebody (h1)": [
-    "easy"
-  ],
-  "Black platebody (h2)": [
-    "easy"
-  ],
-  "Black platebody (h3)": [
-    "easy"
-  ],
-  "Black platebody (h4)": [
-    "easy"
-  ],
-  "Black platebody (h5)": [
-    "easy"
-  ],
-  "Steel full helm (t)": [
-    "easy"
-  ],
-  "Steel platebody (t)": [
-    "easy"
-  ],
-  "Steel platelegs (t)": [
-    "easy"
-  ],
-  "Steel plateskirt (t)": [
-    "easy"
-  ],
-  "Steel kiteshield (t)": [
-    "easy"
-  ],
-  "Steel full helm (g)": [
-    "easy"
-  ],
-  "Steel platebody (g)": [
-    "easy"
-  ],
-  "Steel platelegs (g)": [
-    "easy"
-  ],
-  "Steel plateskirt (g)": [
-    "easy"
-  ],
-  "Steel kiteshield (g)": [
-    "easy"
-  ],
-  "Iron full helm (t)": [
-    "easy"
-  ],
-  "Iron platebody (t)": [
-    "easy"
-  ],
-  "Iron platelegs (t)": [
-    "easy"
-  ],
-  "Iron plateskirt (t)": [
-    "easy"
-  ],
-  "Iron kiteshield (t)": [
-    "easy"
-  ],
-  "Iron full helm (g)": [
-    "easy"
-  ],
-  "Iron platebody (g)": [
-    "easy"
-  ],
-  "Iron platelegs (g)": [
-    "easy"
-  ],
-  "Iron plateskirt (g)": [
-    "easy"
-  ],
-  "Iron kiteshield (g)": [
-    "easy"
-  ],
-  "Bronze full helm (t)": [
-    "easy"
-  ],
-  "Bronze platebody (t)": [
-    "easy"
-  ],
-  "Bronze platelegs (t)": [
-    "easy"
-  ],
-  "Bronze plateskirt (t)": [
-    "easy"
-  ],
-  "Bronze kiteshield (t)": [
-    "easy"
-  ],
-  "Bronze full helm (g)": [
-    "easy"
-  ],
-  "Bronze platebody (g)": [
-    "easy"
-  ],
-  "Bronze platelegs (g)": [
-    "easy"
-  ],
-  "Bronze plateskirt (g)": [
-    "easy"
-  ],
-  "Bronze kiteshield (g)": [
-    "easy"
-  ],
-  "Studded body (g)": [
-    "easy"
-  ],
-  "Studded chaps (g)": [
-    "easy"
-  ],
-  "Studded body (t)": [
-    "easy"
-  ],
-  "Studded chaps (t)": [
-    "easy"
-  ],
-  "Leather body (g)": [
-    "easy"
-  ],
-  "Leather chaps (g)": [
-    "easy"
-  ],
-  "Blue wizard hat (g)": [
-    "easy"
-  ],
-  "Blue wizard robe (g)": [
-    "easy"
-  ],
-  "Blue skirt (g)": [
-    "easy"
-  ],
-  "Blue wizard hat (t)": [
-    "easy"
-  ],
-  "Blue wizard robe (t)": [
-    "easy"
-  ],
-  "Blue skirt (t)": [
-    "easy"
-  ],
-  "Black wizard hat (g)": [
-    "easy"
-  ],
-  "Black wizard robe (g)": [
-    "easy"
-  ],
-  "Black skirt (g)": [
-    "easy"
-  ],
-  "Black wizard hat (t)": [
-    "easy"
-  ],
-  "Black wizard robe (t)": [
-    "easy"
-  ],
-  "Black skirt (t)": [
-    "easy"
-  ],
-  "Monk's robe top (g)": [
-    "easy"
-  ],
-  "Monk's robe (g)": [
-    "easy"
-  ],
-  "Saradomin robe top": [
-    "easy"
-  ],
-  "Saradomin robe legs": [
-    "easy"
-  ],
-  "Guthix robe top": [
-    "easy"
-  ],
-  "Guthix robe legs": [
-    "easy"
-  ],
-  "Zamorak robe top": [
-    "easy"
-  ],
-  "Zamorak robe legs": [
-    "easy"
-  ],
-  "Ancient robe top": [
-    "easy"
-  ],
-  "Ancient robe legs": [
-    "easy"
-  ],
-  "Armadyl robe top": [
-    "easy"
-  ],
-  "Armadyl robe legs": [
-    "easy"
-  ],
-  "Bandos robe top": [
-    "easy"
-  ],
-  "Bandos robe legs": [
-    "easy"
-  ],
-  "Bob's red shirt": [
-    "easy"
-  ],
-  "Bob's green shirt": [
-    "easy"
-  ],
-  "Bob's blue shirt": [
-    "easy"
-  ],
-  "Bob's black shirt": [
-    "easy"
-  ],
-  "Bob's purple shirt": [
-    "easy"
-  ],
-  "Blue beret": [
-    "easy"
-  ],
-  "Black beret": [
-    "easy"
-  ],
-  "Red beret": [
-    "easy"
-  ],
-  "White beret": [
-    "easy"
-  ],
-  "A powdered wig": [
-    "easy"
-  ],
-  "Beanie": [
-    "easy"
-  ],
-  "Imp mask": [
-    "easy"
-  ],
-  "Goblin mask": [
-    "easy"
-  ],
-  "Sleeping cap": [
-    "easy"
-  ],
-  "Flared trousers": [
-    "easy"
-  ],
-  "Pantaloons": [
-    "easy"
-  ],
-  "Black cane": [
-    "easy"
-  ],
-  "Staff of bob the cat": [
-    "easy"
-  ],
-  "Red elegant shirt": [
-    "easy"
-  ],
-  "Red elegant blouse": [
-    "easy"
-  ],
-  "Red elegant legs": [
-    "easy"
-  ],
-  "Red elegant skirt": [
-    "easy"
-  ],
-  "Green elegant shirt": [
-    "easy"
-  ],
-  "Green elegant blouse": [
-    "easy"
-  ],
-  "Green elegant legs": [
-    "easy"
-  ],
-  "Green elegant skirt": [
-    "easy"
-  ],
-  "Blue elegant shirt": [
-    "easy"
-  ],
-  "Blue elegant blouse": [
-    "easy"
-  ],
-  "Blue elegant legs": [
-    "easy"
-  ],
-  "Blue elegant skirt": [
-    "easy"
+  "Amulet of power": [
+    "medium"
   ],
   "Amulet of power (t)": [
     "easy"
-  ],
-  "Ham joint": [
-    "easy"
-  ],
-  "Rain bow": [
-    "easy"
-  ],
-  "Steel pickaxe": [
-    "easy"
-  ],
-  "Coif": [
-    "easy"
-  ],
-  "Studded body": [
-    "easy"
-  ],
-  "Studded chaps": [
-    "easy"
-  ],
-  "Willow shortbow": [
-    "easy"
-  ],
-  "Willow longbow": [
-    "easy"
-  ],
-  "Amulet of magic": [
-    "easy"
-  ],
-  "Trout": [
-    "easy"
-  ],
-  "Salmon": [
-    "easy"
-  ],
-  "Coins": [
-    "easy",
-    "medium",
-    "hard",
-    "elite",
-    "master"
-  ],
-  "Purple sweets": [
-    "easy",
-    "medium",
-    "hard",
-    "elite",
-    "master"
-  ],
-  "Red firelighter": [
-    "easy",
-    "medium",
-    "hard",
-    "elite",
-    "master"
-  ],
-  "Green firelighter": [
-    "easy",
-    "medium",
-    "hard",
-    "elite",
-    "master"
-  ],
-  "Blue firelighter": [
-    "easy",
-    "medium",
-    "hard",
-    "elite",
-    "master"
-  ],
-  "Purple firelighter": [
-    "easy",
-    "medium",
-    "hard",
-    "elite",
-    "master"
-  ],
-  "White firelighter": [
-    "easy",
-    "medium",
-    "hard",
-    "elite",
-    "master"
-  ],
-  "Holy blessing": [
-    "easy",
-    "medium",
-    "hard",
-    "elite",
-    "master"
-  ],
-  "Unholy blessing": [
-    "easy",
-    "medium",
-    "hard",
-    "elite",
-    "master"
-  ],
-  "Peaceful blessing": [
-    "easy",
-    "medium",
-    "hard",
-    "elite",
-    "master"
-  ],
-  "War blessing": [
-    "easy",
-    "medium",
-    "hard",
-    "elite",
-    "master"
-  ],
-  "Honourable blessing": [
-    "easy",
-    "medium",
-    "hard",
-    "elite",
-    "master"
   ],
   "Ancient blessing": [
     "easy",
@@ -748,152 +242,38 @@
     "elite",
     "master"
   ],
-  "Master scroll book": [
-    "easy",
-    "medium",
-    "hard",
-    "elite",
-    "master"
+  "Ancient bracers": [
+    "hard"
   ],
-  "Saradomin page 1": [
-    "easy",
-    "medium",
-    "hard",
-    "elite",
-    "master"
+  "Ancient chaps": [
+    "hard"
   ],
-  "Saradomin page 2": [
-    "easy",
-    "medium",
-    "hard",
-    "elite",
-    "master"
+  "Ancient cloak": [
+    "medium"
   ],
-  "Saradomin page 3": [
-    "easy",
-    "medium",
-    "hard",
-    "elite",
-    "master"
+  "Ancient coif": [
+    "hard"
   ],
-  "Saradomin page 4": [
-    "easy",
-    "medium",
-    "hard",
-    "elite",
-    "master"
+  "Ancient crozier": [
+    "medium"
   ],
-  "Zamorak page 1": [
-    "easy",
-    "medium",
-    "hard",
-    "elite",
-    "master"
+  "Ancient d'hide body": [
+    "hard"
   ],
-  "Zamorak page 2": [
-    "easy",
-    "medium",
-    "hard",
-    "elite",
-    "master"
+  "Ancient d'hide boots": [
+    "hard"
   ],
-  "Zamorak page 3": [
-    "easy",
-    "medium",
-    "hard",
-    "elite",
-    "master"
+  "Ancient d'hide shield": [
+    "hard"
   ],
-  "Zamorak page 4": [
-    "easy",
-    "medium",
-    "hard",
-    "elite",
-    "master"
+  "Ancient full helm": [
+    "hard"
   ],
-  "Guthix page 1": [
-    "easy",
-    "medium",
-    "hard",
-    "elite",
-    "master"
+  "Ancient kiteshield": [
+    "hard"
   ],
-  "Guthix page 2": [
-    "easy",
-    "medium",
-    "hard",
-    "elite",
-    "master"
-  ],
-  "Guthix page 3": [
-    "easy",
-    "medium",
-    "hard",
-    "elite",
-    "master"
-  ],
-  "Guthix page 4": [
-    "easy",
-    "medium",
-    "hard",
-    "elite",
-    "master"
-  ],
-  "Bandos page 1": [
-    "easy",
-    "medium",
-    "hard",
-    "elite",
-    "master"
-  ],
-  "Bandos page 2": [
-    "easy",
-    "medium",
-    "hard",
-    "elite",
-    "master"
-  ],
-  "Bandos page 3": [
-    "easy",
-    "medium",
-    "hard",
-    "elite",
-    "master"
-  ],
-  "Bandos page 4": [
-    "easy",
-    "medium",
-    "hard",
-    "elite",
-    "master"
-  ],
-  "Armadyl page 1": [
-    "easy",
-    "medium",
-    "hard",
-    "elite",
-    "master"
-  ],
-  "Armadyl page 2": [
-    "easy",
-    "medium",
-    "hard",
-    "elite",
-    "master"
-  ],
-  "Armadyl page 3": [
-    "easy",
-    "medium",
-    "hard",
-    "elite",
-    "master"
-  ],
-  "Armadyl page 4": [
-    "easy",
-    "medium",
-    "hard",
-    "elite",
-    "master"
+  "Ancient mitre": [
+    "medium"
   ],
   "Ancient page 1": [
     "easy",
@@ -923,546 +303,6 @@
     "elite",
     "master"
   ],
-  "Large spade": [
-    "easy"
-  ],
-  "Gnomish firelighter": [
-    "medium"
-  ],
-  "Yew comp bow": [
-    "medium"
-  ],
-  "Strength amulet (t)": [
-    "medium"
-  ],
-  "Ranger boots": [
-    "medium"
-  ],
-  "Wizard boots": [
-    "medium"
-  ],
-  "Holy sandals": [
-    "medium"
-  ],
-  "Spiked manacles": [
-    "medium"
-  ],
-  "Climbing boots (g)": [
-    "medium"
-  ],
-  "Adamant full helm (t)": [
-    "medium"
-  ],
-  "Adamant platebody (t)": [
-    "medium"
-  ],
-  "Adamant platelegs (t)": [
-    "medium"
-  ],
-  "Adamant plateskirt (t)": [
-    "medium"
-  ],
-  "Adamant kiteshield (t)": [
-    "medium"
-  ],
-  "Adamant full helm (g)": [
-    "medium"
-  ],
-  "Adamant platebody (g)": [
-    "medium"
-  ],
-  "Adamant platelegs (g)": [
-    "medium"
-  ],
-  "Adamant plateskirt (g)": [
-    "medium"
-  ],
-  "Adamant kiteshield (g)": [
-    "medium"
-  ],
-  "Adamant shield (h1)": [
-    "medium"
-  ],
-  "Adamant shield (h2)": [
-    "medium"
-  ],
-  "Adamant shield (h3)": [
-    "medium"
-  ],
-  "Adamant shield (h4)": [
-    "medium"
-  ],
-  "Adamant shield (h5)": [
-    "medium"
-  ],
-  "Adamant helm (h1)": [
-    "medium"
-  ],
-  "Adamant helm (h2)": [
-    "medium"
-  ],
-  "Adamant helm (h3)": [
-    "medium"
-  ],
-  "Adamant helm (h4)": [
-    "medium"
-  ],
-  "Adamant helm (h5)": [
-    "medium"
-  ],
-  "Adamant platebody (h1)": [
-    "medium"
-  ],
-  "Adamant platebody (h2)": [
-    "medium"
-  ],
-  "Adamant platebody (h3)": [
-    "medium"
-  ],
-  "Adamant platebody (h4)": [
-    "medium"
-  ],
-  "Adamant platebody (h5)": [
-    "medium"
-  ],
-  "Mithril full helm (g)": [
-    "medium"
-  ],
-  "Mithril platebody (g)": [
-    "medium"
-  ],
-  "Mithril platelegs (g)": [
-    "medium"
-  ],
-  "Mithril plateskirt (g)": [
-    "medium"
-  ],
-  "Mithril kiteshield (g)": [
-    "medium"
-  ],
-  "Mithril full helm (t)": [
-    "medium"
-  ],
-  "Mithril platebody (t)": [
-    "medium"
-  ],
-  "Mithril platelegs (t)": [
-    "medium"
-  ],
-  "Mithril plateskirt (t)": [
-    "medium"
-  ],
-  "Mithril kiteshield (t)": [
-    "medium"
-  ],
-  "Green d'hide body (g)": [
-    "medium"
-  ],
-  "Green d'hide body (t)": [
-    "medium"
-  ],
-  "Green d'hide chaps (g)": [
-    "medium"
-  ],
-  "Green d'hide chaps (t)": [
-    "medium"
-  ],
-  "Saradomin mitre": [
-    "medium"
-  ],
-  "Guthix mitre": [
-    "medium"
-  ],
-  "Guthix cloak": [
-    "medium"
-  ],
-  "Zamorak mitre": [
-    "medium"
-  ],
-  "Ancient mitre": [
-    "medium"
-  ],
-  "Ancient cloak": [
-    "medium"
-  ],
-  "Ancient stole": [
-    "medium"
-  ],
-  "Ancient crozier": [
-    "medium"
-  ],
-  "Armadyl mitre": [
-    "medium"
-  ],
-  "Armadyl cloak": [
-    "medium"
-  ],
-  "Armadyl stole": [
-    "medium"
-  ],
-  "Armadyl crozier": [
-    "medium"
-  ],
-  "Bandos mitre": [
-    "medium"
-  ],
-  "Bandos cloak": [
-    "medium"
-  ],
-  "Bandos stole": [
-    "medium"
-  ],
-  "Bandos crozier": [
-    "medium"
-  ],
-  "Red boater": [
-    "medium"
-  ],
-  "Green boater": [
-    "medium"
-  ],
-  "Orange boater": [
-    "medium"
-  ],
-  "Black boater": [
-    "medium"
-  ],
-  "Blue boater": [
-    "medium"
-  ],
-  "Pink boater": [
-    "medium"
-  ],
-  "Purple boater": [
-    "medium"
-  ],
-  "White boater": [
-    "medium"
-  ],
-  "Red headband": [
-    "medium"
-  ],
-  "Black headband": [
-    "medium"
-  ],
-  "Brown headband": [
-    "medium"
-  ],
-  "White headband": [
-    "medium"
-  ],
-  "Blue headband": [
-    "medium"
-  ],
-  "Gold headband": [
-    "medium"
-  ],
-  "Pink headband": [
-    "medium"
-  ],
-  "Green headband": [
-    "medium"
-  ],
-  "Crier hat": [
-    "medium"
-  ],
-  "Crier coat": [
-    "medium"
-  ],
-  "Crier bell": [
-    "medium"
-  ],
-  "Adamant cane": [
-    "medium"
-  ],
-  "Arceuus banner": [
-    "medium"
-  ],
-  "Piscarilius banner": [
-    "medium"
-  ],
-  "Hosidius banner": [
-    "medium"
-  ],
-  "Shayzien banner": [
-    "medium"
-  ],
-  "Lovakengj banner": [
-    "medium"
-  ],
-  "Cabbage round shield": [
-    "medium"
-  ],
-  "Black unicorn mask": [
-    "medium"
-  ],
-  "White unicorn mask": [
-    "medium"
-  ],
-  "Cat mask": [
-    "medium"
-  ],
-  "Penguin mask": [
-    "medium"
-  ],
-  "Leprechaun hat": [
-    "medium"
-  ],
-  "Black leprechaun hat": [
-    "medium"
-  ],
-  "Wolf mask": [
-    "medium"
-  ],
-  "Wolf cloak": [
-    "medium"
-  ],
-  "Purple elegant shirt": [
-    "medium"
-  ],
-  "Purple elegant blouse": [
-    "medium"
-  ],
-  "Purple elegant legs": [
-    "medium"
-  ],
-  "Purple elegant skirt": [
-    "medium"
-  ],
-  "Black elegant shirt": [
-    "medium"
-  ],
-  "White elegant blouse": [
-    "medium"
-  ],
-  "Black elegant legs": [
-    "medium"
-  ],
-  "White elegant skirt": [
-    "medium"
-  ],
-  "Pink elegant shirt": [
-    "medium"
-  ],
-  "Pink elegant blouse": [
-    "medium"
-  ],
-  "Pink elegant legs": [
-    "medium"
-  ],
-  "Pink elegant skirt": [
-    "medium"
-  ],
-  "Gold elegant shirt": [
-    "medium"
-  ],
-  "Gold elegant blouse": [
-    "medium"
-  ],
-  "Gold elegant legs": [
-    "medium"
-  ],
-  "Gold elegant skirt": [
-    "medium"
-  ],
-  "Adamant full helm": [
-    "medium"
-  ],
-  "Adamant platebody": [
-    "medium"
-  ],
-  "Adamant platelegs": [
-    "medium"
-  ],
-  "Adamant longsword": [
-    "medium"
-  ],
-  "Adamant dagger": [
-    "medium"
-  ],
-  "Adamant battleaxe": [
-    "medium"
-  ],
-  "Adamant axe": [
-    "medium"
-  ],
-  "Adamant pickaxe": [
-    "medium"
-  ],
-  "Green d'hide body": [
-    "medium"
-  ],
-  "Green d'hide chaps": [
-    "medium"
-  ],
-  "Yew shortbow": [
-    "medium"
-  ],
-  "Yew longbow": [
-    "medium"
-  ],
-  "Fire battlestaff": [
-    "medium"
-  ],
-  "Amulet of power": [
-    "medium"
-  ],
-  "Death rune": [
-    "medium",
-    "elite",
-    "master"
-  ],
-  "Lobster": [
-    "medium",
-    "hard"
-  ],
-  "Swordfish": [
-    "medium"
-  ],
-  "Magic comp bow": [
-    "hard"
-  ],
-  "Amulet of glory (t)": [
-    "hard"
-  ],
-  "Robin hood hat": [
-    "hard"
-  ],
-  "Enchanted hat": [
-    "hard"
-  ],
-  "Enchanted top": [
-    "hard"
-  ],
-  "Enchanted robe": [
-    "hard"
-  ],
-  "Dragon boots ornament kit": [
-    "hard"
-  ],
-  "Rune full helm (t)": [
-    "hard"
-  ],
-  "Rune platebody (t)": [
-    "hard"
-  ],
-  "Rune platelegs (t)": [
-    "hard"
-  ],
-  "Rune plateskirt (t)": [
-    "hard"
-  ],
-  "Rune kiteshield (t)": [
-    "hard"
-  ],
-  "Rune full helm (g)": [
-    "hard"
-  ],
-  "Rune platebody (g)": [
-    "hard"
-  ],
-  "Rune platelegs (g)": [
-    "hard"
-  ],
-  "Rune plateskirt (g)": [
-    "hard"
-  ],
-  "Rune kiteshield (g)": [
-    "hard"
-  ],
-  "Rune shield (h1)": [
-    "hard"
-  ],
-  "Rune shield (h2)": [
-    "hard"
-  ],
-  "Rune shield (h3)": [
-    "hard"
-  ],
-  "Rune shield (h4)": [
-    "hard"
-  ],
-  "Rune shield (h5)": [
-    "hard"
-  ],
-  "Rune helm (h1)": [
-    "hard"
-  ],
-  "Rune helm (h2)": [
-    "hard"
-  ],
-  "Rune helm (h3)": [
-    "hard"
-  ],
-  "Rune helm (h4)": [
-    "hard"
-  ],
-  "Rune helm (h5)": [
-    "hard"
-  ],
-  "Rune platebody (h1)": [
-    "hard"
-  ],
-  "Rune platebody (h2)": [
-    "hard"
-  ],
-  "Rune platebody (h3)": [
-    "hard"
-  ],
-  "Rune platebody (h4)": [
-    "hard"
-  ],
-  "Rune platebody (h5)": [
-    "hard"
-  ],
-  "Zamorak full helm": [
-    "hard"
-  ],
-  "Zamorak platebody": [
-    "hard"
-  ],
-  "Zamorak platelegs": [
-    "hard"
-  ],
-  "Zamorak plateskirt": [
-    "hard"
-  ],
-  "Zamorak kiteshield": [
-    "hard"
-  ],
-  "Guthix full helm": [
-    "hard"
-  ],
-  "Guthix platebody": [
-    "hard"
-  ],
-  "Guthix platelegs": [
-    "hard"
-  ],
-  "Guthix plateskirt": [
-    "hard"
-  ],
-  "Guthix kiteshield": [
-    "hard"
-  ],
-  "Saradomin full helm": [
-    "hard"
-  ],
-  "Saradomin platebody": [
-    "hard"
-  ],
-  "Saradomin platelegs": [
-    "hard"
-  ],
-  "Saradomin plateskirt": [
-    "hard"
-  ],
-  "Saradomin kiteshield": [
-    "hard"
-  ],
-  "Ancient full helm": [
-    "hard"
-  ],
   "Ancient platebody": [
     "hard"
   ],
@@ -1472,11 +312,111 @@
   "Ancient plateskirt": [
     "hard"
   ],
-  "Ancient kiteshield": [
+  "Ancient robe legs": [
+    "easy"
+  ],
+  "Ancient robe top": [
+    "easy"
+  ],
+  "Ancient stole": [
+    "medium"
+  ],
+  "Anguish ornament kit": [
+    "master"
+  ],
+  "Ankou gloves": [
+    "master"
+  ],
+  "Ankou mask": [
+    "master"
+  ],
+  "Ankou socks": [
+    "master"
+  ],
+  "Ankou top": [
+    "master"
+  ],
+  "Ankou's leggings": [
+    "master"
+  ],
+  "Anti-venom+": [
+    "master"
+  ],
+  "Antifire potion": [
+    "hard"
+  ],
+  "Arceuus banner": [
+    "medium"
+  ],
+  "Arceuus hood": [
+    "master"
+  ],
+  "Arceuus scarf": [
+    "elite"
+  ],
+  "Armadyl bracers": [
+    "hard"
+  ],
+  "Armadyl chaps": [
+    "hard"
+  ],
+  "Armadyl cloak": [
+    "medium"
+  ],
+  "Armadyl coif": [
+    "hard"
+  ],
+  "Armadyl crozier": [
+    "medium"
+  ],
+  "Armadyl d'hide body": [
+    "hard"
+  ],
+  "Armadyl d'hide boots": [
+    "hard"
+  ],
+  "Armadyl d'hide shield": [
     "hard"
   ],
   "Armadyl full helm": [
     "hard"
+  ],
+  "Armadyl godsword ornament kit": [
+    "master"
+  ],
+  "Armadyl kiteshield": [
+    "hard"
+  ],
+  "Armadyl mitre": [
+    "medium"
+  ],
+  "Armadyl page 1": [
+    "easy",
+    "medium",
+    "hard",
+    "elite",
+    "master"
+  ],
+  "Armadyl page 2": [
+    "easy",
+    "medium",
+    "hard",
+    "elite",
+    "master"
+  ],
+  "Armadyl page 3": [
+    "easy",
+    "medium",
+    "hard",
+    "elite",
+    "master"
+  ],
+  "Armadyl page 4": [
+    "easy",
+    "medium",
+    "hard",
+    "elite",
+    "master"
   ],
   "Armadyl platebody": [
     "hard"
@@ -1487,11 +427,78 @@
   "Armadyl plateskirt": [
     "hard"
   ],
-  "Armadyl kiteshield": [
+  "Armadyl robe legs": [
+    "easy"
+  ],
+  "Armadyl robe top": [
+    "easy"
+  ],
+  "Armadyl stole": [
+    "medium"
+  ],
+  "Bandos bracers": [
+    "hard"
+  ],
+  "Bandos chaps": [
+    "hard"
+  ],
+  "Bandos cloak": [
+    "medium"
+  ],
+  "Bandos coif": [
+    "hard"
+  ],
+  "Bandos crozier": [
+    "medium"
+  ],
+  "Bandos d'hide body": [
+    "hard"
+  ],
+  "Bandos d'hide boots": [
+    "hard"
+  ],
+  "Bandos d'hide shield": [
     "hard"
   ],
   "Bandos full helm": [
     "hard"
+  ],
+  "Bandos godsword ornament kit": [
+    "master"
+  ],
+  "Bandos kiteshield": [
+    "hard"
+  ],
+  "Bandos mitre": [
+    "medium"
+  ],
+  "Bandos page 1": [
+    "easy",
+    "medium",
+    "hard",
+    "elite",
+    "master"
+  ],
+  "Bandos page 2": [
+    "easy",
+    "medium",
+    "hard",
+    "elite",
+    "master"
+  ],
+  "Bandos page 3": [
+    "easy",
+    "medium",
+    "hard",
+    "elite",
+    "master"
+  ],
+  "Bandos page 4": [
+    "easy",
+    "medium",
+    "hard",
+    "elite",
+    "master"
   ],
   "Bandos platebody": [
     "hard"
@@ -1502,20 +509,258 @@
   "Bandos plateskirt": [
     "hard"
   ],
-  "Bandos kiteshield": [
+  "Bandos robe legs": [
+    "easy"
+  ],
+  "Bandos robe top": [
+    "easy"
+  ],
+  "Bandos stole": [
+    "medium"
+  ],
+  "Battlestaff": [
+    "elite"
+  ],
+  "Beanie": [
+    "easy"
+  ],
+  "Bear feet": [
+    "beginner"
+  ],
+  "Berserker necklace ornament kit": [
     "hard"
   ],
-  "Red d'hide body (g)": [
+  "Big pirate hat": [
+    "elite"
+  ],
+  "Black 2h sword": [
+    "beginner"
+  ],
+  "Black axe": [
+    "beginner",
+    "easy"
+  ],
+  "Black battleaxe": [
+    "beginner",
+    "easy"
+  ],
+  "Black beret": [
+    "easy"
+  ],
+  "Black boater": [
+    "medium"
+  ],
+  "Black cane": [
+    "easy"
+  ],
+  "Black cavalier": [
     "hard"
   ],
-  "Red d'hide body (t)": [
+  "Black chainbody": [
+    "beginner"
+  ],
+  "Black d'hide body": [
     "hard"
   ],
-  "Red d'hide chaps (g)": [
+  "Black d'hide body (g)": [
+    "elite"
+  ],
+  "Black d'hide body (t)": [
+    "elite"
+  ],
+  "Black d'hide chaps": [
     "hard"
   ],
-  "Red d'hide chaps (t)": [
+  "Black d'hide chaps (g)": [
+    "elite"
+  ],
+  "Black d'hide chaps (t)": [
+    "elite"
+  ],
+  "Black dagger": [
+    "beginner",
+    "easy"
+  ],
+  "Black demon mask": [
+    "master"
+  ],
+  "Black dragon mask": [
     "hard"
+  ],
+  "Black dragonhide": [
+    "master"
+  ],
+  "Black elegant legs": [
+    "medium"
+  ],
+  "Black elegant shirt": [
+    "medium"
+  ],
+  "Black full helm": [
+    "beginner",
+    "easy"
+  ],
+  "Black full helm (g)": [
+    "easy"
+  ],
+  "Black full helm (t)": [
+    "easy"
+  ],
+  "Black headband": [
+    "medium"
+  ],
+  "Black helm (h1)": [
+    "easy"
+  ],
+  "Black helm (h2)": [
+    "easy"
+  ],
+  "Black helm (h3)": [
+    "easy"
+  ],
+  "Black helm (h4)": [
+    "easy"
+  ],
+  "Black helm (h5)": [
+    "easy"
+  ],
+  "Black kiteshield": [
+    "beginner"
+  ],
+  "Black kiteshield (g)": [
+    "easy"
+  ],
+  "Black kiteshield (t)": [
+    "easy"
+  ],
+  "Black leprechaun hat": [
+    "medium"
+  ],
+  "Black longsword": [
+    "beginner",
+    "easy"
+  ],
+  "Black mace": [
+    "beginner"
+  ],
+  "Black med helm": [
+    "beginner"
+  ],
+  "Black pickaxe": [
+    "beginner",
+    "easy"
+  ],
+  "Black platebody": [
+    "beginner",
+    "easy"
+  ],
+  "Black platebody (g)": [
+    "easy"
+  ],
+  "Black platebody (h1)": [
+    "easy"
+  ],
+  "Black platebody (h2)": [
+    "easy"
+  ],
+  "Black platebody (h3)": [
+    "easy"
+  ],
+  "Black platebody (h4)": [
+    "easy"
+  ],
+  "Black platebody (h5)": [
+    "easy"
+  ],
+  "Black platebody (t)": [
+    "easy"
+  ],
+  "Black platelegs": [
+    "beginner",
+    "easy"
+  ],
+  "Black platelegs (g)": [
+    "easy"
+  ],
+  "Black platelegs (t)": [
+    "easy"
+  ],
+  "Black plateskirt": [
+    "beginner"
+  ],
+  "Black plateskirt (g)": [
+    "easy"
+  ],
+  "Black plateskirt (t)": [
+    "easy"
+  ],
+  "Black robe": [
+    "beginner"
+  ],
+  "Black scimitar": [
+    "beginner"
+  ],
+  "Black shield (h1)": [
+    "easy"
+  ],
+  "Black shield (h2)": [
+    "easy"
+  ],
+  "Black shield (h3)": [
+    "easy"
+  ],
+  "Black shield (h4)": [
+    "easy"
+  ],
+  "Black shield (h5)": [
+    "easy"
+  ],
+  "Black skirt (g)": [
+    "easy"
+  ],
+  "Black skirt (t)": [
+    "easy"
+  ],
+  "Black sq shield": [
+    "beginner"
+  ],
+  "Black sword": [
+    "beginner"
+  ],
+  "Black unicorn mask": [
+    "medium"
+  ],
+  "Black warhammer": [
+    "beginner"
+  ],
+  "Black wizard hat (g)": [
+    "easy"
+  ],
+  "Black wizard hat (t)": [
+    "easy"
+  ],
+  "Black wizard robe (g)": [
+    "easy"
+  ],
+  "Black wizard robe (t)": [
+    "easy"
+  ],
+  "Blacksmith's helm": [
+    "elite"
+  ],
+  "Blood rune": [
+    "hard",
+    "elite",
+    "master"
+  ],
+  "Bloodhound": [
+    "master"
+  ],
+  "Blue beret": [
+    "easy"
+  ],
+  "Blue boater": [
+    "medium"
   ],
   "Blue d'hide body (g)": [
     "hard"
@@ -1529,216 +774,364 @@
   "Blue d'hide chaps (t)": [
     "hard"
   ],
-  "Saradomin coif": [
+  "Blue dragon mask": [
     "hard"
   ],
-  "Saradomin d'hide body": [
-    "hard"
+  "Blue elegant blouse": [
+    "easy"
   ],
-  "Saradomin chaps": [
-    "hard"
+  "Blue elegant legs": [
+    "easy"
   ],
-  "Saradomin bracers": [
-    "hard"
+  "Blue elegant shirt": [
+    "easy"
   ],
-  "Saradomin d'hide boots": [
-    "hard"
+  "Blue elegant skirt": [
+    "easy"
   ],
-  "Saradomin d'hide shield": [
-    "hard"
+  "Blue firelighter": [
+    "easy",
+    "medium",
+    "hard",
+    "elite",
+    "master"
   ],
-  "Guthix coif": [
-    "hard"
+  "Blue headband": [
+    "medium"
   ],
-  "Guthix d'hide body": [
-    "hard"
+  "Blue skirt (g)": [
+    "easy"
   ],
-  "Guthix chaps": [
-    "hard"
+  "Blue skirt (t)": [
+    "easy"
   ],
-  "Guthix bracers": [
-    "hard"
+  "Blue wizard hat": [
+    "beginner"
   ],
-  "Guthix d'hide boots": [
-    "hard"
+  "Blue wizard hat (g)": [
+    "easy"
   ],
-  "Guthix d'hide shield": [
-    "hard"
+  "Blue wizard hat (t)": [
+    "easy"
   ],
-  "Zamorak coif": [
-    "hard"
+  "Blue wizard robe": [
+    "beginner"
   ],
-  "Zamorak d'hide body": [
-    "hard"
+  "Blue wizard robe (g)": [
+    "easy"
   ],
-  "Zamorak chaps": [
-    "hard"
+  "Blue wizard robe (t)": [
+    "easy"
   ],
-  "Zamorak bracers": [
-    "hard"
+  "Bob's black shirt": [
+    "easy"
   ],
-  "Zamorak d'hide boots": [
-    "hard"
+  "Bob's blue shirt": [
+    "easy"
   ],
-  "Zamorak d'hide shield": [
-    "hard"
+  "Bob's green shirt": [
+    "easy"
   ],
-  "Bandos coif": [
-    "hard"
+  "Bob's purple shirt": [
+    "easy"
   ],
-  "Bandos d'hide body": [
-    "hard"
+  "Bob's red shirt": [
+    "easy"
   ],
-  "Bandos chaps": [
-    "hard"
+  "Body rune": [
+    "beginner",
+    "easy"
   ],
-  "Bandos bracers": [
-    "hard"
+  "Boots of darkness": [
+    "master"
   ],
-  "Bandos d'hide boots": [
-    "hard"
+  "Bowl wig": [
+    "master"
   ],
-  "Bandos d'hide shield": [
-    "hard"
+  "Briefcase": [
+    "elite"
   ],
-  "Armadyl coif": [
-    "hard"
+  "Bronze arrow": [
+    "beginner"
   ],
-  "Armadyl d'hide body": [
-    "hard"
+  "Bronze dragon mask": [
+    "elite"
   ],
-  "Armadyl chaps": [
-    "hard"
+  "Bronze full helm (g)": [
+    "easy"
   ],
-  "Armadyl bracers": [
-    "hard"
+  "Bronze full helm (t)": [
+    "easy"
   ],
-  "Armadyl d'hide boots": [
-    "hard"
+  "Bronze kiteshield (g)": [
+    "easy"
   ],
-  "Armadyl d'hide shield": [
-    "hard"
+  "Bronze kiteshield (t)": [
+    "easy"
   ],
-  "Ancient coif": [
-    "hard"
+  "Bronze platebody (g)": [
+    "easy"
   ],
-  "Ancient d'hide body": [
-    "hard"
+  "Bronze platebody (t)": [
+    "easy"
   ],
-  "Ancient chaps": [
-    "hard"
+  "Bronze platelegs (g)": [
+    "easy"
   ],
-  "Ancient bracers": [
-    "hard"
+  "Bronze platelegs (t)": [
+    "easy"
   ],
-  "Ancient d'hide boots": [
-    "hard"
+  "Bronze plateskirt (g)": [
+    "easy"
   ],
-  "Ancient d'hide shield": [
-    "hard"
+  "Bronze plateskirt (t)": [
+    "easy"
   ],
-  "Saradomin stole": [
-    "hard"
+  "Brown headband": [
+    "medium"
   ],
-  "Saradomin crozier": [
-    "hard"
+  "Bucket helm": [
+    "elite"
   ],
-  "Guthix stole": [
-    "hard"
+  "Bucket helm (g)": [
+    "master"
   ],
-  "Guthix crozier": [
-    "hard"
+  "Cabbage": [
+    "beginner",
+    "master"
   ],
-  "Zamorak stole": [
-    "hard"
+  "Cabbage round shield": [
+    "medium"
   ],
-  "Zamorak crozier": [
-    "hard"
+  "Cape of skulls": [
+    "easy"
+  ],
+  "Cat mask": [
+    "medium"
+  ],
+  "Chaos rune": [
+    "beginner",
+    "easy",
+    "medium"
+  ],
+  "Climbing boots (g)": [
+    "medium"
+  ],
+  "Coif": [
+    "easy"
+  ],
+  "Coins": [
+    "easy",
+    "medium",
+    "hard",
+    "elite",
+    "master"
+  ],
+  "Combat bracelet": [
+    "elite"
+  ],
+  "Crier bell": [
+    "medium"
+  ],
+  "Crier coat": [
+    "medium"
+  ],
+  "Crier hat": [
+    "medium"
+  ],
+  "Crystal key": [
+    "elite"
   ],
   "Cyclops head": [
     "hard"
   ],
-  "Pirate's hat": [
-    "hard"
-  ],
-  "Red cavalier": [
-    "hard"
-  ],
-  "White cavalier": [
-    "hard"
-  ],
-  "Navy cavalier": [
-    "hard"
-  ],
-  "Tan cavalier": [
-    "hard"
+  "Dark bow tie": [
+    "elite"
   ],
   "Dark cavalier": [
     "hard"
   ],
-  "Black cavalier": [
+  "Dark infinity colour kit": [
+    "elite"
+  ],
+  "Dark trousers": [
+    "elite"
+  ],
+  "Dark tuxedo cuffs": [
+    "elite"
+  ],
+  "Dark tuxedo jacket": [
+    "elite"
+  ],
+  "Dark tuxedo shoes": [
+    "elite"
+  ],
+  "Death rune": [
+    "medium",
+    "elite",
+    "master"
+  ],
+  "Deerstalker": [
+    "elite"
+  ],
+  "Demon feet": [
+    "beginner"
+  ],
+  "Dragon battleaxe": [
+    "master"
+  ],
+  "Dragon boots ornament kit": [
     "hard"
   ],
-  "Pith helmet": [
+  "Dragon cane": [
+    "elite"
+  ],
+  "Dragon chainbody ornament kit": [
+    "elite"
+  ],
+  "Dragon dagger": [
+    "elite",
+    "master"
+  ],
+  "Dragon defender ornament kit": [
+    "master"
+  ],
+  "Dragon full helm ornament kit": [
+    "elite"
+  ],
+  "Dragon halberd": [
+    "master"
+  ],
+  "Dragon kiteshield ornament kit": [
+    "master"
+  ],
+  "Dragon legs/skirt ornament kit": [
+    "elite"
+  ],
+  "Dragon longsword": [
+    "elite",
+    "master"
+  ],
+  "Dragon mace": [
+    "elite",
+    "master"
+  ],
+  "Dragon platebody ornament kit": [
+    "master"
+  ],
+  "Dragon scimitar": [
+    "master"
+  ],
+  "Dragon scimitar ornament kit": [
+    "elite"
+  ],
+  "Dragon sq shield ornament kit": [
+    "elite"
+  ],
+  "Dual sai": [
+    "hard"
+  ],
+  "Earth rune": [
+    "beginner",
+    "easy",
+    "medium"
+  ],
+  "Enchanted hat": [
+    "hard"
+  ],
+  "Enchanted robe": [
+    "hard"
+  ],
+  "Enchanted top": [
     "hard"
   ],
   "Explorer backpack": [
     "hard"
   ],
-  "Green dragon mask": [
-    "hard"
-  ],
-  "Blue dragon mask": [
-    "hard"
-  ],
-  "Red dragon mask": [
-    "hard"
-  ],
-  "Black dragon mask": [
-    "hard"
-  ],
-  "Nunchaku": [
-    "hard"
-  ],
-  "Rune cane": [
-    "hard"
-  ],
-  "Dual sai": [
-    "hard"
-  ],
-  "Thieving bag": [
-    "hard"
-  ],
-  "Rune defender ornament kit": [
-    "hard"
-  ],
-  "Berserker necklace ornament kit": [
-    "hard"
-  ],
-  "Tzhaar-ket-om ornament kit": [
-    "hard"
-  ],
-  "Super energy": [
-    "hard"
-  ],
-  "Super restore": [
-    "hard",
+  "Extended antifire": [
     "elite"
   ],
-  "Antifire potion": [
-    "hard"
+  "Fancy tiara": [
+    "master"
   ],
-  "Super attack": [
-    "hard"
+  "Fire battlestaff": [
+    "medium"
   ],
-  "Super strength": [
-    "hard"
+  "Fire rune": [
+    "beginner",
+    "easy",
+    "medium"
   ],
-  "Super defence": [
-    "hard"
+  "Flared trousers": [
+    "easy"
+  ],
+  "Fremennik kilt": [
+    "elite"
+  ],
+  "Frog slippers": [
+    "beginner"
+  ],
+  "Fury ornament kit": [
+    "elite"
+  ],
+  "Giant boot": [
+    "elite"
+  ],
+  "Gilded 2h sword": [
+    "hard",
+    "elite",
+    "master"
+  ],
+  "Gilded axe": [
+    "elite",
+    "master"
+  ],
+  "Gilded boots": [
+    "elite",
+    "master"
+  ],
+  "Gilded chainbody": [
+    "hard",
+    "elite",
+    "master"
+  ],
+  "Gilded coif": [
+    "elite",
+    "master"
+  ],
+  "Gilded d'hide body": [
+    "elite",
+    "master"
+  ],
+  "Gilded d'hide chaps": [
+    "elite",
+    "master"
+  ],
+  "Gilded d'hide vambraces": [
+    "elite",
+    "master"
   ],
   "Gilded full helm": [
     "hard",
+    "elite",
+    "master"
+  ],
+  "Gilded hasta": [
+    "hard",
+    "elite",
+    "master"
+  ],
+  "Gilded kiteshield": [
+    "hard",
+    "elite",
+    "master"
+  ],
+  "Gilded med helm": [
+    "hard",
+    "elite",
+    "master"
+  ],
+  "Gilded pickaxe": [
     "elite",
     "master"
   ],
@@ -1757,17 +1150,15 @@
     "elite",
     "master"
   ],
-  "Gilded kiteshield": [
-    "hard",
+  "Gilded scimitar": [
     "elite",
     "master"
   ],
-  "Gilded med helm": [
-    "hard",
+  "Gilded spade": [
     "elite",
     "master"
   ],
-  "Gilded chainbody": [
+  "Gilded spear": [
     "hard",
     "elite",
     "master"
@@ -1777,507 +1168,809 @@
     "elite",
     "master"
   ],
-  "Gilded 2h sword": [
+  "Gloves of darkness": [
+    "master"
+  ],
+  "Gnomish firelighter": [
+    "medium"
+  ],
+  "Goblin mask": [
+    "easy"
+  ],
+  "Gold elegant blouse": [
+    "medium"
+  ],
+  "Gold elegant legs": [
+    "medium"
+  ],
+  "Gold elegant shirt": [
+    "medium"
+  ],
+  "Gold elegant skirt": [
+    "medium"
+  ],
+  "Gold headband": [
+    "medium"
+  ],
+  "Golden apron": [
+    "easy"
+  ],
+  "Golden chef's hat": [
+    "easy"
+  ],
+  "Greater demon mask": [
+    "master"
+  ],
+  "Green boater": [
+    "medium"
+  ],
+  "Green d'hide body": [
+    "medium"
+  ],
+  "Green d'hide body (g)": [
+    "medium"
+  ],
+  "Green d'hide body (t)": [
+    "medium"
+  ],
+  "Green d'hide chaps": [
+    "medium"
+  ],
+  "Green d'hide chaps (g)": [
+    "medium"
+  ],
+  "Green d'hide chaps (t)": [
+    "medium"
+  ],
+  "Green dragon mask": [
+    "hard"
+  ],
+  "Green elegant blouse": [
+    "easy"
+  ],
+  "Green elegant legs": [
+    "easy"
+  ],
+  "Green elegant shirt": [
+    "easy"
+  ],
+  "Green elegant skirt": [
+    "easy"
+  ],
+  "Green firelighter": [
+    "easy",
+    "medium",
     "hard",
     "elite",
     "master"
   ],
-  "Gilded spear": [
+  "Green headband": [
+    "medium"
+  ],
+  "Guthix bracers": [
+    "hard"
+  ],
+  "Guthix chaps": [
+    "hard"
+  ],
+  "Guthix cloak": [
+    "medium"
+  ],
+  "Guthix coif": [
+    "hard"
+  ],
+  "Guthix crozier": [
+    "hard"
+  ],
+  "Guthix d'hide body": [
+    "hard"
+  ],
+  "Guthix d'hide boots": [
+    "hard"
+  ],
+  "Guthix d'hide shield": [
+    "hard"
+  ],
+  "Guthix full helm": [
+    "hard"
+  ],
+  "Guthix kiteshield": [
+    "hard"
+  ],
+  "Guthix mitre": [
+    "medium"
+  ],
+  "Guthix page 1": [
+    "easy",
+    "medium",
     "hard",
     "elite",
     "master"
   ],
-  "Gilded hasta": [
+  "Guthix page 2": [
+    "easy",
+    "medium",
     "hard",
     "elite",
     "master"
   ],
-  "3rd age full helmet": [
+  "Guthix page 3": [
+    "easy",
+    "medium",
     "hard",
     "elite",
     "master"
   ],
-  "3rd age platebody": [
+  "Guthix page 4": [
+    "easy",
+    "medium",
     "hard",
     "elite",
     "master"
   ],
-  "3rd age platelegs": [
+  "Guthix platebody": [
+    "hard"
+  ],
+  "Guthix platelegs": [
+    "hard"
+  ],
+  "Guthix plateskirt": [
+    "hard"
+  ],
+  "Guthix robe legs": [
+    "easy"
+  ],
+  "Guthix robe top": [
+    "easy"
+  ],
+  "Guthix stole": [
+    "hard"
+  ],
+  "Half moon spectacles": [
+    "master"
+  ],
+  "Ham joint": [
+    "easy"
+  ],
+  "Hardleather body": [
+    "beginner"
+  ],
+  "Heavy casket": [
+    "elite"
+  ],
+  "Herring": [
+    "beginner"
+  ],
+  "Holy blessing": [
+    "easy",
+    "medium",
     "hard",
     "elite",
     "master"
   ],
-  "3rd age plateskirt": [
+  "Holy sandals": [
+    "medium"
+  ],
+  "Holy wraps": [
+    "elite"
+  ],
+  "Honourable blessing": [
+    "easy",
+    "medium",
     "hard",
     "elite",
     "master"
   ],
-  "3rd age kiteshield": [
+  "Hood of darkness": [
+    "master"
+  ],
+  "Hosidius banner": [
+    "medium"
+  ],
+  "Hosidius hood": [
+    "master"
+  ],
+  "Hosidius scarf": [
+    "elite"
+  ],
+  "Imp mask": [
+    "easy"
+  ],
+  "Iron arrow": [
+    "beginner"
+  ],
+  "Iron dragon mask": [
+    "elite"
+  ],
+  "Iron full helm (g)": [
+    "easy"
+  ],
+  "Iron full helm (t)": [
+    "easy"
+  ],
+  "Iron kiteshield (g)": [
+    "easy"
+  ],
+  "Iron kiteshield (t)": [
+    "easy"
+  ],
+  "Iron pickaxe": [
+    "beginner"
+  ],
+  "Iron platebody (g)": [
+    "easy"
+  ],
+  "Iron platebody (t)": [
+    "easy"
+  ],
+  "Iron platelegs (g)": [
+    "easy"
+  ],
+  "Iron platelegs (t)": [
+    "easy"
+  ],
+  "Iron plateskirt (g)": [
+    "easy"
+  ],
+  "Iron plateskirt (t)": [
+    "easy"
+  ],
+  "Jester cape": [
+    "beginner"
+  ],
+  "Jungle demon mask": [
+    "master"
+  ],
+  "Katana": [
+    "elite"
+  ],
+  "Large spade": [
+    "easy"
+  ],
+  "Lava dragon mask": [
+    "elite"
+  ],
+  "Law rune": [
+    "beginner",
+    "easy",
+    "medium",
+    "hard",
+    "elite"
+  ],
+  "Leather body": [
+    "beginner"
+  ],
+  "Leather body (g)": [
+    "easy"
+  ],
+  "Leather chaps": [
+    "beginner"
+  ],
+  "Leather chaps (g)": [
+    "easy"
+  ],
+  "Leather cowl": [
+    "beginner"
+  ],
+  "Leather vambraces": [
+    "beginner"
+  ],
+  "Left eye patch": [
+    "master"
+  ],
+  "Leprechaun hat": [
+    "medium"
+  ],
+  "Lesser demon mask": [
+    "master"
+  ],
+  "Light bow tie": [
+    "elite"
+  ],
+  "Light infinity colour kit": [
+    "elite"
+  ],
+  "Light trousers": [
+    "elite"
+  ],
+  "Light tuxedo cuffs": [
+    "elite"
+  ],
+  "Light tuxedo jacket": [
+    "elite"
+  ],
+  "Light tuxedo shoes": [
+    "elite"
+  ],
+  "Limpwurt root": [
+    "master"
+  ],
+  "Lobster": [
+    "medium",
+    "hard"
+  ],
+  "Longbow": [
+    "beginner"
+  ],
+  "Loop half of key": [
+    "elite",
+    "master"
+  ],
+  "Lovakengj banner": [
+    "medium"
+  ],
+  "Lovakengj hood": [
+    "master"
+  ],
+  "Lovakengj scarf": [
+    "elite"
+  ],
+  "Magic comp bow": [
+    "hard"
+  ],
+  "Magic longbow": [
+    "hard"
+  ],
+  "Magic seed": [
+    "elite",
+    "master"
+  ],
+  "Magic shortbow": [
+    "hard"
+  ],
+  "Mahogany plank": [
+    "elite"
+  ],
+  "Manta ray": [
+    "master"
+  ],
+  "Master scroll book": [
+    "easy",
+    "medium",
     "hard",
     "elite",
     "master"
   ],
-  "3rd age range coif": [
+  "Mind rune": [
+    "beginner",
+    "easy",
+    "medium"
+  ],
+  "Mithril dragon mask": [
+    "elite"
+  ],
+  "Mithril full helm (g)": [
+    "medium"
+  ],
+  "Mithril full helm (t)": [
+    "medium"
+  ],
+  "Mithril kiteshield (g)": [
+    "medium"
+  ],
+  "Mithril kiteshield (t)": [
+    "medium"
+  ],
+  "Mithril platebody (g)": [
+    "medium"
+  ],
+  "Mithril platebody (t)": [
+    "medium"
+  ],
+  "Mithril platelegs (g)": [
+    "medium"
+  ],
+  "Mithril platelegs (t)": [
+    "medium"
+  ],
+  "Mithril plateskirt (g)": [
+    "medium"
+  ],
+  "Mithril plateskirt (t)": [
+    "medium"
+  ],
+  "Mole slippers": [
+    "beginner"
+  ],
+  "Monk's robe (g)": [
+    "easy"
+  ],
+  "Monk's robe (t)": [
+    "beginner"
+  ],
+  "Monk's robe top (g)": [
+    "easy"
+  ],
+  "Monk's robe top (t)": [
+    "beginner"
+  ],
+  "Monocle": [
+    "elite"
+  ],
+  "Mummy's body": [
+    "master"
+  ],
+  "Mummy's feet": [
+    "master"
+  ],
+  "Mummy's hands": [
+    "master"
+  ],
+  "Mummy's head": [
+    "master"
+  ],
+  "Mummy's legs": [
+    "master"
+  ],
+  "Musketeer hat": [
+    "elite"
+  ],
+  "Musketeer pants": [
+    "elite"
+  ],
+  "Musketeer tabard": [
+    "elite"
+  ],
+  "Nature rune": [
+    "beginner",
+    "easy",
+    "medium",
+    "hard",
+    "master"
+  ],
+  "Navy cavalier": [
+    "hard"
+  ],
+  "Nunchaku": [
+    "hard"
+  ],
+  "Oak longbow": [
+    "beginner"
+  ],
+  "Oak plank": [
+    "elite"
+  ],
+  "Oak shortbow": [
+    "beginner"
+  ],
+  "Obsidian cape": [
+    "master"
+  ],
+  "Occult ornament kit": [
+    "master"
+  ],
+  "Old demon mask": [
+    "master"
+  ],
+  "Onyx bolt tips": [
+    "elite"
+  ],
+  "Onyx bolts": [
+    "master"
+  ],
+  "Orange boater": [
+    "medium"
+  ],
+  "Palm tree seed": [
+    "elite",
+    "master"
+  ],
+  "Pantaloons": [
+    "easy"
+  ],
+  "Peaceful blessing": [
+    "easy",
+    "medium",
     "hard",
     "elite",
     "master"
   ],
-  "3rd age range top": [
+  "Penguin mask": [
+    "medium"
+  ],
+  "Pink boater": [
+    "medium"
+  ],
+  "Pink elegant blouse": [
+    "medium"
+  ],
+  "Pink elegant legs": [
+    "medium"
+  ],
+  "Pink elegant shirt": [
+    "medium"
+  ],
+  "Pink elegant skirt": [
+    "medium"
+  ],
+  "Pink headband": [
+    "medium"
+  ],
+  "Pirate's hat": [
+    "hard"
+  ],
+  "Piscarilius banner": [
+    "medium"
+  ],
+  "Piscarilius hood": [
+    "master"
+  ],
+  "Piscarilius scarf": [
+    "elite"
+  ],
+  "Pith helmet": [
+    "hard"
+  ],
+  "Purple boater": [
+    "medium"
+  ],
+  "Purple elegant blouse": [
+    "medium"
+  ],
+  "Purple elegant legs": [
+    "medium"
+  ],
+  "Purple elegant shirt": [
+    "medium"
+  ],
+  "Purple elegant skirt": [
+    "medium"
+  ],
+  "Purple firelighter": [
+    "easy",
+    "medium",
     "hard",
     "elite",
     "master"
   ],
-  "3rd age range legs": [
+  "Purple sweets": [
+    "easy",
+    "medium",
     "hard",
     "elite",
     "master"
   ],
-  "3rd age vambraces": [
+  "Rain bow": [
+    "easy"
+  ],
+  "Ranarr weed": [
+    "elite",
+    "master"
+  ],
+  "Ranger boots": [
+    "medium"
+  ],
+  "Ranger gloves": [
+    "elite"
+  ],
+  "Rangers' tights": [
+    "elite"
+  ],
+  "Rangers' tunic": [
+    "elite"
+  ],
+  "Ranging potion": [
+    "elite"
+  ],
+  "Raw manta ray": [
+    "elite",
+    "master"
+  ],
+  "Red beret": [
+    "easy"
+  ],
+  "Red boater": [
+    "medium"
+  ],
+  "Red cavalier": [
+    "hard"
+  ],
+  "Red d'hide body (g)": [
+    "hard"
+  ],
+  "Red d'hide body (t)": [
+    "hard"
+  ],
+  "Red d'hide chaps (g)": [
+    "hard"
+  ],
+  "Red d'hide chaps (t)": [
+    "hard"
+  ],
+  "Red dragon mask": [
+    "hard"
+  ],
+  "Red elegant blouse": [
+    "easy"
+  ],
+  "Red elegant legs": [
+    "easy"
+  ],
+  "Red elegant shirt": [
+    "easy"
+  ],
+  "Red elegant skirt": [
+    "easy"
+  ],
+  "Red firelighter": [
+    "easy",
+    "medium",
     "hard",
     "elite",
     "master"
   ],
-  "3rd age mage hat": [
-    "hard",
+  "Red headband": [
+    "medium"
+  ],
+  "Ring of 3rd age": [
     "elite",
     "master"
   ],
-  "3rd age robe top": [
-    "hard",
-    "elite",
+  "Ring of coins": [
     "master"
   ],
-  "3rd age robe": [
-    "hard",
-    "elite",
+  "Ring of nature": [
+    "elite"
+  ],
+  "Ring of wealth": [
+    "elite"
+  ],
+  "Robe bottom of darkness": [
     "master"
   ],
-  "3rd age amulet": [
-    "hard",
-    "elite",
+  "Robe top of darkness": [
     "master"
+  ],
+  "Robin hood hat": [
+    "hard"
+  ],
+  "Royal crown": [
+    "elite"
+  ],
+  "Royal gown bottom": [
+    "elite"
+  ],
+  "Royal gown top": [
+    "elite"
+  ],
+  "Royal sceptre": [
+    "elite"
+  ],
+  "Rune axe": [
+    "hard"
+  ],
+  "Rune battleaxe": [
+    "hard"
+  ],
+  "Rune cane": [
+    "hard"
+  ],
+  "Rune crossbow": [
+    "elite"
+  ],
+  "Rune dagger": [
+    "hard"
+  ],
+  "Rune defender ornament kit": [
+    "hard"
+  ],
+  "Rune dragon mask": [
+    "elite"
   ],
   "Rune full helm": [
+    "hard"
+  ],
+  "Rune full helm (g)": [
+    "hard"
+  ],
+  "Rune full helm (t)": [
+    "hard"
+  ],
+  "Rune helm (h1)": [
+    "hard"
+  ],
+  "Rune helm (h2)": [
+    "hard"
+  ],
+  "Rune helm (h3)": [
+    "hard"
+  ],
+  "Rune helm (h4)": [
+    "hard"
+  ],
+  "Rune helm (h5)": [
+    "hard"
+  ],
+  "Rune kiteshield": [
+    "hard",
+    "elite"
+  ],
+  "Rune kiteshield (g)": [
+    "hard"
+  ],
+  "Rune kiteshield (t)": [
+    "hard"
+  ],
+  "Rune longsword": [
+    "hard"
+  ],
+  "Rune pickaxe": [
     "hard"
   ],
   "Rune platebody": [
     "hard",
     "elite"
   ],
+  "Rune platebody (g)": [
+    "hard"
+  ],
+  "Rune platebody (h1)": [
+    "hard"
+  ],
+  "Rune platebody (h2)": [
+    "hard"
+  ],
+  "Rune platebody (h3)": [
+    "hard"
+  ],
+  "Rune platebody (h4)": [
+    "hard"
+  ],
+  "Rune platebody (h5)": [
+    "hard"
+  ],
+  "Rune platebody (t)": [
+    "hard"
+  ],
   "Rune platelegs": [
     "hard",
     "elite"
+  ],
+  "Rune platelegs (g)": [
+    "hard"
+  ],
+  "Rune platelegs (t)": [
+    "hard"
   ],
   "Rune plateskirt": [
     "hard",
     "elite"
   ],
-  "Rune kiteshield": [
-    "hard",
-    "elite"
-  ],
-  "Rune longsword": [
+  "Rune plateskirt (g)": [
     "hard"
   ],
-  "Rune dagger": [
+  "Rune plateskirt (t)": [
     "hard"
   ],
-  "Rune battleaxe": [
+  "Rune shield (h1)": [
     "hard"
   ],
-  "Rune axe": [
+  "Rune shield (h2)": [
     "hard"
   ],
-  "Rune pickaxe": [
+  "Rune shield (h3)": [
     "hard"
   ],
-  "Black d'hide body": [
+  "Rune shield (h4)": [
     "hard"
   ],
-  "Black d'hide chaps": [
+  "Rune shield (h5)": [
     "hard"
-  ],
-  "Magic shortbow": [
-    "hard"
-  ],
-  "Magic longbow": [
-    "hard"
-  ],
-  "Blood rune": [
-    "hard",
-    "elite",
-    "master"
-  ],
-  "Shark": [
-    "hard"
-  ],
-  "Dragon full helm ornament kit": [
-    "elite"
-  ],
-  "Dragon chainbody ornament kit": [
-    "elite"
-  ],
-  "Dragon legs/skirt ornament kit": [
-    "elite"
-  ],
-  "Dragon sq shield ornament kit": [
-    "elite"
-  ],
-  "Dragon scimitar ornament kit": [
-    "elite"
-  ],
-  "Fury ornament kit": [
-    "elite"
-  ],
-  "Light infinity colour kit": [
-    "elite"
-  ],
-  "Dark infinity colour kit": [
-    "elite"
-  ],
-  "Royal crown": [
-    "elite"
-  ],
-  "Royal gown top": [
-    "elite"
-  ],
-  "Royal gown bottom": [
-    "elite"
-  ],
-  "Royal sceptre": [
-    "elite"
-  ],
-  "Musketeer hat": [
-    "elite"
-  ],
-  "Musketeer tabard": [
-    "elite"
-  ],
-  "Musketeer pants": [
-    "elite"
-  ],
-  "Black d'hide body (g)": [
-    "elite"
-  ],
-  "Black d'hide body (t)": [
-    "elite"
-  ],
-  "Black d'hide chaps (g)": [
-    "elite"
-  ],
-  "Black d'hide chaps (t)": [
-    "elite"
-  ],
-  "Rangers' tunic": [
-    "elite"
-  ],
-  "Ranger gloves": [
-    "elite"
-  ],
-  "Holy wraps": [
-    "elite"
-  ],
-  "Bronze dragon mask": [
-    "elite"
-  ],
-  "Iron dragon mask": [
-    "elite"
-  ],
-  "Steel dragon mask": [
-    "elite"
-  ],
-  "Mithril dragon mask": [
-    "elite"
-  ],
-  "Adamant dragon mask": [
-    "elite"
-  ],
-  "Rune dragon mask": [
-    "elite"
-  ],
-  "Arceuus scarf": [
-    "elite"
-  ],
-  "Hosidius scarf": [
-    "elite"
-  ],
-  "Lovakengj scarf": [
-    "elite"
-  ],
-  "Piscarilius scarf": [
-    "elite"
-  ],
-  "Shayzien scarf": [
-    "elite"
-  ],
-  "Katana": [
-    "elite"
-  ],
-  "Dragon cane": [
-    "elite"
-  ],
-  "Bucket helm": [
-    "elite"
-  ],
-  "Blacksmith's helm": [
-    "elite"
-  ],
-  "Deerstalker": [
-    "elite"
-  ],
-  "Afro": [
-    "elite"
-  ],
-  "Big pirate hat": [
-    "elite"
-  ],
-  "Top hat": [
-    "elite"
-  ],
-  "Monocle": [
-    "elite"
-  ],
-  "Briefcase": [
-    "elite"
-  ],
-  "Sagacious spectacles": [
-    "elite"
-  ],
-  "Dark bow tie": [
-    "elite"
-  ],
-  "Dark tuxedo jacket": [
-    "elite"
-  ],
-  "Dark tuxedo cuffs": [
-    "elite"
-  ],
-  "Dark trousers": [
-    "elite"
-  ],
-  "Dark tuxedo shoes": [
-    "elite"
-  ],
-  "Light bow tie": [
-    "elite"
-  ],
-  "Light tuxedo jacket": [
-    "elite"
-  ],
-  "Light tuxedo cuffs": [
-    "elite"
-  ],
-  "Light trousers": [
-    "elite"
-  ],
-  "Light tuxedo shoes": [
-    "elite"
-  ],
-  "Rangers' tights": [
-    "elite"
-  ],
-  "Uri's hat": [
-    "elite"
-  ],
-  "Giant boot": [
-    "elite"
-  ],
-  "Fremennik kilt": [
-    "elite"
-  ],
-  "Ring of nature": [
-    "elite"
-  ],
-  "Crystal key": [
-    "elite"
-  ],
-  "Lava dragon mask": [
-    "elite"
-  ],
-  "Battlestaff": [
-    "elite"
-  ],
-  "Extended antifire": [
-    "elite"
-  ],
-  "Saradomin brew": [
-    "elite"
-  ],
-  "Ranging potion": [
-    "elite"
-  ],
-  "Gilded scimitar": [
-    "elite",
-    "master"
-  ],
-  "Gilded boots": [
-    "elite",
-    "master"
-  ],
-  "Gilded coif": [
-    "elite",
-    "master"
-  ],
-  "Gilded d'hide vambraces": [
-    "elite",
-    "master"
-  ],
-  "Gilded d'hide body": [
-    "elite",
-    "master"
-  ],
-  "Gilded d'hide chaps": [
-    "elite",
-    "master"
-  ],
-  "Gilded pickaxe": [
-    "elite",
-    "master"
-  ],
-  "Gilded axe": [
-    "elite",
-    "master"
-  ],
-  "Gilded spade": [
-    "elite",
-    "master"
-  ],
-  "3rd age longsword": [
-    "elite",
-    "master"
-  ],
-  "3rd age wand": [
-    "elite",
-    "master"
-  ],
-  "3rd age cloak": [
-    "elite",
-    "master"
-  ],
-  "3rd age bow": [
-    "elite",
-    "master"
-  ],
-  "Ring of 3rd age": [
-    "elite",
-    "master"
-  ],
-  "Ranarr weed": [
-    "elite",
-    "master"
-  ],
-  "Wine of zamorak": [
-    "elite",
-    "master"
-  ],
-  "Raw manta ray": [
-    "elite",
-    "master"
-  ],
-  "Rune crossbow": [
-    "elite"
-  ],
-  "Dragon dagger": [
-    "elite",
-    "master"
-  ],
-  "Dragon mace": [
-    "elite",
-    "master"
-  ],
-  "Dragon longsword": [
-    "elite",
-    "master"
-  ],
-  "Onyx bolt tips": [
-    "elite"
-  ],
-  "Soul rune": [
-    "elite",
-    "master"
-  ],
-  "Tuna potato": [
-    "elite"
-  ],
-  "Summer pie": [
-    "elite"
-  ],
-  "Oak plank": [
-    "elite"
-  ],
-  "Teak plank": [
-    "elite"
-  ],
-  "Mahogany plank": [
-    "elite"
   ],
   "Runite bar": [
     "elite",
     "master"
   ],
-  "Tooth half of key": [
-    "elite",
+  "Runite ore": [
     "master"
   ],
-  "Loop half of key": [
-    "elite",
-    "master"
-  ],
-  "Palm tree seed": [
-    "elite",
-    "master"
-  ],
-  "Yew seed": [
-    "elite",
-    "master"
-  ],
-  "Magic seed": [
-    "elite",
-    "master"
-  ],
-  "Heavy casket": [
+  "Sagacious spectacles": [
     "elite"
   ],
-  "Occult ornament kit": [
-    "master"
+  "Salmon": [
+    "easy"
   ],
-  "Torture ornament kit": [
-    "master"
-  ],
-  "Anguish ornament kit": [
-    "master"
-  ],
-  "Tormented ornament kit": [
-    "master"
-  ],
-  "Dragon defender ornament kit": [
-    "master"
-  ],
-  "Dragon kiteshield ornament kit": [
-    "master"
-  ],
-  "Dragon platebody ornament kit": [
-    "master"
-  ],
-  "Hood of darkness": [
-    "master"
-  ],
-  "Robe top of darkness": [
-    "master"
-  ],
-  "Gloves of darkness": [
-    "master"
-  ],
-  "Robe bottom of darkness": [
-    "master"
-  ],
-  "Boots of darkness": [
-    "master"
-  ],
-  "Samurai kasa": [
-    "master"
-  ],
-  "Samurai shirt": [
+  "Samurai boots": [
     "master"
   ],
   "Samurai gloves": [
@@ -2286,160 +1979,479 @@
   "Samurai greaves": [
     "master"
   ],
-  "Samurai boots": [
+  "Samurai kasa": [
     "master"
   ],
-  "Arceuus hood": [
+  "Samurai shirt": [
     "master"
   ],
-  "Hosidius hood": [
-    "master"
+  "Sandwich lady bottom": [
+    "beginner"
   ],
-  "Lovakengj hood": [
-    "master"
+  "Sandwich lady hat": [
+    "beginner"
   ],
-  "Piscarilius hood": [
-    "master"
+  "Sandwich lady top": [
+    "beginner"
   ],
-  "Shayzien hood": [
-    "master"
+  "Saradomin bracers": [
+    "hard"
   ],
-  "Old demon mask": [
-    "master"
+  "Saradomin brew": [
+    "elite"
   ],
-  "Lesser demon mask": [
-    "master"
+  "Saradomin chaps": [
+    "hard"
   ],
-  "Greater demon mask": [
-    "master"
+  "Saradomin coif": [
+    "hard"
   ],
-  "Black demon mask": [
-    "master"
+  "Saradomin crozier": [
+    "hard"
   ],
-  "Jungle demon mask": [
-    "master"
+  "Saradomin d'hide body": [
+    "hard"
   ],
-  "Left eye patch": [
-    "master"
+  "Saradomin d'hide boots": [
+    "hard"
   ],
-  "Bowl wig": [
-    "master"
+  "Saradomin d'hide shield": [
+    "hard"
   ],
-  "Ale of the gods": [
-    "master"
-  ],
-  "Fancy tiara": [
-    "master"
-  ],
-  "Half moon spectacles": [
-    "master"
-  ],
-  "Armadyl godsword ornament kit": [
-    "master"
-  ],
-  "Bandos godsword ornament kit": [
-    "master"
+  "Saradomin full helm": [
+    "hard"
   ],
   "Saradomin godsword ornament kit": [
     "master"
   ],
-  "Zamorak godsword ornament kit": [
+  "Saradomin kiteshield": [
+    "hard"
+  ],
+  "Saradomin mitre": [
+    "medium"
+  ],
+  "Saradomin page 1": [
+    "easy",
+    "medium",
+    "hard",
+    "elite",
     "master"
   ],
-  "Ankou mask": [
+  "Saradomin page 2": [
+    "easy",
+    "medium",
+    "hard",
+    "elite",
     "master"
   ],
-  "Ankou top": [
+  "Saradomin page 3": [
+    "easy",
+    "medium",
+    "hard",
+    "elite",
     "master"
   ],
-  "Ankou gloves": [
+  "Saradomin page 4": [
+    "easy",
+    "medium",
+    "hard",
+    "elite",
     "master"
   ],
-  "Ankou's leggings": [
+  "Saradomin platebody": [
+    "hard"
+  ],
+  "Saradomin platelegs": [
+    "hard"
+  ],
+  "Saradomin plateskirt": [
+    "hard"
+  ],
+  "Saradomin robe legs": [
+    "easy"
+  ],
+  "Saradomin robe top": [
+    "easy"
+  ],
+  "Saradomin stole": [
+    "hard"
+  ],
+  "Sardine": [
+    "beginner"
+  ],
+  "Scroll sack": [
     "master"
   ],
-  "Ankou socks": [
+  "Shark": [
+    "hard"
+  ],
+  "Shayzien banner": [
+    "medium"
+  ],
+  "Shayzien hood": [
     "master"
   ],
-  "Mummy's head": [
+  "Shayzien scarf": [
+    "elite"
+  ],
+  "Shortbow": [
+    "beginner"
+  ],
+  "Shoulder parrot": [
+    "beginner"
+  ],
+  "Shrimps": [
+    "beginner"
+  ],
+  "Skills necklace": [
+    "elite"
+  ],
+  "Sleeping cap": [
+    "easy"
+  ],
+  "Snapdragon": [
     "master"
   ],
-  "Mummy's body": [
+  "Soul rune": [
+    "elite",
     "master"
   ],
-  "Mummy's hands": [
+  "Spiked manacles": [
+    "medium"
+  ],
+  "Staff of air": [
+    "beginner",
+    "easy"
+  ],
+  "Staff of bob the cat": [
+    "easy"
+  ],
+  "Staff of earth": [
+    "beginner"
+  ],
+  "Staff of fire": [
+    "beginner"
+  ],
+  "Staff of water": [
+    "beginner"
+  ],
+  "Steel axe": [
+    "beginner"
+  ],
+  "Steel battleaxe": [
+    "beginner"
+  ],
+  "Steel dagger": [
+    "beginner"
+  ],
+  "Steel dragon mask": [
+    "elite"
+  ],
+  "Steel full helm": [
+    "beginner"
+  ],
+  "Steel full helm (g)": [
+    "easy"
+  ],
+  "Steel full helm (t)": [
+    "easy"
+  ],
+  "Steel kiteshield (g)": [
+    "easy"
+  ],
+  "Steel kiteshield (t)": [
+    "easy"
+  ],
+  "Steel longsword": [
+    "beginner"
+  ],
+  "Steel pickaxe": [
+    "easy"
+  ],
+  "Steel platebody": [
+    "beginner"
+  ],
+  "Steel platebody (g)": [
+    "easy"
+  ],
+  "Steel platebody (t)": [
+    "easy"
+  ],
+  "Steel platelegs": [
+    "beginner"
+  ],
+  "Steel platelegs (g)": [
+    "easy"
+  ],
+  "Steel platelegs (t)": [
+    "easy"
+  ],
+  "Steel plateskirt": [
+    "beginner"
+  ],
+  "Steel plateskirt (g)": [
+    "easy"
+  ],
+  "Steel plateskirt (t)": [
+    "easy"
+  ],
+  "Strength amulet (t)": [
+    "medium"
+  ],
+  "Studded body": [
+    "easy"
+  ],
+  "Studded body (g)": [
+    "easy"
+  ],
+  "Studded body (t)": [
+    "easy"
+  ],
+  "Studded chaps": [
+    "easy"
+  ],
+  "Studded chaps (g)": [
+    "easy"
+  ],
+  "Studded chaps (t)": [
+    "easy"
+  ],
+  "Summer pie": [
+    "elite"
+  ],
+  "Super attack": [
+    "hard"
+  ],
+  "Super defence": [
+    "hard"
+  ],
+  "Super energy": [
+    "hard"
+  ],
+  "Super restore": [
+    "hard",
+    "elite"
+  ],
+  "Super strength": [
+    "hard"
+  ],
+  "Swordfish": [
+    "medium"
+  ],
+  "Tan cavalier": [
+    "hard"
+  ],
+  "Teak plank": [
+    "elite"
+  ],
+  "Team cape i": [
+    "easy"
+  ],
+  "Team cape x": [
+    "easy"
+  ],
+  "Team cape zero": [
+    "easy"
+  ],
+  "Thieving bag": [
+    "hard"
+  ],
+  "Toadflax": [
     "master"
   ],
-  "Mummy's legs": [
+  "Tooth half of key": [
+    "elite",
     "master"
   ],
-  "Mummy's feet": [
-    "master"
+  "Top hat": [
+    "elite"
   ],
-  "Bucket helm (g)": [
-    "master"
-  ],
-  "Ring of coins": [
-    "master"
-  ],
-  "Anti-venom+": [
+  "Tormented ornament kit": [
     "master"
   ],
   "Torstol": [
     "master"
   ],
-  "3rd age druidic robe top": [
+  "Torture ornament kit": [
     "master"
   ],
-  "3rd age druidic robe bottoms": [
+  "Trout": [
+    "easy"
+  ],
+  "Tuna potato": [
+    "elite"
+  ],
+  "Tzhaar-ket-om ornament kit": [
+    "hard"
+  ],
+  "Unholy blessing": [
+    "easy",
+    "medium",
+    "hard",
+    "elite",
     "master"
   ],
-  "3rd age druidic cloak": [
+  "Uri's hat": [
+    "elite"
+  ],
+  "War blessing": [
+    "easy",
+    "medium",
+    "hard",
+    "elite",
     "master"
   ],
-  "3rd age druidic staff": [
+  "Water rune": [
+    "beginner",
+    "easy",
+    "medium"
+  ],
+  "White beret": [
+    "easy"
+  ],
+  "White boater": [
+    "medium"
+  ],
+  "White cavalier": [
+    "hard"
+  ],
+  "White elegant blouse": [
+    "medium"
+  ],
+  "White elegant skirt": [
+    "medium"
+  ],
+  "White firelighter": [
+    "easy",
+    "medium",
+    "hard",
+    "elite",
     "master"
   ],
-  "3rd age pickaxe": [
+  "White headband": [
+    "medium"
+  ],
+  "White unicorn mask": [
+    "medium"
+  ],
+  "Willow comp bow": [
+    "easy"
+  ],
+  "Willow longbow": [
+    "easy"
+  ],
+  "Willow shortbow": [
+    "easy"
+  ],
+  "Wine of zamorak": [
+    "elite",
     "master"
   ],
-  "3rd age axe": [
+  "Wizard boots": [
+    "medium"
+  ],
+  "Wizard hat": [
+    "beginner"
+  ],
+  "Wolf cloak": [
+    "medium"
+  ],
+  "Wolf mask": [
+    "medium"
+  ],
+  "Wooden shield (g)": [
+    "easy"
+  ],
+  "Yew comp bow": [
+    "medium"
+  ],
+  "Yew longbow": [
+    "medium"
+  ],
+  "Yew seed": [
+    "elite",
     "master"
   ],
-  "Dragon scimitar": [
+  "Yew shortbow": [
+    "medium"
+  ],
+  "Zamorak bracers": [
+    "hard"
+  ],
+  "Zamorak chaps": [
+    "hard"
+  ],
+  "Zamorak coif": [
+    "hard"
+  ],
+  "Zamorak crozier": [
+    "hard"
+  ],
+  "Zamorak d'hide body": [
+    "hard"
+  ],
+  "Zamorak d'hide boots": [
+    "hard"
+  ],
+  "Zamorak d'hide shield": [
+    "hard"
+  ],
+  "Zamorak full helm": [
+    "hard"
+  ],
+  "Zamorak godsword ornament kit": [
     "master"
   ],
-  "Dragon battleaxe": [
+  "Zamorak kiteshield": [
+    "hard"
+  ],
+  "Zamorak mitre": [
+    "medium"
+  ],
+  "Zamorak page 1": [
+    "easy",
+    "medium",
+    "hard",
+    "elite",
     "master"
   ],
-  "Dragon halberd": [
+  "Zamorak page 2": [
+    "easy",
+    "medium",
+    "hard",
+    "elite",
     "master"
   ],
-  "Onyx bolts": [
+  "Zamorak page 3": [
+    "easy",
+    "medium",
+    "hard",
+    "elite",
     "master"
   ],
-  "Manta ray": [
+  "Zamorak page 4": [
+    "easy",
+    "medium",
+    "hard",
+    "elite",
     "master"
   ],
-  "Limpwurt root": [
-    "master"
+  "Zamorak platebody": [
+    "hard"
   ],
-  "Toadflax": [
-    "master"
+  "Zamorak platelegs": [
+    "hard"
   ],
-  "Snapdragon": [
-    "master"
+  "Zamorak plateskirt": [
+    "hard"
   ],
-  "Runite ore": [
-    "master"
+  "Zamorak robe legs": [
+    "easy"
   ],
-  "Black dragonhide": [
-    "master"
+  "Zamorak robe top": [
+    "easy"
   ],
-  "Bloodhound": [
-    "master"
-  ],
-  "Scroll sack": [
-    "master"
+  "Zamorak stole": [
+    "hard"
   ]
 }

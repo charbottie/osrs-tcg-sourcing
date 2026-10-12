@@ -25,6 +25,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import wiki_api
 import re
 from pathlib import Path
 
@@ -193,9 +194,7 @@ def location_regions(titles: list[str]) -> dict[str, str]:
         batch = todo[i:i + 50]
         url = ("https://oldschool.runescape.wiki/api.php?action=query&format=json&redirects=1&prop=revisions"
                "&rvprop=content&rvslots=main&titles=" + urllib.parse.quote("|".join(batch)))
-        req = urllib.request.Request(url, headers={"User-Agent": "osrs-tcg-planner (charbottie)"})
-        with urllib.request.urlopen(req, timeout=60) as r:
-            q = json.loads(r.read())["query"]
+        q = wiki_api.get_json(url)["query"]
         back = {}
         for n in q.get("normalized", []) + q.get("redirects", []):
             back.setdefault(n["to"], []).append(n["from"])
@@ -229,9 +228,7 @@ def monster_slayer_levels(titles: list[str]) -> dict[str, int]:
         batch = todo[i:i + 50]
         url = ("https://oldschool.runescape.wiki/api.php?action=query&format=json&redirects=1&prop=revisions"
                "&rvprop=content&rvslots=main&titles=" + urllib.parse.quote("|".join(batch)))
-        req = urllib.request.Request(url, headers={"User-Agent": "osrs-tcg-planner (charbottie)"})
-        with urllib.request.urlopen(req, timeout=60) as r:
-            q = json.loads(r.read())["query"]
+        q = wiki_api.get_json(url)["query"]
         back = {}
         for n in q.get("normalized", []) + q.get("redirects", []):
             back.setdefault(n["to"], []).append(n["from"])
@@ -379,7 +376,7 @@ def main() -> int:
                     m.setdefault("equipment", []).extend(eqs)
         # location gates: quests / cards (any one) / skills / access needed at that location
         for g in o.get("locationGates", []):
-            gate = {k: g[k] for k in ("quests", "cards", "skills", "access", "note") if g.get(k)}
+            gate = {k: g[k] for k in ("quests", "partialQuests", "diaries", "cards", "skills", "access", "note") if g.get(k)}
             for m in mons:
                 if g.get("monster") and g["monster"].lower() != m["name"].lower():
                     continue

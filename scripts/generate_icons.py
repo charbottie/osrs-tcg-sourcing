@@ -16,6 +16,7 @@ Run after generate_recipes.py / generate_skilling.py / generate_spells.py:
 from __future__ import annotations
 
 import json
+import wiki_api
 import time
 import urllib.parse
 import urllib.request
@@ -38,9 +39,7 @@ def page_images(titles: list[str]) -> dict[str, str]:
         batch = todo[i:i + 50]
         url = ("https://oldschool.runescape.wiki/api.php?action=query&format=json&redirects=1&prop=pageimages"
                "&piprop=thumbnail&pithumbsize=50&pilimit=50&titles=" + urllib.parse.quote("|".join(batch)))
-        req = urllib.request.Request(url, headers={"User-Agent": "osrs-tcg-planner (charbottie)"})
-        with urllib.request.urlopen(req, timeout=60) as r:
-            q = json.loads(r.read())["query"]
+        q = wiki_api.get_json(url)["query"]
         back = {}
         for n in q.get("normalized", []) + q.get("redirects", []):
             back.setdefault(n["to"], []).append(n["from"])

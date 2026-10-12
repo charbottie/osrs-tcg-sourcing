@@ -1,0 +1,1299 @@
+{
+ "_comment": "Curated Treasure Trails data for generate_clue_steps.py. npcFixes: clue NPC names the wiki tables give by place/role -> TCG card (null = not an NPC, no gate). noCard: wiki-linked things known to have no TCG card (so they are never gates; listed only to keep the validation report quiet). itemNameFixes: wiki page titles -> in-game item names where the catalog uses the in-game name. keepItems: item pages with no card that the old Sherlock 'items' list keeps (outfit pages). questAliases: wiki link titles -> quests.json keys. questAccess / partialQuestAccess: a region's gate quest -> access_routes.json key; when a step needs that quest (complete / started) the generator records the access key instead, because the access routes already hold the quest plus the other ways in (e.g. fairy ring CKS for Morytania). itemGroups: wiki link titles for 'any X' / set wordings -> slots (each slot: cards + mode 'any'|'all'; 'sets' = any one complete set). linkGroups: wiki link titles that map to a shared requirement list (group = REQ_GROUPS key in preview.html, tool = TOOL_TIERS key). locationRules: regex (case-insensitive) on a step's location text -> access keys / quests / partialQuests; replaces _CLUE_QUEST_LOCKS in preview.html. hotcoldRegions: Hot/Cold Master page region headers -> access key, with per-location exceptions. emoteUnlocks: emotes that must be unlocked first. sherlockOverrides / emoteOverrides / coordinateOverrides / crypticOverrides / talkOverrides (anagram+cipher, by NPC): hand-fixed slots/requirements for rows the parser can't read (keyed by task text, clue text prefix or coordinate shorthand). Checked against the OSRS Wiki 2026-10-11.",
+ "npcFixes": {
+  "General Bentnoze": "Goblin Generals",
+  "Nardah": "Genie",
+  "Genie (Spirits of the Elid)": "Genie",
+  "Sacrifice": "Priestess Zul-Gwenwynig",
+  "Drunken Dwarf (Keldagrim)": "Drunken Dwarf",
+  "Tool leprechaun": "Tool Leprechaun",
+  "Blue Moon Inn": null
+ },
+ "noCard": [
+  "God book",
+  "Strange device",
+  "Key (Treasure Trails)",
+  "Key (medium)",
+  "Bullroarer",
+  "Sled",
+  "Clockwork suit",
+  "Puzzle box",
+  "Light box",
+  "Shade key",
+  "Lighthouse key",
+  "Metal key",
+  "Battered key",
+  "Silly jester costume",
+  "Bravery potion",
+  "Seal of Passage",
+  "Book o' piracy",
+  "Echo ahrim's ornament kit",
+  "Heraldic crest",
+  "Painted heraldic armour",
+  "Spirit sapling",
+  "Trowel",
+  "Agility cape",
+  "Ring of visibility"
+ ],
+ "itemNameFixes": {
+  "Shayzien body (5)": "Shayzien body",
+  "Varrock armour 4": "Varrock armour"
+ },
+ "keepItems": [
+  "Forestry outfit",
+  "Spirit angler's outfit",
+  "Prospector kit (golden)"
+ ],
+ "questAliases": {
+  "Watchtower Quest": "Watchtower",
+  "Fremennik Isles": "The Fremennik Isles",
+  "Fremennik Trials": "The Fremennik Trials",
+  "Dragon Slayer": "Dragon Slayer I",
+  "Monkey Madness": "Monkey Madness I",
+  "Desert Treasure": "Desert Treasure I",
+  "Fairytale II": "Fairytale II - Cure a Queen",
+  "Fairytale I": "Fairytale I - Growing Pains",
+  "Lost Tribe": "The Lost Tribe",
+  "Grand Tree": "The Grand Tree",
+  "Tourist Trap": "The Tourist Trap",
+  "Giant Dwarf": "The Giant Dwarf"
+ },
+ "questAccess": {
+  "Priest in Peril": "morytania",
+  "Bone Voyage": "fossil_island",
+  "Children of the Sun": "varlamore",
+  "Song of the Elves": "prifddinas",
+  "Cabin Fever": "mos_le_harmless",
+  "Regicide": "tirannwn",
+  "Lost City": "zanaris"
+ },
+ "partialQuestAccess": {
+  "Monkey Madness I": "ape_atoll",
+  "Regicide": "tirannwn",
+  "Icthlarin's Little Helper": "sophanem"
+ },
+ "itemGroups": {
+  "Stole": {
+   "label": "Any god stole",
+   "mode": "any",
+   "cards": [
+    "Saradomin stole",
+    "Guthix stole",
+    "Zamorak stole",
+    "Ancient stole",
+    "Armadyl stole",
+    "Bandos stole"
+   ]
+  },
+  "Mitre": {
+   "label": "Any god mitre",
+   "mode": "any",
+   "cards": [
+    "Saradomin mitre",
+    "Guthix mitre",
+    "Zamorak mitre",
+    "Ancient mitre",
+    "Armadyl mitre",
+    "Bandos mitre"
+   ]
+  },
+  "Crozier": {
+   "label": "Any god crozier",
+   "mode": "any",
+   "cards": [
+    "Saradomin crozier",
+    "Guthix crozier",
+    "Zamorak crozier",
+    "Ancient crozier",
+    "Armadyl crozier",
+    "Bandos crozier"
+   ]
+  },
+  "Headband": {
+   "label": "Any headband",
+   "mode": "any",
+   "cards": [
+    "Red headband",
+    "Black headband",
+    "Brown headband",
+    "White headband",
+    "Blue headband",
+    "Gold headband",
+    "Pink headband",
+    "Green headband"
+   ]
+  },
+  "Boater": {
+   "label": "Any boater",
+   "mode": "any",
+   "cards": [
+    "Red boater",
+    "Orange boater",
+    "Green boater",
+    "Blue boater",
+    "Black boater",
+    "Pink boater",
+    "Purple boater",
+    "White boater"
+   ]
+  },
+  "Bob shirt": {
+   "label": "Any Bob shirt",
+   "mode": "any",
+   "cards": [
+    "Bob's red shirt",
+    "Bob's blue shirt",
+    "Bob's green shirt",
+    "Bob's black shirt",
+    "Bob's purple shirt"
+   ]
+  },
+  "Heraldic rune shield": {
+   "label": "Any rune heraldic shield (h1-h5)",
+   "mode": "any",
+   "cards": [
+    "Rune shield (h1)",
+    "Rune shield (h2)",
+    "Rune shield (h3)",
+    "Rune shield (h4)",
+    "Rune shield (h5)"
+   ],
+   "note": "Treasure Trails kiteshields only; heraldic-crest (player-painted) shields don't work"
+  },
+  "Rune heraldic shield": {
+   "label": "Any rune heraldic shield (h1-h5)",
+   "mode": "any",
+   "cards": [
+    "Rune shield (h1)",
+    "Rune shield (h2)",
+    "Rune shield (h3)",
+    "Rune shield (h4)",
+    "Rune shield (h5)"
+   ],
+   "note": "Treasure Trails kiteshields only; heraldic-crest (player-painted) shields don't work"
+  },
+  "Rune heraldic helm": {
+   "label": "Any rune heraldic helm (h1-h5)",
+   "mode": "any",
+   "cards": [
+    "Rune helm (h1)",
+    "Rune helm (h2)",
+    "Rune helm (h3)",
+    "Rune helm (h4)",
+    "Rune helm (h5)"
+   ],
+   "note": "The Treasure Trails helms, not the painted heraldic armour (the 'Rune heraldic helm' card)"
+  },
+  "Sunfire fanatic armour": {
+   "label": "Any piece of sunfire fanatic armour",
+   "mode": "any",
+   "cards": [
+    "Sunfire fanatic helm",
+    "Sunfire fanatic cuirass",
+    "Sunfire fanatic chausses"
+   ]
+  },
+  "Black dragonhide armour": {
+   "label": "Full black d'hide set",
+   "mode": "all",
+   "cards": [
+    "Black d'hide body",
+    "Black d'hide chaps",
+    "Black d'hide vambraces"
+   ]
+  },
+  "Blue moon armour": {
+   "label": "Full Blue moon set",
+   "mode": "all",
+   "cards": [
+    "Blue moon helm",
+    "Blue moon chestplate",
+    "Blue moon tassets",
+    "Blue moon spear"
+   ]
+  },
+  "Menaphite clothing": {
+   "slots": [
+    {
+     "label": "Menaphite hat",
+     "mode": "any",
+     "cards": [
+      "Menaphite purple hat",
+      "Menaphite red hat"
+     ]
+    },
+    {
+     "label": "Menaphite top",
+     "mode": "any",
+     "cards": [
+      "Menaphite purple top",
+      "Menaphite red top"
+     ]
+    },
+    {
+     "label": "Menaphite robe or kilt",
+     "mode": "any",
+     "cards": [
+      "Menaphite purple robe",
+      "Menaphite purple kilt",
+      "Menaphite red robe",
+      "Menaphite red kilt"
+     ]
+    }
+   ],
+   "note": "Wiki: 'any menaphite clothing will work'"
+  },
+  "Barrows equipment": {
+   "label": "Any full Barrows set",
+   "mode": "any",
+   "sets": [
+    [
+     "Ahrim's hood",
+     "Ahrim's robetop",
+     "Ahrim's robeskirt",
+     "Ahrim's staff"
+    ],
+    [
+     "Dharok's helm",
+     "Dharok's platebody",
+     "Dharok's platelegs",
+     "Dharok's greataxe"
+    ],
+    [
+     "Guthan's helm",
+     "Guthan's platebody",
+     "Guthan's chainskirt",
+     "Guthan's warspear"
+    ],
+    [
+     "Karil's coif",
+     "Karil's leathertop",
+     "Karil's leatherskirt",
+     "Karil's crossbow"
+    ],
+    [
+     "Torag's helm",
+     "Torag's platebody",
+     "Torag's platelegs",
+     "Torag's hammers"
+    ],
+    [
+     "Verac's helm",
+     "Verac's brassard",
+     "Verac's plateskirt",
+     "Verac's flail"
+    ]
+   ]
+  },
+  "Graceful outfit": {
+   "slots": [
+    {
+     "label": "Graceful hood",
+     "mode": "any",
+     "cards": [
+      "Graceful hood"
+     ]
+    },
+    {
+     "label": "Graceful top",
+     "mode": "any",
+     "cards": [
+      "Graceful top"
+     ]
+    },
+    {
+     "label": "Graceful legs",
+     "mode": "any",
+     "cards": [
+      "Graceful legs"
+     ]
+    },
+    {
+     "label": "Graceful gloves",
+     "mode": "any",
+     "cards": [
+      "Graceful gloves"
+     ]
+    },
+    {
+     "label": "Graceful boots",
+     "mode": "any",
+     "cards": [
+      "Graceful boots"
+     ]
+    },
+    {
+     "label": "Graceful cape (or Agility cape)",
+     "mode": "any",
+     "cards": [
+      "Graceful cape",
+      "Agility cape"
+     ]
+    }
+   ]
+  },
+  "Prospector kit": {
+   "slots": [
+    {
+     "label": "Prospector helmet",
+     "mode": "any",
+     "cards": [
+      "Prospector helmet"
+     ]
+    },
+    {
+     "label": "Prospector jacket (or Varrock armour 4)",
+     "mode": "any",
+     "cards": [
+      "Prospector jacket",
+      "Varrock armour"
+     ]
+    },
+    {
+     "label": "Prospector legs",
+     "mode": "any",
+     "cards": [
+      "Prospector legs"
+     ]
+    },
+    {
+     "label": "Prospector boots",
+     "mode": "any",
+     "cards": [
+      "Prospector boots"
+     ]
+    }
+   ],
+   "note": "Golden prospector pieces count (card versions)"
+  },
+  "Angler's outfit": {
+   "label": "Angler's or spirit angler's outfit",
+   "mode": "any",
+   "sets": [
+    [
+     "Angler hat",
+     "Angler top",
+     "Angler waders",
+     "Angler boots"
+    ],
+    [
+     "Spirit angler headband",
+     "Spirit angler top",
+     "Spirit angler waders",
+     "Spirit angler boots"
+    ]
+   ]
+  },
+  "Lumberjack outfit": {
+   "label": "Lumberjack or forestry outfit",
+   "mode": "any",
+   "sets": [
+    [
+     "Lumberjack hat",
+     "Lumberjack top",
+     "Lumberjack legs",
+     "Lumberjack boots"
+    ],
+    [
+     "Forestry hat",
+     "Forestry top",
+     "Forestry legs",
+     "Forestry boots"
+    ]
+   ]
+  }
+ },
+ "linkGroups": {
+  "Lightsource": {
+   "label": "Light source",
+   "group": "light_source"
+  },
+  "Light source": {
+   "label": "Light source",
+   "group": "light_source"
+  },
+  "Slash": {
+   "label": "Slash weapon or knife",
+   "group": "slash_weapon"
+  },
+  "Axe": {
+   "label": "Axe",
+   "tool": "Axe"
+  },
+  "Pickaxe": {
+   "label": "Pickaxe",
+   "tool": "Pickaxe"
+  },
+  "Harpoon": {
+   "label": "Harpoon",
+   "tool": "Harpoon"
+  }
+ },
+ "locationRules": [
+  {
+   "match": "burgh de rott",
+   "access": [
+    "morytania"
+   ],
+   "partialQuests": [
+    "In Aid of the Myreque"
+   ]
+  },
+  {
+   "match": "darkmeyer",
+   "access": [
+    "morytania"
+   ],
+   "partialQuests": [
+    "Sins of the Father"
+   ]
+  },
+  {
+   "match": "meiyerditch|castle drakan",
+   "access": [
+    "morytania"
+   ],
+   "partialQuests": [
+    "Darkness of Hallowvale"
+   ]
+  },
+  {
+   "match": "canifis|mort myre|port phasmatys|morytania|slayer tower|mort'ton|\\bbarrows\\b(?! (gloves|equipment|set|teleport))|ectofuntus|haunted woods|the hollows|\\bslepe\\b|mausoleum|haunted mine|nature grotto|fenkenstrain|dragontooth|harmony island",
+   "access": [
+    "morytania"
+   ]
+  },
+  {
+   "match": "mos le'harmless|harmless island",
+   "access": [
+    "mos_le_harmless"
+   ]
+  },
+  {
+   "match": "\\blletya\\b",
+   "access": [
+    "tirannwn"
+   ],
+   "partialQuests": [
+    "Mourning's End Part I"
+   ]
+  },
+  {
+   "match": "prifddinas|gwenith",
+   "access": [
+    "prifddinas"
+   ]
+  },
+  {
+   "match": "tyras camp|port tyras|isafdar|poison waste|arandar|zul-andra|tirannwn",
+   "access": [
+    "tirannwn"
+   ]
+  },
+  {
+   "match": "ape atoll|\\bmarim\\b",
+   "access": [
+    "ape_atoll"
+   ]
+  },
+  {
+   "match": "crash island",
+   "partialQuests": [
+    "Monkey Madness I"
+   ]
+  },
+  {
+   "match": "pyramid plunder|sophanem",
+   "access": [
+    "sophanem"
+   ]
+  },
+  {
+   "match": "nardah|pollnivneach|bedabin|ruins of uzer|\\buzer\\b|ullek|kalphite (lair|hive)|agility pyramid|desert mining camp|menaphos|necropolis|kharidian desert|genie cave|het's oasis|enakhra|jaldraocht|\\bdesert\\b(?! (diary|amulet|shirt|robe|boots|treasure|mining camp))",
+   "access": [
+    "desert"
+   ]
+  },
+  {
+   "match": "neitiznot|jatizso|fremennik isles mine",
+   "partialQuests": [
+    "The Fremennik Isles"
+   ]
+  },
+  {
+   "match": "lunar isle|astral altar|pirates' cove|moonclan",
+   "partialQuests": [
+    "Lunar Diplomacy"
+   ]
+  },
+  {
+   "match": "\\bweiss\\b",
+   "partialQuests": [
+    "Making Friends with My Arm"
+   ]
+  },
+  {
+   "match": "cam torum|neypotzli",
+   "access": [
+    "varlamore"
+   ],
+   "partialQuests": [
+    "Perilous Moons"
+   ]
+  },
+  {
+   "match": "varlamore|civitas illa fortis|\\bfortis\\b|hunter guild|aldarin|quetzacalli|sunset coast|tal teklan|ralos' rise|darkfrost|proudspire|kastori|avium savannah|auburnvale|nemus retreat|stonecutter|great temple|locus oasis|moonrise|colosseum",
+   "access": [
+    "varlamore"
+   ]
+  },
+  {
+   "match": "\\bkourend\\b|\\bzeah\\b|hosidius|shayzien|lovakengj|arceuus|piscarilius|kebos|farming guild|wintertodt|quidamortem|chambers of xeric|lizardman (canyon|caves|settlement)|molch|land's end|woodcutting guild|kingstown|forthos|tower of magic|karuulm|battlefront|tithe farm|graveyard of heroes|dark altar|soul altar|dense essence|blast mine|sulphur mine",
+   "access": [
+    "kourend"
+   ]
+  },
+  {
+   "match": "fossil island|museum camp|volcanic mine|house on the hill|verdant valley|mushroom forest|tar swamp|wyvern cave",
+   "access": [
+    "fossil_island"
+   ]
+  },
+  {
+   "match": "\\bin zanaris|\\bzanaris\\b(?! shed)",
+   "access": [
+    "zanaris"
+   ]
+  },
+  {
+   "match": "waterbirth",
+   "access": [
+    "waterbirth"
+   ]
+  },
+  {
+   "match": "wilderness(?! (diary|sword|cape))|lava maze|resource area|deserted keep|demonic ruins|frozen waste|rogues' castle|scorpia|callisto|venenatis|graveyard of shadows|lava dragon isle|ferox enclave|mage arena|king black dragon|dark warriors' fortress|silk chasm|corporeal beast|chaos temple \\(wilderness\\)|bandit camp \\(wilderness\\)|blighted volcano|wilderness volcano",
+   "access": [
+    "wilderness"
+   ]
+  },
+  {
+   "match": "keldagrim(?! entrance)",
+   "partialQuests": [
+    "The Giant Dwarf"
+   ]
+  },
+  {
+   "match": "miscellania|etceteria",
+   "quests": [
+    "The Fremennik Trials"
+   ]
+  },
+  {
+   "match": "shilo village(?! quest)",
+   "quests": [
+    "Shilo Village"
+   ]
+  },
+  {
+   "match": "troll stronghold(?! quest)|troll arena",
+   "partialQuests": [
+    "Troll Stronghold"
+   ]
+  },
+  {
+   "match": "kharazi jungle",
+   "partialQuests": [
+    "Legends' Quest"
+   ]
+  },
+  {
+   "match": "dorgesh-kaan",
+   "quests": [
+    "Death to the Dorgeshuun"
+   ]
+  },
+  {
+   "match": "\\biceberg\\b",
+   "partialQuests": [
+    "Cold War"
+   ]
+  },
+  {
+   "match": "ancient cavern",
+   "partialQuests": [
+    "Barbarian Training"
+   ]
+  },
+  {
+   "match": "\\bcrandor\\b",
+   "partialQuests": [
+    "Dragon Slayer I"
+   ]
+  },
+  {
+   "match": "death altar",
+   "partialQuests": [
+    "Mourning's End Part II"
+   ]
+  },
+  {
+   "match": "\\bthe abyss\\b|abyssal nexus",
+   "access": [
+    "abyss"
+   ]
+  },
+  {
+   "match": "wintumber|brittle isle|buccaneers' haven|great conch|drumstick isle",
+   "access": [
+    "sailing"
+   ]
+  },
+  {
+   "match": "yu'biusk",
+   "quests": [
+    "Land of the Goblins"
+   ]
+  }
+ ],
+ "hotcoldRegions": {
+  "Desert": "desert",
+  "Great Kourend": "kourend",
+  "Kebos Lowlands": "kourend",
+  "Morytania": "morytania",
+  "Varlamore": "varlamore",
+  "Wilderness": "wilderness",
+  "Islands (Sailing)": "sailing"
+ },
+ "hotcoldRegionExceptions": [
+  {
+   "region": "Desert",
+   "match": "al kharid|mage training arena",
+   "note": "North of the Shantay Pass: no desert access needed"
+  }
+ ],
+ "emoteUnlocks": {
+  "Goblin Salute": {
+   "match": "^goblin salute",
+   "partialQuests": [
+    "The Lost Tribe"
+   ],
+   "note": "Goblin Salute is unlocked during The Lost Tribe"
+  },
+  "Goblin Bow": {
+   "match": "^goblin bow",
+   "partialQuests": [
+    "The Lost Tribe"
+   ],
+   "note": "Goblin Bow is unlocked during The Lost Tribe"
+  },
+  "Flap": {
+   "match": "^flap\\b",
+   "note": "Flap emote: open the Gift of Peace (Stronghold of Security level 1; no card needed)"
+  },
+  "Slap Head": {
+   "match": "^slap your head|^slap head",
+   "note": "Slap Head emote: open the Grain of Plenty (Stronghold of Security level 2; no card needed)"
+  },
+  "Idea": {
+   "match": "^idea\\b|have an idea",
+   "note": "Idea emote: open the Box of Health (Stronghold of Security level 3; no card needed)"
+  },
+  "Stamp": {
+   "match": "^stamp\\b",
+   "note": "Stamp emote: open the Cradle of Life (Stronghold of Security level 4; no card needed)"
+  },
+  "Crab dance": {
+   "match": "crab dance",
+   "access": [
+    "sailing"
+   ],
+   "note": "Crab dance emote: chart the monument on Wintumber Isle (Sailing)"
+  }
+ },
+ "emoteOverrides": {
+  "Jig at Jiggig.": {
+   "quests": [],
+   "partialQuests": [],
+   "reqNotes": [
+    "If Zogre Flesh Eaters isn't started, talk to its quest starter (Grish) south of Castle Wars and he lets you into Jiggig"
+   ]
+  },
+  "Cheer in the Barbarian Agility Arena.": {
+   "quests": [
+    "Alfred Grimhand's Barcrawl"
+   ],
+   "skills": {
+    "Ranged": 30
+   },
+   "reqNotes": [
+    "30 Ranged is to wield the maple shortbow; the 35 Agility to enter the arena itself isn't needed for the clue"
+   ]
+  },
+  "Stamp in the Enchanted valley": {
+   "partialQuests": [
+    "Fairytale II - Cure a Queen"
+   ],
+   "reqNotes": [
+    "Stamp emote: open the Cradle of Life (Stronghold of Security level 4; no card needed)",
+    "The Enchanted Valley is reached by fairy ring BKQ"
+   ]
+  }
+ },
+ "sherlockOverrides": {
+  "Enchant a piece of dragonstone jewellery.": {
+   "slots": [
+    {
+     "label": "Water rune",
+     "mode": "any",
+     "cards": [
+      "Water rune"
+     ]
+    },
+    {
+     "label": "Earth rune",
+     "mode": "any",
+     "cards": [
+      "Earth rune"
+     ]
+    },
+    {
+     "label": "Cosmic rune",
+     "mode": "any",
+     "cards": [
+      "Cosmic rune"
+     ]
+    },
+    {
+     "label": "Unenchanted dragonstone jewellery",
+     "mode": "any",
+     "cards": [
+      "Dragonstone ring",
+      "Dragon necklace",
+      "Dragonstone amulet",
+      "Dragonstone bracelet"
+     ]
+    }
+   ]
+  },
+  "Craft a nature rune.": {
+   "slots": [
+    {
+     "label": "Nature talisman / tiara / catalytic tiara / Hat of the Eye (not needed via the Abyss)",
+     "mode": "any",
+     "cards": [
+      "Nature talisman",
+      "Nature tiara",
+      "Catalytic tiara",
+      "Hat of the eye"
+     ]
+    },
+    {
+     "label": "Pure essence",
+     "mode": "any",
+     "cards": [
+      "Pure essence"
+     ]
+    }
+   ]
+  },
+  "Craft multiple cosmic runes from a single essence.": {
+   "slots": [
+    {
+     "label": "Cosmic talisman / tiara / catalytic tiara / Hat of the Eye (not needed via the Abyss)",
+     "mode": "any",
+     "cards": [
+      "Cosmic talisman",
+      "Cosmic tiara",
+      "Catalytic tiara",
+      "Hat of the eye"
+     ]
+    },
+    {
+     "label": "Pure essence",
+     "mode": "any",
+     "cards": [
+      "Pure essence"
+     ]
+    }
+   ]
+  },
+  "String a yew longbow.": {
+   "slots": [
+    {
+     "label": "Bow string",
+     "mode": "any",
+     "cards": [
+      "Bow string"
+     ]
+    },
+    {
+     "label": "Unstrung yew longbow (or a knife + yew logs)",
+     "mode": "any",
+     "sets": [
+      [
+       "Yew longbow (u)"
+      ],
+      [
+       "Knife",
+       "Yew logs"
+      ]
+     ]
+    }
+   ]
+  },
+  "Slay a dust devil.": {
+   "slots": [
+    {
+     "label": "Facemask or Slayer helmet",
+     "mode": "any",
+     "cards": [
+      "Facemask",
+      "Slayer helmet"
+     ]
+    }
+   ],
+   "reqNotes": [
+    "Plus a weapon"
+   ]
+  },
+  "Catch a black warlock.": {
+   "slots": [],
+   "reqNotes": [
+    "Butterfly net and butterfly jar, or barehanded with 55 Hunter"
+   ],
+   "optionalCards": [
+    "Butterfly net",
+    "Butterfly jar"
+   ]
+  },
+  "Catch a raw shark.": {
+   "slots": [
+    {
+     "label": "Harpoon (unless barbarian fishing)",
+     "mode": "any",
+     "tool": "Harpoon",
+     "cards": []
+    }
+   ]
+  },
+  "Teleport to a spirit tree you planted yourself.": {
+   "slots": [
+    {
+     "label": "Spirit sapling",
+     "mode": "any",
+     "cards": [
+      "Spirit sapling"
+     ]
+    },
+    {
+     "label": "Spade",
+     "mode": "any",
+     "cards": [
+      "Spade"
+     ]
+    },
+    {
+     "label": "Trowel",
+     "mode": "any",
+     "cards": [
+      "Trowel"
+     ]
+    }
+   ],
+   "reqNotes": [
+    "A spirit tree in a superior garden (POH) also works; a Farming Guild tree needs 85 Farming if limited to one tree"
+   ]
+  },
+  "Kill the spiritual, magic and godly whilst representing their own god.": {
+   "slots": [
+    {
+     "label": "A god item matching the mage's god",
+     "mode": "any",
+     "cards": []
+    }
+   ],
+   "npcCards": [
+    "Spiritual Mage"
+   ],
+   "reqNotes": [
+    "Completion of Troll Stronghold, or 60 Strength, or 60 Agility (to enter the God Wars Dungeon)",
+    "Equipment to kill a spiritual mage, and a god item aligned with that mage"
+   ]
+  },
+  "Complete a lap of the Rellekka rooftop agility course whilst sporting the finest amount of grace.": {
+   "slots": "Graceful outfit"
+  },
+  "Mine a piece of runite ore whilst sporting the finest mining gear.": {
+   "slots": [
+    {
+     "label": "Pickaxe",
+     "mode": "any",
+     "tool": "Pickaxe",
+     "cards": []
+    },
+    {
+     "label": "Prospector helmet",
+     "mode": "any",
+     "cards": [
+      "Prospector helmet"
+     ]
+    },
+    {
+     "label": "Prospector jacket (or Varrock armour 4)",
+     "mode": "any",
+     "cards": [
+      "Prospector jacket",
+      "Varrock armour"
+     ]
+    },
+    {
+     "label": "Prospector legs",
+     "mode": "any",
+     "cards": [
+      "Prospector legs"
+     ]
+    },
+    {
+     "label": "Prospector boots",
+     "mode": "any",
+     "cards": [
+      "Prospector boots"
+     ]
+    }
+   ]
+  },
+  "Bind a blood rune at the Blood Altar. Either blood altar may be used.": {
+   "slots": [
+    {
+     "label": "Dark essence fragments (Kourend altar) or pure / daeyalt essence (Morytania altar)",
+     "mode": "any",
+     "cards": [
+      "Dark essence fragments",
+      "Pure essence",
+      "Daeyalt essence"
+     ]
+    }
+   ],
+   "reqNotes": [
+    "Completion of Sins of the Father if not using Kourend's Blood Altar"
+   ]
+  },
+  "Cremate a set of fiyr remains.": {
+   "slots": [
+    {
+     "label": "Magic or redwood pyre logs",
+     "mode": "any",
+     "cards": [
+      "Magic pyre logs",
+      "Redwood pyre logs"
+     ]
+    },
+    {
+     "label": "Tinderbox",
+     "mode": "any",
+     "cards": [
+      "Tinderbox"
+     ]
+    },
+    {
+     "label": "Fiyr remains",
+     "mode": "any",
+     "cards": [
+      "Fiyr remains"
+     ]
+    }
+   ]
+  },
+  "Angle for an Anglerfish in your finest fishing gear.": {
+   "slots": [
+    {
+     "label": "Fishing rod",
+     "mode": "any",
+     "cards": [
+      "Fishing rod"
+     ]
+    },
+    {
+     "label": "Sandworms",
+     "mode": "any",
+     "cards": [
+      "Sandworms"
+     ]
+    },
+    {
+     "label": "Angler's or spirit angler's outfit",
+     "mode": "any",
+     "group_ref": "Angler's outfit"
+    }
+   ]
+  },
+  "Chop a redwood log whilst sporting the finest lumberjack gear.": {
+   "slots": [
+    {
+     "label": "Axe",
+     "mode": "any",
+     "tool": "Axe",
+     "cards": []
+    },
+    {
+     "label": "Lumberjack or forestry outfit",
+     "mode": "any",
+     "group_ref": "Lumberjack outfit"
+    }
+   ]
+  },
+  "Craft a light orb in the Dorgesh-Kaan bank.": {
+   "slots": [
+    {
+     "label": "Cave goblin wire",
+     "mode": "any",
+     "cards": [
+      "Cave goblin wire"
+     ]
+    },
+    {
+     "label": "Empty light orb (or a glassblowing pipe + molten glass)",
+     "mode": "any",
+     "sets": [
+      [
+       "Empty light orb"
+      ],
+      [
+       "Glassblowing pipe",
+       "Molten glass"
+      ]
+     ]
+    }
+   ]
+  },
+  "Kill a Fiyr shade inside Mort'tons shade catacombs.": {
+   "slots": [],
+   "reqNotes": [
+    "Combat equipment, and a silver or gold shade key (no card; from burning yew-or-better pyre logs with asyn-or-better remains)"
+   ]
+  },
+  "Kill a lizardman shaman.": {
+   "slots": [],
+   "reqNotes": [
+    "Combat equipment"
+   ]
+  },
+  "Mix an anti-venom potion.": {
+   "slots": [
+    {
+     "label": "Antidote++",
+     "mode": "any",
+     "cards": [
+      "Antidote++"
+     ]
+    },
+    {
+     "label": "Zulrah's scales",
+     "mode": "any",
+     "cards": [
+      "Zulrah's scales"
+     ]
+    }
+   ]
+  },
+  "Fletch a rune dart.": {
+   "slots": [
+    {
+     "label": "Rune dart tip",
+     "mode": "any",
+     "cards": [
+      "Rune dart tip"
+     ]
+    },
+    {
+     "label": "Feather",
+     "mode": "any",
+     "cards": [
+      "Feather"
+     ]
+    }
+   ]
+  }
+ },
+ "coordinateOverrides": {
+  "18.03N, 03.03E": {
+   "quests": [],
+   "requirements": [
+    {
+     "label": "Coins (1,000 for Jarvald's boat, unless The Fremennik Trials is done)",
+     "type": "item",
+     "cards": [
+      "Coins"
+     ],
+     "optional": true
+    }
+   ],
+   "access": [
+    "waterbirth"
+   ],
+   "reqNotes": [
+    "1,000 coins (or completion of The Fremennik Trials)"
+   ]
+  },
+  "04.03S, 03.11E": {
+   "partialQuests": [
+    "Watchtower"
+   ],
+   "reqNotes": [
+    "20 coins for the ogre bridge if Watchtower isn't complete (or you used the bridge back)"
+   ]
+  },
+  "16.09N, 10.33E": {
+   "reqNotes": [
+    "A rope if Mountain Daughter isn't complete"
+   ],
+   "requirements": [
+    {
+     "label": "Rope (if Mountain Daughter isn't complete)",
+     "type": "item",
+     "cards": [
+      "Rope"
+     ],
+     "optional": true
+    }
+   ]
+  },
+  "18.05N, 12.05E": {
+   "reqNotes": [
+    "Access to Trollheim (needs quests)"
+   ]
+  },
+  "10.45N, 04.31E": {
+   "skills": {},
+   "reqNotes": [
+    "Recommended: 20 Agility for a shortcut"
+   ]
+  },
+  "23.03N, 02.01E": {
+   "quests": [
+    "The Fremennik Trials"
+   ],
+   "partialQuests": [
+    "Fairytale II - Cure a Queen"
+   ],
+   "reqNotes": [
+    "Miscellania: the boat and fairy ring CIP both need The Fremennik Trials (wiki: Miscellania)"
+   ]
+  },
+  "02.48N, 08.05E": {
+   "partialQuests": [
+    "Fairytale II - Cure a Queen"
+   ],
+   "requirements": [
+    {
+     "label": "Dramen or Lunar staff (fairy ring)",
+     "type": "item",
+     "cards": [
+      "Dramen staff",
+      "Lunar staff"
+     ]
+    }
+   ],
+   "reqNotes": []
+  },
+  "09.33N, 02.15E": {
+   "requirements": [
+    {
+     "label": "Rope",
+     "type": "item",
+     "cards": [
+      "Rope"
+     ]
+    }
+   ]
+  },
+  "00.43N, 11.13W": {
+   "requirements": [
+    {
+     "label": "Adamant keel (boat, for the crystal-flecked waters)",
+     "type": "item",
+     "cards": [
+      "Adamant keel parts"
+     ]
+    }
+   ]
+  }
+ },
+ "crypticOverrides": {
+  "Come brave adventurer, your sense is on fire.": {
+   "access": [],
+   "quests": [
+    "Curse of the Empty Lord"
+   ],
+   "reqNotes": [
+    "Viggora shows up in 3 places, but only the one you spoke to during Curse of the Empty Lord continues the clue (check the quest log)"
+   ]
+  },
+  "If you're feeling brave, dig beneath the dragon's eye.": {
+   "access": [],
+   "partialQuests": [
+    "Legends' Quest"
+   ],
+   "requirementsOnly": [
+    "Spade"
+   ],
+   "reqNotes": [
+    "If Legends' Quest isn't complete, a bravery potion and a rope are needed; with 91 Agility a long rope from Darkmeyer is an alternative"
+   ]
+  },
+  "Go to this building to be illuminated": {
+   "partialQuests": [
+    "Horror from the Deep"
+   ],
+   "requirements": [
+    {
+     "label": "Market Guard (Rellekka; kill for the key)",
+     "type": "enemy",
+     "cards": [
+      "Market Guard"
+     ]
+    },
+    {
+     "label": "Plank (2, to repair the Lighthouse bridge)",
+     "type": "item",
+     "cards": [
+      "Plank"
+     ]
+    }
+   ],
+   "reqNotes": [
+    "Start Horror from the Deep and get the Lighthouse key from Gunnjorn (35 Agility); repair the bridge with 2 planks, a hammer and 60 steel nails"
+   ]
+  }
+ },
+ "talkOverrides": {
+  "Fairy Queen": {
+   "quests": [
+    "Fairytale II - Cure a Queen"
+   ],
+   "reqNotes": [
+    "Fairy Resistance Hideout: Fairytale II finished; reach it with fairy rings AIR, DLR, DJQ, AJS in that order"
+   ]
+  },
+  "Eluned": {
+   "access": [
+    "tirannwn"
+   ],
+   "partialQuests": [
+    "Mourning's End Part I"
+   ],
+   "reqNotes": [
+    "Outside Lletya or north-east of Tyras Camp (Regicide started); in Prifddinas after Song of the Elves"
+   ]
+  },
+  "Brother Tranquility": {
+   "access": [
+    "morytania"
+   ],
+   "reqNotes": [
+    "Mos Le'Harmless (Cabin Fever) or Harmony Island, depending on quest progress"
+   ]
+  }
+ }
+}

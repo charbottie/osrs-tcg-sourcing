@@ -38,6 +38,7 @@ def main() -> int:
     aliases = json.loads((_HERE / "output" / "card_aliases.json").read_text(encoding="utf-8"))
     quests = set(json.loads((_HERE / "output" / "quests.json").read_text(encoding="utf-8")))
     access = set(json.loads((_HERE / "output" / "access_routes.json").read_text(encoding="utf-8")))
+    diary_areas = {a["name"] for a in json.loads((_HERE / "output" / "diaries.json").read_text(encoding="utf-8"))}
     problems = []
     for m in methods:
         for r in m.get("requirements", []):
@@ -45,9 +46,13 @@ def main() -> int:
                 for n in (c if isinstance(c, list) else [c]):
                     if n.lower() not in names and n.lower() not in aliases:
                         problems.append(f"{m['skill']} / {m['name']}: card {n!r}")
-        for q in m.get("quests", []):
+        for q in m.get("quests", []) + m.get("partialQuests", []):
             if q not in quests:
                 problems.append(f"{m['skill']} / {m['name']}: quest {q!r}")
+        for dk in m.get("diaries", []):
+            area, _, tier = dk.rpartition(" ")
+            if area not in diary_areas or tier not in ("Easy", "Medium", "Hard", "Elite"):
+                problems.append(f"{m['skill']} / {m['name']}: diary {dk!r}")
         if m.get("access") and m["access"] not in access:
             problems.append(f"{m['skill']} / {m['name']}: access {m['access']!r}")
     _OUT.write_text(json.dumps(methods, indent=1, ensure_ascii=False) + "\n", encoding="utf-8")

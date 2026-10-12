@@ -1960,6 +1960,9 @@
    "consideredNoCard": [
     "Dying knight",
     "Ghommal's hilt 1"
+   ],
+   "partialQuests": [
+    "Troll Stronghold"
    ]
   },
   {
@@ -2073,7 +2076,8 @@
     "Ghommal's hilt 1",
     "Trollheim teleport (tablet)"
    ],
-   "quests": [
+   "quests": [],
+   "partialQuests": [
     "Troll Stronghold"
    ]
   },
@@ -2178,7 +2182,8 @@
     "Dying knight",
     "Knight's notes"
    ],
-   "quests": [
+   "quests": [],
+   "partialQuests": [
     "Troll Stronghold"
    ]
   },
@@ -2273,7 +2278,8 @@
     "Dying knight (must speak to before first entry)",
     "Ghommal's hilt"
    ],
-   "quests": [
+   "quests": [],
+   "partialQuests": [
     "Troll Stronghold"
    ]
   },
