@@ -572,6 +572,8 @@ def _wiki_image_url(image_path: str) -> str:
     Wiki thumbnail: https://oldschool.runescape.wiki/images/thumb/<filename>/130px-<filename>
     """
     filename = image_path.rsplit("/", 1)[-1] if "/" in image_path else image_path
+    # The TCG catalog cache-busts some files ("Coins_detail_v5067eee0.png"); the wiki file has no suffix
+    filename = re.sub(r"_v[0-9a-f]{6,}(?=\.png$)", "", filename)
     if not filename:
         return ""
     return f"https://oldschool.runescape.wiki/images/thumb/{filename}/130px-{filename}"

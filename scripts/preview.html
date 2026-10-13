@@ -2581,12 +2581,44 @@ function packAcquisitionHtml(name) {
 
 // Cards a wishlisted quest contributes: required requirements only, or also the
 // optional / recommended ones (wishlistQuestRec). Unique, in requirement order.
-function _questWishCards(qn, includeRec = wishlistQuestRec.has(qn)) {
+function _questWishCards(qn, includeRec = wishlistQuestRec.has(qn), needOnly = false) {
   const out = [];
   for (const s of (bmQuestCards[qn]?.sections || []))
-    for (const r of (s.requirements || []))
-      if (includeRec || !r.optional) out.push(..._reqCards(r));
+    for (const r of (s.requirements || [])) {
+      if (!includeRec && r.optional) continue;
+      // needOnly: skip requirements already met (e.g. you own one of an "any of" list); for an
+      // "all of" list keep only the cards still missing
+      if (needOnly && _reqMet(r)) continue;
+      out.push(...(needOnly && r.mode === 'all' && !(r._routes || []).length ? _reqCards(r).filter(c => !isOwned(c)) : _reqCards(r)));
+    }
   return [...new Set(out)];
+}
+// A quest's requirements as wishlist units: {label, cards, any, met}
+function _questWishUnits(qn, includeRec = wishlistQuestRec.has(qn)) {
+  const out = [];
+  for (const s of (bmQuestCards[qn]?.sections || []))
+    for (const r of (s.requirements || [])) {
+      if (!includeRec && r.optional) continue;
+      const cards = _reqCards(r);
+      if (!cards.length && !(r._routes || []).length) continue;
+      out.push({ label: r.label || cards[0] || '', cards, any: !(r.mode === 'all' && !(r._routes || []).length), met: _reqMet(r) });
+    }
+  return out;
+}
+// Requirements still missing for a quest, counted the way they're met: an "any of" list / a
+// requirement with routes is ONE thing (whichever option you get); an "all of" list counts each card.
+// Requirements already wishlisted (any of its cards starred) aren't counted.
+function _questMissingUnits(qn, includeRec) {
+  let n = 0;
+  for (const s of (bmQuestCards[qn]?.sections || []))
+    for (const r of (s.requirements || [])) {
+      if (!includeRec && r.optional) continue;
+      const cards = _reqCards(r);
+      if ((!cards.length && !(r._routes || []).length) || _reqMet(r)) continue;
+      if (r.mode === 'all' && !(r._routes || []).length) n += cards.filter(c => !isOwned(c) && !wishlist.has(c)).length;
+      else if (!cards.some(c => wishlist.has(c))) n += 1;
+    }
+  return n;
 }
 
 // All wishlisted card names across all sources (owned or not).
@@ -2606,9 +2638,9 @@ function _wishlistUnownedTargets() {
   for (const [name] of wishlist) {
     if (!isOwned(name)) targets.add(name);
   }
-  // Quest-wishlisted cards (all requirement cards in every section)
+  // Quest-wishlisted cards: only requirements not yet met ("any of" you already satisfy drops out)
   for (const qn of wishlistedQuests)
-    for (const c of _questWishCards(qn))
+    for (const c of _questWishCards(qn, undefined, true))
       if (!isOwned(c)) targets.add(c);
   // Groups: only include cards from unsatisfied groups
   for (const g of wishlistGroups) {
@@ -3074,6 +3106,8 @@ function removeQuestFromWishlist(questName) {
     const cleaned = _noteRemoveTag(entry.note, questName);
     if (!cleaned) wishlist.delete(card); else entry.note = cleaned;
   }
+  // and the quest's "any of" groups added by wishlistQuest
+  for (let i = wishlistGroups.length - 1; i >= 0; i--) if (wishlistGroups[i].name.startsWith(questName + ': ')) wishlistGroups.splice(i, 1);
   wishlistedQuests.delete(questName);
   wishlistQuestRec.delete(questName);
   _saveWishlist();
@@ -3321,16 +3355,21 @@ function wishlistQuest(questName, includeRec = false) {
   wishlistedQuests.add(questName);
   if (includeRec) wishlistQuestRec.add(questName);
 
-  // Add unowned BM quest cards to the individual wishlist with the quest name as the note
-  const questCards = _questWishCards(questName);
-  for (const card of questCards) {
-    if (isOwned(card)) continue;  // already have it — no need to wishlist
+  // Wishlist what's still needed, requirement by requirement: skip ones already met; an "any of"
+  // list becomes one "any one of these" group; an "all of" list adds each missing card
+  const addCard = card => {
+    if (isOwned(card)) return;
     if (wishlist.has(card)) {
       const entry = wishlist.get(card);
       if (!entry.note.includes(questName)) entry.note = entry.note ? entry.note + ', ' + questName : questName;
-    } else {
-      wishlist.set(card, {note: questName});
-    }
+    } else wishlist.set(card, {note: questName});
+  };
+  for (const u of _questWishUnits(questName, includeRec || wishlistQuestRec.has(questName))) {
+    if (u.met) continue;
+    if (u.any && u.cards.length > 1) {
+      const name = `${questName}: ${u.label}`;
+      if (!wishlistGroups.some(g => g.name === name)) wishlistGroups.push({ name, cards: [...u.cards], anyOf: true });
+    } else u.cards.forEach(addCard);
   }
 
   _saveWishlist();
@@ -3436,20 +3475,22 @@ function _renderWishlistMain() {
     for (const qn of [...wishlistedQuests].sort()) {
       const bm = bmQuestCards[qn];
       const unique = bm ? _questWishCards(qn) : [];
-      const got = unique.filter(n => isOwned(n)).length;
+      // count requirements, not cards: an "any of" list you already satisfy is one ✓
+      const units = bm ? _questWishUnits(qn) : [];
+      const gotU = units.filter(u => u.met).length;
       const qSafe = qn.replace(/&/g,'&amp;').replace(/"/g,'&quot;');
       questHtml += `<div style="margin:10px 0;background:#161616;border:1px solid #2a2a2a;border-radius:4px;padding:10px 12px">
         <div style="display:flex;align-items:baseline;gap:8px;margin-bottom:8px">
           <span style="font-size:13px;color:#bba050;font-weight:500;cursor:pointer;text-decoration:underline dotted"
             data-quest="${qSafe}" onclick="_navToQuest(this)"
             title="Open quest page">${qn}</span>
-          <span style="font-size:10px;color:${got===unique.length&&unique.length?'#00c853':'#888'}">${got}/${unique.length} obtained</span>
+          <span style="font-size:10px;color:${gotU===units.length&&units.length?'#00c853':'#888'}">${gotU}/${units.length} requirements met</span>
           <span style="font-size:9px;color:#666;border:1px solid #2a2a2a;border-radius:3px;padding:0 4px">${wishlistQuestRec.has(qn) ? 'required + recommended' : 'required only'}</span>
           <button data-quest="${qSafe}" onclick="removeQuestFromWishlist(this.dataset.quest)"
             style="margin-left:auto;background:none;border:none;color:#444;cursor:pointer;font-size:12px" title="Remove quest">×</button>
         </div>
         <div style="display:flex;flex-wrap:wrap;gap:4px">`;
-      for (const c of unique.sort()) {
+      const chipFor = c => {
         const own  = isOwned(c);
         const wled = wishlist.has(c);
         const safe = c.replace(/&/g,'&amp;').replace(/"/g,'&quot;');
@@ -3460,8 +3501,19 @@ function _renderWishlistMain() {
             ? 'background:#111;border-color:#222;color:#555'
             : 'background:#1a0808;border-color:#4a1a1a;color:#6a2a2a;text-decoration:line-through';
         const chipTitle = wled ? '' : `title="${c.replace(/"/g,'&quot;')} removed from wishlist"`;
-        questHtml += `<span style="${chipStyle};border:1px solid;border-radius:3px;padding:2px 7px;font-size:10px;cursor:pointer" ${chipTitle}
+        return `<span style="${chipStyle};border:1px solid;border-radius:3px;padding:2px 7px;font-size:10px;cursor:pointer" ${chipTitle}
           data-card="${safe}" data-type="${type}" onclick="showCard(this.dataset.card,this.dataset.type)">${own?'✓ ':''}${c}</span>`;
+      };
+      for (const u of units) {
+        if (u.met) {   // satisfied requirement: one ✓ chip (the owned option)
+          const c = u.cards.find(isOwned) || u.cards[0];
+          questHtml += c ? chipFor(c) : `<span style="background:#0d2210;border:1px solid #2a5a2a;color:#76c442;border-radius:3px;padding:2px 7px;font-size:10px">✓ ${escHtml(u.label)}</span>`;
+        } else if (u.any && u.cards.length > 1) {   // unmet "any of": its options together
+          questHtml += `<span style="display:inline-flex;flex-wrap:wrap;gap:3px;align-items:center;border:1px dashed #3a3a1a;border-radius:3px;padding:1px 5px">
+            <span style="font-size:9px;color:#9a9a3a">any of</span>${u.cards.slice(0, 6).map(chipFor).join('')}${u.cards.length > 6 ? `<span style="font-size:9px;color:#666" ${_cardGridTipAttrs(u.cards, u.label)}>+${u.cards.length - 6}</span>` : ''}</span>`;
+        } else {
+          questHtml += u.cards.filter(c => !isOwned(c)).map(chipFor).join('');
+        }
       }
       questHtml += `</div></div>`;
     }
@@ -6097,6 +6149,46 @@ function skillIcon(skill, size=16) {
   return `<img src="${_WIKI}${name}_icon.png" width="${size}" height="${size}"
     alt="${skill}" style="vertical-align:middle;image-rendering:pixelated;margin-right:3px">`;
 }
+
+// Skill icons for level requirements written as text ("Crafting 49", "Magic 64") anywhere in the
+// detail panes: one DOM pass (MutationObserver, batched per frame) puts the skill icon in front,
+// so every renderer gets them without each one building icons itself.
+const _SKILL_LVL_RE = new RegExp('\\b(' + ['Attack','Strength','Defence','Ranged','Prayer','Magic','Runecraft','Runecrafting','Hitpoints','Crafting','Mining','Smithing','Fishing','Cooking','Firemaking','Woodcutting','Agility','Herblore','Thieving','Fletching','Slayer','Farming','Construction','Hunter','Sailing'].join('|') + ')( level)? (\\d{1,3})\\b', 'g');
+function _iconizeSkillLevels(root) {
+  const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, {
+    acceptNode: n => n.nodeValue && _SKILL_LVL_RE.test(n.nodeValue) && !n.parentElement?.closest('script,style,textarea,input,select,option,[data-noskillicon]')
+      ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_REJECT });
+  const nodes = []; for (let n; (n = walker.nextNode());) nodes.push(n);
+  for (const n of nodes) {
+    _SKILL_LVL_RE.lastIndex = 0;
+    const prev = n.previousSibling;
+    const frag = document.createDocumentFragment(); let last = 0, m, txt = n.nodeValue;
+    while ((m = _SKILL_LVL_RE.exec(txt))) {
+      // skip when an icon for this skill is already right before it
+      if (!last && !txt.slice(0, m.index).trim() && prev && prev.nodeName === 'IMG' && prev.alt === m[1]) continue;
+      frag.append(txt.slice(last, m.index));
+      const t = document.createElement('template');
+      // same size + gap as card icons in requirement rows (16px, 8px) when it starts a row label;
+      // a little smaller inside running text
+      const atLabelStart = !last && !txt.slice(0, m.index).trim() && n.parentElement?.closest('.req-label, .req-row') && !prev;
+      const size = atLabelStart ? 16 : 14;
+      t.innerHTML = skillIcon(m[1], size).trim();
+      const img = t.content.firstChild; img.setAttribute('data-sk', '1');
+      img.style.marginRight = atLabelStart ? '8px' : '5px';
+      frag.append(img, m[0]);
+      last = m.index + m[0].length;
+    }
+    _SKILL_LVL_RE.lastIndex = 0;
+    if (!last) continue;
+    frag.append(txt.slice(last));
+    n.replaceWith(frag);
+  }
+}
+let _skIconQueued = false;
+new MutationObserver(() => {
+  if (_skIconQueued) return; _skIconQueued = true;
+  requestAnimationFrame(() => { _skIconQueued = false; document.querySelectorAll('#detail, [id$="-detail-pane"], #rules-panel').forEach(_iconizeSkillLevels); });
+}).observe(document.documentElement, { childList: true, subtree: true });
 
 // Static data for skills without card-based training
 
@@ -9693,9 +9785,9 @@ function showQuestDetail(questName, push = true) {
       style="margin-left:8px;background:none;border:1px solid ${done ? '#2a2a2a' : '#3a3a1a'};color:${done ? '#666' : '#9a9a3a'};padding:3px 9px;border-radius:3px;font-size:10px;cursor:${done ? 'default' : 'pointer'}">
       ${done ? '★' : '☆'} ${text}${!done && n ? ` (${n} missing)` : ''}</button>`;
   const wishQuestBtn = !_wishReq.length && !_wishAll.length ? '' :
-    _wishBtn(false, _wlState ? 'Required cards wishlisted' : 'Wishlist required', _miss(_wishReq), _wlState >= 1)
+    _wishBtn(false, _wlState ? 'Required cards wishlisted' : 'Wishlist required', _questMissingUnits(questName, false), _wlState >= 1)
     + (_wishAll.length > _wishReq.length
-      ? _wishBtn(true, _wlState === 2 ? 'Recommended wishlisted' : 'Wishlist required + recommended', _miss(_wishAll), _wlState === 2) : '');
+      ? _wishBtn(true, _wlState === 2 ? 'Recommended wishlisted' : 'Wishlist required + recommended', _questMissingUnits(questName, true), _wlState === 2) : '');
 
   let html = `<h1>${questName} ${wikiLink(questName)}
     <span style="font-size:12px;color:${isDone?'#b07a30':statusColor};font-weight:normal;margin-left:8px">${isDone?'Done':statusLabel}</span>

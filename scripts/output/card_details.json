@@ -833,7 +833,7 @@
   },
   "Coins": {
     "examine": "Lovely money!",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Coins_detail_v5067eee0.png/130px-Coins_detail_v5067eee0.png",
+    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Coins_detail.png/130px-Coins_detail.png",
     "tier": "Common",
     "regions": [
       "All regions",
@@ -3608,7 +3608,7 @@
   },
   "Empty cup": {
     "examine": "An empty cup.",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Cup_of_tea_detail_v8de7d253.png/130px-Cup_of_tea_detail_v8de7d253.png",
+    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Cup_of_tea_detail.png/130px-Cup_of_tea_detail.png",
     "tier": "Common",
     "regions": [
       "Misthalin",
@@ -19239,7 +19239,7 @@
   },
   "Diving apparatus": {
     "examine": "Some basic diving apparatus.",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Diving_apparatus_detail_v6b6ad070.png/130px-Diving_apparatus_detail_v6b6ad070.png",
+    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Diving_apparatus_detail.png/130px-Diving_apparatus_detail.png",
     "tier": "Common",
     "regions": [
       "Kandarin"
@@ -39751,7 +39751,7 @@
   },
   "Cheese+tom batta": {
     "examine": "This smells really good.",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Cheese+tom_batta_detail_v1cc348da.png/130px-Cheese+tom_batta_detail_v1cc348da.png",
+    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Cheese+tom_batta_detail.png/130px-Cheese+tom_batta_detail.png",
     "tier": "Common",
     "regions": [
       "Kandarin"
@@ -39879,7 +39879,7 @@
   },
   "Necklace of Fangs": {
     "examine": "Toothy, and makes for decent arrowheads in a pinch.",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Necklace_of_Fangs_detail_v5e1b4985.png/130px-Necklace_of_Fangs_detail_v5e1b4985.png",
+    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Necklace_of_Fangs_detail.png/130px-Necklace_of_Fangs_detail.png",
     "tier": "Epic",
     "regions": [
       "Fremennik"
@@ -39887,7 +39887,7 @@
   },
   "Amulet of air": {
     "examine": "Might be as light as a feather.",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Amulet_of_air_detail_v85fad686.png/130px-Amulet_of_air_detail_v85fad686.png",
+    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Amulet_of_air_detail.png/130px-Amulet_of_air_detail.png",
     "tier": "Rare",
     "regions": [
       "Misthalin"
@@ -39895,7 +39895,7 @@
   },
   "Amulet of water": {
     "examine": "I'm going to get my clothes wet wearing this.",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Amulet_of_water_detail_vcd5924fe.png/130px-Amulet_of_water_detail_vcd5924fe.png",
+    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Amulet_of_water_detail.png/130px-Amulet_of_water_detail.png",
     "tier": "Rare",
     "regions": [
       "Fremennik"
@@ -39903,7 +39903,7 @@
   },
   "Amulet of earth": {
     "examine": "Heavy is the amulet.",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Amulet_of_earth_detail_v03897f27.png/130px-Amulet_of_earth_detail_v03897f27.png",
+    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Amulet_of_earth_detail.png/130px-Amulet_of_earth_detail.png",
     "tier": "Rare",
     "regions": [
       "Misthalin"
@@ -39911,7 +39911,7 @@
   },
   "Amulet of fire": {
     "examine": "I hope my clothes don't catch on fire.",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Amulet_of_fire_detail_vfd1a77c7.png/130px-Amulet_of_fire_detail_vfd1a77c7.png",
+    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Amulet_of_fire_detail.png/130px-Amulet_of_fire_detail.png",
     "tier": "Rare",
     "regions": [
       "Morytania"
@@ -39919,13 +39919,13 @@
   },
   "Elemental amulet": {
     "examine": "Water, earth, fire, air. The four elements living together in harmony.",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Elemental_amulet_detail_v09330451.png/130px-Elemental_amulet_detail_v09330451.png",
+    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Elemental_amulet_detail.png/130px-Elemental_amulet_detail.png",
     "tier": "Epic",
     "regions": []
   },
   "Imbued ancient cape": {
     "examine": "A cape from an almighty god, imbued with great power.",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Imbued_ancient_cape_detail_v022f8f93.png/130px-Imbued_ancient_cape_detail_v022f8f93.png",
+    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Imbued_ancient_cape_detail.png/130px-Imbued_ancient_cape_detail.png",
     "tier": "Epic",
     "regions": [
       "Wilderness"
@@ -39970,7 +39970,7 @@
   },
   "Vanguards": {
     "examine": "Formerly a member of Xeric's elite tactical unit.",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Vanguard_(moving)_va48bc061.png/130px-Vanguard_(moving)_va48bc061.png",
+    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Vanguard_(moving).png/130px-Vanguard_(moving).png",
     "tier": "Legendary",
     "regions": [
       "Kourend"
@@ -40036,7 +40036,7 @@
   },
   "Pete Kayer": {
     "examine": "A helpful rogue.",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Pete_Kayer_v627e1616.png/130px-Pete_Kayer_v627e1616.png",
+    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Pete_Kayer.png/130px-Pete_Kayer.png",
     "tier": "Legendary",
     "regions": [
       "Wilderness"
