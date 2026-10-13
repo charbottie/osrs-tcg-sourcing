@@ -13,7 +13,7 @@ Output: scripts/output/card_versions.json
                  tools: [...], facilities: "…", members: bool}} ] }
 
 Usage:
-  python3 scripts/generate_card_versions.py --card-json research/card-catalog-v1.json
+  python3 scripts/generate_card_versions.py --card-json research/card-catalog-live.json
 """
 
 from __future__ import annotations

@@ -32,11 +32,6 @@
         "fraction": "4/131"
       },
       {
-        "card": "Phosani's Nightmare",
-        "rarity": "Common",
-        "fraction": "4/100"
-      },
-      {
         "card": "The Nightmare",
         "rarity": "Common",
         "fraction": "4/100"
@@ -1283,306 +1278,6 @@
     ],
     "alwaysAvailable": false
   },
-  "Vial of water": {
-    "monsters": [
-      {
-        "card": "Salarin the twisted",
-        "rarity": "Rare",
-        "fraction": "1/128"
-      },
-      {
-        "card": "Cave crawler",
-        "rarity": "Common",
-        "fraction": "13/128"
-      },
-      {
-        "card": "Cave kraken",
-        "rarity": "Uncommon",
-        "fraction": "4/200"
-      },
-      {
-        "card": "Chaos druid",
-        "rarity": "Common",
-        "fraction": "10/128"
-      },
-      {
-        "card": "Chaos druid warrior",
-        "rarity": "Rare",
-        "fraction": "1/128"
-      },
-      {
-        "card": "Water elemental",
-        "rarity": "Always",
-        "fraction": "1/1"
-      },
-      {
-        "card": "Boris",
-        "rarity": "Common",
-        "fraction": "50/512"
-      },
-      {
-        "card": "Imre",
-        "rarity": "Common",
-        "fraction": "50/512"
-      },
-      {
-        "card": "Yuri",
-        "rarity": "Common",
-        "fraction": "50/512"
-      },
-      {
-        "card": "Joseph",
-        "rarity": "Common",
-        "fraction": "50/512"
-      },
-      {
-        "card": "Nikolai",
-        "rarity": "Common",
-        "fraction": "50/512"
-      },
-      {
-        "card": "Eduard",
-        "rarity": "Common",
-        "fraction": "50/512"
-      },
-      {
-        "card": "Lev",
-        "rarity": "Common",
-        "fraction": "50/512"
-      },
-      {
-        "card": "Georgy",
-        "rarity": "Common",
-        "fraction": "50/512"
-      },
-      {
-        "card": "Svetlana",
-        "rarity": "Common",
-        "fraction": "50/512"
-      },
-      {
-        "card": "Irina",
-        "rarity": "Common",
-        "fraction": "50/512"
-      },
-      {
-        "card": "Alexis",
-        "rarity": "Common",
-        "fraction": "50/512"
-      },
-      {
-        "card": "Milla",
-        "rarity": "Common",
-        "fraction": "50/512"
-      },
-      {
-        "card": "Galina",
-        "rarity": "Common",
-        "fraction": "50/512"
-      },
-      {
-        "card": "Sofiya",
-        "rarity": "Common",
-        "fraction": "50/512"
-      },
-      {
-        "card": "Ksenia",
-        "rarity": "Common",
-        "fraction": "50/512"
-      },
-      {
-        "card": "Yadviga",
-        "rarity": "Common",
-        "fraction": "50/512"
-      },
-      {
-        "card": "Nikita",
-        "rarity": "Common",
-        "fraction": "50/512"
-      },
-      {
-        "card": "Vera",
-        "rarity": "Common",
-        "fraction": "50/512"
-      },
-      {
-        "card": "Zoja",
-        "rarity": "Common",
-        "fraction": "50/512"
-      },
-      {
-        "card": "Liliya",
-        "rarity": "Common",
-        "fraction": "50/512"
-      },
-      {
-        "card": "Waterfiend",
-        "rarity": "Uncommon",
-        "fraction": "4/128"
-      },
-      {
-        "card": "Tortured soul",
-        "rarity": "Rare",
-        "fraction": "1/128"
-      },
-      {
-        "card": "Freidir",
-        "rarity": "Common",
-        "fraction": "50/512"
-      },
-      {
-        "card": "Borrokar",
-        "rarity": "Common",
-        "fraction": "50/512"
-      },
-      {
-        "card": "Lanzig",
-        "rarity": "Common",
-        "fraction": "50/512"
-      },
-      {
-        "card": "Lensa",
-        "rarity": "Common",
-        "fraction": "50/512"
-      },
-      {
-        "card": "Jennella",
-        "rarity": "Common",
-        "fraction": "50/512"
-      },
-      {
-        "card": "Elder Chaos druid",
-        "rarity": "Common",
-        "fraction": "10/129"
-      },
-      {
-        "card": "Chasm Crawler",
-        "rarity": "Common",
-        "fraction": ""
-      },
-      {
-        "card": "Forgotten Soul",
-        "rarity": "Common",
-        "fraction": "10/128"
-      }
-    ],
-    "rdtMonsters": [],
-    "quests": [],
-    "gathering": null,
-    "production": {
-      "skill": null,
-      "level": 0,
-      "xp": null,
-      "facilities": "Water",
-      "tools": null,
-      "quests": null,
-      "ingredients": [
-        {
-          "item": "Vial",
-          "quantity": 1
-        }
-      ],
-      "outputQuantity": 1
-    },
-    "spawns": [
-      "Outer Fortis"
-    ],
-    "shopBought": true,
-    "shops": [
-      {
-        "seller": "Aemad's Adventuring Supplies.",
-        "price": 2,
-        "currency": "Coins"
-      },
-      {
-        "seller": "The Lighthouse Store",
-        "price": 2,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Frincos' Fabulous Herb Store.",
-        "price": 2,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Grud's Herblore Stall.",
-        "price": 2,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Jatix's Herblore Shop.",
-        "price": 2,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Razmire General Store.",
-        "price": 2,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Obli's General Store.",
-        "price": 3,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Obli's General Store.(Karamja gloves)",
-        "price": 2,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Jiminua's Jungle Store.",
-        "price": 3,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Jiminua's Jungle Store.(Karamja gloves 3+)",
-        "price": 2,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Sigmund the Merchant (shop)",
-        "price": 2,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Little Shop of Horace",
-        "price": 2,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Regath's Wares",
-        "price": 2,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Myths' Guild Herbalist",
-        "price": 2,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Dom Onion's Reward Shop",
-        "price": 145,
-        "currency": "Nightmare Zone points"
-      },
-      {
-        "seller": "Prifddinas Herbal Supplies",
-        "price": 2,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Huito's Herbal Supplies",
-        "price": 2,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Elder Raley's Herblore Stall",
-        "price": 2,
-        "currency": "Coins"
-      }
-    ],
-    "clueTiers": [],
-    "alwaysAvailable": false
-  },
   "Vial": {
     "monsters": [
       {
@@ -1714,6 +1409,61 @@
         "card": "Jennella",
         "rarity": "Common",
         "fraction": "50/512"
+      },
+      {
+        "card": "Salarin the twisted",
+        "rarity": "Rare",
+        "fraction": "1/128"
+      },
+      {
+        "card": "Cave crawler",
+        "rarity": "Common",
+        "fraction": "13/128"
+      },
+      {
+        "card": "Cave kraken",
+        "rarity": "Uncommon",
+        "fraction": "4/200"
+      },
+      {
+        "card": "Chaos druid",
+        "rarity": "Common",
+        "fraction": "10/128"
+      },
+      {
+        "card": "Chaos druid warrior",
+        "rarity": "Rare",
+        "fraction": "1/128"
+      },
+      {
+        "card": "Water elemental",
+        "rarity": "Always",
+        "fraction": "1/1"
+      },
+      {
+        "card": "Waterfiend",
+        "rarity": "Uncommon",
+        "fraction": "4/128"
+      },
+      {
+        "card": "Tortured soul",
+        "rarity": "Rare",
+        "fraction": "1/128"
+      },
+      {
+        "card": "Elder Chaos druid",
+        "rarity": "Common",
+        "fraction": "10/129"
+      },
+      {
+        "card": "Chasm Crawler",
+        "rarity": "Common",
+        "fraction": ""
+      },
+      {
+        "card": "Forgotten Soul",
+        "rarity": "Common",
+        "fraction": "10/128"
       }
     ],
     "rdtMonsters": [],
@@ -1745,7 +1495,8 @@
       "Hosidius - Little Shop of Horace",
       "Temple Knight training grounds",
       "Aldarin - Alchemical Society",
-      "The Summer Shore"
+      "The Summer Shore",
+      "Outer Fortis"
     ],
     "shopBought": true,
     "shops": [
@@ -1843,6 +1594,31 @@
         "seller": "Port Roberts General Store",
         "price": 2,
         "currency": "Coins"
+      },
+      {
+        "seller": "Aemad's Adventuring Supplies.",
+        "price": 2,
+        "currency": "Coins"
+      },
+      {
+        "seller": "Razmire General Store.",
+        "price": 2,
+        "currency": "Coins"
+      },
+      {
+        "seller": "Little Shop of Horace",
+        "price": 2,
+        "currency": "Coins"
+      },
+      {
+        "seller": "Regath's Wares",
+        "price": 2,
+        "currency": "Coins"
+      },
+      {
+        "seller": "Dom Onion's Reward Shop",
+        "price": 145,
+        "currency": "Nightmare Zone points"
       }
     ],
     "clueTiers": [],
@@ -4048,7 +3824,7 @@
         "fraction": "1/14.3"
       },
       {
-        "card": "Manta ray",
+        "card": "Manta ray (sailing)",
         "rarity": "Common",
         "fraction": "1/20.8"
       },
@@ -5257,7 +5033,7 @@
         "fraction": "1/19"
       },
       {
-        "card": "Manta ray",
+        "card": "Manta ray (sailing)",
         "rarity": "Uncommon",
         "fraction": "1/27.8"
       },
@@ -6471,7 +6247,7 @@
         "fraction": "1/25.4"
       },
       {
-        "card": "Manta ray",
+        "card": "Manta ray (sailing)",
         "rarity": "Uncommon",
         "fraction": "1/37.1"
       },
@@ -7669,7 +7445,7 @@
         "fraction": "1/32.7"
       },
       {
-        "card": "Manta ray",
+        "card": "Manta ray (sailing)",
         "rarity": "Uncommon",
         "fraction": "1/47.6"
       },
@@ -9018,7 +8794,7 @@
         "fraction": "1/37.6"
       },
       {
-        "card": "Manta ray",
+        "card": "Manta ray (sailing)",
         "rarity": "Uncommon",
         "fraction": "1/46.4"
       },
@@ -10214,7 +9990,7 @@
         "fraction": "1/57.1"
       },
       {
-        "card": "Manta ray",
+        "card": "Manta ray (sailing)",
         "rarity": "Uncommon",
         "fraction": "1/83.4"
       },
@@ -11468,7 +11244,7 @@
         "fraction": "1/61.5"
       },
       {
-        "card": "Manta ray",
+        "card": "Manta ray (sailing)",
         "rarity": "Uncommon",
         "fraction": "1/65.3"
       },
@@ -12762,7 +12538,7 @@
         "fraction": "1/80"
       },
       {
-        "card": "Manta ray",
+        "card": "Manta ray (sailing)",
         "rarity": "Rare",
         "fraction": "1/133.4"
       },
@@ -13856,11 +13632,6 @@
         "fraction": "1/273.1"
       },
       {
-        "card": "Phosani's Nightmare",
-        "rarity": "Common",
-        "fraction": "4/100"
-      },
-      {
         "card": "The Nightmare",
         "rarity": "Common",
         "fraction": "4/100"
@@ -14036,7 +13807,7 @@
         "fraction": "1/100"
       },
       {
-        "card": "Manta ray",
+        "card": "Manta ray (sailing)",
         "rarity": "Uncommon",
         "fraction": "1/99"
       },
@@ -15335,7 +15106,7 @@
         "fraction": "1/100"
       },
       {
-        "card": "Manta ray",
+        "card": "Manta ray (sailing)",
         "rarity": "Uncommon",
         "fraction": "1/99"
       },
@@ -15474,11 +15245,6 @@
         "fraction": "1/92.44"
       },
       {
-        "card": "Phosani's Nightmare",
-        "rarity": "Common",
-        "fraction": "4/100"
-      },
-      {
         "card": "The Nightmare",
         "rarity": "Common",
         "fraction": "4/100"
@@ -15534,7 +15300,7 @@
         "fraction": "1/533.3"
       },
       {
-        "card": "Manta ray",
+        "card": "Manta ray (sailing)",
         "rarity": "Rare",
         "fraction": "1/264"
       }
@@ -18489,11 +18255,6 @@
         "fraction": "3/128"
       },
       {
-        "card": "Phosani's Nightmare",
-        "rarity": "Common",
-        "fraction": "6/100"
-      },
-      {
         "card": "The Nightmare",
         "rarity": "Common",
         "fraction": "6/100"
@@ -19558,11 +19319,6 @@
         "fraction": "3/128"
       },
       {
-        "card": "Phosani's Nightmare",
-        "rarity": "Common",
-        "fraction": "6/100"
-      },
-      {
         "card": "The Nightmare",
         "rarity": "Common",
         "fraction": "6/100"
@@ -19678,7 +19434,7 @@
         "fraction": "1/100"
       },
       {
-        "card": "Manta ray",
+        "card": "Manta ray (sailing)",
         "rarity": "Common",
         "fraction": "15/99"
       }
@@ -20077,7 +19833,7 @@
         "fraction": "3/100"
       },
       {
-        "card": "Manta ray",
+        "card": "Manta ray (sailing)",
         "rarity": "Common",
         "fraction": "5/99"
       },
@@ -20674,7 +20430,7 @@
         "fraction": "2/128"
       },
       {
-        "card": "Rock Golem",
+        "card": "Rock Golem (monster)",
         "rarity": "Uncommon",
         "fraction": "3/78"
       },
@@ -20737,6 +20493,11 @@
         "card": "Giant lobster",
         "rarity": "Uncommon",
         "fraction": "2/128"
+      },
+      {
+        "card": "Minotaur (f2p)",
+        "rarity": "Common",
+        "fraction": "6/101"
       }
     ],
     "rdtMonsters": [],
@@ -20915,7 +20676,7 @@
         "fraction": "3/128"
       },
       {
-        "card": "Rock Golem",
+        "card": "Rock Golem (monster)",
         "rarity": "Uncommon",
         "fraction": "3/78"
       },
@@ -20978,6 +20739,11 @@
         "card": "Giant lobster",
         "rarity": "Uncommon",
         "fraction": "4/128"
+      },
+      {
+        "card": "Minotaur (f2p)",
+        "rarity": "Common",
+        "fraction": "6/101"
       }
     ],
     "rdtMonsters": [],
@@ -21301,7 +21067,7 @@
         "fraction": "1/128"
       },
       {
-        "card": "Rock Golem",
+        "card": "Rock Golem (monster)",
         "rarity": "Common",
         "fraction": "4/78"
       },
@@ -22142,11 +21908,6 @@
         "fraction": "3/36"
       },
       {
-        "card": "Phosani's Nightmare",
-        "rarity": "Common",
-        "fraction": "4/100"
-      },
-      {
         "card": "The Nightmare",
         "rarity": "Common",
         "fraction": "4/100"
@@ -22353,7 +22114,7 @@
         "fraction": "1/128"
       },
       {
-        "card": "Rock Golem",
+        "card": "Rock Golem (monster)",
         "rarity": "Common",
         "fraction": "10/128"
       },
@@ -22396,11 +22157,6 @@
         "card": "Zalcano",
         "rarity": "Common",
         "fraction": "2/36"
-      },
-      {
-        "card": "Phosani's Nightmare",
-        "rarity": "Common",
-        "fraction": "5/100"
       },
       {
         "card": "The Nightmare",
@@ -22608,7 +22364,7 @@
         "fraction": "3/128"
       },
       {
-        "card": "Rock Golem",
+        "card": "Rock Golem (monster)",
         "rarity": "Uncommon",
         "fraction": "3/128"
       },
@@ -22676,11 +22432,6 @@
         "card": "Basilisk Knight",
         "rarity": "Uncommon",
         "fraction": "1/52"
-      },
-      {
-        "card": "Phosani's Nightmare",
-        "rarity": "Common",
-        "fraction": "4/100"
       },
       {
         "card": "The Nightmare",
@@ -22888,7 +22639,7 @@
         "fraction": "4/128"
       },
       {
-        "card": "Rock Golem",
+        "card": "Rock Golem (monster)",
         "rarity": "Rare",
         "fraction": "1/128"
       },
@@ -23006,11 +22757,6 @@
         "card": "Zalcano",
         "rarity": "Common",
         "fraction": "2/36"
-      },
-      {
-        "card": "Phosani's Nightmare",
-        "rarity": "Uncommon",
-        "fraction": "2/100"
       },
       {
         "card": "The Nightmare",
@@ -23475,7 +23221,7 @@
         "fraction": "6/128"
       },
       {
-        "card": "Rock Golem",
+        "card": "Rock Golem (monster)",
         "rarity": "Common",
         "fraction": "25/128"
       },
@@ -23573,11 +23319,6 @@
         "card": "Zalcano",
         "rarity": "Uncommon",
         "fraction": "1/36"
-      },
-      {
-        "card": "Phosani's Nightmare",
-        "rarity": "Common",
-        "fraction": "4/100"
       },
       {
         "card": "The Nightmare",
@@ -25616,6 +25357,11 @@
         "card": "Undead Zealot",
         "rarity": "Always",
         "fraction": "1/1"
+      },
+      {
+        "card": "Minotaur (f2p)",
+        "rarity": "Always",
+        "fraction": "1/1"
       }
     ],
     "rdtMonsters": [],
@@ -26040,11 +25786,6 @@
       },
       {
         "card": "Basilisk Knight",
-        "rarity": "Always",
-        "fraction": "1/1"
-      },
-      {
-        "card": "Phosani's Nightmare",
         "rarity": "Always",
         "fraction": "1/1"
       },
@@ -29018,7 +28759,7 @@
         "fraction": "5/129"
       },
       {
-        "card": "Rock Golem",
+        "card": "Rock Golem (monster)",
         "rarity": "Common",
         "fraction": "30/78"
       },
@@ -29645,6 +29386,11 @@
         "card": "Malevolent Mage",
         "rarity": "Common",
         "fraction": ""
+      },
+      {
+        "card": "Minotaur (f2p)",
+        "rarity": "Rare",
+        "fraction": "1/101"
       }
     ],
     "rdtMonsters": [],
@@ -30645,11 +30391,6 @@
         "card": "Basilisk Knight",
         "rarity": "Common",
         "fraction": "3/52"
-      },
-      {
-        "card": "Phosani's Nightmare",
-        "rarity": "Common",
-        "fraction": "4/100"
       },
       {
         "card": "The Nightmare",
@@ -31929,11 +31670,6 @@
         "fraction": "6/52"
       },
       {
-        "card": "Phosani's Nightmare",
-        "rarity": "Common",
-        "fraction": "4/100"
-      },
-      {
         "card": "The Nightmare",
         "rarity": "Common",
         "fraction": "4/100"
@@ -32989,7 +32725,7 @@
         "fraction": "4/128"
       },
       {
-        "card": "Rock Golem",
+        "card": "Rock Golem (monster)",
         "rarity": "Common",
         "fraction": "4/78"
       },
@@ -34924,11 +34660,6 @@
         "fraction": "1/36"
       },
       {
-        "card": "Phosani's Nightmare",
-        "rarity": "Common",
-        "fraction": "4/100"
-      },
-      {
         "card": "The Nightmare",
         "rarity": "Common",
         "fraction": "4/100"
@@ -35591,11 +35322,6 @@
         "fraction": "3/52"
       },
       {
-        "card": "Phosani's Nightmare",
-        "rarity": "Common",
-        "fraction": "4/100"
-      },
-      {
         "card": "The Nightmare",
         "rarity": "Common",
         "fraction": "4/100"
@@ -36003,11 +35729,6 @@
         "card": "Zalcano",
         "rarity": "Uncommon",
         "fraction": "1/36"
-      },
-      {
-        "card": "Phosani's Nightmare",
-        "rarity": "Common",
-        "fraction": "4/100"
       },
       {
         "card": "The Nightmare",
@@ -38890,11 +38611,6 @@
         "fraction": "7/52"
       },
       {
-        "card": "Phosani's Nightmare",
-        "rarity": "Uncommon",
-        "fraction": "2/100"
-      },
-      {
         "card": "The Nightmare",
         "rarity": "Uncommon",
         "fraction": "2/100"
@@ -39323,6 +39039,11 @@
         "card": "H.A.M. Member",
         "rarity": "Common",
         "fraction": "17/102"
+      },
+      {
+        "card": "Minotaur (f2p)",
+        "rarity": "Common",
+        "fraction": "20/101"
       }
     ],
     "rdtMonsters": [
@@ -42561,7 +42282,7 @@
         "fraction": "1/3,542.49"
       },
       {
-        "card": "Rock Golem",
+        "card": "Rock Golem (monster)",
         "rarity": "Very Rare",
         "fraction": "1/8,192"
       },
@@ -45033,6 +44754,11 @@
         "card": "Minotaur",
         "rarity": "Uncommon",
         "fraction": "3/101"
+      },
+      {
+        "card": "Minotaur (f2p)",
+        "rarity": "Uncommon",
+        "fraction": "3/101"
       }
     ],
     "rdtMonsters": [],
@@ -45221,29 +44947,33 @@
         "card": "Dagannoth Supreme",
         "rarity": "Uncommon",
         "fraction": "4/128"
+      },
+      {
+        "card": "Minotaur (f2p)",
+        "rarity": "Common",
+        "fraction": "10/101"
       }
     ],
     "rdtMonsters": [],
     "quests": [],
     "gathering": null,
     "production": {
-      "skill": "Fletching",
-      "level": 15,
-      "xp": 37.5,
-      "facilities": null,
-      "tools": null,
+      "skill": "Smithing",
+      "level": 20,
+      "xp": null,
+      "facilities": "Anvil",
+      "tools": [
+        "Hammer"
+      ],
       "quests": null,
       "ingredients": [
         {
-          "item": "Headless arrow",
-          "quantity": 15
-        },
-        {
-          "item": "Iron arrowtips",
-          "quantity": 15
+          "item": "Iron bar",
+          "quantity": 1
         }
       ],
-      "outputQuantity": 15
+      "outputQuantity": 1,
+      "version": "Iron arrowtips"
     },
     "spawns": [
       "South"
@@ -45637,6 +45367,11 @@
         "card": "Tribeswoman",
         "rarity": "Uncommon",
         "fraction": "2/138"
+      },
+      {
+        "card": "Dagannoth Supreme",
+        "rarity": "Uncommon",
+        "fraction": "5/128"
       }
     ],
     "rdtMonsters": [
@@ -45969,23 +45704,22 @@
     "quests": [],
     "gathering": null,
     "production": {
-      "skill": "Fletching",
-      "level": 30,
-      "xp": 75.0,
-      "facilities": null,
-      "tools": null,
+      "skill": "Smithing",
+      "level": 35,
+      "xp": null,
+      "facilities": "Anvil",
+      "tools": [
+        "Hammer"
+      ],
       "quests": null,
       "ingredients": [
         {
-          "item": "Headless arrow",
-          "quantity": 15
-        },
-        {
-          "item": "Steel arrowtips",
-          "quantity": 15
+          "item": "Steel bar",
+          "quantity": 1
         }
       ],
-      "outputQuantity": 15
+      "outputQuantity": 1,
+      "version": "Steel arrowtips"
     },
     "spawns": [
       "Colossal Wyrm Agility Course advanced route"
@@ -46148,23 +45882,22 @@
     "quests": [],
     "gathering": null,
     "production": {
-      "skill": "Fletching",
-      "level": 45,
-      "xp": 112.5,
-      "facilities": null,
-      "tools": null,
+      "skill": "Smithing",
+      "level": 55,
+      "xp": null,
+      "facilities": "Anvil",
+      "tools": [
+        "Hammer"
+      ],
       "quests": null,
       "ingredients": [
         {
-          "item": "Headless arrow",
-          "quantity": 15
-        },
-        {
-          "item": "Mithril arrowtips",
-          "quantity": 15
+          "item": "Mithril bar",
+          "quantity": 1
         }
       ],
-      "outputQuantity": 15
+      "outputQuantity": 1,
+      "version": "Mithril arrowtips"
     },
     "spawns": [
       "Ranging Guild - shooting range"
@@ -46392,23 +46125,22 @@
     "quests": [],
     "gathering": null,
     "production": {
-      "skill": "Fletching",
-      "level": 60,
-      "xp": 150.0,
-      "facilities": null,
-      "tools": null,
+      "skill": "Smithing",
+      "level": 75,
+      "xp": null,
+      "facilities": "Anvil",
+      "tools": [
+        "Hammer"
+      ],
       "quests": null,
       "ingredients": [
         {
-          "item": "Headless arrow",
-          "quantity": 15
-        },
-        {
-          "item": "Adamant arrowtips",
-          "quantity": 15
+          "item": "Adamantite bar",
+          "quantity": 1
         }
       ],
-      "outputQuantity": 15
+      "outputQuantity": 1,
+      "version": "Adamant arrowtips"
     },
     "spawns": [],
     "shopBought": true,
@@ -46573,11 +46305,6 @@
         "card": "Crystal impling",
         "rarity": "Common",
         "fraction": "1/18"
-      },
-      {
-        "card": "Phosani's Nightmare",
-        "rarity": "Uncommon",
-        "fraction": "3/100"
       },
       {
         "card": "The Nightmare",
@@ -47030,23 +46757,22 @@
     "quests": [],
     "gathering": null,
     "production": {
-      "skill": "Fletching",
-      "level": 75,
-      "xp": 187.5,
-      "facilities": null,
-      "tools": null,
+      "skill": "Smithing",
+      "level": 90,
+      "xp": null,
+      "facilities": "Anvil",
+      "tools": [
+        "Hammer"
+      ],
       "quests": null,
       "ingredients": [
         {
-          "item": "Headless arrow",
-          "quantity": 15
-        },
-        {
-          "item": "Rune arrowtips",
-          "quantity": 15
+          "item": "Runite bar",
+          "quantity": 1
         }
       ],
-      "outputQuantity": 15
+      "outputQuantity": 1,
+      "version": "Rune arrowtips"
     },
     "spawns": [],
     "shopBought": true,
@@ -49452,7 +49178,7 @@
         "fraction": "1/193.61"
       },
       {
-        "card": "Rock Golem",
+        "card": "Rock Golem (monster)",
         "rarity": "Very Rare",
         "fraction": "1/8,192"
       },
@@ -51034,7 +50760,7 @@
         "fraction": "1/193.61"
       },
       {
-        "card": "Rock Golem",
+        "card": "Rock Golem (monster)",
         "rarity": "Very Rare",
         "fraction": "1/8,192"
       },
@@ -57369,6 +57095,11 @@
         "card": "Minotaur",
         "rarity": "Common",
         "fraction": "10/101"
+      },
+      {
+        "card": "Minotaur (f2p)",
+        "rarity": "Common",
+        "fraction": "10/101"
       }
     ],
     "rdtMonsters": [],
@@ -60754,6 +60485,11 @@
         "card": "Gorak",
         "rarity": "Uncommon",
         "fraction": "2/128"
+      },
+      {
+        "card": "Minotaur (f2p)",
+        "rarity": "Uncommon",
+        "fraction": "4/101"
       }
     ],
     "rdtMonsters": [],
@@ -61644,6 +61380,11 @@
       },
       {
         "card": "Minotaur",
+        "rarity": "Common",
+        "fraction": "10/101"
+      },
+      {
+        "card": "Minotaur (f2p)",
         "rarity": "Common",
         "fraction": "10/101"
       }
@@ -62974,7 +62715,7 @@
         "fraction": "1/4,056.39"
       },
       {
-        "card": "Rock Golem",
+        "card": "Rock Golem (monster)",
         "rarity": "Very Rare",
         "fraction": "1/131,072"
       },
@@ -64566,7 +64307,7 @@
         "fraction": "1/10,817.03"
       },
       {
-        "card": "Rock Golem",
+        "card": "Rock Golem (monster)",
         "rarity": "Very Rare",
         "fraction": "1/349,525.33"
       },
@@ -65321,7 +65062,7 @@
         "fraction": "13/128"
       },
       {
-        "card": "Rock Golem",
+        "card": "Rock Golem (monster)",
         "rarity": "Uncommon",
         "fraction": "4/128"
       },
@@ -65697,7 +65438,7 @@
         "fraction": "4/500"
       },
       {
-        "card": "Rock Golem",
+        "card": "Rock Golem (monster)",
         "rarity": "Rare",
         "fraction": "1/128"
       }
@@ -65832,7 +65573,7 @@
         "fraction": "5/128"
       },
       {
-        "card": "Rock Golem",
+        "card": "Rock Golem (monster)",
         "rarity": "Rare",
         "fraction": "1/128"
       },
@@ -74366,6 +74107,11 @@
         "card": "Minotaur",
         "rarity": "Common",
         "fraction": "5/101"
+      },
+      {
+        "card": "Minotaur (f2p)",
+        "rarity": "Common",
+        "fraction": "5/101"
       }
     ],
     "rdtMonsters": [],
@@ -76682,7 +76428,7 @@
         "fraction": "1/1,180.83"
       },
       {
-        "card": "Rock Golem",
+        "card": "Rock Golem (monster)",
         "rarity": "Very Rare",
         "fraction": "1/2,730.67"
       },
@@ -77519,11 +77265,6 @@
         "card": "Vorkath",
         "rarity": "Common",
         "fraction": ""
-      },
-      {
-        "card": "Phosani's Nightmare",
-        "rarity": "Common",
-        "fraction": "4/100"
       },
       {
         "card": "The Nightmare",
@@ -79392,7 +79133,7 @@
         "fraction": "1/1,771.24"
       },
       {
-        "card": "Rock Golem",
+        "card": "Rock Golem (monster)",
         "rarity": "Very Rare",
         "fraction": "1/4,096"
       },
@@ -80320,11 +80061,6 @@
         "fraction": "2/100"
       },
       {
-        "card": "Phosani's Nightmare",
-        "rarity": "Uncommon",
-        "fraction": "3/100"
-      },
-      {
         "card": "The Nightmare",
         "rarity": "Uncommon",
         "fraction": "3/100"
@@ -81237,7 +80973,7 @@
         "fraction": "1/442.81"
       },
       {
-        "card": "Rock Golem",
+        "card": "Rock Golem (monster)",
         "rarity": "Very Rare",
         "fraction": "1/1,024"
       },
@@ -82135,11 +81871,6 @@
         "fraction": "3/100"
       },
       {
-        "card": "Phosani's Nightmare",
-        "rarity": "Uncommon",
-        "fraction": "3/100"
-      },
-      {
         "card": "The Nightmare",
         "rarity": "Uncommon",
         "fraction": "3/100"
@@ -83032,7 +82763,7 @@
         "fraction": "1/221.41"
       },
       {
-        "card": "Rock Golem",
+        "card": "Rock Golem (monster)",
         "rarity": "Rare",
         "fraction": "1/512"
       },
@@ -84827,7 +84558,7 @@
         "fraction": "1/110.7"
       },
       {
-        "card": "Rock Golem",
+        "card": "Rock Golem (monster)",
         "rarity": "Rare",
         "fraction": "1/256"
       },
@@ -86385,146 +86116,6 @@
     "clueTiers": [],
     "alwaysAvailable": false
   },
-  "Ruby ring": {
-    "monsters": [
-      {
-        "card": "Otherworldly being",
-        "rarity": "Uncommon",
-        "fraction": "2/128"
-      },
-      {
-        "card": "Vampyre Juvinate",
-        "rarity": "Uncommon",
-        "fraction": "9/256"
-      },
-      {
-        "card": "Elite Black Knight",
-        "rarity": "Uncommon",
-        "fraction": "3/122"
-      },
-      {
-        "card": "Frigatebird",
-        "rarity": "Common",
-        "fraction": "5/50"
-      }
-    ],
-    "rdtMonsters": [],
-    "quests": [],
-    "gathering": null,
-    "production": {
-      "skill": "Crafting",
-      "level": 34,
-      "xp": 70.0,
-      "facilities": "Furnace",
-      "tools": [
-        "Ring mould"
-      ],
-      "quests": null,
-      "ingredients": [
-        {
-          "item": "Gold bar",
-          "quantity": 1
-        },
-        {
-          "item": "Ruby",
-          "quantity": 1
-        }
-      ],
-      "outputQuantity": 1
-    },
-    "spawns": [
-      "Varrock"
-    ],
-    "shopBought": true,
-    "shops": [
-      {
-        "seller": "Grum's Gold Exchange.",
-        "price": 2025,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Irksol (shop)",
-        "price": 1012,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Conara's Jewels",
-        "price": 2025,
-        "currency": "Coins"
-      }
-    ],
-    "clueTiers": [],
-    "alwaysAvailable": false
-  },
-  "Diamond ring": {
-    "monsters": [
-      {
-        "card": "Elite Black Knight",
-        "rarity": "Uncommon",
-        "fraction": "3/122"
-      },
-      {
-        "card": "Elite Dark Warrior",
-        "rarity": "Rare",
-        "fraction": "1/117"
-      },
-      {
-        "card": "Elite Dark Ranger",
-        "rarity": "Rare",
-        "fraction": "1/117"
-      },
-      {
-        "card": "Elite Dark Mage",
-        "rarity": "Rare",
-        "fraction": "1/117"
-      },
-      {
-        "card": "Albatross",
-        "rarity": "Common",
-        "fraction": "5/50"
-      }
-    ],
-    "rdtMonsters": [],
-    "quests": [],
-    "gathering": null,
-    "production": {
-      "skill": "Crafting",
-      "level": 43,
-      "xp": 85.0,
-      "facilities": "Furnace",
-      "tools": [
-        "Ring mould"
-      ],
-      "quests": null,
-      "ingredients": [
-        {
-          "item": "Gold bar",
-          "quantity": 1
-        },
-        {
-          "item": "Diamond",
-          "quantity": 1
-        }
-      ],
-      "outputQuantity": 1
-    },
-    "spawns": [],
-    "shopBought": true,
-    "shops": [
-      {
-        "seller": "Grum's Gold Exchange.",
-        "price": 3525,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Conara's Jewels",
-        "price": 3525,
-        "currency": "Coins"
-      }
-    ],
-    "clueTiers": [],
-    "alwaysAvailable": false
-  },
   "Gold necklace": {
     "monsters": [
       {
@@ -86574,216 +86165,6 @@
     "clueTiers": [],
     "alwaysAvailable": false
   },
-  "Sapphire necklace": {
-    "monsters": [
-      {
-        "card": "Mummy",
-        "rarity": "Uncommon",
-        "fraction": "10/513"
-      },
-      {
-        "card": "Elite Black Knight",
-        "rarity": "Common",
-        "fraction": "7/122"
-      }
-    ],
-    "rdtMonsters": [],
-    "quests": [],
-    "gathering": null,
-    "production": {
-      "skill": "Crafting",
-      "level": 22,
-      "xp": 55.0,
-      "facilities": "Furnace",
-      "tools": [
-        "Necklace mould"
-      ],
-      "quests": null,
-      "ingredients": [
-        {
-          "item": "Sapphire",
-          "quantity": 1
-        },
-        {
-          "item": "Gold bar",
-          "quantity": 1
-        }
-      ],
-      "outputQuantity": 1
-    },
-    "spawns": [],
-    "shopBought": true,
-    "shops": [
-      {
-        "seller": "Grum's Gold Exchange.",
-        "price": 1050,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Conara's Jewels",
-        "price": 1050,
-        "currency": "Coins"
-      }
-    ],
-    "clueTiers": [],
-    "alwaysAvailable": false
-  },
-  "Emerald necklace": {
-    "monsters": [
-      {
-        "card": "Abyssal guardian",
-        "rarity": "Uncommon",
-        "fraction": "3/256"
-      },
-      {
-        "card": "Abyssal Sire",
-        "rarity": "Uncommon",
-        "fraction": "4/139"
-      },
-      {
-        "card": "Abyssal leech",
-        "rarity": "Uncommon",
-        "fraction": "3/256"
-      },
-      {
-        "card": "Abyssal walker",
-        "rarity": "Uncommon",
-        "fraction": "3/256"
-      }
-    ],
-    "rdtMonsters": [],
-    "quests": [],
-    "gathering": null,
-    "production": {
-      "skill": "Crafting",
-      "level": 29,
-      "xp": 60.0,
-      "facilities": "Furnace",
-      "tools": [
-        "Necklace mould"
-      ],
-      "quests": null,
-      "ingredients": [
-        {
-          "item": "Emerald",
-          "quantity": 1
-        },
-        {
-          "item": "Gold bar",
-          "quantity": 1
-        }
-      ],
-      "outputQuantity": 1
-    },
-    "spawns": [],
-    "shopBought": true,
-    "shops": [
-      {
-        "seller": "Grum's Gold Exchange.",
-        "price": 1425,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Conara's Jewels",
-        "price": 1425,
-        "currency": "Coins"
-      }
-    ],
-    "clueTiers": [],
-    "alwaysAvailable": false
-  },
-  "Ruby necklace": {
-    "monsters": [
-      {
-        "card": "Hammerhead shark",
-        "rarity": "Common",
-        "fraction": "12/100"
-      }
-    ],
-    "rdtMonsters": [],
-    "quests": [],
-    "gathering": null,
-    "production": {
-      "skill": "Crafting",
-      "level": 40,
-      "xp": 75.0,
-      "facilities": "Furnace",
-      "tools": [
-        "Necklace mould"
-      ],
-      "quests": null,
-      "ingredients": [
-        {
-          "item": "Ruby",
-          "quantity": 1
-        },
-        {
-          "item": "Gold bar",
-          "quantity": 1
-        }
-      ],
-      "outputQuantity": 1
-    },
-    "spawns": [],
-    "shopBought": true,
-    "shops": [
-      {
-        "seller": "Grum's Gold Exchange.",
-        "price": 2175,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Conara's Jewels",
-        "price": 2175,
-        "currency": "Coins"
-      }
-    ],
-    "clueTiers": [],
-    "alwaysAvailable": false
-  },
-  "Diamond necklace": {
-    "monsters": [],
-    "rdtMonsters": [],
-    "quests": [],
-    "gathering": null,
-    "production": {
-      "skill": "Crafting",
-      "level": 56,
-      "xp": 90.0,
-      "facilities": "Furnace",
-      "tools": [
-        "Necklace mould"
-      ],
-      "quests": null,
-      "ingredients": [
-        {
-          "item": "Gold bar",
-          "quantity": 1
-        },
-        {
-          "item": "Diamond",
-          "quantity": 1
-        }
-      ],
-      "outputQuantity": 1
-    },
-    "spawns": [],
-    "shopBought": true,
-    "shops": [
-      {
-        "seller": "Grum's Gold Exchange.",
-        "price": 3675,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Conara's Jewels",
-        "price": 3675,
-        "currency": "Coins"
-      }
-    ],
-    "clueTiers": [],
-    "alwaysAvailable": false
-  },
   "Gold amulet": {
     "monsters": [
       {
@@ -86825,198 +86206,6 @@
       {
         "seller": "Conara's Jewels",
         "price": 350,
-        "currency": "Coins"
-      }
-    ],
-    "clueTiers": [],
-    "alwaysAvailable": false
-  },
-  "Sapphire amulet": {
-    "monsters": [],
-    "rdtMonsters": [],
-    "quests": [],
-    "gathering": null,
-    "production": {
-      "skill": "Crafting",
-      "level": 1,
-      "xp": 4.0,
-      "facilities": null,
-      "tools": null,
-      "quests": null,
-      "ingredients": [
-        {
-          "item": "Sapphire amulet (u)",
-          "quantity": 1
-        },
-        {
-          "item": "Ball of wool",
-          "quantity": 1
-        }
-      ],
-      "outputQuantity": 1
-    },
-    "spawns": [],
-    "shopBought": true,
-    "shops": [
-      {
-        "seller": "Grum's Gold Exchange.",
-        "price": 900,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Conara's Jewels",
-        "price": 900,
-        "currency": "Coins"
-      }
-    ],
-    "clueTiers": [],
-    "alwaysAvailable": false
-  },
-  "Emerald amulet": {
-    "monsters": [
-      {
-        "card": "Mummy",
-        "rarity": "Uncommon",
-        "fraction": "10/513"
-      }
-    ],
-    "rdtMonsters": [],
-    "quests": [],
-    "gathering": null,
-    "production": {
-      "skill": "Crafting",
-      "level": 1,
-      "xp": 4.0,
-      "facilities": null,
-      "tools": null,
-      "quests": null,
-      "ingredients": [
-        {
-          "item": "Emerald amulet (u)",
-          "quantity": 1
-        },
-        {
-          "item": "Ball of wool",
-          "quantity": 1
-        }
-      ],
-      "outputQuantity": 1
-    },
-    "spawns": [],
-    "shopBought": true,
-    "shops": [
-      {
-        "seller": "Grum's Gold Exchange.",
-        "price": 1275,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Conara's Jewels",
-        "price": 1275,
-        "currency": "Coins"
-      }
-    ],
-    "clueTiers": [],
-    "alwaysAvailable": false
-  },
-  "Ruby amulet": {
-    "monsters": [
-      {
-        "card": "Mutated Bloodveld",
-        "rarity": "Uncommon",
-        "fraction": "2/128"
-      },
-      {
-        "card": "Insatiable mutated Bloodveld",
-        "rarity": "Common",
-        "fraction": ""
-      }
-    ],
-    "rdtMonsters": [],
-    "quests": [],
-    "gathering": null,
-    "production": {
-      "skill": "Crafting",
-      "level": 1,
-      "xp": 4.0,
-      "facilities": null,
-      "tools": null,
-      "quests": null,
-      "ingredients": [
-        {
-          "item": "Ruby amulet (u)",
-          "quantity": 1
-        },
-        {
-          "item": "Ball of wool",
-          "quantity": 1
-        }
-      ],
-      "outputQuantity": 1
-    },
-    "spawns": [],
-    "shopBought": true,
-    "shops": [
-      {
-        "seller": "Grum's Gold Exchange.",
-        "price": 2025,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Conara's Jewels",
-        "price": 2025,
-        "currency": "Coins"
-      }
-    ],
-    "clueTiers": [],
-    "alwaysAvailable": false
-  },
-  "Diamond amulet": {
-    "monsters": [
-      {
-        "card": "Magpie impling",
-        "rarity": "Common",
-        "fraction": "1/21"
-      },
-      {
-        "card": "Great white shark",
-        "rarity": "Common",
-        "fraction": "12/100"
-      }
-    ],
-    "rdtMonsters": [],
-    "quests": [],
-    "gathering": null,
-    "production": {
-      "skill": "Crafting",
-      "level": 1,
-      "xp": 4.0,
-      "facilities": null,
-      "tools": null,
-      "quests": null,
-      "ingredients": [
-        {
-          "item": "Diamond amulet (u)",
-          "quantity": 1
-        },
-        {
-          "item": "Ball of wool",
-          "quantity": 1
-        }
-      ],
-      "outputQuantity": 1
-    },
-    "spawns": [],
-    "shopBought": true,
-    "shops": [
-      {
-        "seller": "Grum's Gold Exchange.",
-        "price": 3525,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Conara's Jewels",
-        "price": 3525,
         "currency": "Coins"
       }
     ],
@@ -87115,33 +86304,42 @@
         "card": "Giant Mole",
         "rarity": "Common",
         "fraction": "7/131"
+      },
+      {
+        "card": "Mutated Bloodveld",
+        "rarity": "Uncommon",
+        "fraction": "2/128"
+      },
+      {
+        "card": "Insatiable mutated Bloodveld",
+        "rarity": "Common",
+        "fraction": ""
       }
     ],
     "rdtMonsters": [],
     "quests": [],
     "gathering": null,
     "production": {
-      "skill": "Magic",
-      "level": 49,
-      "xp": 59.0,
-      "facilities": null,
-      "tools": null,
+      "skill": "Crafting",
+      "level": 50,
+      "xp": null,
+      "facilities": "Furnace",
+      "tools": [
+        "Amulet mould"
+      ],
       "quests": null,
       "ingredients": [
         {
-          "item": "Ruby amulet",
+          "item": "Ruby",
           "quantity": 1
         },
         {
-          "item": "Cosmic rune",
+          "item": "Gold bar",
           "quantity": 1
-        },
-        {
-          "item": "Fire rune",
-          "quantity": 5
         }
       ],
-      "outputQuantity": 1
+      "outputQuantity": 1,
+      "version": "Ruby amulet (u)"
     },
     "spawns": [],
     "shopBought": true,
@@ -87154,6 +86352,16 @@
       {
         "seller": "Davon's Amulet Store.(Karamja gloves)",
         "price": 2227,
+        "currency": "Coins"
+      },
+      {
+        "seller": "Grum's Gold Exchange.",
+        "price": 2025,
+        "currency": "Coins"
+      },
+      {
+        "seller": "Conara's Jewels",
+        "price": 2025,
         "currency": "Coins"
       }
     ],
@@ -87177,27 +86385,26 @@
     "quests": [],
     "gathering": null,
     "production": {
-      "skill": "Magic",
-      "level": 7,
-      "xp": 17.5,
-      "facilities": null,
-      "tools": null,
+      "skill": "Crafting",
+      "level": 24,
+      "xp": null,
+      "facilities": "Furnace",
+      "tools": [
+        "Amulet mould"
+      ],
       "quests": null,
       "ingredients": [
         {
-          "item": "Sapphire amulet",
+          "item": "Sapphire",
           "quantity": 1
         },
         {
-          "item": "Cosmic rune",
-          "quantity": 1
-        },
-        {
-          "item": "Water rune",
+          "item": "Gold bar",
           "quantity": 1
         }
       ],
-      "outputQuantity": 1
+      "outputQuantity": 1,
+      "version": "Sapphire amulet (u)"
     },
     "spawns": [],
     "shopBought": true,
@@ -87210,6 +86417,16 @@
       {
         "seller": "Davon's Amulet Store.(Karamja gloves)",
         "price": 990,
+        "currency": "Coins"
+      },
+      {
+        "seller": "Grum's Gold Exchange.",
+        "price": 900,
+        "currency": "Coins"
+      },
+      {
+        "seller": "Conara's Jewels",
+        "price": 900,
         "currency": "Coins"
       }
     ],
@@ -87224,33 +86441,37 @@
         "card": "Undead Druid",
         "rarity": "Common",
         "fraction": "5/100"
+      },
+      {
+        "card": "Mummy",
+        "rarity": "Uncommon",
+        "fraction": "10/513"
       }
     ],
     "rdtMonsters": [],
     "quests": [],
     "gathering": null,
     "production": {
-      "skill": "Magic",
-      "level": 27,
-      "xp": 37.0,
-      "facilities": null,
-      "tools": null,
+      "skill": "Crafting",
+      "level": 31,
+      "xp": null,
+      "facilities": "Furnace",
+      "tools": [
+        "Amulet mould"
+      ],
       "quests": null,
       "ingredients": [
         {
-          "item": "Emerald amulet",
+          "item": "Emerald",
           "quantity": 1
         },
         {
-          "item": "Cosmic rune",
+          "item": "Gold bar",
           "quantity": 1
-        },
-        {
-          "item": "Air rune",
-          "quantity": 3
         }
       ],
-      "outputQuantity": 1
+      "outputQuantity": 1,
+      "version": "Emerald amulet (u)"
     },
     "spawns": [],
     "shopBought": true,
@@ -87263,6 +86484,16 @@
       {
         "seller": "Davon's Amulet Store.(Karamja gloves)",
         "price": 1402,
+        "currency": "Coins"
+      },
+      {
+        "seller": "Grum's Gold Exchange.",
+        "price": 1275,
+        "currency": "Coins"
+      },
+      {
+        "seller": "Conara's Jewels",
+        "price": 1275,
         "currency": "Coins"
       }
     ],
@@ -87290,33 +86521,37 @@
         "card": "King Black Dragon",
         "rarity": "Common",
         "fraction": "7/128"
+      },
+      {
+        "card": "Great white shark",
+        "rarity": "Common",
+        "fraction": "12/100"
       }
     ],
     "rdtMonsters": [],
     "quests": [],
     "gathering": null,
     "production": {
-      "skill": "Magic",
-      "level": 57,
-      "xp": 67.0,
-      "facilities": null,
-      "tools": null,
+      "skill": "Crafting",
+      "level": 70,
+      "xp": null,
+      "facilities": "Furnace",
+      "tools": [
+        "Amulet mould"
+      ],
       "quests": null,
       "ingredients": [
         {
-          "item": "Diamond amulet",
+          "item": "Gold bar",
           "quantity": 1
         },
         {
-          "item": "Cosmic rune",
+          "item": "Diamond",
           "quantity": 1
-        },
-        {
-          "item": "Earth rune",
-          "quantity": 10
         }
       ],
-      "outputQuantity": 1
+      "outputQuantity": 1,
+      "version": "Diamond amulet (u)"
     },
     "spawns": [],
     "shopBought": true,
@@ -87329,6 +86564,16 @@
       {
         "seller": "Davon's Amulet Store.(Karamja gloves)",
         "price": 3877,
+        "currency": "Coins"
+      },
+      {
+        "seller": "Grum's Gold Exchange.",
+        "price": 3525,
+        "currency": "Coins"
+      },
+      {
+        "seller": "Conara's Jewels",
+        "price": 3525,
         "currency": "Coins"
       }
     ],
@@ -89285,7 +88530,7 @@
         "fraction": "3/100"
       },
       {
-        "card": "Manta ray",
+        "card": "Manta ray (sailing)",
         "rarity": "Common",
         "fraction": "5/99"
       }
@@ -90469,7 +89714,7 @@
         "fraction": "13/128"
       },
       {
-        "card": "Rock Golem",
+        "card": "Rock Golem (monster)",
         "rarity": "Common",
         "fraction": "13/78"
       },
@@ -95971,136 +95216,6 @@
     "clueTiers": [],
     "alwaysAvailable": false
   },
-  "Premade blurb' sp.": {
-    "monsters": [],
-    "rdtMonsters": [],
-    "quests": [],
-    "gathering": null,
-    "production": null,
-    "spawns": [
-      "Karamja - gnome glider station"
-    ],
-    "shopBought": true,
-    "shops": [
-      {
-        "seller": "Blurberry Bar",
-        "price": 30,
-        "currency": "Coins"
-      }
-    ],
-    "clueTiers": [],
-    "alwaysAvailable": false
-  },
-  "Premade choc s'dy": {
-    "monsters": [],
-    "rdtMonsters": [],
-    "quests": [],
-    "gathering": null,
-    "production": null,
-    "spawns": [
-      "Brimstail's cave"
-    ],
-    "shopBought": true,
-    "shops": [
-      {
-        "seller": "Blurberry Bar",
-        "price": 30,
-        "currency": "Coins"
-      }
-    ],
-    "clueTiers": [],
-    "alwaysAvailable": false
-  },
-  "Premade dr' dragon": {
-    "monsters": [],
-    "rdtMonsters": [],
-    "quests": [],
-    "gathering": null,
-    "production": null,
-    "spawns": [],
-    "shopBought": true,
-    "shops": [
-      {
-        "seller": "Blurberry Bar",
-        "price": 30,
-        "currency": "Coins"
-      }
-    ],
-    "clueTiers": [],
-    "alwaysAvailable": false
-  },
-  "Premade fr' blast": {
-    "monsters": [],
-    "rdtMonsters": [],
-    "quests": [],
-    "gathering": null,
-    "production": null,
-    "spawns": [],
-    "shopBought": true,
-    "shops": [
-      {
-        "seller": "Blurberry Bar",
-        "price": 30,
-        "currency": "Coins"
-      }
-    ],
-    "clueTiers": [],
-    "alwaysAvailable": false
-  },
-  "Premade p' punch": {
-    "monsters": [],
-    "rdtMonsters": [],
-    "quests": [],
-    "gathering": null,
-    "production": null,
-    "spawns": [],
-    "shopBought": true,
-    "shops": [
-      {
-        "seller": "Blurberry Bar",
-        "price": 30,
-        "currency": "Coins"
-      }
-    ],
-    "clueTiers": [],
-    "alwaysAvailable": false
-  },
-  "Premade sgg": {
-    "monsters": [],
-    "rdtMonsters": [],
-    "quests": [],
-    "gathering": null,
-    "production": null,
-    "spawns": [],
-    "shopBought": true,
-    "shops": [
-      {
-        "seller": "Blurberry Bar",
-        "price": 30,
-        "currency": "Coins"
-      }
-    ],
-    "clueTiers": [],
-    "alwaysAvailable": false
-  },
-  "Premade wiz blz'd": {
-    "monsters": [],
-    "rdtMonsters": [],
-    "quests": [],
-    "gathering": null,
-    "production": null,
-    "spawns": [],
-    "shopBought": true,
-    "shops": [
-      {
-        "seller": "Blurberry Bar",
-        "price": 30,
-        "currency": "Coins"
-      }
-    ],
-    "clueTiers": [],
-    "alwaysAvailable": false
-  },
   "Pineapple punch": {
     "monsters": [],
     "rdtMonsters": [],
@@ -96149,6 +95264,11 @@
         "seller": "Gabooty's Tai Bwo Wannai Drinky Store.(Karamja gloves)",
         "price": 28,
         "currency": "Trading sticks"
+      },
+      {
+        "seller": "Blurberry Bar",
+        "price": 30,
+        "currency": "Coins"
       }
     ],
     "clueTiers": [],
@@ -96200,6 +95320,11 @@
         "seller": "Gabooty's Tai Bwo Wannai Drinky Store.(Karamja gloves)",
         "price": 28,
         "currency": "Trading sticks"
+      },
+      {
+        "seller": "Blurberry Bar",
+        "price": 30,
+        "currency": "Coins"
       }
     ],
     "clueTiers": [],
@@ -96251,7 +95376,9 @@
       ],
       "outputQuantity": 1
     },
-    "spawns": [],
+    "spawns": [
+      "Karamja - gnome glider station"
+    ],
     "shopBought": true,
     "shops": [
       {
@@ -96263,6 +95390,11 @@
         "seller": "Gabooty's Tai Bwo Wannai Drinky Store.(Karamja gloves)",
         "price": 28,
         "currency": "Trading sticks"
+      },
+      {
+        "seller": "Blurberry Bar",
+        "price": 30,
+        "currency": "Coins"
       }
     ],
     "clueTiers": [],
@@ -96296,7 +95428,9 @@
       ],
       "outputQuantity": 1
     },
-    "spawns": [],
+    "spawns": [
+      "Brimstail's cave"
+    ],
     "shopBought": true,
     "shops": [
       {
@@ -96308,6 +95442,11 @@
         "seller": "Gabooty's Tai Bwo Wannai Drinky Store.(Karamja gloves)",
         "price": 28,
         "currency": "Trading sticks"
+      },
+      {
+        "seller": "Blurberry Bar",
+        "price": 30,
+        "currency": "Coins"
       }
     ],
     "clueTiers": [],
@@ -96357,6 +95496,11 @@
         "seller": "Gabooty's Tai Bwo Wannai Drinky Store.(Karamja gloves)",
         "price": 28,
         "currency": "Trading sticks"
+      },
+      {
+        "seller": "Blurberry Bar",
+        "price": 30,
+        "currency": "Coins"
       }
     ],
     "clueTiers": [],
@@ -96402,6 +95546,11 @@
         "seller": "Gabooty's Tai Bwo Wannai Drinky Store.(Karamja gloves)",
         "price": 28,
         "currency": "Trading sticks"
+      },
+      {
+        "seller": "Blurberry Bar",
+        "price": 30,
+        "currency": "Coins"
       }
     ],
     "clueTiers": [],
@@ -96439,6 +95588,11 @@
         "seller": "Gabooty's Tai Bwo Wannai Drinky Store.(Karamja gloves)",
         "price": 28,
         "currency": "Trading sticks"
+      },
+      {
+        "seller": "Blurberry Bar",
+        "price": 30,
+        "currency": "Coins"
       }
     ],
     "clueTiers": [],
@@ -97380,6 +96534,11 @@
         "card": "Minotaur",
         "rarity": "Uncommon",
         "fraction": "3/101"
+      },
+      {
+        "card": "Minotaur (f2p)",
+        "rarity": "Uncommon",
+        "fraction": "3/101"
       }
     ],
     "rdtMonsters": [],
@@ -97499,30 +96658,6 @@
     "clueTiers": [],
     "alwaysAvailable": false
   },
-  "Equa toad's legs": {
-    "monsters": [],
-    "rdtMonsters": [],
-    "quests": [],
-    "gathering": null,
-    "production": null,
-    "spawns": [],
-    "shopBought": false,
-    "shops": [],
-    "clueTiers": [],
-    "alwaysAvailable": false
-  },
-  "Spicy worm": {
-    "monsters": [],
-    "rdtMonsters": [],
-    "quests": [],
-    "gathering": null,
-    "production": null,
-    "spawns": [],
-    "shopBought": false,
-    "shops": [],
-    "clueTiers": [],
-    "alwaysAvailable": false
-  },
   "King worm": {
     "monsters": [
       {
@@ -97552,60 +96687,6 @@
     ],
     "shopBought": false,
     "shops": [],
-    "clueTiers": [],
-    "alwaysAvailable": false
-  },
-  "Batta tin": {
-    "monsters": [],
-    "rdtMonsters": [],
-    "quests": [],
-    "gathering": null,
-    "production": null,
-    "spawns": [],
-    "shopBought": true,
-    "shops": [
-      {
-        "seller": "Grand Tree Groceries",
-        "price": 10,
-        "currency": "Coins"
-      }
-    ],
-    "clueTiers": [],
-    "alwaysAvailable": false
-  },
-  "Crunchy tray": {
-    "monsters": [],
-    "rdtMonsters": [],
-    "quests": [],
-    "gathering": null,
-    "production": null,
-    "spawns": [],
-    "shopBought": true,
-    "shops": [
-      {
-        "seller": "Grand Tree Groceries",
-        "price": 10,
-        "currency": "Coins"
-      }
-    ],
-    "clueTiers": [],
-    "alwaysAvailable": false
-  },
-  "Gnomebowl mould": {
-    "monsters": [],
-    "rdtMonsters": [],
-    "quests": [],
-    "gathering": null,
-    "production": null,
-    "spawns": [],
-    "shopBought": true,
-    "shops": [
-      {
-        "seller": "Grand Tree Groceries",
-        "price": 10,
-        "currency": "Coins"
-      }
-    ],
     "clueTiers": [],
     "alwaysAvailable": false
   },
@@ -97690,8 +96771,19 @@
       "outputQuantity": 1
     },
     "spawns": [],
-    "shopBought": false,
-    "shops": [],
+    "shopBought": true,
+    "shops": [
+      {
+        "seller": "Gianne's Restaurant",
+        "price": 160,
+        "currency": "Coins"
+      },
+      {
+        "seller": "Gnome Waiter",
+        "price": 160,
+        "currency": "Coins"
+      }
+    ],
     "clueTiers": [],
     "alwaysAvailable": false
   },
@@ -97727,8 +96819,19 @@
       "outputQuantity": 1
     },
     "spawns": [],
-    "shopBought": false,
-    "shops": [],
+    "shopBought": true,
+    "shops": [
+      {
+        "seller": "Gianne's Restaurant",
+        "price": 160,
+        "currency": "Coins"
+      },
+      {
+        "seller": "Gnome Waiter",
+        "price": 160,
+        "currency": "Coins"
+      }
+    ],
     "clueTiers": [],
     "alwaysAvailable": false
   },
@@ -97757,8 +96860,19 @@
       "outputQuantity": 1
     },
     "spawns": [],
-    "shopBought": false,
-    "shops": [],
+    "shopBought": true,
+    "shops": [
+      {
+        "seller": "Gianne's Restaurant",
+        "price": 150,
+        "currency": "Coins"
+      },
+      {
+        "seller": "Gnome Waiter",
+        "price": 150,
+        "currency": "Coins"
+      }
+    ],
     "clueTiers": [],
     "alwaysAvailable": false
   },
@@ -97787,8 +96901,19 @@
       "outputQuantity": 1
     },
     "spawns": [],
-    "shopBought": false,
-    "shops": [],
+    "shopBought": true,
+    "shops": [
+      {
+        "seller": "Gianne's Restaurant",
+        "price": 150,
+        "currency": "Coins"
+      },
+      {
+        "seller": "Gnome Waiter",
+        "price": 150,
+        "currency": "Coins"
+      }
+    ],
     "clueTiers": [],
     "alwaysAvailable": false
   },
@@ -97815,8 +96940,19 @@
       "outputQuantity": 1
     },
     "spawns": [],
-    "shopBought": false,
-    "shops": [],
+    "shopBought": true,
+    "shops": [
+      {
+        "seller": "Gianne's Restaurant",
+        "price": 85,
+        "currency": "Coins"
+      },
+      {
+        "seller": "Gnome Waiter",
+        "price": 85,
+        "currency": "Coins"
+      }
+    ],
     "clueTiers": [],
     "alwaysAvailable": false
   },
@@ -97845,8 +96981,19 @@
       "outputQuantity": 1
     },
     "spawns": [],
-    "shopBought": false,
-    "shops": [],
+    "shopBought": true,
+    "shops": [
+      {
+        "seller": "Gianne's Restaurant",
+        "price": 85,
+        "currency": "Coins"
+      },
+      {
+        "seller": "Gnome Waiter",
+        "price": 85,
+        "currency": "Coins"
+      }
+    ],
     "clueTiers": [],
     "alwaysAvailable": false
   },
@@ -97873,8 +97020,19 @@
       "outputQuantity": 1
     },
     "spawns": [],
-    "shopBought": false,
-    "shops": [],
+    "shopBought": true,
+    "shops": [
+      {
+        "seller": "Gianne's Restaurant",
+        "price": 85,
+        "currency": "Coins"
+      },
+      {
+        "seller": "Gnome Waiter",
+        "price": 85,
+        "currency": "Coins"
+      }
+    ],
     "clueTiers": [],
     "alwaysAvailable": false
   },
@@ -97908,271 +97066,6 @@
       ],
       "outputQuantity": 1
     },
-    "spawns": [],
-    "shopBought": false,
-    "shops": [],
-    "clueTiers": [],
-    "alwaysAvailable": false
-  },
-  "Premade w'm batta": {
-    "monsters": [],
-    "rdtMonsters": [],
-    "quests": [],
-    "gathering": null,
-    "production": null,
-    "spawns": [],
-    "shopBought": true,
-    "shops": [
-      {
-        "seller": "Gianne's Restaurant",
-        "price": 120,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Gnome Waiter",
-        "price": 120,
-        "currency": "Coins"
-      }
-    ],
-    "clueTiers": [],
-    "alwaysAvailable": false
-  },
-  "Premade t'd batta": {
-    "monsters": [],
-    "rdtMonsters": [],
-    "quests": [],
-    "gathering": null,
-    "production": null,
-    "spawns": [],
-    "shopBought": true,
-    "shops": [
-      {
-        "seller": "Gianne's Restaurant",
-        "price": 120,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Gnome Waiter",
-        "price": 120,
-        "currency": "Coins"
-      }
-    ],
-    "clueTiers": [],
-    "alwaysAvailable": false
-  },
-  "Premade fr't batta": {
-    "monsters": [],
-    "rdtMonsters": [],
-    "quests": [],
-    "gathering": null,
-    "production": null,
-    "spawns": [],
-    "shopBought": true,
-    "shops": [
-      {
-        "seller": "Gianne's Restaurant",
-        "price": 120,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Gnome Waiter",
-        "price": 120,
-        "currency": "Coins"
-      }
-    ],
-    "clueTiers": [],
-    "alwaysAvailable": false
-  },
-  "Premade veg batta": {
-    "monsters": [],
-    "rdtMonsters": [],
-    "quests": [],
-    "gathering": null,
-    "production": null,
-    "spawns": [],
-    "shopBought": true,
-    "shops": [
-      {
-        "seller": "Gianne's Restaurant",
-        "price": 120,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Gnome Waiter",
-        "price": 120,
-        "currency": "Coins"
-      }
-    ],
-    "clueTiers": [],
-    "alwaysAvailable": false
-  },
-  "Premade choc bomb": {
-    "monsters": [],
-    "rdtMonsters": [],
-    "quests": [],
-    "gathering": null,
-    "production": null,
-    "spawns": [],
-    "shopBought": true,
-    "shops": [
-      {
-        "seller": "Gianne's Restaurant",
-        "price": 160,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Gnome Waiter",
-        "price": 160,
-        "currency": "Coins"
-      }
-    ],
-    "clueTiers": [],
-    "alwaysAvailable": false
-  },
-  "Premade ttl": {
-    "monsters": [],
-    "rdtMonsters": [],
-    "quests": [],
-    "gathering": null,
-    "production": null,
-    "spawns": [],
-    "shopBought": true,
-    "shops": [
-      {
-        "seller": "Gianne's Restaurant",
-        "price": 160,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Gnome Waiter",
-        "price": 160,
-        "currency": "Coins"
-      }
-    ],
-    "clueTiers": [],
-    "alwaysAvailable": false
-  },
-  "Premade worm hole": {
-    "monsters": [],
-    "rdtMonsters": [],
-    "quests": [],
-    "gathering": null,
-    "production": null,
-    "spawns": [],
-    "shopBought": true,
-    "shops": [
-      {
-        "seller": "Gianne's Restaurant",
-        "price": 150,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Gnome Waiter",
-        "price": 150,
-        "currency": "Coins"
-      }
-    ],
-    "clueTiers": [],
-    "alwaysAvailable": false
-  },
-  "Premade veg ball": {
-    "monsters": [],
-    "rdtMonsters": [],
-    "quests": [],
-    "gathering": null,
-    "production": null,
-    "spawns": [],
-    "shopBought": true,
-    "shops": [
-      {
-        "seller": "Gianne's Restaurant",
-        "price": 150,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Gnome Waiter",
-        "price": 150,
-        "currency": "Coins"
-      }
-    ],
-    "clueTiers": [],
-    "alwaysAvailable": false
-  },
-  "Premade w'm crun'": {
-    "monsters": [],
-    "rdtMonsters": [],
-    "quests": [],
-    "gathering": null,
-    "production": null,
-    "spawns": [],
-    "shopBought": true,
-    "shops": [
-      {
-        "seller": "Gianne's Restaurant",
-        "price": 85,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Gnome Waiter",
-        "price": 85,
-        "currency": "Coins"
-      }
-    ],
-    "clueTiers": [],
-    "alwaysAvailable": false
-  },
-  "Premade ch' crunch": {
-    "monsters": [],
-    "rdtMonsters": [],
-    "quests": [],
-    "gathering": null,
-    "production": null,
-    "spawns": [],
-    "shopBought": true,
-    "shops": [
-      {
-        "seller": "Gianne's Restaurant",
-        "price": 85,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Gnome Waiter",
-        "price": 85,
-        "currency": "Coins"
-      }
-    ],
-    "clueTiers": [],
-    "alwaysAvailable": false
-  },
-  "Premade s'y crunch": {
-    "monsters": [],
-    "rdtMonsters": [],
-    "quests": [],
-    "gathering": null,
-    "production": null,
-    "spawns": [],
-    "shopBought": true,
-    "shops": [
-      {
-        "seller": "Gianne's Restaurant",
-        "price": 85,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Gnome Waiter",
-        "price": 85,
-        "currency": "Coins"
-      }
-    ],
-    "clueTiers": [],
-    "alwaysAvailable": false
-  },
-  "Premade t'd crunch": {
-    "monsters": [],
-    "rdtMonsters": [],
-    "quests": [],
-    "gathering": null,
-    "production": null,
     "spawns": [],
     "shopBought": true,
     "shops": [
@@ -98221,8 +97114,19 @@
       "outputQuantity": 1
     },
     "spawns": [],
-    "shopBought": false,
-    "shops": [],
+    "shopBought": true,
+    "shops": [
+      {
+        "seller": "Gianne's Restaurant",
+        "price": 120,
+        "currency": "Coins"
+      },
+      {
+        "seller": "Gnome Waiter",
+        "price": 120,
+        "currency": "Coins"
+      }
+    ],
     "clueTiers": [],
     "alwaysAvailable": false
   },
@@ -98249,8 +97153,19 @@
     "spawns": [
       "Tarn's Lair"
     ],
-    "shopBought": false,
-    "shops": [],
+    "shopBought": true,
+    "shops": [
+      {
+        "seller": "Gianne's Restaurant",
+        "price": 120,
+        "currency": "Coins"
+      },
+      {
+        "seller": "Gnome Waiter",
+        "price": 120,
+        "currency": "Coins"
+      }
+    ],
     "clueTiers": [],
     "alwaysAvailable": false
   },
@@ -98277,8 +97192,19 @@
       "outputQuantity": 1
     },
     "spawns": [],
-    "shopBought": false,
-    "shops": [],
+    "shopBought": true,
+    "shops": [
+      {
+        "seller": "Gianne's Restaurant",
+        "price": 120,
+        "currency": "Coins"
+      },
+      {
+        "seller": "Gnome Waiter",
+        "price": 120,
+        "currency": "Coins"
+      }
+    ],
     "clueTiers": [],
     "alwaysAvailable": false
   },
@@ -98307,8 +97233,19 @@
       "outputQuantity": 1
     },
     "spawns": [],
-    "shopBought": false,
-    "shops": [],
+    "shopBought": true,
+    "shops": [
+      {
+        "seller": "Gianne's Restaurant",
+        "price": 120,
+        "currency": "Coins"
+      },
+      {
+        "seller": "Gnome Waiter",
+        "price": 120,
+        "currency": "Coins"
+      }
+    ],
     "clueTiers": [],
     "alwaysAvailable": false
   },
@@ -99108,7 +98045,7 @@
         "fraction": "5/128"
       },
       {
-        "card": "Rock Golem",
+        "card": "Rock Golem (monster)",
         "rarity": "Common",
         "fraction": "10/78"
       },
@@ -99504,7 +98441,7 @@
         "fraction": "7/128"
       },
       {
-        "card": "Rock Golem",
+        "card": "Rock Golem (monster)",
         "rarity": "Common",
         "fraction": "7/78"
       },
@@ -99625,7 +98562,7 @@
         "fraction": "3/128"
       },
       {
-        "card": "Rock Golem",
+        "card": "Rock Golem (monster)",
         "rarity": "Uncommon",
         "fraction": "3/128"
       },
@@ -101593,11 +100530,6 @@
         "fraction": "8/131"
       },
       {
-        "card": "Phosani's Nightmare",
-        "rarity": "Common",
-        "fraction": "5/100"
-      },
-      {
         "card": "The Nightmare",
         "rarity": "Common",
         "fraction": "5/100"
@@ -102361,11 +101293,6 @@
         "card": "K'ril Tsutsaroth",
         "rarity": "Common",
         "fraction": "8/127"
-      },
-      {
-        "card": "Phosani's Nightmare",
-        "rarity": "Common",
-        "fraction": "5/100"
       },
       {
         "card": "The Nightmare",
@@ -103695,7 +102622,7 @@
         "fraction": "1/152.4"
       },
       {
-        "card": "Manta ray",
+        "card": "Manta ray (sailing)",
         "rarity": "Rare",
         "fraction": "1/132"
       },
@@ -104485,37 +103412,74 @@
         "card": "Magpie impling",
         "rarity": "Common",
         "fraction": "1/21"
+      },
+      {
+        "card": "Otherworldly being",
+        "rarity": "Uncommon",
+        "fraction": "2/128"
+      },
+      {
+        "card": "Vampyre Juvinate",
+        "rarity": "Uncommon",
+        "fraction": "9/256"
+      },
+      {
+        "card": "Elite Black Knight",
+        "rarity": "Uncommon",
+        "fraction": "3/122"
+      },
+      {
+        "card": "Frigatebird",
+        "rarity": "Common",
+        "fraction": "5/50"
       }
     ],
     "rdtMonsters": [],
     "quests": [],
     "gathering": null,
     "production": {
-      "skill": "Magic",
-      "level": 49,
-      "xp": 59.0,
-      "facilities": null,
-      "tools": null,
+      "skill": "Crafting",
+      "level": 34,
+      "xp": 70.0,
+      "facilities": "Furnace",
+      "tools": [
+        "Ring mould"
+      ],
       "quests": null,
       "ingredients": [
         {
-          "item": "Ruby ring",
+          "item": "Gold bar",
           "quantity": 1
         },
         {
-          "item": "Cosmic rune",
+          "item": "Ruby",
           "quantity": 1
-        },
-        {
-          "item": "Fire rune",
-          "quantity": 5
         }
       ],
-      "outputQuantity": 1
+      "outputQuantity": 1,
+      "version": "Ruby ring"
     },
-    "spawns": [],
-    "shopBought": false,
-    "shops": [],
+    "spawns": [
+      "Varrock"
+    ],
+    "shopBought": true,
+    "shops": [
+      {
+        "seller": "Grum's Gold Exchange.",
+        "price": 2025,
+        "currency": "Coins"
+      },
+      {
+        "seller": "Irksol (shop)",
+        "price": 1012,
+        "currency": "Coins"
+      },
+      {
+        "seller": "Conara's Jewels",
+        "price": 2025,
+        "currency": "Coins"
+      }
+    ],
     "clueTiers": [],
     "alwaysAvailable": false
   },
@@ -104540,37 +103504,72 @@
         "card": "Dagannoth Rex",
         "rarity": "Rare",
         "fraction": "1/128"
+      },
+      {
+        "card": "Elite Black Knight",
+        "rarity": "Uncommon",
+        "fraction": "3/122"
+      },
+      {
+        "card": "Elite Dark Warrior",
+        "rarity": "Rare",
+        "fraction": "1/117"
+      },
+      {
+        "card": "Elite Dark Ranger",
+        "rarity": "Rare",
+        "fraction": "1/117"
+      },
+      {
+        "card": "Elite Dark Mage",
+        "rarity": "Rare",
+        "fraction": "1/117"
+      },
+      {
+        "card": "Albatross",
+        "rarity": "Common",
+        "fraction": "5/50"
       }
     ],
     "rdtMonsters": [],
     "quests": [],
     "gathering": null,
     "production": {
-      "skill": "Magic",
-      "level": 57,
-      "xp": 67.0,
-      "facilities": null,
-      "tools": null,
+      "skill": "Crafting",
+      "level": 43,
+      "xp": 85.0,
+      "facilities": "Furnace",
+      "tools": [
+        "Ring mould"
+      ],
       "quests": null,
       "ingredients": [
         {
-          "item": "Diamond ring",
+          "item": "Gold bar",
           "quantity": 1
         },
         {
-          "item": "Cosmic rune",
+          "item": "Diamond",
           "quantity": 1
-        },
-        {
-          "item": "Earth rune",
-          "quantity": 10
         }
       ],
-      "outputQuantity": 1
+      "outputQuantity": 1,
+      "version": "Diamond ring"
     },
     "spawns": [],
-    "shopBought": false,
-    "shops": [],
+    "shopBought": true,
+    "shops": [
+      {
+        "seller": "Grum's Gold Exchange.",
+        "price": 3525,
+        "currency": "Coins"
+      },
+      {
+        "seller": "Conara's Jewels",
+        "price": 3525,
+        "currency": "Coins"
+      }
+    ],
     "clueTiers": [],
     "alwaysAvailable": false
   },
@@ -106620,7 +105619,7 @@
         "fraction": "1/400"
       },
       {
-        "card": "Manta ray",
+        "card": "Manta ray (sailing)",
         "rarity": "Rare",
         "fraction": "1/198"
       }
@@ -107958,32 +106957,6 @@
         "currency": "Coins"
       }
     ],
-    "clueTiers": [],
-    "alwaysAvailable": false
-  },
-  "Sliced banana": {
-    "monsters": [],
-    "rdtMonsters": [],
-    "quests": [],
-    "gathering": null,
-    "production": {
-      "skill": null,
-      "level": 0,
-      "xp": null,
-      "facilities": null,
-      "tools": null,
-      "quests": null,
-      "ingredients": [
-        {
-          "item": "Banana",
-          "quantity": 1
-        }
-      ],
-      "outputQuantity": 1
-    },
-    "spawns": [],
-    "shopBought": false,
-    "shops": [],
     "clueTiers": [],
     "alwaysAvailable": false
   },
@@ -114111,6 +113084,11 @@
         "card": "Head Guard",
         "rarity": "Rare",
         "fraction": "1/141"
+      },
+      {
+        "card": "Master Farmer",
+        "rarity": "Common",
+        "fraction": "1/21.8"
       }
     ],
     "rdtMonsters": [],
@@ -114186,6 +113164,11 @@
         "card": "Head Guard",
         "rarity": "Rare",
         "fraction": "1/331"
+      },
+      {
+        "card": "Master Farmer",
+        "rarity": "Uncommon",
+        "fraction": "1/50.9"
       }
     ],
     "rdtMonsters": [],
@@ -114261,6 +113244,11 @@
         "card": "Head Guard",
         "rarity": "Rare",
         "fraction": "1/214"
+      },
+      {
+        "card": "Master Farmer",
+        "rarity": "Uncommon",
+        "fraction": "1/32.9"
       }
     ],
     "rdtMonsters": [],
@@ -114325,6 +113313,11 @@
         "card": "Head Guard",
         "rarity": "Rare",
         "fraction": "1/448"
+      },
+      {
+        "card": "Master Farmer",
+        "rarity": "Uncommon",
+        "fraction": "1/68.9"
       }
     ],
     "rdtMonsters": [],
@@ -114641,7 +113634,7 @@
         "fraction": "1/19.1"
       },
       {
-        "card": "Manta ray",
+        "card": "Manta ray (sailing)",
         "rarity": "Uncommon",
         "fraction": "1/25.2"
       },
@@ -114649,6 +113642,11 @@
         "card": "Hespori",
         "rarity": "Uncommon",
         "fraction": "2/80"
+      },
+      {
+        "card": "Master Farmer",
+        "rarity": "Uncommon",
+        "fraction": "1/86.3"
       }
     ],
     "rdtMonsters": [],
@@ -114708,6 +113706,11 @@
         "card": "Obor",
         "rarity": "Rare",
         "fraction": "1/204"
+      },
+      {
+        "card": "Master Farmer",
+        "rarity": "Uncommon",
+        "fraction": "1/25.8"
       }
     ],
     "rdtMonsters": [],
@@ -114761,6 +113764,11 @@
         "card": "Obor",
         "rarity": "Rare",
         "fraction": "1/292"
+      },
+      {
+        "card": "Master Farmer",
+        "rarity": "Uncommon",
+        "fraction": "1/36.8"
       }
     ],
     "rdtMonsters": [],
@@ -114814,6 +113822,11 @@
         "card": "Obor",
         "rarity": "Rare",
         "fraction": "1/409"
+      },
+      {
+        "card": "Master Farmer",
+        "rarity": "Uncommon",
+        "fraction": "1/51.5"
       }
     ],
     "rdtMonsters": [],
@@ -115084,9 +114097,14 @@
         "fraction": "1/28.4"
       },
       {
-        "card": "Manta ray",
+        "card": "Manta ray (sailing)",
         "rarity": "Uncommon",
         "fraction": "1/37.6"
+      },
+      {
+        "card": "Master Farmer",
+        "rarity": "Rare",
+        "fraction": "1/129"
       }
     ],
     "rdtMonsters": [],
@@ -115347,7 +114365,7 @@
         "fraction": "1/76.9"
       },
       {
-        "card": "Manta ray",
+        "card": "Manta ray (sailing)",
         "rarity": "Rare",
         "fraction": "1/101.7"
       },
@@ -115355,6 +114373,11 @@
         "card": "Hespori",
         "rarity": "Uncommon",
         "fraction": "2/80"
+      },
+      {
+        "card": "Master Farmer",
+        "rarity": "Rare",
+        "fraction": "1/355"
       }
     ],
     "rdtMonsters": [],
@@ -115790,7 +114813,7 @@
         "fraction": "1/95"
       },
       {
-        "card": "Manta ray",
+        "card": "Manta ray (sailing)",
         "rarity": "Rare",
         "fraction": "1/266"
       },
@@ -115823,6 +114846,11 @@
         "card": "Cave abomination",
         "rarity": "Uncommon",
         "fraction": ""
+      },
+      {
+        "card": "Master Farmer",
+        "rarity": "Rare",
+        "fraction": "1/937"
       }
     ],
     "rdtMonsters": [],
@@ -116238,7 +115266,7 @@
         "fraction": "1/101.3"
       },
       {
-        "card": "Manta ray",
+        "card": "Manta ray (sailing)",
         "rarity": "Rare",
         "fraction": "1/288.2"
       },
@@ -116271,6 +115299,11 @@
         "card": "Cave abomination",
         "rarity": "Uncommon",
         "fraction": ""
+      },
+      {
+        "card": "Master Farmer",
+        "rarity": "Very Rare",
+        "fraction": "1/1,230"
       }
     ],
     "rdtMonsters": [],
@@ -116691,7 +115724,7 @@
         "fraction": "1/67.8"
       },
       {
-        "card": "Manta ray",
+        "card": "Manta ray (sailing)",
         "rarity": "Rare",
         "fraction": "1/192.1"
       },
@@ -116719,6 +115752,11 @@
         "card": "Cave abomination",
         "rarity": "Common",
         "fraction": ""
+      },
+      {
+        "card": "Master Farmer",
+        "rarity": "Rare",
+        "fraction": "1/820"
       }
     ],
     "rdtMonsters": [],
@@ -116964,9 +116002,14 @@
         "fraction": "1/90.2"
       },
       {
-        "card": "Manta ray",
+        "card": "Manta ray (sailing)",
         "rarity": "Rare",
         "fraction": "1/119.3"
+      },
+      {
+        "card": "Master Farmer",
+        "rarity": "Rare",
+        "fraction": "1/492"
       }
     ],
     "rdtMonsters": [],
@@ -117192,7 +116235,7 @@
         "fraction": ""
       },
       {
-        "card": "Manta ray",
+        "card": "Manta ray (sailing)",
         "rarity": "Rare",
         "fraction": "1/442"
       },
@@ -117320,7 +116363,7 @@
         "fraction": ""
       },
       {
-        "card": "Manta ray",
+        "card": "Manta ray (sailing)",
         "rarity": "Rare",
         "fraction": "1/618.8"
       },
@@ -117382,6 +116425,11 @@
         "card": "Obor",
         "rarity": "Rare",
         "fraction": "1/517"
+      },
+      {
+        "card": "Master Farmer",
+        "rarity": "Uncommon",
+        "fraction": "1/58.36"
       }
     ],
     "rdtMonsters": [],
@@ -117628,9 +116676,14 @@
         "fraction": "1/20.9"
       },
       {
-        "card": "Manta ray",
+        "card": "Manta ray (sailing)",
         "rarity": "Uncommon",
         "fraction": "1/27.7"
+      },
+      {
+        "card": "Master Farmer",
+        "rarity": "Uncommon",
+        "fraction": "1/95.6"
       }
     ],
     "rdtMonsters": [],
@@ -117877,9 +116930,14 @@
         "fraction": "1/30.8"
       },
       {
-        "card": "Manta ray",
+        "card": "Manta ray (sailing)",
         "rarity": "Uncommon",
         "fraction": "1/40.7"
+      },
+      {
+        "card": "Master Farmer",
+        "rarity": "Rare",
+        "fraction": "1/140"
       }
     ],
     "rdtMonsters": [],
@@ -118136,9 +117194,14 @@
         "fraction": "1/46.7"
       },
       {
-        "card": "Manta ray",
+        "card": "Manta ray (sailing)",
         "rarity": "Uncommon",
         "fraction": "1/61.8"
+      },
+      {
+        "card": "Master Farmer",
+        "rarity": "Rare",
+        "fraction": "1/206"
       }
     ],
     "rdtMonsters": [],
@@ -118510,7 +117573,7 @@
         "fraction": "1/67.1"
       },
       {
-        "card": "Manta ray",
+        "card": "Manta ray (sailing)",
         "rarity": "Uncommon",
         "fraction": "1/88.7"
       },
@@ -118543,6 +117606,11 @@
         "card": "Thermonuclear smoke devil",
         "rarity": "Uncommon",
         "fraction": "2/107"
+      },
+      {
+        "card": "Master Farmer",
+        "rarity": "Rare",
+        "fraction": "1/268.75"
       }
     ],
     "rdtMonsters": [],
@@ -118979,7 +118047,7 @@
         "fraction": "1/45"
       },
       {
-        "card": "Manta ray",
+        "card": "Manta ray (sailing)",
         "rarity": "Rare",
         "fraction": "1/128.1"
       },
@@ -119012,6 +118080,11 @@
         "card": "Cave abomination",
         "rarity": "Common",
         "fraction": ""
+      },
+      {
+        "card": "Master Farmer",
+        "rarity": "Rare",
+        "fraction": "1/443"
       }
     ],
     "rdtMonsters": [],
@@ -119443,7 +118516,7 @@
         "fraction": "1/66.5"
       },
       {
-        "card": "Manta ray",
+        "card": "Manta ray (sailing)",
         "rarity": "Rare",
         "fraction": "1/192.1"
       },
@@ -119486,6 +118559,11 @@
         "card": "Cave abomination",
         "rarity": "Common",
         "fraction": ""
+      },
+      {
+        "card": "Master Farmer",
+        "rarity": "Rare",
+        "fraction": "1/651"
       }
     ],
     "rdtMonsters": [],
@@ -119922,7 +119000,7 @@
         "fraction": "1/97.5"
       },
       {
-        "card": "Manta ray",
+        "card": "Manta ray (sailing)",
         "rarity": "Rare",
         "fraction": "1/288.2"
       },
@@ -119965,6 +119043,11 @@
         "card": "Cave abomination",
         "rarity": "Uncommon",
         "fraction": ""
+      },
+      {
+        "card": "Master Farmer",
+        "rarity": "Rare",
+        "fraction": "1/947"
       }
     ],
     "rdtMonsters": [],
@@ -120401,7 +119484,7 @@
         "fraction": "1/138.1"
       },
       {
-        "card": "Manta ray",
+        "card": "Manta ray (sailing)",
         "rarity": "Rare",
         "fraction": "1/384.3"
       },
@@ -120444,6 +119527,11 @@
         "card": "Cave abomination",
         "rarity": "Uncommon",
         "fraction": ""
+      },
+      {
+        "card": "Master Farmer",
+        "rarity": "Very Rare",
+        "fraction": "1/1,389"
       }
     ],
     "rdtMonsters": [],
@@ -120860,11 +119948,6 @@
         "fraction": "1/766.5"
       },
       {
-        "card": "Phosani's Nightmare",
-        "rarity": "Uncommon",
-        "fraction": "3/100"
-      },
-      {
         "card": "The Nightmare",
         "rarity": "Uncommon",
         "fraction": "3/100"
@@ -120975,7 +120058,7 @@
         "fraction": "1/225"
       },
       {
-        "card": "Manta ray",
+        "card": "Manta ray (sailing)",
         "rarity": "Rare",
         "fraction": "1/691.7"
       },
@@ -121018,6 +120101,11 @@
         "card": "Thermonuclear smoke devil",
         "rarity": "Uncommon",
         "fraction": "2/107"
+      },
+      {
+        "card": "Master Farmer",
+        "rarity": "Very Rare",
+        "fraction": "1/1,854.4"
       }
     ],
     "rdtMonsters": [],
@@ -121444,7 +120532,7 @@
         "fraction": "1/303.8"
       },
       {
-        "card": "Manta ray",
+        "card": "Manta ray (sailing)",
         "rarity": "Rare",
         "fraction": "1/562"
       },
@@ -121487,6 +120575,11 @@
         "card": "Cave abomination",
         "rarity": "Uncommon",
         "fraction": ""
+      },
+      {
+        "card": "Master Farmer",
+        "rarity": "Very Rare",
+        "fraction": "1/2,976"
       }
     ],
     "rdtMonsters": [],
@@ -121923,7 +121016,7 @@
         "fraction": "1/414.4"
       },
       {
-        "card": "Manta ray",
+        "card": "Manta ray (sailing)",
         "rarity": "Rare",
         "fraction": "1/782"
       },
@@ -121956,6 +121049,11 @@
         "card": "Cave abomination",
         "rarity": "Rare",
         "fraction": ""
+      },
+      {
+        "card": "Master Farmer",
+        "rarity": "Very Rare",
+        "fraction": "1/4,167"
       }
     ],
     "rdtMonsters": [],
@@ -122397,7 +121495,7 @@
         "fraction": "1/651.3"
       },
       {
-        "card": "Manta ray",
+        "card": "Manta ray (sailing)",
         "rarity": "Very Rare",
         "fraction": "1/1,729.2"
       },
@@ -122430,6 +121528,11 @@
         "card": "Cave abomination",
         "rarity": "Rare",
         "fraction": ""
+      },
+      {
+        "card": "Master Farmer",
+        "rarity": "Very Rare",
+        "fraction": "1/6,944"
       }
     ],
     "rdtMonsters": [],
@@ -122946,7 +122049,7 @@
         "fraction": "1/1,139"
       },
       {
-        "card": "Manta ray",
+        "card": "Manta ray (sailing)",
         "rarity": "Very Rare",
         "fraction": "1/3,458.4"
       },
@@ -122984,6 +122087,11 @@
         "card": "Cerberus",
         "rarity": "Uncommon",
         "fraction": "2/130"
+      },
+      {
+        "card": "Master Farmer",
+        "rarity": "Very Rare",
+        "fraction": "1/9,271.98"
       }
     ],
     "rdtMonsters": [],
@@ -123068,6 +122176,11 @@
         "card": "Moonlight Cockatrice",
         "rarity": "Very Rare",
         "fraction": "1/3,043"
+      },
+      {
+        "card": "Master Farmer",
+        "rarity": "Common",
+        "fraction": "1/18"
       }
     ],
     "rdtMonsters": [],
@@ -123163,6 +122276,11 @@
         "card": "Moonlight Cockatrice",
         "rarity": "Very Rare",
         "fraction": "1/4,075"
+      },
+      {
+        "card": "Master Farmer",
+        "rarity": "Common",
+        "fraction": "1/24.1"
       }
     ],
     "rdtMonsters": [],
@@ -123252,6 +122370,11 @@
         "card": "Moonlight Cockatrice",
         "rarity": "Very Rare",
         "fraction": "1/3,056"
+      },
+      {
+        "card": "Master Farmer",
+        "rarity": "Common",
+        "fraction": "1/18"
       }
     ],
     "rdtMonsters": [],
@@ -123341,6 +122464,11 @@
         "card": "Moonlight Cockatrice",
         "rarity": "Very Rare",
         "fraction": "1/4,051"
+      },
+      {
+        "card": "Master Farmer",
+        "rarity": "Common",
+        "fraction": "1/23.9"
       }
     ],
     "rdtMonsters": [],
@@ -123430,6 +122558,11 @@
         "card": "Moonlight Cockatrice",
         "rarity": "Very Rare",
         "fraction": "1/6,113"
+      },
+      {
+        "card": "Master Farmer",
+        "rarity": "Uncommon",
+        "fraction": "1/36.1"
       }
     ],
     "rdtMonsters": [],
@@ -123519,6 +122652,11 @@
         "card": "Moonlight Cockatrice",
         "rarity": "Very Rare",
         "fraction": "1/12,226"
+      },
+      {
+        "card": "Master Farmer",
+        "rarity": "Uncommon",
+        "fraction": "1/72.2"
       }
     ],
     "rdtMonsters": [],
@@ -123820,7 +122958,7 @@
         "fraction": "1/31.5"
       },
       {
-        "card": "Manta ray",
+        "card": "Manta ray (sailing)",
         "rarity": "Uncommon",
         "fraction": "1/41.7"
       },
@@ -123828,6 +122966,11 @@
         "card": "Hespori",
         "rarity": "Uncommon",
         "fraction": "2/80"
+      },
+      {
+        "card": "Master Farmer",
+        "rarity": "Rare",
+        "fraction": "1/142"
       }
     ],
     "rdtMonsters": [],
@@ -123952,7 +123095,7 @@
         "fraction": ""
       },
       {
-        "card": "Manta ray",
+        "card": "Manta ray (sailing)",
         "rarity": "Rare",
         "fraction": "1/309.4"
       },
@@ -124066,7 +123209,7 @@
         "fraction": ""
       },
       {
-        "card": "Manta ray",
+        "card": "Manta ray (sailing)",
         "rarity": "Rare",
         "fraction": "1/343.8"
       },
@@ -124260,7 +123403,7 @@
         "fraction": ""
       },
       {
-        "card": "Manta ray",
+        "card": "Manta ray (sailing)",
         "rarity": "Rare",
         "fraction": "1/343.8"
       },
@@ -124462,7 +123605,7 @@
         "fraction": ""
       },
       {
-        "card": "Manta ray",
+        "card": "Manta ray (sailing)",
         "rarity": "Rare",
         "fraction": "1/562.5"
       },
@@ -124579,7 +123722,7 @@
         "fraction": "3/104"
       },
       {
-        "card": "Manta ray",
+        "card": "Manta ray (sailing)",
         "rarity": "Rare",
         "fraction": "1/773.4"
       },
@@ -124800,6 +123943,11 @@
         "card": "Cave abomination",
         "rarity": "Common",
         "fraction": ""
+      },
+      {
+        "card": "Master Farmer",
+        "rarity": "Common",
+        "fraction": "1/5.65"
       }
     ],
     "rdtMonsters": [],
@@ -125025,6 +124173,11 @@
         "card": "Cave abomination",
         "rarity": "Common",
         "fraction": ""
+      },
+      {
+        "card": "Master Farmer",
+        "rarity": "Common",
+        "fraction": "1/7.53"
       }
     ],
     "rdtMonsters": [],
@@ -125250,6 +124403,11 @@
         "card": "Cave abomination",
         "rarity": "Uncommon",
         "fraction": ""
+      },
+      {
+        "card": "Master Farmer",
+        "rarity": "Uncommon",
+        "fraction": "1/45.2"
       }
     ],
     "rdtMonsters": [],
@@ -125757,7 +124915,7 @@
         "fraction": "1/41.5"
       },
       {
-        "card": "Manta ray",
+        "card": "Manta ray (sailing)",
         "rarity": "Uncommon",
         "fraction": "1/54.9"
       },
@@ -125785,6 +124943,11 @@
         "card": "Cave abomination",
         "rarity": "Rare",
         "fraction": ""
+      },
+      {
+        "card": "Master Farmer",
+        "rarity": "Rare",
+        "fraction": "1/189"
       }
     ],
     "rdtMonsters": [],
@@ -126005,6 +125168,11 @@
         "card": "Cave abomination",
         "rarity": "Uncommon",
         "fraction": ""
+      },
+      {
+        "card": "Master Farmer",
+        "rarity": "Common",
+        "fraction": "1/15.7"
       }
     ],
     "rdtMonsters": [],
@@ -126422,7 +125590,7 @@
         "fraction": "1/20"
       },
       {
-        "card": "Manta ray",
+        "card": "Manta ray (sailing)",
         "rarity": "Uncommon",
         "fraction": "1/26.4"
       },
@@ -126435,6 +125603,11 @@
         "card": "Cave abomination",
         "rarity": "Rare",
         "fraction": ""
+      },
+      {
+        "card": "Master Farmer",
+        "rarity": "Uncommon",
+        "fraction": "1/90.4"
       }
     ],
     "rdtMonsters": [],
@@ -126655,6 +125828,11 @@
         "card": "Cave abomination",
         "rarity": "Common",
         "fraction": ""
+      },
+      {
+        "card": "Master Farmer",
+        "rarity": "Common",
+        "fraction": "1/14.4"
       }
     ],
     "rdtMonsters": [],
@@ -128395,36 +127573,6 @@
     "clueTiers": [],
     "alwaysAvailable": false
   },
-  "Apples": {
-    "monsters": [],
-    "rdtMonsters": [],
-    "quests": [],
-    "gathering": null,
-    "production": {
-      "skill": null,
-      "level": 0,
-      "xp": null,
-      "facilities": null,
-      "tools": null,
-      "quests": null,
-      "ingredients": [
-        {
-          "item": "Basket",
-          "quantity": 1
-        },
-        {
-          "item": "Cooking apple",
-          "quantity": 5
-        }
-      ],
-      "outputQuantity": 1
-    },
-    "spawns": [],
-    "shopBought": false,
-    "shops": [],
-    "clueTiers": [],
-    "alwaysAvailable": false
-  },
   "Oranges": {
     "monsters": [],
     "rdtMonsters": [],
@@ -128444,72 +127592,6 @@
         },
         {
           "item": "Orange",
-          "quantity": 5
-        }
-      ],
-      "outputQuantity": 1
-    },
-    "spawns": [],
-    "shopBought": false,
-    "shops": [],
-    "clueTiers": [],
-    "alwaysAvailable": false
-  },
-  "Strawberries": {
-    "monsters": [
-      {
-        "card": "Gourmet impling",
-        "rarity": "Rare",
-        "fraction": "1/100"
-      }
-    ],
-    "rdtMonsters": [],
-    "quests": [],
-    "gathering": null,
-    "production": {
-      "skill": null,
-      "level": 0,
-      "xp": null,
-      "facilities": null,
-      "tools": null,
-      "quests": null,
-      "ingredients": [
-        {
-          "item": "Basket",
-          "quantity": 1
-        },
-        {
-          "item": "Strawberry",
-          "quantity": 5
-        }
-      ],
-      "outputQuantity": 1
-    },
-    "spawns": [],
-    "shopBought": false,
-    "shops": [],
-    "clueTiers": [],
-    "alwaysAvailable": false
-  },
-  "Bananas": {
-    "monsters": [],
-    "rdtMonsters": [],
-    "quests": [],
-    "gathering": null,
-    "production": {
-      "skill": null,
-      "level": 0,
-      "xp": null,
-      "facilities": null,
-      "tools": null,
-      "quests": null,
-      "ingredients": [
-        {
-          "item": "Basket",
-          "quantity": 1
-        },
-        {
-          "item": "Banana",
           "quantity": 5
         }
       ],
@@ -128712,6 +127794,11 @@
         "card": "Dire gryphon",
         "rarity": "Common",
         "fraction": ""
+      },
+      {
+        "card": "Gourmet impling",
+        "rarity": "Rare",
+        "fraction": "1/100"
       }
     ],
     "rdtMonsters": [],
@@ -132656,32 +131743,6 @@
     "clueTiers": [],
     "alwaysAvailable": false
   },
-  "Raw fishlike thing": {
-    "monsters": [],
-    "rdtMonsters": [],
-    "quests": [],
-    "gathering": null,
-    "production": {
-      "skill": null,
-      "level": 0,
-      "xp": null,
-      "facilities": "Uncooking pot",
-      "tools": null,
-      "quests": null,
-      "ingredients": [
-        {
-          "item": "Fishlike thing",
-          "quantity": 1
-        }
-      ],
-      "outputQuantity": 1
-    },
-    "spawns": [],
-    "shopBought": false,
-    "shops": [],
-    "clueTiers": [],
-    "alwaysAvailable": false
-  },
   "Broodoo shield": {
     "monsters": [],
     "rdtMonsters": [],
@@ -132754,12 +131815,22 @@
     "clueTiers": [],
     "alwaysAvailable": false
   },
-  "Snake hide": {
+  "Snakeskin": {
     "monsters": [
+      {
+        "card": "Zulrah",
+        "rarity": "Common",
+        "fraction": ""
+      },
       {
         "card": "Snake",
         "rarity": "Always",
         "fraction": "1/1"
+      },
+      {
+        "card": "Swamp snake",
+        "rarity": "Always",
+        "fraction": ""
       },
       {
         "card": "Bush snake",
@@ -132775,29 +131846,6 @@
         "card": "Veiled kraken",
         "rarity": "Uncommon",
         "fraction": "5/272"
-      },
-      {
-        "card": "Swamp snake",
-        "rarity": "Always",
-        "fraction": ""
-      }
-    ],
-    "rdtMonsters": [],
-    "quests": [],
-    "gathering": null,
-    "production": null,
-    "spawns": [],
-    "shopBought": false,
-    "shops": [],
-    "clueTiers": [],
-    "alwaysAvailable": false
-  },
-  "Snakeskin": {
-    "monsters": [
-      {
-        "card": "Zulrah",
-        "rarity": "Common",
-        "fraction": ""
       }
     ],
     "rdtMonsters": [],
@@ -135314,11 +134362,6 @@
         "fraction": "25/500"
       },
       {
-        "card": "Phosani's Nightmare",
-        "rarity": "Common",
-        "fraction": "5/100"
-      },
-      {
         "card": "The Nightmare",
         "rarity": "Common",
         "fraction": "5/100"
@@ -137205,58 +136248,6 @@
         },
         {
           "item": "Tuna",
-          "quantity": 1
-        }
-      ],
-      "outputQuantity": 1
-    },
-    "spawns": [],
-    "shopBought": false,
-    "shops": [],
-    "clueTiers": [],
-    "alwaysAvailable": false
-  },
-  "Burnt onion": {
-    "monsters": [],
-    "rdtMonsters": [],
-    "quests": [],
-    "gathering": null,
-    "production": {
-      "skill": "Cooking",
-      "level": 42,
-      "xp": 0.0,
-      "facilities": "Cooking range",
-      "tools": null,
-      "quests": null,
-      "ingredients": [
-        {
-          "item": "Chopped onion",
-          "quantity": 1
-        }
-      ],
-      "outputQuantity": 1
-    },
-    "spawns": [],
-    "shopBought": false,
-    "shops": [],
-    "clueTiers": [],
-    "alwaysAvailable": false
-  },
-  "Burnt mushroom": {
-    "monsters": [],
-    "rdtMonsters": [],
-    "quests": [],
-    "gathering": null,
-    "production": {
-      "skill": "Cooking",
-      "level": 46,
-      "xp": 0.0,
-      "facilities": "Cooking range",
-      "tools": null,
-      "quests": null,
-      "ingredients": [
-        {
-          "item": "Sliced mushrooms",
           "quantity": 1
         }
       ],
@@ -140144,6 +139135,11 @@
         "card": "Thermonuclear smoke devil",
         "rarity": "Uncommon",
         "fraction": "2/107"
+      },
+      {
+        "card": "Minotaur (f2p)",
+        "rarity": "Common",
+        "fraction": "5/101"
       }
     ],
     "rdtMonsters": [],
@@ -140353,29 +139349,6 @@
         "currency": "Coins"
       }
     ],
-    "clueTiers": [],
-    "alwaysAvailable": false
-  },
-  "Crawling hand": {
-    "monsters": [
-      {
-        "card": "Crawling Hand",
-        "rarity": "Rare",
-        "fraction": "1/500"
-      },
-      {
-        "card": "Crushing hand",
-        "rarity": "Rare",
-        "fraction": "1/500"
-      }
-    ],
-    "rdtMonsters": [],
-    "quests": [],
-    "gathering": null,
-    "production": null,
-    "spawns": [],
-    "shopBought": false,
-    "shops": [],
     "clueTiers": [],
     "alwaysAvailable": false
   },
@@ -141872,6 +140845,11 @@
       },
       {
         "card": "Minotaur",
+        "rarity": "Uncommon",
+        "fraction": "3/101"
+      },
+      {
+        "card": "Minotaur (f2p)",
         "rarity": "Uncommon",
         "fraction": "3/101"
       }
@@ -144624,48 +143602,6 @@
     "quests": [],
     "gathering": null,
     "production": null,
-    "spawns": [],
-    "shopBought": false,
-    "shops": [],
-    "clueTiers": [],
-    "alwaysAvailable": false
-  },
-  "Half made batta": {
-    "monsters": [],
-    "rdtMonsters": [],
-    "quests": [],
-    "gathering": null,
-    "production": {
-      "skill": "Cooking",
-      "level": 25,
-      "xp": 40.0,
-      "facilities": null,
-      "tools": null,
-      "quests": null,
-      "ingredients": [
-        {
-          "item": "Half baked batta",
-          "quantity": 1
-        },
-        {
-          "item": "Equa leaves",
-          "quantity": 4
-        },
-        {
-          "item": "Lime chunks",
-          "quantity": 1
-        },
-        {
-          "item": "Orange chunks",
-          "quantity": 1
-        },
-        {
-          "item": "Pineapple chunks",
-          "quantity": 1
-        }
-      ],
-      "outputQuantity": 1
-    },
     "spawns": [],
     "shopBought": false,
     "shops": [],
@@ -149581,11 +148517,6 @@
         "fraction": "5/126"
       },
       {
-        "card": "Phosani's Nightmare",
-        "rarity": "Common",
-        "fraction": "5/100"
-      },
-      {
         "card": "The Nightmare",
         "rarity": "Common",
         "fraction": "5/100"
@@ -151227,158 +150158,6 @@
     "clueTiers": [],
     "alwaysAvailable": false
   },
-  "Sapphire bracelet": {
-    "monsters": [],
-    "rdtMonsters": [],
-    "quests": [],
-    "gathering": null,
-    "production": {
-      "skill": "Crafting",
-      "level": 23,
-      "xp": 60.0,
-      "facilities": "Furnace",
-      "tools": [
-        "Bracelet mould"
-      ],
-      "quests": null,
-      "ingredients": [
-        {
-          "item": "Sapphire",
-          "quantity": 1
-        },
-        {
-          "item": "Gold bar",
-          "quantity": 1
-        }
-      ],
-      "outputQuantity": 1
-    },
-    "spawns": [],
-    "shopBought": true,
-    "shops": [
-      {
-        "seller": "Conara's Jewels",
-        "price": 1150,
-        "currency": "Coins"
-      }
-    ],
-    "clueTiers": [],
-    "alwaysAvailable": false
-  },
-  "Emerald bracelet": {
-    "monsters": [],
-    "rdtMonsters": [],
-    "quests": [],
-    "gathering": null,
-    "production": {
-      "skill": "Crafting",
-      "level": 30,
-      "xp": 65.0,
-      "facilities": "Furnace",
-      "tools": [
-        "Bracelet mould"
-      ],
-      "quests": null,
-      "ingredients": [
-        {
-          "item": "Emerald",
-          "quantity": 1
-        },
-        {
-          "item": "Gold bar",
-          "quantity": 1
-        }
-      ],
-      "outputQuantity": 1
-    },
-    "spawns": [],
-    "shopBought": true,
-    "shops": [
-      {
-        "seller": "Conara's Jewels",
-        "price": 1525,
-        "currency": "Coins"
-      }
-    ],
-    "clueTiers": [],
-    "alwaysAvailable": false
-  },
-  "Ruby bracelet": {
-    "monsters": [],
-    "rdtMonsters": [],
-    "quests": [],
-    "gathering": null,
-    "production": {
-      "skill": "Crafting",
-      "level": 42,
-      "xp": 80.0,
-      "facilities": "Furnace",
-      "tools": [
-        "Bracelet mould"
-      ],
-      "quests": null,
-      "ingredients": [
-        {
-          "item": "Ruby",
-          "quantity": 1
-        },
-        {
-          "item": "Gold bar",
-          "quantity": 1
-        }
-      ],
-      "outputQuantity": 1
-    },
-    "spawns": [],
-    "shopBought": true,
-    "shops": [
-      {
-        "seller": "Conara's Jewels",
-        "price": 2325,
-        "currency": "Coins"
-      }
-    ],
-    "clueTiers": [],
-    "alwaysAvailable": false
-  },
-  "Diamond bracelet": {
-    "monsters": [],
-    "rdtMonsters": [],
-    "quests": [],
-    "gathering": null,
-    "production": {
-      "skill": "Crafting",
-      "level": 58,
-      "xp": 95.0,
-      "facilities": "Furnace",
-      "tools": [
-        "Bracelet mould"
-      ],
-      "quests": null,
-      "ingredients": [
-        {
-          "item": "Diamond",
-          "quantity": 1
-        },
-        {
-          "item": "Gold bar",
-          "quantity": 1
-        }
-      ],
-      "outputQuantity": 1
-    },
-    "spawns": [],
-    "shopBought": true,
-    "shops": [
-      {
-        "seller": "Conara's Jewels",
-        "price": 3825,
-        "currency": "Coins"
-      }
-    ],
-    "clueTiers": [],
-    "alwaysAvailable": false
-  },
   "Berserker necklace": {
     "monsters": [],
     "rdtMonsters": [],
@@ -151584,36 +150363,52 @@
     "alwaysAvailable": false
   },
   "Digsite pendant": {
-    "monsters": [],
+    "monsters": [
+      {
+        "card": "Hammerhead shark",
+        "rarity": "Common",
+        "fraction": "12/100"
+      }
+    ],
     "rdtMonsters": [],
     "quests": [],
     "gathering": null,
     "production": {
-      "skill": "Magic",
-      "level": 49,
-      "xp": 59.0,
-      "facilities": null,
-      "tools": null,
+      "skill": "Crafting",
+      "level": 40,
+      "xp": 75.0,
+      "facilities": "Furnace",
+      "tools": [
+        "Necklace mould"
+      ],
       "quests": null,
       "ingredients": [
         {
-          "item": "Ruby necklace",
+          "item": "Ruby",
           "quantity": 1
         },
         {
-          "item": "Cosmic rune",
+          "item": "Gold bar",
           "quantity": 1
-        },
-        {
-          "item": "Fire rune",
-          "quantity": 5
         }
       ],
-      "outputQuantity": 1
+      "outputQuantity": 1,
+      "version": "Ruby necklace"
     },
     "spawns": [],
-    "shopBought": false,
-    "shops": [],
+    "shopBought": true,
+    "shops": [
+      {
+        "seller": "Grum's Gold Exchange.",
+        "price": 2175,
+        "currency": "Coins"
+      },
+      {
+        "seller": "Conara's Jewels",
+        "price": 2175,
+        "currency": "Coins"
+      }
+    ],
     "clueTiers": [],
     "alwaysAvailable": false
   },
@@ -154605,7 +153400,7 @@
         "fraction": "1/3"
       },
       {
-        "card": "Scorpia's offspring",
+        "card": "Scorpia's offspring (monster)",
         "rarity": "Common",
         "fraction": "1/10"
       },
@@ -161070,6 +159865,11 @@
         "card": "Minotaur",
         "rarity": "Uncommon",
         "fraction": "1/50"
+      },
+      {
+        "card": "Minotaur (f2p)",
+        "rarity": "Uncommon",
+        "fraction": "1/50"
       }
     ],
     "rdtMonsters": [],
@@ -161115,7 +159915,7 @@
         "fraction": "1/18"
       },
       {
-        "card": "Scorpia's offspring",
+        "card": "Scorpia's offspring (monster)",
         "rarity": "Common",
         "fraction": "1/25"
       },
@@ -165689,6 +164489,11 @@
         "card": "Knight of Ardougne",
         "rarity": "Very Rare",
         "fraction": "1/255,836"
+      },
+      {
+        "card": "Master Farmer",
+        "rarity": "Very Rare",
+        "fraction": "1/256,261"
       }
     ],
     "rdtMonsters": [],
@@ -166472,44 +165277,6 @@
     "clueTiers": [],
     "alwaysAvailable": false
   },
-  "Empty gourd vial": {
-    "monsters": [],
-    "rdtMonsters": [],
-    "quests": [],
-    "gathering": null,
-    "production": null,
-    "spawns": [],
-    "shopBought": false,
-    "shops": [],
-    "clueTiers": [],
-    "alwaysAvailable": false
-  },
-  "Water-filled gourd vial": {
-    "monsters": [],
-    "rdtMonsters": [],
-    "quests": [],
-    "gathering": null,
-    "production": {
-      "skill": null,
-      "level": 0,
-      "xp": null,
-      "facilities": "Water",
-      "tools": null,
-      "quests": null,
-      "ingredients": [
-        {
-          "item": "Empty gourd vial",
-          "quantity": 1
-        }
-      ],
-      "outputQuantity": 1
-    },
-    "spawns": [],
-    "shopBought": false,
-    "shops": [],
-    "clueTiers": [],
-    "alwaysAvailable": false
-  },
   "Dragon thrownaxe": {
     "monsters": [
       {
@@ -166796,7 +165563,13 @@
     "alwaysAvailable": false
   },
   "Elder potion": {
-    "monsters": [],
+    "monsters": [
+      {
+        "card": "Vanguards",
+        "rarity": "Always",
+        "fraction": ""
+      }
+    ],
     "rdtMonsters": [],
     "quests": [],
     "gathering": null,
@@ -166835,6 +165608,11 @@
         "card": "Vasa Nistirio",
         "rarity": "Always",
         "fraction": "1/1"
+      },
+      {
+        "card": "Vanguards",
+        "rarity": "Always",
+        "fraction": ""
       }
     ],
     "rdtMonsters": [],
@@ -166870,7 +165648,13 @@
     "alwaysAvailable": false
   },
   "Kodai potion": {
-    "monsters": [],
+    "monsters": [
+      {
+        "card": "Vanguards",
+        "rarity": "Always",
+        "fraction": ""
+      }
+    ],
     "rdtMonsters": [],
     "quests": [],
     "gathering": null,
@@ -166917,6 +165701,11 @@
       },
       {
         "card": "Muttadile",
+        "rarity": "Always",
+        "fraction": ""
+      },
+      {
+        "card": "Vanguards",
         "rarity": "Always",
         "fraction": ""
       }
@@ -166969,6 +165758,11 @@
         "card": "Muttadile",
         "rarity": "Always",
         "fraction": "1/1"
+      },
+      {
+        "card": "Vanguards",
+        "rarity": "Always",
+        "fraction": ""
       }
     ],
     "rdtMonsters": [],
@@ -167019,6 +165813,11 @@
         "card": "Vasa Nistirio",
         "rarity": "Always",
         "fraction": "1/1"
+      },
+      {
+        "card": "Vanguards",
+        "rarity": "Always",
+        "fraction": ""
       }
     ],
     "rdtMonsters": [],
@@ -167074,6 +165873,11 @@
         "card": "Vasa Nistirio",
         "rarity": "Always",
         "fraction": "1/1"
+      },
+      {
+        "card": "Vanguards",
+        "rarity": "Common",
+        "fraction": "1/3"
       }
     ],
     "rdtMonsters": [],
@@ -167355,338 +166159,6 @@
     "clueTiers": [],
     "alwaysAvailable": false
   },
-  "Topaz ring": {
-    "monsters": [],
-    "rdtMonsters": [],
-    "quests": [],
-    "gathering": null,
-    "production": {
-      "skill": "Crafting",
-      "level": 16,
-      "xp": 35.0,
-      "facilities": "Furnace",
-      "tools": [
-        "Ring mould"
-      ],
-      "quests": null,
-      "ingredients": [
-        {
-          "item": "Red topaz",
-          "quantity": 1
-        },
-        {
-          "item": "Silver bar",
-          "quantity": 1
-        }
-      ],
-      "outputQuantity": 1
-    },
-    "spawns": [],
-    "shopBought": false,
-    "shops": [],
-    "clueTiers": [],
-    "alwaysAvailable": false
-  },
-  "Opal necklace": {
-    "monsters": [
-      {
-        "card": "Elite Black Knight",
-        "rarity": "Common",
-        "fraction": "7/122"
-      }
-    ],
-    "rdtMonsters": [],
-    "quests": [],
-    "gathering": null,
-    "production": {
-      "skill": "Crafting",
-      "level": 16,
-      "xp": 35.0,
-      "facilities": "Furnace",
-      "tools": [
-        "Necklace mould"
-      ],
-      "quests": null,
-      "ingredients": [
-        {
-          "item": "Opal",
-          "quantity": 1
-        },
-        {
-          "item": "Silver bar",
-          "quantity": 1
-        }
-      ],
-      "outputQuantity": 1
-    },
-    "spawns": [],
-    "shopBought": false,
-    "shops": [],
-    "clueTiers": [],
-    "alwaysAvailable": false
-  },
-  "Jade necklace": {
-    "monsters": [
-      {
-        "card": "Elite Black Knight",
-        "rarity": "Uncommon",
-        "fraction": "4/122"
-      }
-    ],
-    "rdtMonsters": [],
-    "quests": [],
-    "gathering": null,
-    "production": {
-      "skill": "Crafting",
-      "level": 25,
-      "xp": 54.0,
-      "facilities": "Furnace",
-      "tools": [
-        "Necklace mould"
-      ],
-      "quests": null,
-      "ingredients": [
-        {
-          "item": "Jade",
-          "quantity": 1
-        },
-        {
-          "item": "Silver bar",
-          "quantity": 1
-        }
-      ],
-      "outputQuantity": 1
-    },
-    "spawns": [],
-    "shopBought": false,
-    "shops": [],
-    "clueTiers": [],
-    "alwaysAvailable": false
-  },
-  "Topaz necklace": {
-    "monsters": [],
-    "rdtMonsters": [],
-    "quests": [],
-    "gathering": null,
-    "production": {
-      "skill": "Crafting",
-      "level": 32,
-      "xp": 70.0,
-      "facilities": "Furnace",
-      "tools": [
-        "Necklace mould"
-      ],
-      "quests": null,
-      "ingredients": [
-        {
-          "item": "Red topaz",
-          "quantity": 1
-        },
-        {
-          "item": "Silver bar",
-          "quantity": 1
-        }
-      ],
-      "outputQuantity": 1
-    },
-    "spawns": [],
-    "shopBought": false,
-    "shops": [],
-    "clueTiers": [],
-    "alwaysAvailable": false
-  },
-  "Opal amulet": {
-    "monsters": [],
-    "rdtMonsters": [],
-    "quests": [],
-    "gathering": null,
-    "production": {
-      "skill": "Crafting",
-      "level": 1,
-      "xp": 4.0,
-      "facilities": null,
-      "tools": null,
-      "quests": null,
-      "ingredients": [
-        {
-          "item": "Opal amulet (u)",
-          "quantity": 1
-        },
-        {
-          "item": "Ball of wool",
-          "quantity": 1
-        }
-      ],
-      "outputQuantity": 1
-    },
-    "spawns": [],
-    "shopBought": false,
-    "shops": [],
-    "clueTiers": [],
-    "alwaysAvailable": false
-  },
-  "Jade amulet": {
-    "monsters": [],
-    "rdtMonsters": [],
-    "quests": [],
-    "gathering": null,
-    "production": {
-      "skill": "Crafting",
-      "level": 1,
-      "xp": 4.0,
-      "facilities": null,
-      "tools": null,
-      "quests": null,
-      "ingredients": [
-        {
-          "item": "Jade amulet (u)",
-          "quantity": 1
-        },
-        {
-          "item": "Ball of wool",
-          "quantity": 1
-        }
-      ],
-      "outputQuantity": 1
-    },
-    "spawns": [],
-    "shopBought": false,
-    "shops": [],
-    "clueTiers": [],
-    "alwaysAvailable": false
-  },
-  "Topaz amulet": {
-    "monsters": [
-      {
-        "card": "Elite Black Knight",
-        "rarity": "Uncommon",
-        "fraction": "2/122"
-      }
-    ],
-    "rdtMonsters": [],
-    "quests": [],
-    "gathering": null,
-    "production": {
-      "skill": "Crafting",
-      "level": 1,
-      "xp": 4.0,
-      "facilities": null,
-      "tools": null,
-      "quests": null,
-      "ingredients": [
-        {
-          "item": "Topaz amulet (u)",
-          "quantity": 1
-        },
-        {
-          "item": "Ball of wool",
-          "quantity": 1
-        }
-      ],
-      "outputQuantity": 1
-    },
-    "spawns": [],
-    "shopBought": false,
-    "shops": [],
-    "clueTiers": [],
-    "alwaysAvailable": false
-  },
-  "Opal bracelet": {
-    "monsters": [],
-    "rdtMonsters": [],
-    "quests": [],
-    "gathering": null,
-    "production": {
-      "skill": "Crafting",
-      "level": 22,
-      "xp": 45.0,
-      "facilities": "Furnace",
-      "tools": [
-        "Bracelet mould"
-      ],
-      "quests": null,
-      "ingredients": [
-        {
-          "item": "Opal",
-          "quantity": 1
-        },
-        {
-          "item": "Silver bar",
-          "quantity": 1
-        }
-      ],
-      "outputQuantity": 1
-    },
-    "spawns": [],
-    "shopBought": false,
-    "shops": [],
-    "clueTiers": [],
-    "alwaysAvailable": false
-  },
-  "Jade bracelet": {
-    "monsters": [],
-    "rdtMonsters": [],
-    "quests": [],
-    "gathering": null,
-    "production": {
-      "skill": "Crafting",
-      "level": 29,
-      "xp": 60.0,
-      "facilities": "Furnace",
-      "tools": [
-        "Bracelet mould"
-      ],
-      "quests": null,
-      "ingredients": [
-        {
-          "item": "Jade",
-          "quantity": 1
-        },
-        {
-          "item": "Silver bar",
-          "quantity": 1
-        }
-      ],
-      "outputQuantity": 1
-    },
-    "spawns": [],
-    "shopBought": false,
-    "shops": [],
-    "clueTiers": [],
-    "alwaysAvailable": false
-  },
-  "Topaz bracelet": {
-    "monsters": [],
-    "rdtMonsters": [],
-    "quests": [],
-    "gathering": null,
-    "production": {
-      "skill": "Crafting",
-      "level": 38,
-      "xp": 75.0,
-      "facilities": "Furnace",
-      "tools": [
-        "Bracelet mould"
-      ],
-      "quests": null,
-      "ingredients": [
-        {
-          "item": "Red topaz",
-          "quantity": 1
-        },
-        {
-          "item": "Silver bar",
-          "quantity": 1
-        }
-      ],
-      "outputQuantity": 1
-    },
-    "spawns": [],
-    "shopBought": false,
-    "shops": [],
-    "clueTiers": [],
-    "alwaysAvailable": false
-  },
   "Ring of pursuit": {
     "monsters": [],
     "rdtMonsters": [],
@@ -167767,27 +166239,26 @@
     "quests": [],
     "gathering": null,
     "production": {
-      "skill": "Magic",
-      "level": 7,
-      "xp": 17.5,
-      "facilities": null,
-      "tools": null,
+      "skill": "Crafting",
+      "level": 27,
+      "xp": null,
+      "facilities": "Furnace",
+      "tools": [
+        "Amulet mould"
+      ],
       "quests": null,
       "ingredients": [
         {
-          "item": "Opal amulet",
+          "item": "Silver bar",
           "quantity": 1
         },
         {
-          "item": "Cosmic rune",
-          "quantity": 1
-        },
-        {
-          "item": "Water rune",
+          "item": "Opal",
           "quantity": 1
         }
       ],
-      "outputQuantity": 1
+      "outputQuantity": 1,
+      "version": "Opal amulet (u)"
     },
     "spawns": [],
     "shopBought": false,
@@ -167801,27 +166272,26 @@
     "quests": [],
     "gathering": null,
     "production": {
-      "skill": "Magic",
-      "level": 27,
-      "xp": 37.0,
-      "facilities": null,
-      "tools": null,
+      "skill": "Crafting",
+      "level": 34,
+      "xp": null,
+      "facilities": "Furnace",
+      "tools": [
+        "Amulet mould"
+      ],
       "quests": null,
       "ingredients": [
         {
-          "item": "Jade amulet",
+          "item": "Jade",
           "quantity": 1
         },
         {
-          "item": "Cosmic rune",
+          "item": "Silver bar",
           "quantity": 1
-        },
-        {
-          "item": "Air rune",
-          "quantity": 3
         }
       ],
-      "outputQuantity": 1
+      "outputQuantity": 1,
+      "version": "Jade amulet (u)"
     },
     "spawns": [],
     "shopBought": false,
@@ -167830,32 +166300,37 @@
     "alwaysAvailable": false
   },
   "Burning amulet": {
-    "monsters": [],
+    "monsters": [
+      {
+        "card": "Elite Black Knight",
+        "rarity": "Uncommon",
+        "fraction": "2/122"
+      }
+    ],
     "rdtMonsters": [],
     "quests": [],
     "gathering": null,
     "production": {
-      "skill": "Magic",
-      "level": 49,
-      "xp": 59.0,
-      "facilities": null,
-      "tools": null,
+      "skill": "Crafting",
+      "level": 45,
+      "xp": null,
+      "facilities": "Furnace",
+      "tools": [
+        "Amulet mould"
+      ],
       "quests": null,
       "ingredients": [
         {
-          "item": "Topaz amulet",
+          "item": "Red topaz",
           "quantity": 1
         },
         {
-          "item": "Cosmic rune",
+          "item": "Silver bar",
           "quantity": 1
-        },
-        {
-          "item": "Fire rune",
-          "quantity": 5
         }
       ],
-      "outputQuantity": 1
+      "outputQuantity": 1,
+      "version": "Topaz amulet (u)"
     },
     "spawns": [],
     "shopBought": false,
@@ -168041,7 +166516,7 @@
         "fraction": "1/30"
       },
       {
-        "card": "Scorpia's offspring",
+        "card": "Scorpia's offspring (monster)",
         "rarity": "Rare",
         "fraction": "1/319"
       },
@@ -168717,23 +167192,22 @@
     "quests": [],
     "gathering": null,
     "production": {
-      "skill": "Fletching",
-      "level": 82,
-      "xp": 202.5,
+      "skill": "Crafting",
+      "level": 85,
+      "xp": null,
       "facilities": null,
-      "tools": null,
+      "tools": [
+        "Chisel"
+      ],
       "quests": null,
       "ingredients": [
         {
-          "item": "Headless arrow",
-          "quantity": 15
-        },
-        {
-          "item": "Amethyst arrowtips",
-          "quantity": 15
+          "item": "Amethyst",
+          "quantity": 1
         }
       ],
-      "outputQuantity": 15
+      "outputQuantity": 1,
+      "version": "Amethyst arrowtips"
     },
     "spawns": [],
     "shopBought": false,
@@ -168983,7 +167457,7 @@
         "fraction": ""
       },
       {
-        "card": "Manta ray",
+        "card": "Manta ray (sailing)",
         "rarity": "Rare",
         "fraction": "1/343.8"
       },
@@ -169081,7 +167555,7 @@
         "fraction": ""
       },
       {
-        "card": "Manta ray",
+        "card": "Manta ray (sailing)",
         "rarity": "Rare",
         "fraction": "1/343.8"
       },
@@ -169142,6 +167616,11 @@
         "card": "Hermit crab",
         "rarity": "Uncommon",
         "fraction": "4/128"
+      },
+      {
+        "card": "Master Farmer",
+        "rarity": "Very Rare",
+        "fraction": "1/1,892"
       }
     ],
     "rdtMonsters": [],
@@ -169794,18 +168273,6 @@
     "clueTiers": [],
     "alwaysAvailable": false
   },
-  "Hoop snake": {
-    "monsters": [],
-    "rdtMonsters": [],
-    "quests": [],
-    "gathering": null,
-    "production": null,
-    "spawns": [],
-    "shopBought": false,
-    "shops": [],
-    "clueTiers": [],
-    "alwaysAvailable": false
-  },
   "Sulliuscep cap": {
     "monsters": [],
     "rdtMonsters": [],
@@ -170106,18 +168573,6 @@
         "currency": "Mermaid's tear"
       }
     ],
-    "clueTiers": [],
-    "alwaysAvailable": false
-  },
-  "Diving helmet": {
-    "monsters": [],
-    "rdtMonsters": [],
-    "quests": [],
-    "gathering": null,
-    "production": null,
-    "spawns": [],
-    "shopBought": false,
-    "shops": [],
     "clueTiers": [],
     "alwaysAvailable": false
   },
@@ -173616,34 +172071,6 @@
     "clueTiers": [],
     "alwaysAvailable": false
   },
-  "Fish chunks": {
-    "monsters": [],
-    "rdtMonsters": [],
-    "quests": [],
-    "gathering": null,
-    "production": {
-      "skill": "Cooking",
-      "level": 1,
-      "xp": 3.5,
-      "facilities": "None",
-      "tools": [
-        "Knife"
-      ],
-      "quests": null,
-      "ingredients": [
-        {
-          "item": "Bluegill",
-          "quantity": 1
-        }
-      ],
-      "outputQuantity": 1
-    },
-    "spawns": [],
-    "shopBought": false,
-    "shops": [],
-    "clueTiers": [],
-    "alwaysAvailable": false
-  },
   "Molch pearl": {
     "monsters": [],
     "rdtMonsters": [],
@@ -173866,7 +172293,7 @@
         "fraction": "3/104"
       },
       {
-        "card": "Manta ray",
+        "card": "Manta ray (sailing)",
         "rarity": "Very Rare",
         "fraction": "1/1,546.9"
       },
@@ -173959,7 +172386,7 @@
         "fraction": ""
       },
       {
-        "card": "Manta ray",
+        "card": "Manta ray (sailing)",
         "rarity": "Very Rare",
         "fraction": "1/1,546.9"
       },
@@ -174382,7 +172809,7 @@
         "fraction": "1/144.7"
       },
       {
-        "card": "Manta ray",
+        "card": "Manta ray (sailing)",
         "rarity": "Rare",
         "fraction": "1/432.3"
       },
@@ -174415,6 +172842,11 @@
         "card": "Cave abomination",
         "rarity": "Uncommon",
         "fraction": ""
+      },
+      {
+        "card": "Master Farmer",
+        "rarity": "Very Rare",
+        "fraction": "1/2,460"
       }
     ],
     "rdtMonsters": [],
@@ -174512,7 +172944,7 @@
         "fraction": ""
       },
       {
-        "card": "Manta ray",
+        "card": "Manta ray (sailing)",
         "rarity": "Very Rare",
         "fraction": "1/1,031.3"
       },
@@ -175070,7 +173502,7 @@
         "fraction": "1/65.4"
       },
       {
-        "card": "Manta ray",
+        "card": "Manta ray (sailing)",
         "rarity": "Uncommon",
         "fraction": "1/86.5"
       },
@@ -175118,6 +173550,11 @@
         "card": "Cave abomination",
         "rarity": "Rare",
         "fraction": ""
+      },
+      {
+        "card": "Master Farmer",
+        "rarity": "Rare",
+        "fraction": "1/260"
       }
     ],
     "rdtMonsters": [],
@@ -177730,7 +176167,7 @@
         "fraction": "1/72"
       },
       {
-        "card": "Scorpia's offspring",
+        "card": "Scorpia's offspring (monster)",
         "rarity": "Very Rare",
         "fraction": "1/1,367"
       },
@@ -178254,32 +176691,6 @@
     "quests": [],
     "gathering": null,
     "production": null,
-    "spawns": [],
-    "shopBought": false,
-    "shops": [],
-    "clueTiers": [],
-    "alwaysAvailable": false
-  },
-  "Water-filled vial": {
-    "monsters": [],
-    "rdtMonsters": [],
-    "quests": [],
-    "gathering": null,
-    "production": {
-      "skill": null,
-      "level": 0,
-      "xp": null,
-      "facilities": "Water Pump (The Gauntlet)",
-      "tools": null,
-      "quests": null,
-      "ingredients": [
-        {
-          "item": "Vial (The Gauntlet)",
-          "quantity": 1
-        }
-      ],
-      "outputQuantity": 1
-    },
     "spawns": [],
     "shopBought": false,
     "shops": [],
@@ -179227,11 +177638,6 @@
   "Inquisitor's mace": {
     "monsters": [
       {
-        "card": "Phosani's Nightmare",
-        "rarity": "Very Rare",
-        "fraction": "31/35,000"
-      },
-      {
         "card": "The Nightmare",
         "rarity": "Rare",
         "fraction": "1/750"
@@ -179249,11 +177655,6 @@
   },
   "Inquisitor's great helm": {
     "monsters": [
-      {
-        "card": "Phosani's Nightmare",
-        "rarity": "Rare",
-        "fraction": "1/700"
-      },
       {
         "card": "The Nightmare",
         "rarity": "Rare",
@@ -179273,11 +177674,6 @@
   "Inquisitor's hauberk": {
     "monsters": [
       {
-        "card": "Phosani's Nightmare",
-        "rarity": "Rare",
-        "fraction": "1/700"
-      },
-      {
         "card": "The Nightmare",
         "rarity": "Rare",
         "fraction": "1/420"
@@ -179295,11 +177691,6 @@
   },
   "Inquisitor's plateskirt": {
     "monsters": [
-      {
-        "card": "Phosani's Nightmare",
-        "rarity": "Rare",
-        "fraction": "1/700"
-      },
       {
         "card": "The Nightmare",
         "rarity": "Rare",
@@ -179319,11 +177710,6 @@
   "Nightmare staff": {
     "monsters": [
       {
-        "card": "Phosani's Nightmare",
-        "rarity": "Rare",
-        "fraction": "69/35,000"
-      },
-      {
         "card": "The Nightmare",
         "rarity": "Rare",
         "fraction": "1/300"
@@ -179341,11 +177727,6 @@
   },
   "Little nightmare": {
     "monsters": [
-      {
-        "card": "Phosani's Nightmare",
-        "rarity": "Very Rare",
-        "fraction": "1/1,400"
-      },
       {
         "card": "The Nightmare",
         "rarity": "Rare",
@@ -179365,11 +177746,6 @@
   "Jar of dreams": {
     "monsters": [
       {
-        "card": "Phosani's Nightmare",
-        "rarity": "Very Rare",
-        "fraction": "1/4,000"
-      },
-      {
         "card": "The Nightmare",
         "rarity": "Very Rare",
         "fraction": "1/1,900"
@@ -179387,11 +177763,6 @@
   },
   "Harmonised orb": {
     "monsters": [
-      {
-        "card": "Phosani's Nightmare",
-        "rarity": "Very Rare",
-        "fraction": "1/1,600"
-      },
       {
         "card": "The Nightmare",
         "rarity": "Rare",
@@ -179411,11 +177782,6 @@
   "Volatile orb": {
     "monsters": [
       {
-        "card": "Phosani's Nightmare",
-        "rarity": "Very Rare",
-        "fraction": "1/1,600"
-      },
-      {
         "card": "The Nightmare",
         "rarity": "Rare",
         "fraction": "1/960"
@@ -179433,11 +177799,6 @@
   },
   "Eldritch orb": {
     "monsters": [
-      {
-        "card": "Phosani's Nightmare",
-        "rarity": "Very Rare",
-        "fraction": "1/1,600"
-      },
       {
         "card": "The Nightmare",
         "rarity": "Rare",
@@ -182816,18 +181177,6 @@
         "fraction": "1/3,264"
       }
     ],
-    "rdtMonsters": [],
-    "quests": [],
-    "gathering": null,
-    "production": null,
-    "spawns": [],
-    "shopBought": false,
-    "shops": [],
-    "clueTiers": [],
-    "alwaysAvailable": false
-  },
-  "Pumpkin pie": {
-    "monsters": [],
     "rdtMonsters": [],
     "quests": [],
     "gathering": null,
@@ -186850,18 +185199,6 @@
       ],
       "outputQuantity": 1
     },
-    "spawns": [],
-    "shopBought": false,
-    "shops": [],
-    "clueTiers": [],
-    "alwaysAvailable": false
-  },
-  "Immature tecu salamander": {
-    "monsters": [],
-    "rdtMonsters": [],
-    "quests": [],
-    "gathering": null,
-    "production": null,
     "spawns": [],
     "shopBought": false,
     "shops": [],
@@ -192963,7 +191300,7 @@
         "fraction": "9/500"
       },
       {
-        "card": "Manta ray",
+        "card": "Manta ray (sailing)",
         "rarity": "Common",
         "fraction": "16/297"
       },
@@ -193061,7 +191398,7 @@
         "fraction": "3/500"
       },
       {
-        "card": "Manta ray",
+        "card": "Manta ray (sailing)",
         "rarity": "Uncommon",
         "fraction": "8/297"
       },
@@ -193303,7 +191640,7 @@
         "fraction": "15/400"
       },
       {
-        "card": "Manta ray",
+        "card": "Manta ray (sailing)",
         "rarity": "Rare",
         "fraction": "15/1,980"
       },
@@ -193356,7 +191693,7 @@
         "fraction": "4/400"
       },
       {
-        "card": "Manta ray",
+        "card": "Manta ray (sailing)",
         "rarity": "Rare",
         "fraction": "4/1,980"
       },
@@ -193409,7 +191746,7 @@
         "fraction": "1/400"
       },
       {
-        "card": "Manta ray",
+        "card": "Manta ray (sailing)",
         "rarity": "Very Rare",
         "fraction": "1/1,980"
       },
@@ -195029,7 +193366,7 @@
         "fraction": "1/30"
       },
       {
-        "card": "Manta ray",
+        "card": "Manta ray (sailing)",
         "rarity": "Common",
         "fraction": "1/20"
       }
@@ -197478,7 +195815,7 @@
   "Manta ray skin": {
     "monsters": [
       {
-        "card": "Manta ray",
+        "card": "Manta ray (sailing)",
         "rarity": "Common",
         "fraction": "1/10"
       }
@@ -199351,6 +197688,1077 @@
       "xp": 100.0
     },
     "production": null,
+    "spawns": [],
+    "shopBought": false,
+    "shops": [],
+    "clueTiers": [],
+    "alwaysAvailable": false
+  },
+  "White partyhat": {
+    "monsters": [],
+    "rdtMonsters": [],
+    "quests": [],
+    "gathering": null,
+    "production": null,
+    "spawns": [],
+    "shopBought": false,
+    "shops": [],
+    "clueTiers": [],
+    "alwaysAvailable": false
+  },
+  "Orange dye": {
+    "monsters": [],
+    "rdtMonsters": [],
+    "quests": [],
+    "gathering": null,
+    "production": {
+      "skill": null,
+      "level": null,
+      "xp": null,
+      "facilities": null,
+      "tools": null,
+      "quests": null,
+      "ingredients": [
+        {
+          "item": "Red dye",
+          "quantity": 1
+        },
+        {
+          "item": "Yellow dye",
+          "quantity": 1
+        }
+      ],
+      "outputQuantity": 1
+    },
+    "spawns": [
+      "Shayzien Styles"
+    ],
+    "shopBought": true,
+    "shops": [
+      {
+        "seller": "Lletya Seamstress",
+        "price": 6,
+        "currency": "Coins"
+      },
+      {
+        "seller": "Guinevere's Dyes",
+        "price": 6,
+        "currency": "Coins"
+      },
+      {
+        "seller": "Dyes to Die For",
+        "price": 6,
+        "currency": "Coins"
+      },
+      {
+        "seller": "Durrik's Goods",
+        "price": 12,
+        "currency": "Coins"
+      }
+    ],
+    "clueTiers": [],
+    "alwaysAvailable": false
+  },
+  "Dwellberries": {
+    "monsters": [],
+    "rdtMonsters": [],
+    "quests": [],
+    "gathering": null,
+    "production": null,
+    "spawns": [
+      "McGrubor's Wood"
+    ],
+    "shopBought": true,
+    "shops": [
+      {
+        "seller": "Funch's Fine Groceries",
+        "price": 4,
+        "currency": "Coins"
+      },
+      {
+        "seller": "Grand Tree Groceries",
+        "price": 4,
+        "currency": "Coins"
+      }
+    ],
+    "clueTiers": [],
+    "alwaysAvailable": false
+  },
+  "Cheese+tom batta": {
+    "monsters": [],
+    "rdtMonsters": [],
+    "quests": [],
+    "gathering": null,
+    "production": {
+      "skill": "Cooking",
+      "level": 1,
+      "xp": 88.0,
+      "facilities": "Cooking range",
+      "tools": null,
+      "quests": null,
+      "ingredients": [
+        {
+          "item": "Unfinished batta (cheese+tom)",
+          "quantity": 1
+        }
+      ],
+      "outputQuantity": 1
+    },
+    "spawns": [],
+    "shopBought": false,
+    "shops": [],
+    "clueTiers": [],
+    "alwaysAvailable": false
+  },
+  "Games necklace": {
+    "monsters": [
+      {
+        "card": "Mummy",
+        "rarity": "Uncommon",
+        "fraction": "10/513"
+      },
+      {
+        "card": "Elite Black Knight",
+        "rarity": "Common",
+        "fraction": "7/122"
+      }
+    ],
+    "rdtMonsters": [],
+    "quests": [],
+    "gathering": null,
+    "production": {
+      "skill": "Crafting",
+      "level": 22,
+      "xp": 55.0,
+      "facilities": "Furnace",
+      "tools": [
+        "Necklace mould"
+      ],
+      "quests": null,
+      "ingredients": [
+        {
+          "item": "Sapphire",
+          "quantity": 1
+        },
+        {
+          "item": "Gold bar",
+          "quantity": 1
+        }
+      ],
+      "outputQuantity": 1,
+      "version": "Sapphire necklace"
+    },
+    "spawns": [],
+    "shopBought": true,
+    "shops": [
+      {
+        "seller": "Grum's Gold Exchange.",
+        "price": 1050,
+        "currency": "Coins"
+      },
+      {
+        "seller": "Conara's Jewels",
+        "price": 1050,
+        "currency": "Coins"
+      }
+    ],
+    "clueTiers": [],
+    "alwaysAvailable": false
+  },
+  "Binding necklace": {
+    "monsters": [
+      {
+        "card": "Abyssal guardian",
+        "rarity": "Uncommon",
+        "fraction": "3/256"
+      },
+      {
+        "card": "Abyssal Sire",
+        "rarity": "Uncommon",
+        "fraction": "4/139"
+      },
+      {
+        "card": "Abyssal leech",
+        "rarity": "Uncommon",
+        "fraction": "3/256"
+      },
+      {
+        "card": "Abyssal walker",
+        "rarity": "Uncommon",
+        "fraction": "3/256"
+      }
+    ],
+    "rdtMonsters": [],
+    "quests": [],
+    "gathering": null,
+    "production": {
+      "skill": "Crafting",
+      "level": 29,
+      "xp": 60.0,
+      "facilities": "Furnace",
+      "tools": [
+        "Necklace mould"
+      ],
+      "quests": null,
+      "ingredients": [
+        {
+          "item": "Emerald",
+          "quantity": 1
+        },
+        {
+          "item": "Gold bar",
+          "quantity": 1
+        }
+      ],
+      "outputQuantity": 1,
+      "version": "Emerald necklace"
+    },
+    "spawns": [],
+    "shopBought": true,
+    "shops": [
+      {
+        "seller": "Grum's Gold Exchange.",
+        "price": 1425,
+        "currency": "Coins"
+      },
+      {
+        "seller": "Conara's Jewels",
+        "price": 1425,
+        "currency": "Coins"
+      }
+    ],
+    "clueTiers": [],
+    "alwaysAvailable": false
+  },
+  "Egg whisk": {
+    "monsters": [],
+    "rdtMonsters": [],
+    "quests": [],
+    "gathering": null,
+    "production": null,
+    "spawns": [],
+    "shopBought": true,
+    "shops": [
+      {
+        "seller": "Culinaromancer's Chest(full)",
+        "price": 65,
+        "currency": "Coins"
+      },
+      {
+        "seller": "Culinaromancer's Chest(full, diary)",
+        "price": 52,
+        "currency": "Coins"
+      },
+      {
+        "seller": "Culinaromancer's Chest(1 Subquest)",
+        "price": 65,
+        "currency": "Coins"
+      },
+      {
+        "seller": "Culinaromancer's Chest(2 Subquest)",
+        "price": 65,
+        "currency": "Coins"
+      },
+      {
+        "seller": "Culinaromancer's Chest(3 Subquests)",
+        "price": 65,
+        "currency": "Coins"
+      },
+      {
+        "seller": "Culinaromancer's Chest(4 Subquests)",
+        "price": 65,
+        "currency": "Coins"
+      },
+      {
+        "seller": "Culinaromancer's Chest(5 Subquests)",
+        "price": 65,
+        "currency": "Coins"
+      },
+      {
+        "seller": "Culinaromancer's Chest(6 Subquests)",
+        "price": 65,
+        "currency": "Coins"
+      },
+      {
+        "seller": "Culinaromancer's Chest(7 Subquests)",
+        "price": 65,
+        "currency": "Coins"
+      },
+      {
+        "seller": "Culinaromancer's Chest(8 Subquests)",
+        "price": 65,
+        "currency": "Coins"
+      }
+    ],
+    "clueTiers": [],
+    "alwaysAvailable": false
+  },
+  "Ava's accumulator": {
+    "monsters": [],
+    "rdtMonsters": [],
+    "quests": [
+      "Animal Magnetism"
+    ],
+    "gathering": null,
+    "production": null,
+    "spawns": [],
+    "shopBought": true,
+    "shops": [
+      {
+        "seller": "Ava",
+        "price": 999,
+        "currency": "Coins"
+      }
+    ],
+    "clueTiers": [],
+    "alwaysAvailable": false
+  },
+  "Bracelet of clay": {
+    "monsters": [],
+    "rdtMonsters": [],
+    "quests": [],
+    "gathering": null,
+    "production": {
+      "skill": "Crafting",
+      "level": 23,
+      "xp": 60.0,
+      "facilities": "Furnace",
+      "tools": [
+        "Bracelet mould"
+      ],
+      "quests": null,
+      "ingredients": [
+        {
+          "item": "Sapphire",
+          "quantity": 1
+        },
+        {
+          "item": "Gold bar",
+          "quantity": 1
+        }
+      ],
+      "outputQuantity": 1,
+      "version": "Sapphire bracelet"
+    },
+    "spawns": [],
+    "shopBought": true,
+    "shops": [
+      {
+        "seller": "Conara's Jewels",
+        "price": 1150,
+        "currency": "Coins"
+      }
+    ],
+    "clueTiers": [],
+    "alwaysAvailable": false
+  },
+  "Castle wars bracelet": {
+    "monsters": [],
+    "rdtMonsters": [],
+    "quests": [],
+    "gathering": null,
+    "production": {
+      "skill": "Crafting",
+      "level": 30,
+      "xp": 65.0,
+      "facilities": "Furnace",
+      "tools": [
+        "Bracelet mould"
+      ],
+      "quests": null,
+      "ingredients": [
+        {
+          "item": "Emerald",
+          "quantity": 1
+        },
+        {
+          "item": "Gold bar",
+          "quantity": 1
+        }
+      ],
+      "outputQuantity": 1,
+      "version": "Emerald bracelet"
+    },
+    "spawns": [],
+    "shopBought": true,
+    "shops": [
+      {
+        "seller": "Conara's Jewels",
+        "price": 1525,
+        "currency": "Coins"
+      }
+    ],
+    "clueTiers": [],
+    "alwaysAvailable": false
+  },
+  "Inoculation bracelet": {
+    "monsters": [],
+    "rdtMonsters": [],
+    "quests": [],
+    "gathering": null,
+    "production": {
+      "skill": "Crafting",
+      "level": 42,
+      "xp": 80.0,
+      "facilities": "Furnace",
+      "tools": [
+        "Bracelet mould"
+      ],
+      "quests": null,
+      "ingredients": [
+        {
+          "item": "Ruby",
+          "quantity": 1
+        },
+        {
+          "item": "Gold bar",
+          "quantity": 1
+        }
+      ],
+      "outputQuantity": 1,
+      "version": "Ruby bracelet"
+    },
+    "spawns": [],
+    "shopBought": true,
+    "shops": [
+      {
+        "seller": "Conara's Jewels",
+        "price": 2325,
+        "currency": "Coins"
+      }
+    ],
+    "clueTiers": [],
+    "alwaysAvailable": false
+  },
+  "Phoenix necklace": {
+    "monsters": [],
+    "rdtMonsters": [],
+    "quests": [],
+    "gathering": null,
+    "production": {
+      "skill": "Crafting",
+      "level": 56,
+      "xp": 90.0,
+      "facilities": "Furnace",
+      "tools": [
+        "Necklace mould"
+      ],
+      "quests": null,
+      "ingredients": [
+        {
+          "item": "Gold bar",
+          "quantity": 1
+        },
+        {
+          "item": "Diamond",
+          "quantity": 1
+        }
+      ],
+      "outputQuantity": 1,
+      "version": "Diamond necklace"
+    },
+    "spawns": [],
+    "shopBought": true,
+    "shops": [
+      {
+        "seller": "Grum's Gold Exchange.",
+        "price": 3675,
+        "currency": "Coins"
+      },
+      {
+        "seller": "Conara's Jewels",
+        "price": 3675,
+        "currency": "Coins"
+      }
+    ],
+    "clueTiers": [],
+    "alwaysAvailable": false
+  },
+  "Abyssal bracelet": {
+    "monsters": [],
+    "rdtMonsters": [],
+    "quests": [],
+    "gathering": null,
+    "production": {
+      "skill": "Crafting",
+      "level": 58,
+      "xp": 95.0,
+      "facilities": "Furnace",
+      "tools": [
+        "Bracelet mould"
+      ],
+      "quests": null,
+      "ingredients": [
+        {
+          "item": "Diamond",
+          "quantity": 1
+        },
+        {
+          "item": "Gold bar",
+          "quantity": 1
+        }
+      ],
+      "outputQuantity": 1,
+      "version": "Diamond bracelet"
+    },
+    "spawns": [],
+    "shopBought": true,
+    "shops": [
+      {
+        "seller": "Conara's Jewels",
+        "price": 3825,
+        "currency": "Coins"
+      }
+    ],
+    "clueTiers": [],
+    "alwaysAvailable": false
+  },
+  "Efaritay's aid": {
+    "monsters": [],
+    "rdtMonsters": [],
+    "quests": [],
+    "gathering": null,
+    "production": {
+      "skill": "Crafting",
+      "level": 16,
+      "xp": 35.0,
+      "facilities": "Furnace",
+      "tools": [
+        "Ring mould"
+      ],
+      "quests": null,
+      "ingredients": [
+        {
+          "item": "Red topaz",
+          "quantity": 1
+        },
+        {
+          "item": "Silver bar",
+          "quantity": 1
+        }
+      ],
+      "outputQuantity": 1,
+      "version": "Topaz ring"
+    },
+    "spawns": [],
+    "shopBought": false,
+    "shops": [],
+    "clueTiers": [],
+    "alwaysAvailable": false
+  },
+  "Dodgy necklace": {
+    "monsters": [
+      {
+        "card": "Elite Black Knight",
+        "rarity": "Common",
+        "fraction": "7/122"
+      }
+    ],
+    "rdtMonsters": [],
+    "quests": [],
+    "gathering": null,
+    "production": {
+      "skill": "Crafting",
+      "level": 16,
+      "xp": 35.0,
+      "facilities": "Furnace",
+      "tools": [
+        "Necklace mould"
+      ],
+      "quests": null,
+      "ingredients": [
+        {
+          "item": "Opal",
+          "quantity": 1
+        },
+        {
+          "item": "Silver bar",
+          "quantity": 1
+        }
+      ],
+      "outputQuantity": 1,
+      "version": "Opal necklace"
+    },
+    "spawns": [],
+    "shopBought": false,
+    "shops": [],
+    "clueTiers": [],
+    "alwaysAvailable": false
+  },
+  "Necklace of passage": {
+    "monsters": [
+      {
+        "card": "Elite Black Knight",
+        "rarity": "Uncommon",
+        "fraction": "4/122"
+      }
+    ],
+    "rdtMonsters": [],
+    "quests": [],
+    "gathering": null,
+    "production": {
+      "skill": "Crafting",
+      "level": 25,
+      "xp": 54.0,
+      "facilities": "Furnace",
+      "tools": [
+        "Necklace mould"
+      ],
+      "quests": null,
+      "ingredients": [
+        {
+          "item": "Jade",
+          "quantity": 1
+        },
+        {
+          "item": "Silver bar",
+          "quantity": 1
+        }
+      ],
+      "outputQuantity": 1,
+      "version": "Jade necklace"
+    },
+    "spawns": [],
+    "shopBought": false,
+    "shops": [],
+    "clueTiers": [],
+    "alwaysAvailable": false
+  },
+  "Necklace of faith": {
+    "monsters": [],
+    "rdtMonsters": [],
+    "quests": [],
+    "gathering": null,
+    "production": {
+      "skill": "Crafting",
+      "level": 32,
+      "xp": 70.0,
+      "facilities": "Furnace",
+      "tools": [
+        "Necklace mould"
+      ],
+      "quests": null,
+      "ingredients": [
+        {
+          "item": "Red topaz",
+          "quantity": 1
+        },
+        {
+          "item": "Silver bar",
+          "quantity": 1
+        }
+      ],
+      "outputQuantity": 1,
+      "version": "Topaz necklace"
+    },
+    "spawns": [],
+    "shopBought": false,
+    "shops": [],
+    "clueTiers": [],
+    "alwaysAvailable": false
+  },
+  "Expeditious bracelet": {
+    "monsters": [],
+    "rdtMonsters": [],
+    "quests": [],
+    "gathering": null,
+    "production": {
+      "skill": "Crafting",
+      "level": 22,
+      "xp": 45.0,
+      "facilities": "Furnace",
+      "tools": [
+        "Bracelet mould"
+      ],
+      "quests": null,
+      "ingredients": [
+        {
+          "item": "Opal",
+          "quantity": 1
+        },
+        {
+          "item": "Silver bar",
+          "quantity": 1
+        }
+      ],
+      "outputQuantity": 1,
+      "version": "Opal bracelet"
+    },
+    "spawns": [],
+    "shopBought": false,
+    "shops": [],
+    "clueTiers": [],
+    "alwaysAvailable": false
+  },
+  "Flamtaer bracelet": {
+    "monsters": [],
+    "rdtMonsters": [],
+    "quests": [],
+    "gathering": null,
+    "production": {
+      "skill": "Crafting",
+      "level": 29,
+      "xp": 60.0,
+      "facilities": "Furnace",
+      "tools": [
+        "Bracelet mould"
+      ],
+      "quests": null,
+      "ingredients": [
+        {
+          "item": "Jade",
+          "quantity": 1
+        },
+        {
+          "item": "Silver bar",
+          "quantity": 1
+        }
+      ],
+      "outputQuantity": 1,
+      "version": "Jade bracelet"
+    },
+    "spawns": [],
+    "shopBought": false,
+    "shops": [],
+    "clueTiers": [],
+    "alwaysAvailable": false
+  },
+  "Bracelet of slaughter": {
+    "monsters": [],
+    "rdtMonsters": [],
+    "quests": [],
+    "gathering": null,
+    "production": {
+      "skill": "Crafting",
+      "level": 38,
+      "xp": 75.0,
+      "facilities": "Furnace",
+      "tools": [
+        "Bracelet mould"
+      ],
+      "quests": null,
+      "ingredients": [
+        {
+          "item": "Red topaz",
+          "quantity": 1
+        },
+        {
+          "item": "Silver bar",
+          "quantity": 1
+        }
+      ],
+      "outputQuantity": 1,
+      "version": "Topaz bracelet"
+    },
+    "spawns": [],
+    "shopBought": false,
+    "shops": [],
+    "clueTiers": [],
+    "alwaysAvailable": false
+  },
+  "Fishbowl helmet": {
+    "monsters": [],
+    "rdtMonsters": [],
+    "quests": [],
+    "gathering": null,
+    "production": null,
+    "spawns": [],
+    "shopBought": false,
+    "shops": [],
+    "clueTiers": [],
+    "alwaysAvailable": false
+  },
+  "Elaborate lockbox": {
+    "monsters": [],
+    "rdtMonsters": [],
+    "quests": [],
+    "gathering": null,
+    "production": null,
+    "spawns": [],
+    "shopBought": false,
+    "shops": [],
+    "clueTiers": [],
+    "alwaysAvailable": false
+  },
+  "Medium fur pouch": {
+    "monsters": [],
+    "rdtMonsters": [],
+    "quests": [],
+    "gathering": null,
+    "production": {
+      "skill": "Crafting",
+      "level": 50,
+      "xp": 40.0,
+      "facilities": "None",
+      "tools": [
+        "Needle"
+      ],
+      "quests": null,
+      "ingredients": [
+        {
+          "item": "Small fur pouch",
+          "quantity": 1
+        },
+        {
+          "item": "Graahk fur",
+          "quantity": 3
+        },
+        {
+          "item": "Thread",
+          "quantity": 0
+        }
+      ],
+      "outputQuantity": 1
+    },
+    "spawns": [],
+    "shopBought": false,
+    "shops": [],
+    "clueTiers": [],
+    "alwaysAvailable": false
+  },
+  "Necklace of Fangs": {
+    "monsters": [
+      {
+        "card": "Turoth",
+        "rarity": "Rare",
+        "fraction": "1/129"
+      },
+      {
+        "card": "Spiked Turoth",
+        "rarity": "Uncommon",
+        "fraction": ""
+      }
+    ],
+    "rdtMonsters": [],
+    "quests": [],
+    "gathering": null,
+    "production": null,
+    "spawns": [],
+    "shopBought": false,
+    "shops": [],
+    "clueTiers": [],
+    "alwaysAvailable": false
+  },
+  "Amulet of air": {
+    "monsters": [],
+    "rdtMonsters": [],
+    "quests": [],
+    "gathering": null,
+    "production": {
+      "skill": "Runecrafting",
+      "level": 18,
+      "xp": 50.0,
+      "facilities": "Air Altar",
+      "tools": null,
+      "quests": null,
+      "ingredients": [
+        {
+          "item": "Amulet of magic",
+          "quantity": 1
+        },
+        {
+          "item": "Air diamond",
+          "quantity": 1
+        },
+        {
+          "item": "Air rune",
+          "quantity": 100
+        }
+      ],
+      "outputQuantity": 1
+    },
+    "spawns": [],
+    "shopBought": false,
+    "shops": [],
+    "clueTiers": [],
+    "alwaysAvailable": false
+  },
+  "Amulet of water": {
+    "monsters": [],
+    "rdtMonsters": [],
+    "quests": [],
+    "gathering": null,
+    "production": {
+      "skill": "Runecrafting",
+      "level": 19,
+      "xp": 75.0,
+      "facilities": "Water Altar",
+      "tools": null,
+      "quests": null,
+      "ingredients": [
+        {
+          "item": "Amulet of magic",
+          "quantity": 1
+        },
+        {
+          "item": "Water sapphire",
+          "quantity": 1
+        },
+        {
+          "item": "Water rune",
+          "quantity": 100
+        }
+      ],
+      "outputQuantity": 1
+    },
+    "spawns": [],
+    "shopBought": false,
+    "shops": [],
+    "clueTiers": [],
+    "alwaysAvailable": false
+  },
+  "Amulet of earth": {
+    "monsters": [],
+    "rdtMonsters": [],
+    "quests": [],
+    "gathering": null,
+    "production": {
+      "skill": "Runecrafting",
+      "level": 20,
+      "xp": 100.0,
+      "facilities": "Earth Altar",
+      "tools": null,
+      "quests": null,
+      "ingredients": [
+        {
+          "item": "Amulet of magic",
+          "quantity": 1
+        },
+        {
+          "item": "Earth emerald",
+          "quantity": 1
+        },
+        {
+          "item": "Earth rune",
+          "quantity": 100
+        }
+      ],
+      "outputQuantity": 1
+    },
+    "spawns": [],
+    "shopBought": false,
+    "shops": [],
+    "clueTiers": [],
+    "alwaysAvailable": false
+  },
+  "Amulet of fire": {
+    "monsters": [],
+    "rdtMonsters": [],
+    "quests": [],
+    "gathering": null,
+    "production": {
+      "skill": "Runecrafting",
+      "level": 21,
+      "xp": 125.0,
+      "facilities": "Fire Altar",
+      "tools": null,
+      "quests": null,
+      "ingredients": [
+        {
+          "item": "Amulet of magic",
+          "quantity": 1
+        },
+        {
+          "item": "Fire ruby",
+          "quantity": 1
+        },
+        {
+          "item": "Fire rune",
+          "quantity": 100
+        }
+      ],
+      "outputQuantity": 1
+    },
+    "spawns": [],
+    "shopBought": false,
+    "shops": [],
+    "clueTiers": [],
+    "alwaysAvailable": false
+  },
+  "Elemental amulet": {
+    "monsters": [],
+    "rdtMonsters": [],
+    "quests": [],
+    "gathering": null,
+    "production": {
+      "skill": "Runecrafting",
+      "level": 30,
+      "xp": 175.0,
+      "facilities": "Runic Altar",
+      "tools": null,
+      "quests": null,
+      "ingredients": [
+        {
+          "item": "Amulet of air",
+          "quantity": 1
+        },
+        {
+          "item": "Amulet of fire",
+          "quantity": 1
+        },
+        {
+          "item": "Amulet of earth",
+          "quantity": 1
+        },
+        {
+          "item": "Amulet of water",
+          "quantity": 1
+        },
+        {
+          "item": "Air rune",
+          "quantity": 500
+        },
+        {
+          "item": "Fire rune",
+          "quantity": 500
+        },
+        {
+          "item": "Earth rune",
+          "quantity": 500
+        },
+        {
+          "item": "Water rune",
+          "quantity": 500
+        }
+      ],
+      "outputQuantity": 1
+    },
+    "spawns": [],
+    "shopBought": false,
+    "shops": [],
+    "clueTiers": [],
+    "alwaysAvailable": false
+  },
+  "Imbued ancient cape": {
+    "monsters": [
+      {
+        "card": "Pete Kayer",
+        "rarity": "Always",
+        "fraction": ""
+      }
+    ],
+    "rdtMonsters": [],
+    "quests": [],
+    "gathering": null,
+    "production": {
+      "skill": null,
+      "level": 0,
+      "xp": null,
+      "facilities": null,
+      "tools": null,
+      "quests": null,
+      "ingredients": [
+        {
+          "item": "Imbued Saradomin cape",
+          "quantity": 1
+        },
+        {
+          "item": "Ancient fabric",
+          "quantity": 1
+        }
+      ],
+      "outputQuantity": 1
+    },
     "spawns": [],
     "shopBought": false,
     "shops": [],

@@ -1068,7 +1068,6 @@ const TOOL_PART_ALIASES = {
 const TANNING_MAP = {
   'Leather':              'Cowhide',
   'Hard leather':         'Cowhide',
-  'Snakeskin':            'Snake hide',
   'Green dragon leather': 'Green dragonhide',
   'Blue dragon leather':  'Blue dragonhide',
   'Red dragon leather':   'Red dragonhide',
@@ -1132,6 +1131,101 @@ function _activityMet(a) {
   return (a.quests || []).every(_questOk) && Object.entries(a.levels || {}).every(([sk, l]) => getLevel(sk) >= l)
     && (!a.access || _accessMet(a.access));
 }
+
+// ── Curated gathering methods as item sources (skilling.json "outputs") ──────
+// Each gathering method in skilling.json lists the cards it yields: "Woad leaf", or
+// {card, level?, levels?, tool?} when an output needs more than the method (Drift net catches by
+// Fishing level; a farmed tree's logs / roots need the Woodcutting level and an axe).
+// Indexed by the card and by the raw (version) name, lowercase → [{m, out}].
+let _gatherIdx = null;
+function _gatherOut(o) { return typeof o === 'string' ? { card: o } : o; }
+function _curatedGathering(name) {
+  if (!_gatherIdx) {
+    _gatherIdx = {};
+    for (const m of SKILLING) {
+      if (m.type !== 'gathering') continue;
+      for (const o of (m.outputs || [])) {
+        const out = _gatherOut(o), ci = _cardInfo(out.card);
+        for (const k of new Set([out.card.toLowerCase(), ci ? ci.exact.toLowerCase() : null].filter(Boolean)))
+          (_gatherIdx[k] ||= []).push({ m, out });
+      }
+    }
+  }
+  return _gatherIdx[(name || '').toLowerCase()] || [];
+}
+// One curated gathering method for one output → {ok, level, levelOk, gates:[{label, ok, kind, key}], reqs:[{r, ok}]}
+// A requirement counts when one of its cards is usable and (for an item card) obtainable, or a route is met.
+function _curatedGatherStatus(m, out, visited = new Set()) {
+  const level = Math.max(m.level || 1, out.level || 0);
+  const levelOk = getLevel(m.skill) >= level;
+  const gates = [
+    ...Object.entries({ ...(m.levels || {}), ...(out.levels || {}) }).map(([sk, l]) => ({ label: `${sk} ${l}`, ok: getLevel(sk) >= l, kind: 'level', sk, l })),
+    ...(m.quests || []).map(q => ({ label: q, ok: _questOk(q), kind: 'quest', key: q })),
+    ...(m.partialQuests || []).map(q => ({ label: `${q} (started)`, ok: _questStartedOk(q), kind: 'quest', key: q })),
+    ...(m.diaries || []).map(d => ({ label: `${d} Diary`, ok: _diaryOk(d), kind: 'diary', key: d })),
+    ...(m.access ? [{ label: accessRoutes[m.access]?.label || m.access, ok: _accessMet(m.access), kind: 'area', key: m.access }] : []),
+  ];
+  const q = SKILL_UNLOCK_QUESTS[m.skill];
+  if (q && !(m.quests || []).includes(q)) gates.push({ label: q, ok: _questOk(q), kind: 'quest', key: q });
+  const usable = c => _cardUsable(c) && (!itemSources[c] || canGetItem(c, visited));
+  const reqs = (m.requirements || []).map(r => {
+    const cards = r.cards || [];
+    const has = cards.length || (r._routes || []).length;
+    const ok = !has || (r.tool && TOOL_TIERS[r.tool]
+      ? TOOL_TIERS[r.tool].some(t => usable(t.name) && getLevel(_TOOL_SKILL[r.tool] || m.skill) >= t.skillReq)
+      : cards.some(usable) || (r._routes || []).some(_routeMet) || (!!r.skillAlt && getLevel(r.skillAlt.skill) >= r.skillAlt.level));
+    return { r, ok };
+  });
+  if (out.tool && TOOL_TIERS[out.tool]) {
+    const sk = _TOOL_SKILL[out.tool] || m.skill;
+    reqs.push({ r: { label: `${out.tool} (for ${out.card})`, tool: out.tool, cards: TOOL_TIERS[out.tool].map(t => t.name) },
+      ok: TOOL_TIERS[out.tool].some(t => usable(t.name) && getLevel(sk) >= t.skillReq) });
+  }
+  const ok = levelOk && gates.every(g => g.ok) && reqs.every(x => x.ok || x.r.optional);
+  return { ok, level, levelOk, gates, reqs };
+}
+
+// ── Shops: the seller NPC's card (shop_owners.json) + the currency card + reaching the seller ──
+// Bronzeman locks NPC interaction by the NPC's name, so buying needs the shopkeeper's card when
+// one exists (a "Shop keeper" has none → general stores stay open). Unknown seller = unrestricted.
+let SHOP_OWNERS = {};   // seller → {shop, owners, cards} (output/shop_owners.json, generate_shop_owners.py)
+function _shopSellerCards(seller) { return (SHOP_OWNERS[seller] || {}).cards || []; }
+// An NPC card you own can be met: no known location, or one location you can reach
+function _npcReachable(card) {
+  const G = monsterLocations._gates || {};
+  const locs = Object.entries(monsterLocations[card] || {});
+  return !locs.length || locs.some(([l, a]) => _slLocOk(a, G[l]));
+}
+// Where the shop is (shop_owners.json locations → area access, plus monster_locations _gates for the
+// place, e.g. Lletya): reachable if any location is; null = no location known
+function _shopPlaceReach(seller) {
+  const locs = Object.entries((SHOP_OWNERS[seller] || {}).locations || {});
+  if (!locs.length) return null;
+  const G = monsterLocations._gates || {};
+  return locs.some(([l, a]) => _slLocOk(a, G[l]));
+}
+// → {ok, sellerCards, sellerOk, sellerReach, curCard, curOk}
+function _shopStatus(s) {
+  const sellerCards = _shopSellerCards(s.seller);
+  const sellerOwned = sellerCards.filter(c => isOwned(c));
+  const sellerOk = !sellerCards.length || sellerOwned.length > 0;
+  // The shop's own location when known, else (seller with a card) one of that NPC's locations
+  const place = _shopPlaceReach(s.seller);
+  const sellerReach = place != null ? place : (!sellerCards.length || sellerOwned.some(_npcReachable));
+  const cur = s.currency || 'Coins';
+  const curCard = itemSources[cur] !== undefined;
+  // Coins and card currencies need the card; a currency with no card (points…) isn't modelled as a source
+  const curOk = isOwned(cur);
+  return { ok: sellerOk && sellerReach && curOk, sellerCards, sellerOk, sellerReach, curCard, curOk };
+}
+// Production at an NPC (Aggie's dyes, Thormac's battlestaves…) or a shop facility: that NPC's card
+function _facilityCards(f) {
+  if (!f) return [];
+  if (SHOP_OWNERS[f]) return SHOP_OWNERS[f].cards || [];
+  const ci = _cardInfo(f);
+  return ci && ci.type === 'monster' ? [ci.exact] : [];
+}
+function _facilityOk(f) { const cs = _facilityCards(f); return !cs.length || cs.some(c => isOwned(c) && _npcReachable(c)); }
 // ── Clue steps & tiers (Phase 2) ─────────────────────────────────────────────
 // Every step in clue_steps.json carries `requirements` (the complete set of card gates: talk
 // NPC, Double agent, Spade, items, tools…) plus quests / partialQuests / skills / access /
@@ -1403,6 +1497,12 @@ function canGetItem(itemName, visited = new Set()) {
   const data = itemSources[itemName];
   const info = ingredientInfo[itemName];
   if (!data && !info) {
+    // An item version ("Vial of water", "Ruby ring") is got the way its card is
+    const card = cardAliases[itemName.toLowerCase()];
+    if (card && card !== itemName && itemSources[card]) {
+      const ok = canGetItem(card, new Set([...visited, itemName]));
+      _canGetCache[itemName] = ok; return ok;
+    }
     _canGetCache[itemName] = true;                   // unknown → not in card set, no restriction
     return true;
   }
@@ -1414,7 +1514,7 @@ function canGetItem(itemName, visited = new Set()) {
   // Don't penalise data gaps — assume the item is obtainable.
   {
     const hasSrc = src.shopBought || (src.spawns && src.spawns.length) ||
-                   src.gathering || (src.monsters && src.monsters.length) ||
+                   src.gathering || (src.monsters && src.monsters.length) || _curatedGathering(itemName).length ||
                    src.production || src.alwaysAvailable || src.activity || (src.clueTiers && src.clueTiers.length);
     if (!hasSrc) { _canGetCache[itemName] = true; return true; }
   }
@@ -1428,19 +1528,11 @@ function canGetItem(itemName, visited = new Set()) {
     if (accessibleSpawn) { _canGetCache[itemName] = true; return true; }
   }
 
-  // Shop — check whether the item is available via a shop the player can access.
-  // item_sources.json records per-shop currency; many items have ONLY special-currency
-  // shops (NMZ points, Marks of grace, Tokkul, etc.). We check:
-  //  1. Coins-accepting shops — need the Coins card.
-  //  2. Special-currency shops — if that currency is itself a TCG card, check ownership.
+  // Shop — any shop you can use: its currency card (Coins, Tokkul, Mark of grace…; a currency with
+  // no card isn't counted), the seller NPC's card when the shopkeeper has one (shop_owners.json)
+  // and a reachable location for that NPC. See _shopStatus.
   if (src.shopBought && src.shops && src.shops.length > 0) {
-    const hasCoinsShop = src.shops.some(s => !s.currency || s.currency === 'Coins');
-    if (hasCoinsShop && isOwned('Coins')) { _canGetCache[itemName] = true; return true; }
-    // Special currencies that are TCG cards (Tokkul, Mark of grace, Abyssal pearls, etc.)
-    const specialOwned = src.shops.some(s =>
-      s.currency && s.currency !== 'Coins' && isOwned(s.currency)
-    );
-    if (specialOwned) { _canGetCache[itemName] = true; return true; }
+    if (src.shops.some(s => _shopStatus(s).ok)) { _canGetCache[itemName] = true; return true; }
   }
 
   // Minigame / activity reward (e.g. Vale offerings from Vale Totems): its quests, levels and area
@@ -1461,6 +1553,15 @@ function canGetItem(itemName, visited = new Set()) {
     }
     // gathering failed — fall through to check other sources
   }
+  // Curated gathering methods that yield this card (skilling.json outputs: farming patches, special
+  // rocks / trees / fishing spots): level, quests, area and requirements (seeds, tools…) met
+  {
+    const gm = _curatedGathering(itemName);
+    if (gm.length) {
+      const newV = new Set([...visited, itemName]);
+      if (gm.some(({ m, out }) => _curatedGatherStatus(m, out, newV).ok)) { _canGetCache[itemName] = true; return true; }
+    }
+  }
 
   // Monster drop — need to own the monster card
   if (src.monsters && src.monsters.length > 0) {
@@ -1478,7 +1579,8 @@ function canGetItem(itemName, visited = new Set()) {
     const ings = p.ingredients || [];
     // Skip self-referential recipes (item lists itself as an ingredient)
     const isSelfRef = ings.some(i => i.item === itemName);
-    if (!isSelfRef && (!p.skill || getLevel(p.skill) >= (p.level || 1)) && (p.quests || []).every(_questOk) && (!p.skill || _skillUnlocked(p.skill))) {
+    if (!isSelfRef && (!p.skill || getLevel(p.skill) >= (p.level || 1)) && (p.quests || []).every(_questOk) && (!p.skill || _skillUnlocked(p.skill))
+        && _facilityOk(p.facilities)) {   // made by an NPC with a card (e.g. a dye from Aggie): that card
       const prodTools = getImplicitTools(p.skill, ings, p.tools || [], p.facilities);
       const toolsOk   = prodTools.every(t => !itemSources[t] || isOwned(t));
       if (toolsOk) {
@@ -1858,7 +1960,7 @@ function simulateRandom() {
 async function loadData() {
   try {
     const cb = `?v=${Date.now()}`;  // cache-bust so updated JSON files are always fresh
-    const [md, is, cc, cd, css, cs, crr, ii, qd, ed, fd, bmqc, cq, ac, cst, bl, clg, dd, cal, spl, rsrc, acc, cver, bdat, sdat, mloc, skl, rcp, micn] = await Promise.all([
+    const [md, is, cc, cd, css, cs, crr, ii, qd, ed, fd, bmqc, cq, ac, cst, bl, clg, dd, cal, spl, rsrc, acc, cver, bdat, sdat, mloc, skl, rcp, micn, shop] = await Promise.all([
       fetch(`output/monster_drops.json${cb}`).then(r => r.json()).catch(() => ({})),
       fetch(`output/item_sources.json${cb}`).then(r => r.json()).catch(() => ({})),
       fetch(`output/card_categories.json${cb}`).then(r => r.json()).catch(() => ({})),
@@ -1888,6 +1990,7 @@ async function loadData() {
       fetch(`output/skilling.json${cb}`).then(r => r.json()).catch(() => []),
       fetch(`output/recipes.json${cb}`).then(r => r.json()).catch(() => []),
       fetch(`output/method_icons.json${cb}`).then(r => r.json()).catch(() => ({})),
+      fetch(`output/shop_owners.json${cb}`).then(r => r.json()).catch(() => ({})),
     ]);
     monsterDrops = md; itemSources = is; cardCategories = cc; cardDetails = cd;
     _cardLcMap = null; // invalidate case-insensitive card lookup cache
@@ -1907,6 +2010,8 @@ async function loadData() {
     cardVersions       = cver || {};
     monsterLocations   = mloc || {};
     SKILLING           = Array.isArray(skl) ? skl : [];
+    _gatherIdx         = null;
+    SHOP_OWNERS        = shop || {};
     RECIPES            = Array.isArray(rcp) ? rcp : [];
     _recIdx = null;
     METHOD_ICONS       = micn || {};
@@ -2834,7 +2939,7 @@ function toggleWishlist(name, note) {
     }
   }
   _saveWishlist();
-  refreshDetail();
+  if (['questing', 'bosses', 'slayer'].includes(activeTab)) _rerenderReqPane(); else refreshDetail();
   if (activeTab === 'wishlist') renderWishlist();
 }
 
@@ -3899,9 +4004,24 @@ const FACILITY_NOTES = {
   'Soul Altar':   ['Soul talisman', 'Abyss'],
   'Wrath Altar':  ['Wrath talisman', 'Abyss'],
 };
+// Facilities that are an NPC doing the work (no card for the NPC): the player still supplies the ingredients
+const FACILITY_NPCS = new Set(['Aggie', 'Belona', 'Blast Furnace Foreman', 'Dampe', 'Elite Void Knight', 'Elnock Inquisitor',
+  'Gita Prymes', 'Key Master', 'Madam Sikaro', 'Nurmof', 'Patchy', 'Sigli the Huntsman', 'Skulgrimen', 'Smith',
+  'Spirit of Scorpius', 'Taxidermist', 'Thakkrad Sigmundson', 'The Overseer', 'Thormac', 'Trader Stan', 'Wizard Mizgog',
+  'Zooknock', 'Tannery']);
 function facilityNote(f) {
   if (!f || f === 'None') return null;
   const opts = FACILITY_NOTES[f];
+  const npcCards = !opts ? _facilityCards(f) : [];
+  if (npcCards.length) {   // an NPC service (Aggie's dyes…) or a shop whose keeper has a card
+    const ok = _facilityOk(f);
+    const chips = npcCards.slice(0, 3).map(c => `<span style="cursor:pointer;color:${isOwned(c) ? '#76c442' : '#c84a00'}" data-nav="${escHtml(c)}" data-nav-type="monster" onclick="showCard(this.dataset.nav,this.dataset.navType)">${escHtml(c)} ${isOwned(c) ? '✓' : '✗'}</span>`).join(' <span style="color:#555">/</span> ');
+    // The NPC (or shop) does the work; the player supplies the ingredients
+    const by = npcCards.some(c => c.toLowerCase() === f.toLowerCase()) ? `Made by ${escHtml(f)}` : `Made at ${escHtml(f)}`;
+    return `<span style="color:#888">${by} (you bring the ingredients)</span> · NPC card: ${chips}${ok || !npcCards.some(isOwned) ? '' : ' <span style="color:#a05050">(can’t reach)</span>'}`;
+  }
+  if (!opts && SHOP_OWNERS[f]) return `<span style="color:#888">Made at ${escHtml(f)} (you bring the ingredients)</span>`;
+  if (!opts && FACILITY_NPCS.has(f)) return `<span style="color:#888">${f === 'Tannery' ? 'Made at a tannery' : `Made by ${escHtml(f)}`} (you bring the ingredients)</span>`;
   if (!opts) return `<span style="color:#888">Requires: ${f}</span>`;
   const sep = ' <span style="color:#555">/</span> ';
   const parts = opts.map(opt => {
@@ -3933,6 +4053,49 @@ function renderNonCardIngredient(itemName, quantity) {
     <span class="prod-ingredient-qty">×${quantity}</span>
     <span style="font-size:9px;padding:1px 5px;border-radius:8px;background:#1a1a1a;
       border:1px solid #333;color:#555;margin-left:6px;white-space:nowrap">no card</span>
+  </div>`;
+}
+
+// What's missing to reach a shop: its area / the place's quests ("reach Prifddinas access")
+function _shopReachLabel(seller) {
+  const G = monsterLocations._gates || {};
+  for (const [l, a] of Object.entries((SHOP_OWNERS[seller] || {}).locations || {})) {
+    if (a && a !== 'excluded' && !_accessMet(a)) return `reach ${accessRoutes[a]?.label || a}`;
+    const g = G[l] || {};
+    const q = [...(g.quests || []).filter(x => !completedQuests.has(x)), ...(g.partialQuests || []).filter(x => !_questStartedOk(x))][0];
+    if (q) return `${l}: ${q}`;
+  }
+  return 'can’t reach';
+}
+// One shop row (card + ingredient pages): seller, its NPC card ✓/✗ when the shopkeeper has one
+// (shop_owners.json; ✗ "can't reach" when you own it but can't get to any of its locations), price + currency ✓/✗
+function _shopRowHtml(shop) {
+  const st = _shopStatus(shop);
+  const cur = shop.currency || 'Coins';
+  const curCol = st.curCard ? (st.curOk ? '#76c442' : '#c84a00') : '#888';
+  const curSym = st.curCard ? (st.curOk ? ' ✓' : ' ✗') : '';
+  const priceStr = shop.price != null ? `${shop.price.toLocaleString()}× ` : '';
+  const curHtml = st.curCard
+    ? `<span style="cursor:pointer;color:${curCol}" data-nav="${escHtml(cur)}" data-nav-type="item" onclick="showCard(this.dataset.nav,this.dataset.navType)">${priceStr}${escHtml(cur)}${curSym}</span>`
+    : `<span style="color:#888" title="No card for this currency — not counted as a source">${priceStr}${escHtml(cur)}</span>`;
+  const sc = st.sellerCards;
+  let sellerHtml = '';
+  if (sc.length) {
+    const owned = sc.filter(c => isOwned(c));
+    const ok = st.sellerOk && st.sellerReach;
+    const show = (owned.length ? owned : sc).slice(0, 3);
+    const label = show.map(c => `<span style="cursor:pointer;text-decoration:underline dotted" data-nav="${escHtml(c)}" data-nav-type="monster" onclick="showCard(this.dataset.nav,this.dataset.navType)">${escHtml(c)}</span>`).join(' / ')
+      + (sc.length > show.length ? ` <span style="color:#666">+${sc.length - show.length}</span>` : '');
+    const why = !st.sellerOk ? (sc.length > 1 ? 'need one of these NPC cards' : 'need the NPC card') : !st.sellerReach ? _shopReachLabel(shop.seller) : 'NPC card';
+    sellerHtml = `<span style="font-size:10px;margin-left:8px;color:${ok ? '#7ab07a' : '#a05050'}" title="${escHtml(sc.length > 1 ? 'Any of: ' + sc.join(', ') : sc[0])} — trading needs the shopkeeper's card">${ok ? '✓' : '✗'} ${label} <span style="color:#666">(${why})</span></span>`;
+  }
+  // A shop with no NPC card whose place you can't reach yet (Lletya, Prifddinas, Varlamore…)
+  if (!sc.length && !st.sellerReach)
+    sellerHtml = `<span style="font-size:10px;margin-left:8px;color:#a05050">✗ ${escHtml(_shopReachLabel(shop.seller))}</span>`;
+  return `<div class="drop-row" style="cursor:default;background:#0d0d0d${st.ok ? '' : ';opacity:0.75'}">
+    <div class="drop-indicator" style="color:${st.ok ? '#6a8aaa' : '#7a4a4a'}">◈</div>
+    <span class="drop-name" style="color:#aaa;flex:1">${escHtml(shop.seller)}${sellerHtml}</span>
+    <span style="font-size:11px;margin-left:8px;flex-shrink:0">${curHtml}</span>
   </div>`;
 }
 
@@ -4026,22 +4189,7 @@ function renderIngredient(name, container) {
     </div>`;
 
   } else if (shops.length) {
-    const shopRows = shops.map(s => {
-      const isCard = itemSources[s.currency] !== undefined;
-      const curOwned = isCard ? isOwned(s.currency) : null;
-      const col = curOwned === true ? '#76c442' : curOwned === false ? '#c84a00' : '#888';
-      const sym = curOwned === true ? ' ✓' : curOwned === false ? ' ✗' : '';
-      const price = s.price != null ? `${s.price.toLocaleString()}× ` : '';
-      const curHtml = isCard
-        ? `<span style="cursor:pointer;color:${col}" data-nav="${escHtml(s.currency)}" data-nav-type="item"
-            onclick="showCard(this.dataset.nav,this.dataset.navType)">${price}${s.currency}${sym}</span>`
-        : `<span style="color:#888">${price}${s.currency}</span>`;
-      return `<div class="drop-row" style="cursor:default;background:#0d0d0d">
-        <div class="drop-indicator" style="color:#6a8aaa">◈</div>
-        <span class="drop-name" style="color:#aaa;flex:1">${s.seller}</span>
-        <span style="font-size:11px;margin-left:8px">${curHtml}</span>
-      </div>`;
-    }).join('');
+    const shopRows = shops.map(_shopRowHtml).join('');
     html += `<div class="section"><div class="section-header">How to obtain</div>${shopRows}</div>`;
 
   } else if (spawns.length) {
@@ -4768,6 +4916,38 @@ function _cardVersionsHtml(card, part) {
   return html;
 }
 
+// Card page "Gathering" boxes for the curated methods (skilling.json outputs) that yield this card or a
+// version of it: skill + level, the method (click → its skill page), its requirements / quests / area ✓✗
+function _curatedGatherCardsHtml(name) {
+  const tick = (ok, inner, title) => `<span style="margin-right:12px;white-space:nowrap;color:${ok ? '#7ab07a' : '#a05050'}"${title ? ` title="${escHtml(title)}"` : ''}>${ok ? '✓' : '✗'} ${inner}</span>`;
+  const navCard = (c, inner) => { const ci = _cardInfo(c);
+    return ci ? `<span style="cursor:pointer" data-nav="${escHtml(ci.exact)}" data-nav-type="${ci.type}" onclick="event.stopPropagation();_navToCard(this)">${inner}</span>` : inner; };
+  return _curatedGathering(name).map(({ m, out }) => {
+    const st = _curatedGatherStatus(m, out);
+    const reqs = st.reqs.map(({ r, ok }) => {
+      const cards = r._cards || r.cards || [];
+      if (!cards.length && !(r._routes || []).length)   // nothing to check (no card = unrestricted)
+        return `<span style="margin-right:12px;color:#777">○ ${escHtml(r.label)}</span>`;
+      const opt = r.optional ? ' <span style="color:#666">(optional)</span>' : '';
+      const inner = tick(ok || false, escHtml(r.label) + opt, cards.length > 1 ? 'Any of: ' + cards.join(', ') : '');
+      return cards.length === 1 ? navCard(cards[0], inner) : inner;
+    });
+    const gates = st.gates.map(g => g.kind === 'quest'
+      ? `<span style="cursor:pointer" data-quest="${escHtml(g.key)}" onclick="event.stopPropagation();_navToQuest(this)">${tick(g.ok, `<span style="text-decoration:underline dotted">${escHtml(g.label)}</span>`)}</span>`
+      : tick(g.ok, g.kind === 'level' ? `${skillIcon(g.sk, 10)} ${escHtml(g.label)}` : escHtml(g.label)));
+    const other = out.card.toLowerCase() !== name.toLowerCase() ? ` <span style="color:#888;font-size:10px">→ ${escHtml(out.card)}</span>` : '';
+    return `<div class="gathering-card" style="cursor:pointer;margin-top:6px" data-sk="${escHtml(m.skill)}" onclick="_goSkill(this.dataset.sk)" title="Open the ${escHtml(m.skill)} page">
+      <div class="gathering-skill" style="color:${st.ok ? '#76c442' : '#c84a00'}">${skillIcon(m.skill, 12)} ${m.skill}
+        <span class="level-req${st.levelOk ? '' : ' locked'}">Level ${st.level}${st.levelOk ? ' ✓' : ' — need ' + (st.level - getLevel(m.skill)) + ' more lvls'}</span>
+        <span style="font-size:10px;color:${st.ok ? '#7ab07a' : '#a05050'};font-weight:normal;margin-left:6px">${st.ok ? 'you can gather this' : 'locked'}</span></div>
+      <div class="gathering-detail" style="color:#c8a060">${escHtml(m.name)}${other}${m.xp ? ` <span style="color:#666">· ${m.xp} xp</span>` : ''}</div>
+      ${reqs.length ? `<div class="gathering-tool" style="line-height:1.7">${reqs.join('')}</div>` : ''}
+      ${gates.length ? `<div class="gathering-tool" style="line-height:1.7">${gates.join('')}</div>` : ''}
+      ${m.note ? `<div style="font-size:10px;color:#666;margin-top:4px">${escHtml(m.note)}</div>` : ''}
+    </div>`;
+  }).join('');
+}
+
 function renderItem(name, container) {
   const data        = itemSources[name] || {};
   const monsters    = data.monsters    || [];
@@ -4780,6 +4960,7 @@ function renderItem(name, container) {
   const spawns      = data.spawns      || [];
   const shops       = data.shops       || [];
   const clueTiers   = data.clueTiers   || [];
+  const _curGM      = _curatedGathering(name);   // curated gathering methods (skilling.json outputs)
 
   // For items: "owned" means the player has THIS item card
   const itemOwned = isOwned(name);
@@ -4854,6 +5035,13 @@ function renderItem(name, container) {
         <div class="stat-value" style="color:${pColor};font-size:13px">${production.skill || 'Assembly'} ${production.skill ? production.level : ''}</div>
       </div>`;
     })() : '')}
+    ${!gathering && _curGM.length ? (() => {
+      const best = _curGM.map(x => ({ x, st: _curatedGatherStatus(x.m, x.out) })).sort((a, b) => (b.st.ok - a.st.ok) || (a.st.level - b.st.level))[0];
+      return `<div class="stat-block">
+        <div class="stat-label">Gathering</div>
+        <div class="stat-value" style="color:${best.st.ok ? '#76c442' : '#c84a00'};font-size:13px">${best.x.m.skill} ${best.st.level}${_curGM.length > 1 ? `<span class="den"> +${_curGM.length - 1}</span>` : ''}</div>
+      </div>`;
+    })() : ''}
     ${spawns.length ? `<div class="stat-block">
       <div class="stat-label">Ground Spawns</div>
       <div class="stat-value" style="font-size:13px">${spawns.length}</div>
@@ -4942,6 +5130,12 @@ function renderItem(name, container) {
         <div class="gathering-tool">Tool: ${toolHtml}</div>
         ${tiers ? renderToolTiers(tiers, gathering.skill) : ''}
       </div>
+      ${_curGM.length ? _curatedGatherCardsHtml(name) : ''}
+    </div>`;
+  } else if (_curGM.length) {
+    html += `<div class="section">
+      <div class="section-header">Gathering <span style="font-size:10px;color:#555;font-weight:normal">(${_curGM.length} method${_curGM.length !== 1 ? 's' : ''})</span></div>
+      ${_curatedGatherCardsHtml(name)}
     </div>`;
   }
 
@@ -4998,21 +5192,7 @@ function renderItem(name, container) {
   if (shops.length > 0) {
     html += `<div class="section">
       <div class="section-header">Shops &amp; Rewards</div>`;
-    for (const shop of shops) {
-      const isCard    = itemSources[shop.currency] !== undefined;
-      const curOwned  = isCard ? isOwned(shop.currency) : null;
-      const curCol    = curOwned === true ? '#76c442' : curOwned === false ? '#c84a00' : '#888';
-      const curSym    = curOwned === true ? ' ✓' : curOwned === false ? ' ✗' : '';
-      const priceStr  = shop.price != null ? `${shop.price.toLocaleString()}× ` : '';
-      const curHtml   = isCard
-        ? `<span style="cursor:pointer;color:${curCol}" data-nav="${escHtml(shop.currency)}" data-nav-type="item" onclick="showCard(this.dataset.nav,this.dataset.navType)">${priceStr}${shop.currency}${curSym}</span>`
-        : `<span style="color:#888">${priceStr}${shop.currency}</span>`;
-      html += `<div class="drop-row" style="cursor:default;background:#0d0d0d">
-        <div class="drop-indicator" style="color:#6a8aaa">◈</div>
-        <span class="drop-name" style="color:#aaa;flex:1">${shop.seller}</span>
-        <span style="font-size:11px;margin-left:8px;flex-shrink:0">${curHtml}</span>
-      </div>`;
-    }
+    for (const shop of shops) html += _shopRowHtml(shop);
     html += `</div>`;
   }
 
@@ -5026,7 +5206,7 @@ function renderItem(name, container) {
       ${progressPill(monstersUnlocked, dedupedMonsters.length, false)}
     </div>`;
   if (dedupedMonsters.length === 0) {
-    html += `<div class="empty-note">Not found as a monster drop${gathering?' (gathered instead)':''}.</div>`;
+    html += `<div class="empty-note">Not found as a monster drop${gathering || _curGM.length ?' (gathered instead)':''}.</div>`;
   } else {
     const sortedMonsters = [...dedupedMonsters].sort((a, b) => {
       const ao = isOwned(a.card), bo = isOwned(b.card);
@@ -6850,7 +7030,7 @@ function _recUniqueItems() {
 // Only ever a Rare / Very rare monster drop (no shop, spawn, gathering, production or clue source)
 function _recRareOnly(c) {
   const s = itemSources[c];
-  if (!s || s.shopBought || (s.spawns || []).length || s.gathering || s.production || (s.clueTiers || []).length || s.activity) return false;
+  if (!s || s.shopBought || (s.spawns || []).length || s.gathering || _curatedGathering(c).length || s.production || (s.clueTiers || []).length || s.activity) return false;
   const ms = [...(s.monsters || []), ...(s.rdtMonsters || [])];
   return ms.length > 0 && ms.every(x => /^(very )?rare$/i.test(x.rarity || ''));
 }
@@ -6859,11 +7039,13 @@ function _recCardGettable(c) {
   const src = itemSources[c];
   if (!src) return true;
   // no source recorded at all (canGetItem lets these through as a data gap): don't send people after it
-  if (!(src.shopBought || (src.spawns || []).length || src.gathering || (src.monsters || []).length || src.production
+  const cg = _curatedGathering(c);
+  if (!(src.shopBought || (src.spawns || []).length || src.gathering || cg.length || (src.monsters || []).length || src.production
         || src.alwaysAvailable || src.activity || (src.clueTiers || []).length)) return false;
   if (canGetItem(c)) return true;
   const g = src.gathering, p = src.production;
   return !!(src.shopBought || (src.spawns || []).length || src.activity
+    || cg.some(({ m, out }) => { const st = _curatedGatherStatus(m, out); return st.levelOk && st.gates.every(x => x.ok); })
     || (g && getLevel(g.skill) >= (g.level || 1) && (g.quests || []).every(_questOk) && (!g.access || _accessMet(g.access)))
     || (p && p.skill && getLevel(p.skill) >= (p.level || 1) && (p.quests || []).every(_questOk)));
 }
@@ -7689,6 +7871,13 @@ function _slWhyHtml(why) {
     : w.card ? `<span style="cursor:pointer;color:#c08040;text-decoration:underline dotted" data-nav="${escHtml(w.card)}" data-nav-type="monster" onclick="_navToCard(this)">${escHtml(w.label)}</span>`
     : `<span style="color:#c08040">${escHtml(w.label)}</span>`).join(' · ');
 }
+// Several wiki monsters can share one card (Hill Giant, Hill Giant (Dark)…): name the variant
+function _slVariantTag(o) {
+  const n = o.mon.name || '', c = o.card || '';
+  if (!c || n.toLowerCase() === c.toLowerCase()) return '';
+  const q = n.toLowerCase().startsWith(c.toLowerCase()) ? n.slice(c.length).trim() : `(${n})`;
+  return q ? ` <span style="font-size:10px;color:#777">${escHtml(q)}</span>` : '';
+}
 function _renderSlayerDetail() {
   const pane = document.getElementById('slayer-detail-pane');
   if (!pane) return;
@@ -7762,7 +7951,7 @@ function _renderSlayerDetailInner(pane) {
     const lvl = o.mon.slayer ? ` <span style="font-size:10px;color:${getLevel('Slayer') >= o.mon.slayer ? '#7ab07a' : '#a05050'}">Slayer ${o.mon.slayer}</span>` : '';
     return `<div class="req-row" style="align-items:flex-start"><span class="req-icon ${o.ok ? 'ok' : 'fail'}">${o.ok ? '✓' : '✗'}</span>
       ${img ? `<img src="${img}" style="width:16px;height:16px;object-fit:contain;image-rendering:pixelated;flex-shrink:0" onerror="this.style.display='none'">` : ''}
-      <div style="flex:1"><span class="req-label" ${o.card ? `style="cursor:pointer" data-nav="${escHtml(o.card)}" data-nav-type="monster" onclick="_navToCard(this)"` : ''}>${escHtml(o.card || o.mon.name)}</span>
+      <div style="flex:1"><span class="req-label" ${o.card ? `style="cursor:pointer" data-nav="${escHtml(o.card)}" data-nav-type="monster" onclick="_navToCard(this)"` : ''}>${escHtml(o.card || o.mon.name)}${_slVariantTag(o)}</span>
 ${lvl}
         ${locHtml ? `<div style="font-size:10px;margin-top:2px">${locHtml}</div>` : ''}${monEq ? `<div style="font-size:10px;margin-top:2px">needs: ${monEq}</div>` : ''}
         ${o.boss ? `<div style="font-size:10px;margin-top:2px"><span style="cursor:pointer;color:#c8a060;text-decoration:underline dotted" data-boss="${escHtml(o.boss.name)}" onclick="showBoss(this.dataset.boss)">open ${escHtml(o.boss.name)} on the Bosses tab</span></div>` : ''}</div>
@@ -8957,6 +9146,11 @@ function _questProgressHtml(questName) {
 // "Checked" entries (quests + bosses): some have no card at all; others have a card but
 // aren't needed (recommended only, avoidable, rewards…) — those still show ownership.
 function _checkedListsHtml(entries) {
+  // One entry per thing: drop case-insensitive repeats, and a bare name when the same name
+  // is also listed with a reason ("Breive" + "Breive (only stops you attacking off-task)")
+  const _low = entries.map(x => String(x).toLowerCase().trim());
+  entries = entries.filter((x, i) => _low.indexOf(_low[i]) === i
+    && !_low.some((y, j) => j !== i && y.length > _low[i].length && /^\s*([(:,]|[—–-]\s)/.test(y.slice(_low[i].length)) && y.startsWith(_low[i])));
   const _ncCard = x => _cardInfo(String(x).replace(/\s*\([^)]*\)\s*/g, ' ').replace(/\s+[—–-]\s.*$/, '').trim());
   const has = entries.filter(x => _ncCard(x)), none = entries.filter(x => !_ncCard(x));
   const chip = (x, extra, title) => `<span style="display:inline-flex;align-items:center;gap:3px;padding:1px 6px;border-radius:3px;font-size:11px;background:#101010;border:1px solid #2a2a2a;color:#777" title="${title}">${extra}${escHtml(x)}</span>`;
@@ -8986,14 +9180,16 @@ function _questReqRow(req) {
   const cards = req.cards || [];
   const routes = req._routes || [];
   const isMon = req.type === 'npc' || req.type === 'enemy';
-  const navType = c => (monsterDrops[c] ? 'monster' : itemSources[c] ? 'item' : null);
+  const navType = c => _cardInfo(c)?.type || null;   // a card, or a version of one ("Cup of tea" → Empty cup)
   const navAttrs = c => navType(c) ? `style="cursor:pointer" data-nav="${escHtml(c)}" data-nav-type="${navType(c)}" onclick="_navToCard(this)"` : '';
   const img = c => _cardImg(c)
     ? `<img src="${_cardImg(c)}" style="width:16px;height:16px;object-fit:contain;image-rendering:pixelated;flex-shrink:0" onerror="this.style.display='none'">` : '';
-  const chip = c => {
+  // Card chip with ✓/✗: green ✓ owned, yellow ✗ not owned but obtainable, red ✗ not owned
+  const routeChip = c => {
     const own = isOwned(c), get = !own && !isMon && canGetItem(c);
-    return `<span ${navAttrs(c)}><span style="color:${own ? '#7ab07a' : get ? '#c8a830' : '#666'}">${escHtml(c)}</span></span>`;
+    return `<span ${navAttrs(c)}><span style="color:${own ? '#7ab07a' : get ? '#c8a830' : '#a05050'}" title="${own ? 'Card owned' : get ? 'Card not owned (obtainable)' : 'Card not owned'}">${own ? '✓' : '✗'} ${escHtml(c)}</span></span>`;
   };
+  const chip = routeChip;
   const ok = _reqMet(req);
   const opt = !!req.optional;
   const label = req.label || cards[0] || '';
@@ -9008,9 +9204,9 @@ function _questReqRow(req) {
   // Information only (info:true) — something to bring that has no single card to check
   if (!cards.length && !routes.length) {
     return { ok: true, optional: true, html: `<div class="req-row" style="align-items:flex-start">
-      <span class="req-icon" style="color:#777">•</span>
+      <span class="req-icon" style="color:#777">•</span>${_REQ_IMG_SPACER}
       <div style="flex:1"><span class="req-label" style="color:#aaa">${escHtml(label)}</span>${noteHtml}</div>
-      <span class="req-note">not tracked</span></div>` };
+      <span class="req-note">not tracked</span>${_REQ_STAR_SPACER}</div>` };
   }
   // Simple single card, no alternatives
   if (cards.length === 1 && !routes.length) {
@@ -9019,11 +9215,17 @@ function _questReqRow(req) {
     const isCard = !!navType(c);
     // The card is always the main (clickable) text; a custom label becomes a grey note under it
     const disp = escHtml(c);
-    const labelNote = label && label.toLowerCase() !== c.toLowerCase() ? `<div style="font-size:10px;color:#777;margin-top:1px">${escHtml(label)}</div>` : '';
+    // "Crystal axe (for crystal bark)" under "Crystal axe" → just "for crystal bark"
+    let ln = label && label.toLowerCase() !== c.toLowerCase() ? label : '';
+    if (ln && ln.toLowerCase().startsWith(c.toLowerCase())) {
+      const rest = ln.slice(c.length).trim();
+      ln = /^\([^()]*\)$/.test(rest) ? rest.slice(1, -1) : rest;
+    }
+    const labelNote = ln ? `<div style="font-size:10px;color:#777;margin-top:1px">${escHtml(ln)}</div>` : '';
     const nt = altOk ? `${req.skillAlt.skill} ${req.skillAlt.level} ✓` : own ? (isMon ? 'card owned' : 'owned') : (isCard ? 'need card' : 'no TCG card');
-    return { ok, optional: opt, html: `<div class="req-row"${wrapStyle}>${icon}${img(c)}
+    return { ok, optional: opt, html: `<div class="req-row"${wrapStyle}>${icon}${img(c) || _REQ_IMG_SPACER}
       <div style="flex:1"><span class="req-label" ${navAttrs(c)}>${disp}</span>${altTag}${optTag}${labelNote}${noteHtml}</div>
-      <span class="req-note">${nt}</span>${isCard ? _rowWishStar(c, own) : ''}</div>` };
+      <span class="req-note">${nt}</span>${isCard ? _rowWishStar(c, own) : _REQ_STAR_SPACER}</div>` };
   }
 
   // Card group: any one (default) or every card (mode:"all")
@@ -9047,11 +9249,11 @@ function _questReqRow(req) {
       const slots = rt.slots.map(sl => {
         const own = sl.filter(c => isOwned(c));
         const shown = own[0] || sl[0];
-        const col = own.length ? '#7ab07a' : '#666';
+        const col = own.length ? '#7ab07a' : '#a05050';
         const more = sl.length > 1 ? `<span style="font-size:9px;color:#555"> +${sl.length - 1}</span>` : '';
         return sl.length > 1
-          ? `<span style="cursor:help;border-bottom:1px dotted #444" ${_cardGridTipAttrs(sl, 'Any one of')}><span style="color:${col}">${escHtml(shown)}</span>${more}</span>`
-          : chip(sl[0]);
+          ? `<span style="cursor:help;border-bottom:1px dotted #444" ${_cardGridTipAttrs(sl, 'Any one of')}><span style="color:${col}">${own.length ? '✓' : '✗'} ${escHtml(shown)}</span>${more}</span>`
+          : routeChip(sl[0]);
       }).join('<span style="color:#444"> + </span>');
       const sym = rt.manual ? '<span style="color:#555">•</span>' : met ? '<span style="color:#7ab07a">✓</span>' : '<span style="color:#7a4a4a">✗</span>';
       const lowMagic = rt.magic && getLevel('Magic') < rt.magic ? ` <span style="color:#a05050">(you: ${getLevel('Magic')})</span>` : '';
@@ -9060,17 +9262,91 @@ function _questReqRow(req) {
         ...Object.entries(rt.skills || {}).map(([sk, l]) => `<span style="color:${getLevel(sk) >= l ? '#7ab07a' : '#a05050'}">${escHtml(sk)} ${l}</span>`),
         ...(rt.areas || []).map(a => { const ok = _accessMet(a); return `<span style="color:${ok ? '#7ab07a' : '#a05050'}" title="Needs access to ${escHtml(accessRoutes[a]?.label || a)}">${ok ? '✓' : '✗'} ${escHtml(accessRoutes[a]?.label || a)}</span>`; })]
         .join('<span style="color:#444"> + </span>');
-      return `<div style="font-size:11px;line-height:1.6;display:flex;flex-wrap:wrap;gap:0 6px;align-items:baseline">${sym}
-        <span style="color:${met ? '#9ac09a' : '#888'};${(rt.label || '').length > 45 ? 'flex-basis:calc(100% - 20px)' : 'white-space:nowrap'}">${escHtml(rt.label)}${lowMagic}${rt.manual ? ' <span style="color:#555">(not tracked)</span>' : ''}</span>
-        ${rt.slots.length ? `<span>${slots}</span>` : ''}${conds ? `<span>${rt.slots.length ? '<span style="color:#444"> + </span>' : ''}${conds}</span>` : ''}</div>`;
+      // one line per route: ✓/✗ label — parts (cards, quests, levels, areas), wrapping as plain text
+      const parts = [rt.slots.length ? slots : '', conds].filter(Boolean).join('<span style="color:#444"> + </span>');
+      return `<div style="font-size:11px;line-height:1.6;padding-left:14px;text-indent:-14px">${sym}
+        <span style="color:${met ? '#9ac09a' : '#888'}">${escHtml(rt.label)}${lowMagic}${rt.manual ? ' <span style="color:#555">(not tracked)</span>' : ''}</span>${parts ? `<span style="color:#444"> — </span>${parts}` : ''}</div>`;
     }).join('');
   }
   const head = cards.length && !routes.length && req.mode !== 'all' && !/^an?y?\s/i.test(label) ? `Any: ${label}` : label;
-  return { ok, optional: opt, html: `<div class="req-row"${wrapStyle}>${icon}
+  // Right-hand status, same place as a single card's "owned / need card"
+  const cardOk = cards.length && (req.mode === 'all' ? cards.every(_cardUsable) : cards.some(_cardUsable));
+  const metRoute = !cardOk && routes.find(rt => _routeMet(rt));
+  const status = cardOk ? (isMon ? 'card owned' : 'owned')
+    : metRoute ? (metRoute.spell ? 'can cast' : metRoute.access ? 'can reach' : _MAKE_ROUTE_RE.test(metRoute.label || '') ? 'can make' : 'can get')
+    : altOk ? `${req.skillAlt.skill} ${req.skillAlt.level} ✓`
+    : routes.length && !cards.length && routes.every(rt => rt.manual) ? 'not tracked' : 'missing';
+  const ownedCard = cards.find(_cardUsable);
+  const imgSlot = ownedCard && img(ownedCard) ? img(ownedCard) : _REQ_IMG_SPACER;
+  return { ok, optional: opt, html: `<div class="req-row"${wrapStyle}>${icon}${imgSlot}
     <div style="flex:1;min-width:0">
       <div class="req-label" style="color:#aaa;font-size:11px;margin-bottom:3px">${escHtml(head)}${altTag}${optTag}</div>
       ${body}${noteHtml}
-    </div></div>` };
+    </div><span class="req-note">${status}</span>${_reqWishStar(req, ok, cards, routes)}</div>` };
+}
+const _REQ_IMG_SPACER = '<span class="req-img" style="width:16px;flex-shrink:0"></span>';
+const _REQ_STAR_SPACER = '<span class="wish-star" style="visibility:hidden">☆</span>';
+// Route labels that describe making the thing yourself (vs picking it up / buying it)
+const _MAKE_ROUTE_RE = /^(mix|make|craft|cook|smith|fletch|brew|tan|spin|cut|enchant|imbue|assemble|combine|create|build|bake|fill|charge|dye|grind|bless|carve|string|weave)\b/i;
+// Wishlist star for a group / route row. Any-of cards → one "any one of these" wishlist group;
+// every-card groups and routes → the missing cards of the closest route, tagged with the label.
+const _reqWishReg = new Map();
+function _reqWishPlan(req, cards, routes) {
+  const label = req.label || cards[0] || 'Requirement';
+  if (cards.length && req.mode !== 'all' && !routes.length) return { label, group: true, cards: [...cards] };
+  if (cards.length && req.mode === 'all') return { label, group: false, cards: cards.filter(c => !isOwned(c)) };
+  let best = null;
+  for (const rt of routes) {
+    if (rt.manual) continue;
+    const miss = rt.slots.filter(sl => !sl.some(c => isOwned(c))).map(sl => sl[0]);
+    if (!best || miss.length < best.length) best = miss;
+  }
+  if (cards.length && (!best || best.length > 1)) return { label, group: true, cards: [...cards] };
+  return { label, group: false, cards: best || [] };
+}
+function _reqWishActive(plan) {
+  if (plan.group) return wishlistGroups.some(g => g.name === plan.label);
+  return plan.cards.length > 0 && plan.cards.every(c => wishlist.has(c));
+}
+function _reqWishStar(req, ok, cards, routes) {
+  const plan = _reqWishPlan(req, cards, routes);
+  if (!plan.cards.length) return _REQ_STAR_SPACER;   // nothing left to collect
+  const key = (plan.group ? 'g|' : 'c|') + plan.label + '|' + plan.cards.join('|');
+  _reqWishReg.set(key, plan);
+  const on = _reqWishActive(plan);
+  const tip = on ? 'Remove from wishlist' : plan.group ? 'Wishlist as an "any one of these" group' : `Wishlist ${plan.cards.join(', ')}`;
+  return `<span class="wish-star${on ? ' active' : ''}" ${ok && !on ? 'style="opacity:0.3"' : ''} data-wk="${escHtml(key)}"
+    onclick="event.stopPropagation();_toggleReqWish(this.dataset.wk)" title="${escHtml(tip)}">${on ? '★' : '☆'}</span>`;
+}
+function _toggleReqWish(key) {
+  const plan = _reqWishReg.get(key);
+  if (!plan) return;
+  const on = _reqWishActive(plan);
+  if (plan.group) {
+    if (on) wishlistGroups = wishlistGroups.filter(g => g.name !== plan.label);
+    else wishlistGroups.push({ name: plan.label, cards: [...plan.cards] });
+  } else {
+    for (const c of plan.cards) {
+      const e = wishlist.get(c);
+      const tags = e ? (e.note || '').split(',').map(t => t.trim()).filter(Boolean) : [];
+      if (on) { const rest = tags.filter(t => t !== plan.label); if (rest.length) wishlist.set(c, { note: rest.join(', ') }); else wishlist.delete(c); }
+      else if (!tags.includes(plan.label)) wishlist.set(c, { note: [...tags, plan.label].join(', ') });
+    }
+  }
+  _saveWishlist();
+  _rerenderReqPane();
+  if (activeTab === 'wishlist') renderWishlist();
+}
+// Re-render whichever page shows requirement rows so stars update (scroll kept)
+function _rerenderReqPane() {
+  const panes = { questing: 'quest-detail-pane', bosses: 'boss-detail-pane', slayer: 'slayer-detail-pane' };
+  const el = document.getElementById(panes[activeTab] || '');
+  const scroll = el ? el.scrollTop : 0;
+  if (activeTab === 'questing' && selectedQuest) showQuestDetail(selectedQuest, false);
+  else if (activeTab === 'bosses' && selectedBoss) showBossDetail(selectedBoss);
+  else if (activeTab === 'slayer') _renderSlayerDetail();
+  else return refreshDetail();
+  if (el) el.scrollTop = scroll;
 }
 
 // ─── Quest requirement model ────────────────────────────────────────────────
@@ -9147,6 +9423,8 @@ function _expandRoute(rt) {
   return out;
 }
 function _routeMet(rt, seen) {
+  // Called as a .some()/.every() callback too, where the 2nd argument is the array index
+  if (!(seen instanceof Set)) seen = new Set();
   // A route with nothing to check (e.g. "walk into the Wilderness") is always open; manual ones never count
   return !rt.manual
     && (rt.areas || []).every(a => _accessMet(a, seen))
@@ -9649,6 +9927,9 @@ function _rulesTabHtml() {
 
     <h3>NPC Interactions</h3>
     <p>If a TCG card exists for an NPC, you need that card to interact with them in any way — including talking to them to start or progress a quest, using a Slayer master, or claiming Achievement Diary rewards. NPCs with no TCG card are always accessible. (The Bronzeman plugin enforces most of this; the rule applies even where it doesn't — e.g. NPCs of quests you've already started.) NPCs who speak during a cutscene count too: the planner lists them as quest requirements.</p>
+
+    <h3>Stricter than the plugin's defaults</h3>
+    <p>This planner follows the strictest reading of the rules. Every NPC you talk to needs its card, including NPCs of quests you've started (the plugin's <em>Disable Quest NPC Exceptions</em> setting, on) and Veos and the Ironman tutor (which the plugin exempts from card locks). If you play with the plugin's defaults, some NPC rows here will be stricter than the game.</p>
 
     <h3>Item versions</h3>
     <p>One card covers every version of an item listed for it in the TCG catalog: all potion doses, noted items, poisoned weapons, charged/uncharged and damaged versions — and some raw forms, e.g. the <em>Ranarr weed</em> card covers Grimy ranarr weed and the <em>Diamond</em> card covers Uncut diamond. The planner matches drops, loot and requirements using these lists.</p>

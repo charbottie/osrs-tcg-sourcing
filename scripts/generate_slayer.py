@@ -18,7 +18,7 @@ Output: scripts/output/slayer.json
 Also writes scripts/cache/slayer_validation.json: monsters with no card, task pages not found.
 
 Usage:
-  python3 scripts/generate_slayer.py --card-json research/card-catalog-v1.json
+  python3 scripts/generate_slayer.py --card-json research/card-catalog-live.json
 """
 
 from __future__ import annotations
@@ -30,6 +30,7 @@ import re
 from pathlib import Path
 
 from generate_diaries import _fetch_wikitext
+from catalog_names import npc_names
 
 _HERE = Path(__file__).resolve().parent
 _CURATED = _HERE / "slayer_curated.json"
@@ -254,9 +255,10 @@ def main() -> int:
     cur = json.loads(_CURATED.read_text(encoding="utf-8"))
     quests = set(json.loads((_HERE / "output" / "quests.json").read_text(encoding="utf-8")))
     cat = json.loads(Path(args.card_json).read_text(encoding="utf-8"))
-    names = {x["name"].lower(): x["name"] for k in ("items", "npcs") for x in cat[k]}
+    names = {x["name"].lower(): x["name"] for x in cat["items"]}
+    npcs = npc_names(cat, versions=True)   # monsters: an NPC card (or its version names) before an item of the same name
     aliases = json.loads((_HERE / "output" / "card_aliases.json").read_text(encoding="utf-8"))
-    card_of = lambda n: names.get(n.lower()) or aliases.get(n.lower())
+    card_of = lambda n: npcs.get(n.lower()) or names.get(n.lower()) or aliases.get(n.lower())
     loc_override = cur.get("locationAccess", {})
     report = {"taskPagesMissing": [], "monstersNoCard": [], "unmappedLocations": {}}
 

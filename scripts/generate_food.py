@@ -17,7 +17,7 @@ import re
 import sys
 import urllib.request
 
-CARD_JSON = os.path.join(os.path.dirname(__file__), '..', 'research', 'card-catalog-v1.json')
+CARD_JSON = os.path.join(os.path.dirname(__file__), '..', 'research', 'card-catalog-live.json')
 OUT_JSON  = os.path.join(os.path.dirname(__file__), 'output', 'food_data.json')
 
 UA = 'OSRS-TCG-enrichment/1.0 (github.com/Azderi/osrs-tcg)'

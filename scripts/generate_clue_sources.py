@@ -45,11 +45,12 @@ sys.path.insert(0, str(_HERE))
 import loot_parser  # noqa: E402
 import wiki_api  # noqa: E402
 import wiki_fetcher  # noqa: E402
+from catalog_names import npc_names  # noqa: E402
 from generate_diaries import _fetch_wikitext  # noqa: E402
 import generate_sources as gs  # noqa: E402
 
 _ROOT = _HERE.parent
-_CATALOG = _ROOT / "research" / "card-catalog-v1.json"
+_CATALOG = _ROOT / "research" / "card-catalog-live.json"
 _ALIASES = _HERE / "output" / "card_aliases.json"
 _VERSIONS = _HERE / "output" / "card_versions.json"
 _BUCKET_CACHE = _HERE / "cache" / "clue_sources_bucket.json"
@@ -64,7 +65,7 @@ SKILL_TIERS = TIERS[:5]  # no master geodes/nests/bottles
 
 _cat = json.loads(_CATALOG.read_text(encoding="utf-8"))
 ITEM_LC = {i["name"].lower(): i["name"] for i in _cat["items"]}
-NPC_LC = {n["name"].lower(): n["name"] for n in _cat["npcs"]}
+NPC_LC = npc_names(_cat, versions=True)   # card names, wiki pages and version names -> NPC card
 ALIASES: dict[str, str] = json.loads(_ALIASES.read_text(encoding="utf-8")) if _ALIASES.exists() else {}
 VERSION_LC: dict[str, str] = {}  # version name / wiki page (lowercase) → card
 if _VERSIONS.exists():

@@ -467,7 +467,7 @@
       "level": 15,
       "rarity": "1/100",
       "kind": "monster",
-      "card": "Scorpia's offspring"
+      "card": "Scorpia's offspring (monster)"
     },
     {
       "source": "Scorpion",
@@ -3014,7 +3014,7 @@
       "level": 109,
       "rarity": "1/128",
       "kind": "monster",
-      "card": null
+      "card": "Zygomite"
     },
     {
       "source": "Angry barbarian spirit",
@@ -5032,7 +5032,7 @@
       "level": 133,
       "rarity": "1/120",
       "kind": "monster",
-      "card": "Manta ray"
+      "card": "Manta ray (sailing)"
     },
     {
       "source": "Aquanite",
@@ -6687,7 +6687,7 @@
       "level": 1024,
       "rarity": "1/35",
       "kind": "monster",
-      "card": "Phosani's Nightmare"
+      "card": "The Nightmare"
     },
     {
       "source": "Maggot King",

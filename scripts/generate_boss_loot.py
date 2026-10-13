@@ -24,7 +24,7 @@ Output: scripts/output/boss_loot.json
       drops: [{card, rarity, fraction, rate?, notes?}] } }
 
 Usage:
-  python3 scripts/generate_boss_loot.py --card-json research/card-catalog-v1.json
+  python3 scripts/generate_boss_loot.py --card-json research/card-catalog-live.json
 """
 
 from __future__ import annotations

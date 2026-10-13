@@ -1,0 +1,5053 @@
+{
+ "Aaron's Archery Appendages.": {
+  "shop": "Aaron's Archery Appendages.",
+  "owners": [
+   "Armour salesman"
+  ],
+  "cards": [
+   "Armour salesman"
+  ],
+  "locations": {
+   "Ranging Guild": null
+  }
+ },
+ "Aemad's Adventuring Supplies.": {
+  "shop": "Aemad's Adventuring Supplies.",
+  "owners": [
+   "Aemad"
+  ],
+  "cards": [],
+  "locations": {
+   "East Ardougne": null
+  }
+ },
+ "Agelus' Farm Shop": {
+  "shop": "Agelus' Farm Shop",
+  "owners": [
+   "Agelus"
+  ],
+  "cards": [],
+  "locations": {
+   "Ortus Farm": "varlamore"
+  }
+ },
+ "Agility Arena Store": {
+  "shop": "Agility Arena Store",
+  "owners": [
+   "Pirate Jackie the Fruit"
+  ],
+  "cards": [],
+  "locations": {
+   "Brimhaven": null
+  }
+ },
+ "Ak-Haranu's Exotic Shop.": {
+  "shop": "Ak-Haranu's Exotic Shop.",
+  "owners": [
+   "Ak-Haranu"
+  ],
+  "cards": [],
+  "locations": {
+   "Port Phasmatys": "morytania"
+  }
+ },
+ "Al Kharid General Store": {
+  "shop": "Al Kharid General Store",
+  "owners": [
+   "Shop keeper"
+  ],
+  "cards": [],
+  "locations": {
+   "Al Kharid": null
+  }
+ },
+ "Aleck's Hunter Emporium.": {
+  "shop": "Aleck's Hunter Emporium.",
+  "owners": [
+   "Aleck"
+  ],
+  "cards": [],
+  "locations": {
+   "Yanille": null
+  }
+ },
+ "Ali's Discount Wares.(Catalytic runes)": {
+  "shop": "Ali's Discount Wares.",
+  "owners": [
+   "Ali Morrisane"
+  ],
+  "cards": [
+   "Ali Morrisane"
+  ],
+  "locations": {
+   "Al Kharid": null
+  }
+ },
+ "Ali's Discount Wares.(Defensive blackjacks)": {
+  "shop": "Ali's Discount Wares.",
+  "owners": [
+   "Ali Morrisane"
+  ],
+  "cards": [
+   "Ali Morrisane"
+  ],
+  "locations": {
+   "Al Kharid": null
+  }
+ },
+ "Ali's Discount Wares.(Elemental runes)": {
+  "shop": "Ali's Discount Wares.",
+  "owners": [
+   "Ali Morrisane"
+  ],
+  "cards": [
+   "Ali Morrisane"
+  ],
+  "locations": {
+   "Al Kharid": null
+  }
+ },
+ "Ali's Discount Wares.(Offensive blackjacks)": {
+  "shop": "Ali's Discount Wares.",
+  "owners": [
+   "Ali Morrisane"
+  ],
+  "cards": [
+   "Ali Morrisane"
+  ],
+  "locations": {
+   "Al Kharid": null
+  }
+ },
+ "Ali's Discount Wares.(desert gear)": {
+  "shop": "Ali's Discount Wares.",
+  "owners": [
+   "Ali Morrisane"
+  ],
+  "cards": [
+   "Ali Morrisane"
+  ],
+  "locations": {
+   "Al Kharid": null
+  }
+ },
+ "Ali's Discount Wares.(general)": {
+  "shop": "Ali's Discount Wares.",
+  "owners": [
+   "Ali Morrisane"
+  ],
+  "cards": [
+   "Ali Morrisane"
+  ],
+  "locations": {
+   "Al Kharid": null
+  }
+ },
+ "Ali's Discount Wares.(menaphite gear)": {
+  "shop": "Ali's Discount Wares.",
+  "owners": [
+   "Ali Morrisane"
+  ],
+  "cards": [
+   "Ali Morrisane"
+  ],
+  "locations": {
+   "Al Kharid": null
+  }
+ },
+ "Alice's Farming shop.": {
+  "shop": "Alice's Farming shop.",
+  "owners": [
+   "Alice"
+  ],
+  "cards": [],
+  "locations": {
+   "Alice's farm": "morytania"
+  }
+ },
+ "Allanna's Farming Shop": {
+  "shop": "Allanna's Farming Shop",
+  "owners": [
+   "Allanna"
+  ],
+  "cards": [],
+  "locations": {
+   "Farming Guild": "kourend"
+  }
+ },
+ "Alry the Angler's Angling Accessories": {
+  "shop": "Alry the Angler's Angling Accessories",
+  "owners": [
+   "Alry the Angler"
+  ],
+  "cards": [],
+  "locations": {
+   "Molch lake": "kourend"
+  }
+ },
+ "Amelia's Seed Shop": {
+  "shop": "Amelia's Seed Shop",
+  "owners": [
+   "Amelia"
+  ],
+  "cards": [],
+  "locations": {
+   "Farming Guild": "kourend"
+  }
+ },
+ "Amlodd's Magical Supplies": {
+  "shop": "Amlodd's Magical Supplies",
+  "owners": [
+   "Efa"
+  ],
+  "cards": [],
+  "locations": {
+   "Prifddinas": "prifddinas"
+  }
+ },
+ "Aneirin's Armour": {
+  "shop": "Aneirin's Armour",
+  "owners": [
+   "Aneirin"
+  ],
+  "cards": [],
+  "locations": {
+   "Prifddinas": "prifddinas"
+  }
+ },
+ "Arcuani's Archery Supplies": {
+  "shop": "Arcuani's Archery Supplies",
+  "owners": [
+   "Arcuani"
+  ],
+  "cards": [],
+  "locations": {
+   "Tal Teklan": "varlamore"
+  }
+ },
+ "Ardougne Baker's Stall.(east)": {
+  "shop": "Ardougne Baker's Stall.",
+  "owners": [
+   "Baker"
+  ],
+  "cards": [],
+  "locations": {
+   "East Ardougne": null
+  }
+ },
+ "Ardougne Baker's Stall.(west)": {
+  "shop": "Ardougne Baker's Stall.",
+  "owners": [
+   "Baker"
+  ],
+  "cards": [],
+  "locations": {
+   "East Ardougne": null
+  }
+ },
+ "Ardougne Fur Stall.": {
+  "shop": "Ardougne Fur Stall.",
+  "owners": [
+   "Fur Trader"
+  ],
+  "cards": [],
+  "locations": {
+   "East Ardougne": null
+  }
+ },
+ "Ardougne Gem Stall.": {
+  "shop": "Ardougne Gem Stall.",
+  "owners": [
+   "Gem merchant"
+  ],
+  "cards": [],
+  "locations": {
+   "East Ardougne": null
+  }
+ },
+ "Ardougne Silver Stall.": {
+  "shop": "Ardougne Silver Stall.",
+  "owners": [
+   "Silver merchant"
+  ],
+  "cards": [],
+  "locations": {
+   "East Ardougne": null
+  }
+ },
+ "Ardougne Spice Stall.": {
+  "shop": "Ardougne Spice Stall.",
+  "owners": [
+   "Spice seller"
+  ],
+  "cards": [],
+  "locations": {
+   "East Ardougne": null
+  }
+ },
+ "Arhein's General Goods": {
+  "shop": "Arhein's General Goods",
+  "owners": [
+   "Arhein"
+  ],
+  "cards": [],
+  "locations": {
+   "Catherby": null
+  }
+ },
+ "Armour Shop (Jatizso)": {
+  "shop": "Armour Shop (Jatizso)",
+  "owners": [
+   "Raum Urda-Stein"
+  ],
+  "cards": [],
+  "locations": {
+   "Jatizso": null
+  }
+ },
+ "Armour store.": {
+  "shop": "Armour store.",
+  "owners": [
+   "Jorzik"
+  ],
+  "cards": [],
+  "locations": {
+   "Blast Furnace": null,
+   "Keldagrim": null
+  }
+ },
+ "Armoury": {
+  "shop": "Armoury",
+  "owners": [
+   "Shop keeper"
+  ],
+  "cards": [],
+  "locations": {
+   "Combat Training Camp": null
+  }
+ },
+ "Arnold's Eclectic Supplies.": {
+  "shop": "Arnold's Eclectic Supplies.",
+  "owners": [
+   "Arnold Lydspor"
+  ],
+  "cards": [],
+  "locations": {
+   "Piscatoris Fishing Colony": null
+  }
+ },
+ "Artima's Crafting Supplies": {
+  "shop": "Artima's Crafting Supplies",
+  "owners": [
+   "Artima"
+  ],
+  "cards": [],
+  "locations": {
+   "Civitas illa Fortis": "varlamore"
+  }
+ },
+ "Atlazora's Rest": {
+  "shop": "Atlazora's Rest",
+  "owners": [
+   "Bartender"
+  ],
+  "cards": [],
+  "locations": {
+   "Outer Fortis": "varlamore"
+  }
+ },
+ "Auburn Pub": {
+  "shop": "Auburn Pub",
+  "owners": [
+   "Bartender"
+  ],
+  "cards": [],
+  "locations": {
+   "Auburnvale": "varlamore"
+  }
+ },
+ "Auburnvale General Store": {
+  "shop": "Auburnvale General Store",
+  "owners": [
+   "Shopkeeper"
+  ],
+  "cards": [],
+  "locations": {
+   "Auburnvale": "varlamore"
+  }
+ },
+ "Aubury's Rune Shop.": {
+  "shop": "Aubury's Rune Shop.",
+  "owners": [
+   "Aubury"
+  ],
+  "cards": [
+   "Aubury"
+  ],
+  "locations": {
+   "Varrock": null
+  }
+ },
+ "Aurel's Supplies": {
+  "shop": "Aurel's Supplies",
+  "owners": [
+   "Aurel"
+  ],
+  "cards": [],
+  "locations": {
+   "Burgh de Rott": "morytania"
+  }
+ },
+ "Authentic Throwing Weapons.": {
+  "shop": "Authentic Throwing Weapons.",
+  "owners": [
+   "Tribal Weapon Salesman"
+  ],
+  "cards": [],
+  "locations": {
+   "Ranging Guild": null
+  }
+ },
+ "Ava": {
+  "shop": null,
+  "owners": [
+   "Ava"
+  ],
+  "cards": [
+   "Ava"
+  ],
+  "locations": {}
+ },
+ "Ava's Odds and Ends": {
+  "shop": "Ava's Odds and Ends",
+  "owners": [
+   "Ava"
+  ],
+  "cards": [
+   "Ava"
+  ],
+  "locations": {
+   "Draynor Manor": null
+  }
+ },
+ "Baba Yaga's Magic Shop.": {
+  "shop": "Baba Yaga's Magic Shop.",
+  "owners": [
+   "Baba Yaga"
+  ],
+  "cards": [],
+  "locations": {
+   "Lunar Isle": null
+  }
+ },
+ "Baba Yaga's Magic Shop.(post-quest)": {
+  "shop": "Baba Yaga's Magic Shop.",
+  "owners": [
+   "Baba Yaga"
+  ],
+  "cards": [],
+  "locations": {
+   "Lunar Isle": null
+  }
+ },
+ "Bandit Bargains": {
+  "shop": "Bandit Bargains",
+  "owners": [
+   "Bandit shopkeeper"
+  ],
+  "cards": [],
+  "locations": {
+   "Bandit Camp (Kharidian Desert)": "desert"
+  }
+ },
+ "Bandit Duty Free": {
+  "shop": "Bandit Duty Free",
+  "owners": [
+   "Noterazzo"
+  ],
+  "cards": [],
+  "locations": {
+   "Bandit Camp (Wilderness)": null
+  }
+ },
+ "Barkers' Haberdashery": {
+  "shop": "Barkers' Haberdashery",
+  "owners": [
+   "Barker"
+  ],
+  "cards": [],
+  "locations": {
+   "Canifis": "morytania"
+  }
+ },
+ "Battle Runes": {
+  "shop": "Battle Runes",
+  "owners": [
+   "Mage of Zamorak"
+  ],
+  "cards": [],
+  "locations": {
+   "Wilderness": null
+  }
+ },
+ "Battle Runes(Enter the Abyss)": {
+  "shop": "Battle Runes",
+  "owners": [
+   "Mage of Zamorak"
+  ],
+  "cards": [],
+  "locations": {
+   "Wilderness": null
+  }
+ },
+ "Bedabin Village Bartering": {
+  "shop": "Bedabin Village Bartering",
+  "owners": [
+   "Bedabin Nomad"
+  ],
+  "cards": [],
+  "locations": {
+   "Bedabin Camp": "desert"
+  }
+ },
+ "Betty's Magic Emporium": {
+  "shop": "Betty's Magic Emporium",
+  "owners": [
+   "Betty"
+  ],
+  "cards": [],
+  "locations": {
+   "Port Sarim": null
+  }
+ },
+ "Blades by Urbi.": {
+  "shop": "Blades by Urbi.",
+  "owners": [
+   "Urbi"
+  ],
+  "cards": [],
+  "locations": {
+   "Sophanem": "sophanem"
+  }
+ },
+ "Blair's Armour": {
+  "shop": "Blair's Armour",
+  "owners": [
+   "Blair"
+  ],
+  "cards": [],
+  "locations": {
+   "Shayzien": "kourend"
+  }
+ },
+ "Blue Moon Inn": {
+  "shop": "Blue Moon Inn",
+  "owners": [
+   "Bartender"
+  ],
+  "cards": [],
+  "locations": {
+   "Varrock": null
+  }
+ },
+ "Blurberry Bar": {
+  "shop": "Blurberry Bar",
+  "owners": [
+   "Barman"
+  ],
+  "cards": [],
+  "locations": {
+   "Gnome Stronghold": null,
+   "Grand Tree": null
+  }
+ },
+ "Bob's Brilliant Axes.": {
+  "shop": "Bob's Brilliant Axes.",
+  "owners": [
+   "Bob"
+  ],
+  "cards": [
+   "Bob"
+  ],
+  "locations": {
+   "Lumbridge": null
+  }
+ },
+ "Bolkoy's Village Shop": {
+  "shop": "Bolkoy's Village Shop",
+  "owners": [
+   "Bolkoy"
+  ],
+  "cards": [],
+  "locations": {
+   "Tree Gnome Village (location)": null
+  }
+ },
+ "Bounty Hunter Store": {
+  "shop": "Bounty Hunter Store",
+  "owners": [
+   "Emblem Trader"
+  ],
+  "cards": [],
+  "locations": {
+   "Daimon's Crater": null
+  }
+ },
+ "Branwen's Farming Shop": {
+  "shop": "Branwen's Farming Shop",
+  "owners": [
+   "Branwen"
+  ],
+  "cards": [],
+  "locations": {
+   "Prifddinas": "prifddinas"
+  }
+ },
+ "Brian's Archery Supplies.": {
+  "shop": "Brian's Archery Supplies.",
+  "owners": [
+   "Brian"
+  ],
+  "cards": [],
+  "locations": {
+   "Rimmington": null
+  }
+ },
+ "Brian's Battleaxe Bazaar.": {
+  "shop": "Brian's Battleaxe Bazaar.",
+  "owners": [
+   "Brian"
+  ],
+  "cards": [],
+  "locations": {
+   "Port Sarim": null
+  }
+ },
+ "Briget's Weapons": {
+  "shop": "Briget's Weapons",
+  "owners": [
+   "Briget"
+  ],
+  "cards": [],
+  "locations": {
+   "Shayzien": "kourend"
+  }
+ },
+ "Burthorpe Supplies": {
+  "shop": "Burthorpe Supplies",
+  "owners": [
+   "Wistan"
+  ],
+  "cards": [],
+  "locations": {
+   "Burthorpe": null
+  }
+ },
+ "Cam Torum Blacksmith": {
+  "shop": "Cam Torum Blacksmith",
+  "owners": [
+   "Blacksmith"
+  ],
+  "cards": [],
+  "locations": {
+   "Cam Torum": "varlamore"
+  }
+ },
+ "Cam Torum General Store": {
+  "shop": "Cam Torum General Store",
+  "owners": [
+   "Shopkeeeper"
+  ],
+  "cards": [],
+  "locations": {
+   "Cam Torum": "varlamore"
+  }
+ },
+ "Candle Shop": {
+  "shop": "Candle Shop",
+  "owners": [
+   "Candle maker"
+  ],
+  "cards": [],
+  "locations": {
+   "Catherby": null
+  }
+ },
+ "Carefree Crafting Stall": {
+  "shop": "Carefree Crafting Stall",
+  "owners": [
+   "Nolar"
+  ],
+  "cards": [],
+  "locations": {
+   "Keldagrim": null
+  }
+ },
+ "Cassie's Shield Shop.": {
+  "shop": "Cassie's Shield Shop.",
+  "owners": [
+   "Cassie"
+  ],
+  "cards": [],
+  "locations": {
+   "Falador": null
+  }
+ },
+ "Castle Wars Ticket Exchange": {
+  "shop": "Castle Wars Ticket Exchange",
+  "owners": [
+   "Lanthus"
+  ],
+  "cards": [],
+  "locations": {
+   "Castle Wars": null
+  }
+ },
+ "Cobado's Groceries": {
+  "shop": "Cobado's Groceries",
+  "owners": [
+   "Cobado"
+  ],
+  "cards": [],
+  "locations": {
+   "Civitas illa Fortis": "varlamore"
+  }
+ },
+ "Conara's Jewels": {
+  "shop": "Conara's Jewels",
+  "owners": [
+   "Conara"
+  ],
+  "cards": [],
+  "locations": {
+   "Cam Torum": "varlamore"
+  }
+ },
+ "Construction supplies": {
+  "shop": "Construction supplies",
+  "owners": [
+   "Sawmill operator",
+   "Sawmill Operator"
+  ],
+  "cards": [],
+  "locations": {
+   "Sawmill": null,
+   "Auburnvale": "varlamore",
+   "Woodcutting Guild": "kourend",
+   "Prifddinas": "prifddinas"
+  }
+ },
+ "Contraband yak produce.": {
+  "shop": "Contraband yak produce.",
+  "owners": [
+   "Vanligga Gastfrihet"
+  ],
+  "cards": [],
+  "locations": {
+   "Jatizso": null
+  }
+ },
+ "Crossbow Shop (Dwarven Mine)": {
+  "shop": "Crossbow Shop (Dwarven Mine)",
+  "owners": [
+   "Hura"
+  ],
+  "cards": [],
+  "locations": {
+   "Dwarven Mines": null
+  }
+ },
+ "Crossbow Shop (Keldagrim)": {
+  "shop": "Crossbow Shop (Keldagrim)",
+  "owners": [
+   "Hirko"
+  ],
+  "cards": [],
+  "locations": {
+   "Keldagrim Palace": null
+  }
+ },
+ "Crossbow Shop (White Wolf Mountain)": {
+  "shop": "Crossbow Shop (White Wolf Mountain)",
+  "owners": [
+   "Holoy"
+  ],
+  "cards": [],
+  "locations": {
+   "White Wolf Mountain": null
+  }
+ },
+ "Culinaromancer's Chest(0 Subquests)": {
+  "shop": "Culinaromancer's Chest",
+  "owners": [
+   "None"
+  ],
+  "cards": [],
+  "locations": {
+   "Lumbridge Castle": null
+  }
+ },
+ "Culinaromancer's Chest(1 Subquest)": {
+  "shop": "Culinaromancer's Chest",
+  "owners": [
+   "None"
+  ],
+  "cards": [],
+  "locations": {
+   "Lumbridge Castle": null
+  }
+ },
+ "Culinaromancer's Chest(2 Subquest)": {
+  "shop": "Culinaromancer's Chest",
+  "owners": [
+   "None"
+  ],
+  "cards": [],
+  "locations": {
+   "Lumbridge Castle": null
+  }
+ },
+ "Culinaromancer's Chest(3 Subquests)": {
+  "shop": "Culinaromancer's Chest",
+  "owners": [
+   "None"
+  ],
+  "cards": [],
+  "locations": {
+   "Lumbridge Castle": null
+  }
+ },
+ "Culinaromancer's Chest(4 Subquests)": {
+  "shop": "Culinaromancer's Chest",
+  "owners": [
+   "None"
+  ],
+  "cards": [],
+  "locations": {
+   "Lumbridge Castle": null
+  }
+ },
+ "Culinaromancer's Chest(5 Subquests)": {
+  "shop": "Culinaromancer's Chest",
+  "owners": [
+   "None"
+  ],
+  "cards": [],
+  "locations": {
+   "Lumbridge Castle": null
+  }
+ },
+ "Culinaromancer's Chest(6 Subquests)": {
+  "shop": "Culinaromancer's Chest",
+  "owners": [
+   "None"
+  ],
+  "cards": [],
+  "locations": {
+   "Lumbridge Castle": null
+  }
+ },
+ "Culinaromancer's Chest(7 Subquests)": {
+  "shop": "Culinaromancer's Chest",
+  "owners": [
+   "None"
+  ],
+  "cards": [],
+  "locations": {
+   "Lumbridge Castle": null
+  }
+ },
+ "Culinaromancer's Chest(8 Subquests)": {
+  "shop": "Culinaromancer's Chest",
+  "owners": [
+   "None"
+  ],
+  "cards": [],
+  "locations": {
+   "Lumbridge Castle": null
+  }
+ },
+ "Culinaromancer's Chest(food, 0 Subquests)": {
+  "shop": "Culinaromancer's Chest",
+  "owners": [
+   "None"
+  ],
+  "cards": [],
+  "locations": {
+   "Lumbridge Castle": null
+  }
+ },
+ "Culinaromancer's Chest(food, 1 Subquest)": {
+  "shop": "Culinaromancer's Chest",
+  "owners": [
+   "None"
+  ],
+  "cards": [],
+  "locations": {
+   "Lumbridge Castle": null
+  }
+ },
+ "Culinaromancer's Chest(food, 2 Subquests)": {
+  "shop": "Culinaromancer's Chest",
+  "owners": [
+   "None"
+  ],
+  "cards": [],
+  "locations": {
+   "Lumbridge Castle": null
+  }
+ },
+ "Culinaromancer's Chest(food, 3 Subquests)": {
+  "shop": "Culinaromancer's Chest",
+  "owners": [
+   "None"
+  ],
+  "cards": [],
+  "locations": {
+   "Lumbridge Castle": null
+  }
+ },
+ "Culinaromancer's Chest(food, 4 Subquests)": {
+  "shop": "Culinaromancer's Chest",
+  "owners": [
+   "None"
+  ],
+  "cards": [],
+  "locations": {
+   "Lumbridge Castle": null
+  }
+ },
+ "Culinaromancer's Chest(food, 5 Subquests)": {
+  "shop": "Culinaromancer's Chest",
+  "owners": [
+   "None"
+  ],
+  "cards": [],
+  "locations": {
+   "Lumbridge Castle": null
+  }
+ },
+ "Culinaromancer's Chest(food, 6 Subquests)": {
+  "shop": "Culinaromancer's Chest",
+  "owners": [
+   "None"
+  ],
+  "cards": [],
+  "locations": {
+   "Lumbridge Castle": null
+  }
+ },
+ "Culinaromancer's Chest(food, 7 Subquests)": {
+  "shop": "Culinaromancer's Chest",
+  "owners": [
+   "None"
+  ],
+  "cards": [],
+  "locations": {
+   "Lumbridge Castle": null
+  }
+ },
+ "Culinaromancer's Chest(food, 8 Subquests)": {
+  "shop": "Culinaromancer's Chest",
+  "owners": [
+   "None"
+  ],
+  "cards": [],
+  "locations": {
+   "Lumbridge Castle": null
+  }
+ },
+ "Culinaromancer's Chest(food, full)": {
+  "shop": "Culinaromancer's Chest",
+  "owners": [
+   "None"
+  ],
+  "cards": [],
+  "locations": {
+   "Lumbridge Castle": null
+  }
+ },
+ "Culinaromancer's Chest(food, full, diary)": {
+  "shop": "Culinaromancer's Chest",
+  "owners": [
+   "None"
+  ],
+  "cards": [],
+  "locations": {
+   "Lumbridge Castle": null
+  }
+ },
+ "Culinaromancer's Chest(full)": {
+  "shop": "Culinaromancer's Chest",
+  "owners": [
+   "None"
+  ],
+  "cards": [],
+  "locations": {
+   "Lumbridge Castle": null
+  }
+ },
+ "Culinaromancer's Chest(full, diary)": {
+  "shop": "Culinaromancer's Chest",
+  "owners": [
+   "None"
+  ],
+  "cards": [],
+  "locations": {
+   "Lumbridge Castle": null
+  }
+ },
+ "Daga's Scimitar Smithy": {
+  "shop": "Daga's Scimitar Smithy",
+  "owners": [
+   "Daga"
+  ],
+  "cards": [],
+  "locations": {
+   "Ape Atoll": "ape_atoll"
+  }
+ },
+ "Daga's Scimitar Smithy(Monkey Madness I)": {
+  "shop": "Daga's Scimitar Smithy",
+  "owners": [
+   "Daga"
+  ],
+  "cards": [],
+  "locations": {
+   "Ape Atoll": "ape_atoll"
+  }
+ },
+ "Dal's General Ogre Supplies": {
+  "shop": "Dal's General Ogre Supplies",
+  "owners": [
+   "Dal"
+  ],
+  "cards": [],
+  "locations": {
+   "Gu'Tanoth": null
+  }
+ },
+ "Dancing Donkey Inn": {
+  "shop": "Dancing Donkey Inn",
+  "owners": [
+   "Bartender"
+  ],
+  "cards": [],
+  "locations": {
+   "Varrock": null
+  }
+ },
+ "Dargaud's Bow and Arrows.": {
+  "shop": "Dargaud's Bow and Arrows.",
+  "owners": [
+   "Bow and Arrow salesman"
+  ],
+  "cards": [],
+  "locations": {
+   "Ranging Guild": null
+  }
+ },
+ "Darkmeyer General Store": {
+  "shop": "Darkmeyer General Store",
+  "owners": [
+   "Drasdan Ranor"
+  ],
+  "cards": [],
+  "locations": {
+   "Darkmeyer": "morytania"
+  }
+ },
+ "Darkmeyer Lantern Shop": {
+  "shop": "Darkmeyer Lantern Shop",
+  "owners": [
+   "Grinka Krast"
+  ],
+  "cards": [],
+  "locations": {
+   "Darkmeyer": "morytania"
+  }
+ },
+ "Darkmeyer Meat Shop": {
+  "shop": "Darkmeyer Meat Shop",
+  "owners": [
+   "Lenyig Karna"
+  ],
+  "cards": [],
+  "locations": {
+   "Darkmeyer": "morytania"
+  }
+ },
+ "Darkmeyer Seamstress": {
+  "shop": "Darkmeyer Seamstress",
+  "owners": [
+   "Varrian Sobak"
+  ],
+  "cards": [],
+  "locations": {
+   "Darkmeyer": "morytania"
+  }
+ },
+ "Daryl's Ranging Surplus": {
+  "shop": "Daryl's Ranging Surplus",
+  "owners": [
+   "Daryl"
+  ],
+  "cards": [],
+  "locations": {
+   "Shayzien": "kourend"
+  }
+ },
+ "Davon's Amulet Store.": {
+  "shop": "Davon's Amulet Store.",
+  "owners": [
+   "Davon"
+  ],
+  "cards": [],
+  "locations": {
+   "Brimhaven": null
+  }
+ },
+ "Davon's Amulet Store.(Karamja gloves)": {
+  "shop": "Davon's Amulet Store.",
+  "owners": [
+   "Davon"
+  ],
+  "cards": [],
+  "locations": {
+   "Brimhaven": null
+  }
+ },
+ "Dead Man's Chest": {
+  "shop": "Dead Man's Chest",
+  "owners": [
+   "Bartender"
+  ],
+  "cards": [],
+  "locations": {
+   "Brimhaven": null
+  }
+ },
+ "Deepfin Inn": {
+  "shop": "Deepfin Inn",
+  "owners": [
+   "Brikka"
+  ],
+  "cards": [],
+  "locations": {
+   "Deepfin Point": null
+  }
+ },
+ "Deepfin Point Ore Exchange": {
+  "shop": "Deepfin Point Ore Exchange",
+  "owners": [
+   "Korgan"
+  ],
+  "cards": [],
+  "locations": {
+   "Deepfin Point": null
+  }
+ },
+ "Diango": {
+  "shop": null,
+  "owners": [
+   "Diango"
+  ],
+  "cards": [
+   "Diango"
+  ],
+  "locations": {}
+ },
+ "Diango's Toy Store": {
+  "shop": "Diango's Toy Store",
+  "owners": [
+   "Diango"
+  ],
+  "cards": [
+   "Diango"
+  ],
+  "locations": {
+   "Draynor Village": null
+  }
+ },
+ "Dodgy Mike's Second Hand Clothing.": {
+  "shop": "Dodgy Mike's Second Hand Clothing.",
+  "owners": [
+   "Mike"
+  ],
+  "cards": [
+   "Mike"
+  ],
+  "locations": {
+   "Mos Le'Harmless": "mos_le_harmless"
+  }
+ },
+ "Dom Onion's Reward Shop": {
+  "shop": "Dom Onion's Reward Shop",
+  "owners": [
+   "Dominic Onion"
+  ],
+  "cards": [],
+  "locations": {
+   "Yanille": null
+  }
+ },
+ "Dommik's Crafting Store.": {
+  "shop": "Dommik's Crafting Store.",
+  "owners": [
+   "Dommik"
+  ],
+  "cards": [],
+  "locations": {
+   "Al Kharid": null
+  }
+ },
+ "Dorgesh-Kaan General Supplies": {
+  "shop": "Dorgesh-Kaan General Supplies",
+  "owners": [
+   "Lurgon"
+  ],
+  "cards": [],
+  "locations": {
+   "Dorgesh-Kaan": null
+  }
+ },
+ "Dragon Inn": {
+  "shop": "Dragon Inn",
+  "owners": [
+   "Bartender"
+  ],
+  "cards": [],
+  "locations": {
+   "Yanille": null
+  }
+ },
+ "Draynor Seed Market": {
+  "shop": "Draynor Seed Market",
+  "owners": [
+   "Olivia"
+  ],
+  "cards": [],
+  "locations": {
+   "Draynor Village": null
+  }
+ },
+ "Drogo's Mining Emporium.": {
+  "shop": "Drogo's Mining Emporium.",
+  "owners": [
+   "Drogo dwarf"
+  ],
+  "cards": [],
+  "locations": {
+   "Dwarven Mine": null
+  }
+ },
+ "Durrik's Goods": {
+  "shop": "Durrik's Goods",
+  "owners": [
+   "Durrik"
+  ],
+  "cards": [],
+  "locations": {
+   "Deepfin Mine": "sailing"
+  }
+ },
+ "Dusuri's Star Shop": {
+  "shop": "Dusuri's Star Shop",
+  "owners": [
+   "Dusuri"
+  ],
+  "cards": [],
+  "locations": {
+   "Falador": null
+  }
+ },
+ "Dwarven shopping store": {
+  "shop": "Dwarven shopping store",
+  "owners": [
+   "Dwarf"
+  ],
+  "cards": [
+   "Dwarf"
+  ],
+  "locations": {
+   "Dwarven Mine": null
+  }
+ },
+ "Dyes to Die For": {
+  "shop": "Dyes to Die For",
+  "owners": [
+   "Xochitl"
+  ],
+  "cards": [],
+  "locations": {
+   "Tal Teklan": "varlamore"
+  }
+ },
+ "Eblis": {
+  "shop": null,
+  "owners": [
+   "Eblis"
+  ],
+  "cards": [
+   "Eblis"
+  ],
+  "locations": {}
+ },
+ "Edgeville General Store": {
+  "shop": "Edgeville General Store",
+  "owners": [
+   "Shop keeper"
+  ],
+  "cards": [],
+  "locations": {
+   "Edgeville": null
+  }
+ },
+ "Efaritay's Supplies": {
+  "shop": "Efaritay's Supplies",
+  "owners": [
+   "Efaritay Hallow"
+  ],
+  "cards": [
+   "Efaritay Hallow"
+  ],
+  "locations": {
+   "Castle Drakan": "morytania"
+  }
+ },
+ "Elder Blunn's Spear and Shield Stall": {
+  "shop": "Elder Blunn's Spear and Shield Stall",
+  "owners": [
+   "Elder Blunn"
+  ],
+  "cards": [],
+  "locations": {
+   "The Summer Shore": null
+  }
+ },
+ "Elder Coco's Crafting Stall": {
+  "shop": "Elder Coco's Crafting Stall",
+  "owners": [
+   "Elder Coco"
+  ],
+  "cards": [],
+  "locations": {
+   "The Summer Shore": null
+  }
+ },
+ "Elder Krill's Fishing Stall": {
+  "shop": "Elder Krill's Fishing Stall",
+  "owners": [
+   "Elder Krill"
+  ],
+  "cards": [],
+  "locations": {
+   "The Summer Shore": null
+  }
+ },
+ "Elder Raley's Herblore Stall": {
+  "shop": "Elder Raley's Herblore Stall",
+  "owners": [
+   "Mag"
+  ],
+  "cards": [],
+  "locations": {
+   "The Summer Shore": null
+  }
+ },
+ "Elder Reggle's Farming Shop": {
+  "shop": "Elder Reggle's Farming Shop",
+  "owners": [
+   "Elder Reggle"
+  ],
+  "cards": [],
+  "locations": {
+   "The Great Conch": "sailing"
+  }
+ },
+ "Elder Strom's Hunting Stall": {
+  "shop": "Elder Strom's Hunting Stall",
+  "owners": [
+   "Elder Strom"
+  ],
+  "cards": [],
+  "locations": {
+   "The Summer Shore": null
+  }
+ },
+ "Elgan's Exceptional Staffs!": {
+  "shop": "Elgan's Exceptional Staffs!",
+  "owners": [
+   "Elgan"
+  ],
+  "cards": [],
+  "locations": {
+   "Prifddinas": "prifddinas"
+  }
+ },
+ "Emelio's Kebab Shop": {
+  "shop": "Emelio's Kebab Shop",
+  "owners": [
+   "Emelio"
+  ],
+  "cards": [],
+  "locations": {
+   "Varlamore": "varlamore"
+  }
+ },
+ "Etceteria Fish": {
+  "shop": "Etceteria Fish",
+  "owners": [
+   "Fishmonger"
+  ],
+  "cards": [],
+  "locations": {
+   "Etceteria": null
+  }
+ },
+ "Falador General Store": {
+  "shop": "Falador General Store",
+  "owners": [
+   "Shop keeper"
+  ],
+  "cards": [],
+  "locations": {
+   "Falador": null
+  }
+ },
+ "Falador Party Room": {
+  "shop": "Falador Party Room",
+  "owners": [
+   "Lucy",
+   "Megan"
+  ],
+  "cards": [],
+  "locations": {
+   "Falador": null
+  }
+ },
+ "Fancy Clothes Store": {
+  "shop": "Fancy Clothes Store",
+  "owners": [
+   "Asyff"
+  ],
+  "cards": [],
+  "locations": {
+   "Varrock": null
+  }
+ },
+ "Farmer Gricoller's Rewards": {
+  "shop": "Farmer Gricoller's Rewards",
+  "owners": [
+   "Farmer Gricoller"
+  ],
+  "cards": [
+   "Farmer Gricoller"
+  ],
+  "locations": {
+   "Hosidius": "kourend"
+  }
+ },
+ "Faustus' Fruit and Veg": {
+  "shop": "Faustus' Fruit and Veg",
+  "owners": [
+   "Faustus"
+  ],
+  "cards": [],
+  "locations": {
+   "Aldarin": "varlamore"
+  }
+ },
+ "Fernahei's Fishing Hut.": {
+  "shop": "Fernahei's Fishing Hut.",
+  "owners": [
+   "Fernahei"
+  ],
+  "cards": [],
+  "locations": {
+   "Shilo Village (location)": null
+  }
+ },
+ "Fernahei's Fishing Hut.(Karamja gloves)": {
+  "shop": "Fernahei's Fishing Hut.",
+  "owners": [
+   "Fernahei"
+  ],
+  "cards": [],
+  "locations": {
+   "Shilo Village (location)": null
+  }
+ },
+ "Fight Arena Bar": {
+  "shop": "Fight Arena Bar",
+  "owners": [
+   "Khazard barman"
+  ],
+  "cards": [],
+  "locations": {
+   "Fight Arena (location)": null
+  }
+ },
+ "Filamina's Wares": {
+  "shop": "Filamina's Wares",
+  "owners": [
+   "Filamina"
+  ],
+  "cards": [],
+  "locations": {
+   "Arceuus": "kourend"
+  }
+ },
+ "Fine Fashions": {
+  "shop": "Fine Fashions",
+  "owners": [
+   "Rometti"
+  ],
+  "cards": [],
+  "locations": {
+   "Grand Tree": null
+  }
+ },
+ "Fishing Guild Shop.": {
+  "shop": "Fishing Guild Shop.",
+  "owners": [
+   "Roachey"
+  ],
+  "cards": [],
+  "locations": {
+   "Fishing Guild": null
+  }
+ },
+ "Floria's Fashion": {
+  "shop": "Floria's Fashion",
+  "owners": [
+   "Floria"
+  ],
+  "cards": [],
+  "locations": {
+   "Civitas illa Fortis": "varlamore"
+  }
+ },
+ "Flosi's Fishmongers": {
+  "shop": "Flosi's Fishmongers",
+  "owners": [
+   "Flosi Dalksson"
+  ],
+  "cards": [],
+  "locations": {
+   "Jatizso": null
+  }
+ },
+ "Flying Horse Inn": {
+  "shop": "Flying Horse Inn",
+  "owners": [
+   "Bartender"
+  ],
+  "cards": [],
+  "locations": {
+   "East Ardougne": null
+  }
+ },
+ "Flynn's Mace Market.": {
+  "shop": "Flynn's Mace Market.",
+  "owners": [
+   "Flynn"
+  ],
+  "cards": [],
+  "locations": {
+   "Falador": null
+  }
+ },
+ "Food Store": {
+  "shop": "Food Store",
+  "owners": [
+   "Wydin"
+  ],
+  "cards": [],
+  "locations": {
+   "Port Sarim": null
+  }
+ },
+ "Forester's Arms": {
+  "shop": "Forester's Arms",
+  "owners": [
+   "Bartender"
+  ],
+  "cards": [],
+  "locations": {
+   "Seers' Village": null
+  }
+ },
+ "Forestry Shop": {
+  "shop": "Forestry Shop",
+  "owners": [
+   "Friendly Forester"
+  ],
+  "cards": [],
+  "locations": {
+   "Draynor Village": null,
+   "Prifddinas": "prifddinas",
+   "Nemus Retreat": "varlamore",
+   "Seers' Village": null
+  }
+ },
+ "Fortis Baker's Stall": {
+  "shop": "Fortis Baker's Stall",
+  "owners": [
+   "Baker"
+  ],
+  "cards": [],
+  "locations": {
+   "Civitas illa Fortis": "varlamore"
+  }
+ },
+ "Fortis Blacksmith": {
+  "shop": "Fortis Blacksmith",
+  "owners": [
+   "Blacksmith"
+  ],
+  "cards": [],
+  "locations": {
+   "Civitas illa Fortis": "varlamore"
+  }
+ },
+ "Fortis Fur Stall": {
+  "shop": "Fortis Fur Stall",
+  "owners": [
+   "Fur Merchant"
+  ],
+  "cards": [],
+  "locations": {
+   "Civitas illa Fortis": "varlamore"
+  }
+ },
+ "Fortis Gem Stall": {
+  "shop": "Fortis Gem Stall",
+  "owners": [
+   "Gem Merchant"
+  ],
+  "cards": [],
+  "locations": {
+   "Civitas illa Fortis": "varlamore"
+  }
+ },
+ "Fortis General Store": {
+  "shop": "Fortis General Store",
+  "owners": [
+   "Shopkeeper"
+  ],
+  "cards": [],
+  "locations": {
+   "Civitas illa Fortis": "varlamore"
+  }
+ },
+ "Fortis Silk Stall": {
+  "shop": "Fortis Silk Stall",
+  "owners": [
+   "Silk Merchant"
+  ],
+  "cards": [],
+  "locations": {
+   "Civitas illa Fortis": "varlamore"
+  }
+ },
+ "Fortis Spice Stall": {
+  "shop": "Fortis Spice Stall",
+  "owners": [
+   "Spice Merchant"
+  ],
+  "cards": [],
+  "locations": {
+   "Civitas illa Fortis": "varlamore"
+  }
+ },
+ "Fossegrimen": {
+  "shop": null,
+  "owners": [
+   "Fossegrimen"
+  ],
+  "cards": [
+   "Fossegrimen"
+  ],
+  "locations": {}
+ },
+ "Fossil Island General Store": {
+  "shop": "Fossil Island General Store",
+  "owners": [
+   "Shop keeper"
+  ],
+  "cards": [],
+  "locations": {
+   "Museum Camp": null
+  }
+ },
+ "Frankie's Fishing Emporium": {
+  "shop": "Frankie's Fishing Emporium",
+  "owners": [
+   "Frankie"
+  ],
+  "cards": [],
+  "locations": {
+   "Port Piscarilius": "kourend"
+  }
+ },
+ "Fremennik Fish Monger": {
+  "shop": "Fremennik Fish Monger",
+  "owners": [
+   "Fish monger"
+  ],
+  "cards": [],
+  "locations": {
+   "Rellekka": null
+  }
+ },
+ "Fremennik Fur Trader": {
+  "shop": "Fremennik Fur Trader",
+  "owners": [
+   "Fur trader"
+  ],
+  "cards": [],
+  "locations": {
+   "Rellekka": null
+  }
+ },
+ "Frenita's Cookery Shop.": {
+  "shop": "Frenita's Cookery Shop.",
+  "owners": [
+   "Frenita"
+  ],
+  "cards": [],
+  "locations": {
+   "Yanille": null
+  }
+ },
+ "Frincos' Fabulous Herb Store.": {
+  "shop": "Frincos' Fabulous Herb Store.",
+  "owners": [
+   "Frincos"
+  ],
+  "cards": [],
+  "locations": {
+   "Entrana": null
+  }
+ },
+ "Funch's Fine Groceries": {
+  "shop": "Funch's Fine Groceries",
+  "owners": [
+   "Heckel Funch"
+  ],
+  "cards": [],
+  "locations": {
+   "Grand Tree": null
+  }
+ },
+ "Gabooty's Tai Bwo Wannai Cooperative.": {
+  "shop": "Gabooty's Tai Bwo Wannai Cooperative.",
+  "owners": [
+   "Gabooty"
+  ],
+  "cards": [],
+  "locations": {
+   "Tai Bwo Wannai": null
+  }
+ },
+ "Gabooty's Tai Bwo Wannai Cooperative.(Karamja gloves)": {
+  "shop": "Gabooty's Tai Bwo Wannai Cooperative.",
+  "owners": [
+   "Gabooty"
+  ],
+  "cards": [],
+  "locations": {
+   "Tai Bwo Wannai": null
+  }
+ },
+ "Gabooty's Tai Bwo Wannai Drinky Store.": {
+  "shop": "Gabooty's Tai Bwo Wannai Drinky Store.",
+  "owners": [
+   "Gabooty"
+  ],
+  "cards": [],
+  "locations": {
+   "Tai Bwo Wannai": null
+  }
+ },
+ "Gabooty's Tai Bwo Wannai Drinky Store.(Karamja gloves)": {
+  "shop": "Gabooty's Tai Bwo Wannai Drinky Store.",
+  "owners": [
+   "Gabooty"
+  ],
+  "cards": [],
+  "locations": {
+   "Tai Bwo Wannai": null
+  }
+ },
+ "Gaius' Two Handed Shop.": {
+  "shop": "Gaius' Two Handed Shop.",
+  "owners": [
+   "Gaius"
+  ],
+  "cards": [],
+  "locations": {
+   "Taverley": null
+  }
+ },
+ "Garlic Cocktail Supply": {
+  "shop": "Garlic Cocktail Supply",
+  "owners": [
+   "Werewolf"
+  ],
+  "cards": [
+   "Werewolf"
+  ],
+  "locations": {
+   "Darkmeyer": "morytania"
+  }
+ },
+ "Gem Trader.": {
+  "shop": "Gem Trader.",
+  "owners": [
+   "Gem trader"
+  ],
+  "cards": [],
+  "locations": {
+   "Al Kharid": null
+  }
+ },
+ "General Store (Canifis)": {
+  "shop": "General Store (Canifis)",
+  "owners": [
+   "Fidelio"
+  ],
+  "cards": [],
+  "locations": {
+   "Canifis": "morytania"
+  }
+ },
+ "Gerrant's Fishy Business.": {
+  "shop": "Gerrant's Fishy Business.",
+  "owners": [
+   "Gerrant"
+  ],
+  "cards": [],
+  "locations": {
+   "Port Sarim": null
+  }
+ },
+ "Gianne's Restaurant": {
+  "shop": "Gianne's Restaurant",
+  "owners": [
+   "Gnome Waiter"
+  ],
+  "cards": [],
+  "locations": {
+   "Grand Tree": null
+  }
+ },
+ "Giants' Foundry Reward Shop": {
+  "shop": "Giants' Foundry Reward Shop",
+  "owners": [
+   "Kovac"
+  ],
+  "cards": [
+   "Kovac"
+  ],
+  "locations": {
+   "Giants' Foundry": "desert"
+  }
+ },
+ "Grace's Graceful Clothing": {
+  "shop": "Grace's Graceful Clothing",
+  "owners": [
+   "Grace"
+  ],
+  "cards": [
+   "Grace"
+  ],
+  "locations": {
+   "Rogues' Den": null,
+   "Burthorpe": null
+  }
+ },
+ "Grand Tree Groceries": {
+  "shop": "Grand Tree Groceries",
+  "owners": [
+   "Hudo"
+  ],
+  "cards": [],
+  "locations": {
+   "Grand Tree": null
+  }
+ },
+ "Green Gemstone Gems": {
+  "shop": "Green Gemstone Gems",
+  "owners": [
+   "Hervi"
+  ],
+  "cards": [],
+  "locations": {
+   "Keldagrim": null
+  }
+ },
+ "Greengrocer of Miscellania": {
+  "shop": "Greengrocer of Miscellania",
+  "owners": [
+   "Greengrocer"
+  ],
+  "cards": [],
+  "locations": {
+   "Miscellania": null
+  }
+ },
+ "Grud's Herblore Stall.": {
+  "shop": "Grud's Herblore Stall.",
+  "owners": [
+   "Ogre merchant"
+  ],
+  "cards": [],
+  "locations": {
+   "Gu'Tanoth": null
+  }
+ },
+ "Grum's Gold Exchange.": {
+  "shop": "Grum's Gold Exchange.",
+  "owners": [
+   "Grum"
+  ],
+  "cards": [],
+  "locations": {
+   "Port Sarim": null
+  }
+ },
+ "Guinevere's Dyes": {
+  "shop": "Guinevere's Dyes",
+  "owners": [
+   "Guinevere"
+  ],
+  "cards": [],
+  "locations": {
+   "Prifddinas": "prifddinas"
+  }
+ },
+ "Gulluck and Sons": {
+  "shop": "Gulluck and Sons",
+  "owners": [
+   "Gulluck"
+  ],
+  "cards": [],
+  "locations": {
+   "Grand Tree": null
+  }
+ },
+ "Gunslik's Assorted Items": {
+  "shop": "Gunslik's Assorted Items",
+  "owners": [
+   "Gunslik"
+  ],
+  "cards": [],
+  "locations": {
+   "Keldagrim": null
+  }
+ },
+ "Gwyn's Mining Emporium": {
+  "shop": "Gwyn's Mining Emporium",
+  "owners": [
+   "Gwyn"
+  ],
+  "cards": [],
+  "locations": {
+   "Prifddinas": "prifddinas"
+  }
+ },
+ "Hair of the Dog": {
+  "shop": "Hair of the Dog",
+  "owners": [
+   "Roavar"
+  ],
+  "cards": [],
+  "locations": {
+   "Canifis": "morytania"
+  }
+ },
+ "Hamab's Crafting Emporium": {
+  "shop": "Hamab's Crafting Emporium",
+  "owners": [
+   "Hamab"
+  ],
+  "cards": [],
+  "locations": {
+   "Ape Atoll": "ape_atoll"
+  }
+ },
+ "Happy Heroes' H'emporium.": {
+  "shop": "Happy Heroes' H'emporium.",
+  "owners": [
+   "Helemos"
+  ],
+  "cards": [],
+  "locations": {
+   "Heroes' Guild": null
+  }
+ },
+ "Harpoon Joe's House of 'Rum'.": {
+  "shop": "Harpoon Joe's House of 'Rum'.",
+  "owners": [
+   "Joe"
+  ],
+  "cards": [],
+  "locations": {
+   "Mos Le'Harmless": "mos_le_harmless"
+  }
+ },
+ "Harry's Fishing Shop.": {
+  "shop": "Harry's Fishing Shop.",
+  "owners": [
+   "Harry"
+  ],
+  "cards": [],
+  "locations": {
+   "Catherby": null
+  }
+ },
+ "Hefin Inn": {
+  "shop": "Hefin Inn",
+  "owners": [
+   "Eira"
+  ],
+  "cards": [],
+  "locations": {
+   "Prifddinas": "prifddinas"
+  }
+ },
+ "Helmet Shop.": {
+  "shop": "Helmet Shop.",
+  "owners": [
+   "Peksa"
+  ],
+  "cards": [],
+  "locations": {
+   "Barbarian Village": null
+  }
+ },
+ "Henderson's Catch of the Day": {
+  "shop": "Henderson's Catch of the Day",
+  "owners": [
+   "Henderson"
+  ],
+  "cards": [],
+  "locations": {
+   "The Pandemonium": null
+  }
+ },
+ "Hendor's Awesome Ores": {
+  "shop": "Hendor's Awesome Ores",
+  "owners": [
+   "Hendor"
+  ],
+  "cards": [],
+  "locations": {
+   "Mining Guild": null
+  }
+ },
+ "Herquin's Gems.": {
+  "shop": "Herquin's Gems.",
+  "owners": [
+   "Herquin"
+  ],
+  "cards": [],
+  "locations": {
+   "Falador": null
+  }
+ },
+ "Hickton's Archery Emporium.": {
+  "shop": "Hickton's Archery Emporium.",
+  "owners": [
+   "Hickton"
+  ],
+  "cards": [
+   "Hickton"
+  ],
+  "locations": {
+   "Catherby": null
+  }
+ },
+ "Honest Jimmy's House of Stuff": {
+  "shop": "Honest Jimmy's House of Stuff",
+  "owners": [
+   "Honest Jimmy"
+  ],
+  "cards": [],
+  "locations": {
+   "Trouble Brewing": "morytania"
+  }
+ },
+ "Horvik's Armour Shop.": {
+  "shop": "Horvik's Armour Shop.",
+  "owners": [
+   "Horvik"
+  ],
+  "cards": [
+   "Horvik"
+  ],
+  "locations": {
+   "Varrock": null
+  }
+ },
+ "Huito's Herbal Supplies": {
+  "shop": "Huito's Herbal Supplies",
+  "owners": [
+   "Huito"
+  ],
+  "cards": [],
+  "locations": {
+   "Cam Torum": "varlamore"
+  }
+ },
+ "Ifaba's General Store": {
+  "shop": "Ifaba's General Store",
+  "owners": [
+   "Ifaba"
+  ],
+  "cards": [],
+  "locations": {
+   "Ape Atoll": "ape_atoll"
+  }
+ },
+ "Imia's Supplies": {
+  "shop": "Imia's Supplies",
+  "owners": [
+   "Imia"
+  ],
+  "cards": [],
+  "locations": {
+   "Hunter Guild": "varlamore"
+  }
+ },
+ "Initiate Temple Knight Armoury": {
+  "shop": "Initiate Temple Knight Armoury",
+  "owners": [
+   "Sir Tiffy Cashien"
+  ],
+  "cards": [
+   "Sir Tiffy Cashien"
+  ],
+  "locations": {
+   "Falador Park": null
+  }
+ },
+ "Iorwerth's Arms": {
+  "shop": "Iorwerth's Arms",
+  "owners": [
+   "Celyn"
+  ],
+  "cards": [],
+  "locations": {
+   "Prifddinas": "prifddinas"
+  }
+ },
+ "Irksol (shop)": {
+  "shop": "Irksol (shop)",
+  "owners": [
+   "Irksol"
+  ],
+  "cards": [],
+  "locations": {
+   "Zanaris": "zanaris"
+  }
+ },
+ "Ishmael's Fish He Sells": {
+  "shop": "Ishmael's Fish He Sells",
+  "owners": [
+   "Ishmael"
+  ],
+  "cards": [],
+  "locations": {
+   "Ruins of Unkah": "desert"
+  }
+ },
+ "Island Fishmonger": {
+  "shop": "Island Fishmonger",
+  "owners": [
+   "Fishmonger"
+  ],
+  "cards": [],
+  "locations": {
+   "Miscellania": null
+  }
+ },
+ "Island Greengrocer": {
+  "shop": "Island Greengrocer",
+  "owners": [
+   "Greengrocer"
+  ],
+  "cards": [],
+  "locations": {
+   "Etceteria": null
+  }
+ },
+ "Ivan's Supplies": {
+  "shop": "Ivan's Supplies",
+  "owners": [
+   "Ivan Strom"
+  ],
+  "cards": [],
+  "locations": {
+   "Meiyerditch": "morytania"
+  }
+ },
+ "Iwan's Maces": {
+  "shop": "Iwan's Maces",
+  "owners": [
+   "Iwan"
+  ],
+  "cards": [],
+  "locations": {
+   "Prifddinas": "prifddinas"
+  }
+ },
+ "Jamila's Craft Stall.": {
+  "shop": "Jamila's Craft Stall.",
+  "owners": [
+   "Jamila"
+  ],
+  "cards": [],
+  "locations": {
+   "Sophanem": "sophanem"
+  }
+ },
+ "Jatix's Herblore Shop.": {
+  "shop": "Jatix's Herblore Shop.",
+  "owners": [
+   "Jatix"
+  ],
+  "cards": [
+   "Jatix"
+  ],
+  "locations": {
+   "Taverley": null
+  }
+ },
+ "Jennifer's General Supplies": {
+  "shop": "Jennifer's General Supplies",
+  "owners": [
+   "Jennifer"
+  ],
+  "cards": [],
+  "locations": {
+   "Shayzien": "kourend"
+  }
+ },
+ "Jiminua's Jungle Store.": {
+  "shop": "Jiminua's Jungle Store.",
+  "owners": [
+   "Jiminua"
+  ],
+  "cards": [],
+  "locations": {
+   "Karamja": null
+  }
+ },
+ "Jiminua's Jungle Store.(Karamja gloves 3+)": {
+  "shop": "Jiminua's Jungle Store.",
+  "owners": [
+   "Jiminua"
+  ],
+  "cards": [],
+  "locations": {
+   "Karamja": null
+  }
+ },
+ "Jolly Boar Inn": {
+  "shop": "Jolly Boar Inn",
+  "owners": [
+   "Bartender"
+  ],
+  "cards": [],
+  "locations": {
+   "Varrock": null
+  }
+ },
+ "Jukat (shop)": {
+  "shop": "Jukat (shop)",
+  "owners": [
+   "Jukat"
+  ],
+  "cards": [],
+  "locations": {
+   "Zanaris": "zanaris"
+  }
+ },
+ "Juna": {
+  "shop": null,
+  "owners": [
+   "Juna"
+  ],
+  "cards": [
+   "Juna"
+  ],
+  "locations": {}
+ },
+ "Justine's stuff for the Last Shopper Standing": {
+  "shop": "Justine's stuff for the Last Shopper Standing",
+  "owners": [
+   "Justine"
+  ],
+  "cards": [],
+  "locations": {
+   "Last Man Standing": null
+  }
+ },
+ "Karamja General Store": {
+  "shop": "Karamja General Store",
+  "owners": [
+   "Shop keeper"
+  ],
+  "cards": [],
+  "locations": {
+   "Musa Point": null,
+   "Karamja": null
+  }
+ },
+ "Karamja General Store(Karamja gloves)": {
+  "shop": "Karamja General Store",
+  "owners": [
+   "Shop keeper"
+  ],
+  "cards": [],
+  "locations": {
+   "Musa Point": null,
+   "Karamja": null
+  }
+ },
+ "Karamja Wines, Spirits, and Beers.": {
+  "shop": "Karamja Wines, Spirits, and Beers.",
+  "owners": [
+   "Zembo"
+  ],
+  "cards": [],
+  "locations": {
+   "Karamja": null
+  }
+ },
+ "Kastori Farming Supplies": {
+  "shop": "Kastori Farming Supplies",
+  "owners": [
+   "Ameyalli"
+  ],
+  "cards": [],
+  "locations": {
+   "Kastori": "varlamore"
+  }
+ },
+ "Kastori General Store": {
+  "shop": "Kastori General Store",
+  "owners": [
+   "Shopkeeper"
+  ],
+  "cards": [],
+  "locations": {
+   "Kastori": "varlamore"
+  }
+ },
+ "Keepa Kettilon's store": {
+  "shop": "Keepa Kettilon's store",
+  "owners": [
+   "Keepa Kettilon"
+  ],
+  "cards": [],
+  "locations": {
+   "Jatizso": null
+  }
+ },
+ "Keldagrim Stonemason": {
+  "shop": "Keldagrim Stonemason",
+  "owners": [
+   "Stonemason"
+  ],
+  "cards": [],
+  "locations": {
+   "Keldagrim": null
+  }
+ },
+ "Keldagrim's Best Bread": {
+  "shop": "Keldagrim's Best Bread",
+  "owners": [
+   "Randivor"
+  ],
+  "cards": [],
+  "locations": {
+   "Keldagrim Palace": null
+  }
+ },
+ "Kenelme's Wares": {
+  "shop": "Kenelme's Wares",
+  "owners": [
+   "Kenelme"
+  ],
+  "cards": [],
+  "locations": {
+   "Port Piscarilius": "kourend"
+  }
+ },
+ "Khazard General Store": {
+  "shop": "Khazard General Store",
+  "owners": [
+   "Shop keeper"
+  ],
+  "cards": [],
+  "locations": {
+   "Port Khazard": null
+  }
+ },
+ "King Narnode's Royal Seed Pods": {
+  "shop": "King Narnode's Royal Seed Pods",
+  "owners": [
+   "King Narnode Shareen"
+  ],
+  "cards": [
+   "King Narnode Shareen"
+  ],
+  "locations": {
+   "Grand Tree": null
+  }
+ },
+ "King's Axe Inn": {
+  "shop": "King's Axe Inn",
+  "owners": [
+   "Barman"
+  ],
+  "cards": [],
+  "locations": {
+   "Keldagrim": null
+  }
+ },
+ "Kjut's Kebabs": {
+  "shop": "Kjut's Kebabs",
+  "owners": [
+   "Kjut"
+  ],
+  "cards": [],
+  "locations": {
+   "Keldagrim": null
+  }
+ },
+ "Kourend Castle Baker's Stall.": {
+  "shop": "Kourend Castle Baker's Stall.",
+  "owners": [
+   "Baker"
+  ],
+  "cards": [],
+  "locations": {
+   "Kourend Castle": "kourend"
+  }
+ },
+ "Kourend Castle Gem Stall.": {
+  "shop": "Kourend Castle Gem Stall.",
+  "owners": [
+   "Gem merchant"
+  ],
+  "cards": [],
+  "locations": {
+   "Kourend Castle": "kourend"
+  }
+ },
+ "Leenz's General Supplies": {
+  "shop": "Leenz's General Supplies",
+  "owners": [
+   "Leenz"
+  ],
+  "cards": [],
+  "locations": {
+   "Port Piscarilius": "kourend"
+  }
+ },
+ "Legends Guild General Store.": {
+  "shop": "Legends Guild General Store.",
+  "owners": [
+   "Fionella"
+  ],
+  "cards": [],
+  "locations": {
+   "Legends' Guild": null
+  }
+ },
+ "Legends Guild Shop of Useful Items.": {
+  "shop": "Legends Guild Shop of Useful Items.",
+  "owners": [
+   "Siegfried Erkle"
+  ],
+  "cards": [],
+  "locations": {
+   "Legends' Guild": null
+  }
+ },
+ "Leon's Prototype Crossbow.": {
+  "shop": "Leon's Prototype Crossbow.",
+  "owners": [
+   "Leon"
+  ],
+  "cards": [],
+  "locations": {
+   "Yanille": null
+  }
+ },
+ "Leprechaun Larry's Farming Supplies.": {
+  "shop": "Leprechaun Larry's Farming Supplies.",
+  "owners": [
+   "Leprechaun Larry"
+  ],
+  "cards": [],
+  "locations": {
+   "Troll Stronghold (location)": null
+  }
+ },
+ "Little Munty's Little Shop": {
+  "shop": "Little Munty's Little Shop",
+  "owners": [
+   "Munty"
+  ],
+  "cards": [],
+  "locations": {
+   "Lovakengj": "kourend"
+  }
+ },
+ "Little Shop of Horace": {
+  "shop": "Little Shop of Horace",
+  "owners": [
+   "Horace"
+  ],
+  "cards": [],
+  "locations": {
+   "Hosidius": "kourend"
+  }
+ },
+ "Lletya Archery Shop": {
+  "shop": "Lletya Archery Shop",
+  "owners": [
+   "Dalldav"
+  ],
+  "cards": [],
+  "locations": {
+   "Lletya": "tirannwn"
+  }
+ },
+ "Lletya Food Store": {
+  "shop": "Lletya Food Store",
+  "owners": [
+   "Gethin"
+  ],
+  "cards": [],
+  "locations": {
+   "Lletya": "tirannwn"
+  }
+ },
+ "Lletya General Store": {
+  "shop": "Lletya General Store",
+  "owners": [
+   "Eudav"
+  ],
+  "cards": [],
+  "locations": {
+   "Lletya": "tirannwn"
+  }
+ },
+ "Lletya Seamstress": {
+  "shop": "Lletya Seamstress",
+  "owners": [
+   "Oronwen"
+  ],
+  "cards": [],
+  "locations": {
+   "Lletya": "tirannwn"
+  }
+ },
+ "Lliann's Wares": {
+  "shop": "Lliann's Wares",
+  "owners": [
+   "Lliann"
+  ],
+  "cards": [],
+  "locations": {
+   "Prifddinas": "prifddinas"
+  }
+ },
+ "Logava Gricoller's Cooking Supplies": {
+  "shop": "Logava Gricoller's Cooking Supplies",
+  "owners": [
+   "Logava"
+  ],
+  "cards": [],
+  "locations": {
+   "Hosidius": "kourend"
+  }
+ },
+ "Louie's Armoured Legs Bazaar.": {
+  "shop": "Louie's Armoured Legs Bazaar.",
+  "owners": [
+   "Louie Legs"
+  ],
+  "cards": [],
+  "locations": {
+   "Al Kharid": null
+  }
+ },
+ "Lovecraft's Tackle": {
+  "shop": "Lovecraft's Tackle",
+  "owners": [
+   "Ezekial Lovecraft"
+  ],
+  "cards": [],
+  "locations": {
+   "Witchaven": null
+  }
+ },
+ "Lowe's Archery Emporium": {
+  "shop": "Lowe's Archery Emporium",
+  "owners": [
+   "Lowe"
+  ],
+  "cards": [],
+  "locations": {
+   "Varrock": null
+  }
+ },
+ "Lumbridge General Store": {
+  "shop": "Lumbridge General Store",
+  "owners": [
+   "Shop keeper",
+   "Shop assistant"
+  ],
+  "cards": [],
+  "locations": {
+   "Lumbridge": null
+  }
+ },
+ "Lunami's Axe Shop": {
+  "shop": "Lunami's Axe Shop",
+  "owners": [
+   "Lunami"
+  ],
+  "cards": [],
+  "locations": {
+   "Auburnvale": "varlamore"
+  }
+ },
+ "Lundail's Arena-side Rune Shop.": {
+  "shop": "Lundail's Arena-side Rune Shop.",
+  "owners": [
+   "Lundail"
+  ],
+  "cards": [],
+  "locations": {
+   "Mage Arena": null
+  }
+ },
+ "Mage Arena Staffs.": {
+  "shop": "Mage Arena Staffs.",
+  "owners": [
+   "Chamber guardian"
+  ],
+  "cards": [],
+  "locations": {
+   "Mage Arena": null
+  }
+ },
+ "Magic Guild Store (Mystic Robes)": {
+  "shop": "Magic Guild Store (Mystic Robes)",
+  "owners": [
+   "Wizard Sinina"
+  ],
+  "cards": [
+   "Wizard Sinina"
+  ],
+  "locations": {
+   "Wizards' Guild": null
+  }
+ },
+ "Magic Guild Store (Runes and Staves)": {
+  "shop": "Magic Guild Store (Runes and Staves)",
+  "owners": [
+   "Wizard Akutha"
+  ],
+  "cards": [],
+  "locations": {
+   "Wizards' Guild": null
+  }
+ },
+ "Mahogany Homes Reward Shop": {
+  "shop": "Mahogany Homes Reward Shop",
+  "owners": [
+   "Amy"
+  ],
+  "cards": [
+   "Amy"
+  ],
+  "locations": {
+   "Falador": null
+  }
+ },
+ "Mairin's Market": {
+  "shop": "Mairin's Market",
+  "owners": [
+   "Mairin"
+  ],
+  "cards": [],
+  "locations": {
+   "Underwater": null
+  }
+ },
+ "Makeover Mage": {
+  "shop": null,
+  "owners": [
+   "Makeover Mage"
+  ],
+  "cards": [
+   "Makeover Mage"
+  ],
+  "locations": {}
+ },
+ "Martin Thwait's Lost and Found.": {
+  "shop": "Martin Thwait's Lost and Found.",
+  "owners": [
+   "Martin Thwait"
+  ],
+  "cards": [
+   "Martin Thwait"
+  ],
+  "locations": {
+   "Rogues' Den": null
+  }
+ },
+ "Mawnis Burowgar": {
+  "shop": null,
+  "owners": [
+   "Mawnis Burowgar"
+  ],
+  "cards": [
+   "Mawnis Burowgar"
+  ],
+  "locations": {}
+ },
+ "Miltog's Lamps": {
+  "shop": "Miltog's Lamps",
+  "owners": [
+   "Miltog"
+  ],
+  "cards": [],
+  "locations": {
+   "Dorgesh-Kaan": null
+  }
+ },
+ "Mining Guild Mineral Exchange": {
+  "shop": "Mining Guild Mineral Exchange",
+  "owners": [
+   "Belona"
+  ],
+  "cards": [],
+  "locations": {
+   "Mining Guild": null
+  }
+ },
+ "Miscellanian Clothes Shop": {
+  "shop": "Miscellanian Clothes Shop",
+  "owners": [
+   "Halla"
+  ],
+  "cards": [
+   "Halla"
+  ],
+  "locations": {
+   "Miscellania Expansion": null
+  }
+ },
+ "Miscellanian Food Shop": {
+  "shop": "Miscellanian Food Shop",
+  "owners": [
+   "Osvald"
+  ],
+  "cards": [],
+  "locations": {
+   "Miscellania Expansion": null
+  }
+ },
+ "Miscellanian General Store": {
+  "shop": "Miscellanian General Store",
+  "owners": [
+   "Finn"
+  ],
+  "cards": [],
+  "locations": {
+   "Miscellania Expansion": null
+  }
+ },
+ "Mistrock Mining Supplies": {
+  "shop": "Mistrock Mining Supplies",
+  "owners": [
+   "Necto"
+  ],
+  "cards": [],
+  "locations": {
+   "Mistrock": "varlamore"
+  }
+ },
+ "Moon Clan Fine Clothes.": {
+  "shop": "Moon Clan Fine Clothes.",
+  "owners": [
+   "Rimae Sirsalis"
+  ],
+  "cards": [],
+  "locations": {
+   "Lunar Isle": null
+  }
+ },
+ "Moon Clan General Store.": {
+  "shop": "Moon Clan General Store.",
+  "owners": [
+   "Melana Moonlander"
+  ],
+  "cards": [],
+  "locations": {
+   "Lunar Isle": null
+  }
+ },
+ "Moonrise Wines": {
+  "shop": "Moonrise Wines",
+  "owners": [
+   "Antonius"
+  ],
+  "cards": [],
+  "locations": {
+   "Moonrise Brewery and Winery": "varlamore"
+  }
+ },
+ "Mount Karuulm Weapon Shop": {
+  "shop": "Mount Karuulm Weapon Shop",
+  "owners": [
+   "Leke quo Keran"
+  ],
+  "cards": [],
+  "locations": {
+   "Mount Karuulm": "kourend"
+  }
+ },
+ "Multicannon parts for sale": {
+  "shop": "Multicannon parts for sale",
+  "owners": [
+   "Nulodion"
+  ],
+  "cards": [],
+  "locations": {
+   "Ice Mountain": null
+  }
+ },
+ "Myreque's Rest": {
+  "shop": "Myreque's Rest",
+  "owners": [
+   "Veliaf Hurtz"
+  ],
+  "cards": [
+   "Veliaf Hurtz"
+  ],
+  "locations": {
+   "Burgh de Rott": "morytania"
+  }
+ },
+ "Mysterious Hallowed Goods": {
+  "shop": "Mysterious Hallowed Goods",
+  "owners": [
+   "Mysterious Stranger"
+  ],
+  "cards": [],
+  "locations": {
+   "Hallowed Sepulchre": "morytania"
+  }
+ },
+ "Mysterious Stranger (shop)": {
+  "shop": "Mysterious Stranger (shop)",
+  "owners": [
+   "Mysterious Stranger"
+  ],
+  "cards": [],
+  "locations": {
+   "Theatre of Blood": "morytania"
+  }
+ },
+ "Mythical Cape Store": {
+  "shop": "Mythical Cape Store",
+  "owners": [
+   "Jack"
+  ],
+  "cards": [
+   "Jack"
+  ],
+  "locations": {
+   "Myths' Guild": null
+  }
+ },
+ "Myths' Guild Armoury": {
+  "shop": "Myths' Guild Armoury",
+  "owners": [
+   "Erdan"
+  ],
+  "cards": [],
+  "locations": {
+   "Myths' Guild": null
+  }
+ },
+ "Myths' Guild Herbalist": {
+  "shop": "Myths' Guild Herbalist",
+  "owners": [
+   "Primula"
+  ],
+  "cards": [],
+  "locations": {
+   "Myths' Guild": null
+  }
+ },
+ "Myths' Guild Weaponry": {
+  "shop": "Myths' Guild Weaponry",
+  "owners": [
+   "Diana"
+  ],
+  "cards": [],
+  "locations": {
+   "Myths' Guild": null
+  }
+ },
+ "Nardah General Store.": {
+  "shop": "Nardah General Store.",
+  "owners": [
+   "Kazemde"
+  ],
+  "cards": [],
+  "locations": {
+   "Nardah": "desert"
+  }
+ },
+ "Nardah Hunter Shop.": {
+  "shop": "Nardah Hunter Shop.",
+  "owners": [
+   "Artimeus"
+  ],
+  "cards": [],
+  "locations": {
+   "Nardah": "desert"
+  }
+ },
+ "Nardok's Bone Weapons": {
+  "shop": "Nardok's Bone Weapons",
+  "owners": [
+   "Nardok"
+  ],
+  "cards": [],
+  "locations": {
+   "Dorgesh-Kaan mine": null
+  }
+ },
+ "Nathifa's Bake Stall.": {
+  "shop": "Nathifa's Bake Stall.",
+  "owners": [
+   "Nathifa"
+  ],
+  "cards": [],
+  "locations": {
+   "Sophanem": "sophanem"
+  }
+ },
+ "Ned's Handmade Rope (100% Wool)": {
+  "shop": "Ned's Handmade Rope (100% Wool)",
+  "owners": [
+   "Ned"
+  ],
+  "cards": [
+   "Ned"
+  ],
+  "locations": {
+   "Draynor Village": null
+  }
+ },
+ "Ned's Handmade Rope (100% Wool)(Fremennik Isles)": {
+  "shop": "Ned's Handmade Rope (100% Wool)",
+  "owners": [
+   "Ned"
+  ],
+  "cards": [
+   "Ned"
+  ],
+  "locations": {
+   "Draynor Village": null
+  }
+ },
+ "Neitiznot supplies.": {
+  "shop": "Neitiznot supplies.",
+  "owners": [
+   "Jofridr Mordstatter"
+  ],
+  "cards": [],
+  "locations": {
+   "Neitiznot": null
+  }
+ },
+ "Nemus Retreat (pub)": {
+  "shop": "Nemus Retreat (pub)",
+  "owners": [
+   "Bartender"
+  ],
+  "cards": [],
+  "locations": {
+   "Nemus Retreat": "varlamore"
+  }
+ },
+ "Nurmof's Pickaxe Shop.": {
+  "shop": "Nurmof's Pickaxe Shop.",
+  "owners": [
+   "Nurmof"
+  ],
+  "cards": [],
+  "locations": {
+   "Dwarven Mine": null
+  }
+ },
+ "Obli's General Store.": {
+  "shop": "Obli's General Store.",
+  "owners": [
+   "Obli"
+  ],
+  "cards": [],
+  "locations": {
+   "Shilo Village (location)": null
+  }
+ },
+ "Obli's General Store.(Karamja gloves)": {
+  "shop": "Obli's General Store.",
+  "owners": [
+   "Obli"
+  ],
+  "cards": [],
+  "locations": {
+   "Shilo Village (location)": null
+  }
+ },
+ "Old Man Ral's Supplies": {
+  "shop": "Old Man Ral's Supplies",
+  "owners": [
+   "Old Man Ral"
+  ],
+  "cards": [],
+  "locations": {
+   "Meiyerditch": "morytania"
+  }
+ },
+ "Oldak": {
+  "shop": null,
+  "owners": [
+   "Oldak"
+  ],
+  "cards": [
+   "Oldak"
+  ],
+  "locations": {}
+ },
+ "Oneiromancer": {
+  "shop": null,
+  "owners": [
+   "Oneiromancer"
+  ],
+  "cards": [
+   "Oneiromancer"
+  ],
+  "locations": {}
+ },
+ "Oobapohk's Javelin Store": {
+  "shop": "Oobapohk's Javelin Store",
+  "owners": [
+   "Oobapohk"
+  ],
+  "cards": [],
+  "locations": {
+   "Marim": null
+  }
+ },
+ "Ore seller.": {
+  "shop": "Ore seller.",
+  "owners": [
+   "Ordan"
+  ],
+  "cards": [],
+  "locations": {
+   "Blast Furnace": null,
+   "Keldagrim": null
+  }
+ },
+ "Ore store": {
+  "shop": "Ore store",
+  "owners": [
+   "Hring Hring"
+  ],
+  "cards": [],
+  "locations": {
+   "Jatizso": null
+  }
+ },
+ "Otto Godblessed": {
+  "shop": null,
+  "owners": [
+   "Otto Godblessed"
+  ],
+  "cards": [
+   "Otto Godblessed"
+  ],
+  "locations": {}
+ },
+ "Outer Fortis General Store": {
+  "shop": "Outer Fortis General Store",
+  "owners": [
+   "Shopkeeper"
+  ],
+  "cards": [],
+  "locations": {
+   "Outer Fortis": "varlamore"
+  }
+ },
+ "Oziach (shop)": {
+  "shop": "Oziach (shop)",
+  "owners": [
+   "Oziach"
+  ],
+  "cards": [
+   "Oziach"
+  ],
+  "locations": {
+   "Edgeville": null
+  }
+ },
+ "Paramaya Inn": {
+  "shop": "Paramaya Inn",
+  "owners": [
+   "Kaleb Paramaya"
+  ],
+  "cards": [],
+  "locations": {
+   "Shilo Village (location)": null
+  }
+ },
+ "Peer the Seer": {
+  "shop": null,
+  "owners": [
+   "Peer the Seer"
+  ],
+  "cards": [
+   "Peer the Seer"
+  ],
+  "locations": {}
+ },
+ "Pellem's Fur Store": {
+  "shop": "Pellem's Fur Store",
+  "owners": [
+   "Pellem"
+  ],
+  "cards": [],
+  "locations": {
+   "Hunter Guild": "varlamore"
+  }
+ },
+ "Pelters' Veg Stall": {
+  "shop": "Pelters' Veg Stall",
+  "owners": [
+   "Tramp",
+   "Fadli"
+  ],
+  "cards": [],
+  "locations": {
+   "Varrock": null,
+   "Hosidius": "kourend",
+   "Seers' Village": null,
+   "Yanille": null,
+   "Emir's Arena": null
+  }
+ },
+ "Perry's Chop-chop Shop": {
+  "shop": "Perry's Chop-chop Shop",
+  "owners": [
+   "Perry"
+  ],
+  "cards": [],
+  "locations": {
+   "Woodcutting Guild": "kourend"
+  }
+ },
+ "Petrified Pete's Ore Shop": {
+  "shop": "Petrified Pete's Ore Shop",
+  "owners": [
+   "Petrified Pete"
+  ],
+  "cards": [],
+  "locations": {
+   "Volcanic Mine": null
+  }
+ },
+ "Picaria's Fishing Shop": {
+  "shop": "Picaria's Fishing Shop",
+  "owners": [
+   "Picaria"
+  ],
+  "cards": [],
+  "locations": {
+   "Sunset Coast": "varlamore"
+  }
+ },
+ "Pickaxe-Is-Mine": {
+  "shop": "Pickaxe-Is-Mine",
+  "owners": [
+   "Tati",
+   "Sune"
+  ],
+  "cards": [],
+  "locations": {
+   "Keldagrim": null
+  }
+ },
+ "Pie Shop": {
+  "shop": "Pie Shop",
+  "owners": [
+   "Romily Weaklax"
+  ],
+  "cards": [],
+  "locations": {
+   "Cooks' Guild": null
+  }
+ },
+ "Pollnivneach general store.": {
+  "shop": "Pollnivneach general store.",
+  "owners": [
+   "Market seller"
+  ],
+  "cards": [],
+  "locations": {
+   "Pollnivneach": "desert"
+  }
+ },
+ "Port Phasmatys General Store": {
+  "shop": "Port Phasmatys General Store",
+  "owners": [
+   "Ghost shopkeeper"
+  ],
+  "cards": [],
+  "locations": {
+   "Port Phasmatys": "morytania"
+  }
+ },
+ "Port Roberts Cannonball Stall": {
+  "shop": "Port Roberts Cannonball Stall",
+  "owners": [
+   "Iron Bill"
+  ],
+  "cards": [],
+  "locations": {
+   "Port Roberts": null
+  }
+ },
+ "Port Roberts Fish Stall": {
+  "shop": "Port Roberts Fish Stall",
+  "owners": [
+   "Gregory"
+  ],
+  "cards": [],
+  "locations": {
+   "Port Roberts": null
+  }
+ },
+ "Port Roberts Fur Stall": {
+  "shop": "Port Roberts Fur Stall",
+  "owners": [
+   "Perdie"
+  ],
+  "cards": [],
+  "locations": {
+   "Port Roberts": null
+  }
+ },
+ "Port Roberts Gem Stall": {
+  "shop": "Port Roberts Gem Stall",
+  "owners": [
+   "Eleanor"
+  ],
+  "cards": [],
+  "locations": {
+   "Port Roberts": null
+  }
+ },
+ "Port Roberts General Store": {
+  "shop": "Port Roberts General Store",
+  "owners": [
+   "Shopkeeper"
+  ],
+  "cards": [],
+  "locations": {
+   "Port Roberts": null
+  }
+ },
+ "Port Roberts Ore Stall": {
+  "shop": "Port Roberts Ore Stall",
+  "owners": [
+   "Delf"
+  ],
+  "cards": [],
+  "locations": {
+   "Port Roberts": null
+  }
+ },
+ "Port Roberts Silk Stall": {
+  "shop": "Port Roberts Silk Stall",
+  "owners": [
+   "Doria"
+  ],
+  "cards": [],
+  "locations": {
+   "Port Roberts": null
+  }
+ },
+ "Port Roberts Silver Stall": {
+  "shop": "Port Roberts Silver Stall",
+  "owners": [
+   "Amos"
+  ],
+  "cards": [],
+  "locations": {
+   "Port Roberts": null
+  }
+ },
+ "Port Roberts Spice Stall": {
+  "shop": "Port Roberts Spice Stall",
+  "owners": [
+   "Samir"
+  ],
+  "cards": [],
+  "locations": {
+   "Port Roberts": null
+  }
+ },
+ "Port Roberts Veg Stall": {
+  "shop": "Port Roberts Veg Stall",
+  "owners": [
+   "Marla"
+  ],
+  "cards": [],
+  "locations": {
+   "Port Roberts": null
+  }
+ },
+ "Prifddinas Foodstuffs": {
+  "shop": "Prifddinas Foodstuffs",
+  "owners": [
+   "Derwen"
+  ],
+  "cards": [
+   "Derwen"
+  ],
+  "locations": {
+   "Prifddinas": "prifddinas"
+  }
+ },
+ "Prifddinas Gem Stall": {
+  "shop": "Prifddinas Gem Stall",
+  "owners": [
+   "Glenda"
+  ],
+  "cards": [],
+  "locations": {
+   "Prifddinas": "prifddinas"
+  }
+ },
+ "Prifddinas General Store": {
+  "shop": "Prifddinas General Store",
+  "owners": [
+   "Gwallter"
+  ],
+  "cards": [],
+  "locations": {
+   "Prifddinas": "prifddinas"
+  }
+ },
+ "Prifddinas Herbal Supplies": {
+  "shop": "Prifddinas Herbal Supplies",
+  "owners": [
+   "Llio"
+  ],
+  "cards": [],
+  "locations": {
+   "Prifddinas": "prifddinas"
+  }
+ },
+ "Prifddinas Silver Stall": {
+  "shop": "Prifddinas Silver Stall",
+  "owners": [
+   "Osian"
+  ],
+  "cards": [],
+  "locations": {
+   "Prifddinas": "prifddinas"
+  }
+ },
+ "Prifddinas Spice Stall": {
+  "shop": "Prifddinas Spice Stall",
+  "owners": [
+   "Caerwyn"
+  ],
+  "cards": [],
+  "locations": {
+   "Prifddinas": "prifddinas"
+  }
+ },
+ "Prifddinas' Seamstress": {
+  "shop": "Prifddinas' Seamstress",
+  "owners": [
+   "Nia"
+  ],
+  "cards": [],
+  "locations": {
+   "Prifddinas": "prifddinas"
+  }
+ },
+ "Proselyte Temple Knight Armoury": {
+  "shop": "Proselyte Temple Knight Armoury",
+  "owners": [
+   "Sir Tiffy Cashien"
+  ],
+  "cards": [
+   "Sir Tiffy Cashien"
+  ],
+  "locations": {
+   "Falador Park": null
+  }
+ },
+ "Prospector Percy's Nugget Shop": {
+  "shop": "Prospector Percy's Nugget Shop",
+  "owners": [
+   "Prospector Percy"
+  ],
+  "cards": [
+   "Prospector Percy"
+  ],
+  "locations": {
+   "Motherlode Mine": null
+  }
+ },
+ "PvP Arena Rewards": {
+  "shop": "PvP Arena Rewards",
+  "owners": [
+   "Mubariz"
+  ],
+  "cards": [],
+  "locations": {
+   "Emir's Arena": null
+  }
+ },
+ "Quality Armour Shop": {
+  "shop": "Quality Armour Shop",
+  "owners": [
+   "Saro"
+  ],
+  "cards": [],
+  "locations": {
+   "Keldagrim": null
+  }
+ },
+ "Quality Weapons Shop": {
+  "shop": "Quality Weapons Shop",
+  "owners": [
+   "Santiri"
+  ],
+  "cards": [],
+  "locations": {
+   "Keldagrim": null
+  }
+ },
+ "Quartermaster's Stores": {
+  "shop": "Quartermaster's Stores",
+  "owners": [
+   "Quartermaster"
+  ],
+  "cards": [],
+  "locations": {
+   "Tyras Camp": "tirannwn"
+  }
+ },
+ "Quetzacalli Gorge General Store": {
+  "shop": "Quetzacalli Gorge General Store",
+  "owners": [
+   "Shopkeeper"
+  ],
+  "cards": [],
+  "locations": {
+   "Quetzacalli Gorge": "varlamore"
+  }
+ },
+ "Raetul and Co's Cloth Store.": {
+  "shop": "Raetul and Co's Cloth Store.",
+  "owners": [
+   "Raetul"
+  ],
+  "cards": [],
+  "locations": {
+   "Sophanem": "sophanem"
+  }
+ },
+ "Raetul and Co's Cloth Store.(after Contact!)": {
+  "shop": "Raetul and Co's Cloth Store.",
+  "owners": [
+   "Raetul"
+  ],
+  "cards": [],
+  "locations": {
+   "Sophanem": "sophanem"
+  }
+ },
+ "Ramarno": {
+  "shop": null,
+  "owners": [
+   "Ramarno"
+  ],
+  "cards": [
+   "Ramarno"
+  ],
+  "locations": {}
+ },
+ "Ranael's Super Skirt Store.": {
+  "shop": "Ranael's Super Skirt Store.",
+  "owners": [
+   "Ranael"
+  ],
+  "cards": [],
+  "locations": {
+   "Al Kharid": null
+  }
+ },
+ "Ranging Guild Ticket Exchange": {
+  "shop": "Ranging Guild Ticket Exchange",
+  "owners": [
+   "Ticket Merchant"
+  ],
+  "cards": [],
+  "locations": {
+   "Ranging Guild": null
+  }
+ },
+ "Rasolo the Wandering Merchant": {
+  "shop": "Rasolo the Wandering Merchant",
+  "owners": [
+   "Rasolo"
+  ],
+  "cards": [],
+  "locations": {
+   "Baxtorian Falls": null
+  }
+ },
+ "Rat & Bat": {
+  "shop": "Rat & Bat",
+  "owners": [
+   "Carl",
+   "Roy",
+   "Sins of the Father"
+  ],
+  "cards": [],
+  "locations": {
+   "Slepe": "morytania"
+  }
+ },
+ "Ratpit bar (Keldagrim)": {
+  "shop": "Ratpit bar (Keldagrim)",
+  "owners": [
+   "Rauborn"
+  ],
+  "cards": [],
+  "locations": {
+   "Keldagrim": null
+  }
+ },
+ "Ratpit bar (Port Sarim)": {
+  "shop": "Ratpit bar (Port Sarim)",
+  "owners": [
+   "Barman"
+  ],
+  "cards": [],
+  "locations": {
+   "Port Sarim": null
+  }
+ },
+ "Ratpit bar (Varrock)": {
+  "shop": "Ratpit bar (Varrock)",
+  "owners": [
+   "Barman"
+  ],
+  "cards": [],
+  "locations": {
+   "Varrock": null
+  }
+ },
+ "Razmire Builders Merchants.": {
+  "shop": "Razmire Builders Merchants.",
+  "owners": [
+   "Razmire Keelgan"
+  ],
+  "cards": [],
+  "locations": {
+   "Mort'ton": "morytania"
+  }
+ },
+ "Razmire General Store.": {
+  "shop": "Razmire General Store.",
+  "owners": [
+   "Razmire Keelgan"
+  ],
+  "cards": [],
+  "locations": {
+   "Mort'ton": "morytania"
+  }
+ },
+ "Regath's Wares": {
+  "shop": "Regath's Wares",
+  "owners": [
+   "Regath"
+  ],
+  "cards": [],
+  "locations": {
+   "Arceuus": "kourend"
+  }
+ },
+ "Reldak's Leather Armour": {
+  "shop": "Reldak's Leather Armour",
+  "owners": [
+   "Reldak"
+  ],
+  "cards": [],
+  "locations": {
+   "Dorgesh-Kaan": null
+  }
+ },
+ "Rellekka Longhall Bar": {
+  "shop": "Rellekka Longhall Bar",
+  "owners": [
+   "Thora the Barkeep"
+  ],
+  "cards": [],
+  "locations": {
+   "Rellekka": null
+  }
+ },
+ "Rewards Guardian": {
+  "shop": null,
+  "owners": [
+   "Rewards Guardian"
+  ],
+  "cards": [
+   "Rewards Guardian"
+  ],
+  "locations": {}
+ },
+ "Richard's Farming shop.": {
+  "shop": "Richard's Farming shop.",
+  "owners": [
+   "Richard"
+  ],
+  "cards": [],
+  "locations": {
+   "East Ardougne": null
+  }
+ },
+ "Rimmington General Store": {
+  "shop": "Rimmington General Store",
+  "owners": [
+   "Shop keeper"
+  ],
+  "cards": [],
+  "locations": {
+   "Rimmington": null
+  }
+ },
+ "Rising Sun Inn": {
+  "shop": "Rising Sun Inn",
+  "owners": [
+   "Kaylee",
+   "Emily",
+   "Tina"
+  ],
+  "cards": [],
+  "locations": {
+   "Falador": null
+  }
+ },
+ "Rok's Chocs Box.": {
+  "shop": "Rok's Chocs Box.",
+  "owners": [
+   "Rokuh"
+  ],
+  "cards": [],
+  "locations": {
+   "Nardah": "desert"
+  }
+ },
+ "Rommik's Crafty Supplies.": {
+  "shop": "Rommik's Crafty Supplies.",
+  "owners": [
+   "Rommik"
+  ],
+  "cards": [],
+  "locations": {
+   "Rimmington": null
+  }
+ },
+ "Rufus' Meat Emporium": {
+  "shop": "Rufus' Meat Emporium",
+  "owners": [
+   "Rufus"
+  ],
+  "cards": [],
+  "locations": {
+   "Canifis": "morytania"
+  }
+ },
+ "Rusty Anchor Inn": {
+  "shop": "Rusty Anchor Inn",
+  "owners": [
+   "Bartender"
+  ],
+  "cards": [],
+  "locations": {
+   "Port Sarim": null
+  }
+ },
+ "Salius' Armour Shop": {
+  "shop": "Salius' Armour Shop",
+  "owners": [
+   "Salius"
+  ],
+  "cards": [],
+  "locations": {
+   "Salvager Overlook": "varlamore"
+  }
+ },
+ "Salvager Overlook General Store": {
+  "shop": "Salvager Overlook General Store",
+  "owners": [
+   "Shopkeeper"
+  ],
+  "cards": [],
+  "locations": {
+   "Salvager Overlook": "varlamore"
+  }
+ },
+ "Sam's Wilderness Cape Shop.": {
+  "shop": "Sam's Wilderness Cape Shop.",
+  "owners": [
+   "Sam"
+  ],
+  "cards": [],
+  "locations": {
+   "Dark Warriors' Fortress": null
+  }
+ },
+ "Sarah's Farming shop.": {
+  "shop": "Sarah's Farming shop.",
+  "owners": [
+   "Sarah"
+  ],
+  "cards": [],
+  "locations": {
+   "South Falador Farm": null
+  }
+ },
+ "Sawmill": {
+  "shop": "Sawmill",
+  "owners": [
+   "Sawmill Operator",
+   "Sawmill operator"
+  ],
+  "cards": [],
+  "locations": {
+   "Auburnvale": "varlamore",
+   "Prifddinas": "prifddinas",
+   "Woodcutting Guild": "kourend",
+   "Lumber Yard": null
+  }
+ },
+ "Scavvo's Rune Store.": {
+  "shop": "Scavvo's Rune Store.",
+  "owners": [
+   "Scavvo"
+  ],
+  "cards": [],
+  "locations": {
+   "Champions' Guild": null
+  }
+ },
+ "Seb's Shipyard Supplies": {
+  "shop": "Seb's Shipyard Supplies",
+  "owners": [
+   "Shipwright Seb"
+  ],
+  "cards": [],
+  "locations": {
+   "Shipyard": null
+  }
+ },
+ "Sebamo's Sublime Staffs": {
+  "shop": "Sebamo's Sublime Staffs",
+  "owners": [
+   "Sebamo"
+  ],
+  "cards": [],
+  "locations": {
+   "Auburnvale": "varlamore"
+  }
+ },
+ "Seddu's Adventurer's Store.": {
+  "shop": "Seddu's Adventurer's Store.",
+  "owners": [
+   "Seddu"
+  ],
+  "cards": [],
+  "locations": {
+   "Nardah": "desert"
+  }
+ },
+ "Shantay Pass Shop": {
+  "shop": "Shantay Pass Shop",
+  "owners": [
+   "Shantay",
+   "Shantay Guard"
+  ],
+  "cards": [
+   "Shantay",
+   "Shantay Guard"
+  ],
+  "locations": {
+   "Shantay Pass": null,
+   "Ruins of Unkah": "desert"
+  }
+ },
+ "Shayzien Styles": {
+  "shop": "Shayzien Styles",
+  "owners": [
+   "Robyn"
+  ],
+  "cards": [],
+  "locations": {
+   "Shayzien": "kourend"
+  }
+ },
+ "Shields of Mistrock": {
+  "shop": "Shields of Mistrock",
+  "owners": [
+   "Ichta"
+  ],
+  "cards": [],
+  "locations": {
+   "Mistrock": "varlamore"
+  }
+ },
+ "Shop of Distaste": {
+  "shop": "Shop of Distaste",
+  "owners": [
+   "Fadli"
+  ],
+  "cards": [],
+  "locations": {
+   "Emir's Arena": null
+  }
+ },
+ "Sian's Ranged Weaponry": {
+  "shop": "Sian's Ranged Weaponry",
+  "owners": [
+   "Sian"
+  ],
+  "cards": [],
+  "locations": {
+   "Prifddinas": "prifddinas"
+  }
+ },
+ "Sigmund the Merchant (shop)": {
+  "shop": "Sigmund the Merchant (shop)",
+  "owners": [
+   "Sigmund the Merchant"
+  ],
+  "cards": [],
+  "locations": {
+   "Rellekka": null
+  }
+ },
+ "Silver Cog Silver Stall": {
+  "shop": "Silver Cog Silver Stall",
+  "owners": [
+   "Gulldamar"
+  ],
+  "cards": [],
+  "locations": {
+   "Keldagrim": null
+  }
+ },
+ "Sir Renitee": {
+  "shop": null,
+  "owners": [
+   "Sir Renitee"
+  ],
+  "cards": [
+   "Sir Renitee"
+  ],
+  "locations": {}
+ },
+ "Skulgrimen's Battle Gear": {
+  "shop": "Skulgrimen's Battle Gear",
+  "owners": [
+   "Skulgrimen"
+  ],
+  "cards": [],
+  "locations": {
+   "Rellekka": null
+  }
+ },
+ "Slayer Equipment (shop)": {
+  "shop": "Slayer Equipment (shop)",
+  "owners": [
+   "Konar quo Maten",
+   "Mortimer",
+   "Krystilia",
+   "Turael",
+   "Aya",
+   "Spria",
+   "Mazchna",
+   "Achtryn",
+   "Duradel",
+   "Kuradal",
+   "Vannaka",
+   "Chaeldar",
+   "Nieve",
+   "Steve"
+  ],
+  "cards": [
+   "Aya",
+   "Chaeldar",
+   "Duradel",
+   "Konar quo Maten",
+   "Krystilia",
+   "Kuradal",
+   "Mazchna",
+   "Mortimer",
+   "Nieve",
+   "Spria",
+   "Steve",
+   "Turael",
+   "Vannaka"
+  ],
+  "locations": {
+   "Mount Karuulm": "kourend",
+   "Wyrmscraig Cavern": "sailing",
+   "Edgeville": null,
+   "Burthorpe": null,
+   "Draynor Village": null,
+   "Canifis": "morytania",
+   "Shilo Village (location)": null,
+   "Edgeville Dungeon": null,
+   "Zanaris": "zanaris",
+   "Tree Gnome Stronghold": null
+  }
+ },
+ "Slayer Rewards": {
+  "shop": "Slayer Rewards",
+  "owners": [
+   "Konar quo Maten",
+   "Mortimer",
+   "Krystilia",
+   "Turael",
+   "Aya",
+   "Spria",
+   "Mazchna",
+   "Achtryn",
+   "Duradel",
+   "Kuradal",
+   "Vannaka",
+   "Chaeldar",
+   "Nieve",
+   "Steve"
+  ],
+  "cards": [
+   "Aya",
+   "Chaeldar",
+   "Duradel",
+   "Konar quo Maten",
+   "Krystilia",
+   "Kuradal",
+   "Mazchna",
+   "Mortimer",
+   "Nieve",
+   "Spria",
+   "Steve",
+   "Turael",
+   "Vannaka"
+  ],
+  "locations": {
+   "Mount Karuulm": "kourend",
+   "Wyrmscraig Cavern": "sailing",
+   "Edgeville": null,
+   "Burthorpe": null,
+   "Draynor Village": null,
+   "Canifis": "morytania",
+   "Shilo Village (location)": null,
+   "Edgeville Dungeon": null,
+   "Zanaris": "zanaris",
+   "Tree Gnome Stronghold": null
+  }
+ },
+ "Smithing Smith's Shop.": {
+  "shop": "Smithing Smith's Shop.",
+  "owners": [
+   "Smith"
+  ],
+  "cards": [],
+  "locations": {
+   "Mos Le'Harmless": "mos_le_harmless"
+  }
+ },
+ "Solihib's Food Stall": {
+  "shop": "Solihib's Food Stall",
+  "owners": [
+   "Solihib"
+  ],
+  "cards": [],
+  "locations": {
+   "Ape Atoll": "ape_atoll"
+  }
+ },
+ "Soul Wars Reward Shop": {
+  "shop": "Soul Wars Reward Shop",
+  "owners": [
+   "Nomad"
+  ],
+  "cards": [],
+  "locations": {
+   "Isle of Souls": null
+  }
+ },
+ "Spike's Spikes": {
+  "shop": "Spike's Spikes",
+  "owners": [
+   "Spike"
+  ],
+  "cards": [],
+  "locations": {
+   "Outer Fortis": "varlamore"
+  }
+ },
+ "Stick Your Ore Inn": {
+  "shop": "Stick Your Ore Inn",
+  "owners": [
+   "Bartender"
+  ],
+  "cards": [],
+  "locations": {
+   "Mistrock": "varlamore"
+  }
+ },
+ "Stonecutter Supplies": {
+  "shop": "Stonecutter Supplies",
+  "owners": [
+   "Metla"
+  ],
+  "cards": [],
+  "locations": {
+   "Stonecutter Outpost": "varlamore"
+  }
+ },
+ "Sulisal's Superb Fishing Store": {
+  "shop": "Sulisal's Superb Fishing Store",
+  "owners": [
+   "Sulisal"
+  ],
+  "cards": [],
+  "locations": {
+   "Kastori": "varlamore"
+  }
+ },
+ "Sunlight's Sanctum": {
+  "shop": "Sunlight's Sanctum",
+  "owners": [
+   "Bartender"
+  ],
+  "cards": [],
+  "locations": {
+   "Aldarin": "varlamore"
+  }
+ },
+ "Sunset Coast General Store": {
+  "shop": "Sunset Coast General Store",
+  "owners": [
+   "Shopkeeper"
+  ],
+  "cards": [],
+  "locations": {
+   "Sunset Coast": "varlamore"
+  }
+ },
+ "Supplies's Supplies": {
+  "shop": "Supplies's Supplies",
+  "owners": [
+   "Mr Supplies Jnr"
+  ],
+  "cards": [],
+  "locations": {
+   "Wyrmscraig": "sailing"
+  }
+ },
+ "Tal Teklan General Store": {
+  "shop": "Tal Teklan General Store",
+  "owners": [
+   "Shopkeeper"
+  ],
+  "cards": [],
+  "locations": {
+   "Tal Teklan": "varlamore"
+  }
+ },
+ "Tal Teklan Rune Shop": {
+  "shop": "Tal Teklan Rune Shop",
+  "owners": [
+   "Teicuh"
+  ],
+  "cards": [],
+  "locations": {
+   "Tal Teklan": "varlamore"
+  }
+ },
+ "Tamayu's Spear Stall": {
+  "shop": "Tamayu's Spear Stall",
+  "owners": [
+   "Tamayu"
+  ],
+  "cards": [],
+  "locations": {
+   "Tai Bwo Wannai": null
+  }
+ },
+ "Tamayu's Spear Stall(Karamja gloves)": {
+  "shop": "Tamayu's Spear Stall",
+  "owners": [
+   "Tamayu"
+  ],
+  "cards": [],
+  "locations": {
+   "Tai Bwo Wannai": null
+  }
+ },
+ "Temple Supplies": {
+  "shop": "Temple Supplies",
+  "owners": [
+   "Apprentice Felix"
+  ],
+  "cards": [],
+  "locations": {
+   "Temple of the Eye (location)": null
+  }
+ },
+ "The Asp & Snake Bar.": {
+  "shop": "The Asp & Snake Bar.",
+  "owners": [
+   "Ali the Barman"
+  ],
+  "cards": [],
+  "locations": {
+   "Pollnivneach": "desert"
+  }
+ },
+ "The Big Heist Lodge": {
+  "shop": "The Big Heist Lodge",
+  "owners": [
+   "Bartender"
+  ],
+  "cards": [],
+  "locations": {
+   "Bandit Camp (Kharidian Desert)": "desert",
+   "Kharidian Desert": "desert"
+  }
+ },
+ "The Burrow": {
+  "shop": "The Burrow",
+  "owners": [
+   "Huntmaster Gilman"
+  ],
+  "cards": [],
+  "locations": {
+   "Hunter Guild": "varlamore"
+  }
+ },
+ "The Cloak and Stagger": {
+  "shop": "The Cloak and Stagger",
+  "owners": [
+   "Oswald"
+  ],
+  "cards": [],
+  "locations": {
+   "Shayzien": "kourend"
+  }
+ },
+ "The Crypt": {
+  "shop": "The Crypt",
+  "owners": [
+   "Despoina Callidra"
+  ],
+  "cards": [],
+  "locations": {
+   "Darkmeyer": "morytania"
+  }
+ },
+ "The Deeper Lode": {
+  "shop": "The Deeper Lode",
+  "owners": [
+   "Fuggy"
+  ],
+  "cards": [],
+  "locations": {
+   "Lovakengj": "kourend"
+  }
+ },
+ "The Esoterican Arms": {
+  "shop": "The Esoterican Arms",
+  "owners": [
+   "Runa"
+  ],
+  "cards": [],
+  "locations": {
+   "Miscellania Expansion": null
+  }
+ },
+ "The Flaming Arrow": {
+  "shop": "The Flaming Arrow",
+  "owners": [
+   "Bartender"
+  ],
+  "cards": [],
+  "locations": {
+   "Civitas illa Fortis": "varlamore"
+  }
+ },
+ "The Golden Field": {
+  "shop": "The Golden Field",
+  "owners": [
+   "Richard",
+   "Golova"
+  ],
+  "cards": [],
+  "locations": {
+   "Hosidius": "kourend"
+  }
+ },
+ "The King's Inn": {
+  "shop": "The King's Inn",
+  "owners": [
+   "King"
+  ],
+  "cards": [],
+  "locations": {
+   "Tal Teklan": "varlamore"
+  }
+ },
+ "The Legless Faun": {
+  "shop": "The Legless Faun",
+  "owners": [
+   "Bast"
+  ],
+  "cards": [],
+  "locations": {
+   "Kingstown": "kourend"
+  }
+ },
+ "The Lighthouse Store": {
+  "shop": "The Lighthouse Store",
+  "owners": [
+   "Jossik"
+  ],
+  "cards": [],
+  "locations": {
+   "Lighthouse": null
+  }
+ },
+ "The Lost Pickaxe": {
+  "shop": "The Lost Pickaxe",
+  "owners": [
+   "Bartender"
+  ],
+  "cards": [],
+  "locations": {
+   "Cam Torum": "varlamore"
+  }
+ },
+ "The Old Nite": {
+  "shop": "The Old Nite",
+  "owners": [
+   "Camarst"
+  ],
+  "cards": [],
+  "locations": {
+   "Ferox Enclave": null
+  }
+ },
+ "The Other Inn.": {
+  "shop": "The Other Inn.",
+  "owners": [
+   "Mama"
+  ],
+  "cards": [],
+  "locations": {
+   "Mos Le'Harmless": "mos_le_harmless"
+  }
+ },
+ "The Pandemonium (pub)": {
+  "shop": "The Pandemonium (pub)",
+  "owners": [
+   "'Squawking' Steve Beanie"
+  ],
+  "cards": [],
+  "locations": {
+   "The Pandemonium": null
+  }
+ },
+ "The Rolling Tide": {
+  "shop": "The Rolling Tide",
+  "owners": [
+   "Bartender"
+  ],
+  "cards": [],
+  "locations": {
+   "Port Roberts": null
+  }
+ },
+ "The Runic Emporium": {
+  "shop": "The Runic Emporium",
+  "owners": [
+   "Nahta"
+  ],
+  "cards": [],
+  "locations": {
+   "Cam Torum": "varlamore"
+  }
+ },
+ "The Sheared Ram": {
+  "shop": "The Sheared Ram",
+  "owners": [
+   "Bartender"
+  ],
+  "cards": [],
+  "locations": {
+   "Lumbridge": null
+  }
+ },
+ "The Shrimp and Parrot": {
+  "shop": "The Shrimp and Parrot",
+  "owners": [
+   "Alfonse the waiter",
+   "Charlie the cook"
+  ],
+  "cards": [],
+  "locations": {
+   "Brimhaven": null
+  }
+ },
+ "The Spice Is Right.": {
+  "shop": "The Spice Is Right.",
+  "owners": [
+   "Embalmer"
+  ],
+  "cards": [],
+  "locations": {
+   "Sophanem": "sophanem"
+  }
+ },
+ "The Toad and Chicken": {
+  "shop": "The Toad and Chicken",
+  "owners": [
+   "Sam",
+   "Rachael",
+   "Tostig"
+  ],
+  "cards": [],
+  "locations": {
+   "Burthorpe Games Room": null,
+   "Burthorpe": null
+  }
+ },
+ "The Windbreaker": {
+  "shop": "The Windbreaker",
+  "owners": [
+   "Bartender"
+  ],
+  "cards": [],
+  "locations": {
+   "Quetzacalli Gorge": "varlamore"
+  }
+ },
+ "Thessalia": {
+  "shop": null,
+  "owners": [
+   "Thessalia"
+  ],
+  "cards": [
+   "Thessalia"
+  ],
+  "locations": {}
+ },
+ "Thessalia's Fine Clothes.": {
+  "shop": "Thessalia's Fine Clothes.",
+  "owners": [
+   "Thessalia"
+  ],
+  "cards": [
+   "Thessalia"
+  ],
+  "locations": {
+   "Varrock": null
+  }
+ },
+ "Thirus Urkar's Fine Dynamite Store": {
+  "shop": "Thirus Urkar's Fine Dynamite Store",
+  "owners": [
+   "Thirus"
+  ],
+  "cards": [],
+  "locations": {
+   "Lovakengj": "kourend"
+  }
+ },
+ "Thurid's Brain Buckets": {
+  "shop": "Thurid's Brain Buckets",
+  "owners": [
+   "Thurid"
+  ],
+  "cards": [],
+  "locations": {
+   "Sunset Coast": "varlamore"
+  }
+ },
+ "Thyria's Wares": {
+  "shop": "Thyria's Wares",
+  "owners": [
+   "Thyria"
+  ],
+  "cards": [],
+  "locations": {
+   "Arceuus": "kourend"
+  }
+ },
+ "Tiadeche's Karambwan Stall": {
+  "shop": "Tiadeche's Karambwan Stall",
+  "owners": [
+   "Tiadeche"
+  ],
+  "cards": [],
+  "locations": {
+   "Tai Bwo Wannai": null
+  }
+ },
+ "Tizoro's Pickaxes": {
+  "shop": "Tizoro's Pickaxes",
+  "owners": [
+   "Tizoro"
+  ],
+  "cards": [],
+  "locations": {
+   "Cam Torum": "varlamore"
+  }
+ },
+ "Toci's Gem Store": {
+  "shop": "Toci's Gem Store",
+  "owners": [
+   "Toci"
+  ],
+  "cards": [],
+  "locations": {
+   "Aldarin": "varlamore"
+  }
+ },
+ "Toothy's Pickaxes": {
+  "shop": "Toothy's Pickaxes",
+  "owners": [
+   "Toothy"
+  ],
+  "cards": [],
+  "locations": {
+   "Lovakengj": "kourend"
+  }
+ },
+ "Trader Stan's Trading Post": {
+  "shop": "Trader Stan's Trading Post",
+  "owners": [
+   "Trader Crewmember",
+   "Trader Stan"
+  ],
+  "cards": [],
+  "locations": {
+   "Port Piscarilius": "kourend",
+   "The Pandemonium": null,
+   "Corsair Cove": null,
+   "Deepfin Point": null,
+   "Mos Le'Harmless": "mos_le_harmless",
+   "Red Rock": null,
+   "Port Khazard": null,
+   "Musa Point": null,
+   "Catherby": null,
+   "Aldarin": "varlamore",
+   "Port Tyras": "tirannwn",
+   "Brimhaven": null,
+   "Port Sarim": null,
+   "Port Phasmatys": "morytania",
+   "Port Roberts": null,
+   "Civitas illa Fortis": "varlamore",
+   "Prifddinas": "prifddinas",
+   "The Summer Shore": null,
+   "Sunset Coast": "varlamore",
+   "Land's End": "kourend",
+   "Shipyard (Karamja)": null
+  }
+ },
+ "Trader Sven's Black-market Goods.": {
+  "shop": "Trader Sven's Black-market Goods.",
+  "owners": [
+   "Trader Sven"
+  ],
+  "cards": [],
+  "locations": {
+   "Meiyerditch": "morytania"
+  }
+ },
+ "Tutab's Magical Market": {
+  "shop": "Tutab's Magical Market",
+  "owners": [
+   "Tutab"
+  ],
+  "cards": [],
+  "locations": {
+   "Ape Atoll": "ape_atoll"
+  }
+ },
+ "Two Feet Charley's Fish Shop.": {
+  "shop": "Two Feet Charley's Fish Shop.",
+  "owners": [
+   "Charley"
+  ],
+  "cards": [],
+  "locations": {
+   "Mos Le'Harmless": "mos_le_harmless"
+  }
+ },
+ "Tynan's Fishing Supplies": {
+  "shop": "Tynan's Fishing Supplies",
+  "owners": [
+   "Tynan"
+  ],
+  "cards": [],
+  "locations": {
+   "Port Piscarilius": "kourend"
+  }
+ },
+ "TzHaar-Hur-Lek's Ore and Gem Store": {
+  "shop": "TzHaar-Hur-Lek's Ore and Gem Store",
+  "owners": [
+   "TzHaar-Hur-Lek"
+  ],
+  "cards": [],
+  "locations": {
+   "Mor Ul Rek": null
+  }
+ },
+ "TzHaar-Hur-Lek's Ore and Gem Store(Karamja gloves)": {
+  "shop": "TzHaar-Hur-Lek's Ore and Gem Store",
+  "owners": [
+   "TzHaar-Hur-Lek"
+  ],
+  "cards": [],
+  "locations": {
+   "Mor Ul Rek": null
+  }
+ },
+ "TzHaar-Hur-Rin's Ore and Gem Store": {
+  "shop": "TzHaar-Hur-Rin's Ore and Gem Store",
+  "owners": [
+   "TzHaar-Hur-Rin"
+  ],
+  "cards": [],
+  "locations": {
+   "Mor Ul Rek": null
+  }
+ },
+ "TzHaar-Hur-Rin's Ore and Gem Store(Karamja gloves)": {
+  "shop": "TzHaar-Hur-Rin's Ore and Gem Store",
+  "owners": [
+   "TzHaar-Hur-Rin"
+  ],
+  "cards": [],
+  "locations": {
+   "Mor Ul Rek": null
+  }
+ },
+ "TzHaar-Hur-Tel's Equipment Store": {
+  "shop": "TzHaar-Hur-Tel's Equipment Store",
+  "owners": [
+   "TzHaar-Hur-Tel"
+  ],
+  "cards": [],
+  "locations": {
+   "Mor Ul Rek": null
+  }
+ },
+ "TzHaar-Hur-Tel's Equipment Store(Karamja gloves)": {
+  "shop": "TzHaar-Hur-Tel's Equipment Store",
+  "owners": [
+   "TzHaar-Hur-Tel"
+  ],
+  "cards": [],
+  "locations": {
+   "Mor Ul Rek": null
+  }
+ },
+ "TzHaar-Hur-Zal's Equipment Store": {
+  "shop": "TzHaar-Hur-Zal's Equipment Store",
+  "owners": [
+   "TzHaar-Hur-Zal"
+  ],
+  "cards": [],
+  "locations": {
+   "Mor Ul Rek": null
+  }
+ },
+ "TzHaar-Hur-Zal's Equipment Store(Karamja gloves)": {
+  "shop": "TzHaar-Hur-Zal's Equipment Store",
+  "owners": [
+   "TzHaar-Hur-Zal"
+  ],
+  "cards": [],
+  "locations": {
+   "Mor Ul Rek": null
+  }
+ },
+ "TzHaar-Mej-Roh's Rune Store": {
+  "shop": "TzHaar-Mej-Roh's Rune Store",
+  "owners": [
+   "TzHaar-Mej-Roh"
+  ],
+  "cards": [],
+  "locations": {
+   "Mor Ul Rek": null
+  }
+ },
+ "TzHaar-Mej-Roh's Rune Store(Karamja gloves)": {
+  "shop": "TzHaar-Mej-Roh's Rune Store",
+  "owners": [
+   "TzHaar-Mej-Roh"
+  ],
+  "cards": [],
+  "locations": {
+   "Mor Ul Rek": null
+  }
+ },
+ "Valaine's Shop of Champions.": {
+  "shop": "Valaine's Shop of Champions.",
+  "owners": [
+   "Valaine"
+  ],
+  "cards": [],
+  "locations": {
+   "Champions' Guild": null
+  }
+ },
+ "Vale Research Exchange": {
+  "shop": "Vale Research Exchange",
+  "owners": [
+   "Ranulph"
+  ],
+  "cards": [],
+  "locations": {
+   "Auburnvale": "varlamore"
+  }
+ },
+ "Vanessa's Farming shop.": {
+  "shop": "Vanessa's Farming shop.",
+  "owners": [
+   "Vanessa"
+  ],
+  "cards": [],
+  "locations": {
+   "Catherby": null
+  }
+ },
+ "Vannah's Farming Stall": {
+  "shop": "Vannah's Farming Stall",
+  "owners": [
+   "Vannah"
+  ],
+  "cards": [],
+  "locations": {
+   "Hosidius": "kourend"
+  }
+ },
+ "Varrock General Store": {
+  "shop": "Varrock General Store",
+  "owners": [
+   "Shop keeper"
+  ],
+  "cards": [],
+  "locations": {
+   "Varrock": null
+  }
+ },
+ "Varrock Swordshop": {
+  "shop": "Varrock Swordshop",
+  "owners": [
+   "Shop keeper"
+  ],
+  "cards": [],
+  "locations": {
+   "Varrock": null
+  }
+ },
+ "Vermundi's Clothes Stall": {
+  "shop": "Vermundi's Clothes Stall",
+  "owners": [
+   "Vermundi"
+  ],
+  "cards": [],
+  "locations": {
+   "Keldagrim Palace": null
+  }
+ },
+ "Vertida Sefalatis": {
+  "shop": null,
+  "owners": [
+   "Vertida Sefalatis"
+  ],
+  "cards": [
+   "Vertida Sefalatis"
+  ],
+  "locations": {}
+ },
+ "Vigr's Warhammers": {
+  "shop": "Vigr's Warhammers",
+  "owners": [
+   "Vigr"
+  ],
+  "cards": [],
+  "locations": {
+   "Keldagrim": null
+  }
+ },
+ "Void Knight Archery Store": {
+  "shop": "Void Knight Archery Store",
+  "owners": [
+   "Squire"
+  ],
+  "cards": [
+   "Squire"
+  ],
+  "locations": {
+   "Void Knights' Outpost": null
+  }
+ },
+ "Void Knight General Store": {
+  "shop": "Void Knight General Store",
+  "owners": [
+   "Squire"
+  ],
+  "cards": [
+   "Squire"
+  ],
+  "locations": {
+   "Void Knights' Outpost": null
+  }
+ },
+ "Void Knight Magic Store": {
+  "shop": "Void Knight Magic Store",
+  "owners": [
+   "Squire"
+  ],
+  "cards": [
+   "Squire"
+  ],
+  "locations": {
+   "Void Knights' Outpost": null
+  }
+ },
+ "Void Knights' Reward Options": {
+  "shop": "Void Knights' Reward Options",
+  "owners": [
+   "Void Knight"
+  ],
+  "cards": [],
+  "locations": {
+   "Void Knights' Outpost": null
+  }
+ },
+ "Warrens Fish Monger": {
+  "shop": "Warrens Fish Monger",
+  "owners": [
+   "Fish monger"
+  ],
+  "cards": [],
+  "locations": {
+   "The Warrens": "kourend"
+  }
+ },
+ "Warrens General Store": {
+  "shop": "Warrens General Store",
+  "owners": [
+   "Shop keeper"
+  ],
+  "cards": [],
+  "locations": {
+   "The Warrens": "kourend"
+  }
+ },
+ "Warrior Guild Armoury": {
+  "shop": "Warrior Guild Armoury",
+  "owners": [
+   "Anton"
+  ],
+  "cards": [],
+  "locations": {
+   "Warriors' Guild": null
+  }
+ },
+ "Warrior Guild Food Shop": {
+  "shop": "Warrior Guild Food Shop",
+  "owners": [
+   "Lidio"
+  ],
+  "cards": [],
+  "locations": {
+   "Warriors' Guild": null
+  }
+ },
+ "Warrior Guild Potion Shop": {
+  "shop": "Warrior Guild Potion Shop",
+  "owners": [
+   "Lilly"
+  ],
+  "cards": [],
+  "locations": {
+   "Warriors' Guild": null
+  }
+ },
+ "Wayne's Chains! - Chainmail specialist.": {
+  "shop": "Wayne's Chains! - Chainmail specialist.",
+  "owners": [
+   "Wayne"
+  ],
+  "cards": [],
+  "locations": {
+   "Falador": null
+  }
+ },
+ "Weapons galore": {
+  "shop": "Weapons galore",
+  "owners": [
+   "Skuli Myrka"
+  ],
+  "cards": [],
+  "locations": {
+   "Jatizso": null
+  }
+ },
+ "West Ardougne General Store": {
+  "shop": "West Ardougne General Store",
+  "owners": [
+   "Chadwell"
+  ],
+  "cards": [],
+  "locations": {
+   "West Ardougne": null
+  }
+ },
+ "Where Wyrmscraig's Wear Wares Were": {
+  "shop": "Where Wyrmscraig's Wear Wares Were",
+  "owners": [
+   "Declan"
+  ],
+  "cards": [],
+  "locations": {
+   "Auchrie": null
+  }
+ },
+ "White Knight Armoury(Adept)": {
+  "shop": "White Knight Armoury",
+  "owners": [
+   "Sir Vyvin"
+  ],
+  "cards": [
+   "Sir Vyvin"
+  ],
+  "locations": {
+   "Falador": null
+  }
+ },
+ "White Knight Armoury(Master)": {
+  "shop": "White Knight Armoury",
+  "owners": [
+   "Sir Vyvin"
+  ],
+  "cards": [
+   "Sir Vyvin"
+  ],
+  "locations": {
+   "Falador": null
+  }
+ },
+ "White Knight Armoury(Noble)": {
+  "shop": "White Knight Armoury",
+  "owners": [
+   "Sir Vyvin"
+  ],
+  "cards": [
+   "Sir Vyvin"
+  ],
+  "locations": {
+   "Falador": null
+  }
+ },
+ "White Knight Armoury(Novice)": {
+  "shop": "White Knight Armoury",
+  "owners": [
+   "Sir Vyvin"
+  ],
+  "cards": [
+   "Sir Vyvin"
+  ],
+  "locations": {
+   "Falador": null
+  }
+ },
+ "White Knight Armoury(Page)": {
+  "shop": "White Knight Armoury",
+  "owners": [
+   "Sir Vyvin"
+  ],
+  "cards": [
+   "Sir Vyvin"
+  ],
+  "locations": {
+   "Falador": null
+  }
+ },
+ "White Knight Armoury(Peon)": {
+  "shop": "White Knight Armoury",
+  "owners": [
+   "Sir Vyvin"
+  ],
+  "cards": [
+   "Sir Vyvin"
+  ],
+  "locations": {
+   "Falador": null
+  }
+ },
+ "Wine Shop.": {
+  "shop": "Wine Shop.",
+  "owners": [
+   "Fortunato"
+  ],
+  "cards": [
+   "Fortunato"
+  ],
+  "locations": {
+   "Draynor Village": null
+  }
+ },
+ "Wyson the gardener": {
+  "shop": null,
+  "owners": [
+   "Wyson the gardener"
+  ],
+  "cards": [
+   "Wyson the gardener"
+  ],
+  "locations": {}
+ },
+ "Yarnio's Baked Goods": {
+  "shop": "Yarnio's Baked Goods",
+  "owners": [
+   "Yarnio"
+  ],
+  "cards": [],
+  "locations": {
+   "Cam Torum": "varlamore"
+  }
+ },
+ "Yarsul's Prodigious Pickaxes": {
+  "shop": "Yarsul's Prodigious Pickaxes",
+  "owners": [
+   "Yarsul"
+  ],
+  "cards": [],
+  "locations": {
+   "Mining Guild": null
+  }
+ },
+ "Yrsa's Accoutrements": {
+  "shop": "Yrsa's Accoutrements",
+  "owners": [
+   "Yrsa"
+  ],
+  "cards": [
+   "Yrsa"
+  ],
+  "locations": {
+   "Rellekka": null
+  }
+ },
+ "Zaff's Superior Staffs!": {
+  "shop": "Zaff's Superior Staffs!",
+  "owners": [
+   "Zaff"
+  ],
+  "cards": [
+   "Zaff"
+  ],
+  "locations": {
+   "Varrock": null
+  }
+ },
+ "Zanaris General Store": {
+  "shop": "Zanaris General Store",
+  "owners": [
+   "Fairy shop keeper"
+  ],
+  "cards": [],
+  "locations": {
+   "Zanaris": "zanaris"
+  }
+ },
+ "Zeke's Superior Scimitars.": {
+  "shop": "Zeke's Superior Scimitars.",
+  "owners": [
+   "Zeke"
+  ],
+  "cards": [],
+  "locations": {
+   "Al Kharid": null
+  }
+ },
+ "Zenesha's Plate Mail Body Shop.": {
+  "shop": "Zenesha's Plate Mail Body Shop.",
+  "owners": [
+   "Zenesha"
+  ],
+  "cards": [],
+  "locations": {
+   "East Ardougne": null
+  }
+ },
+ "~ Uglug's stuffsies ~": {
+  "shop": "~ Uglug's stuffsies ~",
+  "owners": [
+   "Uglug Nar"
+  ],
+  "cards": [],
+  "locations": {
+   "Jiggig": null
+  }
+ }
+}

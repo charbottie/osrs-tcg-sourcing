@@ -58,11 +58,6 @@
     "Herblore",
     "F2P"
   ],
-  "Vial of water": [
-    "Herblore",
-    "Tool",
-    "F2P"
-  ],
   "Vial": [
     "Herblore",
     "Tool",
@@ -305,7 +300,7 @@
     "Fishing"
   ],
   "Manta ray": [
-    "Sailing"
+    "Cooking"
   ],
   "Raw sea turtle": [
     "Fishing"
@@ -323,7 +318,10 @@
     "Cooking",
     "Food"
   ],
-  "Casket": [],
+  "Casket": [
+    "Sailing",
+    "F2P"
+  ],
   "Oyster": [],
   "Oyster pearl": [
     "Fletching"
@@ -565,7 +563,8 @@
     "Currency",
     "Hunter",
     "Magic",
-    "Smithing"
+    "Smithing",
+    "F2P"
   ],
   "Paramaya ticket": [],
   "Ship ticket": [],
@@ -1234,35 +1233,42 @@
   "Iron chainbody": [
     "Equipment",
     "Smithing",
+    "Melee",
     "F2P"
   ],
   "Bronze chainbody": [
     "Equipment",
     "Smithing",
+    "Melee",
     "F2P"
   ],
   "Steel chainbody": [
     "Equipment",
     "Smithing",
+    "Melee",
     "F2P"
   ],
   "Black chainbody": [
     "Equipment",
+    "Melee",
     "F2P"
   ],
   "Mithril chainbody": [
     "Equipment",
     "Smithing",
+    "Melee",
     "F2P"
   ],
   "Adamant chainbody": [
     "Equipment",
     "Smithing",
+    "Melee",
     "F2P"
   ],
   "Rune chainbody": [
     "Equipment",
     "Smithing",
+    "Melee",
     "F2P"
   ],
   "Iron platebody": [
@@ -2247,73 +2253,12 @@
     "Equipment",
     "F2P"
   ],
-  "Ruby ring": [
-    "Crafting",
-    "Equipment",
-    "Magic",
-    "F2P"
-  ],
-  "Diamond ring": [
-    "Crafting",
-    "Equipment",
-    "Magic",
-    "F2P"
-  ],
   "Gold necklace": [
     "Crafting",
     "Equipment",
     "F2P"
   ],
-  "Sapphire necklace": [
-    "Construction",
-    "Crafting",
-    "Equipment",
-    "Magic",
-    "F2P"
-  ],
-  "Emerald necklace": [
-    "Crafting",
-    "Equipment",
-    "Magic",
-    "F2P"
-  ],
-  "Ruby necklace": [
-    "Crafting",
-    "Equipment",
-    "Magic",
-    "F2P"
-  ],
-  "Diamond necklace": [
-    "Crafting",
-    "Equipment",
-    "Magic",
-    "F2P"
-  ],
   "Gold amulet": [
-    "Crafting",
-    "Equipment",
-    "Magic",
-    "F2P"
-  ],
-  "Sapphire amulet": [
-    "Crafting",
-    "Equipment",
-    "Magic",
-    "F2P"
-  ],
-  "Emerald amulet": [
-    "Crafting",
-    "Equipment",
-    "Magic",
-    "F2P"
-  ],
-  "Ruby amulet": [
-    "Crafting",
-    "Equipment",
-    "Magic",
-    "F2P"
-  ],
-  "Diamond amulet": [
     "Crafting",
     "Equipment",
     "Magic",
@@ -2335,20 +2280,25 @@
   "Amulet of strength": [
     "Equipment",
     "Melee",
+    "Crafting",
     "F2P"
   ],
   "Amulet of magic": [
     "Equipment",
     "Magic",
+    "Crafting",
     "F2P"
   ],
   "Amulet of defence": [
     "Equipment",
+    "Crafting",
+    "Magic",
     "F2P"
   ],
   "Amulet of power": [
     "Equipment",
     "Ranged",
+    "Crafting",
     "F2P"
   ],
   "Needle": [
@@ -2751,13 +2701,6 @@
     "Cooking",
     "Food"
   ],
-  "Premade blurb' sp.": [],
-  "Premade choc s'dy": [],
-  "Premade dr' dragon": [],
-  "Premade fr' blast": [],
-  "Premade p' punch": [],
-  "Premade sgg": [],
-  "Premade wiz blz'd": [],
   "Pineapple punch": [],
   "Wizard blizzard": [],
   "Blurberry special": [],
@@ -2825,21 +2768,11 @@
     "Food",
     "Herblore"
   ],
-  "Equa toad's legs": [],
-  "Spicy worm": [],
   "King worm": [
     "Cooking",
     "Fishing",
     "Food",
     "Hunter"
-  ],
-  "Batta tin": [],
-  "Crunchy tray": [
-    "Cooking",
-    "Food"
-  ],
-  "Gnomebowl mould": [
-    "Tool"
   ],
   "Gnome spice": [
     "Cooking",
@@ -2847,7 +2780,8 @@
   ],
   "Gianne dough": [
     "Cooking",
-    "Food"
+    "Food",
+    "Tool"
   ],
   "Chocolate bomb": [
     "Cooking",
@@ -2881,18 +2815,6 @@
     "Cooking",
     "Food"
   ],
-  "Premade w'm batta": [],
-  "Premade t'd batta": [],
-  "Premade fr't batta": [],
-  "Premade veg batta": [],
-  "Premade choc bomb": [],
-  "Premade ttl": [],
-  "Premade worm hole": [],
-  "Premade veg ball": [],
-  "Premade w'm crun'": [],
-  "Premade ch' crunch": [],
-  "Premade s'y crunch": [],
-  "Premade t'd crunch": [],
   "Worm batta": [
     "Cooking",
     "Food"
@@ -3155,7 +3077,8 @@
   ],
   "Ring of recoil": [
     "Equipment",
-    "Magic"
+    "Magic",
+    "F2P"
   ],
   "Ring of dueling": [
     "Construction",
@@ -3164,10 +3087,14 @@
   ],
   "Ring of forging": [
     "Equipment",
+    "Crafting",
+    "Magic",
     "F2P"
   ],
   "Ring of life": [
-    "Equipment"
+    "Equipment",
+    "Crafting",
+    "Magic"
   ],
   "Sextant": [],
   "Watch": [],
@@ -3688,7 +3615,8 @@
   ],
   "Dragon chainbody": [
     "Equipment",
-    "Smithing"
+    "Smithing",
+    "Melee"
   ],
   "Raw karambwan": [
     "Fishing"
@@ -3702,9 +3630,6 @@
   ],
   "Karambwan vessel": [
     "Tool"
-  ],
-  "Sliced banana": [
-    "F2P"
   ],
   "Karamjan rum": [
     "F2P"
@@ -4311,8 +4236,7 @@
     "Melee"
   ],
   "Purple sweets": [
-    "Clue",
-    "F2P"
+    "Clue"
   ],
   "Black spear": [
     "Melee",
@@ -4728,7 +4652,8 @@
     "Tool"
   ],
   "Rake": [
-    "Tool"
+    "Tool",
+    "Sailing"
   ],
   "Seed dibber": [
     "Farming"
@@ -4741,10 +4666,7 @@
     "Farming"
   ],
   "Basket": [],
-  "Apples": [],
   "Oranges": [],
-  "Strawberries": [],
-  "Bananas": [],
   "Empty sack": [],
   "Potatoes": [],
   "Onions": [],
@@ -5160,10 +5082,6 @@
   "Mystery box": [
     "F2P"
   ],
-  "Raw fishlike thing": [
-    "Fishing",
-    "F2P"
-  ],
   "Broodoo shield": [
     "Equipment",
     "Magic"
@@ -5171,11 +5089,9 @@
   "Thatch spar light": [],
   "Thatch spar med": [],
   "Thatch spar dense": [],
-  "Snake hide": [
-    "Magic"
-  ],
   "Snakeskin": [
-    "Crafting"
+    "Crafting",
+    "Magic"
   ],
   "Spider carcass": [],
   "Spider on stick": [
@@ -5391,7 +5307,8 @@
     "Weapon"
   ],
   "White chainbody": [
-    "Equipment"
+    "Equipment",
+    "Melee"
   ],
   "White platebody": [
     "Equipment",
@@ -5673,8 +5590,6 @@
     "Cooking",
     "Food"
   ],
-  "Burnt onion": [],
-  "Burnt mushroom": [],
   "Stripy pirate shirt": [
     "Equipment"
   ],
@@ -6152,10 +6067,6 @@
     "Cooking",
     "Food"
   ],
-  "Crawling hand": [
-    "Construction",
-    "Slayer"
-  ],
   "Cockatrice head": [
     "Construction",
     "Slayer"
@@ -6480,7 +6391,8 @@
     "Ammo",
     "Construction",
     "Fletching",
-    "Ranged"
+    "Ranged",
+    "F2P"
   ],
   "Iron bolts": [
     "Ammo",
@@ -6638,10 +6550,6 @@
     "Equipment"
   ],
   "Mint cake": [],
-  "Half made batta": [
-    "Cooking",
-    "Food"
-  ],
   "Half made bowl": [
     "Cooking"
   ],
@@ -6752,7 +6660,8 @@
   ],
   "Black warlock": [],
   "Snowy knight": [
-    "Herblore"
+    "Herblore",
+    "Sailing"
   ],
   "Sapphire glacialis": [],
   "Ruby harvest": [],
@@ -7652,22 +7561,6 @@
   "Gold bracelet": [
     "Equipment"
   ],
-  "Sapphire bracelet": [
-    "Equipment",
-    "Magic"
-  ],
-  "Emerald bracelet": [
-    "Equipment",
-    "Magic"
-  ],
-  "Ruby bracelet": [
-    "Equipment",
-    "Magic"
-  ],
-  "Diamond bracelet": [
-    "Equipment",
-    "Magic"
-  ],
   "Berserker necklace": [
     "Equipment",
     "Melee"
@@ -7688,7 +7581,9 @@
   "Old symbol": [],
   "Old chipped vase": [],
   "Digsite pendant": [
-    "Equipment"
+    "Equipment",
+    "Crafting",
+    "Magic"
   ],
   "Dwarven helmet": [
     "Equipment",
@@ -7833,7 +7728,8 @@
   "Anti-dragon shield": [
     "Construction",
     "Equipment",
-    "Smithing"
+    "Smithing",
+    "F2P"
   ],
   "Magic secateurs": [
     "Construction",
@@ -9165,7 +9061,9 @@
   "Vet'ion jr.": [
     "Pet"
   ],
-  "Scorpia's offspring": [],
+  "Scorpia's offspring": [
+    "Pet"
+  ],
   "Platinum token": [
     "Construction",
     "Currency",
@@ -9891,6 +9789,7 @@
   "Gilded chainbody": [
     "Clue",
     "Equipment",
+    "Melee",
     "F2P"
   ],
   "Gilded sq shield": [
@@ -10227,13 +10126,6 @@
     "F2P"
   ],
   "Kindling": [],
-  "Empty gourd vial": [
-    "Tool"
-  ],
-  "Water-filled gourd vial": [
-    "Herblore",
-    "Tool"
-  ],
   "Dragon thrownaxe": [
     "Ranged",
     "Weapon"
@@ -10345,49 +10237,6 @@
   ],
   "Torn prayer scroll": [],
   "Arcane prayer scroll": [],
-  "Topaz ring": [
-    "Equipment",
-    "Magic"
-  ],
-  "Opal necklace": [
-    "Equipment",
-    "Magic"
-  ],
-  "Jade necklace": [
-    "Equipment",
-    "Magic"
-  ],
-  "Topaz necklace": [
-    "Equipment",
-    "Magic"
-  ],
-  "Opal amulet": [
-    "Crafting",
-    "Equipment",
-    "Magic"
-  ],
-  "Jade amulet": [
-    "Crafting",
-    "Equipment",
-    "Magic"
-  ],
-  "Topaz amulet": [
-    "Crafting",
-    "Equipment",
-    "Magic"
-  ],
-  "Opal bracelet": [
-    "Equipment",
-    "Magic"
-  ],
-  "Jade bracelet": [
-    "Equipment",
-    "Magic"
-  ],
-  "Topaz bracelet": [
-    "Equipment",
-    "Magic"
-  ],
   "Ring of pursuit": [
     "Equipment",
     "Magic"
@@ -10397,13 +10246,19 @@
     "Magic"
   ],
   "Amulet of bounty": [
-    "Equipment"
+    "Equipment",
+    "Crafting",
+    "Magic"
   ],
   "Amulet of chemistry": [
-    "Equipment"
+    "Equipment",
+    "Crafting",
+    "Magic"
   ],
   "Burning amulet": [
-    "Equipment"
+    "Equipment",
+    "Crafting",
+    "Magic"
   ],
   "Slayer's enchantment": [],
   "Slayer ring (eternal)": [
@@ -10507,9 +10362,6 @@
     "Herblore",
     "Farming"
   ],
-  "Hoop snake": [
-    "F2P"
-  ],
   "Sulliuscep cap": [
     "Cooking",
     "Food"
@@ -10549,15 +10401,8 @@
     "Food"
   ],
   "Bowl of fish": [],
-  "Diving helmet": [
-    "Equipment",
-    "Sailing",
-    "F2P"
-  ],
   "Diving apparatus": [
-    "Equipment",
-    "Sailing",
-    "F2P"
+    "Sailing"
   ],
   "Brittle key": [],
   "Granite dust": [
@@ -10963,9 +10808,6 @@
   "Dragon knife": [
     "Ranged",
     "Weapon"
-  ],
-  "Fish chunks": [
-    "Sailing"
   ],
   "Molch pearl": [
     "Currency"
@@ -11558,9 +11400,6 @@
   ],
   "Gauntlet cape": [
     "Equipment"
-  ],
-  "Water-filled vial": [
-    "Tool"
   ],
   "Egniol potion": [
     "Herblore",
@@ -12208,9 +12047,6 @@
     "Equipment",
     "Magic"
   ],
-  "Pumpkin pie": [
-    "F2P"
-  ],
   "Condensed gold": [
     "Construction"
   ],
@@ -12348,13 +12184,11 @@
   ],
   "Ghostly hood": [
     "Equipment",
-    "Magic",
-    "F2P"
+    "Magic"
   ],
   "Ghostly robe": [
     "Equipment",
-    "Magic",
-    "F2P"
+    "Magic"
   ],
   "Menaphite remedy": [
     "Herblore"
@@ -12680,7 +12514,6 @@
     "Smithing",
     "Weapon"
   ],
-  "Immature tecu salamander": [],
   "Tecu salamander": [
     "Ranged",
     "Weapon"
@@ -14404,8 +14237,7 @@
     "Weapon"
   ],
   "Raw impaler meat": [
-    "Cooking",
-    "F2P"
+    "Cooking"
   ],
   "Letvek": [
     "Hunter"
@@ -14493,7 +14325,9 @@
   "Chaos dwarf": [
     "F2P"
   ],
-  "Dwarf": [],
+  "Dwarf": [
+    "F2P"
+  ],
   "Gunthor the brave": [
     "F2P"
   ],
@@ -14663,7 +14497,9 @@
   ],
   "Chaos druid": [],
   "Thug": [],
-  "Monk of Zamorak": [],
+  "Monk of Zamorak": [
+    "F2P"
+  ],
   "Tribesman": [],
   "Chaos druid warrior": [],
   "Sorebones": [],
@@ -15036,7 +14872,9 @@
   "Zulrah": [],
   "Snakeling": [],
   "Chaos Elemental": [],
-  "Dark wizard": [],
+  "Dark wizard": [
+    "F2P"
+  ],
   "Oomlie bird": [],
   "Penguin": [],
   "Terrorbird": [],
@@ -15257,7 +15095,9 @@
   "Tstanon Karlak": [],
   "Zakl'n Gritch": [],
   "Balfrug Kreeyath": [],
-  "Imp": [],
+  "Imp": [
+    "F2P"
+  ],
   "Werewolf": [],
   "Bloodveld": [
     "Slayer"
@@ -15964,7 +15804,8 @@
     "Quest"
   ],
   "King Roald": [
-    "Quest"
+    "Quest",
+    "F2P"
   ],
   "Khazard warlord": [
     "Quest"
@@ -16029,7 +15870,6 @@
   "Crazy archaeologist": [],
   "Chaos Fanatic": [],
   "Chaotic death spawn": [],
-  "Rock Golem": [],
   "River troll": [],
   "Shade": [
     "F2P"
@@ -16083,8 +15923,12 @@
   "Guildmaster Lars": [
     "Woodcutting"
   ],
-  "Greater demon": [],
-  "Lesser demon": [],
+  "Greater demon": [
+    "F2P"
+  ],
+  "Lesser demon": [
+    "F2P"
+  ],
   "Dust devil": [
     "Slayer"
   ],
@@ -16271,10 +16115,14 @@
     "Slayer"
   ],
   "Black dragon": [],
-  "Ankou": [],
+  "Ankou": [
+    "F2P"
+  ],
   "Green dragon": [],
   "Hellhound": [],
-  "Ice giant": [],
+  "Ice giant": [
+    "F2P"
+  ],
   "Revenant imp": [],
   "Dusk": [
     "Slayer"
@@ -16430,7 +16278,9 @@
   "Shaeded Beast": [],
   "Sarachnis": [],
   "Spawn of Sarachnis": [],
-  "Moss Giant": [],
+  "Moss Giant": [
+    "F2P"
+  ],
   "Crystal impling": [
     "Hunter"
   ],
@@ -16515,7 +16365,6 @@
     "Quest",
     "Slayer"
   ],
-  "Phosani's Nightmare": [],
   "The Nightmare": [],
   "Sleepwalker": [],
   "Infernal pyrelord": [
@@ -16745,7 +16594,9 @@
   ],
   "Tribeswoman": [],
   "Alomone": [],
-  "Grizzly bear": [],
+  "Grizzly bear": [
+    "F2P"
+  ],
   "Artio": [],
   "Calvar'ion": [],
   "Spindel": [],
@@ -16770,7 +16621,8 @@
   "Vardorvis": [],
   "Shadow Keeper": [],
   "Ghost": [
-    "Quest"
+    "Quest",
+    "F2P"
   ],
   "Kasonde": [
     "Quest"
@@ -16797,7 +16649,8 @@
   ],
   "Wighted Leech": [],
   "Ancient Guardian": [
-    "Quest"
+    "Quest",
+    "F2P"
   ],
   "Jhallan": [
     "Quest"
@@ -17283,5 +17136,160 @@
   ],
   "Golem (sunstone)": [
     "Sailing"
-  ]
+  ],
+  "White partyhat": [
+    "Equipment",
+    "Holiday",
+    "F2P"
+  ],
+  "Orange dye": [
+    "Crafting",
+    "F2P"
+  ],
+  "Dwellberries": [
+    "Cooking"
+  ],
+  "Cheese+tom batta": [
+    "Cooking"
+  ],
+  "Games necklace": [
+    "Construction",
+    "Crafting",
+    "Equipment",
+    "Magic",
+    "F2P"
+  ],
+  "Binding necklace": [
+    "Crafting",
+    "Equipment",
+    "Magic",
+    "F2P"
+  ],
+  "Egg whisk": [
+    "Melee",
+    "Weapon"
+  ],
+  "Ava's accumulator": [
+    "Equipment",
+    "Ranged"
+  ],
+  "Bracelet of clay": [
+    "Equipment",
+    "Magic"
+  ],
+  "Castle wars bracelet": [
+    "Equipment",
+    "Magic",
+    "F2P"
+  ],
+  "Inoculation bracelet": [
+    "Equipment",
+    "Magic"
+  ],
+  "Phoenix necklace": [
+    "Crafting",
+    "Equipment",
+    "Magic",
+    "F2P"
+  ],
+  "Abyssal bracelet": [
+    "Equipment",
+    "Magic"
+  ],
+  "Efaritay's aid": [
+    "Equipment",
+    "Magic"
+  ],
+  "Dodgy necklace": [
+    "Equipment",
+    "Magic"
+  ],
+  "Necklace of passage": [
+    "Equipment",
+    "Magic"
+  ],
+  "Necklace of faith": [
+    "Equipment",
+    "Magic"
+  ],
+  "Expeditious bracelet": [
+    "Equipment",
+    "Magic"
+  ],
+  "Flamtaer bracelet": [
+    "Equipment",
+    "Magic"
+  ],
+  "Bracelet of slaughter": [
+    "Equipment",
+    "Magic"
+  ],
+  "Fishbowl helmet": [
+    "Equipment",
+    "Sailing"
+  ],
+  "Elaborate lockbox": [
+    "F2P"
+  ],
+  "Medium fur pouch": [
+    "Crafting",
+    "Hunter"
+  ],
+  "Necklace of Fangs": [
+    "Equipment",
+    "Ranged"
+  ],
+  "Amulet of air": [
+    "Equipment",
+    "Magic"
+  ],
+  "Amulet of water": [
+    "Equipment",
+    "Magic"
+  ],
+  "Amulet of earth": [
+    "Equipment",
+    "Magic"
+  ],
+  "Amulet of fire": [
+    "Equipment",
+    "Magic"
+  ],
+  "Elemental amulet": [
+    "Equipment",
+    "Magic"
+  ],
+  "Imbued ancient cape": [
+    "Equipment",
+    "Magic"
+  ],
+  "Master Farmer": [],
+  "Scorpia's offspring (monster)": [],
+  "Rock Golem (monster)": [],
+  "Leo": [
+    "F2P"
+  ],
+  "Vanguards": [],
+  "Victoria Kebbit-Monkfish": [
+    "Sailing"
+  ],
+  "Marina Kebbit-Monkfish": [
+    "Sailing"
+  ],
+  "Selina Kebbit-Monkfish": [
+    "Sailing"
+  ],
+  "Gloria Kebbit-Monkfish": [
+    "Sailing"
+  ],
+  "Christina Kebbit-Monkfish": [
+    "Sailing"
+  ],
+  "Manta ray (sailing)": [
+    "Sailing"
+  ],
+  "Minotaur (f2p)": [
+    "F2P"
+  ],
+  "Pete Kayer": []
 }

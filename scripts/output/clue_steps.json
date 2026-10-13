@@ -328,7 +328,7 @@
           {
             "label": "Emerald amulet",
             "cards": [
-              "Emerald amulet"
+              "Amulet of defence"
             ],
             "mode": "any"
           },
@@ -352,7 +352,7 @@
             "label": "Emerald amulet",
             "type": "item",
             "cards": [
-              "Emerald amulet"
+              "Amulet of defence"
             ]
           },
           {
@@ -454,7 +454,7 @@
           {
             "label": "Sapphire necklace",
             "cards": [
-              "Sapphire necklace"
+              "Games necklace"
             ],
             "mode": "any"
           }
@@ -478,7 +478,7 @@
             "label": "Sapphire necklace",
             "type": "item",
             "cards": [
-              "Sapphire necklace"
+              "Games necklace"
             ]
           }
         ],
@@ -558,7 +558,7 @@
             "mode": "any"
           },
           {
-            "label": "Ring of dueling",
+            "label": "Emerald ring",
             "cards": [
               "Ring of dueling"
             ],
@@ -581,7 +581,7 @@
             ]
           },
           {
-            "label": "Ring of dueling",
+            "label": "Emerald ring",
             "type": "item",
             "cards": [
               "Ring of dueling"
@@ -701,7 +701,7 @@
         ],
         "slots": [
           {
-            "label": "Ring of dueling",
+            "label": "Emerald ring",
             "cards": [
               "Ring of dueling"
             ],
@@ -710,7 +710,7 @@
           {
             "label": "Sapphire amulet",
             "cards": [
-              "Sapphire amulet"
+              "Amulet of magic"
             ],
             "mode": "any"
           },
@@ -724,7 +724,7 @@
         ],
         "requirements": [
           {
-            "label": "Ring of dueling",
+            "label": "Emerald ring",
             "type": "item",
             "cards": [
               "Ring of dueling"
@@ -734,7 +734,7 @@
             "label": "Sapphire amulet",
             "type": "item",
             "cards": [
-              "Sapphire amulet"
+              "Amulet of magic"
             ]
           },
           {
@@ -763,7 +763,7 @@
             "mode": "any"
           },
           {
-            "label": "Ring of recoil",
+            "label": "Sapphire ring",
             "cards": [
               "Ring of recoil"
             ],
@@ -786,7 +786,7 @@
             ]
           },
           {
-            "label": "Ring of recoil",
+            "label": "Sapphire ring",
             "type": "item",
             "cards": [
               "Ring of recoil"
@@ -1426,7 +1426,7 @@
           {
             "label": "Ruby ring",
             "cards": [
-              "Ruby ring"
+              "Ring of forging"
             ],
             "mode": "any"
           }
@@ -1450,7 +1450,7 @@
             "label": "Ruby ring",
             "type": "item",
             "cards": [
-              "Ruby ring"
+              "Ring of forging"
             ]
           }
         ]
@@ -1742,7 +1742,7 @@
           {
             "label": "Emerald necklace",
             "cards": [
-              "Emerald necklace"
+              "Binding necklace"
             ],
             "mode": "any"
           },
@@ -1766,7 +1766,7 @@
             "label": "Emerald necklace",
             "type": "item",
             "cards": [
-              "Emerald necklace"
+              "Binding necklace"
             ]
           },
           {
@@ -2217,7 +2217,7 @@
           {
             "label": "Diamond ring",
             "cards": [
-              "Diamond ring"
+              "Ring of life"
             ],
             "mode": "any"
           }
@@ -2241,7 +2241,7 @@
             "label": "Diamond ring",
             "type": "item",
             "cards": [
-              "Diamond ring"
+              "Ring of life"
             ]
           }
         ]
@@ -2378,7 +2378,7 @@
           {
             "label": "Sapphire amulet",
             "cards": [
-              "Sapphire amulet"
+              "Amulet of magic"
             ],
             "mode": "any"
           },
@@ -2402,7 +2402,7 @@
             "label": "Sapphire amulet",
             "type": "item",
             "cards": [
-              "Sapphire amulet"
+              "Amulet of magic"
             ]
           },
           {
@@ -2534,7 +2534,7 @@
         ],
         "slots": [
           {
-            "label": "Snelm",
+            "label": "Bruise blue snelm",
             "cards": [
               "Snelm",
               "Pointed snelm"
@@ -2558,7 +2558,7 @@
         ],
         "requirements": [
           {
-            "label": "Snelm",
+            "label": "Bruise blue snelm",
             "type": "item",
             "cards": [
               "Snelm",
@@ -2726,7 +2726,7 @@
           {
             "label": "Ruby amulet",
             "cards": [
-              "Ruby amulet"
+              "Amulet of strength"
             ],
             "mode": "any"
           },
@@ -2750,7 +2750,7 @@
             "label": "Ruby amulet",
             "type": "item",
             "cards": [
-              "Ruby amulet"
+              "Amulet of strength"
             ]
           },
           {
@@ -3105,7 +3105,7 @@
           {
             "label": "Ruby amulet",
             "cards": [
-              "Ruby amulet"
+              "Amulet of strength"
             ],
             "mode": "any"
           }
@@ -3129,7 +3129,7 @@
             "label": "Ruby amulet",
             "type": "item",
             "cards": [
-              "Ruby amulet"
+              "Amulet of strength"
             ]
           }
         ],
@@ -3150,7 +3150,7 @@
           {
             "label": "Ruby amulet",
             "cards": [
-              "Ruby amulet"
+              "Amulet of strength"
             ],
             "mode": "any"
           },
@@ -3174,7 +3174,7 @@
             "label": "Ruby amulet",
             "type": "item",
             "cards": [
-              "Ruby amulet"
+              "Amulet of strength"
             ]
           },
           {
@@ -3684,7 +3684,7 @@
           {
             "label": "Diamond bracelet",
             "cards": [
-              "Diamond bracelet"
+              "Abyssal bracelet"
             ],
             "mode": "any"
           },
@@ -3708,7 +3708,7 @@
             "label": "Diamond bracelet",
             "type": "item",
             "cards": [
-              "Diamond bracelet"
+              "Abyssal bracelet"
             ]
           },
           {
@@ -4117,7 +4117,7 @@
           {
             "label": "Diamond ring",
             "cards": [
-              "Diamond ring"
+              "Ring of life"
             ],
             "mode": "any"
           },
@@ -4134,7 +4134,7 @@
             "label": "Diamond ring",
             "type": "item",
             "cards": [
-              "Diamond ring"
+              "Ring of life"
             ]
           },
           {
@@ -4799,7 +4799,7 @@
             "mode": "any"
           },
           {
-            "label": "Skills necklace",
+            "label": "Dragon necklace",
             "cards": [
               "Skills necklace"
             ],
@@ -4822,7 +4822,7 @@
             ]
           },
           {
-            "label": "Skills necklace",
+            "label": "Dragon necklace",
             "type": "item",
             "cards": [
               "Skills necklace"
@@ -4861,7 +4861,7 @@
             "mode": "any"
           },
           {
-            "label": "Ring of wealth",
+            "label": "Dragonstone ring",
             "cards": [
               "Ring of wealth"
             ],
@@ -4884,7 +4884,7 @@
             ]
           },
           {
-            "label": "Ring of wealth",
+            "label": "Dragonstone ring",
             "type": "item",
             "cards": [
               "Ring of wealth"
@@ -5034,13 +5034,13 @@
         "slots": [
           {
             "label": "Castle wars bracelet",
-            "cards": [],
-            "mode": "any",
-            "unrestricted": true,
-            "note": "Castle wars bracelet has no card"
+            "cards": [
+              "Castle wars bracelet"
+            ],
+            "mode": "any"
           },
           {
-            "label": "Amulet of glory",
+            "label": "Dragonstone amulet",
             "cards": [
               "Amulet of glory"
             ],
@@ -5056,7 +5056,14 @@
         ],
         "requirements": [
           {
-            "label": "Amulet of glory",
+            "label": "Castle wars bracelet",
+            "type": "item",
+            "cards": [
+              "Castle wars bracelet"
+            ]
+          },
+          {
+            "label": "Dragonstone amulet",
             "type": "item",
             "cards": [
               "Amulet of glory"
@@ -5069,9 +5076,6 @@
               "Ring of forging"
             ]
           }
-        ],
-        "noCard": [
-          "Castle wars bracelet"
         ]
       },
       {

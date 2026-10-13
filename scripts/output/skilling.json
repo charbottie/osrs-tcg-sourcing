@@ -7633,10 +7633,23 @@
     ]
    },
    {
-    "label": "Diving apparatus (recommended underwater)",
+    "label": "Underwater breathing (recommended)",
     "type": "item",
-    "cards": [
-     "Diving apparatus"
+    "cards": [],
+    "routes": [
+     {
+      "label": "Fishbowl helmet + diving apparatus",
+      "cards": [
+       "Fishbowl helmet",
+       "Diving apparatus"
+      ]
+     },
+     {
+      "label": "Medallion of the deep (counts as both)",
+      "cards": [
+       "Medallion of the deep"
+      ]
+     }
     ],
     "optional": true
    }
@@ -7648,7 +7661,7 @@
    "Fishing": 47
   },
   "access": "fossil_island",
-  "note": "Fossil Island underwater. XP scales with level up to 70. The fishbowl helmet has no card. Ironmen make drift nets from 2 jute fibre on a loom (26 Crafting).",
+  "note": "Fossil Island underwater. XP scales with level up to 70. Ironmen make drift nets from 2 jute fibre on a loom (26 Crafting).",
   "wiki": "\"Drift net fishing is a skilling method that requires 44 Hunter and 47 Fishing\"",
   "page": "Drift net fishing"
  },
@@ -8813,11 +8826,19 @@
   "level": 38,
   "xp": 43,
   "type": "pickpocket",
-  "requirements": [],
+  "requirements": [
+   {
+    "label": "Master Farmer",
+    "type": "npc",
+    "cards": [
+     "Master Farmer"
+    ]
+   }
+  ],
   "quests": [],
   "levels": {},
   "access": null,
-  "note": "'Master Farmer' has no TCG card, so no card gate (Martin the Master Gardener does have one, see the next entry). Draynor, Ardougne, Hosidius, Varlamore. Seed loot scales with Farming level. The plugin can also require the seed cards (Master Farmer full-loot mode).",
+  "note": "Draynor, Ardougne, Hosidius, Varlamore. Seed loot scales with Farming level. The plugin can also require the seed cards (Master Farmer full-loot mode).",
   "wiki": "Master Farmer |38 || 43 ... Rarity of the seed increases with Farming level.",
   "page": "Thieving"
  },
@@ -10145,13 +10166,26 @@
   "type": "stall",
   "requirements": [
    {
-    "label": "Fishbowl helmet + Diving apparatus (refill oxygen at the start)",
+    "label": "Underwater breathing",
     "type": "item",
-    "cards": [
-     "Diving apparatus"
+    "cards": [],
+    "routes": [
+     {
+      "label": "Fishbowl helmet + diving apparatus",
+      "cards": [
+       "Fishbowl helmet",
+       "Diving apparatus"
+      ]
+     },
+     {
+      "label": "Medallion of the deep (counts as both)",
+      "cards": [
+       "Medallion of the deep"
+      ]
+     }
     ],
-    "note": "Fishbowl helmet has no card",
-    "optional": true
+    "optional": true,
+    "note": "Refill oxygen at the start"
    }
   ],
   "quests": [
@@ -10768,13 +10802,25 @@
   "type": "sailing",
   "requirements": [
    {
-    "label": "Medallion of the deep (alternative to fishbowl helmet + diving apparatus)",
+    "label": "Underwater breathing",
     "type": "item",
-    "cards": [
-     "Medallion of the deep"
+    "cards": [],
+    "routes": [
+     {
+      "label": "Fishbowl helmet + diving apparatus",
+      "cards": [
+       "Fishbowl helmet",
+       "Diving apparatus"
+      ]
+     },
+     {
+      "label": "Medallion of the deep (counts as both)",
+      "cards": [
+       "Medallion of the deep"
+      ]
+     }
     ],
-    "optional": true,
-    "note": "Fishbowl helmet and the RFD diving apparatus have no TCG card (the 'Diving apparatus' card is the 2017 Halloween item), so they are unrestricted."
+    "optional": true
    }
   ],
   "quests": [
@@ -13608,7 +13654,14 @@
   "access": null,
   "note": "Members with 30+ Mining get Pure essence instead (already covered). Teleported in by Aubury/other NPCs (see wiki).",
   "wiki": "\"Free players may mine rune essence in the rune essence mine, unlocked after completing the Rune Mysteries quest.\" \"Each essence gives 5 Mining experience.\"",
-  "page": "Rune Essence (rock)"
+  "page": "Rune Essence (rock)",
+  "outputs": [
+   "Rune essence",
+   {
+    "card": "Pure essence",
+    "level": 30
+   }
+  ]
  },
  {
   "skill": "Mining",
@@ -13629,7 +13682,10 @@
   "access": null,
   "note": "Limestone Mine (north-east of Varrock, west of Paterdomus) or Arandar mine.",
   "wiki": "\"Limestone rock is a rock from which limestone can be mined.\" Mining table: \"Limestone | 10 | 26.5\"",
-  "page": "Limestone rock"
+  "page": "Limestone rock",
+  "outputs": [
+   "Limestone"
+  ]
  },
  {
   "skill": "Mining",
@@ -13650,7 +13706,10 @@
   "access": null,
   "note": "Level is for the smallest (size-1) star layer; each layer has its own level (10-90). Stars land at random spots around the world.",
   "wiki": "\"players mine crashed stars for stardust\" ... \"Players will additionally receive 32 ... experience each time a piece of stardust is mined (halved to 16 on Free-to-play worlds).\"",
-  "page": "Shooting Stars"
+  "page": "Shooting Stars",
+  "outputs": [
+   "Stardust"
+  ]
  },
  {
   "skill": "Mining",
@@ -13673,7 +13732,11 @@
   "access": null,
   "note": "Barronite deposit gives 32 xp. Camdozaal is opened by Below Ice Mountain.",
   "wiki": "\"Barronite rocks are found in the Ruins of Camdozaal that contain barronite shards and have a small chance of giving a barronite deposit when mined.\" \"Receiving a deposit grants twice the experience\"",
-  "page": "Rocks (Barronite)"
+  "page": "Rocks (Barronite)",
+  "outputs": [
+   "Barronite shards",
+   "Barronite deposit"
+  ]
  },
  {
   "skill": "Mining",
@@ -13697,6 +13760,9 @@
   "page": "Daeyalt rocks",
   "partialQuests": [
    "Darkness of Hallowvale"
+  ],
+  "outputs": [
+   "Daeyalt ore"
   ]
  },
  {
@@ -13717,7 +13783,11 @@
   "levels": {},
   "access": "fossil_island",
   "wiki": "\"Ash piles can be found throughout the Fossil Island Volcano, and can be mined with level 22 Mining, granting 10 experience. When mined, they can produce soda ash and volcanic ash.\"",
-  "page": "Ash pile"
+  "page": "Ash pile",
+  "outputs": [
+   "Volcanic ash",
+   "Soda ash"
+  ]
  },
  {
   "skill": "Mining",
@@ -13738,7 +13808,10 @@
   "access": "sailing",
   "note": "Pandemonium Cave (no extra Sailing level); also Onyx Crest (47), Deepfin Point (67), Wyrmscraig Cavern.",
   "wiki": "\"Lead rocks are a rock that can be mined at level 25 Mining to obtain lead ore and 40.5 Mining experience. They can be found on islands reachable via Sailing.\"",
-  "page": "Lead rocks"
+  "page": "Lead rocks",
+  "outputs": [
+   "Lead ore"
+  ]
  },
  {
   "skill": "Mining",
@@ -13768,7 +13841,11 @@
   "access": null,
   "note": "Clean pay-dirt in the hopper for ores + golden nuggets (bonus xp). Upper level needs 57 Mining + 100 golden nuggets.",
   "wiki": "\"The mine can be accessed at any level, but 30 Mining (not boostable) is required to mine there.\" \"yielding 60 Mining experience each time a pay-dirt is mined.\"",
-  "page": "Motherlode Mine"
+  "page": "Motherlode Mine",
+  "outputs": [
+   "Pay-dirt",
+   "Golden nugget"
+  ]
  },
  {
   "skill": "Mining",
@@ -13798,7 +13875,10 @@
   "access": "kourend",
   "note": "Also 8 Crafting xp per block. Dense essence block card resolves to Dark essence block.",
   "wiki": "\"These pillars can be mined with a pickaxe and chisel to obtain dense essence blocks.\" \"Players need both level 38 Mining and level 38 Crafting in order to mine the dense runestone.\"",
-  "page": "Dense runestone"
+  "page": "Dense runestone",
+  "outputs": [
+   "Dense essence block"
+  ]
  },
  {
   "skill": "Mining",
@@ -13819,7 +13899,11 @@
   "access": "varlamore",
   "note": "Calcified deposits give an extra 3 xp.",
   "wiki": "\"Calcified rocks are found in the Cam Torum Mine, requiring level 41 Mining to mine. Rather than ore, mining the rocks will yield blessed bone shards\" Mining table: \"41 | 33\"",
-  "page": "Calcified rocks"
+  "page": "Calcified rocks",
+  "outputs": [
+   "Blessed bone shards",
+   "Calcified deposit"
+  ]
  },
  {
   "skill": "Mining",
@@ -13849,7 +13933,10 @@
   "access": "kourend",
   "note": "The Mining skill page table lists 25 xp; the rock page says 35.",
   "wiki": "\"Mining volcanic sulphur requires level 42 Mining and an equipped breathing filter (such as a gas mask, face mask, or slayer helmet) to mine, and grants 35 Mining experience.\"",
-  "page": "Volcanic sulphur (rock)"
+  "page": "Volcanic sulphur (rock)",
+  "outputs": [
+   "Volcanic sulphur"
+  ]
  },
  {
   "skill": "Mining",
@@ -13885,7 +13972,20 @@
   "access": "kourend",
   "note": "Gives Blasted ore, cleaned into ores (extra xp). No pickaxe needed.",
   "wiki": "\"Blast mining requires level 43 Mining to participate, as well as a chisel, tinderbox, and dynamite.\" \"Excavating the hard rock earns 20 Mining experience, and lighting the dynamite earns 50 Firemaking experience.\"",
-  "page": "Blast Mine"
+  "page": "Blast Mine",
+  "outputs": [
+   "Coal",
+   "Gold ore",
+   "Mithril ore",
+   {
+    "card": "Adamantite ore",
+    "level": 60
+   },
+   {
+    "card": "Runite ore",
+    "level": 75
+   }
+  ]
  },
  {
   "skill": "Mining",
@@ -13916,7 +14016,10 @@
   "access": "sailing",
   "note": "Charred Island; route passes aggressive red dragons (multicombat).",
   "wiki": "\"Rubium rocks are rocks found in the Charred Dungeon, requiring level 60 Sailing to access. They can be mined at level 48 Mining to produce stackable rubium splinters and 30 Mining XP.\"",
-  "page": "Rubium rocks"
+  "page": "Rubium rocks",
+  "outputs": [
+   "Rubium splinters"
+  ]
  },
  {
   "skill": "Mining",
@@ -13939,7 +14042,10 @@
   "access": "sailing",
   "note": "Infobox lists quest Fallen From Grace (not in quests.json; not checked). Wyrmscraig needs 62 Sailing to dock.",
   "wiki": "\"Sunstone rocks are mining rocks located only on Wyrmscraig that can be mined at level 53 Mining to produce sunstone\" Infobox: \"xp = 23-28\" (28 with momentum)",
-  "page": "Sunstone rocks"
+  "page": "Sunstone rocks",
+  "outputs": [
+   "Sunstone"
+  ]
  },
  {
   "skill": "Mining",
@@ -13962,7 +14068,10 @@
   "access": "sailing",
   "note": "AFK alternative; never depletes. Wyrmscraig needs 62 Sailing.",
   "wiki": "\"The sunstone monolith can be mined with 53 Mining to obtain sunstone\" \"The monolith can be mined without starting Fallen From Grace, but once the quest is begun, it can only be inspected until the quest is progressed.\"",
-  "page": "Sunstone monolith"
+  "page": "Sunstone monolith",
+  "outputs": [
+   "Sunstone"
+  ]
  },
  {
   "skill": "Mining",
@@ -13983,7 +14092,10 @@
   "access": "kourend",
   "note": "Lovakite Mine, Lovakengj.",
   "wiki": "\"A player with a Mining level of 65 or higher can mine lovakite ore from the rocks. Each rock grants 60 Mining experience for each ore mined.\"",
-  "page": "Lovakite rocks"
+  "page": "Lovakite rocks",
+  "outputs": [
+   "Lovakite ore"
+  ]
  },
  {
   "skill": "Mining",
@@ -14023,7 +14135,10 @@
   "access": "sailing",
   "note": "XP is a random 10-100 per geode; xp field = minimum.",
   "wiki": "\"Rubium deposits are rocks found in the Charred Dungeon that can be mined at level 68 Mining to obtain rubium geodes and between 10-100 Mining XP.\"",
-  "page": "Rubium deposit"
+  "page": "Rubium deposit",
+  "outputs": [
+   "Rubium geode"
+  ]
  },
  {
   "skill": "Mining",
@@ -14043,7 +14158,10 @@
   "levels": {},
   "access": "prifddinas",
   "wiki": "\"A player with a Mining level of 70 or higher can mine soft clay from these rocks, which are found in the Trahaearn mine, granting 5 Mining experience for each ore mined.\"",
-  "page": "Soft clay rocks"
+  "page": "Soft clay rocks",
+  "outputs": [
+   "Soft clay"
+  ]
  },
  {
   "skill": "Mining",
@@ -14066,7 +14184,12 @@
   "access": null,
   "note": "Efh and Urt salt rocks are the same; quantity scales with Mining level.",
   "wiki": "\"Te salt rocks containing Te salt can be found in the Salt Mine under Weiss. Te salt rocks can be mined with a Mining level of 72 and higher.\" Mining table: \"Salts | 72 | 5\"",
-  "page": "Te salt rocks"
+  "page": "Te salt rocks",
+  "outputs": [
+   "Te salt",
+   "Efh salt",
+   "Urt salt"
+  ]
  },
  {
   "skill": "Mining",
@@ -14088,7 +14211,10 @@
   "levels": {},
   "access": null,
   "wiki": "\"Basalt rocks containing Basalt can be found in the Salt Mine under Weiss. Basalt rocks can be mined with a Mining level of 72 and higher.\"",
-  "page": "Basalt rocks (mining)"
+  "page": "Basalt rocks (mining)",
+  "outputs": [
+   "Basalt"
+  ]
  },
  {
   "skill": "Mining",
@@ -14110,7 +14236,10 @@
   },
   "access": "sailing",
   "wiki": "\"Nickel rocks can be mined at level 74 Mining to obtain nickel ore and 80.5 Mining experience. ... The lowest level island with nickel rocks is Wyrmscraig, requiring level 62 Sailing.\"",
-  "page": "Nickel rocks"
+  "page": "Nickel rocks",
+  "outputs": [
+   "Nickel ore"
+  ]
  },
  {
   "skill": "Mining",
@@ -14132,7 +14261,10 @@
   "levels": {},
   "access": null,
   "wiki": "\"They are located exclusively in Ghorrock Dungeon's mine, which can only be accessed once the Secrets of the North quest has been completed.\" \"yielding 13.5 Mining experience per successful mine.\"",
-  "page": "Ancient essence crystals"
+  "page": "Ancient essence crystals",
+  "outputs": [
+   "Ancient essence"
+  ]
  },
  {
   "skill": "Mining",
@@ -14161,7 +14293,8 @@
   "access": "kourend",
   "note": "Infernal shale has no card (output unrestricted). xp field = minimum roll.",
   "wiki": "\"They can be found inside the north-east section of the bottom level in the Chasm of Fire, and require level 78 Mining to mine. The rocks can only be accessed after speaking to Yama and agreeing to sign his contract.\" XP: \"one of 10 possible values ranging from 13.2 to 100\"",
-  "page": "Infernal shale rocks"
+  "page": "Infernal shale rocks",
+  "outputs": []
  },
  {
   "skill": "Mining",
@@ -14189,7 +14322,8 @@
   "access": "fossil_island",
   "note": "Group mining minigame; xp per boulder chip varies with boulder stage. Petrified Pete has no card.",
   "wiki": "\"To enter the mine, players must have level 50 Mining. In addition, players must pay Petrified Pete 30 numulite each time to enter the mine.\"",
-  "page": "Volcanic Mine"
+  "page": "Volcanic Mine",
+  "outputs": []
  },
  {
   "skill": "Mining",
@@ -14215,6 +14349,9 @@
   "page": "Scar essence mine",
   "partialQuests": [
    "Desert Treasure II - The Fallen Empire"
+  ],
+  "outputs": [
+   "Tainted essence chunk"
   ]
  },
  {
@@ -14238,7 +14375,10 @@
   "access": null,
   "note": "Keldagrim. Gives Gold ore (same xp as gold rocks).",
   "wiki": "\"Gold veins are a variant of gold rocks that are found exclusively within Dondakan's mine\" infobox \"quest = Between a Rock...\"",
-  "page": "Gold vein"
+  "page": "Gold vein",
+  "outputs": [
+   "Gold ore"
+  ]
  },
  {
   "skill": "Woodcutting",
@@ -14259,7 +14399,10 @@
   "access": null,
   "note": "Gives Logs (charcoal from the Fishing Hamlet / Lava Dragon Isle dead trees; charcoal has no card).",
   "wiki": "Types of trees: \"1 | Dead tree | Logs or Charcoal | 25 ... Dead trees can be found all around Gielinor.\"",
-  "page": "Woodcutting"
+  "page": "Woodcutting",
+  "outputs": [
+   "Logs"
+  ]
  },
  {
   "skill": "Woodcutting",
@@ -14279,7 +14422,10 @@
   "levels": {},
   "access": null,
   "wiki": "Types of trees: \"1 | Evergreen tree | Logs | 25 ... Evergreen trees can be found near Falador, near the entrance to the Dwarven Mines...\"",
-  "page": "Woodcutting"
+  "page": "Woodcutting",
+  "outputs": [
+   "Logs"
+  ]
  },
  {
   "skill": "Woodcutting",
@@ -14299,7 +14445,10 @@
   "levels": {},
   "access": null,
   "wiki": "Types of trees: \"1 | Dying tree | Logs | 25 | Can be found in the Wilderness, Varrock, and the Lumber Yard.\"",
-  "page": "Woodcutting"
+  "page": "Woodcutting",
+  "outputs": [
+   "Logs"
+  ]
  },
  {
   "skill": "Woodcutting",
@@ -14319,7 +14468,10 @@
   "levels": {},
   "access": null,
   "wiki": "Types of trees: \"1 | Jungle tree | Logs | 25 | They are only found in the Feldip Hunter area, the Kharazi Jungle, and on Ape Atoll.\"",
-  "page": "Woodcutting"
+  "page": "Woodcutting",
+  "outputs": [
+   "Logs"
+  ]
  },
  {
   "skill": "Woodcutting",
@@ -14340,7 +14492,10 @@
   "access": null,
   "note": "Achey tree logs resolve to the Logs card.",
   "wiki": "\"Achey Trees are uncommon lumber trees that require level 1 Woodcutting to chop, providing 25 Woodcutting experience per set of achey tree logs received.\"",
-  "page": "Achey tree"
+  "page": "Achey tree",
+  "outputs": [
+   "Achey tree logs"
+  ]
  },
  {
   "skill": "Woodcutting",
@@ -14361,7 +14516,8 @@
   "access": "fossil_island",
   "note": "Charcoal has no card (output unrestricted).",
   "wiki": "\"Burnt trees are found on Fossil Island and give charcoal when chopped down, requiring level 1 Woodcutting to cut.\"",
-  "page": "Burnt tree"
+  "page": "Burnt tree",
+  "outputs": []
  },
  {
   "skill": "Woodcutting",
@@ -14386,7 +14542,10 @@
   "access": null,
   "note": "Tai Bwo Wannai Cleanup; speak to Murcaily first (no card). Can yield gout tubers.",
   "wiki": "\"Light jungle can be cut with a machete at level 10 Woodcutting, giving 32 experience, and yields thatch spar light\" \"Players must have completed the Jungle Potion quest before they can take part in the minigame.\"",
-  "page": "Light Jungle"
+  "page": "Light Jungle",
+  "outputs": [
+   "Thatch spar light"
+  ]
  },
  {
   "skill": "Woodcutting",
@@ -14410,7 +14569,10 @@
   "access": null,
   "note": "Tai Bwo Wannai Cleanup (Murcaily, no card).",
   "wiki": "Types of trees: \"20 | Medium Jungle | Thatch spar med | 55 | Medium jungle can only be cut with a machete, and is found near Tai Bwo Wannai.\"",
-  "page": "Woodcutting"
+  "page": "Woodcutting",
+  "outputs": [
+   "Thatch spar med"
+  ]
  },
  {
   "skill": "Woodcutting",
@@ -14434,7 +14596,10 @@
   "access": null,
   "note": "Tai Bwo Wannai Cleanup (Murcaily, no card).",
   "wiki": "Types of trees: \"35 | Dense Jungle | Thatch spar dense | 80 | Dense jungle can only be cut with a machete, and is found near Tai Bwo Wannai.\"",
-  "page": "Woodcutting"
+  "page": "Woodcutting",
+  "outputs": [
+   "Thatch spar dense"
+  ]
  },
  {
   "skill": "Woodcutting",
@@ -14457,7 +14622,8 @@
   "access": "sailing",
   "note": "Jatoba logs have no card. The Great Conch needs 45 Sailing.",
   "wiki": "\"A jatoba tree is a lumber tree requiring level 40 Woodcutting to cut, granting 92 Woodcutting experience for each set of jatoba logs received.\" Types of trees: \"Can be found on The Great Conch\"",
-  "page": "Jatoba tree"
+  "page": "Jatoba tree",
+  "outputs": []
  },
  {
   "skill": "Woodcutting",
@@ -14477,7 +14643,10 @@
   "levels": {},
   "access": "kourend",
   "wiki": "\"A Mature juniper tree requires level 42 Woodcutting to chop. The tree provides juniper logs when cut and 35 Woodcutting experience per set of logs received. They can only be found in Hosidius.\"",
-  "page": "Mature juniper tree"
+  "page": "Mature juniper tree",
+  "outputs": [
+   "Juniper logs"
+  ]
  },
  {
   "skill": "Woodcutting",
@@ -14497,7 +14666,10 @@
   "levels": {},
   "access": "morytania",
   "wiki": "\"The tree provides bark when cut and 82.5 Woodcutting experience per piece of bark collected from the tree. Hollow trees only grow in select areas of Morytania.\"",
-  "page": "Hollow tree"
+  "page": "Hollow tree",
+  "outputs": [
+   "Bark"
+  ]
  },
  {
   "skill": "Woodcutting",
@@ -14519,7 +14691,10 @@
   "levels": {},
   "access": "morytania",
   "wiki": "\"A single tree can be found in the Arboretum in Darkmeyer.\" Logs table: \"Blisterwood logs | 62 | 76\"; infobox \"quest = Sins of the Father\"",
-  "page": "Blisterwood tree"
+  "page": "Blisterwood tree",
+  "outputs": [
+   "Blisterwood logs"
+  ]
  },
  {
   "skill": "Woodcutting",
@@ -14540,7 +14715,12 @@
   "access": "fossil_island",
   "note": "Yields mushrooms, mort myre fungus, numulite, fossils and sulliuscep caps (no logs).",
   "wiki": "\"Chopping sulliusceps requires level 65 in Woodcutting and grants 127 experience per yield.\" \"Players must have completed Bone Voyage for this method.\"",
-  "page": "Sulliuscep"
+  "page": "Sulliuscep",
+  "outputs": [
+   "Mushroom",
+   "Mort myre fungus",
+   "Sulliuscep cap"
+  ]
  },
  {
   "skill": "Woodcutting",
@@ -14563,7 +14743,10 @@
   "access": "sailing",
   "note": "The Great Conch needs 45 Sailing.",
   "wiki": "Types of trees: \"66 | Camphor tree | Camphor logs | 143.5 | These trees can be found on The Great Conch.\"",
-  "page": "Woodcutting"
+  "page": "Woodcutting",
+  "outputs": [
+   "Camphor logs"
+  ]
  },
  {
   "skill": "Woodcutting",
@@ -14593,7 +14776,10 @@
   "access": null,
   "note": "Vampyrium. xp field = per chop; tapping a wounded tree gives 1,360 per bucket.",
   "wiki": "\"Chopping them requires completion of The Blood Moon Rises, 77 Woodcutting and an empty bucket, yielding bloodwood sap\" \"Every chop gives 29-31 xp\" ... tapping gives \"510, 510 and 340 xp - for a total of 1,360 per tree\"",
-  "page": "Bloodwood tree"
+  "page": "Bloodwood tree",
+  "outputs": [
+   "Bucket of bloodwood sap"
+  ]
  },
  {
   "skill": "Woodcutting",
@@ -14615,7 +14801,10 @@
   },
   "access": "sailing",
   "wiki": "\"An ironwood tree is a lumber tree requiring level 80 Woodcutting to cut, granting 175 Woodcutting experience\" \"Ironwood trees are found on Sunbleak Island, requiring level 72 Sailing to access.\"",
-  "page": "Ironwood tree"
+  "page": "Ironwood tree",
+  "outputs": [
+   "Ironwood logs"
+  ]
  },
  {
   "skill": "Woodcutting",
@@ -14638,7 +14827,11 @@
   "access": "varlamore",
   "note": "Yields Demon tear and Logs.",
   "wiki": "\"Infected roots can be found at the northern end of the Ruins of Mokhaiotl and cut with 80 Woodcutting, after completion of the The Final Dawn quest.\" \"10 XP given if a tear is received, 25 XP given if a log is received, and 35 XP given if both are received.\"",
-  "page": "Infected root"
+  "page": "Infected root",
+  "outputs": [
+   "Demon tear",
+   "Logs"
+  ]
  },
  {
   "skill": "Woodcutting",
@@ -14661,7 +14854,10 @@
   "access": "sailing",
   "note": "Drumstick Isle also needs an adamant keel or better.",
   "wiki": "\"Rosewood tree is a tropical hardwood lumber tree found on Drumstick Isle, requiring 79 Sailing to dock.\" \"It requires 92 Woodcutting to chop.\" Logs table: \"Rosewood logs | 92 | 212.5\"",
-  "page": "Rosewood tree"
+  "page": "Rosewood tree",
+  "outputs": [
+   "Rosewood logs"
+  ]
  },
  {
   "skill": "Woodcutting",
@@ -14689,7 +14885,30 @@
   "access": null,
   "note": "Ents are in the Woodcutting Guild dungeon (60 WC + Kourend) and the Wilderness near the Chaos Temple. Log type depends on Woodcutting level.",
   "wiki": "\"Upon death, the ent's trunk will fall and remain on the ground for 1 minute. These remains can be chopped to give several sets of noted logs ... players get 25 experience per set of logs received no matter the type.\"",
-  "page": "Ent"
+  "page": "Ent",
+  "outputs": [
+   "Logs",
+   {
+    "card": "Oak logs",
+    "level": 15
+   },
+   {
+    "card": "Willow logs",
+    "level": 30
+   },
+   {
+    "card": "Maple logs",
+    "level": 45
+   },
+   {
+    "card": "Yew logs",
+    "level": 60
+   },
+   {
+    "card": "Magic logs",
+    "level": 75
+   }
+  ]
  },
  {
   "skill": "Woodcutting",
@@ -14710,7 +14929,8 @@
   "access": null,
   "note": "Canoe stations on the River Lum (Lumbridge, Champions' Guild, Barbarian Village, Edgeville, Ferox Enclave).",
   "wiki": "\"Building canoes requires the Woodcutting skill\" \"Making a canoe requires an axe ... for which the player has the required Woodcutting level to use.\" Recipe: \"Log canoe | Woodcutting 12 | 30\"",
-  "page": "Canoe"
+  "page": "Canoe",
+  "outputs": []
  },
  {
   "skill": "Woodcutting",
@@ -14731,7 +14951,8 @@
   "access": null,
   "note": "Canoe stations on the River Lum (Lumbridge, Champions' Guild, Barbarian Village, Edgeville, Ferox Enclave).",
   "wiki": "\"Building canoes requires the Woodcutting skill\" \"Making a canoe requires an axe ... for which the player has the required Woodcutting level to use.\" Recipe: \"Dugout canoe | Woodcutting 27 | 60\"",
-  "page": "Canoe"
+  "page": "Canoe",
+  "outputs": []
  },
  {
   "skill": "Woodcutting",
@@ -14752,7 +14973,8 @@
   "access": null,
   "note": "Canoe stations on the River Lum (Lumbridge, Champions' Guild, Barbarian Village, Edgeville, Ferox Enclave).",
   "wiki": "\"Building canoes requires the Woodcutting skill\" \"Making a canoe requires an axe ... for which the player has the required Woodcutting level to use.\" Recipe: \"Stable dugout canoe | Woodcutting 42 | 90\"",
-  "page": "Canoe"
+  "page": "Canoe",
+  "outputs": []
  },
  {
   "skill": "Woodcutting",
@@ -14773,7 +14995,8 @@
   "access": null,
   "note": "Canoe stations on the River Lum (Lumbridge, Champions' Guild, Barbarian Village, Edgeville, Ferox Enclave).",
   "wiki": "\"Building canoes requires the Woodcutting skill\" \"Making a canoe requires an axe ... for which the player has the required Woodcutting level to use.\" Recipe: \"Waka canoe | Woodcutting 57 | 150\"",
-  "page": "Canoe"
+  "page": "Canoe",
+  "outputs": []
  },
  {
   "skill": "Fishing",
@@ -14794,7 +15017,10 @@
   "levels": {},
   "access": null,
   "wiki": "\"may be caught at level 5 Fishing using a small fishing net at the Holy Lake south of Tai Bwo Wannai on Karamja\" \"5 Fishing experience is granted per catch, not per individual fish.\"",
-  "page": "Raw karambwanji"
+  "page": "Raw karambwanji",
+  "outputs": [
+   "Raw karambwanji"
+  ]
  },
  {
   "skill": "Fishing",
@@ -14818,7 +15044,10 @@
   "access": null,
   "note": "Prepared and offered at the Camdozaal altar for Prayer/Cooking xp.",
   "wiki": "Fishing methods: \"Raw guppy | 7 | Quest Below Ice Mountain\". Raw guppy page: \"Each catch grants 8 Fishing experience.\"",
-  "page": "Raw guppy"
+  "page": "Raw guppy",
+  "outputs": [
+   "Raw guppy"
+  ]
  },
  {
   "skill": "Fishing",
@@ -14842,7 +15071,10 @@
   "access": null,
   "note": "Prepared and offered at the Camdozaal altar for Prayer/Cooking xp.",
   "wiki": "Fishing methods: \"Raw cavefish | 20 | Quest Below Ice Mountain\". Raw cavefish page: \"Each catch grants 16 Fishing experience.\"",
-  "page": "Raw cavefish"
+  "page": "Raw cavefish",
+  "outputs": [
+   "Raw cavefish"
+  ]
  },
  {
   "skill": "Fishing",
@@ -14867,7 +15099,10 @@
   "access": null,
   "note": "Prepared and offered at the Camdozaal altar for Prayer/Cooking xp.",
   "wiki": "Fishing methods: \"Raw tetra | 33 | Quest Below Ice Mountain\". Raw tetra page: \"Each catch grants 24 Fishing experience.\"",
-  "page": "Raw tetra"
+  "page": "Raw tetra",
+  "outputs": [
+   "Raw tetra"
+  ]
  },
  {
   "skill": "Fishing",
@@ -14891,7 +15126,10 @@
   "access": null,
   "note": "Prepared and offered at the Camdozaal altar for Prayer/Cooking xp.",
   "wiki": "Fishing methods: \"Raw catfish | 46 | Quest Below Ice Mountain\". Raw catfish page: \"Each catch grants 33 Fishing experience.\"",
-  "page": "Raw catfish"
+  "page": "Raw catfish",
+  "outputs": [
+   "Raw catfish"
+  ]
  },
  {
   "skill": "Fishing",
@@ -14927,7 +15165,10 @@
   "levels": {},
   "access": null,
   "wiki": "\"Frog spawn can be obtained by using a small fishing net in the Lumbridge Swamp Caves, Dorgesh-Kaan South Dungeon, and in the Ruins of Camdozaal, requiring level 33 Fishing and granting 75 experience.\"",
-  "page": "Frog spawn"
+  "page": "Frog spawn",
+  "outputs": [
+   "Frog spawn"
+  ]
  },
  {
   "skill": "Fishing",
@@ -14963,7 +15204,10 @@
   "access": null,
   "note": "Caught alongside frog spawn.",
   "wiki": "\"Players can also catch it with a net while fishing for Frog spawn in Lumbridge Swamp Caves, giving 1 experience point.\" Recipe: \"Swamp weed | Fishing 33 | 1 | Small fishing net\"",
-  "page": "Swamp weed"
+  "page": "Swamp weed",
+  "outputs": [
+   "Swamp weed"
+  ]
  },
  {
   "skill": "Fishing",
@@ -14991,7 +15235,10 @@
   "levels": {},
   "access": null,
   "wiki": "\"They are caught with a fly fishing rod at a river fishing spot ... using stripy feathers (obtained via the Hunter skill) as bait. Each one caught grants 80 Fishing experience.\"",
-  "page": "Raw rainbow fish"
+  "page": "Raw rainbow fish",
+  "outputs": [
+   "Raw rainbow fish"
+  ]
  },
  {
   "skill": "Fishing",
@@ -15044,6 +15291,9 @@
   "page": "Leaping trout",
   "partialQuests": [
    "Barbarian Training"
+  ],
+  "outputs": [
+   "Leaping trout"
   ]
  },
  {
@@ -15097,6 +15347,9 @@
   "page": "Leaping salmon",
   "partialQuests": [
    "Barbarian Training"
+  ],
+  "outputs": [
+   "Leaping salmon"
   ]
  },
  {
@@ -15150,6 +15403,9 @@
   "page": "Leaping sturgeon",
   "partialQuests": [
    "Barbarian Training"
+  ],
+  "outputs": [
+   "Leaping sturgeon"
   ]
  },
  {
@@ -15177,6 +15433,9 @@
   "page": "Fishing",
   "partialQuests": [
    "Barbarian Training"
+  ],
+  "outputs": [
+   "Raw tuna"
   ]
  },
  {
@@ -15204,6 +15463,9 @@
   "page": "Fishing",
   "partialQuests": [
    "Barbarian Training"
+  ],
+  "outputs": [
+   "Raw swordfish"
   ]
  },
  {
@@ -15231,6 +15493,9 @@
   "page": "Fishing",
   "partialQuests": [
    "Barbarian Training"
+  ],
+  "outputs": [
+   "Raw shark"
   ]
  },
  {
@@ -15259,7 +15524,8 @@
   "access": null,
   "note": "Partial quest: Heroes' Quest started (Gerrant teaches the oily rod; Taverley spot only after starting). Raw lava eel has no card.",
   "wiki": "\"Raw lava eels may be caught using an oily fishing rod and bait in the lava rivers found in Taverley Dungeon, the Wilderness Lava Maze, the Charred Dungeon (level 60 Sailing), and the Wyrmscraig Cavern\" Recipe: \"Raw lava eel | Fishing 53 | 60\"",
-  "page": "Raw lava eel"
+  "page": "Raw lava eel",
+  "outputs": []
  },
  {
   "skill": "Fishing",
@@ -15284,7 +15550,8 @@
   "page": "Raw bream",
   "partialQuests": [
    "Perilous Moons"
-  ]
+  ],
+  "outputs": []
  },
  {
   "skill": "Fishing",
@@ -15323,7 +15590,10 @@
   "access": "kourend",
   "note": "Lake Molch (Kebos Lowlands). +16.5 Hunter xp. Weapon/shield slots must be empty.",
   "wiki": "\"Aerial fishing is a hybrid Fishing and Hunter technique requiring levels 35 Hunter and 43 Fishing. The aerial fishing technique is used to catch several fish species at Lake Molch.\" Recipe: \"Bluegill | Fishing 43 11.5; Hunter 35 16.5\"",
-  "page": "Aerial fishing"
+  "page": "Aerial fishing",
+  "outputs": [
+   "Bluegill"
+  ]
  },
  {
   "skill": "Fishing",
@@ -15354,7 +15624,10 @@
   "access": "kourend",
   "note": "Lake Molch. +45 Hunter xp.",
   "wiki": "Recipe: \"Common tench | Fishing 56 40; Hunter 51 45 | Cormorant's glove | Fish offcuts, King worm\"",
-  "page": "Aerial fishing"
+  "page": "Aerial fishing",
+  "outputs": [
+   "Common tench"
+  ]
  },
  {
   "skill": "Fishing",
@@ -15385,7 +15658,10 @@
   "access": "kourend",
   "note": "Lake Molch. +90 Hunter xp.",
   "wiki": "Recipe: \"Mottled eel | Fishing 73 65; Hunter 68 90 | Cormorant's glove | Fish offcuts, King worm\"",
-  "page": "Aerial fishing"
+  "page": "Aerial fishing",
+  "outputs": [
+   "Mottled eel"
+  ]
  },
  {
   "skill": "Fishing",
@@ -15416,7 +15692,10 @@
   "access": "kourend",
   "note": "Lake Molch. +130 Hunter xp.",
   "wiki": "Recipe: \"Greater siren | Fishing 91 100; Hunter 87 130 | Cormorant's glove | Fish offcuts, King worm\"",
-  "page": "Aerial fishing"
+  "page": "Aerial fishing",
+  "outputs": [
+   "Greater siren"
+  ]
  },
  {
   "skill": "Fishing",
@@ -15442,12 +15721,23 @@
    {
     "label": "Underwater breathing",
     "type": "item",
-    "cards": [
-     "Diving apparatus",
-     "Medallion of the deep"
+    "cards": [],
+    "routes": [
+     {
+      "label": "Fishbowl helmet + diving apparatus",
+      "cards": [
+       "Fishbowl helmet",
+       "Diving apparatus"
+      ]
+     },
+     {
+      "label": "Medallion of the deep (counts as both)",
+      "cards": [
+       "Medallion of the deep"
+      ]
+     }
     ],
-    "optional": true,
-    "note": "Strongly recommended; diving apparatus needs a fishbowl helmet (no card)"
+    "optional": true
    },
    {
     "label": "Flippers",
@@ -15465,7 +15755,34 @@
   "access": "fossil_island",
   "note": "Fish shoal recipe: Fishing 47 / 77 xp, Hunter 44 / 101.5 xp — scales with level up to 70.",
   "wiki": "\"Drift net fishing is a skilling method that requires 44 Hunter and 47 Fishing\" Requirements: \"Completion of Bone Voyage to access Fossil Island\" \"200 Numulites for access to the activity for the day or 20,000 for permanent access.\"",
-  "page": "Drift net fishing"
+  "page": "Drift net fishing",
+  "outputs": [
+   "Oyster",
+   "Pufferfish",
+   "Raw anchovies",
+   "Raw sardine",
+   "Raw tuna",
+   {
+    "card": "Raw lobster",
+    "level": 50
+   },
+   {
+    "card": "Raw swordfish",
+    "level": 60
+   },
+   {
+    "card": "Raw shark",
+    "level": 70
+   },
+   {
+    "card": "Raw sea turtle",
+    "level": 80
+   },
+   {
+    "card": "Raw manta ray",
+    "level": 90
+   }
+  ]
  },
  {
   "skill": "Fishing",
@@ -15500,7 +15817,10 @@
   "access": "sailing",
   "note": "Spots: The Onyx Crest (47), Laguna Aurorae (58), Wintumber Island (63), Buccaneers' Haven (76).",
   "wiki": "\"Lantern harpooning is a Fishing activity released with Sailing, requiring at least 47 Sailing and 52 Fishing. Players can use any harpoon (barehanded fishing does not work) and any lit lantern to catch squids\" Recipe: \"Raw swordtip squid | Fishing 52 | 55\"",
-  "page": "Lantern harpooning"
+  "page": "Lantern harpooning",
+  "outputs": [
+   "Raw swordtip squid"
+  ]
  },
  {
   "skill": "Fishing",
@@ -15533,7 +15853,10 @@
   },
   "access": "sailing",
   "wiki": "\"players with 69 Fishing can catch jumbo squid as well.\" Recipe: \"Raw jumbo squid | Fishing 69 | 75\"",
-  "page": "Lantern harpooning"
+  "page": "Lantern harpooning",
+  "outputs": [
+   "Raw jumbo squid"
+  ]
  },
  {
   "skill": "Fishing",
@@ -15590,7 +15913,10 @@
   "levels": {},
   "access": null,
   "wiki": "\"Catching them requires a Fishing level of 80, granting 95 Fishing experience per eel caught. In order to catch infernal eels, an oily fishing rod and bait while wearing ice gloves or Smiths gloves (i) are required.\" \"they can only be caught once a player has proven themselves worthy enough to enter the city by showing a TzHaar guard ... a fire cape.\"",
-  "page": "Infernal eel"
+  "page": "Infernal eel",
+  "outputs": [
+   "Infernal eel"
+  ]
  },
  {
   "skill": "Fishing",
@@ -15625,7 +15951,10 @@
   "access": null,
   "note": "Inside the Fishing Guild (68 Fishing). Kylie Minnow has no card. Minnows trade for raw sharks.",
   "wiki": "\"They require a small fishing net and 82 Fishing to be caught, which cannot be boosted, granting 26.1 Fishing experience per catch\" \"The platform may only be accessed after showing Kylie the full angler's outfit and having completed the Fishing Contest quest.\"",
-  "page": "Minnow"
+  "page": "Minnow",
+  "outputs": [
+   "Minnow"
+  ]
  },
  {
   "skill": "Fishing",
@@ -15656,7 +15985,10 @@
   "levels": {},
   "access": null,
   "wiki": "\"Upon completion of The Blood Moon Rises, they can be fished from leechfin fishing spots south of the Ruined Village with a big fishing net and level 78 Fishing, granting 33.2 experience per fish.\"",
-  "page": "Leechfin"
+  "page": "Leechfin",
+  "outputs": [
+   "Leechfin"
+  ]
  },
  {
   "skill": "Fishing",
@@ -15696,6 +16028,9 @@
   "page": "Sacred eel",
   "partialQuests": [
    "Regicide"
+  ],
+  "outputs": [
+   "Sacred eel"
   ]
  },
  {
@@ -15746,7 +16081,10 @@
   "access": null,
   "note": "On a skiff or sloop. Level shown for Sailing/Construction = minimum net that reaches all the shoal's depths.",
   "wiki": "Shoals table: \"69 | Giant krill shoal | Bait Fish offcuts\"; Raw giant krill: \"112.5 experience per successful catch with a trawling net, or 22.5 if caught with a fishing rod.\"",
-  "page": "Deep sea trawling"
+  "page": "Deep sea trawling",
+  "outputs": [
+   "Raw giant krill"
+  ]
  },
  {
   "skill": "Fishing",
@@ -15776,7 +16114,10 @@
   "access": "sailing",
   "note": "Fished from your boat beside the shoal; slower than nets.",
   "wiki": "\"Lastly, players can also use a fishing rod to catch deep sea fish. Doing so requires a plain/fine fish offcut for each fish caught\" — Raw giant krill: \"22.5 if caught with a fishing rod.\"",
-  "page": "Deep sea trawling"
+  "page": "Deep sea trawling",
+  "outputs": [
+   "Raw giant krill"
+  ]
  },
  {
   "skill": "Fishing",
@@ -15826,7 +16167,10 @@
   "access": null,
   "note": "On a skiff or sloop. Level shown for Sailing/Construction = minimum net that reaches all the shoal's depths.",
   "wiki": "Shoals table: \"73 | Haddock shoal | Bait Fish offcuts\"; Raw haddock: \"128.5 experience per successful catch with a trawling net, or 25.7 if caught with a fishing rod.\"",
-  "page": "Deep sea trawling"
+  "page": "Deep sea trawling",
+  "outputs": [
+   "Raw haddock"
+  ]
  },
  {
   "skill": "Fishing",
@@ -15856,7 +16200,10 @@
   "access": "sailing",
   "note": "Fished from your boat beside the shoal; slower than nets.",
   "wiki": "\"Lastly, players can also use a fishing rod to catch deep sea fish. Doing so requires a plain/fine fish offcut for each fish caught\" — Raw haddock: \"25.7 if caught with a fishing rod.\"",
-  "page": "Deep sea trawling"
+  "page": "Deep sea trawling",
+  "outputs": [
+   "Raw haddock"
+  ]
  },
  {
   "skill": "Fishing",
@@ -15908,7 +16255,10 @@
   "access": null,
   "note": "On a skiff or sloop. Level shown for Sailing/Construction = minimum net that reaches all the shoal's depths.",
   "wiki": "Shoals table: \"79 | Yellowfin shoal | Bait Fish offcuts, Fine fish offcuts\"; Raw yellowfin: \"155.5 experience per successful catch with a trawling net, or 31.1 if caught with a fishing rod.\"",
-  "page": "Deep sea trawling"
+  "page": "Deep sea trawling",
+  "outputs": [
+   "Raw yellowfin"
+  ]
  },
  {
   "skill": "Fishing",
@@ -15939,7 +16289,10 @@
   "access": "sailing",
   "note": "Fished from your boat beside the shoal; slower than nets.",
   "wiki": "\"Lastly, players can also use a fishing rod to catch deep sea fish. Doing so requires a plain/fine fish offcut for each fish caught\" — Raw yellowfin: \"31.1 if caught with a fishing rod.\"",
-  "page": "Deep sea trawling"
+  "page": "Deep sea trawling",
+  "outputs": [
+   "Raw yellowfin"
+  ]
  },
  {
   "skill": "Fishing",
@@ -15990,7 +16343,10 @@
   "access": null,
   "note": "On a skiff or sloop. Level shown for Sailing/Construction = minimum net that reaches all the shoal's depths.",
   "wiki": "Shoals table: \"83 | Halibut shoal | Bait Fine fish offcuts\"; Raw halibut: \"195.5 experience per successful catch with a trawling net, or 39.1 if caught with a fishing rod.\"",
-  "page": "Deep sea trawling"
+  "page": "Deep sea trawling",
+  "outputs": [
+   "Raw halibut"
+  ]
  },
  {
   "skill": "Fishing",
@@ -16020,7 +16376,10 @@
   "access": "sailing",
   "note": "Fished from your boat beside the shoal; slower than nets.",
   "wiki": "\"Lastly, players can also use a fishing rod to catch deep sea fish. Doing so requires a plain/fine fish offcut for each fish caught\" — Raw halibut: \"39.1 if caught with a fishing rod.\"",
-  "page": "Deep sea trawling"
+  "page": "Deep sea trawling",
+  "outputs": [
+   "Raw halibut"
+  ]
  },
  {
   "skill": "Fishing",
@@ -16072,7 +16431,10 @@
   "access": null,
   "note": "On a skiff or sloop. Level shown for Sailing/Construction = minimum net that reaches all the shoal's depths.",
   "wiki": "Shoals table: \"87 | Bluefin shoal | Bait Fine fish offcuts\"; Raw bluefin: \"220.5 experience per successful catch with a trawling net, or 44.1 if caught with a fishing rod.\"",
-  "page": "Deep sea trawling"
+  "page": "Deep sea trawling",
+  "outputs": [
+   "Raw bluefin"
+  ]
  },
  {
   "skill": "Fishing",
@@ -16102,7 +16464,10 @@
   "access": "sailing",
   "note": "Fished from your boat beside the shoal; slower than nets.",
   "wiki": "\"Lastly, players can also use a fishing rod to catch deep sea fish. Doing so requires a plain/fine fish offcut for each fish caught\" — Raw bluefin: \"44.1 if caught with a fishing rod.\"",
-  "page": "Deep sea trawling"
+  "page": "Deep sea trawling",
+  "outputs": [
+   "Raw bluefin"
+  ]
  },
  {
   "skill": "Fishing",
@@ -16154,7 +16519,10 @@
   "access": null,
   "note": "On a skiff or sloop. Level shown for Sailing/Construction = minimum net that reaches all the shoal's depths. Marlin shoals are only in the Northern Ocean and need an eternal brazier.",
   "wiki": "Shoals table: \"91 | Marlin shoal | Bait Fine fish offcuts\"; Raw marlin: \"265.5 experience per successful catch with a trawling net, or 53.1 if caught with a fishing rod.\"",
-  "page": "Deep sea trawling"
+  "page": "Deep sea trawling",
+  "outputs": [
+   "Raw marlin"
+  ]
  },
  {
   "skill": "Fishing",
@@ -16184,7 +16552,10 @@
   "access": "sailing",
   "note": "Fished from your boat beside the shoal; slower than nets. Marlin shoals are only in the Northern Ocean and need an eternal brazier.",
   "wiki": "\"Lastly, players can also use a fishing rod to catch deep sea fish. Doing so requires a plain/fine fish offcut for each fish caught\" — Raw marlin: \"53.1 if caught with a fishing rod.\"",
-  "page": "Deep sea trawling"
+  "page": "Deep sea trawling",
+  "outputs": [
+   "Raw marlin"
+  ]
  },
  {
   "skill": "Farming",
@@ -16229,7 +16600,10 @@
   "access": null,
   "note": "xp = total per patch (plant 8.5 + harvest 47). Produces Marigolds. Flower patches next to every allotment (Falador, Catherby, Ardougne, Port Phasmatys...).",
   "wiki": "Flower seeds: \"2 | Marigold seed | ... | Marigolds | Plant 8.5 | Harvest 47 | Total 55.5\" — \"Both plant and harvest experience is awarded once when the patch is cleared.\"",
-  "page": "Flower patch/Seeds"
+  "page": "Flower patch/Seeds",
+  "outputs": [
+   "Marigolds"
+  ]
  },
  {
   "skill": "Farming",
@@ -16274,7 +16648,10 @@
   "access": null,
   "note": "xp = total per patch (plant 12 + harvest 66.5). Produces Rosemary. Flower patches next to every allotment (Falador, Catherby, Ardougne, Port Phasmatys...).",
   "wiki": "Flower seeds: \"11 | Rosemary seed | ... | Rosemary | Plant 12 | Harvest 66.5 | Total 78.5\" — \"Both plant and harvest experience is awarded once when the patch is cleared.\"",
-  "page": "Flower patch/Seeds"
+  "page": "Flower patch/Seeds",
+  "outputs": [
+   "Rosemary"
+  ]
  },
  {
   "skill": "Farming",
@@ -16319,7 +16696,10 @@
   "access": null,
   "note": "xp = total per patch (plant 19.5 + harvest 111). Produces Nasturtiums. Flower patches next to every allotment (Falador, Catherby, Ardougne, Port Phasmatys...).",
   "wiki": "Flower seeds: \"24 | Nasturtium seed | ... | Nasturtiums | Plant 19.5 | Harvest 111 | Total 130.5\" — \"Both plant and harvest experience is awarded once when the patch is cleared.\"",
-  "page": "Flower patch/Seeds"
+  "page": "Flower patch/Seeds",
+  "outputs": [
+   "Nasturtiums"
+  ]
  },
  {
   "skill": "Farming",
@@ -16364,7 +16744,10 @@
   "access": null,
   "note": "xp = total per patch (plant 20.5 + harvest 115.5). Produces Woad leaf. Flower patches next to every allotment (Falador, Catherby, Ardougne, Port Phasmatys...).",
   "wiki": "Flower seeds: \"25 | Woad seed | ... | Woad leaf | Plant 20.5 | Harvest 115.5 | Total 136\" — \"Both plant and harvest experience is awarded once when the patch is cleared.\"",
-  "page": "Flower patch/Seeds"
+  "page": "Flower patch/Seeds",
+  "outputs": [
+   "Woad leaf"
+  ]
  },
  {
   "skill": "Farming",
@@ -16409,7 +16792,10 @@
   "access": null,
   "note": "xp = total per patch (plant 21.5 + harvest 120). Produces Limpwurt root. Flower patches next to every allotment (Falador, Catherby, Ardougne, Port Phasmatys...).",
   "wiki": "Flower seeds: \"26 | Limpwurt seed | ... | Limpwurt root | Plant 21.5 | Harvest 120 | Total 141.5\" — \"Both plant and harvest experience is awarded once when the patch is cleared.\"",
-  "page": "Flower patch/Seeds"
+  "page": "Flower patch/Seeds",
+  "outputs": [
+   "Limpwurt root"
+  ]
  },
  {
   "skill": "Farming",
@@ -16454,7 +16840,10 @@
   "access": null,
   "note": "xp = total per patch (plant 42 + harvest 250). Produces White lily. Flower patches next to every allotment (Falador, Catherby, Ardougne, Port Phasmatys...).",
   "wiki": "Flower seeds: \"58 | White lily seed | ... | White lily | Plant 42 | Harvest 250 | Total 292\" — \"Both plant and harvest experience is awarded once when the patch is cleared.\"",
-  "page": "Flower patch/Seeds"
+  "page": "Flower patch/Seeds",
+  "outputs": [
+   "White lily"
+  ]
  },
  {
   "skill": "Farming",
@@ -16501,7 +16890,8 @@
   "access": null,
   "note": "xp = per herb harvested; +105 for planting. Produces Goutweed. Gout tubers only come from Tai Bwo Wannai Cleanup.",
   "wiki": "Herb seeds: \"29 | Gout tuber | ... | Plant 105 | Harvest 45\" — \"It can be planted in a herb patch requiring 29 Farming and completion of Eadgar's Ruse\"",
-  "page": "Herb patch/Seeds"
+  "page": "Herb patch/Seeds",
+  "outputs": []
  },
  {
   "skill": "Farming",
@@ -16546,7 +16936,10 @@
   "access": null,
   "note": "xp = per herb harvested; +86.5 for planting. Produces Grimy huasca.",
   "wiki": "Herb seeds: \"65 | Huasca seed | ... | Plant 86.5 | Harvest 110\" — \"Huasca seeds can be planted in a herb patch at level 65 Farming to yield grimy huasca\"",
-  "page": "Herb patch/Seeds"
+  "page": "Herb patch/Seeds",
+  "outputs": [
+   "Grimy huasca"
+  ]
  },
  {
   "skill": "Farming",
@@ -16591,7 +16984,10 @@
   "access": null,
   "note": "xp = per crop harvested; +8.5 for planting. Produces Barley. Hops patches: Lumbridge, McGrubor's Wood, Yanille, Entrana, Aldarin.",
   "wiki": "Hops seeds: \"3 | Barley seed ×4 | ... | Barley | Plant 8.5 | Harvest 9.5\" — \"Four hop seeds, or three jute seeds, are needed to plant in each hops patch.\"",
-  "page": "Hops patch/Seeds"
+  "page": "Hops patch/Seeds",
+  "outputs": [
+   "Barley"
+  ]
  },
  {
   "skill": "Farming",
@@ -16636,7 +17032,10 @@
   "access": null,
   "note": "xp = per crop harvested; +9 for planting. Produces Hammerstone hops. Hops patches: Lumbridge, McGrubor's Wood, Yanille, Entrana, Aldarin.",
   "wiki": "Hops seeds: \"4 | Hammerstone seed ×4 | ... | Hammerstone hops | Plant 9 | Harvest 10\" — \"Four hop seeds, or three jute seeds, are needed to plant in each hops patch.\"",
-  "page": "Hops patch/Seeds"
+  "page": "Hops patch/Seeds",
+  "outputs": [
+   "Hammerstone hops"
+  ]
  },
  {
   "skill": "Farming",
@@ -16681,7 +17080,10 @@
   "access": null,
   "note": "xp = per crop harvested; +10.9 for planting. Produces Asgarnian hops. Hops patches: Lumbridge, McGrubor's Wood, Yanille, Entrana, Aldarin.",
   "wiki": "Hops seeds: \"8 | Asgarnian seed ×4 | ... | Asgarnian hops | Plant 10.9 | Harvest 12\" — \"Four hop seeds, or three jute seeds, are needed to plant in each hops patch.\"",
-  "page": "Hops patch/Seeds"
+  "page": "Hops patch/Seeds",
+  "outputs": [
+   "Asgarnian hops"
+  ]
  },
  {
   "skill": "Farming",
@@ -16726,7 +17128,10 @@
   "access": null,
   "note": "xp = per crop harvested; +13 for planting. Produces Jute fibre. Hops patches: Lumbridge, McGrubor's Wood, Yanille, Entrana, Aldarin.",
   "wiki": "Hops seeds: \"13 | Jute seed ×3 | ... | Jute fibre | Plant 13 | Harvest 14.5\" — \"Four hop seeds, or three jute seeds, are needed to plant in each hops patch.\"",
-  "page": "Hops patch/Seeds"
+  "page": "Hops patch/Seeds",
+  "outputs": [
+   "Jute fibre"
+  ]
  },
  {
   "skill": "Farming",
@@ -16771,7 +17176,10 @@
   "access": null,
   "note": "xp = per crop harvested; +14.5 for planting. Produces Yanillian hops. Hops patches: Lumbridge, McGrubor's Wood, Yanille, Entrana, Aldarin.",
   "wiki": "Hops seeds: \"16 | Yanillian seed ×4 | ... | Yanillian hops | Plant 14.5 | Harvest 16\" — \"Four hop seeds, or three jute seeds, are needed to plant in each hops patch.\"",
-  "page": "Hops patch/Seeds"
+  "page": "Hops patch/Seeds",
+  "outputs": [
+   "Yanillian hops"
+  ]
  },
  {
   "skill": "Farming",
@@ -16816,7 +17224,10 @@
   "access": null,
   "note": "xp = per crop harvested; +16 for planting. Produces Flax. Hops patches: Lumbridge, McGrubor's Wood, Yanille, Entrana, Aldarin.",
   "wiki": "Hops seeds: \"18 | Flax seed ×3 | ... | Flax | Plant 16 | Harvest 17.5\" — \"Four hop seeds, or three jute seeds, are needed to plant in each hops patch.\"",
-  "page": "Hops patch/Seeds"
+  "page": "Hops patch/Seeds",
+  "outputs": [
+   "Flax"
+  ]
  },
  {
   "skill": "Farming",
@@ -16861,7 +17272,10 @@
   "access": null,
   "note": "xp = per crop harvested; +17.5 for planting. Produces Krandorian hops. Hops patches: Lumbridge, McGrubor's Wood, Yanille, Entrana, Aldarin.",
   "wiki": "Hops seeds: \"21 | Krandorian seed ×4 | ... | Krandorian hops | Plant 17.5 | Harvest 19.5\" — \"Four hop seeds, or three jute seeds, are needed to plant in each hops patch.\"",
-  "page": "Hops patch/Seeds"
+  "page": "Hops patch/Seeds",
+  "outputs": [
+   "Krandorian hops"
+  ]
  },
  {
   "skill": "Farming",
@@ -16906,7 +17320,10 @@
   "access": null,
   "note": "xp = per crop harvested; +23 for planting. Produces Wildblood hops. Hops patches: Lumbridge, McGrubor's Wood, Yanille, Entrana, Aldarin.",
   "wiki": "Hops seeds: \"28 | Wildblood seed ×4 | ... | Wildblood hops | Plant 23 | Harvest 26\" — \"Four hop seeds, or three jute seeds, are needed to plant in each hops patch.\"",
-  "page": "Hops patch/Seeds"
+  "page": "Hops patch/Seeds",
+  "outputs": [
+   "Wildblood hops"
+  ]
  },
  {
   "skill": "Farming",
@@ -16951,7 +17368,10 @@
   "access": null,
   "note": "xp = per crop harvested; +33 for planting. Produces Hemp. Hops patches: Lumbridge, McGrubor's Wood, Yanille, Entrana, Aldarin.",
   "wiki": "Hops seeds: \"37 | Hemp seed ×3 | ... | Hemp | Plant 33 | Harvest 37\" — \"Four hop seeds, or three jute seeds, are needed to plant in each hops patch.\"",
-  "page": "Hops patch/Seeds"
+  "page": "Hops patch/Seeds",
+  "outputs": [
+   "Hemp"
+  ]
  },
  {
   "skill": "Farming",
@@ -16996,7 +17416,10 @@
   "access": null,
   "note": "xp = per crop harvested; +72 for planting. Produces Cotton boll. Hops patches: Lumbridge, McGrubor's Wood, Yanille, Entrana, Aldarin.",
   "wiki": "Hops seeds: \"71 | Cotton seed ×3 | ... | Cotton boll | Plant 72 | Harvest 82\" — \"Four hop seeds, or three jute seeds, are needed to plant in each hops patch.\"",
-  "page": "Hops patch/Seeds"
+  "page": "Hops patch/Seeds",
+  "outputs": [
+   "Cotton boll"
+  ]
  },
  {
   "skill": "Farming",
@@ -17050,7 +17473,10 @@
   "access": null,
   "note": "xp = plant 11.5 + check-health 64; +4.5 per berry picked. Produces Redberries. Bush patches: Champions' Guild, Rimmington, south Ardougne, Etceteria, Farming Guild.",
   "wiki": "Bush seeds: \"10 | Redberry seed | ... | Redberries | Plant 11.5 | Check health 64 | Harvest 4.5\" — \"A player can check the health of and then harvest berries from fully grown bushes.\"",
-  "page": "Bush patch/Seeds"
+  "page": "Bush patch/Seeds",
+  "outputs": [
+   "Redberries"
+  ]
  },
  {
   "skill": "Farming",
@@ -17104,7 +17530,8 @@
   "access": null,
   "note": "xp = plant 18 + check-health 102.5; +7 per berry picked. Produces Cadava berries. Bush patches: Champions' Guild, Rimmington, south Ardougne, Etceteria, Farming Guild.",
   "wiki": "Bush seeds: \"22 | Cadavaberry seed | ... | Cadava berries | Plant 18 | Check health 102.5 | Harvest 7\" — \"A player can check the health of and then harvest berries from fully grown bushes.\"",
-  "page": "Bush patch/Seeds"
+  "page": "Bush patch/Seeds",
+  "outputs": []
  },
  {
   "skill": "Farming",
@@ -17158,7 +17585,8 @@
   "access": null,
   "note": "xp = plant 31.5 + check-health 177.5; +12 per berry picked. Produces Dwellberries. Bush patches: Champions' Guild, Rimmington, south Ardougne, Etceteria, Farming Guild.",
   "wiki": "Bush seeds: \"36 | Dwellberry seed | ... | Dwellberries | Plant 31.5 | Check health 177.5 | Harvest 12\" — \"A player can check the health of and then harvest berries from fully grown bushes.\"",
-  "page": "Bush patch/Seeds"
+  "page": "Bush patch/Seeds",
+  "outputs": []
  },
  {
   "skill": "Farming",
@@ -17212,7 +17640,10 @@
   "access": null,
   "note": "xp = plant 50.5 + check-health 284.5; +19 per berry picked. Produces Jangerberries. Bush patches: Champions' Guild, Rimmington, south Ardougne, Etceteria, Farming Guild.",
   "wiki": "Bush seeds: \"48 | Jangerberry seed | ... | Jangerberries | Plant 50.5 | Check health 284.5 | Harvest 19\" — \"A player can check the health of and then harvest berries from fully grown bushes.\"",
-  "page": "Bush patch/Seeds"
+  "page": "Bush patch/Seeds",
+  "outputs": [
+   "Jangerberries"
+  ]
  },
  {
   "skill": "Farming",
@@ -17266,7 +17697,10 @@
   "access": null,
   "note": "xp = plant 78 + check-health 437.5; +29 per berry picked. Produces White berries. Bush patches: Champions' Guild, Rimmington, south Ardougne, Etceteria, Farming Guild.",
   "wiki": "Bush seeds: \"59 | Whiteberry seed | ... | White berries | Plant 78 | Check health 437.5 | Harvest 29\" — \"A player can check the health of and then harvest berries from fully grown bushes.\"",
-  "page": "Bush patch/Seeds"
+  "page": "Bush patch/Seeds",
+  "outputs": [
+   "White berries"
+  ]
  },
  {
   "skill": "Farming",
@@ -17320,7 +17754,10 @@
   "access": null,
   "note": "xp = plant 120 + check-health 675; +45 per berry picked. Produces Poison ivy berries. Bush patches: Champions' Guild, Rimmington, south Ardougne, Etceteria, Farming Guild.",
   "wiki": "Bush seeds: \"70 | Poison ivy seed | ... | Poison ivy berries | Plant 120 | Check health 675 | Harvest 45\" — \"A player can check the health of and then harvest berries from fully grown bushes.\"",
-  "page": "Bush patch/Seeds"
+  "page": "Bush patch/Seeds",
+  "outputs": [
+   "Poison ivy berries"
+  ]
  },
  {
   "skill": "Farming",
@@ -17387,7 +17824,23 @@
   "access": null,
   "note": "xp = plant 14 + check-health 467.3. Chopping the tree gives normal Woodcutting xp. Tree patches: Lumbridge, Varrock, Falador, Taverley, Gnome Stronghold, Farming Guild, Nemus Retreat.",
   "wiki": "Tree seeds: \"15 | Acorn | ... | Oak logs & roots | Plant 14 | Check-health 467.3 | Total 481.3\" — \"Plant one tree seed on the pot with the gardening trowel and water it with a watering can ... players must have a spade in their inventory when planting and removing the stump of a tree.\"",
-  "page": "Tree patch/Seeds"
+  "page": "Tree patch/Seeds",
+  "outputs": [
+   {
+    "card": "Oak logs",
+    "levels": {
+     "Woodcutting": 15
+    },
+    "tool": "Axe"
+   },
+   {
+    "card": "Oak roots",
+    "levels": {
+     "Woodcutting": 15
+    },
+    "tool": "Axe"
+   }
+  ]
  },
  {
   "skill": "Farming",
@@ -17454,7 +17907,23 @@
   "access": null,
   "note": "xp = plant 25 + check-health 1456.5. Chopping the tree gives normal Woodcutting xp. Tree patches: Lumbridge, Varrock, Falador, Taverley, Gnome Stronghold, Farming Guild, Nemus Retreat.",
   "wiki": "Tree seeds: \"30 | Willow seed | ... | Willow logs & roots | Plant 25 | Check-health 1456.5 | Total 1481.5\" — \"Plant one tree seed on the pot with the gardening trowel and water it with a watering can ... players must have a spade in their inventory when planting and removing the stump of a tree.\"",
-  "page": "Tree patch/Seeds"
+  "page": "Tree patch/Seeds",
+  "outputs": [
+   {
+    "card": "Willow logs",
+    "levels": {
+     "Woodcutting": 30
+    },
+    "tool": "Axe"
+   },
+   {
+    "card": "Willow roots",
+    "levels": {
+     "Woodcutting": 30
+    },
+    "tool": "Axe"
+   }
+  ]
  },
  {
   "skill": "Farming",
@@ -17521,7 +17990,23 @@
   "access": null,
   "note": "xp = plant 45 + check-health 3403.4. Chopping the tree gives normal Woodcutting xp. Tree patches: Lumbridge, Varrock, Falador, Taverley, Gnome Stronghold, Farming Guild, Nemus Retreat.",
   "wiki": "Tree seeds: \"45 | Maple seed | ... | Maple logs & roots | Plant 45 | Check-health 3403.4 | Total 3448.4\" — \"Plant one tree seed on the pot with the gardening trowel and water it with a watering can ... players must have a spade in their inventory when planting and removing the stump of a tree.\"",
-  "page": "Tree patch/Seeds"
+  "page": "Tree patch/Seeds",
+  "outputs": [
+   {
+    "card": "Maple logs",
+    "levels": {
+     "Woodcutting": 45
+    },
+    "tool": "Axe"
+   },
+   {
+    "card": "Maple roots",
+    "levels": {
+     "Woodcutting": 45
+    },
+    "tool": "Axe"
+   }
+  ]
  },
  {
   "skill": "Farming",
@@ -17588,7 +18073,23 @@
   "access": null,
   "note": "xp = plant 81 + check-health 7069.9. Chopping the tree gives normal Woodcutting xp. Tree patches: Lumbridge, Varrock, Falador, Taverley, Gnome Stronghold, Farming Guild, Nemus Retreat.",
   "wiki": "Tree seeds: \"60 | Yew seed | ... | Yew logs & roots | Plant 81 | Check-health 7069.9 | Total 7150.9\" — \"Plant one tree seed on the pot with the gardening trowel and water it with a watering can ... players must have a spade in their inventory when planting and removing the stump of a tree.\"",
-  "page": "Tree patch/Seeds"
+  "page": "Tree patch/Seeds",
+  "outputs": [
+   {
+    "card": "Yew logs",
+    "levels": {
+     "Woodcutting": 60
+    },
+    "tool": "Axe"
+   },
+   {
+    "card": "Yew roots",
+    "levels": {
+     "Woodcutting": 60
+    },
+    "tool": "Axe"
+   }
+  ]
  },
  {
   "skill": "Farming",
@@ -17655,7 +18156,23 @@
   "access": null,
   "note": "xp = plant 145.5 + check-health 13768.3. Chopping the tree gives normal Woodcutting xp. Tree patches: Lumbridge, Varrock, Falador, Taverley, Gnome Stronghold, Farming Guild, Nemus Retreat.",
   "wiki": "Tree seeds: \"75 | Magic seed | ... | Magic logs & roots | Plant 145.5 | Check-health 13768.3 | Total 13913.8\" — \"Plant one tree seed on the pot with the gardening trowel and water it with a watering can ... players must have a spade in their inventory when planting and removing the stump of a tree.\"",
-  "page": "Tree patch/Seeds"
+  "page": "Tree patch/Seeds",
+  "outputs": [
+   {
+    "card": "Magic logs",
+    "levels": {
+     "Woodcutting": 75
+    },
+    "tool": "Axe"
+   },
+   {
+    "card": "Magic roots",
+    "levels": {
+     "Woodcutting": 75
+    },
+    "tool": "Axe"
+   }
+  ]
  },
  {
   "skill": "Farming",
@@ -17715,7 +18232,10 @@
   "access": null,
   "note": "xp = total incl. planting, check-health and 6 fruit. Produces Cooking apple. Patches: Gnome Stronghold, Catherby, Tree Gnome Village, Brimhaven, Lletya, Farming Guild, Kastori.",
   "wiki": "Fruit tree seeds: \"27 | Apple tree seed | ... | Cooking apple | XP 1272.5\" (\"Assumes 6 fruits are harvested.\")",
-  "page": "Fruit tree patch/Seeds"
+  "page": "Fruit tree patch/Seeds",
+  "outputs": [
+   "Cooking apple"
+  ]
  },
  {
   "skill": "Farming",
@@ -17775,7 +18295,10 @@
   "access": null,
   "note": "xp = total incl. planting, check-health and 6 fruit. Produces Banana. Patches: Gnome Stronghold, Catherby, Tree Gnome Village, Brimhaven, Lletya, Farming Guild, Kastori.",
   "wiki": "Fruit tree seeds: \"33 | Banana tree seed | ... | Banana | XP 1841.5\" (\"Assumes 6 fruits are harvested.\")",
-  "page": "Fruit tree patch/Seeds"
+  "page": "Fruit tree patch/Seeds",
+  "outputs": [
+   "Banana"
+  ]
  },
  {
   "skill": "Farming",
@@ -17835,7 +18358,10 @@
   "access": null,
   "note": "xp = total incl. planting, check-health and 6 fruit. Produces Orange. Patches: Gnome Stronghold, Catherby, Tree Gnome Village, Brimhaven, Lletya, Farming Guild, Kastori.",
   "wiki": "Fruit tree seeds: \"39 | Orange tree seed | ... | Orange | XP 2586.7\" (\"Assumes 6 fruits are harvested.\")",
-  "page": "Fruit tree patch/Seeds"
+  "page": "Fruit tree patch/Seeds",
+  "outputs": [
+   "Orange"
+  ]
  },
  {
   "skill": "Farming",
@@ -17895,7 +18421,10 @@
   "access": null,
   "note": "xp = total incl. planting, check-health and 6 fruit. Produces Curry leaf. Patches: Gnome Stronghold, Catherby, Tree Gnome Village, Brimhaven, Lletya, Farming Guild, Kastori.",
   "wiki": "Fruit tree seeds: \"42 | Curry tree seed | ... | Curry leaf | XP 3036.9\" (\"Assumes 6 fruits are harvested.\")",
-  "page": "Fruit tree patch/Seeds"
+  "page": "Fruit tree patch/Seeds",
+  "outputs": [
+   "Curry leaf"
+  ]
  },
  {
   "skill": "Farming",
@@ -17955,7 +18484,10 @@
   "access": null,
   "note": "xp = total incl. planting, check-health and 6 fruit. Produces Pineapple. Patches: Gnome Stronghold, Catherby, Tree Gnome Village, Brimhaven, Lletya, Farming Guild, Kastori.",
   "wiki": "Fruit tree seeds: \"51 | Pineapple seed | ... | Pineapple | XP 4791.7\" (\"Assumes 6 fruits are harvested.\")",
-  "page": "Fruit tree patch/Seeds"
+  "page": "Fruit tree patch/Seeds",
+  "outputs": [
+   "Pineapple"
+  ]
  },
  {
   "skill": "Farming",
@@ -18015,7 +18547,10 @@
   "access": null,
   "note": "xp = total incl. planting, check-health and 6 fruit. Produces Papaya fruit. Patches: Gnome Stronghold, Catherby, Tree Gnome Village, Brimhaven, Lletya, Farming Guild, Kastori.",
   "wiki": "Fruit tree seeds: \"57 | Papaya tree seed | ... | Papaya fruit | XP 6380.4\" (\"Assumes 6 fruits are harvested.\")",
-  "page": "Fruit tree patch/Seeds"
+  "page": "Fruit tree patch/Seeds",
+  "outputs": [
+   "Papaya fruit"
+  ]
  },
  {
   "skill": "Farming",
@@ -18075,7 +18610,10 @@
   "access": null,
   "note": "xp = total incl. planting, check-health and 6 fruit. Produces Coconut. Patches: Gnome Stronghold, Catherby, Tree Gnome Village, Brimhaven, Lletya, Farming Guild, Kastori.",
   "wiki": "Fruit tree seeds: \"68 | Palm tree seed | ... | Coconut | XP 10509.6\" (\"Assumes 6 fruits are harvested.\")",
-  "page": "Fruit tree patch/Seeds"
+  "page": "Fruit tree patch/Seeds",
+  "outputs": [
+   "Coconut"
+  ]
  },
  {
   "skill": "Farming",
@@ -18135,7 +18673,10 @@
   "access": null,
   "note": "xp = total incl. planting, check-health and 6 fruit. Produces Dragonfruit. Patches: Gnome Stronghold, Catherby, Tree Gnome Village, Brimhaven, Lletya, Farming Guild, Kastori.",
   "wiki": "Fruit tree seeds: \"81 | Dragonfruit tree seed | ... | Dragonfruit | XP 17895\" (\"Assumes 6 fruits are harvested.\")",
-  "page": "Fruit tree patch/Seeds"
+  "page": "Fruit tree patch/Seeds",
+  "outputs": [
+   "Dragonfruit"
+  ]
  },
  {
   "skill": "Farming",
@@ -18177,11 +18718,22 @@
    {
     "label": "Underwater breathing",
     "type": "item",
-    "cards": [
-     "Diving apparatus",
-     "Medallion of the deep"
-    ],
-    "note": "Diving apparatus is worn with a fishbowl helmet (no card)"
+    "cards": [],
+    "routes": [
+     {
+      "label": "Fishbowl helmet + diving apparatus",
+      "cards": [
+       "Fishbowl helmet",
+       "Diving apparatus"
+      ]
+     },
+     {
+      "label": "Medallion of the deep (counts as both)",
+      "cards": [
+       "Medallion of the deep"
+      ]
+     }
+    ]
    }
   ],
   "quests": [],
@@ -18189,7 +18741,10 @@
   "access": "fossil_island",
   "note": "xp = per giant seaweed harvested; +19 for planting.",
   "wiki": "\"Seaweed spores are used in the Farming skill and require level 23 in the skill to grow them. They are planted at the seaweed patch in the underwater area of Fossil Island\" Special seeds: \"23 | Giant seaweed | Plant 19 | Harvest 21\"",
-  "page": "Seaweed spore"
+  "page": "Seaweed spore",
+  "outputs": [
+   "Giant seaweed"
+  ]
  },
  {
   "skill": "Farming",
@@ -18240,7 +18795,10 @@
   "access": "kourend",
   "note": "Special seeds: plant 31.5, check-health 625, harvest 40 per grape. 12 vine patches; Gallow (no card) protects for free.",
   "wiki": "\"Grape seeds can be planted in a vine patch at the Hosidius Vinery at level 36 Farming\" \"Players will need to use saltpetre on the patches with a gardening trowel in order to treat the soil before planting\" \"players can check the grape vine's health for 625 Farming experience\"",
-  "page": "Grape seed"
+  "page": "Grape seed",
+  "outputs": [
+   "Grapes"
+  ]
  },
  {
   "skill": "Farming",
@@ -18285,7 +18843,10 @@
   "access": "morytania",
   "note": "xp = per mushroom; +61.5 for planting.",
   "wiki": "Special seeds: \"53 | Mushroom | ... | Mushroom | Plant 61.5 | Harvest 57.7\"; Special patches: \"53 | Mushroom | West of Canifis\"",
-  "page": "Special patches/Seeds"
+  "page": "Special patches/Seeds",
+  "outputs": [
+   "Mushroom"
+  ]
  },
  {
   "skill": "Farming",
@@ -18330,7 +18891,10 @@
   "access": null,
   "note": "xp = plant 66.5 + check-health 374; +25 per spine.",
   "wiki": "Cacti seeds: \"55 | Cactus | ... | Cactus spine | Plant 66.5 | Check-health 374 | Harvest 25\" — patches in Al Kharid and the Farming Guild",
-  "page": "Special patches/Seeds"
+  "page": "Special patches/Seeds",
+  "outputs": [
+   "Cactus spine"
+  ]
  },
  {
   "skill": "Farming",
@@ -18388,7 +18952,10 @@
   "access": null,
   "note": "xp = harvest 512; +91 for planting.",
   "wiki": "Special seeds: \"63 | Belladonna | ... | Nightshade | Plant 91 | Harvest 512\"; Belladonna: \"Players must pick nightshade with gloves equipped, or they will be hit for 2 damage\"",
-  "page": "Belladonna"
+  "page": "Belladonna",
+  "outputs": [
+   "Nightshade"
+  ]
  },
  {
   "skill": "Farming",
@@ -18433,7 +19000,10 @@
   "access": null,
   "note": "xp = plant 68 + check-health 230; +68 per potato cactus.",
   "wiki": "Cacti seeds: \"64 | Potato cactus | ... | Plant 68 | Check-health 230 | Harvest 68\"",
-  "page": "Special patches/Seeds"
+  "page": "Special patches/Seeds",
+  "outputs": [
+   "Potato cactus"
+  ]
  },
  {
   "skill": "Farming",
@@ -18485,7 +19055,8 @@
   "access": "kourend",
   "note": "Farming Guild (45 Farming to enter). +62 for planting.",
   "wiki": "\"The Hespori patch, accessible via the cave entrance, is a patch where players with 65 Farming can plant Hespori seeds.\" \"After killing it, the seed may be harvested granting 12,600 Farming experience\"",
-  "page": "Hespori"
+  "page": "Hespori",
+  "outputs": []
  },
  {
   "skill": "Farming",
@@ -18545,7 +19116,10 @@
   "access": null,
   "note": "xp = plant 129.5 + check-health 12,096; +48.5 per fruit.",
   "wiki": "Special tree seeds: \"72 | Calquat tree | ... | Calquat fruit | Plant 129.5 | Check-health 12,096 | Harvest 48.5\"; patches: north of Tai Bwo Wannai, The Summer Shore, Kastori",
-  "page": "Special patches/Seeds"
+  "page": "Special patches/Seeds",
+  "outputs": [
+   "Calquat fruit"
+  ]
  },
  {
   "skill": "Farming",
@@ -18605,7 +19179,10 @@
   "access": "prifddinas",
   "note": "Yields crystal shards; tree can't be diseased.",
   "wiki": "\"At level 74 Farming, crystal acorns may be planted in plant pots with a gardening trowel and watered to become crystal saplings.\" \"Planting the crystal sapling yields 126 experience, and checking its health gives 13,240 experience.\"",
-  "page": "Crystal acorn"
+  "page": "Crystal acorn",
+  "outputs": [
+   "Crystal shard"
+  ]
  },
  {
   "skill": "Farming",
@@ -18643,7 +19220,8 @@
   "access": "kourend",
   "note": "Farming Guild anima patch (intermediate tier, 65 Farming). Seed comes from Hespori.",
   "wiki": "Anima seeds: \"76 | Kronos | Immune | ... | 100\" — \"Experience is only granted when the crop is planted.\"",
-  "page": "Special patches/Seeds"
+  "page": "Special patches/Seeds",
+  "outputs": []
  },
  {
   "skill": "Farming",
@@ -18681,7 +19259,8 @@
   "access": "kourend",
   "note": "Farming Guild anima patch (intermediate tier, 65 Farming). Seed comes from Hespori.",
   "wiki": "Anima seeds: \"76 | Iasor | Immune | ... | 100\" — \"Experience is only granted when the crop is planted.\"",
-  "page": "Special patches/Seeds"
+  "page": "Special patches/Seeds",
+  "outputs": []
  },
  {
   "skill": "Farming",
@@ -18719,7 +19298,8 @@
   "access": "kourend",
   "note": "Farming Guild anima patch (intermediate tier, 65 Farming). Seed comes from Hespori.",
   "wiki": "Anima seeds: \"76 | Attas | Immune | ... | 100\" — \"Experience is only granted when the crop is planted.\"",
-  "page": "Special patches/Seeds"
+  "page": "Special patches/Seeds",
+  "outputs": []
  },
  {
   "skill": "Farming",
@@ -18779,7 +19359,8 @@
   "access": null,
   "note": "Patches: Port Sarim, Etceteria, Brimhaven, Hosidius, Farming Guild (85). One tree at 83, more at 88/93/96/99.",
   "wiki": "\"A spirit seed is a rare seed that members can use to grow a spirit tree at level 83 Farming.\" Special tree seeds: \"83 | Spirit tree | Plant 199.5 | Check-health 19,301.8\"",
-  "page": "Spirit seed"
+  "page": "Spirit seed",
+  "outputs": []
  },
  {
   "skill": "Farming",
@@ -18839,7 +19420,10 @@
   "access": "kourend",
   "note": "Advanced tier of the Farming Guild (85). +23.5 per bark harvested.",
   "wiki": "Special tree seeds: \"85 | Celastrus tree | ... | Celastrus bark | Plant 204 | Check-health 14,130 | Harvest 23.5\"; patch: Farming Guild",
-  "page": "Special patches/Seeds"
+  "page": "Special patches/Seeds",
+  "outputs": [
+   "Celastrus bark"
+  ]
  },
  {
   "skill": "Farming",
@@ -18899,7 +19483,16 @@
   "access": "kourend",
   "note": "Advanced tier of the Farming Guild (85).",
   "wiki": "Special tree seeds: \"90 | Redwood tree | ... | Redwood logs | Plant 230 | Check-health 22,450\"; patch: Farming Guild",
-  "page": "Special patches/Seeds"
+  "page": "Special patches/Seeds",
+  "outputs": [
+   {
+    "card": "Redwood logs",
+    "levels": {
+     "Woodcutting": 90
+    },
+    "tool": "Axe"
+   }
+  ]
  },
  {
   "skill": "Farming",
@@ -18959,7 +19552,16 @@
   "access": "fossil_island",
   "note": "Also Locus Oasis (Varlamore, after The Ribbiting Tale of a Lily Pad Labour Dispute) and Anglers' Retreat (51 Sailing).",
   "wiki": "Hardwood tree seeds: \"35 | Teak tree | ... | Teak logs | Plant 35 | Check-health 7,290\"; patches: \"Fossil Island Mushroom Forest (3 patches)\", \"Locus Oasis\", \"Anglers' Retreat (requires 51 Sailing)\"",
-  "page": "Special patches/Seeds"
+  "page": "Special patches/Seeds",
+  "outputs": [
+   {
+    "card": "Teak logs",
+    "levels": {
+     "Woodcutting": 35
+    },
+    "tool": "Axe"
+   }
+  ]
  },
  {
   "skill": "Farming",
@@ -19019,7 +19621,16 @@
   "access": "fossil_island",
   "note": "Also Locus Oasis (Varlamore, after The Ribbiting Tale of a Lily Pad Labour Dispute) and Anglers' Retreat (51 Sailing).",
   "wiki": "Hardwood tree seeds: \"55 | Mahogany tree | ... | Mahogany logs | Plant 63 | Check-health 15,720\"; patches: \"Fossil Island Mushroom Forest (3 patches)\", \"Locus Oasis\", \"Anglers' Retreat (requires 51 Sailing)\"",
-  "page": "Special patches/Seeds"
+  "page": "Special patches/Seeds",
+  "outputs": [
+   {
+    "card": "Mahogany logs",
+    "levels": {
+     "Woodcutting": 50
+    },
+    "tool": "Axe"
+   }
+  ]
  },
  {
   "skill": "Farming",
@@ -19079,7 +19690,16 @@
   "access": "fossil_island",
   "note": "Also Locus Oasis (Varlamore, after The Ribbiting Tale of a Lily Pad Labour Dispute) and Anglers' Retreat (51 Sailing).",
   "wiki": "Hardwood tree seeds: \"66 | Camphor tree | ... | Camphor logs | Plant 88 | Check-health 17,840\"; patches: \"Fossil Island Mushroom Forest (3 patches)\", \"Locus Oasis\", \"Anglers' Retreat (requires 51 Sailing)\"",
-  "page": "Special patches/Seeds"
+  "page": "Special patches/Seeds",
+  "outputs": [
+   {
+    "card": "Camphor logs",
+    "levels": {
+     "Woodcutting": 66
+    },
+    "tool": "Axe"
+   }
+  ]
  },
  {
   "skill": "Farming",
@@ -19139,7 +19759,16 @@
   "access": "fossil_island",
   "note": "Also Locus Oasis (Varlamore, after The Ribbiting Tale of a Lily Pad Labour Dispute) and Anglers' Retreat (51 Sailing).",
   "wiki": "Hardwood tree seeds: \"80 | Ironwood tree | ... | Ironwood logs | Plant 145 | Check-health 20,380\"; patches: \"Fossil Island Mushroom Forest (3 patches)\", \"Locus Oasis\", \"Anglers' Retreat (requires 51 Sailing)\"",
-  "page": "Special patches/Seeds"
+  "page": "Special patches/Seeds",
+  "outputs": [
+   {
+    "card": "Ironwood logs",
+    "levels": {
+     "Woodcutting": 80
+    },
+    "tool": "Axe"
+   }
+  ]
  },
  {
   "skill": "Farming",
@@ -19199,7 +19828,16 @@
   "access": "fossil_island",
   "note": "Also Locus Oasis (Varlamore, after The Ribbiting Tale of a Lily Pad Labour Dispute) and Anglers' Retreat (51 Sailing).",
   "wiki": "Hardwood tree seeds: \"92 | Rosewood tree | ... | Rosewood logs | Plant 252 | Check-health 23,100\"; patches: \"Fossil Island Mushroom Forest (3 patches)\", \"Locus Oasis\", \"Anglers' Retreat (requires 51 Sailing)\"",
-  "page": "Special patches/Seeds"
+  "page": "Special patches/Seeds",
+  "outputs": [
+   {
+    "card": "Rosewood logs",
+    "levels": {
+     "Woodcutting": 92
+    },
+    "tool": "Axe"
+   }
+  ]
  },
  {
   "skill": "Farming",
@@ -19218,11 +19856,22 @@
    {
     "label": "Underwater breathing",
     "type": "item",
-    "cards": [
-     "Diving apparatus",
-     "Medallion of the deep"
-    ],
-    "note": "Diving apparatus + fishbowl helmet (no card) or medallion of the deep"
+    "cards": [],
+    "routes": [
+     {
+      "label": "Fishbowl helmet + diving apparatus",
+      "cards": [
+       "Fishbowl helmet",
+       "Diving apparatus"
+      ]
+     },
+     {
+      "label": "Medallion of the deep (counts as both)",
+      "cards": [
+       "Medallion of the deep"
+      ]
+     }
+    ]
    }
   ],
   "quests": [
@@ -19232,7 +19881,10 @@
   "access": null,
   "note": "xp = per coral harvested; +20.5 for planting. Chet (no card) can protect for a payment.",
   "wiki": "Coral frags: \"28 | Elkhorn | ... | Elkhorn coral | Plant 20.5 | Harvest 24\" — \"After completion of Troubled Tortugans, players can access the two nurseries in the Coral Nurseries, a location beneath the eastern coast of The Great Conch.\"",
-  "page": "Coral nursery"
+  "page": "Coral nursery",
+  "outputs": [
+   "Elkhorn coral"
+  ]
  },
  {
   "skill": "Farming",
@@ -19251,11 +19903,22 @@
    {
     "label": "Underwater breathing",
     "type": "item",
-    "cards": [
-     "Diving apparatus",
-     "Medallion of the deep"
-    ],
-    "note": "Diving apparatus + fishbowl helmet (no card) or medallion of the deep"
+    "cards": [],
+    "routes": [
+     {
+      "label": "Fishbowl helmet + diving apparatus",
+      "cards": [
+       "Fishbowl helmet",
+       "Diving apparatus"
+      ]
+     },
+     {
+      "label": "Medallion of the deep (counts as both)",
+      "cards": [
+       "Medallion of the deep"
+      ]
+     }
+    ]
    }
   ],
   "quests": [
@@ -19265,7 +19928,10 @@
   "access": null,
   "note": "xp = per coral harvested; +52.5 for planting. Chet (no card) can protect for a payment.",
   "wiki": "Coral frags: \"52 | Pillar | ... | Pillar coral | Plant 52.5 | Harvest 60\" — \"After completion of Troubled Tortugans, players can access the two nurseries in the Coral Nurseries, a location beneath the eastern coast of The Great Conch.\"",
-  "page": "Coral nursery"
+  "page": "Coral nursery",
+  "outputs": [
+   "Pillar coral"
+  ]
  },
  {
   "skill": "Farming",
@@ -19284,11 +19950,22 @@
    {
     "label": "Underwater breathing",
     "type": "item",
-    "cards": [
-     "Diving apparatus",
-     "Medallion of the deep"
-    ],
-    "note": "Diving apparatus + fishbowl helmet (no card) or medallion of the deep"
+    "cards": [],
+    "routes": [
+     {
+      "label": "Fishbowl helmet + diving apparatus",
+      "cards": [
+       "Fishbowl helmet",
+       "Diving apparatus"
+      ]
+     },
+     {
+      "label": "Medallion of the deep (counts as both)",
+      "cards": [
+       "Medallion of the deep"
+      ]
+     }
+    ]
    }
   ],
   "quests": [
@@ -19298,7 +19975,10 @@
   "access": null,
   "note": "xp = per coral harvested; +136 for planting. Chet (no card) can protect for a payment.",
   "wiki": "Coral frags: \"77 | Umbral | ... | Umbral coral | Plant 136 | Harvest 159\" — \"After completion of Troubled Tortugans, players can access the two nurseries in the Coral Nurseries, a location beneath the eastern coast of The Great Conch.\"",
-  "page": "Coral nursery"
+  "page": "Coral nursery",
+  "outputs": [
+   "Umbral coral"
+  ]
  },
  {
   "skill": "Farming",
@@ -19338,7 +20018,8 @@
   "access": "kourend",
   "note": "Minigame; seeds are free from the table (no card). xp field = per-fruit harvest rate derived from the wiki bonus (1500/250); depositing fruit gives more.",
   "wiki": "\"The Tithe Farm is a Farming based minigame that is located in Hosidius, requiring level 34 Farming to play.\" Seeds: \"Golovanova seeds (Farming 34)\". \"Players receive bonus experience of 250 times the harvest experience rate when depositing the 75th fruit—1,500, 3,500, or 5,750 experience\"",
-  "page": "Tithe Farm"
+  "page": "Tithe Farm",
+  "outputs": []
  },
  {
   "skill": "Farming",
@@ -19378,7 +20059,8 @@
   "access": "kourend",
   "note": "Minigame; seeds are free from the table (no card). xp field = per-fruit harvest rate derived from the wiki bonus (3500/250); depositing fruit gives more.",
   "wiki": "\"The Tithe Farm is a Farming based minigame that is located in Hosidius, requiring level 34 Farming to play.\" Seeds: \"Bologano seeds (Farming 54)\". \"Players receive bonus experience of 250 times the harvest experience rate when depositing the 75th fruit—1,500, 3,500, or 5,750 experience\"",
-  "page": "Tithe Farm"
+  "page": "Tithe Farm",
+  "outputs": []
  },
  {
   "skill": "Farming",
@@ -19418,7 +20100,8 @@
   "access": "kourend",
   "note": "Minigame; seeds are free from the table (no card). xp field = per-fruit harvest rate derived from the wiki bonus (5750/250); depositing fruit gives more.",
   "wiki": "\"The Tithe Farm is a Farming based minigame that is located in Hosidius, requiring level 34 Farming to play.\" Seeds: \"Logavano seeds (Farming 74)\". \"Players receive bonus experience of 250 times the harvest experience rate when depositing the 75th fruit—1,500, 3,500, or 5,750 experience\"",
-  "page": "Tithe Farm"
+  "page": "Tithe Farm",
+  "outputs": []
  },
  {
   "skill": "Agility",
@@ -19626,13 +20309,26 @@
   "type": "agility-course",
   "requirements": [
    {
-    "label": "Fishbowl helmet + Diving apparatus (refill oxygen at the start)",
+    "label": "Underwater breathing",
     "type": "item",
-    "cards": [
-     "Diving apparatus"
+    "cards": [],
+    "routes": [
+     {
+      "label": "Fishbowl helmet + diving apparatus",
+      "cards": [
+       "Fishbowl helmet",
+       "Diving apparatus"
+      ]
+     },
+     {
+      "label": "Medallion of the deep (counts as both)",
+      "cards": [
+       "Medallion of the deep"
+      ]
+     }
     ],
     "optional": true,
-    "note": "Fishbowl helmet has no card"
+    "note": "Refill oxygen at the start"
    }
   ],
   "quests": [
@@ -21589,12 +22285,11 @@
      "Abyssal head",
      "Basilisk head",
      "Cockatrice head",
-     "Crawling hand",
      "Kurask head",
      "Alchemical hydra heads",
      "Vorkath's head"
     ],
-    "note": "Vorkath's head gives 1,000"
+    "note": "Vorkath's head gives 1,000. The crawling hand head has no card"
    }
   ],
   "quests": [],

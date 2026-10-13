@@ -9547,6 +9547,23 @@
         "melee_strength": -10
       },
       "attackSpeed": 4
+    },
+    {
+      "name": "Egg whisk",
+      "value": 0,
+      "is2h": false,
+      "itemIds": [
+        7435
+      ],
+      "combatType": "melee",
+      "stats": {
+        "attack_stab": 5,
+        "attack_slash": 3,
+        "attack_crush": -4,
+        "attack_magic": 1,
+        "defence_magic": 1,
+        "melee_strength": 4
+      }
     }
   ],
   "cape": [
@@ -11711,6 +11728,35 @@
       "is2h": false,
       "itemIds": [
         27481
+      ],
+      "combatType": "all"
+    },
+    {
+      "name": "Ava's accumulator",
+      "value": 0,
+      "is2h": false,
+      "itemIds": [
+        10499
+      ],
+      "combatType": "ranged",
+      "reqLvl": {
+        "ranged": 50
+      },
+      "stats": {
+        "attack_ranged": 4,
+        "defence_slash": 1,
+        "defence_magic": 4
+      }
+    },
+    {
+      "name": "Imbued ancient cape",
+      "value": 0,
+      "is2h": false,
+      "itemIds": [
+        34633,
+        34635,
+        34637,
+        34641
       ],
       "combatType": "all"
     }
@@ -18041,16 +18087,6 @@
       }
     },
     {
-      "name": "Diamond bracelet",
-      "value": 3825,
-      "is2h": false,
-      "itemIds": [
-        11092,
-        11094
-      ],
-      "combatType": "all"
-    },
-    {
       "name": "Red d'hide vambraces",
       "value": 3600,
       "is2h": false,
@@ -18277,30 +18313,10 @@
       }
     },
     {
-      "name": "Ruby bracelet",
-      "value": 2325,
-      "is2h": false,
-      "itemIds": [
-        11085,
-        11087
-      ],
-      "combatType": "all"
-    },
-    {
       "name": "Castle wars bracelet",
       "value": 1675,
       "is2h": false,
       "itemIds": [],
-      "combatType": "all"
-    },
-    {
-      "name": "Emerald bracelet",
-      "value": 1525,
-      "is2h": false,
-      "itemIds": [
-        11076,
-        11078
-      ],
       "combatType": "all"
     },
     {
@@ -18327,29 +18343,11 @@
       }
     },
     {
-      "name": "Topaz bracelet",
-      "value": 1500,
-      "is2h": false,
-      "itemIds": [
-        21123
-      ],
-      "combatType": "all"
-    },
-    {
       "name": "Flamtaer bracelet",
       "value": 1300,
       "is2h": false,
       "itemIds": [
         21180
-      ],
-      "combatType": "all"
-    },
-    {
-      "name": "Jade bracelet",
-      "value": 1300,
-      "is2h": false,
-      "itemIds": [
-        21120
       ],
       "combatType": "all"
     },
@@ -18368,25 +18366,6 @@
       "is2h": false,
       "itemIds": [
         21177
-      ],
-      "combatType": "all"
-    },
-    {
-      "name": "Opal bracelet",
-      "value": 1150,
-      "is2h": false,
-      "itemIds": [
-        21117
-      ],
-      "combatType": "all"
-    },
-    {
-      "name": "Sapphire bracelet",
-      "value": 1150,
-      "is2h": false,
-      "itemIds": [
-        11071,
-        11072
       ],
       "combatType": "all"
     },
@@ -19102,6 +19081,82 @@
       "is2h": false,
       "itemIds": [
         12890
+      ],
+      "combatType": "all"
+    },
+    {
+      "name": "Abyssal bracelet",
+      "value": 0,
+      "is2h": false,
+      "itemIds": [
+        11095,
+        11092,
+        11097,
+        11099,
+        11101,
+        11103
+      ],
+      "combatType": "all"
+    },
+    {
+      "name": "Bracelet of clay",
+      "value": 0,
+      "is2h": false,
+      "itemIds": [
+        11074,
+        11072
+      ],
+      "combatType": "all"
+    },
+    {
+      "name": "Bracelet of slaughter",
+      "value": 0,
+      "is2h": false,
+      "itemIds": [
+        21183,
+        21123
+      ],
+      "combatType": "all"
+    },
+    {
+      "name": "Castle wars bracelet",
+      "value": 0,
+      "is2h": false,
+      "itemIds": [
+        11079,
+        11076,
+        11081,
+        11083
+      ],
+      "combatType": "all"
+    },
+    {
+      "name": "Expeditious bracelet",
+      "value": 0,
+      "is2h": false,
+      "itemIds": [
+        21177,
+        21117
+      ],
+      "combatType": "all"
+    },
+    {
+      "name": "Flamtaer bracelet",
+      "value": 0,
+      "is2h": false,
+      "itemIds": [
+        21180,
+        21120
+      ],
+      "combatType": "all"
+    },
+    {
+      "name": "Inoculation bracelet",
+      "value": 0,
+      "is2h": false,
+      "itemIds": [
+        11088,
+        11085
       ],
       "combatType": "all"
     }
@@ -24148,15 +24203,6 @@
       }
     },
     {
-      "name": "Diving helmet",
-      "value": 1,
-      "is2h": false,
-      "itemIds": [
-        21722
-      ],
-      "combatType": "all"
-    },
-    {
       "name": "Druidic wreath",
       "value": 1,
       "is2h": false,
@@ -24724,6 +24770,25 @@
         27473
       ],
       "combatType": "all"
+    },
+    {
+      "name": "Fishbowl helmet",
+      "value": 0,
+      "is2h": false,
+      "itemIds": [
+        21722,
+        7534
+      ],
+      "combatType": "all"
+    },
+    {
+      "name": "White partyhat",
+      "value": 0,
+      "is2h": false,
+      "itemIds": [
+        1048
+      ],
+      "combatType": "all"
     }
   ],
   "neck": [
@@ -25216,15 +25281,6 @@
       "combatType": "all"
     },
     {
-      "name": "Diamond necklace",
-      "value": 3675,
-      "is2h": false,
-      "itemIds": [
-        1662
-      ],
-      "combatType": "all"
-    },
-    {
       "name": "Amulet of power",
       "value": 3525,
       "is2h": false,
@@ -25247,15 +25303,6 @@
         "melee_strength": 6,
         "prayer": 1
       }
-    },
-    {
-      "name": "Diamond amulet",
-      "value": 3525,
-      "is2h": false,
-      "itemIds": [
-        1700
-      ],
-      "combatType": "all"
     },
     {
       "name": "Ancient stole",
@@ -25367,15 +25414,6 @@
       "combatType": "all"
     },
     {
-      "name": "Ruby necklace",
-      "value": 2175,
-      "is2h": false,
-      "itemIds": [
-        1660
-      ],
-      "combatType": "all"
-    },
-    {
       "name": "Amulet of strength",
       "value": 2025,
       "is2h": false,
@@ -25388,15 +25426,6 @@
       }
     },
     {
-      "name": "Ruby amulet",
-      "value": 2025,
-      "is2h": false,
-      "itemIds": [
-        1698
-      ],
-      "combatType": "all"
-    },
-    {
       "name": "Binding necklace",
       "value": 1425,
       "is2h": false,
@@ -25406,29 +25435,11 @@
       "combatType": "all"
     },
     {
-      "name": "Emerald necklace",
-      "value": 1425,
-      "is2h": false,
-      "itemIds": [
-        1658
-      ],
-      "combatType": "all"
-    },
-    {
       "name": "Necklace of faith",
       "value": 1425,
       "is2h": false,
       "itemIds": [
         21157
-      ],
-      "combatType": "all"
-    },
-    {
-      "name": "Topaz necklace",
-      "value": 1425,
-      "is2h": false,
-      "itemIds": [
-        21096
       ],
       "combatType": "all"
     },
@@ -25449,24 +25460,6 @@
       }
     },
     {
-      "name": "Emerald amulet",
-      "value": 1275,
-      "is2h": false,
-      "itemIds": [
-        1696
-      ],
-      "combatType": "all"
-    },
-    {
-      "name": "Jade necklace",
-      "value": 1275,
-      "is2h": false,
-      "itemIds": [
-        21093
-      ],
-      "combatType": "all"
-    },
-    {
       "name": "Necklace of passage",
       "value": 1275,
       "is2h": false,
@@ -25478,15 +25471,6 @@
       "value": 1250,
       "is2h": false,
       "itemIds": [],
-      "combatType": "all"
-    },
-    {
-      "name": "Topaz amulet",
-      "value": 1250,
-      "is2h": false,
-      "itemIds": [
-        21114
-      ],
       "combatType": "all"
     },
     {
@@ -25523,33 +25507,6 @@
       "value": 1050,
       "is2h": false,
       "itemIds": [],
-      "combatType": "all"
-    },
-    {
-      "name": "Jade amulet",
-      "value": 1050,
-      "is2h": false,
-      "itemIds": [
-        21111
-      ],
-      "combatType": "all"
-    },
-    {
-      "name": "Opal necklace",
-      "value": 1050,
-      "is2h": false,
-      "itemIds": [
-        21090
-      ],
-      "combatType": "all"
-    },
-    {
-      "name": "Sapphire necklace",
-      "value": 1050,
-      "is2h": false,
-      "itemIds": [
-        1656
-      ],
       "combatType": "all"
     },
     {
@@ -25603,24 +25560,6 @@
         "attack_magic": -3,
         "magic_damage": -80
       }
-    },
-    {
-      "name": "Opal amulet",
-      "value": 900,
-      "is2h": false,
-      "itemIds": [
-        21108
-      ],
-      "combatType": "all"
-    },
-    {
-      "name": "Sapphire amulet",
-      "value": 900,
-      "is2h": false,
-      "itemIds": [
-        1694
-      ],
-      "combatType": "all"
     },
     {
       "name": "Witchwood icon",
@@ -25916,6 +25855,131 @@
       "is2h": false,
       "itemIds": [
         25332
+      ],
+      "combatType": "all"
+    },
+    {
+      "name": "Amulet of air",
+      "value": 0,
+      "is2h": false,
+      "itemIds": [
+        34407
+      ],
+      "combatType": "all"
+    },
+    {
+      "name": "Amulet of earth",
+      "value": 0,
+      "is2h": false,
+      "itemIds": [
+        34419
+      ],
+      "combatType": "all"
+    },
+    {
+      "name": "Amulet of fire",
+      "value": 0,
+      "is2h": false,
+      "itemIds": [
+        34425
+      ],
+      "combatType": "all"
+    },
+    {
+      "name": "Amulet of water",
+      "value": 0,
+      "is2h": false,
+      "itemIds": [
+        34413
+      ],
+      "combatType": "all"
+    },
+    {
+      "name": "Binding necklace",
+      "value": 0,
+      "is2h": false,
+      "itemIds": [
+        5521,
+        1658
+      ],
+      "combatType": "all"
+    },
+    {
+      "name": "Dodgy necklace",
+      "value": 0,
+      "is2h": false,
+      "itemIds": [
+        21143,
+        21090
+      ],
+      "combatType": "all"
+    },
+    {
+      "name": "Elemental amulet",
+      "value": 0,
+      "is2h": false,
+      "itemIds": [
+        34428
+      ],
+      "combatType": "all"
+    },
+    {
+      "name": "Games necklace",
+      "value": 0,
+      "is2h": false,
+      "itemIds": [
+        3853,
+        1656,
+        3855,
+        3857,
+        3859,
+        3861,
+        3863,
+        3865,
+        3867
+      ],
+      "combatType": "all"
+    },
+    {
+      "name": "Necklace of Fangs",
+      "value": 0,
+      "is2h": false,
+      "itemIds": [
+        34401
+      ],
+      "combatType": "all"
+    },
+    {
+      "name": "Necklace of faith",
+      "value": 0,
+      "is2h": false,
+      "itemIds": [
+        21157,
+        21096
+      ],
+      "combatType": "all"
+    },
+    {
+      "name": "Necklace of passage",
+      "value": 0,
+      "is2h": false,
+      "itemIds": [
+        21146,
+        21093,
+        21149,
+        21151,
+        21153,
+        21155
+      ],
+      "combatType": "all"
+    },
+    {
+      "name": "Phoenix necklace",
+      "value": 0,
+      "is2h": false,
+      "itemIds": [
+        11090,
+        1662
       ],
       "combatType": "all"
     }
@@ -33558,15 +33622,6 @@
       "combatType": "all"
     },
     {
-      "name": "Diamond ring",
-      "value": 3525,
-      "is2h": false,
-      "itemIds": [
-        1643
-      ],
-      "combatType": "all"
-    },
-    {
       "name": "Ring of life",
       "value": 3525,
       "is2h": false,
@@ -33581,15 +33636,6 @@
       "is2h": false,
       "itemIds": [
         2568
-      ],
-      "combatType": "all"
-    },
-    {
-      "name": "Ruby ring",
-      "value": 2025,
-      "is2h": false,
-      "itemIds": [
-        1641
       ],
       "combatType": "all"
     },
@@ -33627,15 +33673,6 @@
       "is2h": false,
       "itemIds": [
         21140
-      ],
-      "combatType": "all"
-    },
-    {
-      "name": "Topaz ring",
-      "value": 1425,
-      "is2h": false,
-      "itemIds": [
-        21087
       ],
       "combatType": "all"
     },
@@ -33747,6 +33784,16 @@
       "is2h": false,
       "itemIds": [
         26314
+      ],
+      "combatType": "all"
+    },
+    {
+      "name": "Efaritay's aid",
+      "value": 0,
+      "is2h": false,
+      "itemIds": [
+        21140,
+        21087
       ],
       "combatType": "all"
     }

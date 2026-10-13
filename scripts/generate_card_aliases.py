@@ -7,7 +7,7 @@ data generators do (generate_sources._card_for_drop): "Silver sickle (b)" → Si
 Output: scripts/output/card_aliases.json  { "<variant name, lowercase>": "<card name>" }
 
 Usage:
-  python3 scripts/generate_card_aliases.py --card-json research/card-catalog-v1.json
+  python3 scripts/generate_card_aliases.py --card-json research/card-catalog-live.json
 """
 
 from __future__ import annotations

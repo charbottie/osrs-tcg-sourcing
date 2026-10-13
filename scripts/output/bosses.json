@@ -294,8 +294,7 @@
       "Gloria, Ueman, Seia (lobby NPCs, optional)"
     ],
     "consideredNoCard": [
-      "Healing totem (Totemic modifier)",
-      "Minotaur (Fortis Colosseum): covered by the 'Minotaur' card (variant 12813)"
+      "Healing totem (Totemic modifier)"
     ],
     "location": [],
     "levels": {},
@@ -307,7 +306,7 @@
     "name": "Chambers of Xeric",
     "category": "raid",
     "area": "Kourend",
-    "note": "Room monsters vary each raid. Every combat room (Tekton, Vespula, Vasa, Vanguards [no card], Mystics, Shamans, Muttadiles, Guardians) and puzzle room (Crabs, Tightrope, Ice demon, Thieving) can appear, so all their requirements apply: a pickaxe for the Guardians, an axe and kindling (plus the tinderbox spawn) for the Ice demon braziers, and cavern grubs for the corrupted scavenger. Herbs, mushrooms and ingredients gathered inside make the CoX potions, and you need their cards to pick them up.",
+    "note": "Room monsters vary each raid. Every combat room (Tekton, Vespula, Vasa, Vanguards, Mystics, Shamans, Muttadiles, Guardians) and puzzle room (Crabs, Tightrope, Ice demon, Thieving) can appear, so all their requirements apply: a pickaxe for the Guardians, an axe and kindling (plus the tinderbox spawn) for the Ice demon braziers, and cavern grubs for the corrupted scavenger. Herbs, mushrooms and ingredients gathered inside make the CoX potions, and you need their cards to pick them up.",
     "relatedCards": [
       "Overload",
       "Xeric's aid",
@@ -371,6 +370,13 @@
         "label": "Vespula",
         "cards": [
           "Vespula"
+        ],
+        "type": "enemy"
+      },
+      {
+        "label": "Vanguards",
+        "cards": [
+          "Vanguards"
         ],
         "type": "enemy"
       },
@@ -460,7 +466,6 @@
       "Keystone crystal",
       "Lux grub",
       "Psykk bat",
-      "Vanguard (all 3 styles)",
       "Vespine soldier"
     ],
     "location": [],
@@ -885,7 +890,7 @@
           "Crystal bow"
         ],
         "optional": true,
-        "note": "The Gauntlet's Crystal bow (basic) is the Crystal bow card's base ID (23901). The halberd (23895) and staff have no card, so a halberd + staff pair works without any weapon card."
+        "note": "The Gauntlet's basic crystal bow counts as the Crystal bow card. The halberd and staff have no card, so a halberd + staff pair needs no weapon card."
       },
       {
         "label": "Crystalline monsters for weapon frames (any)",
@@ -898,7 +903,7 @@
           "Crystalline Scorpion",
           "Crystalline Wolf"
         ],
-        "note": "Hunllef uses protection prayers, so you need at least 2 weapon types, which means 2 weapon frames. Frames drop from any crystalline monster. A weak-monster room is always next to the boss room."
+        "note": "Hunllef uses protection prayers, so you need 2 weapon types (2 weapon frames). Frames drop from any crystalline monster."
       },
       {
         "label": "Crystal axe (for crystal bark)",
@@ -944,8 +949,7 @@
         "cards": [
           "Egniol potion",
           "Pestle and mortar",
-          "Vial",
-          "Water-filled vial"
+          "Vial"
         ],
         "mode": "all",
         "optional": true,
@@ -957,9 +961,9 @@
       "Crystalline Bear/Dragon/Dark Beast (demi-bosses, optional)"
     ],
     "consideredNoCard": [
-      "Crystal halberd (basic) (23895)",
+      "Crystal halberd (basic)",
       "Crystal orb",
-      "Crystal sceptre (23861)",
+      "Crystal sceptre",
       "Crystal shards (The Gauntlet)",
       "Crystal spike",
       "Crystal staff (basic)",
@@ -968,7 +972,7 @@
       "Raw paddlefish / Paddlefish",
       "Teleport crystal (The Gauntlet)",
       "Tornado (The Gauntlet)",
-      "Weapon frame (23871)"
+      "Weapon frame"
     ],
     "location": [],
     "levels": {},
@@ -1014,7 +1018,7 @@
           "Corrupted Unicorn",
           "Corrupted Wolf"
         ],
-        "note": "You need at least one weapon frame to make a halberd, bow or staff, and any Gauntlet monster can drop one. The demi-bosses (Bear/Dragon/Dark Beast) guarantee a frame plus the tier-3 weapon part. More creatures make better gear, but none is individually required."
+        "note": "You need at least one weapon frame (any corrupted creature can drop one) to make a halberd, bow or staff. No single creature is required."
       },
       {
         "label": "Complete The Gauntlet once (Crystalline Hunllef)",
@@ -1040,7 +1044,7 @@
     ],
     "consideredNoCard": [
       "Corrupted halberd/bow/staff and corrupted armour (no cards)",
-      "Corrupted sceptre / corrupted axe / corrupted pickaxe / corrupted harpoon (no catalog card; only the normal-Gauntlet crystal variants 23862-23865 exist, under Crystal axe/pickaxe/harpoon/Pestle and mortar)",
+      "Corrupted sceptre / axe / pickaxe / harpoon",
       "Corrupted shards",
       "Grym leaf (corrupted)",
       "Tornado (Corrupted Gauntlet)",
@@ -1237,7 +1241,7 @@
           "Rejuvenation potion"
         ],
         "optional": true,
-        "note": "Rejuvenation potion (unf) is an alias of this card. You need Druidic Ritual to mix it yourself; otherwise Brew'ma (no card) mixes it for you. Food also restores warmth."
+        "note": "Rejuvenation potion (unf) counts as this card. Mix it yourself (Druidic Ritual), or give Brew'ma (no card) the ingredients and he mixes it."
       }
     ],
     "area": "Kourend",
@@ -1343,11 +1347,11 @@
       "Bucket of water (made inside from a bucket; dousing fires is helpful, not strictly required)",
       "Ferryman Sathwood (transport option only)",
       "Spirit Angler NPC (gives a net, optional)",
-      "Tempoross 'enemy' card: the boss is never attacked directly (cannons + spirit pool). Kept as the encounter's own card; Lottie to decide whether Bronzeman needs it."
+      "Tempoross (never attacked directly)"
     ],
     "consideredNoCard": [
       "Ferryman Sathwood",
-      "Raw harpoonfish / Crystallised harpoonfish (alias -> Harpoonfish, already covered)"
+      "Raw / crystallised harpoonfish (count as the Harpoonfish card)"
     ],
     "lootRequirements": [
       {
@@ -1403,7 +1407,7 @@
         "cards": [
           "Imbued tephra"
         ],
-        "note": "You mine tephra, refine it at the furnace and imbue it at the altar (none of that needs a card). Then you throw imbued tephra at Zalcano to break her armour, which counts as using the item."
+        "note": "Mining, refining and imbuing tephra need no card. Throwing imbued tephra to break Zalcano's armour counts as using the item."
       }
     ],
     "quests": [
@@ -1519,7 +1523,6 @@
       }
     ],
     "consideredNotRequired": [
-      "Slayer 48 is the infobox slaylvl, which the quest already requires (The Heart of Darkness needs Slayer 48). Keep it; it is redundant but harmless.",
       "Unstable ice blocks (destroy or move away from them)"
     ],
     "consideredNoCard": [
@@ -1619,7 +1622,7 @@
       "Crypt spider",
       "Giant crypt rat",
       "Giant crypt spider",
-      "Skeleton (Barrows), covered by the Skeleton card (1685-1688)",
+      "Skeleton (Barrows) — counts as the Skeleton card",
       "Strange old lockpick (optional shortcut item)"
     ],
     "location": [
@@ -1732,7 +1735,7 @@
           "Crystal axe",
           "3rd age axe"
         ],
-        "note": "Any item with the 'Axe' attack type; a bronze axe can be taken from the log pile in the lair (still needs the Bronze axe card to use). Battleaxes/zombie axe/blessed axe do not work."
+        "note": "Any woodcutting axe (not battleaxes, the zombie axe or blessed axe). The bronze axe in the lair's log pile still needs the Bronze axe card."
       },
       {
         "label": "Web: knife or any slash weapon",
@@ -2015,7 +2018,7 @@
           "skill": "Agility",
           "level": 85
         },
-        "note": "The pet rock holds the second door pad, and the rune thrownaxe special knocks down all three door props. Neither is needed with a partner. The Agility 85 (boostable) climbing rocks south of Jarvald go straight to the ladder room. The rune thrownaxe needs 40 Ranged to wield."
+        "note": "The pet rock holds a door pad and the rune thrownaxe special (40 Ranged) knocks down the door props. Not needed with a partner."
       }
     ],
     "consideredNotRequired": [
@@ -2173,7 +2176,7 @@
       }
     ],
     "consideredNotRequired": [
-      "Dad (Troll Stronghold) – only one of two access routes; the other route (Ghommal's hilt 1) has no card",
+      "Dad (Troll Stronghold) — one of two access routes",
       "Dying knight (optional lore)"
     ],
     "consideredNoCard": [
@@ -2295,7 +2298,6 @@
       }
     ],
     "consideredNotRequired": [
-      "Bodyguards (Flight Kilisa, Flockleader Geerin, Wingman Skree) are not strictly required to kill, but kept as they attack throughout and count toward KC — left unchanged",
       "Ecumenical key (optional KC skip)"
     ],
     "consideredNoCard": [
@@ -2407,9 +2409,7 @@
     "levels": {
       "Hitpoints": 70
     },
-    "consideredNotRequired": [
-      "Bodyguards (Tstanon Karlak, Balfrug Kreeyath, Zakl'n Gritch) are left in place, but the wiki does not say they must be killed (you can kill K'ril alone)"
-    ],
+    "consideredNotRequired": [],
     "consideredNoCard": [
       "Dying knight",
       "Knight's notes"
@@ -2806,9 +2806,9 @@
         "type": "item"
       },
       {
-        "label": "Phosani's Nightmare",
+        "label": "Phosani's Nightmare (a version of The Nightmare card)",
         "cards": [
-          "Phosani's Nightmare"
+          "The Nightmare"
         ],
         "type": "enemy"
       },
@@ -3304,7 +3304,7 @@
         "cards": [
           "Pestle and mortar"
         ],
-        "note": "One hangs on the asylum wall, but using it still needs the card. Mushrooms can no longer be fed directly; arder/musca powder (40 total) or 2 arder-musca poisons (also needs salax salt mined with a pickaxe) wake him. Mushrooms, powders, salt and poison have no TCG cards."
+        "note": "Grinds the mushrooms into the powder that wakes him; the one on the asylum wall still needs the card. Mushrooms, powders, salt and poison have no cards."
       },
       {
         "label": "Any pickaxe (salax salt, poison route)",
@@ -3474,8 +3474,7 @@
     ],
     "area": "Morytania",
     "consideredNotRequired": [
-      "Araxyte (cave mobs; avoidable to reach the web tunnel)",
-      "Dreadborn Araxyte (Amulet of rancour (s) sequence, not this fight)"
+      "Araxyte (cave mobs; avoidable to reach the web tunnel)"
     ],
     "consideredNoCard": [
       "Eggs (Araxxor)"
@@ -3562,7 +3561,7 @@
           "Dark totem top"
         ],
         "mode": "all",
-        "note": "Ironman: combine the three pieces yourself. They drop from any non-ghost monster in the Catacombs of Kourend or the Giants' Den. Skotizo rarely drops a ready-made totem, but you need one for the first kill."
+        "note": "Ironman: combine the three pieces yourself. They drop from non-ghost monsters in the Catacombs of Kourend and the Giants' Den."
       }
     ],
     "consideredNotRequired": [
@@ -3801,7 +3800,6 @@
       }
     ],
     "consideredNotRequired": [
-      "Blood Moon / Eclipse Moon (separate encounters)",
       "Eyatlalli (optional: weapon reclaim / sacrifice exchanges)"
     ],
     "consideredNoCard": [
@@ -4106,7 +4104,7 @@
     "name": "Mad Angel",
     "category": "boss",
     "sub": "mid",
-    "note": "Fallen From Grace required. Ardeaglais cathedral on Wyrmscraig (Sailing island). Reach it via necklace of passage, slayer ring (Wyrmscraig Cavern), or the Ardeaglais teleport. The front door has a combination puzzle (no card). Agility 54 rocks are an optional shortcut, otherwise use the boat via the cavern. Proposed new area: Wyrmscraig.",
+    "note": "Fallen From Grace required. Ardeaglais cathedral on Wyrmscraig (Sailing island). Reach it via necklace of passage, slayer ring (Wyrmscraig Cavern), or the Ardeaglais teleport. The front door has a combination puzzle (no card). Agility 54 rocks are an optional shortcut, otherwise use the boat via the cavern.",
     "wikiBosses": [
       "Mad Angel"
     ],
@@ -4174,7 +4172,7 @@
     "name": "Artio",
     "category": "boss",
     "sub": "wilderness",
-    "note": "Hunter's End, level 21 Wilderness (singles-plus). Entry needs the HARD Wilderness Diary OR a Callisto boss Slayer task. 50k coin lair fee. The old note's 'Wilderness Slayer Cave' is wrong. Suggest a diary gate field (e.g. diaries:['Wilderness Hard'] with a slayer-task alternative) if the planner supports one.",
+    "note": "Hunter's End, level 21 Wilderness (singles-plus). Entry needs the HARD Wilderness Diary OR a Callisto boss Slayer task. 50k coin lair fee.",
     "wikiBosses": [
       "Artio"
     ],
@@ -4363,7 +4361,7 @@
     "name": "Calvar'ion",
     "category": "boss",
     "sub": "wilderness",
-    "note": "Skeletal Tomb, level 21 Wilderness (singles-plus). Entry needs the HARD Wilderness Diary OR a Vet'ion boss Slayer task. 50k coin lair fee. The old note's 'Wilderness Slayer Cave' is wrong. Suggest a diary gate field (e.g. diaries:['Wilderness Hard'] with a slayer-task alternative) if the planner supports one.",
+    "note": "Skeletal Tomb, level 21 Wilderness (singles-plus). Entry needs the HARD Wilderness Diary OR a Vet'ion boss Slayer task. 50k coin lair fee.",
     "wikiBosses": [
       "Calvar'ion"
     ],
@@ -4421,7 +4419,7 @@
         "label": "Scorpia's offspring",
         "type": "enemy",
         "cards": [
-          "Scorpia's offspring"
+          "Scorpia's offspring (monster)"
         ],
         "optional": true,
         "note": "Fill the pit and attack, but need not be killed"

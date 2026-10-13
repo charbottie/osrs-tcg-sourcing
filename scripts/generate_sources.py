@@ -12,9 +12,9 @@ These files are generated at dev-time and bundled into the plugin JAR.
 The shipped plugin makes ZERO wiki requests at runtime.
 
 Usage:
-  python scripts/generate_sources.py --card-json research/card-catalog-v1.json
-  python scripts/generate_sources.py --card-json research/card-catalog-v1.json --limit 20
-  python scripts/generate_sources.py --card-json research/card-catalog-v1.json --monster "Abyssal demon"
+  python scripts/generate_sources.py --card-json research/card-catalog-live.json
+  python scripts/generate_sources.py --card-json research/card-catalog-live.json --limit 20
+  python scripts/generate_sources.py --card-json research/card-catalog-live.json --monster "Abyssal demon"
 
 Wiki access rules (non-negotiable, per wiki staff github issue #1 2026-07-18):
   - Plain page URLs only — never api.php?action=parse
@@ -617,7 +617,7 @@ def parse_args() -> argparse.Namespace:
     p = argparse.ArgumentParser(description=__doc__,
                                 formatter_class=argparse.RawDescriptionHelpFormatter)
     p.add_argument("--card-json", required=True,
-                   help="Path to Card.json (e.g. research/card-catalog-v1.json)")
+                   help="Path to Card.json (e.g. research/card-catalog-live.json)")
     p.add_argument("--limit", type=int, default=None,
                    help="Process only the first N monsters (for testing)")
     p.add_argument("--monster", type=str, default=None,

@@ -6535,5 +6535,29 @@
     "questPoints": 2,
     "members": true,
     "wikiPage": "Fallen_From_Grace"
+  },
+  "A Ruff Situation": {
+    "prerequisites": [],
+    "skillRequirements": [
+      {
+        "skill": "Crafting",
+        "level": 15,
+        "boostable": false
+      }
+    ],
+    "itemsRequired": [
+      "Needle",
+      "Thread",
+      "Fur",
+      "Grain"
+    ],
+    "killsRequired": [
+      "Outlaw"
+    ],
+    "rewardItems": [],
+    "questNpc": "Talia",
+    "questPoints": 1,
+    "members": true,
+    "wikiPage": "A_Ruff_Situation"
   }
 }

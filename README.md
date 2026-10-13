@@ -6,7 +6,7 @@ A local web app for **OSRS TCG** players running the **Bronzeman TCG** RuneLite 
 
 ## What it does
 
-- **Collection browser** — view all 5,200 TCG cards (v1.0 catalog); filter by owned, skill, tier
+- **Collection browser** — view all 5,172 TCG cards (live catalog snapshot, `research/card-catalog-live.json`); filter by owned, skill, tier
 - **Questing tab** — see which quests you can complete with your current cards, what's blocking you, and what each quest unlocks
 - **Skilling tab** — find available training methods per skill based on cards you own
 - **Monster detail** — drops, Slayer task probabilities, area access requirements (gated zones like Morytania, Kourend, Varlamore)
@@ -99,11 +99,11 @@ python scripts/generate_equipment.py
 python scripts/generate_food.py
 
 # Rebuild boss chest loot + collection log (run after generate_sources)
-python scripts/generate_boss_loot.py --card-json research/card-catalog-v1.json
+python scripts/generate_boss_loot.py --card-json research/card-catalog-live.json
 
 # Rebuild spells, then diaries (diaries use spells + item_sources)
 python scripts/generate_spells.py
-python scripts/generate_diaries.py --card-json research/card-catalog-v1.json
+python scripts/generate_diaries.py --card-json research/card-catalog-live.json
 ```
 
 > **Careful:** some committed output files carry hand fixes (production sources, images, categories). Regenerate into a scratch directory with `--out-dir` and diff before replacing anything.

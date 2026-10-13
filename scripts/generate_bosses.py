@@ -20,7 +20,7 @@ curated entry lacks (reported, not merged — the wiki table mixes in alternativ
 and card names that don't resolve.
 
 Usage:
-  python3 scripts/generate_bosses.py --card-json research/card-catalog-v1.json
+  python3 scripts/generate_bosses.py --card-json research/card-catalog-live.json
 """
 
 from __future__ import annotations

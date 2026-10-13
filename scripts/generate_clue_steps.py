@@ -40,6 +40,7 @@ sys.path.insert(0, str(Path(__file__).parent))
 
 from bs4 import BeautifulSoup, Tag
 import wiki_fetcher
+from catalog_names import npc_names
 
 _OUT = Path(__file__).parent / "output" / "clue_steps.json"
 
@@ -264,9 +265,9 @@ class _Resolver:
     """Card / quest / access lookups shared by every parser."""
 
     def __init__(self):
-        cat = json.loads((_HERE.parent / "research" / "card-catalog-v1.json").read_text(encoding="utf-8"))
+        cat = json.loads((_HERE.parent / "research" / "card-catalog-live.json").read_text(encoding="utf-8"))
         self.items = {x["name"].lower(): x["name"] for x in cat["items"]}
-        self.npcs = {x["name"].lower(): x["name"] for x in cat["npcs"]}
+        self.npcs = npc_names(cat)   # card names, wiki pages and version names -> NPC card
         self.aliases = {k.lower(): v for k, v in json.loads(
             (_HERE / "output" / "card_aliases.json").read_text(encoding="utf-8")).items()}
         self.quests = set(json.loads((_HERE / "output" / "quests.json").read_text(encoding="utf-8")))
@@ -678,7 +679,7 @@ def _equip_slots(marked: str) -> tuple[list[dict], list[str], list[str]]:
                 continue
             card = R.item(phrase)
             if card:
-                slots.append({"label": card, "cards": [card], "mode": "any"})
+                slots.append({"label": _version_label(phrase, card), "cards": [card], "mode": "any"})
             else:
                 notes.append(f"Unmatched item wording: {seg}")
             continue
@@ -691,7 +692,7 @@ def _equip_slots(marked: str) -> tuple[list[dict], list[str], list[str]]:
                 continue
             card = R.item(title)
             if card:
-                alts.append({"label": card, "cards": [card], "mode": "any"})
+                alts.append({"label": _version_label(title, card), "cards": [card], "mode": "any"})
             else:
                 nocard.append(title)
                 alts.append({"label": title, "cards": [], "mode": "any", "unrestricted": True,
@@ -708,6 +709,15 @@ def _equip_slots(marked: str) -> tuple[list[dict], list[str], list[str]]:
         else:
             slots.extend(alts)
     return slots, notes, nocard
+
+
+def _version_label(title: str, card: str) -> str:
+    """Label a worn item by the version the step names when it isn't the card itself: an emote
+    step wanting an "Emerald amulet" shows that, not its card's name (Amulet of defence)."""
+    t = CUR.get("itemNameFixes", {}).get(title.strip(), title).strip()
+    if t.lower() == card.lower() or t.lower() not in R.aliases:
+        return card
+    return t[:1].upper() + t[1:]
 
 
 def _add_alternatives(slots: list[dict], names: list[str]) -> list[str]:

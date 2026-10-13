@@ -473,6 +473,93 @@
       ]
     },
     {
+      "name": "A Ruff Situation",
+      "miniquest": false,
+      "sections": [
+        {
+          "label": "NPC Interactions",
+          "requirements": [
+            {
+              "label": "Talk to Gertrude",
+              "cards": [
+                "Gertrude"
+              ],
+              "type": "npc"
+            },
+            {
+              "label": "The Guard by Varrock west bank speaks when you find the stray dog",
+              "cards": [
+                "Guard"
+              ],
+              "type": "npc"
+            }
+          ]
+        },
+        {
+          "label": "Items",
+          "requirements": [
+            {
+              "label": "Needle and thread, or a costume needle",
+              "cards": [
+                "Costume needle"
+              ],
+              "type": "item",
+              "routes": [
+                {
+                  "label": "Needle + thread",
+                  "cards": [
+                    "Needle",
+                    "Thread"
+                  ]
+                }
+              ]
+            },
+            {
+              "label": "Any fur (to make the stuffed dog)",
+              "cards": [
+                "Fur",
+                "Bear fur",
+                "Grey wolf fur",
+                "Fox fur",
+                "Jaguar fur"
+              ],
+              "type": "item"
+            },
+            {
+              "label": "Grain",
+              "cards": [
+                "Grain"
+              ],
+              "type": "item"
+            }
+          ]
+        },
+        {
+          "label": "Enemies",
+          "requirements": [
+            {
+              "label": "Outlaw (two, levels 22 and 23)",
+              "cards": [
+                "Outlaw"
+              ],
+              "type": "enemy"
+            }
+          ]
+        }
+      ],
+      "notes": "Released after the live catalogue capture (2026-09-01): the quest's Outlaw and Guard NPC IDs aren't listed as card variants yet, so they're assumed to use the Outlaw and Guard cards by name.",
+      "consideredNoCard": [
+        "Banker",
+        "Chase",
+        "Picklenose",
+        "Stray dog",
+        "Stray puppy",
+        "Stuffed dog",
+        "Talia",
+        "Toetaller"
+      ]
+    },
+    {
       "name": "A Soul's Bane",
       "miniquest": false,
       "sections": [
@@ -831,6 +918,14 @@
                 "Chain"
               ],
               "type": "item"
+            },
+            {
+              "label": "Potion (made in Serafina's basement, used on the door)",
+              "cards": [
+                "Potion"
+              ],
+              "type": "item",
+              "note": "The quest potion is a version of the Potion card"
             }
           ]
         },
@@ -2142,6 +2237,13 @@
                 "Marrentill"
               ],
               "type": "item"
+            },
+            {
+              "label": "Vial of water (to make the Marrentill potion (unf))",
+              "cards": [
+                "Vial of water"
+              ],
+              "type": "item"
             }
           ]
         }
@@ -2240,18 +2342,6 @@
       "miniquest": false,
       "sections": [
         {
-          "label": "Items",
-          "requirements": [
-            {
-              "label": "Tail and Mark the disguised guards",
-              "cards": [
-                "Guard"
-              ],
-              "type": "card"
-            }
-          ]
-        },
-        {
           "label": "NPC Interactions",
           "requirements": [
             {
@@ -2272,6 +2362,13 @@
               "label": "Prince Itzla Arkan speaks in a cutscene",
               "cards": [
                 "Prince Itzla Arkan"
+              ],
+              "type": "npc"
+            },
+            {
+              "label": "Tail and Mark the disguised guards",
+              "cards": [
+                "Guard"
               ],
               "type": "npc"
             }
@@ -2990,6 +3087,13 @@
               "label": "Talk to a Vampyre Juvinate",
               "cards": [
                 "Vampyre Juvinate"
+              ],
+              "type": "npc"
+            },
+            {
+              "label": "Aeonisig Raispher speaks during the King Roald conversation",
+              "cards": [
+                "Aeonisig Raispher"
               ],
               "type": "npc"
             }
@@ -3718,13 +3822,14 @@
               ]
             },
             {
-              "label": "Garlic powder: grind garlic with a pestle and mortar",
+              "label": "Garlic powder (Garlic card; grind garlic with a pestle and mortar)",
               "cards": [
-                "Garlic",
+                "Garlic powder",
                 "Pestle and mortar"
               ],
               "type": "item",
-              "mode": "all"
+              "mode": "all",
+              "note": "Garlic powder is a version of the Garlic card"
             },
             {
               "label": "Climbing boots",
@@ -3818,7 +3923,6 @@
         "Charcoal",
         "Dunstan",
         "Etchings",
-        "Garlic powder",
         "Gas mask",
         "Gilded cross",
         "Malak",
@@ -4451,7 +4555,7 @@
       "notes": "",
       "consideredNoCard": [
         "Crandor map pieces",
-        "General Bentnoze/Wartface (lead rejected: skippable - \"It is possible to skip visiting Goblin Village\")",
+        "General Bentnoze / Wartface (skippable)",
         "Guildmaster",
         "Klarense",
         "Lady Lumbridge (unrelated)",
@@ -4859,6 +4963,20 @@
                 "Aeonisig Raispher"
               ],
               "type": "npc"
+            },
+            {
+              "label": "Sir Tiffy Cashien speaks in a cutscene",
+              "cards": [
+                "Sir Tiffy Cashien"
+              ],
+              "type": "npc"
+            },
+            {
+              "label": "Wise Old Man speaks in a cutscene",
+              "cards": [
+                "Wise Old Man"
+              ],
+              "type": "npc"
             }
           ]
         }
@@ -4934,6 +5052,13 @@
                 "Pestle and mortar"
               ],
               "type": "item"
+            },
+            {
+              "label": "Three kinds of food for Cyrisus (20 pieces: 7 + 7 + 6) — any three food cards",
+              "cards": [],
+              "type": "item",
+              "info": true,
+              "note": "Sacks of cabbages / potatoes / onions or fruit baskets save space. Drinks other than wine and Guthix rest don't count."
             }
           ]
         },
@@ -5111,6 +5236,13 @@
               "type": "item"
             },
             {
+              "label": "Knife (to dice the pineapple into chunks)",
+              "cards": [
+                "Knife"
+              ],
+              "type": "item"
+            },
+            {
               "label": "Logs",
               "cards": [
                 "Logs"
@@ -5166,6 +5298,13 @@
               "label": "Ranarr potion (unf)",
               "cards": [
                 "Ranarr weed"
+              ],
+              "type": "item"
+            },
+            {
+              "label": "Vial of water (to make the Ranarr potion (unf))",
+              "cards": [
+                "Vial of water"
               ],
               "type": "item"
             },
@@ -5474,7 +5613,6 @@
                 "Botanical pie",
                 "Mushroom pie",
                 "Dragonfruit pie",
-                "Pumpkin pie",
                 "Plain pizza",
                 "Meat pizza",
                 "Anchovy pizza",
@@ -6918,7 +7056,7 @@
         "Old crone",
         "Old man",
         "Petition form",
-        "Pirate captain (lead rejected: only a landmark - \"the small room ... with the Old man and the Pirate Captain\")",
+        "Pirate captain (landmark only)",
         "Robin",
         "Translation manual",
         "Velorina"
@@ -6932,7 +7070,7 @@
           "label": "Items",
           "requirements": [
             {
-              "label": "Goblin mail",
+              "label": "Goblin mail ×3 (one stays plain, one is dyed orange, one blue)",
               "cards": [
                 "Goblin mail"
               ],
@@ -6943,21 +7081,16 @@
               "cards": [
                 "Blue dye"
               ],
-              "type": "item"
+              "type": "item",
+              "note": "Make it: give Aggie 2 woad leaves + 5 coins and she dyes it; or buy it at a dye shop. See the Blue dye card for every source"
             },
             {
-              "label": "Red dye",
+              "label": "Orange dye",
               "cards": [
-                "Red dye"
+                "Orange dye"
               ],
-              "type": "item"
-            },
-            {
-              "label": "Yellow dye",
-              "cards": [
-                "Yellow dye"
-              ],
-              "type": "item"
+              "type": "item",
+              "note": "Dyes one goblin mail orange. Mix red + yellow dye (give Aggie 3 redberries / 2 onions + 5 coins for each), or pick up / buy one. See the Orange dye card for every source"
             }
           ]
         },
@@ -6976,9 +7109,7 @@
       ],
       "notes": "",
       "consideredNoCard": [
-        "Aggie",
-        "Orange dye (no card)",
-        "Wyson the gardener"
+        "Aggie"
       ]
     },
     {
@@ -7233,6 +7364,13 @@
               "type": "item"
             },
             {
+              "label": "Vial of water (to make the Harralander potion (unf))",
+              "cards": [
+                "Vial of water"
+              ],
+              "type": "item"
+            },
+            {
               "label": "Ice gloves or Smiths gloves (i)",
               "cards": [
                 "Ice gloves",
@@ -7300,8 +7438,6 @@
         "Thieves' armband",
         "Trobert",
         "Velrak the explorer",
-        "Alfonse the waiter",
-        "Charlie the cook",
         "Id papers",
         "Miscellaneous key",
         "Grip's keyring",
@@ -7536,7 +7672,6 @@
       ],
       "notes": "",
       "consideredNoCard": [
-        "Goblin guard (Land of the Goblins) - not interacted",
         "Goblin potion",
         "Hopespear",
         "Ring of visibility (no card, so this requirement never blocks)",
@@ -7789,7 +7924,7 @@
               "type": "item"
             },
             {
-              "label": "Coins or more for various payments",
+              "label": "Coins for various payments (and to buy linen if you have none)",
               "cards": [
                 "Coins"
               ],
@@ -7801,22 +7936,6 @@
                 "Willow logs"
               ],
               "type": "item"
-            },
-            {
-              "label": "Linen or Coins",
-              "logic": "ANY",
-              "children": [
-                {
-                  "label": "Coins",
-                  "cards": [
-                    "Coins"
-                  ],
-                  "type": "item"
-                }
-              ],
-              "cards": [
-                "Coins"
-              ]
             },
             {
               "label": "Knife (to get bucket of sap)",
@@ -7849,6 +7968,18 @@
                 "Apparition"
               ],
               "type": "enemy"
+            }
+          ]
+        },
+        {
+          "label": "NPC Interactions",
+          "requirements": [
+            {
+              "label": "Icthlarin speaks in a flashback cutscene",
+              "cards": [
+                "Icthlarin"
+              ],
+              "type": "npc"
             }
           ]
         }
@@ -8050,10 +8181,10 @@
                 "Darklight",
                 "Arclight",
                 "Emberlight",
-                "Topaz ring"
+                "Efaritay's aid"
               ],
               "type": "item",
-              "note": "Efaritay's aid is a version of the Topaz ring card. Silverlight, the Wolfbane dagger and the blessed axe have no card"
+              "note": "Silverlight, the Wolfbane dagger and the blessed axe have no card"
             },
             {
               "label": "Any nails",
@@ -8635,6 +8766,14 @@
               "type": "item"
             },
             {
+              "label": "Orange dye",
+              "cards": [
+                "Orange dye"
+              ],
+              "type": "item",
+              "note": "For the orange goblin mail. Mix red + yellow dye, or pick up / buy one. See the Orange dye card for every source"
+            },
+            {
               "label": "Fishing rod",
               "cards": [
                 "Fishing rod"
@@ -8688,6 +8827,13 @@
               "label": "Toadflax potion (unf)",
               "cards": [
                 "Toadflax"
+              ],
+              "type": "item"
+            },
+            {
+              "label": "Vial of water (to make the Toadflax potion (unf))",
+              "cards": [
+                "Vial of water"
               ],
               "type": "item"
             }
@@ -8744,7 +8890,6 @@
         "High Priest Bighead",
         "Mistag",
         "Morris",
-        "Orange dye (no card; onlyUpstream lead)",
         "Pharmakos berries",
         "Tribal keys",
         "Tribal priests (pickpocketed)",
@@ -9301,10 +9446,7 @@
         "Suqah hide",
         "Suqah leather",
         "Suqah tooth",
-        "Waking sleep vial",
-        "Wilson (upstream lead; not on the wiki page)",
-        "Jake (upstream lead; not on the wiki page)",
-        "Palmer (upstream lead; not on the wiki page)"
+        "Waking sleep vial"
       ]
     },
     {
@@ -9803,6 +9945,13 @@
               "label": "Talk to Sir Lancelot",
               "cards": [
                 "Sir Lancelot"
+              ],
+              "type": "npc"
+            },
+            {
+              "label": "Thrantax the Mighty (summon him and recite the incantation)",
+              "cards": [
+                "Thrantax the Mighty"
               ],
               "type": "npc"
             }
@@ -10391,7 +10540,6 @@
       "consideredNoCard": [
         "Ancient rock",
         "Asleif",
-        "Camp dweller (has card; not interacted with in walkthrough)",
         "Corpse of woman",
         "Guard (walked past)",
         "Hamal the Chieftain",
@@ -10509,10 +10657,9 @@
               "type": "item"
             },
             {
-              "label": "Toad crunchies / Premade t'd crunch",
+              "label": "Toad crunchies (premade ones count: same card)",
               "cards": [
-                "Toad crunchies",
-                "Premade t'd crunch"
+                "Toad crunchies"
               ],
               "type": "item"
             },
@@ -10706,6 +10853,19 @@
                 "Death tiara",
                 "Catalytic tiara"
               ]
+            }
+          ]
+        },
+        {
+          "label": "Enemies",
+          "requirements": [
+            {
+              "label": "Shadow (aggressive in the Temple of Light; no kill needed)",
+              "cards": [
+                "Shadow"
+              ],
+              "type": "enemy",
+              "optional": true
             }
           ]
         }
@@ -11255,7 +11415,6 @@
         "Arhein",
         "Brian",
         "Captain Bleemadge",
-        "Cup of tea",
         "Gnormadium Avlafrim",
         "Guthix rest",
         "Hammerspike Stoutbeard",
@@ -11568,6 +11727,13 @@
                 "Chocolate bar"
               ],
               "type": "item"
+            },
+            {
+              "label": "Dwellberries (Alrena makes the gas mask from them)",
+              "cards": [
+                "Dwellberries"
+              ],
+              "type": "item"
             }
           ]
         }
@@ -11579,7 +11745,6 @@
         "Book (Plague City)",
         "Bravek",
         "Clerk",
-        "Dwellberries",
         "Edmond",
         "Gas mask",
         "Hangover cure",
@@ -11587,7 +11752,6 @@
         "Martha Rehnison",
         "Milli Rehnison",
         "Picture of Elena",
-        "Picture of Elena (wiki item \"Picture\"; the \"Elena portrait\" card is the POH quest portrait, not this item)",
         "Ted Rehnison",
         "Warrant"
       ]
@@ -12299,7 +12463,8 @@
                 "Stick",
                 "Thrower troll",
                 "Troll general",
-                "Twig"
+                "Twig",
+                "The rocks"
               ],
               "type": "enemy"
             },
@@ -12420,6 +12585,13 @@
               "label": "Unicorn horn dust",
               "cards": [
                 "Unicorn horn"
+              ],
+              "type": "item"
+            },
+            {
+              "label": "Pestle and mortar (to grind the unicorn horn into dust)",
+              "cards": [
+                "Pestle and mortar"
               ],
               "type": "item"
             },
@@ -12735,6 +12907,13 @@
                 "Zombie gloves"
               ],
               "type": "item"
+            },
+            {
+              "label": "Plank (can be taken during the quest; used on the flat rocks)",
+              "cards": [
+                "Plank"
+              ],
+              "type": "item"
             }
           ]
         },
@@ -12767,7 +12946,6 @@
         "Idris",
         "King's Messenger",
         "Koftik",
-        "Plank (onlyUpstream lead; not on wiki page)",
         "Pot of quicklime",
         "Quicklime",
         "Strip of cloth",
@@ -12805,7 +12983,6 @@
         "Cadava berries",
         "Cadava potion",
         "Father Lawrence",
-        "Guard (lead rejected: no guard interaction on the wiki page)",
         "Message",
         "Phillipa"
       ]
@@ -13420,6 +13597,13 @@
               "type": "item"
             },
             {
+              "label": "Vial of water ×2 (to make the Tarromin potion (unf))",
+              "cards": [
+                "Vial of water"
+              ],
+              "type": "item"
+            },
+            {
               "label": "Ashes",
               "cards": [
                 "Ashes"
@@ -13538,6 +13722,15 @@
               "cards": [
                 "Silver bar"
               ],
+              "type": "item"
+            },
+            {
+              "label": "Black dye for Silverlight: vial + pestle and mortar (grind a black mushroom)",
+              "cards": [
+                "Vial",
+                "Pestle and mortar"
+              ],
+              "mode": "all",
               "type": "item"
             },
             {
@@ -14177,7 +14370,7 @@
       ],
       "notes": "",
       "consideredNoCard": [
-        "Acidic Bloodveld (lead rejected: optional / summoned during Vanstrom fight)",
+        "Acidic Bloodveld (optional; summoned in the Vanstrom fight)",
         "Andras",
         "Carl",
         "Drakan's medallion",
@@ -14362,7 +14555,7 @@
               "type": "item"
             },
             {
-              "label": "Bronze/iron items from the crate (deposited into the crucible)",
+              "label": "Bronze/iron items deposited into the crucible (the crate gives some, or bring your own)",
               "cards": [
                 "Bronze bar",
                 "Bronze platebody",
@@ -14379,7 +14572,19 @@
                 "Iron kiteshield",
                 "Iron chainbody",
                 "Iron scimitar",
-                "Iron longsword"
+                "Iron longsword",
+                "Bronze plateskirt",
+                "Bronze sq shield",
+                "Bronze claws",
+                "Bronze warhammer",
+                "Bronze battleaxe",
+                "Bronze 2h sword",
+                "Iron plateskirt",
+                "Iron sq shield",
+                "Iron claws",
+                "Iron warhammer",
+                "Iron battleaxe",
+                "Iron 2h sword"
               ],
               "type": "item"
             }
@@ -14871,6 +15076,12 @@
               "cards": [],
               "type": "item",
               "access": "desert"
+            },
+            {
+              "label": "A crush, a stab and a slash weapon (one for each golem)",
+              "cards": [],
+              "type": "item",
+              "info": true
             }
           ]
         },
@@ -14978,6 +15189,13 @@
               "type": "item"
             },
             {
+              "label": "Soft clay (to make the pot lid for the airtight pot)",
+              "cards": [
+                "Soft clay"
+              ],
+              "type": "item"
+            },
+            {
               "label": "Iron bar",
               "cards": [
                 "Iron bar"
@@ -15027,6 +15245,12 @@
                 "Brown apron"
               ],
               "type": "item"
+            },
+            {
+              "label": "Piscatoris Fishing Colony access",
+              "cards": [],
+              "type": "item",
+              "access": "piscatoris"
             }
           ]
         },
@@ -15059,7 +15283,8 @@
         "Kathy Corkat",
         "Malignius Mortifer",
         "Pot lid / Airtight pot",
-        "Wizard Frumscone"
+        "Wizard Frumscone",
+        "Piscatoris teleport"
       ]
     },
     {
@@ -15414,6 +15639,13 @@
                 "Magic stone"
               ],
               "type": "item"
+            },
+            {
+              "label": "Swamp tar (made into lamp oil at a lamp still, to fill the lantern)",
+              "cards": [
+                "Swamp tar"
+              ],
+              "type": "item"
             }
           ]
         }
@@ -15438,28 +15670,6 @@
               "label": "Limpwurt root",
               "cards": [
                 "Limpwurt root"
-              ],
-              "type": "item"
-            },
-            {
-              "label": "Any light source to get the boots of lightness",
-              "type": "item",
-              "cards": [
-                "Candle",
-                "Torch",
-                "Oil lamp",
-                "Oil lantern",
-                "Candle lantern",
-                "Mining helmet",
-                "Bullseye lantern",
-                "Bruma torch",
-                "Abyssal lantern"
-              ]
-            },
-            {
-              "label": "Knife to get the boots of lightness",
-              "cards": [
-                "Knife"
               ],
               "type": "item"
             },
@@ -15501,7 +15711,6 @@
             {
               "label": "Weight-reducing clothing (to reach -1kg)",
               "cards": [
-                "Boots of lightness",
                 "Graceful hood",
                 "Graceful top",
                 "Graceful legs",
@@ -15517,7 +15726,45 @@
                 "Desert camo top",
                 "Desert camo legs"
               ],
-              "type": "item"
+              "type": "item",
+              "routes": [
+                {
+                  "label": "Boots of lightness from the dungeon: a light source and a slash weapon (e.g. a knife) to collect them",
+                  "cards": [
+                    "Boots of lightness",
+                    [
+                      "Candle",
+                      "Torch",
+                      "Oil lamp",
+                      "Oil lantern",
+                      "Candle lantern",
+                      "Mining helmet",
+                      "Bullseye lantern",
+                      "Bruma torch",
+                      "Abyssal lantern"
+                    ],
+                    [
+                      "Knife",
+                      "Bronze scimitar",
+                      "Iron scimitar",
+                      "Steel scimitar",
+                      "Black scimitar",
+                      "Mithril scimitar",
+                      "Adamant scimitar",
+                      "Rune scimitar",
+                      "Dragon scimitar",
+                      "Bronze longsword",
+                      "Iron longsword",
+                      "Steel longsword",
+                      "Black longsword",
+                      "Mithril longsword",
+                      "Adamant longsword",
+                      "Rune longsword",
+                      "Dragon longsword"
+                    ]
+                  ]
+                }
+              ]
             }
           ]
         },
@@ -16133,6 +16380,13 @@
                 "Zaryte crossbow",
                 "Dragon hunter crossbow"
               ]
+            },
+            {
+              "label": "3 dwellberries",
+              "cards": [
+                "Dwellberries"
+              ],
+              "type": "item"
             }
           ]
         },
@@ -16164,9 +16418,8 @@
         "Canopic jar",
         "Code key",
         "Decoder strips",
-        "Dwellberries",
-        "Killerwatt (not encountered in walkthrough)",
-        "Mastaba key"
+        "Mastaba key",
+        "Killerwatt (caged; can't be interacted with)"
       ]
     },
     {
@@ -16237,6 +16490,14 @@
                 "Opal"
               ],
               "type": "item"
+            },
+            {
+              "label": "Cup of tea (for the examiner; take one from the Varrock tea stall)",
+              "cards": [
+                "Cup of tea"
+              ],
+              "type": "item",
+              "note": "Cup of tea is a version of the Empty cup card"
             }
           ]
         }
@@ -16249,7 +16510,6 @@
         "Arcenia root",
         "Charcoal",
         "Chemical powder",
-        "Cup of tea",
         "Curator Haig Halen",
         "Digsite workman",
         "Doug Deeping",
@@ -16324,6 +16584,28 @@
                 "Bucket"
               ],
               "type": "item"
+            },
+            {
+              "label": "Bucket of sap (no card): tap a pointy tree with a knife, or buy one",
+              "cards": [],
+              "type": "item",
+              "routes": [
+                {
+                  "label": "Use a knife on an evergreen tree (with the bucket)",
+                  "cards": [
+                    "Knife"
+                  ]
+                },
+                {
+                  "label": "Buy one at The Spice Is Right, Sophanem (45 coins)",
+                  "cards": [
+                    "Coins"
+                  ],
+                  "areas": [
+                    "sophanem"
+                  ]
+                }
+              ]
             },
             {
               "label": "Mud rune",
@@ -16404,7 +16686,8 @@
               "cards": [
                 "Ali Morrisane"
               ],
-              "type": "npc"
+              "type": "npc",
+              "note": "He also sells the Kharidian headpiece and fake beard (no cards)"
             },
             {
               "label": "Talk to a Menaphite Thug",
@@ -16462,13 +16745,6 @@
                 "Zombie gloves"
               ],
               "type": "item"
-            },
-            {
-              "label": "Kharidian headpiece + fake beard (no cards) — bought from Ali Morrisane",
-              "cards": [
-                "Ali Morrisane"
-              ],
-              "type": "npc"
             },
             {
               "label": "Beer",
@@ -17947,11 +18223,23 @@
             },
             {
               "label": "Underwater breathing: fishbowl helmet + diving apparatus, OR Medallion of the deep",
-              "cards": [
-                "Diving apparatus",
-                "Medallion of the deep"
-              ],
-              "type": "item"
+              "cards": [],
+              "type": "item",
+              "routes": [
+                {
+                  "label": "Fishbowl helmet + diving apparatus",
+                  "cards": [
+                    "Fishbowl helmet",
+                    "Diving apparatus"
+                  ]
+                },
+                {
+                  "label": "Medallion of the deep (counts as both)",
+                  "cards": [
+                    "Medallion of the deep"
+                  ]
+                }
+              ]
             },
             {
               "label": "10 wooden cats (no card) — make them from 10 planks + 10 fur",
@@ -18060,10 +18348,9 @@
         "Bill Teach",
         "Brain tongs",
         "Brother Tranquility",
-        "Cranial clamp (catalog lists it as a 'Lamp' variant - likely a catalog quirk)",
+        "Cranial clamp",
         "Crate parts",
         "Dr Fenkenstrain",
-        "Fishbowl helmet",
         "Keg of powder",
         "Mi-Gor",
         "Prayer book",
@@ -18136,6 +18423,15 @@
               "type": "item"
             },
             {
+              "label": "Make the lantern lens: molten glass + glassblowing pipe (Crafting 49)",
+              "cards": [
+                "Molten glass",
+                "Glassblowing pipe"
+              ],
+              "mode": "all",
+              "type": "item"
+            },
+            {
               "label": "Earth rune",
               "cards": [
                 "Earth rune"
@@ -18198,6 +18494,27 @@
               "label": "Talk to Prince Itzla Arkan",
               "cards": [
                 "Prince Itzla Arkan"
+              ],
+              "type": "npc"
+            },
+            {
+              "label": "Queen Zyanyi Arkan speaks in a cutscene",
+              "cards": [
+                "Queen Zyanyi Arkan"
+              ],
+              "type": "npc"
+            },
+            {
+              "label": "Augur Metzli speaks in a cutscene",
+              "cards": [
+                "Augur Metzli"
+              ],
+              "type": "npc"
+            },
+            {
+              "label": "Ennius Tullus speaks in a cutscene",
+              "cards": [
+                "Ennius Tullus"
               ],
               "type": "npc"
             }
@@ -19082,7 +19399,8 @@
               "cards": [
                 "Cake",
                 "Chocolate cake"
-              ]
+              ],
+              "optional": true
             },
             {
               "label": "Favour method (coins or a gathering tool)",
@@ -19115,11 +19433,20 @@
                 "Lobster pot"
               ],
               "type": "item"
+            },
+            {
+              "label": "Shortbow or Longbow (if courting Astrid)",
+              "cards": [
+                "Shortbow",
+                "Longbow"
+              ],
+              "type": "item",
+              "optional": true
             }
           ]
         }
       ],
-      "notes": "",
+      "notes": "Jester row emotes can be used to court Astrid without flowers or a bow.",
       "consideredNoCard": [
         "Advisor Ghrim",
         "Derrik",
@@ -20155,20 +20482,6 @@
               "type": "item"
             },
             {
-              "label": "Ogre shaman",
-              "cards": [
-                "Ogre shaman"
-              ],
-              "type": "enemy"
-            },
-            {
-              "label": "Enclave guard",
-              "cards": [
-                "Enclave guard"
-              ],
-              "type": "enemy"
-            },
-            {
               "label": "Any light source",
               "type": "item",
               "cards": [
@@ -20206,6 +20519,13 @@
                 "Guam leaf"
               ],
               "type": "item"
+            },
+            {
+              "label": "Vial of water (to make the Guam potion (unf))",
+              "cards": [
+                "Vial of water"
+              ],
+              "type": "item"
             }
           ]
         },
@@ -20235,6 +20555,20 @@
               "label": "Talk to / give death rune to City guard",
               "cards": [
                 "City guard"
+              ],
+              "type": "npc"
+            },
+            {
+              "label": "Use the magic ogre potion on the 6 Ogre shamans",
+              "cards": [
+                "Ogre shaman"
+              ],
+              "type": "npc"
+            },
+            {
+              "label": "Use a cave nightshade on an Enclave guard",
+              "cards": [
+                "Enclave guard"
               ],
               "type": "npc"
             }
@@ -20509,6 +20843,15 @@
               "cards": [
                 "Bullseye lantern"
               ],
+              "type": "item"
+            },
+            {
+              "label": "Make the lantern lens: molten glass + glassblowing pipe (Crafting 49)",
+              "cards": [
+                "Molten glass",
+                "Glassblowing pipe"
+              ],
+              "mode": "all",
               "type": "item"
             },
             {
@@ -21047,6 +21390,35 @@
                 "Sample bottle"
               ],
               "type": "item"
+            },
+            {
+              "label": "Kill Slash Bash: comp ogre bow + brutal arrows, or Crumble Undead",
+              "cards": [],
+              "type": "item",
+              "note": "Steel brutal arrows are a version of the Steel arrow card; other brutal arrow tiers have no card. Making them needs a knife and a hammer.",
+              "routes": [
+                {
+                  "label": "Comp ogre bow + brutal arrows you fletch",
+                  "cards": [
+                    "Comp ogre bow",
+                    "Logs",
+                    "Feather",
+                    "Hammer",
+                    [
+                      "Bronze nails",
+                      "Iron nails",
+                      "Steel nails",
+                      "Black nails",
+                      "Mithril nails",
+                      "Adamantite nails",
+                      "Rune nails"
+                    ]
+                  ]
+                }
+              ],
+              "spells": [
+                "Crumble Undead"
+              ]
             }
           ]
         },
@@ -21077,7 +21449,6 @@
         "Book of portraiture",
         "Brentle Vahn",
         "Charcoal",
-        "Cup of tea",
         "Dragon inn tankard",
         "Grish",
         "Necromancy book",
@@ -21329,8 +21700,7 @@
       ],
       "consideredNoCard": [
         "Cake of guidance",
-        "Enchanted egg/milk/flour",
-        "Quiz NPC pictures (shown only, not interacted)"
+        "Enchanted egg/milk/flour"
       ]
     },
     {
@@ -21839,7 +22209,6 @@
       "consideredNoCard": [
         "Doris",
         "Hell-Rat (caught by your cat)",
-        "Hell-rat (caught by your cat)",
         "Spices",
         "Spicy stew",
         "Spicy stew / spices"
@@ -22062,6 +22431,13 @@
               "type": "item"
             },
             {
+              "label": "Fishbowl helmet (Murphy makes it from your fishbowl; you wear it to dive)",
+              "cards": [
+                "Fishbowl helmet"
+              ],
+              "type": "item"
+            },
+            {
               "label": "Diving apparatus",
               "cards": [
                 "Diving apparatus"
@@ -22232,9 +22608,7 @@
       "name": "Recipe for Disaster",
       "miniquest": false,
       "sections": [],
-      "consideredNoCard": [
-        "Umbrella entry; all requirements live in the subquest entries"
-      ]
+      "consideredNoCard": []
     }
   ]
 }

@@ -6,14 +6,20 @@ it can fire).
 Source: scripts/skilling_curated.json — built from the OSRS Wiki (each method keeps a short
 wiki quote and its page), in the shared requirement model:
   {skill, name, level, xp, type, requirements: [{label, type, cards, mode?, optional?, tool?, note?}],
-   quests, levels, access, note, wiki, page}
+   quests, levels, access, note, wiki, page, outputs?}
+Gathering methods (type "gathering") also list the cards they yield:
+  outputs: ["Woad leaf", {"card": "Raw shark", "level": 70}, {"card": "Oak roots", "levels": {"Woodcutting": 15}, "tool": "Axe"}]
+  (a string = at the method's level; an object adds its own level in the method's skill, other skill
+  levels or a TOOL_TIERS tool). [] = yields no card (canoes, Tithe Farm, anima plants…). Farming
+  outputs are the wiki's {{Farming info}} |crop=; the rest the method page's drop table or name.
+  The card page lists each method under "Gathering" and canGetItem counts it as a source.
 This script validates card names (catalog or card_aliases.json versions), quest names
 (quests.json), access keys (access_routes.json) and writes the output.
 
 Output: scripts/output/skilling.json   (list of methods)
 
 Usage:
-  python3 scripts/generate_skilling.py --card-json research/card-catalog-v1.json
+  python3 scripts/generate_skilling.py --card-json research/card-catalog-live.json
 """
 
 from __future__ import annotations
@@ -42,7 +48,7 @@ def main() -> int:
     problems = []
     for m in methods:
         for r in m.get("requirements", []):
-            for c in r.get("cards", []):
+            for c in r.get("cards", []) + [c for rt in r.get("routes", []) for c in rt.get("cards", [])]:
                 for n in (c if isinstance(c, list) else [c]):
                     if n.lower() not in names and n.lower() not in aliases:
                         problems.append(f"{m['skill']} / {m['name']}: card {n!r}")
@@ -53,10 +59,21 @@ def main() -> int:
             area, _, tier = dk.rpartition(" ")
             if area not in diary_areas or tier not in ("Easy", "Medium", "Hard", "Elite"):
                 problems.append(f"{m['skill']} / {m['name']}: diary {dk!r}")
+        if m.get("type") == "gathering":
+            if not isinstance(m.get("outputs"), list):
+                problems.append(f"{m['skill']} / {m['name']}: gathering method without outputs")
+            for o in m.get("outputs") or []:
+                n = o if isinstance(o, str) else o.get("card", "")
+                if n.lower() not in names and n.lower() not in aliases:
+                    problems.append(f"{m['skill']} / {m['name']}: output {n!r} is not a card")
+                if isinstance(o, dict) and set(o) - {"card", "level", "levels", "tool"}:
+                    problems.append(f"{m['skill']} / {m['name']}: output {n!r} has unknown keys")
         if m.get("access") and m["access"] not in access:
             problems.append(f"{m['skill']} / {m['name']}: access {m['access']!r}")
     _OUT.write_text(json.dumps(methods, indent=1, ensure_ascii=False) + "\n", encoding="utf-8")
     print(f"Wrote {_OUT}: {len(methods)} methods", dict(Counter(m["skill"] for m in methods)))
+    gat = [m for m in methods if m.get("type") == "gathering"]
+    print(f"  gathering: {len(gat)} methods, {sum(1 for m in gat if m.get('outputs'))} with card outputs")
     for x in problems:
         print("  ! " + x)
     return 1 if problems else 0

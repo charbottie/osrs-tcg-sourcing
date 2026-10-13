@@ -22,7 +22,7 @@ Output: scripts/output/monster_locations.json
     from the Slayer verification's location gates)
 
 Usage:
-  python3 scripts/generate_monster_locations.py --card-json research/card-catalog-v1.json
+  python3 scripts/generate_monster_locations.py --card-json research/card-catalog-live.json
 """
 
 from __future__ import annotations

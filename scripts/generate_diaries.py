@@ -22,7 +22,7 @@ Output: scripts/output/diaries.json — same shape the page uses for DIARY_DATA:
                  partialQuests?, items, monsters, notes? }] } }]
 
 Usage:
-  python3 scripts/generate_diaries.py --card-json research/card-catalog-v1.json
+  python3 scripts/generate_diaries.py --card-json research/card-catalog-live.json
 """
 
 from __future__ import annotations
@@ -30,6 +30,7 @@ from __future__ import annotations
 import argparse
 import json
 import wiki_api
+from catalog_names import npc_names
 import re
 from pathlib import Path
 
@@ -234,6 +235,9 @@ CARD_OVERRIDES: dict[tuple[str, str, int], dict] = {
     ("Western Provinces", "hard", 9): {"monstersAny": [["Chompy bird", "Jubbly bird"]], "remove": ["Chompy bird", "Jubbly bird"], "npcs": ["Rantz"]},
     ("Western Provinces", "elite", 6): {"monstersAny": [["Chompy bird", "Jubbly bird"]], "remove": ["Chompy bird", "Jubbly bird"], "npcs": ["Rantz"]},
     ("Kandarin", "easy", 8): {"items": ["Empty fishbowl"]},
+    ("Kandarin", "easy", 6): {"remove": ["Unfired cup", "Soft clay"], "note": "Galahad makes the tea; no items needed."},
+    # The unstrung / strung diamond amulet is a version of the Amulet of power card (live catalog)
+    ("Lumbridge & Draynor", "hard", 11): {"items": ["Amulet of power"]},
     ("Lumbridge & Draynor", "easy", 7): {"items": ["Oak logs"]},
     ("Kourend & Kebos", "easy", 6): {"remove": ["Veos"], "note": "Veos or Cabin Boy Herbert (no card) can take you."},
     ("Desert", "easy", 8): {"npcs": ["Guardian mummy"], "itemsAny": [["Ivory comb", "Pottery scarab", "Pottery statuette", "Stone scarab", "Stone seal", "Stone statuette", "Gold seal", "Golden scarab", "Golden statuette"]], "note": "Any Pyramid Plunder artefact."},
@@ -337,6 +341,11 @@ def _strip_markup(s: str) -> str:
         prev, s = s, re.sub(r"\{\{[^{}]*\}\}", "", s)
     s = _LINK_RE.sub(lambda m: m.group(2) or m.group(1), s)
     s = re.sub(r"'{2,}", "", s)
+    # HTML left in the wikitext: list items → "; ", line breaks → space, drop other tags
+    s = re.sub(r"(?i)</li>\s*<li>", "; ", s)
+    s = re.sub(r"(?i)<br\s*/?>", " ", s)
+    s = re.sub(r"(?i):?\s*<ul>\s*<li>", ": ", s)
+    s = re.sub(r"</?[a-zA-Z][^>]*>", "", s)
     return re.sub(r"\s+", " ", s).strip()
 
 
@@ -449,7 +458,7 @@ class Ctx:
         self.grimy_herb_cards = {i["name"] for i in cat["items"]
                                  if any(v.get("name", "").lower().startswith("grimy ")
                                         for v in i.get("tcg", {}).get("variants", []))}
-        self.npcs = {n["name"].lower(): n["name"] for n in cat["npcs"]}
+        self.npcs = npc_names(cat)   # card names, wiki pages and version names -> NPC card
         set_variant_aliases(load_variant_aliases(card_json))
         self.quests = {q.lower(): q for q in json.loads((_OUT_DIR / "quests.json").read_text(encoding="utf-8"))}
         self.sources = json.loads((_OUT_DIR / "item_sources.json").read_text(encoding="utf-8"))
@@ -974,7 +983,7 @@ _TYPES_CACHE = _DIR / "cache" / "wiki_page_types.json"
 def _page_types(titles: list[str]) -> dict[str, str]:
     """Wiki infobox type per page title ("Item", "NPC", "Monster", "Location"…, or "" if none).
     Batched 50 titles per API request; cached in scripts/cache/wiki_page_types.json."""
-    import time, urllib.parse, urllib.request
+    import time, urllib.error, urllib.parse, urllib.request
     cache = json.loads(_TYPES_CACHE.read_text(encoding="utf-8")) if _TYPES_CACHE.exists() else {}
     todo = [t for t in dict.fromkeys(titles) if t not in cache]
     for i in range(0, len(todo), 50):
@@ -1065,7 +1074,7 @@ _WIKITEXT_CACHE = _DIR / "cache" / "wikitext"
 
 def _fetch_wikitext(page: str, refresh: bool = False) -> str:
     """Raw wikitext for a page, cached in scripts/cache/wikitext/ (gitignored)."""
-    import time, urllib.parse, urllib.request
+    import time, urllib.error, urllib.parse, urllib.request
     name = page.replace(" ", "_").replace("/", "%2F")
     # macOS file names are case-insensitive: "Black_Dragons" and "Black_dragons" would share
     # one cache file, so mixed-case titles get a short hash of the exact title
@@ -1073,9 +1082,18 @@ def _fetch_wikitext(page: str, refresh: bool = False) -> str:
         import hashlib
         name += "~" + hashlib.md5(page.encode()).hexdigest()[:6]
     cache = _WIKITEXT_CACHE / (name + ".txt")
+    missing = _WIKITEXT_CACHE / (name + ".missing")   # a 404, remembered so re-runs don't re-ask
     if cache.exists() and not refresh:
         return cache.read_text(encoding="utf-8")
-    text = wiki_api.raw(page)  # plain page URL ?action=raw (never api.php?action=parse)
+    if missing.exists() and not refresh:
+        raise FileNotFoundError(f"no wiki page {page!r} (cached 404)")
+    try:
+        text = wiki_api.raw(page)  # plain page URL ?action=raw (never api.php?action=parse)
+    except urllib.error.HTTPError as e:
+        if e.code == 404:
+            missing.parent.mkdir(parents=True, exist_ok=True)
+            missing.write_text("", encoding="utf-8")
+        raise
     cache.parent.mkdir(parents=True, exist_ok=True)
     cache.write_text(text, encoding="utf-8")
     return text

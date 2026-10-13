@@ -1184,5 +1184,18 @@
  "Thread of elidinis": {
   "shops": [],
   "shopBought": false
+ },
+ "Ava's accumulator": {
+  "shops": [
+   {
+    "seller": "Ava",
+    "price": 999,
+    "currency": "Coins"
+   }
+  ],
+  "shopBought": true,
+  "quests": [
+   "Animal Magnetism"
+  ]
  }
 }

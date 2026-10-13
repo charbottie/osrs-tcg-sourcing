@@ -36,9 +36,9 @@
         ]
       },
       {
-        "label": "Necklace of passage → Eagles' Eyrie (Jade necklace card)",
+        "label": "Necklace of passage → Eagles' Eyrie",
         "cards": [
-          "Jade necklace"
+          "Necklace of passage"
         ]
       },
       {
@@ -409,9 +409,9 @@
         "wiki": "Prifddinas: \"All methods of entering the city require completion of Song of the Elves\" ... \"walk west over the mountain pass of Arandar\"."
       },
       {
-        "label": "Necklace of passage → Jorral's outpost, then Arandar (Jade necklace card)",
+        "label": "Necklace of passage → Jorral's outpost, then Arandar",
         "cards": [
-          "Jade necklace"
+          "Necklace of passage"
         ],
         "quests": [
           "Song of the Elves"
@@ -468,9 +468,9 @@
         "wiki": "Tirannwn: \"All of the following require completion of the Regicide quest: ... Travelling through Arandar\"."
       },
       {
-        "label": "Necklace of passage → Outpost, then Arandar (Jade necklace card)",
+        "label": "Necklace of passage → Outpost, then Arandar",
         "cards": [
-          "Jade necklace"
+          "Necklace of passage"
         ],
         "quests": [
           "Regicide"
@@ -829,5 +829,45 @@
       }
     ],
     "note": "Estate agents have no card. OSRS Wiki: \"Players may either pay 1,000 coins or complete the quest Daddy's Home to get their first house\""
+  },
+  "piscatoris": {
+    "label": "Piscatoris Fishing Colony access",
+    "routes": [
+      {
+        "label": "Kathy Corkat's boat west of the Tree Gnome Stronghold: 50 coins, or charm her with a ring of Charos (a) (she has no card)",
+        "cards": [
+          [
+            "Coins",
+            "Ring of charos"
+          ]
+        ],
+        "wiki": "Swan Song: \"To use the boat, you must either pay Kathy Corkat 50 coins, or charm her while wearing the ring of Charos.\""
+      },
+      {
+        "label": "Fairy ring AKQ (Fairytale I done, Fairytale II started)",
+        "cards": [
+          [
+            "Dramen staff",
+            "Lunar staff"
+          ]
+        ],
+        "quests": [
+          "Fairytale I - Growing Pains"
+        ]
+      },
+      {
+        "label": "Western banner 3/4 teleport (Western Provinces hard diary)",
+        "cards": [
+          "Western banner"
+        ],
+        "diaries": [
+          "Western Provinces Hard"
+        ]
+      },
+      {
+        "label": "Piscatoris teleport scroll (no card)",
+        "manual": true
+      }
+    ]
   }
 }

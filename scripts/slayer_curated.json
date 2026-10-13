@@ -830,7 +830,7 @@
       "Abyssal lantern",
       "Light orb"
      ],
-     "note": "Both cave bug dungeons are dark. Candle covers lit candle and Torch covers lit torch (via aliases). Black candle, sapphire lantern and the Firemaking cape have no card."
+     "note": "Both cave bug dungeons are dark. The Candle and Torch cards cover the lit versions. Black candle, sapphire lantern and Firemaking cape have no card."
     }
    ],
    "locationGates": [
@@ -926,7 +926,7 @@
       "Abyssal lantern",
       "Light orb"
      ],
-     "note": "Exposed flames (candle, torch) can explode in the northern swamp-cave room, so a covered lantern is safer. Candle covers lit candle and Torch covers lit torch via aliases."
+     "note": "Open flames (candle, torch) can explode in the northern swamp-cave room, so a covered lantern is safer. Candle / Torch cards cover the lit versions."
     }
    ],
    "locationGates": [
@@ -1645,7 +1645,7 @@
       "Dragonfire ward",
       "Ancient wyvern shield"
      ],
-     "note": "The anti-dragon shield does NOT work. The wiki says the shield 'provides significant protection' rather than 'required', but the task itself is gated on Elemental Workshop I for this reason."
+     "note": "Protects against the icy breath; the anti-dragon shield does not work. The task is only assigned after Elemental Workshop I for this reason."
     }
    ],
    "locationGates": [
@@ -1698,7 +1698,7 @@
       "Rock thrownhammer",
       "Granite hammer"
      ],
-     "note": "Needed to finish a gargoyle at 9 HP or lower. The Gargoyle Smasher perk automates it but still needs the hammer in the inventory. Grotesque Guardians need a brittle key, which drops from gargoyles on task, so the hammer is effectively needed even for the boss route."
+     "note": "Needed to finish a gargoyle at 9 HP or lower (the Gargoyle Smasher perk still needs it in the inventory). The Grotesque Guardians need one too."
     }
    ],
    "locationGates": [
@@ -2443,7 +2443,7 @@
       "Staff of light",
       "Staff of balance"
      ],
-     "note": "Kurask can only be damaged by leaf-bladed weapons, broad-tipped ammo or Magic Dart (Magic Dart needs a Slayer's staff / Staff of the dead / Toxic staff (alias -> Staff of the dead) / Staff of light / Staff of balance). Broad ammo also needs a bow/crossbow card."
+     "note": "Only leaf-bladed weapons, broad ammo (with a bow or crossbow) or Magic Dart (Slayer's staff, Staff of the dead / light / balance) damage Kurask."
     }
    ],
    "locationGates": [
@@ -2677,7 +2677,7 @@
       "Super antifire potion",
       "Extended super antifire"
      ],
-     "note": "Metallic dragonfire is not reduced by Protect from Magic. Unprotected max hit is 50; an anti-dragon shield alone cuts it to 5, a super antifire alone to 0. Plain antifire alone still lets 35 through, so it doesn't count on its own."
+     "note": "Protect from Magic doesn't reduce metallic dragonfire (max 50). An anti-dragon shield cuts it to 5, super antifire to 0; plain antifire alone lets 35 through."
     }
    ],
    "locationGates": [
@@ -2713,13 +2713,13 @@
    "monstersAdd": [
     {
      "name": "Minotaur",
-     "card": "Minotaur",
+     "card": "Minotaur (f2p)",
      "locations": [
       "Stronghold of Security"
      ]
     }
    ],
-   "notes": "No task page. Minotaurs are only in the Stronghold of Security, Vault of War (level 1). No equipment.",
+   "notes": "No task page. Minotaurs are only in the Stronghold of Security, Vault of War (level 1). No equipment. The Stronghold minotaurs are the 'Minotaur (f2p)' card (the 'Minotaur' card is the Fortis/Varlamore one).",
    "confidence": "high",
    "wiki": "Minotaur location: 'Stronghold of Security: Vault of War'.",
    "task": "Minotaurs"
@@ -3368,7 +3368,7 @@
     "Reanimated scorpion"
    ],
    "cardFixes": {
-    "Scorpia's offspring (monster": "Scorpia's offspring"
+    "Scorpia's offspring (monster": "Scorpia's offspring (monster)"
    },
    "locationGates": [
     {
@@ -3520,7 +3520,7 @@
       "Dragonfire ward",
       "Ancient wyvern shield"
      ],
-     "note": "Survival item against the icy breath. The wiki says it is 'not required to be slain', but Jagex only assigns the task after Elemental Workshop I for this reason. Leave it out if the planner treats only hard requirements as required."
+     "note": "Protects against the icy breath. Not strictly needed to kill them, but the task is only assigned after Elemental Workshop I for this reason."
     }
    ],
    "notes": "No task page. Only found at the end of the Asgarnian Ice Dungeon (82 Agility shortcut optional). Needs 72 Slayer to harm.",
@@ -3782,7 +3782,7 @@
      "label": "Reinforced goggles (no card) or a slayer helmet",
      "type": "item",
      "cards": [],
-     "note": "The wiki says you need reinforced goggles to kill them, or a Slayer helmet after the quest. Reinforced goggles have NO card, so only the Slayer helmet works under Bronzeman. Without eye protection their spit drains Attack/Defence by 90% and hits 20-30.",
+     "note": "Reinforced goggles have no card, so only the Slayer helmet works here. Without eye protection their spit drains Attack and Defence and hits 20-30.",
      "access": "slayer_helmet",
      "routes": [
       {
@@ -4090,7 +4090,7 @@
       "Staff of light",
       "Staff of balance"
      ],
-     "note": "Turoth can only be damaged by leaf-bladed weapons, broad arrows/bolts or Magic Dart (needs a Slayer's staff / Staff of the dead / Toxic staff (alias) / Staff of light / Staff of balance). Broad ammo also needs a bow/crossbow."
+     "note": "Only leaf-bladed weapons, broad ammo (with a bow or crossbow) or Magic Dart (Slayer's staff, Staff of the dead / light / balance) damage Turoth."
     }
    ],
    "notes": "Monster list correct (Turoth + superior Spiked Turoth). Only in the Fremennik Slayer Dungeon, which has no quest gate.",
@@ -4134,9 +4134,9 @@
        "Wolfbane",
        "Blisterwood flail",
        "Sunspear",
-       "Topaz ring"
+       "Efaritay's aid"
       ],
-      "note": "Tier 2. Efaritay's aid is a version of the 'Topaz ring' card. Blessed axe, Rod of Ivandis, Silverlight, Ivandis flail and Hallowed flail have no card. Silver bolts also need a crossbow."
+      "note": "Tier 2. Blessed axe, Rod of Ivandis, Silverlight, Ivandis flail and Hallowed flail have no card. Silver bolts also need a crossbow."
      }
     ],
     "Vyrewatch": [

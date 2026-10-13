@@ -11,13 +11,29 @@ Rules (per wiki staff, github issue #1, 2026-07-18; see wiki_fetcher.py):
 from __future__ import annotations
 
 import json
+import socket
 import time
+import urllib.error
 import urllib.parse
 import urllib.request
 
 USER_AGENT = "osrs-tcg-planner/1.0 (github.com/charbottie/osrs-tcg-sourcing)"
 RATE_LIMIT_SECS = 1.1
 _last = 0.0
+# Any socket this process opens gives up after 60 s of silence (a stalled wiki connection once
+# hung generate_slayer.py); _read() also caps a whole response at a wall-clock deadline.
+socket.setdefaulttimeout(60)
+
+
+def _read(r, deadline: float) -> bytes:
+    chunks = []
+    while True:
+        b = r.read(65536)
+        if not b:
+            return b"".join(chunks)
+        chunks.append(b)
+        if time.monotonic() > deadline:
+            raise TimeoutError("wiki response took too long")
 
 
 def _get(url: str, timeout: int = 60) -> bytes:
@@ -30,7 +46,11 @@ def _get(url: str, timeout: int = 60) -> bytes:
         try:
             req = urllib.request.Request(url, headers={"User-Agent": USER_AGENT})
             with urllib.request.urlopen(req, timeout=timeout) as r:
-                return r.read()
+                return _read(r, time.monotonic() + timeout * 2)
+        except urllib.error.HTTPError as e:
+            if e.code == 404 or attempt == 2:   # a missing page won't appear on a retry
+                raise
+            time.sleep(5 * (attempt + 1))
         except Exception:
             if attempt == 2:
                 raise

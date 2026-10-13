@@ -70,7 +70,7 @@ def _run_generate_background(extra_args: list[str]) -> None:
     global _generate_proc, _generate_start, _generate_done, _generate_result
     cmd = [
         sys.executable, str(_SCRIPTS_DIR / "generate_sources.py"),
-        "--card-json", str(_SCRIPTS_DIR.parent / "research" / "card-catalog-v1.json"),
+        "--card-json", str(_SCRIPTS_DIR.parent / "research" / "card-catalog-live.json"),
         "--skip-quests",
         *extra_args,
     ]

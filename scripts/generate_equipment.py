@@ -27,7 +27,7 @@ import time
 import urllib.request
 from collections import defaultdict
 
-CARD_JSON = os.path.join(os.path.dirname(__file__), '..', 'research', 'card-catalog-v1.json')
+CARD_JSON = os.path.join(os.path.dirname(__file__), '..', 'research', 'card-catalog-live.json')
 OUT_JSON  = os.path.join(os.path.dirname(__file__), 'output', 'equipment_data.json')
 
 UA = 'OSRS-TCG-enrichment/1.0 (github.com/Azderi/osrs-tcg)'

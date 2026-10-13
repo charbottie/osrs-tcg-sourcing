@@ -41,6 +41,20 @@ def _cache_path(page_name: str) -> Path:
     return _CACHE_DIR / (safe + ".html")
 
 
+def _get_with_deadline(url: str, total_secs: float = 90.0) -> requests.Response:
+    """GET with per-read timeouts plus a wall-clock cap, so a trickling connection can't hang a run."""
+    resp = _session.get(url, timeout=_REQUEST_TIMEOUT, stream=True)
+    deadline = time.monotonic() + total_secs
+    chunks = []
+    for chunk in resp.iter_content(65536):
+        chunks.append(chunk)
+        if time.monotonic() > deadline:
+            resp.close()
+            raise TimeoutError(f"response took over {total_secs:.0f}s")
+    resp._content = b"".join(chunks)
+    return resp
+
+
 def fetch(page_name: str, *, force_refresh: bool = False) -> str | None:
     """Return HTML for an OSRS Wiki page, using disk cache when available."""
     page_name = page_name.replace(" ", "_")
@@ -51,8 +65,8 @@ def fetch(page_name: str, *, force_refresh: bool = False) -> str | None:
 
     url = WIKI_BASE + urllib.parse.quote(page_name, safe="/")
     try:
-        resp = _session.get(url, timeout=_REQUEST_TIMEOUT)
-    except requests.RequestException as exc:
+        resp = _get_with_deadline(url)
+    except (requests.RequestException, TimeoutError) as exc:
         print(f"  [FETCH ERROR] {url}: {exc}")
         return None
     finally:

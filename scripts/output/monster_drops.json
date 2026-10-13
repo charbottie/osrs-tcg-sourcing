@@ -4032,7 +4032,7 @@
         "fromRdt": false
       },
       {
-        "card": "Vial of water",
+        "card": "Vial",
         "rarity": "Rare",
         "fraction": "1/128",
         "fromRdt": false
@@ -4846,7 +4846,7 @@
         "fromRdt": false
       },
       {
-        "card": "Vial of water",
+        "card": "Vial",
         "rarity": "Common",
         "fraction": "13/128",
         "fromRdt": false
@@ -7573,12 +7573,6 @@
         "rarity": "Very Rare",
         "fraction": "1/349,525.33",
         "fromRdt": true
-      },
-      {
-        "card": "Crawling hand",
-        "rarity": "Rare",
-        "fraction": "1/500",
-        "fromRdt": false
       }
     ],
     "slayerLevel": 5,
@@ -9571,7 +9565,7 @@
         "fromRdt": false
       },
       {
-        "card": "Vial of water",
+        "card": "Vial",
         "rarity": "Uncommon",
         "fraction": "4/200",
         "fromRdt": false
@@ -10989,7 +10983,7 @@
         "fromRdt": false
       },
       {
-        "card": "Vial of water",
+        "card": "Vial",
         "rarity": "Common",
         "fraction": "10/128",
         "fromRdt": false
@@ -11671,7 +11665,7 @@
         "fromRdt": false
       },
       {
-        "card": "Vial of water",
+        "card": "Vial",
         "rarity": "Rare",
         "fraction": "1/128",
         "fromRdt": false
@@ -13060,7 +13054,7 @@
         "fromRdt": false
       },
       {
-        "card": "Sapphire necklace",
+        "card": "Games necklace",
         "rarity": "Uncommon",
         "fraction": "10/513",
         "fromRdt": false
@@ -13072,7 +13066,7 @@
         "fromRdt": false
       },
       {
-        "card": "Emerald amulet",
+        "card": "Amulet of defence",
         "rarity": "Uncommon",
         "fraction": "10/513",
         "fromRdt": false
@@ -16079,7 +16073,7 @@
   "Snake": {
     "drops": [
       {
-        "card": "Snake hide",
+        "card": "Snakeskin",
         "rarity": "Always",
         "fraction": "1/1",
         "fromRdt": false
@@ -19055,7 +19049,7 @@
   "Water elemental": {
     "drops": [
       {
-        "card": "Vial of water",
+        "card": "Vial",
         "rarity": "Always",
         "fraction": "1/1",
         "fromRdt": false
@@ -21533,7 +21527,7 @@
         "fromRdt": false
       },
       {
-        "card": "Strawberries",
+        "card": "Strawberry",
         "rarity": "Rare",
         "fraction": "1/100",
         "fromRdt": false
@@ -22031,12 +22025,6 @@
       },
       {
         "card": "Diamond",
-        "rarity": "Common",
-        "fraction": "1/21",
-        "fromRdt": false
-      },
-      {
-        "card": "Diamond amulet",
         "rarity": "Common",
         "fraction": "1/21",
         "fromRdt": false
@@ -29704,7 +29692,7 @@
         "fromRdt": false
       },
       {
-        "card": "Emerald necklace",
+        "card": "Binding necklace",
         "rarity": "Uncommon",
         "fraction": "3/256",
         "fromRdt": false
@@ -30138,7 +30126,7 @@
         "fromRdt": false
       },
       {
-        "card": "Vial of water",
+        "card": "Vial",
         "rarity": "Common",
         "fraction": "50/512",
         "fromRdt": false
@@ -30159,12 +30147,6 @@
         "card": "Tinderbox",
         "rarity": "Uncommon",
         "fraction": "20/512",
-        "fromRdt": false
-      },
-      {
-        "card": "Vial",
-        "rarity": "Common",
-        "fraction": "50/512",
         "fromRdt": false
       },
       {
@@ -30403,7 +30385,7 @@
         "fromRdt": false
       },
       {
-        "card": "Vial of water",
+        "card": "Vial",
         "rarity": "Common",
         "fraction": "50/512",
         "fromRdt": false
@@ -30424,12 +30406,6 @@
         "card": "Tinderbox",
         "rarity": "Uncommon",
         "fraction": "20/512",
-        "fromRdt": false
-      },
-      {
-        "card": "Vial",
-        "rarity": "Common",
-        "fraction": "50/512",
         "fromRdt": false
       },
       {
@@ -30668,7 +30644,7 @@
         "fromRdt": false
       },
       {
-        "card": "Vial of water",
+        "card": "Vial",
         "rarity": "Common",
         "fraction": "50/512",
         "fromRdt": false
@@ -30689,12 +30665,6 @@
         "card": "Tinderbox",
         "rarity": "Uncommon",
         "fraction": "20/512",
-        "fromRdt": false
-      },
-      {
-        "card": "Vial",
-        "rarity": "Common",
-        "fraction": "50/512",
         "fromRdt": false
       },
       {
@@ -30933,7 +30903,7 @@
         "fromRdt": false
       },
       {
-        "card": "Vial of water",
+        "card": "Vial",
         "rarity": "Common",
         "fraction": "50/512",
         "fromRdt": false
@@ -30954,12 +30924,6 @@
         "card": "Tinderbox",
         "rarity": "Uncommon",
         "fraction": "20/512",
-        "fromRdt": false
-      },
-      {
-        "card": "Vial",
-        "rarity": "Common",
-        "fraction": "50/512",
         "fromRdt": false
       },
       {
@@ -31198,7 +31162,7 @@
         "fromRdt": false
       },
       {
-        "card": "Vial of water",
+        "card": "Vial",
         "rarity": "Common",
         "fraction": "50/512",
         "fromRdt": false
@@ -31219,12 +31183,6 @@
         "card": "Tinderbox",
         "rarity": "Uncommon",
         "fraction": "20/512",
-        "fromRdt": false
-      },
-      {
-        "card": "Vial",
-        "rarity": "Common",
-        "fraction": "50/512",
         "fromRdt": false
       },
       {
@@ -31463,7 +31421,7 @@
         "fromRdt": false
       },
       {
-        "card": "Vial of water",
+        "card": "Vial",
         "rarity": "Common",
         "fraction": "50/512",
         "fromRdt": false
@@ -31484,12 +31442,6 @@
         "card": "Tinderbox",
         "rarity": "Uncommon",
         "fraction": "20/512",
-        "fromRdt": false
-      },
-      {
-        "card": "Vial",
-        "rarity": "Common",
-        "fraction": "50/512",
         "fromRdt": false
       },
       {
@@ -31728,7 +31680,7 @@
         "fromRdt": false
       },
       {
-        "card": "Vial of water",
+        "card": "Vial",
         "rarity": "Common",
         "fraction": "50/512",
         "fromRdt": false
@@ -31749,12 +31701,6 @@
         "card": "Tinderbox",
         "rarity": "Uncommon",
         "fraction": "20/512",
-        "fromRdt": false
-      },
-      {
-        "card": "Vial",
-        "rarity": "Common",
-        "fraction": "50/512",
         "fromRdt": false
       },
       {
@@ -31993,7 +31939,7 @@
         "fromRdt": false
       },
       {
-        "card": "Vial of water",
+        "card": "Vial",
         "rarity": "Common",
         "fraction": "50/512",
         "fromRdt": false
@@ -32014,12 +31960,6 @@
         "card": "Tinderbox",
         "rarity": "Uncommon",
         "fraction": "20/512",
-        "fromRdt": false
-      },
-      {
-        "card": "Vial",
-        "rarity": "Common",
-        "fraction": "50/512",
         "fromRdt": false
       },
       {
@@ -32258,7 +32198,7 @@
         "fromRdt": false
       },
       {
-        "card": "Vial of water",
+        "card": "Vial",
         "rarity": "Common",
         "fraction": "50/512",
         "fromRdt": false
@@ -32279,12 +32219,6 @@
         "card": "Tinderbox",
         "rarity": "Uncommon",
         "fraction": "20/512",
-        "fromRdt": false
-      },
-      {
-        "card": "Vial",
-        "rarity": "Common",
-        "fraction": "50/512",
         "fromRdt": false
       },
       {
@@ -32523,7 +32457,7 @@
         "fromRdt": false
       },
       {
-        "card": "Vial of water",
+        "card": "Vial",
         "rarity": "Common",
         "fraction": "50/512",
         "fromRdt": false
@@ -32544,12 +32478,6 @@
         "card": "Tinderbox",
         "rarity": "Uncommon",
         "fraction": "20/512",
-        "fromRdt": false
-      },
-      {
-        "card": "Vial",
-        "rarity": "Common",
-        "fraction": "50/512",
         "fromRdt": false
       },
       {
@@ -32788,7 +32716,7 @@
         "fromRdt": false
       },
       {
-        "card": "Vial of water",
+        "card": "Vial",
         "rarity": "Common",
         "fraction": "50/512",
         "fromRdt": false
@@ -32809,12 +32737,6 @@
         "card": "Tinderbox",
         "rarity": "Uncommon",
         "fraction": "20/512",
-        "fromRdt": false
-      },
-      {
-        "card": "Vial",
-        "rarity": "Common",
-        "fraction": "50/512",
         "fromRdt": false
       },
       {
@@ -33053,7 +32975,7 @@
         "fromRdt": false
       },
       {
-        "card": "Vial of water",
+        "card": "Vial",
         "rarity": "Common",
         "fraction": "50/512",
         "fromRdt": false
@@ -33074,12 +32996,6 @@
         "card": "Tinderbox",
         "rarity": "Uncommon",
         "fraction": "20/512",
-        "fromRdt": false
-      },
-      {
-        "card": "Vial",
-        "rarity": "Common",
-        "fraction": "50/512",
         "fromRdt": false
       },
       {
@@ -33318,7 +33234,7 @@
         "fromRdt": false
       },
       {
-        "card": "Vial of water",
+        "card": "Vial",
         "rarity": "Common",
         "fraction": "50/512",
         "fromRdt": false
@@ -33339,12 +33255,6 @@
         "card": "Tinderbox",
         "rarity": "Uncommon",
         "fraction": "20/512",
-        "fromRdt": false
-      },
-      {
-        "card": "Vial",
-        "rarity": "Common",
-        "fraction": "50/512",
         "fromRdt": false
       },
       {
@@ -33583,7 +33493,7 @@
         "fromRdt": false
       },
       {
-        "card": "Vial of water",
+        "card": "Vial",
         "rarity": "Common",
         "fraction": "50/512",
         "fromRdt": false
@@ -33604,12 +33514,6 @@
         "card": "Tinderbox",
         "rarity": "Uncommon",
         "fraction": "20/512",
-        "fromRdt": false
-      },
-      {
-        "card": "Vial",
-        "rarity": "Common",
-        "fraction": "50/512",
         "fromRdt": false
       },
       {
@@ -33848,7 +33752,7 @@
         "fromRdt": false
       },
       {
-        "card": "Vial of water",
+        "card": "Vial",
         "rarity": "Common",
         "fraction": "50/512",
         "fromRdt": false
@@ -33869,12 +33773,6 @@
         "card": "Tinderbox",
         "rarity": "Uncommon",
         "fraction": "20/512",
-        "fromRdt": false
-      },
-      {
-        "card": "Vial",
-        "rarity": "Common",
-        "fraction": "50/512",
         "fromRdt": false
       },
       {
@@ -34113,7 +34011,7 @@
         "fromRdt": false
       },
       {
-        "card": "Vial of water",
+        "card": "Vial",
         "rarity": "Common",
         "fraction": "50/512",
         "fromRdt": false
@@ -34134,12 +34032,6 @@
         "card": "Tinderbox",
         "rarity": "Uncommon",
         "fraction": "20/512",
-        "fromRdt": false
-      },
-      {
-        "card": "Vial",
-        "rarity": "Common",
-        "fraction": "50/512",
         "fromRdt": false
       },
       {
@@ -34378,7 +34270,7 @@
         "fromRdt": false
       },
       {
-        "card": "Vial of water",
+        "card": "Vial",
         "rarity": "Common",
         "fraction": "50/512",
         "fromRdt": false
@@ -34399,12 +34291,6 @@
         "card": "Tinderbox",
         "rarity": "Uncommon",
         "fraction": "20/512",
-        "fromRdt": false
-      },
-      {
-        "card": "Vial",
-        "rarity": "Common",
-        "fraction": "50/512",
         "fromRdt": false
       },
       {
@@ -34643,7 +34529,7 @@
         "fromRdt": false
       },
       {
-        "card": "Vial of water",
+        "card": "Vial",
         "rarity": "Common",
         "fraction": "50/512",
         "fromRdt": false
@@ -34664,12 +34550,6 @@
         "card": "Tinderbox",
         "rarity": "Uncommon",
         "fraction": "20/512",
-        "fromRdt": false
-      },
-      {
-        "card": "Vial",
-        "rarity": "Common",
-        "fraction": "50/512",
         "fromRdt": false
       },
       {
@@ -34908,7 +34788,7 @@
         "fromRdt": false
       },
       {
-        "card": "Vial of water",
+        "card": "Vial",
         "rarity": "Common",
         "fraction": "50/512",
         "fromRdt": false
@@ -34929,12 +34809,6 @@
         "card": "Tinderbox",
         "rarity": "Uncommon",
         "fraction": "20/512",
-        "fromRdt": false
-      },
-      {
-        "card": "Vial",
-        "rarity": "Common",
-        "fraction": "50/512",
         "fromRdt": false
       },
       {
@@ -35173,7 +35047,7 @@
         "fromRdt": false
       },
       {
-        "card": "Vial of water",
+        "card": "Vial",
         "rarity": "Common",
         "fraction": "50/512",
         "fromRdt": false
@@ -35194,12 +35068,6 @@
         "card": "Tinderbox",
         "rarity": "Uncommon",
         "fraction": "20/512",
-        "fromRdt": false
-      },
-      {
-        "card": "Vial",
-        "rarity": "Common",
-        "fraction": "50/512",
         "fromRdt": false
       },
       {
@@ -36405,7 +36273,7 @@
         "fromRdt": false
       },
       {
-        "card": "Ruby ring",
+        "card": "Ring of forging",
         "rarity": "Uncommon",
         "fraction": "2/128",
         "fromRdt": false
@@ -37190,7 +37058,7 @@
         "fromRdt": false
       },
       {
-        "card": "Vial of water",
+        "card": "Vial",
         "rarity": "Uncommon",
         "fraction": "4/128",
         "fromRdt": false
@@ -38533,7 +38401,7 @@
         "fromRdt": false
       },
       {
-        "card": "Vial of water",
+        "card": "Vial",
         "rarity": "Rare",
         "fraction": "1/128",
         "fromRdt": false
@@ -46251,12 +46119,6 @@
         "fromRdt": false
       },
       {
-        "card": "Vial of water",
-        "rarity": "Common",
-        "fraction": "50/512",
-        "fromRdt": false
-      },
-      {
         "card": "Bucket",
         "rarity": "Uncommon",
         "fraction": "17/512",
@@ -46499,12 +46361,6 @@
       },
       {
         "card": "Vial",
-        "rarity": "Common",
-        "fraction": "50/512",
-        "fromRdt": false
-      },
-      {
-        "card": "Vial of water",
         "rarity": "Common",
         "fraction": "50/512",
         "fromRdt": false
@@ -46757,12 +46613,6 @@
         "fromRdt": false
       },
       {
-        "card": "Vial of water",
-        "rarity": "Common",
-        "fraction": "50/512",
-        "fromRdt": false
-      },
-      {
         "card": "Bucket",
         "rarity": "Uncommon",
         "fraction": "17/512",
@@ -47010,12 +46860,6 @@
         "fromRdt": false
       },
       {
-        "card": "Vial of water",
-        "rarity": "Common",
-        "fraction": "50/512",
-        "fromRdt": false
-      },
-      {
         "card": "Bucket",
         "rarity": "Uncommon",
         "fraction": "17/512",
@@ -47258,12 +47102,6 @@
       },
       {
         "card": "Vial",
-        "rarity": "Common",
-        "fraction": "50/512",
-        "fromRdt": false
-      },
-      {
-        "card": "Vial of water",
         "rarity": "Common",
         "fraction": "50/512",
         "fromRdt": false
@@ -56619,7 +56457,7 @@
   "Swamp snake": {
     "drops": [
       {
-        "card": "Snake hide",
+        "card": "Snakeskin",
         "rarity": "Always",
         "fraction": "",
         "fromRdt": false
@@ -57097,7 +56935,7 @@
         "fromRdt": false
       },
       {
-        "card": "Ruby ring",
+        "card": "Ring of forging",
         "rarity": "Uncommon",
         "fraction": "9/256",
         "fromRdt": false
@@ -58550,7 +58388,7 @@
         "fromRdt": false
       },
       {
-        "card": "Emerald necklace",
+        "card": "Binding necklace",
         "rarity": "Uncommon",
         "fraction": "4/139",
         "fromRdt": false
@@ -60795,7 +60633,7 @@
   "Bush snake": {
     "drops": [
       {
-        "card": "Snake hide",
+        "card": "Snakeskin",
         "rarity": "Always",
         "fraction": "1/1",
         "fromRdt": false
@@ -66467,7 +66305,7 @@
         "fromRdt": false
       },
       {
-        "card": "Vial of water",
+        "card": "Vial",
         "rarity": "Common",
         "fraction": "10/129",
         "fromRdt": false
@@ -67224,7 +67062,7 @@
     "combatLevel": 225,
     "quests": []
   },
-  "Scorpia's offspring": {
+  "Scorpia's offspring (monster)": {
     "drops": [
       {
         "card": "Looting bag",
@@ -67979,7 +67817,7 @@
     "combatLevel": 215,
     "quests": []
   },
-  "Rock Golem": {
+  "Rock Golem (monster)": {
     "drops": [
       {
         "card": "Earth rune",
@@ -75065,7 +74903,7 @@
         "fromRdt": false
       },
       {
-        "card": "Ruby amulet",
+        "card": "Amulet of strength",
         "rarity": "Uncommon",
         "fraction": "2/128",
         "fromRdt": false
@@ -76909,12 +76747,6 @@
         "fromRdt": true
       },
       {
-        "card": "Crawling hand",
-        "rarity": "Rare",
-        "fraction": "1/500",
-        "fromRdt": false
-      },
-      {
         "card": "Mist battlestaff",
         "rarity": "Rare",
         "fraction": "1/393",
@@ -77084,7 +76916,7 @@
         "fromRdt": false
       },
       {
-        "card": "Vial of water",
+        "card": "Vial",
         "rarity": "Common",
         "fraction": "",
         "fromRdt": false
@@ -78980,7 +78812,7 @@
         "fromRdt": false
       },
       {
-        "card": "Ruby amulet",
+        "card": "Amulet of strength",
         "rarity": "Common",
         "fraction": "",
         "fromRdt": false
@@ -85904,7 +85736,7 @@
         "fromRdt": false
       },
       {
-        "card": "Snake hide",
+        "card": "Snakeskin",
         "rarity": "Common",
         "fraction": "3/10",
         "fromRdt": false
@@ -99717,229 +99549,6 @@
     "combatLevel": 218,
     "quests": []
   },
-  "Phosani's Nightmare": {
-    "drops": [
-      {
-        "card": "Big bones",
-        "rarity": "Always",
-        "fraction": "1/1",
-        "fromRdt": false
-      },
-      {
-        "card": "Nightmare staff",
-        "rarity": "Rare",
-        "fraction": "69/35,000",
-        "fromRdt": false
-      },
-      {
-        "card": "Inquisitor's great helm",
-        "rarity": "Rare",
-        "fraction": "1/700",
-        "fromRdt": false
-      },
-      {
-        "card": "Inquisitor's hauberk",
-        "rarity": "Rare",
-        "fraction": "1/700",
-        "fromRdt": false
-      },
-      {
-        "card": "Inquisitor's plateskirt",
-        "rarity": "Rare",
-        "fraction": "1/700",
-        "fromRdt": false
-      },
-      {
-        "card": "Inquisitor's mace",
-        "rarity": "Very Rare",
-        "fraction": "31/35,000",
-        "fromRdt": false
-      },
-      {
-        "card": "Eldritch orb",
-        "rarity": "Very Rare",
-        "fraction": "1/1,600",
-        "fromRdt": false
-      },
-      {
-        "card": "Harmonised orb",
-        "rarity": "Very Rare",
-        "fraction": "1/1,600",
-        "fromRdt": false
-      },
-      {
-        "card": "Volatile orb",
-        "rarity": "Very Rare",
-        "fraction": "1/1,600",
-        "fromRdt": false
-      },
-      {
-        "card": "Cosmic rune",
-        "rarity": "Common",
-        "fraction": "4/100",
-        "fromRdt": false
-      },
-      {
-        "card": "Nature rune",
-        "rarity": "Common",
-        "fraction": "4/100",
-        "fromRdt": false
-      },
-      {
-        "card": "Death rune",
-        "rarity": "Common",
-        "fraction": "4/100",
-        "fromRdt": false
-      },
-      {
-        "card": "Blood rune",
-        "rarity": "Common",
-        "fraction": "4/100",
-        "fromRdt": false
-      },
-      {
-        "card": "Soul rune",
-        "rarity": "Common",
-        "fraction": "4/100",
-        "fromRdt": false
-      },
-      {
-        "card": "Steel cannonball",
-        "rarity": "Common",
-        "fraction": "4/100",
-        "fromRdt": false
-      },
-      {
-        "card": "Rune arrow",
-        "rarity": "Uncommon",
-        "fraction": "3/100",
-        "fromRdt": false
-      },
-      {
-        "card": "Mithril ore",
-        "rarity": "Common",
-        "fraction": "5/100",
-        "fromRdt": false
-      },
-      {
-        "card": "Coal",
-        "rarity": "Common",
-        "fraction": "4/100",
-        "fromRdt": false
-      },
-      {
-        "card": "Gold ore",
-        "rarity": "Common",
-        "fraction": "4/100",
-        "fromRdt": false
-      },
-      {
-        "card": "Adamantite ore",
-        "rarity": "Common",
-        "fraction": "4/100",
-        "fromRdt": false
-      },
-      {
-        "card": "Magic logs",
-        "rarity": "Common",
-        "fraction": "4/100",
-        "fromRdt": false
-      },
-      {
-        "card": "Cadantine",
-        "rarity": "Common",
-        "fraction": "4/100",
-        "fromRdt": false
-      },
-      {
-        "card": "Torstol",
-        "rarity": "Common",
-        "fraction": "4/100",
-        "fromRdt": false
-      },
-      {
-        "card": "Snapdragon seed",
-        "rarity": "Uncommon",
-        "fraction": "3/100",
-        "fromRdt": false
-      },
-      {
-        "card": "Emerald",
-        "rarity": "Uncommon",
-        "fraction": "3/100",
-        "fromRdt": false
-      },
-      {
-        "card": "Ruby",
-        "rarity": "Uncommon",
-        "fraction": "3/100",
-        "fromRdt": false
-      },
-      {
-        "card": "Runite ore",
-        "rarity": "Uncommon",
-        "fraction": "2/100",
-        "fromRdt": false
-      },
-      {
-        "card": "Bass",
-        "rarity": "Common",
-        "fraction": "6/100",
-        "fromRdt": false
-      },
-      {
-        "card": "Shark",
-        "rarity": "Common",
-        "fraction": "6/100",
-        "fromRdt": false
-      },
-      {
-        "card": "Prayer potion",
-        "rarity": "Common",
-        "fraction": "5/100",
-        "fromRdt": false
-      },
-      {
-        "card": "Sanfew serum",
-        "rarity": "Common",
-        "fraction": "5/100",
-        "fromRdt": false
-      },
-      {
-        "card": "Saradomin brew",
-        "rarity": "Common",
-        "fraction": "5/100",
-        "fromRdt": false
-      },
-      {
-        "card": "Zamorak brew",
-        "rarity": "Common",
-        "fraction": "5/100",
-        "fromRdt": false
-      },
-      {
-        "card": "Coins",
-        "rarity": "Uncommon",
-        "fraction": "2/100",
-        "fromRdt": false
-      },
-      {
-        "card": "Little nightmare",
-        "rarity": "Very Rare",
-        "fraction": "1/1,400",
-        "fromRdt": false
-      },
-      {
-        "card": "Jar of dreams",
-        "rarity": "Very Rare",
-        "fraction": "1/4,000",
-        "fromRdt": false
-      }
-    ],
-    "slayerLevel": null,
-    "combatLevel": 1024,
-    "quests": []
-  },
   "The Nightmare": {
     "drops": [
       {
@@ -103176,7 +102785,7 @@
         "fromRdt": false
       },
       {
-        "card": "Vial of water",
+        "card": "Vial",
         "rarity": "Common",
         "fraction": "10/128",
         "fromRdt": false
@@ -110596,7 +110205,7 @@
         "fromRdt": false
       },
       {
-        "card": "Emerald necklace",
+        "card": "Binding necklace",
         "rarity": "Uncommon",
         "fraction": "3/256",
         "fromRdt": false
@@ -110706,7 +110315,7 @@
         "fromRdt": false
       },
       {
-        "card": "Emerald necklace",
+        "card": "Binding necklace",
         "rarity": "Uncommon",
         "fraction": "3/256",
         "fromRdt": false
@@ -116424,13 +116033,13 @@
         "fromRdt": false
       },
       {
-        "card": "Opal necklace",
+        "card": "Dodgy necklace",
         "rarity": "Common",
         "fraction": "7/122",
         "fromRdt": false
       },
       {
-        "card": "Sapphire necklace",
+        "card": "Games necklace",
         "rarity": "Common",
         "fraction": "7/122",
         "fromRdt": false
@@ -116448,7 +116057,7 @@
         "fromRdt": false
       },
       {
-        "card": "Jade necklace",
+        "card": "Necklace of passage",
         "rarity": "Uncommon",
         "fraction": "4/122",
         "fromRdt": false
@@ -116472,19 +116081,19 @@
         "fromRdt": false
       },
       {
-        "card": "Ruby ring",
+        "card": "Ring of forging",
         "rarity": "Uncommon",
         "fraction": "3/122",
         "fromRdt": false
       },
       {
-        "card": "Diamond ring",
+        "card": "Ring of life",
         "rarity": "Uncommon",
         "fraction": "3/122",
         "fromRdt": false
       },
       {
-        "card": "Topaz amulet",
+        "card": "Burning amulet",
         "rarity": "Uncommon",
         "fraction": "2/122",
         "fromRdt": false
@@ -116647,7 +116256,7 @@
         "fromRdt": false
       },
       {
-        "card": "Diamond ring",
+        "card": "Ring of life",
         "rarity": "Rare",
         "fraction": "1/117",
         "fromRdt": false
@@ -116702,7 +116311,7 @@
         "fromRdt": false
       },
       {
-        "card": "Diamond ring",
+        "card": "Ring of life",
         "rarity": "Rare",
         "fraction": "1/117",
         "fromRdt": false
@@ -116757,7 +116366,7 @@
         "fromRdt": false
       },
       {
-        "card": "Diamond ring",
+        "card": "Ring of life",
         "rarity": "Rare",
         "fraction": "1/117",
         "fromRdt": false
@@ -124456,7 +124065,7 @@
         "fromRdt": false
       },
       {
-        "card": "Ruby necklace",
+        "card": "Digsite pendant",
         "rarity": "Common",
         "fraction": "12/100",
         "fromRdt": false
@@ -124842,7 +124451,7 @@
         "fromRdt": false
       },
       {
-        "card": "Diamond amulet",
+        "card": "Amulet of power",
         "rarity": "Common",
         "fraction": "12/100",
         "fromRdt": false
@@ -127843,7 +127452,7 @@
     "combatLevel": 92,
     "quests": []
   },
-  "Manta ray": {
+  "Manta ray (sailing)": {
     "drops": [
       {
         "card": "Ray barbs",
@@ -128394,7 +128003,7 @@
         "fromRdt": false
       },
       {
-        "card": "Diamond ring",
+        "card": "Ring of life",
         "rarity": "Common",
         "fraction": "5/50",
         "fromRdt": false
@@ -128497,7 +128106,7 @@
         "fromRdt": false
       },
       {
-        "card": "Ruby ring",
+        "card": "Ring of forging",
         "rarity": "Common",
         "fraction": "5/50",
         "fromRdt": false
@@ -130289,7 +129898,7 @@
         "fromRdt": false
       },
       {
-        "card": "Snake hide",
+        "card": "Snakeskin",
         "rarity": "Uncommon",
         "fraction": "5/272",
         "fromRdt": false
@@ -131620,6 +131229,544 @@
     ],
     "slayerLevel": null,
     "combatLevel": null,
+    "quests": []
+  },
+  "Master Farmer": {
+    "drops": [
+      {
+        "card": "Potato seed",
+        "rarity": "Common",
+        "fraction": "1/5.65",
+        "fromRdt": false
+      },
+      {
+        "card": "Onion seed",
+        "rarity": "Common",
+        "fraction": "1/7.53",
+        "fromRdt": false
+      },
+      {
+        "card": "Cabbage seed",
+        "rarity": "Common",
+        "fraction": "1/14.4",
+        "fromRdt": false
+      },
+      {
+        "card": "Tomato seed",
+        "rarity": "Common",
+        "fraction": "1/15.7",
+        "fromRdt": false
+      },
+      {
+        "card": "Sweetcorn seed",
+        "rarity": "Uncommon",
+        "fraction": "1/45.2",
+        "fromRdt": false
+      },
+      {
+        "card": "Strawberry seed",
+        "rarity": "Uncommon",
+        "fraction": "1/90.4",
+        "fromRdt": false
+      },
+      {
+        "card": "Watermelon seed",
+        "rarity": "Rare",
+        "fraction": "1/189",
+        "fromRdt": false
+      },
+      {
+        "card": "Snape grass seed",
+        "rarity": "Rare",
+        "fraction": "1/260",
+        "fromRdt": false
+      },
+      {
+        "card": "Barley seed",
+        "rarity": "Common",
+        "fraction": "1/18",
+        "fromRdt": false
+      },
+      {
+        "card": "Hammerstone seed",
+        "rarity": "Common",
+        "fraction": "1/18",
+        "fromRdt": false
+      },
+      {
+        "card": "Asgarnian seed",
+        "rarity": "Common",
+        "fraction": "1/23.9",
+        "fromRdt": false
+      },
+      {
+        "card": "Jute seed",
+        "rarity": "Common",
+        "fraction": "1/24.1",
+        "fromRdt": false
+      },
+      {
+        "card": "Yanillian seed",
+        "rarity": "Uncommon",
+        "fraction": "1/36.1",
+        "fromRdt": false
+      },
+      {
+        "card": "Krandorian seed",
+        "rarity": "Uncommon",
+        "fraction": "1/72.2",
+        "fromRdt": false
+      },
+      {
+        "card": "Wildblood seed",
+        "rarity": "Rare",
+        "fraction": "1/142",
+        "fromRdt": false
+      },
+      {
+        "card": "Marigold seed",
+        "rarity": "Common",
+        "fraction": "1/21.8",
+        "fromRdt": false
+      },
+      {
+        "card": "Nasturtium seed",
+        "rarity": "Uncommon",
+        "fraction": "1/32.9",
+        "fromRdt": false
+      },
+      {
+        "card": "Rosemary seed",
+        "rarity": "Uncommon",
+        "fraction": "1/50.9",
+        "fromRdt": false
+      },
+      {
+        "card": "Woad seed",
+        "rarity": "Uncommon",
+        "fraction": "1/68.9",
+        "fromRdt": false
+      },
+      {
+        "card": "Limpwurt seed",
+        "rarity": "Uncommon",
+        "fraction": "1/86.3",
+        "fromRdt": false
+      },
+      {
+        "card": "Redberry seed",
+        "rarity": "Uncommon",
+        "fraction": "1/25.8",
+        "fromRdt": false
+      },
+      {
+        "card": "Cadavaberry seed",
+        "rarity": "Uncommon",
+        "fraction": "1/36.8",
+        "fromRdt": false
+      },
+      {
+        "card": "Dwellberry seed",
+        "rarity": "Uncommon",
+        "fraction": "1/51.5",
+        "fromRdt": false
+      },
+      {
+        "card": "Jangerberry seed",
+        "rarity": "Rare",
+        "fraction": "1/129",
+        "fromRdt": false
+      },
+      {
+        "card": "Whiteberry seed",
+        "rarity": "Rare",
+        "fraction": "1/355",
+        "fromRdt": false
+      },
+      {
+        "card": "Poison ivy seed",
+        "rarity": "Rare",
+        "fraction": "1/937",
+        "fromRdt": false
+      },
+      {
+        "card": "Mushroom spore",
+        "rarity": "Rare",
+        "fraction": "1/492",
+        "fromRdt": false
+      },
+      {
+        "card": "Belladonna seed",
+        "rarity": "Rare",
+        "fraction": "1/820",
+        "fromRdt": false
+      },
+      {
+        "card": "Cactus seed",
+        "rarity": "Very Rare",
+        "fraction": "1/1,230",
+        "fromRdt": false
+      },
+      {
+        "card": "Seaweed spore",
+        "rarity": "Very Rare",
+        "fraction": "1/1,892",
+        "fromRdt": false
+      },
+      {
+        "card": "Potato cactus seed",
+        "rarity": "Very Rare",
+        "fraction": "1/2,460",
+        "fromRdt": false
+      },
+      {
+        "card": "Guam seed",
+        "rarity": "Uncommon",
+        "fraction": "1/58.36",
+        "fromRdt": false
+      },
+      {
+        "card": "Marrentill seed",
+        "rarity": "Uncommon",
+        "fraction": "1/95.6",
+        "fromRdt": false
+      },
+      {
+        "card": "Tarromin seed",
+        "rarity": "Rare",
+        "fraction": "1/140",
+        "fromRdt": false
+      },
+      {
+        "card": "Harralander seed",
+        "rarity": "Rare",
+        "fraction": "1/206",
+        "fromRdt": false
+      },
+      {
+        "card": "Ranarr seed",
+        "rarity": "Rare",
+        "fraction": "1/268.75",
+        "fromRdt": false
+      },
+      {
+        "card": "Toadflax seed",
+        "rarity": "Rare",
+        "fraction": "1/443",
+        "fromRdt": false
+      },
+      {
+        "card": "Irit seed",
+        "rarity": "Rare",
+        "fraction": "1/651",
+        "fromRdt": false
+      },
+      {
+        "card": "Avantoe seed",
+        "rarity": "Rare",
+        "fraction": "1/947",
+        "fromRdt": false
+      },
+      {
+        "card": "Kwuarm seed",
+        "rarity": "Very Rare",
+        "fraction": "1/1,389",
+        "fromRdt": false
+      },
+      {
+        "card": "Snapdragon seed",
+        "rarity": "Very Rare",
+        "fraction": "1/1,854.4",
+        "fromRdt": false
+      },
+      {
+        "card": "Cadantine seed",
+        "rarity": "Very Rare",
+        "fraction": "1/2,976",
+        "fromRdt": false
+      },
+      {
+        "card": "Lantadyme seed",
+        "rarity": "Very Rare",
+        "fraction": "1/4,167",
+        "fromRdt": false
+      },
+      {
+        "card": "Dwarf weed seed",
+        "rarity": "Very Rare",
+        "fraction": "1/6,944",
+        "fromRdt": false
+      },
+      {
+        "card": "Torstol seed",
+        "rarity": "Very Rare",
+        "fraction": "1/9,271.98",
+        "fromRdt": false
+      },
+      {
+        "card": "Rocky",
+        "rarity": "Very Rare",
+        "fraction": "1/256,261",
+        "fromRdt": false
+      }
+    ],
+    "slayerLevel": null,
+    "combatLevel": null,
+    "quests": []
+  },
+  "Leo": {
+    "drops": [],
+    "slayerLevel": null,
+    "combatLevel": null,
+    "quests": []
+  },
+  "Vanguards": {
+    "drops": [
+      {
+        "card": "Elder potion",
+        "rarity": "Always",
+        "fraction": "",
+        "fromRdt": false
+      },
+      {
+        "card": "Twisted potion",
+        "rarity": "Always",
+        "fraction": "",
+        "fromRdt": false
+      },
+      {
+        "card": "Kodai potion",
+        "rarity": "Always",
+        "fraction": "",
+        "fromRdt": false
+      },
+      {
+        "card": "Xeric's aid",
+        "rarity": "Always",
+        "fraction": "",
+        "fromRdt": false
+      },
+      {
+        "card": "Revitalisation potion",
+        "rarity": "Always",
+        "fraction": "",
+        "fromRdt": false
+      },
+      {
+        "card": "Prayer enhance",
+        "rarity": "Always",
+        "fraction": "",
+        "fromRdt": false
+      },
+      {
+        "card": "Overload",
+        "rarity": "Common",
+        "fraction": "1/3",
+        "fromRdt": false
+      }
+    ],
+    "slayerLevel": null,
+    "combatLevel": 1,
+    "quests": []
+  },
+  "Victoria Kebbit-Monkfish": {
+    "drops": [],
+    "slayerLevel": null,
+    "combatLevel": null,
+    "quests": []
+  },
+  "Marina Kebbit-Monkfish": {
+    "drops": [],
+    "slayerLevel": null,
+    "combatLevel": null,
+    "quests": []
+  },
+  "Selina Kebbit-Monkfish": {
+    "drops": [],
+    "slayerLevel": null,
+    "combatLevel": null,
+    "quests": []
+  },
+  "Gloria Kebbit-Monkfish": {
+    "drops": [],
+    "slayerLevel": null,
+    "combatLevel": null,
+    "quests": []
+  },
+  "Christina Kebbit-Monkfish": {
+    "drops": [],
+    "slayerLevel": null,
+    "combatLevel": null,
+    "quests": []
+  },
+  "Minotaur (f2p)": {
+    "drops": [
+      {
+        "card": "Bones",
+        "rarity": "Always",
+        "fraction": "1/1",
+        "fromRdt": false
+      },
+      {
+        "card": "Iron arrow",
+        "rarity": "Common",
+        "fraction": "10/101",
+        "fromRdt": false
+      },
+      {
+        "card": "Bronze spear",
+        "rarity": "Common",
+        "fraction": "10/101",
+        "fromRdt": false
+      },
+      {
+        "card": "Bronze full helm",
+        "rarity": "Common",
+        "fraction": "10/101",
+        "fromRdt": false
+      },
+      {
+        "card": "Bronze arrow",
+        "rarity": "Uncommon",
+        "fraction": "3/101",
+        "fromRdt": false
+      },
+      {
+        "card": "Bronze dagger",
+        "rarity": "Uncommon",
+        "fraction": "4/101",
+        "fromRdt": false
+      },
+      {
+        "card": "Mind rune",
+        "rarity": "Rare",
+        "fraction": "1/101",
+        "fromRdt": false
+      },
+      {
+        "card": "Coins",
+        "rarity": "Common",
+        "fraction": "20/101",
+        "fromRdt": false
+      },
+      {
+        "card": "Copper ore",
+        "rarity": "Common",
+        "fraction": "6/101",
+        "fromRdt": false
+      },
+      {
+        "card": "Tin ore",
+        "rarity": "Common",
+        "fraction": "6/101",
+        "fromRdt": false
+      },
+      {
+        "card": "Pure essence",
+        "rarity": "Common",
+        "fraction": "5/101",
+        "fromRdt": false
+      },
+      {
+        "card": "Rune essence",
+        "rarity": "Common",
+        "fraction": "5/101",
+        "fromRdt": false
+      },
+      {
+        "card": "Cooked meat",
+        "rarity": "Uncommon",
+        "fraction": "3/101",
+        "fromRdt": false
+      },
+      {
+        "card": "Skull sceptre",
+        "rarity": "Uncommon",
+        "fraction": "3/101",
+        "fromRdt": false
+      },
+      {
+        "card": "Sapphire",
+        "rarity": "Rare",
+        "fraction": "1/404",
+        "fromRdt": true
+      },
+      {
+        "card": "Emerald",
+        "rarity": "Rare",
+        "fraction": "1/808",
+        "fromRdt": true
+      },
+      {
+        "card": "Ruby",
+        "rarity": "Very Rare",
+        "fraction": "1/1,616",
+        "fromRdt": true
+      },
+      {
+        "card": "Nature talisman",
+        "rarity": "Very Rare",
+        "fraction": "1/4,309.33",
+        "fromRdt": true
+      },
+      {
+        "card": "Diamond",
+        "rarity": "Very Rare",
+        "fraction": "1/6,464",
+        "fromRdt": true
+      },
+      {
+        "card": "Rune javelin",
+        "rarity": "Very Rare",
+        "fraction": "1/12,928",
+        "fromRdt": true
+      },
+      {
+        "card": "Loop half of key",
+        "rarity": "Very Rare",
+        "fraction": "1/12,928",
+        "fromRdt": true
+      },
+      {
+        "card": "Tooth half of key",
+        "rarity": "Very Rare",
+        "fraction": "1/12,928",
+        "fromRdt": true
+      },
+      {
+        "card": "Rune spear",
+        "rarity": "Very Rare",
+        "fraction": "1/206,848",
+        "fromRdt": true
+      },
+      {
+        "card": "Dragon spear",
+        "rarity": "Very Rare",
+        "fraction": "1/551,594.67",
+        "fromRdt": true
+      },
+      {
+        "card": "Ensouled minotaur head",
+        "rarity": "Uncommon",
+        "fraction": "1/50",
+        "fromRdt": false
+      }
+    ],
+    "slayerLevel": null,
+    "combatLevel": 12,
+    "quests": []
+  },
+  "Pete Kayer": {
+    "drops": [
+      {
+        "card": "Imbued ancient cape",
+        "rarity": "Always",
+        "fraction": "",
+        "fromRdt": false
+      }
+    ],
+    "slayerLevel": null,
+    "combatLevel": 135,
     "quests": []
   }
 }

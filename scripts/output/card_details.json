@@ -104,17 +104,13 @@
     "tier": "Common",
     "regions": []
   },
-  "Vial of water": {
-    "examine": "A glass vial containing water.",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Vial_of_water_detail.png/130px-Vial_of_water_detail.png",
-    "tier": "Common",
-    "regions": []
-  },
   "Vial": {
     "examine": "An empty glass vial.",
     "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Vial_detail.png/130px-Vial_detail.png",
     "tier": "Common",
-    "regions": []
+    "regions": [
+      "Kourend"
+    ]
   },
   "Snape grass": {
     "examine": "Strange spiky grass.",
@@ -473,14 +469,10 @@
     "regions": []
   },
   "Manta ray": {
-    "examine": "Might be feeling a little flat.",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Manta_ray_(Sailing).png/130px-Manta_ray_(Sailing).png",
-    "tier": "Epic",
-    "regions": [
-      "N",
-      "A",
-      "No"
-    ]
+    "examine": "A rare catch.",
+    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Manta_ray_detail.png/130px-Manta_ray_detail.png",
+    "tier": "Rare",
+    "regions": []
   },
   "Raw sea turtle": {
     "examine": "A rare catch.",
@@ -510,7 +502,13 @@
     "examine": "I hope there's treasure in it.",
     "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Casket_detail.png/130px-Casket_detail.png",
     "tier": "Common",
-    "regions": []
+    "regions": [
+      "Misthalin",
+      "Fremennik",
+      "Desert",
+      "Varlamore",
+      "Kourend"
+    ]
   },
   "Oyster": {
     "examine": "Maybe there are pearls inside?",
@@ -581,7 +579,7 @@
   "Coal": {
     "examine": "Hmm a non-renewable energy source!",
     "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Coal_detail.png/130px-Coal_detail.png",
-    "tier": "Rare",
+    "tier": "Uncommon",
     "regions": []
   },
   "Strange fruit": {
@@ -835,7 +833,7 @@
   },
   "Coins": {
     "examine": "Lovely money!",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Coins_(Shilo_Village)_detail.png/130px-Coins_(Shilo_Village)_detail.png",
+    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Coins_detail_v5067eee0.png/130px-Coins_detail_v5067eee0.png",
     "tier": "Common",
     "regions": [
       "All regions",
@@ -3059,76 +3057,16 @@
     "tier": "Uncommon",
     "regions": []
   },
-  "Ruby ring": {
-    "examine": "A valuable ring.",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Ruby_ring_detail.png/130px-Ruby_ring_detail.png",
-    "tier": "Uncommon",
-    "regions": []
-  },
-  "Diamond ring": {
-    "examine": "A valuable ring.",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Diamond_ring_detail.png/130px-Diamond_ring_detail.png",
-    "tier": "Rare",
-    "regions": []
-  },
   "Gold necklace": {
     "examine": "I wonder if this is valuable.",
     "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Gold_necklace_detail.png/130px-Gold_necklace_detail.png",
     "tier": "Uncommon",
     "regions": []
   },
-  "Sapphire necklace": {
-    "examine": "I wonder if this is valuable.",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Sapphire_necklace_detail.png/130px-Sapphire_necklace_detail.png",
-    "tier": "Uncommon",
-    "regions": []
-  },
-  "Emerald necklace": {
-    "examine": "I wonder if this is valuable.",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Emerald_necklace_detail.png/130px-Emerald_necklace_detail.png",
-    "tier": "Uncommon",
-    "regions": []
-  },
-  "Ruby necklace": {
-    "examine": "I wonder if this is valuable.",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Ruby_necklace_detail.png/130px-Ruby_necklace_detail.png",
-    "tier": "Uncommon",
-    "regions": []
-  },
-  "Diamond necklace": {
-    "examine": "I wonder if this is valuable.",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Diamond_necklace_detail.png/130px-Diamond_necklace_detail.png",
-    "tier": "Rare",
-    "regions": []
-  },
   "Gold amulet": {
     "examine": "A plain gold amulet.",
     "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Gold_amulet_detail.png/130px-Gold_amulet_detail.png",
     "tier": "Uncommon",
-    "regions": []
-  },
-  "Sapphire amulet": {
-    "examine": "I wonder if I can get this enchanted.",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Sapphire_amulet_detail.png/130px-Sapphire_amulet_detail.png",
-    "tier": "Uncommon",
-    "regions": []
-  },
-  "Emerald amulet": {
-    "examine": "I wonder if I can get this enchanted.",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Emerald_amulet_detail.png/130px-Emerald_amulet_detail.png",
-    "tier": "Uncommon",
-    "regions": []
-  },
-  "Ruby amulet": {
-    "examine": "I wonder if I can get this enchanted.",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Ruby_amulet_detail.png/130px-Ruby_amulet_detail.png",
-    "tier": "Uncommon",
-    "regions": []
-  },
-  "Diamond amulet": {
-    "examine": "I wonder if I can get this enchanted.",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Diamond_amulet_detail.png/130px-Diamond_amulet_detail.png",
-    "tier": "Rare",
     "regions": []
   },
   "Holy symbol": {
@@ -3670,9 +3608,14 @@
   },
   "Empty cup": {
     "examine": "An empty cup.",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Empty_cup_detail.png/130px-Empty_cup_detail.png",
+    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Cup_of_tea_detail_v8de7d253.png/130px-Cup_of_tea_detail_v8de7d253.png",
     "tier": "Common",
-    "regions": []
+    "regions": [
+      "Misthalin",
+      "Desert",
+      "Asgarnia",
+      "Varlamore"
+    ]
   },
   "Tomato": {
     "examine": "This would make good ketchup.",
@@ -3684,7 +3627,9 @@
     "examine": "It's got holes in it.",
     "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Cheese_detail.png/130px-Cheese_detail.png",
     "tier": "Common",
-    "regions": []
+    "regions": [
+      "Kandarin"
+    ]
   },
   "Grapes": {
     "examine": "Good grapes for wine making.",
@@ -3730,19 +3675,25 @@
     "examine": "An absolutely clear spirit.",
     "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Vodka_detail.png/130px-Vodka_detail.png",
     "tier": "Common",
-    "regions": []
+    "regions": [
+      "Kandarin"
+    ]
   },
   "Whisky": {
     "examine": "A bottle of Draynor Malt.",
     "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Whisky_detail.png/130px-Whisky_detail.png",
     "tier": "Common",
-    "regions": []
+    "regions": [
+      "Kandarin"
+    ]
   },
   "Gin": {
     "examine": "A strong spirit that tastes of Juniper.",
     "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Gin_detail.png/130px-Gin_detail.png",
     "tier": "Common",
-    "regions": []
+    "regions": [
+      "Kandarin"
+    ]
   },
   "Brandy": {
     "examine": "A strong spirit best served in a large glass.",
@@ -3771,63 +3722,6 @@
       "Asgarnia",
       "Kourend",
       "Morytania"
-    ]
-  },
-  "Premade blurb' sp.": {
-    "examine": "A premade Blurberry Special",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Premade_blurb'_sp._detail.png/130px-Premade_blurb'_sp._detail.png",
-    "tier": "Common",
-    "regions": [
-      "Karamja",
-      "Kandarin"
-    ]
-  },
-  "Premade choc s'dy": {
-    "examine": "A premade Chocolate Saturday.",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Premade_choc_s'dy_detail.png/130px-Premade_choc_s'dy_detail.png",
-    "tier": "Common",
-    "regions": [
-      "Kandarin"
-    ]
-  },
-  "Premade dr' dragon": {
-    "examine": "A premade Drunk Dragon.",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Premade_dr'_dragon_detail.png/130px-Premade_dr'_dragon_detail.png",
-    "tier": "Common",
-    "regions": [
-      "Kandarin"
-    ]
-  },
-  "Premade fr' blast": {
-    "examine": "A premade Fruit Blast.",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Premade_fr'_blast_detail.png/130px-Premade_fr'_blast_detail.png",
-    "tier": "Common",
-    "regions": [
-      "Kandarin"
-    ]
-  },
-  "Premade p' punch": {
-    "examine": "A premade Pineapple punch.",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Premade_p'_punch_detail.png/130px-Premade_p'_punch_detail.png",
-    "tier": "Common",
-    "regions": [
-      "Kandarin"
-    ]
-  },
-  "Premade sgg": {
-    "examine": "A premade Short Green Guy.",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Premade_sgg_detail.png/130px-Premade_sgg_detail.png",
-    "tier": "Common",
-    "regions": [
-      "Kandarin"
-    ]
-  },
-  "Premade wiz blz'd": {
-    "examine": "A Premade Wizard Blizzard.",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Premade_wiz_blz'd_detail.png/130px-Premade_wiz_blz'd_detail.png",
-    "tier": "Common",
-    "regions": [
-      "Kandarin"
     ]
   },
   "Pineapple punch": {
@@ -3889,20 +3783,25 @@
     "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Drunk_dragon_detail.png/130px-Drunk_dragon_detail.png",
     "tier": "Common",
     "regions": [
-      "Karamja"
+      "Karamja",
+      "Kandarin"
     ]
   },
   "Lemon": {
     "examine": "A fresh lemon.",
     "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Lemon_detail.png/130px-Lemon_detail.png",
     "tier": "Common",
-    "regions": []
+    "regions": [
+      "Kandarin"
+    ]
   },
   "Orange": {
     "examine": "A fresh orange.",
     "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Orange_detail.png/130px-Orange_detail.png",
     "tier": "Common",
-    "regions": []
+    "regions": [
+      "Kandarin"
+    ]
   },
   "Pineapple": {
     "examine": "It can be cut up into something more manageable with a knife.",
@@ -3914,7 +3813,9 @@
     "examine": "A fresh lime.",
     "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Lime_detail.png/130px-Lime_detail.png",
     "tier": "Common",
-    "regions": []
+    "regions": [
+      "Kandarin"
+    ]
   },
   "Equa leaves": {
     "examine": "Small sweet smelling leaves.",
@@ -3978,20 +3879,6 @@
       "Kandarin"
     ]
   },
-  "Equa toad's legs": {
-    "examine": "They're a gnome delicacy apparently.",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Equa_toad's_legs_detail.png/130px-Equa_toad's_legs_detail.png",
-    "tier": "Common",
-    "regions": [
-      "Kandarin"
-    ]
-  },
-  "Spicy worm": {
-    "examine": "They're a gnome delicacy apparently.",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Spicy_worm_detail.png/130px-Spicy_worm_detail.png",
-    "tier": "Common",
-    "regions": []
-  },
   "King worm": {
     "examine": "They're a gnome delicacy apparently.",
     "imageUrl": "https://oldschool.runescape.wiki/images/thumb/King_worm_detail.png/130px-King_worm_detail.png",
@@ -4000,30 +3887,6 @@
       "Kandarin",
       "Asgarnia",
       "Kourend"
-    ]
-  },
-  "Batta tin": {
-    "examine": "A deep tin used for baking gnome battas in.",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Batta_tin_detail.png/130px-Batta_tin_detail.png",
-    "tier": "Common",
-    "regions": [
-      "Kandarin"
-    ]
-  },
-  "Crunchy tray": {
-    "examine": "A shallow tray used for baking crunchies in.",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Crunchy_tray_detail.png/130px-Crunchy_tray_detail.png",
-    "tier": "Common",
-    "regions": [
-      "Kandarin"
-    ]
-  },
-  "Gnomebowl mould": {
-    "examine": "A large ovenproof bowl.",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Gnomebowl_mould_detail.png/130px-Gnomebowl_mould_detail.png",
-    "tier": "Common",
-    "regions": [
-      "Kandarin"
     ]
   },
   "Gnome spice": {
@@ -4101,102 +3964,6 @@
   "Toad crunchies": {
     "examine": "It actually smells quite good.",
     "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Toad_crunchies_detail.png/130px-Toad_crunchies_detail.png",
-    "tier": "Common",
-    "regions": [
-      "Kandarin"
-    ]
-  },
-  "Premade w'm batta": {
-    "examine": "A premade Worm Batta.",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Premade_w'm_batta_detail.png/130px-Premade_w'm_batta_detail.png",
-    "tier": "Common",
-    "regions": [
-      "Kandarin"
-    ]
-  },
-  "Premade t'd batta": {
-    "examine": "A Premade Toad Batta.",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Premade_t'd_batta_detail.png/130px-Premade_t'd_batta_detail.png",
-    "tier": "Common",
-    "regions": [
-      "Kandarin"
-    ]
-  },
-  "Premade fr't batta": {
-    "examine": "A premade Fruit Batta.",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Premade_fr't_batta_detail.png/130px-Premade_fr't_batta_detail.png",
-    "tier": "Common",
-    "regions": [
-      "Kandarin"
-    ]
-  },
-  "Premade veg batta": {
-    "examine": "A Premade Vegetable Batta.",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Premade_veg_batta_detail.png/130px-Premade_veg_batta_detail.png",
-    "tier": "Common",
-    "regions": [
-      "Kandarin"
-    ]
-  },
-  "Premade choc bomb": {
-    "examine": "A premade Chocolate Bomb.",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Premade_choc_bomb_detail.png/130px-Premade_choc_bomb_detail.png",
-    "tier": "Common",
-    "regions": [
-      "Kandarin"
-    ]
-  },
-  "Premade ttl": {
-    "examine": "A premade Tangled Toads Legs.",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Premade_ttl_detail.png/130px-Premade_ttl_detail.png",
-    "tier": "Common",
-    "regions": [
-      "Kandarin"
-    ]
-  },
-  "Premade worm hole": {
-    "examine": "A premade Worm Hole.",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Premade_worm_hole_detail.png/130px-Premade_worm_hole_detail.png",
-    "tier": "Common",
-    "regions": [
-      "Kandarin"
-    ]
-  },
-  "Premade veg ball": {
-    "examine": "A premade Vegetable Ball.",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Premade_veg_ball_detail.png/130px-Premade_veg_ball_detail.png",
-    "tier": "Common",
-    "regions": [
-      "Kandarin"
-    ]
-  },
-  "Premade w'm crun'": {
-    "examine": "Some Premade Worm Crunchies.",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Premade_w'm_crun'_detail.png/130px-Premade_w'm_crun'_detail.png",
-    "tier": "Common",
-    "regions": [
-      "Kandarin"
-    ]
-  },
-  "Premade ch' crunch": {
-    "examine": "Some Premade chocchip crunchies.",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Premade_ch'_crunch_detail.png/130px-Premade_ch'_crunch_detail.png",
-    "tier": "Common",
-    "regions": [
-      "Kandarin"
-    ]
-  },
-  "Premade s'y crunch": {
-    "examine": "Some premade Spicy Crunchies.",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Premade_s'y_crunch_detail.png/130px-Premade_s'y_crunch_detail.png",
-    "tier": "Common",
-    "regions": [
-      "Kandarin"
-    ]
-  },
-  "Premade t'd crunch": {
-    "examine": "Some premade Toad Crunchies.",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Premade_t'd_crunch_detail.png/130px-Premade_t'd_crunch_detail.png",
     "tier": "Common",
     "regions": [
       "Kandarin"
@@ -4448,7 +4215,7 @@
   "Prayer potion": {
     "examine": "Prayer potion.",
     "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Prayer_potion(4)_detail.png/130px-Prayer_potion(4)_detail.png",
-    "tier": "Uncommon",
+    "tier": "Common",
     "regions": []
   },
   "Super attack": {
@@ -5533,7 +5300,9 @@
     "examine": "Small brightly coloured tropical fish.",
     "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Raw_karambwanji_detail.png/130px-Raw_karambwanji_detail.png",
     "tier": "Common",
-    "regions": []
+    "regions": [
+      "Karamja"
+    ]
   },
   "Karambwan vessel": {
     "examine": "A wide bodied and thin necked vessel, encrusted with sea salt.",
@@ -5542,12 +5311,6 @@
     "regions": [
       "Karamja"
     ]
-  },
-  "Sliced banana": {
-    "examine": "You swear you had more than three slices before.",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Sliced_banana_detail.png/130px-Sliced_banana_detail.png",
-    "tier": "Common",
-    "regions": []
   },
   "Karamjan rum": {
     "examine": "A banana has been stuffed into the neck of this bottle.",
@@ -6860,9 +6623,9 @@
     "regions": []
   },
   "Purple sweets": {
-    "examine": "Not likely to last until next Halloween.",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Purple_sweets_(2005_Halloween_event)_detail.png/130px-Purple_sweets_(2005_Halloween_event)_detail.png",
-    "tier": "Uncommon",
+    "examine": "Remember to brush after eating!",
+    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Purple_sweets_detail.png/130px-Purple_sweets_detail.png",
+    "tier": "Common",
     "regions": [
       "General"
     ]
@@ -7717,7 +7480,18 @@
     "examine": "Use this to clear weeds.",
     "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Rake_detail.png/130px-Rake_detail.png",
     "tier": "Common",
-    "regions": []
+    "regions": [
+      "Karamja",
+      "Kourend",
+      "Kandarin",
+      "Fremennik",
+      "Tirannwn",
+      "Morytania",
+      "Asgarnia",
+      "Misthalin",
+      "Varlamore",
+      "Desert"
+    ]
   },
   "Seed dibber": {
     "examine": "Use this to plant seeds with.",
@@ -7743,27 +7517,9 @@
     "tier": "Common",
     "regions": []
   },
-  "Apples": {
-    "examine": "A fruit basket filled with apples.",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Apples(5)_detail.png/130px-Apples(5)_detail.png",
-    "tier": "Common",
-    "regions": []
-  },
   "Oranges": {
     "examine": "A fruit basket filled with oranges.",
     "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Oranges(5)_detail.png/130px-Oranges(5)_detail.png",
-    "tier": "Common",
-    "regions": []
-  },
-  "Strawberries": {
-    "examine": "A fruit basket filled with strawberries.",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Strawberries(5)_detail.png/130px-Strawberries(5)_detail.png",
-    "tier": "Common",
-    "regions": []
-  },
-  "Bananas": {
-    "examine": "A fruit basket filled with bananas.",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Bananas(5)_detail.png/130px-Bananas(5)_detail.png",
     "tier": "Common",
     "regions": []
   },
@@ -8576,12 +8332,6 @@
       "General"
     ]
   },
-  "Raw fishlike thing": {
-    "examine": "A raw... fish? Is this a fish??",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Raw_fishlike_thing_detail.png/130px-Raw_fishlike_thing_detail.png",
-    "tier": "Common",
-    "regions": []
-  },
   "Broodoo shield": {
     "examine": "A scary broodoo shield.",
     "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Broodoo_shield_(poison)_detail.png/130px-Broodoo_shield_(poison)_detail.png",
@@ -8611,15 +8361,6 @@
     "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Thatch_spar_dense_detail.png/130px-Thatch_spar_dense_detail.png",
     "tier": "Common",
     "regions": [
-      "Karamja"
-    ]
-  },
-  "Snake hide": {
-    "examine": "Scaly but not slimy! It could be a useful material if it were tanned.",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Snake_hide_detail.png/130px-Snake_hide_detail.png",
-    "tier": "Common",
-    "regions": [
-      "Morytania",
       "Karamja"
     ]
   },
@@ -9779,18 +9520,6 @@
     "tier": "Common",
     "regions": []
   },
-  "Burnt onion": {
-    "examine": "A bowl of blackened onions.",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Burnt_onion_detail.png/130px-Burnt_onion_detail.png",
-    "tier": "Common",
-    "regions": []
-  },
-  "Burnt mushroom": {
-    "examine": "A bowl of burnt sliced mushroom.",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Burnt_mushroom_detail.png/130px-Burnt_mushroom_detail.png",
-    "tier": "Common",
-    "regions": []
-  },
   "Stripy pirate shirt": {
     "examine": "A sea worthy shirt.",
     "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Stripy_pirate_shirt_(beige)_detail.png/130px-Stripy_pirate_shirt_(beige)_detail.png",
@@ -9939,7 +9668,7 @@
   "Summer pie": {
     "examine": "All the fruits of a very small forest.",
     "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Summer_pie_detail.png/130px-Summer_pie_detail.png",
-    "tier": "Uncommon",
+    "tier": "Common",
     "regions": []
   },
   "Roast rabbit": {
@@ -10605,7 +10334,7 @@
   "Pure essence": {
     "examine": "An unimbued rune of extra capability.",
     "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Pure_essence_detail.png/130px-Pure_essence_detail.png",
-    "tier": "Rare",
+    "tier": "Uncommon",
     "regions": []
   },
   "Tortoise shell": {
@@ -10630,14 +10359,6 @@
     "tier": "Rare",
     "regions": [
       "Kandarin"
-    ]
-  },
-  "Crawling hand": {
-    "examine": "I should get it stuffed!",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Crawling_hand_(item)_detail.png/130px-Crawling_hand_(item)_detail.png",
-    "tier": "Uncommon",
-    "regions": [
-      "Morytania"
     ]
   },
   "Cockatrice head": {
@@ -10721,8 +10442,7 @@
       "Kourend",
       "Misthalin",
       "Tirannwn",
-      "Varlamore",
-      "Wilderness"
+      "Varlamore"
     ]
   },
   "Big shark": {
@@ -11369,7 +11089,7 @@
     ]
   },
   "Blurite ore": {
-    "examine": "Blurite crossbow bolts.",
+    "examine": "Definitely blue.",
     "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Blurite_ore_detail.png/130px-Blurite_ore_detail.png",
     "tier": "Common",
     "regions": [
@@ -11621,14 +11341,6 @@
       "Karamja"
     ]
   },
-  "Half made batta": {
-    "examine": "This fruit batta needs baking and garnishing with spice.",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Half_made_batta_(fruit)_detail.png/130px-Half_made_batta_(fruit)_detail.png",
-    "tier": "Common",
-    "regions": [
-      "Kandarin"
-    ]
-  },
   "Half made bowl": {
     "examine": "This unfinished tangled toads legs requires baking.",
     "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Half_made_bowl_(tangled_toad's_legs)_detail.png/130px-Half_made_bowl_(tangled_toad's_legs)_detail.png",
@@ -11830,13 +11542,23 @@
     "examine": "If a creature goes inside, the box should then slam shut.",
     "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Box_trap_detail.png/130px-Box_trap_detail.png",
     "tier": "Common",
-    "regions": []
+    "regions": [
+      "Varlamore",
+      "Kandarin",
+      "Desert",
+      "Kourend"
+    ]
   },
   "Butterfly net": {
     "examine": "For catching butterflies...",
     "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Butterfly_net_detail.png/130px-Butterfly_net_detail.png",
     "tier": "Common",
-    "regions": []
+    "regions": [
+      "Varlamore",
+      "Kandarin",
+      "Desert",
+      "Kourend"
+    ]
   },
   "Butterfly jar": {
     "examine": "It's got little holes in the top.",
@@ -11856,7 +11578,8 @@
     "tier": "Common",
     "regions": [
       "Varlamore",
-      "Fremennik"
+      "Fremennik",
+      "Kourend"
     ]
   },
   "Sapphire glacialis": {
@@ -13672,30 +13395,6 @@
     "tier": "Uncommon",
     "regions": []
   },
-  "Sapphire bracelet": {
-    "examine": "I wonder if this is valuable.",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Sapphire_bracelet_detail.png/130px-Sapphire_bracelet_detail.png",
-    "tier": "Uncommon",
-    "regions": []
-  },
-  "Emerald bracelet": {
-    "examine": "I wonder if this is valuable.",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Emerald_bracelet_detail.png/130px-Emerald_bracelet_detail.png",
-    "tier": "Uncommon",
-    "regions": []
-  },
-  "Ruby bracelet": {
-    "examine": "I wonder if this is valuable.",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Ruby_bracelet_detail.png/130px-Ruby_bracelet_detail.png",
-    "tier": "Uncommon",
-    "regions": []
-  },
-  "Diamond bracelet": {
-    "examine": "I wonder if this is valuable.",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Diamond_bracelet_detail.png/130px-Diamond_bracelet_detail.png",
-    "tier": "Rare",
-    "regions": []
-  },
   "Berserker necklace": {
     "examine": "Makes obsidian weapons even stronger!",
     "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Berserker_necklace_detail.png/130px-Berserker_necklace_detail.png",
@@ -14052,7 +13751,7 @@
   "Anti-dragon shield": {
     "examine": "For use in the Nightmare Zone.",
     "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Anti-dragon_shield_(nz)_detail.png/130px-Anti-dragon_shield_(nz)_detail.png",
-    "tier": "Rare",
+    "tier": "Common",
     "regions": [
       "Misthalin"
     ]
@@ -14558,7 +14257,7 @@
   "Pay-dirt": {
     "examine": "Prospector Percy has a machine that can wash this.",
     "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Pay-dirt_detail.png/130px-Pay-dirt_detail.png",
-    "tier": "Rare",
+    "tier": "Uncommon",
     "regions": [
       "Asgarnia"
     ]
@@ -16585,8 +16284,8 @@
   },
   "Scorpia's offspring": {
     "examine": "A scuttling little scorpion with an incredibly vicious tail.",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Scorpia's_offspring_(monster).png/130px-Scorpia's_offspring_(monster).png",
-    "tier": "Uncommon",
+    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Scorpia's_offspring_detail.png/130px-Scorpia's_offspring_detail.png",
+    "tier": "Godly",
     "regions": [
       "Wilderness"
     ]
@@ -18692,7 +18391,9 @@
     "examine": "Rejuvenation potion.",
     "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Rejuvenation_potion_(4)_detail.png/130px-Rejuvenation_potion_(4)_detail.png",
     "tier": "Common",
-    "regions": []
+    "regions": [
+      "Kourend"
+    ]
   },
   "Pyromancer garb": {
     "examine": "The garb of the Pyromancers.",
@@ -18836,22 +18537,6 @@
   "Kindling": {
     "examine": "It feels weak, but it might be okay for burning.",
     "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Kindling_(Chambers_of_Xeric)_detail.png/130px-Kindling_(Chambers_of_Xeric)_detail.png",
-    "tier": "Common",
-    "regions": [
-      "Kourend"
-    ]
-  },
-  "Empty gourd vial": {
-    "examine": "An empty hollowed out fruit. It could be used as a makeshift vial.",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Empty_gourd_vial_detail.png/130px-Empty_gourd_vial_detail.png",
-    "tier": "Common",
-    "regions": [
-      "Kourend"
-    ]
-  },
-  "Water-filled gourd vial": {
-    "examine": "A hollowed out fruit filled with water.",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Water-filled_gourd_vial_detail.png/130px-Water-filled_gourd_vial_detail.png",
     "tier": "Common",
     "regions": [
       "Kourend"
@@ -19122,66 +18807,6 @@
     "regions": [
       "Kourend"
     ]
-  },
-  "Topaz ring": {
-    "examine": "A valuable ring.",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Topaz_ring_detail.png/130px-Topaz_ring_detail.png",
-    "tier": "Uncommon",
-    "regions": []
-  },
-  "Opal necklace": {
-    "examine": "I wonder if this is valuable.",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Opal_necklace_detail.png/130px-Opal_necklace_detail.png",
-    "tier": "Uncommon",
-    "regions": []
-  },
-  "Jade necklace": {
-    "examine": "I wonder if this is valuable.",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Jade_necklace_detail.png/130px-Jade_necklace_detail.png",
-    "tier": "Uncommon",
-    "regions": []
-  },
-  "Topaz necklace": {
-    "examine": "I wonder if this is valuable.",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Topaz_necklace_detail.png/130px-Topaz_necklace_detail.png",
-    "tier": "Uncommon",
-    "regions": []
-  },
-  "Opal amulet": {
-    "examine": "I wonder if I can get this enchanted.",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Opal_amulet_detail.png/130px-Opal_amulet_detail.png",
-    "tier": "Uncommon",
-    "regions": []
-  },
-  "Jade amulet": {
-    "examine": "I wonder if I can get this enchanted.",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Jade_amulet_detail.png/130px-Jade_amulet_detail.png",
-    "tier": "Uncommon",
-    "regions": []
-  },
-  "Topaz amulet": {
-    "examine": "I wonder if I can get this enchanted.",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Topaz_amulet_detail.png/130px-Topaz_amulet_detail.png",
-    "tier": "Uncommon",
-    "regions": []
-  },
-  "Opal bracelet": {
-    "examine": "I wonder if this is valuable.",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Opal_bracelet_detail.png/130px-Opal_bracelet_detail.png",
-    "tier": "Uncommon",
-    "regions": []
-  },
-  "Jade bracelet": {
-    "examine": "I wonder if this is valuable.",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Jade_bracelet_detail.png/130px-Jade_bracelet_detail.png",
-    "tier": "Uncommon",
-    "regions": []
-  },
-  "Topaz bracelet": {
-    "examine": "I wonder if this is valuable.",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Topaz_bracelet_detail.png/130px-Topaz_bracelet_detail.png",
-    "tier": "Uncommon",
-    "regions": []
   },
   "Ring of pursuit": {
     "examine": "This ring can reveal a hunter creature's track.",
@@ -19510,12 +19135,6 @@
       "Misthalin"
     ]
   },
-  "Hoop snake": {
-    "examine": "Stunned hoop snake appears to be hanging on to its tail.",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Hoop_snake_(item)_detail.png/130px-Hoop_snake_(item)_detail.png",
-    "tier": "Common",
-    "regions": []
-  },
   "Sulliuscep cap": {
     "examine": "A Sulliuscep mushroom cap. Edible? Probably...",
     "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Sulliuscep_cap_detail.png/130px-Sulliuscep_cap_detail.png",
@@ -19618,17 +19237,13 @@
     "tier": "Common",
     "regions": []
   },
-  "Diving helmet": {
-    "examine": "A rudimentary diving helmet.",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Diving_helmet_detail.png/130px-Diving_helmet_detail.png",
-    "tier": "Common",
-    "regions": []
-  },
   "Diving apparatus": {
     "examine": "Some basic diving apparatus.",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Diving_apparatus_(2017_Halloween_event)_detail.png/130px-Diving_apparatus_(2017_Halloween_event)_detail.png",
+    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Diving_apparatus_detail_v6b6ad070.png/130px-Diving_apparatus_detail_v6b6ad070.png",
     "tier": "Common",
-    "regions": []
+    "regions": [
+      "Kandarin"
+    ]
   },
   "Brittle key": {
     "examine": "This key will take you to the top! (Unlocks the gate to the roof of the Slayer Tower).",
@@ -20480,12 +20095,6 @@
     "regions": [
       "Kourend"
     ]
-  },
-  "Fish chunks": {
-    "examine": "Apparently Cormorants like to eat this stuff...",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Fish_chunks_detail.png/130px-Fish_chunks_detail.png",
-    "tier": "Common",
-    "regions": []
   },
   "Molch pearl": {
     "examine": "Alry might be interested in trading for this.",
@@ -21571,12 +21180,6 @@
     "regions": [
       "Tirannwn"
     ]
-  },
-  "Water-filled vial": {
-    "examine": "A vial shaped by crystal deep within the Gauntlet, filled with water.",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Water-filled_vial_detail.png/130px-Water-filled_vial_detail.png",
-    "tier": "Common",
-    "regions": []
   },
   "Egniol potion": {
     "examine": "Egniol potion.",
@@ -23175,12 +22778,6 @@
       "Varlamore"
     ]
   },
-  "Pumpkin pie": {
-    "examine": "The best pumpkin pie in Gielinor",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Pumpkin_pie_detail.png/130px-Pumpkin_pie_detail.png",
-    "tier": "Common",
-    "regions": []
-  },
   "Condensed gold": {
     "examine": "The gold standard of gold.",
     "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Condensed_gold_detail.png/130px-Condensed_gold_detail.png",
@@ -24071,7 +23668,7 @@
     "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Butch_detail.png/130px-Butch_detail.png",
     "tier": "Godly",
     "regions": [
-      "Varlamore"
+      "Kourend"
     ]
   },
   "Baron": {
@@ -24409,14 +24006,6 @@
       "Asgarnia",
       "Kandarin",
       "Desert"
-    ]
-  },
-  "Immature tecu salamander": {
-    "examine": "A little too small to stuff full of tar.",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Immature_tecu_salamander_detail.png/130px-Immature_tecu_salamander_detail.png",
-    "tier": "Common",
-    "regions": [
-      "Varlamore"
     ]
   },
   "Tecu salamander": {
@@ -25166,8 +24755,10 @@
   "House keys": {
     "examine": "Spare keys to wealthy households in Civitas illa Fortis.",
     "imageUrl": "https://oldschool.runescape.wiki/images/thumb/House_keys_3_detail.png/130px-House_keys_3_detail.png",
-    "tier": "Common",
-    "regions": []
+    "tier": "Uncommon",
+    "regions": [
+      "Varlamore"
+    ]
   },
   "Valuables": {
     "examine": "Some valuable bits and bobs from wealthy houses.",
@@ -29168,7 +28759,8 @@
     "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Monk_of_Zamorak_(level_30_and_45).png/130px-Monk_of_Zamorak_(level_30_and_45).png",
     "tier": "Rare",
     "regions": [
-      "Misthalin"
+      "Misthalin",
+      "Wilderness"
     ]
   },
   "Tribesman": {
@@ -29811,7 +29403,7 @@
     ]
   },
   "Fairy Queen": {
-    "examine": "Looks otherworldy...",
+    "examine": "Looks otherworldly...",
     "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Fairy_Queen.png/130px-Fairy_Queen.png",
     "tier": "Rare",
     "regions": [
@@ -30232,7 +29824,16 @@
     "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Baby_impling.png/130px-Baby_impling.png",
     "tier": "Common",
     "regions": [
-      "General"
+      "Asgarnia",
+      "Kandarin",
+      "Karamja",
+      "Desert",
+      "Fremennik",
+      "Kourend",
+      "Varlamore",
+      "Tirannwn",
+      "Morytania",
+      "Misthalin"
     ]
   },
   "Young impling": {
@@ -30240,7 +29841,16 @@
     "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Young_impling.png/130px-Young_impling.png",
     "tier": "Common",
     "regions": [
-      "General"
+      "Kandarin",
+      "Asgarnia",
+      "Desert",
+      "Fremennik",
+      "Kourend",
+      "Karamja",
+      "Varlamore",
+      "Tirannwn",
+      "Morytania",
+      "Misthalin"
     ]
   },
   "Gourmet impling": {
@@ -30248,7 +29858,16 @@
     "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Gourmet_impling.png/130px-Gourmet_impling.png",
     "tier": "Common",
     "regions": [
-      "General"
+      "Asgarnia",
+      "Kandarin",
+      "Morytania",
+      "Misthalin",
+      "Tirannwn",
+      "Karamja",
+      "Desert",
+      "Fremennik",
+      "Kourend",
+      "Varlamore"
     ]
   },
   "Earth impling": {
@@ -30256,10 +29875,7 @@
     "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Earth_impling.png/130px-Earth_impling.png",
     "tier": "Uncommon",
     "regions": [
-      "General",
-      "All regions",
       "Misthalin",
-      "Wilderness",
       "Morytania",
       "Kandarin",
       "Asgarnia",
@@ -30276,8 +29892,6 @@
     "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Essence_impling.png/130px-Essence_impling.png",
     "tier": "Uncommon",
     "regions": [
-      "General",
-      "All regions",
       "Asgarnia",
       "Kandarin",
       "Karamja",
@@ -30287,8 +29901,7 @@
       "Varlamore",
       "Tirannwn",
       "Morytania",
-      "Misthalin",
-      "Wilderness"
+      "Misthalin"
     ]
   },
   "Eclectic impling": {
@@ -30296,8 +29909,6 @@
     "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Eclectic_impling.png/130px-Eclectic_impling.png",
     "tier": "Rare",
     "regions": [
-      "General",
-      "All regions",
       "Asgarnia",
       "Kandarin",
       "Karamja",
@@ -30307,8 +29918,7 @@
       "Varlamore",
       "Tirannwn",
       "Morytania",
-      "Misthalin",
-      "Wilderness"
+      "Misthalin"
     ]
   },
   "Nature impling": {
@@ -30316,7 +29926,16 @@
     "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Nature_impling.png/130px-Nature_impling.png",
     "tier": "Rare",
     "regions": [
-      "General"
+      "Asgarnia",
+      "Kandarin",
+      "Morytania",
+      "Misthalin",
+      "Tirannwn",
+      "Karamja",
+      "Desert",
+      "Fremennik",
+      "Kourend",
+      "Varlamore"
     ]
   },
   "Magpie impling": {
@@ -30324,8 +29943,6 @@
     "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Magpie_impling.png/130px-Magpie_impling.png",
     "tier": "Epic",
     "regions": [
-      "General",
-      "All regions",
       "Asgarnia",
       "Kandarin",
       "Karamja",
@@ -30335,8 +29952,7 @@
       "Varlamore",
       "Tirannwn",
       "Morytania",
-      "Misthalin",
-      "Wilderness"
+      "Misthalin"
     ]
   },
   "Ninja impling": {
@@ -30344,8 +29960,6 @@
     "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Ninja_impling.png/130px-Ninja_impling.png",
     "tier": "Epic",
     "regions": [
-      "General",
-      "All regions",
       "Kandarin",
       "Asgarnia",
       "Desert",
@@ -30355,8 +29969,7 @@
       "Varlamore",
       "Tirannwn",
       "Morytania",
-      "Misthalin",
-      "Wilderness"
+      "Misthalin"
     ]
   },
   "Dragon impling": {
@@ -30364,8 +29977,6 @@
     "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Dragon_impling.png/130px-Dragon_impling.png",
     "tier": "Legendary",
     "regions": [
-      "General",
-      "Wilderness",
       "Misthalin",
       "Morytania",
       "Kandarin",
@@ -30375,15 +29986,16 @@
       "Tirannwn",
       "Varlamore",
       "Kourend",
-      "Fremennik",
-      "All regions"
+      "Fremennik"
     ]
   },
   "Penance Runner": {
     "examine": "He's making a run for it!",
     "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Penance_Runner_(wave_1).png/130px-Penance_Runner_(wave_1).png",
     "tier": "Rare",
-    "regions": []
+    "regions": [
+      "Kandarin"
+    ]
   },
   "Penance Healer": {
     "examine": "A nasty piece of work.",
@@ -30690,7 +30302,9 @@
     "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Dark_wizard_(red).png/130px-Dark_wizard_(red).png",
     "tier": "Uncommon",
     "regions": [
-      "Kourend"
+      "Kourend",
+      "Misthalin",
+      "Asgarnia"
     ]
   },
   "Oomlie bird": {
@@ -30730,7 +30344,13 @@
     "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Hill_Giant.png/130px-Hill_Giant.png",
     "tier": "Uncommon",
     "regions": [
-      "Desert"
+      "Desert",
+      "Misthalin",
+      "Wilderness",
+      "Asgarnia",
+      "Kourend",
+      "Varlamore",
+      "Kandarin"
     ]
   },
   "Wise Old Man": {
@@ -31975,8 +31595,7 @@
     "regions": [
       "Kandarin",
       "Kourend",
-      "Misthalin",
-      "Wilderness"
+      "Misthalin"
     ]
   },
   "Druid": {
@@ -34016,7 +33635,8 @@
     "regions": [
       "General",
       "Kandarin",
-      "Misthalin"
+      "Misthalin",
+      "Wilderness"
     ]
   },
   "Cap'n Hand": {
@@ -34276,7 +33896,7 @@
     "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Penance_Queen.png/130px-Penance_Queen.png",
     "tier": "Epic",
     "regions": [
-      "Fremennik"
+      "Kandarin"
     ]
   },
   "Queen spawn": {
@@ -34653,7 +34273,12 @@
     "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Black_demon.png/130px-Black_demon.png",
     "tier": "Epic",
     "regions": [
-      "No"
+      "No",
+      "Kourend",
+      "Wilderness",
+      "Asgarnia",
+      "Karamja",
+      "Kandarin"
     ]
   },
   "Glod": {
@@ -35147,15 +34772,6 @@
       "Wilderness"
     ]
   },
-  "Rock Golem": {
-    "examine": "Rock with attitude.",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Rock_Golem_(monster).png/130px-Rock_Golem_(monster).png",
-    "tier": "Epic",
-    "regions": [
-      "Misthalin",
-      "Kandarin"
-    ]
-  },
   "River troll": {
     "examine": "Likes fish... hates people.",
     "imageUrl": "https://oldschool.runescape.wiki/images/thumb/River_troll.png/130px-River_troll.png",
@@ -35345,7 +34961,6 @@
       "Asgarnia",
       "Desert",
       "Fremennik",
-      "General",
       "Kandarin",
       "Karamja",
       "Kourend",
@@ -35367,7 +34982,12 @@
     "examine": "Big, red, and incredibly evil.",
     "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Greater_demon_(5).png/130px-Greater_demon_(5).png",
     "tier": "Epic",
-    "regions": []
+    "regions": [
+      "Wilderness",
+      "Karamja",
+      "Kandarin",
+      "Kourend"
+    ]
   },
   "Lesser demon": {
     "examine": "Lesser, but still pretty big.",
@@ -36502,16 +36122,16 @@
     "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Spider_(Ungael).png/130px-Spider_(Ungael).png",
     "tier": "Uncommon",
     "regions": [
-      "Asgarnia",
+      "Misthalin",
+      "Kourend",
       "Desert",
       "Kandarin",
-      "Karamja",
-      "Kourend",
-      "Misthalin",
+      "Wilderness",
+      "Asgarnia",
       "Morytania",
-      "Tirannwn",
+      "Karamja",
       "Varlamore",
-      "Wilderness"
+      "Tirannwn"
     ]
   },
   "Growthling": {
@@ -37199,14 +36819,6 @@
     "tier": "Epic",
     "regions": [
       "Fremennik"
-    ]
-  },
-  "Phosani's Nightmare": {
-    "examine": "Sweet dreams are most definitely not made of this.",
-    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/The_Nightmare.png/130px-The_Nightmare.png",
-    "tier": "Mythic",
-    "regions": [
-      "Morytania"
     ]
   },
   "The Nightmare": {
@@ -38325,7 +37937,8 @@
     "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Ancient_Guardian_(Desert_Treasure_II).png/130px-Ancient_Guardian_(Desert_Treasure_II).png",
     "tier": "Epic",
     "regions": [
-      "Desert"
+      "Desert",
+      "Asgarnia"
     ]
   },
   "Jhallan": {
@@ -38478,7 +38091,7 @@
   "Flaming pyrelord": {
     "examine": "A large demonic being of fire.",
     "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Flaming_pyrelord_(Deadman_Apocalypse).png/130px-Flaming_pyrelord_(Deadman_Apocalypse).png",
-    "tier": "Legendary",
+    "tier": "Epic",
     "regions": [
       "Desert",
       "Misthalin",
@@ -38590,8 +38203,7 @@
     "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Minotaur_(Fortis_Colosseum).png/130px-Minotaur_(Fortis_Colosseum).png",
     "tier": "Legendary",
     "regions": [
-      "No",
-      "Varlamore"
+      "No"
     ]
   },
   "Fremennik warband archer": {
@@ -40116,5 +39728,318 @@
     "imageUrl": "https://oldschool.runescape.wiki/images/Swamp_lizard.png",
     "regions": [],
     "tier": ""
+  },
+  "White partyhat": {
+    "examine": "A nice hat from a cracker.",
+    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/White_partyhat_detail.png/130px-White_partyhat_detail.png",
+    "tier": "Legendary",
+    "regions": []
+  },
+  "Orange dye": {
+    "examine": "A little bottle of orange dye.",
+    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Orange_dye_detail.png/130px-Orange_dye_detail.png",
+    "tier": "Common",
+    "regions": []
+  },
+  "Dwellberries": {
+    "examine": "Some rather pretty blue berries.",
+    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Dwellberries_detail.png/130px-Dwellberries_detail.png",
+    "tier": "Common",
+    "regions": [
+      "Kandarin"
+    ]
+  },
+  "Cheese+tom batta": {
+    "examine": "This smells really good.",
+    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Cheese+tom_batta_detail_v1cc348da.png/130px-Cheese+tom_batta_detail_v1cc348da.png",
+    "tier": "Common",
+    "regions": [
+      "Kandarin"
+    ]
+  },
+  "Games necklace": {
+    "examine": "An enchanted necklace.",
+    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Games_necklace_detail.png/130px-Games_necklace_detail.png",
+    "tier": "Uncommon",
+    "regions": []
+  },
+  "Binding necklace": {
+    "examine": "A necklace embedded with mystical power.",
+    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Binding_necklace_detail.png/130px-Binding_necklace_detail.png",
+    "tier": "Uncommon",
+    "regions": []
+  },
+  "Egg whisk": {
+    "examine": "A large whisk of death.",
+    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Egg_whisk_detail.png/130px-Egg_whisk_detail.png",
+    "tier": "Common",
+    "regions": []
+  },
+  "Ava's accumulator": {
+    "examine": "A superior bagged chicken ready to serve you, magnet in claw.",
+    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Ava's_accumulator_detail.png/130px-Ava's_accumulator_detail.png",
+    "tier": "Rare",
+    "regions": [
+      "Misthalin"
+    ]
+  },
+  "Bracelet of clay": {
+    "examine": "Now I can become a potter.",
+    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Bracelet_of_clay_detail.png/130px-Bracelet_of_clay_detail.png",
+    "tier": "Uncommon",
+    "regions": []
+  },
+  "Castle wars bracelet": {
+    "examine": "Must be worn as you enter the game to receive the bonus for that game.",
+    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Castle_wars_bracelet_detail.png/130px-Castle_wars_bracelet_detail.png",
+    "tier": "Uncommon",
+    "regions": []
+  },
+  "Inoculation bracelet": {
+    "examine": "It eases diseases!",
+    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Inoculation_bracelet_detail.png/130px-Inoculation_bracelet_detail.png",
+    "tier": "Uncommon",
+    "regions": []
+  },
+  "Phoenix necklace": {
+    "examine": "In case of emergency, wear necklace.",
+    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Phoenix_necklace_detail.png/130px-Phoenix_necklace_detail.png",
+    "tier": "Rare",
+    "regions": []
+  },
+  "Abyssal bracelet": {
+    "examine": "Makes using the Abyss just slightly safer.",
+    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Abyssal_bracelet_detail.png/130px-Abyssal_bracelet_detail.png",
+    "tier": "Rare",
+    "regions": []
+  },
+  "Efaritay's aid": {
+    "examine": "Aids the user against vampyres.",
+    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Efaritay's_aid_detail.png/130px-Efaritay's_aid_detail.png",
+    "tier": "Uncommon",
+    "regions": []
+  },
+  "Dodgy necklace": {
+    "examine": "Lets you get away with it - sometimes.",
+    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Dodgy_necklace_detail.png/130px-Dodgy_necklace_detail.png",
+    "tier": "Uncommon",
+    "regions": []
+  },
+  "Necklace of passage": {
+    "examine": "This necklace can really take you places.",
+    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Necklace_of_passage_detail.png/130px-Necklace_of_passage_detail.png",
+    "tier": "Uncommon",
+    "regions": []
+  },
+  "Necklace of faith": {
+    "examine": "Can grant me prayer in an emergency.",
+    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Necklace_of_faith_detail.png/130px-Necklace_of_faith_detail.png",
+    "tier": "Uncommon",
+    "regions": []
+  },
+  "Expeditious bracelet": {
+    "examine": "Allows one slayer kill to count as two.",
+    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Expeditious_bracelet_detail.png/130px-Expeditious_bracelet_detail.png",
+    "tier": "Uncommon",
+    "regions": []
+  },
+  "Flamtaer bracelet": {
+    "examine": "Helps when building the Shades of Mort'ton temple.",
+    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Flamtaer_bracelet_detail.png/130px-Flamtaer_bracelet_detail.png",
+    "tier": "Uncommon",
+    "regions": []
+  },
+  "Bracelet of slaughter": {
+    "examine": "Occasionally prevents slayer kill count being decremented.",
+    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Bracelet_of_slaughter_detail.png/130px-Bracelet_of_slaughter_detail.png",
+    "tier": "Uncommon",
+    "regions": []
+  },
+  "Fishbowl helmet": {
+    "examine": "A rudimentary diving helmet.",
+    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Diving_helmet_detail.png/130px-Diving_helmet_detail.png",
+    "tier": "Common",
+    "regions": []
+  },
+  "Elaborate lockbox": {
+    "examine": "Might contain something valuable inside.",
+    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Elaborate_lockbox_detail.png/130px-Elaborate_lockbox_detail.png",
+    "tier": "Common",
+    "regions": [
+      "Asgarnia"
+    ]
+  },
+  "Medium fur pouch": {
+    "examine": "A medium-sized pouch for carrying animal furs.",
+    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Medium_fur_pouch_detail.png/130px-Medium_fur_pouch_detail.png",
+    "tier": "Rare",
+    "regions": [
+      "Varlamore"
+    ]
+  },
+  "Necklace of Fangs": {
+    "examine": "Toothy, and makes for decent arrowheads in a pinch.",
+    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Necklace_of_Fangs_detail_v5e1b4985.png/130px-Necklace_of_Fangs_detail_v5e1b4985.png",
+    "tier": "Epic",
+    "regions": [
+      "Fremennik"
+    ]
+  },
+  "Amulet of air": {
+    "examine": "Might be as light as a feather.",
+    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Amulet_of_air_detail_v85fad686.png/130px-Amulet_of_air_detail_v85fad686.png",
+    "tier": "Rare",
+    "regions": [
+      "Misthalin"
+    ]
+  },
+  "Amulet of water": {
+    "examine": "I'm going to get my clothes wet wearing this.",
+    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Amulet_of_water_detail_vcd5924fe.png/130px-Amulet_of_water_detail_vcd5924fe.png",
+    "tier": "Rare",
+    "regions": [
+      "Fremennik"
+    ]
+  },
+  "Amulet of earth": {
+    "examine": "Heavy is the amulet.",
+    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Amulet_of_earth_detail_v03897f27.png/130px-Amulet_of_earth_detail_v03897f27.png",
+    "tier": "Rare",
+    "regions": [
+      "Misthalin"
+    ]
+  },
+  "Amulet of fire": {
+    "examine": "I hope my clothes don't catch on fire.",
+    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Amulet_of_fire_detail_vfd1a77c7.png/130px-Amulet_of_fire_detail_vfd1a77c7.png",
+    "tier": "Rare",
+    "regions": [
+      "Morytania"
+    ]
+  },
+  "Elemental amulet": {
+    "examine": "Water, earth, fire, air. The four elements living together in harmony.",
+    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Elemental_amulet_detail_v09330451.png/130px-Elemental_amulet_detail_v09330451.png",
+    "tier": "Epic",
+    "regions": []
+  },
+  "Imbued ancient cape": {
+    "examine": "A cape from an almighty god, imbued with great power.",
+    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Imbued_ancient_cape_detail_v022f8f93.png/130px-Imbued_ancient_cape_detail_v022f8f93.png",
+    "tier": "Epic",
+    "regions": [
+      "Wilderness"
+    ]
+  },
+  "Master Farmer": {
+    "examine": "A master at farming.",
+    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Master_Farmer.png/130px-Master_Farmer.png",
+    "tier": "Uncommon",
+    "regions": [
+      "Kandarin",
+      "Kourend",
+      "Misthalin",
+      "Varlamore"
+    ]
+  },
+  "Scorpia's offspring (monster)": {
+    "examine": "A scuttling little scorpion with an incredibly vicious tail.",
+    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Scorpia's_offspring_(monster).png/130px-Scorpia's_offspring_(monster).png",
+    "tier": "Uncommon",
+    "regions": [
+      "Wilderness"
+    ]
+  },
+  "Rock Golem (monster)": {
+    "examine": "Rock with attitude.",
+    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Rock_Golem_(monster).png/130px-Rock_Golem_(monster).png",
+    "tier": "Uncommon",
+    "regions": [
+      "Misthalin",
+      "Kandarin"
+    ]
+  },
+  "Leo": {
+    "examine": "A lazy undertaker.",
+    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Leo.png/130px-Leo.png",
+    "tier": "Uncommon",
+    "regions": [
+      "General",
+      "Varlamore"
+    ]
+  },
+  "Vanguards": {
+    "examine": "Formerly a member of Xeric's elite tactical unit.",
+    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Vanguard_(moving)_va48bc061.png/130px-Vanguard_(moving)_va48bc061.png",
+    "tier": "Legendary",
+    "regions": [
+      "Kourend"
+    ]
+  },
+  "Victoria Kebbit-Monkfish": {
+    "examine": "A mermaid guide, willing to help you research the depths of the sea.",
+    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Victoria_Kebbit-Monkfish.png/130px-Victoria_Kebbit-Monkfish.png",
+    "tier": "Rare",
+    "regions": [
+      "No"
+    ]
+  },
+  "Marina Kebbit-Monkfish": {
+    "examine": "A mermaid guide, willing to help you research the depths of the sea.",
+    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Marina_Kebbit-Monkfish.png/130px-Marina_Kebbit-Monkfish.png",
+    "tier": "Rare",
+    "regions": [
+      "No"
+    ]
+  },
+  "Selina Kebbit-Monkfish": {
+    "examine": "A mermaid guide, willing to help you research the depths of the sea.",
+    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Selina_Kebbit-Monkfish.png/130px-Selina_Kebbit-Monkfish.png",
+    "tier": "Rare",
+    "regions": [
+      "No"
+    ]
+  },
+  "Gloria Kebbit-Monkfish": {
+    "examine": "A mermaid guide, willing to help you research the depths of the sea.",
+    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Gloria_Kebbit-Monkfish.png/130px-Gloria_Kebbit-Monkfish.png",
+    "tier": "Rare",
+    "regions": [
+      "No"
+    ]
+  },
+  "Christina Kebbit-Monkfish": {
+    "examine": "A mermaid guide, willing to help you research the depths of the sea.",
+    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Christina_Kebbit-Monkfish.png/130px-Christina_Kebbit-Monkfish.png",
+    "tier": "Rare",
+    "regions": [
+      "No"
+    ]
+  },
+  "Manta ray (sailing)": {
+    "examine": "Might be feeling a little flat.",
+    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Manta_ray_(Sailing).png/130px-Manta_ray_(Sailing).png",
+    "tier": "Epic",
+    "regions": [
+      "N",
+      "A",
+      "No"
+    ]
+  },
+  "Minotaur (f2p)": {
+    "examine": "He doesn't look very pleased to see you.",
+    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Minotaur.png/130px-Minotaur.png",
+    "tier": "Uncommon",
+    "regions": [
+      "No"
+    ]
+  },
+  "Pete Kayer": {
+    "examine": "A helpful rogue.",
+    "imageUrl": "https://oldschool.runescape.wiki/images/thumb/Pete_Kayer_v627e1616.png/130px-Pete_Kayer_v627e1616.png",
+    "tier": "Legendary",
+    "regions": [
+      "Wilderness"
+    ]
   }
 }

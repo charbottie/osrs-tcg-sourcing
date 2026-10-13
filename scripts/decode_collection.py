@@ -51,6 +51,52 @@ PROFILES_DIR     = pathlib.Path.home() / ".runelite" / "profiles2"
 ALL_COLLECTIONS_JSON = pathlib.Path(__file__).parent / "output" / "all_collections.json"
 
 
+# Card catalog snapshot: resolves the plugin's identity names ("npc:6616") to card names
+CATALOG_JSON = pathlib.Path(__file__).parent.parent / "research" / "card-catalog-live.json"
+_ID_NAMES: dict[str, str] | None = None
+
+
+def _identity_names() -> dict[str, str]:
+    """{"npc:<id>" / "item:<id>": card name} for every card id and version id in the catalog.
+
+    The OSRS TCG plugin names an NPC card "npc:<id>" when its name clashes with an item card
+    (Manta ray, Scorpia's offspring); cards pulled then keep that name in the save/cloud even
+    after the catalog renames the card ("Scorpia's offspring (monster)")."""
+    global _ID_NAMES
+    if _ID_NAMES is None:
+        _ID_NAMES = {}
+        try:
+            cat = json.loads(CATALOG_JSON.read_text(encoding="utf-8"))
+        except (OSError, ValueError):
+            cat = {}
+        for kind, prefix in (("items", "item"), ("npcs", "npc")):
+            for e in cat.get(kind, []):
+                _ID_NAMES.setdefault(f"{prefix}:{e['id']}", e["name"])
+            for e in cat.get(kind, []):
+                for v in (e.get("tcg") or {}).get("variants") or []:
+                    if "id" in v:
+                        _ID_NAMES.setdefault(f"{prefix}:{v['id']}", e["name"])
+    return _ID_NAMES
+
+
+def normalize_profile(d: dict) -> dict:
+    """Replace identity names in a profile's ownedCards / timestamp maps with card names."""
+    ids = _identity_names()
+    fix = lambda n: ids.get(n, n)
+    if not any(n in ids for n in d.get("ownedCards", [])):
+        return d
+    d["ownedCards"] = sorted({fix(n) for n in d.get("ownedCards", [])})
+    d["cardCount"] = len(d["ownedCards"])
+    for key, pick in (("cardTimestamps", max), ("cardFirstTimestamps", min)):
+        if isinstance(d.get(key), dict):
+            out: dict = {}
+            for n, ts in d[key].items():
+                n = fix(n)
+                out[n] = pick(out[n], ts) if n in out else ts
+            d[key] = out
+    return d
+
+
 def xor_with_salt(data: bytes) -> bytes:
     return bytes(b ^ XOR_SALT[i % len(XOR_SALT)] for i, b in enumerate(data))
 
@@ -438,6 +484,8 @@ def main() -> int:
 
     # ── Always extract per-profile data and write all_collections.json ───────
     per_profile = find_per_profile_collections(PROFILES_DIR)
+    for d in per_profile.values():
+        normalize_profile(d)
     if per_profile:
         ALL_COLLECTIONS_JSON.parent.mkdir(parents=True, exist_ok=True)
         ALL_COLLECTIONS_JSON.write_text(
@@ -526,10 +574,10 @@ def main() -> int:
 
     out_path = pathlib.Path(args.out)
     out_path.parent.mkdir(parents=True, exist_ok=True)
-    result = {
+    result = normalize_profile({
         "cardCount":  len(all_names),
         "ownedCards": sorted(all_names),
-    }
+    })
     out_path.write_text(json.dumps(result, indent=2, ensure_ascii=False) + "\n",
                         encoding="utf-8")
     print(f"\nWrote {len(all_names)} unique owned card names → {out_path}")

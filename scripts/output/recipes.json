@@ -69987,32 +69987,6 @@
 "noXp": true
 },
 {
-"output": "Raw batta",
-"outputQuantity": 1.0,
-"skill": null,
-"level": 1,
-"xp": 0,
-"ingredients": [
-{
-"item": "Batta tin",
-"quantity": 1.0
-},
-{
-"item": "Gianne dough",
-"quantity": 1.0
-}
-],
-"tools": [
-"Batta tin"
-],
-"facilities": null,
-"members": true,
-"levels": {},
-"quests": [],
-"page": "Raw batta",
-"noXp": true
-},
-{
 "output": "Raw stuffed snake",
 "outputQuantity": 1.0,
 "skill": null,
@@ -70133,6 +70107,30 @@
 "page": "Sliced red banana",
 "noXp": true,
 "internal": "Recipe for Disaster"
+},
+{
+"output": "Stuffed crawling hand",
+"outputQuantity": 1.0,
+"skill": null,
+"level": 1,
+"xp": 0,
+"ingredients": [
+{
+"item": "Crawling hand (item)",
+"quantity": 1.0
+},
+{
+"item": "Coins",
+"quantity": 1000.0
+}
+],
+"tools": [],
+"facilities": "Taxidermist",
+"members": true,
+"levels": {},
+"quests": [],
+"page": "Stuffed crawling hand",
+"noXp": true
 },
 {
 "output": "Stuffed hydra heads",

@@ -1155,11 +1155,7 @@
 },
 "Bob": {
 "Asgarnia": null,
-"Burthorpe": null,
-"Lumbridge": null,
-"Entrana": null,
-"Varrock": null,
-"Sinclair Mansion": null
+"Burthorpe": null
 },
 "Body Golem": {
 "Ruins of Camdozaal": null
@@ -3362,7 +3358,7 @@
 "Maniacal monkey": {
 "Kruk's Dungeon": "ape_atoll"
 },
-"Manta ray": {
+"Manta ray (sailing)": {
 "The Everdeep": null,
 "Deepfin Point": null,
 "Southern Expanse": null,
@@ -3385,6 +3381,18 @@
 },
 "Master Crafter": {
 "Crafting Guild": null
+},
+"Master Farmer": {
+"East Ardougne": null,
+"Draynor Village": null,
+"Farming Guild": "kourend",
+"Hosidius": "kourend",
+"Varrock": null,
+"Outer Fortis": "varlamore",
+"Quetzacalli Gorge": "varlamore",
+"Ortus Farm": "varlamore",
+"Kastori": "varlamore",
+"Medium Ardougne Diary": null
 },
 "Master fisher": {
 "Fishing Guild": null
@@ -3442,9 +3450,11 @@
 "Fortis Colosseum entrance": "varlamore"
 },
 "Minotaur": {
-"Stronghold of Security": null,
-"Vault of War": null,
 "Minotaurs' Rest": null
+},
+"Minotaur (f2p)": {
+"Stronghold of Security": null,
+"Vault of War": null
 },
 "Mirrorback Araxyte": {
 "Morytania Spider Cave": "morytania"
@@ -3679,7 +3689,8 @@
 },
 "Niles": {
 "random event": null,
-"Underwater": null
+"Underwater": null,
+"Resource Area": null
 },
 "Noodle": {
 "Iceberg": null
@@ -3873,14 +3884,15 @@
 "Pet rock": {
 "Rellekka": null
 },
+"Pete Kayer": {
+"Ferox Enclave": null,
+"1v1 Arena": null
+},
 "Phantom Muspah": {
 "Ghorrock Dungeon": null
 },
 "Pharaoh Kemesis": {
 "Menaphos": "desert"
-},
-"Phosani's Nightmare": {
-"Sisterhood Sanctuary": "morytania"
 },
 "Phrin Shade": {
 "Shade Catacombs": "morytania"
@@ -4366,6 +4378,9 @@
 "Seers' Village": null,
 "Cam Torum": "varlamore",
 "The Darkfrost": "varlamore"
+},
+"Selina Kebbit-Monkfish": {
+"Kraken Cove": null
 },
 "Sergeant": {
 "Lizardman Canyon": "kourend",
@@ -5200,6 +5215,9 @@
 "Meiyerditch": "morytania",
 "Castle Drakan": "morytania"
 },
+"Vanguards": {
+"Chambers of Xeric": "kourend"
+},
 "Vannaka": {
 "Edgeville Dungeon": null
 },
@@ -5248,6 +5266,9 @@
 },
 "Vet'ion": {
 "Vet'ion's Rest": null
+},
+"Victoria Kebbit-Monkfish": {
+"the Pandemonium": null
 },
 "Vorkath": {
 "Ungael": null
