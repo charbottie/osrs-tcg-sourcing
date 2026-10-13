@@ -68,7 +68,9 @@
   .skill-cell:hover { border-color: #444; }
   .skill-cell.selected { border-color: #b07a30; background: #1e1800; }
   .skill-cell.has-methods { border-color: #2a3a2a; }
-  .skill-cell-name { font-size: 10px; color: #888; margin-bottom: 2px; }
+  .skill-cell-icon { height: 20px; display: flex; align-items: center; justify-content: center; margin-bottom: 2px; }
+  .skill-cell-icon img { margin-right: 0 !important; }
+  .skill-cell-name { font-size: 10px; color: #888; margin-bottom: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
   .skill-cell-level { font-size: 16px; color: #e8c97a; font-weight: 600; }
   .skill-cell-count { font-size: 9px; color: #4a8a4a; margin-top: 2px; }
   .skill-cell-count.zero { color: #444; }
@@ -1897,7 +1899,7 @@ function switchCollection(rsn) {
   refreshDetail();
   if (activeTab === 'skilling')   renderSkillGrid();
   if (activeTab === 'questing')   renderQuestList();
-  if (activeTab === 'packs')    { renderPackList(); if (selectedPack) showPackDetail(selectedPack, null, false); }
+  if (activeTab === 'packs')    { renderPackList(); if (selectedPack) showPackDetail(selectedPack, null, false); else _renderPackHome(); }
   if (activeTab === 'wishlist') renderWishlist();
   if (activeTab === 'bosses') renderBossing();
   if (activeTab === 'slayer') { renderSlayerList(); _renderSlayerDetail(); }
@@ -2081,6 +2083,7 @@ async function loadData() {
           sel.appendChild(opt);
         }
       }
+      if (activeTab === 'packs') { renderPackList(); if (selectedPack) showPackDetail(selectedPack, null, false); else _renderPackHome(); }
     }).catch(() => {});
     // Populate account dropdown from pre-loaded all_collections.json (sorted by most recently updated)
     const _startupAccounts = Object.entries(allCollections)
@@ -2314,7 +2317,7 @@ function navigate(state) {
   } else if (state.tab === 'packs') {
     selectedPack = state.pack || null;
     renderPackList();
-    if (selectedPack) showPackDetail(selectedPack, null, false);
+    if (selectedPack) showPackDetail(selectedPack, null, false); else _renderPackHome();
   } else if (state.tab === 'wishlist') {
     renderWishlist();
   } else if (state.tab === 'slayer') {
@@ -2369,6 +2372,7 @@ function showCard(name, type, push = true) {
 
 function refreshDetail(resetScroll = false) {
   if (activeTab === 'clues') { _renderClueDetail(resetScroll); return; }   // wishlist stars etc. on the Clues tab
+  if (activeTab === 'packs' && !selectedPack) { renderPackList(); _renderPackHome(); return; }   // Packs overview stars
   if (!selected) return;
   const detail = document.getElementById('detail');
   if (!detail) return;
@@ -3710,7 +3714,8 @@ function renderPackList() {
   const pane = document.getElementById('pack-list-pane');
   if (!pane || !packCatalog) return;
   const singles = packCatalog.packs.filter(p => !p.id.endsWith('_large'));
-  let html = `<div style="font-size:10px;color:#666;text-transform:uppercase;letter-spacing:1px;margin-bottom:10px">Packs</div>`;
+  let html = `<div id="pack-overview-item" class="boss-item${selectedPack ? '' : ' selected'}" style="margin:-4px -12px 10px;padding-left:12px" onclick="showPackOverview()"><span style="flex:1;font-size:12px;color:#e8c97a">Overview</span></div>
+    <div style="font-size:10px;color:#666;text-transform:uppercase;letter-spacing:1px;margin-bottom:10px">Packs</div>`;
   for (const pack of singles) {
     const cards = _getPackCards(pack);
     const total = cards.length;
@@ -3735,7 +3740,7 @@ function renderPackList() {
   pane.innerHTML = html;
 }
 
-function showPackDetail(packId, filter, push = true) {
+function showPackDetail(packId, filter, push = true, tier = null) {
   if (push) pushHistoryEntry();
   selectedPack = packId;
   renderPackList();
@@ -3811,7 +3816,7 @@ function showPackDetail(packId, filter, push = true) {
 
     const to = t.filter(c => isOwned(c.name)).length;
     const tw = t.filter(c => !isOwned(c.name) && wishlisted.has(c.name)).length;
-    html += `<div class="section">
+    html += `<div class="section" id="pack-tier-${tier}">
       <div class="section-header">
         <span class="tier-badge tier-${tier}">${tier}</span>
         <span style="font-size:10px;font-weight:400;color:#555;margin-left:8px">${to} / ${t.length} owned</span>
@@ -3834,6 +3839,225 @@ function showPackDetail(packId, filter, push = true) {
   }
 
   pane.innerHTML = html;
+  if (tier) { const el = document.getElementById('pack-tier-' + tier); if (el) el.scrollIntoView({ block: 'start' }); else pane.scrollTop = 0; }
+}
+
+// ─── Packs overview (no pack selected) ─────────────────────────────────────
+// "Needs" = unowned, pack-eligible cards that unlock something, from every tab's own demand data:
+// wishlist targets, quest / boss / diary / clue-step blockers (the home panels' demand tables)
+// and the cheapest card sets to start a skill you can't train yet (_skillStarter).
+// value(card) = Σ over sources of min(cap, weight × (targets helped + targets it's the last card for)).
+const _PACK_NEED_SOURCES = [
+  { key: 'wish',  label: 'Wishlist', w: 5,    cap: 5 },
+  { key: 'quest', label: 'Quests',   w: 1,    cap: 10 },
+  { key: 'boss',  label: 'Bosses',   w: 1,    cap: 10 },
+  { key: 'diary', label: 'Diaries',  w: 0.5,  cap: 10 },
+  { key: 'clue',  label: 'Clues',    w: 0.25, cap: 10 },
+  { key: 'skill', label: 'Skilling', w: 3,    cap: 12 },
+];
+let _packHomeFocus = 'all';   // 'all' or one _PACK_NEED_SOURCES key
+// → Map card → {value, src:{key:{n, last, ids:[…]}}}
+function _packNeeds() {
+  const needs = new Map();
+  const add = (key, card, ids, lastIds) => {
+    const info = _cardInfo(card);
+    if (!info || isOwned(info.exact) || !(cardDetails[info.exact] || {}).tier) return;
+    if (!needs.has(info.exact)) needs.set(info.exact, { value: 0, src: {} });
+    const e = needs.get(info.exact), s = e.src[key] || (e.src[key] = { ids: new Set(), last: new Set() });
+    for (const id of ids) s.ids.add(id);
+    for (const id of lastIds || []) s.last.add(id);
+  };
+  const addDemand = (key, demand) => { for (const [c, d] of demand) add(key, c, d.quests, d.last); };
+  const ownCache = !_accessCache;
+  if (ownCache) _accessCache = new Map();
+  try {
+    for (const c of _wishlistUnownedTargets()) add('wish', c, ['wishlist']);
+    addDemand('quest', _questCardDemand());
+    addDemand('boss', _cardDemand(BOSS_DATA.map(b => ({ boss: b, ...evaluateBoss(b) })).filter(e => e.status !== 'available')
+      .map(e => ({ name: e.boss.name, reqs: e.boss.requirements || [] }))));
+    addDemand('diary', _diaryCardDemand());
+    addDemand('clue', _clueStepScan().demand);
+    // Skilling: skills you can't train yet — every card of their cheapest starter options.
+    // The four melee skills share one monster pool, so they count as one "combat" target.
+    const MELEE = new Set(['Attack','Strength','Defence','Hitpoints']), combatCands = _combatStarterCandidates();
+    let meleeDone = false;
+    for (const sk of SKILL_ORDER) {
+      if (!_skillUnlocked(sk) || (MELEE.has(sk) && meleeDone)) continue;
+      const st = _skillStarter(sk, null, MELEE.has(sk) ? combatCands : null);
+      if (st.canTrain) continue;
+      if (MELEE.has(sk)) meleeDone = true;
+      const id = MELEE.has(sk) ? 'Start melee combat' : `Start ${sk}`;
+      // a slot is "any one of": credit its first few (preferred) options, not a whole task list
+      for (const opt of st.options) for (const sl of opt.needCards) for (const c of sl.slice(0, 3))
+        add('skill', c, [id], opt.needCards.length === 1 ? [id] : []);
+    }
+  } finally { if (ownCache) _accessCache = null; }
+  for (const e of needs.values())
+    for (const s of _PACK_NEED_SOURCES) {
+      const x = e.src[s.key];
+      if (!x) continue;
+      x.n = x.ids.size; x.lastN = x.last.size;
+      x.pts = Math.min(s.cap, s.w * (x.n + x.lastN));
+      e.value += x.pts;
+    }
+  return needs;
+}
+function _packNeedValue(e, focus) { return focus === 'all' ? e.value : (e.src[focus]?.pts || 0); }
+function _packNeedWhy(e) {
+  return _PACK_NEED_SOURCES.filter(s => e.src[s.key]).map(s => {
+    const x = e.src[s.key];
+    if (s.key === 'wish') return 'Wishlist';
+    if (s.key === 'skill') return [...x.ids].join(', ');
+    return `${s.label}: ${x.n}${x.lastN ? ` (last card ×${x.lastN})` : ''}`;
+  }).join(' · ');
+}
+function _myCredits() {
+  const k = Object.keys(allCollections).find(n => n.toLowerCase() === (_currentRsn || '').toLowerCase());
+  return k ? (allCollections[k].credits || 0) : 0;
+}
+function setPackHomeFocus(v) { _packHomeFocus = v; _renderPackHome(); }
+
+function showPackOverview() {
+  pushHistoryEntry();
+  selectedPack = null;
+  renderPackList();
+  _renderPackHome();
+}
+
+function _renderPackHome() {
+  const pane = document.getElementById('pack-detail-pane');
+  if (!pane) return;
+  if (!packCatalog) { pane.innerHTML = '<div class="placeholder" style="margin-top:60px;color:#444">Loading packs…</div>'; return; }
+  const scroll = pane.scrollTop;
+  const fmt = n => Math.round(n).toLocaleString();
+  const focus = _packHomeFocus;
+  const needs = _packNeeds();
+  const val = c => { const e = needs.get(c); return e ? _packNeedValue(e, focus) : 0; };
+  const singles = packCatalog.packs.filter(p => !p.id.endsWith('_large'));
+  const packs = singles.map(pack => {
+    const pool = _getPackCards(pack), size = pool.length;
+    const ownedN = pool.filter(c => isOwned(c.name)).length;
+    const needed = pool.filter(c => val(c.name) > 0).sort((a, b) => val(b.name) - val(a.name) || a.name.localeCompare(b.name));
+    const value = needed.reduce((s, c) => s + val(c.name), 0);
+    // Uniform-pool proxy: every card in the pack's pool equally likely (real odds are server-side)
+    const perPack = size ? packCatalog.packSize * needed.length / size : 0;
+    return { pack, pool, size, ownedN, needed, value, perPack,
+      crPerNeed: perPack ? pack.price / perPack : Infinity,
+      score: size ? 1000 * packCatalog.packSize * value / size / pack.price : 0 };
+  });
+  const ranked = packs.filter(p => p.needed.length).sort((a, b) => b.score - a.score || a.pack.price - b.pack.price);
+  const maxScore = ranked.length ? ranked[0].score : 1;
+  const box = (title, sub, inner) => inner ? `<div style="background:#111;border:1px solid #222;border-radius:4px;padding:12px 14px;margin-bottom:14px">
+    <div style="color:#c8a830;font-weight:700;font-size:12px;margin-bottom:2px">${title}</div><div style="color:#666;font-size:10px;margin-bottom:8px">${sub}</div>${inner}</div>` : '';
+  const tile = (label, v, col, title) => `<div style="flex:1;min-width:110px;background:#111;border:1px solid #222;border-radius:4px;padding:10px 12px"${title ? ` title="${escHtml(title)}"` : ''}>
+    <div style="font-size:20px;font-weight:700;color:${col};font-variant-numeric:tabular-nums">${v}</div><div style="font-size:10px;color:#666;text-transform:uppercase;letter-spacing:.05em">${label}</div></div>`;
+  const packLink = (p, label) => `<span style="cursor:pointer;color:#ccc;text-decoration:underline dotted" data-pack="${p.id}" onclick="showPackDetail(this.dataset.pack)">${escHtml(label || p.name)}</span>`;
+  const chip = c => {
+    const e = needs.get(c.name), wl = !!e?.src.wish;
+    return `<span class="pack-chip ${wl ? 'wishlisted' : 'missing'}" style="${wl ? '' : 'color:#bbb;border-color:#333'}" data-card="${escHtml(c.name)}" data-type="${c.type}"
+      onclick="showCard(this.dataset.card,this.dataset.type)" title="${escHtml(`${c.name} (${(cardDetails[c.name] || {}).tier || ''}) — ${_packNeedWhy(e)}`)}">${wl ? '★ ' : ''}${escHtml(c.name)}</span>`;
+  };
+
+  // ── Best packs ──
+  const focusSel = `<select onchange="setPackHomeFocus(this.value)" style="background:#222;border:1px solid #444;color:#ccc;padding:3px 6px;border-radius:3px;font-size:11px;margin-bottom:8px">
+    <option value="all"${focus === 'all' ? ' selected' : ''}>Everything you need</option>
+    ${_PACK_NEED_SOURCES.map(s => `<option value="${s.key}"${focus === s.key ? ' selected' : ''}>${s.label} only</option>`).join('')}</select>`;
+  const bestHtml = ranked.length ? `${focusSel}
+    <table style="border-collapse:collapse;width:100%;font-size:11px">
+      <tr style="color:#666;text-align:left"><th style="padding:4px 6px;font-weight:normal">Pack</th><th style="padding:4px 6px;font-weight:normal">Price</th>
+        <th style="padding:4px 6px;font-weight:normal" title="Unowned cards in this pack's pool that unlock something">Needed</th>
+        <th style="padding:4px 6px;font-weight:normal" title="Need value per 1,000 credits (assumes every card in the pool is equally likely)">Value / 1k cr</th>
+        <th style="padding:4px 6px;font-weight:normal" title="Pack price ÷ expected needed cards per pack, if every card in the pool were equally likely">≈ cr/need</th>
+        <th style="padding:4px 6px;font-weight:normal">Top cards it can give</th></tr>
+      ${ranked.slice(0, 10).map((p, i) => `<tr style="border-top:1px solid #1a1a1a;vertical-align:top">
+        <td style="padding:5px 6px;white-space:nowrap"><span style="color:#666;margin-right:4px">${i + 1}.</span>${packLink(p.pack)}</td>
+        <td style="padding:5px 6px;color:#e8c97a;font-variant-numeric:tabular-nums">${fmt(p.pack.price)}</td>
+        <td style="padding:5px 6px;color:#aaa;font-variant-numeric:tabular-nums;white-space:nowrap">${p.needed.length} <span style="color:#555">/ ${fmt(p.size)}</span></td>
+        <td style="padding:5px 6px"><div style="display:flex;align-items:center;gap:6px"><div style="width:60px;height:5px;background:#1a1a1a;border-radius:3px;overflow:hidden"><div style="width:${Math.round(100 * p.score / maxScore)}%;height:100%;background:#c8a830"></div></div>
+          <span style="color:#c8a830;font-variant-numeric:tabular-nums">${p.score.toFixed(2)}</span></div></td>
+        <td style="padding:5px 6px;color:#888;font-variant-numeric:tabular-nums">${fmt(p.crPerNeed)}</td>
+        <td style="padding:5px 6px;line-height:1.9">${p.needed.slice(0, 6).map(chip).join(' ')}${p.needed.length > 6 ? ` <span style="color:#555;font-size:10px" ${_cardGridTipAttrs(p.needed.slice(6, 60).map(c => c.name), `${p.needed.length - 6} more needed`)}>+${p.needed.length - 6}</span>` : ''}</td></tr>`).join('')}
+    </table>` : `${focusSel}<div style="color:#666;font-size:11px">Nothing ${focus === 'all' ? '' : 'from ' + _PACK_NEED_SOURCES.find(s => s.key === focus).label.toLowerCase() + ' '}that a pack can give is blocking you right now.</div>`;
+
+  // ── Most valuable cards to pull, and the most focused pack for each ──
+  const topCards = [...needs.entries()].filter(([, e]) => _packNeedValue(e, focus) > 0)
+    .sort((a, b) => _packNeedValue(b[1], focus) - _packNeedValue(a[1], focus) || a[0].localeCompare(b[0])).slice(0, 20);
+  const maxV = topCards.length ? _packNeedValue(topCards[0][1], focus) : 1;
+  const topHtml = topCards.map(([c, e]) => {
+    const info = _cardInfo(c), img = _cardImg(c), tier = (cardDetails[c] || {}).tier;
+    const inPacks = packs.filter(p => _cardInPack(c, p.pack)).sort((a, b) => a.size - b.size);
+    const best = inPacks[0];
+    const v = _packNeedValue(e, focus);
+    return `<div style="display:flex;align-items:center;gap:8px;padding:3px 0;font-size:11px">
+      ${img ? `<img src="${img}" style="width:18px;height:18px;object-fit:contain;image-rendering:pixelated;flex-shrink:0" onerror="this.style.display='none'">` : '<span style="width:18px;flex-shrink:0"></span>'}
+      <span style="width:160px;flex-shrink:0;color:#ccc;cursor:pointer;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" data-nav="${escHtml(c)}" data-nav-type="${info ? info.type : 'item'}" onclick="_navToCard(this)">${escHtml(c)}</span>
+      <span style="width:72px;flex-shrink:0">${tier ? `<span class="tier-badge tier-${tier}" style="font-size:9px">${tier}</span>` : ''}</span>
+      <div style="width:60px;flex-shrink:0;height:6px;background:#1a1a1a;border-radius:3px;overflow:hidden"><div style="width:${Math.round(100 * v / maxV)}%;height:100%;background:#c8a830"></div></div>
+      <span style="width:40px;flex-shrink:0;color:#c8a830;font-variant-numeric:tabular-nums">${v % 1 ? v.toFixed(1) : v}</span>
+      <span style="flex:1;color:#888;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="${escHtml(_packNeedWhy(e))}">${escHtml(_packNeedWhy(e))}</span>
+      <span style="width:150px;flex-shrink:0;color:#888;white-space:nowrap;overflow:hidden;text-overflow:ellipsis" title="${escHtml(inPacks.map(p => p.pack.name).join(', '))}">${best ? packLink(best.pack, best.pack.name + (inPacks.length > 1 ? ` +${inPacks.length - 1}` : '')) : ''}</span>
+      ${_rowWishStar(c, false, 'Packs overview')}</div>`;
+  }).join('');
+
+  // ── Collection by pack, split by rarity tier (owned / total per tier; tooltip = needed) ──
+  const tiersIn = PACK_TIER_ORDER.filter(t => packs.some(p => p.pool.some(c => (cardDetails[c.name] || {}).tier === t)));
+  const tierSplit = p => { const o = {}; for (const c of p.pool) { const t = (cardDetails[c.name] || {}).tier; if (!t) continue;
+      const x = o[t] || (o[t] = { done: 0, total: 0, need: 0 }); x.total++; if (isOwned(c.name)) x.done++; else if (val(c.name) > 0) x.need++; } return o; };
+  // tier cell = a mini bar: owned (completeness colour) + needed (amber) + rest; numbers in the tooltip
+  const tierCell = (x, t) => {
+    if (!x) return `<td style="padding:4px 6px"></td>`;
+    const o = 100 * x.done / x.total, n = 100 * x.need / x.total;
+    const col = o === 100 ? '#00c853' : o >= 75 ? '#76c442' : o >= 40 ? '#e8c97a' : '#c87030';
+    return `<td style="padding:4px 6px;cursor:pointer" title="${t}: ${x.done} of ${x.total} owned (${Math.round(o)}%) · ${x.need} needed — click for this tier" onclick="event.stopPropagation();showPackDetail(this.parentElement.dataset.pack, null, true, '${t}')">
+      <div style="width:56px;height:7px;background:#1a1a1a;border-radius:3px;overflow:hidden;display:flex;margin:0 auto">
+        <div style="width:${o}%;background:${col}"></div><div style="width:${n}%;background:#c8a83088"></div></div></td>`;
+  };
+  const packRows = packs.map(p => {
+    const split = tierSplit(p);
+    const pct = p.size ? Math.round(100 * p.ownedN / p.size) : 0;
+    const col = pct === 100 ? '#00c853' : pct >= 75 ? '#76c442' : pct >= 40 ? '#e8c97a' : '#c87030';
+    return `<tr style="border-top:1px solid #1a1a1a;cursor:pointer" data-pack="${p.pack.id}" onclick="showPackDetail(this.dataset.pack)">
+      <td style="padding:4px 6px;color:#ccc;white-space:nowrap">${escHtml(p.pack.name)}</td>
+      <td style="padding:4px 6px;color:#e8c97a;font-variant-numeric:tabular-nums">${fmt(p.pack.price)}</td>
+      <td style="padding:4px 6px" title="${fmt(p.ownedN)} of ${fmt(p.size)} owned"><div style="display:flex;align-items:center;gap:6px;white-space:nowrap"><div style="width:90px;height:7px;background:#1a1a1a;border-radius:3px;overflow:hidden"><div style="width:${pct}%;height:100%;background:${col}"></div></div>
+        <span style="color:${col};font-variant-numeric:tabular-nums;font-size:10px">${pct}%</span></div></td>
+      ${tiersIn.map(t => tierCell(split[t], t)).join('')}
+      <td style="padding:4px 6px;color:${p.needed.length ? '#c8a830' : '#555'};font-variant-numeric:tabular-nums">${p.needed.length}</td></tr>`;
+  }).join('');
+  const packTable = `<div style="overflow-x:auto"><table style="border-collapse:collapse;width:100%;font-size:11px">
+    <tr style="color:#666;text-align:left"><th style="padding:4px 6px;font-weight:normal">Pack</th><th style="padding:4px 6px;font-weight:normal">Price</th><th style="padding:4px 6px;font-weight:normal">Owned</th>${tiersIn.map(t => `<th style="padding:4px 6px;font-weight:normal;text-align:center"><span class="tier-badge tier-${t}" style="font-size:9px">${t}</span></th>`).join('')}<th style="padding:4px 6px;font-weight:normal">Needed${focus === 'all' ? '' : ' (' + _PACK_NEED_SOURCES.find(s => s.key === focus).label.toLowerCase() + ')'}</th></tr>${packRows}</table></div>`;
+
+  // ── Collection by tier (the whole catalog = the Standard pool) ──
+  const std = packs.find(p => !(p.pack.category || []).length) || packs[0];
+  const all = std ? std.pool : [];
+  const byTier = {};
+  for (const c of all) { const t = (cardDetails[c.name] || {}).tier; (byTier[t] = byTier[t] || { done: 0, total: 0, need: 0 }).total++; if (isOwned(c.name)) byTier[t].done++; else if (val(c.name) > 0) byTier[t].need++; }
+  const tierHtml = PACK_TIER_ORDER.filter(t => byTier[t]).map(t => `<div style="display:flex;align-items:center;gap:8px">
+      <div style="flex:1">${_progressBar(t, byTier[t], '#c8a830', `${t}: ${byTier[t].done} owned of ${byTier[t].total}`)}</div>
+      <span style="width:90px;flex-shrink:0;font-size:10px;color:${byTier[t].need ? '#c8a830' : '#555'}">${byTier[t].need} needed</span></div>`).join('');
+
+  const ownedAll = all.filter(c => isOwned(c.name)).length;
+  const neededAll = [...needs.keys()].filter(c => val(c) > 0).length;
+  const onlyStd = [...needs.keys()].filter(c => val(c) > 0 && !packs.some(p => p !== std && _cardInPack(c, p.pack))).length;
+  const credits = _myCredits();
+  const best = ranked[0];
+  pane.innerHTML = `<div style="padding:0 0 20px;max-width:900px">
+    <h1 style="font-size:18px;color:#e8c97a;margin:0 0 12px">Packs</h1>
+    <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px">
+      ${tile('Cards owned', `${fmt(ownedAll)}/${fmt(all.length)}`, '#76c442')}
+      ${tile('Packs complete', `${packs.filter(p => p.size && p.ownedN === p.size).length}/${packs.length}`, '#5a9a5a')}
+      ${tile('Cards you need', fmt(neededAll), '#c8a830', 'Unowned cards that would unlock something (wishlist, quests, bosses, diaries, clue steps, starting a skill)')}
+      ${credits ? tile('Credits', fmt(credits), '#e8c97a', best ? `≈ ${Math.floor(credits / best.pack.price)} × ${best.pack.name}` : '') : ''}
+    </div>
+    <div style="margin-bottom:14px">${_progressBar('Cards owned', { done: ownedAll, total: all.length }, '#c8a830', 'Pack cards you own, whole catalog')}</div>
+    ${box('Best packs for you right now', `Ranked by need value per credit: each pack's needed cards (weighted by what they unlock), divided by its pool size and price.
+      Wishlist ${_PACK_NEED_SOURCES[0].w} · quests / bosses 1 per target · diary task ½ · clue step ¼ · starting a skill you can't train 3 (capped per source; "last card" counts double).
+      Odds assume every card in a pack's pool is equally likely — real rates are server-side and favour lower tiers.`, bestHtml)}
+    ${box('Most valuable cards to pull', `Highest need value first, with the smallest pack that contains each (hover for every pack).${onlyStd ? ` ${onlyStd} needed card${onlyStd === 1 ? ' is' : 's are'} only in the Standard pack.` : ''}`, topHtml)}
+    ${box('Collection by pack', 'Per rarity tier: <span style="color:#76c442">■</span> owned · <span style="color:#c8a830">■</span> needed · hover for numbers. Click a pack for its cards.', packTable)}
+    <div style="color:#555;font-size:11px">Select a pack on the left for its full card list.</div>
+  </div>`;
+  pane.scrollTop = scroll;
 }
 
 function tierBadgeHtml(name) {
@@ -6029,12 +6253,10 @@ function _renderTab(tab, resetSelection = true) {
       if (resetSelection) selectedPack = null;
       mainContent.innerHTML = `<div id="pack-panel">
         <div id="pack-list-pane"></div>
-        <div id="pack-detail-pane">
-          <div class="placeholder" style="margin-top:60px;color:#444">← Select a pack</div>
-        </div>
+        <div id="pack-detail-pane"></div>
       </div>`;
       renderPackList();
-      if (selectedPack) showPackDetail(selectedPack, null, false);
+      if (selectedPack) showPackDetail(selectedPack, null, false); else _renderPackHome();
     } else if (tab === 'wishlist') {
       mainContent.innerHTML = `
         <div style="display:flex;height:100%;overflow:hidden">
@@ -6512,6 +6734,8 @@ function _starterMonsterRank(m) {
   return i >= 0 && (m.level || 0) <= 5 ? i : 99;
 }
 
+const _GENERIC_TOOLS = new Set(['Hammer', 'Saw', 'Knife', 'Chisel', 'Tinderbox', 'Spade', 'Rake', 'Seed dibber', 'Needle', 'Thread',
+  'Pestle and mortar', 'Glassblowing pipe', 'Bucket', 'Coins', 'Gardening trowel', 'Secateurs', 'Watering can', 'Plant pot', 'Small fishing net', 'Butterfly net']);
 function _skillingMethods(skillName) {
   const myLevel = getLevel(skillName);
   return SKILLING.filter(m => m.skill === skillName).map(m => {
@@ -6531,7 +6755,12 @@ function _skillingMethods(skillName) {
       status = 'no-card';
       note = 'need: ' + miss.map(r => _reqCards(r).length === 1 && !r.access ? _reqCards(r)[0] : r.label).slice(0, 3).join(', ');
     } else { status = 'available'; note = m.xp ? `${m.xp} xp` : ''; }
-    const first = reqs.find(r => (r.cards || []).length === 1);
+    // What the row links to: what it produces (gathering outputs), else the NPC/enemy involved, else the
+    // main item used — never a generic tool (Pay-dirt, not the Hammer you also need)
+    const out0 = (m.outputs || []).map(o => typeof o === 'string' ? o : o.card).find(Boolean);
+    const single = rs => rs.find(r => !r.optional && (r.cards || []).length === 1 && !_GENERIC_TOOLS.has(r.cards[0]));
+    const npcReq = reqs.find(r => !r.optional && (r.type === 'npc' || r.type === 'enemy') && (r.cards || []).length);
+    const first = out0 ? { cards: [out0] } : npcReq ? { cards: [npcReq.cards[0]] } : single(reqs);  // no link beats a tool link
     const blockers = [...(m.quests || []).filter(q => !_questOk(q)).map(_blkQuest),
       ...(m.partialQuests || []).filter(q => !_questStartedOk(q)).map(_blkQuest),
       ...(m.diaries || []).filter(d => !_diaryOk(d)).map(_blkDiary),
@@ -6649,9 +6878,7 @@ function _getTrainingMethodsRaw(skillName) {
       // If gatherable via tool but card not owned, note it — resource can be banked but not used
       const gatherNote = questLocked
         ? questNote
-        : (hasTool && !cardOwned)
-          ? (toolNote ? toolNote + ' · no card' : 'no card')
-          : toolNote;
+        : toolNote;   // output-card ownership is shown by the ✓/✗ card badge (_methodOutputChip)
 
       // Missing cards: a tool tier usable at this level / missing tool parts; with no tool, the resource card
       const needCards = [], blockers = [];
@@ -7022,7 +7249,8 @@ function renderSkillGrid() {
     const sel   = skill === selectedSkill ? ' selected' : '';
     const hasMeth = count > 0 ? ' has-methods' : '';
     html += `<div class="skill-cell${sel}${hasMeth}" onclick="showSkillDetail('${skill}')">
-      <div class="skill-cell-name">${skillIcon(skill, 14)} ${skill}</div>
+      <div class="skill-cell-icon">${skillIcon(skill, 18)}</div>
+      <div class="skill-cell-name">${skill}</div>
       <div class="skill-cell-level">${lvl}</div>
       <div class="skill-cell-count ${count===0?'zero':''}">${count} ${skill==='Slayer'?`master${count!==1?'s':''}`:`method${count!==1?'s':''}`}</div>
     </div>`;
@@ -7194,6 +7422,30 @@ function _recCombatCands(cb) {
   if (cb < 20) { const st = out.filter(m => _starterMonsterRank(m) < 99 || _STARTER_MONSTERS.includes(m.name)); if (st.length) return st; }
   return out;
 }
+// Gathering methods: do you own the card for what you gather? (gathering needs no card, but you can
+// only USE the resource with its card — so it says how useful the method is right now)
+function _methodOutputCards(m) {
+  if (m.type === 'gathering' || m.type === 'production') return [m.name];
+  if (m.type === 'generated' && m.method && m.method.type === 'gathering')
+    return (m.method.outputs || []).map(o => typeof o === 'string' ? o : o.card).filter(Boolean);
+  return null;
+}
+function _methodOutputChip(m) {
+  const outs = _methodOutputCards(m);
+  if (!outs) return '';
+  const verb = m.type === 'production' ? 'make' : 'gather';
+  const cards = [...new Set(outs.map(o => (_cardInfo(o) || {}).exact).filter(Boolean))];
+  const chip = (txt, col, tip) => `<span style="font-size:9px;margin-left:6px;padding:0 5px;border-radius:2px;border:1px solid ${col}55;color:${col};white-space:nowrap;cursor:help" title="${escHtml(tip)}">${txt}</span>`;
+  if (!cards.length) return chip('free', '#888', `What you ${verb} has no TCG card, so you can use it freely`);
+  const owned = cards.filter(isOwned);
+  // row named after something else (Cooking rows show the raw ingredient): name the output in the badge
+  const named = m.displayName && m.displayName !== m.name && cards.length === 1 ? `→ ${cards[0]} ` : '';
+  if (named) return isOwned(cards[0]) ? chip(named + '✓', '#7ab07a', `You own ${cards[0]}: you can use what you ${verb}`)
+    : chip(named + '✗', '#a05050', `You can ${verb} ${cards[0]} and bank it, but can't use it without its card`);
+  if (owned.length === cards.length) return chip('✓ card', '#7ab07a', `You own ${cards.join(', ')}: you can use what you ${verb}`);
+  if (owned.length) return chip(`✓ ${owned.length}/${cards.length} cards`, '#c8a830', `Own: ${owned.join(', ')} · missing: ${cards.filter(c => !isOwned(c)).join(', ')}`);
+  return chip('✗ card', '#a05050', `You can ${verb} and bank it, but can't use it without the ${cards.join(' / ')} card`);
+}
 function _skillRecommendHtml(skill, ms) {
   const recs = _skillRecommendations(skill, ms);
   if (!recs.length) return '';
@@ -7208,7 +7460,7 @@ function _skillRecommendHtml(skill, ms) {
     // every missing slot: "A / B" alternatives, slots joined with +
     const need = ok ? '' : ' · needs ' + (m.needCards || []).map(sl => sl.slice(0, sl.length > 1 ? 2 : 1).map(chip).join(' / ')).join(' + ');
     return `<div style="display:flex;gap:8px;align-items:baseline;padding:3px 0;font-size:12px">
-      <span style="color:${ok ? '#7ab07a' : '#c8a830'}" title="${ok ? 'You can do this now' : 'Cards away'}">${ok ? '✓' : '◐'}</span>${nm}
+      <span style="color:${ok ? '#7ab07a' : '#c8a830'}" title="${ok ? 'You can do this now' : 'Cards away'}">${ok ? '✓' : '◐'}</span>${nm}${_methodOutputChip(m)}
       <span style="font-size:10px;color:#777">${meta}${need}</span></div>`;
   }).join('');
   return `<div style="background:#111;border:1px solid #2a2a1a;border-radius:4px;padding:10px 14px;margin:8px 0 12px">
@@ -7463,7 +7715,7 @@ function showSkillDetail(skillName, push = true) {
       rows += `<div class="method-row">
         <div class="method-indicator ${indCls}"></div>
         ${_mImg}
-        ${nameHtml}
+        ${nameHtml}${_methodOutputChip(m)}
         <span class="method-level">${levelStr}</span>
         ${noteStr}${questStr}
       </div>`;
@@ -8190,14 +8442,9 @@ function _renderClueDetail(resetScroll = false) {
   }
   pane.scrollTop = scroll;
 }
-// Clues home panel: per-tier status, blockers across every tier's steps, most-needed cards, key cards
-function _renderClueHome() {
-  const pane = document.getElementById('clue-detail-pane');
-  if (!pane) return;
-  const link = (attrs, label, title) => `<span style="cursor:pointer;color:#c8a060;text-decoration:underline dotted" ${attrs}${title ? ` title="${escHtml(title)}"` : ''}>${escHtml(label)}</span>`;
-  const tierLink = (t, label) => `<span style="cursor:pointer;color:${CLUE_TIER_CONFIG[t].color}" data-t="${t}" onclick="showClue(this.dataset.t)">${escHtml(label || CLUE_TIER_CONFIG[t].label)}</span>`;
-  const sts = CLUE_TIER_ORDER.map(t => _clueTierStatus(t));
-  // Blockers + card demand from every step that isn't doable
+// Every clue step of every tier: blockers (gates) and card demand from steps that aren't doable.
+// Shared by the Clues home panel and the Packs overview.
+function _clueStepScan() {
   const gates = new Map(), demand = new Map();
   let steps = 0, okSteps = 0;
   for (const t of CLUE_TIER_ORDER) for (const { type, step } of _clueTierSteps(t)) {
@@ -8221,6 +8468,17 @@ function _renderClueHome() {
       }
     }
   }
+  return { gates, demand, steps, okSteps };
+}
+// Clues home panel: per-tier status, blockers across every tier's steps, most-needed cards, key cards
+function _renderClueHome() {
+  const pane = document.getElementById('clue-detail-pane');
+  if (!pane) return;
+  const link = (attrs, label, title) => `<span style="cursor:pointer;color:#c8a060;text-decoration:underline dotted" ${attrs}${title ? ` title="${escHtml(title)}"` : ''}>${escHtml(label)}</span>`;
+  const tierLink = (t, label) => `<span style="cursor:pointer;color:${CLUE_TIER_CONFIG[t].color}" data-t="${t}" onclick="showClue(this.dataset.t)">${escHtml(label || CLUE_TIER_CONFIG[t].label)}</span>`;
+  const sts = CLUE_TIER_ORDER.map(t => _clueTierStatus(t));
+  // Blockers + card demand from every step that isn't doable
+  const { gates, demand, steps, okSteps } = _clueStepScan();
   const gateLink = g => {
     const m = g.m, top = Object.entries(g.tiers).sort((a, b) => b[1] - a[1])[0][0];
     if (m.kind === 'quest') return link(`data-quest="${escHtml(m.quest)}" onclick="_navToQuest(this)"`, m.label, 'Open the quest');
@@ -8569,10 +8827,8 @@ function _diaryMissingLink(m, area, tier) {
   return `<span style="${style}" data-dn="${escHtml(area.name)}" data-tier="${tier}" onclick="showDiary(this.dataset.dn);selectDiaryTier(this.dataset.dn,this.dataset.tier)"
     ${m.cards.length > 1 ? _cardGridTipAttrs(m.cards, m.label) : ''}>${escHtml(m.label)}</span>`;
 }
-// Diaries home panel (no diary selected)
-function _renderDiaryHome() {
-  const pane = document.getElementById('diary-detail-pane');
-  if (!pane) return;
+// Every diary tier with each task's done flag and missing requirements: [{area, tier, tasks:[{task, i, done, missing}]}]
+function _diaryTierEval() {
   const tiers = [];   // {area, tier, tasks:[{task, i, done, missing}]}
   for (const area of DIARY_DATA)
     for (const tier of DIARY_TIERS) {
@@ -8583,6 +8839,28 @@ function _renderDiaryHome() {
       });
       tiers.push({ area, tier, tasks });
     }
+  return tiers;
+}
+// Unowned cards blocking diary tasks (not done, not eligible), counted per task — shared by Diaries + Packs homes
+function _diaryCardDemand(tiers = _diaryTierEval()) {
+  const demand = new Map();
+  for (const t of tiers) for (const x of t.tasks) {
+    if (x.done || !x.missing.length) continue;
+    const id = `${t.area.name} ${DIARY_TIER_LABEL[t.tier]} #${x.i + 1}`;
+    for (const m of x.missing) for (const c of m.cards) {
+      if (isOwned(c)) continue;
+      if (!demand.has(c)) demand.set(c, { quests: new Set(), last: new Set() });
+      demand.get(c).quests.add(id);
+      if (x.missing.length === 1) demand.get(c).last.add(id);
+    }
+  }
+  return demand;
+}
+// Diaries home panel (no diary selected)
+function _renderDiaryHome() {
+  const pane = document.getElementById('diary-detail-pane');
+  if (!pane) return;
+  const tiers = _diaryTierEval();
   const allTasks = tiers.flatMap(t => t.tasks);
   const elig = t => t.done || !t.missing.length;
   const tierDone = tiers.filter(t => t.tasks.every(x => x.done)).length;
@@ -8629,17 +8907,7 @@ function _renderDiaryHome() {
         : `<span style="cursor:pointer;color:#ccc;text-decoration:underline dotted" data-dn="${escHtml(g.first.area.name)}" data-tier="${g.first.tier}" onclick="showDiary(this.dataset.dn);selectDiaryTier(this.dataset.dn,this.dataset.tier)">${escHtml(g.m.label)} <span style="color:#666">(you: ${getLevel(g.m.skill)})</span></span>`}</span>
       <span style="color:#c85040;font-variant-numeric:tabular-nums">blocks ${g.n} task${g.n === 1 ? '' : 's'}</span></div>`).join('');
   // Most-needed cards, counted per task (not done, not eligible)
-  const demand = new Map();
-  for (const t of tiers) for (const x of t.tasks) {
-    if (x.done || !x.missing.length) continue;
-    const id = `${t.area.name} ${DIARY_TIER_LABEL[t.tier]} #${x.i + 1}`;
-    for (const m of x.missing) for (const c of m.cards) {
-      if (isOwned(c)) continue;
-      if (!demand.has(c)) demand.set(c, { quests: new Set(), last: new Set() });
-      demand.get(c).quests.add(id);
-      if (x.missing.length === 1) demand.get(c).last.add(id);
-    }
-  }
+  const demand = _diaryCardDemand(tiers);
   const box = (title, sub, inner) => inner ? `<div style="background:#111;border:1px solid #222;border-radius:4px;padding:12px 14px;margin-bottom:14px">
     <div style="color:#c8a830;font-weight:700;font-size:12px;margin-bottom:2px">${title}</div><div style="color:#666;font-size:10px;margin-bottom:8px">${sub}</div>${inner}</div>` : '';
   pane.innerHTML = `<div style="padding:20px 24px;max-width:860px">
