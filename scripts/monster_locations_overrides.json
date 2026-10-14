@@ -63,5 +63,25 @@
     ],
     "reason": "The Barrows version of the infobox has no location field (the brother's crypt is only described in the article text); the generator already drops the Desert Treasure II quest copy in the Ancient Vault.",
     "wiki": "Verac's crypt is located to the north-west of the [[Barrows]] area."
+  },
+  "Tribesman": {
+    "drop": [
+      "Brimhaven Dungeon"
+    ],
+    "add": [
+      "Brimhaven Dungeon (nearby)"
+    ],
+    "reason": "The infobox says 'West of [[Brimhaven Dungeon]] Entrance': they stand in the Karamja jungle outside the dungeon, so the dungeon's entry fee / axe (location_requirements.json) doesn't apply. The generator keeps a link followed by a capitalised word as the place itself ('North-east of [[Miscellania]] Castle'), so this one needs a hand fix.",
+    "wiki": "|location = West of [[Brimhaven Dungeon]] Entrance"
+  },
+  "Tribeswoman": {
+    "drop": [
+      "Brimhaven Dungeon"
+    ],
+    "add": [
+      "Brimhaven Dungeon (nearby)"
+    ],
+    "reason": "The infobox says 'West of [[Brimhaven Dungeon]] Entrance': they stand in the Karamja jungle outside the dungeon, so the dungeon's entry fee / axe (location_requirements.json) doesn't apply. The generator keeps a link followed by a capitalised word as the place itself ('North-east of [[Miscellania]] Castle'), so this one needs a hand fix.",
+    "wiki": "|location = West of [[Brimhaven Dungeon]] Entrance"
   }
 }

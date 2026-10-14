@@ -1902,6 +1902,31 @@ def scrape_step_counts(
 
 # ── Entry point ───────────────────────────────────────────────────────────────
 
+def tag_locations(groups) -> int:
+    """Tag steps that happen inside a gated place with "locations": [name] — every
+    location_requirements.json entry whose clueMatch regex matches the step's location / clue text
+    (e.g. "Salute in the warriors' guild bank" → Warriors' Guild). The planner evaluates the place's
+    gate (guild levels, quest points, worn items…) with _locGate(); the step's own fields stay as
+    they are. Returns the number of steps tagged."""
+    import location_reqs
+    rules = [(n, re.compile(e["clueMatch"], re.I)) for n, e in location_reqs.load().items() if e.get("clueMatch")]
+    n = 0
+    for g in groups:
+        for steps in g.values():
+            for st in steps if isinstance(steps, list) else []:
+                if not isinstance(st, dict):
+                    continue
+                text = " ".join(str(st.get(k) or "") for k in ("location", "clueText")).strip()
+                hits = [name for name, rx in rules if rx.search(text)]
+                if hits:
+                    st["locations"] = hits
+                    n += 1
+                else:
+                    st.pop("locations", None)
+    print(f"  location_requirements: {n} steps tagged with a gated place")
+    return n
+
+
 def main():
     p = argparse.ArgumentParser(description=__doc__,
                                 formatter_class=argparse.RawDescriptionHelpFormatter)
@@ -1992,6 +2017,8 @@ def main():
             _hotcold_requirements(st)
     for st in falo:
         _falo_requirements(st)
+
+    tag_locations([emote, sherlock, {"Master": falo}, cryptic, anagram, cipher, hotcold, map_steps, coord_steps])
 
     output = {
         "emote":      emote,

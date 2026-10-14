@@ -1107,21 +1107,15 @@ function resolveToolParts(toolStr) {
 // tools, and card ownership? Checks ALL source routes as OR conditions.
 // Never returns false from a single failed route — exhausts all options first.
 // Memoised per collection state (cache cleared on refreshCollection / lookupLevels).
-// Skill requirements for entering skill-gated guild areas that contain item spawns.
-// Keys are location name prefixes (location strings start with the guild name).
-const SPAWN_SKILL_REQS = {
-  'Ranging Guild':     {skill:'Ranged',      level:40},
-  'Crafting Guild':    {skill:'Crafting',    level:40},
-  'Mining Guild':      {skill:'Mining',      level:60},
-  'Fishing Guild':     {skill:'Fishing',     level:68},
-  "Cooks' Guild":      {skill:'Cooking',     level:32},
-  'Farming Guild':     {skill:'Farming',     level:45},
-  "Wizards' Guild":    {skill:'Magic',       level:66},
-  'Woodcutting Guild': {skill:'Woodcutting', level:60},
-};
-function spawnSkillReq(loc) {
-  for (const [prefix, req] of Object.entries(SPAWN_SKILL_REQS)) {
-    if (loc.startsWith(prefix)) return req;
+// Ground spawns inside a gated place: a spawn text that starts with a location_requirements.json
+// name ("Crafting Guild ( 1st floor )", "Myths' Guild basement") needs that place's gate.
+let _spawnLocNames = null;
+function spawnLocGate(loc) {
+  if (!_spawnLocNames) _spawnLocNames = Object.keys(LOC_REQS).sort((a, b) => b.length - a.length);
+  const t = (loc || '').toLowerCase();
+  for (const n of _spawnLocNames) {
+    const nl = n.toLowerCase();
+    if (t.startsWith(nl) && !/[a-z]/.test(t.charAt(nl.length))) return { name: n, gate: _locGate(n) };
   }
   return null;
 }
@@ -1167,6 +1161,10 @@ function _curatedGatherStatus(m, out, visited = new Set()) {
     ...(m.diaries || []).map(d => ({ label: `${d} Diary`, ok: _diaryOk(d), kind: 'diary', key: d })),
     ...(m.access ? [{ label: accessRoutes[m.access]?.label || m.access, ok: _accessMet(m.access), kind: 'area', key: m.access }] : []),
   ];
+  if (m.location) {   // the place the method happens (location_requirements.json: guild levels, worn items…)
+    const lm = _gateMissing(_locGate(m.location));
+    gates.push({ label: lm.length ? `${m.location}: ${lm.map(b => b.label).join(', ')}` : m.location, ok: !lm.length, kind: 'place', key: m.location });
+  }
   const q = SKILL_UNLOCK_QUESTS[m.skill];
   if (q && !(m.quests || []).includes(q)) gates.push({ label: q, ok: _questOk(q), kind: 'quest', key: q });
   const usable = c => _cardUsable(c) && (!itemSources[c] || canGetItem(c, visited));
@@ -1196,7 +1194,7 @@ function _shopSellerCards(seller) { return (SHOP_OWNERS[seller] || {}).cards || 
 function _npcReachable(card) {
   const G = monsterLocations._gates || {};
   const locs = Object.entries(monsterLocations[card] || {});
-  return !locs.length || locs.some(([l, a]) => _slLocOk(a, G[l]));
+  return !locs.length || locs.some(([l, a]) => _slLocOk(a, G[l], l));
 }
 // Where the shop is (shop_owners.json locations → area access, plus monster_locations _gates for the
 // place, e.g. Lletya): reachable if any location is; null = no location known
@@ -1204,7 +1202,7 @@ function _shopPlaceReach(seller) {
   const locs = Object.entries((SHOP_OWNERS[seller] || {}).locations || {});
   if (!locs.length) return null;
   const G = monsterLocations._gates || {};
-  return locs.some(([l, a]) => _slLocOk(a, G[l]));
+  return locs.some(([l, a]) => _slLocOk(a, G[l], l));
 }
 // → {ok, sellerCards, sellerOk, sellerReach, curCard, curOk}
 function _shopStatus(s) {
@@ -1365,6 +1363,9 @@ function _clueStepOk(step) {
   for (const [sk, l] of Object.entries(step.skills || {})) if (getLevel(sk) < l) missing.push({ label: `${sk} ${l}`, kind: 'skill' });
   for (const a of [].concat(step.access || [])) if (!_accessMet(a)) missing.push({ label: `Reach ${accessRoutes[a]?.label || a}`, kind: 'access' });
   for (const d of (step.diaries || [])) if (!_diaryOk(d)) missing.push({ label: `${d} diary`, kind: 'diary' });
+  // The place the step happens in (generate_clue_steps.py tags it from location_requirements.json clueMatch)
+  for (const l of (step.locations || [])) for (const b of _gateMissing(_locGate(l)))
+    if (!missing.some(m => m.label === b.label || (b.kind === 'level' && m.label === b.label))) missing.push({ label: `${l}: ${b.label}`, kind: b.kind === 'level' ? 'skill' : b.kind, quest: b.kind === 'quest' ? b.key : undefined });
   if (missing.some(m => !m.partial)) p = 0;
   const res = { ok: !missing.length, p, missing };
   if (!_completableBusy) _clueStepCache.set(step, res);   // mid quest-propagation answers are provisional
@@ -1389,7 +1390,7 @@ function _clueMonsterKillable(card) {
   if (md.slayerLevel && getLevel('Slayer') < md.slayerLevel) return { ok: false, why: `Slayer ${md.slayerLevel}` };
   const G = monsterLocations._gates || {};
   const locs = Object.entries(monsterLocations[card] || {});
-  if (locs.length && !locs.some(([l, a]) => _slLocOk(a, G[l]))) {
+  if (locs.length && !locs.some(([l, a]) => _slLocOk(a, G[l], l))) {
     const a = locs.map(([, x]) => x).find(x => x && x !== 'excluded');
     return { ok: false, why: a ? `reach ${accessRoutes[a]?.label || a}` : 'can’t reach any location' };
   }
@@ -1524,8 +1525,8 @@ function canGetItem(itemName, visited = new Set()) {
   // Ground spawn — free pickup, but check skill-gated guild areas.
   if (src.spawns && src.spawns.length > 0) {
     const accessibleSpawn = src.spawns.some(s => {
-      const req = spawnSkillReq(s);
-      return !req || getLevel(req.skill) >= req.level;
+      const lg = spawnLocGate(s);
+      return !lg || _gateOk(lg.gate);
     });
     if (accessibleSpawn) { _canGetCache[itemName] = true; return true; }
   }
@@ -1962,7 +1963,7 @@ function simulateRandom() {
 async function loadData() {
   try {
     const cb = `?v=${Date.now()}`;  // cache-bust so updated JSON files are always fresh
-    const [md, is, cc, cd, css, cs, crr, ii, qd, ed, fd, bmqc, cq, ac, cst, bl, clg, dd, cal, spl, rsrc, acc, cver, bdat, sdat, mloc, skl, rcp, micn, shop] = await Promise.all([
+    const [md, is, cc, cd, css, cs, crr, ii, qd, ed, fd, bmqc, cq, ac, cst, bl, clg, dd, cal, spl, rsrc, acc, cver, bdat, sdat, mloc, skl, rcp, micn, shop, lreq] = await Promise.all([
       fetch(`output/monster_drops.json${cb}`).then(r => r.json()).catch(() => ({})),
       fetch(`output/item_sources.json${cb}`).then(r => r.json()).catch(() => ({})),
       fetch(`output/card_categories.json${cb}`).then(r => r.json()).catch(() => ({})),
@@ -1993,6 +1994,7 @@ async function loadData() {
       fetch(`output/recipes.json${cb}`).then(r => r.json()).catch(() => []),
       fetch(`output/method_icons.json${cb}`).then(r => r.json()).catch(() => ({})),
       fetch(`output/shop_owners.json${cb}`).then(r => r.json()).catch(() => ({})),
+      fetch(`location_requirements.json${cb}`).then(r => r.json()).catch(() => ({})),
     ]);
     monsterDrops = md; itemSources = is; cardCategories = cc; cardDetails = cd;
     _cardLcMap = null; // invalidate case-insensitive card lookup cache
@@ -2014,6 +2016,7 @@ async function loadData() {
     SKILLING           = Array.isArray(skl) ? skl : [];
     _gatherIdx         = null;
     SHOP_OWNERS        = shop || {};
+    _setLocReqs(lreq || {});
     RECIPES            = Array.isArray(rcp) ? rcp : [];
     _recIdx = null;
     METHOD_ICONS       = micn || {};
@@ -4174,17 +4177,21 @@ function renderMonster(name, container) {
     if (locs.length) {
       _accessCache = new Map();
       const G = monsterLocations._gates || {};   // extra needs at a place (quests / cards / skills)
-      const reach = locs.filter(([l, a]) => _slLocOk(a, G[l]));
-      const chips = locs.map(([l, a]) => { const g = G[l]; const ok = _slLocOk(a, g);
-        const need = [a && (accessRoutes[a]?.label || a), ...((g && g.quests) || []), ...((g && g.partialQuests) || []).map(q => q + ' (started)'),
-          ...((g && g.diaries) || []).map(d => d + ' Diary'), g && g.cards && 'one of: ' + g.cards.join(', '),
-          ...Object.entries((g && g.skills) || {}).map(([sk, lv]) => sk + ' ' + lv)].filter(Boolean).join(' · ');
+      const reach = locs.filter(([l, a]) => _slLocOk(a, G[l], l));
+      const chips = locs.map(([l, a]) => { const g = _locGate(l, G[l]); const ok = _slLocOk(a, G[l], l);
+        const need = [a && (accessRoutes[a]?.label || a), _gateText(g), _locBoostNote(l)].filter(Boolean).join(' · ');
         return `<span style="display:inline-flex;align-items:center;gap:3px;font-size:11px;padding:1px 7px;border-radius:3px;background:${ok ? '#0d2210' : '#180808'};border:1px solid ${ok ? '#2a5a2a' : '#5a2a2a'};color:${ok ? '#7ab07a' : '#c06060'}"
           title="${escHtml(need ? (ok ? 'Reachable · needs ' : 'Needs: ') + need : 'No access requirement')}">${ok ? '✓' : '✗'} ${escHtml(l)}</span>`; }).join(' ');
       // If nowhere is reachable yet, show the routes into the first gated area
-      const gate = !reach.length ? locs.map(([, a]) => a).find(a => a && a !== 'excluded') : null;
+      const gate = !reach.length ? locs.map(([, a]) => a).find(a => a && a !== 'excluded' && !_accessMet(a)) : null;
       let routeHtml = '';
       if (gate) { const r = { label: `Reach ${accessRoutes[gate]?.label || gate}`, access: gate, type: 'item' }; _expandReq(r, name); routeHtml = _questReqRow(r).html; }
+      else if (!reach.length) {   // the areas are open: say what each place still needs (guild level, quest…)
+        routeHtml = locs.filter(([, a]) => a !== 'excluded').slice(0, 4).map(([l]) => {
+          const miss = _gateMissing(_locGate(l, G[l]));
+          return miss.length ? `<div style="font-size:11px;color:#a05050">✗ ${escHtml(l)}: ${miss.map(b => _blockerHtml(b)).join(', ')}</div>` : '';
+        }).join('');
+      }
       html += `<div class="section"><div class="section-header">Found at <span style="font-size:10px;color:#555;font-weight:normal">${reach.length}/${locs.length} reachable</span></div>
         <div style="display:flex;flex-wrap:wrap;gap:4px;margin-top:8px">${chips}</div>${routeHtml ? `<div style="margin-top:8px">${routeHtml}</div>` : ''}</div>`;
       _accessCache = null;
@@ -4337,9 +4344,8 @@ function _shopReachLabel(seller) {
   const G = monsterLocations._gates || {};
   for (const [l, a] of Object.entries((SHOP_OWNERS[seller] || {}).locations || {})) {
     if (a && a !== 'excluded' && !_accessMet(a)) return `reach ${accessRoutes[a]?.label || a}`;
-    const g = G[l] || {};
-    const q = [...(g.quests || []).filter(x => !completedQuests.has(x)), ...(g.partialQuests || []).filter(x => !_questStartedOk(x))][0];
-    if (q) return `${l}: ${q}`;
+    const miss = _gateMissing(_locGate(l, G[l]));
+    if (miss.length) return `${l}: ${miss.map(b => b.label).join(', ')}`;
   }
   return 'can’t reach';
 }
@@ -5429,9 +5435,9 @@ function renderItem(name, container) {
     html += `<div class="section">
       <div class="section-header">Ground Spawns <span style="font-size:10px;color:#666;font-weight:normal;text-transform:none;letter-spacing:0">${spawns.length} location${spawns.length!==1?'s':''}</span></div>
       ${spawns.map(s => {
-        const req = spawnSkillReq(s);
-        const locked = req && getLevel(req.skill) < req.level;
-        const badge = req ? `<span style="font-size:9px;padding:1px 5px;border-radius:3px;background:${locked?'#2a0a0a':'#0a2a0a'};color:${locked?'#c84a00':'#76c442'};margin-left:4px">${req.skill} ${req.level}+</span>` : '';
+        const lg = spawnLocGate(s);
+        const locked = lg && !_gateOk(lg.gate);
+        const badge = lg ? `<span style="font-size:9px;padding:1px 5px;border-radius:3px;background:${locked?'#2a0a0a':'#0a2a0a'};color:${locked?'#c84a00':'#76c442'};margin-left:4px" title="${escHtml(lg.name + ': ' + _gateText(lg.gate))}">${escHtml(_gateText(lg.gate))}</span>` : '';
         return `<div class="spawn-row"${locked?' style="opacity:0.5"':''}>📍 ${cleanSpawnText(s)}${badge}</div>`;
       }).join('')}
     </div>`;
@@ -6406,10 +6412,71 @@ function _iconizeSkillLevels(root) {
     n.replaceWith(frag);
   }
 }
+// Places with entry requirements (location_requirements.json): wherever the name appears as text in a
+// detail pane, underline it and give it a hover tooltip — what it needs, ✓/✗ for this account
+let _locHoverRe = null, _locHoverKeys = null;
+// Instant hover tip for a gated place (same popup as the card-grid tips): each requirement ✓/✗
+function _showLocTip(el) {
+  const name = el.dataset.loc, g = _locGate(name);
+  if (!g) return;
+  let tip = document.getElementById('_card-grid-tip');
+  if (!tip) {
+    tip = document.createElement('div'); tip.id = '_card-grid-tip';
+    tip.style.cssText = 'position:fixed;z-index:9999;background:#1c1c1c;border:1px solid #3a3020;border-radius:4px;padding:8px;box-shadow:0 4px 16px rgba(0,0,0,.75);pointer-events:none;display:none';
+    document.body.appendChild(tip);
+  }
+  const missing = new Set(_gateMissing(g).map(x => x.label));
+  const parts = _gateText(g).split(' · ').filter(Boolean);
+  const isMiss = p => [...missing].some(mm => mm === p || mm.startsWith(p) || p.startsWith(mm.replace(/ \(you:.*\)$/, '')));
+  const row = p => { const bad = isMiss(p); return `<div style="font-size:11px;line-height:1.6;color:${bad ? '#c06060' : '#7ab07a'}">${bad ? '✗' : '✓'} ${escHtml(p)}</div>`; };
+  const note = (LOC_REQS[name] || {}).note;
+  tip.innerHTML = `<div style="font-size:11px;color:#e8c97a;font-weight:600;margin-bottom:4px">${escHtml(name)}</div>`
+    + `<div style="font-size:10px;color:#777;margin-bottom:4px">${missing.size ? 'You still need:' : '✓ You can get in'}</div>`
+    + parts.map(row).join('') + (note ? `<div style="font-size:10px;color:#666;margin-top:4px;max-width:260px">${escHtml(note)}</div>` : '');
+  const rect = el.getBoundingClientRect();
+  tip.style.display = 'block'; tip.style.left = rect.left + 'px'; tip.style.top = (rect.bottom + 6) + 'px';
+  requestAnimationFrame(() => {
+    const tr = tip.getBoundingClientRect();
+    if (tr.right > window.innerWidth - 8) tip.style.left = (window.innerWidth - tr.width - 8) + 'px';
+    if (tr.bottom > window.innerHeight - 8) tip.style.top = (rect.top - tr.height - 6) + 'px';
+  });
+}
+function _hoverLocations(root) {
+  const names = Object.keys(LOC_REQS).filter(n => !n.startsWith('_') && _locGate(n));
+  if (!names.length) return;
+  if (_locHoverKeys !== names.length) {
+    _locHoverKeys = names.length;
+    const esc = n => n.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    _locHoverRe = new RegExp('(?<![\\w\'])(' + names.sort((a, b) => b.length - a.length).map(esc).join('|') + ')(?![\\w\'])', 'g');
+  }
+  const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, { acceptNode: n => {
+    if (!n.nodeValue || n.nodeValue.length < 4) return NodeFilter.FILTER_REJECT;
+    if (n.parentElement?.closest('script,style,textarea,input,select,option,[data-loc],[data-noloc],h1')) return NodeFilter.FILTER_REJECT;
+    _locHoverRe.lastIndex = 0; return _locHoverRe.test(n.nodeValue) ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_REJECT; } });
+  const nodes = []; for (let n; (n = walker.nextNode());) nodes.push(n);
+  for (const n of nodes) {
+    const txt = n.nodeValue, frag = document.createDocumentFragment(); let last = 0, m;
+    _locHoverRe.lastIndex = 0;
+    while ((m = _locHoverRe.exec(txt))) {
+      const g = _locGate(m[1]); if (!g) continue;
+      const miss = _gateMissing(g), ok = !miss.length;
+      frag.append(txt.slice(last, m.index));
+      const sp = document.createElement('span');
+      sp.dataset.loc = m[1];
+      sp.style.cssText = `border-bottom:1px dotted ${ok ? '#4a7a4a' : '#7a4a4a'};cursor:help`;
+      sp.setAttribute('onmouseover', '_showLocTip(this)');
+      sp.setAttribute('onmouseout', '_hideCardGridTip()');
+      sp.textContent = m[1];
+      frag.append(sp); last = m.index + m[1].length;
+    }
+    if (!last) continue;
+    frag.append(txt.slice(last)); n.replaceWith(frag);
+  }
+}
 let _skIconQueued = false;
 new MutationObserver(() => {
   if (_skIconQueued) return; _skIconQueued = true;
-  requestAnimationFrame(() => { _skIconQueued = false; document.querySelectorAll('#detail, [id$="-detail-pane"], #rules-panel').forEach(_iconizeSkillLevels); });
+  requestAnimationFrame(() => { _skIconQueued = false; document.querySelectorAll('#detail, [id$="-detail-pane"], #rules-panel').forEach(el => { _iconizeSkillLevels(el); try { _hoverLocations(el); } catch (e) {} }); });
 }).observe(document.documentElement, { childList: true, subtree: true });
 
 // Static data for skills without card-based training
@@ -6745,12 +6812,15 @@ function _skillingMethods(skillName) {
                    ...(m.diaries || []).filter(d => !_diaryOk(d)).map(d => `${d} Diary`)];
     const lMiss = Object.entries(m.levels || {}).filter(([sk, l]) => getLevel(sk) < l);
     const accOk = !m.access || _accessMet(m.access);
+    // The place itself (location_requirements.json), e.g. the Farming Guild's 45 / 65 / 85 Farming tiers
+    const locMiss = m.location ? _gateMissing(_locGate(m.location)) : [];
     const miss = reqs.filter(r => !r.optional && (_reqCards(r).length || (r._routes || []).length) && !_reqMet(r));
     let status, note;
     if (myLevel < (m.level || 1)) { status = 'locked-level'; note = ''; }
-    else if (qMiss.length || lMiss.length || !accOk) {
+    else if (qMiss.length || lMiss.length || !accOk || locMiss.length) {
       status = 'locked';
-      note = [...qMiss, ...lMiss.map(([sk, l]) => `${sk} ${l}`), !accOk && `reach ${accessRoutes[m.access]?.label || m.access}`].filter(Boolean).join(', ');
+      note = [...qMiss, ...lMiss.map(([sk, l]) => `${sk} ${l}`), !accOk && `reach ${accessRoutes[m.access]?.label || m.access}`,
+        locMiss.length && `${m.location}: ${locMiss.map(b => b.label).join(', ')}`].filter(Boolean).join(', ');
     } else if (miss.length) {
       status = 'no-card';
       note = 'need: ' + miss.map(r => _reqCards(r).length === 1 && !r.access ? _reqCards(r)[0] : r.label).slice(0, 3).join(', ');
@@ -6764,7 +6834,7 @@ function _skillingMethods(skillName) {
     const blockers = [...(m.quests || []).filter(q => !_questOk(q)).map(_blkQuest),
       ...(m.partialQuests || []).filter(q => !_questStartedOk(q)).map(_blkQuest),
       ...(m.diaries || []).filter(d => !_diaryOk(d)).map(_blkDiary),
-      ...lMiss.map(([sk, l]) => _blkLevel(sk, l)), ...(!accOk ? [_blkArea(m.access)] : [])];
+      ...lMiss.map(([sk, l]) => _blkLevel(sk, l)), ...(!accOk ? [_blkArea(m.access)] : []), ...locMiss];
     const needCards = [];
     let otherLocks = blockers.length > 0;
     for (const r of miss) {
@@ -7130,7 +7200,7 @@ function _combatEval(mName, G, mySlayer) {
   if (!cbLv) return null;
   const slayerReq = monsterDrops[mName].slayerLevel || 0;
   const locs = Object.entries(monsterLocations[mName] || {});
-  const reachable = !locs.length || locs.some(([l, a]) => _slLocOk(a, G[l]));
+  const reachable = !locs.length || locs.some(([l, a]) => _slLocOk(a, G[l], l));
   const bossEnc = (BOSS_BY_CARD[mName.toLowerCase()] || []).find(b => b.role === 'monster');
   const bossEv = bossEnc ? evaluateBoss(BOSS_DATA.find(b => b.name === bossEnc.bossName) || {}) : null;
   const bossLocked = bossEv && bossEv.status === 'locked';
@@ -7148,13 +7218,7 @@ function _combatEval(mName, G, mySlayer) {
     for (const [l, acc] of locs) {
       if (acc === 'excluded') continue;
       if (acc != null && !_accessMet(acc)) blockers.push(_blkArea(acc));
-      const gate = G[l];
-      if (!gate) continue;
-      blockers.push(...(gate.quests || []).filter(q => !completedQuests.has(q)).map(_blkQuest),
-        ...(gate.partialQuests || []).filter(q => !_questStartedOk(q)).map(_blkQuest),
-        ...(gate.diaries || []).filter(d => !_diaryOk(d)).map(_blkDiary),
-        ...Object.entries(gate.skills || {}).filter(([sk, lv]) => getLevel(sk) < lv).map(([sk, lv]) => _blkLevel(sk, lv)),
-        ...(gate.access && !_accessMet(gate.access) ? [_blkArea(gate.access)] : []));
+      blockers.push(..._gateMissing(_locGate(l, G[l])));
     }
   }
   const seen = new Set();
@@ -8102,19 +8166,110 @@ function _slAssignable(entry) {
   if (u.ability && !_slayerUnlocks().has(u.ability)) return false;
   return true;
 }
+// ── Location gates: one model for every place (location_requirements.json + per-place gates) ──
+// A gate: {quests, partialQuests, diaries, cards (any one), cardGroup, skills, skillsSum
+// ({'Attack+Strength': 130}), questPoints, access, anyOf: [gate], allOf: [gate]} — all must hold.
+// _locGate(name, gate) adds the place's own entry requirements (and its parent's) from
+// location_requirements.json to a gate that came with the data (monster_locations _gates, Slayer
+// locationGates); merging is idempotent, so gates the generators already merged don't double up.
+// Same rules as scripts/location_reqs.py.
+let LOC_REQS = {}, _locIdx = {}, _locGateMemo = new Map(), _locReviewed = {};
+const _LOC_GATE_KEYS = ['quests', 'partialQuests', 'diaries', 'cards', 'cardGroup', 'skills', 'skillsSum', 'questPoints', 'access', 'anyOf', 'allOf'];
+function _setLocReqs(d) {
+  LOC_REQS = {}; _locIdx = {}; _locGateMemo = new Map(); _spawnLocNames = null; _locReviewed = (d || {})._reviewedNoGate || {};
+  for (const [k, v] of Object.entries(d || {})) if (!k.startsWith('_')) { LOC_REQS[k] = v; _locIdx[k.toLowerCase()] = k; }
+}
+function _locEntry(name) { const k = _locIdx[(name || '').toLowerCase()]; return k ? LOC_REQS[k] : null; }
+const _gateSame = (a, b) => JSON.stringify(a) === JSON.stringify(b);
+function _mergeGate(a, b) {
+  const out = a ? JSON.parse(JSON.stringify(a)) : {};
+  for (const [k, v] of Object.entries(b || {})) {
+    if (v == null || v === '' || (Array.isArray(v) && !v.length) || (typeof v === 'object' && !Object.keys(v).length)) continue;
+    if (!_LOC_GATE_KEYS.includes(k)) { if (!(k in out)) out[k] = v; continue; }   // note etc.
+    if (!(k in out)) out[k] = JSON.parse(JSON.stringify(v));
+    else if (k === 'quests' || k === 'partialQuests' || k === 'diaries') out[k] = [...new Set([...out[k], ...v])];
+    else if (k === 'skills' || k === 'skillsSum') { for (const [sk, l] of Object.entries(v)) out[k][sk] = Math.max(l, out[k][sk] || 0); }
+    else if (k === 'questPoints') out[k] = Math.max(out[k], v);
+    else if (k === 'allOf') out[k] = [...out[k], ...v.filter(x => !out[k].some(y => _gateSame(x, y)))];
+    else if (!_gateSame(out[k], v)) { const extra = { [k]: v }; out.allOf ||= []; if (!out.allOf.some(y => _gateSame(extra, y))) out.allOf.push(extra); }
+  }
+  if (out.partialQuests && out.quests) { out.partialQuests = out.partialQuests.filter(q => !out.quests.includes(q)); if (!out.partialQuests.length) delete out.partialQuests; }
+  return out;
+}
+// The place's own requirements (with its parent chain), as a gate; {} when none are curated
+function _locOwnGate(name, seen = new Set()) {
+  const e = _locEntry(name);
+  if (!e || seen.has(name.toLowerCase())) return {};
+  seen.add(name.toLowerCase());
+  const own = Object.fromEntries(_LOC_GATE_KEYS.filter(k => e[k] != null).map(k => [k, e[k]]));
+  return e.parent ? _mergeGate(_locOwnGate(e.parent, seen), own) : own;
+}
+const _NO_GATE = {};
+function _locGate(name, gate) {
+  if (!name) return gate || null;
+  let byGate = _locGateMemo.get(name);
+  if (!byGate) {
+    const own = _locOwnGate(name);
+    byGate = { own: Object.keys(own).length ? own : null, merged: new WeakMap() };
+    _locGateMemo.set(name, byGate);
+  }
+  if (!byGate.own) return gate || null;
+  const k = gate || _NO_GATE;
+  let g = byGate.merged.get(k);
+  if (!g) { g = _mergeGate(gate, byGate.own); byGate.merged.set(k, g); }
+  return g;
+}
+function _questPointsDone() { let n = 0; for (const q of completedQuests) n += (questsData[q] && questsData[q].questPoints) || 0; return n; }
+function _gateGroupCards(g) {
+  if (g.startsWith('tool:')) return (TOOL_TIERS[g.slice(5)] || []).map(t => t.name);
+  return REQ_GROUPS[g] || [];
+}
+const _GROUP_LABEL = { light_source: 'a light source', 'tool:Axe': 'an axe', 'tool:Pickaxe': 'a pickaxe' };
+// Everything a gate still needs → [{kind, key, label, cards?}] (empty = you meet it)
+function _gateMissing(g) {
+  if (!g) return [];
+  const out = [];
+  for (const q of g.quests || []) if (!completedQuests.has(q)) out.push(_blkQuest(q));
+  for (const q of g.partialQuests || []) if (!_questStartedOk(q)) out.push({ ..._blkQuest(q), label: `${q} (started)` });
+  for (const d of g.diaries || []) if (!_diaryOk(d)) out.push(_blkDiary(d));
+  if ((g.cards || []).length && !g.cards.some(_cardUsable))
+    out.push({ kind: 'card', key: g.cards.join('|'), cards: g.cards, label: g.cards.length > 1 ? 'one of: ' + g.cards.join(', ') : g.cards[0] });
+  if (g.cardGroup) { const cs = _gateGroupCards(g.cardGroup);
+    if (!cs.some(_cardUsable)) out.push({ kind: 'card', key: g.cardGroup, cards: cs, label: _GROUP_LABEL[g.cardGroup] || g.cardGroup }); }
+  for (const [sk, l] of Object.entries(g.skills || {})) if (getLevel(sk) < l) out.push(_blkLevel(sk, l));
+  for (const [sks, l] of Object.entries(g.skillsSum || {})) {
+    if (sks.split('+').reduce((n, sk) => n + getLevel(sk), 0) < l) out.push({ kind: 'level', key: `${sks} ${l}`, label: `${sks.replace('+', ' + ')} ${l} combined` });
+  }
+  if (g.questPoints && _questPointsDone() < g.questPoints) out.push({ kind: 'qp', key: 'qp', label: `${g.questPoints} quest points (you: ${_questPointsDone()})` });
+  if (g.access && !_accessMet(g.access)) out.push(_blkArea(g.access));
+  if ((g.anyOf || []).length && !g.anyOf.some(sub => !_gateMissing(sub).length))
+    out.push({ kind: 'any', key: JSON.stringify(g.anyOf), label: 'one of: ' + g.anyOf.map(_gateText).join(' / '), any: g.anyOf });
+  for (const sub of g.allOf || []) out.push(..._gateMissing(sub));
+  return out;
+}
+function _gateOk(g) { return !_gateMissing(g).length; }
+// Plain-text summary of a gate (tooltips): "Farming 45 · Heroes' Quest · one of: Brown apron, …"
+function _gateText(g) {
+  if (!g) return '';
+  return [...(g.quests || []), ...(g.partialQuests || []).map(q => q + ' (started)'), ...(g.diaries || []).map(d => d + ' Diary'),
+    (g.cards || []).length ? (g.cards.length > 1 ? 'one of: ' + g.cards.join(', ') : g.cards[0]) : '',
+    g.cardGroup ? (_GROUP_LABEL[g.cardGroup] || g.cardGroup) : '',
+    ...Object.entries(g.skills || {}).map(([sk, lv]) => sk + ' ' + lv),
+    ...Object.entries(g.skillsSum || {}).map(([sks, lv]) => sks.replace('+', ' + ') + ' ' + lv + ' combined'),
+    g.questPoints ? g.questPoints + ' quest points' : '', g.access ? (accessRoutes[g.access]?.label || g.access) : '',
+    (g.anyOf || []).length ? '(' + g.anyOf.map(_gateText).join(' or ') + ')' : '',
+    ...(g.allOf || []).map(_gateText)].filter(Boolean).join(' · ');
+}
+// "boosts allowed" / "no boosts" for a place whose wiki entry says so (levels are judged on base levels)
+function _locBoostNote(name) { const e = _locEntry(name); return !e || e.boostable == null ? '' : e.boostable ? 'level can be boosted' : 'level can’t be boosted'; }
+// Can you enter this place (location_requirements.json only)? Unknown places are open.
+function _locReqOk(name) { return _gateOk(_locGate(name)); }
 // Can you reach this location? Its area access (access_routes.json key; 'excluded' = kills
-// there don't count) plus any location gate (quests done, one of the cards, skill levels).
-function _slLocOk(access, gate) {
+// there don't count) plus its gate (the data's own gate merged with the place's entry requirements).
+function _slLocOk(access, gate, name) {
   if (access === 'excluded') return false;
   if (access != null && !_accessMet(access)) return false;
-  if (!gate) return true;
-  if ((gate.quests || []).some(q => !completedQuests.has(q))) return false;
-  if ((gate.partialQuests || []).some(q => !_questStartedOk(q))) return false;
-  if ((gate.diaries || []).some(d => !_diaryOk(d))) return false;
-  if ((gate.cards || []).length && !gate.cards.some(_cardUsable)) return false;
-  if (Object.entries(gate.skills || {}).some(([sk, l]) => getLevel(sk) < l)) return false;
-  if (gate.access && !_accessMet(gate.access)) return false;
-  return true;
+  return _gateOk(_locGate(name, gate));
 }
 // A boss on a Boss task: judged by that boss's own status on the Bosses tab
 const _SL_BOSS_ALIAS = { 'barrows brothers': 'Barrows', 'dagannoth kings': 'Dagannoth Kings', 'grotesque guardians': 'Grotesque Guardians' };
@@ -8141,7 +8296,7 @@ function _slMonsterStatus(mon, entry, isBoss) {
   const gates = { ...(mon.locationGates || {}), ...((entry && entry.locationGates) || {}) };
   const locs = Object.keys(la);
   if (entry && entry.wildernessOnly && !locs.length) return { ok: false, card, reason: 'not in the Wilderness' };
-  if (locs.length && !locs.some(l => _slLocOk(la[l], gates[l]))) return { ok: false, card, reason: 'can’t reach any location' };
+  if (locs.length && !locs.some(l => _slLocOk(la[l], gates[l], l))) return { ok: false, card, reason: 'can’t reach any location' };
   const eq = (mon.equipment || []).filter(r => !r.optional && !_reqMet(r));
   if (eq.length) return { ok: false, card, reason: 'missing ' + eq.map(r => r.label).join(', ') };
   return { ok: true, card };
@@ -8287,9 +8442,8 @@ function _renderSlayerDetailInner(pane) {
   const monRows = ts.opts.map(o => {
     const img = o.card ? _cardImg(o.card) : '';
     const locs = Object.entries(o.mon.locationAccess || {});
-    const locHtml = locs.map(([l, a]) => { const g = (o.mon.locationGates || {})[l]; const ok = _slLocOk(a, g);
-      const need = [a && (a === 'excluded' ? 'kills here don’t count' : 'reach ' + (accessRoutes[a]?.label || a)), ...((g && g.quests) || []), g && g.cards && 'one of: ' + g.cards.join(', '),
-        ...Object.entries((g && g.skills) || {}).map(([sk, lv]) => sk + ' ' + lv), g && g.note].filter(Boolean).join(' · ');
+    const locHtml = locs.map(([l, a]) => { const g0 = (o.mon.locationGates || {})[l], g = _locGate(l, g0); const ok = _slLocOk(a, g0, l);
+      const need = [a && (a === 'excluded' ? 'kills here don’t count' : 'reach ' + (accessRoutes[a]?.label || a)), _gateText(g), g && g.note].filter(Boolean).join(' · ');
       return `<span style="color:${ok ? '#7ab07a' : '#a05050'};${g ? 'border-bottom:1px dotted #555' : ''}" title="${escHtml(need || 'No access requirement')}">${escHtml(l)}</span>`; }).join('<span style="color:#444"> · </span>');
     const monEq = (o.mon.equipment || []).map(r => `<span style="color:${_reqMet(r) ? '#7ab07a' : '#a05050'}">${_reqMet(r) ? '✓' : '✗'} ${escHtml(r.label)}</span>`).join(' · ');
     const lvl = o.mon.slayer ? ` <span style="font-size:10px;color:${getLevel('Slayer') >= o.mon.slayer ? '#7ab07a' : '#a05050'}">Slayer ${o.mon.slayer}</span>` : '';
@@ -8663,6 +8817,19 @@ function _validateDataNames() {
       [].concat(s.access || []).forEach(a => { if (!accessRoutes[a]) bad.push(`access "${a}" (${where})`); });
     }
   }
+  // Location entry requirements (location_requirements.json) and the skilling methods that reference them
+  const chkGate = (g, where) => {
+    (g.cards || []).forEach(c => card(c, where));
+    [...(g.quests || []), ...(g.partialQuests || [])].forEach(q => quest(q, where));
+    if (g.access && !accessRoutes[g.access]) bad.push(`access "${g.access}" (${where})`);
+    if (g.cardGroup && !_gateGroupCards(g.cardGroup).length) bad.push(`cardGroup "${g.cardGroup}" (${where})`);
+    [...(g.anyOf || []), ...(g.allOf || [])].forEach(sub => chkGate(sub, where));
+  };
+  for (const [n, e] of Object.entries(LOC_REQS)) {
+    chkGate(e, `location_requirements.json ${n}`);
+    if (e.parent && !_locEntry(e.parent) && !(e.parent in _locReviewed)) bad.push(`parent "${e.parent}" (location_requirements.json ${n})`);
+  }
+  for (const m of SKILLING) if (m.location && !_locEntry(m.location)) bad.push(`location "${m.location}" (skilling.json ${m.name})`);
   if (bad.length) console.warn(`[data check] ${bad.length} unresolved name(s):\n  ` + [...new Set(bad)].join('\n  '));
   else console.info('[data check] all card and quest names resolve');
 }

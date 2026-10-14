@@ -404,6 +404,7 @@
   "quests": [],
   "levels": {},
   "access": "wilderness",
+  "location": "Wilderness Agility Course",
   "note": "Level 52 is only needed for the entrance gate; obstacles need 49 (boostable from 47). Deep Wilderness (level 50-56): PKers and skeletons.",
   "wiki": "\"The course rewards 571.4 Agility experience per completed lap\" ... \"the level 52 Agility requirement is only needed to enter the gates; the level requirement of the obstacles is level 49\"",
   "page": "Wilderness Agility Course"
@@ -420,6 +421,7 @@
   ],
   "levels": {},
   "access": "morytania",
+  "location": "Hallowed Sepulchre",
   "note": "All five floors as one entry. Floors unlock at 52/62/72/77/87 Agility; floor xp 575 / 925 / 1,600 / 2,875 / 5,725 (11,700 for a full run). Optional coffins need extra skills/items.",
   "wiki": "\"available to players with 52 Agility and completion of Sins of the Father\"; Floor 1 Exp 575 ... Floor 5 cumulative 11,700",
   "page": "Hallowed Sepulchre"
@@ -495,6 +497,7 @@
   ],
   "levels": {},
   "access": null,
+  "location": "Dorgesh-Kaan",
   "note": "Turgall (no card) hands out the spanner and takes the parts. 2,750 is the Agility route both ways.",
   "wiki": "\"requires level 70 Agility, completion of Death to the Dorgeshuun and a light source to access\" ... \"rewards 2,750 Agility experience per completed lap\"",
   "page": "Dorgesh-Kaan Agility Course"
@@ -6994,6 +6997,7 @@
   "quests": [],
   "levels": {},
   "access": "varlamore",
+  "location": "Hunter Guild",
   "note": "The Burrow beneath the Hunter Guild (guild entry needs 46 Hunter). Teasing is not an attack, and these creatures have no card.",
   "wiki": "\"With the required Hunter level, a knife or fletching knife and logs in the inventory, clicking on a pit will set the trap. With a teasing stick in the inventory or a hunter's spear equipped, the player has to tease the creature\"",
   "page": "Pitfall"
@@ -8477,6 +8481,7 @@
    "Construction": 10
   },
   "access": "sailing",
+  "location": "The Pandemonium",
   "note": "The Pandemonium (Sailing island). Quest gate is partial completion. Traps can't fail.",
   "wiki": "\"Red crabs can be caught on The Pandemonium, blue crabs on The Great Conch, and rainbow crabs on The Crown Jewel.\"",
   "page": "Crab trapping",
@@ -8531,6 +8536,7 @@
    "Construction": 10
   },
   "access": "sailing",
+  "location": "The Great Conch",
   "note": "The Great Conch (Sailing island). Quest gate is partial completion. Traps can't fail.",
   "wiki": "\"Red crabs can be caught on The Pandemonium, blue crabs on The Great Conch, and rainbow crabs on The Crown Jewel.\"",
   "page": "Crab trapping",
@@ -8585,6 +8591,7 @@
    "Construction": 10
   },
   "access": "sailing",
+  "location": "The Crown Jewel",
   "note": "The Crown Jewel (Sailing island). Quest gate is partial completion. Traps can't fail.",
   "wiki": "\"Red crabs can be caught on The Pandemonium, blue crabs on The Great Conch, and rainbow crabs on The Crown Jewel.\"",
   "page": "Crab trapping"
@@ -8601,6 +8608,7 @@
   ],
   "levels": {},
   "access": "sailing",
+  "location": "Wyrmscraig",
   "note": "South Wyrmscraig. Looting gives 100 XP at 60, rising to 179 at 99, plus 20 per goat prodded in. The cattleprod and spikes come free from supplies next to Geoff, with no cards. Telekinetic Grab or Dark Lure also work. Wyrmscraig is reached by Sailing, or by teleport after Fallen from Grace.",
   "wiki": "\"Goat hunting is a Hunter activity available at level 60 located on Wyrmscraig and requires completion of Sheep Herder.\"",
   "page": "Goat hunting"
@@ -8817,6 +8825,7 @@
   ],
   "levels": {},
   "access": null,
+  "location": "Dorgesh-Kaan",
   "wiki": "Cave goblin |36 || 40 ... Found in Dorgesh-Kaan after completion of Death to the Dorgeshuun.",
   "page": "Thieving"
  },
@@ -10024,6 +10033,7 @@
   ],
   "levels": {},
   "access": null,
+  "location": "Dorgesh-Kaan",
   "wiki": "Dorgesh-Kaan average chests require 52 Thieving and a lockpick to loot. Doing so yields loot and 200 Thieving experience.",
   "page": "Chest (Dorgesh-Kaan Average)"
  },
@@ -10141,6 +10151,7 @@
   ],
   "levels": {},
   "access": null,
+  "location": "Dorgesh-Kaan",
   "wiki": "Dorgesh-Kaan rich Chests require 78 Thieving and a lockpick to loot. Doing so yields loot and 650 Thieving experience.",
   "page": "Chest (Dorgesh-Kaan Rich)"
  },
@@ -10240,6 +10251,7 @@
   ],
   "levels": {},
   "access": null,
+  "location": "Dorgesh-Kaan",
   "wiki": "It can be stolen from at level 44 Thieving to receive a piece of cave goblin wire and 22 Thieving experience if successful.",
   "page": "Wire machine"
  },
@@ -13730,6 +13742,7 @@
   ],
   "levels": {},
   "access": null,
+  "location": "Ruins of Camdozaal",
   "note": "Barronite deposit gives 32 xp. Camdozaal is opened by Below Ice Mountain.",
   "wiki": "\"Barronite rocks are found in the Ruins of Camdozaal that contain barronite shards and have a small chance of giving a barronite deposit when mined.\" \"Receiving a deposit grants twice the experience\"",
   "page": "Rocks (Barronite)",
@@ -13897,6 +13910,7 @@
   "quests": [],
   "levels": {},
   "access": "varlamore",
+  "location": "Cam Torum",
   "note": "Calcified deposits give an extra 3 xp.",
   "wiki": "\"Calcified rocks are found in the Cam Torum Mine, requiring level 41 Mining to mine. Rather than ore, mining the rocks will yield blessed bone shards\" Mining table: \"41 | 33\"",
   "page": "Calcified rocks",
@@ -14014,6 +14028,7 @@
    "Sailing": 60
   },
   "access": "sailing",
+  "location": "Charred Island",
   "note": "Charred Island; route passes aggressive red dragons (multicombat).",
   "wiki": "\"Rubium rocks are rocks found in the Charred Dungeon, requiring level 60 Sailing to access. They can be mined at level 48 Mining to produce stackable rubium splinters and 30 Mining XP.\"",
   "page": "Rubium rocks",
@@ -14040,6 +14055,7 @@
    "Sailing": 62
   },
   "access": "sailing",
+  "location": "Wyrmscraig",
   "note": "Infobox lists quest Fallen From Grace (not in quests.json; not checked). Wyrmscraig needs 62 Sailing to dock.",
   "wiki": "\"Sunstone rocks are mining rocks located only on Wyrmscraig that can be mined at level 53 Mining to produce sunstone\" Infobox: \"xp = 23-28\" (28 with momentum)",
   "page": "Sunstone rocks",
@@ -14066,6 +14082,7 @@
    "Sailing": 62
   },
   "access": "sailing",
+  "location": "Wyrmscraig",
   "note": "AFK alternative; never depletes. Wyrmscraig needs 62 Sailing.",
   "wiki": "\"The sunstone monolith can be mined with 53 Mining to obtain sunstone\" \"The monolith can be mined without starting Fallen From Grace, but once the quest is begun, it can only be inspected until the quest is progressed.\"",
   "page": "Sunstone monolith",
@@ -14133,6 +14150,7 @@
    "Sailing": 60
   },
   "access": "sailing",
+  "location": "Charred Island",
   "note": "XP is a random 10-100 per geode; xp field = minimum.",
   "wiki": "\"Rubium deposits are rocks found in the Charred Dungeon that can be mined at level 68 Mining to obtain rubium geodes and between 10-100 Mining XP.\"",
   "page": "Rubium deposit",
@@ -14260,6 +14278,7 @@
   ],
   "levels": {},
   "access": null,
+  "location": "Ghorrock Dungeon",
   "wiki": "\"They are located exclusively in Ghorrock Dungeon's mine, which can only be accessed once the Secrets of the North quest has been completed.\" \"yielding 13.5 Mining experience per successful mine.\"",
   "page": "Ancient essence crystals",
   "outputs": [
@@ -14320,6 +14339,7 @@
   "quests": [],
   "levels": {},
   "access": "fossil_island",
+  "location": "Volcanic Mine (inside)",
   "note": "Group mining minigame; xp per boulder chip varies with boulder stage. Petrified Pete has no card.",
   "wiki": "\"To enter the mine, players must have level 50 Mining. In addition, players must pay Petrified Pete 30 numulite each time to enter the mine.\"",
   "page": "Volcanic Mine",
@@ -14344,6 +14364,7 @@
   ],
   "levels": {},
   "access": null,
+  "location": "The Scar",
   "note": "Partial quest: Desert Treasure II (visit the Scar). Entered via the Catalytic Guardian in the Temple of the Eye. Hagus has no card.",
   "wiki": "\"It becomes accessible after partial completion of Desert Treasure II, up to the point where players visit the Scar and disturb all three passages. Players with level 64 Mining can speak to Hagus to receive permission to use the mine.\" Amalgamation infobox: \"xp = 6\"",
   "page": "Scar essence mine",
@@ -14373,6 +14394,7 @@
   ],
   "levels": {},
   "access": null,
+  "location": "Dondakan's mine",
   "note": "Keldagrim. Gives Gold ore (same xp as gold rocks).",
   "wiki": "\"Gold veins are a variant of gold rocks that are found exclusively within Dondakan's mine\" infobox \"quest = Between a Rock...\"",
   "page": "Gold vein",
@@ -14620,6 +14642,7 @@
    "Sailing": 45
   },
   "access": "sailing",
+  "location": "The Great Conch",
   "note": "Jatoba logs have no card. The Great Conch needs 45 Sailing.",
   "wiki": "\"A jatoba tree is a lumber tree requiring level 40 Woodcutting to cut, granting 92 Woodcutting experience for each set of jatoba logs received.\" Types of trees: \"Can be found on The Great Conch\"",
   "page": "Jatoba tree",
@@ -14741,6 +14764,7 @@
    "Sailing": 45
   },
   "access": "sailing",
+  "location": "The Great Conch",
   "note": "The Great Conch needs 45 Sailing.",
   "wiki": "Types of trees: \"66 | Camphor tree | Camphor logs | 143.5 | These trees can be found on The Great Conch.\"",
   "page": "Woodcutting",
@@ -14774,6 +14798,7 @@
   ],
   "levels": {},
   "access": null,
+  "location": "Vampyrium",
   "note": "Vampyrium. xp field = per chop; tapping a wounded tree gives 1,360 per bucket.",
   "wiki": "\"Chopping them requires completion of The Blood Moon Rises, 77 Woodcutting and an empty bucket, yielding bloodwood sap\" \"Every chop gives 29-31 xp\" ... tapping gives \"510, 510 and 340 xp - for a total of 1,360 per tree\"",
   "page": "Bloodwood tree",
@@ -14852,6 +14877,7 @@
    "Sailing": 79
   },
   "access": "sailing",
+  "location": "Drumstick Isle",
   "note": "Drumstick Isle also needs an adamant keel or better.",
   "wiki": "\"Rosewood tree is a tropical hardwood lumber tree found on Drumstick Isle, requiring 79 Sailing to dock.\" \"It requires 92 Woodcutting to chop.\" Logs table: \"Rosewood logs | 92 | 212.5\"",
   "page": "Rosewood tree",
@@ -15042,6 +15068,7 @@
   ],
   "levels": {},
   "access": null,
+  "location": "Ruins of Camdozaal",
   "note": "Prepared and offered at the Camdozaal altar for Prayer/Cooking xp.",
   "wiki": "Fishing methods: \"Raw guppy | 7 | Quest Below Ice Mountain\". Raw guppy page: \"Each catch grants 8 Fishing experience.\"",
   "page": "Raw guppy",
@@ -15069,6 +15096,7 @@
   ],
   "levels": {},
   "access": null,
+  "location": "Ruins of Camdozaal",
   "note": "Prepared and offered at the Camdozaal altar for Prayer/Cooking xp.",
   "wiki": "Fishing methods: \"Raw cavefish | 20 | Quest Below Ice Mountain\". Raw cavefish page: \"Each catch grants 16 Fishing experience.\"",
   "page": "Raw cavefish",
@@ -15097,6 +15125,7 @@
   ],
   "levels": {},
   "access": null,
+  "location": "Ruins of Camdozaal",
   "note": "Prepared and offered at the Camdozaal altar for Prayer/Cooking xp.",
   "wiki": "Fishing methods: \"Raw tetra | 33 | Quest Below Ice Mountain\". Raw tetra page: \"Each catch grants 24 Fishing experience.\"",
   "page": "Raw tetra",
@@ -15124,6 +15153,7 @@
   ],
   "levels": {},
   "access": null,
+  "location": "Ruins of Camdozaal",
   "note": "Prepared and offered at the Camdozaal altar for Prayer/Cooking xp.",
   "wiki": "Fishing methods: \"Raw catfish | 46 | Quest Below Ice Mountain\". Raw catfish page: \"Each catch grants 33 Fishing experience.\"",
   "page": "Raw catfish",
@@ -15912,6 +15942,7 @@
   "quests": [],
   "levels": {},
   "access": null,
+  "location": "Mor Ul Rek (inner city)",
   "wiki": "\"Catching them requires a Fishing level of 80, granting 95 Fishing experience per eel caught. In order to catch infernal eels, an oily fishing rod and bait while wearing ice gloves or Smiths gloves (i) are required.\" \"they can only be caught once a player has proven themselves worthy enough to enter the city by showing a TzHaar guard ... a fire cape.\"",
   "page": "Infernal eel",
   "outputs": [
@@ -15949,6 +15980,7 @@
   ],
   "levels": {},
   "access": null,
+  "location": "Fishing Guild",
   "note": "Inside the Fishing Guild (68 Fishing). Kylie Minnow has no card. Minnows trade for raw sharks.",
   "wiki": "\"They require a small fishing net and 82 Fishing to be caught, which cannot be boosted, granting 26.1 Fishing experience per catch\" \"The platform may only be accessed after showing Kylie the full angler's outfit and having completed the Fishing Contest quest.\"",
   "page": "Minnow",
@@ -15984,6 +16016,7 @@
   ],
   "levels": {},
   "access": null,
+  "location": "Vampyrium",
   "wiki": "\"Upon completion of The Blood Moon Rises, they can be fished from leechfin fishing spots south of the Ruined Village with a big fishing net and level 78 Fishing, granting 33.2 experience per fish.\"",
   "page": "Leechfin",
   "outputs": [
@@ -19053,6 +19086,7 @@
   "quests": [],
   "levels": {},
   "access": "kourend",
+  "location": "Farming Guild (intermediate tier)",
   "note": "Farming Guild (45 Farming to enter). +62 for planting.",
   "wiki": "\"The Hespori patch, accessible via the cave entrance, is a patch where players with 65 Farming can plant Hespori seeds.\" \"After killing it, the seed may be harvested granting 12,600 Farming experience\"",
   "page": "Hespori",
@@ -19218,6 +19252,7 @@
   "quests": [],
   "levels": {},
   "access": "kourend",
+  "location": "Farming Guild (intermediate tier)",
   "note": "Farming Guild anima patch (intermediate tier, 65 Farming). Seed comes from Hespori.",
   "wiki": "Anima seeds: \"76 | Kronos | Immune | ... | 100\" — \"Experience is only granted when the crop is planted.\"",
   "page": "Special patches/Seeds",
@@ -19257,6 +19292,7 @@
   "quests": [],
   "levels": {},
   "access": "kourend",
+  "location": "Farming Guild (intermediate tier)",
   "note": "Farming Guild anima patch (intermediate tier, 65 Farming). Seed comes from Hespori.",
   "wiki": "Anima seeds: \"76 | Iasor | Immune | ... | 100\" — \"Experience is only granted when the crop is planted.\"",
   "page": "Special patches/Seeds",
@@ -19296,6 +19332,7 @@
   "quests": [],
   "levels": {},
   "access": "kourend",
+  "location": "Farming Guild (intermediate tier)",
   "note": "Farming Guild anima patch (intermediate tier, 65 Farming). Seed comes from Hespori.",
   "wiki": "Anima seeds: \"76 | Attas | Immune | ... | 100\" — \"Experience is only granted when the crop is planted.\"",
   "page": "Special patches/Seeds",
@@ -19418,6 +19455,7 @@
   "quests": [],
   "levels": {},
   "access": "kourend",
+  "location": "Farming Guild (advanced tier)",
   "note": "Advanced tier of the Farming Guild (85). +23.5 per bark harvested.",
   "wiki": "Special tree seeds: \"85 | Celastrus tree | ... | Celastrus bark | Plant 204 | Check-health 14,130 | Harvest 23.5\"; patch: Farming Guild",
   "page": "Special patches/Seeds",
@@ -19481,6 +19519,7 @@
   "quests": [],
   "levels": {},
   "access": "kourend",
+  "location": "Farming Guild (advanced tier)",
   "note": "Advanced tier of the Farming Guild (85).",
   "wiki": "Special tree seeds: \"90 | Redwood tree | ... | Redwood logs | Plant 230 | Check-health 22,450\"; patch: Farming Guild",
   "page": "Special patches/Seeds",
@@ -20016,6 +20055,7 @@
   "quests": [],
   "levels": {},
   "access": "kourend",
+  "location": "Tithe Farm",
   "note": "Minigame; seeds are free from the table (no card). xp field = per-fruit harvest rate derived from the wiki bonus (1500/250); depositing fruit gives more.",
   "wiki": "\"The Tithe Farm is a Farming based minigame that is located in Hosidius, requiring level 34 Farming to play.\" Seeds: \"Golovanova seeds (Farming 34)\". \"Players receive bonus experience of 250 times the harvest experience rate when depositing the 75th fruit—1,500, 3,500, or 5,750 experience\"",
   "page": "Tithe Farm",
@@ -20057,6 +20097,7 @@
   "quests": [],
   "levels": {},
   "access": "kourend",
+  "location": "Tithe Farm",
   "note": "Minigame; seeds are free from the table (no card). xp field = per-fruit harvest rate derived from the wiki bonus (3500/250); depositing fruit gives more.",
   "wiki": "\"The Tithe Farm is a Farming based minigame that is located in Hosidius, requiring level 34 Farming to play.\" Seeds: \"Bologano seeds (Farming 54)\". \"Players receive bonus experience of 250 times the harvest experience rate when depositing the 75th fruit—1,500, 3,500, or 5,750 experience\"",
   "page": "Tithe Farm",
@@ -20098,6 +20139,7 @@
   "quests": [],
   "levels": {},
   "access": "kourend",
+  "location": "Tithe Farm",
   "note": "Minigame; seeds are free from the table (no card). xp field = per-fruit harvest rate derived from the wiki bonus (5750/250); depositing fruit gives more.",
   "wiki": "\"The Tithe Farm is a Farming based minigame that is located in Hosidius, requiring level 34 Farming to play.\" Seeds: \"Logavano seeds (Farming 74)\". \"Players receive bonus experience of 250 times the harvest experience rate when depositing the 75th fruit—1,500, 3,500, or 5,750 experience\"",
   "page": "Tithe Farm",
@@ -20408,6 +20450,7 @@
   "quests": [],
   "levels": {},
   "access": "varlamore",
+  "location": "Hunter Guild",
   "note": "xp shown at 46 Hunter: reward = (Hunter level + 5) x 50 per completed rumour, on top of the xp for the creatures you hunt (which need their own methods/cards). Guild Hunter Gilman and Guild Scribe Verity have no cards. Hunter Guild, Varlamore.",
   "wiki": "\"Novice\" rumours unboostable Hunter 46; \"Experience = (HunterLvl + 5) * Modifier\" with modifier 50",
   "page": "Hunters' Rumours"
@@ -20422,6 +20465,7 @@
   "quests": [],
   "levels": {},
   "access": "varlamore",
+  "location": "Hunter Guild",
   "note": "xp shown at 57 Hunter: reward = (Hunter level + 5) x 50 per completed rumour, on top of the xp for the creatures you hunt (which need their own methods/cards). Guild Hunter Cervus / Ornus and Guild Scribe Verity have no cards. Hunter Guild, Varlamore.",
   "wiki": "\"Adept\" rumours unboostable Hunter 57; \"Experience = (HunterLvl + 5) * Modifier\" with modifier 50",
   "page": "Hunters' Rumours"
@@ -20436,6 +20480,7 @@
   "quests": [],
   "levels": {},
   "access": "varlamore",
+  "location": "Hunter Guild",
   "note": "xp shown at 72 Hunter: reward = (Hunter level + 5) x 55 per completed rumour, on top of the xp for the creatures you hunt (which need their own methods/cards). Guild Hunter Aco / Teco and Guild Scribe Verity have no cards. Hunter Guild, Varlamore.",
   "wiki": "\"Expert\" rumours unboostable Hunter 72; \"Experience = (HunterLvl + 5) * Modifier\" with modifier 55",
   "page": "Hunters' Rumours"
@@ -20452,6 +20497,7 @@
   ],
   "levels": {},
   "access": "varlamore",
+  "location": "Hunter Guild",
   "note": "xp shown at 91 Hunter: reward = (Hunter level + 5) x 60 per completed rumour, on top of the xp for the creatures you hunt (which need their own methods/cards). Guild Hunter Wolf and Guild Scribe Verity have no cards. Hunter Guild, Varlamore.",
   "wiki": "\"Master\" rumours unboostable Hunter 91; \"Experience = (HunterLvl + 5) * Modifier\" with modifier 60",
   "page": "Hunters' Rumours"
@@ -21989,6 +22035,7 @@
    "Woodcutting": 60
   },
   "access": "kourend",
+  "location": "Woodcutting Guild",
   "note": "Eggs come from bird nests (woodcutting, bird houses). Also gives a seed nest and a 1/300 evil chicken outfit piece. Woodcutting Guild entry needs 60 Woodcutting (boostable).",
   "wiki": "\"offer bird eggs to this shrine to receive 100 Prayer experience and a bird nest containing tree or fruit tree seeds\"",
   "page": "Woodcutting Guild"
@@ -23551,6 +23598,7 @@
    "Crafting": 52
   },
   "access": null,
+  "location": "Dorgesh-Kaan",
   "note": "Also 500 Crafting xp per lamp (+2,500 each per 50 orbs). Orbs are blown from empty light orbs + cave goblin wire (87 Crafting) or looted from Dorgesh-Kaan chests.",
   "wiki": "\"Level 52 Crafting and Firemaking is needed to fix a lamp, giving 500 Crafting experience and 500 Firemaking experience.\"",
   "page": "Light orb"
@@ -23770,6 +23818,7 @@
    "Strength": 70
   },
   "access": null,
+  "location": "Dorgesh-Kaan",
   "note": "1,250 Ranged + 108 Agility + 108 Strength xp per lap when taking the grapple route both ways. Turgall has no card.",
   "wiki": "Grapple route total \"Agility 108 / Ranged 1,250 / Strength 108\"; \"Optionally, level 70 Strength and Ranged (in addition to 70 Agility), are required to traverse the grapple route\"",
   "page": "Dorgesh-Kaan Agility Course",
@@ -23975,6 +24024,7 @@
    "Agility": 52
   },
   "access": "morytania",
+  "location": "Hallowed Sepulchre",
   "note": "Optional coffins on every floor; each needs a skilling challenge passed and time left. Gives hallowed marks.",
   "wiki": "\"Coffins can be found on all floors of the Hallowed Sepulchre. They require 66 Thieving to loot, granting 200 experience when successfully looted.\"",
   "page": "Coffin (Hallowed Sepulchre)"
@@ -24003,6 +24053,7 @@
    "Agility": 92
   },
   "access": "morytania",
+  "location": "Hallowed Sepulchre",
   "note": "End of floor 5 (92 Agility). Needs 84 Thieving, or 66 Thieving with 92 Agility.",
   "wiki": "\"It requires either Thieving 84, or Thieving 66 with Agility 92, to open and grants 200 experience when successfully looted.\"",
   "page": "Grand Hallowed Coffin"

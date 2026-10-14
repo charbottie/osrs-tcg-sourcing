@@ -11,6 +11,8 @@ Sources:
   - Non-combat quest copies of a combat NPC are skipped when they sit outside the card's TCG pack
     region (Guthan the Infested's Desert Treasure II version in the Ancient Vault).
   - Linked pages that aren't places (quests, items, NPCs) are dropped (wiki_page_types cache).
+  - A link that is only a reference point ("South of the [[Farming Guild]]", "In front of the
+    [[Warriors' Guild]]") becomes "<place> (nearby)": same area access, but not the place's entry gate.
   - monster_locations_overrides.json: per-card drop/add, per-place access fixes, pack-region notes.
   - Location -> region -> access: wiki leagueRegion + slayer_curated.json "locationAccess" overrides
     (REGION_ACCESS in generate_slayer.py), as before.
@@ -18,8 +20,9 @@ Sources:
 
 Output: scripts/output/monster_locations.json
   { "<card>": { "<location>": "<access key>" | null },    (null = nothing needed to reach it)
-    "_gates": { "<location>": {quests?, cards?, skills?, access?} } }   (extra needs at that place,
-    from the Slayer verification's location gates)
+    "_gates": { "<location>": {quests?, partialQuests?, diaries?, cards?, skills?, access?, …} } }
+    (extra needs at that place: the Slayer verification's location gates merged with
+    location_requirements.json — see location_reqs.py for the gate model)
 
 Usage:
   python3 scripts/generate_monster_locations.py --card-json research/card-catalog-live.json
@@ -47,6 +50,21 @@ _NOT_PLACE = {"Quest", "Miniquest", "Item", "Bonuses", "NPC", "Monster", "Skill"
 PACK_REGIONS = {"Misthalin", "Asgarnia", "Kandarin", "Karamja", "Fremennik", "Kourend", "Varlamore",
                 "Morytania", "Desert", "Tirannwn", "Wilderness"}
 _LINK_RE = re.compile(r"\[\[([^\]|#]+)(?:#[^\]|]*)?(?:\|[^\]]*)?\]\]")
+# A link given only as a reference point ("South of the [[Farming Guild]]", "In front of the
+# [[Warriors' Guild]]", "[[Lunar Sea]] - north-east of [[Brittle Isle]]") is not a place the NPC is
+# IN: it is kept as "<place> (nearby)", which shares the place's area access but not its entry gate
+# (location_requirements.json, Slayer location gates). A link followed by a capitalised word names a
+# sub-place ("North-east of [[Miscellania]] Castle" is on Miscellania) and stays as it is.
+NEARBY = " (nearby)"
+_REL_RE = re.compile(r"(?:\b(?:north|south|east|west)(?:[- ]?(?:east|west))?(?:ern)?\s+(?:side\s+)?of|\boutside(?:\s+of)?|"
+                     r"\bin front of|\bnear(?:by)?|\bnext to|\baround|\bbeside|\bbehind|\bopposite|\bacross from)"
+                     r"\s*(?:the\s*)?$", re.I)
+_CACHE_VERSION = 2   # 2: location links carry the "(nearby)" marker
+
+
+def base_place(loc: str) -> str:
+    """'Farming Guild (nearby)' -> 'Farming Guild' (for region / page-type / access lookups)."""
+    return loc[:-len(NEARBY)] if loc.endswith(NEARBY) else loc
 
 
 def _template_at(text: str, i: int) -> str:
@@ -88,8 +106,19 @@ def _params(body: str) -> dict[str, str]:
 
 
 def _links(v: str) -> list[str]:
-    return [l.strip().replace("_", " ") for l in _LINK_RE.findall(v or "")
-            if not l.startswith(("File:", "Category:", ":"))]
+    """Place links of a location value; reference-point links get the NEARBY suffix."""
+    out, prev = [], 0
+    v = v or ""
+    for m in _LINK_RE.finditer(v):
+        name = m.group(1).strip().replace("_", " ")
+        pre, post = v[prev:m.start()], v[m.end():m.end() + 12]
+        prev = m.end()
+        if name.startswith(("File:", "Category:", ":")):
+            continue
+        if _REL_RE.search(pre) and not re.match(r"\s?[A-Z][a-z]", post):
+            name += NEARBY
+        out.append(name)
+    return out
 
 
 def parse_page(text: str) -> dict:
@@ -154,6 +183,8 @@ def npc_id_pages() -> dict[int, list[str]]:
 def page_versions(titles: list[str]) -> dict[str, dict]:
     """page → parse_page(its wikitext); batched 50 per request (action=query revisions), cached."""
     cache = json.loads(_CACHE.read_text(encoding="utf-8")) if _CACHE.exists() else {}
+    if cache.get("__version__") != _CACHE_VERSION:   # parsed with older rules: re-fetch
+        cache = {"__version__": _CACHE_VERSION}
     todo = [t for t in dict.fromkeys(titles) if t not in cache]
     for i in range(0, len(todo), 50):
         batch = todo[i:i + 50]
@@ -203,7 +234,7 @@ def card_locations(page: str, ids: set[int], pages: dict[str, dict], id_pages: d
     def quest_copy_elsewhere(v):
         if v["kind"] != "Npc" or v["quest"].strip() in ("", "No") or not v["locations"] or not pack:
             return False
-        rs = [regions.get(l, "") for l in v["locations"]]
+        rs = [regions.get(base_place(l), "") for l in v["locations"]]
         if not all(rs) or any(set(r.split("&")) & pack for r in rs):
             return False
         own = {r.capitalize() for r in re.findall(r"[A-Za-z]+", v["region"])}
@@ -260,14 +291,19 @@ def main() -> int:
     titles = [pg for pg, ids in cards.values()] + [t for _, ids in cards.values() for i in ids for t in id_pages.get(i, [])]
     pages = page_versions(titles)
     why = Counter()
-    regions = location_regions(sorted({l for info in pages.values() for v in info["versions"] for l in v["locations"]}))
+    regions = location_regions(sorted({base_place(l) for k, info in pages.items() if k != "__version__"
+                                       for v in info["versions"] for l in v["locations"]}))
     found = {card: card_locations(pg, ids, pages, id_pages, packs[card], regions, why)
              for card, (pg, ids) in cards.items()}
     # Drop links that aren't places (quest / item / NPC pages linked from a location field)
     from generate_diaries import _page_types
-    types = _page_types(sorted({l for ls in found.values() for l in ls}))
+    types = _page_types(sorted({base_place(l) for ls in found.values() for l in ls}))
     for card, ls in found.items():
-        keep = [l for l in ls if types.get(l, "") not in _NOT_PLACE]
+        keep = [l for l in ls if types.get(base_place(l), "") not in _NOT_PLACE]
+        if any(l.endswith(NEARBY) for l in keep):
+            why["nearbyLinks"] += sum(1 for l in keep if l.endswith(NEARBY))
+        # the place itself listed too ("Rat: Farming Guild" and "south of the Farming Guild"): drop the nearby copy
+        keep = [l for l in keep if not (l.endswith(NEARBY) and base_place(l) in keep)]
         why["notAPlaceDropped"] += len(ls) - len(keep)
         found[card] = keep
     # Hand fixes (monster_locations_overrides.json): per card, locations to drop / add, with the wiki's word
@@ -285,9 +321,10 @@ def main() -> int:
             print(f"  WARNING override {card!r}: drop {missing} not in its locations (stale?)")
         found[card] = [l for l in found[card] if l not in o.get("drop", [])] + \
             [l for l in o.get("add", []) if l not in found[card]]
-    regions = location_regions([l for ls in found.values() for l in ls])
+    regions = location_regions([base_place(l) for ls in found.values() for l in ls])
 
     def access_of(loc):
+        loc = base_place(loc)   # a nearby place shares the place's area access
         if loc in loc_access:
             return loc_access[loc]
         rs = [r for r in regions.get(loc, "").split("&") if r]
@@ -312,6 +349,24 @@ def main() -> int:
                         prev[k] = {**prev.get(k, {}), **v}
                     else:
                         prev[k] = v
+    # Entry requirements of the places themselves (location_requirements.json: guild levels, quests,
+    # Sailing levels to dock, worn items…), merged into the Slayer-derived gates. Keyed by the name as
+    # our data spells it ('Farming guild' too), plus every curated place (shops use these gates).
+    import location_reqs
+    probs = location_reqs.validate_with_outputs()
+    for x in probs:
+        print("  ! location_requirements.json: " + x)
+    used = {l for ls in found.values() for l in ls} | set(location_reqs.load())
+    added = Counter()
+    for loc in sorted(used):
+        lg = location_reqs.gate_for(loc)
+        if not lg:
+            continue
+        before = json.dumps(gates.get(loc), sort_keys=True)
+        gates[loc] = location_reqs.merge_gate(gates.get(loc), lg)
+        if json.dumps(gates[loc], sort_keys=True) != before:
+            added.update(k for k in lg)
+    print(f"  location_requirements: {sum(1 for l in used if location_reqs.gate_for(l))} places gated; fields merged {dict(added)}")
     out = {"_gates": dict(sorted(gates.items()))}
     for card in sorted(cards):
         ls = found[card]
@@ -327,7 +382,8 @@ def main() -> int:
     # overrides file ("_packRegionNotes") and not flagged.
     noted = hand_all.get("_packRegionNotes", {})
     off = [c for c, ls in out.items() if not c.startswith("_") and packs.get(c)
-           and all(regions.get(l) and not set(regions[l].split("&")) & packs[c] and l not in noted for l in ls)]
+           and all(regions.get(base_place(l)) and not set(regions[base_place(l)].split("&")) & packs[c]
+                   and base_place(l) not in noted for l in ls)]
     print(f"  pack check: {len(off)} cards found only outside their pack's region(s): {', '.join(off)}")
     return 0
 

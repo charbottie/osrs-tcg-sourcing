@@ -73,6 +73,13 @@
      "locationAccess": {
       "Legends' Guild": null,
       "The Stranglewood": "kourend"
+     },
+     "locationGates": {
+      "Legends' Guild": {
+       "quests": [
+        "Legends' Quest"
+       ]
+      }
      }
     },
     {
@@ -92,6 +99,11 @@
       "Champions' Guild": null,
       "Alice's farm": "morytania",
       "Ectofuntus": "morytania"
+     },
+     "locationGates": {
+      "Champions' Guild": {
+       "questPoints": 32
+      }
      }
     },
     {
@@ -201,6 +213,24 @@
         "The Ides of Milk"
        ],
        "note": "Gate applies to Brutus only, not the cows."
+      },
+      "Crafting guild": {
+       "skills": {
+        "Crafting": 40
+       },
+       "anyOf": [
+        {
+         "cards": [
+          "Brown apron",
+          "Golden apron"
+         ]
+        },
+        {
+         "skills": {
+          "Crafting": 99
+         }
+        }
+       ]
       }
      }
     },
@@ -469,6 +499,13 @@
       "Dwarven Mine": null,
       "Mining Guild": null,
       "Skills necklace": null
+     },
+     "locationGates": {
+      "Mining Guild": {
+       "skills": {
+        "Mining": 60
+       }
+      }
      }
     },
     {
@@ -493,6 +530,16 @@
       "Digsite Dungeon": null,
       "Catacombs of Kourend": "kourend",
       "Edgeville Dungeon": null
+     },
+     "locationGates": {
+      "Digsite Dungeon": {
+       "partialQuests": [
+        "The Dig Site"
+       ],
+       "cards": [
+        "Rope"
+       ]
+      }
      }
     },
     {
@@ -1110,7 +1157,18 @@
       "Silk Chasm": null,
       "Lava Maze": null
      },
-     "wildernessOnly": true
+     "wildernessOnly": true,
+     "locationGates": {
+      "Silk Chasm": {
+       "diaries": [
+        "Wilderness Medium"
+       ],
+       "cards": [
+        "Coins"
+       ],
+       "access": "wilderness"
+      }
+     }
     },
     {
      "task": "Bloodveld",
@@ -1140,6 +1198,23 @@
       "Wilderness God Wars Dungeon": {
        "access": "wilderness",
        "note": "In the Wilderness (level 28-32)."
+      },
+      "God Wars Dungeon": {
+       "partialQuests": [
+        "Troll Stronghold"
+       ],
+       "anyOf": [
+        {
+         "skills": {
+          "Strength": 60
+         }
+        },
+        {
+         "skills": {
+          "Agility": 60
+         }
+        }
+       ]
       }
      },
      "wildernessOnly": true
@@ -1627,7 +1702,15 @@
       "Edgeville Dungeon": null,
       "Wilderness Agility Course": null
      },
-     "wildernessOnly": true
+     "wildernessOnly": true,
+     "locationGates": {
+      "Wilderness Agility Course": {
+       "skills": {
+        "Agility": 52
+       },
+       "access": "wilderness"
+      }
+     }
     },
     {
      "task": "Spiders",
@@ -3647,6 +3730,18 @@
        "partialQuests": [
         "Troll Stronghold"
        ],
+       "anyOf": [
+        {
+         "skills": {
+          "Strength": 60
+         }
+        },
+        {
+         "skills": {
+          "Agility": 60
+         }
+        }
+       ],
        "note": "The God Wars Dungeon page says entry 'requires partial completion of Troll Stronghold (defeating Dad) or full completion of the Easy Combat Achievements'. The task infobox says only 'Death Plateau', so otherReq may understate it. A rope is also needed for the first entry."
       }
      }
@@ -3710,6 +3805,21 @@
      "locationGates": {
       "Catacombs of Kourend": {
        "note": "Skotizo's lair needs a Dark totem (card 'Dark totem')."
+      },
+      "Brimhaven Dungeon": {
+       "skills": {
+        "Woodcutting": 10
+       },
+       "allOf": [
+        {
+         "cards": [
+          "Coins"
+         ]
+        },
+        {
+         "cardGroup": "tool:Axe"
+        }
+       ]
       }
      }
     },
@@ -3805,6 +3915,18 @@
       "God Wars Dungeon": {
        "partialQuests": [
         "Troll Stronghold"
+       ],
+       "anyOf": [
+        {
+         "skills": {
+          "Strength": 60
+         }
+        },
+        {
+         "skills": {
+          "Agility": 60
+         }
+        }
        ],
        "note": "Wiki GWD: 'Accessing it requires partial completion of Troll Stronghold (defeating Dad)'; entering the main dungeon also needs 60 Strength (boulder) or 60 Agility (crack); a rope the first time."
       },
@@ -4112,6 +4234,19 @@
        "note": "Needs Boots of stone, boots of brimstone or granite boots, unless the Elite Kourend & Kebos Diary is done."
       },
       "Brimhaven Dungeon": {
+       "skills": {
+        "Woodcutting": 10
+       },
+       "allOf": [
+        {
+         "cards": [
+          "Coins"
+         ]
+        },
+        {
+         "cardGroup": "tool:Axe"
+        }
+       ],
        "note": "Needs an axe and 875 coins."
       },
       "Stronghold Slayer Dungeon": {
@@ -4218,6 +4353,19 @@
        "note": "Boots of stone, boots of brimstone or granite boots, unless the Elite Kourend & Kebos Diary is done."
       },
       "Brimhaven Dungeon": {
+       "skills": {
+        "Woodcutting": 10
+       },
+       "allOf": [
+        {
+         "cards": [
+          "Coins"
+         ]
+        },
+        {
+         "cardGroup": "tool:Axe"
+        }
+       ],
        "note": "Needs an axe and 875 coins."
       },
       "Catacombs of Kourend": {
@@ -4522,6 +4670,19 @@
        ]
       },
       "Brimhaven Dungeon": {
+       "skills": {
+        "Woodcutting": 10
+       },
+       "allOf": [
+        {
+         "cards": [
+          "Coins"
+         ]
+        },
+        {
+         "cardGroup": "tool:Axe"
+        }
+       ],
        "note": "Needs an axe and 875 coins."
       }
      }
@@ -4635,6 +4796,19 @@
      },
      "locationGates": {
       "Brimhaven Dungeon": {
+       "skills": {
+        "Woodcutting": 10
+       },
+       "allOf": [
+        {
+         "cards": [
+          "Coins"
+         ]
+        },
+        {
+         "cardGroup": "tool:Axe"
+        }
+       ],
        "note": "Red dragons need 30 Agility (also an entry fee or Karamja gloves, and an axe for vines)."
       }
      }
@@ -4726,6 +4900,15 @@
        "partialQuests": [
         "Troll Stronghold"
        ]
+      },
+      "Wyrmscraig Cavern": {
+       "skills": {
+        "Sailing": 62
+       },
+       "access": "sailing",
+       "partialQuests": [
+        "Fallen From Grace"
+       ]
       }
      }
     },
@@ -4796,6 +4979,11 @@
         "Darkness of Hallowvale"
        ],
        "note": "Started."
+      },
+      "Vampyrium": {
+       "partialQuests": [
+        "The Blood Moon Rises"
+       ]
       }
      }
     },
@@ -4910,6 +5098,9 @@
         "Fallen From Grace"
        ],
        "access": "sailing",
+       "skills": {
+        "Sailing": 62
+       },
        "note": "Wiki: 'accessible after partial completion of Fallen From Grace'; Wyrmscraig island needs 62 Sailing."
       },
       "Neypotzli": {
@@ -7113,7 +7304,15 @@
       "Deepfin Mine": "sailing"
      },
      "wilderness": [],
-     "slayer": 60
+     "slayer": 60,
+     "locationGates": {
+      "Deepfin Mine": {
+       "skills": {
+        "Sailing": 67
+       },
+       "access": "sailing"
+      }
+     }
     },
     {
      "name": "Abhorrent spectre",
@@ -7129,7 +7328,15 @@
       "Deepfin Mine": "sailing"
      },
      "wilderness": [],
-     "slayer": 60
+     "slayer": 60,
+     "locationGates": {
+      "Deepfin Mine": {
+       "skills": {
+        "Sailing": 67
+       },
+       "access": "sailing"
+      }
+     }
     },
     {
      "name": "Deviant spectre",
@@ -7295,6 +7502,10 @@
      },
      "locationGates": {
       "Deepfin Mine": {
+       "skills": {
+        "Sailing": 67
+       },
+       "access": "sailing",
        "note": "Sailing island (already mapped 'sailing')."
       }
      },
@@ -7443,6 +7654,18 @@
        "partialQuests": [
         "Troll Stronghold"
        ],
+       "anyOf": [
+        {
+         "skills": {
+          "Strength": 60
+         }
+        },
+        {
+         "skills": {
+          "Agility": 60
+         }
+        }
+       ],
        "note": "The God Wars Dungeon page says entry 'requires partial completion of Troll Stronghold (defeating Dad) or full completion of the Easy Combat Achievements'. The task infobox says only 'Death Plateau', so otherReq may understate it. A rope is also needed for the first entry."
       }
      },
@@ -7464,6 +7687,18 @@
        "partialQuests": [
         "Troll Stronghold"
        ],
+       "anyOf": [
+        {
+         "skills": {
+          "Strength": 60
+         }
+        },
+        {
+         "skills": {
+          "Agility": 60
+         }
+        }
+       ],
        "note": "The God Wars Dungeon page says entry 'requires partial completion of Troll Stronghold (defeating Dad) or full completion of the Easy Combat Achievements'. The task infobox says only 'Death Plateau', so otherReq may understate it. A rope is also needed for the first entry."
       }
      },
@@ -7482,6 +7717,18 @@
       "God Wars Dungeon": {
        "partialQuests": [
         "Troll Stronghold"
+       ],
+       "anyOf": [
+        {
+         "skills": {
+          "Strength": 60
+         }
+        },
+        {
+         "skills": {
+          "Agility": 60
+         }
+        }
        ],
        "note": "The God Wars Dungeon page says entry 'requires partial completion of Troll Stronghold (defeating Dad) or full completion of the Easy Combat Achievements'. The task infobox says only 'Death Plateau', so otherReq may understate it. A rope is also needed for the first entry."
       }
@@ -7502,6 +7749,18 @@
        "partialQuests": [
         "Troll Stronghold"
        ],
+       "anyOf": [
+        {
+         "skills": {
+          "Strength": 60
+         }
+        },
+        {
+         "skills": {
+          "Agility": 60
+         }
+        }
+       ],
        "note": "The God Wars Dungeon page says entry 'requires partial completion of Troll Stronghold (defeating Dad) or full completion of the Easy Combat Achievements'. The task infobox says only 'Death Plateau', so otherReq may understate it. A rope is also needed for the first entry."
       }
      },
@@ -7520,6 +7779,18 @@
       "God Wars Dungeon": {
        "partialQuests": [
         "Troll Stronghold"
+       ],
+       "anyOf": [
+        {
+         "skills": {
+          "Strength": 60
+         }
+        },
+        {
+         "skills": {
+          "Agility": 60
+         }
+        }
        ],
        "note": "The God Wars Dungeon page says entry 'requires partial completion of Troll Stronghold (defeating Dad) or full completion of the Easy Combat Achievements'. The task infobox says only 'Death Plateau', so otherReq may understate it. A rope is also needed for the first entry."
       }
@@ -7884,6 +8155,11 @@
        "quests": [
         "Heroes' Quest"
        ]
+      },
+      "Grand Tree mine": {
+       "quests": [
+        "The Grand Tree"
+       ]
       }
      },
      "wilderness": [
@@ -7904,6 +8180,7 @@
        "quests": [
         "Cabin Fever"
        ],
+       "cardGroup": "light_source",
        "note": "Also needs a light source (unless the fire of eternal light is built) and a Witchwood icon (card 'Witchwood icon') to protect from cave horrors."
       }
      },
@@ -7966,23 +8243,23 @@
      "name": "Black bear",
      "locations": [
       "Kebos Lowlands",
-      "Farming Guild",
+      "Farming Guild (nearby)",
       "Entrana",
       "Gnome Maze",
       "Observatory",
       "Mind Altar",
-      "Gu'Tanoth",
+      "Gu'Tanoth (nearby)",
       "Varrock"
      ],
      "card": "Black bear",
      "locationAccess": {
       "Kebos Lowlands": "kourend",
-      "Farming Guild": "kourend",
+      "Farming Guild (nearby)": "kourend",
       "Entrana": null,
       "Gnome Maze": null,
       "Observatory": null,
       "Mind Altar": null,
-      "Gu'Tanoth": null,
+      "Gu'Tanoth (nearby)": null,
       "Varrock": null
      },
      "wilderness": []
@@ -8074,6 +8351,10 @@
      },
      "locationGates": {
       "Escape Caves": {
+       "cards": [
+        "Coins"
+       ],
+       "access": "wilderness",
        "note": "50k Wilderness boss-lair fee (shared)."
       }
      },
@@ -8156,7 +8437,14 @@
       "Falador park": null,
       "Fisher realm": null
      },
-     "wilderness": []
+     "wilderness": [],
+     "locationGates": {
+      "Fisher realm": {
+       "quests": [
+        "Holy Grail"
+       ]
+      }
+     }
     },
     {
      "name": "Chicken",
@@ -8192,7 +8480,23 @@
      "locationAccess": {
       "Port Phasmatys": "morytania"
      },
-     "wilderness": []
+     "wilderness": [],
+     "locationGates": {
+      "Port Phasmatys": {
+       "anyOf": [
+        {
+         "cards": [
+          "Ecto-token"
+         ]
+        },
+        {
+         "quests": [
+          "Ghosts Ahoy"
+         ]
+        }
+       ]
+      }
+     }
     },
     {
      "name": "Rooster",
@@ -8205,7 +8509,14 @@
       "Rellekka": null,
       "Miscellania": null
      },
-     "wilderness": []
+     "wilderness": [],
+     "locationGates": {
+      "Miscellania": {
+       "quests": [
+        "The Fremennik Trials"
+       ]
+      }
+     }
     },
     {
      "name": "Seagull",
@@ -8218,7 +8529,14 @@
       "Port Sarim": null,
       "Corsair Cove": null
      },
-     "wilderness": []
+     "wilderness": [],
+     "locationGates": {
+      "Corsair Cove": {
+       "partialQuests": [
+        "The Corsair Curse"
+       ]
+      }
+     }
     },
     {
      "name": "Penguin (monster)",
@@ -8333,7 +8651,14 @@
       "Lumbridge": null,
       "Farming Guild": "kourend"
      },
-     "wilderness": []
+     "wilderness": [],
+     "locationGates": {
+      "Farming Guild": {
+       "skills": {
+        "Farming": 45
+       }
+      }
+     }
     },
     {
      "name": "Evil Chicken",
@@ -8344,7 +8669,12 @@
      "locationAccess": {
       "Champions' Guild": null
      },
-     "wilderness": []
+     "wilderness": [],
+     "locationGates": {
+      "Champions' Guild": {
+       "questPoints": 32
+      }
+     }
     }
    ],
    "equipment": [],
@@ -8381,7 +8711,26 @@
      },
      "locationGates": {
       "Charred Dungeon": {
+       "skills": {
+        "Sailing": 60
+       },
+       "access": "sailing",
        "note": "Requires 60 Sailing."
+      },
+      "Brimhaven Dungeon": {
+       "skills": {
+        "Woodcutting": 10
+       },
+       "allOf": [
+        {
+         "cards": [
+          "Coins"
+         ]
+        },
+        {
+         "cardGroup": "tool:Axe"
+        }
+       ]
       }
      },
      "wilderness": [
@@ -8423,6 +8772,18 @@
       "God Wars Dungeon": {
        "partialQuests": [
         "Troll Stronghold"
+       ],
+       "anyOf": [
+        {
+         "skills": {
+          "Strength": 60
+         }
+        },
+        {
+         "skills": {
+          "Agility": 60
+         }
+        }
        ],
        "note": "Partial completion of Troll Stronghold plus 60 Strength or 60 Agility; a Rope is needed on the first visit. GWD-related Slayer assignments need Death Plateau. Balfrug Kreeyath is in K'ril's room: 70 Hitpoints for the Zamorak bridge and 40 Zamorak killcount."
       }
@@ -8634,7 +8995,18 @@
       "Lava Maze",
       "Bone Yard",
       "Silk Chasm"
-     ]
+     ],
+     "locationGates": {
+      "Silk Chasm": {
+       "diaries": [
+        "Wilderness Medium"
+       ],
+       "cards": [
+        "Coins"
+       ],
+       "access": "wilderness"
+      }
+     }
     }
    ],
    "equipment": [],
@@ -8675,6 +9047,18 @@
       "God Wars Dungeon": {
        "partialQuests": [
         "Troll Stronghold"
+       ],
+       "anyOf": [
+        {
+         "skills": {
+          "Strength": 60
+         }
+        },
+        {
+         "skills": {
+          "Agility": 60
+         }
+        }
        ],
        "note": "Wiki GWD: 'Accessing it requires partial completion of Troll Stronghold (defeating Dad)'; entering the main dungeon also needs 60 Strength (boulder) or 60 Agility (crack); a rope the first time."
       },
@@ -9014,6 +9398,7 @@
      ],
      "locationGates": {
       "Lumbridge Swamp Caves": {
+       "cardGroup": "light_source",
        "note": "A rope is needed the first time you enter from the swamp (card 'Rope'), or start The Lost Tribe and use a pickaxe for the castle-cellar route. A spiny helmet or Slayer helmet is recommended against wall beasts."
       },
       "Dorgesh-Kaan South Dungeon": {
@@ -9088,6 +9473,7 @@
        "note": "Dark: needs a light source (cards: Candle, Torch, Oil lamp, Candle lantern, Oil lantern, Bullseye lantern, Mining helmet, Kandarin headgear, Bruma torch, Abyssal lantern) and a tinderbox to light most of them."
       },
       "Lumbridge Swamp Caves": {
+       "cardGroup": "light_source",
        "note": "Dark: needs a light source (cards: Candle, Torch, Oil lamp, Candle lantern, Oil lantern, Bullseye lantern, Mining helmet, Kandarin headgear, Bruma torch, Abyssal lantern; plus Tinderbox) and a Rope the first time. Open flames can explode, so a lantern is safer."
       }
      },
@@ -9123,6 +9509,7 @@
        "note": "Dark: needs a light source (cards: Candle, Torch, Oil lamp, Candle lantern, Oil lantern, Bullseye lantern, Mining helmet, Kandarin headgear, Bruma torch, Abyssal lantern) and a tinderbox to light most of them."
       },
       "Lumbridge Swamp Caves": {
+       "cardGroup": "light_source",
        "note": "Dark: needs a light source (cards: Candle, Torch, Oil lamp, Candle lantern, Oil lantern, Bullseye lantern, Mining helmet, Kandarin headgear, Bruma torch, Abyssal lantern; plus Tinderbox) and a Rope the first time. Open flames can explode, so a lantern is safer."
       }
      },
@@ -9151,7 +9538,12 @@
       "Mos Le'Harmless Cave": "mos_le_harmless"
      },
      "wilderness": [],
-     "slayer": 58
+     "slayer": 58,
+     "locationGates": {
+      "Mos Le'Harmless Cave": {
+       "cardGroup": "light_source"
+      }
+     }
     },
     {
      "name": "Cave abomination",
@@ -9163,7 +9555,12 @@
       "Mos Le'Harmless Cave": "mos_le_harmless"
      },
      "wilderness": [],
-     "slayer": 58
+     "slayer": 58,
+     "locationGates": {
+      "Mos Le'Harmless Cave": {
+       "cardGroup": "light_source"
+      }
+     }
     }
    ],
    "equipment": [],
@@ -9225,6 +9622,7 @@
      ],
      "locationGates": {
       "Lumbridge Swamp Caves": {
+       "cardGroup": "light_source",
        "note": "A rope is needed the first time you enter (card 'Rope')."
       },
       "Dorgesh-Kaan South Dungeon": {
@@ -9366,7 +9764,27 @@
       "South Falador Farm": null,
       "Crafting Guild": null
      },
-     "wilderness": []
+     "wilderness": [],
+     "locationGates": {
+      "Crafting Guild": {
+       "skills": {
+        "Crafting": 40
+       },
+       "anyOf": [
+        {
+         "cards": [
+          "Brown apron",
+          "Golden apron"
+         ]
+        },
+        {
+         "skills": {
+          "Crafting": 99
+         }
+        }
+       ]
+      }
+     }
     },
     {
      "name": "Cow calf",
@@ -9385,7 +9803,27 @@
       "South Falador Farm": null,
       "Crafting Guild": null
      },
-     "wilderness": []
+     "wilderness": [],
+     "locationGates": {
+      "Crafting Guild": {
+       "skills": {
+        "Crafting": 40
+       },
+       "anyOf": [
+        {
+         "cards": [
+          "Brown apron",
+          "Golden apron"
+         ]
+        },
+        {
+         "skills": {
+          "Crafting": 99
+         }
+        }
+       ]
+      }
+     }
     },
     {
      "name": "Brutus",
@@ -9505,7 +9943,14 @@
       "Catacombs of Kourend": "kourend",
       "Crabclaw Caves": "kourend"
      },
-     "wilderness": []
+     "wilderness": [],
+     "locationGates": {
+      "Crabclaw Caves": {
+       "partialQuests": [
+        "The Depths of Despair"
+       ]
+      }
+     }
     },
     {
      "name": "Rock Crab",
@@ -9558,7 +10003,14 @@
       "Isle of Souls": null,
       "Outer Fortis": "varlamore"
      },
-     "wilderness": []
+     "wilderness": [],
+     "locationGates": {
+      "Crabclaw Caves": {
+       "partialQuests": [
+        "The Depths of Despair"
+       ]
+      }
+     }
     },
     {
      "name": "Swamp Crab",
@@ -10016,6 +10468,19 @@
      },
      "locationGates": {
       "Brimhaven Dungeon": {
+       "skills": {
+        "Woodcutting": 10
+       },
+       "allOf": [
+        {
+         "cards": [
+          "Coins"
+         ]
+        },
+        {
+         "cardGroup": "tool:Axe"
+        }
+       ],
        "note": "Needs an axe and 875 coins (or a one-time payment)."
       }
      },
@@ -10560,9 +11025,26 @@
        "note": "Needs Boots of stone, boots of brimstone or granite boots, unless the Elite Kourend & Kebos Diary is done."
       },
       "Brimhaven Dungeon": {
+       "skills": {
+        "Woodcutting": 10
+       },
+       "allOf": [
+        {
+         "cards": [
+          "Coins"
+         ]
+        },
+        {
+         "cardGroup": "tool:Axe"
+        }
+       ],
        "note": "Needs an axe and 875 coins."
       },
       "Charred Dungeon": {
+       "skills": {
+        "Sailing": 60
+       },
+       "access": "sailing",
        "note": "'Requires level 60 Sailing to access'. A rope is needed the first time."
       },
       "Stronghold Slayer Dungeon": {
@@ -10939,12 +11421,12 @@
      "name": "Tortured soul",
      "locations": [
       "Ectofuntus",
-      "Port Phasmatys"
+      "Port Phasmatys (nearby)"
      ],
      "card": "Tortured soul",
      "locationAccess": {
       "Ectofuntus": "morytania",
-      "Port Phasmatys": "morytania"
+      "Port Phasmatys (nearby)": "morytania"
      },
      "locationGates": {
       "Ectofuntus": {
@@ -11165,7 +11647,7 @@
       "Observatory Dungeon",
       "Goblin Cave",
       "Goblin Village",
-      "Fishing Guild",
+      "Fishing Guild (nearby)",
       "God Wars Dungeon",
       "Clock Tower Dungeon",
       "Port Sarim",
@@ -11177,7 +11659,7 @@
       "Observatory Dungeon": null,
       "Goblin Cave": null,
       "Goblin Village": null,
-      "Fishing Guild": null,
+      "Fishing Guild (nearby)": null,
       "God Wars Dungeon": null,
       "Clock Tower Dungeon": null,
       "Port Sarim": null,
@@ -11187,6 +11669,18 @@
       "God Wars Dungeon": {
        "partialQuests": [
         "Troll Stronghold"
+       ],
+       "anyOf": [
+        {
+         "skills": {
+          "Strength": 60
+         }
+        },
+        {
+         "skills": {
+          "Agility": 60
+         }
+        }
        ],
        "note": "Partial completion of Troll Stronghold plus 60 Strength or 60 Agility; a Rope is needed on the first visit. GWD-related Slayer assignments need Death Plateau. Sergeants are in General Graardor's room: 40 Bandos killcount, plus 70 Strength and a hammer for the door."
       }
@@ -11215,6 +11709,7 @@
      },
      "locationGates": {
       "Lumbridge Swamp Caves": {
+       "cardGroup": "light_source",
        "note": "A light source is needed."
       }
      },
@@ -11272,6 +11767,18 @@
        "partialQuests": [
         "Troll Stronghold"
        ],
+       "anyOf": [
+        {
+         "skills": {
+          "Strength": 60
+         }
+        },
+        {
+         "skills": {
+          "Agility": 60
+         }
+        }
+       ],
        "note": "Partial completion of Troll Stronghold plus 60 Strength or 60 Agility; a Rope is needed on the first visit. GWD-related Slayer assignments need Death Plateau. Sergeants are in General Graardor's room: 40 Bandos killcount, plus 70 Strength and a hammer for the door."
       }
      },
@@ -11287,6 +11794,18 @@
       "God Wars Dungeon": {
        "partialQuests": [
         "Troll Stronghold"
+       ],
+       "anyOf": [
+        {
+         "skills": {
+          "Strength": 60
+         }
+        },
+        {
+         "skills": {
+          "Agility": 60
+         }
+        }
        ],
        "note": "Partial completion of Troll Stronghold plus 60 Strength or 60 Agility; a Rope is needed on the first visit. GWD-related Slayer assignments need Death Plateau. Sergeants are in General Graardor's room: 40 Bandos killcount, plus 70 Strength and a hammer for the door."
       }
@@ -11306,6 +11825,18 @@
       "God Wars Dungeon": {
        "partialQuests": [
         "Troll Stronghold"
+       ],
+       "anyOf": [
+        {
+         "skills": {
+          "Strength": 60
+         }
+        },
+        {
+         "skills": {
+          "Agility": 60
+         }
+        }
        ],
        "note": "Partial completion of Troll Stronghold plus 60 Strength or 60 Agility; a Rope is needed on the first visit. GWD-related Slayer assignments need Death Plateau. Sergeants are in General Graardor's room: 40 Bandos killcount, plus 70 Strength and a hammer for the door."
       }
@@ -11372,6 +11903,19 @@
        "note": "Boots of stone, boots of brimstone or granite boots, unless the Elite Kourend & Kebos Diary is done."
       },
       "Brimhaven Dungeon": {
+       "skills": {
+        "Woodcutting": 10
+       },
+       "allOf": [
+        {
+         "cards": [
+          "Coins"
+         ]
+        },
+        {
+         "cardGroup": "tool:Axe"
+        }
+       ],
        "note": "Needs an axe and 875 coins."
       },
       "Catacombs of Kourend": {
@@ -11434,6 +11978,18 @@
        "partialQuests": [
         "Troll Stronghold"
        ],
+       "anyOf": [
+        {
+         "skills": {
+          "Strength": 60
+         }
+        },
+        {
+         "skills": {
+          "Agility": 60
+         }
+        }
+       ],
        "note": "Tstanon Karlak and K'ril Tsutsaroth: 'Requires an ecumenical key or 40 Zamorakian follower kill count' (card 'Ecumenical key' is optional). GWD entry needs partial Troll Stronghold."
       }
      },
@@ -11452,6 +12008,18 @@
       "God Wars Dungeon": {
        "partialQuests": [
         "Troll Stronghold"
+       ],
+       "anyOf": [
+        {
+         "skills": {
+          "Strength": 60
+         }
+        },
+        {
+         "skills": {
+          "Agility": 60
+         }
+        }
        ],
        "note": "Tstanon Karlak and K'ril Tsutsaroth: 'Requires an ecumenical key or 40 Zamorakian follower kill count' (card 'Ecumenical key' is optional). GWD entry needs partial Troll Stronghold."
       }
@@ -11659,6 +12227,10 @@
        "note": "Boots of stone, boots of brimstone or granite boots, unless the Elite Kourend & Kebos Diary is done."
       },
       "Buccaneers' Laboratory": {
+       "skills": {
+        "Sailing": 76
+       },
+       "access": "sailing",
        "note": "'requiring 76 Sailing to access'."
       },
       "Deserted Keep": {
@@ -11670,6 +12242,18 @@
       "God Wars Dungeon": {
        "partialQuests": [
         "Troll Stronghold"
+       ],
+       "anyOf": [
+        {
+         "skills": {
+          "Strength": 60
+         }
+        },
+        {
+         "skills": {
+          "Agility": 60
+         }
+        }
        ]
       }
      },
@@ -11856,6 +12440,23 @@
      },
      "locationGates": {
       "Warriors' Guild": {
+       "anyOf": [
+        {
+         "skillsSum": {
+          "Attack+Strength": 130
+         }
+        },
+        {
+         "skills": {
+          "Attack": 99
+         }
+        },
+        {
+         "skills": {
+          "Strength": 99
+         }
+        }
+       ],
        "note": "Needs 130 combined Attack+Strength (or 99 in one) and Warrior guild tokens (card 'Warrior guild token'). Basement cyclopes also need a rune defender shown."
       }
      },
@@ -11874,6 +12475,18 @@
       "God Wars Dungeon": {
        "partialQuests": [
         "Troll Stronghold"
+       ],
+       "anyOf": [
+        {
+         "skills": {
+          "Strength": 60
+         }
+        },
+        {
+         "skills": {
+          "Agility": 60
+         }
+        }
        ],
        "note": "Bandos' Stronghold cyclopes: 70 Strength, hammer, rope the first time. Trollheim access via Death Plateau/Troll Stronghold."
       }
@@ -11913,7 +12526,7 @@
       "Asgarnian Ice Dungeon",
       "Hosidius",
       "vinery",
-      "Crafting Guild",
+      "Crafting Guild (nearby)",
       "Outpost",
       "Hosidius (The Dibber)",
       "Hobgoblin Peninsula",
@@ -11936,7 +12549,7 @@
       "Asgarnian Ice Dungeon": null,
       "Hosidius": "kourend",
       "vinery": "kourend",
-      "Crafting Guild": null,
+      "Crafting Guild (nearby)": null,
       "Outpost": null,
       "Hosidius (The Dibber)": null,
       "Hobgoblin Peninsula": null,
@@ -11957,6 +12570,18 @@
       "God Wars Dungeon": {
        "partialQuests": [
         "Troll Stronghold"
+       ],
+       "anyOf": [
+        {
+         "skills": {
+          "Strength": 60
+         }
+        },
+        {
+         "skills": {
+          "Agility": 60
+         }
+        }
        ],
        "note": "Wiki GWD: 'Accessing it requires partial completion of Troll Stronghold (defeating Dad)'; entering the main dungeon also needs 60 Strength (boulder) or 60 Agility (crack); a rope the first time."
       },
@@ -12182,6 +12807,18 @@
       "God Wars Dungeon": {
        "partialQuests": [
         "Troll Stronghold"
+       ],
+       "anyOf": [
+        {
+         "skills": {
+          "Strength": 60
+         }
+        },
+        {
+         "skills": {
+          "Agility": 60
+         }
+        }
        ],
        "note": "Wiki GWD: 'Accessing it requires partial completion of Troll Stronghold (defeating Dad)'; entering the main dungeon also needs 60 Strength (boulder) or 60 Agility (crack); a rope the first time."
       },
@@ -12709,6 +13346,18 @@
        "partialQuests": [
         "Troll Stronghold"
        ],
+       "anyOf": [
+        {
+         "skills": {
+          "Strength": 60
+         }
+        },
+        {
+         "skills": {
+          "Agility": 60
+         }
+        }
+       ],
        "note": "Partial completion of Troll Stronghold plus 60 Strength or 60 Agility; a Rope is needed on the first visit. GWD-related Slayer assignments need Death Plateau. Zakl'n Gritch is in K'ril's room: 70 Hitpoints and 40 Zamorak killcount."
       }
      },
@@ -13072,6 +13721,19 @@
      },
      "locationGates": {
       "Brimhaven Dungeon": {
+       "skills": {
+        "Woodcutting": 10
+       },
+       "allOf": [
+        {
+         "cards": [
+          "Coins"
+         ]
+        },
+        {
+         "cardGroup": "tool:Axe"
+        }
+       ],
        "note": "Needs an axe and 875 coins."
       }
      },
@@ -13092,6 +13754,19 @@
      },
      "locationGates": {
       "Brimhaven Dungeon": {
+       "skills": {
+        "Woodcutting": 10
+       },
+       "allOf": [
+        {
+         "cards": [
+          "Coins"
+         ]
+        },
+        {
+         "cardGroup": "tool:Axe"
+        }
+       ],
        "note": "Needs an axe and 875 coins."
       }
      },
@@ -13110,6 +13785,19 @@
      },
      "locationGates": {
       "Brimhaven Dungeon": {
+       "skills": {
+        "Woodcutting": 10
+       },
+       "allOf": [
+        {
+         "cards": [
+          "Coins"
+         ]
+        },
+        {
+         "cardGroup": "tool:Axe"
+        }
+       ],
        "note": "Needs an axe and 875 coins."
       }
      },
@@ -13448,7 +14136,7 @@
       "Brimhaven",
       "Agility",
       "Varrock Sewers",
-      "Fishing Guild",
+      "Fishing Guild (nearby)",
       "Wilderness",
       "canoe",
       "Pirates' Cove"
@@ -13465,7 +14153,7 @@
       "Brimhaven": null,
       "Agility": null,
       "Varrock Sewers": null,
-      "Fishing Guild": null,
+      "Fishing Guild (nearby)": null,
       "Wilderness": null,
       "canoe": null,
       "Pirates' Cove": null
@@ -13488,6 +14176,27 @@
         "Lunar Diplomacy"
        ],
        "note": "Partial completion (Lokar Searunner also needs The Fremennik Trials)."
+      },
+      "Brimhaven Dungeon": {
+       "skills": {
+        "Woodcutting": 10
+       },
+       "allOf": [
+        {
+         "cards": [
+          "Coins"
+         ]
+        },
+        {
+         "cardGroup": "tool:Axe"
+        }
+       ]
+      },
+      "Laguna Aurorae": {
+       "skills": {
+        "Sailing": 58
+       },
+       "access": "sailing"
       }
      },
      "wilderness": [
@@ -13610,6 +14319,10 @@
      },
      "locationGates": {
       "Charred Dungeon": {
+       "skills": {
+        "Sailing": 60
+       },
+       "access": "sailing",
        "note": "Requires 60 Sailing."
       }
      },
@@ -13752,6 +14465,28 @@
       "God Wars Dungeon": {
        "partialQuests": [
         "Troll Stronghold"
+       ],
+       "anyOf": [
+        {
+         "skills": {
+          "Strength": 60
+         }
+        },
+        {
+         "skills": {
+          "Agility": 60
+         }
+        }
+       ]
+      },
+      "Combat Training Camp": {
+       "quests": [
+        "Biohazard"
+       ]
+      },
+      "Gu'Tanoth": {
+       "partialQuests": [
+        "Watchtower"
        ]
       }
      },
@@ -13967,6 +14702,18 @@
        "partialQuests": [
         "Troll Stronghold"
        ],
+       "anyOf": [
+        {
+         "skills": {
+          "Strength": 60
+         }
+        },
+        {
+         "skills": {
+          "Agility": 60
+         }
+        }
+       ],
        "note": "Partial completion of Troll Stronghold plus 60 Strength or 60 Agility; a Rope is needed on the first visit. GWD-related Slayer assignments need Death Plateau."
       },
       "Wilderness God Wars Dungeon": {
@@ -14011,6 +14758,18 @@
       "God Wars Dungeon": {
        "partialQuests": [
         "Troll Stronghold"
+       ],
+       "anyOf": [
+        {
+         "skills": {
+          "Strength": 60
+         }
+        },
+        {
+         "skills": {
+          "Agility": 60
+         }
+        }
        ],
        "note": "Partial completion of Troll Stronghold plus 60 Strength or 60 Agility; a Rope is needed on the first visit. GWD-related Slayer assignments need Death Plateau."
       },
@@ -14284,9 +15043,26 @@
        ]
       },
       "Brimhaven Dungeon": {
+       "skills": {
+        "Woodcutting": 10
+       },
+       "allOf": [
+        {
+         "cards": [
+          "Coins"
+         ]
+        },
+        {
+         "cardGroup": "tool:Axe"
+        }
+       ],
        "note": "Red dragons need 30 Agility (also an entry fee or Karamja gloves, and an axe for vines)."
       },
       "Charred Dungeon": {
+       "skills": {
+        "Sailing": 60
+       },
+       "access": "sailing",
        "note": "Sailing (already mapped)."
       }
      },
@@ -14320,6 +15096,19 @@
        ]
       },
       "Brimhaven Dungeon": {
+       "skills": {
+        "Woodcutting": 10
+       },
+       "allOf": [
+        {
+         "cards": [
+          "Coins"
+         ]
+        },
+        {
+         "cardGroup": "tool:Axe"
+        }
+       ],
        "note": "Red dragons need 30 Agility (also an entry fee or Karamja gloves, and an axe for vines)."
       }
      },
@@ -14603,6 +15392,7 @@
        "note": "Under Ynysdail, an ocean island (Sailing)."
       },
       "Lumbridge Swamp Caves": {
+       "cardGroup": "light_source",
        "note": "A light source is needed."
       }
      },
@@ -14702,7 +15492,14 @@
      "locationAccess": {
       "Uzer Mastaba": null
      },
-     "wilderness": []
+     "wilderness": [],
+     "locationGates": {
+      "Uzer Mastaba": {
+       "partialQuests": [
+        "The Curse of Arrav"
+       ]
+      }
+     }
     },
     {
      "name": "Giant Scarab",
@@ -14767,6 +15564,10 @@
      },
      "locationGates": {
       "Sunbleak Island": {
+       "skills": {
+        "Sailing": 72
+       },
+       "access": "sailing",
        "note": "72 Sailing (unboostable) and an Adamant helm."
       },
       "The Great Conch": {
@@ -15347,6 +16148,17 @@
         "Waterfall Quest"
        ],
        "note": "Skeleton Mage: Swan Song (Piscatoris), partial Waterfall Quest, or 60 Sailing (Charred Dungeon)."
+      },
+      "Piscatoris Fishing Colony": {
+       "partialQuests": [
+        "Swan Song"
+       ]
+      },
+      "Charred Dungeon": {
+       "skills": {
+        "Sailing": 60
+       },
+       "access": "sailing"
       }
      },
      "wilderness": []
@@ -15450,7 +16262,15 @@
      },
      "wilderness": [
       "Wilderness Agility Course"
-     ]
+     ],
+     "locationGates": {
+      "Wilderness Agility Course": {
+       "skills": {
+        "Agility": 52
+       },
+       "access": "wilderness"
+      }
+     }
     },
     {
      "name": "Skeletal miner",
@@ -16066,7 +16886,7 @@
       "Lumbridge",
       "H.A.M. Hideout",
       "Lava Dragon Isle",
-      "Gu'Tanoth",
+      "Gu'Tanoth (nearby)",
       "Tree Gnome Stronghold",
       "Stronghold of Security",
       "Pit of Pestilence",
@@ -16088,7 +16908,7 @@
       "Edgeville Dungeon": null,
       "H.A.M. Hideout": null,
       "Lava Dragon Isle": null,
-      "Gu'Tanoth": null,
+      "Gu'Tanoth (nearby)": null,
       "Tree Gnome Stronghold": null,
       "Stronghold of Security": null,
       "Pit of Pestilence": null,
@@ -16206,7 +17026,15 @@
      },
      "wilderness": [
       "Escape Caves"
-     ]
+     ],
+     "locationGates": {
+      "Escape Caves": {
+       "cards": [
+        "Coins"
+       ],
+       "access": "wilderness"
+      }
+     }
     },
     {
      "name": "Shadow spider",
@@ -16351,6 +17179,18 @@
        "partialQuests": [
         "Troll Stronghold"
        ],
+       "anyOf": [
+        {
+         "skills": {
+          "Strength": 60
+         }
+        },
+        {
+         "skills": {
+          "Agility": 60
+         }
+        }
+       ],
        "note": "Wiki GWD: 'Accessing it requires partial completion of Troll Stronghold (defeating Dad)'; entering the main dungeon also needs 60 Strength (boulder) or 60 Agility (crack); a rope the first time."
       },
       "Wilderness God Wars Dungeon": {
@@ -16379,6 +17219,18 @@
        "partialQuests": [
         "Troll Stronghold"
        ],
+       "anyOf": [
+        {
+         "skills": {
+          "Strength": 60
+         }
+        },
+        {
+         "skills": {
+          "Agility": 60
+         }
+        }
+       ],
        "note": "Wiki GWD: 'Accessing it requires partial completion of Troll Stronghold (defeating Dad)'; entering the main dungeon also needs 60 Strength (boulder) or 60 Agility (crack); a rope the first time."
       },
       "Wilderness God Wars Dungeon": {
@@ -16406,6 +17258,18 @@
       "God Wars Dungeon": {
        "partialQuests": [
         "Troll Stronghold"
+       ],
+       "anyOf": [
+        {
+         "skills": {
+          "Strength": 60
+         }
+        },
+        {
+         "skills": {
+          "Agility": 60
+         }
+        }
        ],
        "note": "Wiki GWD: 'Accessing it requires partial completion of Troll Stronghold (defeating Dad)'; entering the main dungeon also needs 60 Strength (boulder) or 60 Agility (crack); a rope the first time."
       },
@@ -17020,6 +17884,18 @@
        "partialQuests": [
         "Troll Stronghold"
        ],
+       "anyOf": [
+        {
+         "skills": {
+          "Strength": 60
+         }
+        },
+        {
+         "skills": {
+          "Agility": 60
+         }
+        }
+       ],
        "note": "Partial completion of Troll Stronghold plus 60 Strength or 60 Agility; a Rope is needed on the first visit. GWD-related Slayer assignments need Death Plateau."
       },
       "Wilderness God Wars Dungeon": {
@@ -17034,14 +17910,14 @@
      "name": "Vampyre Juvinate",
      "locations": [
       "Darkmeyer",
-      "Burgh de Rott",
+      "Burgh de Rott (nearby)",
       "Meiyerditch mine",
       "Ver Sinhaza"
      ],
      "card": "Vampyre Juvinate",
      "locationAccess": {
       "Darkmeyer": "morytania",
-      "Burgh de Rott": "morytania",
+      "Burgh de Rott (nearby)": "morytania",
       "Meiyerditch mine": "morytania",
       "Ver Sinhaza": "morytania"
      },
@@ -17064,7 +17940,7 @@
       }
      ],
      "locationGates": {
-      "Burgh de Rott": {
+      "Burgh de Rott (nearby)": {
        "partialQuests": [
         "In Aid of the Myreque"
        ]
@@ -17259,7 +18135,12 @@
       "Lumbridge Swamp Caves": null
      },
      "wilderness": [],
-     "slayer": 35
+     "slayer": 35,
+     "locationGates": {
+      "Lumbridge Swamp Caves": {
+       "cardGroup": "light_source"
+      }
+     }
     }
    ],
    "equipment": [
@@ -17445,6 +18326,18 @@
        "partialQuests": [
         "Troll Stronghold"
        ],
+       "anyOf": [
+        {
+         "skills": {
+          "Strength": 60
+         }
+        },
+        {
+         "skills": {
+          "Agility": 60
+         }
+        }
+       ],
        "note": "GWD werewolves are aggressive unless you wear a Zamorak item."
       }
      },
@@ -17564,7 +18457,7 @@
      "name": "Ice wolf",
      "locations": [
       "Ice Path",
-      "God Wars Dungeon",
+      "God Wars Dungeon (nearby)",
       "Settlement Ruins",
       "Trollweiss Mountain",
       "Weiss"
@@ -17572,7 +18465,7 @@
      "card": "Ice wolf",
      "locationAccess": {
       "Ice Path": null,
-      "God Wars Dungeon": null,
+      "God Wars Dungeon (nearby)": null,
       "Settlement Ruins": "kourend",
       "Trollweiss Mountain": null,
       "Weiss": null
@@ -17590,7 +18483,7 @@
        ],
        "note": "Ice Path needs spiked boots (no card found)."
       },
-      "God Wars Dungeon": {
+      "God Wars Dungeon (nearby)": {
        "partialQuests": [
         "Troll Stronghold"
        ],
@@ -17627,18 +18520,18 @@
     {
      "name": "White wolves",
      "locations": [
-      "Wilderness Agility Course",
+      "Wilderness Agility Course (nearby)",
       "White Wolf Mountain",
       "The Proudspire"
      ],
      "card": "White wolf",
      "locationAccess": {
-      "Wilderness Agility Course": null,
+      "Wilderness Agility Course (nearby)": null,
       "White Wolf Mountain": null,
       "The Proudspire": "varlamore"
      },
      "wilderness": [
-      "Wilderness Agility Course"
+      "Wilderness Agility Course (nearby)"
      ]
     }
    ],
@@ -17677,6 +18570,9 @@
         "Fallen From Grace"
        ],
        "access": "sailing",
+       "skills": {
+        "Sailing": 62
+       },
        "note": "Wiki: 'accessible after partial completion of Fallen From Grace'; Wyrmscraig island needs 62 Sailing."
       }
      },
@@ -17709,6 +18605,9 @@
         "Fallen From Grace"
        ],
        "access": "sailing",
+       "skills": {
+        "Sailing": 62
+       },
        "note": "Wiki: 'accessible after partial completion of Fallen From Grace'; Wyrmscraig island needs 62 Sailing."
       }
      },
@@ -17732,6 +18631,11 @@
         "Sailing": 62
        },
        "access": "sailing"
+      },
+      "Earthbound Cavern": {
+       "partialQuests": [
+        "Perilous Moons"
+       ]
       }
      },
      "wilderness": [],
@@ -17754,6 +18658,9 @@
         "Fallen From Grace"
        ],
        "access": "sailing",
+       "skills": {
+        "Sailing": 62
+       },
        "note": "Wiki: 'accessible after partial completion of Fallen From Grace'; Wyrmscraig island needs 62 Sailing."
       },
       "Charred Dungeon": {
@@ -17784,6 +18691,9 @@
         "Fallen From Grace"
        ],
        "access": "sailing",
+       "skills": {
+        "Sailing": 62
+       },
        "note": "Wiki: 'accessible after partial completion of Fallen From Grace'; Wyrmscraig island needs 62 Sailing."
       },
       "Charred Dungeon": {
@@ -18000,6 +18910,9 @@
        "note": "Partial."
       },
       "Wizards' Guild": {
+       "skills": {
+        "Magic": 66
+       },
        "note": "66 Magic to enter; zombies there can't be meleed."
       }
      },
@@ -18048,6 +18961,20 @@
         "The Great Brain Robbery"
        ],
        "note": "Wiki (Harmony Island): \"can only be accessed after starting The Great Brain Robbery\" (Rum Deal is Braindeath Island)"
+      },
+      "Underwater Tunnel": {
+       "allOf": [
+        {
+         "cards": [
+          "Fishbowl helmet"
+         ]
+        },
+        {
+         "cards": [
+          "Diving apparatus"
+         ]
+        }
+       ]
       }
      },
      "wilderness": []

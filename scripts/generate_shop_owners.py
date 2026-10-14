@@ -37,6 +37,7 @@ from pathlib import Path
 
 import wiki_api
 from catalog_names import npc_names
+from generate_monster_locations import _links, base_place
 
 _HERE = Path(__file__).resolve().parent
 _CACHE = _HERE / "cache" / "wiki_shop_owners.json"
@@ -83,15 +84,17 @@ def main() -> int:
     places: dict[str, list[str]] = {}
     for row in fetch():
         shops.setdefault(row["page_name"], []).extend(owner_names(row.get("owner") or ""))
-        for loc in re.findall(r"\[\[([^\]|#]+)", row.get("location") or ""):
-            places.setdefault(row["page_name"], []).append(loc.strip())
+        # reference-point links ("south of the [[X]]") become "X (nearby)": X's area access, not its entry gate
+        for loc in _links(row.get("location") or ""):
+            places.setdefault(row["page_name"], []).append(loc)
     from generate_slayer import REGION_ACCESS, location_regions
-    regions = location_regions(sorted({l for ls in places.values() for l in ls}))
+    regions = location_regions(sorted({base_place(l) for ls in places.values() for l in ls}))
     hand = json.loads((_HERE / "monster_locations_overrides.json").read_text(encoding="utf-8"))
     loc_access = {**json.loads((_HERE / "slayer_curated.json").read_text(encoding="utf-8")).get("locationAccess", {}),
                   **{k: v["access"] for k, v in hand.get("_locationAccess", {}).items()}}
 
     def access_of(loc):
+        loc = base_place(loc)
         if loc in loc_access:
             return loc_access[loc]
         rs = [r for r in regions.get(loc, "").split("&") if r]

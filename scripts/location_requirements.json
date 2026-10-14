@@ -1,0 +1,1025 @@
+{
+ "_doc": "Central entry requirements of places, keyed by the location name our data uses (wiki page titles; lookup is case-insensitive, so 'Farming guild' / 'the Great Conch' match too). One gate model, read by the planner's _locGate()/_locReqOk() (preview.html) for every place it evaluates: card 'Found at' boxes and NPC reachability (monster_locations.json), Slayer task locations, shops (shop_owners.json locations), skilling methods with a 'location' field (skilling_curated.json), clue steps tagged with 'locations' (generate_clue_steps.py via clueMatch), ground spawns. generate_monster_locations.py and generate_slayer.py also merge these into their output gates; location_reqs.py validates every name. Fields (all optional, all must be met): skills {Skill: level} (base level; 'boostable' records whether the wiki allows a boost, null = the wiki doesn't say), skillsSum {'Attack+Strength': 130} (combined base levels), questPoints, quests (completed), partialQuests (started counts), diaries ('Area Tier'), cards (any one card), cardGroup ('light_source' | 'tool:Axe' | 'tool:Pickaxe': any card of that group), access (access_routes.json key), anyOf [gate, ...] (one of these sub-gates), allOf [gate, ...] (every sub-gate; for two separate any-one card needs), parent (a place this one is inside: its gate applies too), clueMatch (regex on a clue step's location text that means 'inside this place'), note, wiki (quote), page. Only put a gate here when it applies to the WHOLE place as our data uses it; partial areas get their own key (e.g. 'Farming Guild (advanced tier)'). Use scan_location_requirements.py to find places whose wiki infobox lists a requirement this file doesn't cover yet.",
+ "Farming Guild": {
+  "skills": {
+   "Farming": 45
+  },
+  "boostable": true,
+  "clueMatch": "inside the Farming Guild",
+  "note": "45 enters the guild and its beginner (east) wing; the intermediate (west) wing needs 65 and the advanced (north) wing 85 — see the tier entries.",
+  "wiki": "To enter the guild, a minimum Farming level of 45 is required. ... the intermediate and advanced tier requires level 65 and 85 Farming to enter respectively. (boosts may be used for all tiers)",
+  "page": "Farming Guild"
+ },
+ "Farming Guild (intermediate tier)": {
+  "parent": "Farming Guild",
+  "skills": {
+   "Farming": 65
+  },
+  "boostable": true,
+  "note": "West wing: the anima patch and the Hespori cave.",
+  "wiki": "The Hespori is a sporadic Farming boss fought in the cave within the west wing of the Farming Guild which requires 65 Farming to access.",
+  "page": "Farming Guild"
+ },
+ "Farming Guild (advanced tier)": {
+  "parent": "Farming Guild",
+  "skills": {
+   "Farming": 85
+  },
+  "boostable": true,
+  "clueMatch": "north wing of the Farming Guild",
+  "note": "North wing: celastrus, redwood and spirit tree patches.",
+  "wiki": "the intermediate and advanced tier requires level 65 and 85 Farming to enter respectively.",
+  "page": "Farming Guild"
+ },
+ "Woodcutting Guild": {
+  "skills": {
+   "Woodcutting": 60
+  },
+  "boostable": true,
+  "clueMatch": "^Woodcutting Guild in Hosidius",
+  "note": "The redwood scaffolding inside needs nothing beyond the guild (redwoods themselves need 90 Woodcutting).",
+  "wiki": "In order to enter the guild, players must have at least level 60 in Woodcutting (which can be boosted).",
+  "page": "Woodcutting Guild"
+ },
+ "Mining Guild": {
+  "skills": {
+   "Mining": 60
+  },
+  "boostable": true,
+  "note": "The members' area (mithril to amethyst) has no extra requirement.",
+  "wiki": "a guild for expert miners available to players with at least 60 Mining (can be boosted). ... Other than Old School RuneScape membership, there are no additional requirements to enter the members' area.",
+  "page": "Mining Guild"
+ },
+ "Fishing Guild": {
+  "skills": {
+   "Fishing": 68
+  },
+  "boostable": true,
+  "clueMatch": "(in|inside) the Fishing Guild",
+  "wiki": "To enter, players must have a Fishing level of 68; temporary boosts can be used to boost one's level in order to enter the guild",
+  "page": "Fishing Guild"
+ },
+ "Crafting Guild": {
+  "skills": {
+   "Crafting": 40
+  },
+  "boostable": null,
+  "anyOf": [
+   {
+    "cards": [
+     "Brown apron",
+     "Golden apron"
+    ]
+   },
+   {
+    "skills": {
+     "Crafting": 99
+    }
+   }
+  ],
+  "note": "The apron (or Crafting cape / Max cape, which have no cards) is only checked at the door. The Crafting cape needs 99 Crafting.",
+  "wiki": "A Crafting level of 40 is required to enter the guild as well as wearing one of the following: A brown or golden apron, A Crafting cape, A Max cape or any of its variants. These items are only required to enter through the door.",
+  "page": "Crafting Guild"
+ },
+ "Cooks' Guild": {
+  "skills": {
+   "Cooking": 32
+  },
+  "boostable": null,
+  "anyOf": [
+   {
+    "cards": [
+     "Chef's hat",
+     "Golden chef's hat"
+    ]
+   },
+   {
+    "cards": [
+     "Varrock armour"
+    ],
+    "diaries": [
+     "Varrock Hard"
+    ]
+   },
+   {
+    "skills": {
+     "Cooking": 99
+    }
+   }
+  ],
+  "clueMatch": "head chef in Cooks' Guild|(in|inside) the Cooks' Guild",
+  "note": "Varrock armour 3 (hard Varrock diary) or 4 also works; the Cooking cape / Max cape (no cards) need 99 Cooking.",
+  "wiki": "To enter the guild, players need at least 32 Cooking and must wear one of the following: A chef's hat or golden chef's hat, A Cooking cape or Cooking hood, A Max cape or Max hood, or any of their variants, Varrock armour 3 or 4",
+  "page": "Cooks' Guild"
+ },
+ "Ranging Guild": {
+  "skills": {
+   "Ranged": 40
+  },
+  "boostable": true,
+  "clueMatch": "(in|inside) the Ranging Guild",
+  "wiki": "Level 40 Ranged is required to enter, though this can be boosted.",
+  "page": "Ranging Guild"
+ },
+ "Champions' Guild": {
+  "questPoints": 32,
+  "clueMatch": "(in|inside) the Champions' Guild",
+  "wiki": "The Champions' Guild is located south of Varrock and is accessible to players with at least 32 quest points.",
+  "page": "Champions' Guild"
+ },
+ "Heroes' Guild": {
+  "quests": [
+   "Heroes' Quest"
+  ],
+  "wiki": "The guild is only accessible to members who have completed the Heroes' Quest.",
+  "page": "Heroes' Guild"
+ },
+ "Legends' Guild": {
+  "quests": [
+   "Legends' Quest"
+  ],
+  "clueMatch": "^Legends' Guild$|ground floor of the Legend'?s'? guild",
+  "note": "The grounds open once Legends' Quest is started; the building needs it completed. Our NPC locations are inside, so the gate is completion.",
+  "wiki": "To enter the grounds of the Legends' Guild, players must have started the Legends' Quest. However, to enter the actual building, players must have completed the entire quest.",
+  "page": "Legends' Guild"
+ },
+ "Warriors' Guild": {
+  "anyOf": [
+   {
+    "skillsSum": {
+     "Attack+Strength": 130
+    }
+   },
+   {
+    "skills": {
+     "Attack": 99
+    }
+   },
+   {
+    "skills": {
+     "Strength": 99
+    }
+   }
+  ],
+  "boostable": null,
+  "clueMatch": "warrior'?s'? guild bank|bank of the warrior'?s'? guild|(top floor|middle|entrance hall) of the warrior'?s'? guild|in the warrior'?s'? guild",
+  "wiki": "Only players with a combined Attack and Strength level of at least 130 (or level 99 in either skill), are allowed entry by the guild's guard Ghommal",
+  "page": "Warriors' Guild"
+ },
+ "Myths' Guild": {
+  "quests": [
+   "Dragon Slayer II"
+  ],
+  "clueMatch": "^Myths' Guild$",
+  "wiki": "The player can gain access by helping uncover the lost history of the origin of dragons by completing the Dragon Slayer II quest.",
+  "page": "Myths' Guild"
+ },
+ "Wizards' Guild": {
+  "skills": {
+   "Magic": 66
+  },
+  "boostable": true,
+  "wiki": "You must have level 66 Magic to enter. Boosts, such as a wizard's mind bomb at level 63, can be used to enter.",
+  "page": "Wizards' Guild"
+ },
+ "Hunter Guild": {
+  "skills": {
+   "Hunter": 46
+  },
+  "boostable": false,
+  "note": "The wiki gates the guild's amenities (shops, the Burrow, rumours); our NPCs and shops there are those amenities.",
+  "wiki": "To access the guild's amenities, a minimum Hunter level of 46 (not boostable) is required.",
+  "page": "Hunter Guild"
+ },
+ "Motherlode Mine (upper level)": {
+  "parent": "Motherlode Mine",
+  "skills": {
+   "Mining": 57
+  },
+  "boostable": false,
+  "cards": [
+   "Golden nugget"
+  ],
+  "note": "One-time fee of 100 golden nuggets to Prospector Percy (50 more for the upper hopper). The mine itself has no entry requirement (30 Mining to mine).",
+  "wiki": "Unlocking the upper level of the mine requires level 57 Mining, and a one-time fee of 100 golden nuggets paid to Prospector Percy.",
+  "page": "Motherlode Mine"
+ },
+ "Volcanic Mine": {
+  "access": "fossil_island",
+  "note": "Petrified Pete (the entry fee and his ore shop) stands at the entrance, so the place itself only needs Fossil Island; the mine proper is 'Volcanic Mine (inside)'.",
+  "wiki": "To enter the mine, players must have level 50 Mining. In addition, players must pay Petrified Pete 30 numulite each time to enter the mine.",
+  "page": "Volcanic Mine"
+ },
+ "Volcanic Mine (inside)": {
+  "parent": "Volcanic Mine",
+  "skills": {
+   "Mining": 50
+  },
+  "boostable": null,
+  "cards": [
+   "Numulite"
+  ],
+  "note": "30 numulite per entry (or 3,000 once), paid to Petrified Pete.",
+  "wiki": "To enter the mine, players must have level 50 Mining. In addition, players must pay Petrified Pete 30 numulite each time to enter the mine.",
+  "page": "Volcanic Mine"
+ },
+ "Resource Area": {
+  "access": "wilderness",
+  "anyOf": [
+   {
+    "cards": [
+     "Coins"
+    ]
+   },
+   {
+    "diaries": [
+     "Wilderness Elite"
+    ]
+   }
+  ],
+  "note": "Fee 7,500 coins (6,000 / 3,750 with the medium / hard Wilderness diary).",
+  "wiki": "An entrance fee of 7,500 coins is required to enter the resource area. ... players who have completed the elite Wilderness Diary can enter free of charge.",
+  "page": "Resource Area"
+ },
+ "Brimhaven Dungeon": {
+  "skills": {
+   "Woodcutting": 10
+  },
+  "boostable": null,
+  "allOf": [
+   {
+    "cards": [
+     "Coins"
+    ]
+   },
+   {
+    "cardGroup": "tool:Axe"
+   }
+  ],
+  "note": "875 coins per entry (or 1,000,000 once) and an axe for the vines; deeper parts need 34 Woodcutting / 12+ Agility.",
+  "wiki": "To enter the dungeon, players must pay Saniboch ... 875 coins each time ... A player will also need an axe to cut the vines blocking the path (requiring level 10 Woodcutting).",
+  "page": "Brimhaven Dungeon"
+ },
+ "Mor Ul Rek (inner city)": {
+  "parent": "Mor Ul Rek",
+  "cards": [
+   "Fire cape"
+  ],
+  "note": "The outer area (shops, killable TzHaar) is open; showing a fire cape once opens the inner city (infernal eels, the Inferno).",
+  "wiki": "Having a fire cape or fire max cape is required to enter the interior portion of the city. ... After passing the barrier once, one does not need to bring the fire cape anymore",
+  "page": "Mor Ul Rek"
+ },
+ "Hallowed Sepulchre": {
+  "skills": {
+   "Agility": 52
+  },
+  "boostable": true,
+  "quests": [
+   "Sins of the Father"
+  ],
+  "wiki": "available to players with level 52 Agility and completion of Sins of the Father. ... The entry requirements for a floor are boostable.",
+  "page": "Hallowed Sepulchre"
+ },
+ "Wilderness Agility Course": {
+  "skills": {
+   "Agility": 52
+  },
+  "boostable": null,
+  "access": "wilderness",
+  "wiki": "a training area located deep in the Wilderness, requiring level 52 Agility to enter",
+  "page": "Wilderness Agility Course"
+ },
+ "Tithe Farm": {
+  "skills": {
+   "Farming": 34
+  },
+  "boostable": null,
+  "wiki": "The Tithe Farm is a Farming based minigame that is located in Hosidius, requiring level 34 Farming to play.",
+  "page": "Tithe Farm"
+ },
+ "Trouble Brewing": {
+  "quests": [
+   "Cabin Fever"
+  ],
+  "skills": {
+   "Cooking": 40
+  },
+  "boostable": null,
+  "wiki": "To access the minigame, you must have completed the Cabin Fever quest and have at least 40 Cooking.",
+  "page": "Trouble Brewing"
+ },
+ "God Wars Dungeon": {
+  "partialQuests": [
+   "Troll Stronghold"
+  ],
+  "anyOf": [
+   {
+    "skills": {
+     "Strength": 60
+    }
+   },
+   {
+    "skills": {
+     "Agility": 60
+    }
+   }
+  ],
+  "note": "A rope is also needed the first time; climbing boots without Trollheim Teleport.",
+  "wiki": "Accessing it requires partial completion of Troll Stronghold (defeating Dad) ... and either 60 Strength or 60 Agility.",
+  "page": "God Wars Dungeon"
+ },
+ "Lunar Isle": {
+  "partialQuests": [
+   "Lunar Diplomacy"
+  ],
+  "note": "Talking to most islanders also needs a Seal of passage (no card) until the elite Fremennik diary.",
+  "wiki": "The island becomes accessible to members who have progressed far enough into the Lunar Diplomacy quest.",
+  "page": "Lunar Isle"
+ },
+ "Miscellania": {
+  "quests": [
+   "The Fremennik Trials"
+  ],
+  "wiki": "Using this boat requires the completion of the quest The Fremennik Trials. ... There is a fairy ring ... on Miscellania, which requires the completion of The Fremennik Trials in order to use.",
+  "page": "Miscellania"
+ },
+ "Etceteria": {
+  "quests": [
+   "The Fremennik Trials"
+  ],
+  "note": "Reached through Miscellania (or by boat with 65 Sailing after Royal Trouble).",
+  "wiki": "A boat found off of the second most western dock in northern Rellekka sails to and from the dock on Miscellania (requires the completion of the quest The Fremennik Trials).",
+  "page": "Etceteria"
+ },
+ "Jatizso": {
+  "quests": [
+   "The Fremennik Trials"
+  ],
+  "wiki": "It can be accessed by talking to Mord Gunnars (requires completion of The Fremennik Trials) on the north-easternmost pier in Rellekka.",
+  "page": "Jatizso"
+ },
+ "Neitiznot": {
+  "quests": [
+   "The Fremennik Trials"
+  ],
+  "partialQuests": [
+   "The Fremennik Isles"
+  ],
+  "wiki": "This requires the completion of The Fremennik Trials as well as starting The Fremennik Isles.",
+  "page": "Neitiznot"
+ },
+ "Burgh de Rott": {
+  "partialQuests": [
+   "In Aid of the Myreque"
+  ],
+  "wiki": "Players must have started In Aid of the Myreque in order to access the town.",
+  "page": "Burgh de Rott"
+ },
+ "Port Phasmatys": {
+  "anyOf": [
+   {
+    "cards": [
+     "Ecto-token"
+    ]
+   },
+   {
+    "quests": [
+     "Ghosts Ahoy"
+    ]
+   }
+  ],
+  "note": "A charter ship also bypasses the toll.",
+  "wiki": "Entry to the town through the energy barriers requires two ecto-tokens, or none after completion of Ghosts Ahoy.",
+  "page": "Port Phasmatys"
+ },
+ "Lumbridge Swamp Caves": {
+  "cardGroup": "light_source",
+  "note": "A rope the first time from the swamp entrance; a lit Fire of Eternal Light removes the light-source need.",
+  "wiki": "The caves require a light source, unless the player has lit a fire of eternal light near the rope entrance.",
+  "page": "Lumbridge Swamp Caves"
+ },
+ "Mos Le'Harmless Cave": {
+  "cardGroup": "light_source",
+  "wiki": "A light source is required in the cave unless the player has lit a Fire of Eternal Light near the entrance.",
+  "page": "Mos Le'Harmless Cave"
+ },
+ "Underwater Tunnel": {
+  "allOf": [
+   {
+    "cards": [
+     "Fishbowl helmet"
+    ]
+   },
+   {
+    "cards": [
+     "Diving apparatus"
+    ]
+   }
+  ],
+  "wiki": "A fishbowl helmet and diving apparatus are required to enter.",
+  "page": "Underwater Tunnel"
+ },
+ "Silk Chasm": {
+  "diaries": [
+   "Wilderness Medium"
+  ],
+  "cards": [
+   "Coins"
+  ],
+  "access": "wilderness",
+  "note": "Or a Venenatis boss Slayer task instead of the diary; 50,000 coins fee.",
+  "wiki": "Entering the boss lair requires completion of the medium Wilderness diary OR a Venenatis boss Slayer task, and a fee of 50,000 coins",
+  "page": "Silk Chasm"
+ },
+ "Escape Caves": {
+  "cards": [
+   "Coins"
+  ],
+  "access": "wilderness",
+  "wiki": "Entering the boss lairs or the entrances to the Escape Caves requires players to pay a fee of 50,000 coins",
+  "page": "Escape Caves"
+ },
+ "Corsair Cove": {
+  "partialQuests": [
+   "The Corsair Curse"
+  ],
+  "wiki": "the cove is accessible to free-to-play players, after starting The Corsair Curse quest.",
+  "page": "Corsair Cove"
+ },
+ "Ruins of Camdozaal": {
+  "quests": [
+   "Below Ice Mountain"
+  ],
+  "wiki": "accessed through the entrance on the western side of the mountain after completion of the quest Below Ice Mountain.",
+  "page": "Ruins of Camdozaal"
+ },
+ "Barbarian Agility Course": {
+  "quests": [
+   "Alfred Grimhand's Barcrawl"
+  ],
+  "wiki": "Access to this course requires completion of the Alfred Grimhand's Barcrawl miniquest.",
+  "page": "Barbarian Outpost Agility Course"
+ },
+ "Combat Training Camp": {
+  "quests": [
+   "Biohazard"
+  ],
+  "wiki": "The Combat Training Camp is a combat training facility which players may access upon completion of the Biohazard quest.",
+  "page": "Combat Training Camp"
+ },
+ "Digsite Dungeon": {
+  "partialQuests": [
+   "The Dig Site"
+  ],
+  "cards": [
+   "Rope"
+  ],
+  "wiki": "The Digsite Dungeon is below the Digsite and can only be accessed during and after The Dig Site quest. ... The player must use a rope on the west winch to enter the dungeon there",
+  "page": "Digsite Dungeon"
+ },
+ "Dondakan's mine": {
+  "quests": [
+   "Between a Rock..."
+  ],
+  "wiki": "To access the mines, players must have completed the Between a Rock...",
+  "page": "Dondakan's mine"
+ },
+ "Gu'Tanoth": {
+  "partialQuests": [
+   "Watchtower"
+  ],
+  "wiki": "Players need to progress far enough into the Watchtower quest in order to enter.",
+  "page": "Gu'Tanoth"
+ },
+ "Gwenith": {
+  "quests": [
+   "Song of the Elves"
+  ],
+  "wiki": "Completion of Song of the Elves is required to access the village.",
+  "page": "Gwenith"
+ },
+ "Gwenith Hunter area": {
+  "quests": [
+   "Song of the Elves"
+  ],
+  "wiki": "In order to reach the hunter area, players must have completed Song of the Elves, as the only way to reach the hunting area is through Prifddinas.",
+  "page": "Gwenith Hunter area"
+ },
+ "Zul-Andra": {
+  "quests": [
+   "Regicide"
+  ],
+  "wiki": "Zul-Andra can be reached in several ways, all of which require completion of Regicide.",
+  "page": "Zul-Andra"
+ },
+ "Port Tyras": {
+  "quests": [
+   "Regicide"
+  ],
+  "wiki": "All ways require Regicide to be completed.",
+  "page": "Port Tyras"
+ },
+ "Necropolis": {
+  "partialQuests": [
+   "Beneath Cursed Sands"
+  ],
+  "wiki": "Entering the Necropolis requires partial completion of Beneath Cursed Sands.",
+  "page": "Necropolis"
+ },
+ "Jaltevas Pyramid": {
+  "quests": [
+   "Beneath Cursed Sands"
+  ],
+  "wiki": "Infobox Location |requirement = [[Beneath Cursed Sands]]",
+  "page": "Jaltevas Pyramid"
+ },
+ "Northern Conch mine": {
+  "partialQuests": [
+   "Troubled Tortugans"
+  ],
+  "wiki": "It becomes accessible after partial completion of Troubled Tortugans.",
+  "page": "Northern Conch mine"
+ },
+ "Piscatoris Fishing Colony": {
+  "partialQuests": [
+   "Swan Song"
+  ],
+  "wiki": "Swan Song must be partially completed in order to enter the colony",
+  "page": "Piscatoris Fishing Colony"
+ },
+ "Rat Pits": {
+  "partialQuests": [
+   "Ratcatchers"
+  ],
+  "wiki": "Access to the Rat Pits requires partial completion of Ratcatchers",
+  "page": "Rat Pits"
+ },
+ "Red Rock": {
+  "partialQuests": [
+   "The Red Reef"
+  ],
+  "wiki": "Partial completion of the quest The Red Reef is required to access Red Rock",
+  "page": "Red Rock"
+ },
+ "Sacred Grove": {
+  "partialQuests": [
+   "The Red Reef"
+  ],
+  "wiki": "The Sacred Grove is a grove located in The Great Conch, which requires partial completion of The Red Reef in order to gain access.",
+  "page": "The Sacred Grove"
+ },
+ "The Scar": {
+  "partialQuests": [
+   "Desert Treasure II - The Fallen Empire"
+  ],
+  "wiki": "Partial completion of Desert Treasure II is required to access the Scar.",
+  "page": "The Scar"
+ },
+ "The Summer Shore": {
+  "partialQuests": [
+   "Troubled Tortugans"
+  ],
+  "note": "The docking point also needs 45 Sailing; the fairy ring and charter don't.",
+  "wiki": "The Summer Shore can be reached in several ways, all of which require partial completion of Troubled Tortugans.",
+  "page": "The Summer Shore"
+ },
+ "The Great Conch": {
+  "partialQuests": [
+   "Troubled Tortugans"
+  ],
+  "note": "Sailing there needs 45 Sailing; the fairy ring and charter ship need only the quest started.",
+  "wiki": "Starting Troubled Tortugans, the first quest in the series, is required to access the Great Conch. ... can be visited by: Using the fairy ring, Taking a charter ship, Sailing to the docking point",
+  "page": "The Great Conch"
+ },
+ "The Pandemonium": {
+  "partialQuests": [
+   "Pandemonium"
+  ],
+  "wiki": "All methods of travelling to the Pandemonium require progressing the Pandemonium quest at least to the point where you visit the island.",
+  "page": "The Pandemonium"
+ },
+ "Uzer Mastaba": {
+  "partialQuests": [
+   "The Curse of Arrav"
+  ],
+  "wiki": "Access requires starting The Curse of Arrav",
+  "page": "Uzer Mastaba"
+ },
+ "Villa Lucens": {
+  "quests": [
+   "Death on the Isle"
+  ],
+  "wiki": "The main entrance of the manor is guarded by a Villa Guard, and can only be entered after Death on the Isle is complete",
+  "page": "Villa Lucens"
+ },
+ "Viyeldi Caves": {
+  "partialQuests": [
+   "Legends' Quest"
+  ],
+  "wiki": "They play a major role in Legends' Quest, of which partial completion is required for access to the caves.",
+  "page": "Viyeldi Caves"
+ },
+ "Grand Tree Mine": {
+  "quests": [
+   "The Grand Tree"
+  ],
+  "wiki": "The Grand Tree mine is an area in the northern part of the Grand Tree Tunnels and is only accessible after The Grand Tree quest.",
+  "page": "Grand Tree Mine"
+ },
+ "Fisher Realm": {
+  "quests": [
+   "Holy Grail"
+  ],
+  "wiki": "The completion of Holy Grail is required to travel to the Fisher Realm.",
+  "page": "Fisher Realm"
+ },
+ "Daeyalt essence mine": {
+  "quests": [
+   "Sins of the Father"
+  ],
+  "wiki": "The essence mine becomes available after completion of Sins of the Father.",
+  "page": "Daeyalt essence mine"
+ },
+ "Gorak Plane": {
+  "partialQuests": [
+   "Fairytale II - Cure a Queen"
+  ],
+  "wiki": "The plane is only accessible through the fairy rings ... Players can use fairy rings once the Fairytale II - Cure a Queen quest is partially completed",
+  "page": "Gorak Plane"
+ },
+ "Fairy Resistance Hideout": {
+  "partialQuests": [
+   "Fairytale II - Cure a Queen"
+  ],
+  "wiki": "Players must have at least started Fairytale II - Cure a Queen and found Nuff's certificate.",
+  "page": "Fairy Resistance Hideout"
+ },
+ "Ghorrock Dungeon": {
+  "quests": [
+   "Secrets of the North"
+  ],
+  "wiki": "Infobox Location |requirement = Secrets of the North",
+  "page": "Ghorrock Dungeon"
+ },
+ "KGP Headquarters": {
+  "partialQuests": [
+   "Cold War"
+  ],
+  "wiki": "Infobox Location |requirement = Started [[Cold War]]",
+  "page": "KGP Headquarters"
+ },
+ "Vampyrium": {
+  "partialQuests": [
+   "The Blood Moon Rises"
+  ],
+  "note": "The infobox lists The Blood Moon Rises; it is visited during the quest, so started counts.",
+  "wiki": "The quest The Blood Moon Rises unlocks access to Vampyrium. The area does not appear on the world map until The Blood Moon Rises has been started.",
+  "page": "Vampyrium"
+ },
+ "Wolf Den": {
+  "partialQuests": [
+   "Meat and Greet"
+  ],
+  "wiki": "Infobox Location |requirement = Partial completion of [[Meat and Greet]]",
+  "page": "Wolf Den"
+ },
+ "Tolna's rift": {
+  "quests": [
+   "A Soul's Bane"
+  ],
+  "wiki": "Tolna's rift is a dungeon that can be accessed after completing A Soul's Bane.",
+  "page": "Tolna's rift"
+ },
+ "Dorgesh-Kaan": {
+  "quests": [
+   "Death to the Dorgeshuun"
+  ],
+  "wiki": "It can only be accessed after completion of the Death to the Dorgeshuun quest.",
+  "page": "Dorgesh-Kaan"
+ },
+ "Dorgesh-Kaan mine": {
+  "partialQuests": [
+   "The Lost Tribe"
+  ],
+  "wiki": "it requires The Lost Tribe quest to be started to use.",
+  "page": "Dorgesh-Kaan mine"
+ },
+ "Dorgesh-Kaan–Keldagrim train system": {
+  "quests": [
+   "Another Slice of H.A.M."
+  ],
+  "wiki": "Completion of Another Slice of H.A.M. is required to use the train.",
+  "page": "Dorgesh-Kaan–Keldagrim train system"
+ },
+ "Cam Torum": {
+  "partialQuests": [
+   "Perilous Moons"
+  ],
+  "wiki": "Requires partial completion of Perilous Moons. (Attempting to enter the Cam Torum without having the quest's requirements will result in Attala turning the player away.)",
+  "page": "Cam Torum"
+ },
+ "Earthbound Cavern": {
+  "partialQuests": [
+   "Perilous Moons"
+  ],
+  "wiki": "Accessing Neypotzli requires having gained access during the Perilous Moons quest",
+  "page": "Earthbound Cavern"
+ },
+ "Crabclaw Caves": {
+  "partialQuests": [
+   "The Depths of Despair"
+  ],
+  "wiki": "Access to the caves requires partial completion of The Depths of Despair quest.",
+  "page": "Crabclaw Caves"
+ },
+ "Anglers' Retreat": {
+  "skills": {
+   "Sailing": 51
+  },
+  "boostable": false,
+  "access": "sailing",
+  "wiki": "Level 51 Sailing (unboostable) is required to moor at the island",
+  "page": "Anglers' Retreat"
+ },
+ "Brittle Isle": {
+  "skills": {
+   "Sailing": 81
+  },
+  "boostable": null,
+  "access": "sailing",
+  "note": "The boat also needs an eternal brazier (78 Sailing) for the icy seas.",
+  "wiki": "Brittle Isle is an island in the Northern Ocean requiring 81 Sailing to dock at",
+  "page": "Brittle Isle"
+ },
+ "Buccaneers' Haven": {
+  "skills": {
+   "Sailing": 76
+  },
+  "boostable": false,
+  "access": "sailing",
+  "wiki": "It requires 76 Sailing (not boostable) to moor on.",
+  "page": "Buccaneers' Haven"
+ },
+ "Buccaneers' Laboratory": {
+  "parent": "Buccaneers' Haven",
+  "wiki": "Buccaneers' Laboratory is located on Buccaneers' Haven, therefore requiring 76 Sailing to access.",
+  "page": "Buccaneers' Laboratory"
+ },
+ "Charred Island": {
+  "skills": {
+   "Sailing": 60
+  },
+  "boostable": false,
+  "access": "sailing",
+  "wiki": "Docking here requires level 60 Sailing, unboosted.",
+  "page": "Charred Island"
+ },
+ "Charred Dungeon": {
+  "parent": "Charred Island",
+  "note": "A rope is used on the hole the first time (one spawns on the island).",
+  "wiki": "It is accessible by climbing down the dark hole on Charred Island, which requires level 60 Sailing to dock at.",
+  "page": "Charred Dungeon"
+ },
+ "Chinchompa Island": {
+  "skills": {
+   "Sailing": 42
+  },
+  "boostable": null,
+  "access": "sailing",
+  "wiki": "Docking at the island requires level 42 Sailing.",
+  "page": "Chinchompa Island"
+ },
+ "Deepfin Point": {
+  "skills": {
+   "Sailing": 67
+  },
+  "boostable": false,
+  "access": "sailing",
+  "wiki": "It is accessible by entering the cave on Deepfin Point, which requires level 67 Sailing to dock at (unboostable).",
+  "page": "Deepfin Point"
+ },
+ "Deepfin Mine": {
+  "parent": "Deepfin Point",
+  "wiki": "It is accessible by entering the cave on Deepfin Point, which requires level 67 Sailing to dock at (unboostable).",
+  "page": "Deepfin Mine"
+ },
+ "Dognose Island": {
+  "skills": {
+   "Sailing": 40
+  },
+  "boostable": null,
+  "access": "sailing",
+  "wiki": "Docking at the island requires level 40 Sailing.",
+  "page": "Dognose Island"
+ },
+ "Drumstick Isle": {
+  "skills": {
+   "Sailing": 79
+  },
+  "boostable": null,
+  "access": "sailing",
+  "note": "The boat also needs an adamant keel or better.",
+  "wiki": "Mooring here requires level 79 Sailing and an adamant keel or better.",
+  "page": "Drumstick Isle"
+ },
+ "Grimstone": {
+  "skills": {
+   "Sailing": 87
+  },
+  "boostable": false,
+  "access": "sailing",
+  "note": "Icy seas: the boat needs an eternal brazier.",
+  "wiki": "Infobox Location |requirement = {{SCP|Sailing|87}}{{Boostable|no}}",
+  "page": "Grimstone"
+ },
+ "Isle of Bones": {
+  "skills": {
+   "Sailing": 56
+  },
+  "boostable": null,
+  "access": "sailing",
+  "wiki": "It requires 56 Sailing to moor on.",
+  "page": "Isle of Bones"
+ },
+ "Laguna Aurorae": {
+  "skills": {
+   "Sailing": 58
+  },
+  "boostable": null,
+  "access": "sailing",
+  "wiki": "Laguna Aurorae is an island located in the Sunset Ocean, requiring level 58 Sailing to moor at.",
+  "page": "Laguna Aurorae"
+ },
+ "Lledrith Island": {
+  "skills": {
+   "Sailing": 66
+  },
+  "boostable": null,
+  "access": "sailing",
+  "note": "Adamant keel or better.",
+  "wiki": "It requires 66 Sailing and an adamant keel or better to moor onto.",
+  "page": "Lledrith Island"
+ },
+ "Minotaurs' Rest": {
+  "skills": {
+   "Sailing": 54
+  },
+  "boostable": null,
+  "quests": [
+   "Children of the Sun"
+  ],
+  "access": "sailing",
+  "wiki": "It requires 54 Sailing to moor on, as well as completion of the quest Children of the Sun.",
+  "page": "Minotaurs' Rest"
+ },
+ "Port Roberts": {
+  "skills": {
+   "Sailing": 50
+  },
+  "boostable": null,
+  "wiki": "Level 50 Sailing is required to dock at and Charter to Port Roberts.",
+  "page": "Port Roberts",
+  "access": "sailing"
+ },
+ "Rainbow's End": {
+  "skills": {
+   "Sailing": 69
+  },
+  "boostable": null,
+  "access": "sailing",
+  "wiki": "It requires 69 Sailing to moor on.",
+  "page": "Rainbow's End"
+ },
+ "Shimmering Atoll": {
+  "skills": {
+   "Sailing": 49
+  },
+  "boostable": null,
+  "access": "sailing",
+  "wiki": "Mooring here requires 49 Sailing.",
+  "page": "Shimmering Atoll"
+ },
+ "Sunbleak Island": {
+  "skills": {
+   "Sailing": 72
+  },
+  "boostable": null,
+  "access": "sailing",
+  "note": "Adamant helm needed for the tangled kelp.",
+  "wiki": "Mooring at the island requires 72 Sailing as well as an adamant helm to traverse the surrounding tangled kelp.",
+  "page": "Sunbleak Island"
+ },
+ "Tear of the Soul": {
+  "skills": {
+   "Sailing": 61
+  },
+  "boostable": false,
+  "access": "sailing",
+  "wiki": "Level 61 Sailing is required to moor at the island (not boostable)",
+  "page": "Tear of the Soul"
+ },
+ "The Onyx Crest": {
+  "skills": {
+   "Sailing": 47
+  },
+  "boostable": null,
+  "access": "sailing",
+  "wiki": "Docking at the island requires level 47 Sailing.",
+  "page": "The Onyx Crest"
+ },
+ "The Crown Jewel": {
+  "skills": {
+   "Sailing": 64
+  },
+  "boostable": false,
+  "access": "sailing",
+  "wiki": "It requires 64 Sailing to moor on (not boostable).",
+  "page": "The Crown Jewel"
+ },
+ "The Little Pearl": {
+  "skills": {
+   "Sailing": 45
+  },
+  "boostable": null,
+  "quests": [
+   "Troubled Tortugans"
+  ],
+  "access": "sailing",
+  "wiki": "Docking at the island requires level 45 Sailing and completion of Troubled Tortugans.",
+  "page": "The Little Pearl"
+ },
+ "Vatrachos Island": {
+  "skills": {
+   "Sailing": 46
+  },
+  "boostable": null,
+  "quests": [
+   "Children of the Sun"
+  ],
+  "access": "sailing",
+  "wiki": "It requires 46 Sailing to moor on, as well as completion of the quest Children of the Sun.",
+  "page": "Vatrachos Island"
+ },
+ "Wintumber Island": {
+  "skills": {
+   "Sailing": 63
+  },
+  "boostable": false,
+  "access": "sailing",
+  "wiki": "It requires 63 Sailing, unboosted, to moor on.",
+  "page": "Wintumber Island"
+ },
+ "Wyrmscraig": {
+  "skills": {
+   "Sailing": 62
+  },
+  "boostable": null,
+  "access": "sailing",
+  "wiki": "Wyrmscraig is an island in The Lonely Sea located in the Unquiet Ocean that requires 62 Sailing to access.",
+  "page": "Wyrmscraig"
+ },
+ "Wyrmscraig Cavern": {
+  "parent": "Wyrmscraig",
+  "partialQuests": [
+   "Fallen From Grace"
+  ],
+  "wiki": "The Wyrmscraig Cavern is a dungeon located underneath Wyrmscraig, accessible after partial completion of Fallen From Grace.",
+  "page": "Wyrmscraig Cavern"
+ },
+ "Last Light": {
+  "skills": {
+   "Sailing": 52
+  },
+  "boostable": null,
+  "access": "sailing",
+  "wiki": "52 Sailing is required to start The Red Reef and therefore is also required to dock on the island.",
+  "page": "Last Light"
+ },
+ "_reviewedNoGate": {
+  "Motherlode Mine": "The mine has no entry requirement (30 Mining, unboostable, to mine — the methods carry it); the upper level is its own key.",
+  "Mor Ul Rek": "Outer area open; the inner city is 'Mor Ul Rek (inner city)'.",
+  "Mac's island": "Infobox lists 99s, but that is for buying Mac's cape (max total level); visiting needs nothing.",
+  "Ectofuntus": "Infobox |quest = No.",
+  "Ralos' Rise mine": "Infobox requirement field is an empty template comment.",
+  "Kraken Cove": "Open to everyone; its monsters are task-only (handled by Slayer).",
+  "Smoke Devil Dungeon": "Open; a facemask is needed to fight (Slayer equipment), not to enter.",
+  "Catacombs of Kourend": "No entry requirement beyond reaching Kourend (agility shortcuts are optional).",
+  "Slayer Tower": "Priest in Peril gate already in slayer_curated.json; floors are monster Slayer levels.",
+  "Waterbirth Island Dungeon": "No entry requirement beyond the island (waterbirth access); inner doors need a partner or a pet rock.",
+  "Mage Arena": "The miniquest gates the arena itself, but the bank and Lundail's rune shop are open; our NPCs/shops there are not all inside.",
+  "Void Knights' Outpost": "50 Sailing only to moor; the Port Sarim boat is free of requirements.",
+  "Stonecutter Outpost": "46 Sailing / 50 Construction / Children of the Sun is for the cave south of it, not the outpost.",
+  "Chasm of Fire": "Tale of the Righteous is for a teleport; the chasm is open (Kourend access).",
+  "Molch lake": "43 Fishing / 35 Hunter is for aerial fishing (the methods carry it); the lake and Alry's shop are open.",
+  "dense essence mine": "38 Mining / 38 Crafting is to mine the essence (the method carries it).",
+  "Rellekka": "Most features need The Fremennik Trials, but the town itself is open.",
+  "Ruins (west)": "Desert Treasure I is for the Ancient teleport there.",
+  "West Ruins": "Desert Treasure I is for the Ancient teleport there.",
+  "Demonic Ruins": "Desert Treasure I is for the Ancient teleport there.",
+  "Mort'ton": "50 Agility is for a shortcut.",
+  "Entrana": "No weapons or armour may be brought; not modelled as a gate.",
+  "Twilight Temple": "The main building needs the full Twilight Emissary robes (no card); the grounds and the Ruins of Tapoyauik are open.",
+  "Isle of Souls": "No requirement.",
+  "Taverley Dungeon": "Open; the dusty key / agility pipe only gate inner sections."
+ }
+}

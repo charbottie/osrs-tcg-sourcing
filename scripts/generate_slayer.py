@@ -436,6 +436,45 @@ def main() -> int:
             lv = max(lvls.get(m["name"], 0), m.get("slayer") or 0)
             if lv > 1:
                 m["slayer"] = lv
+    # Entry requirements of the places themselves (location_requirements.json), merged into each
+    # monster's / Konar task's location gates (the planner applies the same file again at runtime).
+    import location_reqs
+    # A task location that monster_locations.json gives for this card only as a reference point
+    # ("East of the [[Farming Guild]]" → "Farming Guild (nearby)") is renamed the same way, so the
+    # place's entry gate doesn't apply (the Slayer hand gates for it are kept).
+    ml_path = _HERE / "output" / "monster_locations.json"
+    ml = json.loads(ml_path.read_text(encoding="utf-8")) if ml_path.exists() else {}
+    nearby = " (nearby)"
+    for tp in tasks_out.values():
+        for m in tp["monsters"]:
+            locs = ml.get(m.get("card") or "", {})
+            for l in list(m.get("locations", [])):
+                if location_reqs.gate_for(l) and l + nearby in locs and l not in locs:
+                    nl = l + nearby
+                    m["locations"] = [nl if x == l else x for x in m["locations"]]
+                    for k in ("locationAccess", "locationGates"):
+                        if l in m.get(k, {}):
+                            m[k] = {(nl if x == l else x): v for x, v in m[k].items()}
+                    if l in m.get("wilderness", []):
+                        m["wilderness"] = [nl if x == l else x for x in m["wilderness"]]
+    for tp in tasks_out.values():
+        for m in tp["monsters"]:
+            for l in m.get("locations", []):
+                lg = location_reqs.gate_for(l)
+                if lg:
+                    prev = m.get("locationGates", {}).get(l, {})
+                    meta = {k: v for k, v in prev.items() if k not in location_reqs.GATE_KEYS}
+                    m.setdefault("locationGates", {})[l] = {**location_reqs.merge_gate(
+                        {k: v for k, v in prev.items() if k in location_reqs.GATE_KEYS}, lg), **meta}
+    for mstr in masters:
+        for t in mstr["tasks"]:
+            for l in t.get("locations") or []:
+                lg = location_reqs.gate_for(l)
+                if lg:
+                    prev = t.get("locationGates", {}).get(l, {})
+                    meta = {k: v for k, v in prev.items() if k not in location_reqs.GATE_KEYS}
+                    t.setdefault("locationGates", {})[l] = {**location_reqs.merge_gate(
+                        {k: v for k, v in prev.items() if k in location_reqs.GATE_KEYS}, lg), **meta}
     report["monstersNoCard"] = [f"{n}: {m['name']}" for n, tp in tasks_out.items() for m in tp["monsters"] if not m.get("card")]
     report["pendingReview"] = sorted(o["task"] for o in cur.get("taskOverrides", {}).values() if o.get("pending"))
 

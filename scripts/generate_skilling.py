@@ -6,7 +6,9 @@ it can fire).
 Source: scripts/skilling_curated.json — built from the OSRS Wiki (each method keeps a short
 wiki quote and its page), in the shared requirement model:
   {skill, name, level, xp, type, requirements: [{label, type, cards, mode?, optional?, tool?, note?}],
-   quests, levels, access, note, wiki, page, outputs?}
+   quests, levels, access, location?, note, wiki, page, outputs?}
+  location = a place in location_requirements.json whose entry gate the planner also applies
+  (e.g. "Farming Guild (advanced tier)" → 85 Farming).
 Gathering methods (type "gathering") also list the cards they yield:
   outputs: ["Woad leaf", {"card": "Raw shark", "level": 70}, {"card": "Oak roots", "levels": {"Woodcutting": 15}, "tool": "Axe"}]
   (a string = at the method's level; an object adds its own level in the method's skill, other skill
@@ -28,6 +30,8 @@ import argparse
 import json
 from collections import Counter
 from pathlib import Path
+
+import location_reqs
 
 _HERE = Path(__file__).resolve().parent
 _CURATED = _HERE / "skilling_curated.json"
@@ -70,6 +74,10 @@ def main() -> int:
                     problems.append(f"{m['skill']} / {m['name']}: output {n!r} has unknown keys")
         if m.get("access") and m["access"] not in access:
             problems.append(f"{m['skill']} / {m['name']}: access {m['access']!r}")
+        # "location": a place in location_requirements.json; the planner applies its gate
+        # (guild levels, Sailing level to dock, worn items…) on top of the method's own fields
+        if m.get("location") and not location_reqs.lookup(m["location"]):
+            problems.append(f"{m['skill']} / {m['name']}: location {m['location']!r} not in location_requirements.json")
     _OUT.write_text(json.dumps(methods, indent=1, ensure_ascii=False) + "\n", encoding="utf-8")
     print(f"Wrote {_OUT}: {len(methods)} methods", dict(Counter(m["skill"] for m in methods)))
     gat = [m for m in methods if m.get("type") == "gathering"]

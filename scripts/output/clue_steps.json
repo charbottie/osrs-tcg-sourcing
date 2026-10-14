@@ -3477,7 +3477,10 @@
         ],
         "skills": {
           "Fishing": 68
-        }
+        },
+        "locations": [
+          "Fishing Guild"
+        ]
       },
       {
         "tier": "Hard",
@@ -4472,6 +4475,9 @@
         ],
         "quests": [
           "Legends' Quest"
+        ],
+        "locations": [
+          "Legends' Guild"
         ]
       },
       {
@@ -5219,7 +5225,10 @@
           "Ranged": 70,
           "Magic": 70,
           "Attack": 70
-        }
+        },
+        "locations": [
+          "Warriors' Guild"
+        ]
       },
       {
         "tier": "Elite",
@@ -5555,6 +5564,9 @@
         ],
         "reqNotes": [
           "A total of 130 levels in Attack and Strength or level 99 in either skill is required to enter the guild."
+        ],
+        "locations": [
+          "Warriors' Guild"
         ]
       },
       {
@@ -12136,7 +12148,10 @@
         "tier": "Medium",
         "clueText": "This crate holds a better reward than a broken arrow.",
         "location": "Inside the Ranging Guild . Search the crate behind the northern most building.",
-        "type": "search"
+        "type": "search",
+        "locations": [
+          "Ranging Guild"
+        ]
       },
       {
         "tier": "Medium",
@@ -12497,6 +12512,9 @@
               "Spade"
             ]
           }
+        ],
+        "locations": [
+          "Champions' Guild"
         ]
       },
       {
@@ -12711,6 +12729,9 @@
               "Head chef"
             ]
           }
+        ],
+        "locations": [
+          "Cooks' Guild"
         ]
       },
       {
@@ -13340,6 +13361,9 @@
         "npc": "Kamfreena",
         "noCard": [
           "Kamfreena"
+        ],
+        "locations": [
+          "Warriors' Guild"
         ]
       },
       {
@@ -13711,6 +13735,9 @@
         ],
         "reqNotes": [
           "To enter, a player must have their Attack and Strength levels add up to a total of 130 or have either one equal to 99."
+        ],
+        "locations": [
+          "Warriors' Guild"
         ]
       },
       {
@@ -15662,6 +15689,9 @@
               "Radimus Erkle"
             ]
           }
+        ],
+        "locations": [
+          "Legends' Guild"
         ]
       },
       {
@@ -15672,6 +15702,9 @@
         "challenge": "Light box or puzzle box .",
         "noCard": [
           "Primula"
+        ],
+        "locations": [
+          "Myths' Guild"
         ]
       },
       {
@@ -15707,6 +15740,9 @@
         ],
         "access": [
           "kourend"
+        ],
+        "locations": [
+          "Woodcutting Guild"
         ]
       },
       {
@@ -29284,7 +29320,10 @@
         ],
         "skills": {
           "Farming": 45
-        }
+        },
+        "locations": [
+          "Farming Guild"
+        ]
       },
       {
         "tier": "Medium",
@@ -32789,6 +32828,9 @@
         },
         "access": [
           "kourend"
+        ],
+        "locations": [
+          "Farming Guild (advanced tier)"
         ]
       },
       {
