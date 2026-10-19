@@ -29,6 +29,7 @@ import json
 import pathlib
 import re
 import sys
+import urllib.error
 import urllib.parse
 import urllib.request
 
@@ -245,6 +246,22 @@ def _fetch_cloud_cards(account_dir: pathlib.Path) -> tuple[list[str], int, dict[
     if not token:
         return None
 
+    # The cloud API rate-limits (HTTP 429). Cache every good fetch per account: reuse it for 30 s,
+    # and fall back to it (not the older local tcg.save) when the API refuses.
+    cache_file = pathlib.Path(__file__).parent / "cache" / f"cloud_cards_{account_dir.name[:16]}.json"
+    cached = None
+    try:
+        cached = json.loads(cache_file.read_text(encoding="utf-8")) if cache_file.is_file() else None
+    except Exception:
+        cached = None
+    if cached and datetime.datetime.now().timestamp() - cached.get("fetchedAt", 0) < 30:
+        all_cards = cached["cards"]
+        print(f"  [cloud API] using cached cards from {int(datetime.datetime.now().timestamp() - cached['fetchedAt'])} s ago")
+        return _cloud_result(all_cards)
+    if cached and datetime.datetime.now().timestamp() < cached.get("backoffUntil", 0):
+        print("  [cloud API] rate-limited earlier — using the last good cloud fetch")
+        return _cloud_result(cached["cards"])
+
     all_cards: list[dict] = []
     cursor: str | None = None
 
@@ -265,8 +282,27 @@ def _fetch_cloud_cards(account_dir: pathlib.Path) -> tuple[list[str], int, dict[
             cursor = data.get("nextCursor")
     except Exception as exc:
         print(f"  [cloud API] fetch failed — {exc}")
+        if cached:
+            wait = 60
+            if isinstance(exc, urllib.error.HTTPError) and exc.code == 429:
+                try: wait = max(30, int(exc.headers.get("Retry-After") or 60))
+                except Exception: pass
+            cached["backoffUntil"] = datetime.datetime.now().timestamp() + wait
+            try: cache_file.write_text(json.dumps(cached), encoding="utf-8")
+            except Exception: pass
+            print(f"  [cloud API] using the last good cloud fetch ({len(cached['cards'])} card instances); retry in {wait} s")
+            return _cloud_result(cached["cards"])
         return None
 
+    try:
+        cache_file.parent.mkdir(parents=True, exist_ok=True)
+        cache_file.write_text(json.dumps({"fetchedAt": datetime.datetime.now().timestamp(), "cards": all_cards}), encoding="utf-8")
+    except Exception:
+        pass
+    return _cloud_result(all_cards)
+
+
+def _cloud_result(all_cards: list[dict]):
     names = sorted({c["cardName"] for c in all_cards if "cardName" in c})
 
     # Per-card first/last pulledAt (ms epoch) across all instances.

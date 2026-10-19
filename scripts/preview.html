@@ -2211,19 +2211,9 @@ async function loadData() {
     }
     // Auto-load fresh data on startup (also refreshes dropdown via /api/accounts/list)
     refreshAll();
-    // Auto-detect new collection after packs opened / logout — poll every 8s
-    setInterval(async () => {
-      if (_refreshInProgress) return;
-      try {
-        const sm = await fetch('/api/collection/source-mtime', { signal: AbortSignal.timeout(3000) }).then(r => r.json());
-        if (sm.sourceMtime && sm.sourceMtime > _lastSourceMtime + 0.5) {
-          const btn = document.getElementById('refresh-btn');
-          if (btn) { btn.style.color = '#b07a30'; btn.title = 'New collection detected — refreshing…'; }
-          await refreshAll();
-          if (btn) { btn.style.color = ''; btn.title = ''; }
-        }
-      } catch {}
-    }, 8000);
+    // No automatic polling: the collection refreshes on page load (refreshAll above) and when the
+    // ↻ Refresh button is pressed. Polling hit the TCG cloud API's rate limit (HTTP 429), which made
+    // refreshes fall back to a stale local save.
   } catch {
     document.getElementById('detail').innerHTML =
       `<div class="placeholder">⚠ Needs a local server.<br>
@@ -6112,8 +6102,8 @@ function _startLiveSync(rsn) {
     }
   }
 
-  _liveTimer = setInterval(_poll, 15000);
-  _poll();  // fire immediately to set baseline
+  // Live sync disabled: refresh only on page load or the ↻ Refresh button (cloud API rate limits)
+  return;
 }
 
 function _stopLiveSync() {
@@ -6166,6 +6156,9 @@ async function refreshCollection() {
       return r.json();
     });
     if (data.error) throw new Error(data.error);
+    // diagnostics: a refresh that loses many cards for the same account is suspicious (wrong account?)
+    if (owned.size && data.ownedCards.length < owned.size * 0.9)
+      console.warn(`[refresh] owned cards dropped ${owned.size} → ${data.ownedCards.length} (account "${rsn || 'default'}")`);
     owned = new Set(data.ownedCards.map(n => n.toLowerCase()));
     cardTimestamps = data.cardTimestamps || {};
     cardFirstTimestamps = data.cardFirstTimestamps || {};
@@ -6212,6 +6205,7 @@ async function refreshCollection() {
 }
 
 // ─── Hiscores level lookup (requires server.py) ────────────────────────────
+let _levelsRsn = null;
 async function lookupLevels(rsn) {
   const _rsn = rsn || document.getElementById('rsn-input')?.value.trim();
   if (!_rsn) return;
@@ -6223,10 +6217,18 @@ async function lookupLevels(rsn) {
     });
     if (data.error) throw new Error(data.error);
 
-    // Merge returned levels into skills — only update skills we track
+    // Merge returned levels into skills — only update skills we track. Levels never go down in OSRS,
+    // so for the same account keep the higher value (a flaky HiScores reply — unranked / 1 — would
+    // otherwise briefly lock most quests); switching account takes the new levels as they are.
+    const sameAcct = _levelsRsn === rsn;
+    const dropped = [];
     for (const [skill, lvl] of Object.entries(data.levels)) {
-      if (skill in skills) skills[skill] = lvl;
+      if (!(skill in skills)) continue;
+      if (sameAcct && lvl < (skills[skill] || 1)) { dropped.push(`${skill} ${skills[skill]}→${lvl}`); continue; }
+      skills[skill] = lvl;
     }
+    if (dropped.length) console.warn('[refresh] ignored lower HiScores levels:', dropped.join(', '));
+    _levelsRsn = rsn;
     _canGetCache = {}; _completableCache = null;
     refreshDetail();
     if (activeTab === 'skilling') renderSkillGrid();
@@ -6290,6 +6292,8 @@ async function syncQuestsFromScreenshots(rsn) {
   }
 
   const before = _cqFile.size;
+  if (before && (data.completedQuests || []).length < before)
+    console.warn(`[refresh] completed quests from screenshots dropped ${before} → ${(data.completedQuests || []).length}`);
   _cqFile = new Set(data.completedQuests || []);
   completedQuests = new Set([..._cqFile, ..._cqManual]);
   _saveCq();
@@ -10081,12 +10085,19 @@ function _cardUsable(c) {
 // _accessCache: set to a Map during a render pass (Slayer pages check thousands of
 // locations); null = no caching (results always fresh).
 let _accessCache = null;
+// Area access, cached until the inputs change (cards, levels, quests, started quests, diary ticks are
+// covered by the explicit resets; the signature catches the rest). Results computed inside another
+// area's check (seen non-empty) aren't cached: a cycle guard there returns false, which would poison it.
+let _accessSig = '';
 function _accessMet(key, seen = new Set()) {
+  const sig = owned.size + '|' + completedQuests.size + '|' + startedQuests.size + '|' + Object.values(skills).join(',') + '|' + Object.keys(accessRoutes).length;
+  if (sig !== _accessSig) { _accessSig = sig; if (_accessCache) _accessCache = new Map(); }
+  const top = seen.size === 0;
   if (_accessCache && _accessCache.has(key)) return _accessCache.get(key);
   if (seen.has(key)) return false;
   seen.add(key);
   const ok = (accessRoutes[key]?.routes || []).some(rt => _routeMet(_expandRoute(rt), seen));
-  if (_accessCache) _accessCache.set(key, ok);
+  if (_accessCache && top) _accessCache.set(key, ok);
   return ok;
 }
 const _routeExpandCache = new WeakMap();   // routes never change: expand each once

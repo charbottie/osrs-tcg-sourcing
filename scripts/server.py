@@ -29,6 +29,7 @@ import subprocess
 import sys
 import threading
 import time
+import urllib.error
 import urllib.parse
 import urllib.request
 from datetime import datetime
@@ -97,6 +98,7 @@ _TCG_PROFILES    = pathlib.Path.home() / ".runelite" / "OSRS-TCG" / "profiles"
 _DISPLAY_NAME_RE = re.compile(r'^rsprofile\.rsprofile\.([^.]+)\.displayName=(.+)$')
 _ACCOUNT_HASH_RE = re.compile(r'^rsprofile\.rsprofile\.([^.]+)\.accountHash=(.+)$')
 
+_revision_cache: dict[str, dict] = {}         # player_lower → {at, payload, backoffUntil}
 _cloud_session_cache: dict[str, dict] = {}   # player_lower → session dict (or {})
 
 
@@ -485,6 +487,13 @@ class Handler(http.server.SimpleHTTPRequestHandler):
             self._json_response({"isCloud": False, "player": player})
             return
 
+        # Cache per player (every open tab polls this) and back off on HTTP 429 (cloud rate limit)
+        import time as _t
+        hit = _revision_cache.get(player.lower())
+        now = _t.time()
+        if hit and (now - hit["at"] < 45 or now < hit.get("backoffUntil", 0)):
+            self._json_response(hit["payload"])
+            return
         url = "https://api.osrs-tcg.net/api/v1/me/cards?limit=1"
         req = urllib.request.Request(url, headers={
             "Authorization": f"Bearer {token}",
@@ -493,13 +502,23 @@ class Handler(http.server.SimpleHTTPRequestHandler):
         try:
             with urllib.request.urlopen(req, timeout=8) as r:
                 data = json.loads(r.read())
-            self._json_response({
+            payload = {
                 "isCloud":   True,
                 "player":    player,
                 "revision":  data.get("revision"),
                 "stateHash": data.get("stateHash"),
-            })
+            }
+            _revision_cache[player.lower()] = {"at": now, "payload": payload}
+            self._json_response(payload)
         except Exception as exc:
+            if hit:   # keep answering with the last good revision while rate-limited
+                wait = 60
+                if isinstance(exc, urllib.error.HTTPError) and exc.code == 429:
+                    try: wait = max(30, int(exc.headers.get("Retry-After") or 60))
+                    except Exception: pass
+                hit["backoffUntil"] = now + wait
+                self._json_response(hit["payload"])
+                return
             self._json_response({"error": str(exc)}, status=502)
 
     # ── Pack catalog + image proxy ────────────────────────────────────────
