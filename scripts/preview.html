@@ -1122,10 +1122,56 @@ function spawnLocGate(loc) {
 
 let _canGetCache = {};
 
-// item_sources "activity" source: {name, quests, levels, access, note}
-function _activityMet(a) {
-  return (a.quests || []).every(_questOk) && Object.entries(a.levels || {}).every(([sk, l]) => getLevel(sk) >= l)
-    && (!a.access || _accessMet(a.access));
+// item_sources "activity" source — one object or a list of alternatives (any one is enough):
+//   {name, kind?, quests?, partialQuests?, diaries?, levels?, access?, cards?, anyCards?, npcs?, from?, note?, wiki?}
+//   kind: quest | minigame | npc | shop | gather | random_event | diary | pet | container | seasonal (yearly holiday
+//         event — counted as obtainable) | other (display only)
+//   quests: done or completable · partialQuests: started is enough · diaries: "Karamja Easy" tiers done
+//   cards: items you use (all) · anyCards: one of these items · npcs: NPC cards you talk to / use (all)
+//   from: items it comes out of (open / search / clean them): their card AND you can get them
+//   boss: a Bosses-tab encounter (raid, wave, minigame) you must be able to do — e.g. raid-only supplies
+function _acts(src) { const a = src && src.activity; return !a ? [] : Array.isArray(a) ? a : [a]; }
+function _activityMet(a, visited) {
+  return (a.quests || []).every(_questOk) && (a.partialQuests || []).every(_questStartedOk)
+    && (a.diaries || []).every(_diaryOk)
+    && Object.entries(a.levels || {}).every(([sk, l]) => getLevel(sk) >= l)
+    && (!a.access || _accessMet(a.access)) && (a.cards || []).every(c => isOwned(c))
+    && (!(a.anyCards || []).length || a.anyCards.some(c => isOwned(c)))
+    && (a.npcs || []).every(c => isOwned(c)) && (!a.boss || _bossDoable(a.boss))
+    && (a.from || []).every(c => isOwned(c) && canGetItem(c, visited instanceof Set ? visited : new Set()));
+}
+// What an activity still needs (labels), for _itemGetNeeds and the card page
+function _activityMissing(a) {
+  const m = [];
+  for (const c of a.cards || []) if (!isOwned(c)) m.push(c);
+  if ((a.anyCards || []).length && !a.anyCards.some(c => isOwned(c))) m.push(a.anyCards.length > 1 ? `one of ${a.anyCards.slice(0, 3).join(' / ')}${a.anyCards.length > 3 ? '…' : ''}` : a.anyCards[0]);
+  for (const c of a.npcs || []) if (!isOwned(c)) m.push(c + ' card');
+  for (const c of a.from || []) if (!isOwned(c)) m.push(c); else if (!canGetItem(c)) m.push('get ' + c);
+  for (const q of a.quests || []) if (!_questOk(q)) m.push(q);
+  for (const q of a.partialQuests || []) if (!_questStartedOk(q)) m.push('start ' + q);
+  for (const d of a.diaries || []) if (!_diaryOk(d)) m.push(d + ' diary');
+  for (const [sk, l] of Object.entries(a.levels || {})) if (getLevel(sk) < l) m.push(`${sk} ${l}`);
+  if (a.access && !_accessMet(a.access)) m.push('reach ' + (accessRoutes[a.access]?.label || a.access));
+  if (a.boss && !_bossDoable(a.boss)) m.push('do ' + a.boss);
+  return m;
+}
+// Chest / reward-based boss loot (boss_loot.json): the boss is "available" (quests, levels, areas
+// and every required card) and its loot requirements are met. Guarded against re-entry (a boss's
+// requirements can lead back to canGetItem).
+const _bossRewardBusy = new Set();
+function _bossDoable(bossName) {
+  const b = typeof BOSS_DATA !== 'undefined' && BOSS_DATA.find(x => x.name === bossName);
+  if (!b || _bossRewardBusy.has(bossName)) return false;
+  _bossRewardBusy.add(bossName);
+  try { return evaluateBoss(b).status === 'available' && (b.lootRequirements || []).every(_reqMet); }
+  finally { _bossRewardBusy.delete(bossName); }
+}
+function _bossRewardOk(name) { return _bossRewardsFor(name).some(({ bossName }) => _bossDoable(bossName)); }
+// Does our data name any way to get this item? (else canGetItem falls back — see there)
+function _hasKnownSource(name, src) {
+  return !!(src.shopBought || (src.spawns && src.spawns.length) || src.gathering || (src.monsters && src.monsters.length)
+    || _curatedGathering(name).length || src.production || src.alwaysAvailable || _acts(src).length
+    || (src.clueTiers && src.clueTiers.length) || _bossRewardsFor(name).length || TANNING_MAP[name] || src.unobtainable);
 }
 
 // ── Curated gathering methods as item sources (skilling.json "outputs") ──────
@@ -1493,6 +1539,55 @@ function _clueTierOk(tier) {
   return st.obtain.ok && st.trail >= CLUE_TRAIL_MIN;
 }
 
+// Why can't I get this item? [] when canGetItem is true; otherwise the cheapest source's missing
+// pieces (cards / levels / access), e.g. ["Coins"], ["Spade"], ["Woodcutting 60", "Axe"].
+const _getNeedsMemo = new Map(); let _getNeedsSig = '';
+function _itemGetNeeds(name) {
+  const sig = owned.size + '|' + completedQuests.size + '|' + Object.values(skills).join(',');
+  if (sig !== _getNeedsSig) { _getNeedsMemo.clear(); _getNeedsSig = sig; }
+  if (_getNeedsMemo.has(name)) return _getNeedsMemo.get(name);
+  let res = [];
+  if ((itemSources[name] || {}).unobtainable) res = ['unobtainable'];
+  else if (!canGetItem(name)) {
+    const src = itemSources[name] || ingredientInfo[name] || {};
+    const opts = [];
+    const cardMiss = c => itemSources[c] !== undefined && !isOwned(c) ? [c] : [];
+    for (const sh of src.shops || []) {
+      const st = _shopStatus(sh), m = [];
+      if (!st.curOk) m.push(sh.currency || 'Coins');
+      if (!st.sellerOk) m.push((st.sellerCards[0] || sh.seller) + ' card');
+      if (st.sellerOk && !st.sellerReach) m.push('reach ' + (sh.seller || 'the shop'));
+      opts.push(m);
+    }
+    const g = src.gathering;
+    if (g) {
+      const m = [];
+      if (getLevel(g.skill) < (g.level || 1)) m.push(`${g.skill} ${g.level}`);
+      if (g.tool && TOOL_TIERS[g.tool] && !TOOL_TIERS[g.tool].some(t => isOwned(t.name) && getLevel(g.skill) >= t.skillReq)) m.push(g.tool.toLowerCase());
+      else if (g.tool && g.tool !== 'None' && !TOOL_TIERS[g.tool]) for (const pt of resolveToolParts(g.tool)) if (itemSources[pt.label] && !isOwned(pt.label)) m.push(pt.label);
+      for (const q of g.quests || []) if (!_questOk(q)) m.push(q);
+      if (g.access && !_accessMet(g.access)) m.push('reach ' + (accessRoutes[g.access]?.label || g.access));
+      opts.push(m);
+    }
+    const p = src.production;
+    if (p && !(p.ingredients || []).some(i => i.item === name)) {
+      const m = [];
+      if (p.skill && getLevel(p.skill) < (p.level || 1)) m.push(`${p.skill} ${p.level}`);
+      for (const i of p.ingredients || []) m.push(...cardMiss(i.item));
+      for (const t of getImplicitTools(p.skill, p.ingredients || [], p.tools || [], p.facilities)) m.push(...cardMiss(t));
+      opts.push(m);
+    }
+    for (const a of _acts(src)) opts.push(_activityMissing(a));
+    for (const { bossName } of _bossRewardsFor(name)) opts.push([`do ${bossName}`]);
+    const mons = (src.monsters || []).filter(x => x.card);
+    if (mons.length) opts.push([`a ${mons[0].card} card (or another dropper)`]);
+    const best = opts.filter(o => o.length).sort((a, b) => a.length - b.length)[0];
+    res = best ? [...new Set(best)] : ['no known source'];
+  }
+  _getNeedsMemo.set(name, res);
+  return res;
+}
+
 function canGetItem(itemName, visited = new Set()) {
   if (visited.has(itemName)) return false;           // cycle guard
   if (itemName in _canGetCache) return _canGetCache[itemName];
@@ -1512,15 +1607,13 @@ function canGetItem(itemName, visited = new Set()) {
 
   const src = data || info;
 
-  // Data gap fallback: entry exists in our data but ALL source fields are empty.
-  // Covers both itemSources (TCG cards) and ingredientInfo (non-card intermediates like unf potions).
-  // Don't penalise data gaps — assume the item is obtainable.
-  {
-    const hasSrc = src.shopBought || (src.spawns && src.spawns.length) ||
-                   src.gathering || (src.monsters && src.monsters.length) || _curatedGathering(itemName).length ||
-                   src.production || src.alwaysAvailable || src.activity || (src.clueTiers && src.clueTiers.length);
-    if (!hasSrc) { _canGetCache[itemName] = true; return true; }
-  }
+  // No longer obtainable (discontinued holiday items, removed rewards…): never
+  if (src.unobtainable) { _canGetCache[itemName] = false; return false; }
+
+  // No source in our data. Every item card now has one (2026-10-19 gap pass, item_sources_overrides.json),
+  // so an item card with none is unknown → not obtainable. ingredientInfo entries (non-card intermediates
+  // like unf potions) keep the old data-gap fallback: assume obtainable.
+  if (!_hasKnownSource(itemName, src)) { const ok = !data; _canGetCache[itemName] = ok; return ok; }
 
   // Ground spawn — free pickup, but check skill-gated guild areas.
   if (src.spawns && src.spawns.length > 0) {
@@ -1538,8 +1631,11 @@ function canGetItem(itemName, visited = new Set()) {
     if (src.shops.some(s => _shopStatus(s).ok)) { _canGetCache[itemName] = true; return true; }
   }
 
-  // Minigame / activity reward (e.g. Vale offerings from Vale Totems): its quests, levels and area
-  if (src.activity && _activityMet(src.activity)) { _canGetCache[itemName] = true; return true; }
+  // Quest / minigame / NPC / activity reward (e.g. Vale offerings from Vale Totems): any listed way met
+  if (_acts(src).some(a => _activityMet(a, new Set([...visited, itemName])))) { _canGetCache[itemName] = true; return true; }
+
+  // Chest / reward-based boss loot (raids, Barrows, Moons, Wintertodt…) at a boss you can do
+  if (_bossRewardOk(itemName)) { _canGetCache[itemName] = true; return true; }
 
   // Gathering: level + tool (no card needed for the resource itself)
   if (src.gathering) {
@@ -1852,6 +1948,20 @@ function updateSimBar() {
 }
 
 function _updateSortVisibility() {
+  // my_collection.json can be written without timestamps; borrow them from the matching profile in
+  // all_collections.json (the one sharing the most cards) so "Recently pulled" sorting still works
+  if (!Object.keys(cardTimestamps).length && typeof allCollections === 'object' && allCollections && owned.size) {
+    let best = null, bestN = 0;
+    for (const prof of Object.values(allCollections)) {
+      if (!prof || !prof.cardTimestamps || !Object.keys(prof.cardTimestamps).length) continue;
+      const n = (prof.ownedCards || []).reduce((k, c) => k + (owned.has(c.toLowerCase()) ? 1 : 0), 0);
+      if (n > bestN) { best = prof; bestN = n; }
+    }
+    if (best && bestN >= owned.size * 0.9) {
+      cardTimestamps = best.cardTimestamps;
+      cardFirstTimestamps = best.cardFirstTimestamps || {};
+    }
+  }
   const row = document.getElementById('filter-row4');
   if (row) row.style.display = Object.keys(cardTimestamps).length ? 'flex' : 'none';
 }
@@ -2004,6 +2114,7 @@ async function loadData() {
     ingredientInfo     = ii;
     questsData         = qd;
     allCollections     = ac.profiles || {};
+    _updateSortVisibility();   // timestamps may come from the matching profile
     clueSteps          = cst;
     bossLoot           = bl || {};
     collectionLog      = clg || {};
@@ -5343,17 +5454,39 @@ function renderItem(name, container) {
   html += '\u0001obtain\u0001';
   // Gathering
   html += '\u0001obtain\u0001';
-  if (data.activity) {
-    const a = data.activity, ok = _activityMet(a);
+  if (data.unobtainable) {
+    html += `<div class="section" style="border-left:3px solid #a05050;background:#1c1010;padding:2px 10px 8px"><div class="section-header" style="color:#d08080">No longer obtainable</div>
+      <div style="margin-top:6px;font-size:11px;color:#b09090">${escHtml(data.unobtainableReason || 'This item can no longer be obtained in game.')}</div>
+      <div style="margin-top:4px;font-size:10px;color:#666">The planner treats it as unobtainable: anything that needs it stays locked.</div></div>`;
+  }
+  for (const a of _acts(data)) {
+    const ok = _activityMet(a);
     const tick = (good, inner) => `<span style="margin-right:12px;color:${good ? '#7ab07a' : '#a05050'}">${good ? '✓' : '✗'} ${inner}</span>`;
+    const qLink = q => `<span style="cursor:pointer;text-decoration:underline dotted" data-quest="${escHtml(q)}" onclick="_navToQuest(this)">${escHtml(q)}</span>`;
+    const cLink = (c, t) => `<span style="cursor:pointer;text-decoration:underline dotted" data-nav="${escHtml(c)}" data-nav-type="${t}" onclick="_navToCard(this)">${escHtml(c)}</span>`;
     const parts = [
-      ...(a.quests || []).map(q => tick(_questOk(q), `<span style="cursor:pointer;text-decoration:underline dotted" data-quest="${escHtml(q)}" onclick="_navToQuest(this)">${escHtml(q)}</span>`)),
+      ...(a.quests || []).map(q => tick(_questOk(q), qLink(q) + (completedQuests.has(q) ? '' : ' <span style="font-size:9px;color:#666">(not done)</span>'))),
+      ...(a.partialQuests || []).map(q => tick(_questStartedOk(q), qLink(q) + ' <span style="font-size:9px;color:#666">(started)</span>')),
+      ...(a.diaries || []).map(d => tick(_diaryOk(d), escHtml(d) + ' diary')),
       ...Object.entries(a.levels || {}).map(([sk, l]) => tick(getLevel(sk) >= l, `${skillIcon(sk, 11)} ${l} ${sk}`)),
       ...(a.access ? [tick(_accessMet(a.access), escHtml(accessRoutes[a.access]?.label || a.access))] : []),
+      ...(a.npcs || []).map(c => tick(isOwned(c), cLink(c, 'monster'))),
+      ...(a.cards || []).map(c => tick(isOwned(c), cLink(c, 'item'))),
+      ...((a.anyCards || []).length ? [tick(a.anyCards.some(c => isOwned(c)), 'one of ' + a.anyCards.map(c => cLink(c, 'item')).join(' / '))] : []),
+      ...(a.from || []).map(c => tick(isOwned(c) && canGetItem(c), 'from ' + cLink(c, 'item'))),
+      ...(a.boss ? [tick(_bossDoable(a.boss), `<span style="cursor:pointer;text-decoration:underline dotted" data-boss="${escHtml(a.boss)}" onclick="showBoss(this.dataset.boss);event.stopPropagation()">${escHtml(a.boss)}</span> <span style="font-size:9px;color:#666">(Bosses tab)</span>`)] : []),
     ];
-    html += `<div class="section"><div class="section-header">Reward from ${escHtml(a.name)}
-        <span style="font-size:10px;color:${ok ? '#7ab07a' : '#a05050'};font-weight:normal">${ok ? 'you can take part' : 'locked'}</span></div>
-      <div style="margin-top:8px;font-size:11px">${parts.join('')}</div>
+    const head = {
+      quest: `Quest reward: ${escHtml(a.name)}`, minigame: `Reward from ${escHtml(a.name)}`, npc: `Given by ${escHtml(a.name)}`,
+      gather: escHtml(a.name), random_event: `Random event: ${escHtml(a.name)}`, diary: `Diary reward: ${escHtml(a.name)}`,
+      pet: `Skilling pet: ${escHtml(a.name)}`, container: `Found in ${escHtml(a.name)}`, shop: `Bought from ${escHtml(a.name)}`, seasonal: `Seasonal: ${escHtml(a.name)}`, other: escHtml(a.name),
+    }[a.kind] || `Reward from ${escHtml(a.name)}`;
+    const qAll = [...(a.quests || []), ...(a.partialQuests || [])];
+    const okTxt = a.kind === 'quest' ? (qAll.every(q => completedQuests.has(q)) ? 'quest done' : (a.partialQuests || []).length ? 'you can start the quest' : 'you can do the quest')
+      : a.kind === 'random_event' ? 'can happen to you' : a.kind === 'seasonal' ? 'once a year, during the event' : a.kind === 'minigame' || !a.kind ? 'you can take part' : 'you can get it';
+    html += `<div class="section"><div class="section-header">${head}
+        <span style="font-size:10px;color:${ok ? '#7ab07a' : '#a05050'};font-weight:normal">${ok ? okTxt : 'locked'}</span></div>
+      ${parts.length ? `<div style="margin-top:8px;font-size:11px">${parts.join('')}</div>` : ''}
       ${a.note ? `<div style="margin-top:6px;font-size:10px;color:#666">${escHtml(a.note)}</div>` : ''}</div>`;
   }
 
@@ -5536,7 +5669,7 @@ function renderItem(name, container) {
       const rarity = drop.rarity, tip = [source, _lootTip(drop)].filter(Boolean).join('\n');
       html += `<span data-boss="${escHtml(bossName)}" onclick="showBoss(this.dataset.boss);event.stopPropagation()"
         style="display:inline-flex;align-items:center;gap:5px;font-size:11px;color:#aaa;background:#161616;border:1px solid #2a2a2a;border-radius:3px;padding:3px 9px;cursor:pointer;white-space:nowrap"
-        title="${escHtml(tip)}">${escHtml(bossName)} <span class="rarity-badge ${rarityClass(rarity)}" style="font-size:9px">${escHtml(rarity)}${rarity === 'Unique' && drop.fraction ? ' ' + escHtml(drop.fraction) : ''}</span></span>`;
+        title="${escHtml(tip)}"><span style="color:${_bossDoable(bossName) ? '#7ab07a' : '#a05050'}" title="${_bossDoable(bossName) ? 'You can do this boss' : 'Boss locked for you'}">${_bossDoable(bossName) ? '✓' : '✗'}</span> ${escHtml(bossName)} <span class="rarity-badge ${rarityClass(rarity)}" style="font-size:9px">${escHtml(rarity)}${rarity === 'Unique' && drop.fraction ? ' ' + escHtml(drop.fraction) : ''}</span></span>`;
     }
     html += `</div></div>`;
   }
@@ -7414,7 +7547,7 @@ function _recUniqueItems() {
 // Only ever a Rare / Very rare monster drop (no shop, spawn, gathering, production or clue source)
 function _recRareOnly(c) {
   const s = itemSources[c];
-  if (!s || s.shopBought || (s.spawns || []).length || s.gathering || _curatedGathering(c).length || s.production || (s.clueTiers || []).length || s.activity) return false;
+  if (!s || s.shopBought || (s.spawns || []).length || s.gathering || _curatedGathering(c).length || s.production || (s.clueTiers || []).length || _acts(s).length || s.unobtainable) return false;
   const ms = [...(s.monsters || []), ...(s.rdtMonsters || [])];
   return ms.length > 0 && ms.every(x => /^(very )?rare$/i.test(x.rarity || ''));
 }
@@ -7424,11 +7557,10 @@ function _recCardGettable(c) {
   if (!src) return true;
   // no source recorded at all (canGetItem lets these through as a data gap): don't send people after it
   const cg = _curatedGathering(c);
-  if (!(src.shopBought || (src.spawns || []).length || src.gathering || cg.length || (src.monsters || []).length || src.production
-        || src.alwaysAvailable || src.activity || (src.clueTiers || []).length)) return false;
+  if (src.unobtainable || !_hasKnownSource(c, src)) return false;
   if (canGetItem(c)) return true;
   const g = src.gathering, p = src.production;
-  return !!(src.shopBought || (src.spawns || []).length || src.activity
+  return !!(src.shopBought || (src.spawns || []).length || _acts(src).length
     || cg.some(({ m, out }) => { const st = _curatedGatherStatus(m, out); return st.levelOk && st.gates.every(x => x.ok); })
     || (g && getLevel(g.skill) >= (g.level || 1) && (g.quests || []).every(_questOk) && (!g.access || _accessMet(g.access)))
     || (p && p.skill && getLevel(p.skill) >= (p.level || 1) && (p.quests || []).every(_questOk)));
@@ -8830,6 +8962,17 @@ function _validateDataNames() {
     if (e.parent && !_locEntry(e.parent) && !(e.parent in _locReviewed)) bad.push(`parent "${e.parent}" (location_requirements.json ${n})`);
   }
   for (const m of SKILLING) if (m.location && !_locEntry(m.location)) bad.push(`location "${m.location}" (skilling.json ${m.name})`);
+  // item_sources.json activity sources (quest / minigame / NPC rewards…)
+  const _diaryKey = d => { const m = /^(.*) (Easy|Medium|Hard|Elite)$/i.exec(d || ''); return m && DIARY_DATA.some(a => a.name.toLowerCase() === m[1].toLowerCase()); };
+  for (const [n, s] of Object.entries(itemSources)) for (const a of _acts(s)) {
+    const where = `item_sources.json ${n} activity`;
+    [...(a.cards || []), ...(a.anyCards || []), ...(a.npcs || []), ...(a.from || [])].forEach(c => card(c, where));
+    [...(a.quests || []), ...(a.partialQuests || [])].forEach(q => quest(q, where));
+    (a.diaries || []).forEach(d => { if (!_diaryKey(d)) bad.push(`diary "${d}" (${where})`); });
+    if (a.access && !accessRoutes[a.access]) bad.push(`access "${a.access}" (${where})`);
+    if (a.boss && !BOSS_DATA.some(b => b.name === a.boss)) bad.push(`boss "${a.boss}" (${where})`);
+    Object.keys(a.levels || {}).forEach(sk => { if (!(sk in skills)) bad.push(`skill "${sk}" (${where})`); });
+  }
   if (bad.length) console.warn(`[data check] ${bad.length} unresolved name(s):\n  ` + [...new Set(bad)].join('\n  '));
   else console.info('[data check] all card and quest names resolve');
 }
@@ -9714,7 +9857,11 @@ function _questReqRow(req) {
   // Card chip with ✓/✗: green ✓ owned, yellow ✗ not owned but obtainable, red ✗ not owned
   const routeChip = c => {
     const own = isOwned(c), get = !own && !isMon && canGetItem(c);
-    return `<span ${navAttrs(c)}><span style="color:${own ? '#7ab07a' : get ? '#c8a830' : '#a05050'}" title="${own ? 'Card owned' : get ? 'Card not owned (obtainable)' : 'Card not owned'}">${own ? '✓' : '✗'} ${escHtml(c)}</span></span>`;
+    // owned item you can't actually get hold of right now (no Coins, no spade…): amber, say what's missing
+    const needs = own && !isMon && itemSources[c] !== undefined ? _itemGetNeeds(c) : [];
+    if (needs[0] === 'unobtainable') return `<span ${navAttrs(c)}><span style="color:#a05050" title="Card owned, but the item is no longer obtainable">◐ ${escHtml(c)} <span style="font-size:9px;color:#8a5a5a">(no longer obtainable)</span></span></span>`;
+    if (needs.length) return `<span ${navAttrs(c)}><span style="color:#c8a830" title="${escHtml('Card owned, but you can\'t get the item yet — needs: ' + needs.join(', '))}">◐ ${escHtml(c)} <span style="font-size:9px;color:#8a7a40">(needs ${escHtml(needs.slice(0, 2).join(', '))})</span></span></span>`;
+    return `<span ${navAttrs(c)}><span style="color:${own ? '#7ab07a' : get ? '#c8a830' : '#a05050'}" title="${own ? 'Card owned · you can get it' : get ? 'Card not owned (obtainable)' : 'Card not owned'}">${own ? '✓' : '✗'} ${escHtml(c)}</span></span>`;
   };
   const chip = routeChip;
   const ok = _reqMet(req);
@@ -9760,7 +9907,9 @@ function _questReqRow(req) {
   if (cards.length) {
     const all = req.mode === 'all';
     const sorted = isMon ? [...cards] : sortCardsByLevel(cards);
-    const tiered = [...sorted.filter(c => isOwned(c)), ...sorted.filter(c => !isOwned(c))];
+    // order: owned and gettable now → owned but can't get yet → not owned
+    const _avail = c => isOwned(c) && (isMon || itemSources[c] === undefined || !_itemGetNeeds(c).length);
+    const tiered = [...sorted.filter(_avail), ...sorted.filter(c => isOwned(c) && !_avail(c)), ...sorted.filter(c => !isOwned(c))];
     const head = routes.length ? (all ? 'All of:' : 'Any of:') : (all ? 'Need all:' : '');
     // Long lists (any slash weapon, any light source…): show up to 4 owned options and a hover grid for the rest
     const shown = tiered.length > 10 ? tiered.filter(c => isOwned(c)).slice(0, 4) : tiered;
@@ -10175,7 +10324,7 @@ function showQuestDetail(questName, push = true) {
   const welcome = document.getElementById('quest-welcome');
   if (welcome) welcome.style.display = 'none';
   document.querySelectorAll('.quest-item').forEach(el => {
-    el.classList.toggle('selected', el.querySelector('.quest-name')?.textContent === questName);
+    el.classList.toggle('selected', el.dataset.quest === questName);   // data attr: the name element may carry a ◐ marker
   });
 
   const pane = document.getElementById('quest-detail-pane');

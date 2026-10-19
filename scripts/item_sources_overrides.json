@@ -849,15 +849,54 @@
  },
  "Saradomin cape": {
   "shops": [],
-  "shopBought": false
+  "shopBought": false,
+  "activity": {
+   "name": "Mage Arena I",
+   "kind": "quest",
+   "quests": [
+    "Mage Arena I"
+   ],
+   "access": "wilderness",
+   "npcs": [
+    "Kolodion"
+   ],
+   "note": "Pray at the god statue after beating Kolodion; replacements from Chamber Guardian (or Lost Property)",
+   "wiki": "\"a reward from Mage Arena I miniquest\""
+  }
  },
  "Guthix cape": {
   "shops": [],
-  "shopBought": false
+  "shopBought": false,
+  "activity": {
+   "name": "Mage Arena I",
+   "kind": "quest",
+   "quests": [
+    "Mage Arena I"
+   ],
+   "access": "wilderness",
+   "npcs": [
+    "Kolodion"
+   ],
+   "note": "Pray at the god statue after beating Kolodion; replacements from Chamber Guardian (or Lost Property)",
+   "wiki": "\"a reward from Mage Arena I miniquest\""
+  }
  },
  "Zamorak cape": {
   "shops": [],
-  "shopBought": false
+  "shopBought": false,
+  "activity": {
+   "name": "Mage Arena I",
+   "kind": "quest",
+   "quests": [
+    "Mage Arena I"
+   ],
+   "access": "wilderness",
+   "npcs": [
+    "Kolodion"
+   ],
+   "note": "Pray at the god statue after beating Kolodion; replacements from Chamber Guardian (or Lost Property)",
+   "wiki": "\"a reward from Mage Arena I miniquest\""
+  }
  },
  "Bronze halberd": {
   "shops": [
@@ -895,15 +934,51 @@
  },
  "Ghostly boots": {
   "shops": [],
-  "shopBought": false
+  "shopBought": false,
+  "activity": {
+   "name": "Curse of the Empty Lord",
+   "kind": "quest",
+   "partialQuests": [
+    "Curse of the Empty Lord"
+   ],
+   "cards": [
+    "Ghostspeak amulet"
+   ],
+   "note": "Talk to each ghost (Kharrim, Rennard, Viggora, Dhalak, Valdez…) wearing a ghostspeak amulet; the card also covers the Last Man Standing copy",
+   "wiki": "\"Players can obtain a pair after speaking to Kharrim during the Curse of the Empty Lord miniquest\""
+  }
  },
  "Ghostly gloves": {
   "shops": [],
-  "shopBought": false
+  "shopBought": false,
+  "activity": {
+   "name": "Curse of the Empty Lord",
+   "kind": "quest",
+   "partialQuests": [
+    "Curse of the Empty Lord"
+   ],
+   "cards": [
+    "Ghostspeak amulet"
+   ],
+   "note": "Talk to each ghost (Kharrim, Rennard, Viggora, Dhalak, Valdez…) wearing a ghostspeak amulet; the card also covers the Last Man Standing copy",
+   "wiki": "\"Players can obtain a pair after speaking to Kharrim during the Curse of the Empty Lord miniquest\""
+  }
  },
  "Ghostly cloak": {
   "shops": [],
-  "shopBought": false
+  "shopBought": false,
+  "activity": {
+   "name": "Curse of the Empty Lord",
+   "kind": "quest",
+   "partialQuests": [
+    "Curse of the Empty Lord"
+   ],
+   "cards": [
+    "Ghostspeak amulet"
+   ],
+   "note": "Talk to each ghost (Kharrim, Rennard, Viggora, Dhalak, Valdez…) wearing a ghostspeak amulet; the card also covers the Last Man Standing copy",
+   "wiki": "\"Players can obtain a pair after speaking to Kharrim during the Curse of the Empty Lord miniquest\""
+  }
  },
  "Lunar staff": {
   "shops": [
@@ -1091,47 +1166,158 @@
  },
  "Karamja gloves": {
   "shops": [],
-  "shopBought": false
+  "shopBought": false,
+  "activity": {
+   "name": "Karamja Diary",
+   "kind": "diary",
+   "diaries": [
+    "Karamja Easy"
+   ],
+   "note": "Every tier is this card; the easy tier comes from Pirate Jackie the Fruit (free replacements)",
+   "wiki": "\"Karamja gloves 4 is a reward for completing the elite Karamja Diary\" (tiers 1–3 for easy–hard)"
+  }
  },
  "Varrock armour": {
   "shops": [],
-  "shopBought": false
+  "shopBought": false,
+  "activity": {
+   "name": "Varrock Diary",
+   "kind": "diary",
+   "diaries": [
+    "Varrock Easy"
+   ],
+   "npcs": [
+    "Toby"
+   ],
+   "note": "Every tier is this card; the easy tier comes from Toby (free replacements)",
+   "wiki": "\"Varrock armour 4 is a reward for completing the elite Varrock Diary\" (tiers 1–3 for easy–hard)"
+  }
  },
  "Wilderness sword": {
   "shops": [],
-  "shopBought": false
+  "shopBought": false,
+  "activity": {
+   "name": "Wilderness Diary",
+   "kind": "diary",
+   "diaries": [
+    "Wilderness Easy"
+   ],
+   "npcs": [
+    "Lesser Fanatic"
+   ],
+   "note": "Every tier is this card; the easy tier comes from Lesser Fanatic (free replacements)",
+   "wiki": "\"Wilderness sword 4 is a reward for completing the elite Wilderness Diary\" (tiers 1–3 for easy–hard)"
+  }
  },
  "Morytania legs": {
   "shops": [],
-  "shopBought": false
+  "shopBought": false,
+  "activity": {
+   "name": "Morytania Diary",
+   "kind": "diary",
+   "diaries": [
+    "Morytania Easy"
+   ],
+   "note": "Every tier is this card; the easy tier comes from Le-sabrè (free replacements)",
+   "wiki": "\"Morytania legs 4 is a reward for completing the elite Morytania Diary\" (tiers 1–3 for easy–hard)"
+  }
  },
  "Falador shield": {
   "shops": [],
-  "shopBought": false
+  "shopBought": false,
+  "activity": {
+   "name": "Falador Diary",
+   "kind": "diary",
+   "diaries": [
+    "Falador Easy"
+   ],
+   "note": "Every tier is this card; the easy tier comes from Sir Rebral (free replacements)",
+   "wiki": "\"Falador shield 4 is a reward for completing the elite Falador Diary\" (tiers 1–3 for easy–hard)"
+  }
  },
  "Ardougne cloak": {
   "shops": [],
-  "shopBought": false
+  "shopBought": false,
+  "activity": {
+   "name": "Ardougne Diary",
+   "kind": "diary",
+   "diaries": [
+    "Ardougne Easy"
+   ],
+   "npcs": [
+    "Two-pints"
+   ],
+   "note": "Every tier is this card; the easy tier comes from Two-pints (free replacements)",
+   "wiki": "\"Ardougne cloak 4 is a reward for completing the elite Ardougne Diary\" (tiers 1–3 for easy–hard)"
+  }
  },
  "Explorer's ring": {
   "shops": [],
-  "shopBought": false
+  "shopBought": false,
+  "activity": {
+   "name": "Lumbridge & Draynor Diary",
+   "kind": "diary",
+   "diaries": [
+    "Lumbridge & Draynor Easy"
+   ],
+   "note": "Every tier is this card; the easy tier comes from Hatius Cosaintus (free replacements)",
+   "wiki": "\"Explorer's ring 4 is a reward for completing the elite Lumbridge & Draynor Diary\" (tiers 1–3 for easy–hard)"
+  }
  },
  "Fremennik sea boots": {
   "shops": [],
-  "shopBought": false
+  "shopBought": false,
+  "activity": {
+   "name": "Fremennik Diary",
+   "kind": "diary",
+   "diaries": [
+    "Fremennik Easy"
+   ],
+   "note": "Every tier is this card; the easy tier comes from Thorodin (free replacements)",
+   "wiki": "\"Fremennik sea boots 4 is a reward for completing the elite Fremennik Diary\" (tiers 1–3 for easy–hard)"
+  }
  },
  "Desert amulet": {
   "shops": [],
-  "shopBought": false
+  "shopBought": false,
+  "activity": {
+   "name": "Desert Diary",
+   "kind": "diary",
+   "diaries": [
+    "Desert Easy"
+   ],
+   "npcs": [
+    "Jarr"
+   ],
+   "note": "Every tier is this card; the easy tier comes from Jarr (free replacements)",
+   "wiki": "\"Desert amulet 4 is a reward for completing the elite Desert Diary\" (tiers 1–3 for easy–hard)"
+  }
  },
  "Kandarin headgear": {
   "shops": [],
-  "shopBought": false
+  "shopBought": false,
+  "activity": {
+   "name": "Kandarin Diary",
+   "kind": "diary",
+   "diaries": [
+    "Kandarin Easy"
+   ],
+   "note": "Every tier is this card; the easy tier comes from The 'Wedge' (free replacements)",
+   "wiki": "\"Kandarin headgear 4 is a reward for completing the elite Kandarin Diary\" (tiers 1–3 for easy–hard)"
+  }
  },
  "Western banner": {
   "shops": [],
-  "shopBought": false
+  "shopBought": false,
+  "activity": {
+   "name": "Western Provinces Diary",
+   "kind": "diary",
+   "diaries": [
+    "Western Provinces Easy"
+   ],
+   "note": "Every tier is this card; the easy tier comes from Elder Gnome child (free replacements)",
+   "wiki": "\"Western banner 4 is a reward for completing the elite Western Provinces Diary\" (tiers 1–3 for easy–hard)"
+  }
  },
  "Chronicle": {
   "shops": [
@@ -1145,15 +1331,54 @@
  },
  "Imbued saradomin cape": {
   "shops": [],
-  "shopBought": false
+  "shopBought": false,
+  "activity": {
+   "name": "Mage Arena II",
+   "kind": "quest",
+   "quests": [
+    "Mage Arena II"
+   ],
+   "levels": {
+    "Magic": 75
+   },
+   "access": "wilderness",
+   "note": "Imbue the god cape with the three Mage Arena II demon drops (Justiciar Zachariah, Porazdir, Derwen)",
+   "wiki": "\"obtained from imbuing a Saradomin cape with the items dropped by Justiciar Zachariah, Porazdir, and Derwen, during the Mage Arena II miniquest, requiring 75 Magic\""
+  }
  },
  "Imbued guthix cape": {
   "shops": [],
-  "shopBought": false
+  "shopBought": false,
+  "activity": {
+   "name": "Mage Arena II",
+   "kind": "quest",
+   "quests": [
+    "Mage Arena II"
+   ],
+   "levels": {
+    "Magic": 75
+   },
+   "access": "wilderness",
+   "note": "Imbue the god cape with the three Mage Arena II demon drops (Justiciar Zachariah, Porazdir, Derwen)",
+   "wiki": "\"obtained from imbuing a Saradomin cape with the items dropped by Justiciar Zachariah, Porazdir, and Derwen, during the Mage Arena II miniquest, requiring 75 Magic\""
+  }
  },
  "Imbued zamorak cape": {
   "shops": [],
-  "shopBought": false
+  "shopBought": false,
+  "activity": {
+   "name": "Mage Arena II",
+   "kind": "quest",
+   "quests": [
+    "Mage Arena II"
+   ],
+   "levels": {
+    "Magic": 75
+   },
+   "access": "wilderness",
+   "note": "Imbue the god cape with the three Mage Arena II demon drops (Justiciar Zachariah, Porazdir, Derwen)",
+   "wiki": "\"obtained from imbuing a Saradomin cape with the items dropped by Justiciar Zachariah, Porazdir, and Derwen, during the Mage Arena II miniquest, requiring 75 Magic\""
+  }
  },
  "Ava's assembler": {
   "shops": [],
@@ -1165,11 +1390,29 @@
  },
  "Rada's blessing": {
   "shops": [],
-  "shopBought": false
+  "shopBought": false,
+  "activity": {
+   "name": "Kourend & Kebos Diary",
+   "kind": "diary",
+   "diaries": [
+    "Kourend & Kebos Easy"
+   ],
+   "note": "Every tier is this card; the easy tier comes from Elise (free replacements)",
+   "wiki": "\"Rada's blessing 4 is a reward for completing the elite Kourend & Kebos Diary\" (tiers 1–3 for easy–hard)"
+  }
  },
  "Book of the dead": {
   "shops": [],
-  "shopBought": false
+  "shopBought": false,
+  "activity": {
+   "name": "A Kingdom Divided",
+   "kind": "quest",
+   "quests": [
+    "A Kingdom Divided"
+   ],
+   "access": "kourend",
+   "wiki": "\"obtained as a reward from completing A Kingdom Divided\""
+  }
  },
  "Colossal blade": {
   "shops": [
@@ -1197,5 +1440,5031 @@
   "quests": [
    "Animal Magnetism"
   ]
+ },
+ "Clue hunter gloves": {
+  "activity": {
+   "name": "Dig spot (south-west of the Fishing Guild)",
+   "cards": [
+    "Spade"
+   ],
+   "note": "Dig with a spade south-west of the Fishing Guild",
+   "wiki": "Wiki (Clue hunter outfit): \"Players must travel to specific locations for each piece of the outfit\" — dig with a spade"
+  }
+ },
+ "Clue hunter boots": {
+  "activity": {
+   "name": "Dig spot (south-west of the Fishing Guild)",
+   "cards": [
+    "Spade"
+   ],
+   "note": "Dig with a spade south-west of the Fishing Guild",
+   "wiki": "Wiki (Clue hunter outfit): \"Players must travel to specific locations for each piece of the outfit\" — dig with a spade"
+  }
+ },
+ "Clue hunter garb": {
+  "activity": {
+   "name": "Dig spot (north-east of the Shayzien East minecart station)",
+   "cards": [
+    "Spade"
+   ],
+   "access": "kourend",
+   "note": "Dig with a spade north-east of the Shayzien East minecart station",
+   "wiki": "Wiki (Clue hunter outfit): \"Players must travel to specific locations for each piece of the outfit\" — dig with a spade"
+  }
+ },
+ "Clue hunter trousers": {
+  "activity": {
+   "name": "Dig spot (by the Pothole Dungeon, north of Tai Bwo Wannai)",
+   "cards": [
+    "Spade"
+   ],
+   "note": "Dig with a spade by the Pothole Dungeon, north of Tai Bwo Wannai",
+   "wiki": "Wiki (Clue hunter outfit): \"Players must travel to specific locations for each piece of the outfit\" — dig with a spade"
+  }
+ },
+ "Clue hunter cloak": {
+  "activity": {
+   "name": "Dig spot (between two willows south-east of Yanille)",
+   "cards": [
+    "Spade"
+   ],
+   "note": "Dig with a spade between two willows south-east of Yanille",
+   "wiki": "Wiki (Clue hunter outfit): \"Players must travel to specific locations for each piece of the outfit\" — dig with a spade"
+  }
+ },
+ "_comment_gaps": "2026-10-19 gap pass: every item card that had no source at all, classified from the OSRS Wiki (item pages via ?action=raw, dropsline + storeline buckets; cached in scripts/cache/). Quest / minigame / NPC / random-event / diary / pet rewards are 'activity' sources (one object or a list of alternatives; fields documented at _acts in preview.html). Discontinued items carry unobtainable + unobtainableReason. Chest bosses (raids, Barrows, Moons, Wintertodt…) are not listed here: preview.html reads boss_loot.json for them.",
+ "Excalibur": {
+  "activity": {
+   "name": "Merlin's Crystal",
+   "kind": "quest",
+   "quests": [
+    "Merlin's Crystal"
+   ],
+   "note": "Pulled from the stone during the quest; lost copies are reclaimed from the Lady of the Lake (500 coins)",
+   "wiki": "\"a quest item obtained from the Merlin's Crystal quest\""
+  }
+ },
+ "Ghostspeak amulet": {
+  "activity": {
+   "name": "The Restless Ghost",
+   "kind": "quest",
+   "partialQuests": [
+    "The Restless Ghost"
+   ],
+   "note": "Given by Father Urhney in Lumbridge Swamp (he also replaces lost ones)",
+   "wiki": "\"Partial completion of The Restless Ghost is required to obtain the item\""
+  }
+ },
+ "Goldsmith gauntlets": {
+  "activity": {
+   "name": "Family Crest",
+   "kind": "quest",
+   "quests": [
+    "Family Crest"
+   ],
+   "note": "Steel gauntlets enchanted by Avan's family; swap types later with Caleb / Johnathon / Avan (25,000 coins)",
+   "wiki": "\"available after completing the quest Family Crest\""
+  }
+ },
+ "Wolfbane": {
+  "activity": {
+   "name": "Priest in Peril",
+   "kind": "quest",
+   "quests": [
+    "Priest in Peril"
+   ],
+   "npcs": [
+    "Drezel"
+   ],
+   "wiki": "\"given as a quest item reward in Priest in Peril. It is obtained from Drezel after completion of the quest\""
+  }
+ },
+ "Drunk parrot": {
+  "activity": {
+   "name": "Eadgar's Ruse",
+   "kind": "quest",
+   "partialQuests": [
+    "Eadgar's Ruse"
+   ],
+   "note": "Give alco-chunks to a parrot in Ardougne Zoo during the quest",
+   "wiki": "\"a quest item used in the Eadgar's Ruse quest. It is obtained by giving alco-chunks to a parrot in Ardougne Zoo\""
+  }
+ },
+ "M'speak amulet": {
+  "activity": {
+   "name": "Monkey Madness I",
+   "kind": "quest",
+   "partialQuests": [
+    "Monkey Madness I"
+   ],
+   "access": "ape_atoll",
+   "note": "Crafted during the quest (gold bar, monkey dentures, ball of wool + Zooknock)",
+   "wiki": "\"an item crafted during Monkey Madness I\""
+  }
+ },
+ "Ring of charos": {
+  "activity": {
+   "name": "Creature of Fenkenstrain",
+   "kind": "quest",
+   "quests": [
+    "Creature of Fenkenstrain"
+   ],
+   "access": "morytania",
+   "note": "Reward of the quest; replaced by Dr Fenkenstrain's ring of charos (a) after Garden of Tranquillity",
+   "wiki": "\"Ring of Charos ... Creature of Fenkenstrain\""
+  }
+ },
+ "Oak blackjack": {
+  "activity": {
+   "name": "The Feud",
+   "kind": "quest",
+   "partialQuests": [
+    "The Feud"
+   ],
+   "access": "desert",
+   "wiki": "\"An oak blackjack can be obtained from Ali the Operator during The Feud quest\""
+  }
+ },
+ "Ugthanki dung": {
+  "activity": {
+   "name": "The Feud",
+   "kind": "quest",
+   "partialQuests": [
+    "The Feud"
+   ],
+   "access": "desert",
+   "cards": [
+    "Bucket"
+   ],
+   "note": "Collected in a bucket from the ugthanki camels in Pollnivneach",
+   "wiki": "\"camel dung that can be collected in a bucket. It plays a small role in ... The Feud quests\""
+  }
+ },
+ "Ana in a barrel": {
+  "activity": {
+   "name": "The Tourist Trap",
+   "kind": "quest",
+   "partialQuests": [
+    "The Tourist Trap"
+   ],
+   "access": "desert",
+   "wiki": "\"quest = The Tourist Trap\""
+  }
+ },
+ "Holy wrench": {
+  "activity": {
+   "name": "Rum Deal",
+   "kind": "quest",
+   "partialQuests": [
+    "Rum Deal"
+   ],
+   "npcs": [
+    "Pirate Pete"
+   ],
+   "wiki": "\"a reward for partially completing the Rum Deal quest\""
+  }
+ },
+ "Darklight": {
+  "activity": {
+   "name": "Shadow of the Storm",
+   "kind": "quest",
+   "quests": [
+    "Shadow of the Storm"
+   ],
+   "access": "desert",
+   "wiki": "\"a demonbane weapon created from the sword Silverlight ... in Shadow of the Storm\""
+  }
+ },
+ "Silly jester hat": {
+  "activity": {
+   "name": "The Fremennik Isles",
+   "kind": "quest",
+   "partialQuests": [
+    "The Fremennik Isles"
+   ],
+   "note": "Taken from the chest (jester costume) in Jatizso; worn during the quest",
+   "wiki": "\"obtained and used during The Fremennik Isles quest\""
+  }
+ },
+ "Silly jester top": {
+  "activity": {
+   "name": "The Fremennik Isles",
+   "kind": "quest",
+   "partialQuests": [
+    "The Fremennik Isles"
+   ],
+   "note": "Taken from the chest (jester costume) in Jatizso; worn during the quest",
+   "wiki": "\"obtained and used during The Fremennik Isles quest\""
+  }
+ },
+ "Silly jester tights": {
+  "activity": {
+   "name": "The Fremennik Isles",
+   "kind": "quest",
+   "partialQuests": [
+    "The Fremennik Isles"
+   ],
+   "note": "Taken from the chest (jester costume) in Jatizso; worn during the quest",
+   "wiki": "\"obtained and used during The Fremennik Isles quest\""
+  }
+ },
+ "Silly jester boots": {
+  "activity": {
+   "name": "The Fremennik Isles",
+   "kind": "quest",
+   "partialQuests": [
+    "The Fremennik Isles"
+   ],
+   "note": "Taken from the chest (jester costume) in Jatizso; worn during the quest",
+   "wiki": "\"obtained and used during The Fremennik Isles quest\""
+  }
+ },
+ "Ghostly hood": {
+  "activity": {
+   "name": "Curse of the Empty Lord",
+   "kind": "quest",
+   "partialQuests": [
+    "Curse of the Empty Lord"
+   ],
+   "cards": [
+    "Ghostspeak amulet"
+   ],
+   "note": "Talk to each ghost (Kharrim, Rennard, Viggora, Dhalak, Valdez…) wearing a ghostspeak amulet; the card also covers the Last Man Standing copy",
+   "wiki": "\"Players can obtain a pair after speaking to Kharrim during the Curse of the Empty Lord miniquest\""
+  }
+ },
+ "Ghostly robe": {
+  "activity": {
+   "name": "Curse of the Empty Lord",
+   "kind": "quest",
+   "partialQuests": [
+    "Curse of the Empty Lord"
+   ],
+   "cards": [
+    "Ghostspeak amulet"
+   ],
+   "note": "Talk to each ghost (Kharrim, Rennard, Viggora, Dhalak, Valdez…) wearing a ghostspeak amulet; the card also covers the Last Man Standing copy",
+   "wiki": "\"Players can obtain a pair after speaking to Kharrim during the Curse of the Empty Lord miniquest\""
+  }
+ },
+ "Guthix mjolnir": {
+  "activity": {
+   "name": "The Enchanted Key",
+   "kind": "quest",
+   "partialQuests": [
+    "The Enchanted Key"
+   ],
+   "cards": [
+    "Spade"
+   ],
+   "note": "Dug up with the enchanted key during the miniquest (one of each)",
+   "wiki": "\"a player can either find it during The Enchanted Key miniquest\""
+  }
+ },
+ "Saradomin mjolnir": {
+  "activity": {
+   "name": "The Enchanted Key",
+   "kind": "quest",
+   "partialQuests": [
+    "The Enchanted Key"
+   ],
+   "cards": [
+    "Spade"
+   ],
+   "note": "Dug up with the enchanted key during the miniquest (one of each)",
+   "wiki": "\"a player can either find it during The Enchanted Key miniquest\""
+  }
+ },
+ "Zamorak mjolnir": {
+  "activity": {
+   "name": "The Enchanted Key",
+   "kind": "quest",
+   "partialQuests": [
+    "The Enchanted Key"
+   ],
+   "cards": [
+    "Spade"
+   ],
+   "note": "Dug up with the enchanted key during the miniquest (one of each)",
+   "wiki": "\"a player can either find it during The Enchanted Key miniquest\""
+  }
+ },
+ "Anti-dragon shield": {
+  "activity": [
+   {
+    "name": "Duke Horacio (Dragon Slayer I)",
+    "kind": "npc",
+    "partialQuests": [
+     "Dragon Slayer I"
+    ],
+    "npcs": [
+     "Duke Horacio"
+    ],
+    "note": "Free from Duke Horacio in Lumbridge Castle (also during the quest). The card also covers the NMZ copy",
+    "wiki": "\"an item given by Duke Horacio in Lumbridge Castle during the Dragon Slayer I quest. After the quest ... obtained from Duke Horacio for free\""
+   },
+   {
+    "name": "Oziach (after Dragon Slayer I)",
+    "kind": "shop",
+    "quests": [
+     "Dragon Slayer I"
+    ],
+    "cards": [
+     "Coins"
+    ],
+    "npcs": [
+     "Oziach"
+    ],
+    "wiki": "\"After the quest, the shield can be purchased from Oziach\""
+   }
+  ]
+ },
+ "Magic secateurs": {
+  "activity": {
+   "name": "Fairytale I - Growing Pains",
+   "kind": "quest",
+   "partialQuests": [
+    "Fairytale I - Growing Pains"
+   ],
+   "note": "Obtained during the quest from Malignius Mortifer; after it, more from him for 40,000 coins. The card also covers the NMZ copy",
+   "wiki": "\"Magic secateurs are obtained during the quest Fairytale I - Growing Pains from Malignius Mortifer\""
+  }
+ },
+ "Fishbowl helmet": {
+  "activity": {
+   "name": "Recipe for Disaster/Freeing Pirate Pete",
+   "kind": "quest",
+   "partialQuests": [
+    "Recipe for Disaster/Freeing Pirate Pete"
+   ],
+   "note": "From Murphy in Port Khazard (fishbowl helmet for an empty fishbowl); free after the subquest. The card also covers the 2017 Halloween copy",
+   "wiki": "\"obtained from Murphy during the Freeing Pirate Pete subquest of the Recipe for Disaster quest ... After the quest it can be obtained for free\""
+  }
+ },
+ "Diving apparatus": {
+  "activity": {
+   "name": "Recipe for Disaster/Freeing Pirate Pete",
+   "kind": "quest",
+   "partialQuests": [
+    "Recipe for Disaster/Freeing Pirate Pete"
+   ],
+   "note": "From Murphy in Port Khazard (fishbowl helmet for an empty fishbowl); free after the subquest. The card also covers the 2017 Halloween copy",
+   "wiki": "\"obtained from Murphy during the Freeing Pirate Pete subquest of the Recipe for Disaster quest ... After the quest it can be obtained for free\""
+  }
+ },
+ "Ring of shadows": {
+  "activity": {
+   "name": "Desert Treasure II - The Fallen Empire",
+   "kind": "quest",
+   "quests": [
+    "Desert Treasure II - The Fallen Empire"
+   ],
+   "wiki": "\"obtained as a reward upon completion of Desert Treasure II\""
+  }
+ },
+ "Arkan blade": {
+  "activity": {
+   "name": "The Final Dawn",
+   "kind": "quest",
+   "quests": [
+    "The Final Dawn"
+   ],
+   "access": "varlamore",
+   "npcs": [
+    "Prince Itzla Arkan"
+   ],
+   "wiki": "\"obtained from him as a reward for completing The Final Dawn\""
+  }
+ },
+ "Cowbell amulet": {
+  "activity": {
+   "name": "The Ides of Milk",
+   "kind": "quest",
+   "quests": [
+    "The Ides of Milk"
+   ],
+   "wiki": "\"obtained from Gillie Groats upon speaking to her after completion of The Ides of Milk\""
+  }
+ },
+ "Costume needle": {
+  "activity": {
+   "name": "Death on the Isle",
+   "kind": "quest",
+   "quests": [
+    "Death on the Isle"
+   ],
+   "access": "varlamore",
+   "wiki": "\"obtained from the costumer in the backstage of the Villa Lucens' theatre on Aldarin after the completion of Death on the Isle\""
+  }
+ },
+ "Ballistic attractor schematic": {
+  "activity": {
+   "name": "Animal Magnetism + Pandemonium (Ava)",
+   "kind": "quest",
+   "quests": [
+    "Animal Magnetism",
+    "Pandemonium"
+   ],
+   "npcs": [
+    "Ava"
+   ],
+   "wiki": "\"Players can receive the schematic by speaking to Ava in Draynor Manor after completing Animal Magnetism and Pandemonium\""
+  }
+ },
+ "Climbing boots": {
+  "activity": {
+   "name": "Tenzing (after Death Plateau)",
+   "kind": "shop",
+   "quests": [
+    "Death Plateau"
+   ],
+   "cards": [
+    "Coins"
+   ],
+   "note": "12 coins each; the card also covers the Last Man Standing copy",
+   "wiki": "\"After finishing Death Plateau, players may buy climbing boots from Tenzing\""
+  }
+ },
+ "Crystal shield": {
+  "activity": [
+   {
+    "name": "Roving Elves reward",
+    "kind": "quest",
+    "quests": [
+     "Roving Elves"
+    ],
+    "access": "tirannwn",
+    "wiki": "\"available after completing the Roving Elves quest, and a possible reward from this quest along with the crystal bow\""
+   },
+   {
+    "name": "Islwyn (750,000 coins)",
+    "kind": "shop",
+    "quests": [
+     "Roving Elves"
+    ],
+    "access": "tirannwn",
+    "cards": [
+     "Coins"
+    ],
+    "wiki": "\"the crystal shield can be purchased from Islwyn for 750,000 coins\""
+   }
+  ]
+ },
+ "Crystal halberd": {
+  "activity": {
+   "name": "Islwyn (750,000 coins)",
+   "kind": "shop",
+   "quests": [
+    "Roving Elves"
+   ],
+   "access": "tirannwn",
+   "cards": [
+    "Coins"
+   ],
+   "note": "Or recharge a crystal weapon seed at Ilfeen",
+   "wiki": "\"one must talk to Islwyn who will offer to sell a crystal halberd for 750,000 coins\""
+  }
+ },
+ "Mort myre pear": {
+  "activity": {
+   "name": "Bloom (Nature Spirit)",
+   "kind": "gather",
+   "partialQuests": [
+    "Nature Spirit"
+   ],
+   "access": "morytania",
+   "cards": [
+    "Silver sickle"
+   ],
+   "note": "Cast Bloom with a blessed silver sickle near small bushes in Mort Myre Swamp",
+   "wiki": "\"obtained during or after the Nature Spirit quest. It appears when the Bloom spell is cast, using a silver sickle(b) near certain small bushes\""
+  }
+ },
+ "Mort myre stem": {
+  "activity": {
+   "name": "Bloom (Nature Spirit)",
+   "kind": "gather",
+   "partialQuests": [
+    "Nature Spirit"
+   ],
+   "access": "morytania",
+   "cards": [
+    "Silver sickle"
+   ],
+   "note": "Cast Bloom with a blessed silver sickle near rotting branches in Mort Myre Swamp",
+   "wiki": "\"obtained by operating a silver sickle (b) near rotting branches on the ground in Mort Myre Swamp\""
+  }
+ },
+ "Black nails": {
+  "activity": {
+   "name": "Ogre coffins (Jiggig)",
+   "kind": "gather",
+   "partialQuests": [
+    "Zogre Flesh Eaters"
+   ],
+   "levels": {
+    "Thieving": 20
+   },
+   "cards": [
+    "Lockpick"
+   ],
+   "note": "Picked from ogre coffins in Jiggig with a lockpick; also a drop from zombies in Tarn's Lair",
+   "wiki": "\"Black nails can be obtained from thieving Ogre coffins or as a drop from zombies in Tarn's Lair\""
+  },
+  "monsters": [
+   {
+    "card": "Zombie",
+    "rarity": "Uncommon",
+    "fraction": "5/128",
+    "note": "Tarn's Lair, high level"
+   }
+  ]
+ },
+ "Fayrg bones": {
+  "activity": {
+   "name": "Ogre coffins (Jiggig)",
+   "kind": "gather",
+   "partialQuests": [
+    "Zogre Flesh Eaters"
+   ],
+   "levels": {
+    "Thieving": 20
+   },
+   "cards": [
+    "Lockpick"
+   ],
+   "wiki": "\"bones available from looting ogre coffins\""
+  }
+ },
+ "Raurg bones": {
+  "activity": {
+   "name": "Ogre coffins (Jiggig)",
+   "kind": "gather",
+   "partialQuests": [
+    "Zogre Flesh Eaters"
+   ],
+   "levels": {
+    "Thieving": 20
+   },
+   "cards": [
+    "Lockpick"
+   ],
+   "wiki": "\"bones available from looting ogre coffins\""
+  }
+ },
+ "Cat training medal": {
+  "activity": {
+   "name": "Gertrude (100 rats caught by your cat)",
+   "kind": "npc",
+   "quests": [
+    "Gertrude's Cat"
+   ],
+   "cards": [
+    "Pet cat"
+   ],
+   "npcs": [
+    "Gertrude"
+   ],
+   "wiki": "\"members can obtain by having their cat or kitten catch 100 rats, and then talking to Gertrude in Varrock\""
+  }
+ },
+ "Pet cat": {
+  "activity": {
+   "name": "Gertrude's Cat (kitten from Gertrude)",
+   "kind": "quest",
+   "quests": [
+    "Gertrude's Cat"
+   ],
+   "npcs": [
+    "Gertrude"
+   ],
+   "note": "A kitten grows into a pet cat; wily / lazy / hell cats come later (Ratcatchers, Felkrash)",
+   "wiki": "\"Wily cat ... a special variant of a pet cat\" (kittens: Gertrude, after Gertrude's Cat)"
+  }
+ },
+ "Chompy bird hat": {
+  "activity": {
+   "name": "Rantz (chompy kills)",
+   "kind": "npc",
+   "quests": [
+    "Big Chompy Bird Hunting"
+   ],
+   "levels": {
+    "Fletching": 5,
+    "Ranged": 30
+   },
+   "npcs": [
+    "Rantz"
+   ],
+   "note": "Kill at least 30 chompy birds (170 for this hat) and talk to Rantz",
+   "wiki": "\"To obtain this hat the player must first kill at least 170 Chompy birds, then talk to Rantz\""
+  }
+ },
+ "Severed leg": {
+  "activity": {
+   "name": "Corpse cart (Darkmeyer)",
+   "kind": "gather",
+   "quests": [
+    "Sins of the Father"
+   ],
+   "access": "morytania",
+   "wiki": "\"can be obtained from a corpse cart, which are found around Darkmeyer, accessed after the completion of the Sins of the Father quest\""
+  }
+ },
+ "Sieve": {
+  "activity": [
+   {
+    "name": "Chemist (Rimmington)",
+    "kind": "npc",
+    "wiki": "\"Players can get sieves by talking to the chemist in Rimmington about impling jars\""
+   },
+   {
+    "name": "Mourning's End Part I (Elena)",
+    "kind": "quest",
+    "partialQuests": [
+     "Mourning's End Part I"
+    ],
+    "npcs": [
+     "Elena"
+    ],
+    "wiki": "\"obtained in exchange for a rotten apple by talking to Elena during Mourning's End Part I\""
+   }
+  ]
+ },
+ "Calcified moth": {
+  "activity": {
+   "name": "Calcified deposit (smash on an anvil)",
+   "kind": "container",
+   "partialQuests": [
+    "Perilous Moons"
+   ],
+   "access": "varlamore",
+   "cards": [
+    "Hammer"
+   ],
+   "from": [
+    "Calcified deposit"
+   ],
+   "wiki": "\"obtained by using a calcified deposit on any anvil with a hammer\""
+  }
+ },
+ "Bonecrusher": {
+  "activity": {
+   "name": "Morytania Diary (Hard)",
+   "kind": "diary",
+   "diaries": [
+    "Morytania Hard"
+   ],
+   "access": "morytania",
+   "cards": [
+    "Ghostspeak amulet"
+   ],
+   "note": "From a ghost disciple at the Ectofuntus, wearing a ghostspeak amulet (or Morytania legs)",
+   "wiki": "\"The bonecrusher is a reward from the hard Morytania Diary\""
+  }
+ },
+ "Ash sanctifier": {
+  "activity": {
+   "name": "Kourend & Kebos Diary (Hard)",
+   "kind": "diary",
+   "diaries": [
+    "Kourend & Kebos Hard"
+   ],
+   "access": "kourend",
+   "wiki": "\"a reward from completing the Hard Kourend & Kebos Diary, where players can then claim it from Tyss near the Dark Altar\""
+  }
+ },
+ "Archery ticket": {
+  "activity": {
+   "name": "Ranging Guild target range",
+   "kind": "minigame",
+   "levels": {
+    "Ranged": 40
+   },
+   "access": "ranged",
+   "cards": [
+    "Coins"
+   ],
+   "note": "200 coins per 10 shots (bow + arrows); tickets buy items from the Ticket Merchant",
+   "wiki": "\"the reward given for using the target range at the Ranging Guild ... at the cost of 200 coins\""
+  }
+ },
+ "Agility arena ticket": {
+  "activity": {
+   "name": "Brimhaven Agility Arena",
+   "kind": "minigame",
+   "cards": [
+    "Coins"
+   ],
+   "npcs": [
+    "Cap'n Izzy No-Beard"
+   ],
+   "note": "200 coins entry (Cap'n Izzy No-Beard); one ticket + one voucher per dispenser tagged",
+   "wiki": "\"One ticket and one Brimhaven voucher are earned for tagging a ticket dispenser\""
+  }
+ },
+ "Brimhaven voucher": {
+  "activity": {
+   "name": "Brimhaven Agility Arena",
+   "kind": "minigame",
+   "cards": [
+    "Coins"
+   ],
+   "npcs": [
+    "Cap'n Izzy No-Beard"
+   ],
+   "note": "200 coins entry (Cap'n Izzy No-Beard); one ticket + one voucher per dispenser tagged",
+   "wiki": "\"One ticket and one Brimhaven voucher are earned for tagging a ticket dispenser\""
+  }
+ },
+ "Castle wars ticket": {
+  "activity": {
+   "name": "Castle Wars",
+   "kind": "minigame",
+   "wiki": "\"awarded in the Castle Wars minigame to players who spend at least 15 minutes in the game\""
+  }
+ },
+ "Castle wars supply crate": {
+  "activity": {
+   "name": "Castle Wars (plaudits)",
+   "kind": "minigame",
+   "note": "Bought for one plaudit; plaudits come from games on the dedicated Castle Wars worlds",
+   "wiki": "\"Castle wars supply crates can be purchased from the Castle Wars Ticket Exchange for one plaudit\""
+  }
+ },
+ "Fine cloth": {
+  "activity": {
+   "name": "Shades of Mort'ton (chests)",
+   "kind": "minigame",
+   "quests": [
+    "Shades of Mort'ton"
+   ],
+   "levels": {
+    "Firemaking": 5
+   },
+   "access": "morytania",
+   "note": "Shade keys (from killing shades) open the Shade Catacombs chests; higher chests need higher Firemaking and better keys",
+   "wiki": "\"obtained from chests within the Shade Catacombs\" (Shades of Mort'ton minigame)"
+  }
+ },
+ "Flamtaer bag": {
+  "activity": {
+   "name": "Shades of Mort'ton (chests)",
+   "kind": "minigame",
+   "quests": [
+    "Shades of Mort'ton"
+   ],
+   "levels": {
+    "Firemaking": 5
+   },
+   "access": "morytania",
+   "note": "Shade keys (from killing shades) open the Shade Catacombs chests; higher chests need higher Firemaking and better keys",
+   "wiki": "\"obtained from chests within the Shade Catacombs\" (Shades of Mort'ton minigame)"
+  }
+ },
+ "Zealot's robe top": {
+  "activity": {
+   "name": "Shades of Mort'ton (chests)",
+   "kind": "minigame",
+   "quests": [
+    "Shades of Mort'ton"
+   ],
+   "levels": {
+    "Firemaking": 5
+   },
+   "access": "morytania",
+   "note": "Shade keys (from killing shades) open the Shade Catacombs chests; higher chests need higher Firemaking and better keys",
+   "wiki": "\"obtained from chests within the Shade Catacombs\" (Shades of Mort'ton minigame)"
+  }
+ },
+ "Zealot's robe bottom": {
+  "activity": {
+   "name": "Shades of Mort'ton (chests)",
+   "kind": "minigame",
+   "quests": [
+    "Shades of Mort'ton"
+   ],
+   "levels": {
+    "Firemaking": 5
+   },
+   "access": "morytania",
+   "note": "Shade keys (from killing shades) open the Shade Catacombs chests; higher chests need higher Firemaking and better keys",
+   "wiki": "\"obtained from chests within the Shade Catacombs\" (Shades of Mort'ton minigame)"
+  }
+ },
+ "Zealot's helm": {
+  "activity": {
+   "name": "Shades of Mort'ton (chests)",
+   "kind": "minigame",
+   "quests": [
+    "Shades of Mort'ton"
+   ],
+   "levels": {
+    "Firemaking": 5
+   },
+   "access": "morytania",
+   "note": "Shade keys (from killing shades) open the Shade Catacombs chests; higher chests need higher Firemaking and better keys",
+   "wiki": "\"obtained from chests within the Shade Catacombs\" (Shades of Mort'ton minigame)"
+  }
+ },
+ "Zealot's boots": {
+  "activity": {
+   "name": "Shades of Mort'ton (chests)",
+   "kind": "minigame",
+   "quests": [
+    "Shades of Mort'ton"
+   ],
+   "levels": {
+    "Firemaking": 5
+   },
+   "access": "morytania",
+   "note": "Shade keys (from killing shades) open the Shade Catacombs chests; higher chests need higher Firemaking and better keys",
+   "wiki": "\"obtained from chests within the Shade Catacombs\" (Shades of Mort'ton minigame)"
+  }
+ },
+ "Steel locks": {
+  "activity": {
+   "name": "Shades of Mort'ton (chests)",
+   "kind": "minigame",
+   "quests": [
+    "Shades of Mort'ton"
+   ],
+   "levels": {
+    "Firemaking": 5
+   },
+   "access": "morytania",
+   "note": "Shade keys (from killing shades) open the Shade Catacombs chests; higher chests need higher Firemaking and better keys",
+   "wiki": "\"obtained from chests within the Shade Catacombs\" (Shades of Mort'ton minigame)"
+  }
+ },
+ "Black locks": {
+  "activity": {
+   "name": "Shades of Mort'ton (chests)",
+   "kind": "minigame",
+   "quests": [
+    "Shades of Mort'ton"
+   ],
+   "levels": {
+    "Firemaking": 5
+   },
+   "access": "morytania",
+   "note": "Shade keys (from killing shades) open the Shade Catacombs chests; higher chests need higher Firemaking and better keys",
+   "wiki": "\"obtained from chests within the Shade Catacombs\" (Shades of Mort'ton minigame)"
+  }
+ },
+ "Silver locks": {
+  "activity": {
+   "name": "Shades of Mort'ton (chests)",
+   "kind": "minigame",
+   "quests": [
+    "Shades of Mort'ton"
+   ],
+   "levels": {
+    "Firemaking": 5
+   },
+   "access": "morytania",
+   "note": "Shade keys (from killing shades) open the Shade Catacombs chests; higher chests need higher Firemaking and better keys",
+   "wiki": "\"obtained from chests within the Shade Catacombs\" (Shades of Mort'ton minigame)"
+  }
+ },
+ "Gold locks": {
+  "activity": {
+   "name": "Shades of Mort'ton (chests)",
+   "kind": "minigame",
+   "quests": [
+    "Shades of Mort'ton"
+   ],
+   "levels": {
+    "Firemaking": 5
+   },
+   "access": "morytania",
+   "note": "Shade keys (from killing shades) open the Shade Catacombs chests; higher chests need higher Firemaking and better keys",
+   "wiki": "\"obtained from chests within the Shade Catacombs\" (Shades of Mort'ton minigame)"
+  }
+ },
+ "Tree wizards' journal": {
+  "activity": {
+   "name": "Shades of Mort'ton (chests)",
+   "kind": "minigame",
+   "quests": [
+    "Shades of Mort'ton"
+   ],
+   "levels": {
+    "Firemaking": 5
+   },
+   "access": "morytania",
+   "note": "Shade keys (from killing shades) open the Shade Catacombs chests; higher chests need higher Firemaking and better keys",
+   "wiki": "\"obtained from chests within the Shade Catacombs\" (Shades of Mort'ton minigame)"
+  }
+ },
+ "Runescroll of swampbark": {
+  "activity": {
+   "name": "Shades of Mort'ton (chests)",
+   "kind": "minigame",
+   "quests": [
+    "Shades of Mort'ton"
+   ],
+   "levels": {
+    "Firemaking": 5
+   },
+   "access": "morytania",
+   "note": "Shade keys (from killing shades) open the Shade Catacombs chests; higher chests need higher Firemaking and better keys",
+   "wiki": "\"obtained from chests within the Shade Catacombs\" (Shades of Mort'ton minigame)"
+  }
+ },
+ "Runescroll of bloodbark": {
+  "activity": {
+   "name": "Shades of Mort'ton (chests)",
+   "kind": "minigame",
+   "quests": [
+    "Shades of Mort'ton"
+   ],
+   "levels": {
+    "Firemaking": 5
+   },
+   "access": "morytania",
+   "note": "Shade keys (from killing shades) open the Shade Catacombs chests; higher chests need higher Firemaking and better keys",
+   "wiki": "\"obtained from chests within the Shade Catacombs\" (Shades of Mort'ton minigame)"
+  }
+ },
+ "Amulet of the damned": {
+  "activity": {
+   "name": "Shades of Mort'ton (chests)",
+   "kind": "minigame",
+   "quests": [
+    "Shades of Mort'ton"
+   ],
+   "levels": {
+    "Firemaking": 5
+   },
+   "access": "morytania",
+   "note": "Shade keys (from killing shades) open the Shade Catacombs chests; higher chests need higher Firemaking and better keys",
+   "wiki": "\"obtained from chests within the Shade Catacombs\" (Shades of Mort'ton minigame)"
+  }
+ },
+ "Bronze locks": {
+  "activity": {
+   "name": "Shades of Mort'ton (bronze chests)",
+   "kind": "minigame",
+   "quests": [
+    "Shades of Mort'ton"
+   ],
+   "access": "morytania",
+   "wiki": "\"Bronze locks are a potential reward from bronze chests in the Shades of Mort'ton minigame\""
+  }
+ },
+ "Broken coffin": {
+  "activity": {
+   "name": "Dampe (Mort'ton)",
+   "kind": "npc",
+   "quests": [
+    "Shades of Mort'ton"
+   ],
+   "access": "morytania",
+   "wiki": "\"The broken coffin can be obtained for free from Dampe in the town of Mort'ton\""
+  }
+ },
+ "Ecto-token": {
+  "activity": {
+   "name": "Worship the Ectofuntus",
+   "kind": "minigame",
+   "access": "morytania",
+   "cards": [
+    "Pot",
+    "Bucket",
+    "Bones"
+   ],
+   "note": "Bonemeal (bones ground in the mill) + a bucket of slime per worship; 5 tokens each",
+   "wiki": "\"Ecto-tokens can be earned by worshipping the Ectofuntus, granting 5 tokens\""
+  }
+ },
+ "Progress hat": {
+  "activity": {
+   "name": "Mage Training Arena",
+   "kind": "minigame",
+   "wiki": "\"If lost, another one can be obtained for free from the Entrance Guardian\""
+  }
+ },
+ "Mage's book": {
+  "activity": {
+   "name": "Mage Training Arena",
+   "kind": "minigame",
+   "npcs": [
+    "Rewards Guardian"
+   ],
+   "note": "Bought with pizazz points from the Rewards Guardian (Peach: the Bones to Peaches spell unlock)",
+   "wiki": "\"It can be obtained by playing the Mage Training Arena minigame\""
+  }
+ },
+ "Master wand": {
+  "activity": {
+   "name": "Mage Training Arena",
+   "kind": "minigame",
+   "npcs": [
+    "Rewards Guardian"
+   ],
+   "note": "Bought with pizazz points from the Rewards Guardian (Peach: the Bones to Peaches spell unlock)",
+   "wiki": "\"It can be obtained by playing the Mage Training Arena minigame\""
+  }
+ },
+ "Infinity top": {
+  "activity": {
+   "name": "Mage Training Arena",
+   "kind": "minigame",
+   "npcs": [
+    "Rewards Guardian"
+   ],
+   "note": "Bought with pizazz points from the Rewards Guardian (Peach: the Bones to Peaches spell unlock)",
+   "wiki": "\"It can be obtained by playing the Mage Training Arena minigame\""
+  }
+ },
+ "Infinity hat": {
+  "activity": {
+   "name": "Mage Training Arena",
+   "kind": "minigame",
+   "npcs": [
+    "Rewards Guardian"
+   ],
+   "note": "Bought with pizazz points from the Rewards Guardian (Peach: the Bones to Peaches spell unlock)",
+   "wiki": "\"It can be obtained by playing the Mage Training Arena minigame\""
+  }
+ },
+ "Infinity boots": {
+  "activity": {
+   "name": "Mage Training Arena",
+   "kind": "minigame",
+   "npcs": [
+    "Rewards Guardian"
+   ],
+   "note": "Bought with pizazz points from the Rewards Guardian (Peach: the Bones to Peaches spell unlock)",
+   "wiki": "\"It can be obtained by playing the Mage Training Arena minigame\""
+  }
+ },
+ "Infinity gloves": {
+  "activity": {
+   "name": "Mage Training Arena",
+   "kind": "minigame",
+   "npcs": [
+    "Rewards Guardian"
+   ],
+   "note": "Bought with pizazz points from the Rewards Guardian (Peach: the Bones to Peaches spell unlock)",
+   "wiki": "\"It can be obtained by playing the Mage Training Arena minigame\""
+  }
+ },
+ "Infinity bottoms": {
+  "activity": {
+   "name": "Mage Training Arena",
+   "kind": "minigame",
+   "npcs": [
+    "Rewards Guardian"
+   ],
+   "note": "Bought with pizazz points from the Rewards Guardian (Peach: the Bones to Peaches spell unlock)",
+   "wiki": "\"It can be obtained by playing the Mage Training Arena minigame\""
+  }
+ },
+ "Peach": {
+  "activity": {
+   "name": "Mage Training Arena",
+   "kind": "minigame",
+   "npcs": [
+    "Rewards Guardian"
+   ],
+   "note": "Bought with pizazz points from the Rewards Guardian (Peach: the Bones to Peaches spell unlock)",
+   "wiki": "\"It can be obtained by playing the Mage Training Arena minigame\""
+  }
+ },
+ "Pyramid top": {
+  "activity": {
+   "name": "Agility Pyramid",
+   "kind": "minigame",
+   "levels": {
+    "Agility": 30
+   },
+   "access": "desert",
+   "note": "Climb to the top of the Agility Pyramid (hand it to Simon Templeton for coins)",
+   "wiki": "\"an artefact found at the top of the Agility Pyramid course\""
+  }
+ },
+ "Ivory comb": {
+  "activity": {
+   "name": "Pyramid Plunder",
+   "kind": "minigame",
+   "levels": {
+    "Thieving": 21
+   },
+   "access": "sophanem",
+   "note": "Urns, chests and sarcophagi in the Sophanem pyramid (later rooms need more Thieving: 31 / 41 / 51 / 61 / 71 / 81 / 91)",
+   "wiki": "\"one of the nine artefacts found during the Pyramid Plunder minigame in Sophanem\""
+  }
+ },
+ "Pottery scarab": {
+  "activity": {
+   "name": "Pyramid Plunder",
+   "kind": "minigame",
+   "levels": {
+    "Thieving": 21
+   },
+   "access": "sophanem",
+   "note": "Urns, chests and sarcophagi in the Sophanem pyramid (later rooms need more Thieving: 31 / 41 / 51 / 61 / 71 / 81 / 91)",
+   "wiki": "\"one of the nine artefacts found during the Pyramid Plunder minigame in Sophanem\""
+  }
+ },
+ "Pottery statuette": {
+  "activity": {
+   "name": "Pyramid Plunder",
+   "kind": "minigame",
+   "levels": {
+    "Thieving": 21
+   },
+   "access": "sophanem",
+   "note": "Urns, chests and sarcophagi in the Sophanem pyramid (later rooms need more Thieving: 31 / 41 / 51 / 61 / 71 / 81 / 91)",
+   "wiki": "\"one of the nine artefacts found during the Pyramid Plunder minigame in Sophanem\""
+  }
+ },
+ "Stone seal": {
+  "activity": {
+   "name": "Pyramid Plunder",
+   "kind": "minigame",
+   "levels": {
+    "Thieving": 21
+   },
+   "access": "sophanem",
+   "note": "Urns, chests and sarcophagi in the Sophanem pyramid (later rooms need more Thieving: 31 / 41 / 51 / 61 / 71 / 81 / 91)",
+   "wiki": "\"one of the nine artefacts found during the Pyramid Plunder minigame in Sophanem\""
+  }
+ },
+ "Stone scarab": {
+  "activity": {
+   "name": "Pyramid Plunder",
+   "kind": "minigame",
+   "levels": {
+    "Thieving": 21
+   },
+   "access": "sophanem",
+   "note": "Urns, chests and sarcophagi in the Sophanem pyramid (later rooms need more Thieving: 31 / 41 / 51 / 61 / 71 / 81 / 91)",
+   "wiki": "\"one of the nine artefacts found during the Pyramid Plunder minigame in Sophanem\""
+  }
+ },
+ "Stone statuette": {
+  "activity": {
+   "name": "Pyramid Plunder",
+   "kind": "minigame",
+   "levels": {
+    "Thieving": 21
+   },
+   "access": "sophanem",
+   "note": "Urns, chests and sarcophagi in the Sophanem pyramid (later rooms need more Thieving: 31 / 41 / 51 / 61 / 71 / 81 / 91)",
+   "wiki": "\"one of the nine artefacts found during the Pyramid Plunder minigame in Sophanem\""
+  }
+ },
+ "Gold seal": {
+  "activity": {
+   "name": "Pyramid Plunder",
+   "kind": "minigame",
+   "levels": {
+    "Thieving": 21
+   },
+   "access": "sophanem",
+   "note": "Urns, chests and sarcophagi in the Sophanem pyramid (later rooms need more Thieving: 31 / 41 / 51 / 61 / 71 / 81 / 91)",
+   "wiki": "\"one of the nine artefacts found during the Pyramid Plunder minigame in Sophanem\""
+  }
+ },
+ "Golden scarab": {
+  "activity": {
+   "name": "Pyramid Plunder",
+   "kind": "minigame",
+   "levels": {
+    "Thieving": 21
+   },
+   "access": "sophanem",
+   "note": "Urns, chests and sarcophagi in the Sophanem pyramid (later rooms need more Thieving: 31 / 41 / 51 / 61 / 71 / 81 / 91)",
+   "wiki": "\"one of the nine artefacts found during the Pyramid Plunder minigame in Sophanem\""
+  }
+ },
+ "Golden statuette": {
+  "activity": {
+   "name": "Pyramid Plunder",
+   "kind": "minigame",
+   "levels": {
+    "Thieving": 21
+   },
+   "access": "sophanem",
+   "note": "Urns, chests and sarcophagi in the Sophanem pyramid (later rooms need more Thieving: 31 / 41 / 51 / 61 / 71 / 81 / 91)",
+   "wiki": "\"one of the nine artefacts found during the Pyramid Plunder minigame in Sophanem\""
+  }
+ },
+ "Pharaoh's sceptre": {
+  "activity": {
+   "name": "Pyramid Plunder",
+   "kind": "minigame",
+   "levels": {
+    "Thieving": 21
+   },
+   "access": "sophanem",
+   "note": "Urns, chests and sarcophagi in the Sophanem pyramid (later rooms need more Thieving: 31 / 41 / 51 / 61 / 71 / 81 / 91)",
+   "wiki": "\"one of the nine artefacts found during the Pyramid Plunder minigame in Sophanem\""
+  }
+ },
+ "Gnome scarf": {
+  "activity": {
+   "name": "Gnome Restaurant",
+   "kind": "minigame",
+   "levels": {
+    "Cooking": 29
+   },
+   "npcs": [
+    "Aluft Gianne snr."
+   ],
+   "note": "Hard deliveries to Captain Daerkin / Captain Ninto",
+   "wiki": "\"a possible reward from the Gnome Restaurant activity ... from Captain Daerkin and Captain Ninto\""
+  }
+ },
+ "Gnome goggles": {
+  "activity": {
+   "name": "Gnome Restaurant",
+   "kind": "minigame",
+   "levels": {
+    "Cooking": 29
+   },
+   "npcs": [
+    "Aluft Gianne snr."
+   ],
+   "note": "Hard deliveries to Captain Daerkin / Captain Ninto",
+   "wiki": "\"a possible reward from the Gnome Restaurant activity ... from Captain Daerkin and Captain Ninto\""
+  }
+ },
+ "Grubs à la mode": {
+  "activity": {
+   "name": "Gourmets of Dorgesh-Kaan",
+   "kind": "npc",
+   "quests": [
+    "Death to the Dorgeshuun"
+   ],
+   "note": "Random reward for selling food to a Gourmet in Dorgesh-Kaan",
+   "wiki": "\"can be obtained at random by selling food to Gourmets in Dorgesh-Kaan\""
+  }
+ },
+ "Roast frog": {
+  "activity": {
+   "name": "Gourmets of Dorgesh-Kaan",
+   "kind": "npc",
+   "quests": [
+    "Death to the Dorgeshuun"
+   ],
+   "note": "Random reward for selling food to a Gourmet in Dorgesh-Kaan",
+   "wiki": "\"can be obtained at random by selling food to Gourmets in Dorgesh-Kaan\""
+  }
+ },
+ "Mushrooms": {
+  "activity": {
+   "name": "Gourmets of Dorgesh-Kaan",
+   "kind": "npc",
+   "quests": [
+    "Death to the Dorgeshuun"
+   ],
+   "note": "Random reward for selling food to a Gourmet in Dorgesh-Kaan",
+   "wiki": "\"can be obtained at random by selling food to Gourmets in Dorgesh-Kaan\""
+  }
+ },
+ "Fillets": {
+  "activity": {
+   "name": "Gourmets of Dorgesh-Kaan",
+   "kind": "npc",
+   "quests": [
+    "Death to the Dorgeshuun"
+   ],
+   "note": "Random reward for selling food to a Gourmet in Dorgesh-Kaan",
+   "wiki": "\"can be obtained at random by selling food to Gourmets in Dorgesh-Kaan\""
+  }
+ },
+ "Loach": {
+  "activity": {
+   "name": "Gourmets of Dorgesh-Kaan",
+   "kind": "npc",
+   "quests": [
+    "Death to the Dorgeshuun"
+   ],
+   "note": "Random reward for selling food to a Gourmet in Dorgesh-Kaan",
+   "wiki": "\"can be obtained at random by selling food to Gourmets in Dorgesh-Kaan\""
+  }
+ },
+ "Eel sushi": {
+  "activity": {
+   "name": "Gourmets of Dorgesh-Kaan",
+   "kind": "npc",
+   "quests": [
+    "Death to the Dorgeshuun"
+   ],
+   "note": "Random reward for selling food to a Gourmet in Dorgesh-Kaan",
+   "wiki": "\"can be obtained at random by selling food to Gourmets in Dorgesh-Kaan\""
+  }
+ },
+ "Spanner": {
+  "activity": {
+   "name": "Dorgesh-Kaan Agility Course",
+   "kind": "minigame",
+   "quests": [
+    "Death to the Dorgeshuun"
+   ],
+   "levels": {
+    "Agility": 80
+   },
+   "note": "Turgall hands out the spanner; the machine parts are collected along the course",
+   "wiki": "\"an item used in the Dorgesh-Kaan agility course to repair the power station\""
+  }
+ },
+ "Cog": {
+  "activity": {
+   "name": "Dorgesh-Kaan Agility Course",
+   "kind": "minigame",
+   "quests": [
+    "Death to the Dorgeshuun"
+   ],
+   "levels": {
+    "Agility": 80
+   },
+   "note": "Turgall hands out the spanner; the machine parts are collected along the course",
+   "wiki": "\"an item used in the Dorgesh-Kaan agility course to repair the power station\""
+  }
+ },
+ "Fuse": {
+  "activity": {
+   "name": "Dorgesh-Kaan Agility Course",
+   "kind": "minigame",
+   "quests": [
+    "Death to the Dorgeshuun"
+   ],
+   "levels": {
+    "Agility": 80
+   },
+   "note": "Turgall hands out the spanner; the machine parts are collected along the course",
+   "wiki": "\"an item used in the Dorgesh-Kaan agility course to repair the power station\""
+  }
+ },
+ "Meter": {
+  "activity": {
+   "name": "Dorgesh-Kaan Agility Course",
+   "kind": "minigame",
+   "quests": [
+    "Death to the Dorgeshuun"
+   ],
+   "levels": {
+    "Agility": 80
+   },
+   "note": "Turgall hands out the spanner; the machine parts are collected along the course",
+   "wiki": "\"an item used in the Dorgesh-Kaan agility course to repair the power station\""
+  }
+ },
+ "Capacitor": {
+  "activity": {
+   "name": "Dorgesh-Kaan Agility Course",
+   "kind": "minigame",
+   "quests": [
+    "Death to the Dorgeshuun"
+   ],
+   "levels": {
+    "Agility": 80
+   },
+   "note": "Turgall hands out the spanner; the machine parts are collected along the course",
+   "wiki": "\"an item used in the Dorgesh-Kaan agility course to repair the power station\""
+  }
+ },
+ "Lever": {
+  "activity": {
+   "name": "Dorgesh-Kaan Agility Course",
+   "kind": "minigame",
+   "quests": [
+    "Death to the Dorgeshuun"
+   ],
+   "levels": {
+    "Agility": 80
+   },
+   "note": "Turgall hands out the spanner; the machine parts are collected along the course",
+   "wiki": "\"an item used in the Dorgesh-Kaan agility course to repair the power station\""
+  }
+ },
+ "Powerbox": {
+  "activity": {
+   "name": "Dorgesh-Kaan Agility Course",
+   "kind": "minigame",
+   "quests": [
+    "Death to the Dorgeshuun"
+   ],
+   "levels": {
+    "Agility": 80
+   },
+   "note": "Turgall hands out the spanner; the machine parts are collected along the course",
+   "wiki": "\"an item used in the Dorgesh-Kaan agility course to repair the power station\""
+  }
+ },
+ "Uncleaned find": {
+  "activity": {
+   "name": "Varrock Museum specimen cleaning",
+   "kind": "minigame",
+   "quests": [
+    "The Dig Site"
+   ],
+   "cards": [
+    "Rock pick"
+   ],
+   "note": "Take a rock pick, specimen brush and trowel from the tools; dig the rock piles",
+   "wiki": "\"obtained in the Varrock Museum specimen cleaning activity ... done after finishing The Dig Site quest\""
+  }
+ },
+ "Arrowheads": {
+  "activity": {
+   "name": "Clean an uncleaned find (Varrock Museum)",
+   "kind": "container",
+   "quests": [
+    "The Dig Site"
+   ],
+   "from": [
+    "Uncleaned find"
+   ],
+   "wiki": "\"found by cleaning an uncleaned find as part of the Varrock Museum activity\""
+  }
+ },
+ "Jewellery": {
+  "activity": {
+   "name": "Clean an uncleaned find (Varrock Museum)",
+   "kind": "container",
+   "quests": [
+    "The Dig Site"
+   ],
+   "from": [
+    "Uncleaned find"
+   ],
+   "wiki": "\"found by cleaning an uncleaned find as part of the Varrock Museum activity\""
+  }
+ },
+ "Pottery": {
+  "activity": {
+   "name": "Clean an uncleaned find (Varrock Museum)",
+   "kind": "container",
+   "quests": [
+    "The Dig Site"
+   ],
+   "from": [
+    "Uncleaned find"
+   ],
+   "wiki": "\"found by cleaning an uncleaned find as part of the Varrock Museum activity\""
+  }
+ },
+ "Old coin": {
+  "activity": {
+   "name": "Clean an uncleaned find (Varrock Museum)",
+   "kind": "container",
+   "quests": [
+    "The Dig Site"
+   ],
+   "from": [
+    "Uncleaned find"
+   ],
+   "wiki": "\"found by cleaning an uncleaned find as part of the Varrock Museum activity\""
+  }
+ },
+ "Old symbol": {
+  "activity": {
+   "name": "Clean an uncleaned find (Varrock Museum)",
+   "kind": "container",
+   "quests": [
+    "The Dig Site"
+   ],
+   "from": [
+    "Uncleaned find"
+   ],
+   "wiki": "\"found by cleaning an uncleaned find as part of the Varrock Museum activity\""
+  }
+ },
+ "Old chipped vase": {
+  "activity": {
+   "name": "Clean an uncleaned find (Varrock Museum)",
+   "kind": "container",
+   "quests": [
+    "The Dig Site"
+   ],
+   "from": [
+    "Uncleaned find"
+   ],
+   "wiki": "\"found by cleaning an uncleaned find as part of the Varrock Museum activity\""
+  }
+ },
+ "Rock pick": {
+  "activity": {
+   "name": "Exam Centre cupboard / Varrock Museum tools",
+   "kind": "gather",
+   "note": "Free to take from the cupboard in the Digsite Exam Centre or the museum tool rack",
+   "wiki": "\"They can be found at the Exam Centre in a cupboard\""
+  }
+ },
+ "Cracked sample": {
+  "activity": {
+   "name": "Digsite digs",
+   "kind": "gather",
+   "note": "Dig the soil with a trowel (level 2/3 digs open during The Dig Site); training digs need the Varrock Museum pass",
+   "wiki": "\"can be found while using a trowel on the soil in the level 3 dig site in the north-eastern Digsite\""
+  }
+ },
+ "Belt buckle": {
+  "activity": {
+   "name": "Digsite digs",
+   "kind": "gather",
+   "note": "Dig the soil with a trowel (level 2/3 digs open during The Dig Site); training digs need the Varrock Museum pass",
+   "wiki": "\"can be found while using a trowel on the soil in the level 3 dig site in the north-eastern Digsite\""
+  }
+ },
+ "Broken staff": {
+  "activity": {
+   "name": "Digsite digs",
+   "kind": "gather",
+   "note": "Dig the soil with a trowel (level 2/3 digs open during The Dig Site); training digs need the Varrock Museum pass",
+   "wiki": "\"can be found while using a trowel on the soil in the level 3 dig site in the north-eastern Digsite\""
+  }
+ },
+ "Ceramic remains": {
+  "activity": {
+   "name": "Digsite digs",
+   "kind": "gather",
+   "note": "Dig the soil with a trowel (level 2/3 digs open during The Dig Site); training digs need the Varrock Museum pass",
+   "wiki": "\"can be found while using a trowel on the soil in the level 3 dig site in the north-eastern Digsite\""
+  }
+ },
+ "Old tooth": {
+  "activity": {
+   "name": "Digsite digs",
+   "kind": "gather",
+   "note": "Dig the soil with a trowel (level 2/3 digs open during The Dig Site); training digs need the Varrock Museum pass",
+   "wiki": "\"can be found while using a trowel on the soil in the level 3 dig site in the north-eastern Digsite\""
+  }
+ },
+ "Broken armour": {
+  "activity": {
+   "name": "Digsite digs",
+   "kind": "gather",
+   "note": "Dig the soil with a trowel (level 2/3 digs open during The Dig Site); training digs need the Varrock Museum pass",
+   "wiki": "\"can be found while using a trowel on the soil in the level 3 dig site in the north-eastern Digsite\""
+  }
+ },
+ "Vase": {
+  "activity": {
+   "name": "Digsite digs",
+   "kind": "gather",
+   "note": "Dig the soil with a trowel (level 2/3 digs open during The Dig Site); training digs need the Varrock Museum pass",
+   "wiki": "\"can be found while using a trowel on the soil in the level 3 dig site in the north-eastern Digsite\""
+  }
+ },
+ "Nuggets": {
+  "activity": {
+   "name": "Digsite panning",
+   "kind": "gather",
+   "wiki": "\"found at the Digsite when panning with a panning tray\""
+  }
+ },
+ "Bruma root": {
+  "activity": {
+   "name": "Wintertodt (bruma roots)",
+   "kind": "gather",
+   "levels": {
+    "Firemaking": 50
+   },
+   "anyCards": [
+    "Bronze axe",
+    "Iron axe",
+    "Steel axe",
+    "Black axe",
+    "Mithril axe",
+    "Adamant axe",
+    "Rune axe",
+    "Dragon axe",
+    "Crystal axe"
+   ],
+   "boss": "Wintertodt",
+   "wiki": "\"obtained by chopping bruma roots found in the four corners of the Wintertodt's prison\""
+  }
+ },
+ "Bruma kindling": {
+  "activity": {
+   "name": "Wintertodt (fletch bruma roots)",
+   "kind": "gather",
+   "levels": {
+    "Firemaking": 50
+   },
+   "cards": [
+    "Knife"
+   ],
+   "anyCards": [
+    "Bronze axe",
+    "Iron axe",
+    "Steel axe",
+    "Black axe",
+    "Mithril axe",
+    "Adamant axe",
+    "Rune axe",
+    "Dragon axe",
+    "Crystal axe"
+   ],
+   "boss": "Wintertodt",
+   "wiki": "\"obtained by using a knife on a bruma root\""
+  }
+ },
+ "Bruma herb": {
+  "activity": {
+   "name": "Wintertodt (sprouting roots)",
+   "kind": "gather",
+   "levels": {
+    "Firemaking": 50
+   },
+   "boss": "Wintertodt",
+   "wiki": "\"obtained from picking Sprouting Roots found within the lobby and the east and west side of the Wintertodt's prison\""
+  }
+ },
+ "Kindling": {
+  "activity": {
+   "name": "Chambers of Xeric (in-raid)",
+   "kind": "minigame",
+   "boss": "Chambers of Xeric",
+   "note": "Only inside the raid",
+   "wiki": "\"obtained from ... within the Chambers of Xeric\""
+  }
+ },
+ "Cavern grubs": {
+  "activity": {
+   "name": "Chambers of Xeric (in-raid)",
+   "kind": "minigame",
+   "boss": "Chambers of Xeric",
+   "note": "Only inside the raid",
+   "wiki": "\"obtained from ... within the Chambers of Xeric\""
+  }
+ },
+ "Dawnbringer": {
+  "activity": {
+   "name": "Theatre of Blood (in-raid)",
+   "kind": "minigame",
+   "boss": "Theatre of Blood",
+   "wiki": "\"obtained from the skeleton next to the entrance to Verzik Vitur's throne room in the Theatre of Blood\""
+  }
+ },
+ "Neutralising potion": {
+  "activity": {
+   "name": "Tombs of Amascut (in-raid)",
+   "kind": "minigame",
+   "boss": "Tombs of Amascut",
+   "note": "Only inside the raid (supplies bag, path rewards, the hidden room)",
+   "wiki": "\"can be obtained from the supplies bag within the Tombs of Amascut\""
+  }
+ },
+ "Nectar": {
+  "activity": {
+   "name": "Tombs of Amascut (in-raid)",
+   "kind": "minigame",
+   "boss": "Tombs of Amascut",
+   "note": "Only inside the raid (supplies bag, path rewards, the hidden room)",
+   "wiki": "\"can be obtained from the supplies bag within the Tombs of Amascut\""
+  }
+ },
+ "Silk dressing": {
+  "activity": {
+   "name": "Tombs of Amascut (in-raid)",
+   "kind": "minigame",
+   "boss": "Tombs of Amascut",
+   "note": "Only inside the raid (supplies bag, path rewards, the hidden room)",
+   "wiki": "\"can be obtained from the supplies bag within the Tombs of Amascut\""
+  }
+ },
+ "Tears of elidinis": {
+  "activity": {
+   "name": "Tombs of Amascut (in-raid)",
+   "kind": "minigame",
+   "boss": "Tombs of Amascut",
+   "note": "Only inside the raid (supplies bag, path rewards, the hidden room)",
+   "wiki": "\"can be obtained from the supplies bag within the Tombs of Amascut\""
+  }
+ },
+ "Blessed crystal scarab": {
+  "activity": {
+   "name": "Tombs of Amascut (in-raid)",
+   "kind": "minigame",
+   "boss": "Tombs of Amascut",
+   "note": "Only inside the raid (supplies bag, path rewards, the hidden room)",
+   "wiki": "\"can be obtained from the supplies bag within the Tombs of Amascut\""
+  }
+ },
+ "Liquid adrenaline": {
+  "activity": {
+   "name": "Tombs of Amascut (in-raid)",
+   "kind": "minigame",
+   "boss": "Tombs of Amascut",
+   "note": "Only inside the raid (supplies bag, path rewards, the hidden room)",
+   "wiki": "\"can be obtained from the supplies bag within the Tombs of Amascut\""
+  }
+ },
+ "Smelling salts": {
+  "activity": {
+   "name": "Tombs of Amascut (in-raid)",
+   "kind": "minigame",
+   "boss": "Tombs of Amascut",
+   "note": "Only inside the raid (supplies bag, path rewards, the hidden room)",
+   "wiki": "\"can be obtained from the supplies bag within the Tombs of Amascut\""
+  }
+ },
+ "Ambrosia": {
+  "activity": {
+   "name": "Tombs of Amascut (in-raid)",
+   "kind": "minigame",
+   "boss": "Tombs of Amascut",
+   "note": "Only inside the raid (supplies bag, path rewards, the hidden room)",
+   "wiki": "\"can be obtained from the supplies bag within the Tombs of Amascut\""
+  }
+ },
+ "Honey locust": {
+  "activity": {
+   "name": "Tombs of Amascut (in-raid)",
+   "kind": "minigame",
+   "boss": "Tombs of Amascut",
+   "note": "Only inside the raid (supplies bag, path rewards, the hidden room)",
+   "wiki": "\"can be obtained from the supplies bag within the Tombs of Amascut\""
+  }
+ },
+ "Ancient key": {
+  "activity": {
+   "name": "Tombs of Amascut (in-raid)",
+   "kind": "minigame",
+   "boss": "Tombs of Amascut",
+   "note": "Only inside the raid (supplies bag, path rewards, the hidden room)",
+   "wiki": "\"can be obtained from the supplies bag within the Tombs of Amascut\""
+  }
+ },
+ "Mask of rebirth": {
+  "activity": {
+   "name": "Tombs of Amascut (in-raid)",
+   "kind": "minigame",
+   "boss": "Tombs of Amascut",
+   "note": "Only inside the raid (supplies bag, path rewards, the hidden room)",
+   "wiki": "\"can be obtained from the supplies bag within the Tombs of Amascut\""
+  }
+ },
+ "Imbued tephra": {
+  "activity": {
+   "name": "Zalcano",
+   "kind": "minigame",
+   "boss": "Zalcano",
+   "wiki": "\"obtained by imbuing refined tephra at the Seren altar ... It can also be obtained from golems that Zalcano occasionally summons\""
+  }
+ },
+ "Tarnished locket": {
+  "activity": {
+   "name": "Guardians of the Rift (intricate pouch)",
+   "kind": "minigame",
+   "boss": "Guardians of the Rift",
+   "wiki": "\"obtained from an intricate pouch, which can be received from the Rewards Guardian after completing a round of Guardians of the Rift\""
+  }
+ },
+ "Lost bag": {
+  "activity": {
+   "name": "Guardians of the Rift (intricate pouch)",
+   "kind": "minigame",
+   "boss": "Guardians of the Rift",
+   "wiki": "\"obtained from an intricate pouch, which can be received from the Rewards Guardian after completing a round of Guardians of the Rift\""
+  }
+ },
+ "Amulet of the eye": {
+  "activity": {
+   "name": "Lumbridge Guide (tarnished locket)",
+   "kind": "npc",
+   "npcs": [
+    "Lumbridge Guide"
+   ],
+   "from": [
+    "Tarnished locket"
+   ],
+   "wiki": "\"obtained by inspecting the tarnished locket and then showing it to Phileas the Lumbridge Guide\""
+  }
+ },
+ "Brutus slippers": {
+  "activity": {
+   "name": "Demonic Brutus",
+   "kind": "minigame",
+   "boss": "Demonic Brutus",
+   "wiki": "\"received from defeating Demonic Brutus\""
+  }
+ },
+ "Abyssal potato": {
+  "activity": {
+   "name": "Growth in the Scar",
+   "kind": "gather",
+   "quests": [
+    "Desert Treasure II - The Fallen Empire"
+   ],
+   "wiki": "\"obtained by plucking the growth just north of the fire in the Scar ... requires completion of Desert Treasure II\""
+  }
+ },
+ "Hespori seed": {
+  "activity": [
+   {
+    "name": "Seed pack (high tier)",
+    "kind": "container",
+    "from": [
+     "Seed pack"
+    ],
+    "wiki": "\"Seed pack#High seed\" (Hespori seeds also come from checking grown trees, bushes and cacti)"
+   },
+   {
+    "name": "Farming (any harvest)",
+    "kind": "gather",
+    "cards": [
+     "Spade",
+     "Rake",
+     "Seed dibber"
+    ],
+    "wiki": "\"randomly obtained from checking the health of fully grown trees, bushes or cacti, from the last harvest of a regular plant\""
+   }
+  ]
+ },
+ "Seed pack": {
+  "activity": [
+   {
+    "name": "Farming Guild contracts",
+    "kind": "npc",
+    "levels": {
+     "Farming": 45
+    },
+    "access": "kourend",
+    "npcs": [
+     "Guildmaster Jane"
+    ],
+    "wiki": "\"received from Guildmaster Jane as a reward for completing a farming contract, or purchased from Farmer Gricoller for 30 Tithe Farm points\""
+   },
+   {
+    "name": "Tithe Farm (30 points)",
+    "kind": "minigame",
+    "levels": {
+     "Farming": 34
+    },
+    "access": "kourend",
+    "npcs": [
+     "Farmer Gricoller"
+    ]
+   }
+  ]
+ },
+ "Hallowed mark": {
+  "activity": {
+   "name": "Hallowed Sepulchre",
+   "kind": "minigame",
+   "quests": [
+    "Sins of the Father"
+   ],
+   "levels": {
+    "Agility": 52
+   },
+   "access": "morytania",
+   "note": "Coffins on each floor (floor 5 needs 92 Agility for the Grand Hallowed Coffin)",
+   "wiki": "\"reward currency gained by looting coffins within the Hallowed Sepulchre in Darkmeyer\""
+  }
+ },
+ "Ring of endurance": {
+  "activity": {
+   "name": "Hallowed Sepulchre",
+   "kind": "minigame",
+   "quests": [
+    "Sins of the Father"
+   ],
+   "levels": {
+    "Agility": 52
+   },
+   "access": "morytania",
+   "note": "Coffins on each floor (floor 5 needs 92 Agility for the Grand Hallowed Coffin)",
+   "wiki": "\"reward currency gained by looting coffins within the Hallowed Sepulchre in Darkmeyer\""
+  }
+ },
+ "Strange old lockpick": {
+  "activity": {
+   "name": "Hallowed Sepulchre",
+   "kind": "minigame",
+   "quests": [
+    "Sins of the Father"
+   ],
+   "levels": {
+    "Agility": 52
+   },
+   "access": "morytania",
+   "note": "Coffins on each floor (floor 5 needs 92 Agility for the Grand Hallowed Coffin)",
+   "wiki": "\"reward currency gained by looting coffins within the Hallowed Sepulchre in Darkmeyer\""
+  }
+ },
+ "Mysterious page": {
+  "activity": {
+   "name": "Hallowed Sepulchre",
+   "kind": "minigame",
+   "quests": [
+    "Sins of the Father"
+   ],
+   "levels": {
+    "Agility": 52
+   },
+   "access": "morytania",
+   "note": "Coffins on each floor (floor 5 needs 92 Agility for the Grand Hallowed Coffin)",
+   "wiki": "\"reward currency gained by looting coffins within the Hallowed Sepulchre in Darkmeyer\""
+  }
+ },
+ "Mermaid's tear": {
+  "activity": {
+   "name": "Underwater Agility and Thieving (Fossil Island)",
+   "kind": "minigame",
+   "quests": [
+    "Bone Voyage"
+   ],
+   "access": "fossil_island",
+   "cards": [
+    "Fishbowl helmet",
+    "Diving apparatus"
+   ],
+   "wiki": "\"obtained by participating in the Underwater Agility and Thieving activity\""
+  }
+ },
+ "Glistening tear": {
+  "activity": {
+   "name": "Underwater Agility and Thieving (Fossil Island)",
+   "kind": "minigame",
+   "quests": [
+    "Bone Voyage"
+   ],
+   "access": "fossil_island",
+   "cards": [
+    "Fishbowl helmet",
+    "Diving apparatus"
+   ],
+   "wiki": "\"obtained by participating in the Underwater Agility and Thieving activity\""
+  }
+ },
+ "Experimental note": {
+  "activity": {
+   "name": "House on the Hill stone chests",
+   "kind": "minigame",
+   "quests": [
+    "Bone Voyage"
+   ],
+   "access": "fossil_island",
+   "cards": [
+    "Numulite"
+   ],
+   "wiki": "\"found by inserting 100 numulites into one of the stone chests inside the House on the Hill on Fossil Island\""
+  }
+ },
+ "Unidentified minerals": {
+  "activity": {
+   "name": "Mining Guild (members area)",
+   "kind": "gather",
+   "levels": {
+    "Mining": 60
+   },
+   "anyCards": [
+    "Bronze pickaxe",
+    "Iron pickaxe",
+    "Steel pickaxe",
+    "Black pickaxe",
+    "Mithril pickaxe",
+    "Adamant pickaxe",
+    "Rune pickaxe",
+    "Dragon pickaxe",
+    "Crystal pickaxe"
+   ],
+   "wiki": "\"obtained by mining rocks in the members' area of the Mining Guild\""
+  }
+ },
+ "Blasted ore": {
+  "activity": {
+   "name": "Blast Mine (Lovakengj)",
+   "kind": "gather",
+   "levels": {
+    "Mining": 43
+   },
+   "access": "kourend",
+   "cards": [
+    "Chisel",
+    "Dynamite",
+    "Tinderbox"
+   ],
+   "wiki": "\"obtained after detonating a hard rock face in the blast mine\""
+  }
+ },
+ "Champion's cape": {
+  "activity": {
+   "name": "Champions' Challenge",
+   "kind": "minigame",
+   "note": "Beat all 11 champions (champion scrolls from monster drops)",
+   "wiki": "\"rewarded after defeating all 11 champions available in the Champions' Challenge\""
+  }
+ },
+ "Training manual": {
+  "activity": {
+   "name": "Intelligence Gathering (Captain Ginea)",
+   "kind": "npc",
+   "access": "kourend",
+   "wiki": "\"obtained from Captain Ginea as part of the Intelligence Gathering activity\""
+  }
+ },
+ "Book of arcane knowledge": {
+  "activity": {
+   "name": "Arceuus Library",
+   "kind": "npc",
+   "access": "kourend",
+   "wiki": "\"a reward from helping NPCs find their requested book around the Arceuus Library\""
+  }
+ },
+ "Evil chicken feet": {
+  "activity": {
+   "name": "Woodcutting Guild shrine (bird's eggs)",
+   "kind": "minigame",
+   "levels": {
+    "Woodcutting": 60
+   },
+   "access": "kourend",
+   "cards": [
+    "Bird nest"
+   ],
+   "wiki": "\"obtained from offering bird's eggs to the shrine in the Woodcutting Guild\""
+  }
+ },
+ "Evil chicken wings": {
+  "activity": {
+   "name": "Woodcutting Guild shrine (bird's eggs)",
+   "kind": "minigame",
+   "levels": {
+    "Woodcutting": 60
+   },
+   "access": "kourend",
+   "cards": [
+    "Bird nest"
+   ],
+   "wiki": "\"obtained from offering bird's eggs to the shrine in the Woodcutting Guild\""
+  }
+ },
+ "Evil chicken head": {
+  "activity": {
+   "name": "Woodcutting Guild shrine (bird's eggs)",
+   "kind": "minigame",
+   "levels": {
+    "Woodcutting": 60
+   },
+   "access": "kourend",
+   "cards": [
+    "Bird nest"
+   ],
+   "wiki": "\"obtained from offering bird's eggs to the shrine in the Woodcutting Guild\""
+  }
+ },
+ "Evil chicken legs": {
+  "activity": {
+   "name": "Woodcutting Guild shrine (bird's eggs)",
+   "kind": "minigame",
+   "levels": {
+    "Woodcutting": 60
+   },
+   "access": "kourend",
+   "cards": [
+    "Bird nest"
+   ],
+   "wiki": "\"obtained from offering bird's eggs to the shrine in the Woodcutting Guild\""
+  }
+ },
+ "Amulet of eternal glory": {
+  "activity": {
+   "name": "Fountain of Rune (recharge glory)",
+   "kind": "minigame",
+   "quests": [
+    "Heroes' Quest"
+   ],
+   "access": "wilderness",
+   "cards": [
+    "Amulet of glory"
+   ],
+   "note": "1/25000 per amulet recharged at the Fountain of Rune",
+   "wiki": "\"made (only after completion of Heroes' Quest) while charging amulets of glory ... at the Fountain of Rune in the Wilderness\""
+  }
+ },
+ "Helm of raedwald": {
+  "activity": {
+   "name": "Crack the Clue (Jagex event)",
+   "kind": "minigame",
+   "cards": [
+    "Spade"
+   ],
+   "note": "Crack the Clue I–III dig steps are permanent: each piece is dug up with a spade and the listed items",
+   "wiki": "\"obtained from completing a clue during the Crack the Clue II event ... obtainable only once\""
+  }
+ },
+ "Ornate gloves": {
+  "activity": {
+   "name": "Crack the Clue (Jagex event)",
+   "kind": "minigame",
+   "cards": [
+    "Spade"
+   ],
+   "note": "Crack the Clue I–III dig steps are permanent: each piece is dug up with a spade and the listed items",
+   "wiki": "\"obtained from completing a clue during the Crack the Clue II event ... obtainable only once\""
+  }
+ },
+ "Ornate boots": {
+  "activity": {
+   "name": "Crack the Clue (Jagex event)",
+   "kind": "minigame",
+   "cards": [
+    "Spade"
+   ],
+   "note": "Crack the Clue I–III dig steps are permanent: each piece is dug up with a spade and the listed items",
+   "wiki": "\"obtained from completing a clue during the Crack the Clue II event ... obtainable only once\""
+  }
+ },
+ "Ornate legs": {
+  "activity": {
+   "name": "Crack the Clue (Jagex event)",
+   "kind": "minigame",
+   "cards": [
+    "Spade"
+   ],
+   "note": "Crack the Clue I–III dig steps are permanent: each piece is dug up with a spade and the listed items",
+   "wiki": "\"obtained from completing a clue during the Crack the Clue II event ... obtainable only once\""
+  }
+ },
+ "Ornate top": {
+  "activity": {
+   "name": "Crack the Clue (Jagex event)",
+   "kind": "minigame",
+   "cards": [
+    "Spade"
+   ],
+   "note": "Crack the Clue I–III dig steps are permanent: each piece is dug up with a spade and the listed items",
+   "wiki": "\"obtained from completing a clue during the Crack the Clue II event ... obtainable only once\""
+  }
+ },
+ "Ornate cape": {
+  "activity": {
+   "name": "Crack the Clue (Jagex event)",
+   "kind": "minigame",
+   "cards": [
+    "Spade"
+   ],
+   "note": "Crack the Clue I–III dig steps are permanent: each piece is dug up with a spade and the listed items",
+   "wiki": "\"obtained from completing a clue during the Crack the Clue II event ... obtainable only once\""
+  }
+ },
+ "Ornate helm": {
+  "activity": {
+   "name": "Crack the Clue (Jagex event)",
+   "kind": "minigame",
+   "cards": [
+    "Spade"
+   ],
+   "note": "Crack the Clue I–III dig steps are permanent: each piece is dug up with a spade and the listed items",
+   "wiki": "\"obtained from completing a clue during the Crack the Clue II event ... obtainable only once\""
+  }
+ },
+ "Hood of ruin": {
+  "activity": {
+   "name": "Crack the Clue (Jagex event)",
+   "kind": "minigame",
+   "cards": [
+    "Spade"
+   ],
+   "note": "Crack the Clue I–III dig steps are permanent: each piece is dug up with a spade and the listed items",
+   "wiki": "\"obtained from completing a clue during the Crack the Clue II event ... obtainable only once\""
+  }
+ },
+ "Robe top of ruin": {
+  "activity": {
+   "name": "Crack the Clue (Jagex event)",
+   "kind": "minigame",
+   "cards": [
+    "Spade"
+   ],
+   "note": "Crack the Clue I–III dig steps are permanent: each piece is dug up with a spade and the listed items",
+   "wiki": "\"obtained from completing a clue during the Crack the Clue II event ... obtainable only once\""
+  }
+ },
+ "Robe bottom of ruin": {
+  "activity": {
+   "name": "Crack the Clue (Jagex event)",
+   "kind": "minigame",
+   "cards": [
+    "Spade"
+   ],
+   "note": "Crack the Clue I–III dig steps are permanent: each piece is dug up with a spade and the listed items",
+   "wiki": "\"obtained from completing a clue during the Crack the Clue II event ... obtainable only once\""
+  }
+ },
+ "Gloves of ruin": {
+  "activity": {
+   "name": "Crack the Clue (Jagex event)",
+   "kind": "minigame",
+   "cards": [
+    "Spade"
+   ],
+   "note": "Crack the Clue I–III dig steps are permanent: each piece is dug up with a spade and the listed items",
+   "wiki": "\"obtained from completing a clue during the Crack the Clue II event ... obtainable only once\""
+  }
+ },
+ "Socks of ruin": {
+  "activity": {
+   "name": "Crack the Clue (Jagex event)",
+   "kind": "minigame",
+   "cards": [
+    "Spade"
+   ],
+   "note": "Crack the Clue I–III dig steps are permanent: each piece is dug up with a spade and the listed items",
+   "wiki": "\"obtained from completing a clue during the Crack the Clue II event ... obtainable only once\""
+  }
+ },
+ "Cloak of ruin": {
+  "activity": {
+   "name": "Crack the Clue (Jagex event)",
+   "kind": "minigame",
+   "cards": [
+    "Spade"
+   ],
+   "note": "Crack the Clue I–III dig steps are permanent: each piece is dug up with a spade and the listed items",
+   "wiki": "\"obtained from completing a clue during the Crack the Clue II event ... obtainable only once\""
+  }
+ },
+ "Infinite money bag": {
+  "activity": {
+   "name": "Crack the Clue (Jagex event)",
+   "kind": "minigame",
+   "cards": [
+    "Spade"
+   ],
+   "note": "Crack the Clue I–III dig steps are permanent: each piece is dug up with a spade and the listed items",
+   "wiki": "\"obtained from completing a clue during the Crack the Clue II event ... obtainable only once\""
+  }
+ },
+ "Mystic hat (dusk)": {
+  "activity": {
+   "name": "Brimstone chest (Mount Karuulm)",
+   "kind": "minigame",
+   "access": "kourend",
+   "cards": [
+    "Brimstone key"
+   ],
+   "note": "Brimstone keys drop from Konar slayer tasks",
+   "wiki": "\"Brimstone chest\" 1/1,000"
+  }
+ },
+ "Mystic robe top (dusk)": {
+  "activity": {
+   "name": "Brimstone chest (Mount Karuulm)",
+   "kind": "minigame",
+   "access": "kourend",
+   "cards": [
+    "Brimstone key"
+   ],
+   "note": "Brimstone keys drop from Konar slayer tasks",
+   "wiki": "\"Brimstone chest\" 1/1,000"
+  }
+ },
+ "Mystic robe bottom (dusk)": {
+  "activity": {
+   "name": "Brimstone chest (Mount Karuulm)",
+   "kind": "minigame",
+   "access": "kourend",
+   "cards": [
+    "Brimstone key"
+   ],
+   "note": "Brimstone keys drop from Konar slayer tasks",
+   "wiki": "\"Brimstone chest\" 1/1,000"
+  }
+ },
+ "Mystic gloves (dusk)": {
+  "activity": {
+   "name": "Brimstone chest (Mount Karuulm)",
+   "kind": "minigame",
+   "access": "kourend",
+   "cards": [
+    "Brimstone key"
+   ],
+   "note": "Brimstone keys drop from Konar slayer tasks",
+   "wiki": "\"Brimstone chest\" 1/1,000"
+  }
+ },
+ "Mystic boots (dusk)": {
+  "activity": {
+   "name": "Brimstone chest (Mount Karuulm)",
+   "kind": "minigame",
+   "access": "kourend",
+   "cards": [
+    "Brimstone key"
+   ],
+   "note": "Brimstone keys drop from Konar slayer tasks",
+   "wiki": "\"Brimstone chest\" 1/1,000"
+  }
+ },
+ "Dragonstone full helm": {
+  "activity": {
+   "name": "Elven Crystal Chest (Prifddinas)",
+   "kind": "minigame",
+   "access": "prifddinas",
+   "cards": [
+    "Crystal key"
+   ],
+   "wiki": "\"found as a rare reward upon opening the Elven Crystal Chest within Prifddinas\""
+  }
+ },
+ "Dragonstone platebody": {
+  "activity": {
+   "name": "Elven Crystal Chest (Prifddinas)",
+   "kind": "minigame",
+   "access": "prifddinas",
+   "cards": [
+    "Crystal key"
+   ],
+   "wiki": "\"found as a rare reward upon opening the Elven Crystal Chest within Prifddinas\""
+  }
+ },
+ "Dragonstone platelegs": {
+  "activity": {
+   "name": "Elven Crystal Chest (Prifddinas)",
+   "kind": "minigame",
+   "access": "prifddinas",
+   "cards": [
+    "Crystal key"
+   ],
+   "wiki": "\"found as a rare reward upon opening the Elven Crystal Chest within Prifddinas\""
+  }
+ },
+ "Dragonstone boots": {
+  "activity": {
+   "name": "Elven Crystal Chest (Prifddinas)",
+   "kind": "minigame",
+   "access": "prifddinas",
+   "cards": [
+    "Crystal key"
+   ],
+   "wiki": "\"found as a rare reward upon opening the Elven Crystal Chest within Prifddinas\""
+  }
+ },
+ "Dragonstone gauntlets": {
+  "activity": {
+   "name": "Elven Crystal Chest (Prifddinas)",
+   "kind": "minigame",
+   "access": "prifddinas",
+   "cards": [
+    "Crystal key"
+   ],
+   "wiki": "\"found as a rare reward upon opening the Elven Crystal Chest within Prifddinas\""
+  }
+ },
+ "Dagon'hai hat": {
+  "activity": {
+   "name": "Larran's big chest (Wilderness)",
+   "kind": "minigame",
+   "access": "wilderness",
+   "cards": [
+    "Larran's key"
+   ],
+   "wiki": "\"obtained as a rare loot from Larran's big chest\""
+  }
+ },
+ "Dagon'hai robe top": {
+  "activity": {
+   "name": "Larran's big chest (Wilderness)",
+   "kind": "minigame",
+   "access": "wilderness",
+   "cards": [
+    "Larran's key"
+   ],
+   "wiki": "\"obtained as a rare loot from Larran's big chest\""
+  }
+ },
+ "Dagon'hai robe bottom": {
+  "activity": {
+   "name": "Larran's big chest (Wilderness)",
+   "kind": "minigame",
+   "access": "wilderness",
+   "cards": [
+    "Larran's key"
+   ],
+   "wiki": "\"obtained as a rare loot from Larran's big chest\""
+  }
+ },
+ "Helmet of the moon": {
+  "activity": {
+   "name": "Moon chest (Ruins of Tapoyauik)",
+   "kind": "minigame",
+   "quests": [
+    "The Heart of Darkness"
+   ],
+   "access": "varlamore",
+   "cards": [
+    "Moon key"
+   ],
+   "wiki": "\"a rare drop from the moon chest, requiring a moon key to open\""
+  }
+ },
+ "Orange egg sac": {
+  "activity": {
+   "name": "Grubby Chest (Forthos Dungeon)",
+   "kind": "minigame",
+   "access": "kourend",
+   "cards": [
+    "Grubby key"
+   ],
+   "wiki": "\"obtained from looting the Grubby Chest in the south-west corner of the Forthos Dungeon\""
+  }
+ },
+ "Blue egg sac": {
+  "activity": {
+   "name": "Grubby Chest (Forthos Dungeon)",
+   "kind": "minigame",
+   "access": "kourend",
+   "cards": [
+    "Grubby key"
+   ],
+   "wiki": "\"obtained from looting the Grubby Chest in the south-west corner of the Forthos Dungeon\""
+  }
+ },
+ "Simple lockbox": {
+  "activity": {
+   "name": "Camdozaal Vault",
+   "kind": "minigame",
+   "quests": [
+    "Below Ice Mountain"
+   ],
+   "wiki": "\"boxes found within the Camdozaal Vault\""
+  }
+ },
+ "Ornate lockbox": {
+  "activity": {
+   "name": "Camdozaal Vault",
+   "kind": "minigame",
+   "quests": [
+    "Below Ice Mountain"
+   ],
+   "wiki": "\"boxes found within the Camdozaal Vault\""
+  }
+ },
+ "Elaborate lockbox": {
+  "activity": {
+   "name": "Camdozaal Vault",
+   "kind": "minigame",
+   "quests": [
+    "Below Ice Mountain"
+   ],
+   "wiki": "\"boxes found within the Camdozaal Vault\""
+  }
+ },
+ "Ancient globe": {
+  "activity": {
+   "name": "Break barronite deposits (Camdozaal)",
+   "kind": "container",
+   "quests": [
+    "Below Ice Mountain"
+   ],
+   "levels": {
+    "Smithing": 14
+   },
+   "cards": [
+    "Hammer"
+   ],
+   "from": [
+    "Barronite deposit"
+   ],
+   "wiki": "\"a relic that may be received from breaking open barronite deposits\""
+  }
+ },
+ "Ancient ledger": {
+  "activity": {
+   "name": "Break barronite deposits (Camdozaal)",
+   "kind": "container",
+   "quests": [
+    "Below Ice Mountain"
+   ],
+   "levels": {
+    "Smithing": 14
+   },
+   "cards": [
+    "Hammer"
+   ],
+   "from": [
+    "Barronite deposit"
+   ],
+   "wiki": "\"a relic that may be received from breaking open barronite deposits\""
+  }
+ },
+ "Ancient astroscope": {
+  "activity": {
+   "name": "Break barronite deposits (Camdozaal)",
+   "kind": "container",
+   "quests": [
+    "Below Ice Mountain"
+   ],
+   "levels": {
+    "Smithing": 14
+   },
+   "cards": [
+    "Hammer"
+   ],
+   "from": [
+    "Barronite deposit"
+   ],
+   "wiki": "\"a relic that may be received from breaking open barronite deposits\""
+  }
+ },
+ "Ancient treatise": {
+  "activity": {
+   "name": "Break barronite deposits (Camdozaal)",
+   "kind": "container",
+   "quests": [
+    "Below Ice Mountain"
+   ],
+   "levels": {
+    "Smithing": 14
+   },
+   "cards": [
+    "Hammer"
+   ],
+   "from": [
+    "Barronite deposit"
+   ],
+   "wiki": "\"a relic that may be received from breaking open barronite deposits\""
+  }
+ },
+ "Ancient carcanet": {
+  "activity": {
+   "name": "Break barronite deposits (Camdozaal)",
+   "kind": "container",
+   "quests": [
+    "Below Ice Mountain"
+   ],
+   "levels": {
+    "Smithing": 14
+   },
+   "cards": [
+    "Hammer"
+   ],
+   "from": [
+    "Barronite deposit"
+   ],
+   "wiki": "\"a relic that may be received from breaking open barronite deposits\""
+  }
+ },
+ "Strange pollen": {
+  "activity": {
+   "name": "Forestry events",
+   "kind": "gather",
+   "anyCards": [
+    "Bronze axe",
+    "Iron axe",
+    "Steel axe",
+    "Black axe",
+    "Mithril axe",
+    "Adamant axe",
+    "Rune axe",
+    "Dragon axe",
+    "Crystal axe"
+   ],
+   "note": "Random Forestry events while chopping (flowering tree, struggling sapling, pheasant control, enchantment ritual)",
+   "wiki": "\"an item used during the flowering tree event\" / \"Pheasant Control Forestry event\" / \"Enchantment Ritual Forestry event\""
+  }
+ },
+ "Mulch": {
+  "activity": {
+   "name": "Forestry events",
+   "kind": "gather",
+   "anyCards": [
+    "Bronze axe",
+    "Iron axe",
+    "Steel axe",
+    "Black axe",
+    "Mithril axe",
+    "Adamant axe",
+    "Rune axe",
+    "Dragon axe",
+    "Crystal axe"
+   ],
+   "note": "Random Forestry events while chopping (flowering tree, struggling sapling, pheasant control, enchantment ritual)",
+   "wiki": "\"an item used during the flowering tree event\" / \"Pheasant Control Forestry event\" / \"Enchantment Ritual Forestry event\""
+  }
+ },
+ "Pheasant tail feathers": {
+  "activity": {
+   "name": "Forestry events",
+   "kind": "gather",
+   "anyCards": [
+    "Bronze axe",
+    "Iron axe",
+    "Steel axe",
+    "Black axe",
+    "Mithril axe",
+    "Adamant axe",
+    "Rune axe",
+    "Dragon axe",
+    "Crystal axe"
+   ],
+   "note": "Random Forestry events while chopping (flowering tree, struggling sapling, pheasant control, enchantment ritual)",
+   "wiki": "\"an item used during the flowering tree event\" / \"Pheasant Control Forestry event\" / \"Enchantment Ritual Forestry event\""
+  }
+ },
+ "Pheasant egg": {
+  "activity": {
+   "name": "Forestry events",
+   "kind": "gather",
+   "anyCards": [
+    "Bronze axe",
+    "Iron axe",
+    "Steel axe",
+    "Black axe",
+    "Mithril axe",
+    "Adamant axe",
+    "Rune axe",
+    "Dragon axe",
+    "Crystal axe"
+   ],
+   "note": "Random Forestry events while chopping (flowering tree, struggling sapling, pheasant control, enchantment ritual)",
+   "wiki": "\"an item used during the flowering tree event\" / \"Pheasant Control Forestry event\" / \"Enchantment Ritual Forestry event\""
+  }
+ },
+ "Petal garland": {
+  "activity": {
+   "name": "Forestry events",
+   "kind": "gather",
+   "anyCards": [
+    "Bronze axe",
+    "Iron axe",
+    "Steel axe",
+    "Black axe",
+    "Mithril axe",
+    "Adamant axe",
+    "Rune axe",
+    "Dragon axe",
+    "Crystal axe"
+   ],
+   "note": "Random Forestry events while chopping (flowering tree, struggling sapling, pheasant control, enchantment ritual)",
+   "wiki": "\"an item used during the flowering tree event\" / \"Pheasant Control Forestry event\" / \"Enchantment Ritual Forestry event\""
+  }
+ },
+ "Oak leaves": {
+  "activity": {
+   "name": "Chop the tree with a Forestry kit",
+   "kind": "gather",
+   "cards": [
+    "Forestry kit"
+   ],
+   "anyCards": [
+    "Bronze axe",
+    "Iron axe",
+    "Steel axe",
+    "Black axe",
+    "Mithril axe",
+    "Adamant axe",
+    "Rune axe",
+    "Dragon axe",
+    "Crystal axe"
+   ],
+   "wiki": "\"obtained from cutting ... trees, at a rate of 1 in 4 when the Forestry kit is in the player's inventory or equipped\""
+  }
+ },
+ "Willow leaves": {
+  "activity": {
+   "name": "Chop the tree with a Forestry kit",
+   "kind": "gather",
+   "cards": [
+    "Forestry kit"
+   ],
+   "anyCards": [
+    "Bronze axe",
+    "Iron axe",
+    "Steel axe",
+    "Black axe",
+    "Mithril axe",
+    "Adamant axe",
+    "Rune axe",
+    "Dragon axe",
+    "Crystal axe"
+   ],
+   "wiki": "\"obtained from cutting ... trees, at a rate of 1 in 4 when the Forestry kit is in the player's inventory or equipped\""
+  }
+ },
+ "Yew leaves": {
+  "activity": {
+   "name": "Chop the tree with a Forestry kit",
+   "kind": "gather",
+   "cards": [
+    "Forestry kit"
+   ],
+   "anyCards": [
+    "Bronze axe",
+    "Iron axe",
+    "Steel axe",
+    "Black axe",
+    "Mithril axe",
+    "Adamant axe",
+    "Rune axe",
+    "Dragon axe",
+    "Crystal axe"
+   ],
+   "wiki": "\"obtained from cutting ... trees, at a rate of 1 in 4 when the Forestry kit is in the player's inventory or equipped\""
+  }
+ },
+ "Maple leaves": {
+  "activity": {
+   "name": "Chop the tree with a Forestry kit",
+   "kind": "gather",
+   "cards": [
+    "Forestry kit"
+   ],
+   "anyCards": [
+    "Bronze axe",
+    "Iron axe",
+    "Steel axe",
+    "Black axe",
+    "Mithril axe",
+    "Adamant axe",
+    "Rune axe",
+    "Dragon axe",
+    "Crystal axe"
+   ],
+   "wiki": "\"obtained from cutting ... trees, at a rate of 1 in 4 when the Forestry kit is in the player's inventory or equipped\""
+  }
+ },
+ "Magic leaves": {
+  "activity": {
+   "name": "Chop the tree with a Forestry kit",
+   "kind": "gather",
+   "cards": [
+    "Forestry kit"
+   ],
+   "anyCards": [
+    "Bronze axe",
+    "Iron axe",
+    "Steel axe",
+    "Black axe",
+    "Mithril axe",
+    "Adamant axe",
+    "Rune axe",
+    "Dragon axe",
+    "Crystal axe"
+   ],
+   "wiki": "\"obtained from cutting ... trees, at a rate of 1 in 4 when the Forestry kit is in the player's inventory or equipped\""
+  }
+ },
+ "Willow branch": {
+  "activity": {
+   "name": "Willow tree patch (secateurs)",
+   "kind": "gather",
+   "levels": {
+    "Farming": 30
+   },
+   "cards": [
+    "Secateurs",
+    "Willow seed",
+    "Spade",
+    "Rake"
+   ],
+   "wiki": "\"obtained by using secateurs on a willow that has fully grown in a tree patch\""
+  }
+ },
+ "Weeds": {
+  "activity": {
+   "name": "Rake a farming patch",
+   "kind": "gather",
+   "cards": [
+    "Rake"
+   ],
+   "wiki": "\"Players can harvest them by using a rake on a Farming patch that has weeds growing in it\""
+  }
+ },
+ "Ent seed": {
+  "activity": {
+   "name": "Chop trees in Varlamore",
+   "kind": "gather",
+   "levels": {
+    "Woodcutting": 15
+   },
+   "access": "varlamore",
+   "anyCards": [
+    "Bronze axe",
+    "Iron axe",
+    "Steel axe",
+    "Black axe",
+    "Mithril axe",
+    "Adamant axe",
+    "Rune axe",
+    "Dragon axe",
+    "Crystal axe"
+   ],
+   "wiki": "\"obtained while chopping certain types of trees throughout Varlamore\""
+  }
+ },
+ "Zamorak's grapes": {
+  "activity": {
+   "name": "Hosidius vinery (Bologa's blessing)",
+   "kind": "gather",
+   "levels": {
+    "Farming": 36
+   },
+   "access": "kourend",
+   "cards": [
+    "Bologa's blessing",
+    "Grapes"
+   ],
+   "wiki": "\"obtained by players through harvesting grapes in the Hosidius vinery while having Bologa's blessings in their inventory\""
+  }
+ },
+ "Wool": {
+  "activity": [
+   {
+    "name": "Shear a sheep",
+    "kind": "gather",
+    "cards": [
+     "Shears"
+    ],
+    "npcs": [
+     "Sheep"
+    ],
+    "note": "Shearing a sheep is an NPC interaction (Sheep card)",
+    "wiki": "\"Wool is gathered from sheep and alpacas using shears\""
+   },
+   {
+    "name": "Shear an alpaca (Varlamore)",
+    "kind": "gather",
+    "access": "varlamore",
+    "cards": [
+     "Shears"
+    ]
+   }
+  ]
+ },
+ "Golovanova fruit top": {
+  "activity": {
+   "name": "Fruit stall (Hosidius)",
+   "kind": "gather",
+   "levels": {
+    "Thieving": 25
+   },
+   "access": "kourend",
+   "wiki": "\"It can only be obtained by stealing from fruit stalls in Hosidius. This requires level 25 Thieving\""
+  }
+ },
+ "Cave goblin wire": {
+  "activity": {
+   "name": "Dorgesh-Kaan wire machine / chests",
+   "kind": "gather",
+   "quests": [
+    "Death to the Dorgeshuun"
+   ],
+   "levels": {
+    "Thieving": 52
+   },
+   "wiki": "\"Wire machine\" / \"Chest (Dorgesh-Kaan Average)\""
+  }
+ },
+ "House keys": {
+  "activity": {
+   "name": "Pickpocket wealthy citizens (Civitas illa Fortis)",
+   "kind": "gather",
+   "levels": {
+    "Thieving": 50
+   },
+   "access": "varlamore",
+   "wiki": "\"House keys can be obtained from pickpocketing wealthy citizens in Civitas illa Fortis at 50 Thieving\""
+  }
+ },
+ "Valuables": {
+  "activity": {
+   "name": "Stealing valuables (Civitas illa Fortis)",
+   "kind": "gather",
+   "levels": {
+    "Thieving": 50
+   },
+   "access": "varlamore",
+   "cards": [
+    "House keys"
+   ],
+   "wiki": "\"acquired by stealing valuables from wealthy citizens' houses in Civitas illa Fortis\""
+  }
+ },
+ "Wilderness agility ticket": {
+  "activity": {
+   "name": "Wilderness Agility Course",
+   "kind": "minigame",
+   "levels": {
+    "Agility": 52
+   },
+   "access": "wilderness",
+   "cards": [
+    "Coins"
+   ],
+   "note": "Pay the dispenser (150,000 coins) to earn a ticket per lap",
+   "wiki": "\"obtained while completing laps of the Wilderness Agility Course. One ticket is awarded per lap completion\""
+  }
+ },
+ "Termites": {
+  "activity": {
+   "name": "Colossal Wyrm Agility Course",
+   "kind": "gather",
+   "levels": {
+    "Agility": 50
+   },
+   "access": "varlamore",
+   "wiki": "\"obtained while training Agility at the Colossal Wyrm Agility Course\""
+  }
+ },
+ "Molch pearl": {
+  "activity": {
+   "name": "Aerial fishing (Lake Molch)",
+   "kind": "gather",
+   "levels": {
+    "Fishing": 43,
+    "Hunter": 35
+   },
+   "access": "kourend",
+   "note": "Alry the Angler lends the cormorant and gloves",
+   "wiki": "\"obtained while Aerial fishing\""
+  }
+ },
+ "Golden tench": {
+  "activity": {
+   "name": "Aerial fishing (Lake Molch)",
+   "kind": "gather",
+   "levels": {
+    "Fishing": 43,
+    "Hunter": 35
+   },
+   "access": "kourend",
+   "note": "Alry the Angler lends the cormorant and gloves",
+   "wiki": "\"obtained while Aerial fishing\""
+  }
+ },
+ "Raw bird meat": {
+  "activity": {
+   "name": "Bird snaring (crimson swift and others)",
+   "kind": "gather",
+   "levels": {
+    "Hunter": 1
+   },
+   "cards": [
+    "Bird snare"
+   ],
+   "wiki": "\"Raw bird meat can be obtained from Hunter birds and bird houses\""
+  }
+ },
+ "Raw beast meat": {
+  "activity": {
+   "name": "Kebbit tracking (noose wand)",
+   "kind": "gather",
+   "levels": {
+    "Hunter": 1
+   },
+   "cards": [
+    "Noose wand"
+   ],
+   "wiki": "\"dropped by kebbits that are tracked and caught using a noose wand\""
+  }
+ },
+ "Ruby harvest": {
+  "activity": {
+   "name": "Catch a ruby harvest",
+   "kind": "gather",
+   "levels": {
+    "Hunter": 15
+   },
+   "cards": [
+    "Butterfly net",
+    "Butterfly jar"
+   ],
+   "wiki": "\"requires level 15 Hunter with a butterfly net\""
+  }
+ },
+ "Sapphire glacialis": {
+  "activity": {
+   "name": "Catch a sapphire glacialis",
+   "kind": "gather",
+   "levels": {
+    "Hunter": 25
+   },
+   "cards": [
+    "Butterfly net",
+    "Butterfly jar"
+   ],
+   "wiki": "\"requires level 25 Hunter with a (magic) butterfly net\" (the wing: a rare part while on a Hunters' Rumour)"
+  }
+ },
+ "Blue butterfly wing": {
+  "activity": {
+   "name": "Catch a sapphire glacialis",
+   "kind": "gather",
+   "levels": {
+    "Hunter": 25
+   },
+   "cards": [
+    "Butterfly net",
+    "Butterfly jar"
+   ],
+   "wiki": "\"requires level 25 Hunter with a (magic) butterfly net\" (the wing: a rare part while on a Hunters' Rumour)"
+  }
+ },
+ "Snowy knight": {
+  "activity": {
+   "name": "Catch a snowy knight",
+   "kind": "gather",
+   "levels": {
+    "Hunter": 35
+   },
+   "cards": [
+    "Butterfly net",
+    "Butterfly jar"
+   ],
+   "wiki": "\"requires level 35 Hunter using a (magic) butterfly net\""
+  }
+ },
+ "White butterfly wing": {
+  "activity": {
+   "name": "Catch a snowy knight",
+   "kind": "gather",
+   "levels": {
+    "Hunter": 35
+   },
+   "cards": [
+    "Butterfly net",
+    "Butterfly jar"
+   ],
+   "wiki": "\"requires level 35 Hunter using a (magic) butterfly net\""
+  }
+ },
+ "Black warlock": {
+  "activity": {
+   "name": "Catch a black warlock",
+   "kind": "gather",
+   "levels": {
+    "Hunter": 45
+   },
+   "cards": [
+    "Butterfly net",
+    "Butterfly jar"
+   ],
+   "wiki": "\"requires level 45 Hunter to do so with a butterfly net\""
+  }
+ },
+ "Black butterfly wing": {
+  "activity": {
+   "name": "Catch a black warlock",
+   "kind": "gather",
+   "levels": {
+    "Hunter": 45
+   },
+   "cards": [
+    "Butterfly net",
+    "Butterfly jar"
+   ],
+   "wiki": "\"requires level 45 Hunter to do so with a butterfly net\""
+  }
+ },
+ "Sunlight moth": {
+  "activity": {
+   "name": "Catch a sunlight moth",
+   "kind": "gather",
+   "levels": {
+    "Hunter": 65
+   },
+   "access": "varlamore",
+   "cards": [
+    "Butterfly net",
+    "Butterfly jar"
+   ],
+   "wiki": "\"requires level 65 Hunter and a butterfly net and jar\""
+  }
+ },
+ "Sunlight moth wing": {
+  "activity": {
+   "name": "Catch a sunlight moth",
+   "kind": "gather",
+   "levels": {
+    "Hunter": 65
+   },
+   "access": "varlamore",
+   "cards": [
+    "Butterfly net",
+    "Butterfly jar"
+   ],
+   "wiki": "\"requires level 65 Hunter and a butterfly net and jar\""
+  }
+ },
+ "Moonlight moth": {
+  "activity": {
+   "name": "Catch a moonlight moth",
+   "kind": "gather",
+   "levels": {
+    "Hunter": 75
+   },
+   "access": "varlamore",
+   "cards": [
+    "Butterfly net",
+    "Butterfly jar"
+   ],
+   "wiki": "\"require level 75 Hunter and a butterfly net and jar\""
+  }
+ },
+ "Moonlight moth wing": {
+  "activity": {
+   "name": "Catch a moonlight moth",
+   "kind": "gather",
+   "levels": {
+    "Hunter": 75
+   },
+   "access": "varlamore",
+   "cards": [
+    "Butterfly net",
+    "Butterfly jar"
+   ],
+   "wiki": "\"require level 75 Hunter and a butterfly net and jar\""
+  }
+ },
+ "Imp-in-a-box": {
+  "activity": {
+   "name": "Catch an imp in a magic box",
+   "kind": "gather",
+   "levels": {
+    "Hunter": 71
+   },
+   "cards": [
+    "Magic box"
+   ],
+   "wiki": "\"made by catching an imp with a magic box, requiring 71 Hunter\""
+  }
+ },
+ "Ferret": {
+  "activity": {
+   "name": "Box trap a ferret (Piscatoris)",
+   "kind": "gather",
+   "levels": {
+    "Hunter": 27
+   },
+   "cards": [
+    "Box trap"
+   ],
+   "wiki": "\"by catching a wild ferret using a box trap\""
+  }
+ },
+ "Rabbit foot": {
+  "activity": {
+   "name": "Ferret-hunt white rabbits (Piscatoris)",
+   "kind": "gather",
+   "levels": {
+    "Hunter": 27
+   },
+   "cards": [
+    "Ferret",
+    "Rabbit snare"
+   ],
+   "wiki": "\"received through the hunter skill by snaring a rabbit\""
+  }
+ },
+ "Barb-tail harpoon": {
+  "activity": {
+   "name": "Deadfall: barb-tailed kebbit (Feldip Hills)",
+   "kind": "gather",
+   "levels": {
+    "Hunter": 33
+   },
+   "cards": [
+    "Knife",
+    "Logs"
+   ],
+   "wiki": "\"a weapon obtained after successfully trapping a barb-tailed kebbit, which requires 33 Hunter\""
+  }
+ },
+ "Kebbit teeth": {
+  "activity": {
+   "name": "Deadfall: sabre-toothed kebbit (Rellekka Hunter area)",
+   "kind": "gather",
+   "levels": {
+    "Hunter": 51
+   },
+   "cards": [
+    "Knife",
+    "Logs"
+   ],
+   "wiki": "\"dropped from Sabre-toothed kebbits after a successful deadfall trapping\""
+  }
+ },
+ "Swamp lizard": {
+  "activity": {
+   "name": "Net trap swamp lizards",
+   "kind": "gather",
+   "levels": {
+    "Hunter": 29
+   },
+   "access": "morytania",
+   "cards": [
+    "Small fishing net",
+    "Rope"
+   ],
+   "wiki": "\"Swamp lizard (Hunter)\" — net trap, 29 Hunter"
+  }
+ },
+ "Swamp lizard claw": {
+  "activity": {
+   "name": "Net trap swamp lizards",
+   "kind": "gather",
+   "levels": {
+    "Hunter": 29
+   },
+   "access": "morytania",
+   "cards": [
+    "Small fishing net",
+    "Rope"
+   ],
+   "wiki": "\"Swamp lizard (Hunter)\" — net trap, 29 Hunter"
+  }
+ },
+ "Red salamander claw": {
+  "activity": {
+   "name": "Net trap red salamanders",
+   "kind": "gather",
+   "levels": {
+    "Hunter": 59
+   },
+   "cards": [
+    "Small fishing net",
+    "Rope"
+   ],
+   "wiki": "Red salamander (Hunter) — net trap, 59 Hunter"
+  }
+ },
+ "Tecu salamander": {
+  "activity": {
+   "name": "Net trap tecu salamanders",
+   "kind": "gather",
+   "levels": {
+    "Hunter": 79
+   },
+   "access": "varlamore",
+   "cards": [
+    "Small fishing net",
+    "Rope"
+   ],
+   "wiki": "\"the strongest salamander that can be caught using a net trap and the Hunter skill at level 79\""
+  }
+ },
+ "Salamander claw": {
+  "activity": {
+   "name": "Net trap tecu salamanders",
+   "kind": "gather",
+   "levels": {
+    "Hunter": 79
+   },
+   "access": "varlamore",
+   "cards": [
+    "Small fishing net",
+    "Rope"
+   ],
+   "wiki": "\"the strongest salamander that can be caught using a net trap and the Hunter skill at level 79\""
+  }
+ },
+ "Chinchompa tuft": {
+  "activity": {
+   "name": "Box trap chinchompas",
+   "kind": "gather",
+   "levels": {
+    "Hunter": 53
+   },
+   "cards": [
+    "Box trap"
+   ],
+   "wiki": "rare creature part from chinchompas (Hunters' Rumours)"
+  }
+ },
+ "Red chinchompa tuft": {
+  "activity": {
+   "name": "Box trap carnivorous chinchompas",
+   "kind": "gather",
+   "levels": {
+    "Hunter": 63
+   },
+   "cards": [
+    "Box trap"
+   ],
+   "wiki": "rare creature part from carnivorous chinchompas"
+  }
+ },
+ "Tailfeathers": {
+  "activity": {
+   "name": "Snare tropical wagtails",
+   "kind": "gather",
+   "levels": {
+    "Hunter": 19
+   },
+   "cards": [
+    "Bird snare"
+   ],
+   "wiki": "rare creature part from tropical wagtails"
+  }
+ },
+ "Larupia ear": {
+  "activity": {
+   "name": "Spiked pit: spined larupia",
+   "kind": "gather",
+   "levels": {
+    "Hunter": 31
+   },
+   "cards": [
+    "Teasing stick",
+    "Logs",
+    "Knife"
+   ],
+   "wiki": "rare creature part from spined larupias"
+  }
+ },
+ "Graahk horn spur": {
+  "activity": {
+   "name": "Spiked pit: horned graahk",
+   "kind": "gather",
+   "levels": {
+    "Hunter": 41
+   },
+   "cards": [
+    "Teasing stick",
+    "Logs",
+    "Knife"
+   ],
+   "wiki": "rare creature part from horned graahks"
+  }
+ },
+ "Kyatt tooth chip": {
+  "activity": {
+   "name": "Spiked pit: sabre-toothed kyatt",
+   "kind": "gather",
+   "levels": {
+    "Hunter": 55
+   },
+   "cards": [
+    "Teasing stick",
+    "Logs",
+    "Knife"
+   ],
+   "wiki": "rare creature part from sabre-toothed kyatts"
+  }
+ },
+ "Raw pyre fox": {
+  "activity": {
+   "name": "Pyre fox (deadfall)",
+   "kind": "gather",
+   "levels": {
+    "Hunter": 57
+   },
+   "access": "varlamore",
+   "cards": [
+    "Knife",
+    "Logs"
+   ],
+   "wiki": "\"obtained from pyre foxes, requiring level 57 Hunter\""
+  }
+ },
+ "Fox fluff": {
+  "activity": {
+   "name": "Pyre fox (deadfall)",
+   "kind": "gather",
+   "levels": {
+    "Hunter": 57
+   },
+   "access": "varlamore",
+   "cards": [
+    "Knife",
+    "Logs"
+   ],
+   "wiki": "\"obtained from pyre foxes, requiring level 57 Hunter\""
+  }
+ },
+ "Raw sunlight antelope": {
+  "activity": {
+   "name": "Sunlight antelope (pitfall)",
+   "kind": "gather",
+   "levels": {
+    "Hunter": 72
+   },
+   "access": "varlamore",
+   "cards": [
+    "Teasing stick",
+    "Logs",
+    "Knife"
+   ],
+   "wiki": "\"obtained from hunting sunlight antelopes (requiring level 72 Hunter)\""
+  }
+ },
+ "Sunlight antelope antler": {
+  "activity": {
+   "name": "Sunlight antelope (pitfall)",
+   "kind": "gather",
+   "levels": {
+    "Hunter": 72
+   },
+   "access": "varlamore",
+   "cards": [
+    "Teasing stick",
+    "Logs",
+    "Knife"
+   ],
+   "wiki": "\"obtained from hunting sunlight antelopes (requiring level 72 Hunter)\""
+  }
+ },
+ "Antelope hoof shard": {
+  "activity": {
+   "name": "Sunlight antelope (pitfall)",
+   "kind": "gather",
+   "levels": {
+    "Hunter": 72
+   },
+   "access": "varlamore",
+   "cards": [
+    "Teasing stick",
+    "Logs",
+    "Knife"
+   ],
+   "wiki": "\"obtained from hunting sunlight antelopes (requiring level 72 Hunter)\""
+  }
+ },
+ "Raw moonlight antelope": {
+  "activity": {
+   "name": "Moonlight antelope (pitfall)",
+   "kind": "gather",
+   "levels": {
+    "Hunter": 91
+   },
+   "access": "varlamore",
+   "cards": [
+    "Teasing stick",
+    "Logs",
+    "Knife"
+   ],
+   "wiki": "\"obtained from moonlight antelopes, requiring level 91 Hunter\""
+  }
+ },
+ "Moonlight antelope antler": {
+  "activity": {
+   "name": "Moonlight antelope (pitfall)",
+   "kind": "gather",
+   "levels": {
+    "Hunter": 91
+   },
+   "access": "varlamore",
+   "cards": [
+    "Teasing stick",
+    "Logs",
+    "Knife"
+   ],
+   "wiki": "\"obtained from moonlight antelopes, requiring level 91 Hunter\""
+  }
+ },
+ "Damaged monkey tail": {
+  "activity": {
+   "name": "Hunt maniacal monkeys (Kruk's Dungeon)",
+   "kind": "gather",
+   "quests": [
+    "Monkey Madness II"
+   ],
+   "levels": {
+    "Hunter": 60
+   },
+   "cards": [
+    "Box trap"
+   ],
+   "wiki": "\"obtained from hunting maniacal monkeys\""
+  }
+ },
+ "Red crab": {
+  "activity": {
+   "name": "Crab trapping (Sailing islands)",
+   "kind": "gather",
+   "levels": {
+    "Hunter": 21
+   },
+   "access": "sailing",
+   "note": "Red crab 21 Hunter (Pandemonium), blue crab 48 (Great Conch), rainbow crab higher (Crown Jewel)",
+   "wiki": "\"caught via crab trapping on the Pandemonium. This requires level 21 Hunter\""
+  }
+ },
+ "Blue crab": {
+  "activity": {
+   "name": "Crab trapping (Sailing islands)",
+   "kind": "gather",
+   "levels": {
+    "Hunter": 21
+   },
+   "access": "sailing",
+   "note": "Red crab 21 Hunter (Pandemonium), blue crab 48 (Great Conch), rainbow crab higher (Crown Jewel)",
+   "wiki": "\"caught via crab trapping on the Pandemonium. This requires level 21 Hunter\""
+  }
+ },
+ "Rainbow crab": {
+  "activity": {
+   "name": "Crab trapping (Sailing islands)",
+   "kind": "gather",
+   "levels": {
+    "Hunter": 21
+   },
+   "access": "sailing",
+   "note": "Red crab 21 Hunter (Pandemonium), blue crab 48 (Great Conch), rainbow crab higher (Crown Jewel)",
+   "wiki": "\"caught via crab trapping on the Pandemonium. This requires level 21 Hunter\""
+  }
+ },
+ "Stymphike carcass": {
+  "activity": {
+   "name": "Hunt stymphikes (Vampyrium)",
+   "kind": "gather",
+   "quests": [
+    "The Blood Moon Rises"
+   ],
+   "levels": {
+    "Hunter": 82
+   },
+   "cards": [
+    "Makeshift spear"
+   ],
+   "wiki": "\"Stymphikes are a Hunter bird that require 82 Hunter to catch ... requiring completion of The Blood Moon Rises\""
+  }
+ },
+ "Makeshift spear": {
+  "activity": {
+   "name": "Pile of makeshift spears (Vampyrium)",
+   "kind": "gather",
+   "quests": [
+    "The Blood Moon Rises"
+   ],
+   "wiki": "\"Players can obtain these in bundles of 10 from the pile of makeshift spears\""
+  }
+ },
+ "Wyrmscraig goat hoof": {
+  "activity": {
+   "name": "Goat hunting (Wyrmscraig)",
+   "kind": "gather",
+   "quests": [
+    "Sheep Herder"
+   ],
+   "levels": {
+    "Hunter": 60
+   },
+   "wiki": "\"requiring level 60 Hunter and completion of the Sheep Herder quest to catch\""
+  }
+ },
+ "Big bass": {
+  "activity": {
+   "name": "Big net fishing (bass)",
+   "kind": "gather",
+   "levels": {
+    "Fishing": 46
+   },
+   "cards": [
+    "Big fishing net"
+   ],
+   "wiki": "\"caught while fishing at any big net/harpoon fishing spot, requiring 46 Fishing\""
+  }
+ },
+ "Big swordfish": {
+  "activity": {
+   "name": "Harpoon fishing (swordfish)",
+   "kind": "gather",
+   "levels": {
+    "Fishing": 50
+   },
+   "cards": [
+    "Harpoon"
+   ],
+   "wiki": "\"requiring 50 Fishing to catch\""
+  }
+ },
+ "Big shark": {
+  "activity": {
+   "name": "Harpoon fishing (shark)",
+   "kind": "gather",
+   "levels": {
+    "Fishing": 76
+   },
+   "cards": [
+    "Harpoon"
+   ],
+   "wiki": "\"requiring 76 Fishing to catch\""
+  }
+ },
+ "Giant blue krill": {
+  "activity": {
+   "name": "Shoal fishing (Sailing)",
+   "kind": "gather",
+   "access": "sailing",
+   "note": "A rare variant while rod fishing or trawling the matching shoal (krill, haddock, yellowfin, halibut, bluefin, marlin)",
+   "wiki": "\"caught while rod fishing or trawling at a ... shoal\""
+  }
+ },
+ "Golden haddock": {
+  "activity": {
+   "name": "Shoal fishing (Sailing)",
+   "kind": "gather",
+   "access": "sailing",
+   "note": "A rare variant while rod fishing or trawling the matching shoal (krill, haddock, yellowfin, halibut, bluefin, marlin)",
+   "wiki": "\"caught while rod fishing or trawling at a ... shoal\""
+  }
+ },
+ "Orangefin": {
+  "activity": {
+   "name": "Shoal fishing (Sailing)",
+   "kind": "gather",
+   "access": "sailing",
+   "note": "A rare variant while rod fishing or trawling the matching shoal (krill, haddock, yellowfin, halibut, bluefin, marlin)",
+   "wiki": "\"caught while rod fishing or trawling at a ... shoal\""
+  }
+ },
+ "Huge halibut": {
+  "activity": {
+   "name": "Shoal fishing (Sailing)",
+   "kind": "gather",
+   "access": "sailing",
+   "note": "A rare variant while rod fishing or trawling the matching shoal (krill, haddock, yellowfin, halibut, bluefin, marlin)",
+   "wiki": "\"caught while rod fishing or trawling at a ... shoal\""
+  }
+ },
+ "Purplefin": {
+  "activity": {
+   "name": "Shoal fishing (Sailing)",
+   "kind": "gather",
+   "access": "sailing",
+   "note": "A rare variant while rod fishing or trawling the matching shoal (krill, haddock, yellowfin, halibut, bluefin, marlin)",
+   "wiki": "\"caught while rod fishing or trawling at a ... shoal\""
+  }
+ },
+ "Swift marlin": {
+  "activity": {
+   "name": "Shoal fishing (Sailing)",
+   "kind": "gather",
+   "access": "sailing",
+   "note": "A rare variant while rod fishing or trawling the matching shoal (krill, haddock, yellowfin, halibut, bluefin, marlin)",
+   "wiki": "\"caught while rod fishing or trawling at a ... shoal\""
+  }
+ },
+ "Angler's paint": {
+  "activity": {
+   "name": "Deep sea trawling (Sailing)",
+   "kind": "gather",
+   "access": "sailing",
+   "wiki": "\"received at a rate of 1/18,000 from deep sea trawling\""
+  }
+ },
+ "Caerula berries": {
+  "activity": {
+   "name": "Caerula bush (Twilight Temple)",
+   "kind": "gather",
+   "access": "varlamore",
+   "wiki": "\"found by picking from caerula bushes, found slightly north-east of the Twilight Temple\""
+  }
+ },
+ "Kettle": {
+  "activity": {
+   "name": "Kitchen shelves (your house)",
+   "kind": "gather",
+   "levels": {
+    "Construction": 6
+   },
+   "access": "house",
+   "wiki": "\"An infinite number can be taken from any type of kitchen shelf\""
+  }
+ },
+ "Teapot": {
+  "activity": {
+   "name": "Kitchen shelves (your house)",
+   "kind": "gather",
+   "levels": {
+    "Construction": 6
+   },
+   "access": "house",
+   "wiki": "\"An infinite number can be taken from any type of kitchen shelf\""
+  }
+ },
+ "Sawdust": {
+  "activity": {
+   "name": "Sawmill operator (making planks)",
+   "kind": "npc",
+   "cards": [
+    "Coins",
+    "Logs"
+   ],
+   "wiki": "\"appears at a player's feet after asking the Sawmill operator to convert logs into planks\""
+  }
+ },
+ "Greenman's ale": {
+  "shopBought": true,
+  "shops": [
+   {
+    "seller": "Dragon Inn",
+    "price": 10,
+    "currency": "Coins"
+   },
+   {
+    "seller": "Rasolo the Wandering Merchant",
+    "price": 4,
+    "currency": "Coins"
+   },
+   {
+    "seller": "The Lighthouse Store",
+    "price": 2,
+    "currency": "Coins"
+   },
+   {
+    "seller": "Sunlight's Sanctum",
+    "price": 2,
+    "currency": "Coins"
+   },
+   {
+    "seller": "Nemus Retreat (pub)",
+    "price": 2,
+    "currency": "Coins"
+   }
+  ]
+ },
+ "Newspaper": {
+  "shopBought": true,
+  "shops": [
+   {
+    "seller": "Benny",
+    "price": 50,
+    "currency": "Coins"
+   }
+  ]
+ },
+ "Gold leaf": {
+  "shopBought": true,
+  "shops": [
+   {
+    "seller": "Keldagrim Stonemason",
+    "price": 130000,
+    "currency": "Coins"
+   },
+   {
+    "seller": "Stonecutter Supplies",
+    "price": 130000,
+    "currency": "Coins"
+   }
+  ]
+ },
+ "Amylase crystal": {
+  "shopBought": true,
+  "shops": [
+   {
+    "seller": "Grace's Graceful Clothing",
+    "price": 10,
+    "currency": "Mark of grace"
+   },
+   {
+    "seller": "Agility Arena Store",
+    "price": 60,
+    "currency": "Brimhaven voucher"
+   },
+   {
+    "seller": "Worm Tongue's Wares",
+    "price": 100,
+    "currency": "Termites"
+   }
+  ]
+ },
+ "Tiny net": {
+  "activity": {
+   "name": "Harry (Catherby fishing shop)",
+   "kind": "shop",
+   "levels": {
+    "Fishing": 10
+   },
+   "cards": [
+    "Coins",
+    "Empty fishbowl"
+   ],
+   "wiki": "\"purchased from Harry in Catherby for 10 gold, provided the player has a fishbowl filled with both water and seaweed\""
+  }
+ },
+ "Apprentice potion pack": {
+  "activity": {
+   "name": "Mastering Mixology",
+   "kind": "minigame",
+   "levels": {
+    "Herblore": 60
+   },
+   "access": "varlamore",
+   "note": "Bought with Mox / Aga / Lye resin from the Mixology Rewards shop",
+   "wiki": "\"purchased from the Mixology Rewards shop with ... resin, which are earned from participating in the Mastering Mixology\""
+  }
+ },
+ "Expert potion pack": {
+  "activity": {
+   "name": "Mastering Mixology",
+   "kind": "minigame",
+   "levels": {
+    "Herblore": 60
+   },
+   "access": "varlamore",
+   "note": "Bought with Mox / Aga / Lye resin from the Mixology Rewards shop",
+   "wiki": "\"purchased from the Mixology Rewards shop with ... resin, which are earned from participating in the Mastering Mixology\""
+  }
+ },
+ "Prescription goggles": {
+  "activity": {
+   "name": "Mastering Mixology",
+   "kind": "minigame",
+   "levels": {
+    "Herblore": 60
+   },
+   "access": "varlamore",
+   "note": "Bought with Mox / Aga / Lye resin from the Mixology Rewards shop",
+   "wiki": "\"purchased from the Mixology Rewards shop with ... resin, which are earned from participating in the Mastering Mixology\""
+  }
+ },
+ "Alchemist labcoat": {
+  "activity": {
+   "name": "Mastering Mixology",
+   "kind": "minigame",
+   "levels": {
+    "Herblore": 60
+   },
+   "access": "varlamore",
+   "note": "Bought with Mox / Aga / Lye resin from the Mixology Rewards shop",
+   "wiki": "\"purchased from the Mixology Rewards shop with ... resin, which are earned from participating in the Mastering Mixology\""
+  }
+ },
+ "Alchemist pants": {
+  "activity": {
+   "name": "Mastering Mixology",
+   "kind": "minigame",
+   "levels": {
+    "Herblore": 60
+   },
+   "access": "varlamore",
+   "note": "Bought with Mox / Aga / Lye resin from the Mixology Rewards shop",
+   "wiki": "\"purchased from the Mixology Rewards shop with ... resin, which are earned from participating in the Mastering Mixology\""
+  }
+ },
+ "Alchemist gloves": {
+  "activity": {
+   "name": "Mastering Mixology",
+   "kind": "minigame",
+   "levels": {
+    "Herblore": 60
+   },
+   "access": "varlamore",
+   "note": "Bought with Mox / Aga / Lye resin from the Mixology Rewards shop",
+   "wiki": "\"purchased from the Mixology Rewards shop with ... resin, which are earned from participating in the Mastering Mixology\""
+  }
+ },
+ "Alchemist's amulet": {
+  "activity": {
+   "name": "Mastering Mixology",
+   "kind": "minigame",
+   "levels": {
+    "Herblore": 60
+   },
+   "access": "varlamore",
+   "note": "Bought with Mox / Aga / Lye resin from the Mixology Rewards shop",
+   "wiki": "\"purchased from the Mixology Rewards shop with ... resin, which are earned from participating in the Mastering Mixology\""
+  }
+ },
+ "Aldarium": {
+  "activity": {
+   "name": "Mastering Mixology",
+   "kind": "minigame",
+   "levels": {
+    "Herblore": 60
+   },
+   "access": "varlamore",
+   "note": "Bought with Mox / Aga / Lye resin from the Mixology Rewards shop",
+   "wiki": "\"purchased from the Mixology Rewards shop with ... resin, which are earned from participating in the Mastering Mixology\""
+  }
+ },
+ "Reagent pouch": {
+  "activity": {
+   "name": "Mastering Mixology",
+   "kind": "minigame",
+   "levels": {
+    "Herblore": 60
+   },
+   "access": "varlamore",
+   "note": "Bought with Mox / Aga / Lye resin from the Mixology Rewards shop",
+   "wiki": "\"purchased from the Mixology Rewards shop with ... resin, which are earned from participating in the Mastering Mixology\""
+  }
+ },
+ "Chugging barrel": {
+  "activity": {
+   "name": "Mastering Mixology",
+   "kind": "minigame",
+   "levels": {
+    "Herblore": 60
+   },
+   "access": "varlamore",
+   "note": "Bought with Mox / Aga / Lye resin from the Mixology Rewards shop",
+   "wiki": "\"purchased from the Mixology Rewards shop with ... resin, which are earned from participating in the Mastering Mixology\""
+  }
+ },
+ "Ent branch": {
+  "activity": {
+   "name": "Vale Totems (vale offerings)",
+   "kind": "container",
+   "quests": [
+    "Vale Totems"
+   ],
+   "levels": {
+    "Fletching": 20
+   },
+   "access": "varlamore",
+   "from": [
+    "Vale offerings"
+   ],
+   "wiki": "\"an item received from the Vale Totems minigame, which can be obtained as common loot from rummaging through Vale offerings\""
+  }
+ },
+ "Dirty arrowtips": {
+  "activity": {
+   "name": "Vale Totems (vale offerings)",
+   "kind": "container",
+   "quests": [
+    "Vale Totems"
+   ],
+   "levels": {
+    "Fletching": 20
+   },
+   "access": "varlamore",
+   "from": [
+    "Vale offerings"
+   ],
+   "wiki": "\"an item received from the Vale Totems minigame, which can be obtained as common loot from rummaging through Vale offerings\""
+  }
+ },
+ "Grape barrel": {
+  "activity": {
+   "name": "Vineyard foreman (Aldarin)",
+   "kind": "npc",
+   "access": "varlamore",
+   "wiki": "\"obtained by speaking to the vineyard foreman\""
+  }
+ },
+ "Jim's wet cloth": {
+  "activity": {
+   "name": "Jim the imp (Chasm of Fire)",
+   "kind": "npc",
+   "access": "kourend",
+   "wiki": "\"obtainable from Jim the imp on the lower floor of the Chasm of Fire\""
+  }
+ },
+ "Nasty surprise": {
+  "activity": {
+   "name": "Nasty Nick (four nasty tokens)",
+   "kind": "npc",
+   "wiki": "\"obtained from Nasty Nick in exchange for all four nasty tokens\""
+  }
+ },
+ "Blueberry muffin": {
+  "activity": {
+   "name": "Cobado (all event tokens)",
+   "kind": "npc",
+   "wiki": "\"obtained once per account by talking to Cobado while wearing an orange hat while having all 7 red tokens, all 4 nasty tokens, and the purple token\""
+  }
+ },
+ "Training sword": {
+  "activity": {
+   "name": "Melee combat tutor (Lumbridge)",
+   "kind": "npc",
+   "npcs": [
+    "Melee combat tutor"
+   ],
+   "wiki": "\"obtained for free ... from the Melee combat tutor, just south of the Lumbridge General Store\""
+  }
+ },
+ "Training shield": {
+  "activity": {
+   "name": "Melee combat tutor (Lumbridge)",
+   "kind": "npc",
+   "npcs": [
+    "Melee combat tutor"
+   ],
+   "wiki": "\"obtained for free ... from the Melee combat tutor, just south of the Lumbridge General Store\""
+  }
+ },
+ "Training bow": {
+  "activity": {
+   "name": "Ranged combat tutor (Lumbridge)",
+   "kind": "npc",
+   "wiki": "\"The training bow can be obtained from the Ranged combat tutor in Lumbridge\""
+  }
+ },
+ "Training arrows": {
+  "activity": {
+   "name": "Ranged combat tutor (Lumbridge)",
+   "kind": "npc",
+   "wiki": "\"The training bow can be obtained from the Ranged combat tutor in Lumbridge\""
+  }
+ },
+ "Fancy boots": {
+  "activity": {
+   "name": "Stronghold of Security (Cradle of Life)",
+   "kind": "minigame",
+   "note": "Reach the fourth level (account needs two-factor authentication)",
+   "wiki": "\"obtained from the Cradle of Life on the fourth level of the Stronghold of Security dungeon\""
+  }
+ },
+ "Fighting boots": {
+  "activity": {
+   "name": "Stronghold of Security (Cradle of Life)",
+   "kind": "minigame",
+   "note": "Reach the fourth level (account needs two-factor authentication)",
+   "wiki": "\"obtained from the Cradle of Life on the fourth level of the Stronghold of Security dungeon\""
+  }
+ },
+ "Fancier boots": {
+  "activity": {
+   "name": "Stronghold of Security (Cradle of Life)",
+   "kind": "minigame",
+   "note": "Reach the fourth level (account needs two-factor authentication)",
+   "wiki": "\"obtained from the Cradle of Life on the fourth level of the Stronghold of Security dungeon\""
+  }
+ },
+ "Hunter's honour": {
+  "activity": {
+   "name": "Bounty Hunter",
+   "kind": "minigame",
+   "access": "wilderness",
+   "wiki": "\"claimed from Corrupted Warriors in Ferox Enclave or Daimon's Crater, once players obtain one target kill in the Bounty Hunter minigame\""
+  }
+ },
+ "Rogue's revenge": {
+  "activity": {
+   "name": "Bounty Hunter",
+   "kind": "minigame",
+   "access": "wilderness",
+   "wiki": "\"claimed from Corrupted Warriors in Ferox Enclave or Daimon's Crater, once players obtain one target kill in the Bounty Hunter minigame\""
+  }
+ },
+ "Bounty hunter hat": {
+  "activity": {
+   "name": "Bounty Hunter",
+   "kind": "minigame",
+   "access": "wilderness",
+   "wiki": "\"claimed from Corrupted Warriors in Ferox Enclave or Daimon's Crater, once players obtain one target kill in the Bounty Hunter minigame\""
+  }
+ },
+ "Lil' creator": {
+  "activity": {
+   "name": "Soul Wars (spoils of war)",
+   "kind": "minigame",
+   "wiki": "\"a pet obtained from spoils of war in Soul Wars\""
+  }
+ },
+ "Guild hunter headwear": {
+  "activity": {
+   "name": "Hunters' Rumours (loot sacks)",
+   "kind": "minigame",
+   "levels": {
+    "Hunter": 46
+   },
+   "access": "varlamore",
+   "wiki": "\"looted from hunters' loot sacks, which are obtained upon completing Hunters' Rumours\""
+  }
+ },
+ "Guild hunter top": {
+  "activity": {
+   "name": "Hunters' Rumours (loot sacks)",
+   "kind": "minigame",
+   "levels": {
+    "Hunter": 46
+   },
+   "access": "varlamore",
+   "wiki": "\"looted from hunters' loot sacks, which are obtained upon completing Hunters' Rumours\""
+  }
+ },
+ "Guild hunter legs": {
+  "activity": {
+   "name": "Hunters' Rumours (loot sacks)",
+   "kind": "minigame",
+   "levels": {
+    "Hunter": 46
+   },
+   "access": "varlamore",
+   "wiki": "\"looted from hunters' loot sacks, which are obtained upon completing Hunters' Rumours\""
+  }
+ },
+ "Guild hunter boots": {
+  "activity": {
+   "name": "Hunters' Rumours (loot sacks)",
+   "kind": "minigame",
+   "levels": {
+    "Hunter": 46
+   },
+   "access": "varlamore",
+   "wiki": "\"looted from hunters' loot sacks, which are obtained upon completing Hunters' Rumours\""
+  }
+ },
+ "Quetzal feed": {
+  "activity": {
+   "name": "Hunters' Rumours (loot sacks)",
+   "kind": "minigame",
+   "levels": {
+    "Hunter": 46
+   },
+   "access": "varlamore",
+   "wiki": "\"looted from hunters' loot sacks, which are obtained upon completing Hunters' Rumours\""
+  }
+ },
+ "Huntsman's kit": {
+  "activity": {
+   "name": "Hunters' Rumours (loot sacks)",
+   "kind": "minigame",
+   "levels": {
+    "Hunter": 46
+   },
+   "access": "varlamore",
+   "wiki": "\"looted from hunters' loot sacks, which are obtained upon completing Hunters' Rumours\""
+  }
+ },
+ "Quetzin": {
+  "activity": {
+   "name": "Hunters' Rumours (loot sacks)",
+   "kind": "minigame",
+   "levels": {
+    "Hunter": 46
+   },
+   "access": "varlamore",
+   "wiki": "\"looted from hunters' loot sacks, which are obtained upon completing Hunters' Rumours\""
+  }
+ },
+ "Gauntlet cape": {
+  "activity": {
+   "name": "Corrupted Gauntlet",
+   "kind": "minigame",
+   "boss": "Corrupted Gauntlet",
+   "wiki": "\"obtained after completing the Corrupted Gauntlet\""
+  }
+ },
+ "Demonic tallow": {
+  "activity": {
+   "name": "Yama (barrel of demonic tallow)",
+   "kind": "minigame",
+   "boss": "Yama",
+   "wiki": "\"drops from Yama in the form of a barrel of demonic tallow\""
+  }
+ },
+ "Small salvage": {
+  "activity": {
+   "name": "Shipwreck salvaging (small)",
+   "kind": "gather",
+   "levels": {
+    "Sailing": 15
+   },
+   "access": "sailing",
+   "wiki": "\"Level 15 Sailing is required to salvage these\""
+  }
+ },
+ "Martial salvage": {
+  "activity": {
+   "name": "Shipwreck salvaging (mercenary)",
+   "kind": "gather",
+   "levels": {
+    "Sailing": 73
+   },
+   "access": "sailing",
+   "wiki": "\"Level 73 Sailing is required to salvage these\""
+  }
+ },
+ "Rusty locket": {
+  "activity": {
+   "name": "Sort small salvage",
+   "kind": "container",
+   "access": "sailing",
+   "from": [
+    "Small salvage"
+   ],
+   "wiki": "\"obtained at a rate of 1/3,000 whilst sorting small salvage\""
+  }
+ },
+ "Broken sextant": {
+  "activity": {
+   "name": "Sort martial salvage",
+   "kind": "container",
+   "access": "sailing",
+   "from": [
+    "Martial salvage"
+   ],
+   "wiki": "\"obtained ... whilst sorting martial salvage\""
+  }
+ },
+ "Salvor's paint": {
+  "activity": {
+   "name": "Sort martial salvage",
+   "kind": "container",
+   "access": "sailing",
+   "from": [
+    "Martial salvage"
+   ],
+   "wiki": "\"obtained ... whilst sorting martial salvage\""
+  }
+ },
+ "Mouldy block": {
+  "activity": {
+   "name": "Shipwreck salvaging (fishy salvage)",
+   "kind": "gather",
+   "access": "sailing",
+   "note": "Salvage the wreck, then sort the salvage at a salvaging station",
+   "wiki": "\"obtained ... whilst sorting fishy salvage\""
+  }
+ },
+ "Dull knife": {
+  "activity": {
+   "name": "Shipwreck salvaging (Barracuda salvage)",
+   "kind": "gather",
+   "access": "sailing",
+   "note": "Salvage the wreck, then sort the salvage at a salvaging station",
+   "wiki": "\"obtained ... whilst sorting Barracuda salvage\""
+  }
+ },
+ "Broken compass": {
+  "activity": {
+   "name": "Shipwreck salvaging (large salvage)",
+   "kind": "gather",
+   "access": "sailing",
+   "note": "Salvage the wreck, then sort the salvage at a salvaging station",
+   "wiki": "\"obtained ... whilst sorting large salvage\""
+  }
+ },
+ "Rusty coin": {
+  "activity": {
+   "name": "Shipwreck salvaging (plundered salvage)",
+   "kind": "gather",
+   "access": "sailing",
+   "note": "Salvage the wreck, then sort the salvage at a salvaging station",
+   "wiki": "\"obtained ... whilst sorting plundered salvage\""
+  }
+ },
+ "Mouldy doll": {
+  "activity": {
+   "name": "Shipwreck salvaging (opulent salvage)",
+   "kind": "gather",
+   "access": "sailing",
+   "note": "Salvage the wreck, then sort the salvage at a salvaging station",
+   "wiki": "\"obtained ... whilst sorting opulent salvage\""
+  }
+ },
+ "Smashed mirror": {
+  "activity": {
+   "name": "Shipwreck salvaging (Fremennik salvage)",
+   "kind": "gather",
+   "access": "sailing",
+   "note": "Salvage the wreck, then sort the salvage at a salvaging station",
+   "wiki": "\"obtained ... whilst sorting Fremennik salvage\""
+  }
+ },
+ "Platinum token": {
+  "activity": {
+   "name": "Shipwreck salvaging (opulent salvage)",
+   "kind": "gather",
+   "access": "sailing",
+   "note": "Salvage the wreck, then sort the salvage at a salvaging station (Platinum tokens also come from any banker for coins)",
+   "wiki": "\"obtained ... whilst sorting opulent salvage\""
+  }
+ },
+ "Sailors' amulet": {
+  "activity": {
+   "name": "Shipwreck salvaging (any salvage)",
+   "kind": "gather",
+   "access": "sailing",
+   "note": "Salvage the wreck, then sort the salvage at a salvaging station",
+   "wiki": "\"obtained ... whilst sorting any salvage\""
+  }
+ },
+ "Boat bottle": {
+  "activity": {
+   "name": "Shipwreck salvaging (low-tier salvage)",
+   "kind": "gather",
+   "access": "sailing",
+   "note": "Salvage the wreck, then sort the salvage at a salvaging station",
+   "wiki": "\"obtained ... whilst sorting low-tier salvage\""
+  }
+ },
+ "Soup": {
+  "activity": {
+   "name": "Sailing (skilling pet)",
+   "kind": "pet",
+   "access": "sailing",
+   "wiki": "\"Soup is a skilling pet that can be obtained while training the Sailing skill\""
+  }
+ },
+ "Shark paint": {
+  "activity": {
+   "name": "Port tasks (Sailing)",
+   "kind": "minigame",
+   "access": "sailing",
+   "wiki": "\"received at a rate of 1/36 upon completing a port task\""
+  }
+ },
+ "Barracuda paint": {
+  "activity": {
+   "name": "Barracuda Trials (Marlin rank)",
+   "kind": "minigame",
+   "access": "sailing",
+   "wiki": "\"received randomly from Marlin rank Barracuda Trials\""
+  }
+ },
+ "Barrel stand": {
+  "activity": {
+   "name": "Tempor Tantrum Barracuda Trial (shark rank)",
+   "kind": "minigame",
+   "access": "sailing",
+   "wiki": "\"rewarded upon clearing the shark rank of the Tempor Tantrum Barracuda Trial\""
+  }
+ },
+ "Captured wind mote": {
+  "activity": {
+   "name": "Jubbly Jive Barracuda Trial (shark rank)",
+   "kind": "minigame",
+   "access": "sailing",
+   "wiki": "\"rewarded upon clearing the shark rank of the Jubbly Jive Barracuda Trial\""
+  }
+ },
+ "Storm cruiser's hat": {
+  "activity": {
+   "name": "Pandemonium Cave chest (stormy key)",
+   "kind": "minigame",
+   "access": "sailing",
+   "wiki": "\"obtained from a chest in the Pandemonium Cave. The chest requires a stormy key ... Tempor Tantrum Barracuda Trial\""
+  }
+ },
+ "Storm cruiser's coat": {
+  "activity": {
+   "name": "Pandemonium Cave chest (stormy key)",
+   "kind": "minigame",
+   "access": "sailing",
+   "wiki": "\"obtained from a chest in the Pandemonium Cave. The chest requires a stormy key ... Tempor Tantrum Barracuda Trial\""
+  }
+ },
+ "Storm cruiser's trousers": {
+  "activity": {
+   "name": "Pandemonium Cave chest (stormy key)",
+   "kind": "minigame",
+   "access": "sailing",
+   "wiki": "\"obtained from a chest in the Pandemonium Cave. The chest requires a stormy key ... Tempor Tantrum Barracuda Trial\""
+  }
+ },
+ "Storm cruiser's shoes": {
+  "activity": {
+   "name": "Pandemonium Cave chest (stormy key)",
+   "kind": "minigame",
+   "access": "sailing",
+   "wiki": "\"obtained from a chest in the Pandemonium Cave. The chest requires a stormy key ... Tempor Tantrum Barracuda Trial\""
+  }
+ },
+ "Swamp cruiser's hat": {
+  "activity": {
+   "name": "Anglers' Retreat chest (fetid key)",
+   "kind": "minigame",
+   "levels": {
+    "Agility": 52
+   },
+   "access": "sailing",
+   "wiki": "\"The chest requires level 52 Agility to reach and a fetid key to open\""
+  }
+ },
+ "Swamp cruiser's jacket": {
+  "activity": {
+   "name": "Anglers' Retreat chest (fetid key)",
+   "kind": "minigame",
+   "levels": {
+    "Agility": 52
+   },
+   "access": "sailing",
+   "wiki": "\"The chest requires level 52 Agility to reach and a fetid key to open\""
+  }
+ },
+ "Swamp cruiser's trousers": {
+  "activity": {
+   "name": "Anglers' Retreat chest (fetid key)",
+   "kind": "minigame",
+   "levels": {
+    "Agility": 52
+   },
+   "access": "sailing",
+   "wiki": "\"The chest requires level 52 Agility to reach and a fetid key to open\""
+  }
+ },
+ "Swamp cruiser's shoes": {
+  "activity": {
+   "name": "Anglers' Retreat chest (fetid key)",
+   "kind": "minigame",
+   "levels": {
+    "Agility": 52
+   },
+   "access": "sailing",
+   "wiki": "\"The chest requires level 52 Agility to reach and a fetid key to open\""
+  }
+ },
+ "Crystal glider's hat": {
+  "activity": {
+   "name": "Laguna Aurorae chest (serrated key)",
+   "kind": "minigame",
+   "levels": {
+    "Agility": 61
+   },
+   "access": "sailing",
+   "wiki": "\"The chest requires level 61 Agility to reach and a serrated key to open\""
+  }
+ },
+ "Crystal glider's jacket": {
+  "activity": {
+   "name": "Laguna Aurorae chest (serrated key)",
+   "kind": "minigame",
+   "levels": {
+    "Agility": 61
+   },
+   "access": "sailing",
+   "wiki": "\"The chest requires level 61 Agility to reach and a serrated key to open\""
+  }
+ },
+ "Crystal glider's trousers": {
+  "activity": {
+   "name": "Laguna Aurorae chest (serrated key)",
+   "kind": "minigame",
+   "levels": {
+    "Agility": 61
+   },
+   "access": "sailing",
+   "wiki": "\"The chest requires level 61 Agility to reach and a serrated key to open\""
+  }
+ },
+ "Crystal glider's shoes": {
+  "activity": {
+   "name": "Laguna Aurorae chest (serrated key)",
+   "kind": "minigame",
+   "levels": {
+    "Agility": 61
+   },
+   "access": "sailing",
+   "wiki": "\"The chest requires level 61 Agility to reach and a serrated key to open\""
+  }
+ },
+ "Spyglass": {
+  "activity": {
+   "name": "Chartin' Charles McAtless",
+   "kind": "npc",
+   "access": "sailing",
+   "wiki": "\"You obtain one by talking to Chartin' Charles McAtless\""
+  }
+ },
+ "Current duck": {
+  "activity": {
+   "name": "Current Affairs",
+   "kind": "quest",
+   "quests": [
+    "Current Affairs"
+   ],
+   "levels": {
+    "Sailing": 22
+   },
+   "wiki": "\"The ability to chart currents is unlocked upon completion of Current Affairs\""
+  }
+ },
+ "Portable weather station": {
+  "activity": {
+   "name": "Meaty Aura Logist",
+   "kind": "npc",
+   "levels": {
+    "Sailing": 57
+   },
+   "access": "sailing",
+   "wiki": "\"a device given by Meaty Aura Logist ... Charting weather requires a Sailing level of 57\""
+  }
+ },
+ "Kraken ink stout": {
+  "activity": {
+   "name": "Chartin' Charles McAtless (sea charting unlocks)",
+   "kind": "shop",
+   "access": "sailing",
+   "cards": [
+    "Coins"
+   ],
+   "note": "Unlocked by charting seas (5+5 / 8+5 / 50 / 70 seas), then 300 coins each",
+   "wiki": "\"The ability to purchase ... is unlocked after completely charting ... then showing Chartin' Charles McAtless the captain's log\""
+  }
+ },
+ "Perildance bitter": {
+  "activity": {
+   "name": "Chartin' Charles McAtless (sea charting unlocks)",
+   "kind": "shop",
+   "access": "sailing",
+   "cards": [
+    "Coins"
+   ],
+   "note": "Unlocked by charting seas (5+5 / 8+5 / 50 / 70 seas), then 300 coins each",
+   "wiki": "\"The ability to purchase ... is unlocked after completely charting ... then showing Chartin' Charles McAtless the captain's log\""
+  }
+ },
+ "Trawler's trust": {
+  "activity": {
+   "name": "Chartin' Charles McAtless (sea charting unlocks)",
+   "kind": "shop",
+   "access": "sailing",
+   "cards": [
+    "Coins"
+   ],
+   "note": "Unlocked by charting seas (5+5 / 8+5 / 50 / 70 seas), then 300 coins each",
+   "wiki": "\"The ability to purchase ... is unlocked after completely charting ... then showing Chartin' Charles McAtless the captain's log\""
+  }
+ },
+ "Horizon's lure": {
+  "activity": {
+   "name": "Chartin' Charles McAtless (sea charting unlocks)",
+   "kind": "shop",
+   "access": "sailing",
+   "cards": [
+    "Coins"
+   ],
+   "note": "Unlocked by charting seas (5+5 / 8+5 / 50 / 70 seas), then 300 coins each",
+   "wiki": "\"The ability to purchase ... is unlocked after completely charting ... then showing Chartin' Charles McAtless the captain's log\""
+  }
+ },
+ "Armadylean paint": {
+  "activity": {
+   "name": "Larrissa (Northern Ocean charted)",
+   "kind": "npc",
+   "quests": [
+    "Horror from the Deep"
+   ],
+   "access": "sailing",
+   "wiki": "\"obtained in unlimited amounts from Larrissa upon completion of Horror from the Deep after having given her the book about lighthouses\""
+  }
+ },
+ "Zamorakian paint": {
+  "activity": {
+   "name": "Charred Dungeon old chest (Unquiet Ocean charted)",
+   "kind": "minigame",
+   "levels": {
+    "Sailing": 60
+   },
+   "access": "sailing",
+   "wiki": "\"obtained in unlimited amounts from the old chest in the Charred Dungeon\""
+  }
+ },
+ "Guthixian paint": {
+  "activity": {
+   "name": "Elite Void Knight (Shrouded Ocean charted)",
+   "kind": "npc",
+   "levels": {
+    "Sailing": 72
+   },
+   "access": "sailing",
+   "wiki": "\"obtained in unlimited amounts from the Elite Void Knight after having given her the void orb\""
+  }
+ },
+ "Saradominist paint": {
+  "activity": {
+   "name": "High Priest of Entrana (Ardent Ocean charted)",
+   "kind": "npc",
+   "access": "sailing",
+   "wiki": "\"obtained in unlimited amounts from the High Priest on Entrana after having given him the holy sheet\""
+  }
+ },
+ "Medallion of the deep": {
+  "activity": {
+   "name": "Assemble the medallion fragments",
+   "kind": "minigame",
+   "access": "sailing",
+   "wiki": "\"created by assembling eight medallion fragments found on various islands accessed via the Sailing skill\""
+  }
+ },
+ "Mogre mace": {
+  "activity": {
+   "name": "Mogre bounty task (Sailing)",
+   "kind": "minigame",
+   "access": "sailing",
+   "npcs": [
+    "Mogre"
+   ],
+   "wiki": "\"commonly dropped by mogres when on a bounty task asking the player to kill them\""
+  }
+ },
+ "Mogre head": {
+  "activity": {
+   "name": "Mogre bounty task (Sailing)",
+   "kind": "minigame",
+   "access": "sailing",
+   "npcs": [
+    "Mogre"
+   ],
+   "wiki": "\"commonly dropped by mogres when on a bounty task asking the player to kill them\""
+  }
+ },
+ "Mime top": {
+  "activity": {
+   "name": "Mime",
+   "kind": "random_event",
+   "npcs": [
+    "Mysterious Old Man",
+    "Mime"
+   ],
+   "wiki": "\"Mime top is a reward from the Mime random event\""
+  }
+ },
+ "Camo top": {
+  "activity": {
+   "name": "Drill Demon",
+   "kind": "random_event",
+   "npcs": [
+    "Sergeant Damien"
+   ],
+   "wiki": "\"a possible reward from the Drill Demon random event\""
+  }
+ },
+ "Camo bottoms": {
+  "activity": {
+   "name": "Drill Demon",
+   "kind": "random_event",
+   "npcs": [
+    "Sergeant Damien"
+   ],
+   "wiki": "\"a possible reward from the Drill Demon random event\""
+  }
+ },
+ "Camo helmet": {
+  "activity": {
+   "name": "Drill Demon",
+   "kind": "random_event",
+   "npcs": [
+    "Sergeant Damien"
+   ],
+   "wiki": "\"a possible reward from the Drill Demon random event\""
+  }
+ },
+ "Zombie shirt": {
+  "activity": {
+   "name": "Gravedigger",
+   "kind": "random_event",
+   "npcs": [
+    "Leo"
+   ],
+   "wiki": "\"a possible reward from the Gravedigger random event\""
+  }
+ },
+ "Zombie trousers": {
+  "activity": {
+   "name": "Gravedigger",
+   "kind": "random_event",
+   "npcs": [
+    "Leo"
+   ],
+   "wiki": "\"a possible reward from the Gravedigger random event\""
+  }
+ },
+ "Zombie mask": {
+  "activity": {
+   "name": "Gravedigger",
+   "kind": "random_event",
+   "npcs": [
+    "Leo"
+   ],
+   "wiki": "\"a possible reward from the Gravedigger random event\""
+  }
+ },
+ "Zombie gloves": {
+  "activity": {
+   "name": "Gravedigger",
+   "kind": "random_event",
+   "npcs": [
+    "Leo"
+   ],
+   "wiki": "\"a possible reward from the Gravedigger random event\""
+  }
+ },
+ "Zombie boots": {
+  "activity": {
+   "name": "Gravedigger",
+   "kind": "random_event",
+   "npcs": [
+    "Leo"
+   ],
+   "wiki": "\"a possible reward from the Gravedigger random event\""
+  }
+ },
+ "Beekeeper's hat": {
+  "activity": {
+   "name": "Beekeeper",
+   "kind": "random_event",
+   "npcs": [
+    "Bee keeper"
+   ],
+   "wiki": "\"an item gained from the Beekeeper random event\""
+  }
+ },
+ "Beekeeper's top": {
+  "activity": {
+   "name": "Beekeeper",
+   "kind": "random_event",
+   "npcs": [
+    "Bee keeper"
+   ],
+   "wiki": "\"an item gained from the Beekeeper random event\""
+  }
+ },
+ "Beekeeper's legs": {
+  "activity": {
+   "name": "Beekeeper",
+   "kind": "random_event",
+   "npcs": [
+    "Bee keeper"
+   ],
+   "wiki": "\"an item gained from the Beekeeper random event\""
+  }
+ },
+ "Beekeeper's gloves": {
+  "activity": {
+   "name": "Beekeeper",
+   "kind": "random_event",
+   "npcs": [
+    "Bee keeper"
+   ],
+   "wiki": "\"an item gained from the Beekeeper random event\""
+  }
+ },
+ "Beekeeper's boots": {
+  "activity": {
+   "name": "Beekeeper",
+   "kind": "random_event",
+   "npcs": [
+    "Bee keeper"
+   ],
+   "wiki": "\"an item gained from the Beekeeper random event\""
+  }
+ },
+ "Frog token": {
+  "activity": {
+   "name": "Kiss the frog",
+   "kind": "random_event",
+   "npcs": [
+    "Frog"
+   ],
+   "wiki": "\"A Frog token is a reward from the Kiss the frog random event\""
+  }
+ },
+ "Heron": {
+  "activity": {
+   "name": "Fishing",
+   "kind": "pet",
+   "anyCards": [
+    "Small fishing net",
+    "Fishing rod",
+    "Fly fishing rod",
+    "Big fishing net",
+    "Harpoon",
+    "Lobster pot"
+   ],
+   "wiki": "\"a members-only skilling pet that can be obtained while training Fishing\""
+  }
+ },
+ "Rock golem": {
+  "activity": {
+   "name": "Mining",
+   "kind": "pet",
+   "anyCards": [
+    "Bronze pickaxe",
+    "Iron pickaxe",
+    "Steel pickaxe",
+    "Black pickaxe",
+    "Mithril pickaxe",
+    "Adamant pickaxe",
+    "Rune pickaxe",
+    "Dragon pickaxe",
+    "Crystal pickaxe"
+   ],
+   "wiki": "\"a members-only skilling pet that can be obtained while training Mining\""
+  }
+ },
+ "Beaver": {
+  "activity": {
+   "name": "Woodcutting",
+   "kind": "pet",
+   "anyCards": [
+    "Bronze axe",
+    "Iron axe",
+    "Steel axe",
+    "Black axe",
+    "Mithril axe",
+    "Adamant axe",
+    "Rune axe",
+    "Dragon axe",
+    "Crystal axe"
+   ],
+   "wiki": "\"a members-only skilling pet that can be obtained while training Woodcutting\""
+  }
+ },
+ "Giant squirrel": {
+  "activity": {
+   "name": "Agility",
+   "kind": "pet",
+   "wiki": "\"a skilling pet that can be obtained after completion of an Agility course\""
+  }
+ },
+ "Rift guardian": {
+  "activity": {
+   "name": "Runecraft",
+   "kind": "pet",
+   "anyCards": [
+    "Rune essence",
+    "Pure essence"
+   ],
+   "wiki": "\"a members-only skilling pet that can be obtained while training Runecraft\""
+  }
+ },
+ "Mr mcgroot": {
+  "activity": {
+   "name": "Goat hunting (Wyrmscraig)",
+   "kind": "pet",
+   "quests": [
+    "Sheep Herder"
+   ],
+   "levels": {
+    "Hunter": 60
+   },
+   "wiki": "\"a pet obtained from hunting goats on Wyrmscraig\""
+  }
+ },
+ "Guthix ornament kit": {
+  "clueTiers": [
+   "Beginner"
+  ]
+ },
+ "Saradomin ornament kit": {
+  "clueTiers": [
+   "Beginner"
+  ]
+ },
+ "Zamorak ornament kit": {
+  "clueTiers": [
+   "Beginner"
+  ]
+ },
+ "Charge dragonstone": {
+  "clueTiers": [
+   "Easy",
+   "Medium",
+   "Hard",
+   "Elite",
+   "Master"
+  ]
+ },
+ "Spined boots": {
+  "monsters": [
+   {
+    "card": "Dagannoth",
+    "rarity": "Uncommon",
+    "fraction": "2/128",
+    "note": "Waterbirth Island level 88"
+   }
+  ]
+ },
+ "Spined gloves": {
+  "monsters": [
+   {
+    "card": "Dagannoth",
+    "rarity": "Uncommon",
+    "fraction": "2/128",
+    "note": "Waterbirth Island level 88"
+   }
+  ]
+ },
+ "Stretched hide": {
+  "monsters": [
+   {
+    "card": "Dagannoth",
+    "rarity": "Uncommon",
+    "fraction": "2/128",
+    "note": "Waterbirth Island level 88"
+   }
+  ]
+ },
+ "Crystal grail": {
+  "activity": {
+   "name": "Powerful rabbit (Gwenith Hunter area cave)",
+   "kind": "minigame",
+   "quests": [
+    "Song of the Elves"
+   ],
+   "npcs": [
+    "Rabbit"
+   ],
+   "wiki": "\"obtained as a drop from killing the powerful rabbit ... requiring completion of Song of the Elves\""
+  }
+ },
+ "Blessed spirit shield": {
+  "activity": {
+   "name": "Holy elixir on a spirit shield",
+   "kind": "other",
+   "levels": {
+    "Prayer": 85
+   },
+   "cards": [
+    "Holy elixir",
+    "Spirit shield"
+   ],
+   "wiki": "\"players must use a holy elixir with a normal spirit shield, which requires 85 Prayer\""
+  }
+ },
+ "Christmas cracker": {
+  "activity": {
+   "name": "Christmas event (yearly, mid-December)",
+   "kind": "seasonal",
+   "note": "Only while the yearly Christmas event runs; ironmen cannot open crackers on other players",
+   "wiki": "\"obtained by completing one of the Christmas holiday events that occur once per year\""
+  }
+ },
+ "Red partyhat": {
+  "activity": {
+   "name": "Christmas event (yearly, mid-December)",
+   "kind": "seasonal",
+   "note": "Only while the yearly Christmas event runs; ironmen cannot open crackers on other players",
+   "wiki": "\"obtained by completing one of the Christmas holiday events that occur once per year\""
+  }
+ },
+ "Yellow partyhat": {
+  "activity": {
+   "name": "Christmas event (yearly, mid-December)",
+   "kind": "seasonal",
+   "note": "Only while the yearly Christmas event runs; ironmen cannot open crackers on other players",
+   "wiki": "\"obtained by completing one of the Christmas holiday events that occur once per year\""
+  }
+ },
+ "Blue partyhat": {
+  "activity": {
+   "name": "Christmas event (yearly, mid-December)",
+   "kind": "seasonal",
+   "note": "Only while the yearly Christmas event runs; ironmen cannot open crackers on other players",
+   "wiki": "\"obtained by completing one of the Christmas holiday events that occur once per year\""
+  }
+ },
+ "Purple partyhat": {
+  "activity": {
+   "name": "Christmas event (yearly, mid-December)",
+   "kind": "seasonal",
+   "note": "Only while the yearly Christmas event runs; ironmen cannot open crackers on other players",
+   "wiki": "\"obtained by completing one of the Christmas holiday events that occur once per year\""
+  }
+ },
+ "White partyhat": {
+  "activity": {
+   "name": "Christmas event (yearly, mid-December)",
+   "kind": "seasonal",
+   "note": "Only while the yearly Christmas event runs; ironmen cannot open crackers on other players",
+   "wiki": "\"obtained by completing one of the Christmas holiday events that occur once per year\""
+  }
+ },
+ "Santa hat": {
+  "activity": {
+   "name": "Christmas event (yearly, mid-December)",
+   "kind": "seasonal",
+   "note": "Only while the yearly Christmas event runs; ironmen cannot open crackers on other players",
+   "wiki": "\"obtained by completing one of the Christmas holiday events that occur once per year\""
+  }
+ },
+ "Green halloween mask": {
+  "activity": {
+   "name": "Halloween event (yearly, late October)",
+   "kind": "seasonal",
+   "note": "Only while the yearly Halloween event runs",
+   "wiki": "\"can be obtained by completing one of the Halloween holiday events that occur once per year\""
+  }
+ },
+ "Blue halloween mask": {
+  "activity": {
+   "name": "Halloween event (yearly, late October)",
+   "kind": "seasonal",
+   "note": "Only while the yearly Halloween event runs",
+   "wiki": "\"can be obtained by completing one of the Halloween holiday events that occur once per year\""
+  }
+ },
+ "Red halloween mask": {
+  "activity": {
+   "name": "Halloween event (yearly, late October)",
+   "kind": "seasonal",
+   "note": "Only while the yearly Halloween event runs",
+   "wiki": "\"can be obtained by completing one of the Halloween holiday events that occur once per year\""
+  }
+ },
+ "Half full wine jug": {
+  "activity": {
+   "name": "Birthday event (yearly, February)",
+   "kind": "seasonal",
+   "note": "Only while the yearly birthday event runs",
+   "wiki": "\"Half full wine jugs were then given out as birthday event rewards from 2020 onwards\""
+  }
+ },
+ "Arceuus icon": {
+  "unobtainable": true,
+  "unobtainableReason": "An interface icon (skill guide), not an item that exists in game"
+ },
+ "Manta ray fin": {
+  "unobtainable": true,
+  "unobtainableReason": "Only drops on a Sailing bounty task for it, and no such task exists (\"impossible to receive as a drop\")"
+ },
+ "Fortis ash white": {
+  "unobtainable": true,
+  "unobtainableReason": "Formerly sold at Moonrise Wines on Aldarin, no longer produced (vine rot); the wiki knows no way to get a bottle"
+ },
+ "Xochipaltic rosé": {
+  "unobtainable": true,
+  "unobtainableReason": "Formerly sold at Moonrise Wines on Aldarin, no longer produced (vine rot); the wiki knows no way to get a bottle"
  }
 }
