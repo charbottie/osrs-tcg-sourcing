@@ -20,8 +20,11 @@ Rules (in application order):
   - Boss trophies (head/trophy items with combat stats + Construction): Construction first
   - General: F2P never first (move to end)
 
+Input/output: scripts/output/card_categories.json ({card name: [tags]}), rewritten in place.
+The first tag is the card's primary category. Rules are idempotent, so re-running is safe.
+
 Usage:
-  python3 scripts/reorder_categories.py [--dry-run]
+  python3 scripts/reorder_categories.py [--dry-run]   # --dry-run: print before/after, write nothing
 """
 
 from __future__ import annotations
@@ -77,6 +80,7 @@ _NON_WC_AXES = {"soulreaper axe", "zombie axe"}
 
 
 def apply_rules(name: str, tags: list[str]) -> list[str]:  # noqa: C901
+    """Return the reordered tag list for one card. The first matching rule below wins (order matters)."""
     if not tags:
         return tags
 
@@ -229,6 +233,7 @@ def apply_rules(name: str, tags: list[str]) -> list[str]:  # noqa: C901
 
 
 def main() -> None:
+    """Apply apply_rules() to every card in JSON_PATH and write it back (unless --dry-run)."""
     ap = argparse.ArgumentParser(description=__doc__,
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--dry-run", action="store_true",

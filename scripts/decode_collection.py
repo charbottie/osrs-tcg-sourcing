@@ -12,6 +12,20 @@ Also writes scripts/output/all_collections.json with every RS profile that has
 TCG data, keyed by displayName — so the preview tool can switch accounts
 client-side without rerunning this script.
 
+Cloud-managed (v1.0+) accounts: when OSRS-TCG/profiles/<hash>/cloud-session.json exists, the
+live card list and pull timestamps are fetched from api.osrs-tcg.net with the stored token
+(cached in scripts/cache/cloud_cards_<hash>.json for 30 s, and reused while rate-limited).
+Card names are normalised through research/card-catalog-live.json (see _identity_names).
+
+Outputs:
+  --out (default scripts/output/my_collection.json)
+      {cardCount, ownedCards: [...], cardTimestamps?, cardFirstTimestamps?}
+  scripts/output/all_collections.json
+      {profiles: {displayName: {cardCount, ownedCards, credits, updatedAt, cardTimestamps?, ...}},
+       updatedAt}
+
+Run by server.py's /api/collection/refresh and /api/accounts/list.
+
 Usage:
   python scripts/decode_collection.py
   python scripts/decode_collection.py --player lottie_tcg
@@ -99,6 +113,7 @@ def normalize_profile(d: dict) -> dict:
 
 
 def xor_with_salt(data: bytes) -> bytes:
+    """XOR *data* with the repeating XOR_SALT (the v2 obfuscation step; self-inverse)."""
     return bytes(b ^ XOR_SALT[i % len(XOR_SALT)] for i, b in enumerate(data))
 
 
@@ -171,6 +186,7 @@ def find_best_backup(backups_dir: pathlib.Path) -> tuple[pathlib.Path, dict] | N
     best_state = None
 
     def _consider(f: pathlib.Path) -> None:
+        """Keep *f* as the best candidate if it is newer than the current best and decodes with cards."""
         nonlocal best_path, best_mtime, best_state
         mtime = f.stat().st_mtime
         if mtime <= best_mtime:
@@ -303,6 +319,7 @@ def _fetch_cloud_cards(account_dir: pathlib.Path) -> tuple[list[str], int, dict[
 
 
 def _cloud_result(all_cards: list[dict]):
+    """Summarise cloud card instances: (sorted names, instance count, last pulledAt, first pulledAt)."""
     names = sorted({c["cardName"] for c in all_cards if "cardName" in c})
 
     # Per-card first/last pulledAt (ms epoch) across all instances.
@@ -509,6 +526,12 @@ def find_per_profile_collections(profiles_dir: pathlib.Path) -> dict[str, dict]:
 
 
 def main() -> int:
+    """Write all_collections.json, then --out for --player (or the best single source). Returns exit code.
+
+    Without --player (or if it isn't found) --out comes from the legacy path: the newest
+    OSRS-TCG save file vs. the largest single profiles2 .properties blob, whichever has more
+    cards. Profiles are never merged; pass --player to pick a specific account.
+    """
     p = argparse.ArgumentParser(description=__doc__,
                                 formatter_class=argparse.RawDescriptionHelpFormatter)
     p.add_argument("--out", default="scripts/output/my_collection.json",
@@ -580,7 +603,8 @@ def main() -> int:
         print(f"\nOSRS-TCG backup  ({mt}): {unique} unique, {instance_count - unique} dupes/foils, {credits:,} credits")
         backup_names.update(names)
 
-    # Decode profiles2
+    # Decode profiles2: keep the single profile with the most cards (a union would merge
+    # every account's cards into one collection)
     profile_names: set[str] = set()
     for source, blob, mtime in profile_blobs:
         try:
@@ -590,7 +614,8 @@ def main() -> int:
             unique = len(names)
             mt = datetime.datetime.fromtimestamp(mtime).strftime("%H:%M:%S")
             print(f"RuneLite profile ({mt}): {unique} unique, {instance_count - unique} dupes/foils, {credits:,} credits")
-            profile_names.update(names)
+            if len(set(names)) > len(profile_names):
+                profile_names = set(names)
         except Exception as e:
             print(f"  {source}: FAILED — {e}")
 

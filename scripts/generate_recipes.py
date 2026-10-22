@@ -11,14 +11,18 @@ Output: scripts/output/recipes.json   (list)
   {output, outputQuantity, skill, level, xp, ingredients: [{item, quantity}], tools: [..],
    facilities, members, levels: {other skill: level}, quests: [..], access?, page,
    internal?: "<minigame / quest>",   # only made inside that minigame/quest: not normal training
-   noXp?: true}                       # a 0-xp step (Pie shell, Uncooked egg…), kept only so the
+   noXp?: true,                       # a 0-xp step (Pie shell, Uncooked egg…), kept only so the
                                       # planner can tell that an ingredient can be made
+   oneOff?: "first time only" | "boat upgrade" | "one-time camp build"}   # no repeatable xp
 
 "internal" (see tag_internal): a facility named "X (minigame)" (Singing Bowl (The Gauntlet)…), a
 minigame/quest-only facility (FACILITY_INTERNAL), a quest item (wiki infobox "quest = …", no TCG
 card) made from something with no source outside that quest (M'speak amulet ← Enchanted bar), and
 anything made from an item that only internal recipes make (Corrupted body (perfected) ← (attuned)).
 Item quest data: the wiki's infobox_item Bucket, cached in cache/wiki_item_quests.json.
+
+Also reads output/item_sources.json, ingredient_info.json, output/card_aliases.json and
+output/quests.json. No CLI flags; delete the cache files to refetch from the wiki.
 
 Usage:
   python3 scripts/generate_recipes.py
@@ -80,6 +84,7 @@ ITEM_INTERNAL_RE = [(re.compile(r"^Raw \w+ (fish|bat) \(\d\)$"), "Chambers of Xe
 
 
 def _item_internal(n: str) -> str | None:
+    """The minigame an item exists only inside (ITEM_INTERNAL / ITEM_INTERNAL_RE), or None."""
     return ITEM_INTERNAL.get(n) or next((v for pat, v in ITEM_INTERNAL_RE if pat.search(n)), None)
 MINIGAMES = set(MINIGAME_GATES) | {"Mastering Mixology", "Guardians of the Rift", "Chambers of Xeric"}
 # Construction facilities that aren't in a player-owned house
@@ -88,6 +93,9 @@ NON_POH = {"Boat schematics": "sailing", "Shipwrights' Workbench": None, "Shipwr
 
 
 def fetch() -> list[dict]:
+    """All rows of the wiki "recipe" Bucket ({page_name, production_json}), from _CACHE if present.
+
+    Pages through the Bucket 500 rows at a time and caches the full list."""
     if _CACHE.exists():
         return json.loads(_CACHE.read_text(encoding="utf-8"))
     out, off = [], 0
@@ -106,12 +114,14 @@ def fetch() -> list[dict]:
 
 
 def _plain(s) -> str:
+    """Wikitext/HTML to plain text: drop tags and [[File:…]] links, keep a link's label."""
     s = re.sub(r"<[^>]+>", "", str(s or ""))
     s = re.sub(r"\[\[File:[^\]]*\]\]", "", s)
     return re.sub(r"\[\[(?:[^\]|]*\|)?([^\]]*)\]\]", r"\1", s).strip()
 
 
 def _num(x):
+    """float(x) with thousands commas removed, or None if it isn't a number."""
     try:
         return float(str(x).replace(",", ""))
     except ValueError:
@@ -205,6 +215,7 @@ def tag_internal(recipes: list[dict], is_card, has_data, item_quest: dict[str, s
     # Quest items made from something with no source outside the quest, and anything made from an
     # item only internal recipes make — to a fixpoint
     def ok_item(n, sourced):
+        """True if n is a card, has central source data, or is in the given set of makeable items."""
         return is_card(n) or has_data(n) or n in sourced
     while True:
         sourced = {m["output"] for m in recipes if not m.get("internal")}
@@ -242,6 +253,10 @@ def tag_internal(recipes: list[dict], is_card, has_data, item_quest: dict[str, s
 
 
 def _row(p: dict, r: dict, s: dict | None, skill: str | None, xp: float, known) -> dict:
+    """One recipes.json entry from a parsed production_json `p` (its Bucket row `r`).
+
+    `s` is the skill entry the xp is for (None for a 0-xp step: level 1); every other skill above
+    level 1 goes into "levels". `known` is {(output, skill): quests} from the hand-checked data."""
     o = p.get("output")
     o = o[0] if isinstance(o, list) and o else o
     name = o["name"]
@@ -260,6 +275,8 @@ def _row(p: dict, r: dict, s: dict | None, skill: str | None, xp: float, known) 
 
 
 def main() -> int:
+    """Build recipes.json: one entry per (output, xp skill, ingredients, facility), plus the 0-xp steps
+    that make a needed non-card ingredient; then merge alternatives and tag internal recipes. Returns 0."""
     rows = fetch()
     known = {}
     data_names = set()
@@ -285,6 +302,7 @@ def main() -> int:
         skills = p.get("skills") or []
         any_xp = False
         for s in skills:
+            # the Bucket sometimes spells it "cooking"
             sk = s.get("name", "").capitalize() if s.get("name", "").lower() == "cooking" else s.get("name", "")
             xp = _num(s.get("experience") or 0)
             if xp and xp > 0:
@@ -322,6 +340,7 @@ def main() -> int:
                 else:
                     m["access"] = "house"  # built in a player-owned house (no facility, or a "… space" hotspot)
             out.append(m)
+        # no skill gives xp, and no experience value is a non-zero string either (formula xp is excluded)
         if not any_xp and not any(_num(s.get("experience") or 0) for s in skills) and not str(
                 next((s.get("experience") for s in skills if s.get("experience")), "")).strip("0"):
             # a 0-xp step: its skill is the first one listed (level gate), if any
@@ -330,6 +349,7 @@ def main() -> int:
             if sk and sk.lower() == "cooking":
                 sk = "Cooking"
             zero.append({**_row(p, r, s, sk, 0, known), "noXp": True})
+    out = merge_alternatives(out)     # first, so the "alts" line below sees the merged recipes
     # Keep only the 0-xp steps that make a non-card ingredient of some recipe (recursively)
     need = {i["item"] for m in out for i in m["ingredients"] for i_ in [i] for _ in [0]}
     need |= {a for m in out for i in m["ingredients"] for a in i.get("alts") or []}
@@ -344,7 +364,6 @@ def main() -> int:
                 keep.append(z)
                 nxt |= {i["item"] for i in z["ingredients"] if not is_card(i["item"]) and not has_data(i["item"])}
         need = nxt - {z["output"] for z in keep}
-    out = merge_alternatives(out)
     quests = set(json.loads((_HERE / "output" / "quests.json").read_text(encoding="utf-8")))
     why = tag_internal(out + keep, is_card, has_data, fetch_item_quests(), quests)
     out.sort(key=lambda m: (m["skill"], m["level"], m["output"]))

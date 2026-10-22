@@ -145,14 +145,8 @@
       "outputQuantity": 4
     },
     "spawns": [],
-    "shopBought": true,
-    "shops": [
-      {
-        "seller": "Port Roberts Cannonball Stall",
-        "price": 12,
-        "currency": "Coins"
-      }
-    ],
+    "shopBought": false,
+    "shops": [],
     "clueTiers": [],
     "alwaysAvailable": false
   },
@@ -1603,31 +1597,6 @@
         "seller": "Port Roberts General Store",
         "price": 2,
         "currency": "Coins"
-      },
-      {
-        "seller": "Aemad's Adventuring Supplies.",
-        "price": 2,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Razmire General Store.",
-        "price": 2,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Little Shop of Horace",
-        "price": 2,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Regath's Wares",
-        "price": 2,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Dom Onion's Reward Shop",
-        "price": 145,
-        "currency": "Nightmare Zone points"
       }
     ],
     "clueTiers": [],
@@ -16595,52 +16564,12 @@
     "shopBought": true,
     "shops": [
       {
-        "seller": "Gerrant's Fishy Business.",
-        "price": 5,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Harry's Fishing Shop.",
-        "price": 5,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Fremennik Fish Monger",
-        "price": 6,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Island Fishmonger",
-        "price": 6,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Etceteria Fish",
-        "price": 6,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Lovecraft's Tackle",
-        "price": 5,
-        "currency": "Coins"
-      },
-      {
         "seller": "Two Feet Charley's Fish Shop.",
         "price": 5,
         "currency": "Coins"
       },
       {
         "seller": "Frankie's Fishing Emporium",
-        "price": 5,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Warrens Fish Monger",
-        "price": 6,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Ishmael's Fish He Sells",
         "price": 5,
         "currency": "Coins"
       },
@@ -16722,52 +16651,12 @@
     "shopBought": true,
     "shops": [
       {
-        "seller": "Gerrant's Fishy Business.",
-        "price": 15,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Harry's Fishing Shop.",
-        "price": 15,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Fremennik Fish Monger",
-        "price": 19,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Island Fishmonger",
-        "price": 19,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Etceteria Fish",
-        "price": 19,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Lovecraft's Tackle",
-        "price": 15,
-        "currency": "Coins"
-      },
-      {
         "seller": "Two Feet Charley's Fish Shop.",
         "price": 15,
         "currency": "Coins"
       },
       {
         "seller": "Frankie's Fishing Emporium",
-        "price": 15,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Warrens Fish Monger",
-        "price": 19,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Ishmael's Fish He Sells",
         "price": 15,
         "currency": "Coins"
       },
@@ -16872,11 +16761,6 @@
     "shops": [
       {
         "seller": "Gerrant's Fishy Business.",
-        "price": 10,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Harry's Fishing Shop.",
         "price": 10,
         "currency": "Coins"
       },
@@ -17026,58 +16910,13 @@
     "shopBought": true,
     "shops": [
       {
-        "seller": "Gerrant's Fishy Business.",
-        "price": 30,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Fernahei's Fishing Hut.",
-        "price": 30,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Fernahei's Fishing Hut.(Karamja gloves)",
-        "price": 30,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Fremennik Fish Monger",
-        "price": 39,
-        "currency": "Coins"
-      },
-      {
         "seller": "Flosi's Fishmongers",
         "price": 33,
         "currency": "Coins"
       },
       {
-        "seller": "Island Fishmonger",
-        "price": 39,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Etceteria Fish",
-        "price": 39,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Lovecraft's Tackle",
-        "price": 30,
-        "currency": "Coins"
-      },
-      {
         "seller": "Rufus' Meat Emporium",
         "price": 39,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Warrens Fish Monger",
-        "price": 39,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Ishmael's Fish He Sells",
-        "price": 30,
         "currency": "Coins"
       },
       {
@@ -17160,53 +16999,8 @@
     "shopBought": true,
     "shops": [
       {
-        "seller": "Gerrant's Fishy Business.",
-        "price": 10,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Fernahei's Fishing Hut.",
-        "price": 10,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Fernahei's Fishing Hut.(Karamja gloves)",
-        "price": 10,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Fremennik Fish Monger",
-        "price": 13,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Island Fishmonger",
-        "price": 13,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Etceteria Fish",
-        "price": 13,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Lovecraft's Tackle",
-        "price": 10,
-        "currency": "Coins"
-      },
-      {
         "seller": "Rufus' Meat Emporium",
         "price": 13,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Warrens Fish Monger",
-        "price": 13,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Ishmael's Fish He Sells",
-        "price": 10,
         "currency": "Coins"
       },
       {
@@ -17257,11 +17051,6 @@
         "currency": "Coins"
       },
       {
-        "seller": "Fishing Guild Shop.",
-        "price": 10,
-        "currency": "Coins"
-      },
-      {
         "seller": "Prifddinas Foodstuffs",
         "price": 10,
         "currency": "Coins"
@@ -17286,28 +17075,8 @@
     "shopBought": true,
     "shops": [
       {
-        "seller": "Harry's Fishing Shop.",
-        "price": 10,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Fremennik Fish Monger",
-        "price": 13,
-        "currency": "Coins"
-      },
-      {
         "seller": "Flosi's Fishmongers",
         "price": 11,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Island Fishmonger",
-        "price": 13,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Etceteria Fish",
-        "price": 13,
         "currency": "Coins"
       },
       {
@@ -17316,18 +17085,8 @@
         "currency": "Coins"
       },
       {
-        "seller": "Fishing Guild Shop.",
-        "price": 10,
-        "currency": "Coins"
-      },
-      {
         "seller": "Frankie's Fishing Emporium",
         "price": 10,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Warrens Fish Monger",
-        "price": 13,
         "currency": "Coins"
       },
       {
@@ -17413,52 +17172,12 @@
     "shopBought": true,
     "shops": [
       {
-        "seller": "Gerrant's Fishy Business.",
-        "price": 10,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Harry's Fishing Shop.",
-        "price": 10,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Fremennik Fish Monger",
-        "price": 13,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Island Fishmonger",
-        "price": 13,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Etceteria Fish",
-        "price": 13,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Lovecraft's Tackle",
-        "price": 10,
-        "currency": "Coins"
-      },
-      {
         "seller": "Two Feet Charley's Fish Shop.",
         "price": 10,
         "currency": "Coins"
       },
       {
         "seller": "Frankie's Fishing Emporium",
-        "price": 10,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Warrens Fish Monger",
-        "price": 13,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Ishmael's Fish He Sells",
         "price": 10,
         "currency": "Coins"
       },
@@ -17559,53 +17278,8 @@
     "shopBought": true,
     "shops": [
       {
-        "seller": "Gerrant's Fishy Business.",
-        "price": 20,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Fernahei's Fishing Hut.",
-        "price": 20,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Fernahei's Fishing Hut.(Karamja gloves)",
-        "price": 20,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Fremennik Fish Monger",
-        "price": 26,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Island Fishmonger",
-        "price": 26,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Etceteria Fish",
-        "price": 26,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Lovecraft's Tackle",
-        "price": 20,
-        "currency": "Coins"
-      },
-      {
         "seller": "Rufus' Meat Emporium",
         "price": 26,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Warrens Fish Monger",
-        "price": 26,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Ishmael's Fish He Sells",
-        "price": 20,
         "currency": "Coins"
       },
       {
@@ -17700,43 +17374,13 @@
         "currency": "Coins"
       },
       {
-        "seller": "Harry's Fishing Shop.",
-        "price": 15,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Fremennik Fish Monger",
-        "price": 19,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Island Fishmonger",
-        "price": 19,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Etceteria Fish",
-        "price": 19,
-        "currency": "Coins"
-      },
-      {
         "seller": "Two Feet Charley's Fish Shop.",
-        "price": 15,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Fishing Guild Shop.",
         "price": 15,
         "currency": "Coins"
       },
       {
         "seller": "Frankie's Fishing Emporium",
         "price": 15,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Warrens Fish Monger",
-        "price": 19,
         "currency": "Coins"
       },
       {
@@ -17795,14 +17439,8 @@
       "outputQuantity": 1
     },
     "spawns": [],
-    "shopBought": true,
-    "shops": [
-      {
-        "seller": "Fishing Guild Shop.",
-        "price": 15,
-        "currency": "Coins"
-      }
-    ],
+    "shopBought": false,
+    "shops": [],
     "clueTiers": [],
     "alwaysAvailable": false
   },
@@ -17890,38 +17528,8 @@
     "shopBought": true,
     "shops": [
       {
-        "seller": "Gerrant's Fishy Business.",
-        "price": 40,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Harry's Fishing Shop.",
-        "price": 40,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Fremennik Fish Monger",
-        "price": 52,
-        "currency": "Coins"
-      },
-      {
         "seller": "Flosi's Fishmongers",
         "price": 44,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Island Fishmonger",
-        "price": 52,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Etceteria Fish",
-        "price": 52,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Lovecraft's Tackle",
-        "price": 40,
         "currency": "Coins"
       },
       {
@@ -17930,22 +17538,7 @@
         "currency": "Coins"
       },
       {
-        "seller": "Fishing Guild Shop.",
-        "price": 40,
-        "currency": "Coins"
-      },
-      {
         "seller": "Frankie's Fishing Emporium",
-        "price": 40,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Warrens Fish Monger",
-        "price": 52,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Ishmael's Fish He Sells",
         "price": 40,
         "currency": "Coins"
       },
@@ -18051,11 +17644,6 @@
         "seller": "Keepa Kettilon's store",
         "price": 44,
         "currency": "Coins"
-      },
-      {
-        "seller": "Fishing Guild Shop.",
-        "price": 40,
-        "currency": "Coins"
       }
     ],
     "clueTiers": [],
@@ -18118,43 +17706,13 @@
     "shopBought": true,
     "shops": [
       {
-        "seller": "Harry's Fishing Shop.",
-        "price": 40,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Fremennik Fish Monger",
-        "price": 52,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Island Fishmonger",
-        "price": 52,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Etceteria Fish",
-        "price": 52,
-        "currency": "Coins"
-      },
-      {
         "seller": "Two Feet Charley's Fish Shop.",
-        "price": 40,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Fishing Guild Shop.",
         "price": 40,
         "currency": "Coins"
       },
       {
         "seller": "Frankie's Fishing Emporium",
         "price": 40,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Warrens Fish Monger",
-        "price": 52,
         "currency": "Coins"
       },
       {
@@ -18311,11 +17869,6 @@
         "currency": "Coins"
       },
       {
-        "seller": "Fishing Guild Shop.",
-        "price": 40,
-        "currency": "Coins"
-      },
-      {
         "seller": "Prifddinas Foodstuffs",
         "price": 40,
         "currency": "Coins"
@@ -18386,57 +17939,12 @@
     "shopBought": true,
     "shops": [
       {
-        "seller": "Gerrant's Fishy Business.",
-        "price": 80,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Harry's Fishing Shop.",
-        "price": 80,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Fremennik Fish Monger",
-        "price": 104,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Island Fishmonger",
-        "price": 104,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Etceteria Fish",
-        "price": 104,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Lovecraft's Tackle",
-        "price": 80,
-        "currency": "Coins"
-      },
-      {
         "seller": "Two Feet Charley's Fish Shop.",
         "price": 80,
         "currency": "Coins"
       },
       {
-        "seller": "Fishing Guild Shop.",
-        "price": 80,
-        "currency": "Coins"
-      },
-      {
         "seller": "Frankie's Fishing Emporium",
-        "price": 80,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Warrens Fish Monger",
-        "price": 104,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Ishmael's Fish He Sells",
         "price": 80,
         "currency": "Coins"
       },
@@ -18564,18 +18072,8 @@
         "currency": "Coins"
       },
       {
-        "seller": "Keepa Kettilon's store",
-        "price": 88,
-        "currency": "Coins"
-      },
-      {
         "seller": "Legends Guild General Store.",
         "price": 124,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Fishing Guild Shop.",
-        "price": 80,
         "currency": "Coins"
       }
     ],
@@ -18686,38 +18184,8 @@
     "shopBought": true,
     "shops": [
       {
-        "seller": "Gerrant's Fishy Business.",
-        "price": 70,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Harry's Fishing Shop.",
-        "price": 70,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Fremennik Fish Monger",
-        "price": 91,
-        "currency": "Coins"
-      },
-      {
         "seller": "Flosi's Fishmongers",
         "price": 77,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Island Fishmonger",
-        "price": 91,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Etceteria Fish",
-        "price": 91,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Lovecraft's Tackle",
-        "price": 70,
         "currency": "Coins"
       },
       {
@@ -18726,22 +18194,7 @@
         "currency": "Coins"
       },
       {
-        "seller": "Fishing Guild Shop.",
-        "price": 70,
-        "currency": "Coins"
-      },
-      {
         "seller": "Frankie's Fishing Emporium",
-        "price": 70,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Warrens Fish Monger",
-        "price": 91,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Ishmael's Fish He Sells",
         "price": 70,
         "currency": "Coins"
       },
@@ -18952,11 +18405,6 @@
         "seller": "Lletya Food Store",
         "price": 91,
         "currency": "Coins"
-      },
-      {
-        "seller": "Fishing Guild Shop.",
-        "price": 70,
-        "currency": "Coins"
       }
     ],
     "clueTiers": [
@@ -19112,31 +18560,6 @@
     "shopBought": true,
     "shops": [
       {
-        "seller": "Harry's Fishing Shop.",
-        "price": 170,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Fremennik Fish Monger",
-        "price": 221,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Flosi's Fishmongers",
-        "price": 187,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Island Fishmonger",
-        "price": 221,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Etceteria Fish",
-        "price": 221,
-        "currency": "Coins"
-      },
-      {
         "seller": "Rufus' Meat Emporium",
         "price": 221,
         "currency": "Coins"
@@ -19150,16 +18573,6 @@
         "seller": "Kylie Minnow",
         "price": 40,
         "currency": "Minnow"
-      },
-      {
-        "seller": "Warrens Fish Monger",
-        "price": 221,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Port Roberts Fish Stall",
-        "price": 170,
-        "currency": "Coins"
       }
     ],
     "clueTiers": [],
@@ -19414,11 +18827,6 @@
     "spawns": [],
     "shopBought": true,
     "shops": [
-      {
-        "seller": "Keepa Kettilon's store",
-        "price": 187,
-        "currency": "Coins"
-      },
       {
         "seller": "Chest (Theatre of Blood)",
         "price": 1,
@@ -20534,11 +19942,6 @@
         "currency": "Tokkul"
       },
       {
-        "seller": "Drogo's Mining Emporium.",
-        "price": 3,
-        "currency": "Coins"
-      },
-      {
         "seller": "Ore store",
         "price": 3,
         "currency": "Coins"
@@ -20557,16 +19960,6 @@
         "seller": "TzHaar-Hur-Rin's Ore and Gem Store(Karamja gloves)",
         "price": 3,
         "currency": "Tokkul"
-      },
-      {
-        "seller": "Hendor's Awesome Ores",
-        "price": 3,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Mistrock Mining Supplies",
-        "price": 3,
-        "currency": "Coins"
       },
       {
         "seller": "Port Roberts Ore Stall",
@@ -20780,11 +20173,6 @@
         "currency": "Tokkul"
       },
       {
-        "seller": "Drogo's Mining Emporium.",
-        "price": 3,
-        "currency": "Coins"
-      },
-      {
         "seller": "Ore store",
         "price": 3,
         "currency": "Coins"
@@ -20803,16 +20191,6 @@
         "seller": "TzHaar-Hur-Rin's Ore and Gem Store(Karamja gloves)",
         "price": 3,
         "currency": "Tokkul"
-      },
-      {
-        "seller": "Hendor's Awesome Ores",
-        "price": 3,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Mistrock Mining Supplies",
-        "price": 3,
-        "currency": "Coins"
       },
       {
         "seller": "Port Roberts Ore Stall",
@@ -21215,11 +20593,6 @@
         "currency": "Tokkul"
       },
       {
-        "seller": "Drogo's Mining Emporium.",
-        "price": 17,
-        "currency": "Coins"
-      },
-      {
         "seller": "Ore store",
         "price": 18,
         "currency": "Coins"
@@ -21240,19 +20613,9 @@
         "currency": "Tokkul"
       },
       {
-        "seller": "Hendor's Awesome Ores",
-        "price": 17,
-        "currency": "Coins"
-      },
-      {
         "seller": "Petrified Pete's Ore Shop",
         "price": 30,
         "currency": "Volcanic Mine points"
-      },
-      {
-        "seller": "Mistrock Mining Supplies",
-        "price": 17,
-        "currency": "Coins"
       },
       {
         "seller": "Port Roberts Ore Stall",
@@ -21681,16 +21044,6 @@
     "shopBought": true,
     "shops": [
       {
-        "seller": "TzHaar-Hur-Lek's Ore and Gem Store",
-        "price": 112,
-        "currency": "Tokkul"
-      },
-      {
-        "seller": "TzHaar-Hur-Lek's Ore and Gem Store(Karamja gloves)",
-        "price": 97,
-        "currency": "Tokkul"
-      },
-      {
         "seller": "Ardougne Silver Stall.",
         "price": 75,
         "currency": "Coins"
@@ -21727,11 +21080,6 @@
       },
       {
         "seller": "Prifddinas Silver Stall",
-        "price": 75,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Mistrock Mining Supplies",
         "price": 75,
         "currency": "Coins"
       },
@@ -22037,16 +21385,6 @@
     "shopBought": true,
     "shops": [
       {
-        "seller": "TzHaar-Hur-Lek's Ore and Gem Store",
-        "price": 225,
-        "currency": "Tokkul"
-      },
-      {
-        "seller": "TzHaar-Hur-Lek's Ore and Gem Store(Karamja gloves)",
-        "price": 195,
-        "currency": "Tokkul"
-      },
-      {
         "seller": "Ore store",
         "price": 165,
         "currency": "Coins"
@@ -22070,11 +21408,6 @@
         "seller": "Petrified Pete's Ore Shop",
         "price": 150,
         "currency": "Volcanic Mine points"
-      },
-      {
-        "seller": "Mistrock Mining Supplies",
-        "price": 150,
-        "currency": "Coins"
       },
       {
         "seller": "Port Roberts Ore Stall",
@@ -22237,21 +21570,6 @@
     "shopBought": true,
     "shops": [
       {
-        "seller": "TzHaar-Hur-Lek's Ore and Gem Store",
-        "price": 243,
-        "currency": "Tokkul"
-      },
-      {
-        "seller": "TzHaar-Hur-Lek's Ore and Gem Store(Karamja gloves)",
-        "price": 210,
-        "currency": "Tokkul"
-      },
-      {
-        "seller": "Ore store",
-        "price": 178,
-        "currency": "Coins"
-      },
-      {
         "seller": "Ore seller.",
         "price": 243,
         "currency": "Coins"
@@ -22267,24 +21585,9 @@
         "currency": "Tokkul"
       },
       {
-        "seller": "Hendor's Awesome Ores",
-        "price": 162,
-        "currency": "Coins"
-      },
-      {
         "seller": "Petrified Pete's Ore Shop",
         "price": 150,
         "currency": "Volcanic Mine points"
-      },
-      {
-        "seller": "Mistrock Mining Supplies",
-        "price": 162,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Port Roberts Ore Stall",
-        "price": 178,
-        "currency": "Coins"
       },
       {
         "seller": "Deepfin Point Ore Exchange",
@@ -22562,21 +21865,6 @@
     "shopBought": true,
     "shops": [
       {
-        "seller": "TzHaar-Hur-Lek's Ore and Gem Store",
-        "price": 600,
-        "currency": "Tokkul"
-      },
-      {
-        "seller": "TzHaar-Hur-Lek's Ore and Gem Store(Karamja gloves)",
-        "price": 520,
-        "currency": "Tokkul"
-      },
-      {
-        "seller": "Ore store",
-        "price": 440,
-        "currency": "Coins"
-      },
-      {
         "seller": "TzHaar-Hur-Rin's Ore and Gem Store",
         "price": 600,
         "currency": "Tokkul"
@@ -22587,29 +21875,9 @@
         "currency": "Tokkul"
       },
       {
-        "seller": "Hendor's Awesome Ores",
-        "price": 400,
-        "currency": "Coins"
-      },
-      {
         "seller": "Petrified Pete's Ore Shop",
         "price": 300,
         "currency": "Volcanic Mine points"
-      },
-      {
-        "seller": "Mistrock Mining Supplies",
-        "price": 400,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Port Roberts Ore Stall",
-        "price": 440,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Deepfin Point Ore Exchange",
-        "price": 440,
-        "currency": "Coins"
       }
     ],
     "clueTiers": [],
@@ -22882,16 +22150,6 @@
     "shopBought": true,
     "shops": [
       {
-        "seller": "TzHaar-Hur-Lek's Ore and Gem Store",
-        "price": 4800,
-        "currency": "Tokkul"
-      },
-      {
-        "seller": "TzHaar-Hur-Lek's Ore and Gem Store(Karamja gloves)",
-        "price": 4160,
-        "currency": "Tokkul"
-      },
-      {
         "seller": "TzHaar-Hur-Rin's Ore and Gem Store",
         "price": 4800,
         "currency": "Tokkul"
@@ -22902,29 +22160,9 @@
         "currency": "Tokkul"
       },
       {
-        "seller": "Hendor's Awesome Ores",
-        "price": 3200,
-        "currency": "Coins"
-      },
-      {
         "seller": "Petrified Pete's Ore Shop",
         "price": 855,
         "currency": "Volcanic Mine points"
-      },
-      {
-        "seller": "Mistrock Mining Supplies",
-        "price": 3200,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Port Roberts Ore Stall",
-        "price": 3520,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Deepfin Point Ore Exchange",
-        "price": 3520,
-        "currency": "Coins"
       }
     ],
     "clueTiers": [
@@ -23499,21 +22737,6 @@
     "shopBought": true,
     "shops": [
       {
-        "seller": "TzHaar-Hur-Lek's Ore and Gem Store",
-        "price": 67,
-        "currency": "Tokkul"
-      },
-      {
-        "seller": "TzHaar-Hur-Lek's Ore and Gem Store(Karamja gloves)",
-        "price": 58,
-        "currency": "Tokkul"
-      },
-      {
-        "seller": "Drogo's Mining Emporium.",
-        "price": 45,
-        "currency": "Coins"
-      },
-      {
         "seller": "Ore store",
         "price": 49,
         "currency": "Coins"
@@ -23534,19 +22757,9 @@
         "currency": "Tokkul"
       },
       {
-        "seller": "Hendor's Awesome Ores",
-        "price": 45,
-        "currency": "Coins"
-      },
-      {
         "seller": "Petrified Pete's Ore Shop",
         "price": 60,
         "currency": "Volcanic Mine points"
-      },
-      {
-        "seller": "Mistrock Mining Supplies",
-        "price": 45,
-        "currency": "Coins"
       },
       {
         "seller": "Port Roberts Ore Stall",
@@ -45807,11 +45020,6 @@
     "shopBought": true,
     "shops": [
       {
-        "seller": "Hickton's Archery Emporium.",
-        "price": 12,
-        "currency": "Coins"
-      },
-      {
         "seller": "Lowe's Archery Emporium",
         "price": 12,
         "currency": "Coins"
@@ -45984,11 +45192,6 @@
     ],
     "shopBought": true,
     "shops": [
-      {
-        "seller": "Hickton's Archery Emporium.",
-        "price": 32,
-        "currency": "Coins"
-      },
       {
         "seller": "Lowe's Archery Emporium",
         "price": 32,
@@ -46225,11 +45428,6 @@
     "spawns": [],
     "shopBought": true,
     "shops": [
-      {
-        "seller": "Hickton's Archery Emporium.",
-        "price": 80,
-        "currency": "Coins"
-      },
       {
         "seller": "Lowe's Archery Emporium",
         "price": 80,
@@ -46857,11 +46055,6 @@
     "spawns": [],
     "shopBought": true,
     "shops": [
-      {
-        "seller": "Hickton's Archery Emporium.",
-        "price": 400,
-        "currency": "Coins"
-      },
       {
         "seller": "Lletya Archery Shop",
         "price": 520,
@@ -52992,11 +52185,6 @@
         "currency": "Coins"
       },
       {
-        "seller": "Armour store.",
-        "price": 2600,
-        "currency": "Coins"
-      },
-      {
         "seller": "Aneirin's Armour",
         "price": 2600,
         "currency": "Coins"
@@ -53133,11 +52321,6 @@
     "shops": [
       {
         "seller": "Louie's Armoured Legs Bazaar.",
-        "price": 6400,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Armour store.",
         "price": 6400,
         "currency": "Coins"
       },
@@ -53461,11 +52644,6 @@
         "currency": "Coins"
       },
       {
-        "seller": "Armour store.",
-        "price": 64000,
-        "currency": "Coins"
-      },
-      {
         "seller": "Aneirin's Armour",
         "price": 64000,
         "currency": "Coins"
@@ -53676,11 +52854,6 @@
         "currency": "Coins"
       },
       {
-        "seller": "Armour store.",
-        "price": 2600,
-        "currency": "Coins"
-      },
-      {
         "seller": "Aneirin's Armour",
         "price": 2600,
         "currency": "Coins"
@@ -53811,11 +52984,6 @@
         "currency": "Coins"
       },
       {
-        "seller": "Armour store.",
-        "price": 6400,
-        "currency": "Coins"
-      },
-      {
         "seller": "Aneirin's Armour",
         "price": 6400,
         "currency": "Coins"
@@ -53898,11 +53066,6 @@
       {
         "seller": "Seddu's Adventurer's Store.",
         "price": 60800,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Armour store.",
-        "price": 64000,
         "currency": "Coins"
       },
       {
@@ -54436,11 +53599,6 @@
         "seller": "Wayne's Chains! - Chainmail specialist.",
         "price": 1950,
         "currency": "Coins"
-      },
-      {
-        "seller": "Armour store.",
-        "price": 1950,
-        "currency": "Coins"
       }
     ],
     "clueTiers": [],
@@ -54519,11 +53677,6 @@
       },
       {
         "seller": "Wayne's Chains! - Chainmail specialist.",
-        "price": 4800,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Armour store.",
         "price": 4800,
         "currency": "Coins"
       }
@@ -54685,11 +53838,6 @@
       {
         "seller": "Seddu's Adventurer's Store.",
         "price": 47500,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Armour store.",
-        "price": 50000,
         "currency": "Coins"
       },
       {
@@ -55029,11 +54177,6 @@
         "currency": "Coins"
       },
       {
-        "seller": "Armour store.",
-        "price": 5200,
-        "currency": "Coins"
-      },
-      {
         "seller": "Aneirin's Armour",
         "price": 5200,
         "currency": "Coins"
@@ -55236,11 +54379,6 @@
       {
         "seller": "Valaine's Shop of Champions.",
         "price": 21632,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Armour store.",
-        "price": 16640,
         "currency": "Coins"
       },
       {
@@ -55485,11 +54623,6 @@
       {
         "seller": "Oziach (shop)",
         "price": 84500,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Armour store.",
-        "price": 65000,
         "currency": "Coins"
       }
     ],
@@ -56243,11 +55376,6 @@
         "currency": "Coins"
       },
       {
-        "seller": "Armour store.",
-        "price": 780,
-        "currency": "Coins"
-      },
-      {
         "seller": "Thurid's Brain Buckets",
         "price": 1014,
         "currency": "Coins"
@@ -56380,11 +55508,6 @@
       {
         "seller": "Quality Armour Shop",
         "price": 2496,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Armour store.",
-        "price": 1920,
         "currency": "Coins"
       },
       {
@@ -56615,14 +55738,8 @@
       "outputQuantity": 1
     },
     "spawns": [],
-    "shopBought": true,
-    "shops": [
-      {
-        "seller": "Armour store.",
-        "price": 19200,
-        "currency": "Coins"
-      }
-    ],
+    "shopBought": false,
+    "shops": [],
     "clueTiers": [],
     "alwaysAvailable": false
   },
@@ -57532,11 +56649,6 @@
         "currency": "Coins"
       },
       {
-        "seller": "Armour store.",
-        "price": 1430,
-        "currency": "Coins"
-      },
-      {
         "seller": "Aneirin's Armour",
         "price": 1430,
         "currency": "Coins"
@@ -57673,11 +56785,6 @@
     "shops": [
       {
         "seller": "Helmet Shop.",
-        "price": 3520,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Armour store.",
         "price": 3520,
         "currency": "Coins"
       },
@@ -58039,11 +57146,6 @@
     "shopBought": true,
     "shops": [
       {
-        "seller": "Armour store.",
-        "price": 35200,
-        "currency": "Coins"
-      },
-      {
         "seller": "Aneirin's Armour",
         "price": 35200,
         "currency": "Coins"
@@ -58337,16 +57439,6 @@
     "shopBought": true,
     "shops": [
       {
-        "seller": "Cassie's Shield Shop.",
-        "price": 600,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Quality Armour Shop",
-        "price": 780,
-        "currency": "Coins"
-      },
-      {
         "seller": "Cam Torum Blacksmith",
         "price": 600,
         "currency": "Coins"
@@ -58537,18 +57629,8 @@
     "shopBought": true,
     "shops": [
       {
-        "seller": "Cassie's Shield Shop.",
-        "price": 1560,
-        "currency": "Coins"
-      },
-      {
         "seller": "Armour Shop (Jatizso)",
         "price": 1716,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Armour store.",
-        "price": 1560,
         "currency": "Coins"
       },
       {
@@ -58651,11 +57733,6 @@
     "spawns": [],
     "shopBought": true,
     "shops": [
-      {
-        "seller": "Armour store.",
-        "price": 3840,
-        "currency": "Coins"
-      },
       {
         "seller": "Cam Torum Blacksmith",
         "price": 3840,
@@ -59065,14 +58142,8 @@
       "outputQuantity": 1
     },
     "spawns": [],
-    "shopBought": true,
-    "shops": [
-      {
-        "seller": "Armour store.",
-        "price": 38400,
-        "currency": "Coins"
-      }
-    ],
+    "shopBought": false,
+    "shops": [],
     "clueTiers": [],
     "alwaysAvailable": false
   },
@@ -59235,11 +58306,6 @@
     "shopBought": true,
     "shops": [
       {
-        "seller": "Cassie's Shield Shop.",
-        "price": 238,
-        "currency": "Coins"
-      },
-      {
         "seller": "Shields of Mistrock",
         "price": 238,
         "currency": "Coins"
@@ -59335,11 +58401,6 @@
     "shopBought": true,
     "shops": [
       {
-        "seller": "Cassie's Shield Shop.",
-        "price": 850,
-        "currency": "Coins"
-      },
-      {
         "seller": "Seddu's Adventurer's Store.",
         "price": 807,
         "currency": "Coins"
@@ -59381,14 +58442,8 @@
     "gathering": null,
     "production": null,
     "spawns": [],
-    "shopBought": true,
-    "shops": [
-      {
-        "seller": "Quality Armour Shop",
-        "price": 2121,
-        "currency": "Coins"
-      }
-    ],
+    "shopBought": false,
+    "shops": [],
     "clueTiers": [
       "beginner"
     ],
@@ -59591,11 +58646,6 @@
         "currency": "Coins"
       },
       {
-        "seller": "Armour store.",
-        "price": 2210,
-        "currency": "Coins"
-      },
-      {
         "seller": "Shields of Mistrock",
         "price": 2210,
         "currency": "Coins"
@@ -59730,11 +58780,6 @@
     "spawns": [],
     "shopBought": true,
     "shops": [
-      {
-        "seller": "Armour store.",
-        "price": 5440,
-        "currency": "Coins"
-      },
       {
         "seller": "Shields of Mistrock",
         "price": 5440,
@@ -60344,14 +59389,8 @@
       "outputQuantity": 1
     },
     "spawns": [],
-    "shopBought": true,
-    "shops": [
-      {
-        "seller": "Armour store.",
-        "price": 54400,
-        "currency": "Coins"
-      }
-    ],
+    "shopBought": false,
+    "shops": [],
     "clueTiers": [
       "hard",
       "elite"
@@ -61366,11 +60405,6 @@
         "currency": "Coins"
       },
       {
-        "seller": "Blades by Urbi.",
-        "price": 45000,
-        "currency": "Coins"
-      },
-      {
         "seller": "Jukat (shop)",
         "price": 30000,
         "currency": "Coins"
@@ -61451,11 +60485,6 @@
       {
         "seller": "Varrock Swordshop",
         "price": 240,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Blades by Urbi.",
-        "price": 360,
         "currency": "Coins"
       },
       {
@@ -61953,16 +60982,6 @@
       {
         "seller": "Elder Blunn's Spear and Shield Stall",
         "price": 2080,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Tamayu's Spear Stall",
-        "price": 2080,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Tamayu's Spear Stall(Karamja gloves)",
-        "price": 1976,
         "currency": "Coins"
       }
     ],
@@ -63575,16 +62594,6 @@
       {
         "seller": "Mount Karuulm Weapon Shop",
         "price": 20800,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Tamayu's Spear Stall",
-        "price": 20800,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Tamayu's Spear Stall(Karamja gloves)",
-        "price": 19760,
         "currency": "Coins"
       }
     ],
@@ -69681,11 +68690,6 @@
     "spawns": [],
     "shopBought": true,
     "shops": [
-      {
-        "seller": "Skulgrimen's Battle Gear",
-        "price": 53950,
-        "currency": "Coins"
-      },
       {
         "seller": "Durrik's Goods",
         "price": 103750,
@@ -80003,64 +79007,8 @@
       "outputQuantity": 1
     },
     "spawns": [],
-    "shopBought": true,
-    "shops": [
-      {
-        "seller": "Herquin's Gems.",
-        "price": 2000,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Gem Trader.",
-        "price": 2000,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Ardougne Gem Stall.",
-        "price": 3000,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Green Gemstone Gems",
-        "price": 3000,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Kourend Castle Gem Stall.",
-        "price": 2000,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Prifddinas Gem Stall",
-        "price": 2000,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Fortis Gem Stall",
-        "price": 3000,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Conara's Jewels",
-        "price": 2000,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Toci's Gem Store",
-        "price": 2000,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Elder Coco's Crafting Stall",
-        "price": 2000,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Port Roberts Gem Stall",
-        "price": 2000,
-        "currency": "Coins"
-      }
-    ],
+    "shopBought": false,
+    "shops": [],
     "clueTiers": [],
     "alwaysAvailable": false
   },
@@ -81846,16 +80794,6 @@
     "shopBought": true,
     "shops": [
       {
-        "seller": "Herquin's Gems.",
-        "price": 1000,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Gem Trader.",
-        "price": 1000,
-        "currency": "Coins"
-      },
-      {
         "seller": "Ardougne Gem Stall.",
         "price": 1500,
         "currency": "Coins"
@@ -83635,11 +82573,6 @@
     "spawns": [],
     "shopBought": true,
     "shops": [
-      {
-        "seller": "Herquin's Gems.",
-        "price": 500,
-        "currency": "Coins"
-      },
       {
         "seller": "Gem Trader.",
         "price": 500,
@@ -85561,19 +84494,8 @@
       "outputQuantity": 1
     },
     "spawns": [],
-    "shopBought": true,
-    "shops": [
-      {
-        "seller": "Gabooty's Tai Bwo Wannai Cooperative.",
-        "price": 120,
-        "currency": "Trading sticks"
-      },
-      {
-        "seller": "Gabooty's Tai Bwo Wannai Cooperative.(Karamja gloves)",
-        "price": 100,
-        "currency": "Trading sticks"
-      }
-    ],
+    "shopBought": false,
+    "shops": [],
     "clueTiers": [],
     "alwaysAvailable": false
   },
@@ -85640,19 +84562,8 @@
       "outputQuantity": 1
     },
     "spawns": [],
-    "shopBought": true,
-    "shops": [
-      {
-        "seller": "Gabooty's Tai Bwo Wannai Cooperative.",
-        "price": 180,
-        "currency": "Trading sticks"
-      },
-      {
-        "seller": "Gabooty's Tai Bwo Wannai Cooperative.(Karamja gloves)",
-        "price": 150,
-        "currency": "Trading sticks"
-      }
-    ],
+    "shopBought": false,
+    "shops": [],
     "clueTiers": [],
     "alwaysAvailable": false
   },
@@ -85709,19 +84620,8 @@
       "outputQuantity": 1
     },
     "spawns": [],
-    "shopBought": true,
-    "shops": [
-      {
-        "seller": "Gabooty's Tai Bwo Wannai Cooperative.",
-        "price": 240,
-        "currency": "Trading sticks"
-      },
-      {
-        "seller": "Gabooty's Tai Bwo Wannai Cooperative.(Karamja gloves)",
-        "price": 200,
-        "currency": "Trading sticks"
-      }
-    ],
+    "shopBought": false,
+    "shops": [],
     "clueTiers": [],
     "alwaysAvailable": false
   },
@@ -86264,11 +85164,6 @@
     "shopBought": true,
     "shops": [
       {
-        "seller": "Grum's Gold Exchange.",
-        "price": 350,
-        "currency": "Coins"
-      },
-      {
         "seller": "Conara's Jewels",
         "price": 350,
         "currency": "Coins"
@@ -86313,11 +85208,6 @@
     "shopBought": true,
     "shops": [
       {
-        "seller": "Grum's Gold Exchange.",
-        "price": 450,
-        "currency": "Coins"
-      },
-      {
         "seller": "Conara's Jewels",
         "price": 450,
         "currency": "Coins"
@@ -86359,11 +85249,6 @@
     "spawns": [],
     "shopBought": true,
     "shops": [
-      {
-        "seller": "Grum's Gold Exchange.",
-        "price": 350,
-        "currency": "Coins"
-      },
       {
         "seller": "Conara's Jewels",
         "price": 350,
@@ -86503,29 +85388,8 @@
       "version": "Ruby amulet (u)"
     },
     "spawns": [],
-    "shopBought": true,
-    "shops": [
-      {
-        "seller": "Davon's Amulet Store.",
-        "price": 2430,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Davon's Amulet Store.(Karamja gloves)",
-        "price": 2227,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Grum's Gold Exchange.",
-        "price": 2025,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Conara's Jewels",
-        "price": 2025,
-        "currency": "Coins"
-      }
-    ],
+    "shopBought": false,
+    "shops": [],
     "clueTiers": [],
     "alwaysAvailable": false
   },
@@ -86568,29 +85432,8 @@
       "version": "Sapphire amulet (u)"
     },
     "spawns": [],
-    "shopBought": true,
-    "shops": [
-      {
-        "seller": "Davon's Amulet Store.",
-        "price": 1080,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Davon's Amulet Store.(Karamja gloves)",
-        "price": 990,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Grum's Gold Exchange.",
-        "price": 900,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Conara's Jewels",
-        "price": 900,
-        "currency": "Coins"
-      }
-    ],
+    "shopBought": false,
+    "shops": [],
     "clueTiers": [
       "easy"
     ],
@@ -86635,29 +85478,8 @@
       "version": "Emerald amulet (u)"
     },
     "spawns": [],
-    "shopBought": true,
-    "shops": [
-      {
-        "seller": "Davon's Amulet Store.",
-        "price": 1530,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Davon's Amulet Store.(Karamja gloves)",
-        "price": 1402,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Grum's Gold Exchange.",
-        "price": 1275,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Conara's Jewels",
-        "price": 1275,
-        "currency": "Coins"
-      }
-    ],
+    "shopBought": false,
+    "shops": [],
     "clueTiers": [],
     "alwaysAvailable": false
   },
@@ -86715,29 +85537,8 @@
       "version": "Diamond amulet (u)"
     },
     "spawns": [],
-    "shopBought": true,
-    "shops": [
-      {
-        "seller": "Davon's Amulet Store.",
-        "price": 4230,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Davon's Amulet Store.(Karamja gloves)",
-        "price": 3877,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Grum's Gold Exchange.",
-        "price": 3525,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Conara's Jewels",
-        "price": 3525,
-        "currency": "Coins"
-      }
-    ],
+    "shopBought": false,
+    "shops": [],
     "clueTiers": [
       "medium"
     ],
@@ -90429,14 +89230,8 @@
       "Buccaneers' Haven",
       "Deepfin Point"
     ],
-    "shopBought": true,
-    "shops": [
-      {
-        "seller": "The Deeper Lode",
-        "price": 2,
-        "currency": "Coins"
-      }
-    ],
+    "shopBought": false,
+    "shops": [],
     "clueTiers": [],
     "alwaysAvailable": false
   },
@@ -90603,11 +89398,6 @@
       {
         "seller": "Arhein's General Goods",
         "price": 5,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Shantay Pass Shop",
-        "price": 4,
         "currency": "Coins"
       },
       {
@@ -91073,11 +89863,6 @@
       },
       {
         "seller": "Ali's Discount Wares.(general)",
-        "price": 2,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Shantay Pass Shop",
         "price": 2,
         "currency": "Coins"
       },
@@ -92246,11 +91031,6 @@
         "currency": "Coins"
       },
       {
-        "seller": "Shantay Pass Shop",
-        "price": 1,
-        "currency": "Coins"
-      },
-      {
         "seller": "Nardah General Store.",
         "price": 1,
         "currency": "Coins"
@@ -92712,26 +91492,6 @@
     "shopBought": true,
     "shops": [
       {
-        "seller": "Vanessa's Farming shop.",
-        "price": 1,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Richard's Farming shop.",
-        "price": 1,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Sarah's Farming shop.",
-        "price": 1,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Alice's Farming shop.",
-        "price": 1,
-        "currency": "Coins"
-      },
-      {
         "seller": "Food Store",
         "price": 1,
         "currency": "Coins"
@@ -92783,11 +91543,6 @@
       },
       {
         "seller": "Cobado's Groceries",
-        "price": 1,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Agelus' Farm Shop",
         "price": 1,
         "currency": "Coins"
       },
@@ -92937,14 +91692,8 @@
       "Hunter Guild ( 1 st floor 2 nd floor )",
       "Sunset Coast ( 1 st floor 2 nd floor )"
     ],
-    "shopBought": true,
-    "shops": [
-      {
-        "seller": "Agelus' Farm Shop",
-        "price": 2,
-        "currency": "Coins"
-      }
-    ],
+    "shopBought": false,
+    "shops": [],
     "clueTiers": [],
     "alwaysAvailable": false
   },
@@ -92973,11 +91722,6 @@
     "spawns": [],
     "shopBought": true,
     "shops": [
-      {
-        "seller": "Fancy Clothes Store",
-        "price": 2,
-        "currency": "Coins"
-      },
       {
         "seller": "Shayzien Styles",
         "price": 2,
@@ -93189,26 +91933,6 @@
     "shopBought": true,
     "shops": [
       {
-        "seller": "Vanessa's Farming shop.",
-        "price": 3,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Richard's Farming shop.",
-        "price": 3,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Sarah's Farming shop.",
-        "price": 3,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Alice's Farming shop.",
-        "price": 3,
-        "currency": "Coins"
-      },
-      {
         "seller": "Grand Tree Groceries",
         "price": 3,
         "currency": "Coins"
@@ -93240,11 +91964,6 @@
       },
       {
         "seller": "Cobado's Groceries",
-        "price": 3,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Agelus' Farm Shop",
         "price": 3,
         "currency": "Coins"
       },
@@ -93513,26 +92232,6 @@
     "shopBought": true,
     "shops": [
       {
-        "seller": "Vanessa's Farming shop.",
-        "price": 1,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Richard's Farming shop.",
-        "price": 1,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Sarah's Farming shop.",
-        "price": 1,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Alice's Farming shop.",
-        "price": 1,
-        "currency": "Coins"
-      },
-      {
         "seller": "Food Store",
         "price": 1,
         "currency": "Coins"
@@ -93584,11 +92283,6 @@
       },
       {
         "seller": "Cobado's Groceries",
-        "price": 1,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Agelus' Farm Shop",
         "price": 1,
         "currency": "Coins"
       },
@@ -94166,26 +92860,6 @@
         "currency": "Coins"
       },
       {
-        "seller": "Vanessa's Farming shop.",
-        "price": 4,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Richard's Farming shop.",
-        "price": 4,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Sarah's Farming shop.",
-        "price": 4,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Alice's Farming shop.",
-        "price": 4,
-        "currency": "Coins"
-      },
-      {
         "seller": "Food Store",
         "price": 4,
         "currency": "Coins"
@@ -94222,11 +92896,6 @@
       },
       {
         "seller": "Cobado's Groceries",
-        "price": 4,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Agelus' Farm Shop",
         "price": 4,
         "currency": "Coins"
       },
@@ -95451,24 +94120,8 @@
       "outputQuantity": 1
     },
     "spawns": [],
-    "shopBought": true,
-    "shops": [
-      {
-        "seller": "Gabooty's Tai Bwo Wannai Drinky Store.",
-        "price": 30,
-        "currency": "Trading sticks"
-      },
-      {
-        "seller": "Gabooty's Tai Bwo Wannai Drinky Store.(Karamja gloves)",
-        "price": 28,
-        "currency": "Trading sticks"
-      },
-      {
-        "seller": "Blurberry Bar",
-        "price": 30,
-        "currency": "Coins"
-      }
-    ],
+    "shopBought": false,
+    "shops": [],
     "clueTiers": [],
     "alwaysAvailable": false
   },
@@ -95507,24 +94160,8 @@
     "spawns": [
       "Sangvesti - central house"
     ],
-    "shopBought": true,
-    "shops": [
-      {
-        "seller": "Gabooty's Tai Bwo Wannai Drinky Store.",
-        "price": 30,
-        "currency": "Trading sticks"
-      },
-      {
-        "seller": "Gabooty's Tai Bwo Wannai Drinky Store.(Karamja gloves)",
-        "price": 28,
-        "currency": "Trading sticks"
-      },
-      {
-        "seller": "Blurberry Bar",
-        "price": 30,
-        "currency": "Coins"
-      }
-    ],
+    "shopBought": false,
+    "shops": [],
     "clueTiers": [],
     "alwaysAvailable": false
   },
@@ -95577,24 +94214,8 @@
     "spawns": [
       "Karamja - gnome glider station"
     ],
-    "shopBought": true,
-    "shops": [
-      {
-        "seller": "Gabooty's Tai Bwo Wannai Drinky Store.",
-        "price": 30,
-        "currency": "Trading sticks"
-      },
-      {
-        "seller": "Gabooty's Tai Bwo Wannai Drinky Store.(Karamja gloves)",
-        "price": 28,
-        "currency": "Trading sticks"
-      },
-      {
-        "seller": "Blurberry Bar",
-        "price": 30,
-        "currency": "Coins"
-      }
-    ],
+    "shopBought": false,
+    "shops": [],
     "clueTiers": [],
     "alwaysAvailable": false
   },
@@ -95629,24 +94250,8 @@
     "spawns": [
       "Brimstail's cave"
     ],
-    "shopBought": true,
-    "shops": [
-      {
-        "seller": "Gabooty's Tai Bwo Wannai Drinky Store.",
-        "price": 30,
-        "currency": "Trading sticks"
-      },
-      {
-        "seller": "Gabooty's Tai Bwo Wannai Drinky Store.(Karamja gloves)",
-        "price": 28,
-        "currency": "Trading sticks"
-      },
-      {
-        "seller": "Blurberry Bar",
-        "price": 30,
-        "currency": "Coins"
-      }
-    ],
+    "shopBought": false,
+    "shops": [],
     "clueTiers": [],
     "alwaysAvailable": false
   },
@@ -95683,24 +94288,8 @@
       "outputQuantity": 1
     },
     "spawns": [],
-    "shopBought": true,
-    "shops": [
-      {
-        "seller": "Gabooty's Tai Bwo Wannai Drinky Store.",
-        "price": 30,
-        "currency": "Trading sticks"
-      },
-      {
-        "seller": "Gabooty's Tai Bwo Wannai Drinky Store.(Karamja gloves)",
-        "price": 28,
-        "currency": "Trading sticks"
-      },
-      {
-        "seller": "Blurberry Bar",
-        "price": 30,
-        "currency": "Coins"
-      }
-    ],
+    "shopBought": false,
+    "shops": [],
     "clueTiers": [],
     "alwaysAvailable": false
   },
@@ -95733,24 +94322,8 @@
       "outputQuantity": 1
     },
     "spawns": [],
-    "shopBought": true,
-    "shops": [
-      {
-        "seller": "Gabooty's Tai Bwo Wannai Drinky Store.",
-        "price": 30,
-        "currency": "Trading sticks"
-      },
-      {
-        "seller": "Gabooty's Tai Bwo Wannai Drinky Store.(Karamja gloves)",
-        "price": 28,
-        "currency": "Trading sticks"
-      },
-      {
-        "seller": "Blurberry Bar",
-        "price": 30,
-        "currency": "Coins"
-      }
-    ],
+    "shopBought": false,
+    "shops": [],
     "clueTiers": [],
     "alwaysAvailable": false
   },
@@ -95775,24 +94348,8 @@
       "outputQuantity": 1
     },
     "spawns": [],
-    "shopBought": true,
-    "shops": [
-      {
-        "seller": "Gabooty's Tai Bwo Wannai Drinky Store.",
-        "price": 30,
-        "currency": "Trading sticks"
-      },
-      {
-        "seller": "Gabooty's Tai Bwo Wannai Drinky Store.(Karamja gloves)",
-        "price": 28,
-        "currency": "Trading sticks"
-      },
-      {
-        "seller": "Blurberry Bar",
-        "price": 30,
-        "currency": "Coins"
-      }
-    ],
+    "shopBought": false,
+    "shops": [],
     "clueTiers": [],
     "alwaysAvailable": false
   },
@@ -96969,19 +95526,8 @@
       "outputQuantity": 1
     },
     "spawns": [],
-    "shopBought": true,
-    "shops": [
-      {
-        "seller": "Gianne's Restaurant",
-        "price": 160,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Gnome Waiter",
-        "price": 160,
-        "currency": "Coins"
-      }
-    ],
+    "shopBought": false,
+    "shops": [],
     "clueTiers": [],
     "alwaysAvailable": false
   },
@@ -97017,19 +95563,8 @@
       "outputQuantity": 1
     },
     "spawns": [],
-    "shopBought": true,
-    "shops": [
-      {
-        "seller": "Gianne's Restaurant",
-        "price": 160,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Gnome Waiter",
-        "price": 160,
-        "currency": "Coins"
-      }
-    ],
+    "shopBought": false,
+    "shops": [],
     "clueTiers": [],
     "alwaysAvailable": false
   },
@@ -97058,19 +95593,8 @@
       "outputQuantity": 1
     },
     "spawns": [],
-    "shopBought": true,
-    "shops": [
-      {
-        "seller": "Gianne's Restaurant",
-        "price": 150,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Gnome Waiter",
-        "price": 150,
-        "currency": "Coins"
-      }
-    ],
+    "shopBought": false,
+    "shops": [],
     "clueTiers": [],
     "alwaysAvailable": false
   },
@@ -97099,19 +95623,8 @@
       "outputQuantity": 1
     },
     "spawns": [],
-    "shopBought": true,
-    "shops": [
-      {
-        "seller": "Gianne's Restaurant",
-        "price": 150,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Gnome Waiter",
-        "price": 150,
-        "currency": "Coins"
-      }
-    ],
+    "shopBought": false,
+    "shops": [],
     "clueTiers": [],
     "alwaysAvailable": false
   },
@@ -97138,19 +95651,8 @@
       "outputQuantity": 1
     },
     "spawns": [],
-    "shopBought": true,
-    "shops": [
-      {
-        "seller": "Gianne's Restaurant",
-        "price": 85,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Gnome Waiter",
-        "price": 85,
-        "currency": "Coins"
-      }
-    ],
+    "shopBought": false,
+    "shops": [],
     "clueTiers": [],
     "alwaysAvailable": false
   },
@@ -97179,19 +95681,8 @@
       "outputQuantity": 1
     },
     "spawns": [],
-    "shopBought": true,
-    "shops": [
-      {
-        "seller": "Gianne's Restaurant",
-        "price": 85,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Gnome Waiter",
-        "price": 85,
-        "currency": "Coins"
-      }
-    ],
+    "shopBought": false,
+    "shops": [],
     "clueTiers": [],
     "alwaysAvailable": false
   },
@@ -97218,19 +95709,8 @@
       "outputQuantity": 1
     },
     "spawns": [],
-    "shopBought": true,
-    "shops": [
-      {
-        "seller": "Gianne's Restaurant",
-        "price": 85,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Gnome Waiter",
-        "price": 85,
-        "currency": "Coins"
-      }
-    ],
+    "shopBought": false,
+    "shops": [],
     "clueTiers": [],
     "alwaysAvailable": false
   },
@@ -97265,19 +95745,8 @@
       "outputQuantity": 1
     },
     "spawns": [],
-    "shopBought": true,
-    "shops": [
-      {
-        "seller": "Gianne's Restaurant",
-        "price": 85,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Gnome Waiter",
-        "price": 85,
-        "currency": "Coins"
-      }
-    ],
+    "shopBought": false,
+    "shops": [],
     "clueTiers": [],
     "alwaysAvailable": false
   },
@@ -97312,19 +95781,8 @@
       "outputQuantity": 1
     },
     "spawns": [],
-    "shopBought": true,
-    "shops": [
-      {
-        "seller": "Gianne's Restaurant",
-        "price": 120,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Gnome Waiter",
-        "price": 120,
-        "currency": "Coins"
-      }
-    ],
+    "shopBought": false,
+    "shops": [],
     "clueTiers": [],
     "alwaysAvailable": false
   },
@@ -97351,19 +95809,8 @@
     "spawns": [
       "Tarn's Lair"
     ],
-    "shopBought": true,
-    "shops": [
-      {
-        "seller": "Gianne's Restaurant",
-        "price": 120,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Gnome Waiter",
-        "price": 120,
-        "currency": "Coins"
-      }
-    ],
+    "shopBought": false,
+    "shops": [],
     "clueTiers": [],
     "alwaysAvailable": false
   },
@@ -97390,19 +95837,8 @@
       "outputQuantity": 1
     },
     "spawns": [],
-    "shopBought": true,
-    "shops": [
-      {
-        "seller": "Gianne's Restaurant",
-        "price": 120,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Gnome Waiter",
-        "price": 120,
-        "currency": "Coins"
-      }
-    ],
+    "shopBought": false,
+    "shops": [],
     "clueTiers": [],
     "alwaysAvailable": false
   },
@@ -97431,19 +95867,8 @@
       "outputQuantity": 1
     },
     "spawns": [],
-    "shopBought": true,
-    "shops": [
-      {
-        "seller": "Gianne's Restaurant",
-        "price": 120,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Gnome Waiter",
-        "price": 120,
-        "currency": "Coins"
-      }
-    ],
+    "shopBought": false,
+    "shops": [],
     "clueTiers": [],
     "alwaysAvailable": false
   },
@@ -97724,11 +96149,6 @@
         "currency": "Coins"
       },
       {
-        "seller": "Food Store",
-        "price": 12,
-        "currency": "Coins"
-      },
-      {
         "seller": "Miscellanian Food Shop",
         "price": 12,
         "currency": "Coins"
@@ -97790,11 +96210,6 @@
       },
       {
         "seller": "Logava Gricoller's Cooking Supplies",
-        "price": 12,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Kenelme's Wares",
         "price": 12,
         "currency": "Coins"
       },
@@ -98689,11 +97104,6 @@
     "shopBought": true,
     "shops": [
       {
-        "seller": "Drogo's Mining Emporium.",
-        "price": 8,
-        "currency": "Coins"
-      },
-      {
         "seller": "Obli's General Store.",
         "price": 12,
         "currency": "Coins"
@@ -98826,14 +97236,8 @@
       "Wilderness",
       "Shields of Mistrock ( 1 st floor 2 nd floor )"
     ],
-    "shopBought": true,
-    "shops": [
-      {
-        "seller": "Drogo's Mining Emporium.",
-        "price": 28,
-        "currency": "Coins"
-      }
-    ],
+    "shopBought": false,
+    "shops": [],
     "clueTiers": [],
     "alwaysAvailable": false
   },
@@ -99386,11 +97790,6 @@
     ],
     "shopBought": true,
     "shops": [
-      {
-        "seller": "Drogo's Mining Emporium.",
-        "price": 300,
-        "currency": "Coins"
-      },
       {
         "seller": "Durrik's Goods",
         "price": 750,
@@ -103699,24 +102098,8 @@
     "spawns": [
       "Varrock"
     ],
-    "shopBought": true,
-    "shops": [
-      {
-        "seller": "Grum's Gold Exchange.",
-        "price": 2025,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Irksol (shop)",
-        "price": 1012,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Conara's Jewels",
-        "price": 2025,
-        "currency": "Coins"
-      }
-    ],
+    "shopBought": false,
+    "shops": [],
     "clueTiers": [],
     "alwaysAvailable": false
   },
@@ -103794,19 +102177,8 @@
       "version": "Diamond ring"
     },
     "spawns": [],
-    "shopBought": true,
-    "shops": [
-      {
-        "seller": "Grum's Gold Exchange.",
-        "price": 3525,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Conara's Jewels",
-        "price": 3525,
-        "currency": "Coins"
-      }
-    ],
+    "shopBought": false,
+    "shops": [],
     "clueTiers": [],
     "alwaysAvailable": false
   },
@@ -111440,14 +109812,8 @@
     "spawns": [
       "Corsair Cove Dungeon - Francois ' inaccessible exit"
     ],
-    "shopBought": true,
-    "shops": [
-      {
-        "seller": "Miltog's Lamps",
-        "price": 42,
-        "currency": "Coins"
-      }
-    ],
+    "shopBought": false,
+    "shops": [],
     "clueTiers": [],
     "alwaysAvailable": false
   },
@@ -111517,14 +109883,8 @@
     "spawns": [
       "Salvager Overlook - East Tower ( 2 nd floor 3 rd floor )"
     ],
-    "shopBought": true,
-    "shops": [
-      {
-        "seller": "Miltog's Lamps",
-        "price": 187,
-        "currency": "Coins"
-      }
-    ],
+    "shopBought": false,
+    "shops": [],
     "clueTiers": [],
     "alwaysAvailable": false
   },
@@ -111561,14 +109921,8 @@
     "spawns": [
       "Darkmeyer - Lady Nadezhda Shadum 's house ( 1 st floor 2 nd floor )"
     ],
-    "shopBought": true,
-    "shops": [
-      {
-        "seller": "Miltog's Lamps",
-        "price": 630,
-        "currency": "Coins"
-      }
-    ],
+    "shopBought": false,
+    "shops": [],
     "clueTiers": [],
     "alwaysAvailable": false
   },
@@ -111802,11 +110156,6 @@
     "spawns": [],
     "shopBought": true,
     "shops": [
-      {
-        "seller": "Daga's Scimitar Smithy",
-        "price": 100000,
-        "currency": "Coins"
-      },
       {
         "seller": "Daga's Scimitar Smithy(Monkey Madness I)",
         "price": 100000,
@@ -113078,24 +111427,8 @@
       "outputQuantity": 1
     },
     "spawns": [],
-    "shopBought": true,
-    "shops": [
-      {
-        "seller": "Hickton's Archery Emporium.",
-        "price": 180,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Dargaud's Bow and Arrows.",
-        "price": 180,
-        "currency": "Coins"
-      },
-      {
-        "seller": "~ Uglug's stuffsies ~",
-        "price": 180,
-        "currency": "Coins"
-      }
-    ],
+    "shopBought": false,
+    "shops": [],
     "clueTiers": [],
     "alwaysAvailable": false
   },
@@ -123140,19 +121473,8 @@
     "gathering": null,
     "production": null,
     "spawns": [],
-    "shopBought": true,
-    "shops": [
-      {
-        "seller": "Draynor Seed Market",
-        "price": 9,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Amelia's Seed Shop",
-        "price": 8,
-        "currency": "Coins"
-      }
-    ],
+    "shopBought": false,
+    "shops": [],
     "clueTiers": [],
     "alwaysAvailable": false
   },
@@ -123454,19 +121776,8 @@
     "gathering": null,
     "production": null,
     "spawns": [],
-    "shopBought": true,
-    "shops": [
-      {
-        "seller": "Draynor Seed Market",
-        "price": 16,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Amelia's Seed Shop",
-        "price": 14,
-        "currency": "Coins"
-      }
-    ],
+    "shopBought": false,
+    "shops": [],
     "clueTiers": [],
     "alwaysAvailable": false
   },
@@ -124897,24 +123208,8 @@
     },
     "production": null,
     "spawns": [],
-    "shopBought": true,
-    "shops": [
-      {
-        "seller": "Draynor Seed Market",
-        "price": 9,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Amelia's Seed Shop",
-        "price": 8,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Port Roberts Veg Stall",
-        "price": 8,
-        "currency": "Coins"
-      }
-    ],
+    "shopBought": false,
+    "shops": [],
     "clueTiers": [],
     "alwaysAvailable": false
   },
@@ -125437,19 +123732,8 @@
     },
     "production": null,
     "spawns": [],
-    "shopBought": true,
-    "shops": [
-      {
-        "seller": "Draynor Seed Market",
-        "price": 67,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Amelia's Seed Shop",
-        "price": 56,
-        "currency": "Coins"
-      }
-    ],
+    "shopBought": false,
+    "shops": [],
     "clueTiers": [],
     "alwaysAvailable": false
   },
@@ -125662,24 +123946,8 @@
     },
     "production": null,
     "spawns": [],
-    "shopBought": true,
-    "shops": [
-      {
-        "seller": "Draynor Seed Market",
-        "price": 4,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Amelia's Seed Shop",
-        "price": 4,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Port Roberts Veg Stall",
-        "price": 4,
-        "currency": "Coins"
-      }
-    ],
+    "shopBought": false,
+    "shops": [],
     "clueTiers": [],
     "alwaysAvailable": false
   },
@@ -126097,19 +124365,8 @@
     },
     "production": null,
     "spawns": [],
-    "shopBought": true,
-    "shops": [
-      {
-        "seller": "Draynor Seed Market",
-        "price": 21,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Amelia's Seed Shop",
-        "price": 18,
-        "currency": "Coins"
-      }
-    ],
+    "shopBought": false,
+    "shops": [],
     "clueTiers": [],
     "alwaysAvailable": false
   },
@@ -128291,39 +126548,8 @@
     "spawns": [
       "Shayziens' Wall"
     ],
-    "shopBought": true,
-    "shops": [
-      {
-        "seller": "Vanessa's Farming shop.",
-        "price": 17,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Richard's Farming shop.",
-        "price": 17,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Sarah's Farming shop.",
-        "price": 17,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Alice's Farming shop.",
-        "price": 17,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Cobado's Groceries",
-        "price": 17,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Faustus' Fruit and Veg",
-        "price": 17,
-        "currency": "Coins"
-      }
-    ],
+    "shopBought": false,
+    "shops": [],
     "clueTiers": [],
     "alwaysAvailable": false
   },
@@ -129355,29 +127581,8 @@
     "gathering": null,
     "production": null,
     "spawns": [],
-    "shopBought": true,
-    "shops": [
-      {
-        "seller": "Vanessa's Farming shop.",
-        "price": 6,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Richard's Farming shop.",
-        "price": 6,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Sarah's Farming shop.",
-        "price": 6,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Alice's Farming shop.",
-        "price": 6,
-        "currency": "Coins"
-      }
-    ],
+    "shopBought": false,
+    "shops": [],
     "clueTiers": [],
     "alwaysAvailable": false
   },
@@ -129678,14 +127883,8 @@
     "gathering": null,
     "production": null,
     "spawns": [],
-    "shopBought": true,
-    "shops": [
-      {
-        "seller": "The Spice Is Right.",
-        "price": 28,
-        "currency": "Coins"
-      }
-    ],
+    "shopBought": false,
+    "shops": [],
     "clueTiers": [],
     "alwaysAvailable": false
   },
@@ -129707,19 +127906,8 @@
     "gathering": null,
     "production": null,
     "spawns": [],
-    "shopBought": true,
-    "shops": [
-      {
-        "seller": "Cobado's Groceries",
-        "price": 64,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Faustus' Fruit and Veg",
-        "price": 64,
-        "currency": "Coins"
-      }
-    ],
+    "shopBought": false,
+    "shops": [],
     "clueTiers": [],
     "alwaysAvailable": false
   },
@@ -129761,19 +127949,8 @@
     "gathering": null,
     "production": null,
     "spawns": [],
-    "shopBought": true,
-    "shops": [
-      {
-        "seller": "Cobado's Groceries",
-        "price": 87,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Faustus' Fruit and Veg",
-        "price": 87,
-        "currency": "Coins"
-      }
-    ],
+    "shopBought": false,
+    "shops": [],
     "clueTiers": [],
     "alwaysAvailable": false
   },
@@ -129881,39 +128058,8 @@
     },
     "production": null,
     "spawns": [],
-    "shopBought": true,
-    "shops": [
-      {
-        "seller": "Vanessa's Farming shop.",
-        "price": 48,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Richard's Farming shop.",
-        "price": 48,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Sarah's Farming shop.",
-        "price": 48,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Alice's Farming shop.",
-        "price": 48,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Cobado's Groceries",
-        "price": 48,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Faustus' Fruit and Veg",
-        "price": 48,
-        "currency": "Coins"
-      }
-    ],
+    "shopBought": false,
+    "shops": [],
     "clueTiers": [],
     "alwaysAvailable": false
   },
@@ -129974,49 +128120,8 @@
     "spawns": [
       "Cam Torum"
     ],
-    "shopBought": true,
-    "shops": [
-      {
-        "seller": "Vanessa's Farming shop.",
-        "price": 9,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Richard's Farming shop.",
-        "price": 9,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Sarah's Farming shop.",
-        "price": 9,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Alice's Farming shop.",
-        "price": 9,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Cobado's Groceries",
-        "price": 9,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Agelus' Farm Shop",
-        "price": 9,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Faustus' Fruit and Veg",
-        "price": 9,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Port Roberts Veg Stall",
-        "price": 9,
-        "currency": "Coins"
-      }
-    ],
+    "shopBought": false,
+    "shops": [],
     "clueTiers": [],
     "alwaysAvailable": false
   },
@@ -130085,29 +128190,8 @@
     "gathering": null,
     "production": null,
     "spawns": [],
-    "shopBought": true,
-    "shops": [
-      {
-        "seller": "Vanessa's Farming shop.",
-        "price": 4,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Richard's Farming shop.",
-        "price": 4,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Sarah's Farming shop.",
-        "price": 4,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Alice's Farming shop.",
-        "price": 4,
-        "currency": "Coins"
-      }
-    ],
+    "shopBought": false,
+    "shops": [],
     "clueTiers": [],
     "alwaysAvailable": false
   },
@@ -130118,29 +128202,8 @@
     "gathering": null,
     "production": null,
     "spawns": [],
-    "shopBought": true,
-    "shops": [
-      {
-        "seller": "Vanessa's Farming shop.",
-        "price": 5,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Richard's Farming shop.",
-        "price": 5,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Sarah's Farming shop.",
-        "price": 5,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Alice's Farming shop.",
-        "price": 5,
-        "currency": "Coins"
-      }
-    ],
+    "shopBought": false,
+    "shops": [],
     "clueTiers": [],
     "alwaysAvailable": false
   },
@@ -130151,29 +128214,8 @@
     "gathering": null,
     "production": null,
     "spawns": [],
-    "shopBought": true,
-    "shops": [
-      {
-        "seller": "Vanessa's Farming shop.",
-        "price": 7,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Richard's Farming shop.",
-        "price": 7,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Sarah's Farming shop.",
-        "price": 7,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Alice's Farming shop.",
-        "price": 7,
-        "currency": "Coins"
-      }
-    ],
+    "shopBought": false,
+    "shops": [],
     "clueTiers": [],
     "alwaysAvailable": false
   },
@@ -130184,29 +128226,8 @@
     "gathering": null,
     "production": null,
     "spawns": [],
-    "shopBought": true,
-    "shops": [
-      {
-        "seller": "Vanessa's Farming shop.",
-        "price": 10,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Richard's Farming shop.",
-        "price": 10,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Sarah's Farming shop.",
-        "price": 10,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Alice's Farming shop.",
-        "price": 10,
-        "currency": "Coins"
-      }
-    ],
+    "shopBought": false,
+    "shops": [],
     "clueTiers": [],
     "alwaysAvailable": false
   },
@@ -130217,29 +128238,8 @@
     "gathering": null,
     "production": null,
     "spawns": [],
-    "shopBought": true,
-    "shops": [
-      {
-        "seller": "Vanessa's Farming shop.",
-        "price": 15,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Richard's Farming shop.",
-        "price": 15,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Sarah's Farming shop.",
-        "price": 15,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Alice's Farming shop.",
-        "price": 15,
-        "currency": "Coins"
-      }
-    ],
+    "shopBought": false,
+    "shops": [],
     "clueTiers": [],
     "alwaysAvailable": false
   },
@@ -130262,34 +128262,8 @@
     "gathering": null,
     "production": null,
     "spawns": [],
-    "shopBought": true,
-    "shops": [
-      {
-        "seller": "Vanessa's Farming shop.",
-        "price": 4,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Richard's Farming shop.",
-        "price": 4,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Sarah's Farming shop.",
-        "price": 4,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Alice's Farming shop.",
-        "price": 4,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Agelus' Farm Shop",
-        "price": 4,
-        "currency": "Coins"
-      }
-    ],
+    "shopBought": false,
+    "shops": [],
     "clueTiers": [],
     "alwaysAvailable": false
   },
@@ -132701,19 +130675,8 @@
     "gathering": null,
     "production": null,
     "spawns": [],
-    "shopBought": true,
-    "shops": [
-      {
-        "seller": "Gabooty's Tai Bwo Wannai Cooperative.",
-        "price": 240,
-        "currency": "Trading sticks"
-      },
-      {
-        "seller": "Gabooty's Tai Bwo Wannai Cooperative.(Karamja gloves)",
-        "price": 200,
-        "currency": "Trading sticks"
-      }
-    ],
+    "shopBought": false,
+    "shops": [],
     "clueTiers": [],
     "alwaysAvailable": false
   },
@@ -133998,31 +131961,6 @@
         "seller": "White Knight Armoury(Master)",
         "price": 360,
         "currency": "Coins"
-      },
-      {
-        "seller": "White Knight Armoury(Adept)",
-        "price": 360,
-        "currency": "Coins"
-      },
-      {
-        "seller": "White Knight Armoury(Noble)",
-        "price": 360,
-        "currency": "Coins"
-      },
-      {
-        "seller": "White Knight Armoury(Page)",
-        "price": 360,
-        "currency": "Coins"
-      },
-      {
-        "seller": "White Knight Armoury(Peon)",
-        "price": 360,
-        "currency": "Coins"
-      },
-      {
-        "seller": "White Knight Armoury(Novice)",
-        "price": 360,
-        "currency": "Coins"
       }
     ],
     "clueTiers": [],
@@ -134039,31 +131977,6 @@
     "shops": [
       {
         "seller": "White Knight Armoury(Master)",
-        "price": 1248,
-        "currency": "Coins"
-      },
-      {
-        "seller": "White Knight Armoury(Adept)",
-        "price": 1248,
-        "currency": "Coins"
-      },
-      {
-        "seller": "White Knight Armoury(Noble)",
-        "price": 1248,
-        "currency": "Coins"
-      },
-      {
-        "seller": "White Knight Armoury(Page)",
-        "price": 1248,
-        "currency": "Coins"
-      },
-      {
-        "seller": "White Knight Armoury(Peon)",
-        "price": 1248,
-        "currency": "Coins"
-      },
-      {
-        "seller": "White Knight Armoury(Novice)",
         "price": 1248,
         "currency": "Coins"
       }
@@ -134122,11 +132035,6 @@
         "seller": "White Knight Armoury(Peon)",
         "price": 240,
         "currency": "Coins"
-      },
-      {
-        "seller": "White Knight Armoury(Novice)",
-        "price": 240,
-        "currency": "Coins"
       }
     ],
     "clueTiers": [],
@@ -134143,31 +132051,6 @@
     "shops": [
       {
         "seller": "White Knight Armoury(Master)",
-        "price": 1920,
-        "currency": "Coins"
-      },
-      {
-        "seller": "White Knight Armoury(Adept)",
-        "price": 1920,
-        "currency": "Coins"
-      },
-      {
-        "seller": "White Knight Armoury(Noble)",
-        "price": 1920,
-        "currency": "Coins"
-      },
-      {
-        "seller": "White Knight Armoury(Page)",
-        "price": 1920,
-        "currency": "Coins"
-      },
-      {
-        "seller": "White Knight Armoury(Peon)",
-        "price": 1920,
-        "currency": "Coins"
-      },
-      {
-        "seller": "White Knight Armoury(Novice)",
         "price": 1920,
         "currency": "Coins"
       }
@@ -134198,21 +132081,6 @@
         "seller": "White Knight Armoury(Noble)",
         "price": 432,
         "currency": "Coins"
-      },
-      {
-        "seller": "White Knight Armoury(Page)",
-        "price": 432,
-        "currency": "Coins"
-      },
-      {
-        "seller": "White Knight Armoury(Peon)",
-        "price": 432,
-        "currency": "Coins"
-      },
-      {
-        "seller": "White Knight Armoury(Novice)",
-        "price": 432,
-        "currency": "Coins"
       }
     ],
     "clueTiers": [],
@@ -134239,21 +132107,6 @@
       },
       {
         "seller": "White Knight Armoury(Noble)",
-        "price": 200,
-        "currency": "Coins"
-      },
-      {
-        "seller": "White Knight Armoury(Page)",
-        "price": 200,
-        "currency": "Coins"
-      },
-      {
-        "seller": "White Knight Armoury(Peon)",
-        "price": 200,
-        "currency": "Coins"
-      },
-      {
-        "seller": "White Knight Armoury(Novice)",
         "price": 200,
         "currency": "Coins"
       }
@@ -134294,11 +132147,6 @@
         "seller": "White Knight Armoury(Peon)",
         "price": 624,
         "currency": "Coins"
-      },
-      {
-        "seller": "White Knight Armoury(Novice)",
-        "price": 624,
-        "currency": "Coins"
       }
     ],
     "clueTiers": [],
@@ -134327,21 +132175,6 @@
         "seller": "White Knight Armoury(Noble)",
         "price": 960,
         "currency": "Coins"
-      },
-      {
-        "seller": "White Knight Armoury(Page)",
-        "price": 960,
-        "currency": "Coins"
-      },
-      {
-        "seller": "White Knight Armoury(Peon)",
-        "price": 960,
-        "currency": "Coins"
-      },
-      {
-        "seller": "White Knight Armoury(Novice)",
-        "price": 960,
-        "currency": "Coins"
       }
     ],
     "clueTiers": [],
@@ -134360,31 +132193,6 @@
         "seller": "White Knight Armoury(Master)",
         "price": 1920,
         "currency": "Coins"
-      },
-      {
-        "seller": "White Knight Armoury(Adept)",
-        "price": 1920,
-        "currency": "Coins"
-      },
-      {
-        "seller": "White Knight Armoury(Noble)",
-        "price": 1920,
-        "currency": "Coins"
-      },
-      {
-        "seller": "White Knight Armoury(Page)",
-        "price": 1920,
-        "currency": "Coins"
-      },
-      {
-        "seller": "White Knight Armoury(Peon)",
-        "price": 1920,
-        "currency": "Coins"
-      },
-      {
-        "seller": "White Knight Armoury(Novice)",
-        "price": 1920,
-        "currency": "Coins"
       }
     ],
     "clueTiers": [],
@@ -134401,31 +132209,6 @@
     "shops": [
       {
         "seller": "White Knight Armoury(Master)",
-        "price": 980,
-        "currency": "Coins"
-      },
-      {
-        "seller": "White Knight Armoury(Adept)",
-        "price": 980,
-        "currency": "Coins"
-      },
-      {
-        "seller": "White Knight Armoury(Noble)",
-        "price": 980,
-        "currency": "Coins"
-      },
-      {
-        "seller": "White Knight Armoury(Page)",
-        "price": 980,
-        "currency": "Coins"
-      },
-      {
-        "seller": "White Knight Armoury(Peon)",
-        "price": 980,
-        "currency": "Coins"
-      },
-      {
-        "seller": "White Knight Armoury(Novice)",
         "price": 980,
         "currency": "Coins"
       }
@@ -134494,26 +132277,6 @@
         "seller": "White Knight Armoury(Adept)",
         "price": 3840,
         "currency": "Coins"
-      },
-      {
-        "seller": "White Knight Armoury(Noble)",
-        "price": 3840,
-        "currency": "Coins"
-      },
-      {
-        "seller": "White Knight Armoury(Page)",
-        "price": 3840,
-        "currency": "Coins"
-      },
-      {
-        "seller": "White Knight Armoury(Peon)",
-        "price": 3840,
-        "currency": "Coins"
-      },
-      {
-        "seller": "White Knight Armoury(Novice)",
-        "price": 3840,
-        "currency": "Coins"
       }
     ],
     "clueTiers": [],
@@ -134535,26 +132298,6 @@
       },
       {
         "seller": "White Knight Armoury(Adept)",
-        "price": 576,
-        "currency": "Coins"
-      },
-      {
-        "seller": "White Knight Armoury(Noble)",
-        "price": 576,
-        "currency": "Coins"
-      },
-      {
-        "seller": "White Knight Armoury(Page)",
-        "price": 576,
-        "currency": "Coins"
-      },
-      {
-        "seller": "White Knight Armoury(Peon)",
-        "price": 576,
-        "currency": "Coins"
-      },
-      {
-        "seller": "White Knight Armoury(Novice)",
         "price": 576,
         "currency": "Coins"
       }
@@ -134590,16 +132333,6 @@
         "seller": "White Knight Armoury(Page)",
         "price": 576,
         "currency": "Coins"
-      },
-      {
-        "seller": "White Knight Armoury(Peon)",
-        "price": 576,
-        "currency": "Coins"
-      },
-      {
-        "seller": "White Knight Armoury(Novice)",
-        "price": 576,
-        "currency": "Coins"
       }
     ],
     "clueTiers": [],
@@ -134621,26 +132354,6 @@
       },
       {
         "seller": "White Knight Armoury(Adept)",
-        "price": 1056,
-        "currency": "Coins"
-      },
-      {
-        "seller": "White Knight Armoury(Noble)",
-        "price": 1056,
-        "currency": "Coins"
-      },
-      {
-        "seller": "White Knight Armoury(Page)",
-        "price": 1056,
-        "currency": "Coins"
-      },
-      {
-        "seller": "White Knight Armoury(Peon)",
-        "price": 1056,
-        "currency": "Coins"
-      },
-      {
-        "seller": "White Knight Armoury(Novice)",
         "price": 1056,
         "currency": "Coins"
       }
@@ -134719,16 +132432,6 @@
         "seller": "White Knight Armoury(Page)",
         "price": 1920,
         "currency": "Coins"
-      },
-      {
-        "seller": "White Knight Armoury(Peon)",
-        "price": 1920,
-        "currency": "Coins"
-      },
-      {
-        "seller": "White Knight Armoury(Novice)",
-        "price": 1920,
-        "currency": "Coins"
       }
     ],
     "clueTiers": [],
@@ -134750,26 +132453,6 @@
       },
       {
         "seller": "White Knight Armoury(Adept)",
-        "price": 6,
-        "currency": "Coins"
-      },
-      {
-        "seller": "White Knight Armoury(Noble)",
-        "price": 6,
-        "currency": "Coins"
-      },
-      {
-        "seller": "White Knight Armoury(Page)",
-        "price": 6,
-        "currency": "Coins"
-      },
-      {
-        "seller": "White Knight Armoury(Peon)",
-        "price": 6,
-        "currency": "Coins"
-      },
-      {
-        "seller": "White Knight Armoury(Novice)",
         "price": 6,
         "currency": "Coins"
       }
@@ -134805,16 +132488,6 @@
         "seller": "White Knight Armoury(Page)",
         "price": 1152,
         "currency": "Coins"
-      },
-      {
-        "seller": "White Knight Armoury(Peon)",
-        "price": 1152,
-        "currency": "Coins"
-      },
-      {
-        "seller": "White Knight Armoury(Novice)",
-        "price": 1152,
-        "currency": "Coins"
       }
     ],
     "clueTiers": [],
@@ -134836,26 +132509,6 @@
       },
       {
         "seller": "White Knight Armoury(Adept)",
-        "price": 1632,
-        "currency": "Coins"
-      },
-      {
-        "seller": "White Knight Armoury(Noble)",
-        "price": 1632,
-        "currency": "Coins"
-      },
-      {
-        "seller": "White Knight Armoury(Page)",
-        "price": 1632,
-        "currency": "Coins"
-      },
-      {
-        "seller": "White Knight Armoury(Peon)",
-        "price": 1632,
-        "currency": "Coins"
-      },
-      {
-        "seller": "White Knight Armoury(Novice)",
         "price": 1632,
         "currency": "Coins"
       }
@@ -137425,14 +135078,8 @@
       "outputQuantity": 1
     },
     "spawns": [],
-    "shopBought": true,
-    "shops": [
-      {
-        "seller": "Pie Shop",
-        "price": 54,
-        "currency": "Coins"
-      }
-    ],
+    "shopBought": false,
+    "shops": [],
     "clueTiers": [],
     "alwaysAvailable": false
   },
@@ -137643,14 +135290,8 @@
       "outputQuantity": 1
     },
     "spawns": [],
-    "shopBought": true,
-    "shops": [
-      {
-        "seller": "Pie Shop",
-        "price": 310,
-        "currency": "Coins"
-      }
-    ],
+    "shopBought": false,
+    "shops": [],
     "clueTiers": [],
     "alwaysAvailable": false
   },
@@ -137721,14 +135362,8 @@
       "outputQuantity": 1
     },
     "spawns": [],
-    "shopBought": true,
-    "shops": [
-      {
-        "seller": "Pie Shop",
-        "price": 182,
-        "currency": "Coins"
-      }
-    ],
+    "shopBought": false,
+    "shops": [],
     "clueTiers": [],
     "alwaysAvailable": false
   },
@@ -137814,14 +135449,8 @@
       "outputQuantity": 1
     },
     "spawns": [],
-    "shopBought": true,
-    "shops": [
-      {
-        "seller": "Pie Shop",
-        "price": 140,
-        "currency": "Coins"
-      }
-    ],
+    "shopBought": false,
+    "shops": [],
     "clueTiers": [
       "elite"
     ],
@@ -140126,16 +137755,6 @@
     "shopBought": true,
     "shops": [
       {
-        "seller": "Jiminua's Jungle Store.",
-        "price": 6,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Jiminua's Jungle Store.(Karamja gloves 3+)",
-        "price": 5,
-        "currency": "Coins"
-      },
-      {
         "seller": "Dom Onion's Reward Shop",
         "price": 70,
         "currency": "Nightmare Zone points"
@@ -140292,14 +137911,8 @@
       "outputQuantity": 1
     },
     "spawns": [],
-    "shopBought": true,
-    "shops": [
-      {
-        "seller": "Arnold's Eclectic Supplies.",
-        "price": 241,
-        "currency": "Coins"
-      }
-    ],
+    "shopBought": false,
+    "shops": [],
     "clueTiers": [],
     "alwaysAvailable": false
   },
@@ -141595,14 +139208,8 @@
     "gathering": null,
     "production": null,
     "spawns": [],
-    "shopBought": true,
-    "shops": [
-      {
-        "seller": "Honest Jimmy's House of Stuff",
-        "price": 20,
-        "currency": "Pieces of eight"
-      }
-    ],
+    "shopBought": false,
+    "shops": [],
     "clueTiers": [],
     "alwaysAvailable": false
   },
@@ -143081,24 +140688,8 @@
       "outputQuantity": 1
     },
     "spawns": [],
-    "shopBought": true,
-    "shops": [
-      {
-        "seller": "Crossbow Shop (Dwarven Mine)",
-        "price": 262,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Crossbow Shop (White Wolf Mountain)",
-        "price": 262,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Crossbow Shop (Keldagrim)",
-        "price": 219,
-        "currency": "Coins"
-      }
-    ],
+    "shopBought": false,
+    "shops": [],
     "clueTiers": [],
     "alwaysAvailable": false
   },
@@ -143159,24 +140750,8 @@
       "outputQuantity": 1
     },
     "spawns": [],
-    "shopBought": true,
-    "shops": [
-      {
-        "seller": "Crossbow Shop (Dwarven Mine)",
-        "price": 565,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Crossbow Shop (White Wolf Mountain)",
-        "price": 565,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Crossbow Shop (Keldagrim)",
-        "price": 471,
-        "currency": "Coins"
-      }
-    ],
+    "shopBought": false,
+    "shops": [],
     "clueTiers": [],
     "alwaysAvailable": false
   },
@@ -143211,24 +140786,8 @@
       "outputQuantity": 1
     },
     "spawns": [],
-    "shopBought": true,
-    "shops": [
-      {
-        "seller": "Crossbow Shop (Dwarven Mine)",
-        "price": 1296,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Crossbow Shop (White Wolf Mountain)",
-        "price": 1296,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Crossbow Shop (Keldagrim)",
-        "price": 1080,
-        "currency": "Coins"
-      }
-    ],
+    "shopBought": false,
+    "shops": [],
     "clueTiers": [],
     "alwaysAvailable": false
   },
@@ -143257,24 +140816,8 @@
       "outputQuantity": 1
     },
     "spawns": [],
-    "shopBought": true,
-    "shops": [
-      {
-        "seller": "Crossbow Shop (Dwarven Mine)",
-        "price": 2818,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Crossbow Shop (White Wolf Mountain)",
-        "price": 2818,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Crossbow Shop (Keldagrim)",
-        "price": 2349,
-        "currency": "Coins"
-      }
-    ],
+    "shopBought": false,
+    "shops": [],
     "clueTiers": [],
     "alwaysAvailable": false
   },
@@ -143329,24 +140872,8 @@
       "outputQuantity": 1
     },
     "spawns": [],
-    "shopBought": true,
-    "shops": [
-      {
-        "seller": "Crossbow Shop (Dwarven Mine)",
-        "price": 6361,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Crossbow Shop (White Wolf Mountain)",
-        "price": 6361,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Crossbow Shop (Keldagrim)",
-        "price": 5301,
-        "currency": "Coins"
-      }
-    ],
+    "shopBought": false,
+    "shops": [],
     "clueTiers": [],
     "alwaysAvailable": false
   },
@@ -143431,24 +140958,8 @@
       "outputQuantity": 1
     },
     "spawns": [],
-    "shopBought": true,
-    "shops": [
-      {
-        "seller": "Crossbow Shop (Dwarven Mine)",
-        "price": 58320,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Crossbow Shop (White Wolf Mountain)",
-        "price": 58320,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Crossbow Shop (Keldagrim)",
-        "price": 48600,
-        "currency": "Coins"
-      }
-    ],
+    "shopBought": false,
+    "shops": [],
     "clueTiers": [
       "elite"
     ],
@@ -146553,14 +144064,8 @@
     },
     "production": null,
     "spawns": [],
-    "shopBought": true,
-    "shops": [
-      {
-        "seller": "Fancy Clothes Store",
-        "price": 26,
-        "currency": "Coins"
-      }
-    ],
+    "shopBought": false,
+    "shops": [],
     "clueTiers": [],
     "alwaysAvailable": false
   },
@@ -146594,39 +144099,8 @@
     "gathering": null,
     "production": null,
     "spawns": [],
-    "shopBought": true,
-    "shops": [
-      {
-        "seller": "Ardougne Fur Stall.",
-        "price": 72,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Fremennik Fur Trader",
-        "price": 72,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Prifddinas' Seamstress",
-        "price": 78,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Fortis Fur Stall",
-        "price": 72,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Pellem's Fur Store",
-        "price": 78,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Port Roberts Fur Stall",
-        "price": 72,
-        "currency": "Coins"
-      }
-    ],
+    "shopBought": false,
+    "shops": [],
     "clueTiers": [],
     "alwaysAvailable": false
   },
@@ -146637,39 +144111,8 @@
     "gathering": null,
     "production": null,
     "spawns": [],
-    "shopBought": true,
-    "shops": [
-      {
-        "seller": "Ardougne Fur Stall.",
-        "price": 96,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Fremennik Fur Trader",
-        "price": 96,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Prifddinas' Seamstress",
-        "price": 104,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Fortis Fur Stall",
-        "price": 96,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Pellem's Fur Store",
-        "price": 104,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Port Roberts Fur Stall",
-        "price": 96,
-        "currency": "Coins"
-      }
-    ],
+    "shopBought": false,
+    "shops": [],
     "clueTiers": [],
     "alwaysAvailable": false
   },
@@ -146680,39 +144123,8 @@
     "gathering": null,
     "production": null,
     "spawns": [],
-    "shopBought": true,
-    "shops": [
-      {
-        "seller": "Ardougne Fur Stall.",
-        "price": 108,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Fremennik Fur Trader",
-        "price": 108,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Prifddinas' Seamstress",
-        "price": 117,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Fortis Fur Stall",
-        "price": 108,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Pellem's Fur Store",
-        "price": 117,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Port Roberts Fur Stall",
-        "price": 108,
-        "currency": "Coins"
-      }
-    ],
+    "shopBought": false,
+    "shops": [],
     "clueTiers": [],
     "alwaysAvailable": false
   },
@@ -146723,39 +144135,8 @@
     "gathering": null,
     "production": null,
     "spawns": [],
-    "shopBought": true,
-    "shops": [
-      {
-        "seller": "Ardougne Fur Stall.",
-        "price": 144,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Fremennik Fur Trader",
-        "price": 144,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Prifddinas' Seamstress",
-        "price": 156,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Fortis Fur Stall",
-        "price": 144,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Pellem's Fur Store",
-        "price": 156,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Port Roberts Fur Stall",
-        "price": 144,
-        "currency": "Coins"
-      }
-    ],
+    "shopBought": false,
+    "shops": [],
     "clueTiers": [],
     "alwaysAvailable": false
   },
@@ -146766,39 +144147,8 @@
     "gathering": null,
     "production": null,
     "spawns": [],
-    "shopBought": true,
-    "shops": [
-      {
-        "seller": "Ardougne Fur Stall.",
-        "price": 144,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Fremennik Fur Trader",
-        "price": 144,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Prifddinas' Seamstress",
-        "price": 156,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Fortis Fur Stall",
-        "price": 144,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Pellem's Fur Store",
-        "price": 156,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Port Roberts Fur Stall",
-        "price": 144,
-        "currency": "Coins"
-      }
-    ],
+    "shopBought": false,
+    "shops": [],
     "clueTiers": [],
     "alwaysAvailable": false
   },
@@ -146809,39 +144159,8 @@
     "gathering": null,
     "production": null,
     "spawns": [],
-    "shopBought": true,
-    "shops": [
-      {
-        "seller": "Ardougne Fur Stall.",
-        "price": 192,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Fremennik Fur Trader",
-        "price": 192,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Prifddinas' Seamstress",
-        "price": 208,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Fortis Fur Stall",
-        "price": 192,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Pellem's Fur Store",
-        "price": 208,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Port Roberts Fur Stall",
-        "price": 192,
-        "currency": "Coins"
-      }
-    ],
+    "shopBought": false,
+    "shops": [],
     "clueTiers": [],
     "alwaysAvailable": false
   },
@@ -146980,39 +144299,8 @@
     },
     "production": null,
     "spawns": [],
-    "shopBought": true,
-    "shops": [
-      {
-        "seller": "Ardougne Fur Stall.",
-        "price": 12,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Fremennik Fur Trader",
-        "price": 12,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Prifddinas' Seamstress",
-        "price": 13,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Fortis Fur Stall",
-        "price": 12,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Pellem's Fur Store",
-        "price": 13,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Port Roberts Fur Stall",
-        "price": 12,
-        "currency": "Coins"
-      }
-    ],
+    "shopBought": false,
+    "shops": [],
     "clueTiers": [],
     "alwaysAvailable": false
   },
@@ -147023,39 +144311,8 @@
     "gathering": null,
     "production": null,
     "spawns": [],
-    "shopBought": true,
-    "shops": [
-      {
-        "seller": "Ardougne Fur Stall.",
-        "price": 16,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Fremennik Fur Trader",
-        "price": 16,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Prifddinas' Seamstress",
-        "price": 18,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Fortis Fur Stall",
-        "price": 16,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Pellem's Fur Store",
-        "price": 18,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Port Roberts Fur Stall",
-        "price": 16,
-        "currency": "Coins"
-      }
-    ],
+    "shopBought": false,
+    "shops": [],
     "clueTiers": [],
     "alwaysAvailable": false
   },
@@ -147072,39 +144329,8 @@
     },
     "production": null,
     "spawns": [],
-    "shopBought": true,
-    "shops": [
-      {
-        "seller": "Ardougne Fur Stall.",
-        "price": 14,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Fremennik Fur Trader",
-        "price": 14,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Prifddinas' Seamstress",
-        "price": 15,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Fortis Fur Stall",
-        "price": 14,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Pellem's Fur Store",
-        "price": 15,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Port Roberts Fur Stall",
-        "price": 14,
-        "currency": "Coins"
-      }
-    ],
+    "shopBought": false,
+    "shops": [],
     "clueTiers": [],
     "alwaysAvailable": false
   },
@@ -147115,39 +144341,8 @@
     "gathering": null,
     "production": null,
     "spawns": [],
-    "shopBought": true,
-    "shops": [
-      {
-        "seller": "Ardougne Fur Stall.",
-        "price": 20,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Fremennik Fur Trader",
-        "price": 20,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Prifddinas' Seamstress",
-        "price": 22,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Fortis Fur Stall",
-        "price": 20,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Pellem's Fur Store",
-        "price": 22,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Port Roberts Fur Stall",
-        "price": 20,
-        "currency": "Coins"
-      }
-    ],
+    "shopBought": false,
+    "shops": [],
     "clueTiers": [],
     "alwaysAvailable": false
   },
@@ -149889,14 +147084,8 @@
       "outputQuantity": 1
     },
     "spawns": [],
-    "shopBought": true,
-    "shops": [
-      {
-        "seller": "~ Uglug's stuffsies ~",
-        "price": 240,
-        "currency": "Coins"
-      }
-    ],
+    "shopBought": false,
+    "shops": [],
     "clueTiers": [],
     "alwaysAvailable": false
   },
@@ -150467,14 +147656,8 @@
       "outputQuantity": 1
     },
     "spawns": [],
-    "shopBought": true,
-    "shops": [
-      {
-        "seller": "Miltog's Lamps",
-        "price": 525,
-        "currency": "Coins"
-      }
-    ],
+    "shopBought": false,
+    "shops": [],
     "clueTiers": [],
     "alwaysAvailable": false
   },
@@ -151961,19 +149144,8 @@
       "version": "Ruby necklace"
     },
     "spawns": [],
-    "shopBought": true,
-    "shops": [
-      {
-        "seller": "Grum's Gold Exchange.",
-        "price": 2175,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Conara's Jewels",
-        "price": 2175,
-        "currency": "Coins"
-      }
-    ],
+    "shopBought": false,
+    "shops": [],
     "clueTiers": [],
     "alwaysAvailable": false
   },
@@ -158787,24 +155959,8 @@
     "gathering": null,
     "production": null,
     "spawns": [],
-    "shopBought": true,
-    "shops": [
-      {
-        "seller": "Grace's Graceful Clothing",
-        "price": 10,
-        "currency": "Mark of grace"
-      },
-      {
-        "seller": "Agility Arena Store",
-        "price": 60,
-        "currency": "Brimhaven voucher"
-      },
-      {
-        "seller": "Worm Tongue's Wares",
-        "price": 100,
-        "currency": "Termites"
-      }
-    ],
+    "shopBought": false,
+    "shops": [],
     "clueTiers": [],
     "alwaysAvailable": false
   },
@@ -189548,24 +186704,8 @@
     "gathering": null,
     "production": null,
     "spawns": [],
-    "shopBought": true,
-    "shops": [
-      {
-        "seller": "Fortis Fur Stall",
-        "price": 12,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Pellem's Fur Store",
-        "price": 13,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Port Roberts Fur Stall",
-        "price": 12,
-        "currency": "Coins"
-      }
-    ],
+    "shopBought": false,
+    "shops": [],
     "clueTiers": [],
     "alwaysAvailable": false
   },
@@ -189649,16 +186789,6 @@
     "shopBought": true,
     "shops": [
       {
-        "seller": "Fortis Fur Stall",
-        "price": 12,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Pellem's Fur Store",
-        "price": 13,
-        "currency": "Coins"
-      },
-      {
         "seller": "Durrik's Goods",
         "price": 25,
         "currency": "Coins"
@@ -189674,19 +186804,8 @@
     "gathering": null,
     "production": null,
     "spawns": [],
-    "shopBought": true,
-    "shops": [
-      {
-        "seller": "Fortis Fur Stall",
-        "price": 12,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Pellem's Fur Store",
-        "price": 13,
-        "currency": "Coins"
-      }
-    ],
+    "shopBought": false,
+    "shops": [],
     "clueTiers": [],
     "alwaysAvailable": false
   },
@@ -196483,19 +193602,8 @@
     "gathering": null,
     "production": null,
     "spawns": [],
-    "shopBought": true,
-    "shops": [
-      {
-        "seller": "Port Roberts Ore Stall",
-        "price": 440,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Deepfin Point Ore Exchange",
-        "price": 440,
-        "currency": "Coins"
-      }
-    ],
+    "shopBought": false,
+    "shops": [],
     "clueTiers": [],
     "alwaysAvailable": false
   },
@@ -197243,14 +194351,8 @@
       "outputQuantity": 4
     },
     "spawns": [],
-    "shopBought": true,
-    "shops": [
-      {
-        "seller": "Port Roberts Cannonball Stall",
-        "price": 450,
-        "currency": "Coins"
-      }
-    ],
+    "shopBought": false,
+    "shops": [],
     "clueTiers": [],
     "alwaysAvailable": false
   },
@@ -197345,14 +194447,8 @@
       "outputQuantity": 4
     },
     "spawns": [],
-    "shopBought": true,
-    "shops": [
-      {
-        "seller": "Port Roberts Cannonball Stall",
-        "price": 3500,
-        "currency": "Coins"
-      }
-    ],
+    "shopBought": false,
+    "shops": [],
     "clueTiers": [],
     "alwaysAvailable": false
   },
@@ -201957,14 +199053,8 @@
     "gathering": null,
     "production": null,
     "spawns": [],
-    "shopBought": true,
-    "shops": [
-      {
-        "seller": "Supplies's Supplies",
-        "price": 13,
-        "currency": "Coins"
-      }
-    ],
+    "shopBought": false,
+    "shops": [],
     "clueTiers": [],
     "alwaysAvailable": false
   },
@@ -202254,19 +199344,8 @@
       "version": "Sapphire necklace"
     },
     "spawns": [],
-    "shopBought": true,
-    "shops": [
-      {
-        "seller": "Grum's Gold Exchange.",
-        "price": 1050,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Conara's Jewels",
-        "price": 1050,
-        "currency": "Coins"
-      }
-    ],
+    "shopBought": false,
+    "shops": [],
     "clueTiers": [],
     "alwaysAvailable": false
   },
@@ -202319,19 +199398,8 @@
       "version": "Emerald necklace"
     },
     "spawns": [],
-    "shopBought": true,
-    "shops": [
-      {
-        "seller": "Grum's Gold Exchange.",
-        "price": 1425,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Conara's Jewels",
-        "price": 1425,
-        "currency": "Coins"
-      }
-    ],
+    "shopBought": false,
+    "shops": [],
     "clueTiers": [],
     "alwaysAvailable": false
   },
@@ -202407,14 +199475,8 @@
     "gathering": null,
     "production": null,
     "spawns": [],
-    "shopBought": true,
-    "shops": [
-      {
-        "seller": "Ava",
-        "price": 999,
-        "currency": "Coins"
-      }
-    ],
+    "shopBought": false,
+    "shops": [],
     "clueTiers": [],
     "alwaysAvailable": false
   },
@@ -202446,14 +199508,8 @@
       "version": "Sapphire bracelet"
     },
     "spawns": [],
-    "shopBought": true,
-    "shops": [
-      {
-        "seller": "Conara's Jewels",
-        "price": 1150,
-        "currency": "Coins"
-      }
-    ],
+    "shopBought": false,
+    "shops": [],
     "clueTiers": [],
     "alwaysAvailable": false
   },
@@ -202485,14 +199541,8 @@
       "version": "Emerald bracelet"
     },
     "spawns": [],
-    "shopBought": true,
-    "shops": [
-      {
-        "seller": "Conara's Jewels",
-        "price": 1525,
-        "currency": "Coins"
-      }
-    ],
+    "shopBought": false,
+    "shops": [],
     "clueTiers": [],
     "alwaysAvailable": false
   },
@@ -202524,14 +199574,8 @@
       "version": "Ruby bracelet"
     },
     "spawns": [],
-    "shopBought": true,
-    "shops": [
-      {
-        "seller": "Conara's Jewels",
-        "price": 2325,
-        "currency": "Coins"
-      }
-    ],
+    "shopBought": false,
+    "shops": [],
     "clueTiers": [],
     "alwaysAvailable": false
   },
@@ -202563,19 +199607,8 @@
       "version": "Diamond necklace"
     },
     "spawns": [],
-    "shopBought": true,
-    "shops": [
-      {
-        "seller": "Grum's Gold Exchange.",
-        "price": 3675,
-        "currency": "Coins"
-      },
-      {
-        "seller": "Conara's Jewels",
-        "price": 3675,
-        "currency": "Coins"
-      }
-    ],
+    "shopBought": false,
+    "shops": [],
     "clueTiers": [],
     "alwaysAvailable": false
   },
@@ -202607,14 +199640,8 @@
       "version": "Diamond bracelet"
     },
     "spawns": [],
-    "shopBought": true,
-    "shops": [
-      {
-        "seller": "Conara's Jewels",
-        "price": 3825,
-        "currency": "Coins"
-      }
-    ],
+    "shopBought": false,
+    "shops": [],
     "clueTiers": [],
     "alwaysAvailable": false
   },

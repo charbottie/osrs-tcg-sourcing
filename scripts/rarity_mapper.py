@@ -12,6 +12,8 @@ table-bg-* classes on ~1,200 cached pages, 2026-10):
   Uncommon  — rarer than 1/25, up to 1/99.99
   Rare      — 1/100 – 1/999.99
   Very Rare — 1/1,000 and rarer (the wiki has no tier above this)
+
+Library module (no CLI), used by loot_parser.py (monster drops for generate_sources.py) and generate_boss_loot.py.
 """
 
 from __future__ import annotations
@@ -23,7 +25,7 @@ _LABEL_MAP = {
     "uncommon": "Uncommon",
     "rare": "Rare",
     "very rare": "Very Rare",
-    "extremely rare": "Extremely Rare",
+    "extremely rare": "Very Rare",   # Very Rare is the top tier (the wiki has none above it)
 }
 
 # Fraction thresholds — 1-in-N strictly below this bound falls in the bucket
@@ -64,6 +66,7 @@ def from_fraction(fraction: str) -> str:
         return "Always"
     if ratio <= 25:
         return "Common"
+    # Always/Common were handled inclusively above; the rest use the strict bounds
     for threshold, label in _THRESHOLDS[2:]:
         if ratio < threshold:
             return label

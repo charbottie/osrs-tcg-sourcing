@@ -6,6 +6,10 @@ Usage rules (per wiki staff, github issue #1, 2026-07-18):
   - Descriptive User-Agent naming this project
   - Cache every raw fetch so re-runs hit the wiki zero times
   - The shipped plugin makes NO wiki requests at runtime
+
+Library module (no CLI), used by generate_sources.py and other HTML-scraping
+generators. Rendered page HTML is cached in scripts/cache/wiki_html/<page>.html;
+delete a file (or pass force_refresh=True) to refetch it.
 """
 
 from __future__ import annotations
@@ -56,7 +60,10 @@ def _get_with_deadline(url: str, total_secs: float = 90.0) -> requests.Response:
 
 
 def fetch(page_name: str, *, force_refresh: bool = False) -> str | None:
-    """Return HTML for an OSRS Wiki page, using disk cache when available."""
+    """Return HTML for an OSRS Wiki page, using disk cache when available.
+
+    Returns None on a fetch error, 404 or other non-2xx status (failures are not cached).
+    Sleeps RATE_LIMIT_SECS after every live request, success or not."""
     page_name = page_name.replace(" ", "_")
     cache = _cache_path(page_name)
 
@@ -85,7 +92,10 @@ def fetch(page_name: str, *, force_refresh: bool = False) -> str | None:
 
 
 def fetch_with_loot_fallback(page_name: str) -> tuple[str | None, str]:
-    """Fetch a monster page; if no drops table found, try the /Loot subpage."""
+    """Fetch a monster page; if no drops table found, try the /Loot subpage.
+
+    Returns (html, page name the html came from). Falls back to the main page's
+    html (possibly None) when the /Loot subpage has no drops table either."""
     html = fetch(page_name)
     if html and _has_drops_table(html):
         return html, page_name
@@ -103,5 +113,8 @@ def fetch_with_loot_fallback(page_name: str) -> tuple[str | None, str]:
 
 
 def _has_drops_table(html: str) -> bool:
-    """Quick check (no BS4) — does this page contain a drops table?"""
+    """Quick check (no BS4) — does this page contain a drops table?
+
+    Loose on purpose: any "wikitable" counts, so a page with an unrelated table
+    passes and the /Loot subpage isn't tried."""
     return "item-drops" in html or "wikitable" in html

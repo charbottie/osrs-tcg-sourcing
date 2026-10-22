@@ -1,196 +1,132 @@
-# OSRS TCG — Bronzeman Planner
+# OSRS TCG: Bronzeman Planner
 
-A local web app for **OSRS TCG** players running the **Bronzeman TCG** RuneLite plugin. It reads your card collection from RuneLite and shows you exactly what you can and can't do — quest requirements, skill training methods, monster drops, equipment, and more — all filtered to your owned cards.
+A local web app for **OSRS TCG** players on the **Bronzeman TCG** RuneLite plugin.
+It reads your card collection from RuneLite and shows what you can and can't do with it:
+quests, skilling, diaries, bosses, Slayer, clues, gear and packs. It works for a brand-new
+account as well as an established one.
 
----
-
-## What it does
-
-- **Collection browser** — view all 5,172 TCG cards (live catalog snapshot, `research/card-catalog-live.json`); filter by owned, skill, tier
-- **Questing tab** — see which quests you can complete with your current cards, what's blocking you, and what each quest unlocks
-- **Skilling tab** — find available training methods per skill based on cards you own
-- **Monster detail** — drops, Slayer task probabilities, area access requirements (gated zones like Morytania, Kourend, Varlamore)
-- **Item detail** — how to obtain it, which quests need it, production requirements, which bosses/raid chests reward it
-- **Bosses tab** — raids, wave content, minigames, skilling bosses and bosses (sub-grouped Low/Mid/High/God Wars/Slayer/Wilderness), with access requirements and a loot table per boss; collection-log uniques are marked ◆
-- **Equipment tab** — gear setups and DPS calculator filtered to owned cards
-- **Multi-account** — auto-discovers all TCG accounts in your RuneLite profiles
-
----
-
-## Requirements
-
-- Python 3.9+
-- [RuneLite](https://runelite.net/) with the **OSRS TCG** plugin installed
-- `pip install -r scripts/requirements.txt`
+**New here? Read the [User Guide](docs/USER_GUIDE.md).** It explains every tab in plain language.
 
 ---
 
 ## Quick start
 
-```bash
-git clone https://github.com/charbottie/osrs-tcg-sourcing.git
-cd osrs-tcg-sourcing
-pip install -r scripts/requirements.txt
-python scripts/server.py
-```
+1. Open the Terminal app (Cmd+Space, type `Terminal`, press Enter).
+2. Paste `cd ~/git/osrs_tcg && python3 scripts/server.py` and press Enter. Leave the window open.
+3. Open **http://localhost:8765/preview.html** in your browser, pick your account, press **↻ Refresh**.
 
-Then open **http://localhost:8765** in your browser.
+To stop it, click the Terminal window and press Ctrl+C. "Address already in use" means it is already running.
 
-On first load the server finds your RuneLite profiles automatically (macOS, Windows, and Linux paths are all supported). Click **↻ Refresh** to decode your collection.
-
-> **No server?** Open `scripts/preview.html` directly in a browser for read-only browsing of the pre-bundled data. Collection sync and hiscores lookup require the server.
+Running the planner needs only Python 3.9 or newer (type `python3 --version` in Terminal to check) and
+RuneLite with the OSRS TCG plugin opened at least once. The update scripts also need `pip3 install -r scripts/requirements.txt`.
 
 ---
 
-## Loading your collection
+## What it does
 
-1. Make sure RuneLite is installed and you've opened it with the OSRS TCG plugin at least once (so your collection is saved to disk)
-2. Start the server: `python scripts/server.py`
-3. Open http://localhost:8765
-4. Your accounts appear in the dropdown — select one and click **↻ Refresh**
+- **Cards**: all 5,172 TCG cards (live catalog snapshot). Drops, sources, recipes, and which quests, bosses and diaries use each card
+- **Wishlist**: cards, quests, Slayer tasks and clue steps you're working towards, with pack suggestions
+- **Equipment**: gear setups and a DPS calculator, filtered to owned cards
+- **Skilling**: training methods per skill from your levels, tools and cards
+- **Questing**: what you can complete now, what's close, what blocks the rest
+- **Diaries**: every Achievement Diary task with its cards and rewards
+- **Bosses**: raids, wave content, minigames, skilling bosses and bosses, with requirements and loot (collection-log uniques marked ◆)
+- **Slayer**: masters and tasks you can do, monsters that count, equipment and locations
+- **Clues**: per tier, whether you can get the clue and finish the steps
+- **Packs**: each pack's card pool, what you own, which packs fill your gaps
+- **Rules**: the Bronzeman rules the planner applies
+- **Multi-account**: finds every TCG account in your RuneLite folder (local saves and cloud accounts)
 
-The server decodes the RuneLite config format (`RLTCG_v2` / `RLTCG_v3`) directly from disk — no login required.
+## Where your data comes from
 
----
+- **Cards**: `scripts/decode_collection.py` reads RuneLite's saves (`RLTCG_v2` / `RLTCG_v3`, and
+  `~/.runelite/OSRS-TCG/profiles/*/tcg.save`). Cloud accounts are fetched from api.osrs-tcg.net with
+  the plugin's stored session. No login needed.
+- **Skill levels**: the OSRS hiscores.
+- **Completed quests**: RuneLite quest-list screenshots (`scripts/decode_completed_quests.py`).
+  Quests you've only started can be marked by hand on the quest's page.
 
-## Syncing quest completions
-
-Quest completions are read from RuneLite's quest-list screenshots. To sync them:
-
-```bash
-python scripts/decode_completed_quests.py --player YOUR_RSN
-```
-
-Or click **↻ Sync** in the Questing tab while the server is running.
-
----
-
-## Data files
-
-All game data lives in `scripts/output/` and is pre-generated from the OSRS Wiki. You don't need to regenerate it unless the game has updated significantly.
-
-| File | Contents |
-|------|----------|
-| `monster_drops.json` | Drop tables for all monster cards |
-| `item_sources.json` | How to obtain every item card |
-| `bm_quest_cards.json` | Quest card requirements for Bronzeman mode (hand-curated) |
-| `quests.json` | Quest list with skill requirements and prerequisites |
-| `quest_chains.json` | Quest prerequisite graph |
-| `equipment_data.json` | Gear stats |
-| `food_data.json` | Food heal values |
-| `card_categories.json` | Card → skill/category mapping |
-| `card_details.json` | Card metadata (tier, description) |
-| `boss_loot.json` | Loot for chest/reward-based bosses (raid chests, Barrows, Moons, Gauntlet, lair chests, Unsired…) |
-| `collection_log.json` | Each boss's collection-log items — used to mark uniques |
-| `diaries.json` | Achievement Diary tasks, requirements and rewards — generated from the wiki |
-| `spells.json` | Every spell's level and rune cost (all four spellbooks) |
-
-### Regenerating data from the wiki
-
-```bash
-# Re-scrape monster drops and item sources (hits the OSRS Wiki — takes a while)
-python scripts/generate_sources.py
-
-# Rebuild quest data
-python scripts/generate_quests.py
-
-# Rebuild equipment / food
-python scripts/generate_equipment.py
-python scripts/generate_food.py
-
-# Rebuild boss chest loot + collection log (run after generate_sources)
-python scripts/generate_boss_loot.py --card-json research/card-catalog-live.json
-
-# Rebuild spells, then diaries (diaries use spells + item_sources)
-python scripts/generate_spells.py
-python scripts/generate_diaries.py --card-json research/card-catalog-live.json
-```
-
-> **Careful:** some committed output files carry hand fixes (production sources, images, categories). Regenerate into a scratch directory with `--out-dir` and diff before replacing anything.
-
-### How drops and rarity are interpreted
-
-- **Item → card matching** uses the catalog's `tcg.variants` lists — the TCG's own mapping, also used by Bronzeman for ownership. So *Grimy ranarr weed* counts for the Ranarr weed card, *Uncut diamond* for Diamond, *Prayer potion(4)* for Prayer potion.
-- **Rarity labels match the OSRS Wiki's tiers:** Common ≤1/25, Uncommon <1/100, Rare <1/1,000, Very Rare beyond.
-- **Unique** — raid unique-table items (CoX/ToB/ToA), shown with their share of the unique roll (e.g. Twisted bow 2/60); the roll itself depends on points/team/raid level, so no per-raid rate is invented.
-- **Conditional** — items gated by an extra requirement per the wiki's footnotes (consolation loot, first completions, Challenge Mode time limits, Konar-only keys, KC milestones).
-- Multi-roll chest rates are combined (Barrows `7 × 1/2,448` ≈ 1/350 per piece). Monster pages linked to Deadman / NMZ / PvM Arena / Construction variants fall back to the main-game page.
-
-Scraped HTML is cached in `scripts/cache/` (~800 MB, gitignored) so repeat runs are fast.
+All of this reloads when the page opens and when you press **↻ Refresh**. Nothing refreshes on its own.
 
 ---
 
-## File structure
+## Repo map
 
 ```
 osrs_tcg/
 ├── scripts/
-│   ├── preview.html              # The web app (single-file, no build step)
-│   ├── server.py                 # Local API server (collection decode, hiscores)
-│   ├── decode_collection.py      # Decodes RuneLite RLTCG config blobs
+│   ├── preview.html            # The planner itself (one file, no build step)
+│   ├── server.py               # Local server: serves the page, decodes collections, hiscores, image cache
+│   ├── decode_collection.py    # Reads RuneLite / cloud card collections
 │   ├── decode_completed_quests.py
-│   ├── generate_sources.py       # Scrapes wiki → monster_drops + item_sources
-│   ├── generate_boss_loot.py     # Wiki chest pages + Collection log → boss_loot + collection_log
-│   ├── generate_spells.py        # Wiki spellbooks → spells (rune costs)
-│   ├── generate_diaries.py       # Wiki diary pages → diaries (tasks, requirements, rewards)
-│   ├── generate_quests.py        # Scrapes wiki → quests + quest_chains
-│   ├── generate_equipment.py
-│   ├── generate_food.py
-│   ├── quest_parser.py           # HTML parser for quest detail pages
-│   ├── loot_parser.py            # HTML parser for monster loot tables
-│   ├── card_groups.py            # Canonical card group definitions
-│   ├── requirements.txt
-│   └── output/                   # Pre-generated data (committed, except personal files)
-├── discord/
-│   ├── announcements.md          # OSRS TCG plugin announcements
-│   └── faq.md                    # Community FAQ
-└── docs/                         # Architecture notes and data structure docs
+│   ├── generate_*.py           # Update scripts: rebuild scripts/output/ from the catalog + OSRS Wiki
+│   ├── *_curated.json          # Hand-checked data the wiki doesn't give (skilling, slayer, bosses, clues)
+│   ├── item_sources_overrides.json  # Hand fixes, applied by generate_sources.py
+│   ├── location_requirements.json   # Entry requirements for gated places (hover tips)
+│   ├── wiki_api.py             # Shared, polite wiki access for the update scripts (~1 request/second)
+│   ├── dev/cdp_check.mjs       # Headless browser check
+│   ├── output/                 # The planner's data (generated, committed, some hand fixes)
+│   ├── assets/icons/           # Local skill, quest and clue icons
+│   └── cache/                  # Wiki pages and images (large, gitignored)
+├── research/                   # Card catalog snapshots (card-catalog-live.json is the current one)
+├── docs/                       # Guides and architecture notes
+└── plugins/                    # Local clones of the two plugin repos (gitignored)
 ```
 
+Key files in `scripts/output/` include `item_sources.json`, `monster_drops.json`, `quests.json`,
+`bm_quest_cards.json` (hand-curated quest cards), `bosses.json`, `boss_loot.json`,
+`collection_log.json`, `diaries.json`, `slayer.json`, `clue_steps.json`, `recipes.json`,
+`skilling.json`, `spells.json`, `shop_owners.json` and `method_icons.json`.
+
+Personal files are generated locally and never committed: `scripts/output/my_collection.json`,
+`all_collections.json` and `completed_quests.json`.
+
+## Updating the data
+
+Only needed after a card catalog update. The steps and the order of the update scripts are in the
+[User Guide](docs/USER_GUIDE.md#advanced-only-after-a-card-catalog-update).
+
+> **Careful:** committed output files carry hand fixes. Back up `scripts/output/`, regenerate
+> (into `--out-dir` where a script supports it), and diff before replacing anything. Keep wiki use
+> light: the wiki's bot check blocks this machine if it fetches too much.
+
+### How drops and rarity are read
+
+- **Item → card matching** uses the catalog's `tcg.variants` lists, the same mapping Bronzeman uses.
+  So *Grimy ranarr weed* counts for the Ranarr weed card and *Prayer potion(4)* for Prayer potion.
+- **Rarity labels follow the OSRS Wiki's tiers:** Common ≤1/25, Uncommon <1/100, Rare <1/1,000, Very Rare beyond.
+- **Unique**: raid unique-table items (CoX/ToB/ToA), shown with their share of the unique roll (e.g. Twisted bow 2/60).
+- **Conditional**: items gated by an extra requirement in the wiki's footnotes (CM time limits, first completions, KC milestones).
+- Multi-roll chest rates are combined (Barrows `7 × 1/2,448` ≈ 1/350 per piece).
+
 ---
 
-## Personal data (gitignored)
+## Documentation
 
-These files are generated locally and never committed:
-
-| File | Contents |
-|------|----------|
-| `scripts/output/my_collection.json` | Decoded collection cache |
-| `scripts/output/all_collections.json` | All detected RuneLite accounts |
-| `scripts/output/completed_quests.json` | Synced quest completions |
+| Doc | For |
+|-----|-----|
+| [docs/USER_GUIDE.md](docs/USER_GUIDE.md) | Using the planner, symbols, troubleshooting, updating data |
+| [docs/CODE_BIBLE.md](docs/CODE_BIBLE.md) | How the code works, for changing it |
+| [docs/KNOWN_ISSUES.md](docs/KNOWN_ISSUES.md) | Small known bugs, written down but not yet fixed |
+| [docs/data-structures.md](docs/data-structures.md) | Card.json schema, save format, catalog snapshot format |
+| `PROJECT_LOG.md` | Session-by-session history (local only, gitignored) |
+| `docs/osrs-tcg-architecture.md`, `docs/bronzeman-architecture.md`, `docs/opportunities.md` | Plugin architecture notes and contribution ideas (local only, gitignored) |
 
 ---
 
-## Known limitations / areas for improvement
+## Known limitations
 
-Contributions welcome — these are the roughest edges:
-
-**Quest completion detection**
-- Relies on RuneLite quest-list screenshots stored locally. If you haven't taken a screenshot of your quest list in RuneLite, completions won't sync. A direct RuneLite API integration or hiscores-based detection would be more reliable.
-
-**`bm_quest_cards.json` is hand-curated**
-- Quest card requirements for Bronzeman mode (which cards you need to complete each quest) are manually maintained. New quests and quest reworks need manual updates. The format is documented in `docs/data-structures.md` — PRs welcome.
-
-**Area gate mappings are hardcoded**
-- The list of monsters tied to gated zones (Morytania, Kourend, Varlamore, etc.) and the extra requirements for each (e.g. Spade for Barrows) are hardcoded in `preview.html` as `CARD_AREAS` / `AREA_GATES`. New content areas or corrections require editing those constants directly.
-
-**Quest-gated gathering/production coverage is incomplete**
-- Only a handful of gathering methods (e.g. Mort Myre Fungus) and production methods (e.g. crystal equipment) have quest requirements encoded. Other quest-locked skilling spots may show as available when they shouldn't.
-
-**Game data can go stale**
-- `monster_drops.json`, `item_sources.json`, and `quests.json` are scraped from the OSRS Wiki. When the game updates (new content, reworks, renamed cards) the data needs re-scraping via the generate scripts. There's no automatic refresh.
-
-**No web-hosted version**
-- The tool requires running a local Python server. There's no hosted/shareable link. The main blocker is that collection data lives on your local disk — a RuneLite plugin API or cloud sync would be needed to host this publicly.
-
-**Card name matching is fragile**
-- Cards have no numeric IDs — names are the sole key throughout all data files and the plugin. If the TCG renames a card, every reference across `bm_quest_cards.json`, `item_sources.json`, `monster_drops.json`, etc. needs updating.
-
-**No mobile support**
-- The UI is desktop-only and hasn't been tested on small screens.
-
-**Data pipeline scripts need a post-beta tidy**
-- Several scripts in `scripts/` were written iteratively during beta and haven't been consolidated. `generate_equipment.py` and `generate_food.py` could be merged; clue scroll data lives across three separate JSON files; some generate scripts still reference the old beta card catalog path. The pipeline works but is rougher than the rest of the codebase.
+- **Quest completions come from screenshots.** If RuneLite has no recent quest-list screenshot,
+  completions won't sync. Started quests must be marked by hand.
+- **`bm_quest_cards.json` is hand-curated.** New quests and reworks need manual updates
+  (format in `docs/data-structures.md`).
+- **Game data goes stale.** It is built from the OSRS Wiki. There is no automatic refresh, and the
+  wiki's bot check now limits how much can be re-fetched.
+- **Some icons stay blank** while the wiki blocks uncached images (mostly Magic spell and Construction icons).
+- **Card names are the only key.** If the TCG renames a card, references across the data files need updating
+  (`research/catalog_migration.json` records past renames).
+- **Local only, desktop only.** Collection data lives on your disk, so there is no hosted version.
+  The UI hasn't been tested on small screens.
 
 ---
 

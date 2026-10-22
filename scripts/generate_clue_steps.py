@@ -127,6 +127,7 @@ def _links_in_cell(td: Tag) -> list[str]:
 
 
 def _first_link_in_cell(td: Tag) -> str | None:
+    """First linked page title in a cell (see _links_in_cell), or None."""
     links = _links_in_cell(td)
     return links[0] if links else None
 
@@ -212,6 +213,7 @@ def _marked(td: Tag) -> str:
 
 
 def _plain(s: str) -> str:
+    """Marked text → plain text: ⟦title|text⟧ becomes its text, space before punctuation removed."""
     s = _LINK_RE.sub(lambda m: m.group(2) or m.group(1), s)
     s = re.sub(r"\s+([.,;:!?)])", r"\1", s)
     return " ".join(s.split())
@@ -222,6 +224,7 @@ def _sentences(s: str) -> list[str]:
     toks: list[str] = []
 
     def _hold(m):
+        """Swap a link for a §n§ placeholder so its text can't be split on '.', ';' or '('."""
         toks.append(m.group(0))
         return f"§{len(toks) - 1}§"
     held = _LINK_RE.sub(_hold, s)
@@ -232,6 +235,7 @@ def _sentences(s: str) -> list[str]:
             break
         held = new
     restore = lambda x: re.sub("§(\\d+)§", lambda m: toks[int(m.group(1))], x)
+    # sentence breaks: '.!?' before a capital / link / digit, ';', or a 'Note:' marker
     out = [p for p in re.split(r"(?<=[.!?])\s+(?=[A-Z§\d])|\s*;\s*|\s+Note\s*:\s*", held) if p.strip()]
     return [restore(p).strip() for p in out + parens if p.strip()]
 
@@ -242,6 +246,7 @@ def _sentences_ctx(s: str) -> list[tuple[str, str]]:
     toks: list[str] = []
 
     def _hold(m):
+        """Swap a link for a §n§ placeholder (restored by `restore`)."""
         toks.append(m.group(0))
         return f"§{len(toks) - 1}§"
     restore = lambda x: re.sub("§(\\d+)§", lambda m: toks[int(m.group(1))], x).strip()
@@ -265,6 +270,7 @@ class _Resolver:
     """Card / quest / access lookups shared by every parser."""
 
     def __init__(self):
+        """Load the catalog, card_aliases.json, quests.json, access_routes.json and diaries.json."""
         cat = json.loads((_HERE.parent / "research" / "card-catalog-live.json").read_text(encoding="utf-8"))
         self.items = {x["name"].lower(): x["name"] for x in cat["items"]}
         self.npcs = npc_names(cat)   # card names, wiki pages and version names -> NPC card
@@ -280,6 +286,7 @@ class _Resolver:
         self.unresolved: dict[str, int] = {}
 
     def item(self, name: str) -> str | None:
+        """Item card for a wiki item name (itemNameFixes, exact, alias, '(2)' dose spacing), or None."""
         name = CUR.get("itemNameFixes", {}).get((name or "").strip(), name)
         l = (name or "").strip().lower()
         if l in self.items:
@@ -293,6 +300,7 @@ class _Resolver:
         return None
 
     def npc(self, name: str) -> str | None:
+        """NPC card for a wiki page / NPC name (exact, alias, then without a '(place)' suffix), or None."""
         l = (name or "").strip().lower()
         if l in self.npcs:
             return self.npcs[l]
@@ -303,6 +311,7 @@ class _Resolver:
         return self.npcs.get(base) if base != l else None
 
     def quest(self, title: str) -> str | None:
+        """quests.json key for a quest page title (questAliases, 'The …', '… quest'), or None."""
         t = CUR["questAliases"].get(title, title)
         for cand in (t, "The " + t, re.sub(r"\s+quest$", "", t, flags=re.I)):
             if cand in self.quests:
@@ -312,6 +321,7 @@ class _Resolver:
         return None
 
     def card_exists(self, name: str) -> bool:
+        """True if the name is an item card, NPC card or card alias."""
         l = name.lower()
         return l in self.items or l in self.npcs or l in self.aliases
 
@@ -320,11 +330,13 @@ R: _Resolver | None = None
 
 
 def _new_reqs() -> dict:
+    """Empty requirement accumulator with every shared field (see 'Requirement model')."""
     return {"requirements": [], "quests": [], "partialQuests": [], "skills": {}, "access": [],
             "diaries": [], "reqNotes": [], "noCard": []}
 
 
 def _merge(dst: dict, src: dict) -> dict:
+    """Merge src into dst in place: skills keep the higher level, lists are unioned in order. Returns dst."""
     for k, v in src.items():
         if k == "skills":
             for sk, lv in v.items():
@@ -337,6 +349,7 @@ def _merge(dst: dict, src: dict) -> dict:
 
 
 def _skills_in(plain: str) -> dict[str, int]:
+    """{Skill: level} for every '70 Agility' / 'Agility level 70' mention (levels 2-99; 'Runecrafting' → Runecraft)."""
     out: dict[str, int] = {}
     for rx in _SKILL_RES:
         for m in rx.finditer(plain):
@@ -349,6 +362,7 @@ def _skills_in(plain: str) -> dict[str, int]:
 
 
 def _diaries_in(plain: str) -> list[str]:
+    """['Area Tier'] for every 'hard Varrock diary' mention; the area is matched on its first word."""
     out = []
     for m in re.finditer(r"\b(easy|medium|hard|elite)\s+([A-Z][\w'&]*(?:\s+[&\w']+)?)\s+(?:achievement\s+)?diary",
                          plain, re.I):
@@ -384,6 +398,8 @@ def _items_in_sentence(sent: str, optional: bool) -> tuple[list[dict], list[str]
         t = _item_token(m.group(1)) or ("unknown", m.group(1))
         toks.append((m.start(), m.end(), t))
     clusters: list[list] = []
+    # A link joins the previous cluster when only "or" / "/" (plus up to two words and an
+    # article) separates them: "a [[Dramen staff]] or [[Lunar staff]]" → one any-of requirement.
     for i, tok in enumerate(toks):
         if clusters and re.fullmatch(r"\s*(?:\w+\s+){0,2}(?:,\s*)?(?:or|/)\s*(?:an?|the|any)?\s*",
                                      _plain(sent[toks[i - 1][1]:tok[0]])):
@@ -501,6 +517,7 @@ def _location_text(marked_or_plain: str) -> str:
 
 
 def _loc_rules(text: str) -> dict:
+    """Requirements from clue_curated.json locationRules whose regex matches the location text."""
     out = _new_reqs()
     if not text:
         return out
@@ -554,6 +571,7 @@ def _finalize(step: dict, acc: dict) -> dict:
 
 
 def _npc_req(name: str | None, kind: str, label: str | None = None) -> tuple[list[dict], list[str]]:
+    """([requirement for the NPC's card], []) or ([], [name]) when the NPC has no card; kind = 'npc' | 'enemy'."""
     if not name:
         return [], []
     card = R.npc(name)
@@ -563,6 +581,7 @@ def _npc_req(name: str | None, kind: str, label: str | None = None) -> tuple[lis
 
 
 def _slot_to_req(sl: dict) -> dict | None:
+    """Item slot → requirement entry (None for an unrestricted slot, which is never a gate)."""
     if sl.get("unrestricted"):
         return None
     r = {"label": sl["label"], "type": "item", "cards": list(sl.get("cards", []))}
@@ -575,6 +594,7 @@ def _slot_to_req(sl: dict) -> dict | None:
 
 
 def _group_slots(title: str) -> list[dict] | None:
+    """Slots for a clue_curated.json itemGroups entry (cardless items handled by _drop_cardless), or None."""
     g = CUR["itemGroups"].get(title)
     if not g:
         return None
@@ -636,6 +656,7 @@ def _norm_slot(sl: dict) -> dict:
 
 
 def _head(name: str) -> str:
+    """Head noun of an item name ('Iron platebody (t)' → 'platebody', 'Cape of legends' → 'cape')."""
     n = re.sub(r"\s*\(.*?\)", "", name.lower()).strip()
     if " of " in n:
         n = n.split(" of ")[0]
@@ -658,6 +679,7 @@ def _equip_slots(marked: str) -> tuple[list[dict], list[str], list[str]]:
     toks: list[str] = []
 
     def _hold(mm):
+        """Swap a link for a §n§ placeholder; toks keeps only its title."""
         toks.append(mm.group(1))
         return f"§{len(toks) - 1}§"
     held = _LINK_RE.sub(_hold, body)
@@ -739,6 +761,7 @@ def _add_alternatives(slots: list[dict], names: list[str]) -> list[str]:
 # ── Emote clues ───────────────────────────────────────────────────────────────
 
 def _parse_emote_tier(tier: str, force_refresh: bool) -> list[dict]:
+    """Emote clue steps of one tier from its Emote_clues/<tier> guide page (with requirements)."""
     page = f"Treasure_Trails/Guide/Emote_clues/{tier}"
     html = wiki_fetcher.fetch(page, force_refresh=force_refresh)
     if not html:
@@ -848,6 +871,7 @@ def _apply_override(acc: dict, ov: dict | None) -> None:
 
 
 def scrape_emote_clues(force_refresh: bool) -> dict[str, list[dict]]:
+    """{tier: emote steps} for every tier in EMOTE_TIERS."""
     return {tier: _parse_emote_tier(tier, force_refresh) for tier in EMOTE_TIERS}
 
 
@@ -860,12 +884,15 @@ def _sherlock_item_slots(marked: str) -> tuple[list[dict], list[str], list[str]]
     toks: list[str] = []
 
     def _hold(m):
+        """Swap a link for a §n§ placeholder; toks keeps only its title."""
         toks.append(m.group(1))
         return f"\u00a7{len(toks) - 1}\u00a7"
     held = _LINK_RE.sub(_hold, marked)
     held = re.split(r"\bNote\s*:|\.\s+(?=[A-Z])", held)[0]
 
     def _paren(m):
+        """Replace a '(…)': '(X also works)' → ¤ids¤ alternative marker; a conditional '(if …)'
+        becomes a note; anything else is dropped."""
         inner = m.group(1)
         ids = [int(x) for x in re.findall("\u00a7(\\d+)\u00a7", inner)]
         if re.search(r"also work|can be used|substitute|work as well", inner, re.I) and ids:
@@ -926,6 +953,7 @@ def _sherlock_item_slots(marked: str) -> tuple[list[dict], list[str], list[str]]
 
 
 def _parse_sherlock_tier(tier: str, force_refresh: bool) -> list[dict]:
+    """Sherlock tasks of one tier from the Sherlock/<tier> page (with requirements)."""
     page = f"Sherlock/{tier}"
     html = wiki_fetcher.fetch(page, force_refresh=force_refresh)
     if not html:
@@ -981,6 +1009,8 @@ def _parse_sherlock_tier(tier: str, force_refresh: bool) -> list[dict]:
 
 def _sherlock_requirements(task: dict, task_marked: str, items_marked: str,
                            skill_marked: str, other_marked: str) -> None:
+    """Fill a Sherlock task's slots and requirement fields in place (curated sherlockOverrides win);
+    also prunes non-item names from task["items"] into droppedItems."""
     acc = _new_reqs()
     keep = set(CUR["keepItems"]) | set(CUR["linkGroups"]) | set(CUR["itemGroups"])
     dropped = [n for n in task["items"] if not R.item(n) and n.lower() not in R.no_card and n not in keep]
@@ -1030,12 +1060,14 @@ def _sherlock_requirements(task: dict, task_marked: str, items_marked: str,
 
 
 def scrape_sherlock(force_refresh: bool) -> dict[str, list[dict]]:
+    """{tier: Sherlock tasks} for every tier in SHERLOCK_TIERS."""
     return {tier: _parse_sherlock_tier(tier, force_refresh) for tier in SHERLOCK_TIERS}
 
 
 # ── Falo the Bard ─────────────────────────────────────────────────────────────
 
 def scrape_falo(force_refresh: bool) -> list[dict]:
+    """Falo the Bard steps from the first lyric table: one step per lyric (rowspan rows add items)."""
     html = wiki_fetcher.fetch("Falo_the_Bard", force_refresh=force_refresh)
     if not html:
         print("  [WARN] Could not fetch Falo_the_Bard")
@@ -1054,6 +1086,7 @@ def scrape_falo(force_refresh: bool) -> list[dict]:
         remaining_rows: int = 0
 
         def _flush():
+            """Emit the lyric being collected (if it has items) and reset."""
             nonlocal current_lyric, lyric_items
             if current_lyric and lyric_items:
                 steps.append({"lyric": current_lyric, "items": list(lyric_items),
@@ -1096,11 +1129,12 @@ _MONSTER_CARD_NAMES: set[str] = set()
 
 
 def _load_monster_card_names() -> None:
+    """Fill _MONSTER_CARD_NAMES (lowercase) from output/monster_drops.json, once; no-op if missing."""
     global _MONSTER_CARD_NAMES
     p = Path(__file__).parent / "output" / "monster_drops.json"
     if p.exists() and not _MONSTER_CARD_NAMES:
         import json as _json
-        _MONSTER_CARD_NAMES = {k.lower() for k in _json.loads(p.read_text()).keys()}
+        _MONSTER_CARD_NAMES = {k.lower() for k in _json.loads(p.read_text(encoding="utf-8")).keys()}
 
 
 def _parse_cryptic_table(table: Tag, tier: str) -> list[dict]:
@@ -1127,7 +1161,8 @@ def _parse_cryptic_table(table: Tag, tier: str) -> list[dict]:
         idx_notes = min(col_notes, len(cells) - 1)
 
         clue_text  = _cell_text(cells[idx_clue])
-        notes_text = _cell_text(cells[idx_notes]) if idx_notes < len(cells) else ""
+        # A one-cell row has no notes column: don't reuse the clue text as its location
+        notes_text = _cell_text(cells[idx_notes]) if idx_notes != idx_clue else ""
 
         if not clue_text:
             continue
@@ -1404,6 +1439,7 @@ def _parse_hotcold_page(tier: str, force_refresh: bool) -> list[dict]:
 
 
 def scrape_hotcold_clues(force_refresh: bool) -> dict[str, list[dict]]:
+    """{tier: hot/cold steps} for every tier in HOT_COLD_TIERS."""
     return {tier: _parse_hotcold_page(tier, force_refresh) for tier in HOT_COLD_TIERS}
 
 
@@ -1526,6 +1562,7 @@ def scrape_coordinate_clues(force_refresh: bool) -> dict[str, list[dict]]:
 # ── Requirements for the talk / riddle step types ─────────────────────────────
 
 def _cryptic_requirements(step: dict) -> None:
+    """Fill a cryptic step's requirement fields in place (talk NPC / kill target / Spade / Charlie / location)."""
     acc = _new_reqs()
     clue_m, notes_m = step.pop("_clue", ""), step.pop("_notes", "")
     t = step.get("type")
@@ -1566,6 +1603,7 @@ def _talk_requirements(step: dict) -> None:
 
 
 def _hotcold_requirements(step: dict) -> None:
+    """Fill a hot/cold step's requirement fields in place: Spade, combat NPC, region access, location gates."""
     acc = _new_reqs()
     loc_m = step.pop("_loc", "")
     acc["requirements"].append(dict(_SPADE_REQ))
@@ -1584,6 +1622,7 @@ def _hotcold_requirements(step: dict) -> None:
 
 
 def _falo_requirements(step: dict) -> None:
+    """Fill a Falo step's slot (any one of the lyric's items) and requirements in place."""
     acc = _new_reqs()
     cards, nocard = [], []
     for n in step["items"]:
@@ -1610,9 +1649,12 @@ _TOOLS = {"Pickaxe", "Axe", "Harpoon"}
 
 
 def validate(output: dict) -> list[str]:
+    """Check every step and the curated data for unknown cards / quests / access keys / diaries / groups.
+    Returns a list of problem strings (empty = valid)."""
     problems: list[str] = []
 
     def _chk_req(where: str, r: dict):
+        """Validate one requirement or slot entry."""
         for c in r.get("cards", []) + [c for s in r.get("sets") or [] for c in s]:
             if not R.card_exists(c):
                 problems.append(f"{where}: card {c!r} not in catalog/aliases")
@@ -1631,6 +1673,7 @@ def validate(output: dict) -> list[str]:
                 problems.append(f"{where}: unknown access {a!r}")
 
     def _chk_step(where: str, st: dict):
+        """Validate one step's requirement fields."""
         for r in st.get("requirements", []):
             _chk_req(where, r)
         for sl in st.get("slots", []):
@@ -1686,6 +1729,7 @@ def validate(output: dict) -> list[str]:
 
 
 def _summary(output: dict) -> None:
+    """Print how many steps per type/tier carry each requirement field, and the access keys used."""
     from collections import Counter
     print("\nRequirement summary (steps with: requirements / quests+partial / skills / access / slots):")
     for kind in ("emote", "sherlock", "cryptic", "anagram", "cipher", "hotcold", "map", "coordinate"):
@@ -1718,11 +1762,13 @@ def _build_indexes(
     npc_index:  dict[str, list[dict]] = {}
 
     def _add_item(item: str, ref: dict):
+        """Append ref under the item name (ignores blanks)."""
         k = item.strip()
         if k:
             item_index.setdefault(k, []).append(ref)
 
     def _add_npc(npc: str, ref: dict):
+        """Append ref under the NPC name (ignores blanks)."""
         k = npc.strip()
         if k:
             npc_index.setdefault(k, []).append(ref)
@@ -1835,9 +1881,8 @@ def scrape_step_counts(
 ) -> dict[str, dict[str, int]]:
     """Return total step counts per type per tier.
 
-    All clue types are now fully scraped, so counts are derived directly
-    from the structured data.  Only map, coordinate, scan, and hot/cold
-    still need wiki fetches (they have no per-step structured data).
+    Most counts come straight from the scraped step lists; map and coordinate totals are
+    re-counted from their (cached) guide pages' tables.
     """
     counts: dict[str, dict[str, int]] = {}
 
@@ -1928,6 +1973,8 @@ def tag_locations(groups) -> int:
 
 
 def main():
+    """Scrape every clue type, attach requirements, write clue_steps.json and validate.
+    Returns 1 (exit code) if validation found problems, else 0."""
     p = argparse.ArgumentParser(description=__doc__,
                                 formatter_class=argparse.RawDescriptionHelpFormatter)
     p.add_argument("--force-refresh", action="store_true",

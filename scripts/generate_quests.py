@@ -5,10 +5,21 @@ Scrapes the quest list from the OSRS Wiki, then fetches each quest page to
 extract: prerequisites, skill requirements, items required, kills required,
 reward items, quest points, and the starting NPC.
 
+Input:  wiki pages List_of_quests + each quest page, via wiki_fetcher (HTML cached
+        in scripts/cache/wiki_html/; parsed by quest_parser.parse_quest).
 Output: scripts/output/quests.json
+  { "<quest>": {prerequisites, skillRequirements: [{skill, level, boostable}], itemsRequired,
+                killsRequired, rewardItems (always [] — not parseable), questNpc,
+                questPoints, members, wikiPage} }
+  Overwritten wholesale: any hand fixes in the committed quests.json are lost on a re-run,
+  so diff a fresh run against it (or write it elsewhere with --out-dir) before keeping it.
+  members: the quest page infobox's "Members" row (mini-quests have no members column in
+  List_of_quests); falls back to the list table (free / members) if the page has none.
 
 Usage:
-  python scripts/generate_quests.py [--limit N]
+  python scripts/generate_quests.py [--out-dir DIR]
+  python scripts/generate_quests.py --limit N --out-dir DIR   # only the first N quests (testing);
+                                                              # needs an --out-dir other than scripts/output/
 """
 
 from __future__ import annotations
@@ -32,7 +43,9 @@ _OUT = Path(__file__).parent / "output" / "quests.json"
 # ── Quest list scraping ────────────────────────────────────────────────────────
 
 class QuestListEntry:
+    """One row of List_of_quests: name, wiki page slug, quest points, members flag."""
     def __init__(self, name: str, page_slug: str, quest_points: int, members: bool):
+        """Store the row's fields as attributes."""
         self.name = name
         self.page_slug = page_slug
         self.quest_points = quest_points
@@ -61,7 +74,7 @@ def _fetch_quest_list() -> list[QuestListEntry]:
     tables = soup.find_all("table", class_="oqg-table")
     # Table 0: free quests, Table 1: members quests, Table 2: mini-quests
     for t_idx, table in enumerate(tables):
-        is_members = (t_idx == 1)
+        is_members = (t_idx == 1)   # mini-quests (table 2): False here; main() reads the page infobox
         is_mini = (t_idx == 2)
 
         for tr in table.find_all("tr"):
@@ -79,7 +92,7 @@ def _fetch_quest_list() -> list[QuestListEntry]:
                 link = cells[name_cell_idx].find("a", href=True)
                 if link:
                     href = link["href"]
-                    page_slug = unquote(href.lstrip("/w/"))
+                    page_slug = unquote(href.removeprefix("/w/"))
 
             # Quest points (cells[4] for quests, not available for mini-quests)
             if not is_mini and len(cells) > 4:
@@ -117,24 +130,32 @@ def _extract_quest_points(rows: dict) -> int:
     return int(m.group()) if m else 0
 
 
-def _extract_members(rows: dict) -> bool:
-    """Return True if this is a members quest."""
-    cell = rows.get("members", "")
-    if not cell:
-        return False
-    if isinstance(cell, str):
-        return False
-    text = cell.get_text(strip=True).lower()
-    return "yes" in text or "members" in text
+def _extract_members(html: str) -> bool | None:
+    """The quest page infobox's "Members" row: True / False, or None if the page has no such row."""
+    box = quest_parser._find_infobox(BeautifulSoup(html, "html.parser"))
+    if box is None:
+        return None
+    for tr in box.find_all("tr"):
+        th, td = tr.find("th"), tr.find("td")
+        if th and td and th.get_text(strip=True).lower().rstrip(":") == "members":
+            text = td.get_text(strip=True).lower()
+            return "yes" in text or "members" in text
+    return None
 
 
 # ── Main ──────────────────────────────────────────────────────────────────────
 
 def main() -> int:
+    """Fetch the quest list and every quest page, write quests.json into --out-dir and print a summary. Returns 0."""
     parser = argparse.ArgumentParser()
     parser.add_argument("--limit", type=int, default=None,
-                        help="Only process the first N quests (for testing)")
+                        help="Only process the first N quests (testing; needs --out-dir other than scripts/output/)")
+    parser.add_argument("--out-dir", default=str(_OUT.parent),
+                        help="Output directory (default: scripts/output/)")
     args = parser.parse_args()
+    out = Path(args.out_dir) / _OUT.name
+    if args.limit and out.resolve() == _OUT.resolve():
+        sys.exit("--limit is a partial run: pass --out-dir DIR (not scripts/output/)")
 
     print("Fetching quest list from OSRS Wiki…")
     entries = _fetch_quest_list()
@@ -169,6 +190,9 @@ def main() -> int:
             continue
 
         info = quest_parser.parse_quest(html)
+        members = _extract_members(html)
+        if members is None:
+            members = entry.members
 
         result[name] = {
             "prerequisites":      info["prerequisites"],
@@ -178,12 +202,12 @@ def main() -> int:
             "rewardItems":        info["reward_items"],
             "questNpc":           info["start_npc"],
             "questPoints":        entry.quest_points,
-            "members":            entry.members,
+            "members":            members,
             "wikiPage":           page_slug,
         }
 
-    _OUT.parent.mkdir(parents=True, exist_ok=True)
-    with open(_OUT, "w", encoding="utf-8", newline="\n") as f:
+    out.parent.mkdir(parents=True, exist_ok=True)
+    with open(out, "w", encoding="utf-8", newline="\n") as f:
         json.dump(result, f, indent=2, ensure_ascii=False)
         f.write("\n")
 
@@ -196,7 +220,7 @@ def main() -> int:
     members_count  = sum(1 for v in result.values() if v["members"])
     total_qp       = sum(v["questPoints"] for v in result.values())
 
-    print(f"\nWrote {_OUT} ({len(result)} quests)")
+    print(f"\nWrote {out} ({len(result)} quests)")
     print(f"  With prerequisites:    {with_prereqs}")
     print(f"  With skill reqs:       {with_skills}")
     print(f"  With items required:   {with_items}")

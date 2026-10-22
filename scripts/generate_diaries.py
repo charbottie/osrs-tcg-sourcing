@@ -8,21 +8,30 @@ parses those tables and derives each task's TCG card needs from central data:
     Bronzeman rules) — matched to cards via the catalog's tcg.variants
   - for "make / cook / craft / smith … X" tasks, X's production ingredients from
     output/item_sources.json (the same data item pages use)
-  - monsters linked in the task text when you kill / slay / defeat / pickpocket them
-  - talk-only NPCs need no card, so they aren't listed
+  - "cast X" spells: the spell's runes from output/spells.json
+  - NPCs linked in the task / requirement text: combat NPCs you fight go in `monsters`,
+    NPCs you only talk to / trade with go in `npcs` (any NPC interaction needs its card)
+  - linked things with no TCG card are listed as itemsNoCard / npcsNoCard (no restriction)
 
-Hand-curated data (reward NPCs, tier rewards, per-task card overrides) lives in
+Hand-curated data (reward NPCs, Barrows sets, per-task CARD_OVERRIDES) lives in
 the constants below, so the generated file is the single source the page reads.
+IRONMAN_ACCOUNT folds the wiki's ironman-only requirements into the normal ones.
+
+Inputs: --card-json catalog; output/quests.json, output/item_sources.json,
+output/monster_drops.json (combat levels), output/spells.json (optional);
+wiki diary pages as raw wikitext (?action=raw, cached in scripts/cache/wikitext/) and
+page infobox types (action=query, cached in scripts/cache/wiki_page_types.json).
 
 Output: scripts/output/diaries.json — same shape the page uses for DIARY_DATA:
   [{ name, rewardNpc, easy|medium|hard|elite: {
-       skills, quests, items, monsters,            # derived: union/max over tasks
-       rewards: {item, lamp, benefits[]},
-       tasks: [{ n, task, skills, boostable?, skillsAny?, combat?, quests,
-                 partialQuests?, items, monsters, notes? }] } }]
+       skills, quests, items, monsters, npcs,       # derived: union/max over tasks
+       rewards: [{text, sub: [...], items?, monsters?, npcs?, itemsNoCard?, npcsNoCard?}],
+       tasks: [{ n, task, skills, quests, items, monsters, npcs, notBoostable?, skillsAny?,
+                 itemsAny?, itemsAnyLabels?, monstersAny?, anyOf?, combat?, partialQuests?,
+                 tools?, lightSource?, setsAny?, itemsNoCard?, npcsNoCard?, notes? }] } }]
 
 Usage:
-  python3 scripts/generate_diaries.py --card-json research/card-catalog-live.json
+  python3 scripts/generate_diaries.py --card-json research/card-catalog-live.json [--out-dir DIR]
 """
 
 from __future__ import annotations
@@ -98,7 +107,6 @@ CARD_OVERRIDES: dict[tuple[str, str, int], dict] = {
     ("Ardougne", "hard", 11):  {"remove": ["Dragon sq shield ornament kit"]},
     ("Ardougne", "elite", 4):  {"items": ["Knife", "Hammer"], "note": "From scratch: fletch the stock and smith the limbs."},
     # ── Desert
-    ("Desert", "easy", 8):     {"partialQuests": ["Icthlarin's Little Helper"]},
     ("Desert", "easy", 9):     {"npcs": ["Guardian mummy"]},
     ("Desert", "medium", 8):   {'items': ['Vial of water', 'Pestle and mortar'], 'note': 'Unfinished potion made from scratch. Unfinished potion made from scratch; grind the goat horn.'},
     ("Desert", "hard", 4):     {"items": ["Rope"], "note": "Rope to enter the Kalphite Lair."},
@@ -240,20 +248,18 @@ CARD_OVERRIDES: dict[tuple[str, str, int], dict] = {
     ("Lumbridge & Draynor", "hard", 11): {"items": ["Amulet of power"]},
     ("Lumbridge & Draynor", "easy", 7): {"items": ["Oak logs"]},
     ("Kourend & Kebos", "easy", 6): {"remove": ["Veos"], "note": "Veos or Cabin Boy Herbert (no card) can take you."},
-    ("Desert", "easy", 8): {"npcs": ["Guardian mummy"], "itemsAny": [["Ivory comb", "Pottery scarab", "Pottery statuette", "Stone scarab", "Stone seal", "Stone statuette", "Gold seal", "Golden scarab", "Golden statuette"]], "note": "Any Pyramid Plunder artefact."},
+    ("Desert", "easy", 8): {"partialQuests": ["Icthlarin's Little Helper"], "npcs": ["Guardian mummy"], "itemsAny": [["Ivory comb", "Pottery scarab", "Pottery statuette", "Stone scarab", "Stone seal", "Stone statuette", "Gold seal", "Golden scarab", "Golden statuette"]], "note": "Any Pyramid Plunder artefact."},
 }
 
+# {{SCP|Skill|level...}} -> (skill, level)
 _SKILL_RE = re.compile(r"\{\{SCP\|([A-Za-z]+)\|(\d+)[^}]*\}\}")
 _QUEST_LINE_RE = re.compile(r"\{\{SCP\|Quest\}\}\s*(.*)")
 _LINK_RE = re.compile(r"\[\[([^\]|#]+)(?:#[^\]|]*)?(?:\|([^\]]*))?\]\]")
 _NOT_BOOSTABLE_RE = re.compile(r"\{\{boostable\|no?\}\}|neither \[\[boost", re.I)
-_KILL_RE = re.compile(r"\b(kill|slay|defeat|pickpocket|steal from)\b", re.I)
 _MAKE_RE = re.compile(r"\b(make|craft|smith|cook|fletch|brew|mix|create|bake|build|cast|"
                       r"string|cut|smelt|tan|spin|weave|construct|fire)\b", re.I)
+# A task row's first cell: "|3. Task text"
 _TASK_START_RE = re.compile(r"^\|\s*(\d+)\.\s*(.*)")
-# Bronzeman: using / equipping / consuming an item needs its card
-_USE_RE = re.compile(r"\b(burn|equip|equipped|wear|wearing|wield|eat|drink|fill|offer|cremate|use|"
-                     r"operate|recharge|upgrade|plant|feed)\b", re.I)   # not "charge": charging makes the item
 # "Any pickaxe" etc. -> the page's TOOL_TIERS keys (any owned tier satisfies it)
 _TOOL_RE = re.compile(r"(?i)\bany \[*\s*(pickaxe|axe|harpoon)\b")
 
@@ -303,10 +309,12 @@ def _top_level_split(line: str) -> list[str]:
 
 
 def _outside_brackets(s: str) -> str:
+    """`s` with [[links]], {{templates}} and (parentheses) removed, to test top-level wording."""
     return re.sub(r"\[\[[^\]]*\]\]|\{\{[^}]*\}\}|\([^)]*\)", "", s)
 
 
 def _split_top(line: str, seps: tuple[str, ...]) -> list[str]:
+    """Split `line` on any of `seps`, but only outside [[...]], {{...}} and (...). Empty parts dropped."""
     parts, buf, depth, i = [], "", 0, 0
     while i < len(line):
         two = line[i:i + 2]
@@ -331,6 +339,7 @@ def _split_top(line: str, seps: tuple[str, ...]) -> list[str]:
 
 
 def _strip_markup(s: str) -> str:
+    """Wikitext -> plain display text (comments, refs, templates, links, bold/italics, HTML removed)."""
     s = re.sub(r"<!--.*?(-->|$)", "", s, flags=re.S)          # wiki editor comments
     s = re.sub(r"<ref[^>]*/>|<ref[^>]*>.*?</ref>", "", s, flags=re.S)
     s = re.sub(r"\{\{SCP\|Quest\}\}\s*", "", s)
@@ -388,6 +397,7 @@ _GE_CLAUSE_RE = re.compile(r",?\s*(?:resellable on the Grand Exchange|for a prof
 
 
 def _ironman_text(txt: str) -> str | None:
+    """Reward text with Grand Exchange value clauses cut; None if it is still about the GE after that."""
     if re.search(r"(?i)grand exchange", txt):
         cut = _GE_CLAUSE_RE.sub("", txt).strip()
         return None if re.search(r"(?i)grand exchange", cut) else cut
@@ -450,7 +460,13 @@ def _rewards(section: str, ctx: "Ctx | None" = None) -> list[dict]:
 
 
 class Ctx:
+    """Lookup context shared by the parser: catalog cards, quests, item sources, spells, combat NPCs.
+
+    Also collects `unknown_quests` (linked quest names not in quests.json) for the end-of-run report.
+    """
+
     def __init__(self, card_json: str):
+        """Load the catalog at `card_json` and the output/*.json files the parser needs."""
         cat = json.loads(Path(card_json).read_text(encoding="utf-8"))
         self.items = {i["name"].lower(): i["name"] for i in cat["items"]}
         self.item_pages = {i["name"].lower(): (i.get("wiki") or {}).get("page", "") for i in cat["items"]}
@@ -470,6 +486,7 @@ class Ctx:
         self.combat_npcs = {k.lower() for k, v in md.items() if v.get("combatLevel")}
 
     def item_card(self, title: str) -> str | None:
+        """Item card for a wiki link title (variants, plural/singular forms tried), or None."""
         title = title.replace("_", " ").strip()         # wiki links can use underscores
         if title.lower().startswith("burnt "):
             return None                                 # burnt food is a different item
@@ -496,13 +513,16 @@ class Ctx:
         return card
 
     def npc_card(self, title: str) -> str | None:
+        """NPC card for a wiki link title (also without a trailing "(...)" disambiguator), or None."""
         return self.npcs.get(title.lower()) or self.npcs.get(re.sub(r"\s*\([^)]*\)$", "", title).lower())
 
     def is_quest(self, title: str) -> bool:
+        """True if the title (optionally with "(quest)") is a quest in quests.json."""
         return (title.lower() in self.quests
                 or re.sub(r"\s*\(quest\)$", "", title, flags=re.I).lower() in self.quests)
 
     def quest(self, title: str) -> str:
+        """Canonical quest name for a link title; unknown titles are returned as-is and recorded."""
         q = self.quests.get(title.lower()) or self.quests.get(re.sub(r"\s*\(quest\)$", "", title, flags=re.I).lower())
         if not q:
             self.unknown_quests.add(title)
@@ -565,6 +585,13 @@ def _category_cards(ctx: "Ctx", title: str) -> list[str]:
 
 
 def parse_task(n: int, task_cell: str, req_cell: str, ctx: Ctx) -> dict:
+    """Parse one diary task row into the task dict written to diaries.json.
+
+    `task_cell` is the task text (first line) plus note lines; `req_cell` the requirement
+    bullets. Requirement lines are read first (quests, skills, "or" groups, items), then the
+    task line itself (used / produced items, production ingredients, spell runes, NPCs).
+    The returned dict still carries a private "_mentioned" list, consumed by _tag_uncarded.
+    """
     lines = task_cell.split("\n")
     first = lines[0]
     # note lines under the task text, except ones about *other* tasks
@@ -587,6 +614,7 @@ def parse_task(n: int, task_cell: str, req_cell: str, ctx: Ctx) -> dict:
     derived: set[str] = set()   # items inferred from production/spells, not stated by the wiki
 
     def add_item(c: str | None, inferred: bool = False) -> None:
+        """Add an item card; `inferred` marks it as derived (production/spells), not wiki-stated."""
         if c and c not in items:
             items.append(c)
             if inferred:
@@ -595,6 +623,7 @@ def parse_task(n: int, task_cell: str, req_cell: str, ctx: Ctx) -> dict:
             derived.discard(c)
 
     def add_skill(sk: str, lv: int, bst: bool) -> None:
+        """Record a skill level (highest wins; "Combat" goes to the combat level instead)."""
         nonlocal combat
         if sk == "Combat":
             combat = max(combat or 0, lv)
@@ -606,6 +635,7 @@ def parse_task(n: int, task_cell: str, req_cell: str, ctx: Ctx) -> dict:
             boostable[sk] = boostable.get(sk, True) and bst
 
     def options_in(seg: str) -> list[dict]:
+        """Alternatives named in an "or" segment: [{skill, level} | {quest} | {card}]."""
         opts = [{"skill": sk, "level": lv} for sk, lv, _ in _skills_in(seg) if sk != "Combat"]
         for t, _ in _LINK_RE.findall(seg):
             if ctx.is_quest(t):
@@ -765,6 +795,7 @@ def parse_task(n: int, task_cell: str, req_cell: str, ctx: Ctx) -> dict:
     ingredient_cards: set[str] = set()     # cards reached through an ingredient name
 
     def add_ingredients(name: str, depth: int) -> None:
+        """Add the production tools/ingredients of `name`, recursing (max depth 3) into made-only ones."""
         prod = (ctx.sources.get(name, {}) or {}).get("production") or {}
         for tool in prod.get("tools") or []:                 # e.g. Pestle and mortar, Hammer
             add_item(ctx.item_card(tool if isinstance(tool, str) else tool.get("item", "")), inferred=True)
@@ -905,6 +936,7 @@ def parse_task(n: int, task_cell: str, req_cell: str, ctx: Ctx) -> dict:
 
 
 def _apply_override(area: str, tier: str, task: dict, ctx: Ctx) -> None:
+    """Apply CARD_OVERRIDES[(area, tier, n)] to a parsed task in place (adds first, then removes)."""
     ov = CARD_OVERRIDES.get((area, tier, task["n"]))
     if not ov:
         return
@@ -1010,6 +1042,7 @@ def _tag_uncarded(result: list[dict], ctx: Ctx) -> None:
     """For every task, list the items and NPCs it mentions that have NO TCG card — so the page
     can show they were considered (no card = no restriction), not missed."""
     def carded(t: str) -> bool:
+        """True if the title resolves to an item or NPC card."""
         return bool(ctx.item_card(t) or ctx.npc_card(t))
     entries = [x for a in result for tier in TIERS
                for x in a.get(tier, {}).get("tasks", []) + a.get(tier, {}).get("rewards", [])]
@@ -1045,6 +1078,10 @@ def _tag_uncarded(result: list[dict], ctx: Ctx) -> None:
 
 
 def build(ctx: Ctx) -> list[dict]:
+    """Fetch and parse every AREAS diary page; returns the diaries.json list.
+
+    Exits if a CARD_OVERRIDES key names a task number beyond the tier's task count.
+    """
     result = []
     for area, page in AREAS.items():
         text = _fetch_wikitext(page)
@@ -1100,6 +1137,7 @@ def _fetch_wikitext(page: str, refresh: bool = False) -> str:
 
 
 def main() -> int:
+    """CLI entry point: build and write diaries.json. Returns 0."""
     p = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     p.add_argument("--card-json", required=True)
     p.add_argument("--out-dir", default=str(_OUT_DIR))

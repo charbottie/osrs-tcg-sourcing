@@ -26,6 +26,7 @@ socket.setdefaulttimeout(60)
 
 
 def _read(r, deadline: float) -> bytes:
+    """Read the whole HTTP response body, raising TimeoutError if it runs past `deadline` (monotonic)."""
     chunks = []
     while True:
         b = r.read(65536)
@@ -37,6 +38,9 @@ def _read(r, deadline: float) -> bytes:
 
 
 def _get(url: str, timeout: int = 60) -> bytes:
+    """Rate-limited GET (RATE_LIMIT_SECS between requests, process-wide) returning the body bytes.
+
+    Up to 3 attempts with 5 s / 10 s back-off; an HTTP 404 is raised immediately."""
     global _last
     for attempt in range(3):
         wait = RATE_LIMIT_SECS - (time.monotonic() - _last)
@@ -66,7 +70,9 @@ def get_json(url: str, timeout: int = 60) -> dict:
 
 
 def raw(title: str, timeout: int = 30) -> str:
-    """Raw wikitext of a page via the plain page URL (?action=raw), following redirects."""
+    """Raw wikitext of a page via the plain page URL (?action=raw), following redirects.
+
+    Follows at most 3 #REDIRECT hops; after that the last fetched text (a redirect stub) is returned."""
     for _ in range(3):
         url = "https://oldschool.runescape.wiki/w/" + urllib.parse.quote(title.replace(" ", "_"), safe="/:()'") + "?action=raw"
         text = _get(url, timeout).decode("utf-8")

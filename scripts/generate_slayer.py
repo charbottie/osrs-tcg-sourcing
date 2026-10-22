@@ -14,8 +14,15 @@ Output: scripts/output/slayer.json
   { masters: [{name, cards, replaces?, requirements: {combat, slayer, quests}, notes, wilderness?,
                tasks: [{task, weight, amount, extended, unlock: {slayer, combat, quests, ability}, alternatives, locations?}]}],
     tasks: {<task>: {page, slayer, combat, otherReq, monsters: [{name, card, locations, locationAccess: {loc: access key | null}}], equipment}},
-    unlocks: [ability names that unlock tasks] }
-Also writes scripts/cache/slayer_validation.json: monsters with no card, task pages not found.
+    unlocks: [ability names that unlock tasks], unlockInfo: (copied from slayer_curated.json) }
+Also writes scripts/cache/slayer_validation.json: monsters with no card, task pages not found,
+locations with no wiki region, curated overrides still pending review.
+
+Other inputs: --card-json catalog, scripts/output/quests.json, scripts/output/card_aliases.json,
+scripts/output/monster_locations.json (optional; for "<place> (nearby)" renames) and
+scripts/location_requirements.json (via location_reqs.py). Location regions and monster Slayer
+levels come from batched action=query reads, cached in scripts/cache/location_regions.json and
+scripts/cache/monster_slayer_levels.json.
 
 Usage:
   python3 scripts/generate_slayer.py --card-json research/card-catalog-live.json
@@ -37,12 +44,15 @@ _CURATED = _HERE / "slayer_curated.json"
 _OUT = _HERE / "output" / "slayer.json"
 _REPORT = _HERE / "cache" / "slayer_validation.json"
 
+# [[Target#anchor|display]]suffix  -> groups: target, display, trailing letters ("[[Bat]]s")
 _LINK_RE = re.compile(r"\[\[([^\]|#]+)(?:#[^\]|]*)?(?:\|([^\]]*))?\]\]([a-z]*)")
 _SCP_RE = re.compile(r"\{\{SCP\|([A-Za-z]+)\|(\d+)")
+# Weight cell: "{{+=|weight|8}}" or a bare number
 _WEIGHT_RE = re.compile(r"\{\{\+=\|weight\|(\d+)|^\s*(\d+)\s*$")
 
 
 def _clean(text: str) -> str:
+    """Strip HTML comments, <ref> footnotes and citation/note templates from wikitext."""
     text = re.sub(r"<!--.*?-->", "", text, flags=re.S)
     text = re.sub(r"<ref[^>]*/>", "", text)  # self-closing refs first, or the paired pattern swallows rows
     text = re.sub(r"<ref[^>]*>.*?</ref>|\{\{Cite[^}]*\}\}|\{\{CiteTwitter[^}]*\}\}|\{\{efn[^}]*\}\}|\{\{note\|[^}]*\}\}", "", text, flags=re.S)
@@ -50,6 +60,7 @@ def _clean(text: str) -> str:
 
 
 def _cells(row: str) -> list[str]:
+    """Split one wikitable row into cell texts, dropping leading data-sort-value/style/class attributes."""
     out = []
     for c in re.split(r"\n\|(?![}-])|\|\|", row)[1:]:
         c = re.sub(r"^\s*(?:data-sort-value=\"[^\"]*\"|style=\"[^\"]*\"|class=\"[^\"]*\")\s*\|", "", c.strip())
@@ -58,6 +69,11 @@ def _cells(row: str) -> list[str]:
 
 
 def _tables_with(text: str, col: str) -> list[tuple[list[str], list[list[str]]]]:
+    """Every wikitable whose header has a column containing `col` (case-insensitive).
+
+    Returns [(column labels, rows of cell texts)]. colspan headers are repeated so labels
+    line up with cells, but rows aren't colspan-expanded (see the Boss Slayer note in main).
+    """
     found = []
     for table in re.findall(r"\{\|.*?\n\|\}", _clean(text), flags=re.S):
         header = re.search(r"\n!(.*?)\n\|-", table, flags=re.S)
@@ -76,6 +92,7 @@ def _tables_with(text: str, col: str) -> list[tuple[list[str], list[list[str]]]]
 
 
 def _col(cols: list[str], row: list[str], *names: str) -> str:
+    """Cell of `row` under the first column whose label contains one of `names`; "" if none."""
     for n in names:
         for i, c in enumerate(cols):
             if n.lower() in c.lower() and i < len(row):
@@ -93,6 +110,7 @@ def _task_name(cell: str) -> tuple[str, str]:
 
 
 def _parse_unlock(cell: str, quests: set[str]) -> dict:
+    """Task unlock cell -> {slayer?, combat?, quests?, ability?}; an ability is the ''italic'' unlock name."""
     out = {}
     for skill, lvl in _SCP_RE.findall(cell):
         if skill in ("Slayer", "Combat"):
@@ -107,6 +125,11 @@ def _parse_unlock(cell: str, quests: set[str]) -> dict:
 
 
 def parse_master(name: str, quests: set[str]) -> list[dict]:
+    """A Slayer master's task list from "<name>/Slayer assignments" (or the master's own page).
+
+    Returns [{task, target, weight, amount, extended, unlock, alternatives, locations?}];
+    `target` is the linked page, `locations` only for masters with a location column (Konar).
+    """
     text = ""
     for page in (f"{name}/Slayer assignments", name):
         try:
@@ -147,6 +170,11 @@ def _fetch_follow(page: str) -> tuple[str, str]:
 
 
 def parse_task_page(task: str, target: str) -> dict | None:
+    """Parse the "Slayer task/<Task>" page, trying several spellings of the name.
+
+    Returns {page, slayer, combat, otherReq, monsters: [{name, locations}]} from the
+    Infobox Slayer and the first Monster Variants table, or None if no page is found.
+    """
     target = target.replace("Slayer task/", "")
     cands = [task, task[:1].upper() + task[1:].lower(), f"{target}s", target, re.sub(r"s$", "", task)]
     for cand in dict.fromkeys(cands):
@@ -249,6 +277,12 @@ def monster_slayer_levels(titles: list[str]) -> dict[str, int]:
 
 
 def main() -> int:
+    """Build and write slayer.json plus the validation report. Returns 0.
+
+    Order matters: masters -> task pages -> location regions -> curated taskOverrides ->
+    merge duplicate monster rows -> access/wilderness -> Slayer levels -> "(nearby)"
+    renames -> location_requirements.json gates merged in.
+    """
     p = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     p.add_argument("--card-json", required=True)
     args = p.parse_args()
@@ -310,6 +344,7 @@ def main() -> int:
     regions = location_regions([l for _, tp in pending for mon in tp["monsters"] for l in mon["locations"]]
                                + [l for m in masters for t in m["tasks"] for l in t.get("locations", [])])
     def access_of(loc):
+        """access_routes.json key needed to reach `loc`, or None if nothing is needed."""
         if loc in loc_override:
             return loc_override[loc]
         # a place in several regions is reachable through whichever needs nothing
@@ -476,7 +511,7 @@ def main() -> int:
                     t.setdefault("locationGates", {})[l] = {**location_reqs.merge_gate(
                         {k: v for k, v in prev.items() if k in location_reqs.GATE_KEYS}, lg), **meta}
     report["monstersNoCard"] = [f"{n}: {m['name']}" for n, tp in tasks_out.items() for m in tp["monsters"] if not m.get("card")]
-    report["pendingReview"] = sorted(o["task"] for o in cur.get("taskOverrides", {}).values() if o.get("pending"))
+    report["pendingReview"] = sorted(o.get("task", k) for k, o in cur.get("taskOverrides", {}).items() if o.get("pending"))
 
     unlocks = sorted({t["unlock"]["ability"] for m in masters for t in m["tasks"] if t["unlock"].get("ability")})
     out = {"masters": masters, "tasks": tasks_out, "unlocks": unlocks, "unlockInfo": cur.get("unlockInfo", {})}

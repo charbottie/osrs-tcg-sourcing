@@ -1134,29 +1134,9 @@
      "optional": true
     },
     {
-     "label": "Warm clothing (any; more pieces = less cold damage)",
-     "cards": [
-      "Pyromancer hood",
-      "Pyromancer garb",
-      "Pyromancer robe",
-      "Pyromancer boots",
-      "Larupia hat",
-      "Larupia top",
-      "Larupia legs",
-      "Clue hunter gloves",
-      "Clue hunter trousers",
-      "Clue hunter cloak",
-      "Clue hunter boots",
-      "Graceful hood",
-      "Graceful top",
-      "Graceful legs",
-      "Graceful gloves",
-      "Graceful boots",
-      "Graceful cape",
-      "Cap and goggles",
-      "Wolf mask",
-      "Earmuffs"
-     ],
+     "label": "Warm clothing (4 pieces in different slots = full protection)",
+     "group": "warm_clothing",
+     "note": "Any item from the wiki's Warm clothing list (head, neck, hands, cape, weapon, shield, body, legs, ring, feet). More than 4 pieces does nothing extra.",
      "type": "item",
      "optional": true
     },

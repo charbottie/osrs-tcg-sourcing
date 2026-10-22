@@ -48,7 +48,11 @@ docs/opportunities.md
 docs/opportunities/
 
 # ── Research / raw data ────────────────────────────────────────────────────────
-# card-catalog-v1.json is tracked — needed by server.py to decode collections
+# Tracked: card-catalog-live.json (+ .version) is the catalog every generator and server.py read;
+# card-catalog-v1.json and catalog_migration.json are kept for reference / name migrations
 research/*
+!research/card-catalog-live.json
+!research/card-catalog-live.version
 !research/card-catalog-v1.json
+!research/catalog_migration.json
 

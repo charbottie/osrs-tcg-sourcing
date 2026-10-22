@@ -11,11 +11,19 @@ Adds to each item:
                   ranged_strength, magic_damage, prayer}
                 Only non-zero values are included.
 
-Combat type is determined first by the item's attack stats
-(highest attack type wins), then by skill requirements,
-then by name patterns for items with no useful data.
+Combat type is determined (classify_combat_type) by the weapon's OSRSBox
+weapon_type, then by skill requirements, then by the item's attack stats
+(highest attack type wins), then by name patterns for items with no useful data.
 
-Usage:
+Input:  research/card-catalog-live.json (fixed path, CARD_JSON): item cards with a tcg.tags.slot,
+        plus the osrsreboxed-db / osrsbox-db items-complete.json from GitHub (ITEMS_COMPLETE_URLS,
+        first one that loads; not cached, not the wiki).
+Output: scripts/output/equipment_data.json
+  { "<slot>": [{name, value, is2h, itemIds, combatType, reqLvl?, stats?, attackSpeed?}] }
+  2h weapons are listed under "weapon" with is2h=true. value is always 0 for the v1.0 catalog,
+  so each slot ends up sorted by name.
+
+No CLI flags. Usage:
   python3 scripts/generate_equipment.py
 """
 from __future__ import annotations
@@ -45,6 +53,7 @@ STAT_KEYS = [
 
 
 def fetch_json(url: str) -> dict:
+    """GET a JSON URL (120 s timeout) and decode it."""
     print(f'  Fetching {url[:80]} ...')
     req = urllib.request.Request(url, headers={'User-Agent': UA})
     with urllib.request.urlopen(req, timeout=120) as r:
@@ -128,7 +137,7 @@ def classify_combat_type(name: str, slot: str, reqs: dict[str, int],
         return 'melee'
 
     # 2. Requirements: the required skill tells us the combat style directly.
-    #    Prioritise the highest-level requirement when multiple exist.
+    #    Fixed priority when several exist: Ranged, then Magic, then Attack/Strength.
     if reqs:
         if 'ranged' in reqs:
             return 'ranged'
@@ -178,7 +187,10 @@ def classify_combat_type(name: str, slot: str, reqs: dict[str, int],
 
 
 def merge_best(id_lookup: dict[int, dict], item_ids: list[int]) -> tuple[dict, dict, int | None, str | None]:
-    """Merge reqs, stats, attack_speed, weapon_type from all item IDs."""
+    """Merge reqs, stats, attack_speed, weapon_type from all item IDs.
+
+    reqs/stats come together from the id with the largest total |stat|; attack_speed and
+    weapon_type are the first non-None seen. Returns (reqs, stats, attack_speed, weapon_type)."""
     best_reqs:   dict[str, int] = {}
     best_stats:  dict[str, int] = {}
     best_speed:  int | None     = None
@@ -232,6 +244,7 @@ def _load_equip_cards(path: str) -> list[dict]:
 
 
 def main() -> int:
+    """Classify every equippable card and write OUT_JSON grouped by slot. Returns 0."""
     # Load Card.json
     print('Loading Card.json ...')
     equip_cards = _load_equip_cards(CARD_JSON)

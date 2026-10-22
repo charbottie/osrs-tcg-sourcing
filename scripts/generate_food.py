@@ -5,6 +5,11 @@ Generate scripts/output/food_data.json — map of card name → HP healed.
 Fetches the Food/All_food page from the OSRS wiki and parses heal amounts.
 Only cards that exist in Card.json are included.
 
+Input:  wiki Food/All_food raw wikitext (wiki_api.raw; not cached — refetched every run),
+        research/card-catalog-live.json (fixed path, CARD_JSON; no CLI flags).
+Output: scripts/output/food_data.json  {"<card name>": total HP healed}
+        (multi-bite foods count every bite; foods that heal 0 / "Random" are left out)
+
 Usage:
   python3 scripts/generate_food.py
 """
@@ -15,12 +20,9 @@ import wiki_api
 import os
 import re
 import sys
-import urllib.request
 
 CARD_JSON = os.path.join(os.path.dirname(__file__), '..', 'research', 'card-catalog-live.json')
 OUT_JSON  = os.path.join(os.path.dirname(__file__), 'output', 'food_data.json')
-
-UA = 'OSRS-TCG-enrichment/1.0 (github.com/Azderi/osrs-tcg)'
 
 # Fetched with wiki_api.raw (plain page URL), never api.php?action=parse
 
@@ -31,6 +33,8 @@ def fetch_wiki_food() -> dict[str, int]:
     wikitext = wiki_api.raw('Food/All_food')  # plain page URL ?action=raw
 
     food: dict[str, int] = {}
+    # Each wikitable row starts with "|-"; the food's name is its {{plinkt|Name}} cell and the
+    # heal amount is in one of the next two cells.
     for row in wikitext.split('|-'):
         m_name = re.search(r'\{\{plinkt\|([^}|]+)', row)
         if not m_name:
@@ -70,6 +74,7 @@ def fetch_wiki_food() -> dict[str, int]:
 
 
 def main() -> int:
+    """Fetch the wiki food table, keep entries named like a card, write OUT_JSON. Returns 0."""
     wiki_food = fetch_wiki_food()
 
     print('Loading Card.json ...')

@@ -20,6 +20,7 @@ _OUT = Path(__file__).resolve().parent / "output" / "card_aliases.json"
 
 
 def main() -> int:
+    """Build {variant name (lowercase): card name} from the catalog and write _OUT. Returns 0."""
     p = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     p.add_argument("--card-json", required=True)
     args = p.parse_args()

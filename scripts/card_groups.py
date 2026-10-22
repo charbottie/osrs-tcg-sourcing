@@ -1,8 +1,12 @@
-"""Canonical card groups for bm_quest_cards.json.
+"""DOCUMENTATION ONLY: the canonical "any one of" card groups for bm_quest_cards.json.
+
+Nothing imports or runs this module, and editing it changes no output. It records the
+intended group scheme; output/bm_quest_cards.json currently has no "groups" key (its
+requirements list their cards inline), and the planner page keeps its own group lists.
 
 A group is a named set of interchangeable cards that satisfy a requirement
-(e.g. any axe, any pickaxe).  Groups are stored in the top-level "groups"
-key of bm_quest_cards.json and referenced by name in requirements:
+(e.g. any axe, any pickaxe). In the scheme, groups would be stored in a top-level
+"groups" key of bm_quest_cards.json and referenced by name in requirements:
 
     {"label": "Any axe", "group": "axe", "type": "item"}
 
@@ -16,6 +20,8 @@ Rules for adding a group:
 
 One-off or context-specific sets (e.g. "Rune axe or higher", "any spear")
 are kept as explicit cards[] on the requirement rather than as groups.
+
+location_reqs.py has its own, unrelated CARD_GROUPS set.
 """
 
 # Each list is ordered weakest → strongest (or alphabetical if no clear tier).

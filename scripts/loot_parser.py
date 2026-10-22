@@ -22,6 +22,8 @@ The rarity cell class encodes the colour tier:
 
 We use the cell text as the fraction directly when it matches N/D format,
 and fall back to the bg-colour class if not.
+
+Library module (no CLI): parse_drops() / parse_monster_info(), used by generate_sources.py.
 """
 
 from __future__ import annotations
@@ -33,6 +35,7 @@ from bs4 import BeautifulSoup, Tag
 
 import rarity_mapper
 
+# "1/512", "4/128", "1/26.9", "2.5/1,000" — numerator may be decimal, denominator may have commas
 _FRACTION_RE = re.compile(r"^\d+(?:\.\d+)?/[\d,.]+$")
 
 # Maps table-bg-* colour to a fallback label when the cell text isn't a fraction
@@ -45,9 +48,11 @@ _BG_TO_LABEL: dict[str, str] = {
 }
 
 
+# Section headings whose tables are the shared rare/gem drop table rather than the monster's own
 _RDT_KEYWORDS = {"rare and gem drop table", "rare drop table", "gem drop table"}
 
 class DropRow(TypedDict):
+    """One parsed drop-table row (see parse_drops)."""
     item: str          # item name as it appears on the wiki
     quantity: str      # e.g. "1", "1–5", "100 (noted)"
     fraction: str      # e.g. "1/512", "4/128", or "" if not found
@@ -58,13 +63,18 @@ class DropRow(TypedDict):
 
 
 def _fraction_rate(frac: str) -> float:
-    """Parse 'N/D' → float probability, for duplicate-dedup comparison."""
+    """Parse 'N/D' → float probability, for duplicate-dedup comparison.
+
+    Both sides may hold commas and decimals ("1/26.9", "3/1,282.5"); anything else is 0.0."""
     if not frac:
         return 0.0
-    m = re.match(r"^([\d.]+)/([\d,]+)$", frac)
+    m = re.match(r"^([\d,.]+)\s*/\s*([\d,.]+)$", frac)
     if not m:
         return 0.0
-    return float(m.group(1)) / float(m.group(2).replace(",", ""))
+    try:
+        return float(m.group(1).replace(",", "")) / float(m.group(2).replace(",", ""))
+    except (ValueError, ZeroDivisionError):
+        return 0.0
 
 
 def parse_drops(html: str) -> list[DropRow]:
@@ -103,6 +113,7 @@ def parse_drops(html: str) -> list[DropRow]:
 
 
 def _parse_row(tr: Tag, section: str, is_rdt: bool) -> DropRow | None:
+    """Parse one <tr> of an item-drops table into a DropRow, or None for header/malformed rows."""
     cells = tr.find_all("td")
     # Skip header rows and malformed rows (need at least 4 cells)
     if len(cells) < 4:
@@ -127,6 +138,7 @@ def _parse_row(tr: Tag, section: str, is_rdt: bool) -> DropRow | None:
 
 
 def _extract_item_name(cell: Tag) -> str:
+    """Item name from the item-col cell: the link text if there is a link, else the cell text."""
     link = cell.find("a")
     if link:
         return link.get_text(strip=True)

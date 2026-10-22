@@ -26,6 +26,9 @@ _CACHE = _HERE / "cache" / "location_infobox_reqs.json"
 
 
 def used_location_names() -> list[str]:
+    """Every location name the planner's outputs use, sorted, with " (nearby)" stripped.
+
+    (monster_locations.json's "_gates" key is iterated like a card, so gated places are included too.)"""
     out = _HERE / "output"
     names: set[str] = set()
     ml = json.loads((out / "monster_locations.json").read_text(encoding="utf-8"))
@@ -45,6 +48,9 @@ def used_location_names() -> list[str]:
 
 
 def _field(text: str, key: str) -> list[str]:
+    """Non-empty values of |key= and its numbered versions (|key1=, |key2=…) in an infobox's wikitext.
+
+    A value runs until the next line starting with "|" or the closing "}}"."""
     return [v.strip() for v in re.findall(r"\|\s*" + key + r"\d*\s*=(.*?)(?=\n\s*\||\n\}\})", text, flags=re.S) if v.strip()]
 
 
@@ -63,7 +69,7 @@ def infobox_requirements(titles: list[str]) -> dict[str, dict]:
         for pg in q.get("pages", {}).values():
             text = (pg.get("revisions") or [{}])[0].get("slots", {}).get("main", {}).get("*", "")
             m = re.search(r"\{\{\s*Infobox Location", text, re.I)
-            box = text[m.start():m.start() + 6000] if m else ""
+            box = text[m.start():m.start() + 6000] if m else ""   # 6000 chars: enough for any Infobox Location
             info = {"requirement": _field(box, "requirement"), "quest": _field(box, "quest"),
                     "type": (_field(box, "type") or [""])[0]} if box else {}
             srcs = [pg["title"]] + back.get(pg["title"], [])
@@ -80,6 +86,7 @@ def infobox_requirements(titles: list[str]) -> dict[str, dict]:
 
 
 def main() -> int:
+    """Print the location names whose wiki infobox has a requirement/quest field (uncovered ones, or --all). Returns 0."""
     p = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     p.add_argument("--all", action="store_true")
     args = p.parse_args()

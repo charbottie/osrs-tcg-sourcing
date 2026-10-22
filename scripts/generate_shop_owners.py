@@ -45,6 +45,7 @@ _OUT = _HERE / "output" / "shop_owners.json"
 
 
 def fetch() -> list[dict]:
+    """All infobox_shop Bucket rows ({page_name, owner, location}), from _CACHE if present (500 per request)."""
     if _CACHE.exists():
         return json.loads(_CACHE.read_text(encoding="utf-8"))
     out, off = [], 0
@@ -64,6 +65,7 @@ def fetch() -> list[dict]:
 def owner_names(owner: str) -> list[str]:
     """In-game names in an Infobox Shop |owner= value."""
     names = []
+    # [[Target#section|Label]]: the label if given, else the target without a "(…)" suffix
     for tgt, txt in re.findall(r"\[\[([^\]|#]+)(?:#[^\]|]*)?(?:\|([^\]]*))?\]\]", owner or ""):
         n = (txt or re.sub(r"\s*\([^)]*\)$", "", tgt)).strip()
         if n:
@@ -75,11 +77,13 @@ def owner_names(owner: str) -> list[str]:
 
 
 def main() -> int:
+    """Map every seller / facility named in item_sources.json + ingredient_info.json to its shop's
+    owner NPC card(s) and locations, and write _OUT. Returns 0."""
     p = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     p.add_argument("--card-json", required=True)
     args = p.parse_args()
     cat = json.loads(Path(args.card_json).read_text(encoding="utf-8"))
-    npc = npc_names(cat)   # card names, wiki pages and version names -> NPC card
+    npc = npc_names(cat)   # card names (and without "(…)") and wiki pages -> NPC card (no version names)
     shops: dict[str, list[str]] = {}
     places: dict[str, list[str]] = {}
     for row in fetch():
@@ -94,6 +98,9 @@ def main() -> int:
                   **{k: v["access"] for k, v in hand.get("_locationAccess", {}).items()}}
 
     def access_of(loc):
+        """Access key for a place: hand override, else its wiki region's REGION_ACCESS key.
+
+        None when the place has no region, or any of its "&"-joined regions has no access key."""
         loc = base_place(loc)
         if loc in loc_access:
             return loc_access[loc]
@@ -110,6 +117,7 @@ def main() -> int:
                 if v.get("production") and v["production"].get("facilities")}
 
     def shop_page(s: str) -> str | None:
+        """The wiki shop page for a seller name (tries without "(variant)" and with/without "."), or None."""
         base = re.sub(r"\((?=[^)]*\)$)[^)]*\)$", "", s).strip()   # "...Store.(Karamja gloves)"
         for c in (s, base, s.rstrip("."), base.rstrip("."), s + ".", base + "."):
             if c.lower() in shops_lc:

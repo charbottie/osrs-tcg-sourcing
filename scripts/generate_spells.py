@@ -12,6 +12,10 @@ Also: scripts/output/rune_sources.json
   few other unlimited sources in EXTRA_SOURCES. Lets a spell's rune cost be
   met by "the rune, or anything that supplies it".
 
+Input: raw wikitext of the spellbook pages, Combination rune and Elemental staff, via
+generate_diaries._fetch_wikitext (cached in scripts/cache/wikitext/; delete a file to refetch).
+No CLI flags.
+
 Usage:
   python3 scripts/generate_spells.py
 """
@@ -45,12 +49,17 @@ BOOKS = {
 _ROW_SPLIT = re.compile(r"^\|-.*$", re.M)
 # Spell name cell: "{{plinkt|Name}}" (Standard) or "|[[Name]]" after the icon cells (others)
 _NAME_RE = re.compile(r"\{\{plinkt?\|([^}|]+)|^\|\s*\[\[(?!File:)([^\]|]+)(?:\|[^\]]*)?\]\]\**\s*$", re.M)
+# {{RuneReq|Law=1|Air=3}} -> "Law rune": 1, "Air rune": 3
 _RUNES_RE = re.compile(r"\{\{RuneReq\|([^}]*)\}\}")
 _LEVEL_RE = re.compile(r"^\|\s*(\d+)\s*$", re.M)
 _MEMBERS_RE = re.compile(r"\{\{members\|(yes|no)\}\}", re.I)
 
 
 def parse_book(book: str, wikitext: str) -> dict[str, dict]:
+    """{spell: {book, level, runes, members}} from one spellbook page's wikitext table.
+
+    A row counts only if it has a name, a {{RuneReq}} and a bare level cell; the first row
+    seen for a name wins. members is None when the row has no {{members}} cell."""
     spells: dict[str, dict] = {}
     for row in _ROW_SPLIT.split(wikitext):
         name, runes = _NAME_RE.search(row), _RUNES_RE.search(row)
@@ -81,6 +90,7 @@ def rune_sources() -> dict[str, list[str]]:
     sources: dict[str, list[str]] = {r: [] for r in ELEMENTS}
 
     def add(rune: str, item: str) -> None:
+        """Record item as a source of rune (no self-sources, no duplicates)."""
         if item != rune and item not in sources[rune]:
             sources[rune].append(item)
 
@@ -111,6 +121,7 @@ def rune_sources() -> dict[str, list[str]]:
 
 
 def main() -> int:
+    """Parse the four spellbooks into _OUT, then write the elemental rune sources. Returns 0."""
     spells: dict[str, dict] = {}
     for book, page in BOOKS.items():
         found = parse_book(book, _fetch_wikitext(page))

@@ -14,6 +14,8 @@ Skill requirements are encoded as:
   <span class="scp" data-skill="SkillName" data-level="N">
 
 Quest prerequisites are in a nested list under "Completion of the following quests".
+
+Library module (no CLI): parse_quest(), used by generate_quests.py and generate_sources.py.
 """
 
 from __future__ import annotations
@@ -34,12 +36,14 @@ _OSRS_SKILLS: frozenset[str] = frozenset({
 
 
 class SkillReq(TypedDict):
+    """A skill level a quest needs; boostable=False when the wiki says "(not boostable)"."""
     skill: str
     level: int
     boostable: bool
 
 
 class QuestInfo(TypedDict):
+    """Everything parse_quest() extracts from one quest page."""
     prerequisites: list[str]           # quest names required first
     reward_items: list[str]            # item names given as quest rewards
     start_npc: str                     # best-effort starting NPC name
@@ -60,7 +64,7 @@ def parse_quest(html: str) -> QuestInfo:
     qd = soup.find("table", class_="questdetails")
     if qd is None:
         return QuestInfo(
-            prerequisites=[], reward_items=[], start_npc="", kills=[],
+            prerequisites=[], reward_items=[], start_npc="", kills=[], avoidable_kills=[],
             skill_requirements=[], items_required=[],
         )
 
@@ -302,7 +306,7 @@ def _extract_start_npc(cell: Tag | None) -> str:
         if name and len(name) > 1:
             return name
 
-    # Fallback: plain text, strip "Talk to" prefix
+    # Fallback: plain text, strip "Talk to" prefix and anything from " at/in/near… <place>" on
     raw = cell.get_text(strip=True)
     raw = re.sub(r"^(?:speak\s+to\s+|talk\s+to\s+)", "", raw, flags=re.IGNORECASE)
     raw = re.split(r"\s+(?:at|in|near|outside|by)\s+", raw, maxsplit=1)[0]

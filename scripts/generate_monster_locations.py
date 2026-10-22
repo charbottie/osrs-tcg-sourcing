@@ -24,6 +24,12 @@ Output: scripts/output/monster_locations.json
     (extra needs at that place: the Slayer verification's location gates merged with
     location_requirements.json — see location_reqs.py for the gate model)
 
+Other inputs: slayer_curated.json "taskOverrides" location gates (non-monster-specific ones become
+"_gates"), location_requirements.json (via location_reqs.py; validated against the outputs first),
+and the region / page-type caches shared with generate_slayer.py / generate_diaries.py
+(cache/location_regions.json, wiki_page_types cache). Delete cache/npc_page_versions.json (or bump
+_CACHE_VERSION) to re-parse pages.
+
 Usage:
   python3 scripts/generate_monster_locations.py --card-json research/card-catalog-live.json
 """
@@ -49,6 +55,7 @@ _OVERRIDES = _HERE / "monster_locations_overrides.json"
 _NOT_PLACE = {"Quest", "Miniquest", "Item", "Bonuses", "NPC", "Monster", "Skill", "Spell", "Pet", "Currency", "Prayer", "Organisation"}
 PACK_REGIONS = {"Misthalin", "Asgarnia", "Kandarin", "Karamja", "Fremennik", "Kourend", "Varlamore",
                 "Morytania", "Desert", "Tirannwn", "Wilderness"}
+# [[Target#anchor|display]] -> group 1 = target page
 _LINK_RE = re.compile(r"\[\[([^\]|#]+)(?:#[^\]|]*)?(?:\|[^\]]*)?\]\]")
 # A link given only as a reference point ("South of the [[Farming Guild]]", "In front of the
 # [[Warriors' Guild]]", "[[Lunar Sea]] - north-east of [[Brittle Isle]]") is not a place the NPC is
@@ -152,6 +159,7 @@ def parse_page(text: str) -> dict:
     for m in re.finditer(r"\{\{\s*LocLine", text, re.I):
         p = _params(_template_at(text, m.start()))
         loclines.append({"locations": _links(p.get("location")), "version": p.get("version", ""),
+                         # "dropverison": a misspelling that occurs on some wiki pages
                          "dropversion": p.get("dropversion", "") or p.get("dropverison", ""),
                          "name": p.get("name", ""), "region": p.get("leagueregion", "")})
     return {"versions": versions, "loclines": loclines}
@@ -211,6 +219,7 @@ def page_versions(titles: list[str]) -> dict[str, dict]:
 
 
 def _norm(s: str) -> str:
+    """Lowercase with non-word characters removed, for comparing version labels/tags."""
     return re.sub(r"\W", "", (s or "").lower())
 
 
@@ -232,6 +241,7 @@ def card_locations(page: str, ids: set[int], pages: dict[str, dict], id_pages: d
         chosen += [(t, v) for v in sel]
 
     def quest_copy_elsewhere(v):
+        """True for a non-combat quest NPC version located wholly outside the card's pack region(s)."""
         if v["kind"] != "Npc" or v["quest"].strip() in ("", "No") or not v["locations"] or not pack:
             return False
         rs = [regions.get(base_place(l), "") for l in v["locations"]]
@@ -278,6 +288,7 @@ def card_locations(page: str, ids: set[int], pages: dict[str, dict], id_pages: d
 
 
 def main() -> int:
+    """Build and write monster_locations.json and print the version-filter / pack-region checks. Returns 0."""
     p = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     p.add_argument("--card-json", required=True)
     args = p.parse_args()
@@ -324,6 +335,7 @@ def main() -> int:
     regions = location_regions([base_place(l) for ls in found.values() for l in ls])
 
     def access_of(loc):
+        """access_routes.json key needed to reach `loc` (None = none); "(nearby)" uses the place's access."""
         loc = base_place(loc)   # a nearby place shares the place's area access
         if loc in loc_access:
             return loc_access[loc]

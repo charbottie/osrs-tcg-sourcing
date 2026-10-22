@@ -911,18 +911,126 @@
   box-shadow:0 4px 16px #000;z-index:9999;pointer-events:none"></div>
 
 <script>
+/* ═══════════════════════════════════════════════════════════════════════════
+   BRONZEMAN PLANNER: TABLE OF CONTENTS
+   One big script, in this order. Search for a section header ("// ─── Name")
+   or the function names listed to jump to an area.
+
+   CORE / SHARED
+   1.  Universal navigation helpers ... _navToCard, _navToQuest, _navToPack
+   2.  Toast notifications ............ showToast
+   3.  Tool tiers ..................... getImplicitTools, TOOL_TIERS, WARM_CLOTHING_BY_SLOT
+   4.  Card level-order sort .......... CARD_SORT_LEVEL, sortCardsByLevel
+   5.  Compound tool resolution ....... resolveToolParts, TANNING_MAP
+   6.  Recursive item reachability .... spawnLocGate, _activityMet, _itemGetNeeds, canGetItem
+                                         (sub-blocks: _curatedGatherStatus, _shopStatus,
+                                          _clueStepOk, _clueTierStatus, _clueSourceStatus)
+       This is the ownership/sourcing core: "can this account get item X?".
+   7.  State .......................... global data stores (monsterDrops, itemSources, …)
+   8.  Slayer wishlist group helper ... toggleSlayerWishlistGroup
+   9.  Quest completion stores ........ _cqFileKey, toggleQuestStarted, toggleQuestDone
+   10. Card ownership & lookup ........ isOwned, _cardInfo, _isCard, _cardImg, questIcon
+   11. Text / HTML helpers ............ cleanSpawnText, escHtml, wikiLink
+   12. Simulation & collection loading  toggleOwned, reroll, updateSimBar, loadCollection
+   13. Collection switcher ............ switchCollection, populateAccountDropdown, onAccountChange
+   14. Data loading ................... loadData (fetches every output/*.json, then renders)
+
+   CARDS TAB (sidebar list + card detail pages)
+   15. Cards tab: sidebar list ........ CLUE_TIER_CONFIG, buildCardList, filterCards, renderList
+   16. Skill levels ................... getLevel, getCombatLevel
+   17. Cross-tab navigation history ... captureState, pushHistoryEntry, navigateBack, navigateForward
+   18. Card display ................... showCard, refreshDetail
+   19. Rarity / progress / drop rows .. fractionValue, progressPill, monsterReqTags, dropRowHtml
+   20. Monster view ................... dedupeDrops
+   21. Pack acquisition helpers ....... _buildPackPools, _cardInPack, packAcquisitionHtml
+
+   WISHLIST TAB
+   22. Wishlist ....................... _questWishCards, _wishlistedCardSet, _wishlistPackRecs
+   23. Hover popups (tooltips) ........ _placeTip, _cardGridTipAttrs, _showCardGridTip, _showPackTip
+   24. Wishlist storage, stars, editing _loadWishlist, _saveWishlist, toggleWishlist,
+                                         openNotePopover, openGroupEditor, renderWishlist
+
+   PACKS TAB
+   25. Pack tab ....................... _getPackCards, renderPackList, showPackDetail
+   26. Packs overview ................. _packNeeds, _renderPackHome, showPackOverview
+
+   CARD DETAIL PAGES (by card kind)
+   27. Monster / NPC card page ........ tierBadgeHtml, renderMonster
+   28. Production card HTML ........... facilityNote
+   29. Non-card ingredient row ........ renderNonCardIngredient, _shopRowHtml
+   30. Ingredient detail page ......... renderIngredient, _cardSkillingHtml, renderProduction
+   31. Clue Scroll view ............... _cluePct, renderClueScroll
+   32. Item view ...................... _recipeHtml, _cardVersionsHtml, renderItem
+   33. Clue step usage (item / NPC) ... clueStepUsageHtml, clueStepNpcHtml
+   34. Tool tier rows HTML ............ renderToolTiers
+
+   SYNC / TOP BAR
+   35. Live sync / Refresh all ........ _startLiveSync, refreshAll
+   36. Live collection refresh ........ refreshCollection   (needs server.py)
+   37. Hiscores level lookup .......... lookupLevels        (needs server.py)
+   38. Quest sync from screenshots .... syncQuestsFromScreenshots
+   39. Tab navigation ................. switchTab, _renderTab
+
+   SKILLING TAB
+   40. Skilling tab ................... skillIcon, SKILL_ORDER
+   41. Skill-icon + location hovers ... _iconizeSkillLevels, _showLocTip, _hoverLocations
+   42. Boss data + boss loot lookups .. BOSS_DATA, _bossLoot, _bossRewardsFor, _buildBossByCard
+   43. Quest card index ............... getQuestCardIndex, requiredForQuestsHtml
+   44. Skilling static training data .. SPELLBOOK_GATES, SPELL_ITEM_REQS
+   45. Generated skilling methods ..... _skillingMethods, getTrainingMethods, _combatEval
+   46. Getting started + recommendations _skillStarter, renderSkillGrid, _skillRecommendations
+   47. Skilling home + skill detail ... _renderSkillHome, showSkillDetail
+
+   BOSSES TAB
+   48. Bosses tab ..................... _bossProgress, evaluateBoss
+   49. Boss two-pane functions ........ _renderBossFilterBtns, renderBossList, showBossDetail
+   (Bosses home panel is after Slayer: _renderBossHome, showBoss, renderBossing)
+
+   SLAYER TAB
+   50. Slayer tab ..................... SLAYER, _slayerUnlocks, _slMasterStatus, _slAssignable
+   51. Location gates (shared) ........ _setLocReqs, _mergeGate, _locGate, _gateOk, _locReqOk
+   52. Slayer evaluation .............. _slMonsterStatus, _slTaskStatus, _slMasterSummary
+   53. Slayer list + detail panes ..... renderSlayerList, showSlayer, _renderSlayerDetail
+   54. Bosses tab: home + navigation .. _renderBossHome, showBoss, showBossOverview
+
+   CLUES TAB
+   55. Clues tab ...................... renderClueList, showClue, _renderClueDetail, _renderClueHome
+
+   DIARIES TAB
+   56. Achievement Diaries tab ........ DIARY_TIERS, AREA_QUESTS, DIARY_DATA, _buildDiaryByCard
+   57. Data name check (dev) .......... _validateDataNames  (logs "[data check]" to console)
+       then evaluateDiaryTier, renderDiaryList, toggleDiaryTick, showDiaryDetail, showDiary
+
+   QUESTING TAB
+   58. Questing tab / most-needed cards _cardDemand, _renderQuestCardSummary
+   59. Progress bars .................. _progressBar, _questProgress
+   60. Requirement rows (shared) ...... _questReqRow, _reqWishStar, _toggleReqWish
+       (used by the Questing, Bosses and Slayer detail pages)
+   61. Quest requirement model ........ _expandReq, _reqCards, _accessMet, _routeMet, _reqMet
+   62. Quest status, list and detail .. questStatus, renderQuestList, showQuestDetail
+
+   RULES / EQUIPMENT
+   63. Rules tab ...................... renderRulesTab, _rulesTabHtml
+   64. Equipment tab .................. computeTotalStats, renderGearStats, buildItemTooltip
+   65. DPS Calculator ................. loadDpsSettings, calcDps, updateDpsOutput
+   66. Equipment slots + paper doll ... getEquipped, refreshEquipDoll, renderEquipSlotDetail
+
+   67. Boot ........................... loadData();  (the only top-level call)
+   ═══════════════════════════════════════════════════════════════════════════ */
 // ─── Universal navigation helpers ─────────────────────────────────────────
 // All cross-tab navigation reads identity from data-* attributes so card/quest
 // names with apostrophes, quotes, or other special characters are handled safely.
 function _navToCard(el) {
   showCard(el.dataset.nav, el.dataset.navType || 'item');
 }
+// Open a quest's detail on the Questing tab (quest name from data-quest)
 function _navToQuest(el) {
   pushHistoryEntry();
   selectedQuest = el.dataset.quest;
   _renderTab('questing', false);
   showQuestDetail(el.dataset.quest, false);
 }
+// Open a pack's detail on the Packs tab (pack id from data-pack)
 function _navToPack(el) {
   _hidePackTip(null);
   pushHistoryEntry();
@@ -932,6 +1040,7 @@ function _navToPack(el) {
 
 // ─── Toast notifications ──────────────────────────────────────────────────
 let _toastTimer = null;
+// Show a temporary banner in #toast; type = warn | error | info, hidden after `duration` ms
 function showToast(msg, type = 'warn', duration = 6000) {
   const el = document.getElementById('toast');
   if (!el) return;
@@ -1017,6 +1126,58 @@ const DRAGONFIRE_ITEMS = [
   'Super antifire potion', 'Extended super antifire',
 ];
 
+// Warm clothing (Wintertodt): every item on the wiki's "Warm clothing" page that is a TCG card,
+// by slot. Four pieces in different slots give the full cold-damage reduction; more don't help.
+// Not on the wiki's list (so not warm): Graceful, Lumberjack, Amulet of fire, Spotted cape…
+const WARM_CLOTHING_BY_SLOT = {
+  Head:   ['Larupia hat', 'Graahk headdress', 'Kyatt hat', 'Evil chicken head', 'Pyromancer hood', 'Santa hat', 'Bearhead',
+           'Fire tiara', 'Elemental tiara', 'Lumberjack hat', 'Forestry hat', 'Cap and goggles', 'Earmuffs', 'Wolf mask', 'Slayer helmet'],
+  Neck:   ['Gnome scarf'],
+  Hands:  ['Clue hunter gloves', 'Gloves of silence', 'Fremennik gloves', 'Warm gloves', 'Grey gloves', 'Red gloves',
+           'Yellow gloves', 'Teal gloves', 'Purple gloves'],
+  Cape:   ['Fire cape', 'Infernal cape', 'Obsidian cape', 'Wolf cloak', 'Clue hunter cloak'],
+  Weapon: ['Bruma torch', 'Staff of fire', 'Fire battlestaff', 'Lava battlestaff', 'Steam battlestaff', 'Smoke battlestaff',
+           'Mystic fire staff', 'Mystic lava staff', 'Mystic steam staff', 'Mystic smoke staff', 'Twinflame staff', 'Ale of the gods'],
+  Shield: ['Tome of fire'],
+  Body:   ['Clue hunter garb', 'Polar camo top', 'Wood camo top', 'Jungle camo top', 'Desert camo top', 'Larupia top',
+           'Graahk top', 'Kyatt top', 'Pyromancer garb', 'Evil chicken wings'],
+  Legs:   ['Clue hunter trousers', 'Polar camo legs', 'Wood camo legs', 'Jungle camo legs', 'Desert camo legs', 'Larupia legs',
+           'Graahk legs', 'Kyatt legs', 'Evil chicken legs', 'Pyromancer robe'],
+  Ring:   ['Ring of the elements'],
+  Feet:   ['Clue hunter boots', 'Pyromancer boots', 'Evil chicken feet', 'Mole slippers', 'Holy moleys', 'Bear feet',
+           'Demon feet', 'Frog slippers', 'Cow slippers', 'Brutus slippers'],
+};
+const WARM_CLOTHING_ITEMS = Object.values(WARM_CLOTHING_BY_SLOT).flat();
+// Warm items with no TCG card: there's no card to collect, so wearing them is free. ok() = you
+// can get it now. Holiday-event outfits are warm too but only claimable while an event runs,
+// so they're named (WARM_EVENT_ONLY) and never counted. Slayer helmet recolours need the
+// Slayer helmet card, so they aren't listed.
+const _warmItemOk = c => _cardUsable(c) && (itemSources[c] === undefined || !_itemGetNeeds(c).length);
+// True when every skill in `skills` is at least 99
+const _allSkills99 = () => Object.keys(skills).every(s => getLevel(s) >= 99);
+// Max cape is buyable: all 99s plus the Mac and Coins cards
+const _maxCapeOk = () => _allSkills99() && isOwned('Mac') && isOwned('Coins');
+const WARM_NO_CARD = [
+  { name: 'Rainbow scarf', slot: 'Neck', how: 'Free from Gilbert, flower field south-east of Barbarian Village', ok: () => true },
+  { name: 'Rainbow cape', slot: 'Cape', how: 'Free from Gilbert, flower field south-east of Barbarian Village', ok: () => true },
+  { name: 'Rainbow jumper', slot: 'Body', how: 'Unlock by talking to Gilbert, then claim from Diango', ok: () => isOwned('Diango') },
+  { name: 'Bomber cap', slot: 'Head', how: 'Enlightened Journey reward (replacement from Auguste)', ok: () => completedQuests.has('Enlightened Journey') },
+  { name: 'Bomber jacket', slot: 'Body', how: 'Enlightened Journey reward (replacement from Auguste)', ok: () => completedQuests.has('Enlightened Journey') },
+  { name: 'Yak-hide armour (top)', slot: 'Body', how: 'Crafting 46: 2 cured yak-hide + thread + needle; 20 Defence to wear',
+    ok: () => getLevel('Crafting') >= 46 && getLevel('Defence') >= 20 && ['Cured yak-hide', 'Thread', 'Needle'].every(_warmItemOk) },
+  { name: 'Yak-hide armour (legs)', slot: 'Legs', how: 'Crafting 43: cured yak-hide + thread + needle; 20 Defence to wear',
+    ok: () => getLevel('Crafting') >= 43 && getLevel('Defence') >= 20 && ['Cured yak-hide', 'Thread', 'Needle'].every(_warmItemOk) },
+  { name: 'Firemaking hood', slot: 'Head', how: '99 Firemaking: bought with the cape from Ignatius Vulcan (99,000 coins)',
+    ok: () => getLevel('Firemaking') >= 99 && isOwned('Ignatius Vulcan') && isOwned('Coins') },
+  { name: 'Firemaking cape', slot: 'Cape', how: '99 Firemaking: bought from Ignatius Vulcan (99,000 coins)',
+    ok: () => getLevel('Firemaking') >= 99 && isOwned('Ignatius Vulcan') && isOwned('Coins') },
+  { name: 'Max cape', slot: 'Cape', how: '99 in every skill: bought from Mac', ok: _maxCapeOk },
+  { name: 'Fire max cape', slot: 'Cape', how: 'Max cape + Fire cape', ok: () => _maxCapeOk() && _warmItemOk('Fire cape') },
+  { name: 'Infernal max cape', slot: 'Cape', how: 'Max cape + Infernal cape', ok: () => _maxCapeOk() && _warmItemOk('Infernal cape') },
+];
+const WARM_EVENT_ONLY = 'Santa hat and the Santa / Antisanta / Bunny / chicken outfits, woolly, bobble and jester hats & scarves, festive and '
+  + 'Christmas jumpers, birthday items (Oldschool jumper, cat & Jad slippers, dragon candle dagger)';
+
 // ─── Card level-order sort ─────────────────────────────────────────────────
 // Used to sort any-of groups by level requirement then alphabetically,
 // so e.g. "Bronze axe · Iron axe · Steel axe…" instead of alphabetical.
@@ -1076,6 +1237,7 @@ const TANNING_MAP = {
   'Black dragon leather': 'Black dragonhide',
 };
 
+// Split a tool string ("Fishing rod + bait") into parts → [{label, owned, note, noCard?}]; a part with no card counts as owned
 function resolveToolParts(toolStr) {
   if (!toolStr || toolStr === 'None') return [];
   // Context-specific alias: Karambwan vessel + bait uses Karambwanji, not Fishing bait
@@ -1110,6 +1272,7 @@ function resolveToolParts(toolStr) {
 // Ground spawns inside a gated place: a spawn text that starts with a location_requirements.json
 // name ("Crafting Guild ( 1st floor )", "Myths' Guild basement") needs that place's gate.
 let _spawnLocNames = null;
+// Place gate for a spawn text that begins with a location_requirements.json name → {name, gate} or null (longest name wins)
 function spawnLocGate(loc) {
   if (!_spawnLocNames) _spawnLocNames = Object.keys(LOC_REQS).sort((a, b) => b.length - a.length);
   const t = (loc || '').toLowerCase();
@@ -1130,7 +1293,9 @@ let _canGetCache = {};
 //   cards: items you use (all) · anyCards: one of these items · npcs: NPC cards you talk to / use (all)
 //   from: items it comes out of (open / search / clean them): their card AND you can get them
 //   boss: a Bosses-tab encounter (raid, wave, minigame) you must be able to do — e.g. raid-only supplies
+// Activity source(s) of an item_sources entry, always as an array
 function _acts(src) { const a = src && src.activity; return !a ? [] : Array.isArray(a) ? a : [a]; }
+// True when every condition on one activity source is met (quests, diaries, levels, access, cards, npcs, boss, from-items)
 function _activityMet(a, visited) {
   return (a.quests || []).every(_questOk) && (a.partialQuests || []).every(_questStartedOk)
     && (a.diaries || []).every(_diaryOk)
@@ -1166,6 +1331,7 @@ function _bossDoable(bossName) {
   try { return evaluateBoss(b).status === 'available' && (b.lootRequirements || []).every(_reqMet); }
   finally { _bossRewardBusy.delete(bossName); }
 }
+// True when any boss whose rewards include this item is doable
 function _bossRewardOk(name) { return _bossRewardsFor(name).some(({ bossName }) => _bossDoable(bossName)); }
 // Does our data name any way to get this item? (else canGetItem falls back — see there)
 function _hasKnownSource(name, src) {
@@ -1180,7 +1346,9 @@ function _hasKnownSource(name, src) {
 // Fishing level; a farmed tree's logs / roots need the Woodcutting level and an axe).
 // Indexed by the card and by the raw (version) name, lowercase → [{m, out}].
 let _gatherIdx = null;
+// Normalise a skilling.json output: plain card name → {card}
 function _gatherOut(o) { return typeof o === 'string' ? { card: o } : o; }
+// Curated gathering methods that yield this card/version → [{m, out}] (index built lazily from SKILLING)
 function _curatedGathering(name) {
   if (!_gatherIdx) {
     _gatherIdx = {};
@@ -1235,6 +1403,7 @@ function _curatedGatherStatus(m, out, visited = new Set()) {
 // Bronzeman locks NPC interaction by the NPC's name, so buying needs the shopkeeper's card when
 // one exists (a "Shop keeper" has none → general stores stay open). Unknown seller = unrestricted.
 let SHOP_OWNERS = {};   // seller → {shop, owners, cards} (output/shop_owners.json, generate_shop_owners.py)
+// NPC cards that sell at this shop seller (shop_owners.json); [] = no restriction
 function _shopSellerCards(seller) { return (SHOP_OWNERS[seller] || {}).cards || []; }
 // An NPC card you own can be met: no known location, or one location you can reach
 function _npcReachable(card) {
@@ -1271,6 +1440,7 @@ function _facilityCards(f) {
   const ci = _cardInfo(f);
   return ci && ci.type === 'monster' ? [ci.exact] : [];
 }
+// A facility is usable when it has no NPC card, or you own one of its NPC cards and can reach it
 function _facilityOk(f) { const cs = _facilityCards(f); return !cs.length || cs.some(c => isOwned(c) && _npcReachable(c)); }
 // ── Clue steps & tiers (Phase 2) ─────────────────────────────────────────────
 // Every step in clue_steps.json carries `requirements` (the complete set of card gates: talk
@@ -1286,7 +1456,9 @@ const CLUE_TRAIL_STEPS = { beginner: 2, easy: 3, medium: 4, hard: 5, elite: 6, m
 // 1 in 20 clues of it can be finished: you can't skip a step you can't do, only drop the clue and
 // get another, so below ~5% you'd burn 20+ clues per casket. Master (7 steps) needs p ≳ 65%.
 const CLUE_TRAIL_MIN = 0.05;
+// "MASTER" / "master" → "Master"
 const _clueCap = t => (t || '').charAt(0).toUpperCase() + (t || '').slice(1).toLowerCase();
+// Attach a hidden (non-enumerable) property so it doesn't show up in JSON / Object.keys
 const _defHidden = (o, k, v) => Object.defineProperty(o, k, { value: v, enumerable: false, configurable: true, writable: true });
 
 // Tag every step with its type/tier (non-enumerable) and expand its requirements once at load
@@ -1302,6 +1474,7 @@ function _prepClueSteps() {
   }
 }
 let _clueTierStepsMemo = {};
+// Every step of one clue tier across all step types → [{type, step}] (memoised)
 function _clueTierSteps(tier) {
   const cap = _clueCap(tier);
   if (_clueTierStepsMemo[cap]) return _clueTierStepsMemo[cap];
@@ -1321,6 +1494,7 @@ function _clueStepText(type, s) {
     default: return s.clueText;
   }
 }
+// Find a clue step by type, tier and its key text (see _clueStepText); null if gone
 function _clueStepFind(type, tier, text) {
   const hit = _clueTierSteps(tier).find(x => x.type === type && _clueStepText(type, x.step) === text);
   return hit ? hit.step : null;
@@ -1328,6 +1502,7 @@ function _clueStepFind(type, tier, text) {
 // Requirement list for a step: its own `requirements`, or (older data without them) gates
 // derived the old per-type way. Emote steps add Uri.
 const _URI_REQ = { label: 'Uri', type: 'npc', cards: ['Uri'] };
+// Requirement list for a step (memoised on step._reqs; each requirement expanded via _expandReq)
 function _clueStepReqs(step) {
   if (step._reqs) return step._reqs;
   const type = step._type;
@@ -1386,10 +1561,12 @@ function _clueReqEval(r) {
 }
 // Cache (cleared when cards / quests / levels change — same idea as _questOk's signature)
 let _clueStepCache = new WeakMap(), _clueTierMemo = {}, _clueSig = '';
+// Clear the clue caches when owned cards, quests or levels changed since the last call
 function _clueSigCheck() {
   const sig = owned.size + '|' + completedQuests.size + '|' + startedQuests.size + '|' + Object.values(skills).join(',');
   if (sig !== _clueSig) { _clueResetCaches(); _clueSig = sig; }
 }
+// Drop every clue step / tier memo
 function _clueResetCaches() { _clueStepCache = new WeakMap(); _clueTierMemo = {}; _clueSig = ''; }
 // One step → {ok, p, missing:[{label, kind, cards}]}. p < 1 only for random asks (or 0 when blocked).
 function _clueStepOk(step) {
@@ -1411,7 +1588,7 @@ function _clueStepOk(step) {
   for (const d of (step.diaries || [])) if (!_diaryOk(d)) missing.push({ label: `${d} diary`, kind: 'diary' });
   // The place the step happens in (generate_clue_steps.py tags it from location_requirements.json clueMatch)
   for (const l of (step.locations || [])) for (const b of _gateMissing(_locGate(l)))
-    if (!missing.some(m => m.label === b.label || (b.kind === 'level' && m.label === b.label))) missing.push({ label: `${l}: ${b.label}`, kind: b.kind === 'level' ? 'skill' : b.kind, quest: b.kind === 'quest' ? b.key : undefined });
+    if (!missing.some(m => m.label === b.label || (b.kind === 'quest' && m.quest === b.key))) missing.push({ label: `${l}: ${b.label}`, kind: b.kind === 'level' ? 'skill' : b.kind, quest: b.kind === 'quest' ? b.key : undefined });
   if (missing.some(m => !m.partial)) p = 0;
   const res = { ok: !missing.length, p, missing };
   if (!_completableBusy) _clueStepCache.set(step, res);   // mid quest-propagation answers are provisional
@@ -1442,6 +1619,7 @@ function _clueMonsterKillable(card) {
   }
   return { ok: true, why: '' };
 }
+// Can this clue_scroll_sources.json entry give you a clue of `tier`? → {ok, why}
 function _clueSourceStatus(s, tier) {
   const q = (s.quests || []).find(qq => !_questOk(qq));
   if (q) return { ok: false, why: `Quest: ${q}` };
@@ -1532,6 +1710,7 @@ function _clueTierStatus(tier) {
     if (ownCache) _accessCache = null;
   }
 }
+// Can you get a clue of this tier at all (ignores whether you can finish it)
 function _clueTierObtainable(tier) { return _clueTierStatus(tier).obtain.ok; }
 // Obtainable AND the trail estimate clears CLUE_TRAIL_MIN — used for clue rewards in canGetItem
 function _clueTierOk(tier) {
@@ -1542,8 +1721,9 @@ function _clueTierOk(tier) {
 // Why can't I get this item? [] when canGetItem is true; otherwise the cheapest source's missing
 // pieces (cards / levels / access), e.g. ["Coins"], ["Spade"], ["Woodcutting 60", "Axe"].
 const _getNeedsMemo = new Map(); let _getNeedsSig = '';
+// (memoised; cache key = account/owned/quests/started/diary ticks/levels signature)
 function _itemGetNeeds(name) {
-  const sig = owned.size + '|' + completedQuests.size + '|' + Object.values(skills).join(',');
+  const sig = _currentRsn + '|' + owned.size + '|' + completedQuests.size + '|' + startedQuests.size + '|' + _diaryTickVer + '|' + Object.values(skills).join(',');
   if (sig !== _getNeedsSig) { _getNeedsMemo.clear(); _getNeedsSig = sig; }
   if (_getNeedsMemo.has(name)) return _getNeedsMemo.get(name);
   let res = [];
@@ -1588,6 +1768,9 @@ function _itemGetNeeds(name) {
   return res;
 }
 
+// Main obtainability check: true when any source route works (spawn, shop, activity, boss chest,
+// gathering, curated gathering, monster drop, clue tier, production, tanning). Memoised in _canGetCache;
+// `visited` guards against recipe cycles.
 function canGetItem(itemName, visited = new Set()) {
   if (visited.has(itemName)) return false;           // cycle guard
   if (itemName in _canGetCache) return _canGetCache[itemName];
@@ -1719,10 +1902,10 @@ let monsterDrops = {}, itemSources = {}, cardCategories = {}, cardDetails = {}, 
 let bossLoot = {};   // boss name → {source, page, drops} for chest/reward-based bosses (boss_loot.json)
 let spellsData   = {};  // spell name → {book, level, runes}, from spells.json (wiki spellbooks)
 let runeSources  = {};  // elemental rune → staves / combination runes that supply it (rune_sources.json)
-let accessRoutes = {};
-let cardVersions = {};
-let monsterLocations = {};  // NPC card → {location: access key | null} (monster_locations.json)  // card → [{name, page, recipe?}] item versions it covers (card_versions.json)
-let selectedVersion = null;  // a version name the user opened (shown on its card's page)  // shared access routes, e.g. desert (access_routes.json)
+let accessRoutes = {};  // shared access routes, e.g. desert (access_routes.json)
+let cardVersions = {};  // card → [{name, page, recipe?}] item versions it covers (card_versions.json)
+let monsterLocations = {};  // NPC card → {location: access key | null} (monster_locations.json)
+let selectedVersion = null;  // a version name the user opened (shown on its card's page)
 let cardAliases = {};  // item version name (lowercase) → card, from the catalog's tcg.variants (card_aliases.json)
 let collectionLog = {};  // boss name → {log, items} — collection-log items = the boss's uniques
 let packCatalog  = null;   // {catalogVersion, packSize, packs:[...]} from /api/packs
@@ -1781,14 +1964,20 @@ function toggleSlayerWishlistGroup(taskName) {
   if (activeTab === 'wishlist') renderWishlist();
 }
 
+// ─── Quest completion stores (per account, localStorage) ───────────────────────
+// localStorage key for screenshot-synced quest completions of an account
 function _cqFileKey(rsn)   { return rsn ? `cq_file_${rsn}`   : 'cq_file'; }
+// localStorage key for manually ticked quest completions of an account
 function _cqManualKey(rsn) { return rsn ? `cq_manual_${rsn}` : 'cq_manual'; }
 
 // Quests you've started / progressed partway (manual; the sync only sees completions).
 // Used by "partialQuests" gates: met when the quest is done, marked started, or completable now.
 let startedQuests = new Set();
+// localStorage key for an account's "started" quests
 function _cqStartedKey(rsn) { return rsn ? `cq_started_${rsn}` : 'cq_started'; }
+// Quest counts as started: done, marked started, or completable now
 function _questStartedOk(q) { return completedQuests.has(q) || startedQuests.has(q) || _questOk(q); }
+// Toggle the manual "started" flag for a quest, save it, and re-render the quest list/detail
 function toggleQuestStarted(name) {
   if (startedQuests.has(name)) startedQuests.delete(name); else startedQuests.add(name);
   localStorage.setItem(_cqStartedKey(_currentRsn), JSON.stringify([...startedQuests]));
@@ -1804,12 +1993,14 @@ function _diaryOk(key) {
   return !!tasks.length && tasks.every((_, i) => isDiaryTicked(area.name, tier, 'task', String(i)));
 }
 
+// Persist both quest stores for the current account (plus the legacy completed_quests union)
 function _saveCq() {
   localStorage.setItem(_cqFileKey(_currentRsn),   JSON.stringify([..._cqFile]));
   localStorage.setItem(_cqManualKey(_currentRsn), JSON.stringify([..._cqManual]));
   localStorage.setItem('completed_quests', JSON.stringify([...completedQuests]));
 }
 
+// Switch the quest stores (file, manual, started) to this account's saved sets
 function _loadManualForRsn(rsn) {
   _currentRsn = rsn || '';
   // Load per-account file completions from localStorage (populated by last sync)
@@ -1820,6 +2011,7 @@ function _loadManualForRsn(rsn) {
   startedQuests = new Set(JSON.parse(localStorage.getItem(_cqStartedKey(_currentRsn)) || '[]'));
 }
 
+// Toggle a quest done/undone by hand (undo removes it from both stores), save and re-render
 function toggleQuestDone(name) {
   if (completedQuests.has(name)) {
     // Remove from whichever set(s) it's in
@@ -1834,6 +2026,7 @@ function toggleQuestDone(name) {
   renderQuestList();
   showQuestDetail(name, false);
 }
+// ── UI selection state (per tab) ──
 let allCards     = [];
 let selected = null, selectedType = null;
 let activeTab = 'cards';
@@ -1866,6 +2059,8 @@ let skills = {
 // Owned cards — randomised on load (no localStorage persistence for simulation)
 let owned = new Set();
 
+// ─── Card ownership & lookup ───────────────────────────────────────────────────
+// True when the card (or the card an item version belongs to) is owned
 function isOwned(name) {
   const k = name.toLowerCase();
   if (owned.has(k)) return true;
@@ -1888,6 +2083,7 @@ function _cardInfo(name) {
   const card = cardAliases[k];             // version → its card
   return card ? (_cardLcMap[card.toLowerCase()] || null) : null;
 }
+// True when the name is a TCG card or a version of one
 function _isCard(name) { return !!_cardInfo(name); }
 // Retry a failed image once with a cache-buster (e.g. a pack thumbnail the proxy couldn't fetch in time)
 function _imgRetry(img, fallback) {
@@ -1895,7 +2091,43 @@ function _imgRetry(img, fallback) {
   else if (fallback) fallback();
 }
 // Card image URL for a card or any version of one (the version's own wiki image, else its card's art)
+// Wiki images go through server.py's /wikiimg/ proxy (retries + disk cache): the wiki's image
+// server often answers 502, which left icons blank. Opened as a plain file, use the wiki directly.
+const _WIKI_IMG_PREFIX = 'https://oldschool.runescape.wiki/images/';
+const _wikiImg = url => url && location.protocol.startsWith('http') && url.startsWith(_WIKI_IMG_PREFIX)
+  ? '/wikiimg/' + url.slice(_WIKI_IMG_PREFIX.length).split('?')[0] : url;
+// Card art: the card's own image from osrs-tcg.net via server.py (cached on disk). Item versions
+// without a card of their own keep their wiki image (proxied). Opened as a file: wiki URLs.
+// Last resort for a proxied wiki image the server couldn't get (the wiki's bot check refuses
+// it, and there's no RuneLite sprite, e.g. Construction furniture): load it from the wiki
+// directly. A browser that has passed the wiki's check carries its clearance cookie.
+document.addEventListener('error', e => {
+  const i = e.target, src = i && i.tagName === 'IMG' ? i.getAttribute('src') || '' : '';
+  if (i && i.dataset && i.dataset.wikiDirect) { i.style.visibility = 'hidden'; return; }   // no source has it: blank, not broken
+  if (!src.startsWith('/wikiimg/')) return;
+  i.dataset.wikiDirect = '1';
+  i.addEventListener('load', () => { i.style.display = ''; }, { once: true });   // undo an onerror hide
+  i.src = _WIKI_IMG_PREFIX + src.slice('/wikiimg/'.length);
+}, true);
+// Image URL for a card or version: osrs-tcg.net art via server.py when served over http, else the (proxied) wiki image
 function _cardImg(name) {
+  if (!name) return '';
+  if (location.protocol.startsWith('http')) {
+    const d = cardDetails[name] || cardDetails[_cardInfo(name)?.exact];
+    const isVersion = d && !cardDetails[name] && (cardVersions[_cardInfo(name)?.exact] || []).some(x => x.name.toLowerCase() === name.toLowerCase() && (x.detail || x.icon));
+    if (d && d.imagePath && !isVersion) return d.imagePath;
+  }
+  return _wikiImg(_cardImgRaw(name));
+}
+// "Quest: X" / "Quest started: X" label → quest star + X (other labels just escaped)
+const _questLabelHtml = label => escHtml(label).replace(/^Quest: /, () => questIcon()).replace(/^Quest started: /, () => questIcon() + 'started: ');
+// The blue quest star (wiki "Quest point icon"), used in place of a "Quest:" prefix
+function questIcon(size = 15) {
+  return `<img src="assets/icons/Quest_point_icon.png" width="${size}" height="${size}" title="Quest" alt="Quest"
+    style="object-fit:contain;vertical-align:-2px;margin-right:3px" onerror="this.replaceWith('Quest: ')">`;
+}
+// Wiki image URL for a card or version (card_details imageUrl, else the version's own icon, else its card's)
+function _cardImgRaw(name) {
   if (!name) return '';
   const d = cardDetails[name];
   if (d && d.imageUrl) return d.imageUrl;
@@ -1906,6 +2138,7 @@ function _cardImg(name) {
   return (info && (cardDetails[info.exact] || {}).imageUrl) || '';
 }
 
+// ─── Text / HTML helpers ───────────────────────────────────────────────────────
 // Normalise wiki spawn location text: "1 st floor 2 nd floor" → "1st floor"
 // The wiki shows both UK (1st floor) and US (2nd floor) names; keep the first only.
 function cleanSpawnText(s) {
@@ -1916,10 +2149,12 @@ function cleanSpawnText(s) {
   return s.trim();
 }
 
+// Escape a value for safe use in HTML text and attributes
 function escHtml(str) {
   return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
 }
 
+// Small "↗ wiki" link HTML for a page name (disambiguation suffix stripped)
 function wikiLink(name) {
   // Strip disambiguation suffix "Monkey (monster)" → "Monkey" for wiki URL
   const page = name.replace(/ \([^)]+\)$/, '').replace(/ /g, '_');
@@ -1928,25 +2163,31 @@ function wikiLink(name) {
     style="color:#555;font-size:11px;text-decoration:none;margin-left:8px;vertical-align:middle"
     onclick="event.stopPropagation()">↗ wiki</a>`;
 }
+// ─── Simulation & collection loading ───────────────────────────────────────────
+// Toggle a card owned/unowned locally (simulation) and re-render the detail pane
 function toggleOwned(name) {
   const k = name.toLowerCase();
   if (owned.has(k)) owned.delete(k); else owned.add(k);
   refreshDetail();
 }
 
+// Re-randomise the simulated account and refresh
 function reroll() {
   simulateRandom();
   refreshDetail();
   updateSimBar();
 }
 
+// Update the header summary for a simulated account (levels list)
 function updateSimBar() {
   const el = document.getElementById('sim-summary');
   if (!el) return;
   const lvls = Object.entries(skills).map(([s,v]) => `${s.slice(0,3)} ${v}`).join(' · ');
-  el.textContent = `~15% owned · ${lvls}`;
+  const pct = _simPoolSize ? Math.round(owned.size / _simPoolSize * 100) : 0;
+  el.textContent = `${owned.size} cards owned (${pct}%) · ${lvls}`;
 }
 
+// Show the "Recently pulled" sort row only when pull timestamps exist (borrowing them from a matching profile if needed)
 function _updateSortVisibility() {
   // my_collection.json can be written without timestamps; borrow them from the matching profile in
   // all_collections.json (the one sharing the most cards) so "Recently pulled" sorting still works
@@ -1966,6 +2207,7 @@ function _updateSortVisibility() {
   if (row) row.style.display = Object.keys(cardTimestamps).length ? 'flex' : 'none';
 }
 
+// Load output/my_collection.json as the owned set; on failure fall back to a random simulation
 async function loadCollection() {
   // Try real collection first; fall back to random simulation
   try {
@@ -2051,6 +2293,8 @@ function onAccountChange(rsn) {
   syncQuestsFromScreenshots(rsn);
 }
 
+let _simPoolSize = 0;   // how many card names simulateRandom drew from (for the sim bar's owned share)
+// Random simulated account: levels 1–99 and ~15% of all card names owned
 function simulateRandom() {
   // Random skill levels: uniform 1–99
   for (const s of Object.keys(skills))
@@ -2064,12 +2308,15 @@ function simulateRandom() {
     for (const d of data.drops || []) allNames.add(d.card.toLowerCase());
 
   // Own ~15% at random
+  _simPoolSize = allNames.size;
   owned = new Set();
   for (const name of allNames)
     if (Math.random() < 0.15) owned.add(name);
 }
 
 // ─── Data loading ──────────────────────────────────────────────────────────
+// Fetch every data JSON in parallel, wire up the globals and indexes, load the collection,
+// then fill the account dropdown and kick off refreshAll(). Called once at startup.
 async function loadData() {
   try {
     const cb = `?v=${Date.now()}`;  // cache-bust so updated JSON files are always fresh
@@ -2222,6 +2469,7 @@ async function loadData() {
   }
 }
 
+// ─── Cards tab: sidebar list ───────────────────────────────────────────────────
 const CLUE_TIER_CONFIG = {
   beginner: {label:'Beginner', color:'#c8a830', bg:'#2a2010'},
   easy:     {label:'Easy',     color:'#50c050', bg:'#102010'},
@@ -2232,7 +2480,9 @@ const CLUE_TIER_CONFIG = {
 };
 const CLUE_TIER_ORDER = ['beginner','easy','medium','hard','elite','master'];
 
+// Build allCards (NPCs/monsters, item cards with categories, virtual clue scroll cards) and render the list
 function buildCardList() {
+  allCards = [];
   for (const name of Object.keys(monsterDrops)) {
     const hasCombat = !!monsterDrops[name]?.combatLevel;
     allCards.push({name, type: hasCombat ? 'monster' : 'npc'});
@@ -2260,6 +2510,7 @@ function buildCardList() {
   renderList(allCards);
 }
 
+// Apply the Cards tab search / owned / category / set filters and sort, then re-render the list
 function filterCards() {
   const q       = document.getElementById('search').value.toLowerCase();
   const owned_f = document.getElementById('owned-filter').value;
@@ -2324,6 +2575,7 @@ const CAT_ABBR = {
   Slayer:'Slay', General:'Gen', Currency:'Coin',
 };
 
+// Render the card sidebar list (icon, name, category / combat badge); click opens showCard
 function renderList(cards, sortBy = 'name') {
   const list = document.getElementById('card-list');
   list.innerHTML = '';
@@ -2332,7 +2584,7 @@ function renderList(cards, sortBy = 'name') {
     if (card.type === 'clue') {
       const cfg = CLUE_TIER_CONFIG[card.tier] || {};
       el.className = 'card-item' + (card.name === selected ? ' selected' : '');
-      const clueImgHtml = `<img src="https://oldschool.runescape.wiki/images/Clue_scroll_(${card.tier}).png" style="width:20px;height:20px;object-fit:contain;image-rendering:pixelated;flex-shrink:0;margin-right:5px" onerror="this.style.display='none'">`;
+      const clueImgHtml = `<img src="assets/icons/Clue_scroll_(${card.tier}).png" style="width:20px;height:20px;object-fit:contain;image-rendering:pixelated;flex-shrink:0;margin-right:5px" onerror="this.style.display='none'">`;
       el.innerHTML = clueImgHtml + `<span class="card-name">${card.name}</span>`
         + `<span style="font-size:9px;color:${cfg.color};background:${cfg.bg};border-radius:2px;padding:1px 5px">${cfg.label}</span>`;
     } else {
@@ -2385,11 +2637,13 @@ function getCombatLevel() {
 let navHistory = [];
 let navForward = [];
 
+// Snapshot of the current tab and selections, for back/forward
 function captureState() {
   return {tab: activeTab, name: selected, type: selectedType,
           skill: selectedSkill, quest: selectedQuest, pack: selectedPack, boss: selectedBoss, slayer: selectedSlayer, clue: selectedClue};
 }
 
+// Push the current state onto the back stack (max 50) and clear forward history
 function pushHistoryEntry() {
   const state = captureState();
   // Only push if there's meaningful state to save
@@ -2400,6 +2654,7 @@ function pushHistoryEntry() {
   updateNavButtons();
 }
 
+// Enable/disable the global back and forward buttons
 function updateNavButtons() {
   const backBtn = document.getElementById('global-back-btn');
   const fwdBtn  = document.getElementById('global-fwd-btn');
@@ -2407,6 +2662,7 @@ function updateNavButtons() {
   if (fwdBtn)  fwdBtn.disabled  = navForward.length === 0;
 }
 
+// Restore a captured state (tab + its selection) without pushing history
 function navigate(state) {
   // Restore full app state without pushing history
   _renderTab(state.tab, false);  // don't reset selection — we restore it below
@@ -2445,6 +2701,7 @@ function navigate(state) {
   updateNavButtons();
 }
 
+// Go back one step in cross-tab history
 function navigateBack() {
   if (!navHistory.length) return;
   navForward.push(captureState());
@@ -2452,6 +2709,7 @@ function navigateBack() {
   navigate(prev);
 }
 
+// Go forward one step in cross-tab history
 function navigateForward() {
   if (!navForward.length) return;
   navHistory.push(captureState());
@@ -2460,6 +2718,7 @@ function navigateForward() {
 }
 
 // ─── Card display ──────────────────────────────────────────────────────────
+// Open a card's detail on the Cards tab (versions open their card's page; clue scrolls go to the Clues tab)
 function showCard(name, type, push = true) {
   // The virtual clue scroll cards live on the Clues tab
   if (type === 'clue') { const t = (/\((\w+)\)$/.exec(name) || [])[1]; if (t) { showClue(t.toLowerCase(), push); return; } }
@@ -2474,6 +2733,7 @@ function showCard(name, type, push = true) {
   refreshDetail(true);
 }
 
+// Re-render the current detail pane for the selected card, keeping scroll unless resetScroll
 function refreshDetail(resetScroll = false) {
   if (activeTab === 'clues') { _renderClueDetail(resetScroll); return; }   // wishlist stars etc. on the Clues tab
   if (activeTab === 'packs' && !selectedPack) { renderPackList(); _renderPackHome(); return; }   // Packs overview stars
@@ -2489,6 +2749,7 @@ function refreshDetail(resetScroll = false) {
   updateNavButtons();
 }
 
+// CSS class for a rarity badge, e.g. "Very Rare" → rarity-Very-Rare
 function rarityClass(r) { return 'rarity-' + (r||'Unknown').replace(/ /g,'-'); }
 
 // Convert a fraction string like "1/128" to a rarity label
@@ -2508,6 +2769,7 @@ function fractionToRarity(frac) {
 
 // ─── Rarity helpers ────────────────────────────────────────────────────────
 const RARITY_RANK = { Always:0, Common:1, Uncommon:2, Rare:3, 'Very Rare':4, 'Extremely Rare':5 };
+// "N/D" → numeric probability N/D (1 when missing/unparseable)
 function fractionValue(f) {
   // Returns numeric drop probability (lower = rarer)
   if (!f) return 1;
@@ -2535,6 +2797,7 @@ function dedupeMonsters(list) {
 }
 
 // ─── Progress pill HTML ────────────────────────────────────────────────────
+// "count / total" pill with a progress bar (green when complete; blue tint for rare drop table)
 function progressPill(count, total, isRdt) {
   if (total === 0) return '';
   const pct  = total ? (count/total)*100 : 0;
@@ -2570,6 +2833,7 @@ function monsterReqTags(monsterData) {
   return html;
 }
 
+// One clickable drop row: ownership indicator, name (+ Slayer/Sailing tags), rarity, fraction, wishlist star
 function dropRowHtml(cardName, rarity, fraction, isRdt, note) {
   const ownedCard = isOwned(cardName);
   // RDT rows still show ownership — owned = green tick, not-owned = dimmed diamond
@@ -2612,6 +2876,7 @@ function dedupeDrops(drops) {
 
 // ─── Pack acquisition helpers ──────────────────────────────────────────────
 
+// Precompute pack pools {packId → {tierLabel → count}} from card tiers/regions and pack filters (single packs only)
 function _buildPackPools() {
   // Build {packId → {tierLabel → count}} from card_details (tier + regions) and
   // card_categories (labels). Single-pack only (skip *_large variants).
@@ -2643,6 +2908,7 @@ function _buildPackPools() {
   return pools;
 }
 
+// True if a card falls in a pack's pool: no category filter = Standard (all cards), else a region or label match.
 function _cardInPack(name, pack) {
   const filters = pack.category || [];
   if (filters.length === 0) return true;
@@ -2654,6 +2920,7 @@ function _cardInPack(name, pack) {
   return false;
 }
 
+// "Pack Acquisition" section for a card page: each single pack it can come from, price, and tier pool size.
 function packAcquisitionHtml(name) {
   if (!packCatalog || !packPools) return '';
   const tier = (cardDetails[name] || {}).tier;
@@ -2782,6 +3049,28 @@ function _wishlistPackRecs(targets) {
   return recs.sort((a, b) => b.count - a.count || a.totalPool - b.totalPool);
 }
 
+// ─── Hover popups (card grid, text and pack tooltips) ──────────────────────
+// Put a hover popup next to the element it describes, fully inside the window: below if it
+// fits, else above, else beside (left or right), clamped to the edges.
+function _placeTip(tip, rect) {
+  const W = window.innerWidth, H = window.innerHeight, M = 8;
+  tip.style.maxWidth = (W - 2 * M) + 'px';
+  tip.style.maxHeight = (H - 2 * M) + 'px';
+  tip.style.overflow = 'hidden';
+  tip.style.left = '0px'; tip.style.top = '0px';   // measure at full width, not squeezed by the right edge
+  const { width: w, height: h } = tip.getBoundingClientRect();
+  const clamp = (v, lo, hi) => Math.max(lo, Math.min(v, hi));
+  let left = clamp(rect.left, M, W - w - M), top;
+  if (rect.bottom + 6 + h <= H - M) top = rect.bottom + 6;
+  else if (rect.top - 6 - h >= M) top = rect.top - 6 - h;
+  else {
+    top = clamp(rect.top, M, H - h - M);
+    left = rect.right + 8 + w <= W - M ? rect.right + 8 : clamp(rect.left - 8 - w, M, W - w - M);
+  }
+  tip.style.left = left + 'px';
+  tip.style.top = top + 'px';
+}
+// Attributes that make an element show the card-grid hover popup for `cards`.
 // Shared hover grid for "any one of these" chips (tool tiers, crossbows, light sources…):
 // card images, owned ones bright and first, the rest dimmed — same look as the pack tooltip.
 // Usage: <span ${_cardGridTipAttrs(cards, 'Any axe')}>…</span>
@@ -2795,13 +3084,19 @@ function _cardRowsTipAttrs(rows, caption) {
   return `data-tiprows="${escHtml(JSON.stringify(rows))}" data-tipcaption="${escHtml(caption || '')}"` +
     ` onmouseover="_showCardGridTip(this)" onmouseout="_hideCardGridTip()"`;
 }
+// Text-only variant (same popup), for things with no card image to show
+function _textTipAttrs(text) {
+  return `data-tiptext="${escHtml(text)}" onmouseover="_showCardGridTip(this)" onmouseout="_hideCardGridTip()"`;
+}
+// mouseover handler for _cardGridTipAttrs / _cardRowsTipAttrs / _textTipAttrs: builds and places the shared popup.
 function _showCardGridTip(el) {
   let cards = [], rows = null;
+  const text = el.dataset.tiptext;
   try {
     cards = JSON.parse(el.dataset.tipcards || '[]');
     rows = el.dataset.tiprows ? JSON.parse(el.dataset.tiprows) : null;
   } catch (e) { return; }
-  if (!cards.length && !(rows && rows.length)) return;
+  if (!text && !cards.length && !(rows && rows.length)) return;
   let tip = document.getElementById('_card-grid-tip');
   if (!tip) {
     tip = document.createElement('div');
@@ -2818,7 +3113,9 @@ function _showCardGridTip(el) {
     return `<div title="${escHtml(c)}" style="display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;border-radius:3px;overflow:hidden;background:#111;border:1px solid ${own ? '#2a5a2a' : '#222'};opacity:${own ? 1 : 0.3}">${inner}</div>`;
   };
   const cap = el.dataset.tipcaption;
-  if (rows) {
+  if (text) {
+    tip.innerHTML = `<div style="font-size:11px;color:#bbb;max-width:280px;line-height:1.4">${escHtml(text)}</div>`;
+  } else if (rows) {
     tip.innerHTML = (cap ? `<div style="font-size:10px;color:#888;margin-bottom:6px">${escHtml(cap)}</div>` : '')
       + rows.map(r => {
           const done = (r.need || r.cards).every(c => isOwned(c));
@@ -2834,17 +3131,15 @@ function _showCardGridTip(el) {
   tip.style.display = 'block';
   tip.style.left = rect.left + 'px';
   tip.style.top = (rect.bottom + 6) + 'px';
-  requestAnimationFrame(() => {
-    const tr = tip.getBoundingClientRect();
-    if (tr.right > window.innerWidth - 8) tip.style.left = (window.innerWidth - tr.width - 8) + 'px';
-    if (tr.bottom > window.innerHeight - 8) tip.style.top = (rect.top - tr.height - 6) + 'px';
-  });
+  _placeTip(tip, rect);
 }
+// Hide the shared card-grid popup.
 function _hideCardGridTip() {
   const tip = document.getElementById('_card-grid-tip');
   if (tip) tip.style.display = 'none';
 }
 
+// Wishlist "Suggested Packs" tile hover: grid of wishlist targets, bright if this pack can give them.
 function _showPackTip(event, el) {
   el.style.borderColor = '#4a4030';
   if (!_wishlistTipCards.length || !packCatalog) return;
@@ -2866,16 +3161,24 @@ function _showPackTip(event, el) {
     else notInPack.push(name);
   }
 
+  // Grid sized to fit the window: wider for long wishlists, smaller cells if still too tall
+  const n = inPack.length + notInPack.length;
+  const maxW = Math.min(window.innerWidth - 40, 640), maxH = window.innerHeight - 60;
+  let cell = 32, cols = Math.max(5, Math.ceil(Math.sqrt(n * 1.8)));
+  cols = Math.min(cols, Math.floor(maxW / (cell + 4)));
+  while (cell > 16 && Math.ceil(n / cols) * (cell + 4) > maxH) { cell -= 4; cols = Math.floor(maxW / (cell + 4)); }
+  const gridW = cols * (cell + 4);
   const chipHtml = (c, dim) => {
     const img = _cardImg(c);
-    const style = `display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;border-radius:3px;overflow:hidden;background:#111;border:1px solid ${dim?'#222':'#4a3800'};opacity:${dim?'0.3':'1'}`;
+    const style = `display:inline-flex;align-items:center;justify-content:center;width:${cell}px;height:${cell}px;border-radius:3px;overflow:hidden;background:#111;border:1px solid ${dim?'#222':'#4a3800'};opacity:${dim?'0.3':'1'}`;
     const inner = img
-      ? `<img src="${img}" style="width:28px;height:28px;object-fit:contain;image-rendering:pixelated" title="${c.replace(/"/g,'&quot;')}" onerror="this.style.display='none'">`
+      ? `<img src="${img}" style="width:${cell - 4}px;height:${cell - 4}px;object-fit:contain;image-rendering:pixelated" title="${c.replace(/"/g,'&quot;')}" onerror="this.style.display='none'">`
       : `<span style="font-size:8px;color:#666;padding:2px;text-align:center;line-height:1.1">${c.slice(0,6)}</span>`;
     return `<div style="${style}" title="${c.replace(/"/g,'&quot;')}">${inner}</div>`;
   };
 
-  tip.innerHTML = `<div style="display:flex;flex-wrap:wrap;gap:4px;max-width:200px">` +
+  tip.innerHTML = `<div style="font-size:10px;color:#888;margin-bottom:6px">${inPack.length}/${n} wishlist cards can come from this pack</div>`
+    + `<div style="display:flex;flex-wrap:wrap;gap:4px;max-width:${gridW}px">` +
     inPack.map(c => chipHtml(c, false)).join('') +
     notInPack.map(c => chipHtml(c, true)).join('') +
     `</div>`;
@@ -2884,19 +3187,18 @@ function _showPackTip(event, el) {
   tip.style.display = 'block';
   tip.style.left = rect.left + 'px';
   tip.style.top  = (rect.bottom + 6) + 'px';
-  requestAnimationFrame(() => {
-    const tr = tip.getBoundingClientRect();
-    if (tr.right  > window.innerWidth  - 8) tip.style.left = (window.innerWidth  - tr.width  - 8) + 'px';
-    if (tr.bottom > window.innerHeight - 8) tip.style.top  = (rect.top - tr.height - 6) + 'px';
-  });
+  _placeTip(tip, rect);
 }
 
+// Hide the pack wishlist popup and reset the tile border.
 function _hidePackTip(el) {
   if (el) el.style.borderColor = '#2a2a2a';
   const tip = document.getElementById('_pack-wishlist-tip');
   if (tip) tip.style.display = 'none';
 }
 
+// ─── Wishlist storage, stars and editing ───────────────────────────────────
+// Load the wishlist (cards, quests, groups, clue steps) from localStorage, migrating the v1 array format.
 function _loadWishlist() {
   try {
     const raw = localStorage.getItem('tcg_wishlist');
@@ -2918,6 +3220,7 @@ function _loadWishlist() {
   } catch { wishlist = new Map(); wishlistedQuests = new Set(); wishlistGroups = []; wishlistedClueSteps = []; }
 }
 
+// Save the wishlist to localStorage (format v2).
 function _saveWishlist() {
   const items = {};
   for (const [k, v] of wishlist) items[k] = v;
@@ -2937,10 +3240,12 @@ function _wlClueStepRes(s) {
   const step = _clueStepFind(s.type, s.tier, s.text);
   return step ? _clueStepOk(step) : null;
 }
+// True when a starred clue step can be done now.
 function _wlClueStepReady(s) {
   const r = _wlClueStepRes(s);
   return r ? r.ok : (s.items || []).every(i => isOwned(i));
 }
+// True if the clue step with this text is starred.
 function _isClueStepWishlisted(text) {
   return wishlistedClueSteps.some(s => s.text === text);
 }
@@ -2960,6 +3265,7 @@ function _removeClueStepCards(step) {
   }
 }
 
+// Star / un-star a clue step from its ☆ button; starring also wishlists its unowned items tagged "<tier> clue".
 function _toggleClueStepWish(el) {
   const text  = el.dataset.stepText;
   const type  = el.dataset.stepType;
@@ -2993,6 +3299,7 @@ function _toggleClueStepWish(el) {
   if (activeTab === 'wishlist') renderWishlist();
 }
 
+// Remove a starred clue step (wishlist page ×) and strip its card tags.
 function removeClueStep(text) {
   const step = wishlistedClueSteps.find(s => s.text === text);
   wishlistedClueSteps = wishlistedClueSteps.filter(s => s.text !== text);
@@ -3047,6 +3354,7 @@ function _rowWishStar(name, owned, note) {
     title="${tip}">${sym}</span>`;
 }
 
+// Star / un-star a card. With `note`, only that context tag is toggled; without, it's a manual pin (★ tag).
 function toggleWishlist(name, note) {
   if (note) {
     // Context-aware toggle: add/remove just this tag, keep other tags intact
@@ -3103,6 +3411,7 @@ function _buildAutoNote(name) {
 }
 
 // ── Wishlist left-panel search ────────────────────────────────────────────────
+// Left-panel search results: matching cards and quests, or everything wishlisted when the query is empty.
 function _wlSearchInput(q) {
   const el = document.getElementById('wl-search-results');
   if (!el) return;
@@ -3168,6 +3477,7 @@ function _wlSearchInput(q) {
   el.innerHTML = html;
 }
 
+// Left-panel quest row click: wishlist or un-wishlist the quest.
 function _wlQuestToggle(questName) {
   if (wishlistedQuests.has(questName)) {
     removeQuestFromWishlist(questName);
@@ -3178,6 +3488,7 @@ function _wlQuestToggle(questName) {
   if (input) _wlSearchInput(input.value);
 }
 
+// Left-panel card row click: add or remove the card.
 function _wlSearchToggle(name) {
   if (wishlist.has(name)) {
     wishlist.delete(name);
@@ -3188,12 +3499,14 @@ function _wlSearchToggle(name) {
   renderWishlist();
 }
 
+// Remove a card from the wishlist entirely (tile ×).
 function removeFromWishlist(name) {
   wishlist.delete(name);
   _saveWishlist();
   if (activeTab === 'wishlist') renderWishlist();
 }
 
+// Remove one tag from a card's note; the card leaves the wishlist when no tags remain.
 function removeWishlistTag(name, tag) {
   if (!wishlist.has(name)) return;
   const entry = wishlist.get(name);
@@ -3205,6 +3518,7 @@ function removeWishlistTag(name, tag) {
   refreshDetail();
 }
 
+// Un-wishlist a quest: strip its tag from cards, drop its "Quest: …" any-of groups.
 function removeQuestFromWishlist(questName) {
   // Smart cleanup: strip quest name from auto-added card notes
   const questCards = _questWishCards(questName, true);
@@ -3227,6 +3541,7 @@ function _noteRemoveTag(note, tag) {
   return note.split(',').map(p => p.trim()).filter(p => p && p !== tag).join(', ');
 }
 
+// Clear the whole wishlist after a confirm prompt.
 function clearWishlist() {
   const parts = [
     wishlist.size && `${wishlist.size} card${wishlist.size === 1 ? '' : 's'}`,
@@ -3238,6 +3553,7 @@ function clearWishlist() {
   if (!confirm(`Clear your whole wishlist?\n\nThis removes ${parts.join(', ')}. It can't be undone.`)) return;
   wishlist.clear();
   wishlistedQuests.clear();
+  wishlistQuestRec.clear();
   wishlistGroups = [];
   wishlistedClueSteps = [];
   _saveWishlist();
@@ -3245,6 +3561,7 @@ function clearWishlist() {
   refreshDetail();  // un-star any open card page
 }
 
+// Store a card's free-text note.
 function saveWishlistNote(name, note) {
   const entry = wishlist.get(name);
   if (entry) { entry.note = note.trim(); _saveWishlist(); }
@@ -3253,6 +3570,7 @@ function saveWishlistNote(name, note) {
 // ── Note popover ──────────────────────────────────────────────────────────────
 let _notePopoverCloseHandler = null;
 
+// Open the note editor popover under a wishlist tile's note button.
 function openNotePopover(btn, cardName) {
   // Close any existing popover first
   _closeNotePopover();
@@ -3262,11 +3580,11 @@ function openNotePopover(btn, cardName) {
   pop.id = 'note-popover';
   pop.style.cssText = 'position:fixed;z-index:9999;background:#1c1c1c;border:1px solid #333;border-radius:4px;padding:10px;box-shadow:0 4px 16px rgba(0,0,0,0.6);width:220px';
 
-  const safeCard = cardName.replace(/&/g,'&amp;').replace(/"/g,'&quot;');
+  const safeCard = escHtml(cardName);
   pop.innerHTML = `
-    <div style="font-size:10px;color:#777;margin-bottom:6px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${cardName}</div>
+    <div style="font-size:10px;color:#777;margin-bottom:6px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${safeCard}</div>
     <textarea id="note-popover-input" placeholder="Why do you want this?" rows="3"
-      style="width:100%;box-sizing:border-box;background:#111;border:1px solid #333;color:#ccc;padding:5px 7px;border-radius:3px;font-size:11px;resize:vertical;outline:none;font-family:inherit">${meta.note}</textarea>
+      style="width:100%;box-sizing:border-box;background:#111;border:1px solid #333;color:#ccc;padding:5px 7px;border-radius:3px;font-size:11px;resize:vertical;outline:none;font-family:inherit">${escHtml(meta.note || '')}</textarea>
     <div style="display:flex;gap:5px;margin-top:7px;justify-content:flex-end">
       <button onclick="_closeNotePopover()" style="background:none;border:1px solid #2a2a2a;color:#666;padding:2px 9px;border-radius:3px;font-size:10px;cursor:pointer">Cancel</button>
       <button data-card="${safeCard}" onclick="_saveNotePopover(this.dataset.card)"
@@ -3296,6 +3614,7 @@ function openNotePopover(btn, cardName) {
   }, 0);
 }
 
+// Close the note popover and remove its outside-click listener.
 function _closeNotePopover() {
   const pop = document.getElementById('note-popover');
   if (pop) pop.remove();
@@ -3305,6 +3624,7 @@ function _closeNotePopover() {
   }
 }
 
+// Save the note popover's text and close it.
 function _saveNotePopover(cardName) {
   const input = document.getElementById('note-popover-input');
   if (input) saveWishlistNote(cardName, input.value);
@@ -3314,6 +3634,7 @@ function _saveNotePopover(cardName) {
 }
 
 // ── Group editor ──────────────────────────────────────────────────────────────
+// Open the modal for creating (gi = -1) or editing an "any one of these" group; draft cards live in window._geCards.
 function openGroupEditor(gi) {
   // gi = -1 for new, else index into wishlistGroups
   const g = gi >= 0 ? wishlistGroups[gi] : {name: '', cards: []};
@@ -3352,6 +3673,7 @@ function openGroupEditor(gi) {
   document.getElementById('ge-name').focus();
 }
 
+// Group editor: search results for cards not already in the draft group.
 function _geRenderSearch(q) {
   const el = document.getElementById('ge-results');
   if (!el) return;
@@ -3369,6 +3691,7 @@ function _geRenderSearch(q) {
   }).join('');
 }
 
+// Group editor: add a card to the draft group.
 function _geAddCard(name) {
   if (window._geCards.includes(name)) return;
   window._geCards.push(name);
@@ -3377,6 +3700,7 @@ function _geAddCard(name) {
   if (search) _geRenderSearch(search.value);
 }
 
+// Group editor: remove a card from the draft group.
 function _geRemoveCard(name) {
   window._geCards = window._geCards.filter(c => c !== name);
   _geRenderChips();
@@ -3384,6 +3708,7 @@ function _geRemoveCard(name) {
   if (search) _geRenderSearch(search.value);
 }
 
+// Group editor: redraw the draft group's card chips and count.
 function _geRenderChips() {
   const el    = document.getElementById('ge-chips');
   const count = document.getElementById('ge-count');
@@ -3398,12 +3723,14 @@ function _geRenderChips() {
   }).join('');
 }
 
+// Close the group editor without saving.
 function closeGroupEditor() {
   const overlay = document.getElementById('group-editor-overlay');
   if (overlay) overlay.remove();
   window._geCards = null; window._geIdx = null;
 }
 
+// Save the group editor: replace or add the group and tag its unowned cards with the group name.
 function saveGroupEditor(gi) {
   const nameEl = document.getElementById('ge-name');
   const name   = (nameEl ? nameEl.value.trim() : '') || 'Unnamed group';
@@ -3441,6 +3768,7 @@ function saveGroupEditor(gi) {
   if (activeTab === 'wishlist') renderWishlist();
 }
 
+// Delete a group and strip its name from card tags.
 function removeGroup(gi) {
   const g = wishlistGroups[gi];
   if (!g) return;
@@ -3487,6 +3815,7 @@ function wishlistQuest(questName, includeRec = false) {
 
 // ── Category helper ───────────────────────────────────────────────────────────
 const _EQUIP_CATS = new Set(['Weapon','Armour','Ammo','Shield','Cape','Helm','Boot','Glove','Amulet','Ring','Jewellery']);
+// Wishlist page section for a card: monster / npc / tool / equipment / currency / other.
 function _wlCategory(name) {
   if (monsterDrops[name]) return monsterDrops[name].combatLevel ? 'monster' : 'npc';
   const cats = cardCategories[name] || [];
@@ -3496,6 +3825,7 @@ function _wlCategory(name) {
   return 'other';
 }
 
+// Card type ('item' / 'monster' / …) for a name, used for navigation.
 function _cardType(name) {
   const card = allCards.find(c => c.name === name);
   return card ? card.type : (monsterDrops[name] ? 'monster' : 'item');
@@ -3510,6 +3840,7 @@ function renderWishlist() {
   if (input) _wlSearchInput(input.value);
 }
 
+// Wishlist page body: stats, suggested packs, groups, cards by category, quests, clue steps.
 function _renderWishlistMain() {
   const container = document.getElementById('wishlist-content');
   if (!container) return;
@@ -3798,6 +4129,7 @@ function _renderWishlistMain() {
 // Keep for backwards compat (called from navigate/switchCollection)
 function renderWishlistList() { renderWishlist(); }
 
+// Open a card from the wishlist (kept for old callers; just calls showCard).
 function showWishlistCard(name, type, push = false) {
   showCard(name, type);
 }
@@ -3806,6 +4138,7 @@ function showWishlistCard(name, type, push = false) {
 
 const PACK_TIER_ORDER = ['Common','Uncommon','Rare','Epic','Legendary','Mythic','Godly'];
 
+// Pack pool for the packs tab: cards with a tier that _cardInPack puts in this pack.
 function _getPackCards(pack) {
   // All allCards entries that belong to this pack and have a tier (excludes virtual clue scroll cards)
   return allCards.filter(c => {
@@ -3814,6 +4147,7 @@ function _getPackCards(pack) {
   });
 }
 
+// Packs tab left list: Overview row plus each single pack with owned / total and a progress bar.
 function renderPackList() {
   const pane = document.getElementById('pack-list-pane');
   if (!pane || !packCatalog) return;
@@ -3844,6 +4178,7 @@ function renderPackList() {
   pane.innerHTML = html;
 }
 
+// Pack detail page: owned stats per tier and card chips, with an all / missing / owned filter; `tier` scrolls to that tier.
 function showPackDetail(packId, filter, push = true, tier = null) {
   if (push) pushHistoryEntry();
   selectedPack = packId;
@@ -3873,13 +4208,13 @@ function showPackDetail(packId, filter, push = true, tier = null) {
     (byTier[tier] = byTier[tier] || []).push(c);
   }
 
-  // Use local proxy so the image is served from localhost (avoids CDN blocking)
+  // Pack thumbnail, floated beside the title (hidden if it fails to load)
   const packImgUrl = pack.thumbnail ? pack.thumbnail : '';
   const packImgHtml = packImgUrl
     ? `<img src="${packImgUrl}" style="float:right;width:48px;height:48px;border-radius:3px;margin:0 0 12px 16px;box-shadow:0 2px 6px #000" onerror="_imgRetry(this, () => this.style.display='none')">`
     : '';
 
-  let html = `<h1>${pack.name}${packImgHtml}</h1>
+  let html = `<h1>${escHtml(pack.name)}${packImgHtml}</h1>
     <div class="subtitle" style="margin-bottom:12px">
       ${pack.price.toLocaleString()} credits · 5 cards per pack
       · <span style="color:#e8c97a">${ownedCount.toLocaleString()} / ${total.toLocaleString()} owned (${pct}%)</span>
@@ -4006,7 +4341,9 @@ function _packNeeds() {
     }
   return needs;
 }
+// A card's need value for the current focus ('all' = total over sources).
 function _packNeedValue(e, focus) { return focus === 'all' ? e.value : (e.src[focus]?.pts || 0); }
+// Tooltip text for why a card is needed, e.g. "Quests: 3 (last card ×1) · Wishlist".
 function _packNeedWhy(e) {
   return _PACK_NEED_SOURCES.filter(s => e.src[s.key]).map(s => {
     const x = e.src[s.key];
@@ -4015,12 +4352,15 @@ function _packNeedWhy(e) {
     return `${s.label}: ${x.n}${x.lastN ? ` (last card ×${x.lastN})` : ''}`;
   }).join(' · ');
 }
+// Credits of the loaded account (from allCollections), 0 if unknown.
 function _myCredits() {
   const k = Object.keys(allCollections).find(n => n.toLowerCase() === (_currentRsn || '').toLowerCase());
   return k ? (allCollections[k].credits || 0) : 0;
 }
+// Packs overview focus dropdown: rank by one need source or all.
 function setPackHomeFocus(v) { _packHomeFocus = v; _renderPackHome(); }
 
+// Show the packs overview (no pack selected).
 function showPackOverview() {
   pushHistoryEntry();
   selectedPack = null;
@@ -4028,6 +4368,7 @@ function showPackOverview() {
   _renderPackHome();
 }
 
+// Packs overview page: best packs per credit, most valuable cards, collection by pack and tier.
 function _renderPackHome() {
   const pane = document.getElementById('pack-detail-pane');
   if (!pane) return;
@@ -4164,12 +4505,15 @@ function _renderPackHome() {
   pane.scrollTop = scroll;
 }
 
+// ─── Monster / NPC card page ───────────────────────────────────────────────
+// Rarity tier badge for a card, or '' if it has no tier.
 function tierBadgeHtml(name) {
   const tier = (cardDetails[name] || {}).tier;
   if (!tier) return '';
   return `<span class="tier-badge tier-${tier}">${tier}</span>`;
 }
 
+// Monster / NPC card page: drops, rare drop table, locations, slayer, quest / clue / boss / diary cross-links.
 function renderMonster(name, container) {
   const data      = monsterDrops[name] || {};
   const allDropsRaw = data.drops || [];
@@ -4188,7 +4532,7 @@ function renderMonster(name, container) {
 
   const mDetail  = cardDetails[name] || {};
   const mImgHtml = mDetail.imageUrl
-    ? `<img src="${mDetail.imageUrl}" style="float:right;max-width:64px;max-height:64px;image-rendering:pixelated;margin-left:8px" onerror="this.style.display='none'">`
+    ? `<img src="${_wikiImg(mDetail.imageUrl)}" style="float:right;max-width:64px;max-height:64px;image-rendering:pixelated;margin-left:8px" onerror="this.style.display='none'">`
     : '';
   const mExamHtml = mDetail.examine
     ? `<div style="font-size:11px;color:#888;font-style:italic;margin-top:3px">${mDetail.examine}</div>`
@@ -4249,6 +4593,7 @@ function renderMonster(name, container) {
       if (ao !== bo) return ao ? -1 : 1;
       return 0;
     });
+    // 5th argument is the wishlist tag: `selected` is the open card (this monster)
     for (const d of sorted)
       html += dropRowHtml(d.card, d.rarity, d.fraction, false, selected);
   }
@@ -4276,26 +4621,28 @@ function renderMonster(name, container) {
   {
     const locs = Object.entries(monsterLocations[name] || {});
     if (locs.length) {
-      _accessCache = new Map();
-      const G = monsterLocations._gates || {};   // extra needs at a place (quests / cards / skills)
-      const reach = locs.filter(([l, a]) => _slLocOk(a, G[l], l));
-      const chips = locs.map(([l, a]) => { const g = _locGate(l, G[l]); const ok = _slLocOk(a, G[l], l);
-        const need = [a && (accessRoutes[a]?.label || a), _gateText(g), _locBoostNote(l)].filter(Boolean).join(' · ');
-        return `<span style="display:inline-flex;align-items:center;gap:3px;font-size:11px;padding:1px 7px;border-radius:3px;background:${ok ? '#0d2210' : '#180808'};border:1px solid ${ok ? '#2a5a2a' : '#5a2a2a'};color:${ok ? '#7ab07a' : '#c06060'}"
-          title="${escHtml(need ? (ok ? 'Reachable · needs ' : 'Needs: ') + need : 'No access requirement')}">${ok ? '✓' : '✗'} ${escHtml(l)}</span>`; }).join(' ');
-      // If nowhere is reachable yet, show the routes into the first gated area
-      const gate = !reach.length ? locs.map(([, a]) => a).find(a => a && a !== 'excluded' && !_accessMet(a)) : null;
-      let routeHtml = '';
-      if (gate) { const r = { label: `Reach ${accessRoutes[gate]?.label || gate}`, access: gate, type: 'item' }; _expandReq(r, name); routeHtml = _questReqRow(r).html; }
-      else if (!reach.length) {   // the areas are open: say what each place still needs (guild level, quest…)
-        routeHtml = locs.filter(([, a]) => a !== 'excluded').slice(0, 4).map(([l]) => {
-          const miss = _gateMissing(_locGate(l, G[l]));
-          return miss.length ? `<div style="font-size:11px;color:#a05050">✗ ${escHtml(l)}: ${miss.map(b => _blockerHtml(b)).join(', ')}</div>` : '';
-        }).join('');
-      }
-      html += `<div class="section"><div class="section-header">Found at <span style="font-size:10px;color:#555;font-weight:normal">${reach.length}/${locs.length} reachable</span></div>
-        <div style="display:flex;flex-wrap:wrap;gap:4px;margin-top:8px">${chips}</div>${routeHtml ? `<div style="margin-top:8px">${routeHtml}</div>` : ''}</div>`;
-      _accessCache = null;
+      const prevCache = _accessCache;
+      _accessCache = prevCache || new Map();
+      try {
+        const G = monsterLocations._gates || {};   // extra needs at a place (quests / cards / skills)
+        const reach = locs.filter(([l, a]) => _slLocOk(a, G[l], l));
+        const chips = locs.map(([l, a]) => { const g = _locGate(l, G[l]); const ok = _slLocOk(a, G[l], l);
+          const need = [a && (accessRoutes[a]?.label || a), _gateText(g), _locBoostNote(l)].filter(Boolean).join(' · ');
+          return `<span style="display:inline-flex;align-items:center;gap:3px;font-size:11px;padding:1px 7px;border-radius:3px;background:${ok ? '#0d2210' : '#180808'};border:1px solid ${ok ? '#2a5a2a' : '#5a2a2a'};color:${ok ? '#7ab07a' : '#c06060'}"
+            title="${escHtml(need ? (ok ? 'Reachable · needs ' : 'Needs: ') + need : 'No access requirement')}">${ok ? '✓' : '✗'} ${escHtml(l)}</span>`; }).join(' ');
+        // If nowhere is reachable yet, show the routes into the first gated area
+        const gate = !reach.length ? locs.map(([, a]) => a).find(a => a && a !== 'excluded' && !_accessMet(a)) : null;
+        let routeHtml = '';
+        if (gate) { const r = { label: `Reach ${accessRoutes[gate]?.label || gate}`, access: gate, type: 'item' }; _expandReq(r, name); routeHtml = _questReqRow(r).html; }
+        else if (!reach.length) {   // the areas are open: say what each place still needs (guild level, quest…)
+          routeHtml = locs.filter(([, a]) => a !== 'excluded').slice(0, 4).map(([l]) => {
+            const miss = _gateMissing(_locGate(l, G[l]));
+            return miss.length ? `<div style="font-size:11px;color:#a05050">✗ ${escHtml(l)}: ${miss.map(b => _blockerHtml(b)).join(', ')}</div>` : '';
+          }).join('');
+        }
+        html += `<div class="section"><div class="section-header">Found at <span style="font-size:10px;color:#555;font-weight:normal">${reach.length}/${locs.length} reachable</span></div>
+          <div style="display:flex;flex-wrap:wrap;gap:4px;margin-top:8px">${chips}</div>${routeHtml ? `<div style="margin-top:8px">${routeHtml}</div>` : ''}</div>`;
+      } finally { _accessCache = prevCache; }
     }
   }
 
@@ -4393,6 +4740,7 @@ const FACILITY_NPCS = new Set(['Aggie', 'Belona', 'Blast Furnace Foreman', 'Damp
   'Gita Prymes', 'Key Master', 'Madam Sikaro', 'Nurmof', 'Patchy', 'Sigli the Huntsman', 'Skulgrimen', 'Smith',
   'Spirit of Scorpius', 'Taxidermist', 'Thakkrad Sigmundson', 'The Overseer', 'Thormac', 'Trader Stan', 'Wizard Mizgog',
   'Zooknock', 'Tannery']);
+// HTML note for a recipe's facility: altar access (talisman / tiara / Abyss), NPC service or shop, else "Requires: …".
 function facilityNote(f) {
   if (!f || f === 'None') return null;
   const opts = FACILITY_NOTES[f];
@@ -4647,6 +4995,7 @@ function renderIngredient(name, container) {
 // Keys are lowercase names; each recipe/method is filed under the raw name AND the card it's a
 // version of, so a card page also finds recipes for its versions (Oak shortbow ← Oak shortbow (u)).
 let _recIdx = null;
+// Build (once) and return the lookup maps byOut / byIng / bySkill described above.
 function _recipeIndex() {
   if (_recIdx) return _recIdx;
   const byOut = {}, byIng = {}, bySkill = {};
@@ -4661,6 +5010,7 @@ function _recipeIndex() {
     for (const k of keys(c)) (bySkill[k] ||= new Set()).add(m);
   return (_recIdx = { byOut, byIng, bySkill });
 }
+// Jump to a skill on the Skilling tab.
 function _goSkill(sk) { switchTab('skilling'); showSkillDetail(sk); }
 // "Made by" / "Used to make" / "Training methods" sections for an item or ingredient page
 function _cardSkillingHtml(name, { madeBy = true } = {}) {
@@ -4672,7 +5022,6 @@ function _cardSkillingHtml(name, { madeBy = true } = {}) {
     const r = made[0];
     html += renderProduction({ ...r, ingredients: (r.ingredients || []).map(i => i.alts ? { ...i, item: _bestAlt(i.alts) } : i) });
   } else if (made.length) {
-    // Several recipes (this card + its versions): one Creation section, a compact row per recipe
     // Several recipes (this card + its versions): one Creation section, each recipe in its own box,
     // labelled with the version it makes; boxes sit side by side where there's room
     made = _mergeRecipeBoxes(made);
@@ -4715,6 +5064,7 @@ function _cardSkillingHtml(name, { madeBy = true } = {}) {
 // one standard order: top (version banner, packs) → versions → creation → obtaining (gathering, spawns,
 // shops, minigames, quests) → combat (drops, boss rewards) → clues → uses
 const _SECTION_ORDER = ['top', 'versions', 'creation', 'obtain', 'combat', 'clues', 'uses'];
+// Reorder a page's tagged sections into _SECTION_ORDER; unknown groups go last.
 function _orderSections(html) {
   const parts = html.split(/\u0001(\w+)\u0001/), out = {};
   out.top = parts[0];
@@ -4786,6 +5136,8 @@ function _recipeCompactHtml(r, cardKey) {
     <div>${ings}${tools ? `<span style="color:#444;font-size:10px;margin:0 4px">with</span>${tools}` : ''}</div></div>`;
 }
 
+// "Creation" box for one recipe: skill level, facility, ingredients / any-of choice / tools with ✓/✗.
+// opts.bare returns just the box (no section), opts.title labels it.
 function renderProduction(prod, opts = {}) {
   const skill       = prod.skill || '';
   const level       = prod.level || 0;
@@ -4887,6 +5239,7 @@ function renderProduction(prod, opts = {}) {
 // ─── Clue Scroll view ──────────────────────────────────────────────────────
 // Step gates come from each step's requirements (see _clueStepOk); the tier roll-up from _clueTierStatus.
 const _CLUE_TIER_COLOR = { Beginner: '#c8a830', Easy: '#50c050', Medium: '#c8c030', Hard: '#4080c0', Elite: '#9050d0', Master: '#d03030' };
+// Format a probability as a percent ("<0.1%" for tiny values).
 function _cluePct(p) {
   if (!p) return '0%';
   if (p >= 0.1) return Math.round(p * 100) + '%';
@@ -4898,11 +5251,12 @@ function _clueStepCol(res) { return res.ok ? '#76c442' : res.p > 0 ? '#c8a830' :
 function _clueMissHtml(res) {
   if (res.ok) return '';
   return `<div style="font-size:10px;color:#a05050;margin-top:4px">✗ Missing: ${res.missing.map(m => {
-    const lab = escHtml(m.label);
+    const lab = _questLabelHtml(m.label);
     return m.quest ? `<span style="cursor:pointer;text-decoration:underline dotted" data-quest="${escHtml(m.quest)}" onclick="_navToQuest(this)">${lab}</span>`
       : m.partial ? `<span style="color:#c8a830">${lab}</span>` : lab;
   }).join('<span style="color:#444"> · </span>')}</div>`;
 }
+// Navigation type for a clue card chip.
 const _clueNavType = c => (_cardInfo(c) || {}).type === 'monster' ? 'monster' : 'item';
 // Card chips for a step's requirements (long any-of lists collapse to a hover grid)
 function _clueReqChipsHtml(step, skipCards = []) {
@@ -4923,6 +5277,7 @@ function _clueReqChipsHtml(step, skipCards = []) {
 function _clueStepCards(step) {
   return [...new Set(_clueStepReqs(step).filter(r => !r.optional && _reqCards(r).length <= 3).flatMap(r => _reqCards(r).filter(_isCard)))];
 }
+// ☆/★ button that stars a clue step (see _toggleClueStepWish).
 function _clueStarHtml(type, tier, text, items) {
   const wled = _isClueStepWishlisted(text);
   return `<span class="wish-star${wled ? ' active' : ''}" style="flex-shrink:0"
@@ -4963,6 +5318,7 @@ function _clueDigListHtml(type, capTier, steps, title, blurb) {
     <div style="font-size:10px;color:#555;padding:0 0 6px">${blurb}</div>${body}</div>`;
 }
 
+// Clue scroll page for a tier: trail chance, clue sources, rewards and every step type with its requirements.
 function renderClueScroll(tier, container) {
   tier = (tier || '').toLowerCase();
   const cfg      = CLUE_TIER_CONFIG[tier] || {label:tier, color:'#888', bg:'#111'};
@@ -4978,7 +5334,7 @@ function renderClueScroll(tier, container) {
   const tierBadge = `<span style="background:${cfg.bg};color:${cfg.color};border:1px solid ${cfg.color}55;border-radius:3px;padding:2px 10px;font-size:11px;font-weight:600;margin-left:8px">${cfg.label}</span>`;
 
   const clueWikiUrl = `https://oldschool.runescape.wiki/w/Clue_scroll_(${tier})`;
-  const clueImgUrl = `https://oldschool.runescape.wiki/images/Clue_scroll_(${tier}).png`;
+  const clueImgUrl = `assets/icons/Clue_scroll_(${tier}).png`;
   const clueImgHtml = `<img src="${clueImgUrl}" style="float:right;max-width:64px;max-height:64px;image-rendering:pixelated;margin-left:8px" onerror="this.style.display='none'">`;
   const trailCol = realistic ? '#76c442' : st.trail > 0 ? '#c8a830' : '#555';
   let html = `<h1>${clueImgHtml}Clue scroll ${tierBadge}<a href="${clueWikiUrl}" target="_blank" rel="noopener" title="View on OSRS Wiki"
@@ -5275,6 +5631,7 @@ function _recipeHtml(rec) {
   const fac = rec.facilities ? [`<span style="color:#777">at ${escHtml(rec.facilities)}</span>`] : [];
   return [...skills, mats.join(' + '), ...tools, ...fac].filter(Boolean).join('<span style="color:#444"> · </span>');
 }
+// Card page "Versions" HTML for a card's wiki versions; part='banner' → only the selected-version banner, 'list' → only the list
 function _cardVersionsHtml(card, part) {
   const vs = cardVersions[card] || [];
   let html = '';
@@ -5331,6 +5688,7 @@ function _curatedGatherCardsHtml(name) {
   }).join('');
 }
 
+// Item card detail page: sources (drops, shops, spawns, gathering, production, clues, bosses), uses and cross-links, rendered into container
 function renderItem(name, container) {
   const data        = itemSources[name] || {};
   const monsters    = data.monsters    || [];
@@ -5359,7 +5717,7 @@ function renderItem(name, container) {
   }).join('');
   const detail  = cardDetails[name] || {};
   const imgHtml = detail.imageUrl
-    ? `<img src="${detail.imageUrl}" style="float:right;max-width:64px;max-height:64px;image-rendering:pixelated;margin-left:8px" onerror="this.style.display='none'">`
+    ? `<img src="${_wikiImg(detail.imageUrl)}" style="float:right;max-width:64px;max-height:64px;image-rendering:pixelated;margin-left:8px" onerror="this.style.display='none'">`
     : '';
   const examHtml = detail.examine
     ? `<div style="font-size:11px;color:#888;font-style:italic;margin-top:3px">${detail.examine}</div>`
@@ -6075,37 +6433,20 @@ function renderToolTiers(tiers, skillName) {
   return html + `</div>`;
 }
 
-// ─── Live sync — polls cloud revision every 15 s for cloud accounts ──────────
+// ─── Live sync — disabled: refresh only on page load or ↻ Refresh ──────────
 let _liveStateHash = null;
 let _liveTimer     = null;
 
+// Cloud live-sync poller — currently disabled: it only stops any old timer and returns
 function _startLiveSync(rsn) {
   _stopLiveSync();
   if (!rsn) return;
-
-  async function _poll() {
-    try {
-      const data = await fetch(`/api/collection/revision?player=${encodeURIComponent(rsn)}`,
-        { signal: AbortSignal.timeout(8000) }).then(r => r.json());
-      if (!data.isCloud) { _stopLiveSync(); return; }
-      if (_liveStateHash === null) {
-        // First successful poll — record baseline, don't refresh yet
-        _liveStateHash = data.stateHash;
-        return;
-      }
-      if (data.stateHash !== _liveStateHash) {
-        _liveStateHash = data.stateHash;
-        await refreshCollection();
-      }
-    } catch {
-      // Server not running or network error — hide the indicator silently
-    }
-  }
 
   // Live sync disabled: refresh only on page load or the ↻ Refresh button (cloud API rate limits)
   return;
 }
 
+// Stops the live-sync timer and forgets the baseline state hash
 function _stopLiveSync() {
   if (_liveTimer) { clearInterval(_liveTimer); _liveTimer = null; }
   _liveStateHash = null;
@@ -6206,6 +6547,7 @@ async function refreshCollection() {
 
 // ─── Hiscores level lookup (requires server.py) ────────────────────────────
 let _levelsRsn = null;
+// Fetches levels for an RSN from /api/hiscores (server.py) into skills, then re-renders the affected views
 async function lookupLevels(rsn) {
   const _rsn = rsn || document.getElementById('rsn-input')?.value.trim();
   if (!_rsn) return;
@@ -6220,7 +6562,7 @@ async function lookupLevels(rsn) {
     // Merge returned levels into skills — only update skills we track. Levels never go down in OSRS,
     // so for the same account keep the higher value (a flaky HiScores reply — unranked / 1 — would
     // otherwise briefly lock most quests); switching account takes the new levels as they are.
-    const sameAcct = _levelsRsn === rsn;
+    const sameAcct = _levelsRsn === _rsn;
     const dropped = [];
     for (const [skill, lvl] of Object.entries(data.levels)) {
       if (!(skill in skills)) continue;
@@ -6228,7 +6570,7 @@ async function lookupLevels(rsn) {
       skills[skill] = lvl;
     }
     if (dropped.length) console.warn('[refresh] ignored lower HiScores levels:', dropped.join(', '));
-    _levelsRsn = rsn;
+    _levelsRsn = _rsn;
     _canGetCache = {}; _completableCache = null;
     refreshDetail();
     if (activeTab === 'skilling') renderSkillGrid();
@@ -6316,6 +6658,7 @@ function switchTab(tab) {
   _renderTab(tab);
 }
 
+// Shows a tab without pushing history: sets activeTab, toggles the sidebar and builds the tab's panes
 function _renderTab(tab, resetSelection = true) {
   activeTab = tab;
   // Update tab button styles
@@ -6509,16 +6852,19 @@ const SKILL_ICON_NAME = {
   Runecrafting: 'Runecraft',  // wiki uses "Runecraft_icon.png" not "Runecrafting_icon.png"
 };
 const _WIKI = 'https://oldschool.runescape.wiki/images/';
+// <img> HTML for a skill icon (local assets/icons/<Skill>_icon.png)
 function skillIcon(skill, size=16) {
   const name = SKILL_ICON_NAME[skill] || skill;
-  return `<img src="${_WIKI}${name}_icon.png" width="${size}" height="${size}"
+  return `<img src="assets/icons/${name}_icon.png" width="${size}" height="${size}"
     alt="${skill}" style="vertical-align:middle;image-rendering:pixelated;margin-right:3px">`;
 }
 
+// ─── Skill-icon + location hover post-pass (all detail panes) ───────────
 // Skill icons for level requirements written as text ("Crafting 49", "Magic 64") anywhere in the
 // detail panes: one DOM pass (MutationObserver, batched per frame) puts the skill icon in front,
 // so every renderer gets them without each one building icons itself.
 const _SKILL_LVL_RE = new RegExp('\\b(' + ['Attack','Strength','Defence','Ranged','Prayer','Magic','Runecraft','Runecrafting','Hitpoints','Crafting','Mining','Smithing','Fishing','Cooking','Firemaking','Woodcutting','Agility','Herblore','Thieving','Fletching','Slayer','Farming','Construction','Hunter','Sailing'].join('|') + ')( level)? (\\d{1,3})\\b', 'g');
+// Puts a skill icon in front of every "Skill NN" text node under root (called by the MutationObserver below)
 function _iconizeSkillLevels(root) {
   const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, {
     acceptNode: n => n.nodeValue && _SKILL_LVL_RE.test(n.nodeValue) && !n.parentElement?.closest('script,style,textarea,input,select,option,[data-noskillicon]')
@@ -6572,12 +6918,9 @@ function _showLocTip(el) {
     + parts.map(row).join('') + (note ? `<div style="font-size:10px;color:#666;margin-top:4px;max-width:260px">${escHtml(note)}</div>` : '');
   const rect = el.getBoundingClientRect();
   tip.style.display = 'block'; tip.style.left = rect.left + 'px'; tip.style.top = (rect.bottom + 6) + 'px';
-  requestAnimationFrame(() => {
-    const tr = tip.getBoundingClientRect();
-    if (tr.right > window.innerWidth - 8) tip.style.left = (window.innerWidth - tr.width - 8) + 'px';
-    if (tr.bottom > window.innerHeight - 8) tip.style.top = (rect.top - tr.height - 6) + 'px';
-  });
+  _placeTip(tip, rect);
 }
+// Wraps every gated place name in text under root in a dotted span with a ✓/✗ requirements hover tip
 function _hoverLocations(root) {
   const names = Object.keys(LOC_REQS).filter(n => !n.startsWith('_') && _locGate(n));
   if (!names.length) return;
@@ -6620,6 +6963,7 @@ new MutationObserver(() => {
 
 // Slayer data lives in output/slayer.json (generate_slayer.py) — see the Slayer tab section.
 
+// ─── Boss data + boss loot lookups (item pages, Bosses tab) ─────────────
 // ── Boss definitions ───────────────────────────────────────────────────────
 // Generated by scripts/generate_bosses.py (wiki Boss page + scripts/boss_curated.json)
 // → output/bosses.json, loaded at startup. Requirements use the quest model (_expandReq):
@@ -6642,6 +6986,7 @@ function _lootTip(d) {
   for (const n of (d.notes || [])) parts.push(n);
   return parts.join('\n');
 }
+// Loot for a boss → {source, page, drops, uniqueRoll?, basis?}: its boss_loot.json chest if any, else its monster's drop table
 function _bossLoot(boss) {
   const chest = bossLoot[boss.name];
   if (chest && chest.drops) return { source: chest.source, page: chest.page, drops: chest.drops,
@@ -6668,6 +7013,7 @@ function _bossLoot(boss) {
 // item card name (lowercase) → [{bossName, rarity, fraction, source}] — chest loot only
 // (monster-table drops already appear as monster sources on item pages).
 let _bossLootByItem = null;
+// Chest-loot entries ({bossName, source, drop}) that give this item; builds the index on first call
 function _bossRewardsFor(itemName) {
   if (!_bossLootByItem) {
     _bossLootByItem = {};
@@ -6681,6 +7027,7 @@ function _bossRewardsFor(itemName) {
 // ── Boss ↔ card reverse lookup ─────────────────────────────────────────────
 // Maps card name → [{bossName, role}] for "Boss Encounters" cross-links.
 var BOSS_BY_CARD = {};
+// Rebuilds BOSS_BY_CARD (card → [{bossName, role}]) from every boss's requirements, loot requirements and related cards
 function _buildBossByCard() {
   BOSS_BY_CARD = {};
   function _add(card, bossName, role) {
@@ -6692,7 +7039,7 @@ function _buildBossByCard() {
   for (const boss of BOSS_DATA) {
     for (const r of (boss.requirements || [])) {
       if (r.access) continue;  // area routes aren't this boss's own cards
-      const role = r.optional ? 'optional' : r.tool ? 'tool' : r.group === 'light_source' ? 'light' : r.group === 'dragonfire' ? 'dragonfire'
+      const role = r.group === 'warm_clothing' ? 'warm' : r.optional ? 'optional' : r.tool ? 'tool' : r.group === 'light_source' ? 'light' : r.group === 'dragonfire' ? 'dragonfire'
         : /^kill count/i.test(r.label || '') ? 'kc' : r.type === 'enemy' ? 'monster' : r.type === 'npc' ? 'npc' : 'item';
       for (const c of _reqCards(r)) _add(c, boss.name, role);
     }
@@ -6704,8 +7051,10 @@ function _buildBossByCard() {
 // Area access lives in output/access_routes.json (routes per area) and
 // output/monster_locations.json (where each NPC card is found).
 
+// ─── Quest card index ("Required For" on card pages) ────────────────────
 // Lazy reverse index: card name → [quest names that require it via bm_quest_cards.json]
 let _questCardIndex = null;
+// Builds (once) and returns the card → [quest names] index
 function getQuestCardIndex() {
   if (_questCardIndex) return _questCardIndex;
   _questCardIndex = {};
@@ -6750,6 +7099,7 @@ function requiredForQuestsHtml(cardName) {
   return html;
 }
 
+// ─── Skilling: static training data ─────────────────────────────────────
 // Spellbook unlocks (Magic training): the quest or area each non-standard book needs
 const SPELLBOOK_GATES = {
   Ancient: { quest: 'Desert Treasure I', label: 'Desert Treasure I' },
@@ -6785,10 +7135,11 @@ let RECIPES = [];
 // Icons for Skilling rows with no card art (output/method_icons.json, generate_icons.py)
 let METHOD_ICONS = {};
 function _methodIcon(m) {
-  if (m.type === 'generated' && m.method) return METHOD_ICONS[`method|${m.method.skill}|${m.method.name}`] || _cardImg(m.navCard) || '';
-  if (m.type === 'magic-spell') return METHOD_ICONS['spell|' + m.name] || '';
+  const mi = k => _wikiImg(METHOD_ICONS[k]);   // wiki URLs → the server's proxy (cache + RuneLite fallback)
+  if (m.type === 'generated' && m.method) return mi(`method|${m.method.skill}|${m.method.name}`) || _cardImg(m.navCard) || '';
+  if (m.type === 'magic-spell') return mi('spell|' + m.name) || '';
   if (m.type === 'ranged-setup') return _cardImg(m.weapon);
-  return _cardImg(m.displayNav || m.name) || METHOD_ICONS['recipe|' + (m.name || '').toLowerCase()] || '';
+  return _cardImg(m.displayNav || m.name) || mi('recipe|' + (m.name || '').toLowerCase()) || '';
 }
 // Of interchangeable ingredients, the first one you can use (card owned + obtainable), else the first
 function _bestAlt(alts) {
@@ -6820,11 +7171,14 @@ function _productionRecipes() {
 // _ingNeeds(name) → {cards: [card names still to collect], other: bool (a non-card lock), why: that
 // lock in words, none: name of an item with no known source at all (or null)}.
 let _recOutIdx = null, _ingNeedsMemo = {}, _ingNeedsSig = '';
+// Non-internal recipes whose output is n (index built on first call)
 function _recipesMaking(n) {
   if (!_recOutIdx) { _recOutIdx = {}; for (const r of RECIPES) if (!r.internal) (_recOutIdx[r.output] ||= []).push(r); }
   return _recOutIdx[n] || [];
 }
+// True when n has no data of its own: not an item card, not in item_sources, not in ingredient_info
 function _noDataItem(n) { const ci = _cardInfo(n); return !(ci && ci.type === 'item') && !itemSources[n] && !ingredientInfo[n]; }
+// What still stands between you and ingredient n (memoised per owned/quest/level state; see the block comment above)
 function _ingNeeds(n, seen = new Set()) {
   const top = !seen.size;
   if (top) {
@@ -6881,6 +7235,7 @@ function _toolTierCards(tool, lvl) {
   const ok = (TOOL_TIERS[tool] || []).filter(t => t.skillReq <= lvl);
   return [...ok.filter(t => !t.rare), ...ok.filter(t => t.rare)].map(t => t.name);
 }
+// Blocker constructors (_blkQuest / _blkArea / _blkDiary / _blkLevel) → {kind, key, label} used in method.blockers
 const _blkQuest = q => ({ kind: 'quest', key: q, label: q });
 const _blkArea  = a => ({ kind: 'area', key: a, label: accessRoutes[a]?.label || a });
 const _blkDiary = d => ({ kind: 'diary', key: d, label: `${d} Diary` });
@@ -6925,6 +7280,7 @@ function _reqNeedSlots(r) {
 // Melee skills (methods = monsters): the highest combat level at or below your combat level + 10,
 // else the lowest one available — not a Cb 525 avatar.
 const _MELEE_SKILLS = new Set(['Attack','Strength','Defence','Hitpoints']);
+// Best available method: highest level then xp; melee skills prefer monsters at or under combat level + 10
 function _bestMethod(avail, skill) {
   const sorted = [...avail].sort((a, b) => ((b.level || 0) - (a.level || 0)) || ((b.xp || 0) - (a.xp || 0)));
   if (!_MELEE_SKILLS.has(skill)) return sorted[0];
@@ -6933,6 +7289,7 @@ function _bestMethod(avail, skill) {
 }
 // Common starter monsters, preferred when reachable
 const _STARTER_MONSTERS = ['Chicken', 'Goblin', 'Man', 'Cow', 'Rat'];
+// Rank of a monster in _STARTER_MONSTERS (only when combat level ≤ 5), else 99
 function _starterMonsterRank(m) {
   const i = _STARTER_MONSTERS.indexOf(m.name);
   return i >= 0 && (m.level || 0) <= 5 ? i : 99;
@@ -6940,6 +7297,7 @@ function _starterMonsterRank(m) {
 
 const _GENERIC_TOOLS = new Set(['Hammer', 'Saw', 'Knife', 'Chisel', 'Tinderbox', 'Spade', 'Rake', 'Seed dibber', 'Needle', 'Thread',
   'Pestle and mortar', 'Glassblowing pipe', 'Bucket', 'Coins', 'Gardening trowel', 'Secateurs', 'Watering can', 'Plant pot', 'Small fishing net', 'Butterfly net']);
+// Training methods for a skill built from SKILLING (skilling.json): status, note, nav card, needCards and blockers per method
 function _skillingMethods(skillName) {
   const myLevel = getLevel(skillName);
   return SKILLING.filter(m => m.skill === skillName).map(m => {
@@ -6988,7 +7346,9 @@ function _skillingMethods(skillName) {
 //   Herblore — "requires completion of the Druidic Ritual quest"; Runecraft — essence mining needs
 //   Rune Mysteries; Sailing — starts with Pandemonium.
 const SKILL_UNLOCK_QUESTS = { Herblore: 'Druidic Ritual', Runecrafting: 'Rune Mysteries', Sailing: 'Pandemonium' };
+// True when the skill needs no unlock quest or that quest is done
 function _skillUnlocked(skill) { const q = SKILL_UNLOCK_QUESTS[skill]; return !q || _questOk(q); }
+// Training methods for a skill; if the skill's unlock quest isn't done, every method is marked locked by that quest
 function getTrainingMethods(skillName) {
   const results = _getTrainingMethodsRaw(skillName);
   if (_skillUnlocked(skillName)) return results;
@@ -7000,6 +7360,7 @@ function getTrainingMethods(skillName) {
       : { ...m, otherLocks: true, blockers: blk };
   });
 }
+// All training methods for a skill before the unlock-quest check: skilling.json methods, plus per-skill card/item-based methods
 function _getTrainingMethodsRaw(skillName) {
   /**
    * Return an array of training method objects for a given skill.
@@ -7388,10 +7749,12 @@ function _combatStarterCandidates() {
   return out;
 }
 
+// ─── Skilling: getting started + recommendations ────────────────────────
 // Cheapest ways to START training a skill: methods at or under your level with no other lock,
 // by number of missing card slots, then level (combat skills: lowest-combat reachable monsters).
 // → {canTrain, best, options:[{method, needCards, cost}]}
 const _COMBAT_SPELL_RE = /(Strike|Bolt|Blast|Wave|Surge|Rush|Burst|Blitz|Barrage)$|^(Crumble Undead|Magic Dart|Claws of Guthix|Flames of Zamorak)$/;
+// Builds the 'Getting started' result for a skill (see the comment above); combatCands can be passed in to share one scan
 function _skillStarter(skill, ms, combatCands) {
   ms = ms || getTrainingMethods(skill);
   const best = _bestMethod(ms.filter(m => m.status === 'available'), skill);
@@ -7436,10 +7799,12 @@ function _skillStarter(skill, ms, combatCands) {
   }) };
 }
 
+// Number of methods for a skill with status 'available'
 function countAvailableMethods(skillName) {
   return getTrainingMethods(skillName).filter(m => m.status === 'available').length;
 }
 
+// Renders the skill grid (icon, level, available method count) into #skill-grid
 function renderSkillGrid() {
   const grid = document.getElementById('skill-grid');
   if (!grid) return;
@@ -7459,6 +7824,7 @@ function renderSkillGrid() {
   grid.innerHTML = html;
 }
 
+// Shows the Skilling home panel (no skill selected), pushing a history entry
 function showSkillOverview() {
   pushHistoryEntry();
   selectedSkill = null;
@@ -7467,7 +7833,9 @@ function showSkillOverview() {
 }
 // ── Getting started: cheapest card sets to start a skill (see _skillStarter) ──
 let _starterLast = {};   // skill → last computed starter, for the wishlist buttons
+// Wishlist tag for a starter option, e.g. "Start Mining: Copper ore"
 const _starterTag = (skill, m) => `Start ${skill}: ${m.displayName || m.name}`;
+// True when this starter tag is already wishlisted (as a group, or as a tag in a card's note)
 function _starterWished(tag) {
   return wishlistGroups.some(g => g.name === tag || g.name.startsWith(tag + ' — '))
     || [...wishlist.values()].some(e => (e.note || '').split(',').map(t => t.trim()).includes(tag));
@@ -7508,6 +7876,7 @@ function _slotChipsHtml(slots) {
     return `<span style="display:inline-block;background:#1c1a12;border:1px solid #3a3420;border-radius:3px;padding:1px 6px;margin:1px 0">${sl.label ? `<span style="color:#888;font-style:italic">${escHtml(sl.label)}: </span>` : ''}${names}${rest.length ? `<span style="color:#777" title="${escHtml(rest.join(', '))}"> / +${rest.length} more</span>` : ''}</span>`;
   }).join('<span style="color:#666"> + </span>');
 }
+// One starter option: method name + level, its card chips, and a ☆/★ wishlist toggle button
 function _starterOptHtml(skill, opt, i) {
   const tag = _starterTag(skill, opt.method), done = _starterWished(tag);
   const m = opt.method, lvTxt = m.level ? ` <span style="color:#666">${m.type === 'combat' ? 'Cb' : 'Lv'} ${m.level}</span>` : '';
@@ -7525,12 +7894,8 @@ function _starterLineHtml(skill, st) {
     <details style="display:inline-block;vertical-align:top;margin-left:6px" onclick="event.stopPropagation()"><summary style="cursor:pointer;color:#777;font-size:10px">${others.length} other option${others.length > 1 ? 's' : ''}</summary>
     ${others.map((o, j) => `<div style="margin:3px 0 0 8px">${_starterOptHtml(skill, o, j + 1)}</div>`).join('')}</details>` : ''}`;
 }
-// Starter box for a skill page (shown when nothing can be trained yet)
-// Top 5 recommended methods for a skill: what you can do now with the best xp (combat: the strongest
-// monsters near your combat level), plus "one card away" methods. Never recommended: one-off /
-// key-gated / reward-only methods (skilling_curated "oneOff", "repeatable": false, "recommend": false),
-// methods with an ingredient nobody can get (no-source), and minigame/quest-internal recipes (not listed).
 const _REC_BY_LEVEL = new Set(['Magic', 'Ranged']);   // xp per action isn't comparable: rank by level
+// False for methods that should never be recommended (one-off, no-source, boss-unique / rare-only recipes)
 function _recEligible(m) {
   const d = m.method || {};
   if (d.repeatable === false || d.oneOff || d.recommend === false || m.oneOff || m.noSource || m.status === 'no-source') return false;
@@ -7544,6 +7909,7 @@ function _recEligible(m) {
   return true;
 }
 let _recUniq = null;
+// Set of every collection-log item (built once), used to skip recipes from / into uniques
 function _recUniqueItems() {
   if (!_recUniq) { _recUniq = new Set(); for (const v of Object.values(collectionLog)) for (const it of v.items || []) _recUniq.add(it); }
   return _recUniq;
@@ -7576,6 +7942,10 @@ function _recWithHouse(m) {
   if (completedQuests.has("Daddy's Home") || isOwned('Coins')) return m;
   return { ...m, otherLocks: false, needCards: [...(m.needCards || []), ['Coins']] };
 }
+// Top 5 recommended methods for a skill: what you can do now with the best xp (combat: the strongest
+// monsters near your combat level), plus "one card away" methods. Never recommended: one-off /
+// key-gated / reward-only methods (skilling_curated "oneOff", "repeatable": false, "recommend": false),
+// methods with an ingredient nobody can get (no-source), and minigame/quest-internal recipes (not listed).
 function _skillRecommendations(skill, ms) {
   const lvl = getLevel(skill), combat = _MELEE_SKILLS.has(skill), cb = getCombatLevel();
   const bySig = !_REC_BY_LEVEL.has(skill) && skill !== 'Slayer';
@@ -7610,14 +7980,16 @@ function _skillRecommendations(skill, ms) {
 // Combat: monsters you don't own yet that you could reach and fight (common starters first while low)
 function _recCombatCands(cb) {
   const G = monsterLocations._gates || {}, mySlayer = getLevel('Slayer'), out = [];
-  _accessCache = new Map();
-  for (const mName of Object.keys(monsterDrops)) {
-    if (isOwned(mName)) continue;
-    const e = _combatEval(mName, G, mySlayer);
-    if (!e || e.status !== 'available' || !e.hasLoc || e.cbLv > cb + 10) continue;
-    out.push({ name: mName, level: e.cbLv, status: 'no-card', type: 'combat', needCards: [[mName]], otherLocks: false, hasLoc: true });
-  }
-  _accessCache = null;
+  const prevCache = _accessCache;
+  _accessCache = prevCache || new Map();
+  try {
+    for (const mName of Object.keys(monsterDrops)) {
+      if (isOwned(mName)) continue;
+      const e = _combatEval(mName, G, mySlayer);
+      if (!e || e.status !== 'available' || !e.hasLoc || e.cbLv > cb + 10) continue;
+      out.push({ name: mName, level: e.cbLv, status: 'no-card', type: 'combat', needCards: [[mName]], otherLocks: false, hasLoc: true });
+    }
+  } finally { _accessCache = prevCache; }
   // While low level, the usual starters (Chicken, Goblin, Man, Cow…) beat obscure low-level NPCs
   if (cb < 20) { const st = out.filter(m => _starterMonsterRank(m) < 99 || _STARTER_MONSTERS.includes(m.name)); if (st.length) return st; }
   return out;
@@ -7630,6 +8002,7 @@ function _methodOutputCards(m) {
     return (m.method.outputs || []).map(o => typeof o === 'string' ? o : o.card).filter(Boolean);
   return null;
 }
+// Small badge saying whether you own the card for what a method gathers/makes (✓ card / ✗ card / free)
 function _methodOutputChip(m) {
   const outs = _methodOutputCards(m);
   if (!outs) return '';
@@ -7646,6 +8019,7 @@ function _methodOutputChip(m) {
   if (owned.length) return chip(`✓ ${owned.length}/${cards.length} cards`, '#c8a830', `Own: ${owned.join(', ')} · missing: ${cards.filter(c => !isOwned(c)).join(', ')}`);
   return chip('✗ card', '#a05050', `You can ${verb} and bank it, but can't use it without the ${cards.join(' / ')} card`);
 }
+// 'Recommended' box HTML for a skill page (rows from _skillRecommendations); '' when there are none
 function _skillRecommendHtml(skill, ms) {
   const recs = _skillRecommendations(skill, ms);
   if (!recs.length) return '';
@@ -7668,6 +8042,7 @@ function _skillRecommendHtml(skill, ms) {
     <div style="color:#666;font-size:10px;margin-bottom:6px">${combat ? 'Strongest monsters you can fight near your combat level' : skill === 'Magic' ? 'Highest-level spells and methods you can use now' : 'Best xp you can get now'} · ◐ = a card away${recs.some(m => m.status !== 'available') && !recs.some(m => m.status === 'available') ? ' (or the cheapest cards to start)' : ' and better'}</div>${rows}</div>`;
 }
 
+// 'Getting started' box for a skill page; '' when the skill can already be trained (also caches _starterLast)
 function _starterBoxHtml(skill) {
   const st = _skillStarter(skill);
   _starterLast[skill] = st;
@@ -7694,8 +8069,9 @@ function _areaRouteTip(key) {
   const parts = [...best.cards.map(c => 'card: ' + c), ...best.other];
   return `Cheapest way in${best.label ? ` (${best.label})` : ''}: ${parts.length ? parts.join('; ') : 'nothing missing'}`;
 }
+// HTML for one blocker: quest / diary link, area with a cheapest-route tooltip, or plain text for levels
 function _blockerHtml(b) {
-  if (b.kind === 'quest') return `<span style="cursor:pointer;color:#c8a060;text-decoration:underline dotted" data-quest="${escHtml(b.key)}" onclick="_navToQuest(this)">${escHtml(b.label)}</span>`;
+  if (b.kind === 'quest') return `<span style="cursor:pointer;color:#c8a060;text-decoration:underline dotted" data-quest="${escHtml(b.key)}" onclick="_navToQuest(this)">${questIcon()}${escHtml(b.label)}</span>`;
   if (b.kind === 'area') return `<span style="color:#ccc;text-decoration:underline dotted;cursor:help" title="${escHtml(_areaRouteTip(b.key))}">Reach ${escHtml(b.label)}</span>`;
   if (b.kind === 'diary') {
     const area = b.key.replace(/ (Easy|Medium|Hard|Elite)$/i, '');
@@ -7704,53 +8080,22 @@ function _blockerHtml(b) {
   return `<span style="color:#ccc">${escHtml(b.label)}</span>`;
 }
 
-// Skilling home panel: getting started per skill, per-skill level / methods / best method now,
-// and the quests / areas / levels locking the most methods
+// ─── Skilling home + skill detail pages ─────────────────────────────────
+// Skilling home panel: methods-available bar and the skills locked behind a quest
+// (also caches each skill's starter in _starterLast for the wishlist buttons)
 function _renderSkillHome() {
   const pane = document.getElementById('skill-detail-pane');
   if (!pane) return;
   document.getElementById('skill-overview-item')?.classList.add('selected');
   const MELEE = new Set(['Attack','Strength','Defence','Hitpoints']);
-  const rows = [], blk = new Map();
+  const rows = [];
   const combatCands = _combatStarterCandidates();   // shared by the four melee skills
   for (const sk of SKILL_ORDER) {
     const ms = getTrainingMethods(sk);
     const avail = ms.filter(m => m.status === 'available');
-    const best = _bestMethod(avail, sk);
-    const st = _skillStarter(sk, ms, MELEE.has(sk) ? combatCands : null);
-    _starterLast[sk] = st;
-    // Melee methods are monsters, so their "level" is the monster's combat level
-    rows.push({ sk, lvl: getLevel(sk), n: ms.length, a: avail.length, best, st, lv: MELEE.has(sk) ? 'Cb' : 'Lv' });
-    // Blockers: each locked method's concrete quests / areas / diaries / levels.
-    // The melee skills share one monster pool, so a monster counts once.
-    for (const m of ms) {
-      if (m.status === 'available' || m.status === 'locked-level' || !(m.blockers || []).length) continue;
-      if (m.status !== 'locked' && !m.otherLocks) continue;
-      const id = MELEE.has(sk) ? 'combat|' + m.name : sk + '|' + m.name;
-      for (const b of m.blockers) {
-        const k = b.kind + '|' + b.key;
-        if (!blk.has(k)) blk.set(k, { b, ids: new Set(), skills: new Set() });
-        blk.get(k).ids.add(id); blk.get(k).skills.add(MELEE.has(sk) ? 'Combat' : sk);
-      }
-    }
+    _starterLast[sk] = _skillStarter(sk, ms, MELEE.has(sk) ? combatCands : null);   // for the wishlist buttons
+    rows.push({ n: ms.length, a: avail.length });
   }
-  const starterTable = `<table style="border-collapse:collapse;width:100%;font-size:11px">
-    ${rows.map(r => `<tr style="border-top:1px solid #1a1a1a">
-      <td style="padding:4px 6px;color:#ccc;white-space:nowrap;vertical-align:top;cursor:pointer;width:120px" onclick="showSkillDetail('${r.sk}')">${skillIcon(r.sk, 12)} ${r.sk}</td>
-      <td style="padding:4px 6px;line-height:1.7">${_starterLineHtml(r.sk, r.st)}</td></tr>`).join('')}</table>`;
-  const table = `<div style="overflow-x:auto"><table style="border-collapse:collapse;width:100%;font-size:11px">
-    <tr style="color:#666;text-align:left"><th style="padding:4px 6px">Skill</th><th style="padding:4px 6px">Level</th><th style="padding:4px 6px">Methods</th><th style="padding:4px 6px">Best you can do now</th></tr>
-    ${rows.map(r => `<tr style="border-top:1px solid #1a1a1a;cursor:pointer" onclick="showSkillDetail('${r.sk}')">
-      <td style="padding:4px 6px;color:#ccc;white-space:nowrap">${skillIcon(r.sk, 12)} ${r.sk}</td>
-      <td style="padding:4px 6px;color:#aaa;font-variant-numeric:tabular-nums">${r.lvl}</td>
-      <td style="padding:4px 6px;color:${r.a ? '#7ab07a' : '#a05050'};font-variant-numeric:tabular-nums">${r.a}/${r.n}</td>
-      <td style="padding:4px 6px;color:#bbb">${r.best ? escHtml(r.best.displayName || r.best.name) + (r.best.level ? ` <span style="color:#666">${r.lv} ${r.best.level}</span>` : '') : '<span style="color:#555">—</span>'}</td>
-      </tr>`).join('')}</table></div>`;
-  const kindTxt = { quest: 'quest', area: 'area', diary: 'diary', level: 'level' };
-  const gateRows = [...blk.values()].sort((a, b) => b.ids.size - a.ids.size).slice(0, 12).map(g => `<div style="display:flex;gap:8px;padding:3px 0;font-size:11px">
-    <span style="width:300px;flex-shrink:0">${_blockerHtml(g.b)} <span style="color:#555;font-size:10px">${kindTxt[g.b.kind] || ''}</span></span>
-    <span style="color:#c85040;font-variant-numeric:tabular-nums;flex-shrink:0;width:60px">locks ${g.ids.size}</span>
-    <span style="color:#666">${[...g.skills].join(', ')}</span></div>`).join('');
   const box = (title, sub, inner) => inner ? `<div style="background:#111;border:1px solid #222;border-radius:4px;padding:12px 14px;margin-bottom:14px">
     <div style="color:#c8a830;font-weight:700;font-size:12px;margin-bottom:2px">${title}</div><div style="color:#666;font-size:10px;margin-bottom:8px">${sub}</div>${inner}</div>` : '';
   const total = rows.reduce((a, r) => ({ done: a.done + r.a, total: a.total + r.n }), { done: 0, total: 0 });
@@ -7771,6 +8116,7 @@ function _renderSkillHome() {
   </div>`;
 }
 
+// Skill detail page: intro, starter + recommended boxes, and the full method list for one skill
 function showSkillDetail(skillName, push = true) {
   if (push) pushHistoryEntry();
   selectedSkill = skillName;
@@ -7953,6 +8299,8 @@ function _bossProgress(boss) {
   for (const r of (boss.lootRequirements || [])) tally(loot, _reqMet(r));
   return { req, rec, loot };
 }
+// Boss status: 'locked' (quest/level/access gate unmet), 'partial' (other requirements missing)
+// or 'available'; also returns the missing lists and _bossProgress.
 function evaluateBoss(boss) {
   const questsMissing = [...(boss.quests || []).filter(q => !completedQuests.has(q)),
                          ...(boss.partialQuests || []).filter(q => !_questStartedOk(q))];
@@ -7983,6 +8331,7 @@ const _BOSS_CATEGORIES = [
   ]},
 ];
 
+// Draws the category filter buttons (All / Raids / Waves …) above the boss list.
 function _renderBossFilterBtns() {
   const el = document.getElementById('boss-filter-btns');
   if (!el) return;
@@ -7995,6 +8344,7 @@ function _renderBossFilterBtns() {
   ).join('');
 }
 
+// Sets the boss category filter, restyles the filter buttons and redraws the list.
 function setBossFilter(key) {
   bossFilter = key;
   ['all',..._BOSS_CATEGORIES.map(c=>c.key)].forEach(k => {
@@ -8006,6 +8356,8 @@ function setBossFilter(key) {
   renderBossList();
 }
 
+// Left pane of the Bosses tab: Overview row, then bosses by category / sub-category,
+// ready first, then by share of required requirements met.
 function renderBossList() {
   const listEl = document.getElementById('boss-list-scroll');
   if (!listEl) return;
@@ -8069,6 +8421,8 @@ function renderBossList() {
     `<div style="padding:16px;color:#444;font-size:12px">No bosses match</div>`;
 }
 
+// Right pane for one boss: status, progress bars, requirement sections (same rows as the
+// Questing tab), related cards and loot grouped by rarity.
 function showBossDetail(name) {
   selectedBoss = name;
   renderBossList();  // re-render to update selected highlight
@@ -8126,11 +8480,11 @@ function showBossDetail(name) {
   const preRows = [
     ...(boss.quests || []).map(q => { const d = completedQuests.has(q);
       return `<div class="req-row"><span class="req-icon ${d ? 'ok' : 'fail'}">${d ? '✓' : '✗'}</span>
-        <span class="req-label" style="cursor:pointer" data-quest="${escHtml(q)}" onclick="_navToQuest(this)">Quest: ${escHtml(q)}</span>
+        <span class="req-label" style="cursor:pointer" data-quest="${escHtml(q)}" onclick="_navToQuest(this)">${questIcon()}${escHtml(q)}</span>
         <span class="req-note">${d ? 'complete' : 'not done'}</span></div>`; }),
     ...(boss.partialQuests || []).map(q => { const d = _questStartedOk(q);
       return `<div class="req-row"><span class="req-icon ${d ? 'ok' : 'fail'}">${d ? '✓' : '✗'}</span>
-        <span class="req-label" style="cursor:pointer" data-quest="${escHtml(q)}" onclick="_navToQuest(this)">Quest started: ${escHtml(q)}</span>
+        <span class="req-label" style="cursor:pointer" data-quest="${escHtml(q)}" onclick="_navToQuest(this)">${questIcon()}${escHtml(q)} <span style="font-size:10px;color:#777">(started is enough)</span></span>
         <span class="req-note">${completedQuests.has(q) ? 'complete' : startedQuests.has(q) ? 'marked started' : d ? 'completable' : 'not started'}</span></div>`; }),
     ...levelGates.map(({ skill, have, req, ok }) => `<div class="req-row"><span class="req-icon ${ok ? 'ok' : 'fail'}">${ok ? '✓' : '✗'}</span>
         <span class="req-label">${skillIcon(skill, 12)} ${escHtml(skill)} ${req}</span><span class="req-note">you: ${have}</span></div>`)];
@@ -8182,6 +8536,7 @@ function showBossDetail(name) {
       const rowDrops = byRarity[r].sort((x, y) => (isUnique(y) - isUnique(x)) || x.card.localeCompare(y.card));
       for (const d of rowDrops) {
         let chip = cardChip(d.card, {type:'item', owned:isOwned(d.card), required:false, dashed:true});
+        // Patch the finished chip HTML: gold border + ◆ for collection-log uniques
         if (isUnique(d))
           chip = chip.replace('<span style="', '<span style="border-color:#8a6a2a !important;border-style:solid !important;')
                      .replace(/<\/span>$/, ` <span style="font-size:8px;color:#b08a3a">\u25c6</span></span>`);
@@ -8244,9 +8599,11 @@ function _missingLink(r, bossName) {
 let SLAYER = { masters: [], tasks: {}, unlocks: [] };
 let selectedSlayer = null;   // {kind:'master'|'task', name}
 let slayerSearch = '';
+// Slayer reward unlocks the user has ticked (localStorage 'tcg_slayer_unlocks'), as a Set.
 function _slayerUnlocks() {
   try { return new Set(JSON.parse(localStorage.getItem('tcg_slayer_unlocks') || '[]')); } catch { return new Set(); }
 }
+// Ticks / unticks a Slayer reward unlock and redraws both Slayer panes.
 function toggleSlayerUnlock(name) {
   const u = _slayerUnlocks();
   u.has(name) ? u.delete(name) : u.add(name);
@@ -8255,6 +8612,7 @@ function toggleSlayerUnlock(name) {
 }
 // card (lowercase) → [{task, mon}] for every Slayer task monster with that card
 let _slCardIndex = null;
+// Builds _slCardIndex on first call; [] for a card that is on no task.
 function _slCardEntries(card) {
   if (!_slCardIndex) {
     _slCardIndex = {};
@@ -8281,9 +8639,12 @@ function _slMastersForCard(card) {
   return SLAYER.masters.filter(m => (m.cards || []).some(c => c.toLowerCase() === k) || (m.replacedBy && m.replacedBy.card.toLowerCase() === k));
 }
 
+// The card that counts for a master: the replacement's card once its quest is done, else the master's first card (or name).
 function _slMasterCard(m) {
   return m.replacedBy && completedQuests.has(m.replacedBy.quest) ? m.replacedBy.card : (m.cards || [m.name])[0];
 }
+// Can you use this master? {ok, why:[{label, card?|quest?}], card}: needs its card, Combat and
+// Slayer level, quests and area access.
 function _slMasterStatus(m) {
   const req = m.requirements || {}, why = [];
   const card = _slMasterCard(m);
@@ -8294,6 +8655,7 @@ function _slMasterStatus(m) {
   if (m.access && !_accessMet(m.access)) why.push({ label: `Reach ${accessRoutes[m.access]?.label || m.access}` });
   return { ok: !why.length, why, card };
 }
+// Will a master give this task entry yet? Checks its unlock: Slayer / Combat level, quests, ticked reward unlock.
 function _slAssignable(entry) {
   const u = entry.unlock || {};
   if (u.slayer && getLevel('Slayer') < u.slayer) return false;
@@ -8302,6 +8664,7 @@ function _slAssignable(entry) {
   if (u.ability && !_slayerUnlocks().has(u.ability)) return false;
   return true;
 }
+// ─── Location gates (shared by Slayer, skilling, item sources…) ────────────────
 // ── Location gates: one model for every place (location_requirements.json + per-place gates) ──
 // A gate: {quests, partialQuests, diaries, cards (any one), cardGroup, skills, skillsSum
 // ({'Attack+Strength': 130}), questPoints, access, anyOf: [gate], allOf: [gate]} — all must hold.
@@ -8311,12 +8674,19 @@ function _slAssignable(entry) {
 // Same rules as scripts/location_reqs.py.
 let LOC_REQS = {}, _locIdx = {}, _locGateMemo = new Map(), _locReviewed = {};
 const _LOC_GATE_KEYS = ['quests', 'partialQuests', 'diaries', 'cards', 'cardGroup', 'skills', 'skillsSum', 'questPoints', 'access', 'anyOf', 'allOf'];
+// Loads location_requirements.json into LOC_REQS (+ lowercase index) and clears the gate memo caches.
 function _setLocReqs(d) {
   LOC_REQS = {}; _locIdx = {}; _locGateMemo = new Map(); _spawnLocNames = null; _locReviewed = (d || {})._reviewedNoGate || {};
   for (const [k, v] of Object.entries(d || {})) if (!k.startsWith('_')) { LOC_REQS[k] = v; _locIdx[k.toLowerCase()] = k; }
 }
+// location_requirements.json entry for a place name (case-insensitive), or null.
 function _locEntry(name) { const k = _locIdx[(name || '').toLowerCase()]; return k ? LOC_REQS[k] : null; }
-const _gateSame = (a, b) => JSON.stringify(a) === JSON.stringify(b);
+// Structural equality of two gates: JSON compare with object keys sorted, so key order doesn't matter.
+const _gateCanon = v => Array.isArray(v) ? v.map(_gateCanon)
+  : v && typeof v === 'object' ? Object.fromEntries(Object.keys(v).sort().map(k => [k, _gateCanon(v[k])])) : v;
+const _gateSame = (a, b) => JSON.stringify(_gateCanon(a)) === JSON.stringify(_gateCanon(b));
+// Merges gate b into a deep copy of a: lists union, levels / quest points take the max, allOf
+// concatenates; a conflicting value for any other gate key is kept by pushing it onto allOf.
 function _mergeGate(a, b) {
   const out = a ? JSON.parse(JSON.stringify(a)) : {};
   for (const [k, v] of Object.entries(b || {})) {
@@ -8340,7 +8710,10 @@ function _locOwnGate(name, seen = new Set()) {
   const own = Object.fromEntries(_LOC_GATE_KEYS.filter(k => e[k] != null).map(k => [k, e[k]]));
   return e.parent ? _mergeGate(_locOwnGate(e.parent, seen), own) : own;
 }
+// WeakMap key standing in for "no data gate" (WeakMap keys must be objects).
 const _NO_GATE = {};
+// A place's full gate: the data's own gate merged with the place's entry requirements. Memoised
+// per place and per gate object, so repeat calls return the same object.
 function _locGate(name, gate) {
   if (!name) return gate || null;
   let byGate = _locGateMemo.get(name);
@@ -8355,7 +8728,9 @@ function _locGate(name, gate) {
   if (!g) { g = _mergeGate(gate, byGate.own); byGate.merged.set(k, g); }
   return g;
 }
+// Total quest points from completed quests.
 function _questPointsDone() { let n = 0; for (const q of completedQuests) n += (questsData[q] && questsData[q].questPoints) || 0; return n; }
+// Cards in a gate's cardGroup: 'tool:Axe' → every tier in TOOL_TIERS.Axe, else a REQ_GROUPS list.
 function _gateGroupCards(g) {
   if (g.startsWith('tool:')) return (TOOL_TIERS[g.slice(5)] || []).map(t => t.name);
   return REQ_GROUPS[g] || [];
@@ -8383,6 +8758,7 @@ function _gateMissing(g) {
   for (const sub of g.allOf || []) out.push(..._gateMissing(sub));
   return out;
 }
+// True when a gate (or null) has nothing missing.
 function _gateOk(g) { return !_gateMissing(g).length; }
 // Plain-text summary of a gate (tooltips): "Farming 45 · Heroes' Quest · one of: Brown apron, …"
 function _gateText(g) {
@@ -8407,13 +8783,18 @@ function _slLocOk(access, gate, name) {
   if (access != null && !_accessMet(access)) return false;
   return _gateOk(_locGate(name, gate));
 }
+// ─── Slayer tab: master / task / monster evaluation ────────────────────────────
 // A boss on a Boss task: judged by that boss's own status on the Bosses tab
 const _SL_BOSS_ALIAS = { 'barrows brothers': 'Barrows', 'dagannoth kings': 'Dagannoth Kings', 'grotesque guardians': 'Grotesque Guardians' };
+// BOSS_DATA entry for a Boss-task monster name (via _SL_BOSS_ALIAS or a boss's wikiBosses), or undefined.
 function _slBossEncounter(name) {
   const k = name.toLowerCase();
   return BOSS_DATA.find(b => b.name.toLowerCase() === (_SL_BOSS_ALIAS[k] || name).toLowerCase())
     || BOSS_DATA.find(b => (b.wikiBosses || []).some(w => w.toLowerCase() === k));
 }
+// Can you kill this monster for a task? → {ok, card, reason, boss?, noCard?}. Bosses use their
+// Bosses-tab status; others need the card, Slayer level, a reachable location and equipment.
+// `entry` is the master's task entry (its own locations / Wilderness-only rule), or null.
 function _slMonsterStatus(mon, entry, isBoss) {
   if (isBoss) {
     const enc = _slBossEncounter(mon.name);
@@ -8437,6 +8818,8 @@ function _slMonsterStatus(mon, entry, isBoss) {
   if (eq.length) return { ok: false, card, reason: 'missing ' + eq.map(r => r.label).join(', ') };
   return { ok: true, card };
 }
+// One task's options (each monster's status, plus the master entry's alternatives), missing task
+// equipment, and doable = some monster ok and no equipment missing.
 function _slTaskStatus(taskName, entry) {
   const t = SLAYER.tasks[taskName] || { monsters: [] };
   const mons = [...(t.monsters || [])];
@@ -8447,6 +8830,7 @@ function _slTaskStatus(taskName, entry) {
   const doable = opts.some(o => o.ok) && !equipMissing.length;
   return { opts, equipMissing, doable, t };
 }
+// Per-master totals: task rows (assignable / doable), weights, and chance = doable weight / assignable weight.
 function _slMasterSummary(m) {
   const st = _slMasterStatus(m);
   let assignW = 0, doW = 0, totalW = 0;
@@ -8459,7 +8843,11 @@ function _slMasterSummary(m) {
   });
   return { m, st, rows, assignW, doW, totalW, chance: assignW ? doW / assignW : 0 };
 }
+// 0.42 → '42%'
 const _pct = x => `${Math.round(x * 100)}%`;
+// ─── Slayer tab: list + detail panes ───────────────────────────────────────────
+// Left pane of the Slayer tab: Overview, masters (doable chance) and every task. Uses a fresh
+// _accessCache for the duration of the render.
 function renderSlayerList() {
   const el = document.getElementById('slayer-list-scroll');
   if (!el) return;
@@ -8489,20 +8877,24 @@ function renderSlayerList() {
   el.innerHTML = html;
   _accessCache = null;
 }
+// Selects a master / task (null = overview) within the Slayer tab, as a history step.
 function selectSlayer(kind, name) {
   pushHistoryEntry();
   selectedSlayer = kind ? { kind, name } : null;
   renderSlayerList(); _renderSlayerDetail();
 }
+// Opens a Slayer master / task from any tab (switches to the Slayer tab if needed).
 function showSlayer(kind, name) {
   if (activeTab !== 'slayer') { pushHistoryEntry(); selectedSlayer = { kind, name }; _renderTab('slayer', false); }
   else selectSlayer(kind, name);
 }
+// Dotted link HTML that selects a Slayer master or task.
 function _slLink(kind, name, label) {
   return `<span style="cursor:pointer;color:#c8a060;text-decoration:underline dotted" data-n="${escHtml(name)}" onclick="selectSlayer('${kind}', this.dataset.n)">${escHtml(label || name)}</span>`;
 }
+// A master's lock reasons as HTML; quest and card reasons link to their pages.
 function _slWhyHtml(why) {
-  return why.map(w => w.quest ? `<span style="cursor:pointer;color:#c08040;text-decoration:underline dotted" data-quest="${escHtml(w.quest)}" onclick="_navToQuest(this)">${escHtml(w.label)}</span>`
+  return why.map(w => w.quest ? `<span style="cursor:pointer;color:#c08040;text-decoration:underline dotted" data-quest="${escHtml(w.quest)}" onclick="_navToQuest(this)">${_questLabelHtml(w.label)}</span>`
     : w.card ? `<span style="cursor:pointer;color:#c08040;text-decoration:underline dotted" data-nav="${escHtml(w.card)}" data-nav-type="monster" onclick="_navToCard(this)">${escHtml(w.label)}</span>`
     : `<span style="color:#c08040">${escHtml(w.label)}</span>`).join(' · ');
 }
@@ -8513,12 +8905,15 @@ function _slVariantTag(o) {
   const q = n.toLowerCase().startsWith(c.toLowerCase()) ? n.slice(c.length).trim() : `(${n})`;
   return q ? ` <span style="font-size:10px;color:#777">${escHtml(q)}</span>` : '';
 }
+// Right pane of the Slayer tab, rendered inside a fresh _accessCache (cleared even on error).
 function _renderSlayerDetail() {
   const pane = document.getElementById('slayer-detail-pane');
   if (!pane) return;
   _accessCache = new Map();
   try { _renderSlayerDetailInner(pane); } finally { _accessCache = null; }
 }
+// Builds the Slayer right pane: overview (masters + reward unlock ticks), a master's task table,
+// or one task's monsters, equipment and assigning masters.
 function _renderSlayerDetailInner(pane) {
   const box = (title, sub, inner) => `<div style="background:#111;border:1px solid #222;border-radius:4px;padding:12px 14px;margin-bottom:14px">
     <div style="color:#c8a830;font-weight:700;font-size:12px;margin-bottom:2px">${title}</div>${sub ? `<div style="color:#666;font-size:10px;margin-bottom:8px">${sub}</div>` : ''}${inner}</div>`;
@@ -8563,7 +8958,7 @@ function _renderSlayerDetailInner(pane) {
     const req = m.requirements || {};
     pane.innerHTML = `<div style="padding:20px 24px;max-width:860px">
       <h1 style="font-size:18px;color:#e8c97a;margin:0 0 4px">${escHtml(m.name)} ${wikiLink(m.name)}</h1>
-      <div style="color:#666;font-size:11px;margin-bottom:8px">${[req.combat && `Combat ${req.combat}`, req.slayer && `Slayer ${req.slayer}`, ...(req.quests || [])].filter(Boolean).join(' · ') || 'No requirements'}${m.replacedBy ? ` · replaced by ${escHtml(m.replacedBy.card)} after ${escHtml(m.replacedBy.quest)}` : ''}${m.wilderness ? ' · all tasks in the Wilderness' : ''}</div>
+      <div style="color:#666;font-size:11px;margin-bottom:8px">${escHtml([req.combat && `Combat ${req.combat}`, req.slayer && `Slayer ${req.slayer}`, ...(req.quests || [])].filter(Boolean).join(' · ') || 'No requirements')}${m.replacedBy ? ` · replaced by ${escHtml(m.replacedBy.card)} after ${escHtml(m.replacedBy.quest)}` : ''}${m.wilderness ? ' · all tasks in the Wilderness' : ''}</div>
       ${s.st.ok ? '' : `<div style="color:#c85040;font-size:11px;margin-bottom:8px">Locked: ${_slWhyHtml(s.st.why)}</div>`}
       <div style="margin-bottom:10px">${_progressBar('Doable task weight', { done: s.doW, total: s.assignW }, '#c8a830', 'Weight of doable tasks out of tasks this master can give you')}</div>
       ${m.notes ? `<div style="color:#888;font-size:11px;line-height:1.5;margin:4px 0 10px;padding:6px 10px;border-left:2px solid #3a3010;background:#12100a">${escHtml(m.notes)}</div>` : ''}
@@ -8589,7 +8984,7 @@ function _renderSlayerDetailInner(pane) {
 ${lvl}
         ${locHtml ? `<div style="font-size:10px;margin-top:2px">${locHtml}</div>` : ''}${monEq ? `<div style="font-size:10px;margin-top:2px">needs: ${monEq}</div>` : ''}
         ${o.boss ? `<div style="font-size:10px;margin-top:2px"><span style="cursor:pointer;color:#c8a060;text-decoration:underline dotted" data-boss="${escHtml(o.boss.name)}" onclick="showBoss(this.dataset.boss)">open ${escHtml(o.boss.name)} on the Bosses tab</span></div>` : ''}</div>
-      <span class="req-note">${o.ok ? 'can kill' : o.reason}</span>${o.card ? _rowWishStar(o.card, isOwned(o.card)) : ''}</div>`;
+      <span class="req-note">${o.ok ? 'can kill' : escHtml(o.reason)}</span>${o.card ? _rowWishStar(o.card, isOwned(o.card)) : ''}</div>`;
   }).join('');
   const eqRows = (t.equipment || []).map(r => _questReqRow(r).html).join('');
   const assigned = SLAYER.masters.flatMap(m => (m.tasks || []).filter(e => e.task === name).map(e => ({ m, e })));
@@ -8606,6 +9001,7 @@ ${lvl}
   </div>`;
 }
 
+// ─── Bosses tab: home panel + navigation ───────────────────────────────────────
 // Bosses home panel (no boss selected): status counts, closest bosses, top blockers, most-needed cards
 function _renderBossHome() {
   const pane = document.getElementById('boss-detail-pane');
@@ -8633,7 +9029,7 @@ function _renderBossHome() {
   const gatesHtml = gateRows.map(g => `<div style="display:flex;gap:8px;padding:3px 0;font-size:11px">
       <span style="width:260px;flex-shrink:0;color:#ccc;cursor:pointer;text-decoration:underline dotted"
         ${g.quest ? `data-quest="${escHtml(g.quest)}" onclick="_navToQuest(this)" title="Open the quest"`
-          : `data-boss="${escHtml(g.bosses[0])}" onclick="showBossDetail(this.dataset.boss)" title="Open ${escHtml(g.bosses[0])} to see the routes"`}>${escHtml(g.label)}</span>
+          : `data-boss="${escHtml(g.bosses[0])}" onclick="showBossDetail(this.dataset.boss)" title="Open ${escHtml(g.bosses[0])} to see the routes"`}>${_questLabelHtml(g.label)}</span>
       <span style="color:#c85040;font-variant-numeric:tabular-nums;flex-shrink:0">blocks ${g.bosses.length}:</span>
       <span style="color:#888">${g.bosses.map(b => `<span style="cursor:pointer;text-decoration:underline dotted" data-boss="${escHtml(b)}" onclick="showBossDetail(this.dataset.boss)">${escHtml(b)}</span>`).join(' · ')}</span></div>`).join('');
   const box = (title, sub, inner) => inner ? `<div style="background:#111;border:1px solid #222;border-radius:4px;padding:12px 14px;margin-bottom:14px">
@@ -8652,6 +9048,7 @@ function _renderBossHome() {
   </div>`;
 }
 
+// Opens a boss from any tab (switches to the Bosses tab if needed), as a history step.
 function showBoss(name) {
   if (activeTab !== 'bosses') {
     pushHistoryEntry();
@@ -8665,8 +9062,7 @@ function showBoss(name) {
   }
 }
 
-// renderBossing kept as alias for refresh callers (e.g. switchCollection)
-// Refreshes the boss list (and detail pane if a boss is selected) when the bosses tab is active.
+// Back to the Bosses home panel (no boss selected), as a history step.
 function showBossOverview() {
   pushHistoryEntry();
   selectedBoss = null;
@@ -8674,6 +9070,8 @@ function showBossOverview() {
   _renderBossHome();
 }
 
+// renderBossing kept as alias for refresh callers (e.g. switchCollection)
+// Redraws the Bosses tab if it's showing (list + selected boss or home panel); no-op on other tabs.
 function renderBossing() {
   if (!document.getElementById('boss-list-scroll')) return; // not on bosses tab — nothing to refresh
   renderBossList();
@@ -8688,7 +9086,9 @@ function renderBossing() {
 // _clueTierStatus / _clueStepOk (Clue steps & tiers section near the top).
 let selectedClue = null;   // tier key ('beginner' … 'master') or null = overview
 const CLUE_KEY_CARDS = ['Spade', 'Uri', 'Double agent', 'Sherlock', 'Falo the Bard', 'Watson'];
+// A tier is realistic when you can get the clue and a typical trail is at least CLUE_TRAIL_MIN doable.
 function _clueRealistic(st) { return st.obtain.ok && st.trail >= CLUE_TRAIL_MIN; }
+// Left pane of the Clues tab: Overview plus one row per tier (trail chance, doable / too hard / no source).
 function renderClueList() {
   const el = document.getElementById('clue-list-scroll');
   if (!el) return;
@@ -8699,7 +9099,7 @@ function renderClueList() {
     const dot = real ? '#76c442' : st.obtain.ok ? '#c8a020' : '#6a2a2a';
     html += `<div class="boss-item${selectedClue === tier ? ' selected' : ''}" data-t="${tier}" onclick="selectClue(this.dataset.t)">
       <span class="boss-status-dot" style="background:${dot}"></span>
-      <img src="https://oldschool.runescape.wiki/images/Clue_scroll_(${tier}).png" style="width:16px;height:16px;object-fit:contain;image-rendering:pixelated;flex-shrink:0" onerror="this.style.display='none'">
+      <img src="assets/icons/Clue_scroll_(${tier}).png" style="width:16px;height:16px;object-fit:contain;image-rendering:pixelated;flex-shrink:0" onerror="this.style.display='none'">
       <span style="flex:1;font-size:12px;color:${cfg.color}">${cfg.label}</span>
       <span style="font-size:10px;color:#888;font-variant-numeric:tabular-nums" title="Chance a typical ${st.k}-step trail is fully doable for you">${_cluePct(st.trail)} trail</span>
       ${(() => { const [txt, col, tip] = real ? ['doable', '#7ab07a', `You can get these clues (${st.obtain.usable} sources) and most trails are finishable`]
@@ -8709,18 +9109,22 @@ function renderClueList() {
   }
   el.innerHTML = html;
 }
+// Selects a tier (null = overview) within the Clues tab, as a history step; no-op if already selected.
 function selectClue(tier) {
   if ((tier || null) === selectedClue) return;
   pushHistoryEntry();
   selectedClue = tier || null;
   renderClueList(); _renderClueDetail(true);
 }
+// Opens a clue tier from any tab; push=false skips the history step.
 function showClue(tier, push = true) {
   tier = tier ? tier.toLowerCase() : null;
   if (activeTab !== 'clues') { if (push) pushHistoryEntry(); selectedClue = tier; _renderTab('clues', false); }
   else if (push) selectClue(tier);
   else { selectedClue = tier; renderClueList(); _renderClueDetail(true); }
 }
+// Right pane of the Clues tab: home panel, or a tier page via renderClueScroll(); keeps the scroll
+// position unless resetScroll.
 function _renderClueDetail(resetScroll = false) {
   const pane = document.getElementById('clue-detail-pane');
   if (!pane) return;
@@ -8764,7 +9168,7 @@ function _clueStepScan() {
 function _renderClueHome() {
   const pane = document.getElementById('clue-detail-pane');
   if (!pane) return;
-  const link = (attrs, label, title) => `<span style="cursor:pointer;color:#c8a060;text-decoration:underline dotted" ${attrs}${title ? ` title="${escHtml(title)}"` : ''}>${escHtml(label)}</span>`;
+  const link = (attrs, label, title) => `<span style="cursor:pointer;color:#c8a060;text-decoration:underline dotted" ${attrs}${title ? ` title="${escHtml(title)}"` : ''}>${_questLabelHtml(label)}</span>`;
   const tierLink = (t, label) => `<span style="cursor:pointer;color:${CLUE_TIER_CONFIG[t].color}" data-t="${t}" onclick="showClue(this.dataset.t)">${escHtml(label || CLUE_TIER_CONFIG[t].label)}</span>`;
   const sts = CLUE_TIER_ORDER.map(t => _clueTierStatus(t));
   // Blockers + card demand from every step that isn't doable
@@ -8795,7 +9199,7 @@ function _renderClueHome() {
     const sp = st.steps ? Math.round(100 * st.okSteps / st.steps) : 0;
     const trailCol = real ? '#76c442' : st.trail > 0 ? '#c8a830' : '#555';
     return `<tr style="border-top:1px solid #1a1a1a">
-      <td style="padding:4px 6px"><img src="https://oldschool.runescape.wiki/images/Clue_scroll_(${t}).png" style="width:14px;height:14px;object-fit:contain;image-rendering:pixelated;vertical-align:middle;margin-right:4px" onerror="this.style.display='none'">${tierLink(t)}</td>
+      <td style="padding:4px 6px"><img src="assets/icons/Clue_scroll_(${t}).png" style="width:14px;height:14px;object-fit:contain;image-rendering:pixelated;vertical-align:middle;margin-right:4px" onerror="this.style.display='none'">${tierLink(t)}</td>
       <td style="padding:4px 6px">${yes(st.obtain.ok, why)} <span style="color:#666;font-size:10px">${st.obtain.usable}/${st.obtain.sources.length}</span></td>
       <td style="padding:4px 6px"><div style="display:flex;align-items:center;gap:6px">${bar(sp, st.okSteps === st.steps ? '#5a9a5a' : cfg.color)}<span style="color:#aaa;font-variant-numeric:tabular-nums">${st.okSteps}/${st.steps}</span></div></td>
       <td style="padding:4px 6px;color:#888;font-variant-numeric:tabular-nums" title="Share of steps you could do, weighted by step type">${_cluePct(st.p)}</td>
@@ -8878,6 +9282,7 @@ let DIARY_DATA = [];
 // Each entry now carries the specific task text so card pages can show exactly
 // which task uses the card, not just the area+tier.
 var DIARY_BY_CARD = {};
+// Rebuilds DIARY_BY_CARD from every diary task's items, monsters, NPCs, any-of groups and sets.
 function _buildDiaryByCard() {
   DIARY_BY_CARD = {};
   function _add(card, diaryName, tier, role, taskText) {
@@ -8909,6 +9314,7 @@ function _buildDiaryByCard() {
   }
 }
 
+// ─── Data name check (dev) ─────────────────────────────────────────────────────
 // ── Dev check: card/quest names in hand-written data ───────────────────────
 // Runs after data load. Warns (console only) for any name in slayer.json,
 // bosses.json or DIARY_DATA that isn't a TCG card, and any
@@ -8922,6 +9328,7 @@ function _validateDataNames() {
   for (const m of SLAYER.masters) (m.requirements?.quests || []).forEach(q => quest(q, `slayer.json master ${m.name}`));
   for (const [tn, t] of Object.entries(SLAYER.tasks))
     for (const r of (t.equipment || [])) (r.cards || []).forEach(c => card(c, `slayer.json ${tn} equipment`));
+  WARM_CLOTHING_ITEMS.forEach(c => card(c, 'WARM_CLOTHING_BY_SLOT'));
   for (const b of BOSS_DATA) {
     [...(b.requirements || []), ...(b.lootRequirements || [])].filter(r => !r.group && !r.tool)  // shared lists are checked where defined
       .forEach(r => (r.cards || []).forEach(c => card(c, `bosses.json ${b.name}`)));
@@ -9075,12 +9482,12 @@ function renderDiaryList() {
       const skillsOk2 = ev2.levelGates.every(g => g.ok);
       let st2;
       if (done2 === tasks2.length && skillsOk2) st2 = 'available';
-      else st2 = 'partial';
+      else st2 = ev2.status === 'locked' ? 'locked' : 'partial';   // locked = an area-wide quest is missing
       const col = st2 === 'available' ? '#3a7a3a' : st2 === 'partial' ? '#7a6010' : '#5a2020';
       return `<span class="diary-tier-pip" style="background:${col}" title="${DIARY_TIER_LABEL[tier]}: ${st2}"></span>`;
     }).join('');
 
-    html += `<div class="diary-item${isSel?' selected':''}" onclick="showDiary('${escHtml(area.name)}')">
+    html += `<div class="diary-item${isSel?' selected':''}" data-dn="${escHtml(area.name)}" onclick="showDiary(this.dataset.dn)">
       <div style="font-size:12px;color:${isSel?'#e8c97a':'#bbb'};margin-bottom:3px">${escHtml(area.name)}</div>
       <div>${pips}</div>
     </div>`;
@@ -9094,13 +9501,19 @@ function renderDiaryList() {
 function _diaryTickKey(dn, tier, type, task) {
   return `dtick\x1f${dn}\x1f${tier}\x1f${type}\x1f${task}`;
 }
+let _diaryTickVer = 0;   // bumped on every tick change; part of the _itemGetNeeds / _accessMet cache signatures
+// Has the user ticked this diary task done (localStorage)? False when storage is blocked.
 function isDiaryTicked(dn, tier, type, task) {
-  return localStorage.getItem(_diaryTickKey(dn, tier, type, task)) === '1';
+  try { return localStorage.getItem(_diaryTickKey(dn, tier, type, task)) === '1'; } catch (e) { return false; }
 }
+// Ticks / unticks a diary task, resets the clue caches and redraws the diary.
 function toggleDiaryTick(dn, tier, type, task) {
   const k = _diaryTickKey(dn, tier, type, task);
-  if (localStorage.getItem(k) === '1') localStorage.removeItem(k);
-  else localStorage.setItem(k, '1');
+  try {
+    if (localStorage.getItem(k) === '1') localStorage.removeItem(k);
+    else localStorage.setItem(k, '1');
+  } catch (e) { console.warn('[diary] could not save tick (storage blocked):', e); }
+  _diaryTickVer++;
   _clueResetCaches();   // clue steps can need a diary (not in the clue cache signature)
   showDiaryDetail(dn);
 }
@@ -9136,7 +9549,7 @@ function _diaryTaskMissing(area, task) {
 // A missing diary unit as a link: quest → quest page; one card → card page; group → hover grid
 function _diaryMissingLink(m, area, tier) {
   const style = 'cursor:pointer;color:#c8a060;text-decoration:underline dotted';
-  if (m.quest) return `<span style="${style}" data-quest="${escHtml(m.quest)}" onclick="_navToQuest(this)">${escHtml(m.label)}</span>`;
+  if (m.quest) return `<span style="${style}" data-quest="${escHtml(m.quest)}" onclick="_navToQuest(this)">${_questLabelHtml(m.label)}</span>`;
   if (m.cards.length === 1) { const i = _cardInfo(m.cards[0]); return `<span style="${style}" data-nav="${escHtml(i.exact)}" data-nav-type="${i.type}" onclick="_navToCard(this)">${escHtml(i.exact)}</span>`; }
   return `<span style="${style}" data-dn="${escHtml(area.name)}" data-tier="${tier}" onclick="showDiary(this.dataset.dn);selectDiaryTier(this.dataset.dn,this.dataset.tier)"
     ${m.cards.length > 1 ? _cardGridTipAttrs(m.cards, m.label) : ''}>${escHtml(m.label)}</span>`;
@@ -9238,12 +9651,12 @@ function _renderDiaryHome() {
   </div>`;
 }
 
+// Switches the selected tier and redraws the diary detail.
 function selectDiaryTier(dn, tier) {
   selectedDiaryTier = tier;
   showDiaryDetail(dn);
 }
 
-// Wishlist all missing cards from a diary tier
 // Every card a diary tier needs: task items, monsters to kill, NPCs to interact with,
 // plus the reward NPC (to claim) and the cards its rewards involve (lamp, diary item…).
 function _diaryTierCards(area, tier) {
@@ -9255,6 +9668,7 @@ function _diaryTierCards(area, tier) {
   return [...new Set(cards)].filter(c => _isCard(c));
 }
 
+// Adds the tier's unowned cards to the wishlist (note = 'Area Tier') and flashes the count on the button.
 function wishlistDiaryTier(diaryName, tier) {
   const area = DIARY_DATA.find(a => a.name === diaryName);
   if (!area || !area[tier]) return;
@@ -9269,7 +9683,7 @@ function wishlistDiaryTier(diaryName, tier) {
   if (added > 0) _saveWishlist();
   // Brief feedback flash on button
   const btn = document.getElementById(`wl-tier-btn-${tier}`);
-  if (btn) { btn.textContent = `+${added} added`; btn.style.color='#76c442'; setTimeout(()=>{ btn.textContent='☆ Wishlist missing'; btn.style.color=''; }, 1800); }
+  if (btn) { btn.textContent = `+${added} added`; btn.style.color='#76c442'; setTimeout(()=>{ btn.textContent='☆ Wishlist missing cards'; btn.style.color=''; }, 1800); }
 }
 
 // ── Right-pane detail ───────────────────────────────────────────────────────
@@ -9318,12 +9732,15 @@ function _diaryTaskEligible(area, task) {
   if (ok) _diaryTaskUnits(task, (_, met) => { if (!met) ok = false; });
   return ok;
 }
+// {done, total}: tasks in a tier that are ticked done or eligible.
 function _diaryEligibleTasks(area, tier) {
   const tasks = area[tier]?.tasks || [];
   const done = tasks.filter((task, i) => isDiaryTicked(area.name, tier, 'task', String(i)) || _diaryTaskEligible(area, task)).length;
   return { done, total: tasks.length };
 }
 
+// Right pane for one diary area: tier chips, then the selected tier's progress bars,
+// prerequisites, task checklist (click to tick) and rewards.
 function showDiaryDetail(name) {
   selectedDiary = name;
   renderDiaryList();
@@ -9680,6 +10097,7 @@ function showDiaryDetail(name) {
   pane.innerHTML = html;
 }
 
+// Back to the Diaries home panel (no diary selected), as a history step.
 function showDiaryOverview() {
   pushHistoryEntry();
   selectedDiary = null;
@@ -9687,6 +10105,7 @@ function showDiaryOverview() {
   _renderDiaryHome();
 }
 
+// Opens a diary area from any tab (switches to the Diaries tab if needed).
 function showDiary(name) {
   if (activeTab !== 'diaries') {
     pushHistoryEntry();
@@ -9700,16 +10119,7 @@ function showDiary(name) {
 
 // ─── Questing tab ──────────────────────────────────────────────────────────
 
-/**
- * Check whether all card groups for a quest are satisfied using BM data.
- * Returns {cardsOk, missingCount} where cardsOk=true means all groups have ≥1 owned card.
- * Falls back to quests.json itemsRequired + killsRequired if no BM data.
- */
 // ─── Most-needed missing cards (Questing tab welcome panel) ─────────────────
-// For every quest not marked done, each unmet *required* requirement credits the unowned
-// cards that would satisfy it: any option of an "any of" group (counted once per quest),
-// or the missing pieces of a route (each slot's first choice, so staffs don't swamp it).
-// "Last card" = owning this one card would complete every card requirement of that quest.
 // Unowned cards that would meet a still-unmet *required* requirement, per target (quest or
 // boss): any option of an "any of" group counts, and each missing slot's first choice of a
 // route. "last" = owning this one card completes every card requirement of that target.
@@ -9744,6 +10154,7 @@ function _cardDemand(entries) {
   }
   return demand;
 }
+// Card demand across every quest not yet done (input for the most-needed table)
 function _questCardDemand() {
   return _cardDemand(Object.entries(bmQuestCards).filter(([qn]) => !completedQuests.has(qn))
     .map(([name, bm]) => ({ name, reqs: (bm.sections || []).flatMap(s => s.requirements || []) })));
@@ -9774,6 +10185,7 @@ function _demandTableHtml(demand, title, unit, wishNote) {
     }).join('')}
   </div>`;
 }
+// Fill the Questing overview's "most-needed cards" panel
 function _renderQuestCardSummary() {
   const el = document.getElementById('quest-card-summary');
   if (!el) return;
@@ -9807,6 +10219,7 @@ function _questProgress(questName) {
     }
   return { req, rec, all: { done: req.done + rec.done, total: req.total + rec.total } };
 }
+// Required / Recommended / All progress bars for a quest page (empty if nothing to count)
 function _questProgressHtml(questName) {
   const p = _questProgress(questName);
   if (!p.all.total) return '';
@@ -9817,6 +10230,7 @@ function _questProgressHtml(questName) {
   </div>`;
 }
 
+// ─── Requirement rows (shared by Questing, Bosses, Slayer detail pages) ────
 // "Checked" entries (quests + bosses): some have no card at all; others have a card but
 // aren't needed (recommended only, avoidable, rewards…) — those still show ownership.
 function _checkedListsHtml(entries) {
@@ -9916,10 +10330,20 @@ function _questReqRow(req) {
     const tiered = [...sorted.filter(_avail), ...sorted.filter(c => isOwned(c) && !_avail(c)), ...sorted.filter(c => !isOwned(c))];
     const head = routes.length ? (all ? 'All of:' : 'Any of:') : (all ? 'Need all:' : '');
     // Long lists (any slash weapon, any light source…): show up to 4 owned options and a hover grid for the rest
-    const shown = tiered.length > 10 ? tiered.filter(c => isOwned(c)).slice(0, 4) : tiered;
-    const more = tiered.length - shown.length;
+    // Warm clothing: one wearable item per slot you can fill (4 slots = full protection)
+    const warm = req.group === 'warm_clothing' ? _warmUsableSlots() : null;
+    const warmFree = warm ? Object.fromEntries(WARM_NO_CARD.map(w => [w.name, w])) : {};
+    // a no-card warm item: free to wear, so green with its source on hover
+    const freeChip = w => `<span style="color:#7ab07a;cursor:help" ${_textTipAttrs('No card needed · ' + w.how)}>✓ ${escHtml(w.name)} <span style="font-size:9px;color:#6a8a6a">(no card)</span></span>`;
+    const shown = warm ? warm.map(s => s.cards[0]) : tiered.length > 10 ? tiered.filter(c => isOwned(c)).slice(0, 4) : tiered;
+    const more = tiered.length - shown.filter(c => !warmFree[c]).length;
+    if (warm) body += `<div style="font-size:10px;color:${warm.length >= 4 ? '#7ab07a' : '#c8a830'};margin-bottom:2px">Wearable now: ${Math.min(warm.length, 4)}/4 slots`
+      + (warm.length ? ` (${warm.map(s => s.slot).join(', ')})` : '') + (warm.length < 4 ? ' — hover the options for other slots' : '') + `</div>`;
     const moreHtml = more > 0 ? `<span style="cursor:help;color:#888;border-bottom:1px dotted #444" ${_cardGridTipAttrs(tiered, label)}>${shown.length ? '+' : ''}${more} ${shown.length ? 'more' : 'options'}</span>` : '';
-    body += `<div style="font-size:11px;line-height:1.6">${head ? `<span style="color:#666">${head} </span>` : ''}${[...shown.map(chip), moreHtml].filter(Boolean).join('<span style="color:#444"> · </span>')}</div>`;
+    body += `<div style="font-size:11px;line-height:1.6">${head ? `<span style="color:#666">${head} </span>` : ''}${[...shown.map(c => warmFree[c] ? freeChip(warmFree[c]) : chip(c)), moreHtml].filter(Boolean).join('<span style="color:#444"> · </span>')}</div>`;
+    if (warm) body += `<div style="font-size:10px;line-height:1.6;color:#777;margin-top:2px">No card needed: ${WARM_NO_CARD.map(w => { const ok = w.ok();
+        return `<span style="color:${ok ? '#7ab07a' : '#8a5a5a'};cursor:help" ${_textTipAttrs((ok ? 'You can get this now · ' : 'Not yet · ') + w.how)}>${ok ? '✓' : '✗'} ${escHtml(w.name)}</span>`; }).join('<span style="color:#444"> · </span>')}</div>
+      <div style="font-size:10px;color:#666">Holiday-event items also count but can only be claimed during events, so they aren't counted here: ${escHtml(WARM_EVENT_ONLY)}.</div>`;
   }
   // Routes: one line each; a slot with alternatives (staff for a rune, Dramen/Lunar…) gets a hover grid
   if (routes.length) {
@@ -9952,7 +10376,8 @@ function _questReqRow(req) {
   // Right-hand status, same place as a single card's "owned / need card"
   const cardOk = cards.length && (req.mode === 'all' ? cards.every(_cardUsable) : cards.some(_cardUsable));
   const metRoute = !cardOk && routes.find(rt => _routeMet(rt));
-  const status = cardOk ? (isMon ? 'card owned' : 'owned')
+  const status = req.group === 'warm_clothing' ? `${Math.min(_warmUsableSlots().length, 4)}/4 slots`
+    : cardOk ? (isMon ? 'card owned' : 'owned')
     : metRoute ? (metRoute.spell ? 'can cast' : metRoute.access ? 'can reach' : _MAKE_ROUTE_RE.test(metRoute.label || '') ? 'can make' : 'can get')
     : altOk ? `${req.skillAlt.skill} ${req.skillAlt.level} ✓`
     : routes.length && !cards.length && routes.every(rt => rt.manual) ? 'not tracked' : 'missing';
@@ -9971,6 +10396,7 @@ const _MAKE_ROUTE_RE = /^(mix|make|craft|cook|smith|fletch|brew|tan|spin|cut|enc
 // Wishlist star for a group / route row. Any-of cards → one "any one of these" wishlist group;
 // every-card groups and routes → the missing cards of the closest route, tagged with the label.
 const _reqWishReg = new Map();
+// Decide what a row's star wishlists → {label, group (true = "any one of" group), cards}
 function _reqWishPlan(req, cards, routes) {
   const label = req.label || cards[0] || 'Requirement';
   if (cards.length && req.mode !== 'all' && !routes.length) return { label, group: true, cards: [...cards] };
@@ -9984,10 +10410,12 @@ function _reqWishPlan(req, cards, routes) {
   if (cards.length && (!best || best.length > 1)) return { label, group: true, cards: [...cards] };
   return { label, group: false, cards: best || [] };
 }
+// True if that plan is already on the wishlist (group by name, or every card tagged)
 function _reqWishActive(plan) {
   if (plan.group) return wishlistGroups.some(g => g.name === plan.label);
   return plan.cards.length > 0 && plan.cards.every(c => wishlist.has(c));
 }
+// Star HTML for a group/route row; registers the plan in _reqWishReg under a data-wk key
 function _reqWishStar(req, ok, cards, routes) {
   const plan = _reqWishPlan(req, cards, routes);
   if (!plan.cards.length) return _REQ_STAR_SPACER;   // nothing left to collect
@@ -9998,6 +10426,7 @@ function _reqWishStar(req, ok, cards, routes) {
   return `<span class="wish-star${on ? ' active' : ''}" ${ok && !on ? 'style="opacity:0.3"' : ''} data-wk="${escHtml(key)}"
     onclick="event.stopPropagation();_toggleReqWish(this.dataset.wk)" title="${escHtml(tip)}">${on ? '★' : '☆'}</span>`;
 }
+// Star click: add/remove the plan (a wishlist group, or tag each card with the row label)
 function _toggleReqWish(key) {
   const plan = _reqWishReg.get(key);
   if (!plan) return;
@@ -10073,10 +10502,12 @@ function _expandReq(r, questName) {
   r._routes = routes;
   r._cards = [...new Set([...(r.cards || []), ...routes.flatMap(rt => rt.slots.map(sl => sl[0]))])];
 }
+// Cards to check/collect for a requirement (expanded _cards when available)
 function _reqCards(r) { return r._cards || r.cards || []; }
 // Cards an ironman has to craft from other cards: owning the card alone doesn't count,
 // the crafting route (access_routes.json) must be met too — e.g. the Slayer helmet.
 const CRAFTED_CARD_ROUTES = { 'slayer helmet': 'slayer_helmet' };
+// Card counts as usable: owned, and for CRAFTED_CARD_ROUTES cards the crafting route is met too
 function _cardUsable(c) {
   const route = CRAFTED_CARD_ROUTES[(c || '').toLowerCase()];
   return route ? _accessMet(route) : isOwned(c);
@@ -10085,12 +10516,13 @@ function _cardUsable(c) {
 // _accessCache: set to a Map during a render pass (Slayer pages check thousands of
 // locations); null = no caching (results always fresh).
 let _accessCache = null;
-// Area access, cached until the inputs change (cards, levels, quests, started quests, diary ticks are
-// covered by the explicit resets; the signature catches the rest). Results computed inside another
+// Area access, cached until the inputs change (account, cards, levels, quests, started quests and
+// diary ticks are in the signature; explicit resets cover the rest). Results computed inside another
 // area's check (seen non-empty) aren't cached: a cycle guard there returns false, which would poison it.
 let _accessSig = '';
+// True if access area `key` is reachable; `seen` guards against cyclic area references
 function _accessMet(key, seen = new Set()) {
-  const sig = owned.size + '|' + completedQuests.size + '|' + startedQuests.size + '|' + Object.values(skills).join(',') + '|' + Object.keys(accessRoutes).length;
+  const sig = _currentRsn + '|' + owned.size + '|' + completedQuests.size + '|' + startedQuests.size + '|' + _diaryTickVer + '|' + Object.values(skills).join(',') + '|' + Object.keys(accessRoutes).length;
   if (sig !== _accessSig) { _accessSig = sig; if (_accessCache) _accessCache = new Map(); }
   const top = seen.size === 0;
   if (_accessCache && _accessCache.has(key)) return _accessCache.get(key);
@@ -10101,6 +10533,7 @@ function _accessMet(key, seen = new Set()) {
   return ok;
 }
 const _routeExpandCache = new WeakMap();   // routes never change: expand each once
+// Expand one access_routes.json route into the {slots, quests, skills, areas…} form _routeMet reads
 function _expandRoute(rt) {
   if (_routeExpandCache.has(rt)) return _routeExpandCache.get(rt);
   const tmp = { routes: [rt] };
@@ -10109,6 +10542,7 @@ function _expandRoute(rt) {
   _routeExpandCache.set(rt, out);
   return out;
 }
+// True if every part of an expanded route is met (areas, Magic level, quests, diaries, skills, card slots)
 function _routeMet(rt, seen) {
   // Called as a .some()/.every() callback too, where the 2nd argument is the array index
   if (!(seen instanceof Set)) seen = new Set();
@@ -10128,14 +10562,44 @@ const REQ_GROUPS = {
   slash_weapon: SLASH_WEAPONS,
   get light_source() { return LIGHT_SOURCE_ITEMS; },
   get dragonfire()   { return DRAGONFIRE_ITEMS; },
+  get warm_clothing() { return WARM_CLOTHING_ITEMS; },
 };
+// Warm clothing you can wear now: card owned, item gettable, wield levels met — or a no-card
+// item you can get. → [{slot, cards}] for the slots you can fill (Wintertodt counts up to 4).
+let _equipByName = null;
+// Lazily builds _equipByName (lower-cased item name → equipment entry) on first call
+function _warmUsableSlots() {
+  if (!_equipByName && Object.keys(equipBySlot).length) {   // built once equipment data has loaded
+    _equipByName = {};
+    for (const items of Object.values(equipBySlot)) for (const it of items) _equipByName[it.name.toLowerCase()] ||= it;
+  }
+  // only from a yearly holiday event: not counted, same as the no-card holiday items
+  const seasonalOnly = c => {
+    const s = itemSources[c] || {}, acts = _acts(s);
+    return acts.length && acts.every(a => a.kind === 'seasonal') && !(s.shops || []).length && !(s.monsters || []).length
+      && !s.production && !s.gathering && !(s.spawns || []).length && !(s.clueTiers || []).length && !_bossRewardsFor(c).length;
+  };
+  const usable = c => {
+    if (!_warmItemOk(c) || seasonalOnly(c)) return false;
+    const eq = _equipByName?.[c.toLowerCase()];
+    return !eq || meetsReqLvl(eq);
+  };
+  return Object.entries(WARM_CLOTHING_BY_SLOT).map(([slot, cs]) => ({ slot,
+    cards: [...cs.filter(usable), ...WARM_NO_CARD.filter(w => w.slot === slot && w.ok()).map(w => w.name)] }))
+    .filter(s => s.cards.length);
+}
+// True if a requirement is met: its cards (any / all), any route, or the skillAlt level
 function _reqMet(r) {
+  if (r.group === 'warm_clothing') return _warmUsableSlots().length >= 4;   // full protection = 4 slots
   const cards = r.cards || [];
   if (cards.length && (r.mode === 'all' ? cards.every(_cardUsable) : cards.some(_cardUsable))) return true;
   if ((r._routes || []).some(_routeMet)) return true;
   return !!r.skillAlt && getLevel(r.skillAlt.skill) >= r.skillAlt.level;
 }
 
+// ─── Quest status, list and detail page ────────────────────────────────────
+// Count unmet required card requirements → {cardsOk, missingCount}; bm_quest_cards first,
+// else the wiki infobox itemsRequired / killsRequired
 function checkQuestCards(name, q) {
   const bm = bmQuestCards[name];
   if (bm) {
@@ -10160,6 +10624,7 @@ function checkQuestCards(name, q) {
 // Quest met for planning = done, or completable now. Cached until quests / cards / levels change;
 // the guard stops recursion (quest card checks can reach canGetItem).
 let _completableCache = null, _completableSig = '', _completableBusy = false;
+// True if quest q is done or completable now (uses the cached completable set)
 function _questOk(q) {
   if (completedQuests.has(q)) return true;
   const sig = completedQuests.size + '|' + owned.size + '|' + Object.values(skills).join(',');
@@ -10171,6 +10636,7 @@ function _questOk(q) {
   return !!(_completableCache && _completableCache.has(q));
 }
 
+// Fixed-point pass over all quests → Set of done + completable quest names
 function computeCompletableQuests() {
   /**
    * Iteratively propagate completability. A quest is completable if:
@@ -10197,6 +10663,7 @@ function computeCompletableQuests() {
   return completable;
 }
 
+// Quest list status: done | ok (completable) | close (≤2 cards missing) | locked
 function questStatus(questName, completable) {
   if (completedQuests.has(questName)) return 'done';
   const q = questsData[questName];
@@ -10211,6 +10678,7 @@ function questStatus(questName, completable) {
   return 'locked';
 }
 
+// True for miniquests (BM flag, or a 0-QP wiki-only entry)
 function isMiniquest(name) {
   // A quest is a miniquest if BM data flags it, or if it has 0 quest points and
   // isn't in the main BM quest list (best-effort for wiki-only entries).
@@ -10219,6 +10687,7 @@ function isMiniquest(name) {
   return false;
 }
 
+// One row in the quest list (status badge, QP, members / mini tags, started marker)
 function questItemHtml(name, data, completable) {
   const st = questStatus(name, completable);
   const badge = st === 'done' ? '☑' : (st === 'ok' ? '✓' : (st === 'close' ? '~' : '✗'));
@@ -10229,11 +10698,12 @@ function questItemHtml(name, data, completable) {
   const mini = isMiniquest(name) ? `<span class="quest-miniquest-tag">mini</span>` : '';
   return `<div class="quest-item${sel}${doneCls}" data-quest="${escHtml(name)}" onclick="showQuestDetail(this.dataset.quest)">
     <span class="quest-badge ${st}">${badge}</span>
-    <span class="quest-name">${name}${startedQuests.has(name) && !completedQuests.has(name) ? ' <span style="color:#c8a830;font-size:10px" title="Marked as started">◐</span>' : ''}</span>
+    <span class="quest-name">${escHtml(name)}${startedQuests.has(name) && !completedQuests.has(name) ? ' <span style="color:#c8a830;font-size:10px" title="Marked as started">◐</span>' : ''}</span>
     ${qp}${mem}${mini}
   </div>`;
 }
 
+// Completed / Available / Total quest and QP counters above the quest list
 function renderQuestStats(completable) {
   const el = document.getElementById('quest-stats');
   if (!el) return;
@@ -10271,6 +10741,7 @@ function renderQuestStats(completable) {
     </div>`;
 }
 
+// Render the filtered, status-sorted quest list (main quests, then miniquests)
 function renderQuestList() {
   const scroll = document.getElementById('quest-list-scroll');
   if (!scroll) return;
@@ -10322,12 +10793,14 @@ function renderQuestList() {
   scroll.innerHTML = html;
 }
 
+// Select the Overview entry: clear the selected quest and re-render the Questing tab
 function showQuestOverview() {
   pushHistoryEntry();
   selectedQuest = null;
   _renderTab('questing');
 }
 
+// Render a quest's detail page: status, buttons, progress, prerequisites, skills, card requirement rows, rewards
 function showQuestDetail(questName, push = true) {
   if (push) pushHistoryEntry();
   selectedQuest = questName;
@@ -10384,7 +10857,7 @@ function showQuestDetail(questName, push = true) {
     + (_wishAll.length > _wishReq.length
       ? _wishBtn(true, _wlState === 2 ? 'Recommended wishlisted' : 'Wishlist required + recommended', _questMissingUnits(questName, true), _wlState === 2) : '');
 
-  let html = `<h1>${questName} ${wikiLink(questName)}
+  let html = `<h1>${escHtml(questName)} ${wikiLink(questName)}
     <span style="font-size:12px;color:${isDone?'#b07a30':statusColor};font-weight:normal;margin-left:8px">${isDone?'Done':statusLabel}</span>
   </h1>
   <div class="subtitle">${typeStr}${qpStr} ${doneBtn}${wishQuestBtn}</div>
@@ -10404,7 +10877,7 @@ function showQuestDetail(questName, push = true) {
     if (!_hasNpcSection) {
       html += `<div class="section">
         <div class="section-header">Start NPC</div>
-        <div style="margin-top:8px;font-size:13px;color:#aaa">${q.questNpc} <span style="color:#555;font-size:11px">(talk to — no card required)</span></div>
+        <div style="margin-top:8px;font-size:13px;color:#aaa">${escHtml(q.questNpc)} <span style="color:#555;font-size:11px">(talk to — no card required)</span></div>
       </div>`;
     }
   }
@@ -10423,7 +10896,7 @@ function showQuestDetail(questName, push = true) {
         <span class="req-icon ${iCls}">${sym}</span>
         <span class="req-label" style="cursor:pointer;color:${col}"
           data-quest="${escHtml(prereq)}" onclick="showQuestDetail(this.dataset.quest)">
-          ${prereq}</span>
+          ${escHtml(prereq)}</span>
         <span class="req-note">${note}</span>
       </div>`;
     }
@@ -10513,7 +10986,7 @@ function showQuestDetail(questName, push = true) {
         const isCard = !!itemSources[item];
         html += `<div class="req-row">
           <span class="req-icon ${ok?'ok':'fail'}">${ok?'✓':'✗'}</span>
-          <span class="req-label" ${isCard?`style="cursor:pointer" data-nav="${escHtml(item)}" data-nav-type="item" onclick="_navToCard(this)"`:''}>${item}</span>
+          <span class="req-label" ${isCard?`style="cursor:pointer" data-nav="${escHtml(item)}" data-nav-type="item" onclick="_navToCard(this)"`:''}>${escHtml(item)}</span>
           <span class="req-note">${ok ? 'owned' : (isCard ? 'need card' : 'no TCG card')}</span>
           ${isCard ? _rowWishStar(item, ok) : ''}
         </div>`;
@@ -10527,7 +11000,7 @@ function showQuestDetail(questName, push = true) {
         const isCard = !!monsterDrops[kill];
         html += `<div class="req-row">
           <span class="req-icon ${ok?'ok':'fail'}">${ok?'✓':'✗'}</span>
-          <span class="req-label" ${isCard?`style="cursor:pointer" data-nav="${escHtml(kill)}" data-nav-type="monster" onclick="_navToCard(this)"`:''}>${kill}</span>
+          <span class="req-label" ${isCard?`style="cursor:pointer" data-nav="${escHtml(kill)}" data-nav-type="monster" onclick="_navToCard(this)"`:''}>${escHtml(kill)}</span>
           <span class="req-note">${ok ? 'card owned' : (isCard ? 'need monster card' : 'no TCG card')}</span>
           ${isCard ? _rowWishStar(kill, ok) : ''}
         </div>`;
@@ -10540,7 +11013,7 @@ function showQuestDetail(questName, push = true) {
   if (q.rewardItems?.length) {
     html += `<div class="section"><div class="section-header">Reward Items</div>
       <div style="margin-top:8px;font-size:12px;color:#888">
-        ${q.rewardItems.map(r => `<span style="margin-right:8px">${r}</span>`).join('')}
+        ${q.rewardItems.map(r => `<span style="margin-right:8px">${escHtml(r)}</span>`).join('')}
       </div>
       <div style="font-size:10px;color:#555;margin-top:6px">Quest rewards are given directly — no card required to receive. You can drop/bank items you haven't unlocked.</div>
     </div>`;
@@ -10579,6 +11052,7 @@ function _rulesScrollSpy() {
   cur = cur || panel.querySelector('h3[id]')?.id;
   document.querySelectorAll('#rules-side a').forEach(a => a.classList.toggle('active', a.dataset.sec === cur));
 }
+// Static Rules reference HTML (renderRulesTab adds the contents strip and Yes/No colours)
 function _rulesTabHtml() {
   return `<div>
     <h2>Bronzeman TCG — Rules Reference</h2>
@@ -10697,11 +11171,11 @@ function _rulesTabHtml() {
     <p>Foil cards are cosmetically shiny but don't grant any extra unlocks. A foil Iron ore card unlocks exactly the same things as a regular Iron ore card.</p>
 
     <h3>No card exists</h3>
-    <p>If no TCG card exists for an NPC or item, there is no restriction — you can interact with it freely. The v1.0 card set covers 1,391 NPCs and 3,809 items (5,200 cards); anything outside that set is unrestricted.</p>
+    <p>If no TCG card exists for an NPC or item, there is no restriction — you can interact with it freely. The live card set covers 1,400 NPCs and 3,772 items (5,172 cards); anything outside that set is unrestricted.</p>
 
     <h3>Tabs in this tool</h3>
     <ul>
-      <li><strong>Cards</strong> — Browse all 5,200 TCG cards. See monster drop rates, item sources, production recipes, ingredient chains, and which bosses, diaries and quests use each card.</li>
+      <li><strong>Cards</strong> — Browse all 5,172 TCG cards. See monster drop rates, item sources, production recipes, ingredient chains, and which bosses, diaries and quests use each card.</li>
       <li><strong>Wishlist</strong> — Cards, quests, slayer task groups and clue steps you're working towards, with pack suggestions.</li>
       <li><strong>Equipment</strong> — Gear comparison filtered to cards you own.</li>
       <li><strong>Skilling</strong> — See which training methods are available for each skill based on your level, tools, and owned cards.</li>
@@ -10737,18 +11211,22 @@ const STAT_SHORT = {
   magic_damage:'Magic dmg', prayer:'Prayer',
 };
 
-function computeTotalStats() {
+// Sum the stats of every equipped item for the active style (shield ignored under a 2H weapon).
+// Optional swapSlot / swapItem: total as if swapItem were equipped in swapSlot (DPS previews).
+function computeTotalStats(swapSlot, swapItem) {
   const totals = {};
   for (const k of STAT_KEYS) totals[k] = 0;
+  const itemIn = slot => {
+    if (swapItem && slot === swapSlot) return swapItem;
+    const eq = getEquipped(slot);
+    return eq ? (equipBySlot[slot] || []).find(i => i.name === eq) : null;
+  };
   // If a 2H weapon is equipped, ignore the shield slot entirely
-  const wpnName = getEquipped('weapon');
-  const wpnItem = wpnName ? (equipBySlot['weapon'] || []).find(i => i.name === wpnName) : null;
+  const wpnItem = itemIn('weapon');
   const has2h   = wpnItem && wpnItem.is2h;
   for (const slot of Object.keys(SLOT_FULL)) {
     if (slot === 'shield' && has2h) continue;
-    const eq = getEquipped(slot);
-    if (!eq) continue;
-    const item = (equipBySlot[slot] || []).find(i => i.name === eq);
+    const item = itemIn(slot);
     if (!item || !item.stats) continue;
     for (const [k, v] of Object.entries(item.stats)) {
       if (totals[k] !== undefined) totals[k] += v;
@@ -10757,6 +11235,7 @@ function computeTotalStats() {
   return totals;
 }
 
+// Render the equipped-totals stats grid and the DPS controls
 function renderGearStats() {
   const el = document.getElementById('equip-stats-panel');
   if (!el) return;
@@ -10837,6 +11316,7 @@ function renderGearStats() {
     </div>`;
 }
 
+// Hover tooltip HTML for an equipment item: its stats, deltas vs the equipped item, level reqs
 function buildItemTooltip(item, eqItem) {
   const stats  = item.stats  || {};
   const eqStats = (eqItem && eqItem.name !== item.name && eqItem.stats) || {};
@@ -10904,16 +11384,19 @@ let dpsSettings = {
   enemyDefBonus: 0,
 };
 
+// Restore DPS settings from localStorage
 function loadDpsSettings() {
   try {
     const s = JSON.parse(localStorage.getItem('dps_settings') || '{}');
     Object.assign(dpsSettings, s);
   } catch {}
 }
+// Persist DPS settings to localStorage
 function saveDpsSettings() {
   localStorage.setItem('dps_settings', JSON.stringify(dpsSettings));
 }
 
+// True if the player meets every wield level requirement of an equipment item
 function meetsReqLvl(item) {
   const reqs = item.reqLvl || {};
   for (const [skill, lvl] of Object.entries(reqs)) {
@@ -10923,6 +11406,7 @@ function meetsReqLvl(item) {
   return true;
 }
 
+// Melee/ranged DPS from the equipped gear and settings → {maxHit, hitChance, dps, speed}; null for magic
 function calcDps() {
   const style  = activeEquipStyle;
   const s      = computeTotalStats();
@@ -10973,6 +11457,7 @@ function calcDps() {
   return null; // magic — too spell-dependent
 }
 
+// Read the DPS controls into dpsSettings, save, and refresh the DPS readout
 function dpsSettingChanged() {
   const prayerEl = document.getElementById('dps-prayer');
   const styleEl  = document.getElementById('dps-style');
@@ -10986,6 +11471,7 @@ function dpsSettingChanged() {
   updateDpsOutput();
 }
 
+// Render the max hit / accuracy / DPS / speed readout
 function updateDpsOutput() {
   const el = document.getElementById('dps-output');
   if (!el) return;
@@ -11002,6 +11488,7 @@ function updateDpsOutput() {
     <div class="dps-val"><span class="dps-val-num">${speed}t</span><span class="dps-val-lbl">Speed</span></div>`;
 }
 
+// ─── Equipment slots, paper doll and slot detail ───────────────────────────
 const SLOT_FULL = {
   head:'Head', cape:'Cape', neck:'Neck', ammo:'Ammo',
   weapon:'Weapon', body:'Body', shield:'Shield',
@@ -11011,8 +11498,10 @@ const SLOT_FULL = {
 // Style colours for headers
 const STYLE_COLOR = { melee:'#e8c97a', ranged:'#76c442', magic:'#6a8aee' };
 
+// Equipped items live in localStorage, one key per style + slot
 function equipKey(slot) { return `equip_${activeEquipStyle}_${slot}`; }
 function getEquipped(slot) { return localStorage.getItem(equipKey(slot)) || ''; }
+// Equip (or clear with '') an item in a slot; handles the 2H weapon / shield conflict and re-renders
 function setEquipped(slot, name) {
   hideEquipTooltip();
   localStorage.setItem(equipKey(slot), name);
@@ -11059,6 +11548,7 @@ function slotItems(slot) {
   });
 }
 
+// True if the slot has an owned, wieldable item that isn't equipped (shows the upgrade dot)
 function slotHasUpgrade(slot) {
   const eq = getEquipped(slot);
   const items = slotItems(slot);
@@ -11066,6 +11556,7 @@ function slotHasUpgrade(slot) {
   return items.some(i => i.owned && i.meetsReq && i.name !== eq);
 }
 
+// Equipment tab shell HTML (style buttons, paper doll, stats and slot detail panes)
 function renderEquipmentTab() {
   return `<div id="equip-panel">
     <div id="equip-doll-pane">
@@ -11087,6 +11578,7 @@ function renderEquipmentTab() {
   </div>`;
 }
 
+// After the shell renders: restore saved style and slot, draw the doll, stats and DPS
 function initEquipmentTab() {
   // Restore persisted style + slot
   const savedStyle = localStorage.getItem('equip_active_style');
@@ -11106,6 +11598,7 @@ function initEquipmentTab() {
   }
 }
 
+// Switch melee / ranged / magic: each style has its own equipped set
 function switchEquipStyle(style) {
   activeEquipStyle = style;
   localStorage.setItem('equip_active_style', style);
@@ -11119,6 +11612,7 @@ function switchEquipStyle(style) {
   if (selectedEquipSlot) renderEquipSlotDetail(selectedEquipSlot);
 }
 
+// "owned / total" equipment count under the style buttons
 function updateEquipCount() {
   const el = document.getElementById('equip-owned-count');
   if (!el) return;
@@ -11128,6 +11622,7 @@ function updateEquipCount() {
   el.textContent = `${totalOwned} / ${totalItems} owned`;
 }
 
+// Draw the paper doll grid (DOLL_LAYOUT) with equipped icons, upgrade dots and the 2H-blocked shield
 function refreshEquipDoll() {
   const pane = document.getElementById('equip-doll');
   if (!pane) return;
@@ -11193,6 +11688,7 @@ const SLOT_DEFAULT_SORT = {
   shield: 'def_style',
 };
 
+// Select a slot, apply its default sort and show its item list
 function selectEquipSlot(slot) {
   selectedEquipSlot = slot;
   localStorage.setItem('equip_selected_slot', slot);
@@ -11225,28 +11721,18 @@ const EQUIP_SORT_OPTS = [
   { key: 'prayer',          label: 'Prayer'    },
 ];
 
+// Change the slot item list sort key
 function setEquipSort(key) {
   equipSortBy = key;
   localStorage.setItem('equip_sort_by', key);
   if (selectedEquipSlot) renderEquipSlotDetail(selectedEquipSlot);
 }
 
+// Full-gear DPS with `item` swapped into `slot` (used for the DPS sort and column)
 function calcDpsForItem(slot, item) {
-  // Full-gear DPS with `item` swapped into `slot` — keeps all other equipped gear.
-  const s = computeTotalStats();
-
-  // Remove current occupant's stats from this slot
-  const cur = getEquipped(slot);
-  if (cur) {
-    const curItem = (equipBySlot[slot] || []).find(i => i.name === cur);
-    if (curItem && curItem.stats)
-      for (const [k, v] of Object.entries(curItem.stats))
-        if (s[k] !== undefined) s[k] -= v;
-  }
-  // Add candidate item's stats
-  if (item.stats)
-    for (const [k, v] of Object.entries(item.stats))
-      if (s[k] !== undefined) s[k] += v;
+  // Full-gear DPS with `item` swapped into `slot` — keeps all other equipped gear
+  // (same 2H / shield rule as the equipped totals).
+  const s = computeTotalStats(slot, item);
 
   // Weapon speed: use candidate's own speed for weapon slot, else current weapon
   let baseSpeed;
@@ -11292,6 +11778,7 @@ function calcDpsForItem(slot, item) {
   return 0; // magic — too spell-dependent
 }
 
+// Best offensive bonus for the active style
 function styleAtkStat(stats) {
   // Best offensive bonus for the current combat style
   if (activeEquipStyle === 'melee')
@@ -11304,6 +11791,7 @@ function styleAtkStat(stats) {
                   stats.attack_ranged||0, stats.attack_magic||0);
 }
 
+// Defence against the active style
 function styleDefStat(stats) {
   // Defence against the current combat style's attack type
   if (activeEquipStyle === 'melee')
@@ -11317,6 +11805,7 @@ function styleDefStat(stats) {
        + (stats.defence_ranged||0) + (stats.defence_magic||0);
 }
 
+// Sort value of an item for the chosen sort key
 function getStatVal(item, key) {
   if (key === 'value')    return item.value || 0;
   if (key === 'dps')      return selectedEquipSlot ? calcDpsForItem(selectedEquipSlot, item) : 0;
@@ -11325,6 +11814,7 @@ function getStatVal(item, key) {
   return (item.stats && item.stats[key]) || 0;
 }
 
+// Render a slot's item list, grouped Equipped / Owned / Level required / Obtainable / Locked
 function renderEquipSlotDetail(slot) {
   const pane = document.getElementById('equip-detail-pane');
   if (!pane) return;
@@ -11483,6 +11973,7 @@ function showEquipTooltip(event) {
   tt.style.left  = 'auto';
 }
 
+// Hide the floating equipment tooltip
 function hideEquipTooltip() {
   const tt = document.getElementById('equip-tooltip-float');
   if (tt) tt.style.display = 'none';
@@ -11495,12 +11986,15 @@ function navigateToCard(name) {
   showCard(name, match ? (match.type || 'item') : 'item');
 }
 
+// Short gp format: 1.2M, 35K, 900
 function formatGp(n) {
   if (n >= 1_000_000) return (n/1_000_000).toFixed(1).replace(/\.0$/,'') + 'M';
   if (n >= 1_000)     return (n/1_000).toFixed(1).replace(/\.0$/,'') + 'K';
   return n.toString();
 }
 
+// ─── Boot ──────────────────────────────────────────────────────────────────
+// Entry point: loadData() fetches every data file, then builds the card list and renders the saved tab
 loadData();
 </script>
 </body>

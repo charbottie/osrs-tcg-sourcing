@@ -19,12 +19,27 @@ Also writes collection_log.json — each BOSS_DATA boss's collection-log items
 (TCG cards only), from the wiki's Collection log page. The frontend uses it to
 split boss loot into "Uniques" (log items) and "Other drops".
 
+Inputs:
+  --card-json catalog (item cards + tcg.variants aliases)
+  scripts/output/monster_drops.json  (generate_sources.py; for "also_monster" / final-boss drops)
+  scripts/output/bosses.json         (generate_bosses.py; boss names for the collection log)
+  Wiki pages via wiki_fetcher (cached in scripts/cache/wiki_html/): each BOSS_LOOT page
+  plus "Collection_log".
+
 Output: scripts/output/boss_loot.json
   { "<BOSS_DATA name>": { source, page, uniqueRoll?, basis?,
       drops: [{card, rarity, fraction, rate?, notes?}] } }
+  Bosses that only have EXTRA_LOOT rows get { "extra": [...] } instead.
+Also: scripts/output/collection_log.json
+  { "<BOSS_DATA name>": { log: "<Collection log heading>", items: [card, ...] } }
 
 Usage:
-  python3 scripts/generate_boss_loot.py --card-json research/card-catalog-live.json
+  python3 scripts/generate_boss_loot.py --card-json research/card-catalog-live.json [--out-dir DIR] [--in-dir DIR]
+  (--out-dir defaults to scripts/output/. monster_drops.json and bosses.json are read from
+  --in-dir, which also defaults to scripts/output/ and does not follow --out-dir, so a scratch
+  --out-dir still reads the committed inputs.)
+
+Committed outputs carry hand fixes: diff a fresh run against them rather than overwriting.
 """
 
 from __future__ import annotations
@@ -131,6 +146,7 @@ LOG_HEADING_OVERRIDES: dict[str, str] = {
 # Bosses with no collection log entry (The Mimic's items sit in the clue logs,
 # Mad Angel / Gemstone Crab have none) show one undivided loot list.
 
+# Rarity text: optional "N ×" roll count, then "a/b" (commas allowed): "7 × 1/2,448", "1/128"
 _RATE_RE = re.compile(r"^(?:([\d.]+)\s*×\s*)?([\d.,]+)\s*/\s*([\d.,]+)")
 _CONDITIONAL_RE = re.compile(r"\b(only (obtained|obtainable|received|awarded|dropped|given)|awarded) (if|in)\b", re.I)
 _ON_UNIQUE_RE = re.compile(r"\bonly rolled when\b.*\bunique\b", re.I)  # e.g. Olmlet
@@ -145,6 +161,7 @@ def _canon(name: str, item_canon: dict[str, str]) -> str | None:
 
 
 def _num(s: str) -> float:
+    """Parse a wiki number that may contain thousands commas ("2,448" -> 2448.0)."""
     return float(s.replace(",", ""))
 
 
@@ -175,12 +192,20 @@ def _footnotes(cell: Tag, soup: BeautifulSoup) -> list[str]:
 
 
 def parse_chest(html: str, cfg: dict, item_canon: dict[str, str], scale: float = 1.0) -> list[dict]:
+    """Parse every item-drops table on a reward page into card drop rows.
+
+    Tables are filtered by the heading path above them (cfg include/skip/unique/
+    only_uniques, see BOSS_LOOT). `scale` multiplies each per-chest chance (used to
+    turn Unsired rates into per-Sire-kill rates). Returns one row per card
+    ({card, rarity, fraction, rate?, notes?}), keeping the most informative row
+    when a card appears in several tables.
+    """
     soup = BeautifulSoup(html, "html.parser")
     body = soup.select_one(".mw-parser-output") or soup
     include, skip, unique = cfg.get("include"), cfg.get("skip", []), cfg.get("unique", [])
     only_uniques = {n.lower() for n in cfg.get("only_uniques", [])}
 
-    path: dict[str, str] = {}
+    path: dict[str, str] = {}  # heading level ("h2"/"h3"/"h4") -> current heading text
     best: dict[str, dict] = {}
     for el in body.find_all(["h2", "h3", "h4", "table"]):
         if el.name != "table":
@@ -212,7 +237,7 @@ def parse_chest(html: str, cfg: dict, item_canon: dict[str, str], scale: float =
             if only_uniques and is_unique_heading and card.lower() not in only_uniques:
                 continue
 
-            rcell = cells[3]
+            rcell = cells[3]  # rarity column (see loot_parser for the column layout)
             notes = _footnotes(rcell, soup)
             for sup in rcell.select("sup"):
                 sup.decompose()
@@ -252,9 +277,12 @@ def parse_chest(html: str, cfg: dict, item_canon: dict[str, str], scale: float =
     return list(best.values())
 
 
-def build_boss_loot(item_canon: dict[str, str]) -> dict[str, dict]:
+def build_boss_loot(item_canon: dict[str, str], in_dir: Path = _OUT_DIR) -> dict[str, dict]:
+    """Build the boss_loot.json dict: BOSS_LOOT chest pages, then BOSS_FIXED_LOOT
+    rewards, then EXTRA_LOOT rows merged in. Reads in_dir/monster_drops.json for
+    "also_monster" / final-monster drops (RDT rows excluded). Fetches wiki pages."""
     result: dict[str, dict] = {}
-    monster_drops = json.loads((_OUT_DIR / "monster_drops.json").read_text(encoding="utf-8"))
+    monster_drops = json.loads((in_dir / "monster_drops.json").read_text(encoding="utf-8"))
     for boss, cfg in BOSS_LOOT.items():
         page = cfg["page"]
         html = wiki_fetcher.fetch(page.replace(" ", "_"))
@@ -322,7 +350,8 @@ def build_boss_loot(item_canon: dict[str, str]) -> dict[str, dict]:
 
 def parse_collection_log(html: str, item_canon: dict[str, str]) -> dict[str, list[str]]:
     """Collection log heading -> TCG card names listed under it (first table only)."""
-    body = BeautifulSoup(html, "html.parser").select_one(".mw-parser-output")
+    soup = BeautifulSoup(html, "html.parser")
+    body = soup.select_one(".mw-parser-output") or soup
     out: dict[str, list[str]] = {}
     cur = None
     for el in body.find_all(["h2", "h3", "h4", "table"]):
@@ -342,6 +371,8 @@ def parse_collection_log(html: str, item_canon: dict[str, str]) -> dict[str, lis
 
 
 def _log_heading_for(boss: str, headings: list[str]) -> str | None:
+    """Collection log heading for a boss: override, else case-insensitive "X" /
+    "The X", else a "X and Y" heading naming the boss. None if no match."""
     if boss in LOG_HEADING_OVERRIDES:
         return LOG_HEADING_OVERRIDES[boss]
     low = {h.lower(): h for h in headings}
@@ -355,6 +386,8 @@ def _log_heading_for(boss: str, headings: list[str]) -> str | None:
 
 
 def build_collection_log(boss_names: list[str], item_canon: dict[str, str]) -> dict[str, dict]:
+    """Boss name -> {log: heading, items: [cards]} from the wiki Collection log page.
+    Bosses with no matching heading are left out (and printed)."""
     html = wiki_fetcher.fetch("Collection_log")
     if not html:
         print("  [SKIP] could not fetch Collection log")
@@ -371,28 +404,32 @@ def build_collection_log(boss_names: list[str], item_canon: dict[str, str]) -> d
     return result
 
 
-def _boss_names_from_preview() -> list[str]:
-    """Boss encounter names, from output/bosses.json (generate_bosses.py) so the two never drift."""
-    return [b["name"] for b in json.loads((_OUT_DIR / "bosses.json").read_text(encoding="utf-8"))]
+def _boss_names_from_preview(in_dir: Path = _OUT_DIR) -> list[str]:
+    """Boss encounter names, from in_dir/bosses.json (generate_bosses.py) so the two never drift."""
+    return [b["name"] for b in json.loads((in_dir / "bosses.json").read_text(encoding="utf-8"))]
 
 
 def main() -> int:
+    """CLI entry point: write boss_loot.json and collection_log.json. Returns 0."""
     p = argparse.ArgumentParser(description=__doc__,
                                 formatter_class=argparse.RawDescriptionHelpFormatter)
     p.add_argument("--card-json", required=True)
     p.add_argument("--out-dir", default=str(_OUT_DIR))
+    p.add_argument("--in-dir", default=str(_OUT_DIR),
+                   help="where monster_drops.json and bosses.json are read (default scripts/output/)")
     args = p.parse_args()
+    in_dir = Path(args.in_dir)
 
     items = item_cards(load_cards(args.card_json))
     set_variant_aliases(load_variant_aliases(args.card_json))
     item_canon = {c["name"].lower(): c["name"] for c in items}
 
-    loot = build_boss_loot(item_canon)
+    loot = build_boss_loot(item_canon, in_dir)
     out = Path(args.out_dir) / "boss_loot.json"
     out.write_text(json.dumps(loot, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
     print(f"Wrote {out} ({len(loot)} bosses)")
 
-    clog = build_collection_log(_boss_names_from_preview(), item_canon)
+    clog = build_collection_log(_boss_names_from_preview(in_dir), item_canon)
     out = Path(args.out_dir) / "collection_log.json"
     out.write_text(json.dumps(clog, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
     print(f"Wrote {out} ({len(clog)} bosses)")

@@ -9,6 +9,11 @@ _locGate() / _locReqOk(), using the same merge rules as merge_gate() below.
   gate_for(name)    -> the full gate for a place: its own fields plus its parent chain's
   merge_gate(a, b)  -> a gate meeting both (idempotent: merging the same gate twice changes nothing)
   validate(...)     -> list of problems (unknown quests / cards / diaries / access keys / parents)
+
+Run directly to validate location_requirements.json against the committed outputs
+(quests.json, diaries.json, access_routes.json, card_aliases.json) and the live catalog;
+exits 1 if any problem is found:
+  python3 scripts/location_reqs.py
 """
 
 from __future__ import annotations
@@ -22,11 +27,13 @@ PATH = _HERE / "location_requirements.json"
 # Fields that make up a gate (everything else is metadata: note / wiki / page / boostable / clueMatch)
 GATE_KEYS = ("quests", "partialQuests", "diaries", "cards", "cardGroup", "skills", "skillsSum",
              "questPoints", "access", "anyOf", "allOf")
+# cardGroup values the planner knows how to evaluate (unrelated to card_groups.CARD_GROUPS)
 CARD_GROUPS = {"light_source", "tool:Axe", "tool:Pickaxe"}
 _cache: dict | None = None
 
 
 def load() -> dict:
+    """{location name: entry} from location_requirements.json, without "_" meta keys. Cached per process."""
     global _cache
     if _cache is None:
         raw = json.loads(PATH.read_text(encoding="utf-8"))
@@ -35,19 +42,23 @@ def load() -> dict:
 
 
 def reviewed_no_gate() -> dict:
+    """The file's "_reviewedNoGate" map: places checked on the wiki and found to have no entry gate."""
     return json.loads(PATH.read_text(encoding="utf-8")).get("_reviewedNoGate", {})
 
 
 def _index() -> dict:
+    """{lowercase name: name as written in the file}, for case-insensitive lookup."""
     return {k.lower(): k for k in load()}
 
 
 def lookup(name: str) -> dict | None:
+    """The entry for a location name (case-insensitive), or None if the file doesn't list it."""
     k = _index().get((name or "").lower())
     return load()[k] if k else None
 
 
 def own_gate(entry: dict) -> dict:
+    """Just the non-empty GATE_KEYS fields of an entry (no parent chain, no metadata)."""
     return {k: entry[k] for k in GATE_KEYS if entry.get(k) not in (None, [], {}, "")}
 
 
@@ -67,6 +78,7 @@ def gate_for(name: str, _seen: set | None = None) -> dict:
 
 
 def _same(a, b) -> bool:
+    """Deep equality of two JSON values, ignoring dict key order."""
     return json.dumps(a, sort_keys=True) == json.dumps(b, sort_keys=True)
 
 
@@ -108,6 +120,7 @@ def validate(quests: set[str], card_ok, diary_areas: set[str], access: set[str])
     names = load()
 
     def check(where: str, g: dict):
+        """Append problems for one gate (recursing into anyOf/allOf sub-gates) to probs."""
         for q in g.get("quests", []) + g.get("partialQuests", []):
             if q not in quests:
                 probs.append(f"{where}: quest {q!r}")
@@ -122,6 +135,7 @@ def validate(quests: set[str], card_ok, diary_areas: set[str], access: set[str])
                 probs.append(f"{where}: diary {d!r}")
         if g.get("access") and g["access"] not in access:
             probs.append(f"{where}: access {g['access']!r}")
+        # skillsSum keys are "Skill+Skill" (a combined-level requirement)
         for s in list(g.get("skills", {})) + [x for k in g.get("skillsSum", {}) for x in k.split("+")]:
             if s not in SKILLS:
                 probs.append(f"{where}: skill {s!r}")

@@ -49,6 +49,7 @@ DT2_QUEST = "Desert Treasure II - The Fallen Empire"
 # Wiki sections that aren't planner boss encounters (quest bosses live on the Questing tab)
 SKIP_SECTIONS = {"Quest bosses", "Quests with multiple bosses", "Event bosses", "Nightmare Zone", "See also", "List of bosses"}
 
+# {{SCP|Agility|85}} -> ("Agility", "85");  {{SCP|Quest}} [[Quest name]] -> the quest
 _SCP_RE = re.compile(r"\{\{SCP\|([A-Za-z]+)\|(\d+)")
 _QUEST_RE = re.compile(r"\{\{SCP\|Quest\}\}\s*(?:\[\[([^\]|]+)(?:\|[^\]]*)?\]\])?")
 _LINK_RE = re.compile(r"\[\[([^\]|#]+)(?:#[^\]|]*)?(?:\|[^\]]*)?\]\]")
@@ -56,6 +57,7 @@ _PLINK_RE = re.compile(r"\{\{[Pp]link\|([^}|]+)")
 
 
 def _clean(text: str) -> str:
+    """Strip {{efn}} footnotes and <ref> tags from a table cell."""
     text = re.sub(r"\{\{efn[^}]*\}\}", "", text)
     text = re.sub(r"<ref[^>]*/>", "", text)  # self-closing refs first, or the paired pattern swallows rows
     text = re.sub(r"<ref[^>]*>.*?</ref>", "", text, flags=re.S)
@@ -63,7 +65,10 @@ def _clean(text: str) -> str:
 
 
 def parse_boss_tables(wikitext: str) -> list[dict]:
-    """One dict per boss row: name, section, location, solo, quests, levels, other, log."""
+    """One dict per boss row: name, section, location, solo, quests, levels, otherReq, log.
+
+    Splits the page on headings (rows inherit the latest heading as `section`), then reads each
+    {| … |} table: column names come from the "!" header row (colspan repeated), rows split on "|-"."""
     rows: list[dict] = []
     section = None
     for part in re.split(r"\n(=+[^=\n]+=+)[ \t]*(?=\n)", wikitext):
@@ -102,6 +107,7 @@ def parse_boss_tables(wikitext: str) -> list[dict]:
 
 
 def load_card_names(card_json: str) -> tuple[set[str], dict[str, str]]:
+    """(lowercase card names from the catalog, card_aliases.json or {} if it doesn't exist yet)."""
     cat = json.loads(Path(card_json).read_text(encoding="utf-8"))
     names = {x["name"].lower() for k in ("items", "npcs") for x in cat[k]}
     aliases_path = _HERE / "output" / "card_aliases.json"
@@ -110,6 +116,11 @@ def load_card_names(card_json: str) -> tuple[set[str], dict[str, str]]:
 
 
 def build(card_json: str) -> tuple[list[dict], dict]:
+    """Merge boss_curated.json encounters with the wiki Boss page rows.
+
+    Returns (encounters for bosses.json, validation report). Curated quests/levels are kept as-is;
+    wiki differences only go into the report. A curated `area` adds a "Reach <area>" access
+    requirement (or the DT2 quest for area "DT2")."""
     curated = json.loads(_CURATED.read_text(encoding="utf-8"))
     wiki_rows = parse_boss_tables(_fetch_wikitext("Boss"))
     by_name = {r["name"].lower(): r for r in wiki_rows}
@@ -166,6 +177,7 @@ def build(card_json: str) -> tuple[list[dict], dict]:
 
 
 def main() -> int:
+    """Build bosses.json and the validation report, print a summary. Returns 0 (report problems don't fail)."""
     p = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     p.add_argument("--card-json", required=True)
     args = p.parse_args()

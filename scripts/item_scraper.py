@@ -19,6 +19,12 @@ Shop locations:
   - Columns: Seller | Location | Stock | Restock | Price sold at | Price bought at | ...
   - Price cell (col 4): data-sort-value holds integer; child <img> src encodes currency
   - No-img shops use seller name → currency lookup table
+
+Item sources (h2/h3/h4 containing "Item sources"):
+  - Source | Level | Quantity | Rarity | ... ; rarity from the table-bg-* class / data-drop-fraction
+
+Library module (no CLI, no file I/O): callers pass cached page HTML from wiki_fetcher.
+Used by generate_sources.py (Pass 3 item pages) and generate_ingredient_info.py.
 """
 
 from __future__ import annotations
@@ -157,6 +163,7 @@ def parse_spawns(html: str) -> list[str]:
             loc = re.sub(r"\[.*?\]", "", raw).strip()
             loc = re.sub(r"\s{2,}", " ", loc)
             # Trim after common separators that indicate qualifiers
+            # e.g. "Lumbridge Castle - 2nd floor" → "Lumbridge Castle"
             loc = re.split(r"[-–](?:\s*on\b|\s*north|\s*south|\s*east|\s*west|\s*2nd|\s*building)", loc)[0].strip()
             if loc and loc not in seen:
                 seen.add(loc)
@@ -179,6 +186,7 @@ _ITEM_SRC_BG: dict[str, str] = {
     "table-bg-red":    "Very Rare",
 }
 
+# "1/128", "2.5/1,000" — a drop fraction (numerator may be decimal, denominator may have commas)
 _FRACTION_RE2 = re.compile(r"^\d+(?:\.\d+)?/[\d,.]+$")
 
 
@@ -323,6 +331,7 @@ def parse_shop_locations(html: str) -> list[dict]:
 
     Each entry: {seller: str, price: int|None, currency: str}
     Deduplicates by (seller, currency) — strips trailing (N) from seller names.
+    Skips shops whose base stock is 0 (they only resell items sold to them).
     """
     soup = BeautifulSoup(html, "html.parser")
     results: list[dict] = []
@@ -332,6 +341,13 @@ def parse_shop_locations(html: str) -> list[dict]:
         for tr in table.find_all("tr")[1:]:          # skip header row
             cells = tr.find_all(["td", "th"])
             if len(cells) < 5:
+                continue
+
+            # Base stock 0 = the shop only resells what players sold to it
+            # (fur stalls, Gem Trader diamonds…): not a source for an ironman.
+            stock_cell = cells[2]
+            stock = (stock_cell.get("data-sort-value") or stock_cell.get_text(strip=True)).strip()
+            if stock == "0":
                 continue
 
             # Seller: strip trailing (N) from multi-instance shop names
@@ -365,6 +381,7 @@ def parse_shop_locations(html: str) -> list[dict]:
 # ── Helpers ─────────────────────────────────────────────────────────────────
 
 def _row_texts(tr: Tag | None) -> list[str]:
+    """Stripped text of every th/td cell in a table row ([] for None)."""
     if tr is None:
         return []
     return [c.get_text(strip=True) for c in tr.find_all(["th", "td"])]

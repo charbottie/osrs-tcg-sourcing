@@ -6,7 +6,8 @@ is covered by its card: owning the card unlocks every version. The card page lis
 versions so it's clear what the card covers and how each upgrade is created.
 
 Wiki pages are read in batches of 50 (action=query, redirects resolved) and cached in
-scripts/cache/version_pages.json.
+scripts/cache/version_pages.json. Version icon/detail image URLs (action=query prop=imageinfo)
+are cached in scripts/cache/version_images.json. Delete a cache file to refetch.
 
 Output: scripts/output/card_versions.json
   { "<card>": [ {name, page, icon?, detail? (image URLs), recipe?: {skills: {Skill: lvl}, materials: [[name, qty]],
@@ -89,6 +90,9 @@ def fetch_pages(titles: list[str]) -> dict[str, dict]:
 
 
 def _template_params(block: str) -> dict[str, str]:
+    """{lowercase param: value} of one multi-line {{Template\n|k = v\n...}} block.
+
+    Assumes one parameter per line (split on "\n|"); the closing "}}" is stripped from the last value."""
     params = {}
     for line in block.split("\n|")[1:]:
         if "=" in line:
@@ -99,6 +103,7 @@ def _template_params(block: str) -> dict[str, str]:
 
 def recipe_for(text: str, version: str) -> dict | None:
     """The {{Recipe}} whose output is this version (falls back to the page's only recipe)."""
+    # each {{Recipe ...}} block, which the wiki writes one param per line and closes with "}}" on its own line
     blocks = re.findall(r"\{\{Recipe\s*\n.*?\n\}\}", text, flags=re.S)
     chosen = None
     for b in blocks:
@@ -133,6 +138,7 @@ def recipe_for(text: str, version: str) -> dict | None:
 
 
 def main() -> int:
+    """List each card's non-card versions, fetch their pages/images, and write _OUT. Returns 0."""
     p = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     p.add_argument("--card-json", required=True)
     args = p.parse_args()

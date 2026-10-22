@@ -6,6 +6,13 @@ These items appear as ingredients in TCG card crafting recipes but are not
 themselves TCG cards (e.g. unfinished potions, (u) bows, bolt tips, sacred
 oil, etc.). This file lets the preview UI show the full unlock chain.
 
+Input:  scripts/output/item_sources.json (production ingredients that aren't card keys),
+        each ingredient's wiki page via wiki_fetcher (cached in scripts/cache/wiki_html/),
+        parsed with item_scraper.
+Output: scripts/ingredient_info.json (note: scripts/, not scripts/output/)
+  { "<ingredient>": {production?, spawns?, shops?, shopBought?, itemSources?} }   ({} = nothing found)
+  Overwritten wholesale on every run.
+
 Usage:
   python scripts/generate_ingredient_info.py
 """
@@ -26,6 +33,7 @@ _SOURCES = Path(__file__).parent / "output" / "item_sources.json"
 
 
 def main() -> int:
+    """Scrape every non-card production ingredient's wiki page and write _OUT. Returns 0."""
     with open(_SOURCES, encoding="utf-8") as f:
         sources = json.load(f)
 
@@ -60,7 +68,7 @@ def main() -> int:
         methods  = item_scraper.parse_production(html)
         spawns   = item_scraper.parse_spawns(html)
         shops    = item_scraper.parse_shop_locations(html)
-        sources  = item_scraper.parse_item_sources(html)
+        sources  = item_scraper.parse_item_sources(html)   # rebinds the outer `sources` (no longer needed)
 
         entry: dict = {}
         if methods:

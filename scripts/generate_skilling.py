@@ -18,7 +18,10 @@ Gathering methods (type "gathering") also list the cards they yield:
 This script validates card names (catalog or card_aliases.json versions), quest names
 (quests.json), access keys (access_routes.json) and writes the output.
 
-Output: scripts/output/skilling.json   (list of methods)
+Output: scripts/output/skilling.json   (list of methods; the curated list copied as-is)
+Also reads output/card_aliases.json, quests.json, access_routes.json, diaries.json and
+location_requirements.json for validation. Problems are printed; the output is still written,
+and the exit code is 1 if there were any.
 
 Usage:
   python3 scripts/generate_skilling.py --card-json research/card-catalog-live.json
@@ -39,6 +42,7 @@ _OUT = _HERE / "output" / "skilling.json"
 
 
 def main() -> int:
+    """Validate skilling_curated.json and copy it to _OUT. Returns 1 if any problem was found."""
     p = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     p.add_argument("--card-json", required=True)
     args = p.parse_args()

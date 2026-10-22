@@ -1,20 +1,47 @@
 #!/usr/bin/env python3
-"""Generate sourcing data for the OSRS TCG sourcing panel.
+"""Generate the core sourcing data for the Bronzeman Planner (and, originally, the plugin panel).
 
-Reads Card.json, fetches OSRS Wiki pages for each monster/quest card,
-and writes three static JSON files for the plugin:
+Reads the card catalog (--card-json), fetches OSRS Wiki pages for each monster / quest /
+item card (through wiki_fetcher's HTML cache) and writes, into --out-dir (default
+scripts/output/):
 
-  monster_drops.json  — monster card -> TCG card drops with rarity
-  item_sources.json   — item card -> monster/quest sources
-  quest_chains.json   — quest -> prerequisites + involved cards
+  monster_drops.json    — monster card -> {drops: [{card, rarity, fraction, fromRdt}],
+                          slayerLevel, combatLevel, quests, fetchedFrom?}
+  item_sources.json     — item card -> {monsters, rdtMonsters, quests, gathering, production,
+                          spawns, shopBought, shops, clueTiers, alwaysAvailable, ...}
+  quest_chains.json     — quest -> {prerequisites, rewardCards, monsterCards, questNpc}
+  card_categories.json  — card -> catalog tag labels
+  card_details.json     — card -> {examine, imageUrl, imagePath, tier, regions}
 
-These files are generated at dev-time and bundled into the plugin JAR.
-The shipped plugin makes ZERO wiki requests at runtime.
+Passes (in order; later passes rewrite item_sources.json):
+  1. Monster loot tables (loot_parser)          → monster_drops.json
+  2. Invert drops + gathering_sources.json      → item_sources.json
+  3. Quest pages (quest_parser)                 → quest_chains.json, item_sources[*].quests
+     (currently a no-op: the live catalog has no quest-item flag, see load_cards, so
+     quest_chains.json is always {}; quest data comes from generate_quests.py instead)
+  4. Item pages (item_scraper): production, spawns, shops, "Item sources" backfill
+  5. scripts/clue_sources.json                  → item_sources[*].clueTiers
+  6. scripts/item_sources_overrides.json        → hand fixes merged per field (null deletes a field)
+  then card metadata → card_categories.json + card_details.json
+
+Hand fixes to item_sources belong in item_sources_overrides.json (pass 6), never in the output.
+The committed outputs also carry other hand fixes, so diff a regenerated file before keeping it.
+Safety: a full run into scripts/output/ first copies the files it is about to replace
+(monster_drops, item_sources, quest_chains, card_categories, card_details) to
+scripts/cache/output_backup/generate_sources-<timestamp>/ (gitignored) and prints the path,
+so a run that drops hand fixes can be diffed and rolled back. Partial runs (--monster /
+--limit) must write elsewhere: they need an --out-dir other than scripts/output/.
+server.py's /api/generate/run runs this with --skip-quests (a full run, so it is backed up).
 
 Usage:
-  python scripts/generate_sources.py --card-json research/card-catalog-live.json
-  python scripts/generate_sources.py --card-json research/card-catalog-live.json --limit 20
-  python scripts/generate_sources.py --card-json research/card-catalog-live.json --monster "Abyssal demon"
+  python3 scripts/generate_sources.py --card-json research/card-catalog-live.json
+  python3 scripts/generate_sources.py --card-json research/card-catalog-live.json --monster "Abyssal demon" --out-dir /tmp/gs
+  python3 scripts/generate_sources.py --card-json research/card-catalog-live.json --limit 20 --skip-items --out-dir /tmp/gs
+  Flags: --limit N        only the first N monsters in pass 1 (testing; needs --out-dir)
+         --monster NAME   only this monster in pass 1 (testing; needs --out-dir)
+         --skip-quests    skip pass 3 (quest_chains.json is written empty)
+         --skip-items     skip pass 4 (no production / spawns / shops)
+         --out-dir DIR    output directory (default scripts/output/)
 
 Wiki access rules (non-negotiable, per wiki staff github issue #1 2026-07-18):
   - Plain page URLs only — never api.php?action=parse
@@ -28,7 +55,9 @@ from __future__ import annotations
 import argparse
 import json
 import re
+import shutil
 import sys
+import time
 from pathlib import Path
 
 # Ensure scripts/ is on the path so sibling modules import cleanly
@@ -40,7 +69,10 @@ import quest_parser
 import wiki_fetcher
 
 _OUT_DIR = Path(__file__).parent / "output"
-_OUT_DIR.mkdir(parents=True, exist_ok=True)
+_BACKUP_DIR = Path(__file__).parent / "cache" / "output_backup"
+# Files a run rewrites (backed up before a full run into scripts/output/)
+_OUTPUT_FILES = ("monster_drops.json", "item_sources.json", "quest_chains.json",
+                 "card_categories.json", "card_details.json")
 _CLUE_SOURCES = Path(__file__).parent / "clue_sources.json"
 _GATHERING_JSON = Path(__file__).parent / "gathering_sources.json"
 
@@ -53,6 +85,15 @@ _SUFFIX_RE = re.compile(r"^(.*?) \([^)]*\)$")
 # ---------------------------------------------------------------------------
 
 def load_cards(card_json_path: str) -> list[dict]:
+    """Load the card catalog as a flat list of card dicts.
+
+    A v1.0 catalog ({items: [...], npcs: [...]}) is normalised to the old Card.json shape:
+    items get category ["Resource"], NPCs ["Monster"]; questItem is always False, because the
+    live catalog has no quest-item field (item entries carry only cardId, id, name, examine,
+    imagePath, regions, wiki.page and tcg {score, foilScore, tierLabel, tags {labels, slot,
+    combatStyle}, variants}; no tag label marks quest items). So pass 3 finds no cards and
+    writes quest_chains.json as {}. An older flat-list catalog is returned unchanged.
+    """
     with open(card_json_path, encoding="utf-8") as f:
         data = json.load(f)
     # Normalise v1.0 format {items: [...], npcs: [...]} to flat list
@@ -100,14 +141,17 @@ def load_cards(card_json_path: str) -> list[dict]:
 
 
 def monster_cards(cards: list[dict]) -> list[dict]:
+    """Cards in the "Monster" category (every NPC card)."""
     return [c for c in cards if "Monster" in c.get("category", [])]
 
 
 def item_cards(cards: list[dict]) -> list[dict]:
+    """Cards in the "Resource" category (every item card)."""
     return [c for c in cards if "Resource" in c.get("category", [])]
 
 
 def quest_item_cards(cards: list[dict]) -> list[dict]:
+    """Item cards flagged questItem (none with a v1.0 / live catalog: it has no such field)."""
     return [c for c in item_cards(cards) if c.get("questItem")]
 
 
@@ -163,7 +207,7 @@ def build_monster_drops(
         html, fetched_from = wiki_fetcher.fetch_with_loot_fallback(page)
         if html is None:
             print(f"    [SKIP] could not fetch page")
-            result[name] = _empty_monster_entry(card)
+            result[name] = _empty_monster_entry()
             continue
 
         raw_drops = loot_parser.parse_drops(html)
@@ -245,6 +289,7 @@ def load_variant_aliases(card_json_path: str) -> dict[str, str]:
     return aliases
 
 
+# Key prefix (NUL can't occur in a name) for "card name + wiki disambiguator" aliases
 _SAME_NAME_MARK = "\0same:"
 _WIKI_DISAMBIG_RE = re.compile(r"\s*\([^)]*\)$")
 
@@ -253,6 +298,7 @@ _VARIANT_ALIASES: dict[str, str] = {}  # set by main() / callers via set_variant
 
 
 def set_variant_aliases(aliases: dict[str, str]) -> None:
+    """Install the variant -> card map used by _card_for_drop (module-level, replaced in place)."""
     _VARIANT_ALIASES.clear()
     _VARIANT_ALIASES.update(aliases)
 
@@ -299,7 +345,8 @@ def _tcg_drops(raw_drops: list[dict], item_names_lc: set[str]) -> list[dict]:
     return list(best.values())
 
 
-def _empty_monster_entry(card: dict) -> dict:
+def _empty_monster_entry() -> dict:
+    """monster_drops entry for a monster whose page couldn't be fetched."""
     return {
         "drops": [],
         "slayerLevel": None,
@@ -554,7 +601,25 @@ def build_production_spawns(
 # Output
 # ---------------------------------------------------------------------------
 
+def _backup_outputs(out_dir: Path) -> Path | None:
+    """Copy the existing _OUTPUT_FILES in out_dir to a timestamped folder under _BACKUP_DIR.
+
+    Returns the backup folder (None if there was nothing to back up)."""
+    existing = [out_dir / f for f in _OUTPUT_FILES if (out_dir / f).exists()]
+    if not existing:
+        return None
+    dest = _BACKUP_DIR / f"generate_sources-{time.strftime('%Y%m%d-%H%M%S')}"
+    dest.mkdir(parents=True, exist_ok=True)
+    for f in existing:
+        shutil.copy2(f, dest / f.name)
+    print(f"Backed up {len(existing)} output files to {dest}\n"
+          f"  (diff against them before keeping this run; hand fixes not in "
+          f"item_sources_overrides.json are otherwise lost)")
+    return dest
+
+
 def write_json(path: Path, data: dict, label: str) -> None:
+    """Write *data* as indented UTF-8 JSON with LF endings and a trailing newline, and log it."""
     with open(path, "w", encoding="utf-8", newline="\n") as f:
         json.dump(data, f, indent=2, ensure_ascii=False)
         f.write("\n")
@@ -583,7 +648,7 @@ def _write_card_metadata(cards: list[dict], out_dir: Path) -> None:
     """Write card_categories.json and card_details.json from the loaded card list.
 
     card_categories: {name: [label, ...]}  — category tags for UI filtering
-    card_details:    {name: {examine, imageUrl}}  — shown in card detail pane
+    card_details:    {name: {examine, imageUrl, imagePath}}  — shown in card detail pane
     """
     categories: dict[str, list] = {}
     details: dict[str, dict] = {}
@@ -601,6 +666,7 @@ def _write_card_metadata(cards: list[dict], out_dir: Path) -> None:
         details[name] = {
             "examine":  examine,
             "imageUrl": _wiki_image_url(image_path) if image_path else "",
+            "imagePath": image_path,   # card art on osrs-tcg.net (server.py proxies + caches /images/)
             "tier":     card.get("tierLabel", ""),
             "regions":  card.get("regions", []),
         }
@@ -616,14 +682,17 @@ def _write_card_metadata(cards: list[dict], out_dir: Path) -> None:
 # ---------------------------------------------------------------------------
 
 def parse_args() -> argparse.Namespace:
+    """Parse the CLI flags (see the module docstring)."""
     p = argparse.ArgumentParser(description=__doc__,
                                 formatter_class=argparse.RawDescriptionHelpFormatter)
     p.add_argument("--card-json", required=True,
                    help="Path to Card.json (e.g. research/card-catalog-live.json)")
     p.add_argument("--limit", type=int, default=None,
-                   help="Process only the first N monsters (for testing)")
+                   help="Process only the first N monsters in pass 1 (testing; needs --out-dir "
+                        "other than scripts/output/)")
     p.add_argument("--monster", type=str, default=None,
-                   help="Process only this one monster card name (for testing)")
+                   help="Process only this one monster card name (testing; needs --out-dir "
+                        "other than scripts/output/)")
     p.add_argument("--skip-quests", action="store_true",
                    help="Skip the quest parsing pass")
     p.add_argument("--skip-items", action="store_true",
@@ -634,9 +703,17 @@ def parse_args() -> argparse.Namespace:
 
 
 def main() -> int:
+    """Run every pass in order and write the outputs; returns 0. Exits with a message if a
+    partial run (--limit / --monster) targets scripts/output/; backs up a full run's targets there."""
     args = parse_args()
     out_dir = Path(args.out_dir)
+    into_committed = out_dir.resolve() == _OUT_DIR.resolve()
+    if into_committed and (args.limit or args.monster):
+        # A partial run would replace the full outputs with a handful of monsters
+        sys.exit("--limit / --monster are partial runs: pass --out-dir DIR (not scripts/output/)")
     out_dir.mkdir(parents=True, exist_ok=True)
+    if into_committed:
+        _backup_outputs(out_dir)
 
     print(f"Loading {args.card_json}...")
     cards = load_cards(args.card_json)
@@ -678,7 +755,6 @@ def main() -> int:
         print(f"\nPass 3: Quest chains ({len(quest_items)} quest-item cards)...")
         quest_chains = build_quest_chains(
             quest_items, item_names_lc, monster_names_lc,
-            limit=args.limit,
         )
         enrich_with_quests(item_sources, quest_chains)
         write_json(out_dir / "quest_chains.json", quest_chains, "quest chains")
@@ -692,8 +768,7 @@ def main() -> int:
     if not args.skip_items:
         print(f"\nPass 4: Item production & spawns ({len(items)} item cards)...")
         build_production_spawns(items, item_sources,
-                               monster_names_lc=monster_names_lc,
-                               limit=args.limit)
+                               monster_names_lc=monster_names_lc)
         write_json(out_dir / "item_sources.json", item_sources,
                    "item sources (with production + spawns)")
     else:
@@ -730,7 +805,7 @@ def main() -> int:
         print(f"\nPass 6: applied overrides to {sum(1 for k in overrides if not k.startswith('_'))} items")
         write_json(out_dir / "item_sources.json", item_sources, "item sources (with overrides)")
 
-    # --- Pass 6: Card metadata (categories + details) ---
+    # --- Card metadata (categories + details); also logged as "Pass 6", runs after the overrides ---
     print("\nPass 6: Writing card metadata...")
     _write_card_metadata(cards, out_dir)
 

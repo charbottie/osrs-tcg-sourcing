@@ -6,9 +6,13 @@ RuneLite's Screenshot plugin saves a file named:
   Quest(<quest name>) YYYY-MM-DD_HH-MM-SS.png
 in ~/.runelite/screenshots/<player>/Quests/ whenever a quest is completed.
 
-This script scans all player directories under that path, extracts the quest
-names from the filenames, and writes them to completed_quests.json so the
-preview tool can load them as a static file (no server needed).
+This script scans one player's directory under that path (--player is
+required), extracts the quest names from the filenames, and writes them to
+completed_quests.json so the preview tool can load them as a static file (no
+server needed).
+
+Input:  ~/.runelite/screenshots/<player>/Quests/*.png (filenames only)
+Output: scripts/output/completed_quests.json  {"player": ..., "completedQuests": [names]}
 
 Usage:
   python3 scripts/decode_completed_quests.py
@@ -26,6 +30,7 @@ import sys
 SCREENSHOTS_BASE = pathlib.Path.home() / ".runelite" / "screenshots"
 OUT_JSON = pathlib.Path(__file__).parent / "output" / "completed_quests.json"
 
+# "Quest(Cook's Assistant) 2026-07-01_12-34-56.png" -> group(1) = quest name
 PATTERN = re.compile(r'^Quest\((.+?)\)\s+\d{4}-\d{2}-\d{2}_\d{2}-\d{2}-\d{2}\.png$')
 
 
@@ -45,6 +50,7 @@ def scan_dir(quest_dir: pathlib.Path) -> dict[str, str]:
 
 
 def main() -> int:
+    """CLI entry point: scan --player's quest screenshots and write OUT_JSON. Returns the exit code."""
     p = argparse.ArgumentParser(description=__doc__,
                                 formatter_class=argparse.RawDescriptionHelpFormatter)
     p.add_argument("--player", default=None,

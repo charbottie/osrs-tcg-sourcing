@@ -4,7 +4,9 @@ recipe outputs (recipes.json; the wiki recipe Bucket's output image), wiki-built
 spell page's image).
 
 Page images come from the wiki API (action=query&prop=pageimages, 50 titles per request),
-cached in cache/page_images.json.
+cached in cache/page_images.json (a title with no image is cached as "").
+Also reads cache/wiki_recipes.json (written by generate_recipes.py — it must exist),
+output/skilling.json and output/spells.json. No CLI flags.
 
 Output: scripts/output/method_icons.json
   { "recipe|<output lowercase>": url, "method|<skill>|<name>": url, "spell|<name>": url }
@@ -29,10 +31,15 @@ _IMG = "https://oldschool.runescape.wiki/images/"
 
 
 def _file_url(f: str) -> str:
+    """Wiki image URL for a File: name ("Oak logs.png" -> .../images/Oak_logs.png)."""
     return _IMG + urllib.parse.quote(f.replace(" ", "_"))
 
 
 def page_images(titles: list[str]) -> dict[str, str]:
+    """{title: 50px thumbnail URL or ""} for the titles, fetching only ones not in the cache.
+
+    Returns the whole cache (a superset of titles). The cache is saved after every batch.
+    """
     cache = json.loads(_CACHE.read_text(encoding="utf-8")) if _CACHE.exists() else {}
     todo = [t for t in dict.fromkeys(titles) if t and t not in cache]
     for i in range(0, len(todo), 50):
@@ -40,6 +47,8 @@ def page_images(titles: list[str]) -> dict[str, str]:
         url = ("https://oldschool.runescape.wiki/api.php?action=query&format=json&redirects=1&prop=pageimages"
                "&piprop=thumbnail&pithumbsize=50&pilimit=50&titles=" + urllib.parse.quote("|".join(batch)))
         q = wiki_api.get_json(url)["query"]
+        # map each resolved title back to the title(s) we asked for, through normalisation and
+        # redirects (two hops: "a" -normalized-> "A" -redirect-> "B"), so the cache is keyed by request
         back = {}
         for n in q.get("normalized", []) + q.get("redirects", []):
             back.setdefault(n["to"], []).append(n["from"])
@@ -59,6 +68,7 @@ def page_images(titles: list[str]) -> dict[str, str]:
 
 
 def main() -> int:
+    """Collect recipe/method/spell icons and write _OUT. Returns 0."""
     out: dict[str, str] = {}
     bucket = json.loads((_HERE / "cache" / "wiki_recipes.json").read_text(encoding="utf-8"))
     for r in bucket:

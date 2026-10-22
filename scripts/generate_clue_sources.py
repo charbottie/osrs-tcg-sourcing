@@ -105,6 +105,7 @@ def card_for_npc(name: str) -> str | None:
 
 
 def card_for_source(name: str, kind: str) -> str | None:
+    """The card you must own to use a clue source of this kind, or None (chests, caskets)."""
     if name in SOURCE_CARDS:
         return SOURCE_CARDS[name]
     if kind in ("monster", "pickpocket"):
@@ -121,6 +122,11 @@ def card_for_source(name: str, kind: str) -> str | None:
 # ── Wiki data ──────────────────────────────────────────────────────────────────────────────
 
 def _bucket_rows(where: str, cache: dict, refresh: bool) -> list[dict]:
+    """All 'dropsline' Bucket rows matching a where() clause, paged 500 at a time.
+
+    `cache` (keyed by the where clause) is updated in place; each row's drop_json is decoded
+    into row["drop"]. Saved to disk by main().
+    """
     if where in cache and not refresh:
         return cache[where]
     out, off = [], 0
@@ -153,11 +159,13 @@ def _frac(s: str | None) -> float | None:
 
 
 def _fmt_one_in(rate: float) -> str:
+    """Rate → '1/N' string (whole N from 1/10 down, else up to 2 decimals: '1/2.5')."""
     n = 1 / rate
     return f"1/{n:,.0f}" if n >= 10 else f"1/{n:.2f}".rstrip("0").rstrip(".")
 
 
 def _min_level(s: str) -> int | None:
+    """Lowest number in a drop-level string ('70, 85' → 70), or None if it has none."""
     nums = [int(x) for x in re.findall(r"\d+", s or "")]
     return min(nums) if nums else None
 
@@ -169,7 +177,8 @@ _CHESTISH = re.compile(r"chest|coffin|casket|sarcophag|reward pool|pouch|gambles
 SOURCE_CARDS = {"Grotesque Guardians": "Dusk", "Casket (Reward pool)": "Casket"}
 
 
-def _kind(drop_type: str, name: str, tier: str) -> str:
+def _kind(drop_type: str, name: str) -> str:
+    """Classify a source page into a `kind` (see module docstring). Checks run in priority order."""
     if re.fullmatch(r"Reward casket \(\w+\)", name):
         return "casket"
     if "impling" in name.lower():
@@ -202,7 +211,7 @@ def scroll_sources(tier: str, rows: list[dict]) -> list[dict]:
         d = r["drop"]
         frm = d.get("Dropped from") or r["page_name"]
         page, _, version = frm.partition("#")
-        kind = _kind(d.get("Drop type", ""), page, tier)
+        kind = _kind(d.get("Drop type", ""), page)
         rate = _frac(d.get("Rarity"))
         e = by_page.get(page)
         if e is None:
@@ -272,6 +281,7 @@ SKILLING = [  # (page, item prefix, skill, generic tool, base multiplier in the 
 
 
 def _wikitable_after(text: str, heading_re: str) -> list[list[str]]:
+    """Data rows (cell strings, header '!' cells dropped) of the first {| table after a heading."""
     m = re.search(heading_re, text)
     if not m:
         return []
@@ -287,11 +297,13 @@ def _wikitable_after(text: str, heading_re: str) -> list[list[str]]:
 
 
 def _link_target(cell: str) -> str:
+    """First [[link]] or {{plink|…}} target in a wikitext cell, else the cell text itself."""
     m = re.search(r"\[\[([^\]|#]+)", cell) or re.search(r"\{\{plinkt?\|([^|}]+)", cell)
     return (m.group(1) if m else cell).replace("_", " ").strip()
 
 
 def _num(cell: str) -> float | None:
+    """Leading number of a cell (commas allowed), ignoring any trailing {{template}}; None if none."""
     m = re.match(r"\s*([\d,.]+)", re.sub(r"\{\{.*", "", cell, flags=re.S))
     return float(m.group(1).replace(",", "")) if m else None
 
@@ -317,16 +329,22 @@ def _rate(base: float, mult: float, level: int, mod: float) -> float:
 
 
 def skilling_sources(cache: dict, refresh: bool) -> tuple[dict[str, list[dict]], list[str]]:
+    """Clue geode / nest / bottle sources per tier, one entry per tool, plus parse warnings.
+
+    Each entry's rarity is the lowest-level node at its own level; rarity99 is the best node at 99.
+    Also adds non-skilling "reward" sources of the vessel and bird houses for clue nests.
+    """
     out: dict[str, list[dict]] = defaultdict(list)
     warn: list[str] = []
     for page, prefix, skill, tool, mult in SKILLING:
         base, mods = skilling_tables(page, refresh)
-        if set(mods) != set(SKILL_TIERS):
+        if set(mods) != set(SKILL_TIERS):  # a missing tier gets no computed skilling rates
             warn.append(f"{page}: clue-tier modifiers parsed {mods}")
         for tier in SKILL_TIERS:
             item = f"{prefix} ({tier})"
             rows = _bucket_rows(f"'item_name','{item}'", cache, refresh)
             nodes: list[dict] = []
+            mod = mods.get(tier)  # None if the wiki table lacks this tier (warned above)
             if skill == "Mining":  # bucket rows carry rock + level + rate; base table adds the 99 rate
                 for r in rows:
                     d = r["drop"]
@@ -335,16 +353,18 @@ def skilling_sources(cache: dict, refresh: bool) -> tuple[dict[str, list[dict]],
                     name = d["Dropped from"].split("#")[0]
                     lvl = _min_level(d.get("Drop level")) or (10 if name == "Crashed Star" else 1)
                     b = base.get(name) or base.get(re.sub(r"\s*\(rock\)$", "", name))
+                    if not mod:
+                        b = None  # no modifier: fall back to the bucket's own rate
                     n = {"name": name, "level": lvl, "tool": "Pickaxe",
-                         "rarity": _fmt_one_in(_rate(b, mult, lvl, mods[tier])) if b else d.get("Rarity")}
+                         "rarity": _fmt_one_in(_rate(b, mult, lvl, mod)) if b else d.get("Rarity")}
                     if b:
-                        n["rarity99"] = _fmt_one_in(_rate(b, mult, 99, mods[tier]))
+                        n["rarity99"] = _fmt_one_in(_rate(b, mult, 99, mod))
                     nodes.append(n)
-                if "Blast mine" in base:
+                if "Blast mine" in base and mod:
                     nodes.append({"name": "Blast mine", "level": 43, "tool": None,
-                                  "rarity": _fmt_one_in(_rate(base["Blast mine"], mult, 43, mods[tier])),
-                                  "rarity99": _fmt_one_in(_rate(base["Blast mine"], mult, 99, mods[tier]))})
-            else:
+                                  "rarity": _fmt_one_in(_rate(base["Blast mine"], mult, 43, mod)),
+                                  "rarity99": _fmt_one_in(_rate(base["Blast mine"], mult, 99, mod))})
+            elif mod:  # woodcutting / fishing rates need the tier modifier
                 levels = TREE_LEVELS if skill == "Woodcutting" else {k: v[0] for k, v in FISH.items()}
                 for name, b in base.items():
                     if name not in levels:
@@ -354,8 +374,8 @@ def skilling_sources(cache: dict, refresh: bool) -> tuple[dict[str, list[dict]],
                     lvl = levels[name]
                     ntool = tool if skill == "Woodcutting" else FISH[name][1]
                     nodes.append({"name": name, "level": lvl, "tool": ntool,
-                                  "rarity": _fmt_one_in(_rate(b, mult, lvl, mods[tier])),
-                                  "rarity99": _fmt_one_in(_rate(b, mult, 99, mods[tier]))})
+                                  "rarity": _fmt_one_in(_rate(b, mult, lvl, mod)),
+                                  "rarity99": _fmt_one_in(_rate(b, mult, 99, mod))})
             # one source entry per tool, so the page can gate it on owning that tool
             by_tool: dict = defaultdict(list)
             for n in nodes:
@@ -417,6 +437,8 @@ def casket_rewards(tier: str, rows: list[dict], html: str | None) -> dict[str, l
 
 
 def _sum_rarities(rs: list[str]) -> str:
+    """Combine several rarity strings for one card: add numerators when the denominators match,
+    else sum the rates as '1/N'; if any isn't a fraction, keep the most common one."""
     if len(rs) == 1:
         return rs[0]
     dens = {re.sub(r"^[\d.]+/", "", r) for r in rs}
@@ -433,6 +455,7 @@ def _sum_rarities(rs: list[str]) -> str:
 # ── Main ───────────────────────────────────────────────────────────────────────────────────
 
 def main() -> int:
+    """Build and write the three clue JSON files (and the bucket cache); print a summary."""
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--refresh", action="store_true", help="re-fetch wiki data instead of using the cache")
     args = ap.parse_args()
